@@ -1,4 +1,3 @@
-cat > (api / subscribe.js) << "EOF";
 const https = require("https");
 
 module.exports = async (req, res) => {
@@ -15,7 +14,17 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const { prenom, email, phone } = req.body;
+  let body = req.body;
+  if (typeof body === "string") {
+    try {
+      body = JSON.parse(body);
+    } catch (e) {
+      res.status(400).json({ error: "JSON invalide" });
+      return;
+    }
+  }
+
+  const { prenom, email, phone } = body || {};
 
   if (!prenom || !email) {
     res.status(400).json({ error: "Prénom et email requis." });
@@ -32,35 +41,38 @@ module.exports = async (req, res) => {
     updateEnabled: true,
   });
 
-  const options = {
-    hostname: "api.brevo.com",
-    path: "/v3/contacts",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "api-key": process.env.BREVO_API_KEY,
-      "Content-Length": Buffer.byteLength(payload),
-    },
-  };
+  return new Promise((resolve) => {
+    const options = {
+      hostname: "api.brevo.com",
+      path: "/v3/contacts",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": process.env.BREVO_API_KEY,
+        "Content-Length": Buffer.byteLength(payload),
+      },
+    };
 
-  const brevoReq = https.request(options, (brevoRes) => {
-    let data = "";
-    brevoRes.on("data", (chunk) => (data += chunk));
-    brevoRes.on("end", () => {
-      const status = brevoRes.statusCode;
-      if (status === 201 || status === 204 || status === 400) {
-        res.status(200).json({ success: true });
-      } else {
-        res.status(status).json({ error: data });
-      }
+    const brevoReq = https.request(options, (brevoRes) => {
+      let data = "";
+      brevoRes.on("data", (chunk) => (data += chunk));
+      brevoRes.on("end", () => {
+        const status = brevoRes.statusCode;
+        if (status === 201 || status === 204 || status === 400) {
+          res.status(200).json({ success: true });
+        } else {
+          res.status(status).json({ error: data });
+        }
+        resolve();
+      });
     });
-  });
 
-  brevoReq.on("error", (e) => {
-    res.status(500).json({ error: e.message });
-  });
+    brevoReq.on("error", (e) => {
+      res.status(500).json({ error: e.message });
+      resolve();
+    });
 
-  brevoReq.write(payload);
-  brevoReq.end();
+    brevoReq.write(payload);
+    brevoReq.end();
+  });
 };
-EOF;
