@@ -109,3 +109,15 @@ server.listen(PORT, () => {
   console.log(`   Brevo List ID : ${BREVO_LIST_ID}`);
   console.log(`   Clé API       : ${BREVO_API_KEY ? '✓ chargée' : '✗ MANQUANTE'}`);
 });
+
+brevoRes.on("end", () => {
+  const status = brevoRes.statusCode;
+  console.log("Brevo status:", status);
+  console.log("Brevo response:", data);
+  if (status === 201 || status === 204 || status === 400) {
+    res.status(200).json({ success: true });
+  } else {
+    res.status(status).json({ error: data });
+  }
+  resolve();
+});
