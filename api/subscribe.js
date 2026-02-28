@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
   const payload = JSON.stringify({
     email,
     attributes: {
-      PRENOM: prenom,
+      FIRSTNAME: prenom,
       ...(phone && { SMS: phone }),
     },
     listIds: [parseInt(process.env.BREVO_LIST_ID, 10)],
