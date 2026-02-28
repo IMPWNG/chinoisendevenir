@@ -30,6 +30,16 @@ module.exports = async function handler(req, res) {
 
   const { prenom, email, phone } = parsed;
 
+  // Formate le numéro automatiquement
+  function formatPhone(num) {
+    if (!num) return null;
+    let clean = num.replace(/\s|-|\./g, ""); // supprime espaces, tirets, points
+    if (clean.startsWith("0")) clean = "+33" + clean.slice(1); // 06... → +336...
+    if (!clean.startsWith("+")) clean = "+" + clean;
+    return clean;
+  }
+  const formattedPhone = formatPhone(phone);
+
   console.log("Received:", { prenom, email, phone });
 
   if (!prenom || !email) {
@@ -41,7 +51,7 @@ module.exports = async function handler(req, res) {
     email,
     attributes: {
       FIRSTNAME: prenom,
-      ...(phone && { SMS: phone }),
+      ...(formattedPhone && { SMS: formattedPhone }),
     },
     listIds: [parseInt(process.env.BREVO_LIST_ID, 10)],
     updateEnabled: true,
@@ -81,4 +91,4 @@ module.exports = async function handler(req, res) {
     brevoReq.write(payload);
     brevoReq.end();
   });
-};
+};;
