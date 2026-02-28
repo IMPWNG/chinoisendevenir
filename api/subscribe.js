@@ -58,11 +58,13 @@ module.exports = async (req, res) => {
       brevoRes.on("data", (chunk) => (data += chunk));
       brevoRes.on("end", () => {
         const status = brevoRes.statusCode;
-        if (status === 201 || status === 204 || status === 400) {
-          res.status(200).json({ success: true });
-        } else {
-          res.status(status).json({ error: data });
-        }
+if (status === 201 || status === 204) {
+  res.status(200).json({ success: true });
+} else {
+  res
+    .status(200)
+    .json({ success: false, brevoStatus: status, brevoResponse: data });
+}
         resolve();
       });
     });
