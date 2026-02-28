@@ -67,20 +67,17 @@ const server = http.createServer((req, res) => {
         const brevoReq = https.request(options, (brevoRes) => {
           let data = '';
           brevoRes.on('data', chunk => data += chunk);
-          brevoRes.on('end', () => {
-            const status = brevoRes.statusCode;
-            if (status === 201 || status === 204) {
-              res.writeHead(200, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ success: true }));
-            } else if (status === 400) {
-              // Contact déjà existant = succès côté UX
-              res.writeHead(200, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ success: true }));
-            } else {
-              res.writeHead(status, { 'Content-Type': 'application/json' });
-              res.end(data);
-            }
-          });
+brevoRes.on("end", () => {
+  const status = brevoRes.statusCode;
+  console.log("Brevo status:", status);
+  console.log("Brevo response:", data);
+  if (status === 201 || status === 204 || status === 400) {
+    res.status(200).json({ success: true });
+  } else {
+    res.status(status).json({ error: data });
+  }
+  resolve();
+});
         });
 
         brevoReq.on('error', (e) => {
@@ -110,14 +107,3 @@ server.listen(PORT, () => {
   console.log(`   Clé API       : ${BREVO_API_KEY ? '✓ chargée' : '✗ MANQUANTE'}`);
 });
 
-brevoRes.on("end", () => {
-  const status = brevoRes.statusCode;
-  console.log("Brevo status:", status);
-  console.log("Brevo response:", data);
-  if (status === 201 || status === 204 || status === 400) {
-    res.status(200).json({ success: true });
-  } else {
-    res.status(status).json({ error: data });
-  }
-  resolve();
-});
