@@ -690,6 +690,236 @@
         color: var(--red);
       }
 
+      /* ── POPUP FUNNEL ── */
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        backdrop-filter: blur(4px);
+      }
+
+      .popup-overlay.show {
+        display: flex;
+      }
+
+      .popup-box {
+        background: var(--dark2);
+        border: 1px solid var(--border);
+        max-width: 520px;
+        width: 100%;
+        position: relative;
+        animation: fadeUp 0.3s ease both;
+      }
+
+      .popup-top {
+        background: var(--red);
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .popup-top-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .popup-lock {
+        font-size: 16px;
+      }
+
+      .popup-body {
+        padding: 40px;
+      }
+
+      .popup-ep-tag {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+      }
+
+      .popup-title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(20px, 3vw, 26px);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 16px;
+        color: var(--light);
+      }
+
+      .popup-desc {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 28px;
+      }
+
+      .popup-desc strong {
+        color: var(--light);
+      }
+
+      .popup-perks {
+        list-style: none;
+        margin-bottom: 32px;
+        background: rgba(200, 16, 46, 0.06);
+        border: 1px solid rgba(200, 16, 46, 0.15);
+        padding: 20px 24px;
+      }
+
+      .popup-perks li {
+        font-size: 13px;
+        color: rgba(245, 240, 232, 0.75);
+        padding: 5px 0;
+        padding-left: 18px;
+        position: relative;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .popup-perks li:last-child {
+        border-bottom: none;
+      }
+
+      .popup-perks li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .popup-btn-primary {
+        display: block;
+        width: 100%;
+        background: var(--red);
+        color: white;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 18px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+        margin-bottom: 12px;
+      }
+
+      .popup-btn-primary:hover {
+        background: #a50e26;
+        transform: translateY(-1px);
+      }
+
+      .popup-already {
+        text-align: center;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .popup-already-link {
+        color: var(--muted);
+        text-decoration: underline;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 12px;
+        font-family: 'DM Sans', sans-serif;
+      }
+
+      .popup-already-link:hover {
+        color: var(--gold);
+      }
+
+      .popup-already-form {
+        display: none;
+        margin-top: 16px;
+        gap: 8px;
+        flex-direction: column;
+      }
+
+      .popup-already-form.show {
+        display: flex;
+      }
+
+      .popup-already-input {
+        background: var(--dark);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--light);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        padding: 12px 16px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .popup-already-input:focus {
+        border-color: var(--gold);
+      }
+
+      .popup-already-input::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      .popup-already-submit {
+        background: var(--dark3);
+        border: 1px solid var(--border);
+        color: var(--light);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 12px;
+        cursor: pointer;
+        transition: border-color 0.2s, color 0.2s;
+      }
+
+      .popup-already-submit:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .popup-already-msg {
+        font-size: 12px;
+        color: var(--gold);
+        text-align: center;
+        display: none;
+        line-height: 1.5;
+      }
+
+      .popup-already-msg.show {
+        display: block;
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 20px;
+        cursor: pointer;
+        line-height: 1;
+        transition: color 0.2s;
+      }
+
+      .popup-close:hover {
+        color: white;
+      }
+
       /* ── ANIMATIONS ── */
       @keyframes fadeUp {
         from {
@@ -761,13 +991,17 @@
         <span>CHINE</span>
         2026
       </h1>
-      <p class="hero-sub">Ne rate pas ta chance. Le guide stratégique pour tes études en Chine. Comprendre, Décider et Agir.</p>
+      <p class="hero-sub">Ne rate pas ta chance. Le guide stratégique pour comprendre, décider et agir.</p>
       <a href="#episodes" class="hero-cta">
         Découvrir les 8 épisodes
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M8 3L13 8L8 13M3 8H13" stroke="white" stroke-width="1.5" stroke-linecap="square" />
         </svg>
       </a>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        Scroll
+      </div>
     </section>
 
     <!-- STATS -->
@@ -796,7 +1030,7 @@
     <section class="lead-section" id="lead-top">
       <div class="lead-inner">
         <div class="section-label">Accès anticipé</div>
-        <h2>Reçois le GUIDE  dès sa sortie.</h2>
+        <h2>Reçois le guide PDF dès sa sortie — <em style="font-style:normal;color:var(--gold)">gratuitement.</em></h2>
         <p>Laisse tes coordonnées et sois le premier informé. On t'envoie aussi les ressources exclusives de chaque
           épisode.</p>
         <div class="lead-form" id="form-top">
@@ -855,7 +1089,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> Ce n'est pas un choix culturel. C'est un positionnement
             géopolitique personnel.</div>
-          <a href="#" class="ep-link">▶ Voir la vidéo complète</a>
+          <a href="#" class="ep-link" onclick="openPopup(1);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 2 -->
@@ -871,7 +1105,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> 80% des refus viennent d'un dossier incomplet, d'un mauvais
             timing ou d'un mauvais choix d'université.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(2);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 3 -->
@@ -887,7 +1121,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> Universités publiques : 2 000–5 000 USD/an. Programmes
             internationaux : jusqu'à 10 000 USD/an.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(3);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 4 -->
@@ -903,7 +1137,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> Oui, elles sont accessibles — mais le dossier doit être
             impeccable et préparé 6 à 9 mois à l'avance.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(4);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 5 -->
@@ -918,7 +1152,7 @@
             <li>Traductions mal faites & timing hors deadline</li>
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> Un bon dossier est stratégique. Pas juste complet.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(5);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 6 -->
@@ -934,7 +1168,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> Une erreur administrative peut retarder votre départ d'un an
             entier.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(6);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 7 -->
@@ -950,7 +1184,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> La Chine est sécurisée, ultra connectée et offre une vie
             sociale riche. Le fantasme est souvent en dessous de la réalité.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(7);return false;">▶ Voir la vidéo complète</a>
         </div>
 
         <!-- EP 8 -->
@@ -966,7 +1200,7 @@
           </ul>
           <div class="ep-box"><strong>À retenir :</strong> Ceux qui réussissent ne sont pas les plus brillants. Ce sont
             les plus structurés.</div>
-          <a href="#" class="ep-link">▶ À venir</a>
+          <a href="#" class="ep-link" onclick="openPopup(8);return false;">▶ Voir la vidéo complète</a>
         </div>
 
       </div>
@@ -1026,7 +1260,7 @@
         <div class="section-label">Dernière chance</div>
         <h2>Tu as vu les 8 épisodes.<br>La prochaine étape, c'est <em
             style="font-style:normal;color:var(--gold)">toi.</em></h2>
-        <p>Rejoins la liste et reçois en avant-première le GUIDE complet.</p>
+        <p>Rejoins la liste et reçois en avant-première le PDF complet + les templates de candidature.</p>
         <div class="lead-form" id="form-bottom">
           <div class="lead-row">
             <input class="lead-input" type="text" placeholder="Prénom *" id="bottom-prenom" />
@@ -1050,12 +1284,67 @@
     <!-- FINAL CTA -->
     <section class="final-cta">
       <h2>Prêt à ne pas<br>rater ta chance <em>?</em></h2>
-      <p>Télécharge le guide GUIDE complet avec les templates, checklists et calendrier des deadlines.</p>
+      <p>Télécharge le guide PDF complet avec les templates, checklists et calendrier des deadlines.</p>
       <div class="cta-group">
-        <a href="#" class="btn-primary">Obtenir le GUIDE — À venir</a>
+        <a href="#" class="btn-primary">Obtenir le PDF — À venir</a>
         <a href="#episodes" class="btn-secondary">Voir tous les épisodes</a>
       </div>
     </section>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- POPUP FUNNEL — accès vidéos            -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="popup-overlay" id="popup-overlay" onclick="closePopupOutside(event)">
+      <div class="popup-box">
+
+        <button class="popup-close" onclick="closePopup()">✕</button>
+
+        <div class="popup-top">
+          <span class="popup-lock">🔒</span>
+          <span class="popup-top-label">Contenu réservé aux acheteurs</span>
+        </div>
+
+        <div class="popup-body">
+          <div class="popup-ep-tag" id="popup-ep-tag">Épisode</div>
+          <h2 class="popup-title" id="popup-title">Cette vidéo est réservée aux acheteurs du guide complet.</h2>
+          <p class="popup-desc">
+            Pour accéder aux <strong>8 épisodes complets</strong>, tu dois posséder le guide <strong>Étude Chine
+              2026</strong>.
+            Il inclut les vidéos, les templates, les checklists et le calendrier des deadlines.
+          </p>
+
+          <ul class="popup-perks">
+            <li>Les 8 épisodes vidéo complets</li>
+            <li>Templates de lettre de motivation</li>
+            <li>Checklist visa & documents</li>
+            <li>Calendrier des deadlines 2026</li>
+            <li>Accès à vie aux mises à jour</li>
+          </ul>
+
+          <a href="LIEN_GUMROAD_ICI" class="popup-btn-primary" target="_blank">
+            Obtenir le guide complet — 29€ →
+          </a>
+
+          <div class="popup-already">
+            <button class="popup-already-link" onclick="toggleAlreadyForm()">
+              J'ai déjà acheté le guide
+            </button>
+
+            <div class="popup-already-form" id="popup-already-form">
+              <input class="popup-already-input" type="email" id="popup-email-input"
+                placeholder="Ton email d'achat..." />
+              <button class="popup-already-submit" onclick="submitAlreadyBuyer()">
+                Vérifier mon accès →
+              </button>
+              <p class="popup-already-msg" id="popup-already-msg">
+                ✅ Email envoyé ! Vérifie ta boîte — tu vas recevoir ton lien d'accès dans quelques minutes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -1128,6 +1417,60 @@
         btn.disabled = false;
         btn.textContent = isTop ? 'Je veux recevoir le guide →' : 'Je rejoins la liste →';
       }
+
+      // ── POPUP FUNNEL ──
+      const episodes = {
+        1: { tag: 'Épisode 1', title: 'Pourquoi étudier en Chine en 2026 est un choix stratégique' },
+        2: { tag: 'Épisode 2', title: 'Est-ce que TU peux vraiment y aller ?' },
+        3: { tag: 'Épisode 3', title: 'Comment choisir la bonne université' },
+        4: { tag: 'Épisode 4', title: 'Les bourses : vraiment accessibles ?' },
+        5: { tag: 'Épisode 5', title: 'Les erreurs qui ruinent un dossier' },
+        6: { tag: 'Épisode 6', title: 'Visa & démarches simplifiées' },
+        7: { tag: 'Épisode 7', title: 'La vraie vie sur place' },
+        8: { tag: 'Épisode 8', title: 'Plan d\'action en 30 jours' },
+      };
+
+      function openPopup(epNum) {
+        const ep = episodes[epNum] || episodes[1];
+        document.getElementById('popup-ep-tag').textContent = ep.tag;
+        document.getElementById('popup-title').textContent = '🔒 ' + ep.title + ' — Accès réservé';
+        document.getElementById('popup-overlay').classList.add('show');
+        document.body.style.overflow = 'hidden';
+        // Reset already-buyer form
+        document.getElementById('popup-already-form').classList.remove('show');
+        document.getElementById('popup-already-msg').classList.remove('show');
+        document.getElementById('popup-email-input').value = '';
+      }
+
+      function closePopup() {
+        document.getElementById('popup-overlay').classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      function closePopupOutside(e) {
+        if (e.target === document.getElementById('popup-overlay')) closePopup();
+      }
+
+      function toggleAlreadyForm() {
+        document.getElementById('popup-already-form').classList.toggle('show');
+      }
+
+      function submitAlreadyBuyer() {
+        const email = document.getElementById('popup-email-input').value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          document.getElementById('popup-email-input').style.borderColor = '#ff6b6b';
+          return;
+        }
+        // Ici tu peux brancher une vraie vérification plus tard
+        // Pour l'instant → affiche le message et notifie par email
+        document.getElementById('popup-already-msg').classList.add('show');
+        document.getElementById('popup-already-form').querySelector('button').disabled = true;
+      }
+
+      // Fermer avec Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
+      });
 
       // Soumission au clavier (Enter)
       document.addEventListener('keydown', (e) => {
