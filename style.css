@@ -1130,3 +1130,35 @@
           grid-template-columns: repeat(2, 1fr);
         }
       }
+      .article {
+  max-width: 800px;
+  margin: 120px auto 80px;
+  padding: 0 20px;
+  line-height: 1.7;
+  color: var(--light);
+}
+
+.article h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.article h2 {
+  margin-top: 50px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.article p {
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.article ul {
+  margin: 20px 0 20px 20px;
+}
+
+.article li {
+  margin-bottom: 8px;
+}
