@@ -15,11 +15,11 @@
         },
         {
             "src": "/",
-            "dest": "/etude-chine-2026.html"
+            "dest": "/index.html"
         },
         {
             "src": "/(.*)",
-            "dest": "/etude-chine-2026.html"
+            "dest": "//index.html"
         }
     ]
 }
