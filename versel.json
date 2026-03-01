@@ -1,5 +1,15 @@
 {
     "version": 2,
+    "builds": [
+        {
+            "src": "api/subscribe.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "*.html",
+            "use": "@vercel/static"
+        }
+    ],
     "routes": [
         {
             "src": "/api/subscribe",
@@ -16,10 +26,6 @@
         {
             "src": "/",
             "dest": "/index.html"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "//index.html"
         }
     ]
 }
