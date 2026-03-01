@@ -40,6 +40,10 @@
         "dest": "/a-venir.html"
     },
     {
+        "src": "/pourquoi-etudier-en-chine-2026",
+        "dest": "/pourquoi-etudier-en-chine-2026.html"
+    },
+    {
         "src": "/",
         "dest": "/index.html"
     }
