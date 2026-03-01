@@ -18,34 +18,34 @@
             "use": "@vercel/static"
         }
     ],
-    "routes": [
-        {
-            "src": "/api/subscribe",
-            "dest": "/api/subscribe.js"
-        },
-        {
-            "src": "/sitemap.xml",
-            "dest": "/sitemap.xml"
-        },
-        {
-            "src": "/robots.txt",
-            "dest": "/robots.txt"
-        },
-        {
-            "src": "/llms.txt",
-            "dest": "/llms.txt"
-        },
-        {
-            "src": "/a-venir",
-            "dest": "/a-venir.html"
-        },
-        {
-            "src": "/a-venir.html",
-            "dest": "/a-venir.html"
-        },
-        {
-            "src": "/",
-            "dest": "/index.html"
-        }
-    ]
+   "routes": [
+    {
+        "src": "/api/subscribe",
+        "dest": "/api/subscribe.js"
+    },
+    {
+        "src": "/sitemap.xml",
+        "dest": "/sitemap.xml"
+    },
+    {
+        "src": "/robots.txt",
+        "dest": "/robots.txt"
+    },
+    {
+        "src": "/llms.txt",
+        "dest": "/llms.txt"
+    },
+    {
+        "src": "/a-venir",
+        "dest": "/a-venir.html"
+    },
+    {
+        "src": "/pourquoi-etudier-en-chine-2026",
+        "dest": "/pourquoi-etudier-en-chine-2026.html"
+    },
+    {
+        "src": "/",
+        "dest": "/index.html"
+    }
+]
 }
