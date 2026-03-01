@@ -1,3 +1,47 @@
 {
-    "version": 2
+    "version": 2,
+    "builds": [
+        {
+            "src": "api/subscribe.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "*.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "*.xml",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "*.txt",
+            "use": "@vercel/static"
+        }
+    ],
+   "routes": [
+    {
+        "src": "/api/subscribe",
+        "dest": "/api/subscribe.js"
+    },
+    {
+        "src": "/sitemap.xml",
+        "dest": "/sitemap.xml"
+    },
+    {
+        "src": "/robots.txt",
+        "dest": "/robots.txt"
+    },
+    {
+        "src": "/llms.txt",
+        "dest": "/llms.txt"
+    },
+    {
+        "src": "/a-venir",
+        "dest": "/a-venir.html"
+    },
+    {
+        "src": "/",
+        "dest": "/index.html"
+    }
+]
 }
