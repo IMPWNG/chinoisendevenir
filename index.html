@@ -37,6 +37,170 @@
         overflow-x: hidden;
       }
 
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(13, 13, 13, 0.95);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+        transition: background 0.3s;
+      }
+
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 32px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--light);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav-logo span {
+        color: var(--red);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        padding: 8px 14px;
+        transition: color 0.2s;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--light);
+      }
+
+      .nav-links a.active {
+        color: var(--light);
+      }
+
+      .nav-links a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background: var(--red);
+      }
+
+      .nav-links .soon-tag {
+        position: relative;
+      }
+
+      .nav-links .soon-tag::after {
+        content: 'Bientôt';
+        position: absolute;
+        top: -6px;
+        right: 4px;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(212, 168, 83, 0.08);
+        border: 1px solid rgba(212, 168, 83, 0.25);
+        padding: 2px 5px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      .nav-cta {
+        background: var(--red) !important;
+        color: white !important;
+        padding: 10px 20px !important;
+        font-weight: 700 !important;
+      }
+
+      .nav-cta:hover {
+        background: #a50e26 !important;
+        color: white !important;
+      }
+
+      .nav-burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+
+      .nav-burger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--light);
+        transition: transform 0.2s, opacity 0.2s;
+      }
+
+      @media (max-width: 768px) {
+        .nav-burger {
+          display: flex;
+        }
+
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          background: var(--dark2);
+          border-bottom: 1px solid var(--border);
+          flex-direction: column;
+          padding: 16px 0;
+          gap: 0;
+        }
+
+        .nav-links.open {
+          display: flex;
+        }
+
+        .nav-links a {
+          padding: 12px 24px;
+          width: 100%;
+        }
+
+        .nav-links .soon-tag::after {
+          top: 10px;
+          right: auto;
+          left: 120px;
+        }
+
+        .nav-cta {
+          margin: 8px 24px;
+        }
+      }
+
       /* ── HERO ── */
       .hero {
         position: relative;
@@ -46,7 +210,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 80px 24px;
+        padding: 120px 24px 80px;
         overflow: hidden;
       }
 
@@ -982,6 +1146,24 @@
 
   <body>
 
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          🇨🇳 <span>Chinois</span> en Devenir
+        </a>
+        <button class="nav-burger" id="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#" class="active">Étudier</a></li>
+          <li class="soon-tag"><a href="/a-venir.html">S'expatrier</a></li>
+          <li class="soon-tag"><a href="/a-venir.html">Tourisme</a></li>
+          <li><a href="LIEN_GUMROAD_ICI" class="nav-cta" target="_blank">Guide — 29€</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- HERO -->
     <section class="hero">
       <div class="hero-badge">Chinois en Devenir — Guide Stratégique 2026</div>
@@ -1604,6 +1786,17 @@
       // Fermer avec Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closePopup();
+      });
+
+      // ── NAV BURGER ──
+      function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+      }
+      // Fermer le menu en cliquant ailleurs
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav')) {
+          document.getElementById('nav-links').classList.remove('open');
+        }
       });
 
       // Soumission au clavier (Enter)

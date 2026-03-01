@@ -6,7 +6,19 @@
             "dest": "/api/subscribe.js"
         },
         {
+            "src": "/a-venir",
+            "dest": "/a-venir.html"
+        },
+        {
+            "src": "/a-venir.html",
+            "dest": "/a-venir.html"
+        },
+        {
             "src": "/",
+            "dest": "/etude-chine-2026.html"
+        },
+        {
+            "src": "/(.*)",
             "dest": "/etude-chine-2026.html"
         }
     ]
