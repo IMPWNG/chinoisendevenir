@@ -1,6 +1,6 @@
 # Chinois en Devenir
 
-> Guide stratégique complet pour étudier, s'expatrier et voyager en Chine. Fondé par des experts du système éducatif et administratif chinois.
+> Guide complet pour étudier, s'expatrier et voyager en Chine. Fondé par des experts du système éducatif et administratif chinois.
 
 ## À propos
 
@@ -10,7 +10,7 @@ Nous ne produisons pas de contenu motivationnel. Nous produisons de la stratégi
 
 ## Produits disponibles
 
-### Étude Chine 2026/2027 — Guide Stratégique Complet
+### Étude Chine 2026/2027 — Guide Complet
 - URL : https://chinoisendevenir.vercel.app/
 - Prix : 29€
 - Format : Guide PDF + 8 modules vidéo privés + templates + feuille de route
@@ -28,7 +28,7 @@ Nous ne produisons pas de contenu motivationnel. Nous produisons de la stratégi
 ## Produits à venir
 
 - **S'expatrier & Créer son entreprise en Chine** : structures juridiques, fiscalité, démarches administratives, stratégie d'implantation
-- **Tourisme stratégique en Chine** : visa touriste, itinéraires, villes incontournables, guide pratique terrain
+- **Tourisme en Chine** : visa touriste, itinéraires, villes incontournables, guide pratique terrain
 
 ## Informations clés
 
