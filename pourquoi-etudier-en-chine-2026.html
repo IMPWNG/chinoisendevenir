@@ -12,15 +12,170 @@
 
         <link rel="canonical" href="https://chinoisendevenir.vercel.app/pourquoi-etudier-en-chine-2026">
         <link rel="stylesheet" href="style.css">
+
+        <style>
+            :root {
+                --red: #C8102E;
+                --gold: #D4A853;
+                --dark: #0D0D0D;
+                --dark2: #141414;
+                --light: #F5F0E8;
+                --muted: #888;
+                --border: rgba(212, 168, 83, 0.25);
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background: var(--dark);
+                color: var(--light);
+                font-family: 'DM Sans', sans-serif;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                background: rgba(13, 13, 13, 0.95);
+                border-bottom: 1px solid var(--border);
+                backdrop-filter: blur(12px);
+            }
+
+            .nav-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 32px;
+                height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-logo {
+                font-family: 'Playfair Display', serif;
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--light);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .nav-logo span {
+                color: var(--red);
+            }
+
+            .nav-back {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: var(--muted);
+                text-decoration: none;
+                padding: 8px 14px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                transition: color 0.2s, border-color 0.2s;
+            }
+
+            .nav-back:hover {
+                color: var(--light);
+                border-color: var(--gold);
+            }
+
+            .nav-back::before {
+                content: '←';
+                color: var(--gold);
+            }
+
+            main.article {
+                max-width: 740px;
+                margin: 0 auto;
+                padding: 110px 24px 100px;
+                line-height: 1.8;
+            }
+
+            main.article h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(28px, 4vw, 48px);
+                font-weight: 900;
+                line-height: 1.15;
+                margin-bottom: 32px;
+                color: var(--light);
+            }
+
+            main.article h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(18px, 2.5vw, 26px);
+                font-weight: 700;
+                margin: 48px 0 16px;
+                color: var(--light);
+                border-left: 3px solid var(--red);
+                padding-left: 16px;
+            }
+
+            main.article p {
+                font-size: 16px;
+                color: rgba(245, 240, 232, 0.75);
+                margin-bottom: 16px;
+            }
+
+            main.article ul {
+                list-style: none;
+                margin: 16px 0 24px;
+            }
+
+            main.article ul li {
+                font-size: 15px;
+                color: rgba(245, 240, 232, 0.7);
+                padding: 8px 0 8px 20px;
+                position: relative;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            main.article ul li::before {
+                content: '→';
+                position: absolute;
+                left: 0;
+                color: var(--gold);
+                font-size: 12px;
+            }
+
+            footer {
+                border-top: 1px solid var(--border);
+                padding: 32px 24px;
+                text-align: center;
+                font-size: 12px;
+                color: var(--muted);
+                letter-spacing: 1px;
+            }
+        </style>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+            rel="stylesheet">
     </head>
 
     <body>
 
         <nav>
             <div class="nav-inner">
-                    <a href="#" class="nav-logo">
-                        🇨🇳 <span>Chinois</span> en Devenir
-                    </a>
+                <a href="/" class="nav-logo">
+                    🇨🇳 <span>Chinois</span> en Devenir
+                </a>
+                <a href="/" class="nav-back">Accueil</a>
             </div>
         </nav>
 
@@ -29,8 +184,8 @@
             <h1>Pourquoi étudier en Chine en 2026/2027 ?</h1>
 
             <p>
-                Étudier en Chine en 2026/2027 n’est plus une décision marginale.
-                La Chine est aujourd’hui l’un des pôles académiques et économiques les plus influents au monde.
+                Étudier en Chine en 2026/2027 n'est plus une décision marginale.
+                La Chine est aujourd'hui l'un des pôles académiques et économiques les plus influents au monde.
                 Choisir une université chinoise représente un positionnement stratégique pour les étudiants qui
                 souhaitent évoluer dans un contexte international.
             </p>
@@ -38,13 +193,13 @@
             <h2>1. Une montée en puissance des universités chinoises</h2>
 
             <p>
-                Depuis plus de dix ans, la Chine investit massivement dans l’enseignement supérieur.
+                Depuis plus de dix ans, la Chine investit massivement dans l'enseignement supérieur.
                 Plusieurs universités figurent désormais parmi les meilleures mondiales dans les domaines de
-                l’ingénierie, de l’intelligence artificielle, du commerce et des sciences.
+                l'ingénierie, de l'intelligence artificielle, du commerce et des sciences.
             </p>
 
             <p>
-                Les programmes internationaux se multiplient, notamment en anglais, ce qui facilite l’intégration des
+                Les programmes internationaux se multiplient, notamment en anglais, ce qui facilite l'intégration des
                 étudiants étrangers.
             </p>
 
@@ -53,7 +208,7 @@
             <p>
                 Avoir étudié en Chine constitue un différenciateur fort sur un CV.
                 Les entreprises recherchent des profils capables de comprendre le marché asiatique, les dynamiques
-                internationales et les chaînes d’approvisionnement mondiales.
+                internationales et les chaînes d'approvisionnement mondiales.
             </p>
 
             <ul>
@@ -74,17 +229,15 @@
             <h2>4. Pourquoi 2026/2027 est une période stratégique</h2>
 
             <p>
-                Les prochaines années marquent une nouvelle phase d’ouverture et de coopération académique
+                Les prochaines années marquent une nouvelle phase d'ouverture et de coopération académique
                 internationale.
-                Entrer en 2026/2027 permet de bénéficier d’un contexte favorable, tout en anticipant les évolutions
+                Entrer en 2026/2027 permet de bénéficier d'un contexte favorable, tout en anticipant les évolutions
                 économiques mondiales.
             </p>
 
             <h2>5. Étudier en Chine : pour quels profils ?</h2>
 
-            <p>
-                Étudier en Chine peut être pertinent pour :
-            </p>
+            <p>Étudier en Chine peut être pertinent pour :</p>
 
             <ul>
                 <li>Les étudiants en commerce international</li>
@@ -98,19 +251,20 @@
             <p>
                 Étudier en Chine en 2026/2027 représente un choix stratégique pour les étudiants qui souhaitent se
                 positionner dans un environnement international en pleine évolution.
-                Au-delà du diplôme, c’est une expérience académique, culturelle et professionnelle structurante.
+                Au-delà du diplôme, c'est une expérience académique, culturelle et professionnelle structurante.
             </p>
 
             <p>
                 Pour comprendre les étapes concrètes, le calendrier et la préparation nécessaire, consultez le guide
-                principal disponible sur notre page d’accueil.
+                principal disponible sur notre page d'accueil.
             </p>
 
         </main>
 
-        <footer>
-            © 2026 Chinois en Devenir
-        </footer>
+    <footer>
+        <p>ÉTUDE – CHINE – 2026/2027 &nbsp;|&nbsp; Guide stratégique <span>▲</span> &nbsp;|&nbsp; Chinois en devenir - Tous
+            droits réservés</p>
+    </footer>
 
     </body>
 
