@@ -1,6 +1,14 @@
-const https = require("https");
+import https from "https";
 
-module.exports = async function handler(req, res) {
+function formatPhone(num) {
+  if (!num) return null;
+  let clean = num.replace(/\s|-|\./g, "");
+  if (clean.startsWith("0")) clean = "+33" + clean.slice(1);
+  if (!clean.startsWith("+")) clean = "+" + clean;
+  return clean;
+}
+
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -14,33 +22,8 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  let body = "";
-  await new Promise((resolve) => {
-    req.on("data", (chunk) => (body += chunk));
-    req.on("end", resolve);
-  });
-
-  let parsed;
-  try {
-    parsed = JSON.parse(body);
-  } catch (e) {
-    res.status(400).json({ error: "JSON invalide" });
-    return;
-  }
-
-  const { prenom, email, phone } = parsed;
-
-  // Formate le numéro automatiquement
-  function formatPhone(num) {
-    if (!num) return null;
-    let clean = num.replace(/\s|-|\./g, ""); // supprime espaces, tirets, points
-    if (clean.startsWith("0")) clean = "+33" + clean.slice(1); // 06... → +336...
-    if (!clean.startsWith("+")) clean = "+" + clean;
-    return clean;
-  }
+  const { prenom, email, phone } = req.body || {};
   const formattedPhone = formatPhone(phone);
-
-  console.log("Received:", { prenom, email, phone });
 
   if (!prenom || !email) {
     res.status(400).json({ error: "Prénom et email requis." });
@@ -74,16 +57,13 @@ module.exports = async function handler(req, res) {
       brevoRes.on("data", (chunk) => (data += chunk));
       brevoRes.on("end", () => {
         console.log("Brevo status:", brevoRes.statusCode);
-        console.log("Brevo response:", data);
-        res
-          .status(200)
-          .json({ success: true, brevoStatus: brevoRes.statusCode });
+        res.status(200).json({ success: true, brevoStatus: brevoRes.statusCode });
         resolve();
       });
     });
 
     brevoReq.on("error", (e) => {
-      console.log("Brevo error:", e.message);
+      console.error("Brevo error:", e.message);
       res.status(500).json({ error: e.message });
       resolve();
     });
@@ -91,4 +71,4 @@ module.exports = async function handler(req, res) {
     brevoReq.write(payload);
     brevoReq.end();
   });
-};;
+}
