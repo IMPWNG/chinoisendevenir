@@ -21,7 +21,7 @@ export default function LeadForm({ prefix }) {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prenom: prenom.trim(), email: email.trim(), phone: phone.trim() }),
+        body: JSON.stringify({ prenom: prenom.trim(), email: email.trim() }),
       })
       const json = await res.json().catch(() => ({}))
       if (res.ok && json.success) {
@@ -52,7 +52,6 @@ export default function LeadForm({ prefix }) {
         <input className="lead-input" type="text" placeholder="Prénom *" value={prenom} onChange={e => setPrenom(e.target.value)} />
         <input className="lead-input" type="email" placeholder="Email *" value={email} onChange={e => setEmail(e.target.value)} />
       </div>
-      <input className="lead-input" type="tel" placeholder="Téléphone (alertes importantes par SMS)" value={phone} onChange={e => setPhone(e.target.value)} />
       <button className="lead-submit" onClick={handleSubmit} disabled={loading}>
         {loading ? 'Envoi en cours…' : 'Recevoir les infos importantes →'}
       </button>
