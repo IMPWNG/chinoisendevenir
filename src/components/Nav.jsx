@@ -26,10 +26,10 @@ export default function Nav() {
               Étudier
             </Link>
           </li>
-          <li className="soon-tag">
+          <li>
             <Link to="/a-venir">S'expatrier</Link>
           </li>
-          <li className="soon-tag">
+          <li>
             <Link to="/a-venir">Tourisme</Link>
           </li>
           <li>
