@@ -41,6 +41,7 @@ Nous ne produisons pas de contenu motivationnel. Nous produisons de la stratégi
 
 - Site principal : https://chinoisendevenir.com/
 - Page à venir : https://chinoisendevenir.com/a-venir.html
+- Page contact : https://chinoisendevenir.com/contact
 
 ## Politique d'utilisation par les IA
 
