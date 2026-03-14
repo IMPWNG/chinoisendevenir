@@ -2,7 +2,7 @@ import Nav from "../components/Nav.jsx";
 import LeadForm from "../components/LeadForm.jsx";
 
 export default function Contact() {
-  const CALENDLY_URL = "https://calendly.com/VOTRE_LIEN_CALENDLY";
+  const CALENDLY_URL = "https://calendly.com/chinoisendevenir/30min";
 
   return (
     <>
@@ -164,7 +164,7 @@ export default function Contact() {
             >
               Appel découverte
               <br />
-              <span style={{ color: "var(--gold)" }}>gratuit — 20 min</span>
+              <span style={{ color: "var(--gold)" }}>gratuit — 30 min</span>
             </h2>
 
             <p
@@ -175,8 +175,7 @@ export default function Contact() {
                 marginBottom: "28px",
               }}
             >
-              On analyse rapidement ton profil et ton projet pour voir ce qui
-              est possible pour toi en 2026/2027.
+              Un échange rapide pour comprendre ton projet et ton profil.
             </p>
 
             <div
@@ -189,15 +188,14 @@ export default function Contact() {
                 marginBottom: "14px",
               }}
             >
-              Pendant l'appel tu vas découvrir :
+              Pendant cet appel nous allons :
             </div>
 
             <ul style={{ listStyle: "none", marginBottom: "28px", flex: 1 }}>
               {[
-                "Les options réelles qui existent pour ton profil",
-                "Les universités et opportunités possibles",
-                "Les dates importantes à ne pas rater",
-                "Les réponses à toutes tes questions",
+                "Comprendre ton projet et tes objectifs",
+                "Voir si étudier en Chine est une bonne option pour toi",
+                "Identifier les universités et opportunités possibles",
               ].map((item) => (
                 <li
                   key={item}
@@ -281,7 +279,7 @@ export default function Contact() {
           <div
             style={{
               background: "#0f0f0f",
-              border: "1px solid rgba(255,255,255,0.05)",
+              border: "1px solid rgba(212,168,83,0.15)",
               padding: "48px 40px",
               display: "flex",
               flexDirection: "column",
@@ -349,7 +347,16 @@ export default function Contact() {
               ))}
             </ul>
 
-            <LeadForm prefix="contact" />
+            <div
+              style={{
+                background: "rgba(212,168,83,0.04)",
+                border: "1px solid rgba(212,168,83,0.15)",
+                padding: "24px",
+                marginTop: "auto",
+              }}
+            >
+              <LeadForm prefix="contact" />
+            </div>
           </div>
         </section>
 
