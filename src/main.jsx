@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Analytics } from "@vercel/analytics/react"
 import Home from './pages/Home.jsx'
 import AVenir from './pages/AVenir.jsx'
+import Contact from './pages/contact.jsx'
 import './index.css'
 
 createRoot(document.getElementById("root")).render(
