@@ -14,6 +14,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<Home />} />
         <Route path="/a-venir" element={<AVenir />} />
         <Route path="/a-venir.html" element={<AVenir />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
