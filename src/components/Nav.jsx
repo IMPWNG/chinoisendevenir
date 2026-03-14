@@ -16,11 +16,13 @@ export default function Nav() {
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
-          <span /><span /><span />
+          <span />
+          <span />
+          <span />
         </button>
-        <ul className={`nav-links${open ? ' open' : ''}`}>
+        <ul className={`nav-links${open ? " open" : ""}`}>
           <li>
-            <Link to="/" className={pathname === '/' ? 'active' : ''}>
+            <Link to="/" className={pathname === "/" ? "active" : ""}>
               Étudier
             </Link>
           </li>
@@ -30,8 +32,11 @@ export default function Nav() {
           <li className="soon-tag">
             <Link to="/a-venir">Tourisme</Link>
           </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
         </ul>
       </div>
     </nav>
-  )
+  );
 }
