@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CALENDLY_URL = "https://calendly.com/chinoisendevenir/30min";
 
@@ -39,7 +39,7 @@ export default function Landing() {
 
   return (
     <>
-      {/* NAV */}
+      {/* NAV — redirige vers /contact */}
       <nav
         style={{
           position: "fixed",
@@ -76,10 +76,8 @@ export default function Landing() {
           >
             🇨🇳 <span style={{ color: "var(--red)" }}>Chinois</span> en Devenir
           </span>
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/contact"
             style={{
               background: "var(--red)",
               color: "white",
@@ -97,7 +95,7 @@ export default function Landing() {
             }
           >
             Appel gratuit →
-          </a>
+          </Link>
         </div>
       </nav>
 
@@ -133,7 +131,7 @@ export default function Landing() {
             textAlign: "center",
           }}
         >
-          {/* MENU NAVIGATION — au dessus du titre */}
+          {/* MENU NAVIGATION — hover fort */}
           <div
             style={{
               display: "grid",
@@ -163,65 +161,11 @@ export default function Landing() {
               <Link
                 key={s.label}
                 to={s.href}
-                style={{
-                  background: s.active ? "var(--dark2)" : "#0a0a0a",
-                  border: s.active
-                    ? "1px solid rgba(200,16,46,0.25)"
-                    : "1px solid rgba(255,255,255,0.04)",
-                  padding: "20px 16px",
-                  textDecoration: "none",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "8px",
-                  transition: "border-color 0.2s, background 0.2s",
-                  position: "relative",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = s.active
-                    ? "rgba(200,16,46,0.5)"
-                    : "rgba(212,168,83,0.2)";
-                  e.currentTarget.style.background = "#141414";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = s.active
-                    ? "rgba(200,16,46,0.25)"
-                    : "rgba(255,255,255,0.04)";
-                  e.currentTarget.style.background = s.active
-                    ? "var(--dark2)"
-                    : "#0a0a0a";
-                }}
+                className={`nav-card ${s.active ? "nav-card-active" : "nav-card-soon"}`}
               >
-                {!s.active && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                      fontSize: "7px",
-                      fontWeight: 700,
-                      letterSpacing: "1px",
-                      textTransform: "uppercase",
-                      color: "#444",
-                      background: "rgba(255,255,255,0.03)",
-                      padding: "3px 8px",
-                    }}
-                  >
-                    Bientôt
-                  </span>
-                )}
-                <span style={{ fontSize: "24px" }}>{s.emoji}</span>
-                <span
-                  style={{
-                    fontFamily: '"Playfair Display", serif',
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    color: s.active ? "var(--light)" : "rgba(245,240,232,0.2)",
-                    letterSpacing: "0.5px",
-                  }}
-                >
-                  {s.label}
-                </span>
+                {!s.active && <span className="nav-card-badge">Bientôt</span>}
+                <span className="nav-card-emoji">{s.emoji}</span>
+                <span className="nav-card-label">{s.label}</span>
               </Link>
             ))}
           </div>
@@ -253,7 +197,6 @@ export default function Landing() {
             <span style={{ color: "var(--red)" }}>en Devenir</span>
           </h1>
 
-          {/* TEXTE PRÉSENTATION */}
           <p
             style={{
               fontSize: "16px",
@@ -264,8 +207,9 @@ export default function Landing() {
               animation: "fadeUp 0.65s 0.15s ease both",
             }}
           >
-            On t'aide à étudier en Chine, à t'y expatrier ou à préparer ton
-            prochain voyage. Un accompagnement clair, adapté à ton projet.
+            Étudier en Chine, s'expatrier ou voyager 🇨🇳 On t'accompagne pour les
+            universités, les bourses, les démarches et la préparation de ton
+            projet en Chine.
           </p>
 
           {/* FLÈCHES */}
@@ -387,57 +331,15 @@ export default function Landing() {
             className="action-grid"
           >
             {/* APPEL */}
-            <div
-              style={{
-                background: "var(--dark2)",
-                border: "1px solid rgba(200,16,46,0.2)",
-                padding: "32px 24px",
-                display: "flex",
-                flexDirection: "column",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  background: "var(--red)",
-                  color: "white",
-                  fontSize: "8px",
-                  fontWeight: 700,
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                  padding: "5px 10px",
-                }}
-              >
-                Recommandé
-              </div>
-              <span style={{ fontSize: "28px", marginBottom: "12px" }}>📞</span>
-              <p
-                style={{
-                  fontFamily: '"Playfair Display", serif',
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  color: "var(--light)",
-                  lineHeight: 1.2,
-                  marginBottom: "8px",
-                }}
-              >
+            <div className="action-card action-card-call">
+              <div className="action-card-tag">Recommandé</div>
+              <span className="action-card-icon">📞</span>
+              <p className="action-card-title">
                 Appel gratuit
                 <br />
-                <span style={{ color: "var(--gold)" }}>30 min</span>
+                <span>30 min</span>
               </p>
-              <p
-                style={{
-                  fontSize: "12px",
-                  color: "rgba(245,240,232,0.35)",
-                  lineHeight: 1.6,
-                  marginBottom: "24px",
-                  flex: 1,
-                }}
-              >
+              <p className="action-card-desc">
                 On fait le point sur ton projet et on t'oriente vers les
                 meilleures options.
               </p>
@@ -445,73 +347,22 @@ export default function Landing() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  display: "block",
-                  background: "var(--red)",
-                  color: "white",
-                  textAlign: "center",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                  padding: "14px",
-                  textDecoration: "none",
-                  transition: "background 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "#a50e26")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "var(--red)")
-                }
+                className="action-card-btn action-card-btn-red"
               >
                 Réserver →
               </a>
-              <p
-                style={{
-                  fontSize: "10px",
-                  color: "#555",
-                  textAlign: "center",
-                  marginTop: "10px",
-                }}
-              >
-                Sans engagement
-              </p>
+              <p className="action-card-sub">Sans engagement</p>
             </div>
 
             {/* EMAIL */}
-            <div
-              style={{
-                background: "#0f0f0f",
-                border: "1px solid rgba(212,168,83,0.1)",
-                padding: "32px 24px",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <span style={{ fontSize: "28px", marginBottom: "12px" }}>📬</span>
-              <p
-                style={{
-                  fontFamily: '"Playfair Display", serif',
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  color: "var(--light)",
-                  lineHeight: 1.2,
-                  marginBottom: "8px",
-                }}
-              >
+            <div className="action-card action-card-email">
+              <span className="action-card-icon">📬</span>
+              <p className="action-card-title">
                 Rester
                 <br />
-                <span style={{ color: "var(--gold)" }}>informé</span>
+                <span>informé</span>
               </p>
-              <p
-                style={{
-                  fontSize: "12px",
-                  color: "rgba(245,240,232,0.35)",
-                  lineHeight: 1.6,
-                  marginBottom: "20px",
-                }}
-              >
+              <p className="action-card-desc">
                 Dates, bourses et mises à jour 2026/2027.
               </p>
 
@@ -555,22 +406,12 @@ export default function Landing() {
                     placeholder="Prénom *"
                     value={prenom}
                     onChange={(e) => setPrenom(e.target.value)}
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(212,168,83,0.2)",
-                      color: "var(--light)",
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontSize: "13px",
-                      padding: "11px 13px",
-                      outline: "none",
-                      width: "100%",
-                      boxSizing: "border-box",
-                    }}
+                    className="action-input"
                     onFocus={(e) =>
                       (e.target.style.borderColor = "var(--gold)")
                     }
                     onBlur={(e) =>
-                      (e.target.style.borderColor = "rgba(212,168,83,0.2)")
+                      (e.target.style.borderColor = "rgba(212,168,83,0.25)")
                     }
                   />
                   <input
@@ -579,22 +420,12 @@ export default function Landing() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(212,168,83,0.2)",
-                      color: "var(--light)",
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontSize: "13px",
-                      padding: "11px 13px",
-                      outline: "none",
-                      width: "100%",
-                      boxSizing: "border-box",
-                    }}
+                    className="action-input"
                     onFocus={(e) =>
                       (e.target.style.borderColor = "var(--gold)")
                     }
                     onBlur={(e) =>
-                      (e.target.style.borderColor = "rgba(212,168,83,0.2)")
+                      (e.target.style.borderColor = "rgba(212,168,83,0.25)")
                     }
                   />
                   {error && (
@@ -607,30 +438,11 @@ export default function Landing() {
                   <button
                     onClick={handleSubmit}
                     disabled={loading}
+                    className="action-card-btn action-card-btn-gold"
                     style={{
-                      background: "rgba(212,168,83,0.1)",
-                      border: "1px solid rgba(212,168,83,0.3)",
-                      color: "var(--gold)",
-                      fontFamily: '"DM Sans", sans-serif',
-                      fontSize: "11px",
-                      fontWeight: 700,
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                      padding: "13px",
-                      cursor: loading ? "not-allowed" : "pointer",
                       opacity: loading ? 0.5 : 1,
-                      transition: "background 0.2s",
-                      width: "100%",
+                      cursor: loading ? "not-allowed" : "pointer",
                     }}
-                    onMouseEnter={(e) =>
-                      !loading &&
-                      (e.currentTarget.style.background =
-                        "rgba(212,168,83,0.2)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background =
-                        "rgba(212,168,83,0.1)")
-                    }
                   >
                     {loading ? "Envoi…" : "S'inscrire →"}
                   </button>
@@ -639,7 +451,6 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* REASSURANCE — plus visible */}
           <p
             style={{
               fontSize: "12px",
@@ -663,7 +474,6 @@ export default function Landing() {
         </div>
       </main>
 
-      {/* FOOTER — plus visible */}
       <footer
         style={{
           borderTop: "1px solid rgba(255,255,255,0.07)",
@@ -694,6 +504,156 @@ export default function Landing() {
       </footer>
 
       <style>{`
+        /* ── NAV CARDS ── */
+        .nav-card {
+          padding: 20px 16px;
+          text-decoration: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+          transition: all 0.25s ease;
+        }
+        .nav-card-active {
+          background: var(--dark2);
+          border: 1px solid rgba(200,16,46,0.25);
+        }
+        .nav-card-soon {
+          background: #0a0a0a;
+          border: 1px solid rgba(255,255,255,0.04);
+        }
+        .nav-card-active:hover {
+          background: #1e1010;
+          border-color: var(--red);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 32px rgba(200,16,46,0.2);
+        }
+        .nav-card-soon:hover {
+          background: #141414;
+          border-color: rgba(212,168,83,0.3);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+        .nav-card-active:hover .nav-card-label { color: var(--red); }
+        .nav-card-soon:hover .nav-card-label { color: rgba(245,240,232,0.5); }
+        .nav-card-active:hover .nav-card-emoji { transform: scale(1.2); }
+        .nav-card-soon:hover .nav-card-emoji { transform: scale(1.1); }
+        .nav-card-badge {
+          position: absolute; top: 0; right: 0;
+          font-size: 7px; font-weight: 700; letter-spacing: 1px;
+          text-transform: uppercase; color: #444;
+          background: rgba(255,255,255,0.03); padding: 3px 8px;
+        }
+        .nav-card-emoji {
+          font-size: 24px;
+          transition: transform 0.25s ease;
+        }
+        .nav-card-label {
+          font-family: "Playfair Display", serif;
+          font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+          transition: color 0.25s ease;
+        }
+        .nav-card-active .nav-card-label { color: var(--light); }
+        .nav-card-soon .nav-card-label { color: rgba(245,240,232,0.2); }
+
+        /* ── ACTION CARDS ── */
+        .action-card {
+          padding: 32px 24px;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .action-card:hover {
+          transform: translateY(-3px);
+        }
+        .action-card-call {
+          background: var(--dark2);
+          border: 1px solid rgba(200,16,46,0.2);
+        }
+        .action-card-call:hover {
+          border-color: rgba(200,16,46,0.5);
+          box-shadow: 0 12px 40px rgba(200,16,46,0.15);
+        }
+        .action-card-email {
+          background: #0f0f0f;
+          border: 1px solid rgba(212,168,83,0.1);
+        }
+        .action-card-email:hover {
+          border-color: rgba(212,168,83,0.35);
+          box-shadow: 0 12px 40px rgba(212,168,83,0.08);
+        }
+        .action-card-tag {
+          position: absolute; top: 0; right: 0;
+          background: var(--red); color: white;
+          font-size: 8px; font-weight: 700;
+          letter-spacing: 1.5px; text-transform: uppercase;
+          padding: 5px 10px;
+        }
+        .action-card-icon {
+          font-size: 28px; margin-bottom: 12px;
+          transition: transform 0.25s ease;
+        }
+        .action-card:hover .action-card-icon {
+          transform: scale(1.15);
+        }
+        .action-card-title {
+          font-family: "Playfair Display", serif;
+          font-size: 18px; font-weight: 700;
+          color: var(--light); line-height: 1.2; margin-bottom: 8px;
+        }
+        .action-card-call .action-card-title span { color: var(--gold); }
+        .action-card-email .action-card-title span { color: var(--gold); }
+        .action-card-desc {
+          font-size: 12px; color: rgba(245,240,232,0.35);
+          line-height: 1.6; margin-bottom: 20px; flex: 1;
+        }
+        .action-card-btn {
+          display: block; text-align: center;
+          font-size: 11px; font-weight: 700;
+          letter-spacing: 1.5px; text-transform: uppercase;
+          padding: 14px; text-decoration: none;
+          border: none; width: 100%;
+          transition: all 0.2s ease;
+          cursor: pointer;
+        }
+        .action-card-btn-red {
+          background: var(--red); color: white;
+        }
+        .action-card-btn-red:hover {
+          background: #a50e26;
+          letter-spacing: 2.5px;
+        }
+        .action-card-btn-gold {
+          background: rgba(212,168,83,0.1);
+          border: 1px solid rgba(212,168,83,0.3) !important;
+          color: var(--gold);
+          font-family: "DM Sans", sans-serif;
+        }
+        .action-card-btn-gold:hover {
+          background: rgba(212,168,83,0.2);
+          letter-spacing: 2.5px;
+        }
+        .action-card-sub {
+          font-size: 10px; color: #555;
+          text-align: center; margin-top: 10px;
+        }
+        .action-input {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(212,168,83,0.25);
+          color: var(--light);
+          font-family: "DM Sans", sans-serif;
+          font-size: 13px; padding: 11px 13px;
+          outline: none; width: 100%; box-sizing: border-box;
+          transition: border-color 0.2s, background 0.2s;
+        }
+        .action-input:hover {
+          background: rgba(255,255,255,0.06);
+        }
+
+        /* ── ANIMATIONS ── */
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(6px); }
