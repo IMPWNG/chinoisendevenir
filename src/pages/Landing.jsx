@@ -484,58 +484,75 @@ export default function Landing() {
       </footer>
 
       <style>{`
-        /* ── NAV CARDS ── */
-        .nav-card {
-          padding: 20px 16px;
-          text-decoration: none;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 8px;
-          position: relative;
-          transition: all 0.25s ease;
-        }
-        .nav-card-active {
-          background: var(--dark2);
-          border: 1px solid rgba(200,16,46,0.25);
-        }
-        .nav-card-soon {
-          background: #0a0a0a;
-          border: 1px solid rgba(255,255,255,0.04);
-        }
-        .nav-card-active:hover {
-          background: #1e1010;
-          border-color: var(--red);
-          transform: translateY(-3px);
-          box-shadow: 0 8px 32px rgba(200,16,46,0.2);
-        }
-        .nav-card-soon:hover {
-          background: #141414;
-          border-color: rgba(212,168,83,0.3);
-          transform: translateY(-3px);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-        }
-        .nav-card-active:hover .nav-card-label { color: var(--red); }
-        .nav-card-soon:hover .nav-card-label { color: rgba(245,240,232,0.5); }
-        .nav-card-active:hover .nav-card-emoji { transform: scale(1.2); }
-        .nav-card-soon:hover .nav-card-emoji { transform: scale(1.1); }
-        .nav-card-badge {
-          position: absolute; top: 0; right: 0;
-          font-size: 7px; font-weight: 700; letter-spacing: 1px;
-          text-transform: uppercase; color: #444;
-          background: rgba(255,255,255,0.03); padding: 3px 8px;
-        }
-        .nav-card-emoji {
-          font-size: 24px;
-          transition: transform 0.25s ease;
-        }
-        .nav-card-label {
-          font-family: "Playfair Display", serif;
-          font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
-          transition: color 0.25s ease;
-        }
-        .nav-card-active .nav-card-label { color: var(--light); }
-        .nav-card-soon .nav-card-label { color: rgba(245,240,232,0.2); }
+/* ── NAV CARDS ── */
+.nav-card {
+  padding: 20px 16px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.nav-card-active {
+  background: var(--dark2);
+  border: 1px solid rgba(200,16,46,0.5);
+  box-shadow: 0 0 0 1px rgba(200,16,46,0.15), inset 0 0 20px rgba(200,16,46,0.05);
+}
+.nav-card-soon {
+  background: #0d0d0d;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.nav-card::after {
+  content: '↗';
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 10px;
+  color: #333;
+  transition: color 0.25s, transform 0.25s;
+}
+.nav-card-active::after { color: rgba(200,16,46,0.4); }
+.nav-card-active:hover {
+  background: #1e1010;
+  border-color: var(--red);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(200,16,46,0.25);
+}
+.nav-card-soon:hover {
+  background: #141414;
+  border-color: rgba(212,168,83,0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+}
+.nav-card:hover::after { color: var(--gold); transform: translate(2px, -2px); }
+.nav-card-active:hover .nav-card-label { color: var(--red); }
+.nav-card-soon:hover .nav-card-label { color: rgba(245,240,232,0.6); }
+.nav-card-active:hover .nav-card-emoji { transform: scale(1.2); }
+.nav-card-soon:hover .nav-card-emoji { transform: scale(1.1); }
+.nav-card-badge {
+  position: absolute; top: 0; right: 0;
+  font-size: 7px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(212,168,83,0.08);
+  border-bottom: 1px solid rgba(212,168,83,0.15);
+  border-left: 1px solid rgba(212,168,83,0.15);
+  padding: 3px 8px;
+}
+.nav-card-emoji {
+  font-size: 24px;
+  transition: transform 0.25s ease;
+}
+.nav-card-label {
+  font-family: "Playfair Display", serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+  transition: color 0.25s ease;
+}
+.nav-card-active .nav-card-label { color: var(--light); }
+.nav-card-soon .nav-card-label { color: rgba(245,240,232,0.4); }
 
         /* ── ACTION CARDS ── */
         .action-card {
