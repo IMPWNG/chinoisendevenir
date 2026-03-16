@@ -22,7 +22,7 @@ export default function Nav() {
         </button>
         <ul className={`nav-links${open ? " open" : ""}`}>
           <li>
-            <Link to="/" className={pathname === "/" ? "active" : ""}>
+            <Link to="/etude" className={pathname === "/etude" ? "active" : ""}>
               Étudier
             </Link>
           </li>
