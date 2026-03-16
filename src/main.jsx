@@ -2,7 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-import Home from "./pages/Home.jsx";
+import Landing from "./pages/Landing.jsx";
+import Etude from "./pages/Etude.jsx";
 import AVenir from "./pages/AVenir.jsx";
 import Contact from "./pages/Contact.jsx";
 import "./index.css";
@@ -12,7 +13,8 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Analytics />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/etudier" element={<Etude />} />
         <Route path="/a-venir" element={<AVenir />} />
         <Route path="/a-venir.html" element={<AVenir />} />
         <Route path="/contact" element={<Contact />} />
@@ -20,3 +22,4 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </StrictMode>,
 );
+git
