@@ -222,64 +222,41 @@ export default function Landing() {
               animation: "fadeUp 0.65s 0.2s ease both",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              <span
+            {[
+              { label: "Appel", color: "var(--gold)" },
+              { label: "Email", color: "var(--gold)" },
+            ].map((item, i) => (
+              <div
+                key={item.label}
                 style={{
-                  fontSize: "11px",
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "6px",
                 }}
               >
-                Appel
-              </span>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "var(--gold)",
-                  display: "inline-block",
-                  animation: "bounce 1.5s infinite",
-                }}
-              >
-                ↓
-              </span>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: "rgba(245,240,232,0.4)",
-                }}
-              >
-                Email
-              </span>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "rgba(245,240,232,0.4)",
-                  display: "inline-block",
-                  animation: "bounce 1.5s 0.3s infinite",
-                }}
-              >
-                ↓
-              </span>
-            </div>
+                <span
+                  style={{
+                    fontSize: "11px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: item.color,
+                  }}
+                >
+                  {item.label}
+                </span>
+                <span
+                  style={{
+                    fontSize: "20px",
+                    color: item.color,
+                    display: "inline-block",
+                    animation: `bounce 1.5s ${i * 0.3}s infinite`,
+                  }}
+                >
+                  ↓
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* SÉPARATEUR */}
@@ -340,8 +317,9 @@ export default function Landing() {
                 <span>30 min</span>
               </p>
               <p className="action-card-desc">
-                On fait le point sur ton projet et on t'oriente vers les
-                meilleures options.
+                On analyse ton profil, on identifie les universités et bourses
+                adaptées, et on t'explique les vraies étapes à suivre pour
+                2026/2027.
               </p>
               <a
                 href={CALENDLY_URL}
@@ -349,7 +327,7 @@ export default function Landing() {
                 rel="noreferrer"
                 className="action-card-btn action-card-btn-red"
               >
-                Réserver →
+                📞 Réserver mon appel gratuit →
               </a>
               <p className="action-card-sub">Sans engagement</p>
             </div>
@@ -363,7 +341,9 @@ export default function Landing() {
                 <span>informé</span>
               </p>
               <p className="action-card-desc">
-                Dates, bourses et mises à jour 2026/2027.
+                Reçois les dates d'ouverture des candidatures, les bourses
+                disponibles et les rappels importants pour ne rien rater en
+                2026/2027.
               </p>
 
               {success ? (
@@ -444,7 +424,7 @@ export default function Landing() {
                       cursor: loading ? "not-allowed" : "pointer",
                     }}
                   >
-                    {loading ? "Envoi…" : "S'inscrire →"}
+                    {loading ? "Envoi…" : "📬 Recevoir les infos →"}
                   </button>
                 </div>
               )}
