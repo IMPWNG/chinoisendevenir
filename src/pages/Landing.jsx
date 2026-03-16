@@ -124,7 +124,7 @@ export default function Landing() {
           style={{
             maxWidth: "600px",
             margin: "0 auto",
-            padding: "64px 24px 100px",
+            padding: "48px 24px 100px",
             position: "relative",
             zIndex: 1,
             display: "flex",
@@ -133,144 +133,7 @@ export default function Landing() {
             textAlign: "center",
           }}
         >
-          {/* HERO */}
-          <div
-            style={{
-              fontSize: "56px",
-              marginBottom: "20px",
-              animation: "fadeUp 0.6s ease both",
-            }}
-          >
-            🇨🇳
-          </div>
-
-          <h1
-            style={{
-              fontFamily: '"Playfair Display", serif',
-              fontSize: "clamp(42px, 8vw, 72px)",
-              fontWeight: 900,
-              lineHeight: 1.0,
-              marginBottom: "20px",
-              letterSpacing: "-1px",
-              animation: "fadeUp 0.65s 0.05s ease both",
-            }}
-          >
-            Chinois
-            <br />
-            <span style={{ color: "var(--red)" }}>en Devenir</span>
-          </h1>
-
-          {/* PRÉSENTATION */}
-          <div
-            style={{
-              animation: "fadeUp 0.65s 0.1s ease both",
-              marginBottom: "40px",
-              width: "100%",
-            }}
-          >
-            {[
-              { e: "🎓", t: "Trouve ton université et étudie en Chine" },
-              { e: "🏢", t: "Expatrie-toi et lance ton projet là-bas" },
-              { e: "✈️", t: "Prépare ton prochain voyage en toute sérénité" },
-            ].map((item) => (
-              <div
-                key={item.t}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  padding: "10px 0",
-                  borderBottom: "1px solid rgba(255,255,255,0.05)",
-                  textAlign: "left",
-                }}
-              >
-                <span style={{ fontSize: "20px", flexShrink: 0 }}>
-                  {item.e}
-                </span>
-                <span
-                  style={{
-                    fontSize: "15px",
-                    color: "rgba(245,240,232,0.55)",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {item.t}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* FLÈCHES */}
-          <div
-            style={{
-              display: "flex",
-              gap: "32px",
-              justifyContent: "center",
-              marginBottom: "40px",
-              animation: "fadeUp 0.65s 0.15s ease both",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
-                }}
-              >
-                Appel
-              </span>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "var(--gold)",
-                  display: "inline-block",
-                  animation: "bounce 1.5s infinite",
-                }}
-              >
-                ↓
-              </span>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: "rgba(245,240,232,0.3)",
-                }}
-              >
-                Email
-              </span>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "rgba(245,240,232,0.3)",
-                  display: "inline-block",
-                  animation: "bounce 1.5s 0.3s infinite",
-                }}
-              >
-                ↓
-              </span>
-            </div>
-          </div>
-
-          {/* MENU NAVIGATION */}
+          {/* MENU NAVIGATION — au dessus du titre */}
           <div
             style={{
               display: "grid",
@@ -278,7 +141,7 @@ export default function Landing() {
               gap: "2px",
               width: "100%",
               marginBottom: "48px",
-              animation: "fadeUp 0.65s 0.2s ease both",
+              animation: "fadeUp 0.6s ease both",
             }}
             className="nav-grid"
           >
@@ -363,6 +226,118 @@ export default function Landing() {
             ))}
           </div>
 
+          {/* HERO */}
+          <div
+            style={{
+              fontSize: "52px",
+              marginBottom: "20px",
+              animation: "fadeUp 0.65s 0.05s ease both",
+            }}
+          >
+            🇨🇳
+          </div>
+
+          <h1
+            style={{
+              fontFamily: '"Playfair Display", serif',
+              fontSize: "clamp(42px, 8vw, 72px)",
+              fontWeight: 900,
+              lineHeight: 1.0,
+              marginBottom: "24px",
+              letterSpacing: "-1px",
+              animation: "fadeUp 0.65s 0.1s ease both",
+            }}
+          >
+            Chinois
+            <br />
+            <span style={{ color: "var(--red)" }}>en Devenir</span>
+          </h1>
+
+          {/* TEXTE PRÉSENTATION */}
+          <p
+            style={{
+              fontSize: "16px",
+              color: "rgba(245,240,232,0.5)",
+              lineHeight: 1.8,
+              marginBottom: "48px",
+              maxWidth: "440px",
+              animation: "fadeUp 0.65s 0.15s ease both",
+            }}
+          >
+            On t'aide à étudier en Chine, à t'y expatrier ou à préparer ton
+            prochain voyage. Un accompagnement clair, adapté à ton projet.
+          </p>
+
+          {/* FLÈCHES */}
+          <div
+            style={{
+              display: "flex",
+              gap: "40px",
+              justifyContent: "center",
+              marginBottom: "40px",
+              animation: "fadeUp 0.65s 0.2s ease both",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                }}
+              >
+                Appel
+              </span>
+              <span
+                style={{
+                  fontSize: "20px",
+                  color: "var(--gold)",
+                  display: "inline-block",
+                  animation: "bounce 1.5s infinite",
+                }}
+              >
+                ↓
+              </span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  color: "rgba(245,240,232,0.4)",
+                }}
+              >
+                Email
+              </span>
+              <span
+                style={{
+                  fontSize: "20px",
+                  color: "rgba(245,240,232,0.4)",
+                  display: "inline-block",
+                  animation: "bounce 1.5s 0.3s infinite",
+                }}
+              >
+                ↓
+              </span>
+            </div>
+          </div>
+
           {/* SÉPARATEUR */}
           <div
             style={{
@@ -411,7 +386,7 @@ export default function Landing() {
             }}
             className="action-grid"
           >
-            {/* BLOC APPEL */}
+            {/* APPEL */}
             <div
               style={{
                 background: "var(--dark2)",
@@ -495,7 +470,7 @@ export default function Landing() {
               <p
                 style={{
                   fontSize: "10px",
-                  color: "#333",
+                  color: "#555",
                   textAlign: "center",
                   marginTop: "10px",
                 }}
@@ -504,7 +479,7 @@ export default function Landing() {
               </p>
             </div>
 
-            {/* BLOC EMAIL */}
+            {/* EMAIL */}
             <div
               style={{
                 background: "#0f0f0f",
@@ -664,37 +639,57 @@ export default function Landing() {
             </div>
           </div>
 
+          {/* REASSURANCE — plus visible */}
           <p
             style={{
-              fontSize: "10px",
-              color: "#2a2a2a",
+              fontSize: "12px",
+              color: "rgba(245,240,232,0.45)",
               letterSpacing: "1px",
-              marginTop: "20px",
+              marginTop: "24px",
               animation: "fadeUp 0.65s 0.35s ease both",
+              display: "flex",
+              gap: "8px",
+              alignItems: "center",
+              flexWrap: "wrap",
+              justifyContent: "center",
             }}
           >
-            🔒 Aucun spam &nbsp;·&nbsp; Sans engagement &nbsp;·&nbsp; Réponse
-            sous 24h
+            <span>🔒 Aucun spam</span>
+            <span style={{ color: "#444" }}>·</span>
+            <span>Sans engagement</span>
+            <span style={{ color: "#444" }}>·</span>
+            <span>Réponse sous 24h</span>
           </p>
         </div>
       </main>
 
+      {/* FOOTER — plus visible */}
       <footer
         style={{
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-          padding: "20px 24px",
+          borderTop: "1px solid rgba(255,255,255,0.07)",
+          padding: "24px",
           textAlign: "center",
-          fontSize: "11px",
-          color: "#333",
-          letterSpacing: "1px",
           position: "relative",
           zIndex: 1,
         }}
       >
-        <p>
-          🇨🇳 Chinois en Devenir &nbsp;·&nbsp;{" "}
-          <span style={{ color: "var(--red)" }}>2026/2027</span> &nbsp;·&nbsp;
-          Tous droits réservés
+        <p
+          style={{
+            fontSize: "12px",
+            color: "rgba(245,240,232,0.35)",
+            letterSpacing: "1px",
+            display: "flex",
+            gap: "8px",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <span>🇨🇳 Chinois en Devenir</span>
+          <span style={{ color: "#333" }}>·</span>
+          <span style={{ color: "var(--red)" }}>2026/2027</span>
+          <span style={{ color: "#333" }}>·</span>
+          <span>Tous droits réservés</span>
         </p>
       </footer>
 
