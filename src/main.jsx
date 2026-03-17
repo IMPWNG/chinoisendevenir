@@ -6,6 +6,7 @@ import Landing from "./pages/Landing.jsx";
 import Etude from "./pages/Etude.jsx";
 import AVenir from "./pages/AVenir.jsx";
 import Contact from "./pages/Contact.jsx";
+import Indispensables from "./pages/Indispensables.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
@@ -17,9 +18,12 @@ createRoot(document.getElementById("root")).render(
         <Route path="/etudier" element={<Etude />} />
         <Route path="/a-venir" element={<AVenir />} />
         <Route path="/a-venir.html" element={<AVenir />} />
+        <Route path="/indispensables" element={<Indispensables />} />;
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
 );
-git
+
+
+// ...
