@@ -107,7 +107,7 @@ export default function AVenir() {
               },
               {
                 tag: "Prochainement",
-                title: "S'expatrier &amp; Créer son entreprise en Chine",
+                title: "S'expatrier & Créer son entreprise en Chine",
                 desc: "Conseils pratiques pour celles et ceux qui souhaitent vivre, travailler ou entreprendre en Chine. Démarches, réalités du terrain et points d'attention.",
                 available: false,
               },
