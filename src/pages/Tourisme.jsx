@@ -268,7 +268,7 @@ export default function Tourisme() {
                 {
                   icon: "📱",
                   titre: "Applications locales",
-                  desc: "WeChat, Alipay — tout est différent en Chine.",
+                  desc: "WeChat, Alipay, Meituan — tout est différent en Chine.",
                 },
                 {
                   icon: "💳",
