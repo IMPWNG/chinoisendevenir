@@ -17,7 +17,7 @@ const OUTILS = [
     ],
   },
   {
-    categorie: "Banque &amp; Argent",
+    categorie: "Banque & Argent",
     icon: "💳",
     items: [
       {
