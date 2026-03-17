@@ -263,7 +263,7 @@ export default function Tourisme() {
                 {
                   icon: "🔐",
                   titre: "Visa",
-                  desc: "Les démarches sont spécifiques et prennent du temps.",
+                  desc: "Les démarches sont spécifiques et prennent du temps. Les passeports français peuvent rester 30 jours sur le territoire sans visa.",
                 },
                 {
                   icon: "📱",
