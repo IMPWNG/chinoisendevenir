@@ -40,7 +40,7 @@ export default function Landing() {
   const navItems = [
     { emoji: "🎓", label: "Étudier", href: "/etudier", active: true },
     { emoji: "🏢", label: "S'expatrier", href: "/a-venir", active: false },
-    { emoji: "✈️", label: "Tourisme", href: "/a-venir", active: false },
+    { emoji: "✈️", label: "Tourisme", href: "/a-venir", active: true },
     {
       emoji: "🛠",
       label: "Indispensables",
