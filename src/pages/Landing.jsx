@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CALENDLY_URL = "https://calendly.com/chinoisendevenir/30min";
 
@@ -37,9 +37,21 @@ export default function Landing() {
     }
   }
 
+  const navItems = [
+    { emoji: "🎓", label: "Étudier", href: "/etudier", active: true },
+    { emoji: "🏢", label: "S'expatrier", href: "/a-venir", active: false },
+    { emoji: "✈️", label: "Tourisme", href: "/a-venir", active: false },
+    {
+      emoji: "🛠",
+      label: "Indispensables",
+      href: "/indispensables",
+      gold: true,
+    },
+  ];
+
   return (
     <>
-      {/* NAV — redirige vers /contact */}
+      {/* NAV */}
       <nav
         style={{
           position: "fixed",
@@ -131,11 +143,11 @@ export default function Landing() {
             textAlign: "center",
           }}
         >
-          {/* MENU NAVIGATION — hover fort */}
+          {/* MENU NAVIGATION */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: "repeat(4, 1fr)",
               gap: "2px",
               width: "100%",
               marginBottom: "48px",
@@ -143,26 +155,15 @@ export default function Landing() {
             }}
             className="nav-grid"
           >
-            {[
-              { emoji: "🎓", label: "Étudier", href: "/etudier", active: true },
-              {
-                emoji: "🏢",
-                label: "S'expatrier",
-                href: "/a-venir",
-                active: false,
-              },
-              {
-                emoji: "✈️",
-                label: "Tourisme",
-                href: "/a-venir",
-                active: false,
-              },
-            ].map((s) => (
+            {navItems.map((s) => (
               <Link
                 key={s.label}
                 to={s.href}
-                className={`nav-card ${s.active ? "nav-card-active" : "nav-card-soon"}`}
+                className={`nav-card ${s.gold ? "nav-card-gold" : s.active ? "nav-card-active" : "nav-card-soon"}`}
               >
+                {!s.active && !s.gold && (
+                  <span className="nav-card-badge">Bientôt</span>
+                )}
                 <span className="nav-card-emoji">{s.emoji}</span>
                 <span className="nav-card-label">{s.label}</span>
               </Link>
@@ -483,88 +484,92 @@ export default function Landing() {
       </footer>
 
       <style>{`
-/* ── NAV CARDS ── */
-.nav-card {
-  padding: 20px 16px;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  transition: all 0.25s ease;
-  cursor: pointer;
-}
-.nav-card-active {
-  background: var(--dark2);
-  border: 1px solid rgba(200,16,46,0.5);
-  box-shadow: 0 0 0 1px rgba(200,16,46,0.15), inset 0 0 20px rgba(200,16,46,0.05);
-}
-.nav-card-soon {
-  background: #0d0d0d;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.nav-card::after {
-  content: '↗';
-  position: absolute;
-  bottom: 8px;
-  right: 10px;
-  font-size: 10px;
-  color: #333;
-  transition: color 0.25s, transform 0.25s;
-}
-.nav-card-active::after { color: rgba(200,16,46,0.4); }
-.nav-card-active:hover {
-  background: #1e1010;
-  border-color: var(--red);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(200,16,46,0.25);
-}
-.nav-card-soon:hover {
-  background: #141414;
-  border-color: rgba(212,168,83,0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.5);
-}
-.nav-card:hover::after { color: var(--gold); transform: translate(2px, -2px); }
-.nav-card-active:hover .nav-card-label { color: var(--red); }
-.nav-card-soon:hover .nav-card-label { color: rgba(245,240,232,0.6); }
-.nav-card-active:hover .nav-card-emoji { transform: scale(1.2); }
-.nav-card-soon:hover .nav-card-emoji { transform: scale(1.1); }
-.nav-card-badge {
-  position: absolute; top: 0; right: 0;
-  font-size: 7px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(212,168,83,0.08);
-  border-bottom: 1px solid rgba(212,168,83,0.15);
-  border-left: 1px solid rgba(212,168,83,0.15);
-  padding: 3px 8px;
-}
-.nav-card-emoji {
-  font-size: 24px;
-  transition: transform 0.25s ease;
-}
-.nav-card-label {
-  font-family: "Playfair Display", serif;
-  font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
-  transition: color 0.25s ease;
-}
-.nav-card-active .nav-card-label { color: var(--light); }
-.nav-card-soon .nav-card-label { color: rgba(245,240,232,0.4); }
+        /* ── NAV CARDS ── */
+        .nav-card {
+          padding: 20px 16px;
+          text-decoration: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+          transition: all 0.25s ease;
+          cursor: pointer;
+        }
+        .nav-card-active {
+          background: var(--dark2);
+          border: 1px solid rgba(200,16,46,0.5);
+          box-shadow: 0 0 0 1px rgba(200,16,46,0.15), inset 0 0 20px rgba(200,16,46,0.05);
+        }
+        .nav-card-soon {
+          background: #0d0d0d;
+          border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-card-gold {
+          background: rgba(212,168,83,0.04);
+          border: 1px solid rgba(212,168,83,0.3);
+        }
+        .nav-card::after {
+          content: '↗';
+          position: absolute;
+          bottom: 8px; right: 10px;
+          font-size: 10px; color: #333;
+          transition: color 0.25s, transform 0.25s;
+        }
+        .nav-card-active::after { color: rgba(200,16,46,0.4); }
+        .nav-card-gold::after { color: rgba(212,168,83,0.3); }
+        .nav-card-active:hover {
+          background: #1e1010;
+          border-color: var(--red);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(200,16,46,0.25);
+        }
+        .nav-card-soon:hover {
+          background: #141414;
+          border-color: rgba(212,168,83,0.4);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+        }
+        .nav-card-gold:hover {
+          background: rgba(212,168,83,0.1);
+          border-color: var(--gold);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(212,168,83,0.15);
+        }
+        .nav-card:hover::after { color: var(--gold); transform: translate(2px, -2px); }
+        .nav-card-active:hover .nav-card-label { color: var(--red); }
+        .nav-card-soon:hover .nav-card-label { color: rgba(245,240,232,0.6); }
+        .nav-card-gold:hover .nav-card-label { color: var(--gold); }
+        .nav-card-active:hover .nav-card-emoji { transform: scale(1.2); }
+        .nav-card-soon:hover .nav-card-emoji { transform: scale(1.1); }
+        .nav-card-gold:hover .nav-card-emoji { transform: scale(1.2); }
+        .nav-card-badge {
+          position: absolute; top: 0; right: 0;
+          font-size: 7px; font-weight: 700; letter-spacing: 1px;
+          text-transform: uppercase; color: var(--gold);
+          background: rgba(212,168,83,0.08);
+          border-bottom: 1px solid rgba(212,168,83,0.15);
+          border-left: 1px solid rgba(212,168,83,0.15);
+          padding: 3px 8px;
+        }
+        .nav-card-emoji { font-size: 24px; transition: transform 0.25s ease; }
+        .nav-card-label {
+          font-family: "Playfair Display", serif;
+          font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+          transition: color 0.25s ease;
+        }
+        .nav-card-active .nav-card-label { color: var(--light); }
+        .nav-card-soon .nav-card-label { color: rgba(245,240,232,0.4); }
+        .nav-card-gold .nav-card-label { color: var(--gold); }
 
         /* ── ACTION CARDS ── */
         .action-card {
           padding: 32px 24px;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          overflow: hidden;
+          display: flex; flex-direction: column;
+          position: relative; overflow: hidden;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-        .action-card:hover {
-          transform: translateY(-3px);
-        }
+        .action-card:hover { transform: translateY(-3px); }
         .action-card-call {
           background: var(--dark2);
           border: 1px solid rgba(200,16,46,0.2);
@@ -588,13 +593,8 @@ export default function Landing() {
           letter-spacing: 1.5px; text-transform: uppercase;
           padding: 5px 10px;
         }
-        .action-card-icon {
-          font-size: 28px; margin-bottom: 12px;
-          transition: transform 0.25s ease;
-        }
-        .action-card:hover .action-card-icon {
-          transform: scale(1.15);
-        }
+        .action-card-icon { font-size: 28px; margin-bottom: 12px; transition: transform 0.25s ease; }
+        .action-card:hover .action-card-icon { transform: scale(1.15); }
         .action-card-title {
           font-family: "Playfair Display", serif;
           font-size: 18px; font-weight: 700;
@@ -612,51 +612,36 @@ export default function Landing() {
           letter-spacing: 1.5px; text-transform: uppercase;
           padding: 14px; text-decoration: none;
           border: none; width: 100%;
-          transition: all 0.2s ease;
-          cursor: pointer;
+          transition: all 0.2s ease; cursor: pointer;
         }
-        .action-card-btn-red {
-          background: var(--red); color: white;
-        }
-        .action-card-btn-red:hover {
-          background: #a50e26;
-          letter-spacing: 2.5px;
-        }
+        .action-card-btn-red { background: var(--red); color: white; }
+        .action-card-btn-red:hover { background: #a50e26; letter-spacing: 2.5px; }
         .action-card-btn-gold {
           background: rgba(212,168,83,0.1);
           border: 1px solid rgba(212,168,83,0.3) !important;
           color: var(--gold);
           font-family: "DM Sans", sans-serif;
         }
-        .action-card-btn-gold:hover {
-          background: rgba(212,168,83,0.2);
-          letter-spacing: 2.5px;
-        }
-        .action-card-sub {
-          font-size: 10px; color: #555;
-          text-align: center; margin-top: 10px;
-        }
+        .action-card-btn-gold:hover { background: rgba(212,168,83,0.2); letter-spacing: 2.5px; }
+        .action-card-sub { font-size: 10px; color: #555; text-align: center; margin-top: 10px; }
         .action-input {
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(212,168,83,0.25);
-          color: var(--light);
-          font-family: "DM Sans", sans-serif;
+          color: var(--light); font-family: "DM Sans", sans-serif;
           font-size: 13px; padding: 11px 13px;
           outline: none; width: 100%; box-sizing: border-box;
           transition: border-color 0.2s, background 0.2s;
         }
-        .action-input:hover {
-          background: rgba(255,255,255,0.06);
-        }
+        .action-input:hover { background: rgba(255,255,255,0.06); }
 
         /* ── ANIMATIONS ── */
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(6px); }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
+          .nav-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .action-grid { grid-template-columns: 1fr !important; }
-          .nav-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </>
