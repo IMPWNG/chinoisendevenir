@@ -163,7 +163,6 @@ export default function Landing() {
                 to={s.href}
                 className={`nav-card ${s.active ? "nav-card-active" : "nav-card-soon"}`}
               >
-                {!s.active && <span className="nav-card-badge">Bientôt</span>}
                 <span className="nav-card-emoji">{s.emoji}</span>
                 <span className="nav-card-label">{s.label}</span>
               </Link>
