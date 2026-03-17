@@ -3,46 +3,46 @@ import { Link } from "react-router-dom";
 
 const OUTILS = [
   {
-    categorie: "Internet & VPN",
+    categorie: "VPN",
     icon: "🔐",
     items: [
       {
-        nom: "ExpressVPN",
+        nom: "LetsVPN",
         desc: "Le VPN le plus fiable en Chine. Indispensable pour accéder à Google, Instagram, WhatsApp.",
-        cta: "Obtenir ExpressVPN",
-        href: "https://www.expressrefer.com/refer-a-friend/30-days-free?referrer_id=TON_ID", // ← remplace
+        cta: "Obtenir LetsVPN",
+        href: "", // ← remplace
         badge: "Essentiel",
         badgeColor: "var(--red)",
-      },
-      {
-        nom: "NordVPN",
-        desc: "Alternative solide. Bon rapport qualité/prix pour un séjour long.",
-        cta: "Essayer NordVPN",
-        href: "https://nordvpn.com/?ref=TON_ID", // ← remplace
-        badge: "Populaire",
-        badgeColor: "#4a90d9",
       },
     ],
   },
   {
-    categorie: "Banque & Argent",
+    categorie: "Banque &amp; Argent",
     icon: "💳",
     items: [
-      {
-        nom: "Wise",
-        desc: "Envoie de l'argent en Chine sans frais cachés. Taux de change réel, carte internationale incluse.",
-        cta: "Ouvrir un compte Wise",
-        href: "https://wise.com/invite/TON_ID", // ← remplace
-        badge: "Recommandé",
-        badgeColor: "var(--gold)",
-      },
       {
         nom: "Revolut",
         desc: "Carte sans frais à l'étranger. Idéale pour les retraits et paiements en voyage.",
         cta: "Obtenir Revolut",
-        href: "https://revolut.com/referral/TON_ID", // ← remplace
-        badge: null,
-        badgeColor: null,
+        href: "https://revolut.com/referral/TON_ID",
+        badge: "Utile",
+        badgeColor: "var(--gold)",
+      },
+      {
+        nom: "WeChat Pay",
+        desc: "L'application de paiement incontournable en Chine. Utilisée partout — restaurants, transports, commerces. À configurer avant ton départ.",
+        cta: "Voir le guide d'installation",
+        href: "https://pay.weixin.qq.com/index.php/public/wechatpay",
+        badge: "Essentiel",
+        badgeColor: "var(--red)",
+      },
+      {
+        nom: "Alipay",
+        desc: "Le second portefeuille numérique dominant en Chine. Accepte désormais les cartes étrangères pour les étrangers.",
+        cta: "Créer un compte Alipay",
+        href: "https://global.alipay.com",
+        badge: "Essentiel",
+        badgeColor: "var(--red)",
       },
     ],
   },
@@ -51,20 +51,20 @@ const OUTILS = [
     icon: "🏥",
     items: [
       {
-        nom: "Chapka",
-        desc: "Assurance voyage et étudiant spécialisée pour la Chine. Couvre les soins médicaux, le rapatriement et l'annulation.",
-        cta: "Voir les offres Chapka",
-        href: "https://www.chapkassurance.com/?ref=TON_ID", // ← remplace
-        badge: "Essentiel",
-        badgeColor: "var(--red)",
+        nom: "A venir",
+        desc: "",
+        cta: "",
+        href: "", // ← remplace
+        badge: "",
+        badgeColor: "",
       },
       {
-        nom: "AVI International",
-        desc: "Assurance santé internationale pour les étudiants expatriés longue durée.",
-        cta: "Découvrir AVI",
-        href: "https://www.avi-international.com/?ref=TON_ID", // ← remplace
-        badge: null,
-        badgeColor: null,
+        nom: "A venir",
+        desc: "",
+        cta: "",
+        href: "", // ← remplace
+        badge: "",
+        badgeColor: "",
       },
     ],
   },
@@ -73,12 +73,12 @@ const OUTILS = [
     icon: "🏠",
     items: [
       {
-        nom: "Airbnb",
-        desc: "Pour tes premières semaines en Chine avant de trouver un logement étudiant.",
-        cta: "Chercher sur Airbnb",
-        href: "https://airbnb.com/r/TON_ID", // ← remplace
-        badge: null,
-        badgeColor: null,
+        nom: "A venir",
+        desc: "",
+        cta: "",
+        href: "", // ← remplace
+        badge: "",
+        badgeColor: "",
       },
     ],
   },
@@ -87,20 +87,20 @@ const OUTILS = [
     icon: "🀄",
     items: [
       {
-        nom: "Drops",
-        desc: "Application pour apprendre le vocabulaire chinois rapidement. 5 min par jour suffisent.",
-        cta: "Essayer Drops",
-        href: "https://languagedrops.com/?ref=TON_ID", // ← remplace
-        badge: null,
-        badgeColor: null,
+        nom: "A venir",
+        desc: "",
+        cta: "",
+        href: "", // ← remplace
+        badge: "",
+        badgeColor: "",
       },
       {
-        nom: "italki",
-        desc: "Trouve un professeur natif pour pratiquer le mandarin en ligne avant ton départ.",
-        cta: "Trouver un prof sur italki",
-        href: "https://www.italki.com/?ref=TON_ID", // ← remplace
-        badge: "Utile",
-        badgeColor: "var(--gold)",
+        nom: "A venir",
+        desc: "",
+        cta: "",
+        href: "", // ← remplace
+        badge: "",
+        badgeColor: "",
       },
     ],
   },
