@@ -22,7 +22,7 @@ export default function Nav() {
         </button>
         <ul className={`nav-links${open ? " open" : ""}`}>
           <li>
-            <Link 
+            <Link
               to="/etudier"
               className={pathname === "/etudier" ? "active" : ""}
             >
@@ -54,6 +54,13 @@ export default function Nav() {
             <Link
               to="/contact"
               className={pathname === "/contact" ? "active" : ""}
+              style={{
+                color: "var(--gold)",
+                border: "1px solid rgba(212,168,83,0.3)",
+                padding: "6px 14px",
+                fontSize: "11px",
+                letterSpacing: "1px",
+              }}
             >
               Contact
             </Link>

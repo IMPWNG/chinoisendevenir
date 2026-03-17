@@ -54,6 +54,10 @@ const MODULES = [
   },
 ]
 
+const ETUDES = [
+
+]
+
 export default function Etude() {
   const [popupEp, setPopupEp] = useState(null)
   const observerRef = useRef(null)
