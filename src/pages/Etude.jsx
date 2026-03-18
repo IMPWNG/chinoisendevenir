@@ -1,83 +1,130 @@
-import { useEffect, useRef, useState } from 'react'
-import Nav from '../components/Nav.jsx'
-import LeadForm from '../components/LeadForm.jsx'
-import Popup from '../components/Popup.jsx'
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Nav from "../components/Nav.jsx";
+import LeadForm from "../components/LeadForm.jsx";
+import Popup from "../components/Popup.jsx";
 
 const MODULES = [
   {
-    num: '01', tag: 'Module 1',
-    title: 'Comprendre comment fonctionnent vraiment les admissions',
-    points: ['Pourquoi la Chine attire les étudiants internationaux', 'Comment les universités sélectionnent', 'Ce qu\'elles regardent en priorité', 'Les idées reçues les plus fréquentes'],
-    obj: 'Comprendre les règles du jeu avant de postuler.',
+    num: "01",
+    tag: "Module 1",
+    title: "Comprendre comment fonctionnent vraiment les admissions",
+    points: [
+      "Pourquoi la Chine attire les étudiants internationaux",
+      "Comment les universités sélectionnent",
+      "Ce qu'elles regardent en priorité",
+      "Les idées reçues les plus fréquentes",
+    ],
+    obj: "Comprendre les règles du jeu avant de postuler.",
   },
   {
-    num: '02', tag: 'Module 2',
-    title: 'Ce qui fait vraiment la différence dans un dossier',
-    points: ['Les critères visibles… et ceux qu\'on oublie', 'Comment adapter ton profil', 'Ce que les universités attendent vraiment', 'Les détails qui changent tout'],
-    obj: 'Mettre toutes les chances de ton côté.',
+    num: "02",
+    tag: "Module 2",
+    title: "Ce qui fait vraiment la différence dans un dossier",
+    points: [
+      "Les critères visibles… et ceux qu'on oublie",
+      "Comment adapter ton profil",
+      "Ce que les universités attendent vraiment",
+      "Les détails qui changent tout",
+    ],
+    obj: "Mettre toutes les chances de ton côté.",
   },
   {
-    num: '03', tag: 'Module 3',
-    title: 'Les erreurs qui peuvent retarder ton départ',
-    points: ['Les pièges les plus fréquents', 'Les mauvais timings', 'Les oublis qui bloquent un dossier', 'Comment les éviter facilement'],
-    obj: 'Éviter de perdre une année inutilement.',
+    num: "03",
+    tag: "Module 3",
+    title: "Les erreurs qui peuvent retarder ton départ",
+    points: [
+      "Les pièges les plus fréquents",
+      "Les mauvais timings",
+      "Les oublis qui bloquent un dossier",
+      "Comment les éviter facilement",
+    ],
+    obj: "Éviter de perdre une année inutilement.",
   },
   {
-    num: '04', tag: 'Module 4',
-    title: 'Le vrai calendrier 2026/2027',
-    points: ['Quand commencer les démarches', 'Pourquoi il faut anticiper', 'Les délais réels à prévoir', 'Comment garder de l\'avance'],
-    obj: 'Ne jamais être en retard.',
+    num: "04",
+    tag: "Module 4",
+    title: "Le vrai calendrier 2026/2027",
+    points: [
+      "Quand commencer les démarches",
+      "Pourquoi il faut anticiper",
+      "Les délais réels à prévoir",
+      "Comment garder de l'avance",
+    ],
+    obj: "Ne jamais être en retard.",
   },
   {
-    num: '05', tag: 'Module 5',
-    title: 'Construire un dossier solide et convaincant',
-    points: ['Comment ton dossier est lu', 'Les erreurs classiques', 'Ce qui renforce ta crédibilité', 'Comment rester cohérent'],
-    obj: 'Présenter un dossier clair, complet et sérieux.',
+    num: "05",
+    tag: "Module 5",
+    title: "Construire un dossier solide et convaincant",
+    points: [
+      "Comment ton dossier est lu",
+      "Les erreurs classiques",
+      "Ce qui renforce ta crédibilité",
+      "Comment rester cohérent",
+    ],
+    obj: "Présenter un dossier clair, complet et sérieux.",
   },
   {
-    num: '06', tag: 'Module 6',
-    title: 'Visa & démarches administratives',
-    points: ['Les étapes importantes', 'Les documents nécessaires', 'Les délais à prévoir', 'Les erreurs à éviter'],
-    obj: 'Partir sans stress administratif.',
+    num: "06",
+    tag: "Module 6",
+    title: "Visa & démarches administratives",
+    points: [
+      "Les étapes importantes",
+      "Les documents nécessaires",
+      "Les délais à prévoir",
+      "Les erreurs à éviter",
+    ],
+    obj: "Partir sans stress administratif.",
   },
   {
-    num: '07', tag: 'Module 7',
-    title: 'Financement & bourses',
-    points: ['Comment fonctionnent les bourses', 'Les critères importants', 'Comment maximiser tes chances', 'Choisir la bonne option pour ton profil'],
-    obj: 'Réduire le coût de ton projet.',
+    num: "07",
+    tag: "Module 7",
+    title: "Financement & bourses",
+    points: [
+      "Comment fonctionnent les bourses",
+      "Les critères importants",
+      "Comment maximiser tes chances",
+      "Choisir la bonne option pour ton profil",
+    ],
+    obj: "Réduire le coût de ton projet.",
   },
   {
-    num: '08', tag: 'Module 8',
-    title: 'Préparer ton avenir après l\'admission',
-    points: ['Bien choisir ton université', 'Penser à ton futur professionnel', 'Valoriser ton expérience en Chine', 'Construire un profil international'],
-    obj: 'Faire de cette expérience un vrai tremplin.',
+    num: "08",
+    tag: "Module 8",
+    title: "Préparer ton avenir après l'admission",
+    points: [
+      "Bien choisir ton université",
+      "Penser à ton futur professionnel",
+      "Valoriser ton expérience en Chine",
+      "Construire un profil international",
+    ],
+    obj: "Faire de cette expérience un vrai tremplin.",
   },
-]
+];
 
-const ETUDES = [
-
-]
+const ETUDES = [];
 
 export default function Etude() {
-  const [popupEp, setPopupEp] = useState(null)
-  const observerRef = useRef(null)
+  const [popupEp, setPopupEp] = useState(null);
+  const observerRef = useRef(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((e, i) => {
           if (e.isIntersecting) {
-            setTimeout(() => e.target.classList.add('visible'), i * 80)
+            setTimeout(() => e.target.classList.add("visible"), i * 80);
           }
-        })
+        });
       },
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.ep-card, .stat-item').forEach(el => {
-      observerRef.current.observe(el)
-    })
-    return () => observerRef.current?.disconnect()
-  }, [])
+      { threshold: 0.1 },
+    );
+    document.querySelectorAll(".ep-card, .stat-item").forEach((el) => {
+      observerRef.current.observe(el);
+    });
+    return () => observerRef.current?.disconnect();
+  }, []);
 
   return (
     <>
