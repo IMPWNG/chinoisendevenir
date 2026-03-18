@@ -13,8 +13,9 @@ Le service inclut un accompagnement personnalisé via appel gratuit de 30 minute
 
 - / — Page d'accueil avec présentation des services et formulaire de contact
 - /etudier — Guide complet pour étudier en Chine en 2026/2027 : universités, bourses CSC, visa étudiant, dossier de candidature, calendrier des deadlines
+- /etudier/guide-etudier-en-chine — Article SEO complet sur comment étudier en Chine : système universitaire, erreurs fréquentes, timing, financement, FAQ
 - /tourisme — Guide pour voyager en Chine : destinations incontournables (Beijing, Shanghai, Xi'an, Guilin, Chengdu), préparation visa, culture, gastronomie
-- /indispensables — Outils recommandés pour vivre en Chine : VPN (ExpressVPN), banque (Revolut, WeChat Pay, Alipay), assurance (Chapka), apprentissage du mandarin
+- /indispensables — Outils recommandés pour vivre en Chine : VPN (ExpressVPN, NordVPN), banque (Wise, Revolut, WeChat Pay, Alipay), assurance (Chapka), apprentissage du mandarin (italki, Drops)
 - /contact — Prise de contact, réservation d'appel découverte gratuit via Calendly, formulaire email
 - /a-venir — Sections en cours de développement : expatriation et création d'entreprise en Chine
 
@@ -26,7 +27,7 @@ Le service inclut un accompagnement personnalisé via appel gratuit de 30 minute
 
 ## Mots-clés principaux
 
-étudier en Chine, université Chine 2026 2027, bourse CSC, visa étudiant Chine, candidature université chinoise, s'expatrier en Chine, voyager en Chine, VPN Chine, WeChat Pay étranger, Alipay étranger, apprendre le mandarin, francophone Chine
+étudier en Chine, université Chine 2026 2027, bourse CSC, visa étudiant Chine, candidature université chinoise, s'expatrier en Chine, voyager en Chine, VPN Chine, WeChat Pay étranger, Alipay étranger, apprendre le mandarin, francophone Chine, guide étudier en Chine, erreurs candidature Chine, financer études Chine
 
 ## Contact
 
