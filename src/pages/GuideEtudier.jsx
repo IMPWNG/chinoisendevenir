@@ -95,7 +95,7 @@ export default function GuideEtudier() {
 
           <div
             style={{
-              display: "block",
+              display: "inline-block",
               border: "1px solid rgba(212,168,83,0.3)",
               color: "var(--gold)",
               fontSize: "10px",
@@ -105,7 +105,6 @@ export default function GuideEtudier() {
               padding: "7px 20px",
               marginBottom: "28px",
               animation: "fadeUp 0.7s ease both",
-              display: "inline-block",
             }}
           >
             🎓 Guide complet — 2026/2027
