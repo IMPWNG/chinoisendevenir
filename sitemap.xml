@@ -23,6 +23,34 @@
   </url>
 
   <url>
+    <loc>https://chinoisendevenir.com/expatrier</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://chinoisendevenir.com/expatrier/visa-chine</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://chinoisendevenir.com/expatrier/travailler-en-chine</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://chinoisendevenir.com/expatrier/logement-en-chine</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://chinoisendevenir.com/indispensables</loc>
     <lastmod>2026-03-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -30,17 +58,17 @@
   </url>
 
   <url>
-    <loc>https://chinoisendevenir.com/contact</loc>
+    <loc>https://chinoisendevenir.com/tourisme</loc>
     <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://chinoisendevenir.com/tourisme</loc>
+    <loc>https://chinoisendevenir.com/contact</loc>
     <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>

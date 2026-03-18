@@ -30,7 +30,7 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            <Link to="/a-venir">S'expatrier</Link>
+            <Link to="/expatrier">S'expatrier</Link>
           </li>
           <li>
             <Link to="/tourisme">Tourisme</Link>
