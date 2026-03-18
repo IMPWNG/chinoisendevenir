@@ -8,6 +8,7 @@ import AVenir from "./pages/AVenir.jsx";
 import Contact from "./pages/Contact.jsx";
 import Indispensables from "./pages/Indispensables.jsx";
 import Tourisme from "./pages/Tourisme.jsx";
+import GuideEtudier from "./pages/GuideEtudier.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
@@ -17,17 +18,16 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/etudier" element={<Etude />} />
-        <Route path="/a-venir" element={<AVenir />} />
-        <Route path="/a-venir" element={<AVenir />} />
-        <Route path="/tourisme" element={<Tourisme />} />;
-        <Route path="/indispensables" element={<Indispensables />} />;
+        <Route
+          path="/etudier/guide-etudier-en-chine"
+          element={<GuideEtudier />}
+        />
+        <Route path="/tourisme" element={<Tourisme />} />
+        <Route path="/indispensables" element={<Indispensables />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/a-venir" element={<AVenir />} />
+        <Route path="/a-venir.html" element={<AVenir />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
 );
-// ...
-
-
-
-// ...
