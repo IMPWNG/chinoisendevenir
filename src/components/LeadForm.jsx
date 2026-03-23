@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "../lib/supabase";
 
 export default function LeadForm({ prefix, source = "website" }) {
   const [prenom, setPrenom] = useState("");
@@ -8,37 +9,43 @@ export default function LeadForm({ prefix, source = "website" }) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  async function handleSubmit() {
-    setError("");
-    if (!prenom.trim()) {
-      setError("⚠ Prénom requis.");
-      return;
-    }
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("⚠ Email invalide.");
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prenom: prenom.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          source,
-        }),
-      });
-      const json = await res.json().catch(() => ({}));
-      if (res.ok && json.success) setSuccess(true);
-      else setError(json.error || "Une erreur est survenue.");
-    } catch {
-      setError("⚠ Connexion impossible.");
-    } finally {
-      setLoading(false);
-    }
+async function handleSubmit() {
+  setError("");
+
+  if (!prenom.trim()) {
+    setError("⚠ Prénom requis.");
+    return;
   }
+
+  if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setError("⚠ Email invalide.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const { data, error } = await supabase.from("contacts").upsert({
+      prenom: prenom.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      source,
+    });
+
+    if (error) {
+      console.error("❌ ERROR:", error);
+      setError("⚠ Erreur : " + error.message);
+    } else {
+      console.log("✅ SUCCESS:", data);
+      setSuccess(true);
+    }
+  } catch (err) {
+    console.error("💥 CRASH:", err);
+    setError("⚠ Connexion impossible.");
+  } finally {
+    setLoading(false);
+  }
+}
 
   if (success) {
     return (
