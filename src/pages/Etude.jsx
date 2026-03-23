@@ -699,20 +699,6 @@ export default function Etude() {
           borderTop: "1px solid var(--border)",
         }}
       >
-        <Link
-          to="/etudier/guide-etudier-en-chine"
-          style={{
-            color: "var(--gold)",
-            fontSize: "13px",
-            textDecoration: "none",
-            letterSpacing: "1px",
-            borderBottom: "1px solid rgba(212,168,83,0.3)",
-            paddingBottom: "2px",
-          }}
-        >
-          📖 Lire le guide complet : Étudier en Chine, comprendre et réussir ton
-          projet →
-        </Link>
       </section>
 
       <footer>
