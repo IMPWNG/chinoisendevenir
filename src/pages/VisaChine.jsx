@@ -111,7 +111,6 @@ export default function VisaChine() {
               marginBottom: "28px",
               transition: "color 0.2s",
               display: "block",
-              marginBottom: "28px",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}

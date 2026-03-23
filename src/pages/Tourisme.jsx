@@ -636,10 +636,15 @@ export default function Tourisme() {
             </div>
 
             <div style={{ maxWidth: "480px", margin: "0 auto" }}>
-              <LeadForm prefix="tourisme" />
+              <LeadForm
+                prefix="tourisme"
+                source="tourisme"
+                submitLabel="Envoyer mes informations →"
+              />
             </div>
           </section>
 
+          {/* ── CTA FINAL ── */}
           {/* ── CTA FINAL ── */}
           <div
             style={{
@@ -694,7 +699,7 @@ export default function Tourisme() {
                 (e.currentTarget.style.background = "var(--red)")
               }
             >
-              On en parle — appel gratuit →
+              Laisse tes informations →
             </Link>
           </div>
         </div>

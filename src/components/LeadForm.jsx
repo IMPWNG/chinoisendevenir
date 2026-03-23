@@ -59,14 +59,14 @@ export default function LeadForm({ prefix, source = "website" }) {
         <input
           className="lead-input"
           type="text"
-          placeholder="Prénom *"
+          placeholder="👤 Prénom *"
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
         />
         <input
           className="lead-input"
           type="email"
-          placeholder="Email *"
+          placeholder="📩 Email *"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -74,7 +74,7 @@ export default function LeadForm({ prefix, source = "website" }) {
       <input
         className="lead-input"
         type="tel"
-        placeholder="📱 Téléphone (optionnel — pour les alertes SMS)"
+        placeholder="📱 Téléphone"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />

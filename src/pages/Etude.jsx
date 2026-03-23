@@ -261,7 +261,13 @@ export default function Etude() {
             Si tu veux partir sereinement et éviter les erreurs, reste informé
             des dates clés et des mises à jour officielles.
           </p>
-          <LeadForm prefix="top" />
+          <div style={{ maxWidth: "480px", margin: "0 auto" }}>
+            <LeadForm
+              prefix="top"
+              source="etudier"
+              submitLabel="Recevoir les infos importantes →"
+            />
+          </div>
         </div>
       </section>
 
@@ -630,7 +636,13 @@ export default function Etude() {
             Inscris-toi pour recevoir les dates importantes, les mises à jour
             officielles et les rappels utiles pour ne rien rater.
           </p>
-          <LeadForm prefix="bottom" />
+          <div style={{ maxWidth: "480px", margin: "0 auto" }}>
+            <LeadForm
+              prefix="bottom"
+              source="etudier"
+              submitLabel="Recevoir les infos importantes →"
+            />
+          </div>
         </div>
       </section>
 
@@ -698,8 +710,7 @@ export default function Etude() {
           textAlign: "center",
           borderTop: "1px solid var(--border)",
         }}
-      >
-      </section>
+      ></section>
 
       <footer>
         <p>
