@@ -34,7 +34,7 @@ export default async function handler(req, res) {
   try {
     const supabase = createClient(
       process.env.SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_KEY,
+      process.env.SUPABASE_ANON_KEY,
     );
 
     const { error: supabaseError } = await supabase
