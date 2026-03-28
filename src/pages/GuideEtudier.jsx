@@ -1012,7 +1012,7 @@ export default function GuideEtudier() {
                 (e.currentTarget.style.background = "var(--red)")
               }
             >
-              Accéder au guide — 29€ →
+              Accéder au guide — 14€ →
             </a>
 
             <p

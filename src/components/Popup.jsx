@@ -49,7 +49,7 @@ export default function Popup({ epNum, onClose }) {
             <li>Mises à jour incluses à vie</li>
           </ul>
           <a href="https://chinoisendevenir.gumroad.com/l/etude-chine-2026-2027" className="popup-btn-primary" target="_blank" rel="noreferrer">
-            GUIDE COMPLET — 29€ →
+            GUIDE COMPLET —14€ →
           </a>
           <p style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.2)', marginBottom: '12px' }}>
             Accès immédiat · Paiement sécurisé
