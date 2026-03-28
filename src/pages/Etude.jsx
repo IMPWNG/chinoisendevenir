@@ -235,7 +235,7 @@ export default function Etude() {
             num: "Structure",
             label: "Un bon dossier multiplie fortement tes chances.",
           },
-          { num: "29€", label: "Accès complet au guide" },
+          { num: "14€", label: "Accès complet au guide" },
         ].map((s) => (
           <div className="stat-item" key={s.num}>
             <div className="stat-num">{s.num}</div>
@@ -604,7 +604,7 @@ export default function Etude() {
               marginTop: "32px",
             }}
           >
-            29€
+          14€
           </p>
           <p
             style={{
@@ -685,7 +685,7 @@ export default function Etude() {
             target="_blank"
             rel="noreferrer"
           >
-            Accéder au guide complet — 29€ →
+            Accéder au guide complet — 14€ →
           </a>
           <a href="#episodes" className="btn-secondary">
             Voir les 8 modules
