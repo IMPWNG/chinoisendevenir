@@ -1,9 +1,13 @@
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext.jsx";
+import translations from "../translations.js";
 
 export default function Nav() {
-  const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const { lang, toggleLang } = useLanguage();
+  const t = translations[lang];
 
   return (
     <nav>
@@ -16,22 +20,23 @@ export default function Nav() {
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
-          <span /><span /><span />
+          <span />
+          <span />
+          <span />
         </button>
-        <ul className={`nav-links${open ? ' open' : ''}`}>
+        <ul className={`nav-links${open ? " open" : ""}`}>
           <li>
-            <Link to="/" className={pathname === '/' ? 'active' : ''}>
-              Étudier
+            <Link to="/" className={pathname === "/" ? "active" : ""}>
+              {t.nav_home}
             </Link>
           </li>
-          {/* <li className="soon-tag">
-            <Link to="/a-venir">S'expatrier</Link>
+          <li>
+            <button onClick={toggleLang} className="nav-lang-btn">
+              {lang === "fr" ? "ENG" : "FR"}
+            </button>
           </li>
-          <li className="soon-tag">
-            <Link to="/a-venir">Tourisme</Link>
-          </li> */}
         </ul>
       </div>
     </nav>
-  )
+  );
 }

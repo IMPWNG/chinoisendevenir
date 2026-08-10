@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useLanguage } from "../context/LanguageContext.jsx";
+import translations from "../translations.js";
 
 export default function LeadForm({ prefix, source = "website" }) {
+  const { lang } = useLanguage();
+  const t = translations[lang].leadForm;
+
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
   const [age, setAge] = useState("");
@@ -18,39 +23,39 @@ export default function LeadForm({ prefix, source = "website" }) {
     setError("");
 
     if (!prenom.trim()) {
-      setError("⚠ Prénom requis.");
+      setError(t.errPrenom);
       return;
     }
     if (!nom.trim()) {
-      setError("⚠ Nom requis.");
+      setError(t.errNom);
       return;
     }
     if (!age.trim() || isNaN(age) || age < 15 || age > 99) {
-      setError("⚠ Âge invalide.");
+      setError(t.errAge);
       return;
     }
     if (!pays.trim()) {
-      setError("⚠ Pays de résidence requis.");
+      setError(t.errPays);
       return;
     }
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("⚠ Email invalide.");
+      setError(t.errEmail);
       return;
     }
     if (!phone.trim()) {
-      setError("⚠ Numéro de téléphone requis.");
+      setError(t.errPhone);
       return;
     }
     if (!domaineEtudes.trim()) {
-      setError("⚠ Domaine d'études requis.");
+      setError(t.errDomaine);
       return;
     }
     if (!budget) {
-      setError("⚠ Merci de sélectionner ton budget.");
+      setError(t.errBudget);
       return;
     }
     if (!dateRentree) {
-      setError("⚠ Merci de sélectionner la rentrée souhaitée.");
+      setError(t.errDate);
       return;
     }
 
@@ -74,9 +79,9 @@ export default function LeadForm({ prefix, source = "website" }) {
       });
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.success) setSuccess(true);
-      else setError(json.error || "Une erreur est survenue.");
+      else setError(json.error || t.errGeneric);
     } catch {
-      setError("⚠ Connexion impossible.");
+      setError(t.errConnexion);
     } finally {
       setLoading(false);
     }
@@ -86,11 +91,8 @@ export default function LeadForm({ prefix, source = "website" }) {
     return (
       <div className="lead-success show">
         <div className="lead-success-icon">✅</div>
-        <h3>Ta demande a bien été envoyée 🎉</h3>
-        <p>
-          Notre équipe va analyser ton profil et te recontacter rapidement.
-          Pense à vérifier tes emails et ton téléphone.
-        </p>
+        <h3>{t.successTitle}</h3>
+        <p>{t.successText}</p>
       </div>
     );
   }
@@ -101,14 +103,14 @@ export default function LeadForm({ prefix, source = "website" }) {
         <input
           className="lead-input"
           type="text"
-          placeholder="Prénom *"
+          placeholder={t.placeholderPrenom}
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
         />
         <input
           className="lead-input"
           type="text"
-          placeholder="Nom *"
+          placeholder={t.placeholderNom}
           value={nom}
           onChange={(e) => setNom(e.target.value)}
         />
@@ -118,7 +120,7 @@ export default function LeadForm({ prefix, source = "website" }) {
         <input
           className="lead-input"
           type="number"
-          placeholder="Âge *"
+          placeholder={t.placeholderAge}
           value={age}
           onChange={(e) => setAge(e.target.value)}
           min="15"
@@ -127,7 +129,7 @@ export default function LeadForm({ prefix, source = "website" }) {
         <input
           className="lead-input"
           type="text"
-          placeholder="Pays de résidence *"
+          placeholder={t.placeholderPays}
           value={pays}
           onChange={(e) => setPays(e.target.value)}
         />
@@ -137,14 +139,14 @@ export default function LeadForm({ prefix, source = "website" }) {
         <input
           className="lead-input"
           type="email"
-          placeholder="Email *"
+          placeholder={t.placeholderEmail}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="lead-input"
           type="tel"
-          placeholder="📱 Téléphone (WhatsApp) *"
+          placeholder={t.placeholderPhone}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
@@ -153,7 +155,7 @@ export default function LeadForm({ prefix, source = "website" }) {
       <input
         className="lead-input"
         type="text"
-        placeholder="Domaine d'études souhaité * (ex: Médecine, Informatique...)"
+        placeholder={t.placeholderDomaine}
         value={domaineEtudes}
         onChange={(e) => setDomaineEtudes(e.target.value)}
       />
@@ -164,13 +166,13 @@ export default function LeadForm({ prefix, source = "website" }) {
           value={budget}
           onChange={(e) => setBudget(e.target.value)}
         >
-          <option value="">Budget annuel disponible *</option>
-          <option value="moins-3000">Moins de 3 000 €</option>
-          <option value="3000-6000">3 000 € – 6 000 €</option>
-          <option value="6000-10000">6 000 € – 10 000 €</option>
-          <option value="plus-10000">Plus de 10 000 €</option>
-          <option value="besoin-bourse">Je recherche une bourse</option>
-          <option value="ne-sais-pas">Je ne sais pas encore</option>
+          <option value="">{t.budgetLabel}</option>
+          <option value="moins-3000">{t.budgetOptions.moins3000}</option>
+          <option value="3000-6000">{t.budgetOptions.de3000a6000}</option>
+          <option value="6000-10000">{t.budgetOptions.de6000a10000}</option>
+          <option value="plus-10000">{t.budgetOptions.plus10000}</option>
+          <option value="besoin-bourse">{t.budgetOptions.besoinBourse}</option>
+          <option value="ne-sais-pas">{t.budgetOptions.neSaisPas}</option>
         </select>
 
         <select
@@ -178,24 +180,22 @@ export default function LeadForm({ prefix, source = "website" }) {
           value={dateRentree}
           onChange={(e) => setDateRentree(e.target.value)}
         >
-          <option value="">Rentrée souhaitée *</option>
-          <option value="2026-septembre">Septembre 2026</option>
-          <option value="2027-mars">Mars 2027</option>
-          <option value="2027-septembre">Septembre 2027</option>
-          <option value="plus-tard">Plus tard</option>
-          <option value="pas-sur">Pas encore décidé</option>
+          <option value="">{t.dateLabel}</option>
+          <option value="2026-septembre">{t.dateOptions.sept2026}</option>
+          <option value="2027-mars">{t.dateOptions.mars2027}</option>
+          <option value="2027-septembre">{t.dateOptions.sept2027}</option>
+          <option value="plus-tard">{t.dateOptions.plusTard}</option>
+          <option value="pas-sur">{t.dateOptions.pasSur}</option>
         </select>
       </div>
 
       <button className="lead-submit" onClick={handleSubmit} disabled={loading}>
-        {loading ? "Envoi en cours…" : "Envoyer ma demande →"}
+        {loading ? t.submitLoading : t.submitDefault}
       </button>
 
       {error && <div className="lead-error show">{error}</div>}
 
-      <p className="lead-legal">
-        🔒 Données confidentielles · Aucun spam · Désinscription à tout moment
-      </p>
+      <p className="lead-legal">{t.legal}</p>
     </div>
   );
 }

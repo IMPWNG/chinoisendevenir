@@ -215,6 +215,23 @@ nav {
   line-height: 1.5;
 }
 
+.nav-lang-btn {
+  background: transparent;
+  border: 1px solid rgba(212, 168, 83, 0.4);
+  color: var(--gold, #d4a853);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-lang-btn:hover {
+  background: rgba(212, 168, 83, 0.1);
+  border-color: var(--gold, #d4a853);
+}
+
 /* ── LEAD SECTION ── */
 .lead-section {
   padding: 80px 24px;

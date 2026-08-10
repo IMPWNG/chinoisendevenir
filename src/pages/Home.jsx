@@ -2,83 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav.jsx";
 import LeadForm from "../components/LeadForm.jsx";
 import Popup from "../components/Popup.jsx";
-
-const SERVICES = [
-  {
-    num: "01",
-    tag: "Orientation",
-    title: "Trouver l'université et le programme adaptés à ton profil",
-    points: [
-      "Analyse de ton parcours et de tes objectifs",
-      "Sélection des universités qui correspondent à ton profil",
-      "Comparatif des programmes et des villes",
-      "Conseils sur les langues d'enseignement (anglais / chinois)",
-    ],
-    obj: "Faire le bon choix dès le départ.",
-  },
-  {
-    num: "02",
-    tag: "Dossier de candidature",
-    title: "Construire un dossier complet et solide",
-    points: [
-      "Liste précise des documents nécessaires",
-      "Aide à la rédaction de la lettre de motivation",
-      "Vérification et mise en forme du dossier",
-      "Conseils pour éviter les erreurs qui font perdre du temps",
-    ],
-    obj: "Présenter un dossier crédible et complet.",
-  },
-  {
-    num: "03",
-    tag: "Bourses & financement",
-    title: "Explorer les options de financement disponibles",
-    points: [
-      "Panorama des bourses accessibles (CSC, Confucius, universitaires…)",
-      "Critères d'éligibilité expliqués simplement",
-      "Conseils pour renforcer un dossier de bourse",
-      "Alternatives si la bourse n'est pas obtenue",
-    ],
-    obj: "Réduire le coût réel de ton projet d'études.",
-  },
-  {
-    num: "04",
-    tag: "Visa & démarches",
-    title: "Comprendre les démarches administratives",
-    points: [
-      "Étapes du visa étudiant (type X1 / X2)",
-      "Documents à préparer en amont",
-      "Délais réalistes à anticiper",
-      "Points de vigilance fréquents",
-    ],
-    obj: "Aborder les démarches sans stress.",
-  },
-  {
-    num: "05",
-    tag: "Calendrier",
-    title: "Connaître les dates clés de candidature",
-    points: [
-      "Périodes d'ouverture et de fermeture des candidatures",
-      "Différences selon les universités et les programmes",
-      "Rappels pour ne rien manquer",
-      "Anticipation des délais administratifs",
-    ],
-    obj: "Ne jamais candidater dans l'urgence.",
-  },
-  {
-    num: "06",
-    tag: "Vie sur place",
-    title: "Préparer ton installation en Chine",
-    points: [
-      "Logement étudiant : options et démarches",
-      "Coût de la vie selon les villes",
-      "Premiers repères une fois sur place",
-      "Réseau d'étudiants et de contacts utiles",
-    ],
-    obj: "Arriver préparé, pas seulement admis.",
-  },
-];
+import { useLanguage } from "../context/LanguageContext.jsx";
+import translations from "../translations.js";
 
 export default function Home() {
+  const { lang } = useLanguage();
+  const t = translations[lang];
+  const SERVICES = t.services;
+
   const [popupEp, setPopupEp] = useState(null);
   const observerRef = useRef(null);
 
@@ -97,7 +28,7 @@ export default function Home() {
       observerRef.current.observe(el);
     });
     return () => observerRef.current?.disconnect();
-  }, []);
+  }, [lang]);
 
   return (
     <>
@@ -105,22 +36,18 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-badge">Chinois en Devenir — Étudier en Chine</div>
+        <div className="hero-badge">{t.hero_badge}</div>
         <div className="hero-flag">🇨🇳</div>
         <h1
           className="hero-title"
           style={{ fontSize: "clamp(32px, 5vw, 64px)", letterSpacing: "-1px" }}
         >
-          Étudier en Chine,
+          {t.hero_title_1}
           <br />
-          <span>ça se prépare bien avant la candidature.</span>
+          <span>{t.hero_title_2}</span>
         </h1>
-        <p className="hero-sub">
-          Universités, bourses, visa, calendrier, vie sur place…
-          <br />
-          On t'accompagne à chaque étape pour que ton projet
-          <br />
-          se construise sereinement, sans mauvaise surprise.
+        <p className="hero-sub" style={{ whiteSpace: "pre-line" }}>
+          {t.hero_sub}
         </p>
         <div
           style={{
@@ -133,14 +60,9 @@ export default function Home() {
             position: "relative",
           }}
         >
-          {[
-            "✓ Informations à jour",
-            "✓ Accompagnement personnalisé",
-            "✓ Réponses claires à tes questions",
-            "✓ Suivi jusqu'à ton départ",
-          ].map((t) => (
+          {t.hero_tags.map((tag) => (
             <span
-              key={t}
+              key={tag}
               style={{
                 border: "1px solid rgba(212,168,83,0.3)",
                 color: "rgba(245,240,232,0.6)",
@@ -149,12 +71,12 @@ export default function Home() {
                 padding: "6px 14px",
               }}
             >
-              {t}
+              {tag}
             </span>
           ))}
         </div>
         <a href="#etudier-en-chine" className="hero-cta">
-          Être accompagné dans mon projet →
+          {t.hero_cta}
         </a>
         <p
           style={{
@@ -166,22 +88,13 @@ export default function Home() {
             position: "relative",
           }}
         >
-          Réponse rapide &nbsp;·&nbsp; Sans engagement &nbsp;·&nbsp;
-          Informations vérifiées
+          {t.hero_footer}
         </p>
       </section>
 
       {/* STATS */}
       <div className="stats">
-        {[
-          {
-            num: "6–9 mois",
-            label: "Délai moyen à anticiper avant une rentrée",
-          },
-          { num: "6", label: "Domaines d'accompagnement" },
-          { num: "100%", label: "Informations vérifiées et actualisées" },
-          { num: "1", label: "Interlocuteur pour tout ton projet" },
-        ].map((s) => (
+        {t.stats.map((s) => (
           <div className="stat-item" key={s.num}>
             <div className="stat-num">{s.num}</div>
             <div className="stat-label">{s.label}</div>
@@ -192,47 +105,31 @@ export default function Home() {
       {/* LEAD FORM TOP */}
       <section className="lead-section" id="etudier-en-chine">
         <div className="lead-inner">
-          <div className="section-label">Ton projet d'études en Chine</div>
+          <div className="section-label">{t.lead_top_label}</div>
           <h2>
-            Reçois des informations claires sur{" "}
+            {t.lead_top_title}{" "}
             <em style={{ fontStyle: "normal", color: "var(--gold)" }}>
-              les études en Chine
+              {t.lead_top_title_em}
             </em>
             .
           </h2>
-          <p>
-            Universités, bourses, visa, dates de candidature…
-            <br />
-            Laisse-nous tes coordonnées pour recevoir des informations
-            personnalisées et être accompagné dans ton projet.
-          </p>
+          <p>{t.lead_top_text}</p>
           <LeadForm prefix="top" />
         </div>
       </section>
 
       {/* INTRO */}
       <section className="intro">
-        <div className="section-label">Pourquoi se faire accompagner</div>
+        <div className="section-label">{t.intro_label}</div>
         <h2>
-          Étudier en Chine est une vraie opportunité,{" "}
+          {t.intro_title}{" "}
           <em style={{ fontStyle: "normal", color: "var(--gold)" }}>
-            à condition d'être bien informé
+            {t.intro_title_em}
           </em>
         </h2>
-        <p>
-          Chaque année, de nombreux étudiants s'intéressent aux études en Chine
-          sans savoir par où commencer.
-        </p>
-        <p>
-          Entre le choix de l'université, les démarches de bourse, la
-          constitution du dossier et les formalités de visa, il est facile de
-          perdre du temps ou de rater une échéance importante.
-        </p>
-        <p>
-          Notre rôle est simple : t'apporter des informations fiables et un
-          accompagnement concret, pour que ton projet avance sans stress
-          inutile.
-        </p>
+        <p>{t.intro_p1}</p>
+        <p>{t.intro_p2}</p>
+        <p>{t.intro_p3}</p>
         <p
           style={{
             color: "var(--muted)",
@@ -242,8 +139,7 @@ export default function Home() {
             paddingTop: "32px",
           }}
         >
-          Que tu sois au tout début de ta réflexion ou prêt à candidater, on
-          t'aide à voir clair.
+          {t.intro_p4}
         </p>
       </section>
 
@@ -260,15 +156,10 @@ export default function Home() {
         >
           <div style={{ background: "var(--dark2)", padding: "40px" }}>
             <div className="section-label" style={{ marginBottom: "24px" }}>
-              Cet accompagnement est fait pour toi si :
+              {t.fit_title}
             </div>
             <ul style={{ listStyle: "none" }}>
-              {[
-                "Tu envisages sérieusement d'étudier en Chine",
-                "Tu veux des réponses claires à tes questions",
-                "Tu ne sais pas par où commencer et cherches un accompagnement",
-                "Tu veux gagner du temps sur tes recherches",
-              ].map((item) => (
+              {t.fit_items.map((item) => (
                 <li
                   key={item}
                   style={{
@@ -312,14 +203,10 @@ export default function Home() {
                 marginBottom: "24px",
               }}
             >
-              Pas adapté si :
+              {t.notfit_title}
             </div>
             <ul style={{ listStyle: "none" }}>
-              {[
-                "Tu cherches juste des informations générales sans projet concret",
-                "Tu n'as pas encore réfléchi à tes objectifs d'études",
-                "Tu ne souhaites pas être accompagné dans les démarches",
-              ].map((item) => (
+              {t.notfit_items.map((item) => (
                 <li
                   key={item}
                   style={{
@@ -351,11 +238,11 @@ export default function Home() {
       {/* SERVICES */}
       <section className="episodes" id="episodes">
         <div className="episodes-header">
-          <div className="section-label">Nos domaines d'accompagnement</div>
-          <h2>Ce qu'on t'aide à comprendre et à préparer</h2>
+          <div className="section-label">{t.services_label}</div>
+          <h2>{t.services_title}</h2>
         </div>
         <div className="ep-grid">
-          {SERVICES.map((m, i) => (
+          {SERVICES.map((m) => (
             <div className="ep-card" key={m.num}>
               <div className="ep-num">{m.num}</div>
               <div className="ep-tag">{m.tag}</div>
@@ -366,7 +253,7 @@ export default function Home() {
                 ))}
               </ul>
               <div className="ep-box">
-                <strong>Objectif :</strong> {m.obj}
+                <strong>{t.services_obj}</strong> {m.obj}
               </div>
               <a
                 href="#lead-bottom"
@@ -378,7 +265,7 @@ export default function Home() {
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                ▶ En savoir plus
+                {t.services_more}
               </a>
             </div>
           ))}
@@ -389,48 +276,11 @@ export default function Home() {
       <section className="plan">
         <div className="plan-inner">
           <div className="section-label" style={{ textAlign: "center" }}>
-            Comment ça fonctionne
+            {t.plan_label}
           </div>
-          <h2>Un accompagnement simple, en 4 étapes</h2>
+          <h2>{t.plan_title}</h2>
           <div className="weeks">
-            {[
-              {
-                icon: "📩",
-                title: "1. Premier contact",
-                items: [
-                  "Tu remplis le formulaire",
-                  "On revient vers toi rapidement",
-                  "Un premier échange pour comprendre ton projet",
-                ],
-              },
-              {
-                icon: "🎯",
-                title: "2. Analyse de ton profil",
-                items: [
-                  "Objectifs, niveau, budget",
-                  "Universités et programmes envisageables",
-                  "Options de bourses possibles",
-                ],
-              },
-              {
-                icon: "📋",
-                title: "3. Préparation du dossier",
-                items: [
-                  "Documents à réunir",
-                  "Rédaction et vérification",
-                  "Calendrier personnalisé",
-                ],
-              },
-              {
-                icon: "✈️",
-                title: "4. Suivi jusqu'au départ",
-                items: [
-                  "Démarches de visa",
-                  "Préparation de l'installation",
-                  "Accompagnement jusqu'à ton arrivée en Chine",
-                ],
-              },
-            ].map((w) => (
+            {t.plan_steps.map((w) => (
               <div className="week" key={w.title}>
                 <div style={{ fontSize: "28px", marginBottom: "12px" }}>
                   {w.icon}
@@ -459,7 +309,7 @@ export default function Home() {
         <div
           style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}
         >
-          <div className="section-label">Pourquoi anticiper</div>
+          <div className="section-label">{t.anticiper_label}</div>
           <h2
             style={{
               fontFamily: '"Playfair Display", serif',
@@ -469,7 +319,7 @@ export default function Home() {
               lineHeight: 1.2,
             }}
           >
-            Les candidatures ferment plus tôt qu'on ne le pense
+            {t.anticiper_title}
           </h2>
           <div
             style={{
@@ -479,12 +329,7 @@ export default function Home() {
               marginBottom: "48px",
             }}
           >
-            {[
-              { n: "6–9", l: "Mois avant la rentrée" },
-              { n: "1", l: "Rentrée par an, parfois deux" },
-              { n: "1", l: "Dossier bien préparé" },
-              { n: "0", l: "Place pour l'improvisation" },
-            ].map((item) => (
+            {t.anticiper_stats.map((item) => (
               <div
                 key={item.l}
                 style={{
@@ -525,8 +370,7 @@ export default function Home() {
               lineHeight: 1.7,
             }}
           >
-            Plus tu commences tôt, plus tu as de choix : universités, bourses et
-            délais confortables pour ton visa.
+            {t.anticiper_text}
           </p>
         </div>
       </section>
@@ -534,18 +378,15 @@ export default function Home() {
       {/* LEAD FORM BOTTOM */}
       <section className="lead-section" id="lead-bottom">
         <div className="lead-inner">
-          <div className="section-label">Prêt à démarrer ton projet ?</div>
+          <div className="section-label">{t.lead_bottom_label}</div>
           <h2>
-            Parle-nous de{" "}
+            {t.lead_bottom_title}{" "}
             <em style={{ fontStyle: "normal", color: "var(--gold)" }}>
-              ton projet d'études en Chine
+              {t.lead_bottom_title_em}
             </em>
             .
           </h2>
-          <p>
-            Laisse-nous tes coordonnées, on te recontacte pour faire le point
-            sur ta situation et t'aider à avancer étape par étape.
-          </p>
+          <p>{t.lead_bottom_text}</p>
           <LeadForm prefix="bottom" />
         </div>
       </section>
@@ -553,9 +394,9 @@ export default function Home() {
       {/* FINAL CTA */}
       <section className="final-cta">
         <h2>
-          Étudier en Chine,
+          {t.final_title_1}
           <br />
-          <em>ce n'est pas si compliqué</em>
+          <em>{t.final_title_2}</em>
         </h2>
         <p
           style={{
@@ -567,7 +408,7 @@ export default function Home() {
             position: "relative",
           }}
         >
-          À condition d'être bien accompagné.
+          {t.final_sub1}
         </p>
         <p
           style={{
@@ -581,14 +422,14 @@ export default function Home() {
             position: "relative",
           }}
         >
-          Fais le premier pas dès aujourd'hui.
+          {t.final_sub2}
         </p>
         <div className="cta-group">
           <a href="#etudier-en-chine" className="btn-primary">
-            Démarrer mon projet →
+            {t.final_cta1}
           </a>
           <a href="#episodes" className="btn-secondary">
-            Voir nos domaines d'accompagnement
+            {t.final_cta2}
           </a>
         </div>
         <p
@@ -600,17 +441,15 @@ export default function Home() {
             position: "relative",
           }}
         >
-          Réponse rapide &nbsp;·&nbsp; Sans engagement &nbsp;·&nbsp;
-          Informations vérifiées
+          {t.final_footer}
         </p>
       </section>
 
       <footer>
-        <p>
-          ÉTUDIER EN CHINE &nbsp;|&nbsp; Accompagnement personnalisé{" "}
-          <span>▲</span> &nbsp;|&nbsp; Chinois en devenir - Tous droits réservés
-        </p>
+        <p>{t.footer_text}</p>
       </footer>
+
+      {popupEp && <Popup epNum={popupEp} onClose={() => setPopupEp(null)} />}
     </>
   );
 }
