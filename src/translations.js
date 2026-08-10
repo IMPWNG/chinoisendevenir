@@ -4,51 +4,74 @@ const translations = {
     hero_badge: "Chinois en Devenir — Étudier en Chine",
     hero_title_1: "Étudier en Chine,",
     hero_title_2: "ça se prépare bien avant la candidature.",
+
     hero_sub: `Universités, bourses, visa, calendrier, vie sur place…
 On t'accompagne à chaque étape pour que ton projet
 se construise sereinement, sans mauvaise surprise.`,
+
     hero_tags: [
       "✓ Informations à jour",
       "✓ Accompagnement personnalisé",
       "✓ Réponses claires à tes questions",
       "✓ Suivi jusqu'à ton départ",
     ],
+
     hero_cta: "Être accompagné dans mon projet →",
     hero_footer: "Réponse rapide · Sans engagement · Informations vérifiées",
 
     stats: [
-      { num: "6–9 mois", label: "Délai moyen à anticiper avant une rentrée" },
-      { num: "6", label: "Domaines d'accompagnement" },
-      { num: "100%", label: "Informations vérifiées et actualisées" },
-      { num: "1", label: "Interlocuteur pour tout ton projet" },
+      {
+        num: "6–9 mois",
+        label: "Délai moyen à anticiper avant une rentrée",
+      },
+      {
+        num: "6",
+        label: "Domaines d'accompagnement",
+      },
+      {
+        num: "100%",
+        label: "Informations vérifiées et actualisées",
+      },
+      {
+        num: "1",
+        label: "Interlocuteur pour tout ton projet",
+      },
     ],
 
     lead_top_label: "Ton projet d'études en Chine",
     lead_top_title: "Reçois des informations claires sur",
     lead_top_title_em: "les études en Chine",
+
     lead_top_text:
       "Universités, bourses, visa, dates de candidature… Laisse-nous tes coordonnées pour recevoir des informations personnalisées et être accompagné dans ton projet.",
 
     intro_label: "Pourquoi se faire accompagner",
     intro_title: "Étudier en Chine est une vraie opportunité,",
     intro_title_em: "à condition d'être bien informé",
+
     intro_p1:
       "Chaque année, de nombreux étudiants s'intéressent aux études en Chine sans savoir par où commencer.",
+
     intro_p2:
       "Entre le choix de l'université, les démarches de bourse, la constitution du dossier et les formalités de visa, il est facile de perdre du temps ou de rater une échéance importante.",
+
     intro_p3:
       "Notre rôle est simple : t'apporter des informations fiables et un accompagnement concret, pour que ton projet avance sans stress inutile.",
+
     intro_p4:
       "Que tu sois au tout début de ta réflexion ou prêt à candidater, on t'aide à voir clair.",
 
     fit_title: "Cet accompagnement est fait pour toi si :",
+
     fit_items: [
       "Tu envisages sérieusement d'étudier en Chine",
       "Tu veux des réponses claires à tes questions",
       "Tu ne sais pas par où commencer et cherches un accompagnement",
       "Tu veux gagner du temps sur tes recherches",
     ],
+
     notfit_title: "Pas adapté si :",
+
     notfit_items: [
       "Tu cherches juste des informations générales sans projet concret",
       "Tu n'as pas encore réfléchi à tes objectifs d'études",
@@ -137,6 +160,7 @@ se construise sereinement, sans mauvaise surprise.`,
 
     plan_label: "Comment ça fonctionne",
     plan_title: "Un accompagnement simple, en 4 étapes",
+
     plan_steps: [
       {
         icon: "📩",
@@ -178,18 +202,33 @@ se construise sereinement, sans mauvaise surprise.`,
 
     anticiper_label: "Pourquoi anticiper",
     anticiper_title: "Les candidatures ferment plus tôt qu'on ne le pense",
+
     anticiper_stats: [
-      { n: "6–9", l: "Mois avant la rentrée" },
-      { n: "1", l: "Rentrée par an, parfois deux" },
-      { n: "1", l: "Dossier bien préparé" },
-      { n: "0", l: "Place pour l'improvisation" },
+      {
+        n: "6–9",
+        l: "Mois avant la rentrée",
+      },
+      {
+        n: "1",
+        l: "Rentrée par an, parfois deux",
+      },
+      {
+        n: "1",
+        l: "Dossier bien préparé",
+      },
+      {
+        n: "0",
+        l: "Place pour l'improvisation",
+      },
     ],
+
     anticiper_text:
       "Plus tu commences tôt, plus tu as de choix : universités, bourses et délais confortables pour ton visa.",
 
     lead_bottom_label: "Prêt à démarrer ton projet ?",
     lead_bottom_title: "Parle-nous de",
     lead_bottom_title_em: "ton projet d'études en Chine",
+
     lead_bottom_text:
       "Laisse-nous tes coordonnées, on te recontacte pour faire le point sur ta situation et t'aider à avancer étape par étape.",
 
@@ -218,6 +257,7 @@ se construise sereinement, sans mauvaise surprise.`,
       errConnexion: "⚠ Connexion impossible.",
 
       successTitle: "Ta demande a bien été envoyée 🎉",
+
       successText:
         "Notre équipe va analyser ton profil et te recontacter rapidement. Pense à vérifier tes emails et ton téléphone.",
 
@@ -227,10 +267,12 @@ se construise sereinement, sans mauvaise surprise.`,
       placeholderPays: "Pays de résidence *",
       placeholderEmail: "Email *",
       placeholderPhone: "📱 Téléphone (WhatsApp) *",
+
       placeholderDomaine:
-        "Domaine d'études souhaité * (ex: Médecine, Informatique...)",
+        "Domaine d'études souhaité * (ex : Médecine, Informatique...)",
 
       budgetLabel: "Budget annuel disponible *",
+
       budgetOptions: {
         moins3000: "Moins de 3 000 €",
         de3000a6000: "3 000 € – 6 000 €",
@@ -241,6 +283,7 @@ se construise sereinement, sans mauvaise surprise.`,
       },
 
       dateLabel: "Rentrée souhaitée *",
+
       dateOptions: {
         sept2026: "Septembre 2026",
         mars2027: "Mars 2027",
@@ -262,51 +305,74 @@ se construise sereinement, sans mauvaise surprise.`,
     hero_badge: "Chinois en Devenir — Study in China",
     hero_title_1: "Studying in China",
     hero_title_2: "needs to be prepared well before you apply.",
+
     hero_sub: `Universities, scholarships, visas, timelines, life on campus…
 We guide you through every step so your project
 comes together smoothly, without any surprises.`,
+
     hero_tags: [
       "✓ Up-to-date information",
       "✓ Personalized guidance",
       "✓ Clear answers to your questions",
       "✓ Support until your departure",
     ],
+
     hero_cta: "Get guidance on my project →",
     hero_footer: "Fast reply · No commitment · Verified information",
 
     stats: [
-      { num: "6–9 months", label: "Average lead time before intake" },
-      { num: "6", label: "Areas of support" },
-      { num: "100%", label: "Verified and up-to-date information" },
-      { num: "1", label: "Single point of contact for your project" },
+      {
+        num: "6–9 months",
+        label: "Average lead time before intake",
+      },
+      {
+        num: "6",
+        label: "Areas of support",
+      },
+      {
+        num: "100%",
+        label: "Verified and up-to-date information",
+      },
+      {
+        num: "1",
+        label: "Single point of contact for your project",
+      },
     ],
 
     lead_top_label: "Your study project in China",
     lead_top_title: "Get clear information about",
     lead_top_title_em: "studying in China",
+
     lead_top_text:
       "Universities, scholarships, visas, application dates… Leave us your details to receive personalized information and support for your project.",
 
     intro_label: "Why get support",
     intro_title: "Studying in China is a real opportunity,",
     intro_title_em: "as long as you're well informed",
+
     intro_p1:
       "Every year, many students become interested in studying in China without knowing where to start.",
+
     intro_p2:
       "Between choosing a university, applying for scholarships, preparing your application, and dealing with visa formalities, it's easy to waste time or miss an important deadline.",
+
     intro_p3:
       "Our role is simple: to give you reliable information and concrete support, so your project moves forward without unnecessary stress.",
+
     intro_p4:
       "Whether you're just starting to think about it or ready to apply, we help you see things clearly.",
 
     fit_title: "This support is right for you if:",
+
     fit_items: [
       "You're seriously considering studying in China",
       "You want clear answers to your questions",
       "You don't know where to start and are looking for guidance",
       "You want to save time on your research",
     ],
+
     notfit_title: "Not a good fit if:",
+
     notfit_items: [
       "You're just looking for general information without a concrete project",
       "You haven't yet thought about your study goals",
@@ -395,6 +461,7 @@ comes together smoothly, without any surprises.`,
 
     plan_label: "How it works",
     plan_title: "Simple support, in 4 steps",
+
     plan_steps: [
       {
         icon: "📩",
@@ -436,18 +503,33 @@ comes together smoothly, without any surprises.`,
 
     anticiper_label: "Why plan ahead",
     anticiper_title: "Applications close earlier than you think",
+
     anticiper_stats: [
-      { n: "6–9", l: "Months before intake" },
-      { n: "1", l: "Intake per year, sometimes two" },
-      { n: "1", l: "Well-prepared application" },
-      { n: "0", l: "Room for improvisation" },
+      {
+        n: "6–9",
+        l: "Months before intake",
+      },
+      {
+        n: "1",
+        l: "Intake per year, sometimes two",
+      },
+      {
+        n: "1",
+        l: "Well-prepared application",
+      },
+      {
+        n: "0",
+        l: "Room for improvisation",
+      },
     ],
+
     anticiper_text:
       "The earlier you start, the more options you have: universities, scholarships, and comfortable visa timelines.",
 
     lead_bottom_label: "Ready to start your project?",
     lead_bottom_title: "Tell us about",
     lead_bottom_title_em: "your study project in China",
+
     lead_bottom_text:
       "Leave us your details, we'll get back to you to review your situation and help you move forward step by step.",
 
@@ -461,57 +543,61 @@ comes together smoothly, without any surprises.`,
 
     footer_text:
       "STUDY IN CHINA | Personalized support ▲ | Chinois en devenir - All rights reserved",
-  },
 
-  leadForm: {
-    errPrenom: "⚠ First name required.",
-    errNom: "⚠ Last name required.",
-    errAge: "⚠ Invalid age.",
-    errPays: "⚠ Country of residence required.",
-    errEmail: "⚠ Invalid email.",
-    errPhone: "⚠ Phone number required.",
-    errDomaine: "⚠ Field of study required.",
-    errBudget: "⚠ Please select your budget.",
-    errDate: "⚠ Please select your desired start date.",
-    errGeneric: "An error occurred.",
-    errConnexion: "⚠ Connection failed.",
+    leadForm: {
+      errPrenom: "⚠ First name required.",
+      errNom: "⚠ Last name required.",
+      errAge: "⚠ Invalid age.",
+      errPays: "⚠ Country of residence required.",
+      errEmail: "⚠ Invalid email.",
+      errPhone: "⚠ Phone number required.",
+      errDomaine: "⚠ Field of study required.",
+      errBudget: "⚠ Please select your budget.",
+      errDate: "⚠ Please select your desired start date.",
+      errGeneric: "An error occurred.",
+      errConnexion: "⚠ Connection failed.",
 
-    successTitle: "Your request has been sent 🎉",
-    successText:
-      "Our team will review your profile and contact you shortly. Please check your emails and phone.",
+      successTitle: "Your request has been sent 🎉",
 
-    placeholderPrenom: "First name *",
-    placeholderNom: "Last name *",
-    placeholderAge: "Age *",
-    placeholderPays: "Country of residence *",
-    placeholderEmail: "Email *",
-    placeholderPhone: "📱 Phone (WhatsApp) *",
-    placeholderDomaine:
-      "Desired field of study * (e.g. Medicine, Computer Science...)",
+      successText:
+        "Our team will review your profile and contact you shortly. Please check your emails and phone.",
 
-    budgetLabel: "Available annual budget *",
-    budgetOptions: {
-      moins3000: "Less than €3,000",
-      de3000a6000: "€3,000 – €6,000",
-      de6000a10000: "€6,000 – €10,000",
-      plus10000: "More than €10,000",
-      besoinBourse: "I'm looking for a scholarship",
-      neSaisPas: "I don't know yet",
+      placeholderPrenom: "First name *",
+      placeholderNom: "Last name *",
+      placeholderAge: "Age *",
+      placeholderPays: "Country of residence *",
+      placeholderEmail: "Email *",
+      placeholderPhone: "📱 Phone (WhatsApp) *",
+
+      placeholderDomaine:
+        "Desired field of study * (e.g. Medicine, Computer Science...)",
+
+      budgetLabel: "Available annual budget *",
+
+      budgetOptions: {
+        moins3000: "Less than €3,000",
+        de3000a6000: "€3,000 – €6,000",
+        de6000a10000: "€6,000 – €10,000",
+        plus10000: "More than €10,000",
+        besoinBourse: "I'm looking for a scholarship",
+        neSaisPas: "I don't know yet",
+      },
+
+      dateLabel: "Desired intake *",
+
+      dateOptions: {
+        sept2026: "September 2026",
+        mars2027: "March 2027",
+        sept2027: "September 2027",
+        plusTard: "Later",
+        pasSur: "Not decided yet",
+      },
+
+      submitLoading: "Sending…",
+      submitDefault: "Send my request →",
+
+      legal: "🔒 Confidential data · No spam · Unsubscribe anytime",
     },
-
-    dateLabel: "Desired intake *",
-    dateOptions: {
-      sept2026: "September 2026",
-      mars2027: "March 2027",
-      sept2027: "September 2027",
-      plusTard: "Later",
-      pasSur: "Not decided yet",
-    },
-
-    submitLoading: "Sending…",
-    submitDefault: "Send my request →",
-
-    legal: "🔒 Confidential data · No spam · Unsubscribe anytime",
   },
 };
 
