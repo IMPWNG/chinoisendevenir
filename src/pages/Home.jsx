@@ -153,7 +153,7 @@ export default function Home() {
             </span>
           ))}
         </div>
-        <a href="#lead-top" className="hero-cta">
+        <a href="#etudier-en-chine" className="hero-cta">
           Être accompagné dans mon projet →
         </a>
         <p
@@ -190,7 +190,7 @@ export default function Home() {
       </div>
 
       {/* LEAD FORM TOP */}
-      <section className="lead-section" id="lead-top">
+      <section className="lead-section" id="etudier-en-chine">
         <div className="lead-inner">
           <div className="section-label">Ton projet d'études en Chine</div>
           <h2>
@@ -584,7 +584,7 @@ export default function Home() {
           Fais le premier pas dès aujourd'hui.
         </p>
         <div className="cta-group">
-          <a href="#lead-top" className="btn-primary">
+          <a href="#etudier-en-chine" className="btn-primary">
             Démarrer mon projet →
           </a>
           <a href="#episodes" className="btn-secondary">
