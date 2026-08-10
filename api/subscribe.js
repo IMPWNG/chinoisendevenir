@@ -10,6 +10,14 @@ function formatPhone(num) {
 }
 
 export default async function handler(req, res) {
+    console.log("🔍 DEBUG ENV:");
+    console.log("SUPABASE_URL:", process.env.SUPABASE_URL);
+    console.log(
+      "SUPABASE_SERVICE_KEY length:",
+      process.env.SUPABASE_SERVICE_KEY?.length,
+    );
+    console.log("BREVO_API_KEY length:", process.env.BREVO_API_KEY?.length);
+    console.log("BREVO_LIST_ID:", process.env.BREVO_LIST_ID);
   // ── CORS Headers ──
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
