@@ -1,111 +1,84 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import Nav from "../components/Nav.jsx";
 import LeadForm from "../components/LeadForm.jsx";
 import Popup from "../components/Popup.jsx";
 
-const MODULES = [
+const SERVICES = [
   {
     num: "01",
-    tag: "Module 1",
-    title: "Comprendre comment fonctionnent vraiment les admissions",
+    tag: "Orientation",
+    title: "Trouver l'université et le programme adaptés à ton profil",
     points: [
-      "Pourquoi la Chine attire les étudiants internationaux",
-      "Comment les universités sélectionnent",
-      "Ce qu'elles regardent en priorité",
-      "Les idées reçues les plus fréquentes",
+      "Analyse de ton parcours et de tes objectifs",
+      "Sélection des universités qui correspondent à ton profil",
+      "Comparatif des programmes et des villes",
+      "Conseils sur les langues d'enseignement (anglais / chinois)",
     ],
-    obj: "Comprendre les règles du jeu avant de postuler.",
+    obj: "Faire le bon choix dès le départ.",
   },
   {
     num: "02",
-    tag: "Module 2",
-    title: "Ce qui fait vraiment la différence dans un dossier",
+    tag: "Dossier de candidature",
+    title: "Construire un dossier complet et solide",
     points: [
-      "Les critères visibles… et ceux qu'on oublie",
-      "Comment adapter ton profil",
-      "Ce que les universités attendent vraiment",
-      "Les détails qui changent tout",
+      "Liste précise des documents nécessaires",
+      "Aide à la rédaction de la lettre de motivation",
+      "Vérification et mise en forme du dossier",
+      "Conseils pour éviter les erreurs qui font perdre du temps",
     ],
-    obj: "Mettre toutes les chances de ton côté.",
+    obj: "Présenter un dossier crédible et complet.",
   },
   {
     num: "03",
-    tag: "Module 3",
-    title: "Les erreurs qui peuvent retarder ton départ",
+    tag: "Bourses & financement",
+    title: "Explorer les options de financement disponibles",
     points: [
-      "Les pièges les plus fréquents",
-      "Les mauvais timings",
-      "Les oublis qui bloquent un dossier",
-      "Comment les éviter facilement",
+      "Panorama des bourses accessibles (CSC, Confucius, universitaires…)",
+      "Critères d'éligibilité expliqués simplement",
+      "Conseils pour renforcer un dossier de bourse",
+      "Alternatives si la bourse n'est pas obtenue",
     ],
-    obj: "Éviter de perdre une année inutilement.",
+    obj: "Réduire le coût réel de ton projet d'études.",
   },
   {
     num: "04",
-    tag: "Module 4",
-    title: "Le vrai calendrier 2026/2027",
+    tag: "Visa & démarches",
+    title: "Comprendre les démarches administratives",
     points: [
-      "Quand commencer les démarches",
-      "Pourquoi il faut anticiper",
-      "Les délais réels à prévoir",
-      "Comment garder de l'avance",
+      "Étapes du visa étudiant (type X1 / X2)",
+      "Documents à préparer en amont",
+      "Délais réalistes à anticiper",
+      "Points de vigilance fréquents",
     ],
-    obj: "Ne jamais être en retard.",
+    obj: "Aborder les démarches sans stress.",
   },
   {
     num: "05",
-    tag: "Module 5",
-    title: "Construire un dossier solide et convaincant",
+    tag: "Calendrier",
+    title: "Connaître les dates clés de candidature",
     points: [
-      "Comment ton dossier est lu",
-      "Les erreurs classiques",
-      "Ce qui renforce ta crédibilité",
-      "Comment rester cohérent",
+      "Périodes d'ouverture et de fermeture des candidatures",
+      "Différences selon les universités et les programmes",
+      "Rappels pour ne rien manquer",
+      "Anticipation des délais administratifs",
     ],
-    obj: "Présenter un dossier clair, complet et sérieux.",
+    obj: "Ne jamais candidater dans l'urgence.",
   },
   {
     num: "06",
-    tag: "Module 6",
-    title: "Visa & démarches administratives",
+    tag: "Vie sur place",
+    title: "Préparer ton installation en Chine",
     points: [
-      "Les étapes importantes",
-      "Les documents nécessaires",
-      "Les délais à prévoir",
-      "Les erreurs à éviter",
+      "Logement étudiant : options et démarches",
+      "Coût de la vie selon les villes",
+      "Premiers repères une fois sur place",
+      "Réseau d'étudiants et de contacts utiles",
     ],
-    obj: "Partir sans stress administratif.",
-  },
-  {
-    num: "07",
-    tag: "Module 7",
-    title: "Financement & bourses",
-    points: [
-      "Comment fonctionnent les bourses",
-      "Les critères importants",
-      "Comment maximiser tes chances",
-      "Choisir la bonne option pour ton profil",
-    ],
-    obj: "Réduire le coût de ton projet.",
-  },
-  {
-    num: "08",
-    tag: "Module 8",
-    title: "Préparer ton avenir après l'admission",
-    points: [
-      "Bien choisir ton université",
-      "Penser à ton futur professionnel",
-      "Valoriser ton expérience en Chine",
-      "Construire un profil international",
-    ],
-    obj: "Faire de cette expérience un vrai tremplin.",
+    obj: "Arriver préparé, pas seulement admis.",
   },
 ];
 
-const ETUDES = [];
-
-export default function Etude() {
+export default function Home() {
   const [popupEp, setPopupEp] = useState(null);
   const observerRef = useRef(null);
 
@@ -132,23 +105,22 @@ export default function Etude() {
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-badge">Chinois en Devenir — Guide 2026/2027</div>
+        <div className="hero-badge">Chinois en Devenir — Étudier en Chine</div>
         <div className="hero-flag">🇨🇳</div>
         <h1
           className="hero-title"
           style={{ fontSize: "clamp(32px, 5vw, 64px)", letterSpacing: "-1px" }}
         >
-          En 2026/2027, les candidatures
+          Étudier en Chine,
           <br />
-          <span>ferment avant que tu commences.</span>
+          <span>ça se prépare bien avant la candidature.</span>
         </h1>
         <p className="hero-sub">
-          Les universités ferment leurs candidatures 6 à 9 mois avant la
-          rentrée.
+          Universités, bourses, visa, calendrier, vie sur place…
           <br />
-          Si tu attends → tu repousses ton projet d'un an.
+          On t'accompagne à chaque étape pour que ton projet
           <br />
-          Si tu te prépares → tu prends de l'avance.
+          se construise sereinement, sans mauvaise surprise.
         </p>
         <div
           style={{
@@ -162,10 +134,10 @@ export default function Etude() {
           }}
         >
           {[
-            "✓ Guide complet étape par étape",
-            "✓ 8 épisodes vidéo",
-            "✓ Modèles de candidature prêts à utiliser",
-            "✓ Feuille de route claire pour partir",
+            "✓ Informations à jour",
+            "✓ Accompagnement personnalisé",
+            "✓ Réponses claires à tes questions",
+            "✓ Suivi jusqu'à ton départ",
           ].map((t) => (
             <span
               key={t}
@@ -181,13 +153,8 @@ export default function Etude() {
             </span>
           ))}
         </div>
-        <a
-          href="https://chinoisendevenir.gumroad.com/l/etude-chine-2026-2027"
-          className="hero-cta"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Je prépare mon départ →
+        <a href="#lead-top" className="hero-cta">
+          Être accompagné dans mon projet →
         </a>
         <p
           style={{
@@ -199,43 +166,21 @@ export default function Etude() {
             position: "relative",
           }}
         >
-          Lecture immédiate &nbsp;·&nbsp; Accès privé &nbsp;·&nbsp; Mise à jour
-          2026/2027 incluse
+          Réponse rapide &nbsp;·&nbsp; Sans engagement &nbsp;·&nbsp;
+          Informations vérifiées
         </p>
-      </section>
-      <section
-        style={{
-          padding: "40px 24px",
-          textAlign: "center",
-          borderTop: "1px solid var(--border)",
-        }}
-      >
-        <Link
-          to="/etudier/guide-etudier-en-chine"
-          style={{
-            color: "var(--gold)",
-            fontSize: "13px",
-            textDecoration: "none",
-            letterSpacing: "1px",
-            borderBottom: "1px solid rgba(212,168,83,0.3)",
-            paddingBottom: "2px",
-          }}
-        >
-          📖 Lire le guide complet : Étudier en Chine, comprendre et réussir ton
-          projet →
-        </Link>
       </section>
 
       {/* STATS */}
       <div className="stats">
         {[
-          { num: "6–9 mois", label: "Avant la fermeture des candidatures" },
-          { num: "8", label: "Modules clairs & concrets" },
           {
-            num: "Structure",
-            label: "Un bon dossier multiplie fortement tes chances.",
+            num: "6–9 mois",
+            label: "Délai moyen à anticiper avant une rentrée",
           },
-          { num: "14€", label: "Accès complet au guide" },
+          { num: "6", label: "Domaines d'accompagnement" },
+          { num: "100%", label: "Informations vérifiées et actualisées" },
+          { num: "1", label: "Interlocuteur pour tout ton projet" },
         ].map((s) => (
           <div className="stat-item" key={s.num}>
             <div className="stat-num">{s.num}</div>
@@ -247,58 +192,46 @@ export default function Etude() {
       {/* LEAD FORM TOP */}
       <section className="lead-section" id="lead-top">
         <div className="lead-inner">
-          <div className="section-label">Départ Chine 2026/2027</div>
+          <div className="section-label">Ton projet d'études en Chine</div>
           <h2>
-            Prépare ton dossier dès maintenant pour{" "}
+            Reçois des informations claires sur{" "}
             <em style={{ fontStyle: "normal", color: "var(--gold)" }}>
-              2026/2027
+              les études en Chine
             </em>
             .
           </h2>
           <p>
-            Les universités ferment leurs candidatures des mois à l'avance.
+            Universités, bourses, visa, dates de candidature…
             <br />
-            Si tu veux partir sereinement et éviter les erreurs, reste informé
-            des dates clés et des mises à jour officielles.
+            Laisse-nous tes coordonnées pour recevoir des informations
+            personnalisées et être accompagné dans ton projet.
           </p>
-          <div style={{ maxWidth: "480px", margin: "0 auto" }}>
-            <LeadForm
-              prefix="top"
-              source="etudier"
-              submitLabel="Recevoir les infos importantes →"
-            />
-          </div>
+          <LeadForm prefix="top" />
         </div>
       </section>
 
       {/* INTRO */}
       <section className="intro">
-        <div className="section-label">Ce qu'il faut comprendre</div>
+        <div className="section-label">Pourquoi se faire accompagner</div>
         <h2>
-          Pourquoi beaucoup d'étudiants passent à côté{" "}
+          Étudier en Chine est une vraie opportunité,{" "}
           <em style={{ fontStyle: "normal", color: "var(--gold)" }}>
-            avant même d'envoyer leur dossier
+            à condition d'être bien informé
           </em>
         </h2>
         <p>
-          Étudier en Chine ne se décide pas au dernier moment.
-          <br />
-          Les candidatures ouvrent tôt… et ferment vite.
+          Chaque année, de nombreux étudiants s'intéressent aux études en Chine
+          sans savoir par où commencer.
         </p>
         <p>
-          En 2026/2027, les universités sélectionnent plus rapidement et
-          demandent des dossiers complets dès le départ.
-          <br />
-          La différence ne se joue pas sur la motivation.
-          <br />
-          Elle se joue sur l'anticipation.
+          Entre le choix de l'université, les démarches de bourse, la
+          constitution du dossier et les formalités de visa, il est facile de
+          perdre du temps ou de rater une échéance importante.
         </p>
         <p>
-          Un retard dans les dates = candidature reportée.
-          <br />
-          Un document manquant = dossier mis en attente.
-          <br />
-          Un manque de préparation = une année repoussée.
+          Notre rôle est simple : t'apporter des informations fiables et un
+          accompagnement concret, pour que ton projet avance sans stress
+          inutile.
         </p>
         <p
           style={{
@@ -309,7 +242,8 @@ export default function Etude() {
             paddingTop: "32px",
           }}
         >
-          Ce guide est là pour t'éviter ces erreurs et te faire gagner du temps.
+          Que tu sois au tout début de ta réflexion ou prêt à candidater, on
+          t'aide à voir clair.
         </p>
       </section>
 
@@ -326,14 +260,14 @@ export default function Etude() {
         >
           <div style={{ background: "var(--dark2)", padding: "40px" }}>
             <div className="section-label" style={{ marginBottom: "24px" }}>
-              Ce guide est fait pour toi si :
+              Cet accompagnement est fait pour toi si :
             </div>
             <ul style={{ listStyle: "none" }}>
               {[
-                "Tu veux candidater en 2026/2027 avec un plan clair",
-                "Tu refuses de perdre un an par manque d'information",
-                "Tu veux comprendre le système avant d'entrer dedans",
-                "Tu veux structurer ton dossier comme un profil stratégique",
+                "Tu envisages sérieusement d'étudier en Chine",
+                "Tu veux des réponses claires à tes questions",
+                "Tu ne sais pas par où commencer et cherches un accompagnement",
+                "Tu veux gagner du temps sur tes recherches",
               ].map((item) => (
                 <li
                   key={item}
@@ -378,13 +312,13 @@ export default function Etude() {
                 marginBottom: "24px",
               }}
             >
-              Pas pour toi si :
+              Pas adapté si :
             </div>
             <ul style={{ listStyle: "none" }}>
               {[
-                'Tu veux "voir comment ça se passe"',
-                "Tu préfères improviser",
-                "Tu n'es pas prêt à t'organiser sérieusement",
+                "Tu cherches juste des informations générales sans projet concret",
+                "Tu n'as pas encore réfléchi à tes objectifs d'études",
+                "Tu ne souhaites pas être accompagné dans les démarches",
               ].map((item) => (
                 <li
                   key={item}
@@ -414,14 +348,14 @@ export default function Etude() {
         </div>
       </section>
 
-      {/* EPISODES */}
+      {/* SERVICES */}
       <section className="episodes" id="episodes">
         <div className="episodes-header">
-          <div className="section-label">Programme complet — 8 modules</div>
-          <h2>Ce que tu vas apprendre concrètement</h2>
+          <div className="section-label">Nos domaines d'accompagnement</div>
+          <h2>Ce qu'on t'aide à comprendre et à préparer</h2>
         </div>
         <div className="ep-grid">
-          {MODULES.map((m, i) => (
+          {SERVICES.map((m, i) => (
             <div className="ep-card" key={m.num}>
               <div className="ep-num">{m.num}</div>
               <div className="ep-tag">{m.tag}</div>
@@ -435,64 +369,65 @@ export default function Etude() {
                 <strong>Objectif :</strong> {m.obj}
               </div>
               <a
-                href="#"
+                href="#lead-bottom"
                 className="ep-link"
                 onClick={(e) => {
                   e.preventDefault();
-                  setPopupEp(i + 1);
+                  document
+                    .getElementById("lead-bottom")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                ▶ Voir le module
+                ▶ En savoir plus
               </a>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CE QUE TU REÇOIS */}
+      {/* COMMENT ÇA SE PASSE */}
       <section className="plan">
         <div className="plan-inner">
           <div className="section-label" style={{ textAlign: "center" }}>
-            Programme 2026/2027
+            Comment ça fonctionne
           </div>
-          <h2>Ce que tu obtiens concrètement</h2>
+          <h2>Un accompagnement simple, en 4 étapes</h2>
           <div className="weeks">
             {[
               {
-                icon: "📘",
-                title: "Guide clair et structuré",
+                icon: "📩",
+                title: "1. Premier contact",
                 items: [
-                  "Explications étape par étape",
-                  "Informations organisées simplement",
-                  "Consultable à ton rythme",
-                  "Un échange individuel pour analyser ton profil et t'orienter efficacement",
+                  "Tu remplis le formulaire",
+                  "On revient vers toi rapidement",
+                  "Un premier échange pour comprendre ton projet",
                 ],
               },
               {
-                icon: "🎬",
-                title: "Vidéos explicatives",
+                icon: "🎯",
+                title: "2. Analyse de ton profil",
                 items: [
-                  "Explications concrètes et accessibles",
-                  "Conseils pour mieux comprendre les attentes",
-                  "Points clés souvent mal expliqués ailleurs",
+                  "Objectifs, niveau, budget",
+                  "Universités et programmes envisageables",
+                  "Options de bourses possibles",
                 ],
               },
               {
-                icon: "📝",
-                title: "Conseils pour ton dossier",
+                icon: "📋",
+                title: "3. Préparation du dossier",
                 items: [
-                  "Comment structurer ta candidature",
-                  "Les erreurs fréquentes à éviter",
-                  "Comment rendre ton profil plus cohérent",
+                  "Documents à réunir",
+                  "Rédaction et vérification",
+                  "Calendrier personnalisé",
                 ],
               },
               {
-                icon: "🗓",
-                title: "Calendrier 2026/2027",
+                icon: "✈️",
+                title: "4. Suivi jusqu'au départ",
                 items: [
-                  "Dates importantes regroupées",
-                  "Délais à anticiper",
-                  "Vision claire des étapes à suivre",
+                  "Démarches de visa",
+                  "Préparation de l'installation",
+                  "Accompagnement jusqu'à ton arrivée en Chine",
                 ],
               },
             ].map((w) => (
@@ -512,7 +447,7 @@ export default function Etude() {
         </div>
       </section>
 
-      {/* ANCRAGE PRIX */}
+      {/* POURQUOI ANTICIPER */}
       <section
         style={{
           padding: "80px 24px",
@@ -524,7 +459,7 @@ export default function Etude() {
         <div
           style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}
         >
-          <div className="section-label">Mise en perspective</div>
+          <div className="section-label">Pourquoi anticiper</div>
           <h2
             style={{
               fontFamily: '"Playfair Display", serif',
@@ -534,7 +469,7 @@ export default function Etude() {
               lineHeight: 1.2,
             }}
           >
-            Une année perdue coûte :
+            Les candidatures ferment plus tôt qu'on ne le pense
           </h2>
           <div
             style={{
@@ -545,10 +480,10 @@ export default function Etude() {
             }}
           >
             {[
-              { n: "12", l: "Mois" },
-              { n: "1", l: "Rentrée" },
-              { n: "1", l: "Opportunité" },
-              { n: "1", l: "Bourse" },
+              { n: "6–9", l: "Mois avant la rentrée" },
+              { n: "1", l: "Rentrée par an, parfois deux" },
+              { n: "1", l: "Dossier bien préparé" },
+              { n: "0", l: "Place pour l'improvisation" },
             ].map((item) => (
               <div
                 key={item.l}
@@ -590,31 +525,8 @@ export default function Etude() {
               lineHeight: 1.7,
             }}
           >
-            Ce guide coûte{" "}
-            <strong style={{ color: "var(--light)" }}>
-              moins qu'un mois d'abonnement Netflix.
-            </strong>
-          </p>
-          <p
-            style={{
-              fontFamily: '"Playfair Display", serif',
-              fontSize: "clamp(36px, 5vw, 56px)",
-              fontWeight: 900,
-              color: "var(--gold)",
-              marginTop: "32px",
-            }}
-          >
-          14€
-          </p>
-          <p
-            style={{
-              fontSize: "12px",
-              color: "var(--muted)",
-              marginTop: "8px",
-              letterSpacing: "1px",
-            }}
-          >
-            Accès complet au guide · Mises à jour incluses
+            Plus tu commences tôt, plus tu as de choix : universités, bourses et
+            délais confortables pour ton visa.
           </p>
         </div>
       </section>
@@ -622,35 +534,28 @@ export default function Etude() {
       {/* LEAD FORM BOTTOM */}
       <section className="lead-section" id="lead-bottom">
         <div className="lead-inner">
-          <div className="section-label">Départ Chine 2026/2027</div>
+          <div className="section-label">Prêt à démarrer ton projet ?</div>
           <h2>
-            Prépare dès maintenant{" "}
+            Parle-nous de{" "}
             <em style={{ fontStyle: "normal", color: "var(--gold)" }}>
-              2026/2027
+              ton projet d'études en Chine
             </em>
             .
           </h2>
           <p>
-            Les candidatures ferment des mois à l'avance.
-            <br />
-            Inscris-toi pour recevoir les dates importantes, les mises à jour
-            officielles et les rappels utiles pour ne rien rater.
+            Laisse-nous tes coordonnées, on te recontacte pour faire le point
+            sur ta situation et t'aider à avancer étape par étape.
           </p>
-          <div style={{ maxWidth: "480px", margin: "0 auto" }}>
-            <LeadForm
-              prefix="bottom"
-              source="etudier"
-              submitLabel="Recevoir les infos importantes →"
-            />
-          </div>
+          <LeadForm prefix="bottom" />
         </div>
       </section>
 
       {/* FINAL CTA */}
       <section className="final-cta">
         <h2>
-          La question n'est pas :<br />
-          <em>« Est-ce possible ? »</em>
+          Étudier en Chine,
+          <br />
+          <em>ce n'est pas si compliqué</em>
         </h2>
         <p
           style={{
@@ -662,7 +567,7 @@ export default function Etude() {
             position: "relative",
           }}
         >
-          La question est :
+          À condition d'être bien accompagné.
         </p>
         <p
           style={{
@@ -676,19 +581,14 @@ export default function Etude() {
             position: "relative",
           }}
         >
-          « Est-ce que tu t'organises à temps ? »
+          Fais le premier pas dès aujourd'hui.
         </p>
         <div className="cta-group">
-          <a
-            href="https://chinoisendevenir.gumroad.com/l/etude-chine-2026-2027"
-            className="btn-primary"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Accéder au guide complet — 14€ →
+          <a href="#lead-top" className="btn-primary">
+            Démarrer mon projet →
           </a>
           <a href="#episodes" className="btn-secondary">
-            Voir les 8 modules
+            Voir nos domaines d'accompagnement
           </a>
         </div>
         <p
@@ -700,26 +600,17 @@ export default function Etude() {
             position: "relative",
           }}
         >
-          Accès immédiat &nbsp;·&nbsp; Paiement sécurisé &nbsp;·&nbsp; Mise à
-          jour 2026/2027 incluse
+          Réponse rapide &nbsp;·&nbsp; Sans engagement &nbsp;·&nbsp;
+          Informations vérifiées
         </p>
       </section>
-      <section
-        style={{
-          padding: "40px 24px",
-          textAlign: "center",
-          borderTop: "1px solid var(--border)",
-        }}
-      ></section>
 
       <footer>
         <p>
-          ÉTUDE – CHINE – 2026/2027 &nbsp;|&nbsp; Guide Complet <span>▲</span>{" "}
-          &nbsp;|&nbsp; Chinois en devenir - Tous droits réservés
+          ÉTUDIER EN CHINE &nbsp;|&nbsp; Accompagnement personnalisé{" "}
+          <span>▲</span> &nbsp;|&nbsp; Chinois en devenir - Tous droits réservés
         </p>
       </footer>
-
-      {popupEp && <Popup epNum={popupEp} onClose={() => setPopupEp(null)} />}
     </>
   );
 }
