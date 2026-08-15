@@ -67,15 +67,15 @@ const DOMAINES_ETUDES = [
 const BUDGETS = ["Faible", "Moyen", "Élevé"];
 
 const ACTIONS_TYPES = [
-  { value: "appel_effectue", label: "Appel effectué", icon: "📞" },
-  { value: "email_envoye", label: "Email envoyé", icon: "📧" },
-  { value: "whatsapp_envoye", label: "Message WhatsApp", icon: "💬" },
+  { value: "appel", label: "Appel effectué", icon: "📞" },
+  { value: "email", label: "Email envoyé", icon: "📧" },
+  { value: "whatsapp", label: "Message WhatsApp", icon: "💬" },
   { value: "relance", label: "Relance", icon: "🔔" },
-  { value: "rdv_planifie", label: "RDV planifié", icon: "📅" },
-  { value: "offre_envoyee", label: "Offre envoyée", icon: "💌" },
-  { value: "document_recu", label: "Document reçu", icon: "📄" },
-  { value: "paiement_recu", label: "Paiement reçu", icon: "💰" },
-  { value: "dossier_envoye", label: "Dossier envoyé", icon: "📤" },
+  { value: "rdv", label: "RDV planifié", icon: "📅" },
+  { value: "offre", label: "Offre envoyée", icon: "💌" },
+  { value: "document", label: "Document reçu", icon: "📄" },
+  { value: "paiement", label: "Paiement reçu", icon: "💰" },
+  { value: "dossier", label: "Dossier envoyé", icon: "📤" },
 ];
 
 export default function AdminDashboard() {
