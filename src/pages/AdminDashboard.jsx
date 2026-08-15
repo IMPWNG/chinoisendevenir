@@ -113,25 +113,44 @@ export default function AdminDashboard() {
     setLoading(false);
   };
 
-  const updateStatut = async (id, newStatut) => {
+const updateStatut = async (id, newStatut) => {
+  try {
     const { error } = await supabase
       .from("contacts")
-      .update({ suivi_statut: newStatut, updated_at: new Date().toISOString() })
+      .update({
+        suivi_statut: newStatut,
+        updated_at: new Date().toISOString(),
+      })
       .eq("id", id);
 
-    if (!error) {
-      await supabase.from("suivi_actions").insert({
-        contact_id: id,
-        action: "changement_statut",
-        description: `Statut changé vers "${newStatut}"`,
-        user_admin: user?.email,
-      });
-
-      setContacts((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, suivi_statut: newStatut } : c)),
-      );
+    if (error) {
+      console.error("Erreur update statut:", error);
+      alert("Erreur : " + error.message);
+      return;
     }
-  };
+
+    // Enregistrer l'action
+    const { error: actionError } = await supabase.from("suivi_actions").insert({
+      contact_id: id,
+      action: "changement_statut",
+      description: `Statut changé vers "${newStatut}"`,
+      user_admin: user?.email,
+      created_at: new Date().toISOString(),
+    });
+
+    if (actionError) {
+      console.error("Erreur enregistrement action:", actionError);
+    }
+
+    // Mettre à jour l'état local
+    setContacts((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, suivi_statut: newStatut } : c)),
+    );
+  } catch (err) {
+    console.error("Erreur:", err);
+    alert("Une erreur est survenue");
+  }
+};
 
   const deleteContact = async (id) => {
     if (!confirm("Supprimer définitivement ce contact ?")) return;
