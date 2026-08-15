@@ -68,14 +68,22 @@ const BUDGETS = ["Faible", "Moyen", "Élevé"];
 
 const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
-  { value: "email", label: "Email envoyé", icon: "📧" },
-  { value: "whatsapp", label: "Message WhatsApp", icon: "💬" },
+  { value: "email_envoye", label: "Email envoyé", icon: "📧" },
   { value: "relance", label: "Relance", icon: "🔔" },
-  { value: "rdv", label: "RDV planifié", icon: "📅" },
-  { value: "offre", label: "Offre envoyée", icon: "💌" },
-  { value: "document", label: "Document reçu", icon: "📄" },
-  { value: "paiement", label: "Paiement reçu", icon: "💰" },
-  { value: "dossier", label: "Dossier envoyé", icon: "📤" },
+  { value: "qualification", label: "Qualification", icon: "✓" },
+  { value: "changement_statut", label: "Changement de statut", icon: "🔄" },
+  { value: "note_ajoutee", label: "Note ajoutée", icon: "📝" },
+  { value: "contact_appele", label: "Contact appelé", icon: "☎️" },
+  { value: "document_envoye", label: "Document envoyé", icon: "📄" },
+  { value: "rendez_vous_fixe", label: "RDV fixé", icon: "📅" },
+  { value: "paiement_recu", label: "Paiement reçu", icon: "💰" },
+  {
+    value: "inscription_effectuee",
+    label: "Inscription effectuée",
+    icon: "✅",
+  },
+  { value: "contact_modifier", label: "Contact modifié", icon: "✏️" },
+  { value: "dossier_complet", label: "Dossier complet", icon: "📂" },
 ];
 
 export default function AdminDashboard() {
