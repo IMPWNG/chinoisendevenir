@@ -1,64 +1,16 @@
-# Chinois en Devenir — Vite + React
+# React + Vite
 
-Stack : **Vite + React + React Router** · API Route Vercel · Déploiement Vercel
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Structure
+Currently, two official plugins are available:
 
-```
-chinois-en-devenir/
-├── api/
-│   └── subscribe.js        ← Vercel serverless function (Brevo)
-├── src/
-│   ├── components/
-│   │   ├── Nav.jsx
-│   │   ├── LeadForm.jsx
-│   │   └── Popup.jsx
-│   ├── pages/
-│   │   ├── Home.jsx
-│   │   └── AVenir.jsx
-│   ├── main.jsx
-│   └── index.css
-├── index.html
-├── vite.config.js
-├── vercel.json
-└── package.json
-```
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Lancer en local
+## React Compiler
 
-```bash
-npm install
-npm run dev
-```
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Variables d'environnement
+## Expanding the ESLint configuration
 
-Crée un fichier `.env` à la racine :
-```
-BREVO_API_KEY=ta_clé_api_brevo
-BREVO_LIST_ID=ton_list_id
-```
-
-Sur Vercel : Settings → Environment Variables → ajouter les mêmes.
-
-## Déployer sur Vercel
-
-```bash
-# Option 1 — via CLI
-npm i -g vercel
-vercel
-
-# Option 2 — via GitHub
-# Push sur GitHub → importer le repo sur vercel.com
-# Vercel détecte Vite automatiquement, aucune config nécessaire
-```
-
-**Framework preset** : Vite (détecté automatiquement)  
-**Build command** : `npm run build`  
-**Output directory** : `dist`
-
-## Notes importantes
-
-- Le fichier `api/subscribe.js` est une **Vercel Serverless Function** — elle remplace ton `server.js`
-- `vercel.json` gère le routing : `/api/*` → serverless, `/*` → React SPA
-- Les variables d'environnement Vercel sont automatiquement disponibles dans `api/subscribe.js`
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

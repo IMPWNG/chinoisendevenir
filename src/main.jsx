@@ -1,22 +1,11 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LanguageProvider } from "./context/LanguageContext.jsx";
-import Home from "./pages/Home.jsx";
-import AVenir from "./pages/AVenir.jsx";
+// src/main.jsx (ne devrait pas changer)
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
 
-import "./index.css";
-
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <LanguageProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/a-venir" element={<AVenir />} />
-          <Route path="/a-venir.html" element={<AVenir />} /> */}
-        </Routes>
-      </BrowserRouter>
-    </LanguageProvider>
-  </StrictMode>,
-);
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
