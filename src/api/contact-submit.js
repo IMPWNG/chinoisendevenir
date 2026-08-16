@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 // ✅ Variables d'environnement (Vercel)
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const resendApiKey = process.env.RESEND_API_KEY; // ⚠️ SANS VITE_ en prod
+const resendApiKey = process.env.RESEND_API_KEY; // ✅ SANS VITE_ en prod Vercel
 
 // ✅ Vérifier AVANT de créer les clients
 if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
@@ -18,7 +18,7 @@ if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
 const supabase = createClient(supabaseUrl || "", serviceRoleKey || "");
 const resend = new Resend(resendApiKey || "");
 
-// 📧 Template email pour la prod
+// 📧 Template email
 function generateEmailTemplate(prenom) {
   return `
     <!DOCTYPE html>
@@ -168,23 +168,18 @@ function generateEmailTemplate(prenom) {
       </head>
       <body>
         <div class="container">
-          <!-- Header -->
           <div class="header">
             <h1>🇨🇳 Bienvenue ${prenom}</h1>
             <p>Votre projet d'études en Chine – Prochaine étape</p>
           </div>
-
-          <!-- Content -->
           <div class="content">
             <div class="greeting">
               <p>Bonjour ${prenom},</p>
             </div>
-
             <div class="section">
               <p>Merci d'avoir soumis votre demande concernant votre projet d'études en Chine.</p>
               <p><strong>Nous avons bien reçu vos informations.</strong></p>
             </div>
-
             <div class="section">
               <p>Votre profil va maintenant être étudié afin d'identifier les options les plus adaptées à votre parcours :</p>
               <ul style="list-style: none; padding-left: 0; margin: 10px 0;">
@@ -194,8 +189,6 @@ function generateEmailTemplate(prenom) {
                 <li style="margin-bottom: 8px;">✓ Conditions d'admission</li>
               </ul>
             </div>
-
-            <!-- Services -->
             <div class="section">
               <div class="section-title">Notre accompagnement comprend :</div>
               <div class="services">
@@ -209,17 +202,12 @@ function generateEmailTemplate(prenom) {
                 </ul>
               </div>
             </div>
-
             <div class="section">
               <p>Après cette première étude, nous vous contacterons rapidement afin de vous présenter les possibilités correspondant à votre situation ainsi que nos formules d'accompagnement.</p>
             </div>
-
-            <!-- Warning -->
             <div class="warning">
               <strong>⚠️ Important :</strong> Aucune admission ou bourse ne peut être garantie. Les décisions finales dépendent des universités et des organismes concernés.
             </div>
-
-            <!-- CTA -->
             <div class="cta-section">
               <p><strong>Souhaitez-vous continuer et être recontacté ?</strong></p>
               <p style="font-size: 13px; color: #666;">Répondez simplement à cet e-mail avec :</p>
@@ -228,8 +216,6 @@ function generateEmailTemplate(prenom) {
               </div>
             </div>
           </div>
-
-          <!-- Footer -->
           <div class="footer">
             <p>Cordialement,</p>
             <div class="footer-brand">Chinois en Devenir</div>
@@ -247,7 +233,7 @@ function generateEmailTemplate(prenom) {
 }
 
 export default async function handler(req, res) {
-  // ✅ CORS headers (optionnel mais recommandé)
+  // ✅ CORS headers
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -268,7 +254,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
 
-  // ✅ Vérifier à chaque appel
   if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
     return res.status(500).json({
       error: "Variables d'environnement manquantes",
@@ -338,10 +323,28 @@ export default async function handler(req, res) {
 
     console.log("✅ Contact créé (PROD):", contact.id, "-", email);
 
-    // 2️⃣ Envoyer email avec Resend (PROD)
+    // 2️⃣ Enregistrer l'action dans suivi_actions
+    const { error: actionError } = await supabase.from("suivi_actions").insert([
+      {
+        contact_id: contact.id,
+        action: "email_bienvenue_envoye",
+        description: `Email de bienvenue envoyé à ${email}`,
+        date_action: new Date().toISOString(),
+        user_admin: "système_automatique",
+      },
+    ]);
+
+    if (actionError) {
+      console.error("⚠️ Erreur suivi_actions:", actionError);
+      // On continue quand même
+    } else {
+      console.log("✉️ Action loggée dans suivi_actions");
+    }
+
+    // 3️⃣ Envoyer email avec Resend (PROD)
     try {
       const emailResponse = await resend.emails.send({
-        from: "contact@chinoisendevenir.com", // ✅ DOMAINE VÉRIFIÉ
+        from: "contact@chinoisendevenir.com",
         replyTo: "chinoisendevenir@gmail.com",
         to: email,
         subject: `Bienvenue ${prenom} ! 🇨🇳`,
@@ -350,7 +353,6 @@ export default async function handler(req, res) {
 
       if (emailResponse.error) {
         console.error("⚠️ Erreur Resend:", emailResponse.error);
-        // ⚠️ On continue quand même (pas bloquant)
       } else {
         console.log("✉️ Email envoyé:", emailResponse.id);
       }
