@@ -9,20 +9,42 @@
   --light: #f8f9fa;
 }
 
-/* Reset minimal - ne pas conflictuer avec Tailwind */
+/* Reset minimal */
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Styles personnalisés uniquement pour la landing page */
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Container principal - CENTRAGE */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container.max-w-4xl {
+  max-width: 900px;
+}
+
+/* Header */
 .landing-header {
   position: sticky;
   top: 0;
   z-index: 100;
   background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
 }
 
 .landing-header-content {
@@ -68,12 +90,18 @@ html, body {
   cursor: pointer;
 }
 
-/* Hero */
+/* Hero - CENTRAGE */
 .landing-hero {
   background: linear-gradient(135deg, var(--secondary), #457b9d);
   color: white;
-  padding: 100px 0;
+  padding: 100px 20px;
   text-align: center;
+  width: 100%;
+}
+
+.landing-hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .landing-hero-badge {
@@ -88,6 +116,7 @@ html, body {
 .landing-hero-title {
   font-size: 3rem;
   margin: 20px 0;
+  font-weight: 700;
 }
 
 .landing-hero-subtitle {
@@ -153,10 +182,16 @@ html, body {
   margin-top: 10px;
 }
 
-/* Stats */
+/* Stats - CENTRAGE */
 .landing-stats {
   background: var(--light);
-  padding: 60px 0;
+  padding: 60px 20px;
+  width: 100%;
+}
+
+.landing-stats-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .landing-stats-grid {
@@ -164,9 +199,6 @@ html, body {
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 .landing-stat-value {
@@ -180,9 +212,13 @@ html, body {
   margin-top: 8px;
 }
 
-/* Programs */
+/* Programs - CENTRAGE */
 .landing-programs {
-  padding: 80px 0;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+.landing-programs-content {
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -191,6 +227,7 @@ html, body {
   text-align: center;
   font-size: 2.2rem;
   color: var(--secondary);
+  font-weight: 700;
 }
 
 .landing-section-subtitle {
@@ -203,7 +240,6 @@ html, body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  padding: 0 20px;
 }
 
 .landing-program-card {
@@ -225,10 +261,16 @@ html, body {
   margin-bottom: 16px;
 }
 
-/* Form */
+/* Form - CENTRAGE */
 .landing-form-section {
   background: var(--light);
-  padding: 80px 0;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+.landing-form-section-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .landing-form {
@@ -312,7 +354,8 @@ html, body {
 .landing-footer {
   background: var(--secondary);
   color: white;
-  padding: 30px 0;
+  padding: 30px 20px;
+  width: 100%;
 }
 
 .landing-footer-content {
@@ -322,7 +365,6 @@ html, body {
   gap: 12px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .landing-footer-links {
@@ -377,19 +419,4 @@ html, body {
   .landing-programs-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* Pages légales */
-.landing-programs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 200px);
-}
-
-.container.max-w-4xl {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
