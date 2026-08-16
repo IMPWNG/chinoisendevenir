@@ -1,23 +1,11 @@
 /* eslint-disable no-undef */
-import { Resend } from "resend";
+import express from "express";
+import cors from "cors"; // ← AJOUTE ICI
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
+import dotenv from "dotenv";
 
-// ✅ Variables d'environnement (Vercel)
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const resendApiKey = process.env.RESEND_API_KEY; // ⚠️ SANS VITE_ en prod
-
-// ✅ Vérifier AVANT de créer les clients
-if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
-  console.error("❌ Variables manquantes dans Vercel:");
-  console.error("- VITE_SUPABASE_URL:", supabaseUrl ? "✅" : "❌");
-  console.error("- SUPABASE_SERVICE_ROLE_KEY:", serviceRoleKey ? "✅" : "❌");
-  console.error("- RESEND_API_KEY:", resendApiKey ? "✅" : "❌");
-}
-
-const supabase = createClient(supabaseUrl || "", serviceRoleKey || "");
-const resend = new Resend(resendApiKey || "");
-
+// Fonction pour générer le template email
 // 📧 Template email pour la prod
 function generateEmailTemplate(prenom) {
   return `
@@ -246,40 +234,36 @@ function generateEmailTemplate(prenom) {
   `;
 }
 
-export default async function handler(req, res) {
-  // ✅ CORS headers (optionnel mais recommandé)
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-  );
+dotenv.config({ path: ".env.local" });
 
-  if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
-  }
+const app = express();
+app.use(express.json());
+app.use(
+  cors({
+    // ← AJOUTE ICI
+    origin: "http://localhost:5174",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  }),
+);
 
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Méthode non autorisée" });
-  }
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const resendApiKey = process.env.VITE_RESEND_API_KEY;
 
-  // ✅ Vérifier à chaque appel
-  if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
-    return res.status(500).json({
-      error: "Variables d'environnement manquantes",
-      missing: {
-        supabaseUrl: !supabaseUrl,
-        serviceRoleKey: !serviceRoleKey,
-        resendApiKey: !resendApiKey,
-      },
-    });
-  }
+if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
+  console.error("❌ Variables manquantes dans .env.local :");
+  console.error("- VITE_SUPABASE_URL:", supabaseUrl ? "✅" : "❌");
+  console.error("- SUPABASE_SERVICE_ROLE_KEY:", serviceRoleKey ? "✅" : "❌");
+  console.error("- VITE_RESEND_API_KEY:", resendApiKey ? "✅" : "❌");
+  process.exit(1);
+}
 
+const supabase = createClient(supabaseUrl, serviceRoleKey);
+const resend = new Resend(resendApiKey);
+
+app.post("/contact-submit", async (req, res) => {
   try {
     const {
       prenom,
@@ -295,7 +279,7 @@ export default async function handler(req, res) {
       notes_admin,
     } = req.body;
 
-    // ✅ Validation stricte
+    // ✅ Validation
     if (!email || !email.includes("@")) {
       return res.status(400).json({ error: "Email invalide" });
     }
@@ -320,8 +304,8 @@ export default async function handler(req, res) {
           budget: budget || null,
           date_rentree: date_rentree || null,
           notes_admin: notes_admin || null,
-          source: "website_vercel",
-          suivi_statut: "Informations reçues",
+          source: "website_local",
+          suivi_statut: "nouveau_prospect",
           created_at: new Date().toISOString(),
         },
       ])
@@ -336,21 +320,20 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Erreur Supabase" });
     }
 
-    console.log("✅ Contact créé (PROD):", contact.id, "-", email);
+    console.log("✅ Contact créé (LOCAL):", contact.id, "-", email);
 
-    // 2️⃣ Envoyer email avec Resend (PROD)
+    // 2️⃣ Envoyer email avec Resend (optionnel en local)
     try {
-      const emailResponse = await resend.emails.send({
-        from: "contact@chinoisendevenir.com", // ✅ DOMAINE VÉRIFIÉ
-        replyTo: "chinoisendevenir@gmail.com",
-        to: email,
-        subject: `Bienvenue ${prenom} ! 🇨🇳`,
-        html: generateEmailTemplate(prenom),
-      });
+const emailResponse = await resend.emails.send({
+  from: "contact@chinoisendevenir.com", // ✅ Domaine vérifié
+  replyTo: "chinoisendevenir@gmail.com",
+  to: email, // ← Maintenant tu peux envoyer à n'importe qui
+  subject: `Bienvenue ${prenom} !`,
+  html: generateEmailTemplate(prenom),
+});
 
       if (emailResponse.error) {
         console.error("⚠️ Erreur Resend:", emailResponse.error);
-        // ⚠️ On continue quand même (pas bloquant)
       } else {
         console.log("✉️ Email envoyé:", emailResponse.id);
       }
@@ -361,11 +344,17 @@ export default async function handler(req, res) {
     return res.status(201).json({
       success: true,
       contact_id: contact.id,
-      message: `Bienvenue ${prenom} ✅`,
-      environment: "vercel_production",
+      message: `Bienvenue ${prenom} ! (LOCAL) ✅`,
+      environment: "local",
     });
   } catch (error) {
-    console.error("❌ Erreur serveur:", error);
+    console.error("❌ Erreur serveur local:", error);
     return res.status(500).json({ error: error.message });
   }
-}
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`🚀 Serveur local sur http://localhost:${PORT}`);
+  console.log(`📝 Endpoint: POST http://localhost:${PORT}/contact-submit`);
+});

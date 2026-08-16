@@ -61,24 +61,20 @@ const LeadForm = ({ t }) => {
     }
   };
 
-  const calculateScore = (data) => {
-    let score = 0;
-    if (data.phone) score += 20;
-    if (data.age) score += 10;
-    if (data.budget) score += 20;
-    if (data.date_rentree) score += 15;
-    if (data.notes_admin && data.notes_admin.length > 20) score += 15;
-    if (data.domaine_etudes) score += 20;
-    return Math.min(score, 100);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setStatus("submitting");
 
-    const payload = {
+try {
+  const response = await fetch("http://localhost:3001/contact-submit", {
+    // ← ICI
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       prenom: formData.prenom.trim(),
       nom: formData.nom.trim(),
       age: formData.age ? parseInt(formData.age, 10) : null,
@@ -90,54 +86,45 @@ const LeadForm = ({ t }) => {
       budget: formData.budget || null,
       date_rentree: formData.date_rentree || null,
       notes_admin: formData.notes_admin.trim() || null,
-      source: "website",
-      suivi_statut: "nouveau",
-      score_qualite: calculateScore(formData),
-    };
+    }),
+  });
 
-    try {
-      // 🚀 Appel à la fonction serverless Vercel
-      const response = await fetch("/api/contact-submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+  const data = await response.json();
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 409) {
-          // Email déjà existant
-          setStatus("duplicate");
-          return;
-        }
-        throw new Error(result.error || "Erreur lors de l'envoi");
-      }
-
-      // ✅ Succès !
-      setStatus("success");
-      setFormData({
-        prenom: "",
-        nom: "",
-        age: "",
-        email: "",
-        phone: "",
-        pays: "",
-        dernier_diplome: "",
-        domaine_etudes: "",
-        budget: "",
-        date_rentree: "",
-        notes_admin: "",
-      });
-
-      // Auto reset après 5 secondes
-      setTimeout(() => setStatus("idle"), 5000);
-    } catch (err) {
-      console.error("Erreur:", err);
+  if (!response.ok) {
+    if (data.code === "duplicate") {
+      setStatus("duplicate");
+      setTimeout(() => setStatus("idle"), 3000);
+    } else {
+      console.error("❌ Erreur:", data.error);
       setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
     }
+    return;
+  }
+
+  // ✅ Succès
+  setStatus("success");
+  setFormData({
+    prenom: "",
+    nom: "",
+    age: "",
+    email: "",
+    phone: "",
+    pays: "",
+    dernier_diplome: "",
+    domaine_etudes: "",
+    budget: "",
+    date_rentree: "",
+    notes_admin: "",
+  });
+
+  setTimeout(() => setStatus("idle"), 3000);
+} catch (err) {
+  console.error("❌ Erreur fetch:", err);
+  setStatus("error");
+  setTimeout(() => setStatus("idle"), 3000);
+}
   };
 
   return (
@@ -163,6 +150,7 @@ const LeadForm = ({ t }) => {
         )}
 
         <form className="landing-form" onSubmit={handleSubmit} noValidate>
+          {/* Prénom + Nom */}
           <div className="landing-form-row">
             <div className="landing-form-group">
               <label>{t.form_firstname} *</label>
@@ -195,6 +183,7 @@ const LeadForm = ({ t }) => {
             </div>
           </div>
 
+          {/* Email + Téléphone */}
           <div className="landing-form-row">
             <div className="landing-form-group">
               <label>{t.form_email} *</label>
@@ -227,6 +216,7 @@ const LeadForm = ({ t }) => {
             </div>
           </div>
 
+          {/* Âge + Pays */}
           <div className="landing-form-row">
             <div className="landing-form-group">
               <label>{t.form_age}</label>
@@ -261,6 +251,7 @@ const LeadForm = ({ t }) => {
             </div>
           </div>
 
+          {/* Diplôme + Domaine */}
           <div className="landing-form-row">
             <div className="landing-form-group">
               <label>{t.form_level} *</label>
@@ -302,6 +293,7 @@ const LeadForm = ({ t }) => {
             </div>
           </div>
 
+          {/* Budget + Date rentrée */}
           <div className="landing-form-row">
             <div className="landing-form-group">
               <label>{t.form_budget}</label>
@@ -334,6 +326,7 @@ const LeadForm = ({ t }) => {
             </div>
           </div>
 
+          {/* Message */}
           <div className="landing-form-group">
             <label>{t.form_message}</label>
             <textarea
@@ -346,6 +339,7 @@ const LeadForm = ({ t }) => {
             />
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             className="landing-btn landing-btn-primary landing-btn-full"
