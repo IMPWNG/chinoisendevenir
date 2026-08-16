@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
 // ✅ Variables d'environnement (Vercel)
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseUrl = process.env.SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const resendApiKey = process.env.RESEND_API_KEY; // ✅ SANS VITE_ en prod Vercel
 
