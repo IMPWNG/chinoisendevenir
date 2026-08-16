@@ -2,22 +2,6 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
-// ✅ Variables d'environnement (Vercel)
-const supabaseUrl = process.env.SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const resendApiKey = process.env.RESEND_API_KEY; // ✅ SANS VITE_ en prod Vercel
-
-// ✅ Vérifier AVANT de créer les clients
-if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
-  console.error("❌ Variables manquantes dans Vercel:");
-  console.error("- VITE_SUPABASE_URL:", supabaseUrl ? "✅" : "❌");
-  console.error("- SUPABASE_SERVICE_ROLE_KEY:", serviceRoleKey ? "✅" : "❌");
-  console.error("- RESEND_API_KEY:", resendApiKey ? "✅" : "❌");
-}
-
-const supabase = createClient(supabaseUrl || "", serviceRoleKey || "");
-const resend = new Resend(resendApiKey || "");
-
 // 📧 Template email
 function generateEmailTemplate(prenom) {
   return `
@@ -161,9 +145,6 @@ function generateEmailTemplate(prenom) {
             text-decoration: none;
             font-weight: 600;
           }
-          .footer-link:hover {
-            text-decoration: underline;
-          }
         </style>
       </head>
       <body>
@@ -232,19 +213,23 @@ function generateEmailTemplate(prenom) {
   `;
 }
 
+// ✅ Variables d'environnement Vercel (SANS VITE_)
+const supabaseUrl = process.env.SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const resendApiKey = process.env.RESEND_API_KEY;
+
+// ✅ Initialiser Supabase et Resend
+const supabase = createClient(supabaseUrl, serviceRoleKey);
+const resend = new Resend(resendApiKey);
+
 export default async function handler(req, res) {
-  // DEBUG
+  // ✅ DEBUG Variables env
   console.log("🔍 DEBUG Variables env:");
-  console.log(
-    "VITE_SUPABASE_URL:",
-    process.env.VITE_SUPABASE_URL ? "✅" : "❌",
-  );
-  console.log(
-    "SUPABASE_SERVICE_ROLE_KEY:",
-    process.env.SUPABASE_SERVICE_ROLE_KEY ? "✅" : "❌",
-  );
-  console.log("RESEND_API_KEY:", process.env.RESEND_API_KEY ? "✅" : "❌");
-  // ✅ CORS headers
+  console.log("SUPABASE_URL:", supabaseUrl ? "✅" : "❌");
+  console.log("SUPABASE_SERVICE_ROLE_KEY:", serviceRoleKey ? "✅" : "❌");
+  console.log("RESEND_API_KEY:", resendApiKey ? "✅" : "❌");
+
+  // ✅ CORS Headers (Vercel serverless)
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -256,22 +241,25 @@ export default async function handler(req, res) {
     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
   );
 
+  // ✅ Handle preflight
   if (req.method === "OPTIONS") {
     res.status(200).end();
     return;
   }
 
+  // ✅ Accepter uniquement POST
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
 
+  // ✅ Vérifier les variables d'environnement
   if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
     return res.status(500).json({
-      error: "Variables d'environnement manquantes",
+      error: "Variables d'environnement manquantes en Vercel",
       missing: {
-        supabaseUrl: !supabaseUrl,
-        serviceRoleKey: !serviceRoleKey,
-        resendApiKey: !resendApiKey,
+        SUPABASE_URL: !supabaseUrl,
+        SUPABASE_SERVICE_ROLE_KEY: !serviceRoleKey,
+        RESEND_API_KEY: !resendApiKey,
       },
     });
   }
@@ -300,7 +288,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Champs obligatoires manquants" });
     }
 
-    // 1️⃣ Insérer dans Supabase
+    // 1️⃣ Insérer le contact dans Supabase
     const { data: contact, error: insertError } = await supabase
       .from("contacts")
       .insert([
@@ -311,7 +299,7 @@ export default async function handler(req, res) {
           age: age || null,
           pays,
           phone: phone || null,
-          domaine_etudes,
+          domaine_etudes: domaine_etudes || null,
           dernier_diplome: dernier_diplome || null,
           budget: budget || null,
           date_rentree: date_rentree || null,
@@ -325,34 +313,41 @@ export default async function handler(req, res) {
       .single();
 
     if (insertError) {
-      console.error("❌ Erreur Supabase:", insertError);
+      console.error("❌ Erreur Supabase contacts:", insertError);
       if (insertError.code === "23505") {
         return res.status(409).json({ error: "Cet email existe déjà" });
       }
-      return res.status(500).json({ error: "Erreur Supabase" });
+      return res.status(500).json({ error: "Erreur insertion contact" });
     }
 
     console.log("✅ Contact créé (PROD):", contact.id, "-", email);
 
-    // 2️⃣ Enregistrer l'action dans suivi_actions
-    const { error: actionError } = await supabase.from("suivi_actions").insert([
-      {
-        contact_id: contact.id,
-        action: "email_bienvenue_envoye",
-        description: `Email de bienvenue envoyé à ${email}`,
-        date_action: new Date().toISOString(),
-        user_admin: "système_automatique",
-      },
-    ]);
+    // 2️⃣ Enregistrer l'action dans suivi_actions (NON BLOQUANT)
+    try {
+      const { error: actionError } = await supabase
+        .from("suivi_actions")
+        .insert([
+          {
+            contact_id: contact.id,
+            action: "email_bienvenue_envoye",
+            description: `Email de bienvenue envoyé à ${email}`,
+            user_admin: "système_automatique",
+            // ❌ Enlever date_action si la colonne n'existe pas
+            // date_action: new Date().toISOString(),
+          },
+        ]);
 
-    if (actionError) {
-      console.error("⚠️ Erreur suivi_actions:", actionError);
+      if (actionError) {
+        console.warn("⚠️ Erreur suivi_actions (non bloquant):", actionError);
+      } else {
+        console.log("✓ Action loggée dans suivi_actions");
+      }
+    } catch (actionError) {
+      console.warn("⚠️ Erreur suivi_actions:", actionError.message);
       // On continue quand même
-    } else {
-      console.log("✉️ Action loggée dans suivi_actions");
     }
 
-    // 3️⃣ Envoyer email avec Resend (PROD)
+    // 3️⃣ Envoyer l'email de bienvenue (NON BLOQUANT)
     try {
       const emailResponse = await resend.emails.send({
         from: "contact@chinoisendevenir.com",
@@ -363,14 +358,16 @@ export default async function handler(req, res) {
       });
 
       if (emailResponse.error) {
-        console.error("⚠️ Erreur Resend:", emailResponse.error);
+        console.warn("⚠️ Erreur Resend:", emailResponse.error);
       } else {
-        console.log("✉️ Email envoyé:", emailResponse.id);
+        console.log("✅ Email envoyé:", emailResponse.id);
       }
     } catch (emailError) {
-      console.error("⚠️ Erreur Resend (non bloquante):", emailError.message);
+      console.warn("⚠️ Erreur Resend (non bloquant):", emailError.message);
+      // On continue quand même
     }
 
+    // ✅ Réponse succès
     return res.status(201).json({
       success: true,
       contact_id: contact.id,
@@ -379,6 +376,9 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error("❌ Erreur serveur:", error);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({
+      error: error.message,
+      timestamp: new Date().toISOString(),
+    });
   }
 }
