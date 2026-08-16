@@ -322,29 +322,26 @@ export default async function handler(req, res) {
 
     console.log("✅ Contact créé (PROD):", contact.id, "-", email);
 
-    // 2️⃣ Enregistrer l'action dans suivi_actions (NON BLOQUANT)
+    // 2️⃣ Enregistrer l'action dans suivi_actions
     try {
       const { error: actionError } = await supabase
         .from("suivi_actions")
         .insert([
           {
             contact_id: contact.id,
-            action: "email_bienvenue_envoye",
+            action: "email_envoye", // ✅ CHANGE ICI (au lieu de "email_bienvenue_envoye")
             description: `Email de bienvenue envoyé à ${email}`,
             user_admin: "système_automatique",
-            // ❌ Enlever date_action si la colonne n'existe pas
-            // date_action: new Date().toISOString(),
           },
         ]);
 
       if (actionError) {
-        console.warn("⚠️ Erreur suivi_actions (non bloquant):", actionError);
+        console.warn("⚠️ Erreur suivi_actions:", actionError);
       } else {
-        console.log("✓ Action loggée dans suivi_actions");
+        console.log("✅ Action loggée: email_envoye");
       }
     } catch (actionError) {
       console.warn("⚠️ Erreur suivi_actions:", actionError.message);
-      // On continue quand même
     }
 
     // 3️⃣ Envoyer l'email de bienvenue (NON BLOQUANT)
