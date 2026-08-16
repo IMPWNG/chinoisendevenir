@@ -233,6 +233,17 @@ function generateEmailTemplate(prenom) {
 }
 
 export default async function handler(req, res) {
+  // DEBUG
+  console.log("🔍 DEBUG Variables env:");
+  console.log(
+    "VITE_SUPABASE_URL:",
+    process.env.VITE_SUPABASE_URL ? "✅" : "❌",
+  );
+  console.log(
+    "SUPABASE_SERVICE_ROLE_KEY:",
+    process.env.SUPABASE_SERVICE_ROLE_KEY ? "✅" : "❌",
+  );
+  console.log("RESEND_API_KEY:", process.env.RESEND_API_KEY ? "✅" : "❌");
   // ✅ CORS headers
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
