@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabase";
 
 const LeadForm = ({ t }) => {
   const [formData, setFormData] = useState({
@@ -97,30 +96,27 @@ const LeadForm = ({ t }) => {
     };
 
     try {
-      const { data, error } = await supabase
-        .from("contacts")
-        .insert([payload])
-        .select();
+      // 🚀 Appel à la fonction serverless Vercel
+      const response = await fetch("/api/contact-submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-      if (error) {
-        if (error.code === "23505") {
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          // Email déjà existant
           setStatus("duplicate");
           return;
         }
-        throw error;
+        throw new Error(result.error || "Erreur lors de l'envoi");
       }
 
-      if (data && data[0]) {
-        await supabase.from("suivi_actions").insert([
-          {
-            contact_id: data[0].id,
-            action: "changement_statut",
-            description: "Nouveau lead créé depuis le site web",
-            user_admin: "system",
-          },
-        ]);
-      }
-
+      // ✅ Succès !
       setStatus("success");
       setFormData({
         prenom: "",
@@ -135,8 +131,11 @@ const LeadForm = ({ t }) => {
         date_rentree: "",
         notes_admin: "",
       });
+
+      // Auto reset après 5 secondes
+      setTimeout(() => setStatus("idle"), 5000);
     } catch (err) {
-      console.error("Erreur Supabase:", err);
+      console.error("Erreur:", err);
       setStatus("error");
     }
   };
