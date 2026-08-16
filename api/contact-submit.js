@@ -364,6 +364,31 @@ export default async function handler(req, res) {
       // On continue quand même
     }
 
+    // 🆕 AJOUTER CES LIGNES : Email de notif pour TOI dans Gmail
+    try {
+      await resend.emails.send({
+        from: "contact@chinoisendevenir.com",
+        to: "chinoisendevenir@gmail.com", // ✅ TU REÇOIS LA NOTIF
+        subject: `📧 Nouveau contact : ${prenom} ${nom}`,
+        html: `
+      <h2>Nouveau prospect 🎯</h2>
+      <p><strong>Nom :</strong> ${prenom} ${nom}</p>
+      <p><strong>Email :</strong> ${email}</p>
+      <p><strong>Pays :</strong> ${pays}</p>
+      <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
+      <p><strong>Domaine :</strong> ${domaine_etudes || "Non spécifié"}</p>
+      <p><strong>Budget :</strong> ${budget || "Non spécifié"}</p>
+      <p><strong>Date rentrée :</strong> ${date_rentree || "Non spécifiée"}</p>
+      <hr>
+      <p style="font-size: 12px; color: #666;">ID Contact: ${contact.id}</p>
+    `,
+        replyTo: email, // ✅ Tu peux répondre directement
+      });
+      console.log("✅ Notif envoyée à ton Gmail");
+    } catch (notifError) {
+      console.warn("⚠️ Notif Gmail (non bloquant):", notifError.message);
+    }
+
     // ✅ Réponse succès
     return res.status(201).json({
       success: true,
