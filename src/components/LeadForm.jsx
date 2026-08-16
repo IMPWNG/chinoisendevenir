@@ -68,7 +68,7 @@ const LeadForm = ({ t }) => {
     setStatus("submitting");
 
 try {
-  const response = await fetch("http://localhost:3001/contact-submit", {
+  const response = await fetch("/api/contact-submit", {
     // ← ICI
     method: "POST",
     headers: {

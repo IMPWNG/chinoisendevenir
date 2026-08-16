@@ -1,8 +1,10 @@
 {
+    "buildCommand": "vite build",
+    "outputDirectory": "dist",
     "functions": {
-        "api/contact-submit.js": {
+        "api/**/*.js": {
             "memory": 1024,
-            "maxDuration": 10
+            "maxDuration": 60
         }
     },
     "env": {
