@@ -34,18 +34,18 @@ const STATUT_COLORS = {
 };
 
 const STATUT_ICONS = {
-  mail_bienvenue_envoyé: "🆕",
-  choix_des_formules: "📥",
-  formule_choisie: "🔍",
-  prospect_à_qualifier: "📞",
-  offre_envoyée: "💌",
-  attente_paiement: "💳",
-  client_payé: "✅",
-  appel_réservé: "📅",
-  dossier_préparation: "📋",
-  candidature_envoyée: "🚀",
-  admission_reçue: "🎉",
-  dossier_terminé: "🎓",
+  mail_bienvenue_envoyé: "📧", // Email envoyé
+  choix_des_formules: "📋", // Choix à faire
+  formule_choisie: "✔️", // Sélection confirmée
+  prospect_à_qualifier: "🔍", // Analyse/recherche
+  offre_envoyée: "💼", // Offre professionnelle
+  attente_paiement: "⏳", // En attente
+  client_payé: "💰", // Paiement reçu
+  appel_réservé: "📞", // Appel/contact
+  dossier_préparation: "📁", // Dossier en cours
+  candidature_envoyée: "🎯", // Candidature lancée
+  admission_reçue: "🎊", // Succès/admission
+  dossier_terminé: "🏆", // Finalisé/réussi
 };
 
 const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat"];
