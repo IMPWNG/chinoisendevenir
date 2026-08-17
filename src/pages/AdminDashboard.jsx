@@ -4,13 +4,14 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 
 const STATUTS = [
-  "nouveau_prospect",
-  "informations_reçues",
-  "profil_analyser",
-  "appel_réservé",
+  "mail_bienvenue_envoyé",
+  "choix_des_formules",
+  "formule_choisie",
+  "prospect_à_qualifier",
   "offre_envoyée",
   "attente_paiement",
   "client_payé",
+  "appel_réservé",
   "dossier_préparation",
   "candidature_envoyée",
   "admission_reçue",
@@ -18,13 +19,14 @@ const STATUTS = [
 ];
 
 const STATUT_COLORS = {
-  nouveau_prospect: "bg-slate-500/20 text-slate-300 border-slate-500/50",
-  informations_reçues: "bg-blue-500/20 text-blue-300 border-blue-500/50",
-  profil_analyser: "bg-cyan-500/20 text-cyan-300 border-cyan-500/50",
-  appel_réservé: "bg-indigo-500/20 text-indigo-300 border-indigo-500/50",
+  mail_bienvenue_envoyé: "bg-slate-500/20 text-slate-300 border-slate-500/50",
+  choix_des_formules: "bg-blue-500/20 text-blue-300 border-blue-500/50",
+  formule_choisie: "bg-cyan-500/20 text-cyan-300 border-cyan-500/50",
+  prospect_à_qualifier: "bg-indigo-500/20 text-indigo-300 border-indigo-500/50",
   offre_envoyée: "bg-yellow-500/20 text-yellow-300 border-yellow-500/50",
   attente_paiement: "bg-orange-500/20 text-orange-300 border-orange-500/50",
   client_payé: "bg-purple-500/20 text-purple-300 border-purple-500/50",
+  appel_réservé: "bg-violet-500/20 text-violet-300 border-violet-500/50",
   dossier_préparation: "bg-pink-500/20 text-pink-300 border-pink-500/50",
   candidature_envoyée: "bg-teal-500/20 text-teal-300 border-teal-500/50",
   admission_reçue: "bg-green-500/20 text-green-300 border-green-500/50",
@@ -32,13 +34,14 @@ const STATUT_COLORS = {
 };
 
 const STATUT_ICONS = {
-  nouveau_prospect: "🆕",
-  informations_reçues: "📥",
-  profil_analyser: "🔍",
-  appel_réservé: "📞",
+  mail_bienvenue_envoyé: "🆕",
+  choix_des_formules: "📥",
+  formule_choisie: "🔍",
+  prospect_à_qualifier: "📞",
   offre_envoyée: "💌",
   attente_paiement: "💳",
   client_payé: "✅",
+  appel_réservé: "📅",
   dossier_préparation: "📋",
   candidature_envoyée: "🚀",
   admission_reçue: "🎉",
@@ -121,44 +124,46 @@ export default function AdminDashboard() {
     setLoading(false);
   };
 
-const updateStatut = async (id, newStatut) => {
-  try {
-    const { error } = await supabase
-      .from("contacts")
-      .update({
-        suivi_statut: newStatut,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", id);
+  const updateStatut = async (id, newStatut) => {
+    try {
+      const { error } = await supabase
+        .from("contacts")
+        .update({
+          suivi_statut: newStatut,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", id);
 
-    if (error) {
-      console.error("Erreur update statut:", error);
-      alert("Erreur : " + error.message);
-      return;
+      if (error) {
+        console.error("Erreur update statut:", error);
+        alert("Erreur : " + error.message);
+        return;
+      }
+
+      // Enregistrer l'action
+      const { error: actionError } = await supabase
+        .from("suivi_actions")
+        .insert({
+          contact_id: id,
+          action: "changement_statut",
+          description: `Statut changé vers "${newStatut}"`,
+          user_admin: user?.email,
+          created_at: new Date().toISOString(),
+        });
+
+      if (actionError) {
+        console.error("Erreur enregistrement action:", actionError);
+      }
+
+      // Mettre à jour l'état local
+      setContacts((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, suivi_statut: newStatut } : c)),
+      );
+    } catch (err) {
+      console.error("Erreur:", err);
+      alert("Une erreur est survenue");
     }
-
-    // Enregistrer l'action
-    const { error: actionError } = await supabase.from("suivi_actions").insert({
-      contact_id: id,
-      action: "changement_statut",
-      description: `Statut changé vers "${newStatut}"`,
-      user_admin: user?.email,
-      created_at: new Date().toISOString(),
-    });
-
-    if (actionError) {
-      console.error("Erreur enregistrement action:", actionError);
-    }
-
-    // Mettre à jour l'état local
-    setContacts((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, suivi_statut: newStatut } : c)),
-    );
-  } catch (err) {
-    console.error("Erreur:", err);
-    alert("Une erreur est survenue");
-  }
-};
+  };
 
   const deleteContact = async (id) => {
     if (!confirm("Supprimer définitivement ce contact ?")) return;
@@ -201,7 +206,7 @@ const updateStatut = async (id, newStatut) => {
 
   const stats = {
     total: contacts.length,
-    nouveau: contacts.filter((c) => c.suivi_statut === "nouveau_prospect")
+    nouveau: contacts.filter((c) => c.suivi_statut === "mail_bienvenue_envoyé")
       .length,
     en_attente: contacts.filter((c) => c.suivi_statut === "attente_paiement")
       .length,
@@ -518,12 +523,7 @@ function StatCard({ label, value, icon, color }) {
   );
 }
 
-function ContactModal({
-  contact,
-  onClose,
-  onUpdateStatut,
-  userEmail,
-}) {
+function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
   const [actions, setActions] = useState([]);
   const [newAction, setNewAction] = useState("");
   const [newDescription, setNewDescription] = useState("");
