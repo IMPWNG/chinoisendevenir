@@ -305,7 +305,7 @@ export default async function handler(req, res) {
           date_rentree: date_rentree || null,
           notes_admin: notes_admin || null,
           source: "website_vercel",
-          suivi_statut: "nouveau_prospect",
+          suivi_statut: "mail_bienvenue_envoyé",
           created_at: new Date().toISOString(),
         },
       ])
