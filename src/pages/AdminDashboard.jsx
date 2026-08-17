@@ -516,6 +516,7 @@ const stats = {
           onContactUpdated={fetchContacts}
         />
       )}
+      
     </div>
   );
 }
