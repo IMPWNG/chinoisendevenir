@@ -48,26 +48,38 @@ const STATUT_ICONS = {
   dossier_terminé: "🎓",
 };
 
-const NIVEAUX_ETUDES = [
-  "Licence",
-  "Master",
-  "Doctorat",
-  "Langue chinoise",
-  "Formation continue",
-];
+const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat"];
 
 const DOMAINES_ETUDES = [
-  "Finance",
-  "Médecine",
-  "Informatique",
-  "Commerce",
-  "Ingénierie",
+  "Informatique / IA / Data Science",
+  "Ingénierie / Génie civil",
+  "Génie électrique / Énergie",
+  "Génie mécanique",
+  "Aérospatial",
+  "Architecture",
+  "Commerce / Business",
+  "Commerce international",
+  "Management / Gestion",
+  "Marketing digital",
+  "Banque / Finance / Assurance",
+  "Droit",
+  "Science politique",
+  "Sciences pharmaceutiques",
+  "Agriculture",
+  "Hydrologie",
   "Langues",
-  "Arts",
   "Autre",
 ];
 
-const BUDGETS = ["Faible", "Moyen", "Élevé"];
+const BUDGETS = [
+  "moins-3000",
+  "3000-6000",
+  "<5000",
+  "5000-10000",
+  "10000-20000",
+  ">20000",
+  "besoin-bourse",
+];
 
 const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
@@ -204,16 +216,21 @@ export default function AdminDashboard() {
     );
   });
 
-  const stats = {
-    total: contacts.length,
-    nouveau: contacts.filter((c) => c.suivi_statut === "mail_bienvenue_envoyé")
-      .length,
-    en_attente: contacts.filter((c) => c.suivi_statut === "attente_paiement")
-      .length,
-    paye: contacts.filter((c) => c.suivi_statut === "client_payé").length,
-    termine: contacts.filter((c) => c.suivi_statut === "dossier_terminé")
-      .length,
-  };
+const stats = {
+  total: contacts.length,
+  a_qualifier: contacts.filter((c) => c.suivi_statut === "prospect_à_qualifier")
+    .length,
+  offre_envoyee: contacts.filter((c) => c.suivi_statut === "offre_envoyée")
+    .length,
+  attente_paiement: contacts.filter(
+    (c) => c.suivi_statut === "attente_paiement",
+  ).length,
+  paye: contacts.filter((c) => c.suivi_statut === "client_payé").length,
+  en_cours_dossier: contacts.filter((c) =>
+    ["dossier_préparation", "candidature_envoyée"].includes(c.suivi_statut),
+  ).length,
+  termine: contacts.filter((c) => c.suivi_statut === "dossier_terminé").length,
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
@@ -257,22 +274,22 @@ export default function AdminDashboard() {
             color="from-blue-600 to-cyan-500"
           />
           <StatCard
-            label="Nouveaux"
-            value={stats.nouveau}
-            icon="🆕"
-            color="from-slate-600 to-slate-500"
+            label="À qualifier"
+            value={stats.a_qualifier}
+            icon="📞"
+            color="from-indigo-600 to-violet-500"
           />
           <StatCard
-            label="Payés"
-            value={stats.paye}
+            label="En attente paiement"
+            value={stats.attente_paiement}
             icon="💳"
-            color="from-purple-600 to-pink-500"
+            color="from-orange-600 to-yellow-500"
           />
           <StatCard
-            label="Terminés"
-            value={stats.termine}
-            icon="🎓"
-            color="from-green-600 to-emerald-500"
+            label="Clients payés"
+            value={stats.paye}
+            icon="✅"
+            color="from-purple-600 to-pink-500"
           />
         </div>
 

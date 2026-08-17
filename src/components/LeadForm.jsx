@@ -1,5 +1,27 @@
 import { useState } from "react";
 
+// ✅ Liste standardisée des domaines d'études
+const DOMAINES_ETUDES = [
+  "Informatique / IA / Data Science",
+  "Ingénierie / Génie civil",
+  "Génie électrique / Énergie",
+  "Génie mécanique",
+  "Aérospatial",
+  "Architecture",
+  "Commerce / Business",
+  "Commerce international",
+  "Management / Gestion",
+  "Marketing digital",
+  "Banque / Finance / Assurance",
+  "Droit",
+  "Science politique",
+  "Sciences pharmaceutiques",
+  "Agriculture",
+  "Hydrologie",
+  "Langues",
+  "Autre",
+];
+
 const LeadForm = ({ t }) => {
   const [formData, setFormData] = useState({
     prenom: "",
@@ -10,6 +32,7 @@ const LeadForm = ({ t }) => {
     pays: "",
     dernier_diplome: "",
     domaine_etudes: "",
+    domaine_etudes_precision: "",
     budget: "",
     date_rentree: "",
     notes_admin: "",
@@ -46,8 +69,16 @@ const LeadForm = ({ t }) => {
     if (!formData.pays.trim()) newErrors.pays = t.form_error_required;
     if (!formData.dernier_diplome)
       newErrors.dernier_diplome = t.form_error_required;
-    if (!formData.domaine_etudes.trim())
+
+    if (!formData.domaine_etudes)
       newErrors.domaine_etudes = t.form_error_required;
+
+    if (
+      formData.domaine_etudes === "Autre" &&
+      !formData.domaine_etudes_precision.trim()
+    ) {
+      newErrors.domaine_etudes_precision = t.form_error_required;
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -67,64 +98,70 @@ const LeadForm = ({ t }) => {
 
     setStatus("submitting");
 
-try {
-  const response = await fetch("/api/contact-submit", {
-    // ← ICI
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prenom: formData.prenom.trim(),
-      nom: formData.nom.trim(),
-      age: formData.age ? parseInt(formData.age, 10) : null,
-      email: formData.email.trim().toLowerCase(),
-      phone: formData.phone.trim() || null,
-      pays: formData.pays.trim(),
-      dernier_diplome: formData.dernier_diplome || null,
-      domaine_etudes: formData.domaine_etudes.trim(),
-      budget: formData.budget || null,
-      date_rentree: formData.date_rentree || null,
-      notes_admin: formData.notes_admin.trim() || null,
-    }),
-  });
+    // Si "Autre" est choisi, on envoie la précision comme valeur finale
+    const domaineFinal =
+      formData.domaine_etudes === "Autre"
+        ? formData.domaine_etudes_precision.trim()
+        : formData.domaine_etudes;
 
-  const data = await response.json();
+    try {
+      const response = await fetch("/api/contact-submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prenom: formData.prenom.trim(),
+          nom: formData.nom.trim(),
+          age: formData.age ? parseInt(formData.age, 10) : null,
+          email: formData.email.trim().toLowerCase(),
+          phone: formData.phone.trim() || null,
+          pays: formData.pays.trim(),
+          dernier_diplome: formData.dernier_diplome || null,
+          domaine_etudes: domaineFinal,
+          budget: formData.budget || null,
+          date_rentree: formData.date_rentree || null,
+          notes_admin: formData.notes_admin.trim() || null,
+        }),
+      });
 
-  if (!response.ok) {
-    if (data.code === "duplicate") {
-      setStatus("duplicate");
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.code === "duplicate") {
+          setStatus("duplicate");
+          setTimeout(() => setStatus("idle"), 3000);
+        } else {
+          console.error("❌ Erreur:", data.error);
+          setStatus("error");
+          setTimeout(() => setStatus("idle"), 3000);
+        }
+        return;
+      }
+
+      // ✅ Succès
+      setStatus("success");
+      setFormData({
+        prenom: "",
+        nom: "",
+        age: "",
+        email: "",
+        phone: "",
+        pays: "",
+        dernier_diplome: "",
+        domaine_etudes: "",
+        domaine_etudes_precision: "",
+        budget: "",
+        date_rentree: "",
+        notes_admin: "",
+      });
+
       setTimeout(() => setStatus("idle"), 3000);
-    } else {
-      console.error("❌ Erreur:", data.error);
+    } catch (err) {
+      console.error("❌ Erreur fetch:", err);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
     }
-    return;
-  }
-
-  // ✅ Succès
-  setStatus("success");
-  setFormData({
-    prenom: "",
-    nom: "",
-    age: "",
-    email: "",
-    phone: "",
-    pays: "",
-    dernier_diplome: "",
-    domaine_etudes: "",
-    budget: "",
-    date_rentree: "",
-    notes_admin: "",
-  });
-
-  setTimeout(() => setStatus("idle"), 3000);
-} catch (err) {
-  console.error("❌ Erreur fetch:", err);
-  setStatus("error");
-  setTimeout(() => setStatus("idle"), 3000);
-}
   };
 
   return (
@@ -277,18 +314,43 @@ try {
 
             <div className="landing-form-group">
               <label>{t.form_field} *</label>
-              <input
-                type="text"
+              <select
                 name="domaine_etudes"
                 value={formData.domaine_etudes}
                 onChange={handleChange}
-                placeholder="Ex: Commerce international"
                 className={errors.domaine_etudes ? "error" : ""}
-              />
+              >
+                <option value="">-- Sélectionner --</option>
+                {DOMAINES_ETUDES.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
               {errors.domaine_etudes && (
                 <span className="landing-error-msg">
                   {errors.domaine_etudes}
                 </span>
+              )}
+
+              {/* Champ conditionnel si "Autre" est sélectionné */}
+              {formData.domaine_etudes === "Autre" && (
+                <>
+                  <input
+                    type="text"
+                    name="domaine_etudes_precision"
+                    value={formData.domaine_etudes_precision}
+                    onChange={handleChange}
+                    placeholder="Précisez votre domaine"
+                    className={errors.domaine_etudes_precision ? "error" : ""}
+                    style={{ marginTop: "8px" }}
+                  />
+                  {errors.domaine_etudes_precision && (
+                    <span className="landing-error-msg">
+                      {errors.domaine_etudes_precision}
+                    </span>
+                  )}
+                </>
               )}
             </div>
           </div>

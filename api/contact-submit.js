@@ -2,6 +2,27 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
+// ✅ Liste standardisée des domaines d'études (doit matcher le front)
+const DOMAINES_VALIDES = [
+  "Informatique / IA / Data Science",
+  "Ingénierie / Génie civil",
+  "Génie électrique / Énergie",
+  "Génie mécanique",
+  "Aérospatial",
+  "Architecture",
+  "Commerce / Business",
+  "Commerce international",
+  "Management / Gestion",
+  "Marketing digital",
+  "Banque / Finance / Assurance",
+  "Droit",
+  "Science politique",
+  "Sciences pharmaceutiques",
+  "Agriculture",
+  "Hydrologie",
+  "Langues",
+];
+
 // 📧 Template email
 function generateEmailTemplate(prenom) {
   return `
@@ -288,6 +309,35 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Champs obligatoires manquants" });
     }
 
+    // ✅ Validation du domaine d'études
+    // On accepte soit une valeur de la liste standardisée,
+    // soit du texte libre (cas "Autre" précisé côté front),
+    // mais on rejette les valeurs vides ou trop longues.
+    let domaineFinal = null;
+    if (domaine_etudes) {
+      const trimmed = String(domaine_etudes).trim();
+
+      if (trimmed.length === 0) {
+        return res
+          .status(400)
+          .json({ error: "Domaine d'études invalide (vide)" });
+      }
+
+      if (trimmed.length > 100) {
+        return res
+          .status(400)
+          .json({ error: "Domaine d'études trop long (max 100 caractères)" });
+      }
+
+      // Si ce n'est pas dans la liste standard, on le garde quand même
+      // (cas "Autre" avec précision libre), mais on log pour suivi.
+      if (!DOMAINES_VALIDES.includes(trimmed)) {
+        console.log("ℹ️ Domaine hors liste standard (cas 'Autre'):", trimmed);
+      }
+
+      domaineFinal = trimmed;
+    }
+
     // 1️⃣ Insérer le contact dans Supabase
     const { data: contact, error: insertError } = await supabase
       .from("contacts")
@@ -299,7 +349,7 @@ export default async function handler(req, res) {
           age: age || null,
           pays,
           phone: phone || null,
-          domaine_etudes: domaine_etudes || null,
+          domaine_etudes: domaineFinal,
           dernier_diplome: dernier_diplome || null,
           budget: budget || null,
           date_rentree: date_rentree || null,
@@ -315,7 +365,10 @@ export default async function handler(req, res) {
     if (insertError) {
       console.error("❌ Erreur Supabase contacts:", insertError);
       if (insertError.code === "23505") {
-        return res.status(409).json({ error: "Cet email existe déjà" });
+        // ✅ Ajout du code "duplicate" pour matcher le front
+        return res
+          .status(409)
+          .json({ error: "Cet email existe déjà", code: "duplicate" });
       }
       return res.status(500).json({ error: "Erreur insertion contact" });
     }
@@ -329,7 +382,7 @@ export default async function handler(req, res) {
         .insert([
           {
             contact_id: contact.id,
-            action: "email_envoye", // ✅ CHANGE ICI (au lieu de "email_bienvenue_envoye")
+            action: "email_envoye",
             description: `Email de bienvenue envoyé à ${email}`,
             user_admin: "système_automatique",
           },
@@ -361,14 +414,13 @@ export default async function handler(req, res) {
       }
     } catch (emailError) {
       console.warn("⚠️ Erreur Resend (non bloquant):", emailError.message);
-      // On continue quand même
     }
 
-    // 🆕 AJOUTER CES LIGNES : Email de notif pour TOI dans Gmail
+    // 🆕 Email de notif pour toi dans Gmail
     try {
       await resend.emails.send({
         from: "contact@chinoisendevenir.com",
-        to: "chinoisendevenir@gmail.com", // ✅ TU REÇOIS LA NOTIF
+        to: "chinoisendevenir@gmail.com",
         subject: `📧 Nouveau contact : ${prenom} ${nom}`,
         html: `
       <h2>Nouveau prospect 🎯</h2>
@@ -376,13 +428,13 @@ export default async function handler(req, res) {
       <p><strong>Email :</strong> ${email}</p>
       <p><strong>Pays :</strong> ${pays}</p>
       <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
-      <p><strong>Domaine :</strong> ${domaine_etudes || "Non spécifié"}</p>
+      <p><strong>Domaine :</strong> ${domaineFinal || "Non spécifié"}</p>
       <p><strong>Budget :</strong> ${budget || "Non spécifié"}</p>
       <p><strong>Date rentrée :</strong> ${date_rentree || "Non spécifiée"}</p>
       <hr>
       <p style="font-size: 12px; color: #666;">ID Contact: ${contact.id}</p>
     `,
-        replyTo: email, // ✅ Tu peux répondre directement
+        replyTo: email,
       });
       console.log("✅ Notif envoyée à ton Gmail");
     } catch (notifError) {
