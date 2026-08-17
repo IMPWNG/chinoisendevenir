@@ -1,4 +1,5 @@
 import Navigation from "../components/Navigation";
+import VacationAlert from "../components/VacationAlert";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import LeadForm from "../components/LeadForm";
@@ -12,6 +13,7 @@ function HomePage() {
   return (
     <div className="app">
       <Navigation />
+      <VacationAlert t={t} />
       <Hero t={t} />
       <Stats t={t} />
       <LeadForm t={t} />
