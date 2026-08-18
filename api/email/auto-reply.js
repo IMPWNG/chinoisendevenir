@@ -9,6 +9,22 @@ const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
 
+// 🎯 Patterns de détection des réponses
+const AUTO_REPLY_PATTERNS = {
+  welcome_confirm: {
+    keywords: [
+      "je souhaite recevoir les informations",
+      "je veux recevoir",
+      "je souhaite l'accompagnement",
+      "oui je suis intéressé",
+      "intéressé",
+      "oui",
+    ],
+    status: "choix_des_formules",
+    emailTemplate: "formules_presentation",
+  },
+};
+
 console.log("✅ Route /api/email/auto-reply démarrée");
 
 // 📧 Fonction pour générer le template HTML des formules
@@ -329,14 +345,12 @@ async function sendAutoReply(contact) {
 }
 
 // 🔄 Mettre à jour le statut dans contacts
-// 🔄 Mettre à jour le statut dans contacts
 async function updateContactStatus(contactId, newStatus) {
   console.log("\n🔄 === MISE À JOUR STATUT ===");
   console.log(`Contact ID: ${contactId}`);
-  console.log(`Ancien statut → Nouveau statut: ${newStatus}`);
+  console.log(`Nouveau statut: ${newStatus}`);
 
   try {
-    // ✅ UPDATE avec .select().single() comme ton code de bienvenue
     const { data: updatedContact, error: updateError } = await supabase
       .from("contacts")
       .update({
@@ -367,13 +381,19 @@ async function logAction(contactId, email, actionType, description) {
   console.log(`Description: ${description}`);
 
   try {
-    const { error } = await supabase.from("suivi_actions").insert({
-      contact_id: contactId,
-      action: actionType,
-      description: description,
-      user_admin: "système_automatique",
-      created_at: new Date().toISOString(),
-    });
+    const { error } = await supabase
+      .from("suivi_actions")
+      .insert([
+        {
+          contact_id: contactId,
+          action: actionType,
+          description: description,
+          user_admin: "système_automatique",
+          created_at: new Date().toISOString(),
+        },
+      ])
+      .select()
+      .single();
 
     if (error) {
       console.warn("⚠️ Erreur logging:", error.message);
@@ -498,10 +518,10 @@ export default async function handler(req, res) {
         });
       }
 
-      // 🔄 ✅ METTRE À JOUR LE STATUT AUTOMATIQUEMENT
+      // 🔄 METTRE À JOUR LE STATUT
       const statusUpdated = await updateContactStatus(
         contact.id,
-        "choix_des_formules", // ✅ Exact comme dans ta table CHECK
+        "choix_des_formules",
       );
       if (!statusUpdated) {
         return res.status(500).json({
@@ -515,7 +535,7 @@ export default async function handler(req, res) {
         contact.id,
         contact.email,
         "email_envoye",
-        "Email des formules envoyé - Statut changé en 'choix_des_formules'",
+        "Email des formules envoyé - Statut: choix_des_formules",
       );
 
       console.log("\n" + "✅".repeat(40));
@@ -579,7 +599,7 @@ export default async function handler(req, res) {
         contactId,
         contact.email,
         "email_envoye",
-        "Choix des formules envoyé (clic manuel dashboard)",
+        `Choix des formules envoyé - Statut: ${status}`,
       );
 
       console.log("\n" + "✅".repeat(40));
