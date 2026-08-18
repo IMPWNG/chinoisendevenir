@@ -590,6 +590,25 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
       .eq("id", contact.id);
   };
 
+  async function sendManualAutoReply(contactId, status) {
+    try {
+      const response = await fetch("/api/admin/send-auto-reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contactId, status }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert("✅ Réponse automatique envoyée !");
+      } else {
+        alert("❌ Erreur : " + data.message);
+      }
+    } catch (error) {
+      alert("❌ Erreur : " + error.message);
+    }
+  }
+
   return (
     <div
       className="fixed inset-0 bg-black/70 backdrop-blur-xl flex items-center justify-center p-4 z-50"
@@ -609,12 +628,29 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
               {contact.email}
             </p>
           </div>
-          <button
-            onClick={onClose}
-            className="text-white hover:bg-white/20 rounded-xl p-2 transition-all duration-200 hover:scale-110 active:scale-95"
-          >
-            ✕
-          </button>
+
+          <div className="flex gap-3">
+            <button
+              onClick={() => {
+                const confirmed = confirm(
+                  "Envoyer une réponse automatique pour ce statut ?",
+                );
+                if (confirmed) {
+                  sendManualAutoReply(contact.id, contact.statut);
+                }
+              }}
+              className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 font-medium backdrop-blur-sm"
+            >
+              📧 Envoyer réponse auto
+            </button>
+
+            <button
+              onClick={onClose}
+              className="text-white hover:bg-white/20 rounded-xl p-2 transition-all duration-200 hover:scale-110 active:scale-95"
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         <div className="p-8">

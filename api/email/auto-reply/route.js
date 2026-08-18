@@ -23,32 +23,32 @@ const AUTO_REPLY_PATTERNS = {
     status: "choix_des_formules",
     emailTemplate: "formules_presentation",
   },
-  formula_chosen: {
-    keywords: [
-      "formule 1",
-      "formule 2",
-      "formule 3",
-      "je choisissez la formule",
-      "je prends la formule",
-      "je veux la formule",
-      "orientation",
-      "accompagnement candidature",
-      "accompagnement complet",
-    ],
-    status: "formule_choisie",
-    emailTemplate: "formula_confirmation",
-  },
-  payment_ready: {
-    keywords: [
-      "prêt à payer",
-      "ready to pay",
-      "je suis prêt",
-      "je veux procéder au paiement",
-      "comment payer",
-    ],
-    status: "attente_paiement",
-    emailTemplate: "payment_instructions",
-  },
+//   formula_chosen: {
+//     keywords: [
+//       "formule 1",
+//       "formule 2",
+//       "formule 3",
+//       "je choisissez la formule",
+//       "je prends la formule",
+//       "je veux la formule",
+//       "orientation",
+//       "accompagnement candidature",
+//       "accompagnement complet",
+//     ],
+//     status: "formule_choisie",
+//     emailTemplate: "formula_confirmation",
+//   },
+//   payment_ready: {
+//     keywords: [
+//       "prêt à payer",
+//       "ready to pay",
+//       "je suis prêt",
+//       "je veux procéder au paiement",
+//       "comment payer",
+//     ],
+//     status: "attente_paiement",
+//     emailTemplate: "payment_instructions",
+//   },
 };
 
 // 📧 Templates d'emails de réponse
@@ -158,93 +158,93 @@ const EMAIL_TEMPLATES = {
     `,
   },
 
-  formula_confirmation: {
-    subject: "🎯 Formule confirmée ! Prochaines étapes",
-    html: (contact) => `
-      <div style="max-width: 600px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
+//   formula_confirmation: {
+//     subject: "🎯 Formule confirmée ! Prochaines étapes",
+//     html: (contact) => `
+//       <div style="max-width: 600px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
         
-        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 10px 10px 0 0;">
-          <h2 style="color: white; margin: 0; font-size: 22px;">🎯 Formule confirmée !</h2>
-        </div>
+//         <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 10px 10px 0 0;">
+//           <h2 style="color: white; margin: 0; font-size: 22px;">🎯 Formule confirmée !</h2>
+//         </div>
 
-        <div style="padding: 30px; background: #f9fafb;">
-          <p>Parfait <strong>${contact.prenom}</strong> ! 🎉</p>
-          <p>Votre choix de formule a été bien enregistré.</p>
+//         <div style="padding: 30px; background: #f9fafb;">
+//           <p>Parfait <strong>${contact.prenom}</strong> ! 🎉</p>
+//           <p>Votre choix de formule a été bien enregistré.</p>
 
-          <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #10b981;">
-            <h3 style="color: #10b981; margin-top: 0;">⏭️ Prochaines étapes :</h3>
-            <ol style="color: #555;">
-              <li style="margin-bottom: 10px;"><strong>Modalités de paiement</strong> - Nous vous les transmettrons rapidement</li>
-              <li style="margin-bottom: 10px;"><strong>Documents à préparer</strong> - Vous recevrez une liste personnalisée</li>
-              <li style="margin-bottom: 10px;"><strong>Signature du contrat</strong> - Formalités rapides</li>
-              <li style="margin-bottom: 10px;"><strong>Commencement de l'accompagnement</strong> - Après paiement</li>
-            </ol>
-          </div>
+//           <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #10b981;">
+//             <h3 style="color: #10b981; margin-top: 0;">⏭️ Prochaines étapes :</h3>
+//             <ol style="color: #555;">
+//               <li style="margin-bottom: 10px;"><strong>Modalités de paiement</strong> - Nous vous les transmettrons rapidement</li>
+//               <li style="margin-bottom: 10px;"><strong>Documents à préparer</strong> - Vous recevrez une liste personnalisée</li>
+//               <li style="margin-bottom: 10px;"><strong>Signature du contrat</strong> - Formalités rapides</li>
+//               <li style="margin-bottom: 10px;"><strong>Commencement de l'accompagnement</strong> - Après paiement</li>
+//             </ol>
+//           </div>
 
-          <p style="color: #666; margin: 20px 0;">
-            📧 <strong>Les modalités de paiement vous seront communiquées dans les 24h.</strong>
-          </p>
+//           <p style="color: #666; margin: 20px 0;">
+//             📧 <strong>Les modalités de paiement vous seront communiquées dans les 24h.</strong>
+//           </p>
 
-          <p style="color: #999; font-size: 13px;">
-            Des questions ? N'hésitez pas à répondre à cet email !
-          </p>
+//           <p style="color: #999; font-size: 13px;">
+//             Des questions ? N'hésitez pas à répondre à cet email !
+//           </p>
 
-          <div style="border-top: 2px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; color: #999;">
-            <p style="margin: 5px 0;"><strong>Chinois en Devenir</strong></p>
-            <p style="margin: 5px 0; font-size: 11px;">🌎 https://chinoisendevenir.com/</p>
-          </div>
-        </div>
+//           <div style="border-top: 2px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; color: #999;">
+//             <p style="margin: 5px 0;"><strong>Chinois en Devenir</strong></p>
+//             <p style="margin: 5px 0; font-size: 11px;">🌎 https://chinoisendevenir.com/</p>
+//           </div>
+//         </div>
 
-      </div>
-    `,
-  },
+//       </div>
+//     `,
+//   },
 
-  payment_instructions: {
-    subject: "💳 Modalités de paiement - Accédez à votre compte",
-    html: (contact) => `
-      <div style="max-width: 600px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
+//   payment_instructions: {
+//     subject: "💳 Modalités de paiement - Accédez à votre compte",
+//     html: (contact) => `
+//       <div style="max-width: 600px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
         
-        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border-radius: 10px 10px 0 0;">
-          <h2 style="color: white; margin: 0; font-size: 22px;">💳 Modalités de paiement</h2>
-        </div>
+//         <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border-radius: 10px 10px 0 0;">
+//           <h2 style="color: white; margin: 0; font-size: 22px;">💳 Modalités de paiement</h2>
+//         </div>
 
-        <div style="padding: 30px; background: #f9fafb;">
-          <p>Bonjour <strong>${contact.prenom}</strong>,</p>
-          <p>Voici les modalités de paiement pour accéder à votre accompagnement :</p>
+//         <div style="padding: 30px; background: #f9fafb;">
+//           <p>Bonjour <strong>${contact.prenom}</strong>,</p>
+//           <p>Voici les modalités de paiement pour accéder à votre accompagnement :</p>
 
-          <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #7c3aed;">
-            <h3 style="color: #7c3aed; margin-top: 0;">🔗 Lien de paiement sécurisé :</h3>
-            <p style="margin: 15px 0;">
-              <a href="https://paiement.chinoisendevenir.com" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Procéder au paiement</a>
-            </p>
-          </div>
+//           <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #7c3aed;">
+//             <h3 style="color: #7c3aed; margin-top: 0;">🔗 Lien de paiement sécurisé :</h3>
+//             <p style="margin: 15px 0;">
+//               <a href="https://paiement.chinoisendevenir.com" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Procéder au paiement</a>
+//             </p>
+//           </div>
 
-          <div style="background: #f3e8ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
-            <p style="color: #555; margin: 0;"><strong>Moyens de paiement acceptés :</strong></p>
-            <ul style="color: #555; margin: 10px 0 0 0;">
-              <li>💳 Carte bancaire</li>
-              <li>💸 Virement bancaire</li>
-              <li>🅿️ PayPal</li>
-            </ul>
-          </div>
+//           <div style="background: #f3e8ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
+//             <p style="color: #555; margin: 0;"><strong>Moyens de paiement acceptés :</strong></p>
+//             <ul style="color: #555; margin: 10px 0 0 0;">
+//               <li>💳 Carte bancaire</li>
+//               <li>💸 Virement bancaire</li>
+//               <li>🅿️ PayPal</li>
+//             </ul>
+//           </div>
 
-          <p style="color: #666; margin: 15px 0;">
-            ✅ <strong>Accès immédiat</strong> après confirmation du paiement
-          </p>
+//           <p style="color: #666; margin: 15px 0;">
+//             ✅ <strong>Accès immédiat</strong> après confirmation du paiement
+//           </p>
 
-          <p style="color: #999; font-size: 13px;">
-            ❓ Des questions sur le paiement ? Répondez à cet email !
-          </p>
+//           <p style="color: #999; font-size: 13px;">
+//             ❓ Des questions sur le paiement ? Répondez à cet email !
+//           </p>
 
-          <div style="border-top: 2px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; color: #999;">
-            <p style="margin: 5px 0;"><strong>Chinois en Devenir</strong></p>
-            <p style="margin: 5px 0; font-size: 11px;">🌎 https://chinoisendevenir.com/</p>
-          </div>
-        </div>
+//           <div style="border-top: 2px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; color: #999;">
+//             <p style="margin: 5px 0;"><strong>Chinois en Devenir</strong></p>
+//             <p style="margin: 5px 0; font-size: 11px;">🌎 https://chinoisendevenir.com/</p>
+//           </div>
+//         </div>
 
-      </div>
-    `,
-  },
+//       </div>
+//     `,
+//   },
 };
 
 // 🔍 Fonction pour détecter le type de réponse
