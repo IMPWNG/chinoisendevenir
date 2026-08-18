@@ -329,27 +329,30 @@ async function sendAutoReply(contact) {
 }
 
 // 🔄 Mettre à jour le statut dans contacts
+// 🔄 Mettre à jour le statut dans contacts
 async function updateContactStatus(contactId, newStatus) {
   console.log("\n🔄 === MISE À JOUR STATUT ===");
   console.log(`Contact ID: ${contactId}`);
-  console.log(`Nouveau statut: ${newStatus}`);
+  console.log(`Ancien statut → Nouveau statut: ${newStatus}`);
 
   try {
-    const { error } = await supabase
+    // ✅ UPDATE avec .select().single() comme ton code de bienvenue
+    const { data: updatedContact, error: updateError } = await supabase
       .from("contacts")
       .update({
         suivi_statut: newStatus,
         updated_at: new Date().toISOString(),
       })
       .eq("id", contactId)
-      .select();
+      .select()
+      .single();
 
-    if (error) {
-      console.error("❌ Erreur Supabase:", error.message);
+    if (updateError) {
+      console.error("❌ Erreur Supabase UPDATE:", updateError);
       return false;
     }
 
-    console.log(`✅ Statut mis à jour: ${newStatus}`);
+    console.log(`✅ Contact mis à jour:`, updatedContact.id, "-", newStatus);
     return true;
   } catch (error) {
     console.error("❌ Erreur mise à jour:", error.message);
@@ -495,10 +498,10 @@ export default async function handler(req, res) {
         });
       }
 
-      // 🔄 Mettre à jour le statut dans contacts
+      // 🔄 ✅ METTRE À JOUR LE STATUT AUTOMATIQUEMENT
       const statusUpdated = await updateContactStatus(
         contact.id,
-        "choix_des_formules",
+        "choix_des_formules", // ✅ Exact comme dans ta table CHECK
       );
       if (!statusUpdated) {
         return res.status(500).json({
@@ -510,9 +513,9 @@ export default async function handler(req, res) {
       // 📝 Logger l'action
       await logAction(
         contact.id,
-        from,
+        contact.email,
         "email_envoye",
-        "Email des formules envoyé (détection automatique webhook)",
+        "Email des formules envoyé - Statut changé en 'choix_des_formules'",
       );
 
       console.log("\n" + "✅".repeat(40));
