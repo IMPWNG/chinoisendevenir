@@ -132,60 +132,105 @@ const EMAIL_TEMPLATES = {
   },
 };
 
-// 🔍 Détecter le type de réponse
+// 🔍 Détecter le type de réponse avec DEBUG
 function detectResponseType(emailText) {
+  console.log("\n🔍 === DÉTECTION DE PATTERN ===");
+  console.log(`📝 Texte reçu (${emailText.length} caractères):`);
+  console.log(emailText);
+
   const text = emailText.toLowerCase();
-  for (const pattern of Object.values(AUTO_REPLY_PATTERNS)) {
-    if (pattern.keywords.some((keyword) => text.includes(keyword))) {
-      return pattern;
+  console.log(`\n📝 Texte en minuscules:`);
+  console.log(text);
+
+  for (const [patternName, pattern] of Object.entries(AUTO_REPLY_PATTERNS)) {
+    console.log(`\n🎯 Test pattern: ${patternName}`);
+    console.log(`Keywords à chercher:`, pattern.keywords);
+
+    for (const keyword of pattern.keywords) {
+      const found = text.includes(keyword);
+      console.log(`  ${found ? "✅" : "❌"} "${keyword}"`);
+
+      if (found) {
+        console.log(`\n✅ MATCH TROUVÉ: ${patternName}`);
+        console.log(`   Status: ${pattern.status}`);
+        console.log(`   Template: ${pattern.emailTemplate}`);
+        return pattern;
+      }
     }
   }
+
+  console.log("\n❌ Aucun pattern ne match");
   return null;
 }
 
 // ✉️ Envoyer la réponse automatique
 async function sendAutoReply(contact, pattern) {
+  console.log("\n📧 === ENVOI EMAIL ===");
+  console.log(`À: ${contact.email}`);
+  console.log(`Prenom: ${contact.prenom}`);
+
   const template = EMAIL_TEMPLATES[pattern.emailTemplate];
   if (!template) {
-    console.error(`Template non trouvé : ${pattern.emailTemplate}`);
+    console.error(`❌ Template non trouvé : ${pattern.emailTemplate}`);
     return false;
   }
+
   try {
-    await resend.emails.send({
+    console.log(`📤 Envoi via Resend...`);
+    const response = await resend.emails.send({
       from: "contact@chinoisendevenir.com",
       to: contact.email,
       subject: template.subject,
       html: template.html(contact),
       replyTo: "contact@chinoisendevenir.com",
     });
-    console.log(`✅ Auto-reply envoyé à ${contact.email}`);
+
+    console.log(`✅ Email envoyé avec ID: ${response.id}`);
     return true;
   } catch (error) {
-    console.error("❌ Erreur envoi auto-reply:", error);
+    console.error("❌ Erreur envoi email:", error);
+    console.error("Détails:", error.message);
     return false;
   }
 }
 
 // 🔄 Mettre à jour le statut
 async function updateContactStatus(contactId, newStatus) {
-  const { error } = await supabase
-    .from("contacts")
-    .update({
-      suivi_statut: newStatus,
-      updated_at: new Date(),
-    })
-    .eq("id", contactId);
+  console.log("\n🔄 === MISE À JOUR STATUT ===");
+  console.log(`Contact ID: ${contactId}`);
+  console.log(`Nouveau statut: ${newStatus}`);
 
-  if (error) {
-    console.error("❌ Erreur mise à jour statut:", error);
+  try {
+    const { data, error } = await supabase
+      .from("contacts")
+      .update({
+        suivi_statut: newStatus,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", contactId)
+      .select();
+
+    if (error) {
+      console.error("❌ Erreur Supabase:", error);
+      console.error("Message:", error.message);
+      return false;
+    }
+
+    console.log(`✅ Statut mis à jour avec succès`);
+    console.log(`Données retournées:`, data);
+    return true;
+  } catch (error) {
+    console.error("❌ Erreur mise à jour:", error);
     return false;
   }
-  console.log(`✅ Statut mis à jour : ${newStatus}`);
-  return true;
 }
 
 // 📝 Logger l'action
 async function logAction(contactId, email, actionType, description) {
+  console.log("\n📝 === LOGGING ACTION ===");
+  console.log(`Action: ${actionType}`);
+  console.log(`Description: ${description}`);
+
   try {
     const { error } = await supabase.from("suivi_actions").insert({
       contact_id: contactId,
@@ -199,7 +244,7 @@ async function logAction(contactId, email, actionType, description) {
       console.warn("⚠️ Erreur logging:", error);
       return false;
     }
-    console.log(`✅ Action loggée: ${actionType}`);
+    console.log(`✅ Action loggée`);
     return true;
   } catch (error) {
     console.warn("⚠️ Erreur logging:", error.message);
@@ -209,7 +254,11 @@ async function logAction(contactId, email, actionType, description) {
 
 // 🎯 Handler Vercel
 export default async function handler(req, res) {
-  // ✅ Accepter POST et GET
+  console.log("\n" + "=".repeat(80));
+  console.log(`⏰ ${new Date().toISOString()}`);
+  console.log("=".repeat(80));
+
+  // ✅ Accepter GET
   if (req.method === "GET") {
     return res.status(200).json({
       success: true,
@@ -222,34 +271,50 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("📨 Requête reçue:", JSON.stringify(req.body, null, 2));
+    console.log("\n📨 REQUÊTE REÇUE");
+    console.log(JSON.stringify(req.body, null, 2));
 
     const body = req.body;
 
     // 🔍 Cas 1 : Webhook Resend (AUTOMATIQUE)
     if (body.type === "email.received") {
-      console.log("📧 Webhook Resend détecté");
+      console.log("\n🎯 CAS 1 : WEBHOOK RESEND DÉTECTÉ");
 
       const { data } = body;
+
+      if (!data) {
+        console.error("❌ Pas de data dans le webhook");
+        return res.status(400).json({
+          success: false,
+          message: "Pas de data",
+        });
+      }
+
       const { from, subject, text } = data;
 
       if (!from || !text) {
         console.error("❌ Données Resend incomplètes");
+        console.error(`  from: ${from}`);
+        console.error(`  text: ${text}`);
         return res.status(400).json({
           success: false,
           message: "Données incomplètes",
         });
       }
 
-      console.log(`📧 Email reçu de ${from} : ${subject}`);
+      console.log(`📧 Email reçu de: ${from}`);
+      console.log(`📧 Sujet: ${subject}`);
 
+      // 🔍 Chercher le contact
+      console.log("\n🔎 Recherche du contact...");
       const { data: contact, error: fetchError } = await supabase
         .from("contacts")
         .select("*")
         .eq("email", from)
         .single();
 
-      if (fetchError || !contact) {
+      if (fetchError) {
+        console.error("❌ Erreur Supabase:", fetchError);
         console.log(`⚠️ Contact non trouvé : ${from}`);
         return res.status(404).json({
           success: false,
@@ -257,6 +322,17 @@ export default async function handler(req, res) {
         });
       }
 
+      if (!contact) {
+        console.log(`⚠️ Contact non trouvé : ${from}`);
+        return res.status(404).json({
+          success: false,
+          message: "Contact non trouvé",
+        });
+      }
+
+      console.log(`✅ Contact trouvé: ${contact.prenom} ${contact.nom}`);
+
+      // 🎯 Détecter le pattern
       const pattern = detectResponseType(text);
 
       if (!pattern) {
@@ -268,16 +344,31 @@ export default async function handler(req, res) {
       }
 
       console.log(
-        `✅ Pattern détecté : ${pattern.emailTemplate} → ${pattern.status}`,
+        `\n✅ Pattern détecté : ${pattern.emailTemplate} → ${pattern.status}`,
       );
 
+      // 📧 Envoyer email
       const replySent = await sendAutoReply(contact, pattern);
+      if (!replySent) {
+        return res.status(500).json({
+          success: false,
+          message: "Erreur envoi email",
+        });
+      }
+
+      // 🔄 Mettre à jour le statut
       const statusUpdated = await updateContactStatus(
         contact.id,
         pattern.status,
       );
+      if (!statusUpdated) {
+        return res.status(500).json({
+          success: false,
+          message: "Erreur mise à jour statut",
+        });
+      }
 
-      // 📝 Logger l'action (WEBHOOK = AUTOMATIQUE)
+      // 📝 Logger l'action
       await logAction(
         contact.id,
         from,
@@ -285,35 +376,45 @@ export default async function handler(req, res) {
         "Email des formules envoyé (détection automatique webhook)",
       );
 
-      if (!replySent || !statusUpdated) {
-        return res.status(500).json({
-          success: false,
-          message: "Erreur lors du traitement",
-        });
-      }
+      console.log("\n" + "✅".repeat(40));
+      console.log("SUCCÈS COMPLET - WEBHOOK");
+      console.log("✅".repeat(40));
 
       return res.status(200).json({
         success: true,
         message: "Auto-reply envoyé (webhook Resend)",
         contact: contact.id,
         pattern: pattern.emailTemplate,
+        status: pattern.status,
         source: "webhook_automatique",
       });
     }
 
     // 🔍 Cas 2 : Appel manuel (BOUTON DASHBOARD)
     if (body.contactId && body.status) {
-      console.log("🔄 Appel manuel détecté");
+      console.log("\n🎯 CAS 2 : APPEL MANUEL DÉTECTÉ");
+      console.log(`contactId: ${body.contactId}`);
+      console.log(`status: ${body.status}`);
 
       const { contactId, status } = body;
 
+      // Chercher le contact
+      console.log("\n🔎 Recherche du contact...");
       const { data: contact, error: fetchError } = await supabase
         .from("contacts")
         .select("*")
         .eq("id", contactId)
         .single();
 
-      if (fetchError || !contact) {
+      if (fetchError) {
+        console.error("❌ Erreur Supabase:", fetchError);
+        return res.status(404).json({
+          success: false,
+          message: "Contact non trouvé",
+        });
+      }
+
+      if (!contact) {
         console.error(`❌ Contact non trouvé : ${contactId}`);
         return res.status(404).json({
           success: false,
@@ -321,15 +422,29 @@ export default async function handler(req, res) {
         });
       }
 
-      // ✅ Envoyer l'email des formules
+      console.log(`✅ Contact trouvé: ${contact.prenom} ${contact.nom}`);
+
+      // 📧 Envoyer l'email des formules
       const replySent = await sendAutoReply(contact, {
         emailTemplate: "formules_presentation",
       });
+      if (!replySent) {
+        return res.status(500).json({
+          success: false,
+          message: "Erreur envoi email",
+        });
+      }
 
-      // ✅ Mettre à jour le statut
+      // 🔄 Mettre à jour le statut
       const statusUpdated = await updateContactStatus(contactId, status);
+      if (!statusUpdated) {
+        return res.status(500).json({
+          success: false,
+          message: "Erreur mise à jour statut",
+        });
+      }
 
-      // 📝 Logger l'action (BOUTON = MANUEL)
+      // 📝 Logger l'action
       await logAction(
         contactId,
         contact.email,
@@ -337,12 +452,9 @@ export default async function handler(req, res) {
         "Choix des formules envoyé (clic manuel dashboard)",
       );
 
-      if (!replySent || !statusUpdated) {
-        return res.status(500).json({
-          success: false,
-          message: "Erreur lors du traitement",
-        });
-      }
+      console.log("\n" + "✅".repeat(40));
+      console.log("SUCCÈS COMPLET - MANUEL");
+      console.log("✅".repeat(40));
 
       return res.status(200).json({
         success: true,
@@ -354,12 +466,16 @@ export default async function handler(req, res) {
     }
 
     console.error("❌ Format de requête non reconnu");
+    console.log("Body reçu:", body);
     return res.status(400).json({
       success: false,
       message: "Format non reconnu",
     });
   } catch (error) {
-    console.error("❌ Erreur:", error);
+    console.error("\n❌ ERREUR GÉNÉRALE:", error);
+    console.error("Message:", error.message);
+    console.error("Stack:", error.stack);
+
     return res.status(500).json({
       success: false,
       error: error.message,
