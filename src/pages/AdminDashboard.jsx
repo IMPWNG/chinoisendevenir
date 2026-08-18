@@ -590,24 +590,38 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
       .eq("id", contact.id);
   };
 
-async function sendManualAutoReply(contactId, status) {
-  try {
-    const response = await fetch("/api/email/auto-reply", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contactId, status }),
-    });
+  // ✅ APRÈS (correct)
+  async function sendAutoReply(contactId, status) {
+    try {
+      console.log("📤 Envoi:", { contactId, status });
 
-    const data = await response.json();
-    if (data.success) {
-      alert("✅ Réponse automatique envoyée !");
-    } else {
-      alert("❌ Erreur : " + data.message);
+      const response = await fetch("/api/email/auto-reply", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contactId: String(contactId), // S'assurer que c'est un string
+          status: String(status), // S'assurer que c'est un string
+        }),
+      });
+
+      const data = await response.json();
+      console.log("✅ Réponse serveur:", data);
+
+      if (data.success) {
+        alert("✅ Réponse automatique envoyée !");
+        return data;
+      } else {
+        alert("❌ Erreur : " + (data.message || data.error));
+        return null;
+      }
+    } catch (error) {
+      console.error("❌ Erreur fetch:", error);
+      alert("❌ Erreur réseau : " + error.message);
+      return null;
     }
-  } catch (error) {
-    alert("❌ Erreur : " + error.message);
   }
-}
 
   return (
     <div
@@ -636,7 +650,7 @@ async function sendManualAutoReply(contactId, status) {
                   "Envoyer une réponse automatique pour ce statut ?",
                 );
                 if (confirmed) {
-                  sendManualAutoReply(contact.id, contact.statut);
+                  sendAutoReply(contact.id, contact.statut);
                 }
               }}
               className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 font-medium backdrop-blur-sm"
