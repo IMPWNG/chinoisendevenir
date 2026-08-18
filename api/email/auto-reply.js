@@ -11,7 +11,7 @@ const resend = new Resend(resendApiKey);
 
 console.log("✅ Route /api/email/auto-reply démarrée");
 
-// 🎯 Patterns (pour détection automatique)
+// 🎯 Patterns
 const AUTO_REPLY_PATTERNS = {
   welcome_confirm: {
     keywords: [
@@ -132,7 +132,7 @@ const EMAIL_TEMPLATES = {
   },
 };
 
-// 🔍 Détecter le type de réponse (WEBHOOKS RESEND)
+// 🔍 Détecter le type de réponse
 function detectResponseType(emailText) {
   const text = emailText.toLowerCase();
   for (const pattern of Object.values(AUTO_REPLY_PATTERNS)) {
@@ -184,6 +184,29 @@ async function updateContactStatus(contactId, newStatus) {
   return true;
 }
 
+// 📝 Logger l'action
+async function logAction(contactId, email, actionType, description) {
+  try {
+    const { error } = await supabase.from("suivi_actions").insert({
+      contact_id: contactId,
+      action: actionType,
+      description: description,
+      user_admin: "système_automatique",
+      created_at: new Date().toISOString(),
+    });
+
+    if (error) {
+      console.warn("⚠️ Erreur logging:", error);
+      return false;
+    }
+    console.log(`✅ Action loggée: ${actionType}`);
+    return true;
+  } catch (error) {
+    console.warn("⚠️ Erreur logging:", error.message);
+    return false;
+  }
+}
+
 // 🎯 Handler Vercel
 export default async function handler(req, res) {
   // ✅ Accepter POST et GET
@@ -203,7 +226,7 @@ export default async function handler(req, res) {
 
     const body = req.body;
 
-    // 🔍 Cas 1 : Webhook Resend (détection automatique)
+    // 🔍 Cas 1 : Webhook Resend (AUTOMATIQUE)
     if (body.type === "email.received") {
       console.log("📧 Webhook Resend détecté");
 
@@ -254,19 +277,13 @@ export default async function handler(req, res) {
         pattern.status,
       );
 
-      const { error: logError } = await supabase.from("email_logs").insert({
-        contact_id: contact.id,
-        from_email: from,
-        subject,
-        type: "auto_reply",
-        pattern_detected: pattern.emailTemplate,
-        status_updated_to: pattern.status,
-        created_at: new Date(),
-      });
-
-      if (logError) {
-        console.warn("⚠️ Erreur logging:", logError);
-      }
+      // 📝 Logger l'action (WEBHOOK = AUTOMATIQUE)
+      await logAction(
+        contact.id,
+        from,
+        "email_envoye",
+        "Email des formules envoyé (détection automatique webhook)",
+      );
 
       if (!replySent || !statusUpdated) {
         return res.status(500).json({
@@ -280,10 +297,11 @@ export default async function handler(req, res) {
         message: "Auto-reply envoyé (webhook Resend)",
         contact: contact.id,
         pattern: pattern.emailTemplate,
+        source: "webhook_automatique",
       });
     }
 
-    // 🔍 Cas 2 : Appel manuel (depuis le dashboard)
+    // 🔍 Cas 2 : Appel manuel (BOUTON DASHBOARD)
     if (body.contactId && body.status) {
       console.log("🔄 Appel manuel détecté");
 
@@ -303,25 +321,21 @@ export default async function handler(req, res) {
         });
       }
 
-      // ✅ Accepter N'IMPORTE QUEL statut en manuel
+      // ✅ Envoyer l'email des formules
       const replySent = await sendAutoReply(contact, {
         emailTemplate: "formules_presentation",
       });
+
+      // ✅ Mettre à jour le statut
       const statusUpdated = await updateContactStatus(contactId, status);
 
-      const { error: logError } = await supabase.from("email_logs").insert({
-        contact_id: contactId,
-        from_email: contact.email,
-        subject: `Manuel - formules_presentation`,
-        type: "manual",
-        pattern_detected: "formules_presentation",
-        status_updated_to: status,
-        created_at: new Date(),
-      });
-
-      if (logError) {
-        console.warn("⚠️ Erreur logging:", logError);
-      }
+      // 📝 Logger l'action (BOUTON = MANUEL)
+      await logAction(
+        contactId,
+        contact.email,
+        "email_envoye",
+        "Choix des formules envoyé (clic manuel dashboard)",
+      );
 
       if (!replySent || !statusUpdated) {
         return res.status(500).json({
@@ -332,9 +346,10 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
-        message: "Auto-reply envoyé (appel manuel)",
+        message: "Email des formules envoyé ✅",
         contact: contact.id,
         status: status,
+        source: "bouton_dashboard",
       });
     }
 
