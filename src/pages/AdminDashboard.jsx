@@ -590,24 +590,24 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
       .eq("id", contact.id);
   };
 
-  async function sendManualAutoReply(contactId, status) {
-    try {
-      const response = await fetch("/api/admin/send-auto-reply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contactId, status }),
-      });
+async function sendManualAutoReply(contactId, status) {
+  try {
+    const response = await fetch("/api/email/auto-reply", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contactId, status }),
+    });
 
-      const data = await response.json();
-      if (data.success) {
-        alert("✅ Réponse automatique envoyée !");
-      } else {
-        alert("❌ Erreur : " + data.message);
-      }
-    } catch (error) {
-      alert("❌ Erreur : " + error.message);
+    const data = await response.json();
+    if (data.success) {
+      alert("✅ Réponse automatique envoyée !");
+    } else {
+      alert("❌ Erreur : " + data.message);
     }
+  } catch (error) {
+    alert("❌ Erreur : " + error.message);
   }
+}
 
   return (
     <div
