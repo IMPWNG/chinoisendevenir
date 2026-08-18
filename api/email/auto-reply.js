@@ -11,7 +11,7 @@ const resend = new Resend(resendApiKey);
 
 console.log("✅ Route /api/email/auto-reply démarrée");
 
-// 🎯 Patterns
+// 🎯 Patterns (pour détection automatique)
 const AUTO_REPLY_PATTERNS = {
   welcome_confirm: {
     keywords: [
@@ -132,7 +132,7 @@ const EMAIL_TEMPLATES = {
   },
 };
 
-// 🔍 Détecter le type de réponse
+// 🔍 Détecter le type de réponse (WEBHOOKS RESEND)
 function detectResponseType(emailText) {
   const text = emailText.toLowerCase();
   for (const pattern of Object.values(AUTO_REPLY_PATTERNS)) {
@@ -171,7 +171,7 @@ async function updateContactStatus(contactId, newStatus) {
   const { error } = await supabase
     .from("contacts")
     .update({
-      statut: newStatus,
+      suivi_statut: newStatus,
       updated_at: new Date(),
     })
     .eq("id", contactId);
@@ -203,7 +203,7 @@ export default async function handler(req, res) {
 
     const body = req.body;
 
-    // 🔍 Cas 1 : Webhook Resend
+    // 🔍 Cas 1 : Webhook Resend (détection automatique)
     if (body.type === "email.received") {
       console.log("📧 Webhook Resend détecté");
 
@@ -283,7 +283,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // 🔍 Cas 2 : Appel manuel
+    // 🔍 Cas 2 : Appel manuel (depuis le dashboard)
     if (body.contactId && body.status) {
       console.log("🔄 Appel manuel détecté");
 
@@ -303,27 +303,18 @@ export default async function handler(req, res) {
         });
       }
 
-      const pattern = Object.values(AUTO_REPLY_PATTERNS).find(
-        (p) => p.status === status,
-      );
-
-      if (!pattern) {
-        console.error(`❌ Pas de pattern pour le statut : ${status}`);
-        return res.status(400).json({
-          success: false,
-          message: "Statut invalide",
-        });
-      }
-
-      const replySent = await sendAutoReply(contact, pattern);
+      // ✅ Accepter N'IMPORTE QUEL statut en manuel
+      const replySent = await sendAutoReply(contact, {
+        emailTemplate: "formules_presentation",
+      });
       const statusUpdated = await updateContactStatus(contactId, status);
 
       const { error: logError } = await supabase.from("email_logs").insert({
         contact_id: contactId,
         from_email: contact.email,
-        subject: `Manuel - ${pattern.emailTemplate}`,
+        subject: `Manuel - formules_presentation`,
         type: "manual",
-        pattern_detected: pattern.emailTemplate,
+        pattern_detected: "formules_presentation",
         status_updated_to: status,
         created_at: new Date(),
       });
@@ -343,7 +334,7 @@ export default async function handler(req, res) {
         success: true,
         message: "Auto-reply envoyé (appel manuel)",
         contact: contact.id,
-        pattern: pattern.emailTemplate,
+        status: status,
       });
     }
 
