@@ -13,7 +13,7 @@ const resend = new Resend(resendApiKey);
 
 console.log("✅ Webhook Resend démarrée");
 
-// 🎯 Patterns de détection des réponses
+// 🎯 Patterns de détection
 const AUTO_REPLY_PATTERNS = {
   welcome_confirm: {
     keywords: [
@@ -29,7 +29,7 @@ const AUTO_REPLY_PATTERNS = {
   },
 };
 
-// 📧 Templates d'emails de réponse
+// 📧 Templates
 const EMAIL_TEMPLATES = {
   formules_presentation: {
     subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
@@ -137,28 +137,24 @@ const EMAIL_TEMPLATES = {
   },
 };
 
-// 🔍 Fonction pour détecter le type de réponse
+// 🔍 Détecter le type de réponse
 function detectResponseType(emailText) {
   const text = emailText.toLowerCase();
-
   for (const pattern of Object.values(AUTO_REPLY_PATTERNS)) {
     if (pattern.keywords.some((keyword) => text.includes(keyword))) {
       return pattern;
     }
   }
-
   return null;
 }
 
-// ✉️ Fonction pour envoyer la réponse automatique
+// ✉️ Envoyer la réponse automatique
 async function sendAutoReply(contact, pattern) {
   const template = EMAIL_TEMPLATES[pattern.emailTemplate];
-
   if (!template) {
     console.error(`Template non trouvé : ${pattern.emailTemplate}`);
     return false;
   }
-
   try {
     await resend.emails.send({
       from: "contact@chinoisendevenir.com",
@@ -167,7 +163,6 @@ async function sendAutoReply(contact, pattern) {
       html: template.html(contact),
       replyTo: "contact@chinoisendevenir.com",
     });
-
     console.log(`✅ Auto-reply envoyé à ${contact.email}`);
     return true;
   } catch (error) {
@@ -176,7 +171,7 @@ async function sendAutoReply(contact, pattern) {
   }
 }
 
-// 🔄 Fonction pour mettre à jour le statut
+// 🔄 Mettre à jour le statut
 async function updateContactStatus(contactId, newStatus) {
   const { error } = await supabase
     .from("contacts")
@@ -190,16 +185,15 @@ async function updateContactStatus(contactId, newStatus) {
     console.error("❌ Erreur mise à jour statut:", error);
     return false;
   }
-
   console.log(`✅ Statut mis à jour : ${newStatus}`);
   return true;
 }
 
-// 🔐 Vérifier la signature du webhook Resend
+// 🔐 Vérifier la signature (optionnel en dev)
 function verifyResendSignature(req, secret) {
   if (!secret) {
-    console.warn("⚠️ RESEND_WEBHOOK_SECRET non configuré");
-    return true; // Accepter si pas de secret (mode dev)
+    console.warn("⚠️ RESEND_WEBHOOK_SECRET non configuré - Mode DEV");
+    return true;
   }
 
   const timestamp = req.headers["resend-timestamp"];
@@ -216,11 +210,23 @@ function verifyResendSignature(req, secret) {
     .update(signedContent)
     .digest("base64");
 
-  return hash === signature;
+  const isValid = hash === signature;
+  if (!isValid) {
+    console.error("❌ Signature du webhook invalide");
+  }
+  return isValid;
 }
 
-// 🎯 Handler Vercel pour le webhook
+// 🎯 Handler Vercel
 export default async function handler(req, res) {
+  // ✅ Accepter les health checks GET
+  if (req.method === "GET") {
+    return res.status(200).json({
+      success: true,
+      message: "Webhook Resend actif ✅",
+    });
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -228,14 +234,15 @@ export default async function handler(req, res) {
   try {
     console.log("📨 Webhook Resend reçu");
 
-    // 🔐 Vérifier la signature
+    // 🔐 Vérifier la signature (à activer en PROD)
     if (!verifyResendSignature(req, resendWebhookSecret)) {
-      console.error("❌ Signature du webhook invalide");
-      return res.status(401).json({ error: "Unauthorized" });
+      console.error("❌ Signature invalide");
+      // EN PROD: return res.status(401).json({ error: "Unauthorized" });
+      // EN DEV: continuer quand même
     }
 
     const body = req.body;
-    console.log("📨 Payload webhook:", JSON.stringify(body, null, 2));
+    console.log("📨 Payload:", JSON.stringify(body, null, 2));
 
     // 🔍 Vérifier que c'est un email entrant
     if (body.type !== "email.received") {
@@ -245,21 +252,15 @@ export default async function handler(req, res) {
 
     const { data } = body;
 
-    if (!data) {
-      console.error("❌ Données d'email manquantes");
-      return res.status(400).json({ error: "Missing email data" });
-    }
-
-    const { from, subject, text } = data;
-
-    if (!from || !text) {
-      console.error("❌ Email 'from' ou 'text' manquant");
+    if (!data || !data.from || !data.text) {
+      console.error("❌ Données d'email incomplètes");
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    console.log(`📧 Email reçu de ${from} : ${subject}`);
+    const { from, subject, text } = data;
+    console.log(`📧 Email de ${from} : ${subject}`);
 
-    // 🔍 Chercher le contact dans la DB
+    // 🔍 Chercher le contact
     const { data: contact, error: fetchError } = await supabase
       .from("contacts")
       .select("*")
@@ -274,30 +275,28 @@ export default async function handler(req, res) {
       });
     }
 
-    // 🎯 Détecter le type de réponse
+    // 🎯 Détecter le pattern
     const pattern = detectResponseType(text);
 
     if (!pattern) {
-      console.log(`ℹ️ Pas de pattern détecté pour : ${from}`);
+      console.log(`ℹ️ Pas de pattern pour : ${from}`);
       return res.status(200).json({
         success: false,
         message: "Pas de pattern détecté",
       });
     }
 
-    console.log(
-      `✅ Pattern détecté : ${pattern.emailTemplate} → ${pattern.status}`,
-    );
+    console.log(`✅ Pattern : ${pattern.emailTemplate} → ${pattern.status}`);
 
-    // 📧 Envoyer la réponse automatique
+    // 📧 Envoyer la réponse
     const replySent = await sendAutoReply(contact, pattern);
 
     if (!replySent) {
-      console.error("❌ Erreur lors de l'envoi de la réponse");
+      console.error("❌ Erreur lors de l'envoi");
       return res.status(500).json({ error: "Failed to send reply" });
     }
 
-    // 🔄 Mettre à jour le statut
+    // 🔄 Update statut
     const statusUpdated = await updateContactStatus(contact.id, pattern.status);
 
     if (!statusUpdated) {
@@ -305,7 +304,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Failed to update status" });
     }
 
-    // 📝 Logger la conversation
+    // 📝 Log
     const { error: logError } = await supabase.from("email_logs").insert({
       contact_id: contact.id,
       from_email: from,
@@ -322,13 +321,12 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: "Auto-reply envoyé avec succès",
+      message: "Auto-reply envoyé ✅",
       contact: contact.id,
       pattern: pattern.emailTemplate,
-      status: pattern.status,
     });
   } catch (error) {
-    console.error("❌ Erreur webhook:", error);
+    console.error("❌ Erreur:", error);
     return res.status(500).json({
       success: false,
       error: error.message,

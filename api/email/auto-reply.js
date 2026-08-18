@@ -11,7 +11,7 @@ const resend = new Resend(resendApiKey);
 
 console.log("✅ Route /api/email/auto-reply démarrée");
 
-// 🎯 Patterns de détection des réponses
+// 🎯 Patterns
 const AUTO_REPLY_PATTERNS = {
   welcome_confirm: {
     keywords: [
@@ -27,17 +27,15 @@ const AUTO_REPLY_PATTERNS = {
   },
 };
 
-// 📧 Templates d'emails de réponse
+// 📧 Templates
 const EMAIL_TEMPLATES = {
   formules_presentation: {
     subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
     html: (contact) => `
       <div style="max-width: 700px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
-
         <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px 10px 0 0;">
           <h2 style="color: white; margin: 0; font-size: 24px;">🇨🇳 Nos formules d'accompagnement pour étudier en Chine</h2>
         </div>
-
         <div style="padding: 30px; background: #f9fafb;">
           <p>Bonjour <strong>${contact.prenom}</strong>,</p>
           <p>Merci pour votre retour ! Nous proposons plusieurs formules d'accompagnement selon votre besoin et votre niveau d'assistance.</p>
@@ -129,34 +127,29 @@ const EMAIL_TEMPLATES = {
             <p style="margin: 5px 0; font-size: 11px; color: #bbb;">Études en Chine • Accompagnement personnalisé • Admissions garanties</p>
           </div>
         </div>
-
       </div>
     `,
   },
 };
 
-// 🔍 Fonction pour détecter le type de réponse
+// 🔍 Détecter le type de réponse
 function detectResponseType(emailText) {
   const text = emailText.toLowerCase();
-
   for (const pattern of Object.values(AUTO_REPLY_PATTERNS)) {
     if (pattern.keywords.some((keyword) => text.includes(keyword))) {
       return pattern;
     }
   }
-
   return null;
 }
 
-// ✉️ Fonction pour envoyer la réponse automatique
+// ✉️ Envoyer la réponse automatique
 async function sendAutoReply(contact, pattern) {
   const template = EMAIL_TEMPLATES[pattern.emailTemplate];
-
   if (!template) {
     console.error(`Template non trouvé : ${pattern.emailTemplate}`);
     return false;
   }
-
   try {
     await resend.emails.send({
       from: "contact@chinoisendevenir.com",
@@ -165,7 +158,6 @@ async function sendAutoReply(contact, pattern) {
       html: template.html(contact),
       replyTo: "contact@chinoisendevenir.com",
     });
-
     console.log(`✅ Auto-reply envoyé à ${contact.email}`);
     return true;
   } catch (error) {
@@ -174,7 +166,7 @@ async function sendAutoReply(contact, pattern) {
   }
 }
 
-// 🔄 Fonction pour mettre à jour le statut
+// 🔄 Mettre à jour le statut
 async function updateContactStatus(contactId, newStatus) {
   const { error } = await supabase
     .from("contacts")
@@ -188,29 +180,37 @@ async function updateContactStatus(contactId, newStatus) {
     console.error("❌ Erreur mise à jour statut:", error);
     return false;
   }
-
   console.log(`✅ Statut mis à jour : ${newStatus}`);
   return true;
 }
 
 // 🎯 Handler Vercel
 export default async function handler(req, res) {
+  // ✅ Accepter POST et GET
+  if (req.method === "GET") {
+    return res.status(200).json({
+      success: true,
+      message: "Endpoint auto-reply actif ✅",
+    });
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
+    console.log("📨 Requête reçue:", JSON.stringify(req.body, null, 2));
+
     const body = req.body;
-    console.log("📨 Requête reçue:", JSON.stringify(body, null, 2));
 
     // 🔍 Cas 1 : Webhook Resend
     if (body.type === "email.received") {
       console.log("📧 Webhook Resend détecté");
 
       const { data } = body;
-      const { from, subject, text: text_body } = data;
+      const { from, subject, text } = data;
 
-      if (!from || !text_body) {
+      if (!from || !text) {
         console.error("❌ Données Resend incomplètes");
         return res.status(400).json({
           success: false,
@@ -220,7 +220,6 @@ export default async function handler(req, res) {
 
       console.log(`📧 Email reçu de ${from} : ${subject}`);
 
-      // 🔍 Chercher le contact dans la DB
       const { data: contact, error: fetchError } = await supabase
         .from("contacts")
         .select("*")
@@ -235,14 +234,13 @@ export default async function handler(req, res) {
         });
       }
 
-      // 🎯 Détecter le type de réponse
-      const pattern = detectResponseType(text_body);
+      const pattern = detectResponseType(text);
 
       if (!pattern) {
         console.log(`ℹ️ Pas de pattern détecté pour : ${from}`);
         return res.status(200).json({
           success: false,
-          message: "Pas de réponse automatique applicable",
+          message: "Pas de pattern détecté",
         });
       }
 
@@ -250,16 +248,12 @@ export default async function handler(req, res) {
         `✅ Pattern détecté : ${pattern.emailTemplate} → ${pattern.status}`,
       );
 
-      // 📧 Envoyer la réponse automatique
       const replySent = await sendAutoReply(contact, pattern);
-
-      // 🔄 Mettre à jour le statut
       const statusUpdated = await updateContactStatus(
         contact.id,
         pattern.status,
       );
 
-      // 📝 Logger la conversation
       const { error: logError } = await supabase.from("email_logs").insert({
         contact_id: contact.id,
         from_email: from,
@@ -275,12 +269,6 @@ export default async function handler(req, res) {
       }
 
       if (!replySent || !statusUpdated) {
-        console.warn(
-          "⚠️ Erreur lors du traitement - replySent:",
-          replySent,
-          "statusUpdated:",
-          statusUpdated,
-        );
         return res.status(500).json({
           success: false,
           message: "Erreur lors du traitement",
@@ -289,20 +277,18 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
-        message: "Auto-reply envoyé avec succès (webhook Resend)",
+        message: "Auto-reply envoyé (webhook Resend)",
         contact: contact.id,
         pattern: pattern.emailTemplate,
-        statusUpdated: pattern.status,
       });
     }
 
-    // 🔍 Cas 2 : Appel manuel (depuis le bouton)
+    // 🔍 Cas 2 : Appel manuel
     if (body.contactId && body.status) {
       console.log("🔄 Appel manuel détecté");
 
       const { contactId, status } = body;
 
-      // Récupérer le contact
       const { data: contact, error: fetchError } = await supabase
         .from("contacts")
         .select("*")
@@ -317,7 +303,6 @@ export default async function handler(req, res) {
         });
       }
 
-      // Trouver le pattern correspondant au statut
       const pattern = Object.values(AUTO_REPLY_PATTERNS).find(
         (p) => p.status === status,
       );
@@ -330,17 +315,13 @@ export default async function handler(req, res) {
         });
       }
 
-      // 📧 Envoyer la réponse automatique
       const replySent = await sendAutoReply(contact, pattern);
-
-      // 🔄 Mettre à jour le statut
       const statusUpdated = await updateContactStatus(contactId, status);
 
-      // 📝 Logger la conversation
       const { error: logError } = await supabase.from("email_logs").insert({
         contact_id: contactId,
-        from_email: "manual_trigger",
-        subject: `Manual trigger - ${pattern.emailTemplate}`,
+        from_email: contact.email,
+        subject: `Manuel - ${pattern.emailTemplate}`,
         type: "manual",
         pattern_detected: pattern.emailTemplate,
         status_updated_to: status,
@@ -360,20 +341,19 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
-        message: "Auto-reply envoyé avec succès (appel manuel)",
+        message: "Auto-reply envoyé (appel manuel)",
         contact: contact.id,
         pattern: pattern.emailTemplate,
       });
     }
 
-    // ❌ Données invalides
     console.error("❌ Format de requête non reconnu");
     return res.status(400).json({
       success: false,
-      message: "Données incomplètes ou format non reconnu",
+      message: "Format non reconnu",
     });
   } catch (error) {
-    console.error("❌ Erreur webhook:", error);
+    console.error("❌ Erreur:", error);
     return res.status(500).json({
       success: false,
       error: error.message,
