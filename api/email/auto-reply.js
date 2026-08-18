@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
 const resendApiKey = process.env.RESEND_API_KEY;
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
@@ -193,14 +193,17 @@ async function updateContactStatus(contactId, newStatus) {
   return true;
 }
 
-// 🎯 Webhook principal
-export async function POST(request) {
-  try {
-    const body = await request.json();
+// 🎯 Handler Vercel
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
+  try {
+    const body = req.body;
     console.log("📨 Requête reçue:", JSON.stringify(body, null, 2));
 
-    // 🔍 Cas 1 : C'est un webhook de Resend
+    // 🔍 Cas 1 : Webhook Resend
     if (body.type === "email.received") {
       console.log("📧 Webhook Resend détecté");
 
@@ -209,7 +212,7 @@ export async function POST(request) {
 
       if (!from || !text_body) {
         console.error("❌ Données Resend incomplètes");
-        return Response.json({
+        return res.status(400).json({
           success: false,
           message: "Données incomplètes",
         });
@@ -226,7 +229,7 @@ export async function POST(request) {
 
       if (fetchError || !contact) {
         console.log(`⚠️ Contact non trouvé : ${from}`);
-        return Response.json({
+        return res.status(404).json({
           success: false,
           message: "Contact non trouvé",
         });
@@ -237,7 +240,7 @@ export async function POST(request) {
 
       if (!pattern) {
         console.log(`ℹ️ Pas de pattern détecté pour : ${from}`);
-        return Response.json({
+        return res.status(200).json({
           success: false,
           message: "Pas de réponse automatique applicable",
         });
@@ -271,7 +274,6 @@ export async function POST(request) {
         console.warn("⚠️ Erreur logging:", logError);
       }
 
-      // ✅ Vérifier que tout s'est bien passé
       if (!replySent || !statusUpdated) {
         console.warn(
           "⚠️ Erreur lors du traitement - replySent:",
@@ -279,13 +281,13 @@ export async function POST(request) {
           "statusUpdated:",
           statusUpdated,
         );
-        return Response.json({
+        return res.status(500).json({
           success: false,
           message: "Erreur lors du traitement",
         });
       }
 
-      return Response.json({
+      return res.status(200).json({
         success: true,
         message: "Auto-reply envoyé avec succès (webhook Resend)",
         contact: contact.id,
@@ -294,7 +296,7 @@ export async function POST(request) {
       });
     }
 
-    // 🔍 Cas 2 : C'est un appel manuel (depuis le bouton)
+    // 🔍 Cas 2 : Appel manuel (depuis le bouton)
     if (body.contactId && body.status) {
       console.log("🔄 Appel manuel détecté");
 
@@ -309,7 +311,7 @@ export async function POST(request) {
 
       if (fetchError || !contact) {
         console.error(`❌ Contact non trouvé : ${contactId}`);
-        return Response.json({
+        return res.status(404).json({
           success: false,
           message: "Contact non trouvé",
         });
@@ -321,32 +323,27 @@ export async function POST(request) {
       );
 
       if (!pattern) {
-        console.error(`❌ Pattern non trouvé pour le statut : ${status}`);
-        return Response.json({
+        console.error(`❌ Pas de pattern pour le statut : ${status}`);
+        return res.status(400).json({
           success: false,
-          message: "Pattern non trouvé pour ce statut",
+          message: "Statut invalide",
         });
       }
 
-      console.log(
-        `✅ Pattern trouvé (manuel) : ${pattern.emailTemplate} → ${pattern.status}`,
-      );
-
-      // Envoyer et updater
+      // 📧 Envoyer la réponse automatique
       const replySent = await sendAutoReply(contact, pattern);
-      const statusUpdated = await updateContactStatus(
-        contact.id,
-        pattern.status,
-      );
 
-      // Logger
+      // 🔄 Mettre à jour le statut
+      const statusUpdated = await updateContactStatus(contactId, status);
+
+      // 📝 Logger la conversation
       const { error: logError } = await supabase.from("email_logs").insert({
-        contact_id: contact.id,
-        from_email: contact.email,
-        subject: `Manuel - ${pattern.emailTemplate}`,
-        type: "manual_reply",
+        contact_id: contactId,
+        from_email: "manual_trigger",
+        subject: `Manual trigger - ${pattern.emailTemplate}`,
+        type: "manual",
         pattern_detected: pattern.emailTemplate,
-        status_updated_to: pattern.status,
+        status_updated_to: status,
         created_at: new Date(),
       });
 
@@ -355,19 +352,13 @@ export async function POST(request) {
       }
 
       if (!replySent || !statusUpdated) {
-        console.warn(
-          "⚠️ Erreur lors du traitement (manuel) - replySent:",
-          replySent,
-          "statusUpdated:",
-          statusUpdated,
-        );
-        return Response.json({
+        return res.status(500).json({
           success: false,
           message: "Erreur lors du traitement",
         });
       }
 
-      return Response.json({
+      return res.status(200).json({
         success: true,
         message: "Auto-reply envoyé avec succès (appel manuel)",
         contact: contact.id,
@@ -377,16 +368,15 @@ export async function POST(request) {
 
     // ❌ Données invalides
     console.error("❌ Format de requête non reconnu");
-    return Response.json({
+    return res.status(400).json({
       success: false,
       message: "Données incomplètes ou format non reconnu",
     });
   } catch (error) {
     console.error("❌ Erreur webhook:", error);
-    return Response.json(
-      { success: false, error: error.message },
-      { status: 500 },
-    );
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
 }
-git 

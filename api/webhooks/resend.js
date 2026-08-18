@@ -1,13 +1,17 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import crypto from "crypto";
 
 const resendApiKey = process.env.RESEND_API_KEY;
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const resendWebhookSecret = process.env.RESEND_WEBHOOK_SECRET;
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
+
+console.log("✅ Webhook Resend démarrée");
 
 // 🎯 Patterns de détection des réponses
 const AUTO_REPLY_PATTERNS = {
@@ -23,32 +27,6 @@ const AUTO_REPLY_PATTERNS = {
     status: "choix_des_formules",
     emailTemplate: "formules_presentation",
   },
-//   formula_chosen: {
-//     keywords: [
-//       "formule 1",
-//       "formule 2",
-//       "formule 3",
-//       "je choisissez la formule",
-//       "je prends la formule",
-//       "je veux la formule",
-//       "orientation",
-//       "accompagnement candidature",
-//       "accompagnement complet",
-//     ],
-//     status: "formule_choisie",
-//     emailTemplate: "formula_confirmation",
-//   },
-//   payment_ready: {
-//     keywords: [
-//       "prêt à payer",
-//       "ready to pay",
-//       "je suis prêt",
-//       "je veux procéder au paiement",
-//       "comment payer",
-//     ],
-//     status: "attente_paiement",
-//     emailTemplate: "payment_instructions",
-//   },
 };
 
 // 📧 Templates d'emails de réponse
@@ -57,7 +35,7 @@ const EMAIL_TEMPLATES = {
     subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
     html: (contact) => `
       <div style="max-width: 700px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
-        
+
         <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px 10px 0 0;">
           <h2 style="color: white; margin: 0; font-size: 24px;">🇨🇳 Nos formules d'accompagnement pour étudier en Chine</h2>
         </div>
@@ -157,94 +135,6 @@ const EMAIL_TEMPLATES = {
       </div>
     `,
   },
-
-//   formula_confirmation: {
-//     subject: "🎯 Formule confirmée ! Prochaines étapes",
-//     html: (contact) => `
-//       <div style="max-width: 600px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
-        
-//         <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 10px 10px 0 0;">
-//           <h2 style="color: white; margin: 0; font-size: 22px;">🎯 Formule confirmée !</h2>
-//         </div>
-
-//         <div style="padding: 30px; background: #f9fafb;">
-//           <p>Parfait <strong>${contact.prenom}</strong> ! 🎉</p>
-//           <p>Votre choix de formule a été bien enregistré.</p>
-
-//           <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #10b981;">
-//             <h3 style="color: #10b981; margin-top: 0;">⏭️ Prochaines étapes :</h3>
-//             <ol style="color: #555;">
-//               <li style="margin-bottom: 10px;"><strong>Modalités de paiement</strong> - Nous vous les transmettrons rapidement</li>
-//               <li style="margin-bottom: 10px;"><strong>Documents à préparer</strong> - Vous recevrez une liste personnalisée</li>
-//               <li style="margin-bottom: 10px;"><strong>Signature du contrat</strong> - Formalités rapides</li>
-//               <li style="margin-bottom: 10px;"><strong>Commencement de l'accompagnement</strong> - Après paiement</li>
-//             </ol>
-//           </div>
-
-//           <p style="color: #666; margin: 20px 0;">
-//             📧 <strong>Les modalités de paiement vous seront communiquées dans les 24h.</strong>
-//           </p>
-
-//           <p style="color: #999; font-size: 13px;">
-//             Des questions ? N'hésitez pas à répondre à cet email !
-//           </p>
-
-//           <div style="border-top: 2px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; color: #999;">
-//             <p style="margin: 5px 0;"><strong>Chinois en Devenir</strong></p>
-//             <p style="margin: 5px 0; font-size: 11px;">🌎 https://chinoisendevenir.com/</p>
-//           </div>
-//         </div>
-
-//       </div>
-//     `,
-//   },
-
-//   payment_instructions: {
-//     subject: "💳 Modalités de paiement - Accédez à votre compte",
-//     html: (contact) => `
-//       <div style="max-width: 600px; margin: 0 auto; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333;">
-        
-//         <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border-radius: 10px 10px 0 0;">
-//           <h2 style="color: white; margin: 0; font-size: 22px;">💳 Modalités de paiement</h2>
-//         </div>
-
-//         <div style="padding: 30px; background: #f9fafb;">
-//           <p>Bonjour <strong>${contact.prenom}</strong>,</p>
-//           <p>Voici les modalités de paiement pour accéder à votre accompagnement :</p>
-
-//           <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid #7c3aed;">
-//             <h3 style="color: #7c3aed; margin-top: 0;">🔗 Lien de paiement sécurisé :</h3>
-//             <p style="margin: 15px 0;">
-//               <a href="https://paiement.chinoisendevenir.com" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Procéder au paiement</a>
-//             </p>
-//           </div>
-
-//           <div style="background: #f3e8ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
-//             <p style="color: #555; margin: 0;"><strong>Moyens de paiement acceptés :</strong></p>
-//             <ul style="color: #555; margin: 10px 0 0 0;">
-//               <li>💳 Carte bancaire</li>
-//               <li>💸 Virement bancaire</li>
-//               <li>🅿️ PayPal</li>
-//             </ul>
-//           </div>
-
-//           <p style="color: #666; margin: 15px 0;">
-//             ✅ <strong>Accès immédiat</strong> après confirmation du paiement
-//           </p>
-
-//           <p style="color: #999; font-size: 13px;">
-//             ❓ Des questions sur le paiement ? Répondez à cet email !
-//           </p>
-
-//           <div style="border-top: 2px solid #e5e7eb; padding-top: 20px; margin-top: 30px; text-align: center; color: #999;">
-//             <p style="margin: 5px 0;"><strong>Chinois en Devenir</strong></p>
-//             <p style="margin: 5px 0; font-size: 11px;">🌎 https://chinoisendevenir.com/</p>
-//           </div>
-//         </div>
-
-//       </div>
-//     `,
-//   },
 };
 
 // 🔍 Fonction pour détecter le type de réponse
@@ -305,20 +195,69 @@ async function updateContactStatus(contactId, newStatus) {
   return true;
 }
 
-// 🎯 Webhook principal (à intégrer avec Resend)
-export async function POST(request) {
+// 🔐 Vérifier la signature du webhook Resend
+function verifyResendSignature(req, secret) {
+  if (!secret) {
+    console.warn("⚠️ RESEND_WEBHOOK_SECRET non configuré");
+    return true; // Accepter si pas de secret (mode dev)
+  }
+
+  const timestamp = req.headers["resend-timestamp"];
+  const signature = req.headers["resend-signature"];
+
+  if (!timestamp || !signature) {
+    console.error("❌ Headers de signature manquants");
+    return false;
+  }
+
+  const signedContent = `${timestamp}.${JSON.stringify(req.body)}`;
+  const hash = crypto
+    .createHmac("sha256", secret)
+    .update(signedContent)
+    .digest("base64");
+
+  return hash === signature;
+}
+
+// 🎯 Handler Vercel pour le webhook
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
   try {
-    const body = await request.json();
+    console.log("📨 Webhook Resend reçu");
 
-    // Récupérer l'email entrant
-    const { from, subject, text_body } = body;
-
-    if (!from || !text_body) {
-      return Response.json({
-        success: false,
-        message: "Données incomplètes",
-      });
+    // 🔐 Vérifier la signature
+    if (!verifyResendSignature(req, resendWebhookSecret)) {
+      console.error("❌ Signature du webhook invalide");
+      return res.status(401).json({ error: "Unauthorized" });
     }
+
+    const body = req.body;
+    console.log("📨 Payload webhook:", JSON.stringify(body, null, 2));
+
+    // 🔍 Vérifier que c'est un email entrant
+    if (body.type !== "email.received") {
+      console.log(`ℹ️ Type d'événement non géré: ${body.type}`);
+      return res.status(200).json({ success: true, message: "Event ignored" });
+    }
+
+    const { data } = body;
+
+    if (!data) {
+      console.error("❌ Données d'email manquantes");
+      return res.status(400).json({ error: "Missing email data" });
+    }
+
+    const { from, subject, text } = data;
+
+    if (!from || !text) {
+      console.error("❌ Email 'from' ou 'text' manquant");
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    console.log(`📧 Email reçu de ${from} : ${subject}`);
 
     // 🔍 Chercher le contact dans la DB
     const { data: contact, error: fetchError } = await supabase
@@ -329,28 +268,42 @@ export async function POST(request) {
 
     if (fetchError || !contact) {
       console.log(`⚠️ Contact non trouvé : ${from}`);
-      return Response.json({
+      return res.status(200).json({
         success: false,
         message: "Contact non trouvé",
       });
     }
 
     // 🎯 Détecter le type de réponse
-    const pattern = detectResponseType(text_body);
+    const pattern = detectResponseType(text);
 
     if (!pattern) {
       console.log(`ℹ️ Pas de pattern détecté pour : ${from}`);
-      return Response.json({
+      return res.status(200).json({
         success: false,
-        message: "Pas de réponse automatique applicable",
+        message: "Pas de pattern détecté",
       });
     }
+
+    console.log(
+      `✅ Pattern détecté : ${pattern.emailTemplate} → ${pattern.status}`,
+    );
 
     // 📧 Envoyer la réponse automatique
     const replySent = await sendAutoReply(contact, pattern);
 
+    if (!replySent) {
+      console.error("❌ Erreur lors de l'envoi de la réponse");
+      return res.status(500).json({ error: "Failed to send reply" });
+    }
+
     // 🔄 Mettre à jour le statut
     const statusUpdated = await updateContactStatus(contact.id, pattern.status);
+
+    if (!statusUpdated) {
+      console.error("❌ Erreur lors de la mise à jour du statut");
+      return res.status(500).json({ error: "Failed to update status" });
+    }
 
     // 📝 Logger la conversation
     const { error: logError } = await supabase.from("email_logs").insert({
@@ -367,32 +320,18 @@ export async function POST(request) {
       console.warn("⚠️ Erreur logging:", logError);
     }
 
-    // ✅ Vérifier que tout s'est bien passé
-    if (!replySent || !statusUpdated) {
-      console.warn(
-        "⚠️ Erreur lors du traitement - replySent:",
-        replySent,
-        "statusUpdated:",
-        statusUpdated,
-      );
-      return Response.json({
-        success: false,
-        message: "Erreur lors du traitement",
-      });
-    }
-
-    return Response.json({
+    return res.status(200).json({
       success: true,
       message: "Auto-reply envoyé avec succès",
       contact: contact.id,
       pattern: pattern.emailTemplate,
-      statusUpdated: pattern.status,
+      status: pattern.status,
     });
   } catch (error) {
     console.error("❌ Erreur webhook:", error);
-    return Response.json(
-      { success: false, error: error.message },
-      { status: 500 },
-    );
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
 }
