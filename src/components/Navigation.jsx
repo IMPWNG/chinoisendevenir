@@ -19,7 +19,7 @@ const Navigation = () => {
     { path: "/processus", label: "Processus", icon: "🔄" },
     { path: "/about", label: "À propos", icon: "ℹ️" },
     { path: "/contact", label: "Contact", icon: "📧" },
-    { path: "/espace-etudiant/connexion", label: "Espace étudiant", icon: "🎓" },
+    { path: "/espace-etudiant", label: "Espace étudiant", icon: "🎓" },
   ];
 
   return (

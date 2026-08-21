@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
@@ -11,7 +11,7 @@ import { useAuth } from "../context/AuthContext";
 export default function StudentLogin() {
   const t = fr;
   const router = useRouter();
-  const { user, signIn, signUp, signOut, resetPassword } = useAuth();
+  const { user, loading, signIn, signUp, resetPassword } = useAuth();
   const [mode, setMode] = useState("login");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
@@ -47,8 +47,14 @@ export default function StudentLogin() {
   };
 
   const goToDashboard = () => {
-    router.push("/espace-etudiant");
+    router.replace("/espace-etudiant");
   };
+
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/espace-etudiant");
+    }
+  }, [loading, user, router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -130,6 +136,17 @@ export default function StudentLogin() {
     }
   };
 
+  if (loading || user) {
+    return (
+      <div className="app app-page-fill is-centered">
+        <Navigation />
+        <section className="landing-form-section">
+          <p className="landing-section-subtitle">Chargement de votre espace...</p>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="app app-page-fill is-centered">
       <Navigation />
@@ -144,30 +161,6 @@ export default function StudentLogin() {
               ? "Connectez-vous pour accéder à votre dossier."
               : "Créez votre compte pour enregistrer vos informations."}
           </p>
-
-          {user && (
-            <div className="landing-form landing-form-narrow landing-alert-card">
-              <p>
-                Session ouverte avec <strong>{user.email}</strong>.
-              </p>
-              <div className="landing-hero-actions landing-actions-start">
-                <button
-                  type="button"
-                  className="landing-btn landing-btn-primary"
-                  onClick={goToDashboard}
-                >
-                  Accéder à mon dossier
-                </button>
-                <button
-                  type="button"
-                  className="landing-btn landing-btn-secondary"
-                  onClick={signOut}
-                >
-                  Se déconnecter
-                </button>
-              </div>
-            </div>
-          )}
 
           {status === "success" && (
             <div className="landing-alert landing-alert-success">{message}</div>
