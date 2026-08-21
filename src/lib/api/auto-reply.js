@@ -590,23 +590,23 @@ const EMAIL_TEMPLATES = {
   formules_presentation: {
     subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
     generateHtml: generateFormulesPresentationTemplate,
-    action: "email_envoye",
-    description: "Email des formules envoyé",
+    action: "email_formules",
+    description: "Email formules d'accompagnement envoyé",
     status: "choix_des_formules",
   },
   relance_1: {
     subject: "Votre projet d'études en Chine 🇨🇳",
     generateHtml: generateRelance1Template,
-    action: "relance",
+    action: "relance_1",
     description: "Relance 1 envoyée — formulaire à remplir",
-    status: null,
+    status: "relance_1_envoyée",
   },
   relance_2: {
     subject: "Êtes-vous toujours intéressé(e) par des études en Chine ?",
     generateHtml: generateRelance2Template,
-    action: "relance",
+    action: "relance_2",
     description: "Relance 2 envoyée — confirmation d'intérêt",
-    status: null,
+    status: "relance_2_envoyée",
   },
 };
 
@@ -841,7 +841,7 @@ export default async function handler(req, res) {
       await logAction(
         contact.id,
         contact.email,
-        "email_envoye",
+        "email_formules",
         "Email des formules envoyé - Statut: choix_des_formules",
       );
 
@@ -901,7 +901,7 @@ export default async function handler(req, res) {
         });
       }
 
-      const nextStatus = body.status || template.status;
+      const nextStatus = template.status;
       if (nextStatus) {
         const statusUpdated = await updateContactStatus(contactId, nextStatus);
         if (!statusUpdated) {

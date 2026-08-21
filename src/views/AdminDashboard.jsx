@@ -7,6 +7,8 @@ import { useAuth } from "../context/AuthContext";
 
 const STATUTS = [
   "mail_bienvenue_envoyé",
+  "relance_1_envoyée",
+  "relance_2_envoyée",
   "choix_des_formules",
   "formule_choisie",
   "prospect_à_qualifier",
@@ -22,6 +24,8 @@ const STATUTS = [
 
 const STATUT_COLORS = {
   mail_bienvenue_envoyé: "bg-slate-500/20 text-slate-300 border-slate-500/50",
+  relance_1_envoyée: "bg-amber-500/20 text-amber-300 border-amber-500/50",
+  relance_2_envoyée: "bg-orange-500/20 text-orange-200 border-orange-500/50",
   choix_des_formules: "bg-blue-500/20 text-blue-300 border-blue-500/50",
   formule_choisie: "bg-cyan-500/20 text-cyan-300 border-cyan-500/50",
   prospect_à_qualifier: "bg-indigo-500/20 text-indigo-300 border-indigo-500/50",
@@ -36,18 +40,20 @@ const STATUT_COLORS = {
 };
 
 const STATUT_ICONS = {
-  mail_bienvenue_envoyé: "📧", // Email envoyé
-  choix_des_formules: "📋", // Choix à faire
-  formule_choisie: "✔️", // Sélection confirmée
-  prospect_à_qualifier: "🔍", // Analyse/recherche
-  offre_envoyée: "💼", // Offre professionnelle
-  attente_paiement: "⏳", // En attente
-  client_payé: "💰", // Paiement reçu
-  appel_réservé: "📞", // Appel/contact
-  dossier_préparation: "📁", // Dossier en cours
-  candidature_envoyée: "🎯", // Candidature lancée
-  admission_reçue: "🎊", // Succès/admission
-  dossier_terminé: "🏆", // Finalisé/réussi
+  mail_bienvenue_envoyé: "📧",
+  relance_1_envoyée: "🔔",
+  relance_2_envoyée: "🔔",
+  choix_des_formules: "📋",
+  formule_choisie: "✔️",
+  prospect_à_qualifier: "🔍",
+  offre_envoyée: "💼",
+  attente_paiement: "⏳",
+  client_payé: "💰",
+  appel_réservé: "📞",
+  dossier_préparation: "📁",
+  candidature_envoyée: "🎯",
+  admission_reçue: "🎊",
+  dossier_terminé: "🏆",
 };
 
 const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat"];
@@ -86,6 +92,9 @@ const BUDGETS = [
 const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
   { value: "email_envoye", label: "Email envoyé", icon: "📧" },
+  { value: "email_formules", label: "Email formules envoyé", icon: "📋" },
+  { value: "relance_1", label: "Relance 1", icon: "🔔" },
+  { value: "relance_2", label: "Relance 2", icon: "🔔" },
   { value: "relance", label: "Relance", icon: "🔔" },
   { value: "qualification", label: "Qualification", icon: "✓" },
   { value: "changement_statut", label: "Changement de statut", icon: "🔄" },
@@ -131,6 +140,9 @@ export default function AdminDashboard() {
 
     if (!error) {
       setContacts(data);
+      setSelectedContact((prev) =>
+        prev ? data.find((c) => c.id === prev.id) || prev : prev,
+      );
       // Extraire les pays uniques
       const paysUniques = [...new Set(data.map((c) => c.pays).filter(Boolean))];
       setPays(paysUniques.sort());
@@ -172,6 +184,9 @@ export default function AdminDashboard() {
       // Mettre à jour l'état local
       setContacts((prev) =>
         prev.map((c) => (c.id === id ? { ...c, suivi_statut: newStatut } : c)),
+      );
+      setSelectedContact((prev) =>
+        prev && prev.id === id ? { ...prev, suivi_statut: newStatut } : prev,
       );
     } catch (err) {
       console.error("Erreur:", err);
@@ -631,10 +646,6 @@ function ContactModal({
         emailTemplate,
       };
 
-      if (emailTemplate === "formules_presentation") {
-        payload.status = "choix_des_formules";
-      }
-
       const response = await fetch("/api/email/auto-reply", {
         method: "POST",
         headers: {
@@ -801,11 +812,11 @@ function ContactModal({
             </div>
             <p className="text-xs text-slate-500 mt-3">
               {emailTemplate === "formules_presentation" &&
-                "Envoie les 3 formules d'accompagnement et passe le statut à « choix des formules »."}
+                "Action : Email formules • Statut : choix des formules"}
               {emailTemplate === "relance_1" &&
-                "Relance pour inviter le prospect à remplir le formulaire sur le site."}
+                "Action : Relance 1 • Statut : relance 1 envoyée"}
               {emailTemplate === "relance_2" &&
-                "Relance pour confirmer si le projet d'études est toujours d'actualité."}
+                "Action : Relance 2 • Statut : relance 2 envoyée"}
             </p>
           </div>
 
