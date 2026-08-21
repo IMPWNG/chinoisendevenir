@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { CONTACT_FROM_EMAIL, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
 import {
   sendTemplatedEmail,
   updateContactStatus,
   logAction,
-  CONTACT_FROM_EMAIL,
 } from "./auto-reply.js";
 
 const supabaseUrl =
@@ -18,7 +18,6 @@ const resendApiKey =
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
-const ADMIN_NOTIFY_EMAIL = "chinoisendevenir@gmail.com";
 
 const INTEREST_KEYWORDS = [
   "je souhaite recevoir les informations",
@@ -87,15 +86,6 @@ const FORMULES = [
   },
 ];
 
-const EARLY_STATUSES = new Set([
-  "",
-  "mail_bienvenue_envoyé",
-  "relance_1_envoyée",
-  "relance_2_envoyée",
-  "nouveau_prospect",
-  "nouveau",
-]);
-
 const FORMULE_ALREADY_CHOSEN = new Set([
   "formule_choisie",
   "offre_envoyée",
@@ -140,12 +130,13 @@ function extractLatestReply(text) {
   if (!text) return "";
   let body = String(text).replace(/\r\n/g, "\n");
   const splitters = [
-    /\nOn .+ wrote:\s*\n/,
-    /\nLe .+ a écrit[ :]*\n/i,
+    /\nOn .+ wrote:\s*\n?/i,
+    /\nLe .+? a écrit\s*:/i,
     /\n-----Original Message-----/i,
     /\n________________________________/,
     /\nDe\s*:/i,
     /\nFrom\s*:/i,
+    /\n-{2,} ?message d'origine/i,
   ];
 
   for (const splitter of splitters) {
@@ -158,6 +149,10 @@ function extractLatestReply(text) {
     .filter((line) => !line.trim().startsWith(">"))
     .join("\n")
     .trim();
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function normalizeText(text) {
@@ -211,34 +206,45 @@ function truncate(text, max = 1200) {
 async function fetchReceivedEmail(emailId) {
   if (!emailId) return null;
 
-  try {
-    if (resend.emails?.receiving?.get) {
-      const { data, error } = await resend.emails.receiving.get(emailId);
-      if (!error && data) return data;
-      if (error) {
-        console.warn("⚠️ Resend receiving.get:", error.message || error);
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    try {
+      if (resend.emails?.receiving?.get) {
+        const { data, error } = await resend.emails.receiving.get(emailId);
+        if (!error && data) return data;
+        if (error) {
+          console.warn(
+            `⚠️ Resend receiving.get (${attempt}/4):`,
+            error.message || error,
+          );
+        }
       }
+    } catch (error) {
+      console.warn("⚠️ SDK receiving.get:", error.message);
     }
-  } catch (error) {
-    console.warn("⚠️ SDK receiving.get indisponible:", error.message);
+
+    try {
+      const response = await fetch(
+        `https://api.resend.com/emails/receiving/${emailId}`,
+        {
+          headers: { Authorization: `Bearer ${resendApiKey}` },
+        },
+      );
+      if (response.ok) {
+        return await response.json();
+      }
+      console.warn(
+        `⚠️ HTTP receiving (${attempt}/4):`,
+        response.status,
+        await response.text(),
+      );
+    } catch (error) {
+      console.warn("⚠️ Fetch receiving:", error.message);
+    }
+
+    if (attempt < 4) await sleep(800 * attempt);
   }
 
-  try {
-    const response = await fetch(
-      `https://api.resend.com/emails/receiving/${emailId}`,
-      {
-        headers: { Authorization: `Bearer ${resendApiKey}` },
-      },
-    );
-    if (!response.ok) {
-      console.warn("⚠️ HTTP receiving:", response.status, await response.text());
-      return null;
-    }
-    return await response.json();
-  } catch (error) {
-    console.warn("⚠️ Fetch receiving:", error.message);
-    return null;
-  }
+  return null;
 }
 
 async function findContactByEmail(email) {
@@ -435,7 +441,11 @@ export async function processInboundEmail(payload) {
     };
   }
 
-  if (interest && EARLY_STATUSES.has(statut)) {
+  if (
+    interest &&
+    statut !== "choix_des_formules" &&
+    !FORMULE_ALREADY_CHOSEN.has(statut)
+  ) {
     const sent = await sendTemplatedEmail(contact, "formules_presentation");
     if (!sent.success) {
       return {

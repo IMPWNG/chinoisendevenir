@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -645,8 +646,6 @@ const EMAIL_TEMPLATES = {
   },
 };
 
-const CONTACT_FROM_EMAIL = "contact@chinoisendevenir.com";
-
 // ✉️ Envoyer un email selon le template choisi
 async function sendTemplatedEmail(
   contact,
@@ -671,7 +670,7 @@ async function sendTemplatedEmail(
       to: contact.email,
       subject: template.subject,
       html: template.generateHtml(contact, extras),
-      replyTo: CONTACT_FROM_EMAIL,
+      replyTo: INBOUND_REPLY_TO,
     });
 
     if (response.error) {

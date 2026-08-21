@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { INBOUND_REPLY_TO } from "../emailConfig.js";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -491,7 +492,7 @@ export default async function handler(req, res) {
     try {
       const emailResponse = await resend.emails.send({
         from: "contact@chinoisendevenir.com",
-        replyTo: "contact@chinoisendevenir.com",
+        replyTo: INBOUND_REPLY_TO,
         to: normalizedEmail,
         subject: `Bienvenue ${prenom} ! 🇨🇳`,
         html: generateEmailTemplate(prenom),
