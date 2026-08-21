@@ -8,7 +8,10 @@ const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const isActive = (path) => pathname === path;
+  const isActive = (path) =>
+    path === "/espace-etudiant"
+      ? pathname.startsWith("/espace-etudiant")
+      : pathname === path;
 
   const navLinks = [
     { path: "/", label: "Accueil", icon: "🏠" },
@@ -16,6 +19,7 @@ const Navigation = () => {
     { path: "/processus", label: "Processus", icon: "🔄" },
     { path: "/about", label: "À propos", icon: "ℹ️" },
     { path: "/contact", label: "Contact", icon: "📧" },
+    { path: "/espace-etudiant", label: "Espace étudiant", icon: "🎓" },
   ];
 
   return (

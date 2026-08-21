@@ -27,10 +27,21 @@ export function AuthProvider({ children }) {
   const signIn = (email, password) =>
     supabase.auth.signInWithPassword({ email, password });
 
+  const signInWithMagicLink = (email) =>
+    supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/espace-etudiant/auth/callback`,
+        shouldCreateUser: true,
+      },
+    });
+
   const signOut = () => supabase.auth.signOut();
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, loading, signIn, signInWithMagicLink, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

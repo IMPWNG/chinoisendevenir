@@ -452,3 +452,77 @@ html, body {
     font-size: 0.8rem;
   }
 }
+
+.student-progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.student-step {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px 14px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.student-step-done {
+  border-color: #c8e6c9;
+  background: #f1f8f4;
+}
+
+.student-step-current {
+  border-color: var(--primary);
+  background: #fff7f7;
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.12);
+}
+
+.student-step-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.student-step-label {
+  font-weight: 700;
+  color: var(--secondary);
+  font-size: 0.9rem;
+}
+
+.student-step-desc {
+  color: var(--gray);
+  font-size: 0.75rem;
+  margin-top: 6px;
+}
+
+.student-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+}
+
+.student-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 992px) {
+  .student-progress {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .student-progress {
+    grid-template-columns: 1fr;
+  }
+}

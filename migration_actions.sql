@@ -7,6 +7,7 @@ ALTER TABLE suivi_actions
   ADD CONSTRAINT suivi_actions_action_check CHECK (
     action IN (
       'appel',
+      'appel_effectue',
       'email_envoye',
       'email_formules',
       'relance',
