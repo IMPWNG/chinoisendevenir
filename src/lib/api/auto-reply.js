@@ -13,22 +13,6 @@ const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
 
-// 🎯 Patterns de détection des réponses
-const AUTO_REPLY_PATTERNS = {
-  welcome_confirm: {
-    keywords: [
-      "je souhaite recevoir les informations",
-      "je veux recevoir",
-      "je souhaite l'accompagnement",
-      "oui je suis intéressé",
-      "intéressé",
-      "oui",
-    ],
-    status: "choix_des_formules",
-    emailTemplate: "formules_presentation",
-  },
-};
-
 console.log("✅ Route /api/email/auto-reply démarrée");
 
 const EMAIL_BASE_STYLES = `
@@ -586,32 +570,89 @@ function generateFormulesPresentationTemplate(prenom) {
   `;
 }
 
+function generateFormuleConfirmeeTemplate(contact, formuleLabel) {
+  const greeting = [contact.prenom, contact.nom].filter(Boolean).join(" ");
+  return wrapEmailTemplate({
+    headerTitle: "Formule confirmée",
+    headerSubtitle: "Étude de votre projet d'études en Chine",
+    prenom: greeting || "bonjour",
+    innerHtml: `
+            <div class="section">
+              <p>Nous vous remercions pour votre retour et confirmons votre intérêt pour la formule :</p>
+            </div>
+            <div class="formule-card highlight">
+              <div class="formule-title">${formuleLabel || "Formule sélectionnée"}</div>
+            </div>
+            <div class="section">
+              <p>Nous allons maintenant vérifier les informations communiquées dans votre formulaire et préparer une première étude de votre projet d'études en Chine.</p>
+              <p>Cette étude nous permettra notamment de rechercher :</p>
+              <ul class="formule-list">
+                <li>Les formations correspondant à votre parcours</li>
+                <li>Les universités adaptées à votre profil</li>
+                <li>Les conditions d'admission</li>
+                <li>Les possibilités de bourses ou de réduction</li>
+                <li>Les documents nécessaires pour votre candidature</li>
+              </ul>
+            </div>
+            <div class="section">
+              <p>Le délai estimatif de cette analyse est de <strong>7 à 14 jours ouvrables</strong>, selon la complexité de votre profil et les informations disponibles.</p>
+              <p>Notre équipe pourra vous contacter par e-mail ou WhatsApp si des informations ou documents supplémentaires sont nécessaires. Nous pourrons également organiser un appel afin de mieux comprendre votre projet.</p>
+            </div>
+            <div class="section">
+              <p>À la fin de l'étude, nous vous présenterons les options identifiées ainsi que les prochaines étapes. Après validation de votre part, nous vous transmettrons les conditions de service et les modalités de paiement.</p>
+              <p>Les démarches officielles commenceront après confirmation du paiement.</p>
+            </div>
+            <div class="warning">
+              <p>Veuillez noter qu'une admission ou l'obtention d'une bourse ne peut pas être garantie, car la décision finale appartient aux universités et aux organismes concernés.</p>
+            </div>
+            <div class="section">
+              <p>Merci de rester disponible sur le numéro indiqué dans votre formulaire.</p>
+            </div>
+    `,
+  });
+}
+
 const EMAIL_TEMPLATES = {
   formules_presentation: {
     subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
-    generateHtml: generateFormulesPresentationTemplate,
+    generateHtml: (contact) =>
+      generateFormulesPresentationTemplate(contact.prenom || ""),
     action: "email_formules",
     description: "Email formules d'accompagnement envoyé",
     status: "choix_des_formules",
   },
   relance_1: {
     subject: "Votre projet d'études en Chine 🇨🇳",
-    generateHtml: generateRelance1Template,
+    generateHtml: (contact) => generateRelance1Template(contact.prenom || ""),
     action: "relance_1",
     description: "Relance 1 envoyée — formulaire à remplir",
     status: "relance_1_envoyée",
   },
   relance_2: {
     subject: "Êtes-vous toujours intéressé(e) par des études en Chine ?",
-    generateHtml: generateRelance2Template,
+    generateHtml: (contact) => generateRelance2Template(contact.prenom || ""),
     action: "relance_2",
     description: "Relance 2 envoyée — confirmation d'intérêt",
     status: "relance_2_envoyée",
   },
+  formule_confirmee: {
+    subject: "Nous confirmons votre formule d'accompagnement 🇨🇳",
+    generateHtml: (contact, extras = {}) =>
+      generateFormuleConfirmeeTemplate(contact, extras.formuleLabel),
+    action: "email_envoye",
+    description: "Confirmation de la formule choisie",
+    status: "formule_choisie",
+  },
 };
 
+const CONTACT_FROM_EMAIL = "contact@chinoisendevenir.com";
+
 // ✉️ Envoyer un email selon le template choisi
-async function sendTemplatedEmail(contact, templateKey = "formules_presentation") {
+async function sendTemplatedEmail(
+  contact,
+  templateKey = "formules_presentation",
+  extras = {},
+) {
   const template = EMAIL_TEMPLATES[templateKey];
   if (!template) {
     console.error(`❌ Template inconnu: ${templateKey}`);
@@ -626,11 +667,11 @@ async function sendTemplatedEmail(contact, templateKey = "formules_presentation"
   try {
     console.log(`📤 Envoi via Resend...`);
     const response = await resend.emails.send({
-      from: "contact@chinoisendevenir.com",
+      from: CONTACT_FROM_EMAIL,
       to: contact.email,
       subject: template.subject,
-      html: template.generateHtml(contact.prenom),
-      replyTo: "chinoisendevenir@gmail.com",
+      html: template.generateHtml(contact, extras),
+      replyTo: CONTACT_FROM_EMAIL,
     });
 
     if (response.error) {
@@ -644,11 +685,6 @@ async function sendTemplatedEmail(contact, templateKey = "formules_presentation"
     console.error("❌ Erreur envoi email:", error.message);
     return { success: false, error: error.message };
   }
-}
-
-async function sendAutoReply(contact) {
-  const result = await sendTemplatedEmail(contact, "formules_presentation");
-  return result.success;
 }
 
 // 🔄 Mettre à jour le statut dans contacts
@@ -699,6 +735,8 @@ async function logAction(contactId, email, actionType, description) {
     relance_1: "relance",
     relance_2: "relance",
     email_formules: "email_envoye",
+    reponse_client: "note_ajoutee",
+    formule_choisie: "changement_statut",
   };
 
   const actionCandidates = [actionType, fallbacks[actionType]].filter(
@@ -791,104 +829,9 @@ export default async function handler(req, res) {
 
     // 🔍 CAS 1 : Webhook Resend (AUTOMATIQUE)
     if (body.type === "email.received") {
-      console.log("\n🎯 CAS 1 : WEBHOOK RESEND DÉTECTÉ");
-
-      const { data } = body;
-
-      if (!data) {
-        console.error("❌ Pas de data dans le webhook");
-        return res.status(400).json({
-          success: false,
-          message: "Pas de data",
-        });
-      }
-
-      const { from, subject, text } = data;
-
-      if (!from || !text) {
-        console.error("❌ Données Resend incomplètes");
-        return res.status(400).json({
-          success: false,
-          message: "Données incomplètes",
-        });
-      }
-
-      console.log(`📧 Email reçu de: ${from}`);
-      console.log(`📧 Sujet: ${subject}`);
-
-      // 🔍 Chercher le contact
-      console.log("\n🔎 Recherche du contact...");
-      const { data: contact, error: fetchError } = await supabase
-        .from("contacts")
-        .select("*")
-        .eq("email", from)
-        .single();
-
-      if (fetchError || !contact) {
-        console.error(`❌ Contact non trouvé : ${from}`);
-        return res.status(404).json({
-          success: false,
-          message: "Contact non trouvé",
-        });
-      }
-
-      console.log(`✅ Contact trouvé: ${contact.prenom} ${contact.nom}`);
-
-      // 🎯 Détecter si c'est une demande de formules
-      const textLower = text.toLowerCase();
-      const isFormuleRequest = Object.values(
-        AUTO_REPLY_PATTERNS,
-      )[0].keywords.some((keyword) => textLower.includes(keyword));
-
-      if (!isFormuleRequest) {
-        console.log(`ℹ️ Pas de pattern détecté pour : ${from}`);
-        return res.status(200).json({
-          success: false,
-          message: "Pas de pattern détecté",
-        });
-      }
-
-      console.log(`\n✅ Pattern détecté → Envoi des formules`);
-
-      // 📧 Envoyer email
-      const replySent = await sendAutoReply(contact);
-      if (!replySent) {
-        return res.status(500).json({
-          success: false,
-          message: "Erreur envoi email",
-        });
-      }
-
-      // 🔄 METTRE À JOUR LE STATUT
-      const statusUpdated = await updateContactStatus(
-        contact.id,
-        "choix_des_formules",
-      );
-      if (!statusUpdated) {
-        return res.status(500).json({
-          success: false,
-          message: "Erreur mise à jour statut",
-        });
-      }
-
-      // 📝 Logger l'action
-      await logAction(
-        contact.id,
-        contact.email,
-        "email_formules",
-        "Email des formules envoyé - Statut: choix_des_formules",
-      );
-
-      console.log("\n" + "✅".repeat(40));
-      console.log("SUCCÈS COMPLET - WEBHOOK");
-      console.log("✅".repeat(40));
-
-      return res.status(200).json({
-        success: true,
-        message: "Auto-reply envoyé (webhook Resend)",
-        contact: contact.id,
-        source: "webhook_automatique",
-      });
+      const { processInboundEmail } = await import("./inbound-email.js");
+      const result = await processInboundEmail(body);
+      return res.status(result.httpStatus || 200).json(result);
     }
 
     // 🔍 CAS 2 : Appel manuel (BOUTON DASHBOARD)
@@ -981,3 +924,11 @@ export default async function handler(req, res) {
     });
   }
 }
+
+export {
+  sendTemplatedEmail,
+  updateContactStatus,
+  logAction,
+  EMAIL_TEMPLATES,
+  CONTACT_FROM_EMAIL,
+};

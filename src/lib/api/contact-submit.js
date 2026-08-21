@@ -491,7 +491,7 @@ export default async function handler(req, res) {
     try {
       const emailResponse = await resend.emails.send({
         from: "contact@chinoisendevenir.com",
-        replyTo: "chinoisendevenir@gmail.com",
+        replyTo: "contact@chinoisendevenir.com",
         to: normalizedEmail,
         subject: `Bienvenue ${prenom} ! 🇨🇳`,
         html: generateEmailTemplate(prenom),

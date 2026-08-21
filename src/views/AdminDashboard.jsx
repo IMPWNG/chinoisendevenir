@@ -94,6 +94,8 @@ const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
   { value: "email_envoye", label: "Email envoyé", icon: "📧" },
   { value: "email_formules", label: "Email formules envoyé", icon: "📋" },
+  { value: "reponse_client", label: "Réponse client (email)", icon: "📥" },
+  { value: "formule_choisie", label: "Formule choisie", icon: "✔️" },
   { value: "relance_1", label: "Relance 1", icon: "🔔" },
   { value: "relance_2", label: "Relance 2", icon: "🔔" },
   { value: "relance", label: "Relance", icon: "🔔" },
@@ -755,6 +757,14 @@ function ContactModal({
                   </td>
                   <td className="px-4 py-3 text-white font-semibold">
                     {contact.budget || "—"}
+                  </td>
+                </tr>
+                <tr className="border-b border-slate-700/50">
+                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
+                    📋 Formule
+                  </td>
+                  <td className="px-4 py-3 text-white">
+                    {contact.formule || "—"}
                   </td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
