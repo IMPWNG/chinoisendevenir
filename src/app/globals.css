@@ -693,6 +693,82 @@ a {
   margin-bottom: 0;
 }
 
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.doc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.doc-missing {
+  background: #fff5f5;
+  border-color: #f5c2c7;
+}
+
+.doc-received {
+  background: #f1f8f4;
+  border-color: #c8e6c9;
+}
+
+.doc-row-main {
+  flex: 1;
+  min-width: 220px;
+}
+
+.doc-row-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.doc-row-desc,
+.doc-row-file {
+  margin: 6px 0 0;
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+.doc-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 220px;
+}
+
+.doc-badge-missing,
+.doc-badge-ok {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.doc-badge-missing {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.doc-badge-ok {
+  background: #d4edda;
+  color: #155724;
+}
+
 @media (max-width: 992px) {
   .student-progress {
     grid-template-columns: repeat(2, 1fr);

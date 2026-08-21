@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
+import AdminStudentFiles from "../components/AdminStudentFiles";
 import {
   isStudentSpaceUnlocked,
   getChosenFormule,
+  getDisplayedStepIndex,
+  STUDENT_PROCESS_STEPS,
   FORMULE_OPTIONS,
   mergeFormuleNote,
   stripFormuleNote,
+  mergeAvancementNote,
 } from "../lib/studentProgress";
 
 const STATUTS = [
@@ -380,6 +384,70 @@ export default function AdminDashboard() {
       );
     } catch (err) {
       console.error("Erreur update formule:", err);
+      alert("Une erreur est survenue");
+    }
+  };
+
+  const updateDossierEtape = async (id, etapeIndex) => {
+    const current =
+      (selectedContact?.id === id ? selectedContact : null) ||
+      contacts.find((c) => c.id === id);
+    if (!current) return;
+
+    const step = STUDENT_PROCESS_STEPS[etapeIndex];
+    if (!step) return;
+
+    const notes = mergeAvancementNote(current.notes_admin, etapeIndex);
+    const payloads = [
+      {
+        dossier_etape: etapeIndex,
+        notes_admin: notes,
+        updated_at: new Date().toISOString(),
+      },
+      { dossier_etape: etapeIndex, notes_admin: notes },
+      { notes_admin: notes, updated_at: new Date().toISOString() },
+      { notes_admin: notes },
+    ];
+
+    try {
+      let saved = false;
+      for (const payload of payloads) {
+        const { error } = await supabase
+          .from("contacts")
+          .update(payload)
+          .eq("id", id);
+        if (!error) {
+          saved = true;
+          break;
+        }
+        console.warn("Erreur update avancement:", error.message);
+      }
+
+      if (!saved) {
+        alert("Impossible d'enregistrer l'avancement.");
+        return;
+      }
+
+      await supabase.from("suivi_actions").insert({
+        contact_id: id,
+        action: "changement_statut",
+        description: `Avancement dossier : ${step.label}`,
+        user_admin: user?.email,
+      });
+
+      const next = {
+        ...current,
+        dossier_etape: etapeIndex,
+        notes_admin: notes,
+      };
+      setContacts((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, ...next } : c)),
+      );
+      setSelectedContact((prev) =>
+        prev && prev.id === id ? { ...prev, ...next } : prev,
+      );
+    } catch (err) {
+      console.error("Erreur update avancement:", err);
       alert("Une erreur est survenue");
     }
   };
@@ -855,6 +923,7 @@ const stats = {
           onClose={() => setSelectedContact(null)}
           onUpdateStatut={updateStatut}
           onUpdateFormule={updateFormule}
+          onUpdateDossierEtape={updateDossierEtape}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
         />
@@ -889,6 +958,7 @@ function ContactModal({
   onClose,
   onUpdateStatut,
   onUpdateFormule,
+  onUpdateDossierEtape,
   userEmail,
   onContactUpdated,
 }) {
@@ -1205,6 +1275,41 @@ function ContactModal({
               modifié.
             </p>
           </div>
+
+          {/* Avancement dossier */}
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              📈 Avancement du dossier
+            </label>
+            <p className="text-xs text-slate-400 mb-4">
+              Étape visible dans l'espace étudiant :{" "}
+              <span className="text-white font-semibold">
+                {STUDENT_PROCESS_STEPS[getDisplayedStepIndex(contact)]?.label}
+              </span>
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {STUDENT_PROCESS_STEPS.map((step, index) => {
+                const current = getDisplayedStepIndex(contact) === index;
+                return (
+                  <button
+                    key={step.key}
+                    type="button"
+                    onClick={() => onUpdateDossierEtape(contact.id, index)}
+                    className={`text-left px-4 py-3 rounded-xl border font-semibold transition-all duration-200 ${
+                      current
+                        ? "bg-cyan-500/20 border-cyan-400 text-white"
+                        : "bg-slate-700/40 border-slate-600/50 text-slate-300 hover:bg-slate-700"
+                    }`}
+                  >
+                    <span className="mr-2">{step.icon}</span>
+                    {index + 1}. {step.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <AdminStudentFiles contactId={contact.id} />
 
           {/* Accès espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">

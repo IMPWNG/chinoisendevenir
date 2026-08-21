@@ -94,6 +94,38 @@ export function getStudentStepIndex(statut) {
   return STATUS_STEP_INDEX[statut] ?? 0;
 }
 
+export function clampDossierEtape(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const index = Number(value);
+  if (!Number.isInteger(index)) return null;
+  if (index < 0 || index >= STUDENT_PROCESS_STEPS.length) return null;
+  return index;
+}
+
+export function getDisplayedStepIndex(contact) {
+  const explicit = clampDossierEtape(contact?.dossier_etape);
+  if (explicit !== null) return explicit;
+  const notes = String(contact?.notes_admin || "");
+  const match = notes.match(/Avancement dossier:\s*(\d+)/i);
+  if (match) {
+    const fromNotes = clampDossierEtape(Number(match[1]));
+    if (fromNotes !== null) return fromNotes;
+  }
+  return getStudentStepIndex(contact?.suivi_statut);
+}
+
+export function mergeAvancementNote(notesAdmin, etapeIndex) {
+  const noteLine = `Avancement dossier: ${etapeIndex}`;
+  const cleaned = stripAvancementNote(notesAdmin);
+  return cleaned ? `${cleaned}\n${noteLine}` : noteLine;
+}
+
+export function stripAvancementNote(notesAdmin) {
+  return String(notesAdmin || "")
+    .replace(/\n?Avancement dossier:\s*\d+/gi, "")
+    .trim();
+}
+
 export function isStudentSpaceUnlocked(statut) {
   const unlocked = new Set([
     "formule_choisie",
@@ -119,6 +151,22 @@ export const FORMULE_OPTIONS = [
   {
     value: "Accompagnement complet (500€)",
     label: "3️⃣ Accompagnement complet (500€)",
+  },
+];
+
+export const REQUIRED_STUDENT_DOCUMENTS = [
+  {
+    key: "passeport",
+    label: "Passeport",
+    icon: "🛂",
+    description: "Passeport en cours de validité (PDF, JPG ou PNG — 10 Mo max).",
+  },
+  {
+    key: "dernier_diplome",
+    label: "Dernier diplôme obtenu",
+    icon: "🎓",
+    description:
+      "Copie de votre dernier diplôme obtenu (PDF, JPG ou PNG — 10 Mo max).",
   },
 ];
 

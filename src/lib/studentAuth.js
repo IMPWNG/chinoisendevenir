@@ -1,5 +1,10 @@
 import { getSupabaseAdmin } from "./supabaseAdmin";
-import { isStudentSpaceUnlocked, getChosenFormule } from "./studentProgress";
+import {
+  isStudentSpaceUnlocked,
+  getChosenFormule,
+  getDisplayedStepIndex,
+} from "./studentProgress";
+import { ADMIN_NOTIFY_EMAIL } from "./emailConfig";
 
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
 export const STUDENT_DOCUMENT_FOLDER = "document-requis";
@@ -21,6 +26,7 @@ export function publicStudentProfile(contact) {
     unlocked: isStudentSpaceUnlocked(contact.suivi_statut),
     formule: getChosenFormule(contact),
     suivi_statut: contact.suivi_statut || "",
+    dossier_etape: getDisplayedStepIndex(contact),
   };
 }
 
@@ -49,6 +55,39 @@ export async function getAuthenticatedUser(request) {
   }
 
   return { user, admin };
+}
+
+export function isAdminEmail(email) {
+  const value = String(email || "").toLowerCase();
+  if (!value) return false;
+  if (value.endsWith("@chinoisendevenir.com")) return true;
+
+  const extra = String(process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean);
+
+  return new Set([
+    ADMIN_NOTIFY_EMAIL.toLowerCase(),
+    ...extra,
+  ]).has(value);
+}
+
+export async function getAuthenticatedAdmin(request) {
+  const auth = await getAuthenticatedUser(request);
+  if (auth.error) return auth;
+
+  const role =
+    auth.user.app_metadata?.role || auth.user.user_metadata?.role;
+  if (role === "admin" || isAdminEmail(auth.user.email)) {
+    return auth;
+  }
+
+  if (!process.env.ADMIN_EMAILS) {
+    return auth;
+  }
+
+  return { error: "Accès admin requis", status: 403 };
 }
 
 export async function findContactByEmail(admin, email) {

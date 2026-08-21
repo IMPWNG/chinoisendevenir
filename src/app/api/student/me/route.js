@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import {
   getAuthenticatedContact,
-  getStudentDocument,
   publicStudentProfile,
   ensureStudentBucket,
 } from "@/lib/studentAuth";
+import {
+  getRequiredDocumentsStatus,
+  listAdminSentDocuments,
+} from "@/lib/studentDocuments";
 
 export async function GET(request) {
   try {
@@ -13,15 +16,23 @@ export async function GET(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    await ensureStudentBucket(auth.admin);
-    const document = await getStudentDocument(auth.admin, auth.contact.id);
-
     const profile = publicStudentProfile(auth.contact);
+    let requiredDocuments = [];
+    let adminDocuments = [];
+
+    if (profile.unlocked) {
+      await ensureStudentBucket(auth.admin);
+      [requiredDocuments, adminDocuments] = await Promise.all([
+        getRequiredDocumentsStatus(auth.admin, auth.contact.id),
+        listAdminSentDocuments(auth.admin, auth.contact.id),
+      ]);
+    }
 
     return NextResponse.json({
       success: true,
       profile,
-      document: profile.unlocked ? document : null,
+      requiredDocuments,
+      adminDocuments,
       unlocked: profile.unlocked,
     });
   } catch (error) {
