@@ -671,6 +671,10 @@ async function sendTemplatedEmail(
       subject: template.subject,
       html: template.generateHtml(contact, extras),
       replyTo: INBOUND_REPLY_TO,
+      headers: {
+        "Auto-Submitted": "auto-replied",
+        "X-Auto-Response-Suppress": "All",
+      },
     });
 
     if (response.error) {

@@ -108,6 +108,14 @@ function isIgnoredSender(email) {
   return false;
 }
 
+function isLoopEmail(subject, envelopeFrom) {
+  const sub = String(subject || "");
+  if (sub.startsWith("📩")) return true;
+  if (isOurMailbox(envelopeFrom)) return true;
+  if (String(envelopeFrom || "").endsWith("@zenaek.resend.app")) return true;
+  return false;
+}
+
 function isOurMailbox(email) {
   const value = String(email || "").toLowerCase();
   return (
@@ -420,11 +428,15 @@ export async function processInboundEmail(payload) {
     };
   }
 
-  if (isIgnoredSender(from) || isOurMailbox(from)) {
+  if (
+    isIgnoredSender(from) ||
+    isIgnoredSender(envelopeFrom) ||
+    isLoopEmail(subject, envelopeFrom)
+  ) {
     return {
       success: true,
       ignored: true,
-      message: "Email système ignoré",
+      message: "Email système ignoré (anti-boucle)",
       from,
       httpStatus: 200,
     };
@@ -448,7 +460,7 @@ export async function processInboundEmail(payload) {
   }
 
   const formule = detectFormule(replyText);
-  const interest = detectInterest(replyText) || detectInterest(rawText);
+  const interest = detectInterest(replyText);
   const question = looksLikeQuestion(replyText);
   const statut = contact.suivi_statut || "";
 
@@ -464,12 +476,7 @@ export async function processInboundEmail(payload) {
     `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
   );
 
-  await notifyAdmin({
-    contact,
-    subject,
-    text: replyText || rawText,
-    intent,
-  });
+  // Pas de notif Gmail : le transfert Gmail + une notif recréent une boucle.
 
   if (formule && !FORMULE_ALREADY_CHOSEN.has(statut)) {
     const sent = await sendTemplatedEmail(contact, "formule_confirmee", {
