@@ -96,6 +96,21 @@ const BUDGETS = [
   "besoin-bourse",
 ];
 
+const EMAIL_TEMPLATE_OPTIONS = [
+  {
+    value: "relance_1",
+    label: "🔔 Relance 1 — Formulaire à remplir",
+  },
+  {
+    value: "relance_2",
+    label: "🔔 Relance 2 — Toujours intéressé(e) ?",
+  },
+  {
+    value: "formules_presentation",
+    label: "📋 Formules d'accompagnement",
+  },
+];
+
 const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
   { value: "email_envoye", label: "Email envoyé", icon: "📧" },
@@ -131,6 +146,10 @@ export default function AdminDashboard() {
   const [filterNiveau, setFilterNiveau] = useState("tous");
   const [filterDomaine, setFilterDomaine] = useState("tous");
   const [selectedContact, setSelectedContact] = useState(null);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [bulkTemplate, setBulkTemplate] = useState("relance_1");
+  const [bulkSending, setBulkSending] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState(null);
   const [pays, setPays] = useState([]);
   const { signOut, user } = useAuth();
   const router = useRouter();
@@ -157,6 +176,91 @@ export default function AdminDashboard() {
       setPays(paysUniques.sort());
     }
     setLoading(false);
+  };
+
+  const toggleSelected = (id) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
+
+  const sendBulkEmails = async () => {
+    const selected = contacts.filter((c) => selectedIds.includes(c.id));
+    const withEmail = selected.filter((c) => c.email);
+    if (withEmail.length === 0) {
+      alert("Aucun contact avec email dans la sélection.");
+      return;
+    }
+
+    const template = EMAIL_TEMPLATE_OPTIONS.find(
+      (option) => option.value === bulkTemplate,
+    );
+    const confirmed = confirm(
+      `Envoyer « ${template?.label || bulkTemplate} » à ${withEmail.length} personne${withEmail.length > 1 ? "s" : ""} ?\n\nLes emails partent un par un. Ne fermez pas la page.`,
+    );
+    if (!confirmed) return;
+
+    setBulkSending(true);
+    const sent = [];
+    const failed = [];
+
+    try {
+      for (let i = 0; i < withEmail.length; i++) {
+        const contact = withEmail[i];
+        setBulkProgress({
+          current: i + 1,
+          total: withEmail.length,
+          name: `${contact.prenom || ""} ${contact.nom || ""}`.trim(),
+        });
+
+        try {
+          const response = await fetch("/api/email/auto-reply", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contactId: String(contact.id),
+              emailTemplate: bulkTemplate,
+            }),
+          });
+          const data = await response.json();
+          if (data.success) {
+            sent.push(contact);
+            if (data.status) {
+              setContacts((prev) =>
+                prev.map((c) =>
+                  c.id === contact.id ? { ...c, suivi_statut: data.status } : c,
+                ),
+              );
+            }
+          } else {
+            failed.push({
+              contact,
+              error: data.message || data.error || "Erreur inconnue",
+            });
+          }
+        } catch (err) {
+          failed.push({ contact, error: err.message });
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 250));
+      }
+    } finally {
+      setBulkSending(false);
+      setBulkProgress(null);
+      setSelectedIds([]);
+    }
+
+    await fetchContacts();
+
+    const failLines = failed
+      .map(
+        (item) =>
+          `• ${item.contact.prenom || ""} ${item.contact.nom || ""} — ${item.error}`,
+      )
+      .join("\n");
+    alert(
+      `Envoi groupé terminé.\n✅ ${sent.length} envoyé${sent.length > 1 ? "s" : ""}\n❌ ${failed.length} échec${failed.length > 1 ? "s" : ""}${failLines ? `\n\n${failLines}` : ""}`,
+    );
   };
 
   const updateStatut = async (id, newStatut) => {
@@ -488,6 +592,96 @@ const stats = {
           </div>
         </div>
 
+        {/* Envoi groupé */}
+        <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 sticky top-[88px] z-30">
+          <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
+            <div className="flex-1">
+              <p className="text-white font-bold">
+                📬 Envoi groupé
+                {selectedIds.length > 0
+                  ? ` — ${selectedIds.length} sélectionné${selectedIds.length > 1 ? "s" : ""}`
+                  : ""}
+              </p>
+              <p className="text-xs text-slate-400 mt-1">
+                {bulkSending && bulkProgress
+                  ? `Envoi ${bulkProgress.current}/${bulkProgress.total} — ${bulkProgress.name}`
+                  : "Cochez des contacts dans la liste, puis envoyez une relance ou les formules."}
+              </p>
+              {bulkSending && bulkProgress ? (
+                <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300"
+                    style={{
+                      width: `${Math.round(
+                        (bulkProgress.current / bulkProgress.total) * 100,
+                      )}%`,
+                    }}
+                  />
+                </div>
+              ) : null}
+            </div>
+            <select
+              value={bulkTemplate}
+              disabled={bulkSending}
+              onChange={(e) => setBulkTemplate(e.target.value)}
+              className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-300 font-semibold cursor-pointer disabled:opacity-50"
+            >
+              {EMAIL_TEMPLATE_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                disabled={bulkSending || filteredContacts.length === 0}
+                onClick={() => {
+                  const filteredIds = filteredContacts.map((c) => c.id);
+                  const allSelected =
+                    filteredIds.length > 0 &&
+                    filteredIds.every((id) => selectedIds.includes(id));
+                  if (allSelected) {
+                    setSelectedIds((prev) =>
+                      prev.filter((id) => !filteredIds.includes(id)),
+                    );
+                    return;
+                  }
+                  setSelectedIds((prev) => [
+                    ...new Set([...prev, ...filteredIds]),
+                  ]);
+                }}
+                className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
+              >
+                {filteredContacts.length > 0 &&
+                filteredContacts.every((c) => selectedIds.includes(c.id))
+                  ? "Tout désélectionner"
+                  : "Sélectionner les filtrés"}
+              </button>
+              {selectedIds.length > 0 ? (
+                <button
+                  type="button"
+                  disabled={bulkSending}
+                  onClick={() => setSelectedIds([])}
+                  className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
+                >
+                  Vider
+                </button>
+              ) : null}
+              <button
+                type="button"
+                disabled={bulkSending || selectedIds.length === 0}
+                onClick={sendBulkEmails}
+                className="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {bulkSending
+                  ? `⏳ Envoi ${bulkProgress?.current || 0}/${bulkProgress?.total || 0}`
+                  : `📤 Envoyer (${selectedIds.length})`}
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Table */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
           {loading ? (
@@ -509,6 +703,34 @@ const stats = {
               <table className="w-full">
                 <thead className="bg-slate-900/60 border-b border-slate-700/50">
                   <tr>
+                    <th className="px-4 py-4 w-12">
+                      <input
+                        type="checkbox"
+                        checked={
+                          filteredContacts.length > 0 &&
+                          filteredContacts.every((c) =>
+                            selectedIds.includes(c.id),
+                          )
+                        }
+                        disabled={bulkSending}
+                        onChange={() => {
+                          const filteredIds = filteredContacts.map((c) => c.id);
+                          const allSelected = filteredIds.every((id) =>
+                            selectedIds.includes(id),
+                          );
+                          if (allSelected) {
+                            setSelectedIds((prev) =>
+                              prev.filter((id) => !filteredIds.includes(id)),
+                            );
+                            return;
+                          }
+                          setSelectedIds((prev) => [
+                            ...new Set([...prev, ...filteredIds]),
+                          ]);
+                        }}
+                        className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
+                      />
+                    </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
                       👤 Nom
                     </th>
@@ -536,8 +758,20 @@ const stats = {
                   {filteredContacts.map((c) => (
                     <tr
                       key={c.id}
-                      className="hover:bg-slate-700/30 transition-all duration-200 group"
+                      className={`hover:bg-slate-700/30 transition-all duration-200 group ${
+                        selectedIds.includes(c.id) ? "bg-amber-500/10" : ""
+                      }`}
                     >
+                      <td className="px-4 py-4">
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.includes(c.id)}
+                          disabled={bulkSending}
+                          onChange={() => toggleSelected(c.id)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
+                        />
+                      </td>
                       <td className="px-6 py-4">
                         <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                           {c.prenom} {c.nom}
@@ -669,21 +903,6 @@ function ContactModal({
     getChosenFormule(contact),
   );
   const [savingFormule, setSavingFormule] = useState(false);
-
-  const EMAIL_TEMPLATE_OPTIONS = [
-    {
-      value: "formules_presentation",
-      label: "📋 Formules d'accompagnement",
-    },
-    {
-      value: "relance_1",
-      label: "🔔 Relance 1 — Formulaire à remplir",
-    },
-    {
-      value: "relance_2",
-      label: "🔔 Relance 2 — Toujours intéressé(e) ?",
-    },
-  ];
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability

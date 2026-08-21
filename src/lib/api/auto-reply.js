@@ -14,6 +14,32 @@ const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
 
+const STATUS_RANK = {
+  mail_bienvenue_envoyé: 0,
+  relance_1_envoyée: 1,
+  relance_2_envoyée: 2,
+  choix_des_formules: 3,
+  formule_choisie: 4,
+  prospect_à_qualifier: 5,
+  offre_envoyée: 6,
+  attente_paiement: 7,
+  client_payé: 8,
+  appel_réservé: 9,
+  dossier_préparation: 10,
+  candidature_envoyée: 11,
+  admission_reçue: 12,
+  dossier_terminé: 13,
+};
+
+function shouldAdvanceStatus(currentStatus, nextStatus) {
+  if (!nextStatus) return false;
+  if (!currentStatus) return true;
+  const currentRank = STATUS_RANK[currentStatus];
+  const nextRank = STATUS_RANK[nextStatus];
+  if (currentRank === undefined || nextRank === undefined) return true;
+  return nextRank >= currentRank;
+}
+
 console.log("✅ Route /api/email/auto-reply démarrée");
 
 const EMAIL_BASE_STYLES = `
@@ -884,20 +910,28 @@ export default async function handler(req, res) {
       }
 
       const nextStatus = template.status;
-      if (nextStatus) {
+      const canAdvance = shouldAdvanceStatus(
+        contact.suivi_statut,
+        nextStatus,
+      );
+      if (nextStatus && canAdvance) {
         const statusUpdated = await updateContactStatus(contactId, nextStatus);
         if (!statusUpdated) {
           console.warn(
             "⚠️ Statut non mis à jour (contrainte BDD probable). L'email a bien été envoyé.",
           );
         }
+      } else if (nextStatus && !canAdvance) {
+        console.log(
+          `ℹ️ Statut conservé (${contact.suivi_statut}) — pas de recul vers ${nextStatus}`,
+        );
       }
 
       await logAction(
         contactId,
         contact.email,
         template.action,
-        nextStatus
+        nextStatus && canAdvance
           ? `${template.description} - Statut visé: ${nextStatus}`
           : template.description,
       );
@@ -911,7 +945,9 @@ export default async function handler(req, res) {
         message: `${template.description} ✅`,
         contact: contactId,
         emailTemplate,
-        status: nextStatus || contact.suivi_statut,
+        status: canAdvance
+          ? nextStatus || contact.suivi_statut
+          : contact.suivi_statut,
         source: "bouton_dashboard",
       });
     }
