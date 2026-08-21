@@ -5,7 +5,5 @@ export const maxDuration = 30;
 
 const adapted = adaptVercelHandler(handler);
 
-const adapted = adaptVercelHandler(handler);
-
 export const GET = adapted;
 export const POST = adapted;
