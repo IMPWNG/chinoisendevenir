@@ -110,10 +110,34 @@ export function isStudentSpaceUnlocked(statut) {
   return unlocked.has(statut);
 }
 
+export const FORMULE_OPTIONS = [
+  { value: "Orientation (50€)", label: "1️⃣ Orientation (50€)" },
+  {
+    value: "Accompagnement candidature (300€)",
+    label: "2️⃣ Accompagnement candidature (300€)",
+  },
+  {
+    value: "Accompagnement complet (500€)",
+    label: "3️⃣ Accompagnement complet (500€)",
+  },
+];
+
 export function getChosenFormule(contact) {
   if (!contact) return "";
   if (contact.formule) return String(contact.formule).trim();
   const notes = String(contact.notes_admin || "");
   const match = notes.match(/Formule choisie:\s*(.+)/i);
   return match ? match[1].trim() : "";
+}
+
+export function mergeFormuleNote(notesAdmin, formuleLabel) {
+  const noteLine = `Formule choisie: ${formuleLabel}`;
+  const cleaned = stripFormuleNote(notesAdmin);
+  return cleaned ? `${cleaned}\n${noteLine}` : noteLine;
+}
+
+export function stripFormuleNote(notesAdmin) {
+  return String(notesAdmin || "")
+    .replace(/\n?Formule choisie:\s*.+/gi, "")
+    .trim();
 }

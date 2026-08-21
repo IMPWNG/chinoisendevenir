@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
-import { isStudentSpaceUnlocked, getChosenFormule } from "../lib/studentProgress";
+import {
+  isStudentSpaceUnlocked,
+  getChosenFormule,
+  FORMULE_OPTIONS,
+  mergeFormuleNote,
+  stripFormuleNote,
+} from "../lib/studentProgress";
 
 const STATUTS = [
   "mail_bienvenue_envoyé",
@@ -193,6 +199,83 @@ export default function AdminDashboard() {
       );
     } catch (err) {
       console.error("Erreur:", err);
+      alert("Une erreur est survenue");
+    }
+  };
+
+  const updateFormule = async (id, formuleLabel) => {
+    const current =
+      (selectedContact?.id === id ? selectedContact : null) ||
+      contacts.find((c) => c.id === id);
+    if (!current) return;
+
+    const nextFormule = formuleLabel || null;
+    const shouldUnlock =
+      Boolean(nextFormule) && !isStudentSpaceUnlocked(current.suivi_statut);
+    const notes = nextFormule
+      ? mergeFormuleNote(current.notes_admin, nextFormule)
+      : stripFormuleNote(current.notes_admin) || null;
+
+    const payloadBase = {
+      formule: nextFormule,
+      notes_admin: notes,
+    };
+    if (shouldUnlock) payloadBase.suivi_statut = "formule_choisie";
+
+    const payloads = [
+      { ...payloadBase, updated_at: new Date().toISOString() },
+      payloadBase,
+      {
+        notes_admin: notes,
+        ...(shouldUnlock ? { suivi_statut: "formule_choisie" } : {}),
+      },
+    ];
+
+    try {
+      let saved = false;
+      for (const payload of payloads) {
+        const { error } = await supabase
+          .from("contacts")
+          .update(payload)
+          .eq("id", id);
+        if (!error) {
+          saved = true;
+          break;
+        }
+        console.warn("Erreur update formule:", error.message);
+      }
+
+      if (!saved) {
+        alert("Impossible d'enregistrer la formule.");
+        return;
+      }
+
+      await supabase.from("suivi_actions").insert({
+        contact_id: id,
+        action: nextFormule ? "formule_choisie" : "contact_modifier",
+        description: nextFormule
+          ? `Formule enregistrée manuellement : ${nextFormule}`
+          : "Formule retirée manuellement",
+        user_admin: user?.email,
+      });
+
+      const next = {
+        ...current,
+        formule: nextFormule,
+        notes_admin: notes,
+        suivi_statut: shouldUnlock
+          ? "formule_choisie"
+          : current.suivi_statut,
+      };
+
+      setContacts((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, ...next } : c)),
+      );
+      setSelectedContact((prev) =>
+        prev && prev.id === id ? { ...prev, ...next } : prev,
+      );
+    } catch (err) {
+      console.error("Erreur update formule:", err);
       alert("Une erreur est survenue");
     }
   };
@@ -537,6 +620,7 @@ const stats = {
           contact={selectedContact}
           onClose={() => setSelectedContact(null)}
           onUpdateStatut={updateStatut}
+          onUpdateFormule={updateFormule}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
         />
@@ -570,6 +654,7 @@ function ContactModal({
   contact,
   onClose,
   onUpdateStatut,
+  onUpdateFormule,
   userEmail,
   onContactUpdated,
 }) {
@@ -580,6 +665,10 @@ function ContactModal({
   const [loadingActions, setLoadingActions] = useState(true);
   const [emailTemplate, setEmailTemplate] = useState("formules_presentation");
   const [sendingEmail, setSendingEmail] = useState(false);
+  const [selectedFormule, setSelectedFormule] = useState(
+    getChosenFormule(contact),
+  );
+  const [savingFormule, setSavingFormule] = useState(false);
 
   const EMAIL_TEMPLATE_OPTIONS = [
     {
@@ -599,7 +688,9 @@ function ContactModal({
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability
     fetchActions();
-  }, [contact.id]);
+    setNotes(contact.notes_admin || "");
+    setSelectedFormule(getChosenFormule(contact));
+  }, [contact.id, contact.formule, contact.notes_admin]);
 
   const fetchActions = async () => {
     setLoadingActions(true);
@@ -775,14 +866,6 @@ function ContactModal({
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📋 Formule
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {getChosenFormule(contact) || "—"}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
                     📅 Date de rentrée
                   </td>
                   <td className="px-4 py-3 text-white">
@@ -842,6 +925,65 @@ function ContactModal({
                 "Action : Relance 1 • Statut : relance 1 envoyée"}
               {emailTemplate === "relance_2" &&
                 "Action : Relance 2 • Statut : relance 2 envoyée"}
+            </p>
+          </div>
+
+          {/* Formule d'accompagnement */}
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              📋 Formule d'accompagnement
+            </label>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <select
+                value={
+                  FORMULE_OPTIONS.some((o) => o.value === selectedFormule)
+                    ? selectedFormule
+                    : selectedFormule
+                      ? "__custom__"
+                      : ""
+                }
+                onChange={(e) => {
+                  if (e.target.value === "__custom__") return;
+                  setSelectedFormule(e.target.value);
+                }}
+                className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold cursor-pointer"
+              >
+                <option value="">-- Aucune formule --</option>
+                {FORMULE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+                {selectedFormule &&
+                  !FORMULE_OPTIONS.some((o) => o.value === selectedFormule) && (
+                    <option value="__custom__">{selectedFormule}</option>
+                  )}
+              </select>
+              <button
+                type="button"
+                disabled={
+                  savingFormule ||
+                  (selectedFormule || "") === getChosenFormule(contact)
+                }
+                onClick={async () => {
+                  setSavingFormule(true);
+                  try {
+                    await onUpdateFormule(contact.id, selectedFormule);
+                    fetchActions();
+                  } finally {
+                    setSavingFormule(false);
+                  }
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {savingFormule ? "⏳ Enregistrement..." : "💾 Enregistrer"}
+              </button>
+            </div>
+            <p className="text-xs text-slate-500 mt-3">
+              Pour les étudiants qui ont déjà choisi avant l'automatisation.
+              Enregistrer une formule débloque l'espace étudiant si besoin
+              (statut « formule choisie »). Un statut plus avancé n'est pas
+              modifié.
             </p>
           </div>
 
