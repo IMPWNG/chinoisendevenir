@@ -695,27 +695,53 @@ async function logAction(contactId, email, actionType, description) {
   console.log(`Action: ${actionType}`);
   console.log(`Description: ${description}`);
 
+  const fallbacks = {
+    relance_1: "relance",
+    relance_2: "relance",
+    email_formules: "email_envoye",
+  };
+
+  const actionCandidates = [actionType, fallbacks[actionType]].filter(
+    (value, index, list) => value && list.indexOf(value) === index,
+  );
+
   try {
-    const { error } = await supabase
-      .from("suivi_actions")
-      .insert([
+    for (const action of actionCandidates) {
+      const { error } = await supabase.from("suivi_actions").insert([
         {
           contact_id: contactId,
-          action: actionType,
+          action,
           description: description,
           user_admin: "système_automatique",
           created_at: new Date().toISOString(),
         },
-      ])
-      .select()
-      .single();
+      ]);
 
-    if (error) {
+      if (!error) {
+        console.log(`✅ Action loggée: ${action}`);
+        return true;
+      }
+
       console.warn("⚠️ Erreur logging:", error.message);
-      return false;
+
+      const { error: retryError } = await supabase.from("suivi_actions").insert([
+        {
+          contact_id: contactId,
+          action,
+          description: description,
+          user_admin: "système_automatique",
+        },
+      ]);
+
+      if (!retryError) {
+        console.log(`✅ Action loggée (sans created_at): ${action}`);
+        return true;
+      }
+
+      console.warn("⚠️ Erreur logging retry:", retryError.message);
     }
-    console.log(`✅ Action loggée`);
-    return true;
+
+    return false;
   } catch (error) {
     console.warn("⚠️ Erreur logging:", error.message);
     return false;
