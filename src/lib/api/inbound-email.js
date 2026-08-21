@@ -98,6 +98,62 @@ const FORMULE_ALREADY_CHOSEN = new Set([
   "dossier_terminé",
 ]);
 
+function isIgnoredSender(email) {
+  const value = String(email || "").toLowerCase();
+  if (!value) return true;
+  if (value.endsWith("@google.com")) return true;
+  if (value.endsWith("@zenaek.resend.app")) return true;
+  if (value.includes("mailer-daemon")) return true;
+  if (value.includes("noreply") || value.includes("no-reply")) return true;
+  return false;
+}
+
+function isOurMailbox(email) {
+  const value = String(email || "").toLowerCase();
+  return (
+    value === CONTACT_FROM_EMAIL ||
+    value === ADMIN_NOTIFY_EMAIL.toLowerCase() ||
+    value.endsWith("@chinoisendevenir.com")
+  );
+}
+
+function extractForwardedSender(text, headers = {}) {
+  const headerBag = headers || {};
+  const headerCandidates = [
+    headerBag["reply-to"],
+    headerBag.reply_to,
+    headerBag["x-original-from"],
+    headerBag["resent-from"],
+    headerBag.from,
+  ];
+
+  for (const candidate of headerCandidates) {
+    const email = extractEmailAddress(candidate);
+    if (email && !isOurMailbox(email) && !isIgnoredSender(email)) {
+      return email;
+    }
+  }
+
+  const body = String(text || "");
+  const patterns = [
+    /Forwarded message[\s\S]{0,300}?From:\s*(.+)/i,
+    /Message transféré[\s\S]{0,300}?De\s*:\s*(.+)/i,
+    /\nFrom:\s*(.+@.+\..+)/i,
+    /\nDe\s*:\s*(.+@.+\..+)/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = body.match(pattern);
+    if (!match) continue;
+    const email = extractEmailAddress(match[1]);
+    if (email && !isOurMailbox(email) && !isIgnoredSender(email)) {
+      return email;
+    }
+  }
+
+  return "";
+}
+
 function extractEmailAddress(from) {
   if (!from) return "";
   if (Array.isArray(from)) return extractEmailAddress(from[0]);
@@ -349,10 +405,12 @@ export async function processInboundEmail(payload) {
   }
 
   const received = await fetchReceivedEmail(emailId);
-  const from = extractEmailAddress(received?.from || webhookFrom);
+  const envelopeFrom = extractEmailAddress(received?.from || webhookFrom);
   const subject = received?.subject || webhookSubject;
   const rawText = received?.text || htmlToText(received?.html) || data.text || "";
   const replyText = extractLatestReply(rawText);
+  const from =
+    extractForwardedSender(rawText, received?.headers) || envelopeFrom;
 
   if (!from) {
     return {
@@ -362,19 +420,22 @@ export async function processInboundEmail(payload) {
     };
   }
 
-  if (
-    from === CONTACT_FROM_EMAIL ||
-    from.endsWith("@chinoisendevenir.com")
-  ) {
+  if (isIgnoredSender(from) || isOurMailbox(from)) {
     return {
       success: true,
       ignored: true,
-      message: "Email interne ignoré",
+      message: "Email système ignoré",
+      from,
       httpStatus: 200,
     };
   }
 
-  const contact = await findContactByEmail(from);
+  const contact =
+    (await findContactByEmail(from)) ||
+    (envelopeFrom && envelopeFrom !== from
+      ? await findContactByEmail(envelopeFrom)
+      : null);
+
   if (!contact) {
     console.log("⚠️ Contact non trouvé:", from);
     return {
@@ -387,7 +448,7 @@ export async function processInboundEmail(payload) {
   }
 
   const formule = detectFormule(replyText);
-  const interest = detectInterest(replyText);
+  const interest = detectInterest(replyText) || detectInterest(rawText);
   const question = looksLikeQuestion(replyText);
   const statut = contact.suivi_statut || "";
 
