@@ -31,6 +31,268 @@ const AUTO_REPLY_PATTERNS = {
 
 console.log("✅ Route /api/email/auto-reply démarrée");
 
+const EMAIL_BASE_STYLES = `
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #2c3e50;
+            background: #f5f7fa;
+          }
+          .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+          }
+          .header { 
+            background: linear-gradient(135deg, #FF2C00 0%, #FA694B 100%);
+            color: white; 
+            padding: 40px 20px;
+            text-align: center;
+          }
+          .header h1 { 
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+          }
+          .header p { 
+            font-size: 14px;
+            opacity: 0.95;
+          }
+          .content { 
+            padding: 40px 30px;
+          }
+          .greeting {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+          }
+          .section {
+            margin-bottom: 25px;
+          }
+          .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #FF2C00;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+          }
+          .section p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 12px;
+          }
+          .formule-card {
+            background: white;
+            border-left: 4px solid #FF2C00;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+          }
+          .formule-card.highlight {
+            background: #f0f4ff;
+            border-left-color: #667eea;
+            border: 1px solid #dde4ff;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+          }
+          .formule-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+          .formule-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FF2C00;
+          }
+          .formule-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0 0;
+          }
+          .formule-list li {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+          }
+          .formule-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FF2C00;
+            font-weight: bold;
+          }
+          .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin: 20px 0;
+          }
+          .warning h4 {
+            margin-bottom: 10px;
+            font-size: 14px;
+          }
+          .warning ol {
+            margin-left: 20px;
+            margin-top: 10px;
+          }
+          .warning li {
+            margin-bottom: 5px;
+            font-size: 13px;
+          }
+          .cta-section {
+            background: linear-gradient(135deg, #FF2C00 0%, #FA694B 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 4px;
+            margin: 25px 0;
+            text-align: center;
+          }
+          .cta-section p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: white;
+          }
+          .cta-text {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 12px;
+            border-radius: 4px;
+            font-style: italic;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+          }
+          .cta-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+          }
+          .footer {
+            background: #f5f7fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+          }
+          .footer p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+          }
+          .footer-brand {
+            font-size: 16px;
+            font-weight: 700;
+            color: #FF2C00;
+            margin: 15px 0;
+          }
+          .footer-link {
+            color: #FF2C00;
+            text-decoration: none;
+            font-weight: 600;
+          }
+`;
+
+function wrapEmailTemplate({ headerTitle, headerSubtitle, prenom, innerHtml }) {
+  return `
+    <!DOCTYPE html>
+    <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          ${EMAIL_BASE_STYLES}
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>${headerTitle}</h1>
+            <p>${headerSubtitle}</p>
+          </div>
+          <div class="content">
+            <div class="greeting">
+              <p>Bonjour <strong>${prenom}</strong>,</p>
+            </div>
+            ${innerHtml}
+          </div>
+          <div class="footer">
+            <p>Cordialement,</p>
+            <div class="footer-brand">L'équipe Chinois en Devenir</div>
+            <p>
+              <a href="https://chinoisendevenir.com/" class="footer-link">🌐 https://chinoisendevenir.com/</a>
+            </p>
+            <p style="font-size: 12px; color: #999; margin-top: 20px;">
+              © 2026 Chinois en Devenir | Tous droits réservés
+            </p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+}
+
+function generateRelance1Template(prenom) {
+  return wrapEmailTemplate({
+    headerTitle: "Votre projet d'études en Chine 🇨🇳",
+    headerSubtitle: "Souhaitez-vous poursuivre ?",
+    prenom,
+    innerHtml: `
+            <div class="section">
+              <p>Vous nous avez récemment contactés au sujet de votre projet d'études en Chine.</p>
+              <p>Nous souhaitons savoir si vous êtes toujours intéressé(e) par ce projet. Si c'est le cas, nous vous invitons à remplir soigneusement le formulaire disponible sur notre site :</p>
+            </div>
+            <div class="cta-section">
+              <p><strong>🌐 Remplir le formulaire</strong></p>
+              <a href="https://chinoisendevenir.com/" class="cta-link">https://chinoisendevenir.com/</a>
+            </div>
+            <div class="section">
+              <p>Ces informations nous permettront de mieux étudier votre profil, vos objectifs et les possibilités adaptées à votre situation.</p>
+              <p>Si vous avez déjà rempli le formulaire, vous pouvez simplement répondre à cet e-mail en nous le confirmant.</p>
+              <p>Nous restons à votre disposition pour toute question.</p>
+            </div>
+    `,
+  });
+}
+
+function generateRelance2Template(prenom) {
+  return wrapEmailTemplate({
+    headerTitle: "Êtes-vous toujours intéressé(e) ?",
+    headerSubtitle: "Votre projet d'études en Chine",
+    prenom,
+    innerHtml: `
+            <div class="section">
+              <p>Vous nous avez sollicités il y a quelque temps concernant votre projet d'études en Chine.</p>
+              <p>Nous souhaitons savoir si vous êtes toujours intéressé(e) par un accompagnement pour votre admission, la recherche de formation ou les opportunités de bourses.</p>
+            </div>
+            <div class="cta-section">
+              <p><strong>Si votre projet est toujours d'actualité, répondez simplement à cet e-mail par :</strong></p>
+              <div class="cta-text">Oui</div>
+            </div>
+            <div class="section">
+              <p>Notre équipe vous recontactera afin de vous présenter les prochaines étapes.</p>
+              <p>Si votre projet n'est plus d'actualité, vous pouvez également nous le signaler.</p>
+            </div>
+    `,
+  });
+}
+
 // 📧 Fonction pour générer le template HTML des formules
 function generateFormulesPresentationTemplate(prenom) {
   return `
@@ -324,9 +586,40 @@ function generateFormulesPresentationTemplate(prenom) {
   `;
 }
 
-// ✉️ Envoyer la réponse automatique
-async function sendAutoReply(contact) {
+const EMAIL_TEMPLATES = {
+  formules_presentation: {
+    subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
+    generateHtml: generateFormulesPresentationTemplate,
+    action: "email_envoye",
+    description: "Email des formules envoyé",
+    status: "choix_des_formules",
+  },
+  relance_1: {
+    subject: "Votre projet d'études en Chine 🇨🇳",
+    generateHtml: generateRelance1Template,
+    action: "relance",
+    description: "Relance 1 envoyée — formulaire à remplir",
+    status: null,
+  },
+  relance_2: {
+    subject: "Êtes-vous toujours intéressé(e) par des études en Chine ?",
+    generateHtml: generateRelance2Template,
+    action: "relance",
+    description: "Relance 2 envoyée — confirmation d'intérêt",
+    status: null,
+  },
+};
+
+// ✉️ Envoyer un email selon le template choisi
+async function sendTemplatedEmail(contact, templateKey = "formules_presentation") {
+  const template = EMAIL_TEMPLATES[templateKey];
+  if (!template) {
+    console.error(`❌ Template inconnu: ${templateKey}`);
+    return { success: false, error: "Template inconnu" };
+  }
+
   console.log("\n📧 === ENVOI EMAIL ===");
+  console.log(`Template: ${templateKey}`);
   console.log(`À: ${contact.email}`);
   console.log(`Prenom: ${contact.prenom}`);
 
@@ -335,17 +628,27 @@ async function sendAutoReply(contact) {
     const response = await resend.emails.send({
       from: "contact@chinoisendevenir.com",
       to: contact.email,
-      subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
-      html: generateFormulesPresentationTemplate(contact.prenom),
+      subject: template.subject,
+      html: template.generateHtml(contact.prenom),
       replyTo: "chinoisendevenir@gmail.com",
     });
 
-    console.log(`✅ Email envoyé avec ID: ${response.id}`);
-    return true;
+    if (response.error) {
+      console.error("❌ Erreur Resend:", response.error);
+      return { success: false, error: response.error };
+    }
+
+    console.log(`✅ Email envoyé avec ID: ${response.id || response.data?.id}`);
+    return { success: true, template };
   } catch (error) {
     console.error("❌ Erreur envoi email:", error.message);
-    return false;
+    return { success: false, error: error.message };
   }
+}
+
+async function sendAutoReply(contact) {
+  const result = await sendTemplatedEmail(contact, "formules_presentation");
+  return result.success;
 }
 
 // 🔄 Mettre à jour le statut dans contacts
@@ -555,12 +858,22 @@ export default async function handler(req, res) {
     }
 
     // 🔍 CAS 2 : Appel manuel (BOUTON DASHBOARD)
-    if (body.contactId && body.status) {
+    if (body.contactId) {
       console.log("\n🎯 CAS 2 : APPEL MANUEL DÉTECTÉ");
       console.log(`contactId: ${body.contactId}`);
+      console.log(`emailTemplate: ${body.emailTemplate}`);
       console.log(`status: ${body.status}`);
 
-      const { contactId, status } = body;
+      const { contactId } = body;
+      const emailTemplate = body.emailTemplate || "formules_presentation";
+      const template = EMAIL_TEMPLATES[emailTemplate];
+
+      if (!template) {
+        return res.status(400).json({
+          success: false,
+          message: "Template email inconnu",
+        });
+      }
 
       // Chercher le contact
       console.log("\n🔎 Recherche du contact...");
@@ -580,30 +893,32 @@ export default async function handler(req, res) {
 
       console.log(`✅ Contact trouvé: ${contact.prenom} ${contact.nom}`);
 
-      // 📧 Envoyer l'email des formules
-      const replySent = await sendAutoReply(contact);
-      if (!replySent) {
+      const replySent = await sendTemplatedEmail(contact, emailTemplate);
+      if (!replySent.success) {
         return res.status(500).json({
           success: false,
           message: "Erreur envoi email",
         });
       }
 
-      // 🔄 Mettre à jour le statut dans contacts
-      const statusUpdated = await updateContactStatus(contactId, status);
-      if (!statusUpdated) {
-        return res.status(500).json({
-          success: false,
-          message: "Erreur mise à jour statut",
-        });
+      const nextStatus = body.status || template.status;
+      if (nextStatus) {
+        const statusUpdated = await updateContactStatus(contactId, nextStatus);
+        if (!statusUpdated) {
+          return res.status(500).json({
+            success: false,
+            message: "Erreur mise à jour statut",
+          });
+        }
       }
 
-      // 📝 Logger l'action
       await logAction(
         contactId,
         contact.email,
-        "email_envoye",
-        `Choix des formules envoyé - Statut: ${status}`,
+        template.action,
+        nextStatus
+          ? `${template.description} - Statut: ${nextStatus}`
+          : template.description,
       );
 
       console.log("\n" + "✅".repeat(40));
@@ -612,9 +927,10 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
-        message: "Email des formules envoyé ✅",
+        message: `${template.description} ✅`,
         contact: contactId,
-        status: status,
+        emailTemplate,
+        status: nextStatus || contact.suivi_statut,
         source: "bouton_dashboard",
       });
     }

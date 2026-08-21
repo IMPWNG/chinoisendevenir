@@ -543,12 +543,35 @@ function StatCard({ label, value, icon, color }) {
   );
 }
 
-function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
+function ContactModal({
+  contact,
+  onClose,
+  onUpdateStatut,
+  userEmail,
+  onContactUpdated,
+}) {
   const [actions, setActions] = useState([]);
   const [newAction, setNewAction] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [notes, setNotes] = useState(contact.notes_admin || "");
   const [loadingActions, setLoadingActions] = useState(true);
+  const [emailTemplate, setEmailTemplate] = useState("formules_presentation");
+  const [sendingEmail, setSendingEmail] = useState(false);
+
+  const EMAIL_TEMPLATE_OPTIONS = [
+    {
+      value: "formules_presentation",
+      label: "📋 Formules d'accompagnement",
+    },
+    {
+      value: "relance_1",
+      label: "🔔 Relance 1 — Formulaire à remplir",
+    },
+    {
+      value: "relance_2",
+      label: "🔔 Relance 2 — Toujours intéressé(e) ?",
+    },
+  ];
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability
@@ -592,36 +615,52 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
       .eq("id", contact.id);
   };
 
-  // ✅ APRÈS (correct)
-  async function sendAutoReply(contactId, status) {
+  async function sendSelectedEmail() {
+    const selected = EMAIL_TEMPLATE_OPTIONS.find(
+      (option) => option.value === emailTemplate,
+    );
+    const confirmed = confirm(
+      `Envoyer l'email « ${selected?.label || emailTemplate} » à ${contact.prenom} ?`,
+    );
+    if (!confirmed) return;
+
+    setSendingEmail(true);
     try {
-      console.log("📤 Envoi:", { contactId, status });
+      const payload = {
+        contactId: String(contact.id),
+        emailTemplate,
+      };
+
+      if (emailTemplate === "formules_presentation") {
+        payload.status = "choix_des_formules";
+      }
 
       const response = await fetch("/api/email/auto-reply", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          contactId: String(contactId), // S'assurer que c'est un string
-          status: String(status), // S'assurer que c'est un string
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
       console.log("✅ Réponse serveur:", data);
 
       if (data.success) {
-        alert("✅ Réponse automatique envoyée !");
+        alert("✅ Email envoyé !");
+        fetchActions();
+        onContactUpdated?.();
         return data;
-      } else {
-        alert("❌ Erreur : " + (data.message || data.error));
-        return null;
       }
+
+      alert("❌ Erreur : " + (data.message || data.error));
+      return null;
     } catch (error) {
       console.error("❌ Erreur fetch:", error);
       alert("❌ Erreur réseau : " + error.message);
       return null;
+    } finally {
+      setSendingEmail(false);
     }
   }
 
@@ -646,20 +685,6 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
           </div>
 
           <div className="flex gap-3">
-            <button
-              onClick={() => {
-                const confirmed = confirm(
-                  "Envoyer une réponse automatique pour ce statut ?",
-                );
-                if (confirmed) {
-                  sendAutoReply(contact.id, "choix_des_formules"); // ✅ Force la valeur exacte
-                }
-              }}
-              className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 font-medium backdrop-blur-sm"
-            >
-              📧 Envoyer réponse auto
-            </button>
-
             <button
               onClick={onClose}
               className="text-white hover:bg-white/20 rounded-xl p-2 transition-all duration-200 hover:scale-110 active:scale-95"
@@ -746,6 +771,42 @@ function ContactModal({ contact, onClose, onUpdateStatut, userEmail }) {
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Envoi d'email */}
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              📧 Envoyer un email
+            </label>
+            <div className="flex flex-col md:flex-row gap-3">
+              <select
+                value={emailTemplate}
+                onChange={(e) => setEmailTemplate(e.target.value)}
+                className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold cursor-pointer"
+              >
+                {EMAIL_TEMPLATE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={sendSelectedEmail}
+                disabled={sendingEmail}
+                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {sendingEmail ? "⏳ Envoi..." : "📤 Envoyer"}
+              </button>
+            </div>
+            <p className="text-xs text-slate-500 mt-3">
+              {emailTemplate === "formules_presentation" &&
+                "Envoie les 3 formules d'accompagnement et passe le statut à « choix des formules »."}
+              {emailTemplate === "relance_1" &&
+                "Relance pour inviter le prospect à remplir le formulaire sur le site."}
+              {emailTemplate === "relance_2" &&
+                "Relance pour confirmer si le projet d'études est toujours d'actualité."}
+            </p>
           </div>
 
           {/* Statut Selector */}
