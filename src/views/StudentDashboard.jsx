@@ -505,7 +505,7 @@ export default function StudentDashboard() {
               </div>
 
               <div className="student-card">
-                <h2 className="card-title">Documents de l'équipe</h2>
+                <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
                 <p className="card-subtitle">
                   Fichiers transmis par Chinois en Devenir pour votre dossier.
                 </p>
