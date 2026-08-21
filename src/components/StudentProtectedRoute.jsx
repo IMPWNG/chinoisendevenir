@@ -16,8 +16,10 @@ export default function StudentProtectedRoute({ children }) {
 
   if (loading || !user) {
     return (
-      <div className="app">
-        <div className="p-10 text-center">Chargement de votre espace...</div>
+      <div className="app app-page-fill">
+        <div className="landing-form-section">
+          <p className="landing-section-subtitle">Chargement de votre espace...</p>
+        </div>
       </div>
     );
   }

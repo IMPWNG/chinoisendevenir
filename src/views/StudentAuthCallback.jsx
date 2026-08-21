@@ -28,6 +28,12 @@ export default function StudentAuthCallback() {
           }
         }
 
+        const next = url.searchParams.get("next");
+        if (next === "password") {
+          router.replace("/espace-etudiant/mot-de-passe");
+          return;
+        }
+
         router.replace("/espace-etudiant");
       } catch (error) {
         setMessage(error.message || "Connexion impossible");
@@ -38,8 +44,10 @@ export default function StudentAuthCallback() {
   }, [router]);
 
   return (
-    <div className="app">
-      <div className="p-10 text-center">{message}</div>
+    <div className="app app-page-fill is-centered">
+      <div className="landing-form-section">
+        <p className="landing-section-subtitle">{message}</p>
+      </div>
     </div>
   );
 }

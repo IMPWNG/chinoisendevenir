@@ -113,10 +113,10 @@ function ProcessusPage() {
   ];
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
 
-      <section className="landing-programs py-20">
+      <section className="landing-programs">
         <div className="container">
           <h1 className="landing-section-title">
             🔄 Notre processus d'admission

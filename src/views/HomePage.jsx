@@ -10,7 +10,7 @@ function HomePage() {
   const t = fr;
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
       <VacationAlert t={t} />
       <Hero t={t} />

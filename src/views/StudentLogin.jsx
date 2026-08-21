@@ -1,56 +1,129 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { fr } from "../i18n/fr";
+import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 
 export default function StudentLogin() {
   const t = fr;
   const router = useRouter();
-  const { user, loading, signInWithMagicLink } = useAuth();
-  const [email, setEmail] = useState("");
+  const { user, signIn, signUp, signOut, resetPassword } = useAuth();
+  const [mode, setMode] = useState("login");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
+  const [form, setForm] = useState({
+    prenom: "",
+    nom: "",
+    pays: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  useEffect(() => {
-    if (!loading && user) {
-      router.replace("/espace-etudiant");
-    }
-  }, [loading, user, router]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = async (e) => {
+  const ensureProfile = async (extras = {}) => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.access_token) return;
+
+    await fetch("/api/student/ensure-profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify(extras),
+    });
+  };
+
+  const goToDashboard = () => {
+    router.push("/espace-etudiant");
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     setStatus("submitting");
     setMessage("");
 
     try {
-      const check = await fetch("/api/student/request-access", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const checkData = await check.json();
-
-      if (!check.ok) {
-        setStatus("error");
-        setMessage(checkData.error || "Impossible de vérifier cet email.");
-        return;
-      }
-
-      const { error } = await signInWithMagicLink(email.trim().toLowerCase());
+      const { error } = await signIn(
+        form.email.trim().toLowerCase(),
+        form.password,
+      );
       if (error) {
         setStatus("error");
-        setMessage(error.message || "Impossible d'envoyer le lien de connexion.");
+        setMessage("Email ou mot de passe incorrect.");
         return;
       }
 
-      setStatus("success");
-      setMessage(
-        "Un lien de connexion vous a été envoyé par email. Ouvrez-le pour accéder à votre espace.",
-      );
+      await ensureProfile();
+      goToDashboard();
+    } catch (err) {
+      setStatus("error");
+      setMessage(err.message || "Une erreur est survenue.");
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setStatus("submitting");
+    setMessage("");
+
+    if (form.password.length < 8) {
+      setStatus("error");
+      setMessage("Le mot de passe doit contenir au moins 8 caractères.");
+      return;
+    }
+
+    if (form.password !== form.confirmPassword) {
+      setStatus("error");
+      setMessage("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    try {
+      const email = form.email.trim().toLowerCase();
+      const { data, error } = await signUp(email, form.password, {
+        prenom: form.prenom.trim(),
+        nom: form.nom.trim(),
+        pays: form.pays.trim(),
+      });
+
+      if (error) {
+        setStatus("error");
+        setMessage(
+          error.message?.includes("already")
+            ? "Un compte existe déjà avec cet email. Connectez-vous."
+            : error.message || "Impossible de créer le compte.",
+        );
+        return;
+      }
+
+      if (!data.session) {
+        setStatus("success");
+        setMessage(
+          "Compte créé. Vérifiez votre email pour confirmer l'inscription, puis connectez-vous.",
+        );
+        setMode("login");
+        return;
+      }
+
+      await ensureProfile({
+        prenom: form.prenom.trim(),
+        nom: form.nom.trim(),
+        pays: form.pays.trim(),
+      });
+      goToDashboard();
     } catch (err) {
       setStatus("error");
       setMessage(err.message || "Une erreur est survenue.");
@@ -58,16 +131,43 @@ export default function StudentLogin() {
   };
 
   return (
-    <div className="app app-page-fill">
+    <div className="app app-page-fill is-centered">
       <Navigation />
       <section className="landing-form-section">
         <div className="container">
-          <span className="landing-hero-badge">🎓 Espace étudiant</span>
-          <h1 className="landing-section-title">Connexion à votre dossier</h1>
+          <span className="landing-hero-badge">Espace étudiant</span>
+          <h1 className="landing-section-title">
+            {mode === "login" ? "Connexion" : "Créer un compte"}
+          </h1>
           <p className="landing-section-subtitle">
-            Entrez l'email utilisé lors de votre inscription. Vous recevrez un
-            lien pour vous connecter, sans mot de passe.
+            {mode === "login"
+              ? "Connectez-vous pour accéder à votre dossier."
+              : "Créez votre compte pour enregistrer vos informations."}
           </p>
+
+          {user && (
+            <div className="landing-form landing-form-narrow landing-alert-card">
+              <p>
+                Session ouverte avec <strong>{user.email}</strong>.
+              </p>
+              <div className="landing-hero-actions landing-actions-start">
+                <button
+                  type="button"
+                  className="landing-btn landing-btn-primary"
+                  onClick={goToDashboard}
+                >
+                  Accéder à mon dossier
+                </button>
+                <button
+                  type="button"
+                  className="landing-btn landing-btn-secondary"
+                  onClick={signOut}
+                >
+                  Se déconnecter
+                </button>
+              </div>
+            </div>
+          )}
 
           {status === "success" && (
             <div className="landing-alert landing-alert-success">{message}</div>
@@ -76,27 +176,168 @@ export default function StudentLogin() {
             <div className="landing-alert landing-alert-error">{message}</div>
           )}
 
-          <form className="landing-form" onSubmit={handleSubmit}>
-            <div className="landing-form-group">
-              <label>Adresse e-mail *</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="jean@example.com"
-                required
-              />
-            </div>
+          <div className="auth-tabs">
             <button
-              type="submit"
-              className="landing-btn landing-btn-primary landing-btn-full"
-              disabled={status === "submitting"}
+              type="button"
+              className={`auth-tab ${mode === "login" ? "is-active" : ""}`}
+              onClick={() => {
+                setMode("login");
+                setStatus("idle");
+                setMessage("");
+              }}
             >
-              {status === "submitting"
-                ? "Envoi du lien..."
-                : "Recevoir mon lien de connexion"}
+              Connexion
             </button>
-          </form>
+            <button
+              type="button"
+              className={`auth-tab ${mode === "register" ? "is-active" : ""}`}
+              onClick={() => {
+                setMode("register");
+                setStatus("idle");
+                setMessage("");
+              }}
+            >
+              Créer un compte
+            </button>
+          </div>
+
+          {mode === "login" ? (
+            <form className="landing-form landing-form-narrow" onSubmit={handleLogin}>
+              <div className="landing-form-group">
+                <label htmlFor="login-email">Adresse e-mail *</label>
+                <input
+                  id="login-email"
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="jean@example.com"
+                  required
+                />
+              </div>
+              <div className="landing-form-group">
+                <label htmlFor="login-password">Mot de passe *</label>
+                <input
+                  id="login-password"
+                  type="password"
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="landing-btn landing-btn-primary landing-btn-full"
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" ? "Connexion..." : "Se connecter"}
+              </button>
+              <button
+                type="button"
+                className="landing-btn-link"
+                onClick={async () => {
+                  if (!form.email) {
+                    setStatus("error");
+                    setMessage("Entrez votre email pour réinitialiser le mot de passe.");
+                    return;
+                  }
+                  setStatus("submitting");
+                  const { error } = await resetPassword(form.email.trim().toLowerCase());
+                  if (error) {
+                    setStatus("error");
+                    setMessage(error.message || "Impossible d'envoyer l'email.");
+                    return;
+                  }
+                  setStatus("success");
+                  setMessage(
+                    "Un email de réinitialisation vous a été envoyé si un compte existe.",
+                  );
+                }}
+              >
+                Mot de passe oublié ?
+              </button>
+            </form>
+          ) : (
+            <form
+              className="landing-form landing-form-narrow"
+              onSubmit={handleRegister}
+            >
+              <div className="landing-form-row">
+                <div className="landing-form-group">
+                  <label htmlFor="register-prenom">Prénom *</label>
+                  <input
+                    id="register-prenom"
+                    name="prenom"
+                    value={form.prenom}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="landing-form-group">
+                  <label htmlFor="register-nom">Nom *</label>
+                  <input
+                    id="register-nom"
+                    name="nom"
+                    value={form.nom}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="landing-form-group">
+                <label htmlFor="register-pays">Pays *</label>
+                <input
+                  id="register-pays"
+                  name="pays"
+                  value={form.pays}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="landing-form-group">
+                <label htmlFor="register-email">Adresse e-mail *</label>
+                <input
+                  id="register-email"
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="landing-form-group">
+                <label htmlFor="register-password">Mot de passe *</label>
+                <input
+                  id="register-password"
+                  type="password"
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  minLength={8}
+                  required
+                />
+              </div>
+              <div className="landing-form-group">
+                <label htmlFor="register-confirm">Confirmer le mot de passe *</label>
+                <input
+                  id="register-confirm"
+                  type="password"
+                  name="confirmPassword"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="landing-btn landing-btn-primary landing-btn-full"
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" ? "Création..." : "Créer mon compte"}
+              </button>
+            </form>
+          )}
         </div>
       </section>
       <Footer t={t} />

@@ -50,6 +50,7 @@ export default function StudentDashboard() {
   const [error, setError] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const unlocked = Boolean(profile?.unlocked);
   const currentStep = getStudentStepIndex(profile?.suivi_statut);
 
   const loadProfile = async () => {
@@ -133,18 +134,23 @@ export default function StudentDashboard() {
 
   if (loading) {
     return (
-      <div className="app">
+      <div className="app app-page-fill">
         <Navigation />
-        <div className="p-10 text-center">Chargement de votre dossier...</div>
+        <section className="landing-form-section">
+          <div className="container">
+            <p className="landing-section-subtitle">Chargement de votre dossier...</p>
+          </div>
+        </section>
+        <Footer t={t} />
       </div>
     );
   }
 
   if (error && !profile) {
     return (
-      <div className="app">
+      <div className="app app-page-fill">
         <Navigation />
-        <section className="landing-programs py-20">
+        <section className="landing-form-section">
           <div className="container">
             <div className="landing-alert landing-alert-error">{error}</div>
             <button
@@ -162,19 +168,20 @@ export default function StudentDashboard() {
   }
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
-      <section className="landing-programs py-20">
+      <section className="landing-form-section">
         <div className="container">
           <div className="student-toolbar">
             <div>
-              <span className="landing-hero-badge">🎓 Espace étudiant</span>
-              <h1 className="landing-section-title" style={{ marginTop: 16 }}>
+              <span className="landing-hero-badge">Espace étudiant</span>
+              <h1 className="landing-section-title is-left">
                 Bonjour {profile.prenom || ""}
               </h1>
-              <p className="landing-section-subtitle">
-                Consultez l'avancement de votre dossier, mettez à jour vos
-                informations et déposez vos documents.
+              <p className="landing-section-subtitle is-left">
+                {unlocked
+                  ? "Consultez l'avancement de votre dossier, mettez à jour vos informations et déposez vos documents."
+                  : "Complétez vos informations. Le suivi et les documents seront débloqués une fois votre formule validée."}
               </p>
             </div>
             <button
@@ -193,93 +200,18 @@ export default function StudentDashboard() {
             <div className="landing-alert landing-alert-error">{message.text}</div>
           )}
 
-          <h2 className="landing-section-title">Avancement de votre dossier</h2>
-          <p className="landing-section-subtitle">
-            Étape {currentStep + 1} sur {STUDENT_PROCESS_STEPS.length}
-          </p>
-          <div className="student-progress">
-            {STUDENT_PROCESS_STEPS.map((step, index) => {
-              const state =
-                index < currentStep
-                  ? "student-step-done"
-                  : index === currentStep
-                    ? "student-step-current"
-                    : "";
-              return (
-                <div key={step.key} className={`student-step ${state}`}>
-                  <div className="student-step-icon">{step.icon}</div>
-                  <div className="student-step-label">
-                    {index < currentStep ? "✓ " : ""}
-                    {step.label}
-                  </div>
-                  <div className="student-step-desc">{step.description}</div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="student-card">
-            <h2 className="landing-section-title" style={{ textAlign: "left" }}>
-              📄 Document requis
-            </h2>
-            <p className="landing-section-subtitle" style={{ textAlign: "left" }}>
-              Pour le moment, merci de déposer votre passeport ou une pièce
-              d'identité (PDF, JPG ou PNG — 10 Mo max).
-            </p>
-
-            {documentFile ? (
-              <div className="landing-alert landing-alert-success">
-                Document actuel : <strong>{documentFile.name}</strong>
-              </div>
-            ) : (
-              <div className="landing-alert landing-alert-warning">
-                Aucun document n'a encore été envoyé.
-              </div>
-            )}
-
-            <form onSubmit={handleUpload}>
-              <div className="landing-form-group">
-                <label>Choisir un fichier</label>
-                <input
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png,.webp"
-                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-                />
-              </div>
-              <div className="landing-hero-actions" style={{ justifyContent: "flex-start" }}>
-                <button
-                  type="submit"
-                  className="landing-btn landing-btn-primary"
-                  disabled={uploading || !selectedFile}
-                >
-                  {uploading ? "Envoi..." : "Envoyer le document"}
-                </button>
-                {documentFile && (
-                  <button
-                    type="button"
-                    className="landing-btn landing-btn-secondary"
-                    onClick={handleDownload}
-                  >
-                    Télécharger
-                  </button>
-                )}
-              </div>
-            </form>
-          </div>
-
           <form className="student-card" onSubmit={handleSave}>
-            <h2 className="landing-section-title" style={{ textAlign: "left" }}>
-              👤 Mes informations
-            </h2>
-            <p className="landing-section-subtitle" style={{ textAlign: "left" }}>
+            <h2 className="card-title">Mes informations</h2>
+            <p className="card-subtitle">
               Connecté avec {user?.email}. L'adresse email ne peut pas être
               modifiée ici.
             </p>
 
             <div className="landing-form-row">
               <div className="landing-form-group">
-                <label>Prénom *</label>
+                <label htmlFor="student-prenom">Prénom *</label>
                 <input
+                  id="student-prenom"
                   name="prenom"
                   value={profile.prenom}
                   onChange={handleChange}
@@ -287,8 +219,9 @@ export default function StudentDashboard() {
                 />
               </div>
               <div className="landing-form-group">
-                <label>Nom *</label>
+                <label htmlFor="student-nom">Nom *</label>
                 <input
+                  id="student-nom"
                   name="nom"
                   value={profile.nom}
                   onChange={handleChange}
@@ -299,12 +232,13 @@ export default function StudentDashboard() {
 
             <div className="landing-form-row">
               <div className="landing-form-group">
-                <label>Email</label>
-                <input value={profile.email} disabled />
+                <label htmlFor="student-email">Email</label>
+                <input id="student-email" value={profile.email} disabled />
               </div>
               <div className="landing-form-group">
-                <label>Téléphone</label>
+                <label htmlFor="student-phone">Téléphone</label>
                 <input
+                  id="student-phone"
                   name="phone"
                   value={profile.phone}
                   onChange={handleChange}
@@ -314,8 +248,9 @@ export default function StudentDashboard() {
 
             <div className="landing-form-row">
               <div className="landing-form-group">
-                <label>Âge</label>
+                <label htmlFor="student-age">Âge</label>
                 <input
+                  id="student-age"
                   type="number"
                   name="age"
                   min="15"
@@ -325,8 +260,9 @@ export default function StudentDashboard() {
                 />
               </div>
               <div className="landing-form-group">
-                <label>Pays *</label>
+                <label htmlFor="student-pays">Pays *</label>
                 <input
+                  id="student-pays"
                   name="pays"
                   value={profile.pays}
                   onChange={handleChange}
@@ -337,8 +273,9 @@ export default function StudentDashboard() {
 
             <div className="landing-form-row">
               <div className="landing-form-group">
-                <label>Dernier diplôme</label>
+                <label htmlFor="student-diplome">Dernier diplôme</label>
                 <select
+                  id="student-diplome"
                   name="dernier_diplome"
                   value={profile.dernier_diplome}
                   onChange={handleChange}
@@ -352,8 +289,9 @@ export default function StudentDashboard() {
                 </select>
               </div>
               <div className="landing-form-group">
-                <label>Domaine d'études</label>
+                <label htmlFor="student-domaine">Domaine d'études</label>
                 <select
+                  id="student-domaine"
                   name="domaine_etudes"
                   value={profile.domaine_etudes}
                   onChange={handleChange}
@@ -376,8 +314,9 @@ export default function StudentDashboard() {
 
             <div className="landing-form-row">
               <div className="landing-form-group">
-                <label>Budget annuel estimé</label>
+                <label htmlFor="student-budget">Budget annuel estimé</label>
                 <select
+                  id="student-budget"
                   name="budget"
                   value={profile.budget}
                   onChange={handleChange}
@@ -390,8 +329,9 @@ export default function StudentDashboard() {
                 </select>
               </div>
               <div className="landing-form-group">
-                <label>Rentrée souhaitée</label>
+                <label htmlFor="student-rentree">Rentrée souhaitée</label>
                 <select
+                  id="student-rentree"
                   name="date_rentree"
                   value={profile.date_rentree}
                   onChange={handleChange}
@@ -413,6 +353,93 @@ export default function StudentDashboard() {
               {saving ? "Enregistrement..." : "Enregistrer mes informations"}
             </button>
           </form>
+
+          {unlocked ? (
+            <>
+              <div className="student-card">
+                <h2 className="card-title">Avancement de votre dossier</h2>
+                <p className="card-subtitle">
+                  Étape {currentStep + 1} sur {STUDENT_PROCESS_STEPS.length}
+                </p>
+                <div className="student-progress">
+                  {STUDENT_PROCESS_STEPS.map((step, index) => {
+                    const state =
+                      index < currentStep
+                        ? "student-step-done"
+                        : index === currentStep
+                          ? "student-step-current"
+                          : "";
+                    return (
+                      <div key={step.key} className={`student-step ${state}`}>
+                        <div className="student-step-icon">{step.icon}</div>
+                        <div className="student-step-label">
+                          {index < currentStep ? "✓ " : ""}
+                          {step.label}
+                        </div>
+                        <div className="student-step-desc">{step.description}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="student-card">
+                <h2 className="card-title">Document requis</h2>
+                <p className="card-subtitle">
+                  Merci de déposer votre passeport ou une pièce d'identité (PDF,
+                  JPG ou PNG — 10 Mo max).
+                </p>
+
+                {documentFile ? (
+                  <div className="landing-alert landing-alert-success">
+                    Document actuel : <strong>{documentFile.name}</strong>
+                  </div>
+                ) : (
+                  <div className="landing-alert landing-alert-warning">
+                    Aucun document n'a encore été envoyé.
+                  </div>
+                )}
+
+                <form onSubmit={handleUpload}>
+                  <div className="landing-form-group">
+                    <label htmlFor="student-file">Choisir un fichier</label>
+                    <input
+                      id="student-file"
+                      type="file"
+                      accept=".pdf,.jpg,.jpeg,.png,.webp"
+                      onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                    />
+                  </div>
+                  <div className="landing-hero-actions landing-actions-start">
+                    <button
+                      type="submit"
+                      className="landing-btn landing-btn-primary"
+                      disabled={uploading || !selectedFile}
+                    >
+                      {uploading ? "Envoi..." : "Envoyer le document"}
+                    </button>
+                    {documentFile && (
+                      <button
+                        type="button"
+                        className="landing-btn landing-btn-secondary"
+                        onClick={handleDownload}
+                      >
+                        Télécharger
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+            </>
+          ) : (
+            <div className="student-card student-locked">
+              <h2 className="card-title">Suivi et documents verrouillés</h2>
+              <p className="card-subtitle">
+                Une fois votre formule validée par notre équipe, vous pourrez
+                consulter l'avancement de votre dossier et déposer vos documents.
+              </p>
+            </div>
+          )}
         </div>
       </section>
       <Footer t={t} />

@@ -6,10 +6,10 @@ function AboutPage() {
   const t = fr;
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
 
-      <section className="landing-programs py-20">
+      <section className="landing-programs">
         <div className="container">
           <h1 className="landing-section-title">ℹ️ À propos de nous</h1>
           <p className="landing-section-subtitle mb-12">

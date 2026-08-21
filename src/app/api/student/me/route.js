@@ -16,10 +16,13 @@ export async function GET(request) {
     await ensureStudentBucket(auth.admin);
     const document = await getStudentDocument(auth.admin, auth.contact.id);
 
+    const profile = publicStudentProfile(auth.contact);
+
     return NextResponse.json({
       success: true,
-      profile: publicStudentProfile(auth.contact),
-      document,
+      profile,
+      document: profile.unlocked ? document : null,
+      unlocked: profile.unlocked,
     });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

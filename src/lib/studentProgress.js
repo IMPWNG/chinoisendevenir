@@ -93,3 +93,19 @@ export function getStudentStepIndex(statut) {
   if (!statut) return 0;
   return STATUS_STEP_INDEX[statut] ?? 0;
 }
+
+export function isStudentSpaceUnlocked(statut) {
+  const unlocked = new Set([
+    "formule_choisie",
+    "prospect_à_qualifier",
+    "offre_envoyée",
+    "attente_paiement",
+    "client_payé",
+    "appel_réservé",
+    "dossier_préparation",
+    "candidature_envoyée",
+    "admission_reçue",
+    "dossier_terminé",
+  ]);
+  return unlocked.has(statut);
+}

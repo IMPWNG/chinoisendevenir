@@ -6,6 +6,7 @@ import {
   getAuthenticatedContact,
   getStudentDocument,
 } from "@/lib/studentAuth";
+import { isStudentSpaceUnlocked } from "@/lib/studentProgress";
 
 const ALLOWED_TYPES = [
   "application/pdf",
@@ -26,6 +27,16 @@ export async function GET(request) {
     const auth = await getAuthenticatedContact(request);
     if (auth.error) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+
+    if (!isStudentSpaceUnlocked(auth.contact.suivi_statut)) {
+      return NextResponse.json(
+        {
+          error:
+            "Les documents seront disponibles une fois votre formule validée.",
+        },
+        { status: 403 },
+      );
     }
 
     await ensureStudentBucket(auth.admin);
@@ -63,6 +74,16 @@ export async function POST(request) {
     const auth = await getAuthenticatedContact(request);
     if (auth.error) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+
+    if (!isStudentSpaceUnlocked(auth.contact.suivi_statut)) {
+      return NextResponse.json(
+        {
+          error:
+            "Les documents seront disponibles une fois votre formule validée.",
+        },
+        { status: 403 },
+      );
     }
 
     const formData = await request.formData();

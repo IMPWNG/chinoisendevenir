@@ -9,7 +9,7 @@ const Navigation = () => {
   const pathname = usePathname();
 
   const isActive = (path) =>
-    path === "/espace-etudiant"
+    path.startsWith("/espace-etudiant")
       ? pathname.startsWith("/espace-etudiant")
       : pathname === path;
 
@@ -19,7 +19,7 @@ const Navigation = () => {
     { path: "/processus", label: "Processus", icon: "🔄" },
     { path: "/about", label: "À propos", icon: "ℹ️" },
     { path: "/contact", label: "Contact", icon: "📧" },
-    { path: "/espace-etudiant", label: "Espace étudiant", icon: "🎓" },
+    { path: "/espace-etudiant/connexion", label: "Espace étudiant", icon: "🎓" },
   ];
 
   return (
@@ -43,11 +43,7 @@ const Navigation = () => {
               key={link.path}
               href={link.path}
               onClick={() => setMenuOpen(false)}
-              className={`flex items-center gap-2 transition-colors ${
-                isActive(link.path)
-                  ? "text-red-600 font-bold border-b-2 border-red-600"
-                  : "text-gray-700 hover:text-red-600"
-              }`}
+              className={`landing-nav-link ${isActive(link.path) ? "is-active" : ""}`}
             >
               <span>{link.icon}</span>
               {link.label}

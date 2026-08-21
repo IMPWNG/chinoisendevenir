@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
+import { isStudentSpaceUnlocked } from "../lib/studentProgress";
 
 const STATUTS = [
   "mail_bienvenue_envoyé",
@@ -812,12 +813,48 @@ function ContactModal({
             </div>
             <p className="text-xs text-slate-500 mt-3">
               {emailTemplate === "formules_presentation" &&
-                "Action : Email formules • Statut : choix des formules"}
+                "Action : Email formules • Statut : choix des formules (espace encore verrouillé)"}
               {emailTemplate === "relance_1" &&
                 "Action : Relance 1 • Statut : relance 1 envoyée"}
               {emailTemplate === "relance_2" &&
                 "Action : Relance 2 • Statut : relance 2 envoyée"}
             </p>
+          </div>
+
+          {/* Accès espace étudiant */}
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              🎓 Espace étudiant
+            </label>
+            {isStudentSpaceUnlocked(contact.suivi_statut) ? (
+              <>
+                <p className="text-sm text-emerald-300 mb-3">
+                  Accès débloqué. Le suivi et les documents sont visibles pour
+                  cet étudiant.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => onUpdateStatut(contact.id, "choix_des_formules")}
+                  className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
+                >
+                  Verrouiller l'espace
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-slate-400 mb-3">
+                  L'étudiant peut uniquement modifier ses informations. Passez
+                  le statut à « formule choisie » pour débloquer le reste.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => onUpdateStatut(contact.id, "formule_choisie")}
+                  className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300"
+                >
+                  Débloquer (formule choisie)
+                </button>
+              </>
+            )}
           </div>
 
           {/* Statut Selector */}

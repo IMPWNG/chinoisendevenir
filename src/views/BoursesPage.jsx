@@ -49,10 +49,10 @@ function BoursesPage() {
   ];
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
 
-      <section className="landing-programs py-20">
+      <section className="landing-programs">
         <div className="container">
           <h1 className="landing-section-title">💰 Bourses d'études</h1>
           <p className="landing-section-subtitle mb-12">

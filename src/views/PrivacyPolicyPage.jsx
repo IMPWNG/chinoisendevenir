@@ -6,10 +6,10 @@ function PrivacyPolicyPage() {
   const t = fr;
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
 
-      <section className="landing-programs py-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="landing-programs">
         <div className="container max-w-4xl">
           {/* Titre */}
           <div className="text-center mb-16">
