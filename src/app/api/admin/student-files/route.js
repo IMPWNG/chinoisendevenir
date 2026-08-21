@@ -8,6 +8,7 @@ import {
   adminFolder,
   createDocumentSignedUrl,
   getRequiredDocumentsStatus,
+  isAdminSentPath,
   isOwnedStoragePath,
   listAdminSentDocuments,
   safeFileName,
@@ -105,10 +106,46 @@ export async function POST(request) {
       );
     }
 
+    const files = await loadFiles(auth.admin, contactId);
+    return NextResponse.json({ success: true, ...files });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const auth = await getAuthenticatedAdmin(request);
+    if (auth.error) {
+      return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+
+    const body = await request.json().catch(() => ({}));
+    const contactId = String(body.contactId || "");
+    const path = String(body.path || "");
+
+    if (!contactId || !isAdminSentPath(contactId, path)) {
+      return NextResponse.json(
+        { error: "Document introuvable" },
+        { status: 400 },
+      );
+    }
+
+    const { error: removeError } = await auth.admin.storage
+      .from(STUDENT_DOCUMENT_BUCKET)
+      .remove([path]);
+
+    if (removeError) {
+      return NextResponse.json(
+        { error: removeError.message || "Impossible de supprimer le document" },
+        { status: 500 },
+      );
+    }
+
     await auth.admin.from("suivi_actions").insert({
       contact_id: contactId,
-      action: "document_envoye",
-      description: `Document envoyé à l'étudiant : ${file.name}`,
+      action: "contact_modifier",
+      description: `Document retiré de l'espace étudiant : ${path.split("/").pop()}`,
       user_admin: auth.user.email,
     });
 

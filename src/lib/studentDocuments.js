@@ -47,6 +47,11 @@ export function isOwnedStoragePath(contactId, path) {
   );
 }
 
+export function isAdminSentPath(contactId, path) {
+  const prefix = `${adminFolder(contactId)}/`;
+  return isOwnedStoragePath(contactId, path) && String(path || "").startsWith(prefix);
+}
+
 function toFileMeta(folder, file) {
   if (!file?.name) return null;
   return {

@@ -34,6 +34,7 @@ export default function AdminStudentFiles({ contactId }) {
   const [adminDocuments, setAdminDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [deletingPath, setDeletingPath] = useState("");
   const [fileToSend, setFileToSend] = useState(null);
   const [error, setError] = useState("");
 
@@ -65,6 +66,24 @@ export default function AdminStudentFiles({ contactId }) {
       window.open(data.url, "_blank", "noopener,noreferrer");
     } catch (err) {
       alert(err.message);
+    }
+  };
+
+  const deleteFile = async (path, name) => {
+    if (!confirm(`Supprimer « ${name} » de l'espace étudiant ?`)) return;
+    setDeletingPath(path);
+    setError("");
+    try {
+      const data = await adminFetch("/api/admin/student-files", {
+        method: "DELETE",
+        body: JSON.stringify({ contactId, path }),
+      });
+      setRequiredDocuments(data.requiredDocuments || []);
+      setAdminDocuments(data.adminDocuments || []);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setDeletingPath("");
     }
   };
 
@@ -174,13 +193,23 @@ export default function AdminStudentFiles({ contactId }) {
                   className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 flex flex-wrap items-center justify-between gap-3"
                 >
                   <p className="text-white text-sm font-semibold">📄 {doc.name}</p>
-                  <button
-                    type="button"
-                    onClick={() => downloadFile(doc.path)}
-                    className="px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-lg text-sm font-bold"
-                  >
-                    Télécharger
-                  </button>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => downloadFile(doc.path)}
+                      className="px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-lg text-sm font-bold"
+                    >
+                      Télécharger
+                    </button>
+                    <button
+                      type="button"
+                      disabled={deletingPath === doc.path}
+                      onClick={() => deleteFile(doc.path, doc.name)}
+                      className="px-4 py-2 bg-rose-600/80 hover:bg-rose-500 text-white rounded-lg text-sm font-bold disabled:opacity-50"
+                    >
+                      {deletingPath === doc.path ? "Suppression..." : "Supprimer"}
+                    </button>
+                  </div>
                 </div>
               ))
             )}
