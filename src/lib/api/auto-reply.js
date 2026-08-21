@@ -219,9 +219,9 @@ function wrapEmailTemplate({ headerTitle, headerSubtitle, prenom, innerHtml }) {
           </div>
           <div class="footer">
             <p>Cordialement,</p>
-            <div class="footer-brand">L'équipe Chinois en Devenir</div>
+            <div class="footer-brand">Chinois en Devenir</div>
             <p>
-              <a href="https://chinoisendevenir.com/" class="footer-link">🌐 https://chinoisendevenir.com/</a>
+              <a href="https://chinoisendevenir.com/" class="footer-link">🌎 https://chinoisendevenir.com/</a>
             </p>
             <p style="font-size: 12px; color: #999; margin-top: 20px;">
               © 2026 Chinois en Devenir | Tous droits réservés
@@ -572,7 +572,9 @@ function generateFormulesPresentationTemplate(prenom) {
 }
 
 function generateFormuleConfirmeeTemplate(contact, formuleLabel) {
-  const greeting = [contact.prenom, contact.nom].filter(Boolean).join(" ");
+  const nom = contact.nom || "";
+  const prenom = contact.prenom || "";
+  const greeting = [nom, prenom].filter(Boolean).join(" ");
   return wrapEmailTemplate({
     headerTitle: "Formule confirmée",
     headerSubtitle: "Étude de votre projet d'études en Chine",

@@ -10,6 +10,7 @@ import {
   DOMAINES_ETUDES,
   STUDENT_PROCESS_STEPS,
   getStudentStepIndex,
+  getChosenFormule,
 } from "../lib/studentProgress";
 
 async function studentFetch(path, options = {}) {
@@ -51,6 +52,7 @@ export default function StudentDashboard() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const unlocked = Boolean(profile?.unlocked);
+  const chosenFormule = getChosenFormule(profile);
   const currentStep = getStudentStepIndex(profile?.suivi_statut);
 
   const loadProfile = async () => {
@@ -198,6 +200,26 @@ export default function StudentDashboard() {
           )}
           {message?.type === "error" && (
             <div className="landing-alert landing-alert-error">{message.text}</div>
+          )}
+
+          {chosenFormule ? (
+            <div className="student-card">
+              <h2 className="card-title">Votre formule</h2>
+              <p className="card-subtitle">
+                Formule confirmée pour votre accompagnement.
+              </p>
+              <div className="landing-alert landing-alert-success">
+                {chosenFormule}
+              </div>
+            </div>
+          ) : (
+            <div className="student-card">
+              <h2 className="card-title">Votre formule</h2>
+              <p className="card-subtitle">
+                Aucune formule n'a encore été confirmée. Répondez à notre email
+                avec le numéro de la formule souhaitée (1, 2 ou 3).
+              </p>
+            </div>
           )}
 
           <form className="student-card" onSubmit={handleSave}>

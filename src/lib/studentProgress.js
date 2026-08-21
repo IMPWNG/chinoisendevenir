@@ -109,3 +109,11 @@ export function isStudentSpaceUnlocked(statut) {
   ]);
   return unlocked.has(statut);
 }
+
+export function getChosenFormule(contact) {
+  if (!contact) return "";
+  if (contact.formule) return String(contact.formule).trim();
+  const notes = String(contact.notes_admin || "");
+  const match = notes.match(/Formule choisie:\s*(.+)/i);
+  return match ? match[1].trim() : "";
+}

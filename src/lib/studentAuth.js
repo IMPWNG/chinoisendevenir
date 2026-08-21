@@ -1,5 +1,5 @@
 import { getSupabaseAdmin } from "./supabaseAdmin";
-import { isStudentSpaceUnlocked } from "./studentProgress";
+import { isStudentSpaceUnlocked, getChosenFormule } from "./studentProgress";
 
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
 export const STUDENT_DOCUMENT_FOLDER = "document-requis";
@@ -19,6 +19,7 @@ export function publicStudentProfile(contact) {
     budget: contact.budget || "",
     date_rentree: contact.date_rentree || "",
     unlocked: isStudentSpaceUnlocked(contact.suivi_statut),
+    formule: getChosenFormule(contact),
     suivi_statut: contact.suivi_statut || "",
   };
 }

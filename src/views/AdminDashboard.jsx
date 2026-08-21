@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
-import { isStudentSpaceUnlocked } from "../lib/studentProgress";
+import { isStudentSpaceUnlocked, getChosenFormule } from "../lib/studentProgress";
 
 const STATUTS = [
   "mail_bienvenue_envoyé",
@@ -459,6 +459,11 @@ const stats = {
                         <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                           {c.prenom} {c.nom}
                         </span>
+                        {getChosenFormule(c) ? (
+                          <p className="text-xs text-cyan-300 mt-1 font-semibold">
+                            📋 {getChosenFormule(c)}
+                          </p>
+                        ) : null}
                         <p className="text-xs text-slate-500 mt-1">{c.email}</p>
                       </td>
                       <td className="px-6 py-4 text-slate-300 text-sm">
@@ -693,6 +698,15 @@ function ContactModal({
             <h2 className="text-3xl font-bold text-white">
               👤 {contact.prenom} {contact.nom}
             </h2>
+            {getChosenFormule(contact) ? (
+              <p className="text-white text-lg font-semibold mt-3 bg-white/15 inline-block px-4 py-2 rounded-xl">
+                📋 {getChosenFormule(contact)}
+              </p>
+            ) : (
+              <p className="text-blue-100 text-sm mt-2 font-medium">
+                Aucune formule choisie
+              </p>
+            )}
             <p className="text-blue-100 text-sm mt-2 font-medium">
               {contact.email}
             </p>
@@ -764,7 +778,7 @@ function ContactModal({
                     📋 Formule
                   </td>
                   <td className="px-4 py-3 text-white">
-                    {contact.formule || "—"}
+                    {getChosenFormule(contact) || "—"}
                   </td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
