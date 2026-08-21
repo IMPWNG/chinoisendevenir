@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
-import { INBOUND_REPLY_TO } from "../emailConfig.js";
+import { CONTACT_FROM, INBOUND_REPLY_TO } from "../emailConfig.js";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -491,7 +491,7 @@ export default async function handler(req, res) {
     // 3️⃣ Envoyer l'email de bienvenue (NON BLOQUANT)
     try {
       const emailResponse = await resend.emails.send({
-        from: "contact@chinoisendevenir.com",
+        from: CONTACT_FROM,
         replyTo: INBOUND_REPLY_TO,
         to: normalizedEmail,
         subject: `Bienvenue ${prenom} ! 🇨🇳`,
@@ -510,7 +510,7 @@ export default async function handler(req, res) {
     // 🆕 Email de notif pour toi dans Gmail
     try {
       await resend.emails.send({
-        from: "contact@chinoisendevenir.com",
+        from: CONTACT_FROM,
         to: "chinoisendevenir@gmail.com",
         subject: isUpdate
           ? `📝 Profil complété : ${prenom} ${nom}`

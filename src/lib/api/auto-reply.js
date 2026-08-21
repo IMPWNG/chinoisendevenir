@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
-import { CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
+import { CONTACT_FROM, CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -694,7 +694,7 @@ async function sendTemplatedEmail(
   try {
     console.log(`📤 Envoi via Resend...`);
     const response = await resend.emails.send({
-      from: CONTACT_FROM_EMAIL,
+      from: CONTACT_FROM,
       to: contact.email,
       subject: template.subject,
       html: template.generateHtml(contact, extras),

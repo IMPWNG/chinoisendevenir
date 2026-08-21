@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
-import { CONTACT_FROM_EMAIL, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
+import { CONTACT_FROM, CONTACT_FROM_EMAIL, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
 import {
   sendTemplatedEmail,
   updateContactStatus,
@@ -375,7 +375,7 @@ async function saveChosenFormule(contact, formuleLabel) {
 async function notifyAdmin({ contact, subject, text, intent }) {
   try {
     await resend.emails.send({
-      from: CONTACT_FROM_EMAIL,
+      from: CONTACT_FROM,
       to: ADMIN_NOTIFY_EMAIL,
       replyTo: contact.email,
       subject: `📩 Réponse de ${contact.prenom || ""} ${contact.nom || ""} — ${intent}`,

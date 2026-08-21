@@ -1,4 +1,6 @@
 export const CONTACT_FROM_EMAIL = "contact@chinoisendevenir.com";
+export const CONTACT_FROM_NAME = "Étudier en Chine";
+export const CONTACT_FROM = `${CONTACT_FROM_NAME} <${CONTACT_FROM_EMAIL}>`;
 export const ADMIN_NOTIFY_EMAIL = "chinoisendevenir@gmail.com";
 
 export const INBOUND_REPLY_TO =
