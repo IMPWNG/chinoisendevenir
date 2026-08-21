@@ -507,33 +507,6 @@ export default async function handler(req, res) {
       console.warn("⚠️ Erreur Resend (non bloquant):", emailError.message);
     }
 
-    // 🆕 Email de notif pour toi dans Gmail
-    try {
-      await resend.emails.send({
-        from: CONTACT_FROM,
-        to: "chinoisendevenir@gmail.com",
-        subject: isUpdate
-          ? `📝 Profil complété : ${prenom} ${nom}`
-          : `📧 Nouveau contact : ${prenom} ${nom}`,
-        html: `
-      <h2>${isUpdate ? "Profil CSV complété via le formulaire 📝" : "Nouveau prospect 🎯"}</h2>
-      <p><strong>Nom :</strong> ${prenom} ${nom}</p>
-      <p><strong>Email :</strong> ${normalizedEmail}</p>
-      <p><strong>Pays :</strong> ${pays}</p>
-      <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
-      <p><strong>Domaine :</strong> ${domaineFinal || "Non spécifié"}</p>
-      <p><strong>Budget :</strong> ${budget || "Non spécifié"}</p>
-      <p><strong>Date rentrée :</strong> ${date_rentree || "Non spécifiée"}</p>
-      <hr>
-      <p style="font-size: 12px; color: #666;">ID Contact: ${contact.id}${isUpdate ? " • mise à jour (pas de doublon)" : ""}</p>
-    `,
-        replyTo: normalizedEmail,
-      });
-      console.log("✅ Notif envoyée à ton Gmail");
-    } catch (notifError) {
-      console.warn("⚠️ Notif Gmail (non bloquant):", notifError.message);
-    }
-
     // ✅ Réponse succès
     return res.status(isUpdate ? 200 : 201).json({
       success: true,
