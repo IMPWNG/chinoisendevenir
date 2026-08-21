@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = ({ t }) => {
   const year = new Date().getFullYear();
 
@@ -8,8 +10,10 @@ const Footer = ({ t }) => {
           © {year} ChinoisEnDevenir — {t.footer_rights}
         </p>
         <div className="landing-footer-links">
-          <a href="/politique-confidentialite">Politique de Confidentialité</a>
-          <a href="/conditions-utilisation">Conditions d'Utilisation</a>
+          <Link href="/politique-confidentialite">
+            Politique de Confidentialité
+          </Link>
+          <Link href="/conditions-utilisation">Conditions d'Utilisation</Link>
         </div>
       </div>
     </footer>

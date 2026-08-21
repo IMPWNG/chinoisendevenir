@@ -1,3 +1,5 @@
+"use client";
+
 const Programs = ({ t }) => {
   const programs = [
     {

@@ -1,11 +1,14 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => pathname === path;
 
   const navLinks = [
     { path: "/", label: "Accueil", icon: "🏠" },
@@ -18,7 +21,7 @@ const Navigation = () => {
   return (
     <nav className="landing-header">
       <div className="container landing-header-content">
-        <Link to="/" className="landing-logo">
+        <Link href="/" className="landing-logo">
           🎓 Chinois en Devenir 
         </Link>
 
@@ -34,7 +37,7 @@ const Navigation = () => {
           {navLinks.map((link) => (
             <Link
               key={link.path}
-              to={link.path}
+              href={link.path}
               onClick={() => setMenuOpen(false)}
               className={`flex items-center gap-2 transition-colors ${
                 isActive(link.path)
@@ -47,7 +50,7 @@ const Navigation = () => {
             </Link>
           ))}
           <Link
-            to="/#lead-form"
+            href="/#lead-form"
             className="landing-nav-cta"
             onClick={() => setMenuOpen(false)}
           >
