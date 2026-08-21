@@ -58,7 +58,7 @@ export default function StudentLogin() {
   };
 
   return (
-    <div className="app">
+    <div className="app app-page-fill">
       <Navigation />
       <section className="landing-form-section">
         <div className="container">

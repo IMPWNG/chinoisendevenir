@@ -24,6 +24,22 @@ html, body {
   overflow-x: hidden;
 }
 
+.app-page-fill {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-page-fill .landing-form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.app-page-fill .landing-form-section > .container {
+  width: 100%;
+}
+
 /* Container principal - CENTRAGE */
 .container {
   width: 100%;
