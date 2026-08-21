@@ -246,6 +246,25 @@ const resendApiKey =
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
 
+function isFilled(value) {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string" && value.trim() === "") return false;
+  return true;
+}
+
+function pick(formValue, existingValue) {
+  return isFilled(formValue) ? formValue : (existingValue ?? null);
+}
+
+function mergeNotes(existingNotes, incomingNotes) {
+  if (!isFilled(incomingNotes)) return existingNotes || null;
+  if (!isFilled(existingNotes)) return incomingNotes;
+  if (String(existingNotes).includes(String(incomingNotes))) {
+    return existingNotes;
+  }
+  return `${existingNotes}\n---\n${incomingNotes}`;
+}
+
 export default async function handler(req, res) {
   // ✅ DEBUG Variables env
   console.log("🔍 DEBUG Variables env:");
@@ -341,42 +360,110 @@ export default async function handler(req, res) {
       domaineFinal = trimmed;
     }
 
-    // 1️⃣ Insérer le contact dans Supabase
-    const { data: contact, error: insertError } = await supabase
-      .from("contacts")
-      .insert([
-        {
-          prenom,
-          nom,
-          email,
-          age: age || null,
-          pays,
-          phone: phone || null,
-          domaine_etudes: domaineFinal,
-          dernier_diplome: dernier_diplome || null,
-          budget: budget || null,
-          date_rentree: date_rentree || null,
-          notes_admin: notes_admin || null,
-          source: "website_vercel",
-          suivi_statut: "mail_bienvenue_envoyé",
-          created_at: new Date().toISOString(),
-        },
-      ])
-      .select()
-      .single();
+    const normalizedEmail = String(email).trim().toLowerCase();
 
-    if (insertError) {
-      console.error("❌ Erreur Supabase contacts:", insertError);
-      if (insertError.code === "23505") {
-        // ✅ Ajout du code "duplicate" pour matcher le front
-        return res
-          .status(409)
-          .json({ error: "Cet email existe déjà", code: "duplicate" });
-      }
-      return res.status(500).json({ error: "Erreur insertion contact" });
+    const { data: existingRows, error: lookupError } = await supabase
+      .from("contacts")
+      .select("*")
+      .ilike("email", normalizedEmail)
+      .order("created_at", { ascending: true })
+      .limit(1);
+
+    if (lookupError) {
+      console.error("❌ Erreur recherche contact:", lookupError);
+      return res.status(500).json({ error: "Erreur recherche contact" });
     }
 
-    console.log("✅ Contact créé (PROD):", contact.id, "-", email);
+    const existing = existingRows?.[0] || null;
+    const profilePayload = {
+      prenom: pick(prenom, existing?.prenom),
+      nom: pick(nom, existing?.nom),
+      email: normalizedEmail,
+      age: pick(age || null, existing?.age),
+      pays: pick(pays, existing?.pays),
+      phone: pick(phone || null, existing?.phone),
+      domaine_etudes: pick(domaineFinal, existing?.domaine_etudes),
+      dernier_diplome: pick(dernier_diplome || null, existing?.dernier_diplome),
+      budget: pick(budget || null, existing?.budget),
+      date_rentree: pick(date_rentree || null, existing?.date_rentree),
+      notes_admin: mergeNotes(existing?.notes_admin, notes_admin),
+      updated_at: new Date().toISOString(),
+    };
+
+    const earlyStatuses = [
+      null,
+      "",
+      "nouveau_prospect",
+      "relance_1_envoyée",
+      "relance_2_envoyée",
+      "mail_bienvenue_envoyé",
+    ];
+    if (!existing || earlyStatuses.includes(existing.suivi_statut)) {
+      profilePayload.suivi_statut = "mail_bienvenue_envoyé";
+    }
+
+    let contact = existing;
+    let isUpdate = false;
+
+    if (existing) {
+      isUpdate = true;
+      const { data: updated, error: updateError } = await supabase
+        .from("contacts")
+        .update(profilePayload)
+        .eq("id", existing.id)
+        .select()
+        .single();
+
+      if (updateError) {
+        console.warn("⚠️ Update avec updated_at échoué, retry:", updateError.message);
+    const { updated_at: _ignored, ...withoutUpdatedAt } = profilePayload;
+        const { data: retried, error: retryError } = await supabase
+          .from("contacts")
+          .update(withoutUpdatedAt)
+          .eq("id", existing.id)
+          .select()
+          .single();
+
+        if (retryError) {
+          console.error("❌ Erreur update contact:", retryError);
+          return res.status(500).json({ error: "Erreur mise à jour contact" });
+        }
+        contact = retried;
+      } else {
+        contact = updated;
+      }
+
+      console.log("✅ Contact mis à jour (même email):", contact.id, "-", normalizedEmail);
+    } else {
+      const { data: created, error: insertError } = await supabase
+        .from("contacts")
+        .insert([
+          {
+            ...profilePayload,
+            source: "website_vercel",
+            created_at: new Date().toISOString(),
+          },
+        ])
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error("❌ Erreur Supabase contacts:", insertError);
+        if (insertError.code === "23505") {
+          return res
+            .status(409)
+            .json({ error: "Cet email existe déjà", code: "duplicate" });
+        }
+        return res.status(500).json({ error: "Erreur insertion contact" });
+      }
+
+      contact = created;
+      console.log("✅ Contact créé (PROD):", contact.id, "-", normalizedEmail);
+    }
+
+    const actionDescription = isUpdate
+      ? `Formulaire site complété — profil mis à jour pour ${normalizedEmail}`
+      : `Email de bienvenue envoyé à ${normalizedEmail}`;
 
     // 2️⃣ Enregistrer l'action dans suivi_actions
     try {
@@ -385,8 +472,8 @@ export default async function handler(req, res) {
         .insert([
           {
             contact_id: contact.id,
-            action: "email_envoye",
-            description: `Email de bienvenue envoyé à ${email}`,
+            action: isUpdate ? "contact_modifier" : "email_envoye",
+            description: actionDescription,
             user_admin: "système_automatique",
           },
         ]);
@@ -405,7 +492,7 @@ export default async function handler(req, res) {
       const emailResponse = await resend.emails.send({
         from: "contact@chinoisendevenir.com",
         replyTo: "chinoisendevenir@gmail.com",
-        to: email,
+        to: normalizedEmail,
         subject: `Bienvenue ${prenom} ! 🇨🇳`,
         html: generateEmailTemplate(prenom),
       });
@@ -424,20 +511,22 @@ export default async function handler(req, res) {
       await resend.emails.send({
         from: "contact@chinoisendevenir.com",
         to: "chinoisendevenir@gmail.com",
-        subject: `📧 Nouveau contact : ${prenom} ${nom}`,
+        subject: isUpdate
+          ? `📝 Profil complété : ${prenom} ${nom}`
+          : `📧 Nouveau contact : ${prenom} ${nom}`,
         html: `
-      <h2>Nouveau prospect 🎯</h2>
+      <h2>${isUpdate ? "Profil CSV complété via le formulaire 📝" : "Nouveau prospect 🎯"}</h2>
       <p><strong>Nom :</strong> ${prenom} ${nom}</p>
-      <p><strong>Email :</strong> ${email}</p>
+      <p><strong>Email :</strong> ${normalizedEmail}</p>
       <p><strong>Pays :</strong> ${pays}</p>
       <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
       <p><strong>Domaine :</strong> ${domaineFinal || "Non spécifié"}</p>
       <p><strong>Budget :</strong> ${budget || "Non spécifié"}</p>
       <p><strong>Date rentrée :</strong> ${date_rentree || "Non spécifiée"}</p>
       <hr>
-      <p style="font-size: 12px; color: #666;">ID Contact: ${contact.id}</p>
+      <p style="font-size: 12px; color: #666;">ID Contact: ${contact.id}${isUpdate ? " • mise à jour (pas de doublon)" : ""}</p>
     `,
-        replyTo: email,
+        replyTo: normalizedEmail,
       });
       console.log("✅ Notif envoyée à ton Gmail");
     } catch (notifError) {
@@ -445,8 +534,9 @@ export default async function handler(req, res) {
     }
 
     // ✅ Réponse succès
-    return res.status(201).json({
+    return res.status(isUpdate ? 200 : 201).json({
       success: true,
+      updated: isUpdate,
       contact_id: contact.id,
       message: `Bienvenue ${prenom} ✅`,
       environment: "vercel_production",

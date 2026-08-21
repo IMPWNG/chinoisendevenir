@@ -657,24 +657,32 @@ async function updateContactStatus(contactId, newStatus) {
   console.log(`Contact ID: ${contactId}`);
   console.log(`Nouveau statut: ${newStatus}`);
 
-  try {
-    const { data: updatedContact, error: updateError } = await supabase
-      .from("contacts")
-      .update({
-        suivi_statut: newStatus,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", contactId)
-      .select()
-      .single();
+  const payloads = [
+    {
+      suivi_statut: newStatus,
+      updated_at: new Date().toISOString(),
+    },
+    { suivi_statut: newStatus },
+  ];
 
-    if (updateError) {
-      console.error("❌ Erreur Supabase UPDATE:", updateError);
-      return false;
+  try {
+    for (const payload of payloads) {
+      const { data: updatedContact, error: updateError } = await supabase
+        .from("contacts")
+        .update(payload)
+        .eq("id", contactId)
+        .select()
+        .single();
+
+      if (!updateError && updatedContact) {
+        console.log(`✅ Contact mis à jour:`, updatedContact.id, "-", newStatus);
+        return true;
+      }
+
+      console.warn("⚠️ Tentative update statut échouée:", updateError?.message);
     }
 
-    console.log(`✅ Contact mis à jour:`, updatedContact.id, "-", newStatus);
-    return true;
+    return false;
   } catch (error) {
     console.error("❌ Erreur mise à jour:", error.message);
     return false;
@@ -905,10 +913,9 @@ export default async function handler(req, res) {
       if (nextStatus) {
         const statusUpdated = await updateContactStatus(contactId, nextStatus);
         if (!statusUpdated) {
-          return res.status(500).json({
-            success: false,
-            message: "Erreur mise à jour statut",
-          });
+          console.warn(
+            "⚠️ Statut non mis à jour (contrainte BDD probable). L'email a bien été envoyé.",
+          );
         }
       }
 
@@ -917,7 +924,7 @@ export default async function handler(req, res) {
         contact.email,
         template.action,
         nextStatus
-          ? `${template.description} - Statut: ${nextStatus}`
+          ? `${template.description} - Statut visé: ${nextStatus}`
           : template.description,
       );
 
