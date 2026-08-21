@@ -7,6 +7,7 @@ import {
   updateContactStatus,
   logAction,
 } from "./auto-reply.js";
+import { getChosenFormule } from "../studentProgress.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -194,7 +195,9 @@ function extractLatestReply(text) {
   if (!text) return "";
   let body = String(text).replace(/\r\n/g, "\n");
   const splitters = [
+    /\s+On (Mon|Tue|Wed|Thu|Fri|Sat|Sun),[\s\S]*$/i,
     /\nOn .+ wrote:\s*\n?/i,
+    /\s+Le .+? a écrit\s*:[\s\S]*$/i,
     /\nLe .+? a écrit\s*:/i,
     /\n-----Original Message-----/i,
     /\n________________________________/,
@@ -463,6 +466,7 @@ export async function processInboundEmail(payload) {
   const interest = detectInterest(replyText);
   const question = looksLikeQuestion(replyText);
   const statut = contact.suivi_statut || "";
+  const existingFormule = getChosenFormule(contact);
 
   let intent = "reponse_libre";
   if (formule) intent = "choix_formule";
@@ -476,32 +480,44 @@ export async function processInboundEmail(payload) {
     `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
   );
 
-  // Pas de notif Gmail : le transfert Gmail + une notif recréent une boucle.
+  if (formule) {
+    const alreadySameFormule = existingFormule === formule.label;
 
-  if (formule && !FORMULE_ALREADY_CHOSEN.has(statut)) {
-    const sent = await sendTemplatedEmail(contact, "formule_confirmee", {
-      formuleLabel: formule.label,
-    });
-    if (!sent.success) {
-      return {
-        success: false,
-        message: "Erreur envoi confirmation formule",
-        error: sent.error,
-        httpStatus: 500,
-      };
+    if (!alreadySameFormule) {
+      const sent = await sendTemplatedEmail(contact, "formule_confirmee", {
+        formuleLabel: formule.label,
+      });
+      if (!sent.success) {
+        await logAction(
+          contact.id,
+          contact.email,
+          "note_ajoutee",
+          `Échec envoi confirmation formule (${formule.label}) : ${sent.error || "erreur Resend"}`,
+        );
+        return {
+          success: false,
+          message: "Erreur envoi confirmation formule",
+          error: sent.error,
+          httpStatus: 500,
+        };
+      }
     }
 
     await saveChosenFormule(contact, formule.label);
-    await logAction(
-      contact.id,
-      contact.email,
-      "formule_choisie",
-      `Formule choisie automatiquement : ${formule.label}`,
-    );
+    if (!alreadySameFormule) {
+      await logAction(
+        contact.id,
+        contact.email,
+        "formule_choisie",
+        `Formule choisie automatiquement : ${formule.label}`,
+      );
+    }
 
     return {
       success: true,
-      message: "Formule confirmée et email envoyé",
+      message: alreadySameFormule
+        ? "Formule déjà enregistrée"
+        : "Formule confirmée et email envoyé",
       contact: contact.id,
       formule: formule.label,
       status: "formule_choisie",
