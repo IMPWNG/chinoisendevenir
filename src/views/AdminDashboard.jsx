@@ -18,6 +18,23 @@ import {
   mergeAvancementNote,
 } from "../lib/studentProgress";
 
+async function authedFetch(path, options = {}) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (!session?.access_token) {
+    throw new Error("SESSION");
+  }
+  return fetch(path, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {}),
+      Authorization: `Bearer ${session.access_token}`,
+    },
+  });
+}
+
 const STATUTS = [
   "mail_bienvenue_envoyé",
   "relance_1_envoyée",
@@ -229,9 +246,8 @@ export default function AdminDashboard() {
         });
 
         try {
-          const response = await fetch("/api/email/auto-reply", {
+          const response = await authedFetch("/api/email/auto-reply", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               contactId: String(contact.id),
               emailTemplate: bulkTemplate,
@@ -1035,11 +1051,8 @@ function ContactModal({
         emailTemplate,
       };
 
-      const response = await fetch("/api/email/auto-reply", {
+      const response = await authedFetch("/api/email/auto-reply", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(payload),
       });
 

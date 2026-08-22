@@ -41,31 +41,6 @@ create index if not exists universities_province_idx on public.universities (pro
 create index if not exists universities_active_idx on public.universities (is_active);
 create index if not exists universities_majors_idx on public.universities using gin (majors);
 
+-- RLS policies live in sql/admin-security.sql (admins only).
+-- Do not grant this table to every logged-in user.
 alter table public.universities enable row level security;
-
-drop policy if exists "authenticated can read universities" on public.universities;
-create policy "authenticated can read universities"
-  on public.universities for select
-  to authenticated
-  using (true);
-
-drop policy if exists "authenticated can insert universities" on public.universities;
-create policy "authenticated can insert universities"
-  on public.universities for insert
-  to authenticated
-  with check (true);
-
-drop policy if exists "authenticated can update universities" on public.universities;
-create policy "authenticated can update universities"
-  on public.universities for update
-  to authenticated
-  using (true)
-  with check (true);
-
-drop policy if exists "authenticated can delete universities" on public.universities;
-create policy "authenticated can delete universities"
-  on public.universities for delete
-  to authenticated
-  using (true);
-
-grant select, insert, update, delete on public.universities to authenticated;

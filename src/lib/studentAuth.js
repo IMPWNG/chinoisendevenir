@@ -4,7 +4,6 @@ import {
   getChosenFormule,
   getDisplayedStepIndex,
 } from "./studentProgress";
-import { ADMIN_NOTIFY_EMAIL } from "./emailConfig";
 
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
 export const STUDENT_DOCUMENT_FOLDER = "document-requis";
@@ -57,37 +56,69 @@ export async function getAuthenticatedUser(request) {
   return { user, admin };
 }
 
+export function getAdminEmailAllowlist() {
+  return new Set(
+    String(process.env.ADMIN_EMAILS || "")
+      .split(",")
+      .map((item) => item.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
+
 export function isAdminEmail(email) {
   const value = String(email || "").toLowerCase();
   if (!value) return false;
-  if (value.endsWith("@chinoisendevenir.com")) return true;
+  return getAdminEmailAllowlist().has(value);
+}
 
-  const extra = String(process.env.ADMIN_EMAILS || "")
-    .split(",")
-    .map((item) => item.trim().toLowerCase())
-    .filter(Boolean);
+function tableMissing(error) {
+  const message = String(error?.message || "").toLowerCase();
+  return (
+    message.includes("admin_users") &&
+    (message.includes("does not exist") ||
+      message.includes("schema cache") ||
+      message.includes("could not find"))
+  );
+}
 
-  return new Set([
-    ADMIN_NOTIFY_EMAIL.toLowerCase(),
-    ...extra,
-  ]).has(value);
+export async function isApprovedAdmin(admin, user) {
+  const email = String(user?.email || "").toLowerCase();
+  const allowlist = getAdminEmailAllowlist();
+
+  if (allowlist.size > 0 && !allowlist.has(email)) {
+    return false;
+  }
+
+  const { data, error } = await admin
+    .from("admin_users")
+    .select("user_id")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (!error) {
+    return Boolean(data?.user_id);
+  }
+
+  // Table not created yet: allowlist-only fallback so you are not locked out
+  // before running sql/admin-security.sql. With no allowlist, deny everyone.
+  if (tableMissing(error)) {
+    return allowlist.has(email);
+  }
+
+  console.error("admin_users check failed:", error.message);
+  return false;
 }
 
 export async function getAuthenticatedAdmin(request) {
   const auth = await getAuthenticatedUser(request);
   if (auth.error) return auth;
 
-  const role =
-    auth.user.app_metadata?.role || auth.user.user_metadata?.role;
-  if (role === "admin" || isAdminEmail(auth.user.email)) {
-    return auth;
+  const approved = await isApprovedAdmin(auth.admin, auth.user);
+  if (!approved) {
+    return { error: "Accès admin requis", status: 403 };
   }
 
-  if (!process.env.ADMIN_EMAILS) {
-    return auth;
-  }
-
-  return { error: "Accès admin requis", status: 403 };
+  return auth;
 }
 
 export async function findContactByEmail(admin, email) {

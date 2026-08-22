@@ -2,6 +2,7 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
+import { getAuthenticatedAdmin } from "../studentAuth.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -818,6 +819,21 @@ async function logAction(contactId, email, actionType, description) {
 }
 
 // 🎯 Handler Vercel
+function requestFromNodeHeaders(headers) {
+  return {
+    headers: {
+      get(name) {
+        const lower = String(name).toLowerCase();
+        const bag = headers || {};
+        for (const [key, value] of Object.entries(bag)) {
+          if (key.toLowerCase() === lower) return value;
+        }
+        return null;
+      },
+    },
+  };
+}
+
 export default async function handler(req, res) {
   console.log("\n" + "=".repeat(80));
   console.log(`⏰ ${new Date().toISOString()}`);
@@ -832,7 +848,7 @@ export default async function handler(req, res) {
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
   );
 
   if (req.method === "OPTIONS") {
@@ -858,16 +874,25 @@ export default async function handler(req, res) {
 
     const body = req.body;
 
-    // 🔍 CAS 1 : Webhook Resend (AUTOMATIQUE)
+    // Inbound emails go through /api/webhooks/resend — not this admin endpoint.
     if (body.type === "email.received") {
-      const { processInboundEmail } = await import("./inbound-email.js");
-      const result = await processInboundEmail(body);
-      return res.status(result.httpStatus || 200).json(result);
+      return res.status(401).json({
+        success: false,
+        message: "Webhook inbound non autorisé ici",
+      });
     }
 
-    // 🔍 CAS 2 : Appel manuel (BOUTON DASHBOARD)
+    // 🔍 Appel manuel (BOUTON DASHBOARD) — admins only
     if (body.contactId) {
-      console.log("\n🎯 CAS 2 : APPEL MANUEL DÉTECTÉ");
+      const auth = await getAuthenticatedAdmin(requestFromNodeHeaders(req.headers));
+      if (auth.error) {
+        return res.status(auth.status || 403).json({
+          success: false,
+          message: auth.error,
+        });
+      }
+
+      console.log("\n🎯 APPEL MANUEL DÉTECTÉ");
       console.log(`contactId: ${body.contactId}`);
       console.log(`emailTemplate: ${body.emailTemplate}`);
       console.log(`status: ${body.status}`);

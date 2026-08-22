@@ -27,6 +27,8 @@ export const adminTranslations = {
       submit: "Se connecter",
       submitting: "Connexion...",
       invalid: "Email ou mot de passe incorrect",
+      forbidden:
+        "Ce compte n'a pas accès à l'administration. Seuls les emails validés par le propriétaire sont autorisés.",
     },
     nav: {
       contacts: "Contacts",
@@ -331,6 +333,8 @@ export const adminTranslations = {
       submit: "Sign in",
       submitting: "Signing in...",
       invalid: "Incorrect email or password",
+      forbidden:
+        "This account cannot access the admin. Only emails approved by the owner are allowed.",
     },
     nav: {
       contacts: "Contacts",
@@ -634,6 +638,7 @@ export const adminTranslations = {
       submit: "登录",
       submitting: "登录中...",
       invalid: "邮箱或密码不正确",
+      forbidden: "此账号无权进入管理后台。仅限所有者批准的邮箱。",
     },
     nav: {
       contacts: "联系人",

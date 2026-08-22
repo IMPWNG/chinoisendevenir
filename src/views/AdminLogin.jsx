@@ -1,31 +1,60 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { ADMIN_LANGS } from "../i18n/admin";
+import { supabase } from "../lib/supabase";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, signOut } = useAuth();
   const { lang, setLang, t } = useAdminI18n();
   const router = useRouter();
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("forbidden") === "1"
+    ) {
+      setError(t("login.forbidden"));
+    }
+  }, [t]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
     const { error: signError } = await signIn(email, password);
-    setLoading(false);
     if (signError) {
+      setLoading(false);
       setError(t("login.invalid"));
-    } else {
-      router.push("/admin/dashboard");
+      return;
     }
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const token = session?.access_token;
+    const me = token
+      ? await fetch("/api/admin/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+      : null;
+
+    if (!me?.ok) {
+      await signOut();
+      setLoading(false);
+      setError(t("login.forbidden"));
+      return;
+    }
+
+    setLoading(false);
+    router.push("/admin/dashboard");
   };
 
   return (
