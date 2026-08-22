@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
+import { useAdminI18n } from "../context/AdminI18nContext";
 import {
   isStudentSpaceUnlocked,
   getChosenFormule,
@@ -116,6 +117,13 @@ const EMAIL_TEMPLATE_OPTIONS = [
   },
 ];
 
+function translatedOrRaw(t, prefix, value) {
+  if (!value) return "";
+  const path = `${prefix}.${value}`;
+  const translated = t(path);
+  return translated === path ? value : translated;
+}
+
 const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
   { value: "email_envoye", label: "Email envoyé", icon: "📧" },
@@ -142,6 +150,7 @@ const ACTIONS_TYPES = [
 ];
 
 export default function AdminDashboard() {
+  const { t } = useAdminI18n();
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -193,15 +202,16 @@ export default function AdminDashboard() {
     const selected = contacts.filter((c) => selectedIds.includes(c.id));
     const withEmail = selected.filter((c) => c.email);
     if (withEmail.length === 0) {
-      alert("Aucun contact avec email dans la sélection.");
+      alert(t("dashboard.noEmail"));
       return;
     }
 
-    const template = EMAIL_TEMPLATE_OPTIONS.find(
-      (option) => option.value === bulkTemplate,
-    );
+    const templateLabel = t(`emailTemplate.${bulkTemplate}`);
     const confirmed = confirm(
-      `Envoyer « ${template?.label || bulkTemplate} » à ${withEmail.length} personne${withEmail.length > 1 ? "s" : ""} ?\n\nLes emails partent un par un. Ne fermez pas la page.`,
+      t("dashboard.bulkConfirm", {
+        template: templateLabel,
+        count: withEmail.length,
+      }),
     );
     if (!confirmed) return;
 
@@ -240,7 +250,7 @@ export default function AdminDashboard() {
           } else {
             failed.push({
               contact,
-              error: data.message || data.error || "Erreur inconnue",
+              error: data.message || data.error || t("unknownError"),
             });
           }
         } catch (err) {
@@ -264,7 +274,11 @@ export default function AdminDashboard() {
       )
       .join("\n");
     alert(
-      `Envoi groupé terminé.\n✅ ${sent.length} envoyé${sent.length > 1 ? "s" : ""}\n❌ ${failed.length} échec${failed.length > 1 ? "s" : ""}${failLines ? `\n\n${failLines}` : ""}`,
+      t("dashboard.bulkDone", {
+        sent: sent.length,
+        failed: failed.length,
+        details: failLines ? `\n\n${failLines}` : "",
+      }),
     );
   };
 
@@ -280,7 +294,7 @@ export default function AdminDashboard() {
 
       if (error) {
         console.error("Erreur update statut:", error);
-        alert("Erreur : " + error.message);
+        alert(t("error") + " : " + error.message);
         return;
       }
 
@@ -290,7 +304,9 @@ export default function AdminDashboard() {
         .insert({
           contact_id: id,
           action: "changement_statut",
-          description: `Statut changé vers "${newStatut}"`,
+      description: t("dashboard.statusChangedNote", {
+        status: t(`statut.${newStatut}`),
+      }),
           user_admin: user?.email,
           created_at: new Date().toISOString(),
         });
@@ -308,7 +324,7 @@ export default function AdminDashboard() {
       );
     } catch (err) {
       console.error("Erreur:", err);
-      alert("Une erreur est survenue");
+        alert(t("genericError"));
     }
   };
 
@@ -355,7 +371,7 @@ export default function AdminDashboard() {
       }
 
       if (!saved) {
-        alert("Impossible d'enregistrer la formule.");
+        alert(t("dashboard.formuleSaveFail"));
         return;
       }
 
@@ -363,8 +379,8 @@ export default function AdminDashboard() {
         contact_id: id,
         action: nextFormule ? "formule_choisie" : "contact_modifier",
         description: nextFormule
-          ? `Formule enregistrée manuellement : ${nextFormule}`
-          : "Formule retirée manuellement",
+          ? t("dashboard.formuleSavedNote", { formule: nextFormule })
+          : t("dashboard.formuleRemovedNote"),
         user_admin: user?.email,
       });
 
@@ -385,7 +401,7 @@ export default function AdminDashboard() {
       );
     } catch (err) {
       console.error("Erreur update formule:", err);
-      alert("Une erreur est survenue");
+        alert(t("genericError"));
     }
   };
 
@@ -425,14 +441,16 @@ export default function AdminDashboard() {
       }
 
       if (!saved) {
-        alert("Impossible d'enregistrer l'avancement.");
+        alert(t("dashboard.progressSaveFail"));
         return;
       }
 
       await supabase.from("suivi_actions").insert({
         contact_id: id,
         action: "changement_statut",
-        description: `Avancement dossier : ${step.label}`,
+        description: t("dashboard.progressActionNote", {
+          step: t(`step.${step.key}`),
+        }),
         user_admin: user?.email,
       });
 
@@ -449,12 +467,12 @@ export default function AdminDashboard() {
       );
     } catch (err) {
       console.error("Erreur update avancement:", err);
-      alert("Une erreur est survenue");
+        alert(t("genericError"));
     }
   };
 
   const deleteContact = async (id) => {
-    if (!confirm("Supprimer définitivement ce contact ?")) return;
+    if (!confirm(t("dashboard.deleteConfirm"))) return;
     const { error } = await supabase.from("contacts").delete().eq("id", id);
     if (!error) {
       setContacts((prev) => prev.filter((c) => c.id !== id));
@@ -509,34 +527,29 @@ const stats = {
 };
 
   return (
-    <AdminShell
-      title="Dashboard Admin"
-      subtitle="Étudier en Chine"
-      user={user}
-      onLogout={handleLogout}
-    >
+    <AdminShell user={user} onLogout={handleLogout}>
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
           <StatCard
-            label="Total contacts"
+            label={t("dashboard.totalContacts")}
             value={stats.total}
             icon="👥"
             color="from-blue-600 to-cyan-500"
           />
           <StatCard
-            label="À qualifier"
+            label={t("dashboard.toQualify")}
             value={stats.a_qualifier}
             icon="📞"
             color="from-indigo-600 to-violet-500"
           />
           <StatCard
-            label="En attente paiement"
+            label={t("dashboard.waitingPayment")}
             value={stats.attente_paiement}
             icon="💳"
             color="from-orange-600 to-yellow-500"
           />
           <StatCard
-            label="Clients payés"
+            label={t("dashboard.paidClients")}
             value={stats.paye}
             icon="✅"
             color="from-purple-600 to-pink-500"
@@ -551,7 +564,7 @@ const stats = {
               <div className="flex-1 relative">
                 <input
                   type="text"
-                  placeholder="🔍 Rechercher par nom, email..."
+                  placeholder={`🔍 ${t("dashboard.searchPlaceholder")}`}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-300"
@@ -562,10 +575,10 @@ const stats = {
                 onChange={(e) => setFilterStatut(e.target.value)}
                 className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
-                <option value="tous">📋 Tous les statuts</option>
+                <option value="tous">📋 {t("dashboard.allStatuses")}</option>
                 {STATUTS.map((s) => (
                   <option key={s} value={s}>
-                    {STATUT_ICONS[s]} {s.replace(/_/g, " ")}
+                    {STATUT_ICONS[s]} {t(`statut.${s}`)}
                   </option>
                 ))}
               </select>
@@ -578,7 +591,7 @@ const stats = {
                 onChange={(e) => setFilterPays(e.target.value)}
                 className="px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
-                <option value="tous">🌍 Tous les pays</option>
+                <option value="tous">🌍 {t("dashboard.allCountries")}</option>
                 {pays.map((p) => (
                   <option key={p} value={p}>
                     {p}
@@ -591,10 +604,10 @@ const stats = {
                 onChange={(e) => setFilterNiveau(e.target.value)}
                 className="px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
-                <option value="tous">🎓 Tous les niveaux</option>
+                <option value="tous">🎓 {t("dashboard.allLevels")}</option>
                 {NIVEAUX_ETUDES.map((n) => (
                   <option key={n} value={n}>
-                    {n}
+                    {t(`niveau.${n}`)}
                   </option>
                 ))}
               </select>
@@ -604,10 +617,10 @@ const stats = {
                 onChange={(e) => setFilterDomaine(e.target.value)}
                 className="px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
-                <option value="tous">📚 Tous les domaines</option>
+                <option value="tous">📚 {t("dashboard.allDomains")}</option>
                 {DOMAINES_ETUDES.map((d) => (
                   <option key={d} value={d}>
-                    {d}
+                    {t(`domaine.${d}`)}
                   </option>
                 ))}
               </select>
@@ -617,10 +630,10 @@ const stats = {
                 onChange={(e) => setFilterBudget(e.target.value)}
                 className="px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
-                <option value="tous">💰 Tous les budgets</option>
+                <option value="tous">💰 {t("dashboard.allBudgets")}</option>
                 {BUDGETS.map((b) => (
                   <option key={b} value={b}>
-                    {b}
+                    {t(`budget.${b}`)}
                   </option>
                 ))}
               </select>
@@ -629,7 +642,7 @@ const stats = {
                 onClick={fetchContacts}
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/40 transition-all duration-300 font-semibold transform hover:scale-105 active:scale-95"
               >
-                🔄 Actualiser
+                🔄 {t("refresh")}
               </button>
             </div>
           </div>
@@ -640,15 +653,19 @@ const stats = {
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
             <div className="flex-1">
               <p className="text-white font-bold">
-                📬 Envoi groupé
+                📬 {t("dashboard.bulkTitle")}
                 {selectedIds.length > 0
-                  ? ` — ${selectedIds.length} sélectionné${selectedIds.length > 1 ? "s" : ""}`
+                  ? ` — ${t("dashboard.bulkSelected", { count: selectedIds.length })}`
                   : ""}
               </p>
               <p className="text-xs text-slate-400 mt-1">
                 {bulkSending && bulkProgress
-                  ? `Envoi ${bulkProgress.current}/${bulkProgress.total} — ${bulkProgress.name}`
-                  : "Cochez des contacts dans la liste, puis envoyez une relance ou les formules."}
+                  ? t("dashboard.bulkProgress", {
+                      current: bulkProgress.current,
+                      total: bulkProgress.total,
+                      name: bulkProgress.name,
+                    })
+                  : t("dashboard.bulkHint")}
               </p>
               {bulkSending && bulkProgress ? (
                 <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
@@ -671,7 +688,7 @@ const stats = {
             >
               {EMAIL_TEMPLATE_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {option.label}
+                  {t(`emailTemplate.${option.value}`)}
                 </option>
               ))}
             </select>
@@ -698,8 +715,8 @@ const stats = {
               >
                 {filteredContacts.length > 0 &&
                 filteredContacts.every((c) => selectedIds.includes(c.id))
-                  ? "Tout désélectionner"
-                  : "Sélectionner les filtrés"}
+                  ? t("dashboard.deselectAll")
+                  : t("dashboard.selectFiltered")}
               </button>
               {selectedIds.length > 0 ? (
                 <button
@@ -708,7 +725,7 @@ const stats = {
                   onClick={() => setSelectedIds([])}
                   className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
                 >
-                  Vider
+                  {t("dashboard.clear")}
                 </button>
               ) : null}
               <button
@@ -718,8 +735,11 @@ const stats = {
                 className="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {bulkSending
-                  ? `⏳ Envoi ${bulkProgress?.current || 0}/${bulkProgress?.total || 0}`
-                  : `📤 Envoyer (${selectedIds.length})`}
+                  ? `⏳ ${t("dashboard.sendingCount", {
+                      current: bulkProgress?.current || 0,
+                      total: bulkProgress?.total || 0,
+                    })}`
+                  : `📤 ${t("dashboard.send", { count: selectedIds.length })}`}
               </button>
             </div>
           </div>
@@ -731,15 +751,15 @@ const stats = {
             <div className="p-16 text-center">
               <div className="inline-block animate-spin text-4xl mb-4">⏳</div>
               <p className="text-slate-400 text-lg font-medium">
-                Chargement des contacts...
+                {t("dashboard.loadingContacts")}
               </p>
             </div>
           ) : filteredContacts.length === 0 ? (
             <div className="p-16 text-center">
               <p className="text-slate-300 text-xl font-semibold mb-2">
-                😔 Aucun contact trouvé
+                😔 {t("dashboard.noContacts")}
               </p>
-              <p className="text-slate-500">Ajustez vos filtres</p>
+              <p className="text-slate-500">{t("dashboard.adjustFilters")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -775,25 +795,25 @@ const stats = {
                       />
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      👤 Nom
+                      👤 {t("dashboard.colName")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      🌍 Pays
+                      🌍 {t("dashboard.colCountry")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      🎓 Niveau
+                      🎓 {t("dashboard.colLevel")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      📚 Domaine
+                      📚 {t("dashboard.colDomain")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      💰 Budget
+                      💰 {t("dashboard.colBudget")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      ⭐ Statut
+                      ⭐ {t("dashboard.colStatus")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
-                      ⚙️ Actions
+                      ⚙️ {t("dashboard.colActions")}
                     </th>
                   </tr>
                 </thead>
@@ -821,7 +841,7 @@ const stats = {
                         </span>
                         {getChosenFormule(c) ? (
                           <p className="text-xs text-cyan-300 mt-1 font-semibold">
-                            📋 {getChosenFormule(c)}
+                            📋 {translatedOrRaw(t, "formule", getChosenFormule(c))}
                           </p>
                         ) : null}
                         <p className="text-xs text-slate-500 mt-1">{c.email}</p>
@@ -830,14 +850,20 @@ const stats = {
                         {c.pays || "—"}
                       </td>
                       <td className="px-6 py-4 text-slate-300 text-sm">
-                        {c.dernier_diplome || "—"}
+                        {c.dernier_diplome
+                          ? translatedOrRaw(t, "niveau", c.dernier_diplome)
+                          : "—"}
                       </td>
                       <td className="px-6 py-4 text-slate-300 text-sm">
-                        {c.domaine_etudes || "—"}
+                        {c.domaine_etudes
+                          ? translatedOrRaw(t, "domaine", c.domaine_etudes)
+                          : "—"}
                       </td>
                       <td className="px-6 py-4">
                         <span className="text-sm font-bold px-3 py-1 rounded-lg bg-slate-700/30 text-slate-300">
-                          {c.budget || "—"}
+                          {c.budget
+                            ? translatedOrRaw(t, "budget", c.budget)
+                            : "—"}
                         </span>
                       </td>
                       <td className="px-6 py-4">
@@ -849,10 +875,10 @@ const stats = {
                             "bg-slate-700/20 text-slate-400 border-slate-600/30"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 cursor-pointer`}
                         >
-                          <option value="">-- Sélectionner --</option>
+                          <option value="">{t("dashboard.select")}</option>
                           {STATUTS.map((s) => (
                             <option key={s} value={s}>
-                              {STATUT_ICONS[s]} {s.replace(/_/g, " ")}
+                              {STATUT_ICONS[s]} {t(`statut.${s}`)}
                             </option>
                           ))}
                         </select>
@@ -863,13 +889,13 @@ const stats = {
                             onClick={() => setSelectedContact(c)}
                             className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/20 px-3 py-1 rounded-lg text-sm font-semibold transition-all duration-200"
                           >
-                            👁️ Voir
+                            👁️ {t("dashboard.view")}
                           </button>
                           <button
                             onClick={() => deleteContact(c.id)}
                             className="text-red-400 hover:text-red-300 hover:bg-red-500/20 px-3 py-1 rounded-lg text-sm font-semibold transition-all duration-200"
                           >
-                            🗑️ Sup
+                            🗑️ {t("dashboard.deleteShort")}
                           </button>
                         </div>
                       </td>
@@ -883,9 +909,10 @@ const stats = {
           {/* Footer */}
           <div className="bg-slate-900/40 px-6 py-4 border-t border-slate-700/50 text-center">
             <p className="text-slate-400 text-sm font-medium">
-              📊 {filteredContacts.length} contact
-              {filteredContacts.length > 1 ? "s" : ""} affichés sur{" "}
-              {contacts.length}
+              📊 {t("dashboard.shown", {
+                filtered: filteredContacts.length,
+                total: contacts.length,
+              })}
             </p>
           </div>
         </div>
@@ -935,6 +962,7 @@ function ContactModal({
   userEmail,
   onContactUpdated,
 }) {
+  const { t, lang } = useAdminI18n();
   const [actions, setActions] = useState([]);
   const [newAction, setNewAction] = useState("");
   const [newDescription, setNewDescription] = useState("");
@@ -992,11 +1020,11 @@ function ContactModal({
   };
 
   async function sendSelectedEmail() {
-    const selected = EMAIL_TEMPLATE_OPTIONS.find(
-      (option) => option.value === emailTemplate,
-    );
     const confirmed = confirm(
-      `Envoyer l'email « ${selected?.label || emailTemplate} » à ${contact.prenom} ?`,
+      t("dashboard.sendEmailConfirm", {
+        template: t(`emailTemplate.${emailTemplate}`),
+        name: contact.prenom,
+      }),
     );
     if (!confirmed) return;
 
@@ -1019,17 +1047,17 @@ function ContactModal({
       console.log("✅ Réponse serveur:", data);
 
       if (data.success) {
-        alert("✅ Email envoyé !");
+        alert(`✅ ${t("dashboard.emailOk")}`);
         fetchActions();
         onContactUpdated?.();
         return data;
       }
 
-      alert("❌ Erreur : " + (data.message || data.error));
+      alert("❌ " + t("dashboard.emailFail", { error: data.message || data.error }));
       return null;
     } catch (error) {
       console.error("❌ Erreur fetch:", error);
-      alert("❌ Erreur réseau : " + error.message);
+      alert("❌ " + t("dashboard.networkError", { error: error.message }));
       return null;
     } finally {
       setSendingEmail(false);
@@ -1053,11 +1081,11 @@ function ContactModal({
             </h2>
             {getChosenFormule(contact) ? (
               <p className="text-white text-lg font-semibold mt-3 bg-white/15 inline-block px-4 py-2 rounded-xl">
-                📋 {getChosenFormule(contact)}
+                📋 {translatedOrRaw(t, "formule", getChosenFormule(contact))}
               </p>
             ) : (
               <p className="text-blue-100 text-sm mt-2 font-medium">
-                Aucune formule choisie
+                {t("dashboard.noFormuleChosen")}
               </p>
             )}
             <p className="text-blue-100 text-sm mt-2 font-medium">
@@ -1082,13 +1110,13 @@ function ContactModal({
               <tbody>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20 w-1/3">
-                    📧 Email
+                    📧 {t("dashboard.email")}
                   </td>
                   <td className="px-4 py-3 text-white">{contact.email}</td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📱 Téléphone
+                    📱 {t("dashboard.phone")}
                   </td>
                   <td className="px-4 py-3 text-white">
                     {contact.phone || "—"}
@@ -1096,7 +1124,7 @@ function ContactModal({
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    🌍 Pays
+                    🌍 {t("dashboard.country")}
                   </td>
                   <td className="px-4 py-3 text-white">
                     {contact.pays || "—"}
@@ -1104,31 +1132,37 @@ function ContactModal({
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    🎓 Niveau d'études
+                    🎓 {t("dashboard.studyLevel")}
                   </td>
                   <td className="px-4 py-3 text-white">
-                    {contact.dernier_diplome || "—"}
+                    {contact.dernier_diplome
+                      ? translatedOrRaw(t, "niveau", contact.dernier_diplome)
+                      : "—"}
                   </td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📚 Domaine
+                    📚 {t("dashboard.domain")}
                   </td>
                   <td className="px-4 py-3 text-white">
-                    {contact.domaine_etudes || "—"}
+                    {contact.domaine_etudes
+                      ? translatedOrRaw(t, "domaine", contact.domaine_etudes)
+                      : "—"}
                   </td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    💰 Budget
+                    💰 {t("dashboard.budget")}
                   </td>
                   <td className="px-4 py-3 text-white font-semibold">
-                    {contact.budget || "—"}
+                    {contact.budget
+                      ? translatedOrRaw(t, "budget", contact.budget)
+                      : "—"}
                   </td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📅 Date de rentrée
+                    📅 {t("dashboard.intakeDate")}
                   </td>
                   <td className="px-4 py-3 text-white">
                     {contact.date_rentree || "—"}
@@ -1136,7 +1170,7 @@ function ContactModal({
                 </tr>
                 <tr className="border-b border-slate-700/50">
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    🔍 Source
+                    🔍 {t("dashboard.source")}
                   </td>
                   <td className="px-4 py-3 text-white">
                     {contact.source || "—"}
@@ -1144,7 +1178,7 @@ function ContactModal({
                 </tr>
                 <tr>
                   <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    ⭐ Score qualité
+                    ⭐ {t("dashboard.qualityScore")}
                   </td>
                   <td className="px-4 py-3 text-white">
                     {contact.score_qualite || "—"}
@@ -1157,7 +1191,7 @@ function ContactModal({
           {/* Envoi d'email */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📧 Envoyer un email
+              📧 {t("dashboard.emailSection")}
             </label>
             <div className="flex flex-col md:flex-row gap-3">
               <select
@@ -1167,7 +1201,7 @@ function ContactModal({
               >
                 {EMAIL_TEMPLATE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
-                    {option.label}
+                    {t(`emailTemplate.${option.value}`)}
                   </option>
                 ))}
               </select>
@@ -1177,23 +1211,23 @@ function ContactModal({
                 disabled={sendingEmail}
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
-                {sendingEmail ? "⏳ Envoi..." : "📤 Envoyer"}
+                {sendingEmail ? `⏳ ${t("sending")}` : `📤 ${t("dashboard.sendEmail")}`}
               </button>
             </div>
             <p className="text-xs text-slate-500 mt-3">
               {emailTemplate === "formules_presentation" &&
-                "Action : Email formules • Statut : choix des formules (espace encore verrouillé)"}
+                t("dashboard.emailHintFormules")}
               {emailTemplate === "relance_1" &&
-                "Action : Relance 1 • Statut : relance 1 envoyée"}
+                t("dashboard.emailHintRelance1")}
               {emailTemplate === "relance_2" &&
-                "Action : Relance 2 • Statut : relance 2 envoyée"}
+                t("dashboard.emailHintRelance2")}
             </p>
           </div>
 
           {/* Formule d'accompagnement */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📋 Formule d'accompagnement
+              📋 {t("dashboard.formuleSection")}
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <select
@@ -1210,10 +1244,10 @@ function ContactModal({
                 }}
                 className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold cursor-pointer"
               >
-                <option value="">-- Aucune formule --</option>
+                <option value="">{t("dashboard.noFormule")}</option>
                 {FORMULE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
-                    {option.label}
+                    {t(`formule.${option.value}`)}
                   </option>
                 ))}
                 {selectedFormule &&
@@ -1238,26 +1272,25 @@ function ContactModal({
                 }}
                 className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
-                {savingFormule ? "⏳ Enregistrement..." : "💾 Enregistrer"}
+                {savingFormule ? `⏳ ${t("saving")}` : `💾 ${t("save")}`}
               </button>
             </div>
             <p className="text-xs text-slate-500 mt-3">
-              Pour les étudiants qui ont déjà choisi avant l'automatisation.
-              Enregistrer une formule débloque l'espace étudiant si besoin
-              (statut « formule choisie »). Un statut plus avancé n'est pas
-              modifié.
+              {t("dashboard.formuleHint")}
             </p>
           </div>
 
           {/* Avancement dossier */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📈 Avancement du dossier
+              📈 {t("dashboard.progressSection")}
             </label>
             <p className="text-xs text-slate-400 mb-4">
-              Étape visible dans l'espace étudiant :{" "}
+              {t("dashboard.progressVisible")}{" "}
               <span className="text-white font-semibold">
-                {STUDENT_PROCESS_STEPS[getDisplayedStepIndex(contact)]?.label}
+                {t(
+                  `step.${STUDENT_PROCESS_STEPS[getDisplayedStepIndex(contact)]?.key}`,
+                )}
               </span>
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1275,7 +1308,7 @@ function ContactModal({
                     }`}
                   >
                     <span className="mr-2">{step.icon}</span>
-                    {index + 1}. {step.label}
+                    {index + 1}. {t(`step.${step.key}`)}
                   </button>
                 );
               })}
@@ -1287,34 +1320,32 @@ function ContactModal({
           {/* Accès espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              🎓 Espace étudiant
+              🎓 {t("dashboard.studentSpace")}
             </label>
             {isStudentSpaceUnlocked(contact.suivi_statut) ? (
               <>
                 <p className="text-sm text-emerald-300 mb-3">
-                  Accès débloqué. Le suivi et les documents sont visibles pour
-                  cet étudiant.
+                  {t("dashboard.unlocked")}
                 </p>
                 <button
                   type="button"
                   onClick={() => onUpdateStatut(contact.id, "choix_des_formules")}
                   className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
                 >
-                  Verrouiller l'espace
+                  {t("dashboard.lockSpace")}
                 </button>
               </>
             ) : (
               <>
                 <p className="text-sm text-slate-400 mb-3">
-                  L'étudiant peut uniquement modifier ses informations. Passez
-                  le statut à « formule choisie » pour débloquer le reste.
+                  {t("dashboard.locked")}
                 </p>
                 <button
                   type="button"
                   onClick={() => onUpdateStatut(contact.id, "formule_choisie")}
                   className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300"
                 >
-                  Débloquer (formule choisie)
+                  {t("dashboard.unlockSpace")}
                 </button>
               </>
             )}
@@ -1323,17 +1354,17 @@ function ContactModal({
           {/* Statut Selector */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              ⭐ Statut actuel
+              ⭐ {t("dashboard.currentStatus")}
             </label>
             <select
               value={contact.suivi_statut || ""}
               onChange={(e) => onUpdateStatut(contact.id, e.target.value)}
               className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold"
             >
-              <option value="">-- Sélectionner un statut --</option>
+              <option value="">{t("dashboard.selectStatus")}</option>
               {STATUTS.map((s) => (
                 <option key={s} value={s}>
-                  {STATUT_ICONS[s]} {s.replace(/_/g, " ")}
+                  {STATUT_ICONS[s]} {t(`statut.${s}`)}
                 </option>
               ))}
             </select>
@@ -1342,7 +1373,7 @@ function ContactModal({
           {/* Notes Admin */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📝 Notes internes
+              📝 {t("dashboard.internalNotes")}
             </label>
             <textarea
               value={notes}
@@ -1350,7 +1381,7 @@ function ContactModal({
               onBlur={saveNotes}
               rows={4}
               className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 resize-none"
-              placeholder="Ajouter une note (sauvegardée automatiquement)..."
+              placeholder={t("dashboard.notesPlaceholder")}
             />
           </div>
 
@@ -1360,7 +1391,7 @@ function ContactModal({
             className="mb-8 pb-8 border-b border-slate-700/50"
           >
             <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wide">
-              ➕ Enregistrer une action
+              ➕ {t("dashboard.logAction")}
             </h3>
             <div className="flex flex-col gap-4">
               <select
@@ -1368,17 +1399,17 @@ function ContactModal({
                 onChange={(e) => setNewAction(e.target.value)}
                 className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
-                <option value="">-- Choisir une action --</option>
+                <option value="">{t("dashboard.chooseAction")}</option>
                 {ACTIONS_TYPES.map((a) => (
                   <option key={a.value} value={a.value}>
-                    {a.icon} {a.label}
+                    {a.icon} {t(`action.${a.value}`)}
                   </option>
                 ))}
               </select>
               <textarea
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
-                placeholder="Description (optionnel)..."
+                placeholder={t("dashboard.actionPlaceholder")}
                 rows={2}
                 className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 resize-none"
               />
@@ -1386,7 +1417,7 @@ function ContactModal({
                 type="submit"
                 className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105 active:scale-95 uppercase tracking-wide"
               >
-                ✅ Enregistrer l'action
+                ✅ {t("dashboard.saveAction")}
               </button>
             </div>
           </form>
@@ -1394,14 +1425,14 @@ function ContactModal({
           {/* Historique */}
           <div>
             <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wide">
-              📜 Historique ({actions.length})
+              📜 {t("dashboard.history")} ({actions.length})
             </h3>
             <div className="space-y-3 max-h-64 overflow-y-auto">
               {loadingActions ? (
-                <p className="text-slate-400 text-center py-4">Chargement...</p>
+                <p className="text-slate-400 text-center py-4">{t("loading")}</p>
               ) : actions.length === 0 ? (
                 <p className="text-slate-400 text-center py-4">
-                  Aucune action enregistrée
+                  {t("dashboard.noActions")}
                 </p>
               ) : (
                 actions.map((action) => {
@@ -1416,10 +1447,14 @@ function ContactModal({
                       <div className="flex justify-between items-start mb-2">
                         <span className="font-bold text-blue-300">
                           {actionType?.icon}{" "}
-                          {actionType?.label || action.action}
+                          {actionType
+                            ? t(`action.${actionType.value}`)
+                            : action.action}
                         </span>
                         <span className="text-xs text-slate-500 font-medium">
-                          {new Date(action.created_at).toLocaleString("fr-FR")}
+                          {new Date(action.created_at).toLocaleString(
+                            lang === "zh" ? "zh-CN" : lang === "en" ? "en-GB" : "fr-FR",
+                          )}
                         </span>
                       </div>
                       {action.description && (

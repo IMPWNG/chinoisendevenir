@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useAdminI18n } from "../context/AdminI18nContext";
 
 async function adminFetch(path, options = {}) {
   const {
@@ -9,7 +10,7 @@ async function adminFetch(path, options = {}) {
   } = await supabase.auth.getSession();
 
   if (!session?.access_token) {
-    throw new Error("Session expirée. Reconnectez-vous.");
+    throw new Error("SESSION");
   }
 
   const isFormData = options.body instanceof FormData;
@@ -24,12 +25,13 @@ async function adminFetch(path, options = {}) {
 
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(data.error || "Une erreur est survenue");
+    throw new Error(data.error || "ERROR");
   }
   return data;
 }
 
 export default function AdminStudentFiles({ contactId }) {
+  const { t } = useAdminI18n();
   const [requiredDocuments, setRequiredDocuments] = useState([]);
   const [adminDocuments, setAdminDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,7 +50,9 @@ export default function AdminStudentFiles({ contactId }) {
       setRequiredDocuments(data.requiredDocuments || []);
       setAdminDocuments(data.adminDocuments || []);
     } catch (err) {
-      setError(err.message);
+      setError(
+        err.message === "SESSION" ? t("sessionExpired") : err.message === "ERROR" ? t("genericError") : err.message,
+      );
     } finally {
       setLoading(false);
     }
@@ -65,12 +69,12 @@ export default function AdminStudentFiles({ contactId }) {
       );
       window.open(data.url, "_blank", "noopener,noreferrer");
     } catch (err) {
-      alert(err.message);
+      alert(err.message === "SESSION" ? t("sessionExpired") : err.message);
     }
   };
 
   const deleteFile = async (path, name) => {
-    if (!confirm(`Supprimer « ${name} » de l'espace étudiant ?`)) return;
+    if (!confirm(t("files.deleteConfirm", { name }))) return;
     setDeletingPath(path);
     setError("");
     try {
@@ -118,11 +122,11 @@ export default function AdminStudentFiles({ contactId }) {
   return (
     <div className="mb-8 pb-8 border-b border-slate-700/50">
       <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-        📂 Documents du dossier
+        📂 {t("files.title")}
       </label>
 
       {loading ? (
-        <p className="text-sm text-slate-400">Chargement des documents...</p>
+        <p className="text-sm text-slate-400">{t("files.loading")}</p>
       ) : (
         <>
           {error ? (
@@ -130,8 +134,7 @@ export default function AdminStudentFiles({ contactId }) {
           ) : null}
 
           <p className="text-xs text-slate-400 mb-3">
-            Reçus de l'étudiant — {missingCount} manquant
-            {missingCount > 1 ? "s" : ""}
+            {t("files.receivedFromStudent", { count: missingCount })}
           </p>
           <div className="space-y-3 mb-6">
             {requiredDocuments.map((doc) => {
@@ -148,14 +151,17 @@ export default function AdminStudentFiles({ contactId }) {
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <p className="text-white font-semibold">
-                        {doc.icon} {doc.label}
+                        {doc.icon}{" "}
+                        {t(`docs.${doc.key}`) === `docs.${doc.key}`
+                          ? doc.label
+                          : t(`docs.${doc.key}`)}
                       </p>
                       <p
                         className={`text-xs font-bold uppercase tracking-wide mt-1 ${
                           missing ? "text-rose-300" : "text-emerald-300"
                         }`}
                       >
-                        {missing ? "Manquant" : "Reçu"}
+                        {missing ? t("files.missing") : t("files.received")}
                       </p>
                       {doc.file ? (
                         <p className="text-xs text-slate-400 mt-1">
@@ -169,7 +175,7 @@ export default function AdminStudentFiles({ contactId }) {
                         onClick={() => downloadFile(doc.file.path)}
                         className="px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-lg text-sm font-bold"
                       >
-                        Télécharger
+                        {t("download")}
                       </button>
                     ) : null}
                   </div>
@@ -179,13 +185,11 @@ export default function AdminStudentFiles({ contactId }) {
           </div>
 
           <p className="text-xs text-slate-400 mb-3">
-            Envoyés à l'étudiant
+            {t("files.sentToStudent")}
           </p>
           <div className="space-y-3 mb-4">
             {adminDocuments.length === 0 ? (
-              <p className="text-sm text-slate-500">
-                Aucun document envoyé pour le moment.
-              </p>
+              <p className="text-sm text-slate-500">{t("files.noneSent")}</p>
             ) : (
               adminDocuments.map((doc) => (
                 <div
@@ -199,7 +203,7 @@ export default function AdminStudentFiles({ contactId }) {
                       onClick={() => downloadFile(doc.path)}
                       className="px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-lg text-sm font-bold"
                     >
-                      Télécharger
+                      {t("download")}
                     </button>
                     <button
                       type="button"
@@ -207,7 +211,7 @@ export default function AdminStudentFiles({ contactId }) {
                       onClick={() => deleteFile(doc.path, doc.name)}
                       className="px-4 py-2 bg-rose-600/80 hover:bg-rose-500 text-white rounded-lg text-sm font-bold disabled:opacity-50"
                     >
-                      {deletingPath === doc.path ? "Suppression..." : "Supprimer"}
+                      {deletingPath === doc.path ? t("deleting") : t("delete")}
                     </button>
                   </div>
                 </div>
@@ -227,13 +231,10 @@ export default function AdminStudentFiles({ contactId }) {
               disabled={uploading || !fileToSend}
               className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
-              {uploading ? "⏳ Envoi..." : "📤 Envoyer à l'étudiant"}
+              {uploading ? `⏳ ${t("sending")}` : `📤 ${t("files.sendToStudent")}`}
             </button>
           </form>
-          <p className="text-xs text-slate-500 mt-3">
-            PDF, JPG ou PNG — 10 Mo max. Le fichier apparaîtra dans l'espace
-            étudiant.
-          </p>
+          <p className="text-xs text-slate-500 mt-3">{t("files.hint")}</p>
         </>
       )}
     </div>

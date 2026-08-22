@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import AdminShell from "../components/AdminShell";
 import { UNIVERSITY_SEED, toUniversityInsert } from "../lib/universitySeed";
+import { useAdminI18n } from "../context/AdminI18nContext";
 
 const EMPTY_FORM = {
   name_zh: "",
@@ -38,10 +39,10 @@ const EMPTY_FORM = {
   application_deadline: "",
 };
 
-const REPLY_LABELS = {
-  replied: { text: "Répondu", className: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40" },
-  no_reply: { text: "Pas de réponse", className: "bg-rose-500/20 text-rose-300 border-rose-500/40" },
-  pending: { text: "En attente", className: "bg-amber-500/20 text-amber-300 border-amber-500/40" },
+const REPLY_STYLES = {
+  replied: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+  no_reply: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+  pending: "bg-amber-500/20 text-amber-300 border-amber-500/40",
 };
 
 function splitList(value) {
@@ -120,8 +121,16 @@ function tableMissing(error) {
   );
 }
 
+function replyLabel(status, t) {
+  if (status === "replied") return t("universities.replyReplied");
+  if (status === "no_reply") return t("universities.replyNoReply");
+  if (status === "pending") return t("universities.replyPending");
+  return "";
+}
+
 export default function AdminUniversities() {
   const { signOut, user } = useAuth();
+  const { t } = useAdminI18n();
   const router = useRouter();
   const [universities, setUniversities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -195,7 +204,7 @@ export default function AdminUniversities() {
     e.preventDefault();
     const payload = formToPayload(form);
     if (!payload.name_zh) {
-      alert("Le nom chinois est obligatoire.");
+      alert(t("universities.nameRequired"));
       return;
     }
 
@@ -231,7 +240,7 @@ export default function AdminUniversities() {
   };
 
   const deleteUniversity = async (row) => {
-    if (!confirm(`Supprimer ${row.name_zh} ?`)) return;
+    if (!confirm(t("universities.deleteConfirm", { name: row.name_zh }))) return;
     const { error: deleteError } = await supabase
       .from("universities")
       .delete()
@@ -246,7 +255,7 @@ export default function AdminUniversities() {
   const importSeed = async () => {
     if (
       !confirm(
-        `Importer ${UNIVERSITY_SEED.length} universités depuis la liste partenaire ?`,
+        t("universities.importConfirm", { count: UNIVERSITY_SEED.length }),
       )
     ) {
       return;
@@ -266,26 +275,32 @@ export default function AdminUniversities() {
     }
   };
 
+  const tableHeaders = [
+    t("universities.colUniversity"),
+    t("universities.colCity"),
+    t("universities.colDepartment"),
+    t("universities.colEmail"),
+    t("universities.colPhone"),
+    t("universities.colLastContact"),
+    t("universities.colReply"),
+    t("universities.colWebsite"),
+    "",
+  ];
+
   return (
-    <AdminShell
-      title="Universités"
-      subtitle="Base partenaires — matching à venir"
-      user={user}
-      onLogout={handleLogout}
-    >
+    <AdminShell user={user} onLogout={handleLogout}>
       {missingTable ? (
         <div className="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-6 text-amber-100">
-          <h2 className="text-xl font-bold mb-2">Table `universities` manquante</h2>
+          <h2 className="text-xl font-bold mb-2">{t("universities.missingTable")}</h2>
           <p className="text-sm text-amber-200/90 mb-4">
-            Exécute le fichier SQL <code className="text-white">sql/universities.sql</code>{" "}
-            dans l&apos;éditeur SQL Supabase, puis clique sur Actualiser.
+            {t("universities.missingTableHint")}
           </p>
           <button
             type="button"
             onClick={fetchUniversities}
             className="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold"
           >
-            🔄 Actualiser
+            🔄 {t("refresh")}
           </button>
         </div>
       ) : (
@@ -293,17 +308,17 @@ export default function AdminUniversities() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
             <div className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-6 text-white">
               <p className="text-4xl font-bold">{universities.length}</p>
-              <p className="text-sm text-white/80 mt-1">Universités</p>
+              <p className="text-sm text-white/80 mt-1">{t("universities.count")}</p>
             </div>
             <div className="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-2xl p-6 text-white">
               <p className="text-4xl font-bold">
                 {universities.filter((u) => u.reply_status === "replied").length}
               </p>
-              <p className="text-sm text-white/80 mt-1">Ont répondu</p>
+              <p className="text-sm text-white/80 mt-1">{t("universities.replied")}</p>
             </div>
             <div className="bg-gradient-to-br from-violet-600 to-purple-500 rounded-2xl p-6 text-white">
               <p className="text-4xl font-bold">{provinces.length}</p>
-              <p className="text-sm text-white/80 mt-1">Provinces / villes</p>
+              <p className="text-sm text-white/80 mt-1">{t("universities.provinces")}</p>
             </div>
           </div>
 
@@ -316,7 +331,7 @@ export default function AdminUniversities() {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="🔍 Nom, ville, email..."
+                placeholder={`🔍 ${t("universities.searchPlaceholder")}`}
                 className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               />
               <select
@@ -324,7 +339,7 @@ export default function AdminUniversities() {
                 onChange={(e) => setFilterProvince(e.target.value)}
                 className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white"
               >
-                <option value="tous">🌍 Toutes les provinces</option>
+                <option value="tous">🌍 {t("universities.allProvinces")}</option>
                 {provinces.map((p) => (
                   <option key={p} value={p}>
                     {p}
@@ -336,7 +351,7 @@ export default function AdminUniversities() {
                 onClick={fetchUniversities}
                 className="px-5 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold"
               >
-                🔄 Actualiser
+                🔄 {t("refresh")}
               </button>
               {universities.length === 0 ? (
                 <button
@@ -345,7 +360,9 @@ export default function AdminUniversities() {
                   onClick={importSeed}
                   className="px-5 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl font-bold disabled:opacity-50"
                 >
-                  {importing ? "Import..." : "📥 Importer la liste (30)"}
+                  {importing
+                    ? t("universities.importing")
+                    : `📥 ${t("universities.importList")}`}
                 </button>
               ) : null}
               <button
@@ -353,21 +370,21 @@ export default function AdminUniversities() {
                 onClick={openCreate}
                 className="px-5 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold"
               >
-                ➕ Ajouter
+                ➕ {t("universities.add")}
               </button>
             </div>
           </div>
 
           <div className="bg-slate-800/40 rounded-2xl overflow-hidden border border-slate-700/50">
             {loading ? (
-              <p className="p-12 text-center text-slate-400">Chargement...</p>
+              <p className="p-12 text-center text-slate-400">{t("loading")}</p>
             ) : filtered.length === 0 ? (
               <div className="p-12 text-center">
                 <p className="text-slate-300 font-semibold mb-2">
-                  Aucune université
+                  {t("universities.none")}
                 </p>
                 <p className="text-slate-500 text-sm">
-                  Importe la liste partenaire ou ajoute une université.
+                  {t("universities.noneHint")}
                 </p>
               </div>
             ) : (
@@ -375,19 +392,9 @@ export default function AdminUniversities() {
                 <table className="w-full min-w-[1100px]">
                   <thead className="bg-slate-900/60 border-b border-slate-700/50">
                     <tr>
-                      {[
-                        "Université",
-                        "Ville",
-                        "Département",
-                        "Email",
-                        "Téléphone",
-                        "Dernier contact",
-                        "Réponse",
-                        "Site",
-                        "",
-                      ].map((label) => (
+                      {tableHeaders.map((label, index) => (
                         <th
-                          key={label || "actions"}
+                          key={label || `actions-${index}`}
                           className="px-4 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-widest"
                         >
                           {label}
@@ -397,7 +404,7 @@ export default function AdminUniversities() {
                   </thead>
                   <tbody className="divide-y divide-slate-700/50">
                     {filtered.map((u) => {
-                      const reply = REPLY_LABELS[u.reply_status];
+                      const replyText = replyLabel(u.reply_status, t);
                       return (
                         <tr
                           key={u.id}
@@ -438,11 +445,11 @@ export default function AdminUniversities() {
                             ) : null}
                           </td>
                           <td className="px-4 py-4">
-                            {reply ? (
+                            {replyText ? (
                               <span
-                                className={`text-xs px-2 py-1 rounded-lg border font-bold ${reply.className}`}
+                                className={`text-xs px-2 py-1 rounded-lg border font-bold ${REPLY_STYLES[u.reply_status]}`}
                               >
-                                {reply.text}
+                                {replyText}
                               </span>
                             ) : (
                               <span className="text-slate-500 text-xs">—</span>
@@ -457,7 +464,7 @@ export default function AdminUniversities() {
                                 onClick={(e) => e.stopPropagation()}
                                 className="text-blue-400 text-xs hover:underline"
                               >
-                                Site
+                                {t("universities.site")}
                               </a>
                             ) : (
                               "—"
@@ -472,7 +479,7 @@ export default function AdminUniversities() {
                               }}
                               className="text-red-400 hover:text-red-300 text-sm font-semibold"
                             >
-                              Suppr
+                              {t("delete")}
                             </button>
                           </td>
                         </tr>
@@ -483,7 +490,7 @@ export default function AdminUniversities() {
               </div>
             )}
             <div className="bg-slate-900/40 px-6 py-4 border-t border-slate-700/50 text-center text-slate-400 text-sm">
-              {filtered.length} université{filtered.length > 1 ? "s" : ""}
+              {t("universities.shown", { count: filtered.length })}
             </div>
           </div>
         </>
@@ -519,6 +526,7 @@ function inputClass() {
 }
 
 function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
+  const { t } = useAdminI18n();
   const update = (name, value) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
@@ -535,10 +543,12 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
         <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-6 flex justify-between items-start sticky top-0">
           <div>
             <h2 className="text-2xl font-bold text-white">
-              {isNew ? "Nouvelle université" : form.name_zh || "Modifier"}
+              {isNew
+                ? t("universities.newTitle")
+                : form.name_zh || t("universities.editTitle")}
             </h2>
             <p className="text-blue-100 text-sm mt-1">
-              Champs matching (majors, bourse, documents) prêts pour plus tard
+              {t("universities.editHint")}
             </p>
           </div>
           <button type="button" onClick={onClose} className="text-white text-xl">
@@ -549,10 +559,10 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
         <div className="p-6 space-y-8">
           <section>
             <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wide mb-4">
-              Identité
+              {t("universities.identity")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Field label="Nom chinois *">
+              <Field label={t("universities.nameZh")}>
                 <input
                   className={inputClass()}
                   value={form.name_zh}
@@ -560,35 +570,35 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   required
                 />
               </Field>
-              <Field label="Nom anglais">
+              <Field label={t("universities.nameEn")}>
                 <input
                   className={inputClass()}
                   value={form.name_en}
                   onChange={(e) => update("name_en", e.target.value)}
                 />
               </Field>
-              <Field label="Nom français">
+              <Field label={t("universities.nameFr")}>
                 <input
                   className={inputClass()}
                   value={form.name_fr}
                   onChange={(e) => update("name_fr", e.target.value)}
                 />
               </Field>
-              <Field label="Slug">
+              <Field label={t("universities.slug")}>
                 <input
                   className={inputClass()}
                   value={form.slug}
                   onChange={(e) => update("slug", e.target.value)}
                 />
               </Field>
-              <Field label="Ville">
+              <Field label={t("universities.city")}>
                 <input
                   className={inputClass()}
                   value={form.city}
                   onChange={(e) => update("city", e.target.value)}
                 />
               </Field>
-              <Field label="Province">
+              <Field label={t("universities.province")}>
                 <input
                   className={inputClass()}
                   value={form.province}
@@ -601,7 +611,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   checked={form.is_active}
                   onChange={(e) => update("is_active", e.target.checked)}
                 />
-                Université active (matching)
+                {t("universities.active")}
               </label>
               <label className="flex items-center gap-3 text-slate-200 font-semibold mt-7">
                 <input
@@ -609,31 +619,31 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   checked={form.is_partner}
                   onChange={(e) => update("is_partner", e.target.checked)}
                 />
-                Partenaire / liste actuelle
+                {t("universities.partner")}
               </label>
             </div>
           </section>
 
           <section>
             <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wide mb-4">
-              Contact (liste partenaire)
+              {t("universities.contact")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Field label="Département">
+              <Field label={t("universities.department")}>
                 <input
                   className={inputClass()}
                   value={form.department}
                   onChange={(e) => update("department", e.target.value)}
                 />
               </Field>
-              <Field label="Téléphone">
+              <Field label={t("universities.phone")}>
                 <input
                   className={inputClass()}
                   value={form.phone}
                   onChange={(e) => update("phone", e.target.value)}
                 />
               </Field>
-              <Field label="Emails (un par ligne)">
+              <Field label={t("universities.emails")}>
                 <textarea
                   rows={3}
                   className={inputClass()}
@@ -641,21 +651,21 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("emails_text", e.target.value)}
                 />
               </Field>
-              <Field label="WeChat">
+              <Field label={t("universities.wechat")}>
                 <input
                   className={inputClass()}
                   value={form.wechat}
                   onChange={(e) => update("wechat", e.target.value)}
                 />
               </Field>
-              <Field label="Site">
+              <Field label={t("universities.website")}>
                 <input
                   className={inputClass()}
                   value={form.website}
                   onChange={(e) => update("website", e.target.value)}
                 />
               </Field>
-              <Field label="Dernier contact">
+              <Field label={t("universities.lastContact")}>
                 <input
                   type="date"
                   className={inputClass()}
@@ -663,27 +673,27 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("last_contact_at", e.target.value)}
                 />
               </Field>
-              <Field label="Note de contact">
+              <Field label={t("universities.contactNote")}>
                 <input
                   className={inputClass()}
                   value={form.last_contact_note}
                   onChange={(e) => update("last_contact_note", e.target.value)}
                 />
               </Field>
-              <Field label="Réponse">
+              <Field label={t("universities.reply")}>
                 <select
                   className={inputClass()}
                   value={form.reply_status}
                   onChange={(e) => update("reply_status", e.target.value)}
                 >
                   <option value="">—</option>
-                  <option value="replied">Répondu</option>
-                  <option value="no_reply">Pas de réponse</option>
-                  <option value="pending">En attente</option>
+                  <option value="replied">{t("universities.replyReplied")}</option>
+                  <option value="no_reply">{t("universities.replyNoReply")}</option>
+                  <option value="pending">{t("universities.replyPending")}</option>
                 </select>
               </Field>
               <div className="md:col-span-2">
-                <Field label="Notes">
+                <Field label={t("universities.notes")}>
                   <textarea
                     rows={2}
                     className={inputClass()}
@@ -697,19 +707,19 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
 
           <section>
             <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wide mb-4">
-              Matching (à compléter plus tard)
+              {t("universities.matching")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Field label="Majors / filières (une par ligne)">
+              <Field label={t("universities.majors")}>
                 <textarea
                   rows={3}
                   className={inputClass()}
                   value={form.majors_text}
                   onChange={(e) => update("majors_text", e.target.value)}
-                  placeholder="Informatique&#10;Commerce international"
+                  placeholder={t("universities.majorsPlaceholder")}
                 />
               </Field>
-              <Field label="Documents requis (un par ligne)">
+              <Field label={t("universities.requiredDocs")}>
                 <textarea
                   rows={3}
                   className={inputClass()}
@@ -717,18 +727,18 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) =>
                     update("required_documents_text", e.target.value)
                   }
-                  placeholder="Passeport&#10;Diplôme&#10;HSK 4"
+                  placeholder={t("universities.docsPlaceholder")}
                 />
               </Field>
-              <Field label="Bourse (texte)">
+              <Field label={t("universities.scholarshipText")}>
                 <input
                   className={inputClass()}
                   value={form.scholarship_amount}
                   onChange={(e) => update("scholarship_amount", e.target.value)}
-                  placeholder="CSC, 25000 RMB / an"
+                  placeholder={t("universities.scholarshipPlaceholder")}
                 />
               </Field>
-              <Field label="HSK minimum">
+              <Field label={t("universities.minHsk")}>
                 <input
                   type="number"
                   min="1"
@@ -738,7 +748,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("min_hsk_level", e.target.value)}
                 />
               </Field>
-              <Field label="Bourse min (RMB)">
+              <Field label={t("universities.scholarshipMin")}>
                 <input
                   type="number"
                   className={inputClass()}
@@ -746,7 +756,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("scholarship_min", e.target.value)}
                 />
               </Field>
-              <Field label="Bourse max (RMB)">
+              <Field label={t("universities.scholarshipMax")}>
                 <input
                   type="number"
                   className={inputClass()}
@@ -754,7 +764,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("scholarship_max", e.target.value)}
                 />
               </Field>
-              <Field label="Frais min (RMB)">
+              <Field label={t("universities.tuitionMin")}>
                 <input
                   type="number"
                   className={inputClass()}
@@ -762,7 +772,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("tuition_min", e.target.value)}
                 />
               </Field>
-              <Field label="Frais max (RMB)">
+              <Field label={t("universities.tuitionMax")}>
                 <input
                   type="number"
                   className={inputClass()}
@@ -770,7 +780,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   onChange={(e) => update("tuition_max", e.target.value)}
                 />
               </Field>
-              <Field label="Exigences linguistiques">
+              <Field label={t("universities.languageReq")}>
                 <input
                   className={inputClass()}
                   value={form.language_requirements}
@@ -779,7 +789,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
                   }
                 />
               </Field>
-              <Field label="Deadline candidature">
+              <Field label={t("universities.deadline")}>
                 <input
                   className={inputClass()}
                   value={form.application_deadline}
@@ -797,14 +807,14 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
               onClick={onClose}
               className="px-5 py-3 bg-slate-700 text-white rounded-xl font-bold"
             >
-              Annuler
+              {t("cancel")}
             </button>
             <button
               type="submit"
               disabled={saving}
               className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold disabled:opacity-50"
             >
-              {saving ? "Enregistrement..." : "Enregistrer"}
+              {saving ? t("saving") : t("save")}
             </button>
           </div>
         </div>
