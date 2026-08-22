@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
+import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import {
   isStudentSpaceUnlocked,
@@ -508,38 +509,12 @@ const stats = {
 };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Header */}
-      <header className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-xl">📊</span>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-white">Dashboard Admin</h1>
-              <p className="text-xs text-slate-400">Étudier en Chine</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="text-sm text-white font-medium">{user?.email}</p>
-              <p className="text-xs text-slate-400">Connecté</p>
-            </div>
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              {user?.email?.[0].toUpperCase()}
-            </div>
-            <button
-              onClick={handleLogout}
-              className="text-sm bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-red-500/50"
-            >
-              🚪 Déconnexion
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-6 py-8">
+    <AdminShell
+      title="Dashboard Admin"
+      subtitle="Étudier en Chine"
+      user={user}
+      onLogout={handleLogout}
+    >
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
           <StatCard
@@ -914,7 +889,6 @@ const stats = {
             </p>
           </div>
         </div>
-      </div>
 
       {/* Modal détail */}
       {selectedContact && (
@@ -928,8 +902,7 @@ const stats = {
           onContactUpdated={fetchContacts}
         />
       )}
-      
-    </div>
+    </AdminShell>
   );
 }
 
