@@ -57,7 +57,7 @@ const FORMULES = [
       /\bformule\s*1\b/i,
       /\borientation\b/i,
       /1️⃣/,
-      /\b1\s*[-–:.]?\s*orientation\b/i,
+      /\b1\s*[-–—:.]?\s*(formule\s*)?orientation\b/i,
       /^[\s"'«»]*1[\s"'«».!]*$/m,
     ],
   },
@@ -66,10 +66,10 @@ const FORMULES = [
     label: "Accompagnement candidature (300€)",
     patterns: [
       /\bformule\s*2\b/i,
-      /\baccompagnement\s+candidature\b/i,
+      /\baccompagnement\s+(à\s+la\s+)?candidature\b/i,
       /\bcandidature\b/i,
       /2️⃣/,
-      /\b2\s*[-–:.]?\s*(accompagnement|candidature)\b/i,
+      /\b2\s*[-–—:.]?\s*(accompagnement|candidature)\b/i,
       /^[\s"'«»]*2[\s"'«».!]*$/m,
     ],
   },
@@ -378,7 +378,7 @@ async function notifyAdmin({ contact, subject, text, intent }) {
       from: CONTACT_FROM,
       to: ADMIN_NOTIFY_EMAIL,
       replyTo: contact.email,
-      subject: `📩 Réponse de ${contact.prenom || ""} ${contact.nom || ""} — ${intent}`,
+      subject: `Réponse de ${contact.prenom || ""} ${contact.nom || ""} — ${intent}`,
       html: `
         <p><strong>${contact.prenom || ""} ${contact.nom || ""}</strong> (${contact.email})</p>
         <p><strong>Sujet :</strong> ${subject || "—"}</p>

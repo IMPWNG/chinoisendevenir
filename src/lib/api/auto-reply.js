@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
 import { getAuthenticatedAdmin } from "../studentAuth.js";
+import { wrapEmailHtml, SITE_URL, escapeHtml } from "../emailLayout.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -43,240 +44,22 @@ function shouldAdvanceStatus(currentStatus, nextStatus) {
 
 console.log("✅ Route /api/email/auto-reply démarrée");
 
-const EMAIL_BASE_STYLES = `
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            color: #2c3e50;
-            background: #f5f7fa;
-          }
-          .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-          }
-          .header { 
-            background: linear-gradient(135deg, #FF2C00 0%, #FA694B 100%);
-            color: white; 
-            padding: 40px 20px;
-            text-align: center;
-          }
-          .header h1 { 
-            font-size: 28px;
-            margin-bottom: 5px;
-            font-weight: 700;
-          }
-          .header p { 
-            font-size: 14px;
-            opacity: 0.95;
-          }
-          .content { 
-            padding: 40px 30px;
-          }
-          .greeting {
-            font-size: 16px;
-            margin-bottom: 25px;
-            color: #2c3e50;
-          }
-          .section {
-            margin-bottom: 25px;
-          }
-          .section-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #FF2C00;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-          }
-          .section p {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 12px;
-          }
-          .formule-card {
-            background: white;
-            border-left: 4px solid #FF2C00;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-            border: 1px solid #e5e7eb;
-          }
-          .formule-card.highlight {
-            background: #f0f4ff;
-            border-left-color: #667eea;
-            border: 1px solid #dde4ff;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-          }
-          .formule-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          }
-          .formule-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #FF2C00;
-          }
-          .formule-list {
-            list-style: none;
-            padding: 0;
-            margin: 12px 0 0 0;
-          }
-          .formule-list li {
-            font-size: 13px;
-            color: #555;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-          }
-          .formule-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #FF2C00;
-            font-weight: bold;
-          }
-          .warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 4px;
-            font-size: 13px;
-            margin: 20px 0;
-          }
-          .warning h4 {
-            margin-bottom: 10px;
-            font-size: 14px;
-          }
-          .warning ol {
-            margin-left: 20px;
-            margin-top: 10px;
-          }
-          .warning li {
-            margin-bottom: 5px;
-            font-size: 13px;
-          }
-          .cta-section {
-            background: linear-gradient(135deg, #FF2C00 0%, #FA694B 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 4px;
-            margin: 25px 0;
-            text-align: center;
-          }
-          .cta-section p {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: white;
-          }
-          .cta-text {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 12px;
-            border-radius: 4px;
-            font-style: italic;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-          }
-          .cta-link {
-            display: inline-block;
-            margin-top: 8px;
-            color: white;
-            font-weight: 700;
-            text-decoration: none;
-          }
-          .footer {
-            background: #f5f7fa;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-          }
-          .footer p {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 10px;
-          }
-          .footer-brand {
-            font-size: 16px;
-            font-weight: 700;
-            color: #FF2C00;
-            margin: 15px 0;
-          }
-          .footer-link {
-            color: #FF2C00;
-            text-decoration: none;
-            font-weight: 600;
-          }
-`;
-
-function wrapEmailTemplate({ headerTitle, headerSubtitle, prenom, innerHtml }) {
-  return `
-    <!DOCTYPE html>
-    <html lang="fr">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          ${EMAIL_BASE_STYLES}
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>${headerTitle}</h1>
-            <p>${headerSubtitle}</p>
-          </div>
-          <div class="content">
-            <div class="greeting">
-              <p>Bonjour <strong>${prenom}</strong>,</p>
-            </div>
-            ${innerHtml}
-          </div>
-          <div class="footer">
-            <p>Cordialement,</p>
-            <div class="footer-brand">Chinois en Devenir</div>
-            <p>
-              <a href="https://chinoisendevenir.com/" class="footer-link">🌎 https://chinoisendevenir.com/</a>
-            </p>
-            <p style="font-size: 12px; color: #999; margin-top: 20px;">
-              © 2026 Chinois en Devenir | Tous droits réservés
-            </p>
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
-}
-
 function generateRelance1Template(prenom) {
-  return wrapEmailTemplate({
-    headerTitle: "Votre projet d'études en Chine 🇨🇳",
-    headerSubtitle: "Souhaitez-vous poursuivre ?",
+  return wrapEmailHtml({
+    title: "Votre projet d'études en Chine",
+    subtitle: "Compléter votre dossier",
     prenom,
-    innerHtml: `
+    bodyHtml: `
             <div class="section">
               <p>Vous nous avez récemment contactés au sujet de votre projet d'études en Chine.</p>
-              <p>Nous souhaitons savoir si vous êtes toujours intéressé(e) par ce projet. Si c'est le cas, nous vous invitons à remplir soigneusement le formulaire disponible sur notre site :</p>
+              <p>Afin d'étudier votre profil avec précision, nous vous invitons à renseigner le formulaire disponible sur notre site. Ces informations nous permettront d'identifier les formations, universités et possibilités de financement les plus adaptées à votre situation.</p>
             </div>
-            <div class="cta-section">
-              <p><strong>🌐 Remplir le formulaire</strong></p>
-              <a href="https://chinoisendevenir.com/" class="cta-link">https://chinoisendevenir.com/</a>
+            <div class="cta">
+              <p>Formulaire à compléter :</p>
+              <a href="${SITE_URL}" class="cta-link">${SITE_URL}</a>
             </div>
             <div class="section">
-              <p>Ces informations nous permettront de mieux étudier votre profil, vos objectifs et les possibilités adaptées à votre situation.</p>
-              <p>Si vous avez déjà rempli le formulaire, vous pouvez simplement répondre à cet e-mail en nous le confirmant.</p>
+              <p>Si vous avez déjà transmis ces informations, il vous suffit de répondre à cet e-mail pour nous le confirmer.</p>
               <p>Nous restons à votre disposition pour toute question.</p>
             </div>
     `,
@@ -284,367 +67,179 @@ function generateRelance1Template(prenom) {
 }
 
 function generateRelance2Template(prenom) {
-  return wrapEmailTemplate({
-    headerTitle: "Êtes-vous toujours intéressé(e) ?",
-    headerSubtitle: "Votre projet d'études en Chine",
+  return wrapEmailHtml({
+    title: "Votre projet d'études en Chine",
+    subtitle: "Confirmation d'intérêt",
     prenom,
-    innerHtml: `
+    bodyHtml: `
             <div class="section">
-              <p>Vous nous avez sollicités il y a quelque temps concernant votre projet d'études en Chine.</p>
-              <p>Nous souhaitons savoir si vous êtes toujours intéressé(e) par un accompagnement pour votre admission, la recherche de formation ou les opportunités de bourses.</p>
+              <p>Vous nous avez contactés il y a quelque temps concernant un projet d'études en Chine.</p>
+              <p>Nous souhaitons simplement savoir si cette démarche est toujours d'actualité, notamment pour l'orientation, la candidature ou la recherche de bourse.</p>
             </div>
-            <div class="cta-section">
-              <p><strong>Si votre projet est toujours d'actualité, répondez simplement à cet e-mail par :</strong></p>
-              <div class="cta-text">Oui</div>
+            <div class="cta">
+              <p>Si votre projet est toujours d'actualité, répondez à cet e-mail par :</p>
+              <div class="cta-choice">Oui</div>
             </div>
             <div class="section">
-              <p>Notre équipe vous recontactera afin de vous présenter les prochaines étapes.</p>
-              <p>Si votre projet n'est plus d'actualité, vous pouvez également nous le signaler.</p>
+              <p>Nous reviendrons ensuite vers vous pour vous présenter les prochaines étapes. Si votre projet n'est plus d'actualité, vous pouvez également nous l'indiquer.</p>
             </div>
     `,
   });
 }
 
-// 📧 Fonction pour générer le template HTML des formules
 function generateFormulesPresentationTemplate(prenom) {
-  return `
-    <!DOCTYPE html>
-    <html lang="fr">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            color: #2c3e50;
-            background: #f5f7fa;
-          }
-          .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-          }
-          .header { 
-            background: linear-gradient(135deg, #FF2C00 0%, #FA694B 100%);
-            color: white; 
-            padding: 40px 20px;
-            text-align: center;
-          }
-          .header h1 { 
-            font-size: 28px;
-            margin-bottom: 5px;
-            font-weight: 700;
-          }
-          .header p { 
-            font-size: 14px;
-            opacity: 0.95;
-          }
-          .content { 
-            padding: 40px 30px;
-          }
-          .greeting {
-            font-size: 16px;
-            margin-bottom: 25px;
-            color: #2c3e50;
-          }
-          .section {
-            margin-bottom: 25px;
-          }
-          .section-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #FF2C00;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-          }
-          .section p {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 12px;
-          }
-          .formule-card {
-            background: white;
-            border-left: 4px solid #FF2C00;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-            border: 1px solid #e5e7eb;
-          }
-          .formule-card.highlight {
-            background: #f0f4ff;
-            border-left-color: #667eea;
-            border: 1px solid #dde4ff;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-          }
-          .formule-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          }
-          .formule-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #FF2C00;
-          }
-          .formule-list {
-            list-style: none;
-            padding: 0;
-            margin: 12px 0 0 0;
-          }
-          .formule-list li {
-            font-size: 13px;
-            color: #555;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-          }
-          .formule-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #FF2C00;
-            font-weight: bold;
-          }
-          .warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 4px;
-            font-size: 13px;
-            margin: 20px 0;
-          }
-          .warning h4 {
-            margin-bottom: 10px;
-            font-size: 14px;
-          }
-          .warning ol {
-            margin-left: 20px;
-            margin-top: 10px;
-          }
-          .warning li {
-            margin-bottom: 5px;
-            font-size: 13px;
-          }
-          .cta-section {
-            background: linear-gradient(135deg, #FF2C00 0%, #FA694B 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 4px;
-            margin: 25px 0;
-            text-align: center;
-          }
-          .cta-section p {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: white;
-          }
-          .cta-text {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 12px;
-            border-radius: 4px;
-            font-style: italic;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-          }
-          .footer {
-            background: #f5f7fa;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-          }
-          .footer p {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 10px;
-          }
-          .footer-brand {
-            font-size: 16px;
-            font-weight: 700;
-            color: #FF2C00;
-            margin: 15px 0;
-          }
-          .footer-link {
-            color: #FF2C00;
-            text-decoration: none;
-            font-weight: 600;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>✅ Nos formules d'accompagnement</h1>
-            <p>Pour étudier en Chine 🇨🇳</p>
-          </div>
-          <div class="content">
-            <div class="greeting">
-              <p>Bonjour <strong>${prenom}</strong>,</p>
+  return wrapEmailHtml({
+    title: "Formules d'accompagnement",
+    subtitle: "Études en Chine",
+    prenom,
+    bodyHtml: `
+            <div class="section">
+              <p>Merci pour l'intérêt que vous portez à notre accompagnement pour votre projet d'études en Chine.</p>
+              <p>Afin de vous orienter au mieux, nous proposons plusieurs formules. Votre choix nous permet de comprendre vos besoins, votre niveau d'avancement et les étapes pour lesquelles vous souhaitez être accompagné(e).</p>
+              <p>Notre objectif est de vous aider à préparer un dossier cohérent, complet et adapté aux exigences des universités et des organismes concernés.</p>
+            </div>
+
+            <div class="formule-card">
+              <div class="formule-title">Formule 1 — Orientation</div>
+              <div class="formule-price">50 euros</div>
+              <p class="formule-intro">Destinée aux personnes qui souhaitent obtenir des informations claires et personnalisées avant de commencer leurs démarches.</p>
+              <p class="formule-intro">Elle comprend :</p>
+              <ul class="formule-list">
+                <li>L'analyse de votre profil et de votre projet d'études</li>
+                <li>Des conseils concernant le choix du domaine et du niveau d'études</li>
+                <li>Une orientation vers les formations et universités adaptées</li>
+                <li>Des informations sur les possibilités de bourses</li>
+                <li>Une présentation des principales étapes de la procédure</li>
+                <li>Une liste personnalisée des documents à préparer</li>
+                <li>Des recommandations pour améliorer vos chances de réussite</li>
+              </ul>
+              <p class="formule-intro" style="margin-top:12px;">Cette formule vous permet d'avoir une vision plus claire de votre projet et d'organiser efficacement vos prochaines démarches.</p>
+            </div>
+
+            <div class="formule-card featured">
+              <div class="formule-title">Formule 2 — Accompagnement à la candidature</div>
+              <div class="formule-price">300 euros</div>
+              <p class="formule-intro">Destinée aux candidats qui souhaitent être accompagnés dans la préparation et le dépôt de leur dossier de candidature.</p>
+              <p class="formule-intro">Elle comprend :</p>
+              <ul class="formule-list">
+                <li>L'étude approfondie de votre profil</li>
+                <li>La recherche d'universités et de formations correspondant à votre projet</li>
+                <li>L'identification des opportunités de bourses adaptées</li>
+                <li>La préparation et la vérification de votre dossier</li>
+                <li>Des conseils pour la rédaction et l'amélioration des documents nécessaires</li>
+                <li>L'assistance lors du remplissage des formulaires de candidature</li>
+                <li>La traduction des documents selon les besoins du dossier</li>
+                <li>Le dépôt des candidatures auprès des établissements sélectionnés</li>
+                <li>Le suivi de votre dossier jusqu'à la réception des réponses des universités</li>
+                <li>Des échanges réguliers pour vous informer de l'avancement de la procédure</li>
+              </ul>
+              <p class="formule-intro" style="margin-top:12px;">Cette formule convient particulièrement aux personnes qui souhaitent mener les démarches de candidature avec un accompagnement professionnel, tout en restant impliquées dans leur projet.</p>
+            </div>
+
+            <div class="formule-card">
+              <div class="formule-title">Formule 3 — Accompagnement complet</div>
+              <div class="formule-price">500 euros</div>
+              <p class="formule-intro">Un accompagnement personnalisé, de l'analyse de votre projet jusqu'à la préparation de votre départ pour la Chine.</p>
+              <p class="formule-intro">Elle comprend :</p>
+              <ul class="formule-list">
+                <li>L'ensemble des services inclus dans la formule « Accompagnement à la candidature »</li>
+                <li>Un suivi personnalisé pendant toutes les étapes de la procédure</li>
+                <li>Une assistance renforcée pour la préparation des documents administratifs</li>
+                <li>Des conseils concernant les démarches après admission</li>
+                <li>Une orientation pour la demande de visa étudiant</li>
+                <li>Des informations concernant le logement et l'organisation de votre arrivée</li>
+                <li>Des conseils pratiques pour préparer votre installation en Chine</li>
+                <li>Un accompagnement jusqu'à la préparation de votre départ</li>
+              </ul>
+              <p class="formule-intro" style="margin-top:12px;">Cette formule s'adresse aux personnes qui souhaitent être guidées de manière plus complète et bénéficier d'un suivi continu tout au long de leur projet.</p>
+            </div>
+
+            <div class="note">
+              <h4>Informations importantes</h4>
+              <p>Le choix d'une formule ne constitue pas un engagement définitif. Il nous permet d'identifier le niveau d'accompagnement le plus adapté à votre situation et de préparer notre premier échange dans de bonnes conditions.</p>
+              <p>Après réception de votre choix, nous vous proposerons une première consultation téléphonique. Cet échange permettra notamment de :</p>
+              <ul>
+                <li>Mieux comprendre votre parcours et vos objectifs</li>
+                <li>Vérifier la cohérence de votre projet</li>
+                <li>Évaluer les démarches nécessaires dans votre situation</li>
+                <li>Répondre à vos principales questions</li>
+                <li>Vous expliquer le déroulement de l'accompagnement</li>
+                <li>Confirmer ensemble la formule la plus adaptée</li>
+              </ul>
+              <p style="margin-top:12px;">À l'issue de cette consultation, si vous souhaitez poursuivre avec notre agence, nous vous présenterons les conditions de service ainsi que les prochaines étapes. Le règlement des frais d'accompagnement intervient uniquement après cet échange et après validation de la formule choisie.</p>
+              <p>Les frais liés aux candidatures, aux examens, à la traduction officielle, à la légalisation des documents, au visa ou à d'autres démarches administratives peuvent être facturés séparément et ne sont pas nécessairement inclus dans les tarifs indiqués.</p>
+              <p>L'admission dans une université ou l'obtention d'une bourse ne peut pas être garantie. La décision finale appartient exclusivement aux universités et aux organismes concernés. Notre rôle est de vous conseiller, de vous aider à constituer un dossier sérieux et de vous accompagner dans vos démarches.</p>
+            </div>
+
+            <div class="cta">
+              <p>Pour nous faire part de votre choix, répondez simplement à cet e-mail en indiquant la formule qui correspond le mieux à votre besoin :</p>
+              <div class="cta-choice">
+                1 — Formule Orientation<br>
+                2 — Accompagnement à la candidature<br>
+                3 — Accompagnement complet
+              </div>
             </div>
             <div class="section">
-              <p>Merci pour votre retour ! Nous proposons plusieurs formules d'accompagnement selon votre besoin et votre niveau d'assistance.</p>
+              <p>Nous reviendrons ensuite vers vous afin de convenir d'un échange téléphonique et de faire le point sur votre projet.</p>
+              <p>Nous restons à votre disposition pour toute question complémentaire.</p>
             </div>
-
-            <!-- FORMULE 1 -->
-            <div class="formule-card">
-              <div class="formule-title">
-                <span>1️⃣</span>
-                <span>Orientation</span>
-                <span class="formule-price">50€</span>
-              </div>
-              <p style="font-weight: 600; color: #666; margin: 10px 0; font-size: 13px;">Cette formule comprend :</p>
-              <ul class="formule-list">
-                <li>Analyse de votre profil</li>
-                <li>Orientation vers les formations adaptées</li>
-                <li>Informations sur les universités et bourses possibles</li>
-                <li>Liste personnalisée des documents à préparer</li>
-              </ul>
-            </div>
-
-            <!-- FORMULE 2 (HIGHLIGHT) -->
-            <div class="formule-card highlight">
-              <div class="formule-title">
-                <span>2️⃣</span>
-                <span>Accompagnement candidature</span>
-                <span class="formule-price">300€</span>
-              </div>
-              <p style="font-weight: 600; color: #666; margin: 10px 0; font-size: 13px;">Cette formule comprend :</p>
-              <ul class="formule-list">
-                <li>Recherche d'universités adaptées</li>
-                <li>Identification des opportunités de bourses</li>
-                <li>Préparation et vérification du dossier</li>
-                <li>Assistance pour remplir les candidatures</li>
-                <li>Dépôt des candidatures</li>
-                <li>Suivi de votre dossier jusqu'à la réponse des universités</li>
-                <li>Traduction des documents</li>
-              </ul>
-            </div>
-
-            <!-- FORMULE 3 -->
-            <div class="formule-card">
-              <div class="formule-title">
-                <span>3️⃣</span>
-                <span>Accompagnement complet</span>
-                <span class="formule-price">500€</span>
-              </div>
-              <p style="font-weight: 600; color: #666; margin: 10px 0; font-size: 13px;">Cette formule comprend :</p>
-              <ul class="formule-list">
-                <li>Tous les services de la formule candidature</li>
-                <li>Accompagnement personnalisé pendant toute la procédure</li>
-                <li>Aide pour les documents administratifs</li>
-                <li>Assistance après admission</li>
-                <li>Orientation concernant le logement, le visa et l'arrivée en Chine</li>
-                <li>Suivi jusqu'à votre départ</li>
-              </ul>
-            </div>
-
-            <!-- CONDITIONS IMPORTANTES -->
-            <div class="warning">
-              <h4>⚠️ Conditions importantes</h4>
-              <p><strong>Les démarches commencent après :</strong></p>
-              <ol>
-                <li>Le choix de la formule</li>
-                <li>La signature de nos conditions de service</li>
-                <li>Le paiement des frais d'accompagnement</li>
-              </ol>
-              <p style="margin-top: 12px; font-size: 12px;">
-                📌 <strong>Note :</strong> Les frais de candidature, de légalisation, de visa ou autres frais administratifs ne sont pas nécessairement inclus dans ces tarifs.
-              </p>
-              <p style="margin-top: 8px; font-size: 12px;">
-                📌 L'obtention d'une admission ou d'une bourse ne peut pas être garantie. La décision finale appartient aux universités et organismes concernés.
-              </p>
-            </div>
-
-            <!-- CTA PRINCIPAL -->
-            <div class="cta-section">
-              <p><strong>👉 Pour commencer, répondez simplement à cet e-mail avec le numéro de la formule souhaitée :</strong></p>
-              <div class="cta-text">
-                1️⃣ Orientation<br>
-                2️⃣ Accompagnement candidature<br>
-                3️⃣ Accompagnement complet
-              </div>
-            </div>
-
-            <div class="section">
-              <p>Nous vous transmettrons ensuite les modalités de paiement et la liste des documents nécessaires.</p>
-            </div>
-          </div>
-          <div class="footer">
-            <p>Cordialement,</p>
-            <div class="footer-brand">Chinois en Devenir</div>
-            <p>
-              <a href="https://chinoisendevenir.com/" class="footer-link">🌐 https://chinoisendevenir.com/</a>
-            </p>
-            <p style="font-size: 12px; color: #999; margin-top: 20px;">
-              © 2026 Chinois en Devenir | Tous droits réservés
-            </p>
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
+    `,
+  });
 }
 
 function generateFormuleConfirmeeTemplate(contact, formuleLabel) {
-  const nom = contact.nom || "";
   const prenom = contact.prenom || "";
-  const greeting = [nom, prenom].filter(Boolean).join(" ");
-  return wrapEmailTemplate({
-    headerTitle: "Formule confirmée",
-    headerSubtitle: "Étude de votre projet d'études en Chine",
-    prenom: greeting || "bonjour",
-    innerHtml: `
+  const displayed = displayFormuleLabel(formuleLabel);
+  return wrapEmailHtml({
+    title: "Confirmation de votre choix",
+    subtitle: "Prochaine étape : un échange téléphonique",
+    prenom,
+    bodyHtml: `
             <div class="section">
-              <p>Nous vous remercions pour votre retour et confirmons votre intérêt pour la formule :</p>
+              <p>Nous vous remercions pour votre retour. Nous avons bien pris en compte votre intérêt pour la formule suivante :</p>
             </div>
-            <div class="formule-card highlight">
-              <div class="formule-title">${formuleLabel || "Formule sélectionnée"}</div>
+            <div class="formule-card featured">
+              <div class="formule-title">${escapeHtml(displayed)}</div>
             </div>
             <div class="section">
-              <p>Nous allons maintenant vérifier les informations communiquées dans votre formulaire et préparer une première étude de votre projet d'études en Chine.</p>
-              <p>Cette étude nous permettra notamment de rechercher :</p>
+              <p>Ce choix n'est pas encore un engagement définitif. Il nous permet de préparer une première consultation téléphonique, afin d'étudier votre projet et de confirmer ensemble le niveau d'accompagnement le plus adapté.</p>
+              <p>Lors de cet échange, nous pourrons notamment :</p>
               <ul class="formule-list">
-                <li>Les formations correspondant à votre parcours</li>
-                <li>Les universités adaptées à votre profil</li>
-                <li>Les conditions d'admission</li>
-                <li>Les possibilités de bourses ou de réduction</li>
-                <li>Les documents nécessaires pour votre candidature</li>
+                <li>Revenir sur votre parcours et vos objectifs</li>
+                <li>Vérifier la cohérence de votre projet</li>
+                <li>Préciser les démarches nécessaires dans votre situation</li>
+                <li>Répondre à vos questions</li>
+                <li>Vous expliquer le déroulement de l'accompagnement</li>
               </ul>
             </div>
             <div class="section">
-              <p>Le délai estimatif de cette analyse est de <strong>7 à 14 jours ouvrables</strong>, selon la complexité de votre profil et les informations disponibles.</p>
-              <p>Notre équipe pourra vous contacter par e-mail ou WhatsApp si des informations ou documents supplémentaires sont nécessaires. Nous pourrons également organiser un appel afin de mieux comprendre votre projet.</p>
+              <p>À l'issue de cette consultation, si vous souhaitez poursuivre avec notre agence, nous vous présenterons les conditions de service ainsi que les prochaines étapes. Le règlement des frais d'accompagnement n'intervient qu'après cet échange et après validation de la formule.</p>
+            </div>
+            <div class="note">
+              <p>L'admission dans une université ou l'obtention d'une bourse ne peut pas être garantie. La décision finale appartient aux universités et aux organismes concernés.</p>
             </div>
             <div class="section">
-              <p>À la fin de l'étude, nous vous présenterons les options identifiées ainsi que les prochaines étapes. Après validation de votre part, nous vous transmettrons les conditions de service et les modalités de paiement.</p>
-              <p>Les démarches officielles commenceront après confirmation du paiement.</p>
-            </div>
-            <div class="warning">
-              <p>Veuillez noter qu'une admission ou l'obtention d'une bourse ne peut pas être garantie, car la décision finale appartient aux universités et aux organismes concernés.</p>
-            </div>
-            <div class="section">
-              <p>Merci de rester disponible sur le numéro indiqué dans votre formulaire.</p>
+              <p>Nous reviendrons vers vous rapidement afin de convenir d'un créneau. Merci de rester joignable sur le numéro indiqué dans votre formulaire.</p>
             </div>
     `,
   });
+}
+
+function displayFormuleLabel(formuleLabel) {
+  const labels = {
+    "Orientation (50€)": "Formule 1 — Orientation (50 euros)",
+    "Accompagnement candidature (300€)":
+      "Formule 2 — Accompagnement à la candidature (300 euros)",
+    "Accompagnement complet (500€)":
+      "Formule 3 — Accompagnement complet (500 euros)",
+  };
+  return labels[formuleLabel] || formuleLabel || "Formule sélectionnée";
 }
 
 const EMAIL_TEMPLATES = {
   formules_presentation: {
-    subject: "✅ Nos formules d'accompagnement pour étudier en Chine 🇨🇳",
+    subject:
+      "Choisissez la formule d'accompagnement qui correspond à votre projet d'études en Chine",
     generateHtml: (contact) =>
       generateFormulesPresentationTemplate(contact.prenom || ""),
     action: "email_formules",
@@ -652,21 +247,21 @@ const EMAIL_TEMPLATES = {
     status: "choix_des_formules",
   },
   relance_1: {
-    subject: "Votre projet d'études en Chine 🇨🇳",
+    subject: "Votre projet d'études en Chine — formulaire à compléter",
     generateHtml: (contact) => generateRelance1Template(contact.prenom || ""),
     action: "relance_1",
     description: "Relance 1 envoyée — formulaire à remplir",
     status: "relance_1_envoyée",
   },
   relance_2: {
-    subject: "Êtes-vous toujours intéressé(e) par des études en Chine ?",
+    subject: "Votre projet d'études en Chine est-il toujours d'actualité ?",
     generateHtml: (contact) => generateRelance2Template(contact.prenom || ""),
     action: "relance_2",
     description: "Relance 2 envoyée — confirmation d'intérêt",
     status: "relance_2_envoyée",
   },
   formule_confirmee: {
-    subject: "Nous confirmons votre formule d'accompagnement 🇨🇳",
+    subject: "Nous confirmons votre choix de formule — prochaine étape",
     generateHtml: (contact, extras = {}) =>
       generateFormuleConfirmeeTemplate(contact, extras.formuleLabel),
     action: "email_envoye",
