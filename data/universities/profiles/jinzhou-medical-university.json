@@ -1,0 +1,516 @@
+{
+  "identity": {
+    "name_en": "Jinzhou Medical University",
+    "name_zh": "锦州医科大学",
+    "name_fr": "Université médicale de Jinzhou",
+    "aliases": [
+      "JZMU"
+    ],
+    "website": "https://www.jzmu.edu.cn/",
+    "international_website": "https://www.jzmu.edu.cn/en/",
+    "application_portal_url": "https://gjjyxy.jzmu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université médicale publique du Liaoning. Recrutement d'étudiants étrangers depuis 1997. Plus de 2000 étudiants internationaux de 80 pays inscrits. École d'éducation internationale fondée en 2005.",
+    "history": "Recrutement international dès 1997. En 2012, approbation du Ministère de l'Éducation pour l'enseignement de la médecine clinique. En 2014, listée comme université acceptant la Bourse du Gouvernement chinois. En 2015, autorisée à recruter des étudiants de Hong Kong, Macao et Taïwan. Éducation postgraduée depuis 1979, maîtrise depuis 1984, doctorat depuis 2003.",
+    "rankings": [],
+    "strengths": [
+      "Médecine clinique",
+      "Stomatologie",
+      "Imagerie médicale",
+      "Anesthésiologie",
+      "Pharmacie",
+      "Santé publique",
+      "Sciences infirmières",
+      "Médecine de base",
+      "Biologie",
+      "Sciences et ingénierie alimentaires"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Jinzhou",
+      "province": "Liaoning",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal",
+        "city": "Jinzhou",
+        "description": "Adresse: No. 48, Section 5, Songpo Road, Guta District. Nouveau campus en construction (promotion 2025)."
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Clinical Medicine",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 6,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare en anglais pour étudiants internationaux. Approuvé MOE 2012."
+    },
+    {
+      "level": "bachelor",
+      "name": "Stomatology",
+      "field": "dentistry",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Medical Imaging",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Anesthesiology",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Pharmacy",
+      "field": "pharmacy",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Nursing",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Clinical Medicine (Master)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master professionnel et académique disponibles."
+    },
+    {
+      "level": "master",
+      "name": "Basic Medicine",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master académique de 1er niveau."
+    },
+    {
+      "level": "master",
+      "name": "Pharmacy (Master)",
+      "field": "pharmacy",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Public Health and Preventive Medicine",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "Doctorat en médecine (joint)",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "4 points d'autorisation conjointe de doctorat avec China Medical University."
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes avec et sans diplôme (record/non-record education)."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires. Pour médecine clinique en anglais: dossier académique solide en sciences.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible à l'École d'éducation internationale.",
+      "other": [
+        "Examen d'entrée ou évaluation du dossier",
+        "Bonne maîtrise de l'anglais pour le programme Clinical Medicine"
+      ]
+    },
+    "master": {
+      "academic": "Licence/Bachelor dans un domaine connexe.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Examen d'admission aux études supérieures"
+      ]
+    },
+    "phd": {
+      "academic": "Master dans un domaine connexe.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Co-tutelle avec China Medical University"
+      ]
+    },
+    "language": {
+      "academic": "Aucune exigence académique spécifique.",
+      "age_max": null,
+      "other": [
+        "Cours de chinois pour étudiants étrangers avec/sans diplôme"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "School of International Education",
+    "iso_email": "gjjlyhzc@jzmu.edu.cn",
+    "admissions_email": "admissioncie@jzmu.edu.cn",
+    "wechat": "",
+    "phone": "0086-416-3675199",
+    "address": "No. 48, Section 5, Songpo Road, Guta District, Jinzhou City, Liaoning Province, P.R.China, 121000"
+  },
+  "matching": {
+    "fields": [
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "sciences",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Jinzhou",
+    "province": "Liaoning",
+    "tags": [
+      "médecine",
+      "Belt and Road",
+      "bourse du gouvernement chinois",
+      "médecine clinique en anglais",
+      "80 pays",
+      "programme sino-étranger avec Waikato"
+    ]
+  },
+  "confidence": 0.72,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "deadline_typical",
+    "cost_of_living_cny_month",
+    "has_university_scholarship",
+    "has_provincial_scholarship"
+  ],
+  "notes": "Sources limitées: pas de détails sur frais de scolarité, scores HSK/IELTS/TOEFL, délais d'admission, bourses propres. Site officiel fournit uniquement contacts et présentation générale. Programmes spécifiques pour étrangers confirmés: Clinical Medicine (EN), Stomatology, Medical Imaging, Anesthesiology, Pharmacy, Nursing. Bourse du gouvernement chinois (CSC) confirmée depuis 2014.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Université listée par le Ministère de l'Éducation depuis 2014 pour la bourse du gouvernement chinois",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "School of International Education, admissioncie@jzmu.edu.cn, 0086-416-3675199, No. 48 Section 5 Songpo Road, Guta District, Jinzhou",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "jinzhou-medical-university",
+  "scraped_at": "2026-08-23T14:52:29.154Z",
+  "model": "minimax-m3",
+  "pages_fetched": 9,
+  "pages_used": 7,
+  "sources": [
+    {
+      "url": "https://www.jzmu.edu.cn/en/Education/International_Education.htm",
+      "title": "International Education-Jinzhou Medical University",
+      "chars": 3118
+    },
+    {
+      "url": "https://www.jzmu.edu.cn/en/",
+      "title": "Jinzhou Medical University",
+      "chars": 3593
+    },
+    {
+      "url": "https://www.jzmu.edu.cn/en/Education/Undergraduate_Education.htm",
+      "title": "Undergraduate Education-Jinzhou Medical University",
+      "chars": 3262
+    },
+    {
+      "url": "https://www.jzmu.edu.cn/en/Education/Postgraduate_Education.htm",
+      "title": "Postgraduate Education-Jinzhou Medical University",
+      "chars": 3600
+    },
+    {
+      "url": "https://www.jzmu.edu.cn/en/International/Office_of_International_Exchange__Cooperation.htm",
+      "title": "Office of International Exchange ＆Cooperation-Jinzhou Medical University",
+      "chars": 3296
+    },
+    {
+      "url": "https://www.jzmu.edu.cn/en/International/School_of_International_Education.htm",
+      "title": "School of International Education-Jinzhou Medical University",
+      "chars": 3506
+    },
+    {
+      "url": "https://www.jzmu.edu.cn/en/Internationalizationl/International_Exchange_Programs.htm",
+      "title": "International Exchange Programs-Jinzhou Medical University",
+      "chars": 2744
+    }
+  ],
+  "db_row": {
+    "name_zh": "锦州医科大学",
+    "name_en": "Jinzhou Medical University",
+    "name_fr": "Université médicale de Jinzhou",
+    "slug": "jinzhou-medical-university",
+    "city": "Jinzhou",
+    "province": "Liaoning",
+    "country": "Chine",
+    "department": "School of International Education",
+    "emails": [
+      "gjjlyhzc@jzmu.edu.cn",
+      "admissioncie@jzmu.edu.cn"
+    ],
+    "phone": "0086-416-3675199",
+    "wechat": null,
+    "website": "https://www.jzmu.edu.cn/en/",
+    "majors": [
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "sciences",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

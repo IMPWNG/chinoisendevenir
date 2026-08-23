@@ -1,0 +1,391 @@
+{
+  "identity": {
+    "name_en": "Xi'an Jiaotong University",
+    "name_zh": "西安交通大学",
+    "name_fr": "Université Jiaotong de Xi'an",
+    "aliases": [
+      "XJTU"
+    ],
+    "website": "https://en.xjtu.edu.cn/",
+    "international_website": "https://en.xjtu.edu.cn/",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Xi'an Jiaotong University (XJTU), a key university under the direct administration of the Ministry of Education, is one of China's oldest and most prestigious higher education institutions. Comprehensive research university specializing in science and technology.",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "science and technology",
+      "research"
+    ],
+    "teaching_languages": [],
+    "location": {
+      "city": "Xi'an",
+      "province": "Shaanxi",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Xianning Campus",
+        "city": "Xi'an",
+        "description": "Adresse principale: No.28 Xianning West Road, Xi'an, Shaanxi 710049"
+      }
+    ]
+  },
+  "programs": [],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "No.28 Xianning West Road, Xi'an, Shaanxi 710049, P.R. China"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "sciences"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": null,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "tags": [
+      "CSC designated university",
+      "XJTU Siyuan Scholarship",
+      "MOFCOM Scholarship",
+      "International Chinese Language Teachers Scholarship",
+      "Ministry of Education administered"
+    ]
+  },
+  "confidence": 0.45,
+  "missing_fields": [
+    "programs",
+    "tuition fees",
+    "housing costs",
+    "specific admission scores (HSK/IELTS/TOEFL)",
+    "GPA requirements",
+    "age limits",
+    "application portal URL",
+    "international office email",
+    "phone",
+    "wechat",
+    "teaching languages explicit list",
+    "history details",
+    "cost of living"
+  ],
+  "notes": "Sources provide mainly navigation structure and very limited content. Confirmed: CSC university, XJTU Siyuan Scholarship, MOFCOM Scholarship, International Chinese Language Teachers Scholarship, programs in sciences and technology. Address confirmed. Most specific admission criteria and program lists not present in provided sources.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "China Scholarship Council (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "MOFCOM Scholarship",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "XJTU Siyuan International Student Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "xian-jiaotong-university",
+  "scraped_at": "2026-08-23T14:42:46.319Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://en.xjtu.edu.cn/",
+      "title": "Welcome to Xi'an Jiaotong University!",
+      "chars": 2576
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/contactus.html",
+      "title": "Contact Us",
+      "chars": 762
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/undergraduate.html",
+      "title": "Undergraduate",
+      "chars": 1014
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/internationalexchanges.html",
+      "title": "International Exchanges",
+      "chars": 937
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/scholarship.html",
+      "title": "Scholarship",
+      "chars": 1376
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/2026-07/28/c_1204912.htm",
+      "title": "2026 POMS International Conference in China convenes in Xi'an",
+      "chars": 3042
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/2026-08/13/c_1205403.htm",
+      "title": "Silk Road Youth Leadership Program concludes in Hong Kong",
+      "chars": 3615
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/about.html",
+      "title": "About",
+      "chars": 1084
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/generalinformation.html",
+      "title": "General Information",
+      "chars": 1143
+    }
+  ],
+  "db_row": {
+    "name_zh": "西安交通大学",
+    "name_en": "Xi'an Jiaotong University",
+    "name_fr": "Université Jiaotong de Xi'an",
+    "slug": "xian-jiaotong-university",
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "country": "Chine",
+    "department": null,
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://en.xjtu.edu.cn/",
+    "majors": [
+      "engineering",
+      "sciences"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "China Scholarship Council (CSC) / MOFCOM Scholarship / International Chinese Language Teachers Scholarship / XJTU Siyuan International Student Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

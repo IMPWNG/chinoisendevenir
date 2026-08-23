@@ -1,0 +1,425 @@
+{
+  "identity": {
+    "name_en": "Beijing University of Technology",
+    "name_zh": "北京工业大学",
+    "name_fr": "Université de technologie de Pékin",
+    "aliases": [
+      "BJUT",
+      "北工大"
+    ],
+    "website": "https://www.bjut.edu.cn/",
+    "international_website": "",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université de technologie de Pékin (BJUT), fondée en 1960, est une université clé du projet « 211 » et de la « Double First-Class ». Elle compte 11 disciplines dans le top 1% ESI (2 dans le top 1‰), 3 disciplines nationales clés, 2 laboratoires nationaux clés, 26 793 étudiants et 3 298 personnels. Devise : « 不息为体，日新为道 ».",
+    "history": "Fondée en 1960. Entrée dans le projet national « 211 » en 1996. Entrée dans les universités de construction de disciplines de premier plan en 2017. Sélectionnée pour la 2e vague « Double First-Class » en 2022. Nouveau campus de Fangshan en construction depuis 2025.",
+    "rankings": [
+      "Double First-Class (2022)",
+      "Projet 211 (1996)",
+      "11 disciplines ESI top 1%",
+      "2 disciplines ESI top 1‰"
+    ],
+    "strengths": [
+      "Génie civil",
+      "Génie environnemental (traitement des eaux)",
+      "Science des matériaux",
+      "Informatique",
+      "Intelligence artificielle",
+      "Mathématiques",
+      "Statistique",
+      "Architecture"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Beijing",
+      "province": "Beijing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal (校本部)",
+        "city": "Beijing",
+        "description": "100 Pingleyuan, district de Chaoyang, Beijing"
+      },
+      {
+        "name": "Campus de Tongzhou (通州校区)",
+        "city": "Beijing",
+        "description": "89 Luyuan South Street, district de Tongzhou, Beijing"
+      },
+      {
+        "name": "Campus de Guanzhuang (管庄校区)",
+        "city": "Beijing",
+        "description": "20 Guanzhuang Xili, district de Chaoyang, Beijing"
+      },
+      {
+        "name": "Campus de Liulijing (琉璃井校区)",
+        "city": "Beijing",
+        "description": "41 Liulijing Road, district de Dongcheng, Beijing"
+      },
+      {
+        "name": "Huixin East Street (惠新东街)",
+        "city": "Beijing",
+        "description": "8 Huixin East Street, district de Chaoyang, Beijing"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de premier cycle (diverses disciplines)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes principalement en chinois ; programmes en anglais possibles selon la filière"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (diverses disciplines)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes principalement en chinois"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat (diverses disciplines)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes principalement en chinois"
+    },
+    {
+      "level": "language",
+      "name": "Langue et culture chinoises (中国语言文化)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme créé en 2002, dédié aux étudiants étrangers"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée)",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "Diplôme de bachelor (licence)",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "Diplôme de master",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau des étudiants internationaux (留学生招生)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "100 Pingleyuan, district de Chaoyang, Beijing 100124"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "design",
+      "architecture",
+      "chinese_language",
+      "law",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Beijing",
+    "province": "Beijing",
+    "tags": [
+      "211",
+      "Double First-Class",
+      "Beijing",
+      "multidisciplinaire",
+      "recherche"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "international_website",
+    "application_portal_url",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "admissions_email",
+    "iso_email",
+    "phone",
+    "wechat",
+    "deadline_typical",
+    "cost_of_living_cny_month",
+    "specific_program_list",
+    "english_programs_details"
+  ],
+  "notes": "Sources limitées : page principale et page sur l'éducation internationale uniquement. Pas d'informations détaillées sur les frais, les scores linguistiques requis, les délais d'admission ou les contacts spécifiques. BJUT accueille des étudiants étrangers depuis 1990, a formé près de 10 000 étudiants de plus de 90 pays. Programme de langue et culture chinoises créé en 2002. Premier doctorat étranger en 2005. Bourse du gouvernement chinois (CSC) confirmée via le témoignage d'une ancienne doctorante égyptienne.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "beijing-university-of-technology",
+  "scraped_at": "2026-08-23T14:41:56.882Z",
+  "model": "minimax-m3",
+  "pages_fetched": 8,
+  "pages_used": 3,
+  "sources": [
+    {
+      "url": "https://www.bjut.edu.cn/",
+      "title": "北京工业大学|Beijing University of Technology",
+      "chars": 7360
+    },
+    {
+      "url": "https://www.bjut.edu.cn/xkjs/bs_ssxwsyd.htm",
+      "title": "博士/硕士学位授予点-北京工业大学|Beijing University of Technology",
+      "chars": 1237
+    },
+    {
+      "url": "https://www.bjut.edu.cn/jyjx/lxsjy1.htm",
+      "title": "留学生教育-北京工业大学|Beijing University of Technology",
+      "chars": 1537
+    }
+  ],
+  "db_row": {
+    "name_zh": "北京工业大学",
+    "name_en": "Beijing University of Technology",
+    "name_fr": "Université de technologie de Pékin",
+    "slug": "beijing-university-of-technology",
+    "city": "Beijing",
+    "province": "Beijing",
+    "country": "Chine",
+    "department": "Bureau des étudiants internationaux (留学生招生)",
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://www.bjut.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "design",
+      "architecture",
+      "chinese_language",
+      "law",
+      "education"
+    ],
+    "required_documents": [],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

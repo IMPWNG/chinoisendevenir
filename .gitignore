@@ -29,3 +29,4 @@ out
 .env.local
 node_modules
 dist
+data/universities/raw/

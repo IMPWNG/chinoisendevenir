@@ -1,0 +1,658 @@
+{
+  "identity": {
+    "name_en": "Zhejiang A&F University",
+    "name_zh": "浙江农林大学",
+    "name_fr": "Université A&F du Zhejiang",
+    "aliases": [
+      "ZAFU",
+      "Zhejiang Agriculture and Forestry University",
+      "Zhejiang A and F University"
+    ],
+    "website": "https://www.zafu.edu.cn/",
+    "international_website": "https://en.zafu.edu.cn/",
+    "application_portal_url": "http://admission.zafu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique complète fondée en 1958, située à Hangzhou (district de Lin'an). Campus réputé pour sa biodiversité végétale, entouré de montagnes et d'eau, idéal pour les études et la recherche. Spécialisée en agriculture, foresterie et sciences de l'environnement, avec une forte dimension internationale.",
+    "history": "Fondée en 1958. En 2019, ZAFU et le Centre pour l'éducation linguistique et la coopération (CLEC) ont créé conjointement la Bourse internationale pour les enseignants de chinois de ZAFU.",
+    "rankings": [],
+    "strengths": [
+      "foresterie",
+      "agriculture",
+      "sciences de l'environnement",
+      "horticulture",
+      "biologie",
+      "programme coopératif en foresterie avec le Canada"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Hangzhou",
+      "province": "Zhejiang",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 3000,
+      "notes": "Allocation mensuelle de la bourse Confucius: 2500 CNY (langue) ou 3000 CNY (master)"
+    },
+    "campuses": [
+      {
+        "name": "Campus principal de Lin'an",
+        "city": "Hangzhou (Lin'an)",
+        "description": "Campus principal entouré de montagnes et d'eau, célèbre pour ses nombreuses espèces végétales"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Machine Design, Manufacturing & Automation (English-Medium)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science & Technology (English-Medium)",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Civil Engineering (English-Medium)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "International Economics and Trade (English-Medium)",
+      "field": "economics",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Forestry (China-Canada Cooperative Program)",
+      "field": "agriculture",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme coopératif avec le Canada lancé en 2014"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes en chinois (Bachelor)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Diverses spécialités enseignées en chinois"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de Master (en chinois)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme non-diplôme de langue chinoise"
+    },
+    {
+      "level": "language",
+      "name": "Study Tour Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [],
+      "academic_calendar": "semester",
+      "notes": "Programme de visite d'étude"
+    },
+    {
+      "level": "language",
+      "name": "International Chinese Language Teachers Scholarship (Online)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme en ligne, bourse Confucius"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": 16,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
+      "other": [
+        "Non-Chinese citizen",
+        "Bonne condition physique et mentale",
+        "Bonne performance académique et conduite"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de Bachelor ou équivalent",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": 16,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Non-Chinese citizen",
+        "2 lettres de recommandation de professeurs ou experts"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de Master ou équivalent",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": 16,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Non-Chinese citizen"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme de fin d'études secondaires",
+      "age_max": 35,
+      "other": [
+        "Non-Chinese citizen",
+        "HSK minimum 180 (niveau 3) pour le programme en ligne",
+        "Score HSKK requis",
+        "Âge entre 16 et 35 ans"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Office for International Students, Zhejiang A&F University",
+    "iso_email": "iczafu@163.com",
+    "admissions_email": "CISZAFU@163.com",
+    "wechat": "",
+    "phone": "+86-571-63926893",
+    "address": "666 Wusu Ave., Lin'an, Hangzhou, Zhejiang Province, 311300, P.R.C."
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "economics",
+      "agriculture",
+      "chinese_language",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 3,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": 35,
+    "age_max_master": 35,
+    "age_max_phd": 35,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "10 mai (rentrée septembre) / 10 novembre (rentrée mars)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "tags": [
+      "agriculture",
+      "foresterie",
+      "environnement",
+      "programme coopératif Canada",
+      "bourse Confucius",
+      "bourse provinciale Zhejiang",
+      "bourse d'entreprise"
+    ]
+  },
+  "confidence": 0.75,
+  "missing_fields": [
+    "frais de scolarité exacts en CNY",
+    "frais de logement annuels",
+    "scores IELTS/TOEFL minimum",
+    "GPA minimum",
+    "classements précis"
+  ],
+  "notes": "Université spécialisée en agriculture et foresterie avec plusieurs programmes en anglais (génie, informatique, économie). Forte présence internationale avec bourses multiples (Confucius, provinciales Zhejiang, universitaires, d'entreprise). Programme coopératif unique en foresterie avec le Canada. Adresses emails distinctes: iczafu@163.com (général) et CISZAFU@163.com (bourse Confucius).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Scanned copy of passport photo page"
+    },
+    {
+      "type": "hsk",
+      "required": true,
+      "count": null,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK and HSKK score reports within two-year validity"
+    },
+    {
+      "type": "reference_letter",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Reference letter by the head of the recommending institutions"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "degree program applicants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Certification of highest education diploma (or proof of expected graduation) and official transcript"
+    },
+    {
+      "type": "reference_letter",
+      "required": true,
+      "count": 2,
+      "who": "degree scholarship applicants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Two reference letters from professors or associate professors or experts with equivalent professional and technical titles"
+    },
+    {
+      "type": "guardian_document",
+      "required": true,
+      "count": null,
+      "who": "applicants under 18",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certified documents of designation signed by entrusted legal guardians in China"
+    }
+  ],
+  "application": {
+    "platform_name": "ZAFU Online Application",
+    "platform_url": "http://admission.zafu.edu.cn/",
+    "steps": [
+      "Complete online application form on admission.zafu.edu.cn",
+      "Upload required documents",
+      "Track application progress and result",
+      "Confirm with ZAFU and print admission letter",
+      "Register at ZAFU on designated date"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "International Chinese Language Teachers Scholarship (Confucius Institute Scholarship)",
+      "type": "confucius_institute",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "living_allowance",
+        "insurance"
+      ],
+      "stipend_cny_month": 2500,
+      "conditions": "Non-Chinese citizens aged 16-35, committed to Chinese language education, good physical and mental condition. For Master's degree students stipend is 3000 CNY/month. Annual assessment required for degree students.",
+      "apply_via": "cis.chinese.cn (agency number 10341)",
+      "deadline": "May 10 for September intake; November 10 for March intake",
+      "renewal": "Annual assessment for degree students"
+    },
+    {
+      "name": "Zhejiang Governmental Scholarship",
+      "type": "government",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "University Scholarship",
+      "type": "university",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Enterprise Scholarship",
+      "type": "enterprise",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "One semester or one academic year",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission notice",
+      "JW202 visa application form",
+      "Scholarship certificate (if applicable)"
+    ],
+    "instructions": "Contact ZAFU Office for International Students for visa application documents",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "on-campus dormitory"
+    ],
+    "rules": "",
+    "international_office": "Office for International Students, Zhejiang A&F University, 666# Wusu Ave., Lin'an, Hangzhou, Zhejiang Province, 311300. Tel: +86-571-63926893, Email: iczafu@163.com",
+    "orientation": "",
+    "english_support": true,
+    "clubs": "Students' Union, Sports Teams, Recreation Clubs, Culture and Activities"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Ukraine",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Germany",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Ghana",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Thailand",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Zambia",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Congo",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Cameroon",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Canada",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Equatorial Guinea",
+      "notes": ""
+    },
+    {
+      "region_or_country": "Ethiopia",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "zafu",
+  "scraped_at": "2026-08-23T14:48:36.406Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 11,
+  "sources": [
+    {
+      "url": "http://admission.zafu.edu.cn/",
+      "title": "浙江农林大学国教学院英文版",
+      "chars": 1953
+    },
+    {
+      "url": "https://en.zafu.edu.cn/",
+      "title": "浙江农林大学",
+      "chars": 1936
+    },
+    {
+      "url": "https://www.zafu.edu.cn/",
+      "title": "浙江农林大学",
+      "chars": 3604
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/Programs/Non_degree_Programs.htm",
+      "title": "Non-degree Programs-浙江农林大学国教学院英文版",
+      "chars": 1673
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/Contact/Chinese_as_Second_Language_Center.htm",
+      "title": "Chinese as Second Language Center-浙江农林大学国教学院英文版",
+      "chars": 1501
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/Contact/English_as_Second_Language_Center.htm",
+      "title": "English as Second Language Center-浙江农林大学国教学院英文版",
+      "chars": 1404
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/info/1004/1676.htm",
+      "title": "Application Guide for International Chinese Language Teachers Scholarship 2021 （Zhejiang A&F University）-浙江农林大学国教学院英文版",
+      "chars": 5430
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/info/1004/1664.htm",
+      "title": "Application Guide for International Chinese Language Teachers Scholarship Online Program of Zhejiang A&F University -浙江农林大学国教学院英文版",
+      "chars": 4173
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/Programs.htm",
+      "title": "Programs-浙江农林大学国教学院英文版",
+      "chars": 2027
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/Programs/Chinese_Medium_Programs.htm",
+      "title": "Chinese-Medium Programs-浙江农林大学国教学院英文版",
+      "chars": 1385
+    },
+    {
+      "url": "https://admission.zafu.edu.cn/Programs/English_medium_Programs.htm",
+      "title": "English-medium Programs-浙江农林大学国教学院英文版",
+      "chars": 1746
+    }
+  ],
+  "db_row": {
+    "name_zh": "浙江农林大学",
+    "name_en": "Zhejiang A&F University",
+    "name_fr": "Université A&F du Zhejiang",
+    "slug": "zafu",
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "country": "Chine",
+    "department": "Office for International Students, Zhejiang A&F University",
+    "emails": [
+      "iczafu@163.com",
+      "CISZAFU@163.com"
+    ],
+    "phone": "+86-571-63926893",
+    "wechat": null,
+    "website": "https://en.zafu.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "economics",
+      "agriculture",
+      "chinese_language",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "hsk",
+      "reference_letter",
+      "diploma",
+      "reference_letter",
+      "guardian_document"
+    ],
+    "scholarship_amount": "International Chinese Language Teachers Scholarship (Confucius Institute Scholarship) / Zhejiang Governmental Scholarship / University Scholarship / Enterprise Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 3,
+    "language_requirements": "HSK 3+",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "10 mai (rentrée septembre) / 10 novembre (rentrée mars)"
+  }
+}

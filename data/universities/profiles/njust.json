@@ -1,0 +1,513 @@
+{
+  "identity": {
+    "name_en": "Nanjing University of Science and Technology",
+    "name_zh": "南京理工大学",
+    "name_fr": "Université de science et technologie de Nanjing",
+    "aliases": [
+      "NJUST"
+    ],
+    "website": "https://www.njust.edu.cn",
+    "international_website": "https://study.njust.edu.cn",
+    "application_portal_url": "https://admission.njust.edu.cn"
+  },
+  "general": {
+    "presentation": "Université publique de science et technologie située à Nanjing, réputée notamment pour le génie de la défense, l'armement et l'ingénierie.",
+    "history": "Fondée en 1953 sous le nom de China Military Engineering Institute, elle est l'une des universités clés du projet 211.",
+    "rankings": [],
+    "strengths": [
+      "engineering",
+      "defense technology",
+      "computer_science",
+      "sciences"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Nanjing",
+      "province": "Jiangsu",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal",
+        "city": "Nanjing",
+        "description": "Campus principal à Nanjing"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de premier cycle pour étudiants internationaux",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en chinois principalement; certains cours en anglais possibles selon filière."
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master pour étudiants internationaux",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master recherche et professionnel; bourses Lanshan et Silk Road disponibles."
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat pour étudiants internationaux",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Doctorat en sciences et ingénierie."
+    },
+    {
+      "level": "language",
+      "name": "Programme préparatoire de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Formation préparatoire en chinois avant admission."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) reconnu, hors de Chine.",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire d'un an en chinois proposé si HSK insuffisant.",
+      "other": [
+        "Dossier de candidature via admission.njust.edu.cn",
+        "Passeport valide"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de bachelor (licence) dans une discipline pertinente.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible.",
+      "other": [
+        "Lettre de recommandation",
+        "Plan d'études ou proposition de recherche"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master dans une discipline pertinente.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible.",
+      "other": [
+        "Accord préalable avec un superviseur",
+        "Proposition de recherche détaillée"
+      ]
+    },
+    "language": {
+      "academic": "Aucune exigence académique préalable spécifique.",
+      "age_max": null,
+      "other": [
+        "Inscription via admission.njust.edu.cn"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "School of International Education (SIE)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "Nanjing, Jiangsu, Chine"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "design"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "30 juin",
+    "intake_months": [
+      9
+    ],
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "tags": [
+      "211 Project",
+      "defense engineering",
+      "Silk Road scholarship",
+      "Lanshan scholarship"
+    ]
+  },
+  "confidence": 0.45,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "cost_of_living_cny_month",
+    "admissions_email",
+    "iso_email",
+    "phone",
+    "wechat",
+    "address",
+    "rankings",
+    "specific_program_list",
+    "scholarship_amounts"
+  ],
+  "notes": "Sources limitées: principalement liens vers guides d'admission 2026 (bachelor, master, Lanshan, Silk Road) sans contenu détaillé chargé. HSK/IELTS/TOEFL et âges indiqués sont des estimations standards pour universités chinoises similaires; à vérifier sur study.njust.edu.cn ou sie.njust.edu.cn.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide requis"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo d'identité"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "candidats bachelor/master/phd",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Diplôme le plus élevé + relevé de notes notariés"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": null,
+      "who": "programmes en chinois / anglais",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd",
+        "language"
+      ],
+      "notes": "HSK pour chinois ; IELTS/TOEFL pour anglais"
+    },
+    {
+      "type": "physical_exam",
+      "required": true,
+      "count": null,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certificat médical"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire vierge"
+    }
+  ],
+  "application": {
+    "platform_name": "NJUST Online Service Platform for International Students",
+    "platform_url": "http://admission.njust.edu.cn/",
+    "steps": [
+      "Créer un compte sur admission.njust.edu.cn",
+      "Remplir les informations personnelles (email valide obligatoire)",
+      "Activer le compte via email",
+      "Compléter toutes les informations du dossier",
+      "Soumettre la candidature et suivre le statut"
+    ],
+    "opens_at": "2025-11-20",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship – Silk Road Program",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour les candidats des pays le long de la Route de la Soie ; candidature via agence CSC",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "NJUST Lanshan Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Sélection académique de NJUST",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "JW202 / JW201"
+    ],
+    "instructions": "Demander un visa étudiant X1 ou X2 à l'ambassade de Chine avec la lettre d'admission et le formulaire JW202",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours au bureau de sécurité publique local"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "dortoir universitaire"
+    ],
+    "rules": "",
+    "international_office": "School of International Education, NJUST",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "njust",
+  "scraped_at": "2026-08-23T14:58:25.587Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "http://admission.njust.edu.cn/",
+      "title": "Online Service Platform for International Students",
+      "chars": 1023
+    },
+    {
+      "url": "https://admission.njust.edu.cn/html/article_content/202511/4667D4F446414C99B17DEE61DD4C2121.shtml",
+      "title": "2026年南京理工大学来华留学生兰杉奖学金招生简章-2026 NJUST Lanshan Scholarship Program Admission Guide - 国际学生服务平台",
+      "chars": 344
+    },
+    {
+      "url": "https://admission.njust.edu.cn/html/0/guide_en.htm",
+      "title": null,
+      "chars": 736
+    },
+    {
+      "url": "https://admission.njust.edu.cn/html/article_content/202604/BA950423F68C45B0A4AB9C959BC00903.shtml",
+      "title": "2026年南京理工大学中国政府奖学金“丝绸之路”项目招生简章-2026 NJUST Chinese Government Scholarship – Silk Road Program Admissions - 国际学生服务平台",
+      "chars": 390
+    },
+    {
+      "url": "https://admission.njust.edu.cn/html/article_content/202511/4FB0C6A58D87487585CF487ADD748C82.shtml",
+      "title": "2026年南京理工大学来华留学研究生招生简章-2026 NJUST International Postgraduate Students Admission Guide - 国际学生服务平台",
+      "chars": 355
+    },
+    {
+      "url": "https://admission.njust.edu.cn/html/article_content/202511/1354E63CFEAC4607A25DD72E063F4E74.shtml",
+      "title": "2026年南京理工大学来华留学本科生招生简章-2026 NJUST International Undergraduate Students Admission Guide - 国际学生服务平台",
+      "chars": 357
+    },
+    {
+      "url": "https://admission.njust.edu.cn/template/css/form.css",
+      "title": null,
+      "chars": 2954
+    },
+    {
+      "url": "https://admission.njust.edu.cn/template/css/header.css",
+      "title": null,
+      "chars": 2291
+    },
+    {
+      "url": "https://admission.njust.edu.cn/template/css/member_login_window.css",
+      "title": null,
+      "chars": 4174
+    }
+  ],
+  "db_row": {
+    "name_zh": "南京理工大学",
+    "name_en": "Nanjing University of Science and Technology",
+    "name_fr": "Université de science et technologie de Nanjing",
+    "slug": "njust",
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "country": "Chine",
+    "department": "School of International Education (SIE)",
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://study.njust.edu.cn",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "design"
+    ],
+    "required_documents": [
+      "passport",
+      "photo",
+      "diploma",
+      "language_certificate",
+      "physical_exam",
+      "no_criminal_record"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship – Silk Road Program / NJUST Lanshan Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "30 juin"
+  }
+}

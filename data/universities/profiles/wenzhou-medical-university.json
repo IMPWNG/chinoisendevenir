@@ -1,0 +1,621 @@
+{
+  "identity": {
+    "name_en": "Wenzhou Medical University",
+    "name_zh": "温州医科大学",
+    "name_fr": "Université médicale de Wenzhou",
+    "aliases": [
+      "WMU"
+    ],
+    "website": "https://www.wmu.edu.cn/",
+    "international_website": "http://en.wmu.edu.cn/",
+    "application_portal_url": "http://sis.wmu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université clé de médecine du Zhejiang, reconnue pour l'ophtalmologie, les sciences de la vision, la médecine clinique et la pharmacie. 16 804 étudiants L3, 8 727 étudiants postgraduate, 550 étudiants internationaux. Plus de 170 partenaires académiques internationaux.",
+    "history": "Histoire remontant à 1912 (école de médecine). Devenue Wenzhou Medical University en tant qu'université publique de médecine.",
+    "rankings": [
+      "Université clé de construction du Zhejiang"
+    ],
+    "strengths": [
+      "Ophtalmologie et optométrie (Eye Hospital réputé)",
+      "Médecine clinique",
+      "Stomatologie",
+      "Sciences pharmaceutiques",
+      "Sciences de laboratoire et sciences de la vie",
+      "Santé publique",
+      "Soins infirmiers",
+      "Génie biomédical",
+      "Médecine chinoise traditionnelle"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Wenzhou",
+      "province": "Zhejiang",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation pour étudiant international à Wenzhou"
+    },
+    "campuses": [
+      {
+        "name": "Campus Chashan (principal)",
+        "city": "Wenzhou",
+        "description": "University Town, Chashan, campus principal"
+      },
+      {
+        "name": "Campus Binhai",
+        "city": "Wenzhou",
+        "description": "Campus secondaire"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Clinical Medicine (MBBS)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 6,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare pour étudiants internationaux"
+    },
+    {
+      "level": "bachelor",
+      "name": "Médecine clinique (zh)",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Ophtalmologie et Optométrie",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Discipline phare WMU"
+    },
+    {
+      "level": "bachelor",
+      "name": "Stomatologie",
+      "field": "dentistry",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Pharmacy",
+      "field": "pharmacy",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Sciences infirmières",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Sciences de laboratoire médical / Sciences de la vie",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Santé publique",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie biomédical / Information et Ingénierie",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Médecine chinoise traditionnelle",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (médecine, pharmacie, santé publique, soins infirmiers)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes de master internationaux, notamment Sino-Thai Nursing Master"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat (sciences médicales)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "foundation",
+      "name": "Programme préparatoire / pré-universitaire",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Pour étudiants n'ayant pas le HSK requis"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires reconnu, bons résultats en sciences (biologie, chimie, physique, mathématiques) pour MBBS et programmes médicaux",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire d'un an disponible à l'École internationale (sis.wmu.edu.cn)",
+      "other": [
+        "Examen médical",
+        "Passeport valide",
+        "Casier judiciaire vierge"
+      ]
+    },
+    "master": {
+      "academic": "Licence (Bachelor) dans un domaine connexe, transcripts académiques, 2 lettres de recommandation",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Plan d'études / proposition de recherche pour la recherche master",
+        "Publications préférables pour doctorat"
+      ]
+    },
+    "phd": {
+      "academic": "Master dans un domaine connexe, proposition de recherche, 2 lettres de recommandation",
+      "min_gpa": null,
+      "age_max": 45,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Proposition de recherche détaillée",
+        "Accord préalable d'un superviseur WMU"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme de fin d'études secondaires",
+      "age_max": 55,
+      "other": [
+        "Programme de langue chinoise (中文+医学特色)"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "International Education College (国际教育学院) / School of International Studies",
+    "iso_email": "sis@wmu.edu.cn",
+    "admissions_email": "zsb@wmu.edu.cn",
+    "wechat": "",
+    "phone": "+86-577-86689885",
+    "address": "Wenzhou Medical University, University Town, Chashan, Wenzhou, Zhejiang 325035, P.R. China"
+  },
+  "matching": {
+    "fields": [
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "sciences",
+      "engineering",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": 40,
+    "age_max_phd": 45,
+    "has_csc": true,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 18000,
+    "tuition_cny_max": 35000,
+    "housing_cny_year_min": 4000,
+    "deadline_typical": "30 juin",
+    "intake_months": [
+      9
+    ],
+    "city": "Wenzhou",
+    "province": "Zhejiang",
+    "tags": [
+      "médecine",
+      "MBBS",
+      "ophtalmologie",
+      "optométrie",
+      "sciences de la vision",
+      "stomatologie",
+      "pharmacie",
+      "santé publique",
+      "soins infirmiers",
+      "génie biomédical",
+      "CSC Silk Road",
+      "CSC High-Level Graduate",
+      "recherche médicale",
+      "affiliations hospitalières multiples",
+      "Sino-Thai Nursing"
+    ]
+  },
+  "confidence": 0.72,
+  "missing_fields": [
+    "tuition_cny_min/max confirmés par source",
+    "min_gpa exact",
+    "has_university_scholarship non explicitement confirmé",
+    "wechat officiel",
+    "contact email direct du International Education College"
+  ],
+  "notes": "Université médicale majeure du Zhejiang, 550 étudiants internationaux. 17 écoles dont médecine clinique (avec programme MBBS en anglais), ophtalmologie (discipline phare nationale), stomatologie, pharmacie, sciences infirmières, sciences de laboratoire, santé publique, génie biomédical, et école de médecine chinoise traditionnelle. 13 hôpitaux affiliés. Partenaires internationaux : +170 institutions, programmes conjoints avec Université de l'Alberta (Canada) via Alberta College, et coopération avec universités thaïlandaises (programmes master nursing sino-thaïlandais). Bourses : Gouvernement chinois (CSC - Silk Road et High-Level Graduate), bourses provinciales du Zhejiang. École internationale (sis.wmu.edu.cn) gère admissions étudiants étrangers, avec programmes undergrad, pré-universitaire (foundation), graduate et non-degree. Calendrier académique semestriel, rentrée septembre.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide requis pour étudiants étrangers"
+    },
+    {
+      "type": "diplôme",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Diplômes et relevés de notes traduits"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photos d'identité"
+    },
+    {
+      "type": "certificat de langue",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour anglais"
+    }
+  ],
+  "application": {
+    "platform_name": "Système de gestion des étudiants étrangers WMU",
+    "platform_url": "http://sis.wmu.edu.cn/",
+    "steps": [
+      "S'inscrire sur la plateforme de gestion des étudiants étrangers",
+      "Remplir le formulaire de candidature",
+      "Soumettre les documents requis",
+      "Attendre la notification d'admission",
+      "Payer les frais"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du gouvernement chinois - Programme Route de la Soie",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Candidats des pays le long de la Route de la Soie",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse du gouvernement chinois - Programme haut niveau pour étudiants graduate",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Étudiants graduate",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Formulaire JW202",
+      "Lettre d'admission",
+      "Visa Application for Study in China"
+    ],
+    "instructions": "L'université fournit les documents nécessaires à la demande de visa X1 ou X2 selon la durée du programme",
+    "arrival_and_residence_permit": "À l'arrivée, les étudiants doivent se présenter au Bureau international pour les formalités de permis de séjour"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "dortoir sur campus"
+    ],
+    "rules": "Règlement intérieur du dortoir de l'université",
+    "international_office": "Collège d'éducation internationale (国际教育学院) - sis.wmu.edu.cn",
+    "orientation": true,
+    "english_support": true,
+    "clubs": "Troupe artistique des étudiants internationaux, associations étudiantes"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Pays de la Route de la Soie",
+      "notes": "Éligibles au programme de bourse gouvernementale spécifique"
+    },
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "wenzhou-medical-university",
+  "scraped_at": "2026-08-23T14:53:09.837Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.wmu.edu.cn/",
+      "title": "温州医科大学",
+      "chars": 2243
+    },
+    {
+      "url": "http://en.wmu.edu.cn/",
+      "title": "WENZHOU MEDICAL UNIVERSITY",
+      "chars": 4853
+    },
+    {
+      "url": "http://sis.wmu.edu.cn/",
+      "title": "国际教育学院",
+      "chars": 3869
+    },
+    {
+      "url": "http://zhaosheng.wmu.edu.cn/",
+      "title": "本科招生网-温州医科大学",
+      "chars": 1739
+    },
+    {
+      "url": "https://www.wmu.edu.cn/css/base.css?ac",
+      "title": null,
+      "chars": 7552
+    },
+    {
+      "url": "https://www.wmu.edu.cn/css/style.css?act=3",
+      "title": null,
+      "chars": 7170
+    },
+    {
+      "url": "https://www.wmu.edu.cn/css/common.css?act=12",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://www.wmu.edu.cn/css/common1000.css?act=7",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://www.wmu.edu.cn/css/font-awesome.css",
+      "title": null,
+      "chars": 12000
+    }
+  ],
+  "db_row": {
+    "name_zh": "温州医科大学",
+    "name_en": "Wenzhou Medical University",
+    "name_fr": "Université médicale de Wenzhou",
+    "slug": "wenzhou-medical-university",
+    "city": "Wenzhou",
+    "province": "Zhejiang",
+    "country": "Chine",
+    "department": "International Education College (国际教育学院) / School of International Studies",
+    "emails": [
+      "sis@wmu.edu.cn",
+      "zsb@wmu.edu.cn"
+    ],
+    "phone": "+86-577-86689885",
+    "wechat": null,
+    "website": "http://en.wmu.edu.cn/",
+    "majors": [
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "sciences",
+      "engineering",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport",
+      "diplôme",
+      "photo",
+      "certificat de langue"
+    ],
+    "scholarship_amount": "Bourse du gouvernement chinois - Programme Route de la Soie / Bourse du gouvernement chinois - Programme haut niveau pour étudiants graduate",
+    "scholarship_min": 18000,
+    "scholarship_max": 35000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "tuition_min": 18000,
+    "tuition_max": 35000,
+    "application_deadline": "30 juin"
+  }
+}

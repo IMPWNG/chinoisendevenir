@@ -1,0 +1,590 @@
+{
+  "identity": {
+    "name_en": "Liaoning University of Technology",
+    "name_zh": "辽宁工业大学",
+    "name_fr": "Université de technologie du Liaoning",
+    "aliases": [
+      "LNUT",
+      "辽工大"
+    ],
+    "website": "https://www.lnut.edu.cn/",
+    "international_website": "http://gjxy.lnut.edu.cn/",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université polytechnique située à Jinzhou, Liaoning, offrant des programmes de licence, master et doctorat ainsi que des formations en langue chinoise pour étudiants internationaux.",
+    "history": "Plus de 75 ans d'histoire académique (fondement mentionné en 2026), avec une orientation forte en ingénierie, sciences des matériaux, mécanique et disciplines appliquées.",
+    "rankings": [],
+    "strengths": [
+      "Génie mécanique",
+      "Science et ingénierie des matériaux",
+      "Génie automobile et transports",
+      "Génie électrique",
+      "Sciences de l'environnement",
+      "Sciences économiques et gestion"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Jinzhou",
+      "province": "Liaoning",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal",
+        "city": "Jinzhou",
+        "description": "No.169 Shiying Street, district de Guta, Jinzhou, Liaoning"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Génie mécanique et automatisation",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie automobile et des transports",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Science et ingénierie des matériaux",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie chimique et environnemental",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie électrique",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie électronique et de l'information",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Économie et gestion",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie civil et architecture",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Design médias culturels et artistiques",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Logiciel (Software)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (diverses disciplines)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en ingénierie, sciences des matériaux, gestion, etc."
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Centre de test HSK disponible sur le campus"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires (lycée) ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de langue chinoise proposée",
+      "other": [
+        "Dossier de candidature via le bureau de l'éducation internationale"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bac+4) ou équivalent dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Examen d'entrée ou entretien selon le programme"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "Pas de prérequis académique spécifique",
+      "age_max": null,
+      "other": [
+        "Inscription ouverte aux étrangers"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau de la coopération et des échanges internationaux (École d'éducation internationale)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "+86-416-4199311",
+    "address": "No.169 Shiying Street, district de Guta, Jinzhou, Liaoning, 121001, Chine"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "sciences",
+      "arts",
+      "design",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9,
+      3
+    ],
+    "city": "Jinzhou",
+    "province": "Liaoning",
+    "tags": [
+      "polytechnique",
+      "ingénierie",
+      "matériaux",
+      "mécanique",
+      "75+ ans",
+      "échange international",
+      "Brunel University London"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "frais de scolarité exacts",
+    "scores HSK/IELTS/TOEFL minimaux précis",
+    "GPA minimum",
+    "limites d'âge",
+    "existence de bourses (CSC, université, province)",
+    "URL du portail de candidature",
+    "email international",
+    "délai d'inscription typique",
+    "coût de la vie"
+  ],
+  "notes": "Informations limitées sur les conditions d'admission chiffrées. La page internationale (http://gjxy.lnut.edu.cn/) propose des programmes en anglais et chinois ainsi que des bourses (sans détails). HSK 4 estimé pour les programmes en chinois. Partenariat international confirmé avec Brunel University London. Centre HSK présent sur le campus.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "diploma",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "transcript",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "hsk_certificate",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "chinese_taught"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "ielts_toefl",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "english_taught"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "physical_examination",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "no_criminal_record",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "photo",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "Section 'Before & After Arrival' présente sur le site anglais mais contenu détaillé non accessible dans les sources.",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "Bureau international (国际交流合作处/国际教育学院), tél: 86-416-4199311, No.169 Shiying Street, Guta District, Jinzhou, 121001",
+    "orientation": "",
+    "english_support": null,
+    "clubs": "Activités culturelles rapportées: célébration du Festival des bateaux-dragons, Journée internationale du chinois, Festival du Nouvel An (Laba)."
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "lnut",
+  "scraped_at": "2026-08-23T14:55:01.658Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.lnut.edu.cn/",
+      "title": "辽宁工业大学",
+      "chars": 1362
+    },
+    {
+      "url": "https://zjc.lnut.edu.cn/index/zsw/",
+      "title": "首页-辽宁工业大学招生就业网",
+      "chars": 777
+    },
+    {
+      "url": "http://www.lnut.edu.cn/ENGLISHml/Home.htm",
+      "title": "Home-辽宁工业大学",
+      "chars": 2033
+    },
+    {
+      "url": "http://jwc.lnut.edu.cn/",
+      "title": "辽宁工业大学教务处",
+      "chars": 1961
+    },
+    {
+      "url": "http://gjxy.lnut.edu.cn/",
+      "title": "国际交流合作处(国际教育学院)",
+      "chars": 728
+    },
+    {
+      "url": "http://yjsxy.lnut.edu.cn/yjszsw/sy.htm",
+      "title": "首页-辽宁工业大学研究生处",
+      "chars": 479
+    },
+    {
+      "url": "https://www.lnut.edu.cn/info/1150/189790.htm",
+      "title": "2026年振动力学理论与应用国际学术会议暨第二十届辽宁省振动工程学会学术交流会议在我校召开-辽宁工业大学",
+      "chars": 1683
+    },
+    {
+      "url": "https://www.lnut.edu.cn/info/1150/189789.htm",
+      "title": "“智造强省 材料赋能”高质量发展研讨会暨新材料产学研对接会在我校举办-辽宁工业大学",
+      "chars": 1664
+    },
+    {
+      "url": "https://www.lnut.edu.cn/info/14257/189791.htm",
+      "title": "我校在2026年中国大学生机械工程创新创意大赛第十二届材料热处理创新创业赛总决赛中喜获佳绩-辽宁工业大学",
+      "chars": 1012
+    }
+  ],
+  "db_row": {
+    "name_zh": "辽宁工业大学",
+    "name_en": "Liaoning University of Technology",
+    "name_fr": "Université de technologie du Liaoning",
+    "slug": "lnut",
+    "city": "Jinzhou",
+    "province": "Liaoning",
+    "country": "Chine",
+    "department": "Bureau de la coopération et des échanges internationaux (École d'éducation internationale)",
+    "emails": [],
+    "phone": "+86-416-4199311",
+    "wechat": null,
+    "website": "http://gjxy.lnut.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "sciences",
+      "arts",
+      "design",
+      "chinese_language"
+    ],
+    "required_documents": [],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

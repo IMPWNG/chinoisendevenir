@@ -1,0 +1,355 @@
+{
+  "identity": {
+    "name_en": "Shanxi Medical University",
+    "name_zh": "山西医科大学",
+    "name_fr": "Université médicale du Shanxi",
+    "aliases": [
+      "SXMU"
+    ],
+    "website": "https://www.sxmu.edu.cn/",
+    "international_website": "",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université médicale provinciale du Shanxi, à Taiyuan. Dispose d'un Collège international de santé de Wolverhampton (programme sino-britannique en santé publique/médecine). Accueil de留学生 (étudiants étrangers).",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "Médecine",
+      "Médecine nucléaire",
+      "Pharmacie",
+      "Santé publique",
+      "Médecine bucco-dentaire",
+      "Sciences du cerveau",
+      "Médecine d'urgence",
+      "Oncologie"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "location": {
+      "city": "Taiyuan",
+      "province": "Shanxi",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "川至校区 (Chuanzhi)",
+        "city": "Taiyuan",
+        "description": "Taiyuan, district Xinghualing, 382 Wuyi Lu"
+      },
+      {
+        "name": "迎泽校区 (Yingze)",
+        "city": "Taiyuan",
+        "description": "Taiyuan, district Yingze, 56 Xinjian Nan Lu"
+      },
+      {
+        "name": "中都校区 (Zhongdu)",
+        "city": "Jinzhong (Yuci)",
+        "description": "Université de Jinzhong, district Yuci, 98 Daxue Jie"
+      }
+    ]
+  },
+  "programs": [],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "国际教育学院 (International Education College)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "Camp Zhongdu, 98 Daxue Jie, district Yuci, Jinzhong, Shanxi"
+  },
+  "matching": {
+    "fields": [
+      "medicine",
+      "pharmacy",
+      "sciences"
+    ],
+    "degrees": [],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": null,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Taiyuan",
+    "province": "Shanxi",
+    "tags": [
+      "medicine",
+      "sino-british-joint",
+      "nuclear-medicine",
+      "pharmacy",
+      "public-health",
+      "dental"
+    ]
+  },
+  "confidence": 0.35,
+  "missing_fields": [
+    "international_admissions_office_contact",
+    "tuition_fees",
+    "hsk_requirements",
+    "ielts_toefl_requirements",
+    "scholarship_details",
+    "application_deadlines",
+    "specific_programs_list",
+    "international_student_application_portal"
+  ],
+  "notes": "Sources limitées: pages d'accueil et actualités de l'université confirment l'identité (SXMU, Taiyuan, Shanxi), 3 campus, existence du Collège international de santé de Wolverhampton (programme sino-britannique, mention IELTS et bourses), accueil d'étudiants étrangers, forces en médecine/médecine nucléaire/pharmacie/santé publique/médecine dentaire. Aucune page d'admission internationale ni détails sur HSK/IELTS/frais/bourses n'a pu être extraite des sources fournies.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide requis (informations non confirmées dans les sources)"
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "国际教育学院 (College of International Education)",
+    "orientation": "",
+    "english_support": null,
+    "clubs": "Programme 'Communauté des étoiles' (星光社区) pour les étudiants internationaux"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Italie",
+      "notes": "Programme d'échange avec l'Università degli Studi Gabriele d'Annunzio (邓南遮大学)"
+    },
+    {
+      "region_or_country": "Royaume-Uni",
+      "notes": "Institut international de la santé avec l'Université de Wolverhampton (伍尔弗汉普顿大学) - coopération sino-étrangère, première promotion prévue"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "shanxi-medical-university",
+  "scraped_at": "2026-08-23T14:56:35.190Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.sxmu.edu.cn/",
+      "title": "山西医科大学",
+      "chars": 6669
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/system/resource/code/auth/auth.css",
+      "title": null,
+      "chars": 1374
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/css/master.css",
+      "title": null,
+      "chars": 2691
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/jyjx1/zsjy.htm",
+      "title": "招生就业-山西医科大学",
+      "chars": 935
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/info/1081/40240.htm",
+      "title": "聚焦抗菌药物安全 我校药学院研究成果亮相国际顶刊《柳叶刀-感染病学》-山西医科大学",
+      "chars": 1767
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/info/1411/40252.htm",
+      "title": "凝心聚力备开学 协同护航育新人——我校召开伍尔弗汉普顿国际健康学院首批新生开学工作部署会-山西医科大学",
+      "chars": 2096
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/info/1411/39731.htm",
+      "title": "从“星光社区”到榆次老城——我校留学生参加第16个“5·19中国旅游日”主题活动-山西医科大学",
+      "chars": 1762
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/info/1411/39568.htm",
+      "title": "国际癌症研究机构/世界卫生组织（IARC/WHO）专家Gary Clifford教授做客公共卫生学院，共话癌症流行病学与防控新方向-山西医科大学",
+      "chars": 1943
+    },
+    {
+      "url": "https://www.sxmu.edu.cn/info/1411/39554.htm",
+      "title": "国际交流拓新域 中西融合促创新——我校药学院科创项目亮相国际培训班-山西医科大学",
+      "chars": 1647
+    }
+  ],
+  "db_row": {
+    "name_zh": "山西医科大学",
+    "name_en": "Shanxi Medical University",
+    "name_fr": "Université médicale du Shanxi",
+    "slug": "shanxi-medical-university",
+    "city": "Taiyuan",
+    "province": "Shanxi",
+    "country": "Chine",
+    "department": "国际教育学院 (International Education College)",
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://www.sxmu.edu.cn/",
+    "majors": [
+      "medicine",
+      "pharmacy",
+      "sciences"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

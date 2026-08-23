@@ -1,0 +1,701 @@
+{
+  "identity": {
+    "name_en": "Harbin Engineering University",
+    "name_zh": "哈尔滨工程大学",
+    "name_fr": "Université d'ingénierie de Harbin",
+    "aliases": [
+      "HEU",
+      "哈工程"
+    ],
+    "website": "https://www.hrbeu.edu.cn/",
+    "international_website": "https://english.hrbeu.edu.cn/",
+    "application_portal_url": "https://studyheu.hrbeu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique de classe « Double First Class » rattachée au Ministère de l'Industrie et des Technologies de l'Information. Héritière de l'ancienne Académie militaire de Harbin (哈军工), elle est leader national en ingénierie navale, sciences nucléaires et acoustique sous-marine. 27 écoles, 16 700+ étudiants en licence, 17 000+ en master/doctorat, 1 100+ étudiants internationaux.",
+    "history": "Fondée en 1953 comme Académie militaire d'ingénierie de Harbin (哈军工), restructurée en université civile en 1970 sous le nom de Harbin Shipbuilding Engineering Institute, renommée Harbin Engineering University en 1994. 70e anniversaire célébré en 2023.",
+    "rankings": [
+      "8 disciplines dans ESI top 1% (Ingénierie, Science des matériaux, Informatique, Chimie, Environnement/Écologie, Physique, Sciences de la Terre, Sciences sociales)",
+      "Ingénierie dans ESI top 1‰",
+      "Architecture navale et ingénierie océanique : 1er national (4e évaluation MOE)",
+      "Sciences et technologies nucléaires : 3e national",
+      "Sciences et ingénierie du contrôle : 6e national"
+    ],
+    "strengths": [
+      "Architecture navale et ingénierie océanique",
+      "Sciences et technologies nucléaires",
+      "Acoustique sous-marine",
+      "Intelligence artificielle et robotique",
+      "Sciences et ingénierie du contrôle",
+      "Construction navale et ingénierie maritime",
+      "Sciences des matériaux",
+      "Mécanique"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Harbin",
+      "province": "Heilongjiang",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 3500,
+      "notes": "Logement 400-2600 CNY/mois selon type de chambre; repas et transport à ajouter."
+    },
+    "campuses": [
+      {
+        "name": "Campus principal Nantong",
+        "city": "Harbin",
+        "description": "145 Nantong Street, Nangang District - siège et principaux départements d'ingénierie."
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Naval Architecture and Ocean Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Discipline phare, 1er national."
+    },
+    {
+      "level": "bachelor",
+      "name": "Civil Engineering (Double Degree with University of Aberdeen)",
+      "field": "engineering",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "4e année à l'Université d'Aberdeen (UK)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Artificial Intelligence",
+      "field": "computer_science",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours en chinois et en anglais."
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours en chinois et en anglais."
+    },
+    {
+      "level": "bachelor",
+      "name": "Underwater Acoustics Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Discipline unique au niveau national."
+    },
+    {
+      "level": "bachelor",
+      "name": "Nuclear Energy Engineering and Technology",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Top 3 national."
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language and Literature",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de langue chinoise pour internationaux."
+    },
+    {
+      "level": "master",
+      "name": "Design and Construction of Naval Architecture and Ocean Structure",
+      "field": "engineering",
+      "language": "bilingual",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master et doctorat disponibles."
+    },
+    {
+      "level": "master",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Materials Science and Engineering",
+      "field": "sciences",
+      "language": "bilingual",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "Underwater Acoustics Engineering",
+      "field": "engineering",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Doctorat en acoustique sous-marine."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent; bonne performance académique.",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire (预科) d'un an disponible si HSK insuffisant.",
+      "other": [
+        "Passeport valide",
+        "Formulaire de candidature en ligne",
+        "Relevés de notes du secondaire",
+        "Certificat de diplôme"
+      ]
+    },
+    "master": {
+      "academic": "Licence (Bachelor) ou équivalent dans un domaine pertinent; bon dossier académique.",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire disponible.",
+      "other": [
+        "Passeport valide",
+        "Diplôme de licence et relevés de notes",
+        "Plan d'études ou proposition de recherche",
+        "Deux lettres de recommandation"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent dans un domaine pertinent.",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Passeport valide",
+        "Diplômes (licence + master) et relevés",
+        "Proposition de recherche détaillée",
+        "Deux lettres de recommandation",
+        "Accord d'un superviseur potentiel"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme de fin d'études secondaires; pour étudiants chinois langue étrangère.",
+      "age_max": null,
+      "other": [
+        "Programme de langue chinoise (汉语言文学)",
+        "Programme préparatoire (预科)"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Division des affaires internationales / Bureau d'admission des étudiants internationaux",
+    "iso_email": "heufao@hrbeu.edu.cn",
+    "admissions_email": "heufao@hrbeu.edu.cn",
+    "wechat": "",
+    "phone": "0086-451-82568266",
+    "address": "145 Nantong Street, Nangang District, Harbin, Heilongjiang 150001, Chine"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "law",
+      "design",
+      "chinese_language",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 16000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 4800,
+    "deadline_typical": "30 juin",
+    "intake_months": [
+      9
+    ],
+    "city": "Harbin",
+    "province": "Heilongjiang",
+    "tags": [
+      "Double First Class",
+      "naval engineering",
+      "nuclear science",
+      "underwater acoustics",
+      "CSC scholarship",
+      "Silk Road scholarship",
+      "Eurasia scholarship",
+      "marine scholarship",
+      "university scholarship",
+      "enterprise scholarship",
+      "bilingual programs",
+      "joint program UK"
+    ]
+  },
+  "confidence": 0.82,
+  "missing_fields": [
+    "frais de scolarité exacts par programme (estimation 16000-30000 CNY/an)",
+    "scores HSK/IELTS/TOEFL minimums précis non confirmés dans les sources",
+    "durée exacte doctorat",
+    "détails des montants de bourses CSC et bourses d'université"
+  ],
+  "notes": "Université de référence en ingénierie navale et sciences nucléaires en Chine. Programmes en chinois et en anglais disponibles dans plusieurs disciplines. Forte présence internationale (1 100+ étudiants). Plusieurs bourses : Gouvernement chinois (CSC), Route de la Soie, Eurasie, Océan, Énergie atomique, bourses d'université et d'entreprise (Buminusa). Programme préparatoire (预科) et programme de langue chinoise (汉语言文学) disponibles. Coût du logement très variable (400-2600 CNY/mois).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Diplômés du secondaire (licence) ou titulaires d'un master (doctorat)",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "transcript",
+      "required": true,
+      "count": null,
+      "who": "Relevés de notes officiels",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "studyheu.hrbeu.edu.cn 在线申请",
+    "platform_url": "https://studyheu.hrbeu.edu.cn/",
+    "steps": [
+      "Créer un compte sur la plateforme en ligne",
+      "Remplir le formulaire de candidature",
+      "Soumettre les documents requis",
+      "Attendre la notification d'admission"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": [
+      "Virement bancaire (ICBC)"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": 4800,
+          "included": "Tarifs mensuels: 400/800/1400/2000/2600 CNY selon le type de chambre"
+        },
+        {
+          "type": "single",
+          "price_cny_year": 9600,
+          "included": ""
+        },
+        {
+          "type": "studio",
+          "price_cny_year": 16800,
+          "included": ""
+        },
+        {
+          "type": "suite",
+          "price_cny_year": 24000,
+          "included": ""
+        },
+        {
+          "type": "deluxe",
+          "price_cny_year": 31200,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "中国政府奖学金 (Bourse du gouvernement chinois)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via l'ambassade de Chine ou l'université",
+      "apply_via": "ambassade ou université",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "欧亚国家留学生奖学金项目 (Bourse pour étudiants eurasie)",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Réservé aux ressortissants de 13 pays eurasie: Russie, Biélorussie, Ukraine, Géorgie, Arménie, Kirghizistan, Ouzbékistan, Tadjikistan, Kazakhstan, Turkménistan, Moldavie, Azerbaïdjan, Mongolie",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "丝绸之路奖学金 (Bourse Route de la Soie)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "国际中文教师奖学金 (Bourse pour enseignants de chinois)",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants en langue chinoise ou enseignement du chinois",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "哈尔滨工程大学外国留学生奖学金 (Bourse HEU)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Buminusa – HEU硕士奖学金",
+      "type": "enterprise",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme de master uniquement",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme préparatoire (预科生项目) pour étudiants étrangers avant admission en programme diplômant"
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2",
+      "F"
+    ],
+    "documents_from_university": [
+      "Formulaire JW202 / JW201",
+      "Lettre d'admission (Admission Notice)"
+    ],
+    "instructions": "Appliquer avec l'admission notice et le formulaire JW202 auprès du consulat chinois",
+    "arrival_and_residence_permit": "Faire la résidence permit dans les 30 jours suivant l'arrivée au bureau de sécurité publique local"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Chambre double (double)",
+      "Chambre simple (single)",
+      "Studio",
+      "Suite",
+      "Deluxe"
+    ],
+    "rules": "Réservation via le service du campus; paiement à l'arrivée",
+    "international_office": "Service des échanges internationaux et coopération, 145 Nantong Street, Nangang District, Harbin. Tél: 0086-451-82568266",
+    "orientation": null,
+    "english_support": null,
+    "clubs": null
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Eurasie (13 pays)",
+      "notes": "Bourse spéciale du Ministère de l'Éducation réservé aux étudiants de Russie, Biélorussie, Ukraine, Géorgie, Arménie, Kirghizistan, Ouzbékistan, Tadjikistan, Kazakhstan, Turkménistan, Moldavie, Azerbaïdjan, Mongolie"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "harbin-engineering-university",
+  "scraped_at": "2026-08-23T14:51:18.514Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/",
+      "title": "哈尔滨工程大学留学生招生网",
+      "chars": 1721
+    },
+    {
+      "url": "http://studyheu.hrbeu.edu.cn/",
+      "title": "哈尔滨工程大学留学生招生网",
+      "chars": 1721
+    },
+    {
+      "url": "https://english.hrbeu.edu.cn/",
+      "title": "Harbin Engineering University",
+      "chars": 6792
+    },
+    {
+      "url": "https://www.hrbeu.edu.cn/",
+      "title": "哈尔滨工程大学",
+      "chars": 3842
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/jxj1/gjzwjsjxj.htm",
+      "title": "国际中文教师奖学金-哈尔滨工程大学留学生招生网",
+      "chars": 610
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/zsxx/bksxm.htm",
+      "title": "本科生项目-哈尔滨工程大学留学生招生网",
+      "chars": 3533
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/zsxx/sssxm.htm",
+      "title": "硕士生项目-哈尔滨工程大学留学生招生网",
+      "chars": 3205
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/zsxx/bssxm.htm",
+      "title": "博士生项目-哈尔滨工程大学留学生招生网",
+      "chars": 2537
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/jxj1/zgzfjxj.htm",
+      "title": "中国政府奖学金-哈尔滨工程大学留学生招生网",
+      "chars": 700
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/jxj1/xxjxj.htm",
+      "title": "学校奖学金-哈尔滨工程大学留学生招生网",
+      "chars": 595
+    },
+    {
+      "url": "https://studyheu.hrbeu.edu.cn/jxj1/qyjxj.htm",
+      "title": "企业奖学金-哈尔滨工程大学留学生招生网",
+      "chars": 599
+    },
+    {
+      "url": "https://english.hrbeu.edu.cn/Admission/Undergraduate_Program.htm",
+      "title": "Undergraduate Program-Harbin Engineering University",
+      "chars": 4670
+    }
+  ],
+  "db_row": {
+    "name_zh": "哈尔滨工程大学",
+    "name_en": "Harbin Engineering University",
+    "name_fr": "Université d'ingénierie de Harbin",
+    "slug": "harbin-engineering-university",
+    "city": "Harbin",
+    "province": "Heilongjiang",
+    "country": "Chine",
+    "department": "Division des affaires internationales / Bureau d'admission des étudiants internationaux",
+    "emails": [
+      "heufao@hrbeu.edu.cn",
+      "heufao@hrbeu.edu.cn"
+    ],
+    "phone": "0086-451-82568266",
+    "wechat": null,
+    "website": "https://english.hrbeu.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "law",
+      "design",
+      "chinese_language",
+      "education"
+    ],
+    "required_documents": [
+      "passport",
+      "diploma",
+      "transcript"
+    ],
+    "scholarship_amount": "中国政府奖学金 (Bourse du gouvernement chinois) / 欧亚国家留学生奖学金项目 (Bourse pour étudiants eurasie) / 丝绸之路奖学金 (Bourse Route de la Soie) / 国际中文教师奖学金 (Bourse pour enseignants de chinois) / 哈尔滨工程大学外国留学生奖学金 (Bourse HEU) / Buminusa – HEU硕士奖学金",
+    "scholarship_min": 16000,
+    "scholarship_max": 30000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "tuition_min": 16000,
+    "tuition_max": 30000,
+    "application_deadline": "30 juin"
+  }
+}

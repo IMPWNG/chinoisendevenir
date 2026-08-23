@@ -1,0 +1,795 @@
+{
+  "identity": {
+    "name_en": "Huazhong University of Science and Technology",
+    "name_zh": "华中科技大学",
+    "name_fr": "Université de science et technologie Huazhong",
+    "aliases": [
+      "HUST"
+    ],
+    "website": "https://english.hust.edu.cn/",
+    "international_website": "https://iso.hust.edu.cn/",
+    "application_portal_url": "http://admission.hust.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université de recherche complète sous tutelle directe du Ministère de l'Éducation, participant au projet « 985 » et figurant parmi les premières universités « Double First-Class ». Plus de 2 000 étudiants internationaux de 120 pays, 1 500 en programme de diplôme. Acceptant des étudiants internationaux depuis les années 1960.",
+    "history": "Fondée en 1952, accepte des étudiants internationaux depuis les années 1960. Plus de 15 000 talents internationaux formés originaires de plus de 160 pays. 70e anniversaire célébré en 2023.",
+    "rankings": [
+      "U.S. News 2024 : 100e mondial",
+      "QS 2024 : 275e mondial",
+      "Shanghai Ranking 2024 : 79e mondial",
+      "Top 10 des universités en Chine"
+    ],
+    "strengths": [
+      "4 laboratoires nationaux / centres scientifiques nationaux",
+      "41 écoles, 1 département, 2 instituts, 1 institut conjoint sino-étranger",
+      "10 catégories disciplinaires majeures",
+      "Campus de 1 160 acres (460 hectares) avec 72% de verdure (« Université dans la forêt »)",
+      "Médecine (Tongji Medical College), ingénierie, informatique, optique"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Wuhan",
+      "province": "Hubei",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 3500,
+      "notes": "Allocation bourse Silk Road : 2 500 CNY/mois ; allocation bourses de master varie selon le type"
+    },
+    "campuses": [
+      {
+        "name": "Main Campus (Hongshan)",
+        "city": "Wuhan",
+        "description": "Campus principal de 1 160 acres, 1037 Luoyu Road, Hongshan District"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Software Engineering (Silk Road Scholarship)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse du gouvernement chinois Silk Road ; pays désignés : Russie, Malaisie, Mongolie, Laos, Indonésie, Cambodge, Thaïlande, Bangladesh, Vietnam, Pakistan"
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture (Silk Road Scholarship)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse Silk Road ; mêmes pays désignés"
+    },
+    {
+      "level": "bachelor",
+      "name": "Ingénierie, Sciences, Arts, Économie, Gestion (en chinois)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais : 25 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Littérature, Éducation, Droit (en chinois)",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais : 18 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Médecine (en chinois)",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais : 33 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Clinical Medicine (MBBS)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 6,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais : 40 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Pharmacy (en anglais)",
+      "field": "pharmacy",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais : 35 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Telecommunication Engineering (en anglais)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme en anglais"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (diverses disciplines)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master ICE (Information and Communication Engineering) notamment ; bourses disponibles"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes doctoraux (diverses disciplines)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourses CSC et autres disponibles"
+    },
+    {
+      "level": "language",
+      "name": "Chinese Training Program (programme de langue chinoise)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme d'un semestre (5 mois, mars) ou d'un an ; bourse International Chinese Language Teachers Scholarship"
+    },
+    {
+      "level": "foundation",
+      "name": "HUST-OXFORD Research Internship / Scientific Research Internship",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Stage de recherche ; HUST-Oxford Internship et programme de recherche scientifique"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou preuve de diplomation imminente",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": 16,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible (Chinese Training Program)",
+      "other": [
+        "Test CSCA (China Scholastic Competency Assessment) requis : chinois professionnel, mathématiques, physique",
+        "Examen médical",
+        "Certificat de non-condamnation",
+        "Relevés de notes du lycée",
+        "Lettre de motivation et vidéo d'auto-présentation (60s)",
+        "Preuve financière ≥ 5 000 USD",
+        "Frais de dossier : 600 CNY / 100 USD non remboursables",
+        "HSK5 ≥180 requis pour Économie, Gestion, Littérature, Éducation, Philosophie, Arts, Droit et École d'Intelligence Artificielle (au lieu de HSK4)"
+      ]
+    },
+    "master": {
+      "academic": "Licence (Bachelor) ou équivalent ; conditions spécifiques selon le programme",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Examen CSCA possible pour certaines bourses",
+        "Lettre de recommandation",
+        "Plan de recherche",
+        "Diplôme et relevés de notes",
+        "Voir guide spécifique 2026 sur le site ISO"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent ; dossier de recherche",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Plan de recherche détaillé",
+        "Accord avec un superviseur HUST recommandé",
+        "Lettres de recommandation",
+        "Publications antérieures valorisées"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires minimum",
+      "age_max": 35,
+      "other": [
+        "HSK3 ≥180 pour programme d'un semestre (bourse Chinese Language Teachers)",
+        "HSKK requis",
+        "Âge 16-35 (jusqu'à 45 pour enseignants en exercice)",
+        "25 ans max pour scholarship bachelor",
+        "Bourse International Chinese Language Teachers Scholarship (CLEC)"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "International Admission and Cooperation Office (IACO), School of International Education, HUST",
+    "iso_email": "iso@hust.edu.cn",
+    "admissions_email": "admission@hust.edu.cn",
+    "wechat": "",
+    "phone": "0086-27-87542457",
+    "address": "1037 Luoyu Road, Hongshan District, Wuhan 430074, P.R.China"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "design",
+      "law",
+      "education",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 80,
+    "age_max_bachelor": 25,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 18000,
+    "tuition_cny_max": 40000,
+    "housing_cny_year_min": null,
+    "deadline_typical": "15 juin (bachelor général) ; 20 mai (Silk Road 2026) ; 31 octobre (Chinese Teachers Scholarship)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Wuhan",
+    "province": "Hubei",
+    "tags": [
+      "985",
+      "Double First-Class",
+      "CSC Silk Road",
+      "MOFCOM Scholarship",
+      "Chinese University Program",
+      "Bilateral Programs",
+      "Bourse Enseignants Chinois",
+      "Tongji Medical College",
+      "Joint Institute",
+      "Université dans la forêt"
+    ]
+  },
+  "confidence": 0.82,
+  "missing_fields": [
+    "Frais de logement détaillés (CNY/an)",
+    "Age max master/PhD exact",
+    "Min GPA bachelor/master/PhD",
+    "Détails des frais master/PhD",
+    "Montants exacts des bourses universitaires HUST (hors CSC)"
+  ],
+  "notes": "HUST propose une large offre en anglais et chinois. Sources : 2026 Application Guide for International Undergraduate Students, 2026 Silk Road Scholarship, International Chinese Language Teachers Scholarship 2025, site ISO et site principal english.hust.edu.cn. Frais de bachelor varient de 18 000 à 40 000 CNY/an selon discipline et langue. Master ICE (Information & Communication Engineering) confirmé. Plusieurs types de bourses : CSC (incluant Silk Road), MOFCOM, Chinese University Program (CUP), Bilateral Programs, International Chinese Language Teachers Scholarship. Contacts vérifiés du Bureau IACO.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photocopie du passeport ordinaire valide (expiration après le 15 octobre 2027). Résidents en Chine: joindre visa/residence permit."
+    },
+    {
+      "type": "high_school_diploma",
+      "required": true,
+      "count": 1,
+      "who": "Candidats bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Diplôme de fin d'études secondaires ou preuve de graduation imminente."
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": 1,
+      "who": "Candidats bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Relevés de notes du lycée. Si en langue tierce, traduction notariée en chinois ou anglais."
+    },
+    {
+      "type": "csca_exam",
+      "required": true,
+      "count": 1,
+      "who": "Candidats bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Examen China Scholastic Competency Assessment (CSC) - chinois professionnel, maths, physique pour les filières ingénierie."
+    },
+    {
+      "type": "personal_statement",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Présentation personnelle, motivation pour étudier à HUST."
+    },
+    {
+      "type": "video_introduction",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Vidéo de présentation en chinois ou anglais, max 60 secondes."
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK4 ≥180 (Sciences, Ingénierie, Médecine) ou HSK5 ≥180 (Économie, Gestion, Littérature, Éducation, Philosophie, Arts, Droit, IA). TOEFL ≥80 ou IELTS ≥5.5 pour anglais. Exempté si instruction précédente en chinois/anglais."
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire d'examen médical pour étrangers."
+    },
+    {
+      "type": "non_criminal_record",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certificat de non-condamnation délivré par les autorités policières."
+    },
+    {
+      "type": "financial_proof",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevé bancaire/attestation financière ≥ 5 000 USD."
+    },
+    {
+      "type": "guardian_authorization",
+      "required": false,
+      "count": 1,
+      "who": "Candidats < 18 ans",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Lettre d'autorisation du tuteur légal en Chine."
+    },
+    {
+      "type": "art_portfolio",
+      "required": false,
+      "count": 5,
+      "who": "Candidats architecture/design",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Au moins 5 œuvres personnelles pour les majeures d'architecture et design."
+    }
+  ],
+  "application": {
+    "platform_name": "HUST Online Application System",
+    "platform_url": "https://admission.hust.edu.cn/",
+    "steps": [
+      "Créer un compte sur admission.hust.edu.cn",
+      "Choisir le programme et remplir les informations personnelles",
+      "Télécharger les documents académiques et soumettre",
+      "Payer les frais de candidature sous 15 jours",
+      "Recevoir un avis d'entretien si applicable, passer l'entretien",
+      "Après pré-admission, télécharger les documents non-académiques et finaliser",
+      "Attendre les résultats finaux d'admission"
+    ],
+    "opens_at": "2025-10-15",
+    "deadline": "2026-06-15",
+    "results_at": "2026-06",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": 600,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "UnionPay",
+      "Alipay",
+      "WeChat Pay",
+      "VISA",
+      "MasterCard"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": 18000,
+        "max": 40000
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": 800,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship - Silk Road Program",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": 2500,
+      "conditions": "Candidats des pays désignés (Russie, Malaisie, Mongolie, Laos, Indonésie, Cambodge, Thaïlande, Bangladesh, Vietnam, Pakistan); HSK4 ≥180; < 25 ans; diplôme lycée",
+      "apply_via": "university",
+      "deadline": "2026-05-20",
+      "renewal": "Renouvelable annuellement selon performance"
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": 2500,
+      "conditions": "HSK3 ≥180 + HSKK pour programme 1 semestre (5 mois dès mars 2025); âge 16-35 (45 pour enseignants en poste)",
+      "apply_via": "chinese.cn",
+      "deadline": "2024-10-31",
+      "renewal": "Non renouvelé (programme court)"
+    },
+    {
+      "name": "Chinese University Program (CUP)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Voir site HUST pour détails",
+      "apply_via": "university",
+      "deadline": null,
+      "renewal": ""
+    },
+    {
+      "name": "Bilateral Programs (BP)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Via ambassades de Chine",
+      "apply_via": "embassy",
+      "deadline": null,
+      "renewal": ""
+    },
+    {
+      "name": "MOFCOM Scholarship",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Voir site HUST",
+      "apply_via": "university",
+      "deadline": null,
+      "renewal": ""
+    },
+    {
+      "name": "Youth of Excellence Scheme of China Program",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Voir site HUST",
+      "apply_via": "university",
+      "deadline": null,
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": 4,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": 5.5,
+    "toefl_min": 80,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 semestre (5 mois) ou plus",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "Formulaire JW202"
+    ],
+    "instructions": "Demander un visa étudiant X1 (programme >180 jours) ou X2 (≤180 jours) auprès de l'ambassade de Chine avec Admission Notice, JW202, passeport, formulaire de demande de visa.",
+    "arrival_and_residence_permit": "À l'arrivée, l'université aide pour le permis de résidence dans les 30 jours."
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Résidences sur le campus (chambres doubles)"
+    ],
+    "rules": "Voir règlement HUST",
+    "international_office": "International Admission and Cooperation Office, 1037 Luoyu Road, Hongshan District, Wuhan 430074; Tel: 0086-27-87542457; Email: admission@hust.edu.cn / apply@hust.edu.cn",
+    "orientation": "Voir calendrier académique HUST",
+    "english_support": true,
+    "clubs": "SICA & Activities (Student International Cultural Activities)"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Pays Belt and Road désignés (Silk Road)",
+      "notes": "Russie, Malaisie, Mongolie, Laos, Indonésie, Cambodge, Thaïlande, Bangladesh, Vietnam, Pakistan - bourses du gouvernement chinois disponibles."
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "hust",
+  "scraped_at": "2026-08-23T14:47:19.349Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 11,
+  "sources": [
+    {
+      "url": "https://iso.hust.edu.cn/",
+      "title": "International Student Office, HUST",
+      "chars": 3147
+    },
+    {
+      "url": "https://iso.hust.edu.cn/Contact_Us/Admission___Cooperation_Office.htm",
+      "title": "Admission & Cooperation Office",
+      "chars": 2618
+    },
+    {
+      "url": "https://english.hust.edu.cn/",
+      "title": "Huazhong University of Science and Technology",
+      "chars": 6697
+    },
+    {
+      "url": "https://iso.hust.edu.cn/Scholarships/International_Chinese_Language_Teachers_Scholarshi.htm",
+      "title": "International Chinese Language Teachers Scholarship",
+      "chars": 9427
+    },
+    {
+      "url": "https://iso.hust.edu.cn/info/1194/4986.htm",
+      "title": "2026 Application Guide for Chinese Government Scholarship - Silk Road Program",
+      "chars": 6297
+    },
+    {
+      "url": "https://iso.hust.edu.cn/info/1194/4638.htm",
+      "title": "2026 HUST Application Guide for International Undergraduate Students",
+      "chars": 10150
+    },
+    {
+      "url": "https://iso.hust.edu.cn/Scholarships/Chinese_University_Program_CUP_.htm",
+      "title": "Chinese University Program(CUP)",
+      "chars": 6644
+    },
+    {
+      "url": "https://iso.hust.edu.cn/Scholarships/Bilateral_Programs_BP_.htm",
+      "title": "Bilateral Programs(BP)",
+      "chars": 2897
+    },
+    {
+      "url": "https://iso.hust.edu.cn/Scholarships/YESCP.htm",
+      "title": "Youth of Excellence Scheme of China Program",
+      "chars": 6691
+    },
+    {
+      "url": "https://iso.hust.edu.cn/Chinese_Language/Distinctive_Programs.htm",
+      "title": "Distinctive Programs",
+      "chars": 3360
+    },
+    {
+      "url": "https://iso.hust.edu.cn/About_HUST/International_Education.htm",
+      "title": "International Education",
+      "chars": 5753
+    }
+  ],
+  "db_row": {
+    "name_zh": "华中科技大学",
+    "name_en": "Huazhong University of Science and Technology",
+    "name_fr": "Université de science et technologie Huazhong",
+    "slug": "hust",
+    "city": "Wuhan",
+    "province": "Hubei",
+    "country": "Chine",
+    "department": "International Admission and Cooperation Office (IACO), School of International Education, HUST",
+    "emails": [
+      "iso@hust.edu.cn",
+      "admission@hust.edu.cn"
+    ],
+    "phone": "0086-27-87542457",
+    "wechat": null,
+    "website": "https://iso.hust.edu.cn/",
+    "majors": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "design",
+      "law",
+      "education",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "high_school_diploma",
+      "transcripts",
+      "csca_exam",
+      "personal_statement",
+      "video_introduction",
+      "language_certificate",
+      "physical_examination",
+      "non_criminal_record",
+      "financial_proof"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship - Silk Road Program / International Chinese Language Teachers Scholarship / Chinese University Program (CUP) / Bilateral Programs (BP) / MOFCOM Scholarship / Youth of Excellence Scheme of China Program",
+    "scholarship_min": 18000,
+    "scholarship_max": 40000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 80",
+    "tuition_min": 18000,
+    "tuition_max": 40000,
+    "application_deadline": "15 juin (bachelor général) ; 20 mai (Silk Road 2026) ; 31 octobre (Chinese Teachers Scholarship)"
+  }
+}

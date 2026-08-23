@@ -1,0 +1,802 @@
+{
+  "identity": {
+    "name_en": "Chang'an University",
+    "name_zh": "长安大学",
+    "name_fr": "Université Chang'an",
+    "aliases": [
+      "CHD",
+      "Chang'an University",
+      "长安大学"
+    ],
+    "website": "https://www.chd.edu.cn/",
+    "international_website": "https://en.chd.edu.cn/",
+    "application_portal_url": "https://is.chd.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique chinoise située à Xi'an, spécialisée dans les transports, le génie civil, l'automobile, les sciences de la Terre et la construction routière. L'École d'éducation internationale (fondée en 2006) gère le recrutement et l'administration des étudiants étrangers (licence, master, doctorat, langue chinoise, courts séjours).",
+    "history": "Fondée en 1951 (à l'origine sous d'autres noms), l'université a pris son nom actuel Chang'an en 2000 lors de la fusion de trois établissements. Elle célèbre en 2026 les 70 ans de l'enseignement aux étudiants étrangers.",
+    "rankings": [
+      "Université clé nationale (211 Project)",
+      "Disciplines de transport et génie civil parmi les meilleures de Chine"
+    ],
+    "strengths": [
+      "Transport et génie routier (route, pont, tunnel)",
+      "Génie civil et architecture",
+      "Automobile et véhicules intelligents",
+      "Sciences de la Terre, géologie, géodésie",
+      "Génie mécanique",
+      "Sciences de l'environnement et ressources en eau",
+      "Économie, gestion, logistique"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Xi'an",
+      "province": "Shaanxi",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation Xi'an; bourse CSC/TFSU: 3000 CNY/mois, bourses Xi'an: 2000 CNY/mois, bourse du président: 2000 CNY/mois (10 mois)"
+    },
+    "campuses": [
+      {
+        "name": "Campus Nord (北校区)",
+        "city": "Xi'an",
+        "description": "Adresse: 西安市未央区尚苑路"
+      },
+      {
+        "name": "Campus Sud (南校区)",
+        "city": "Xi'an",
+        "description": "Adresse: 西安市南二环路中段 - Siège de l'École d'éducation internationale"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Génie routier, des ponts et des traversées fluviales (道路桥梁与渡河工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare, école des routes"
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie automobile / Véhicules intelligents (车辆工程/智能车辆工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie civil (土木工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Informatique / Intelligence artificielle (计算机科学与技术/人工智能)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie de l'information électronique / Télécommunications (电子信息工程/通信工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie géologique / Géodésie (地质工程/测绘工程)",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Économie et commerce international / Statistiques économiques",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Administration des affaires / Comptabilité / Gestion logistique",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture / Urbanisme / Architecture du paysage",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Littérature chinoise / Droit / Journalisme",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Génie des transports (交通运输工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare, éligible CSC Type B"
+    },
+    {
+      "level": "master",
+      "name": "Génie mécanique (机械工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Éligible CSC Type B"
+    },
+    {
+      "level": "master",
+      "name": "Informatique (计算机科学与技术)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Éligible CSC Type B"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires (lycée) ou équivalent; fournir relevés de notes authentiques sans échec",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 65,
+      "preparatory_if_insufficient": "Année préparatoire de chinois (1 an) si HSK insuffisant",
+      "other": [
+        "Passeport valide jusqu'au 1er mars 2027 minimum",
+        "Examen physique",
+        "Casier judiciaire vierge",
+        "Plan d'études (800 mots)"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bac+4) avec diplôme et relevés de notes sans échec; preuve de pré-diplôme si en cours",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Année préparatoire de chinois (1 an) pour projets CSC",
+      "other": [
+        "2 lettres de recommandation de professeurs associés",
+        "Lettre d'acceptation d'un superviseur (optionnelle, prioritaire)",
+        "Plan d'études/recherche (800 mots)",
+        "Preuve financière: ≥50000 CNY pour projets autofinancés",
+        "Examen physique",
+        "Casier judiciaire vierge"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent; fournir relevés de notes",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "2 lettres de recommandation",
+        "Plan de recherche",
+        "Accord superviseur"
+      ]
+    },
+    "language": {
+      "academic": "Pas d'exigence académique spécifique",
+      "age_max": 45,
+      "other": [
+        "Âge 16-45 ans pour projets autofinancés",
+        "16-35 ans pour bourses TFSU (45 ans pour enseignants en poste)"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau de recrutement des étudiants internationaux - École d'éducation internationale",
+    "iso_email": "apply@chd.edu.cn",
+    "admissions_email": "apply@chd.edu.cn",
+    "wechat": "留学长大",
+    "phone": "+86-29-82334167 / +86-29-82334270 / +86-29-82335172",
+    "address": "École d'éducation internationale, Université Chang'an, section centrale du 2e périphérique sud, Xi'an, Shaanxi, Chine, 710064"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "design",
+      "arts",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 6,
+    "min_toefl": 80,
+    "age_max_bachelor": null,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 14000,
+    "tuition_cny_max": 21000,
+    "housing_cny_year_min": 7200,
+    "deadline_typical": "31 mai (CSC Type A); 28 février (CSC Type B 1ère session); 15 juin (autofinancé)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "tags": [
+      "211 Project",
+      "transport",
+      "génie civil",
+      "automobile",
+      "géologie",
+      "CSC",
+      "TFSU",
+      "bourse Xi'an Belt and Road",
+      "bourse président",
+      "programmes en anglais",
+      "programmes en chinois",
+      "Institut Confucius aux Maldives"
+    ]
+  },
+  "confidence": 0.85,
+  "missing_fields": [
+    "Classements QS/Shanghai précis",
+    "Frais de subsistance détaillés",
+    "Durée exacte des programmes de licence (4 ans standard)",
+    "Conditions GPA précises",
+    "Liste complète des programmes en anglais (PDF non extrait)"
+  ],
+  "notes": "Université clé nationale (211 Project) spécialisée en transports et génie civil. Frais de scolarité master: 21000 CNY/an; logement double: 7200 CNY/an. Programmes de langue chinoise autofinancés: 14000 CNY/an ou 8000 CNY/semestre. Frais de dossier: 400-600 CNY (non remboursables). Bourses disponibles: CSC (Type A/B), TFSU, Xi'an 'Belt and Road', Xi'an '5 pays d'Asie centrale', Bourse du Président, Sanqin du Shaanxi. École d'éducation internationale fondée en 2006. 70 ans d'enseignement aux étudiants étrangers célébrés en 2026. Institut Confucius à Villa College (Maldives).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Validité jusqu'au 1er mars 2027 minimum. Page info + visa/résidence actuel si en Chine"
+    },
+    {
+      "type": "diplome_bachelor",
+      "required": true,
+      "count": 1,
+      "who": "master",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme + certificat de licence. Étudiants en cours: attestation de pré-diplomation"
+    },
+    {
+      "type": "releves_notes",
+      "required": true,
+      "count": 1,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevés de notes du parcours bachelor, sans échec"
+    },
+    {
+      "type": "certificat_langue",
+      "required": true,
+      "count": 1,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK 5 ≥180 (210 pour Faculté des Lettres) ou TOEFL 80/IELTS 6.0/Duolingo 100"
+    },
+    {
+      "type": "plan_etudes",
+      "required": true,
+      "count": 1,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Plan d'études ou de recherche en chinois/anglais, ~800 mots"
+    },
+    {
+      "type": "examen_medical",
+      "required": true,
+      "count": 1,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire Examen Physique Étranger, validité 6 mois"
+    },
+    {
+      "type": "casier_judiciaire",
+      "required": true,
+      "count": 1,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Délivré dans les 6 derniers mois"
+    },
+    {
+      "type": "lettres_recommandation",
+      "required": true,
+      "count": 2,
+      "who": "master/phd",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Deux lettres de professeurs associés (含) ou supérieur"
+    },
+    {
+      "type": "attestation_encadrant",
+      "required": false,
+      "count": 1,
+      "who": "master",
+      "applies_to": [
+        "master"
+      ],
+      "notes": "Lettre d'acceptation du directeur de thèse (non obligatoire, priorité à égalité)"
+    },
+    {
+      "type": "garantie_financiere",
+      "required": true,
+      "count": 1,
+      "who": "autofinancement",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Épargne ≥50 000 CNY ou équivalent en devises"
+    }
+  ],
+  "application": {
+    "platform_name": "Plateforme de candidature étudiants internationaux de l'Université Chang'an",
+    "platform_url": "https://is.chd.edu.cn/",
+    "steps": [
+      "Créer un compte sur la plateforme",
+      "Remplir le formulaire en ligne",
+      "Téléverser les documents en PDF/JPG couleur",
+      "Payer les frais de candidature en ligne",
+      "Suivre la notification par e-mail"
+    ],
+    "opens_at": "",
+    "deadline": "Variable selon programme: CSC Type A 31/05/2026, Type B lot 1 28/02/2026, lot 2 31/03/2026, TFSU 15/05/2026, Xi'an 'Asie centrale' 31/03/2026, 'Belt and Road' 31/05/2026, Bourse du Président 31/05/2026, Autofinancement 15/06/2026",
+    "results_at": "",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 400,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "en_ligne"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": 21000,
+        "max": 21000
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": 14000,
+        "max": 14000
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": 800,
+    "other_fees": [
+      {
+        "name": "examen_medical",
+        "amount_cny": null,
+        "notes": "À payer après arrivée"
+      },
+      {
+        "name": "frais_dossier_CSC_TFSU",
+        "amount_cny": 600,
+        "notes": "Non remboursable"
+      },
+      {
+        "name": "frais_dossier_autres",
+        "amount_cny": 400,
+        "notes": "Non remboursable"
+      }
+    ],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": 7200,
+          "included": "Logement double sur campus"
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": true
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": "Bourse couvre 2000-3000 CNY/mois selon programme"
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du Gouvernement chinois (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "living"
+      ],
+      "stipend_cny_month": 3000,
+      "conditions": "Type A via ambassade, Type B via université (code 10710). Âge ≤35 ans pour master",
+      "apply_via": "ambassade_ou_universite",
+      "deadline": "Type A 31/05/2026, Type B lot 1 28/02/2026, lot 2 31/03/2026",
+      "renewal": "Réévaluation annuelle"
+    },
+    {
+      "name": "Bourse Internationale Professeur de Chinois (TFSU)",
+      "type": "institutional",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "living"
+      ],
+      "stipend_cny_month": 3000,
+      "conditions": "Spécialité: Éducation chinoise internationale uniquement. HSK5 ≥210 + HSKK intermédiaire ≥60",
+      "apply_via": "university",
+      "deadline": "15/05/2026 (sept), 15/09/2026 (déc), 31/10/2026 (mars 2027)",
+      "renewal": "Annuelle"
+    },
+    {
+      "name": "Bourse Xi'an 'Cinq pays d'Asie centrale'",
+      "type": "municipal",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "medical_exam",
+        "residence_permit",
+        "living"
+      ],
+      "stipend_cny_month": 2000,
+      "conditions": "Réservé aux étudiants des 5 pays d'Asie centrale",
+      "apply_via": "university",
+      "deadline": "31/03/2026",
+      "renewal": "Annuelle"
+    },
+    {
+      "name": "Bourse Xi'an 'Belt and Road'",
+      "type": "municipal",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "living"
+      ],
+      "stipend_cny_month": 2000,
+      "conditions": "Allocation uniquement la 1ère année (10 mois)",
+      "apply_via": "university",
+      "deadline": "31/05/2026",
+      "renewal": "Non - 1ère année seulement"
+    },
+    {
+      "name": "Bourse du Président de l'Université Chang'an",
+      "type": "institutional",
+      "coverage": "partial",
+      "covers": [
+        "housing",
+        "living"
+      ],
+      "stipend_cny_month": 2000,
+      "conditions": "Logement gratuit uniquement sur campus Nord. Allocation 10 mois la 1ère année",
+      "apply_via": "university",
+      "deadline": "31/05/2026",
+      "renewal": "Non - 1ère année seulement"
+    },
+    {
+      "name": "Bourse Sanqin du Shaanxi",
+      "type": "provincial",
+      "coverage": "partial",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants en cours, mérite académique",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Annuelle"
+    },
+    {
+      "name": "Bourse Excellent Étudiant Étranger",
+      "type": "institutional",
+      "coverage": "partial",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants en cours, mérite académique",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Annuelle"
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": 5,
+    "hsk_phd": null,
+    "ielts_min": 6,
+    "toefl_min": 80,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "lettre_admission",
+      "formulaire_examen_physique_JW202",
+      "visa_application"
+    ],
+    "instructions": "Titulaires de visa X1/X2 non acceptés pour certains programmes TFSU. Passeport valide jusqu'au 1er mars 2027 minimum",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours après arrivée. Bourse 'Asie centrale' couvre les frais de permis"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "chambre_double_sur_campus",
+      "logement_exterieur_autorise"
+    ],
+    "rules": "Logement sur campus Nord gratuit pour Bourse du Président. Allocation 700 CNY/mois pour logement extérieur (TFSU)",
+    "international_office": "Bureau des étudiants internationaux: 029-82334167 / 029-82334270 / 029-82335172, apply@chd.edu.cn",
+    "orientation": "",
+    "english_support": true,
+    "clubs": "Compétitions culturelles (danse du lion/dragon), excursions, activités d'échange sino-étrangers"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Asie centrale (5 pays)",
+      "notes": "Bourse spéciale Xi'an couvrant frais complets + 2000 CNY/mois"
+    },
+    {
+      "region_or_country": "Pays 'Belt and Road'",
+      "notes": "Bourse Xi'an couvrant tuition + allocation 1ère année"
+    },
+    {
+      "region_or_country": "Maldives",
+      "notes": "Centre Confucius Villa College (clc@villacollege.edu.mv) peut fournir lettre de recommandation pour TFSU"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "changan-university",
+  "scraped_at": "2026-08-23T14:44:17.200Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 11,
+  "sources": [
+    {
+      "url": "https://ies.chd.edu.cn/",
+      "title": "长安大学国际教育学院",
+      "chars": 1843
+    },
+    {
+      "url": "http://ies.chd.edu.cn/",
+      "title": "长安大学国际教育学院",
+      "chars": 1843
+    },
+    {
+      "url": "https://en.chd.edu.cn/",
+      "title": "Chang'an University",
+      "chars": 4089
+    },
+    {
+      "url": "https://www.chd.edu.cn/",
+      "title": "长安大学",
+      "chars": 8053
+    },
+    {
+      "url": "https://ies.chd.edu.cn/2025/1201/c8839a257495/page.htm",
+      "title": "2026年长安大学国际学生硕士招生简章",
+      "chars": 4919
+    },
+    {
+      "url": "https://ies.chd.edu.cn/2026/0228/c8839a258742/page.htm",
+      "title": "关于申请2026年国际中文教师奖学金（TFSU）的通知",
+      "chars": 3423
+    },
+    {
+      "url": "https://ies.chd.edu.cn/2025/1203/c8839a257547/page.htm",
+      "title": "2026年长安大学国际学生非学历项目招生简章",
+      "chars": 5803
+    },
+    {
+      "url": "https://ies.chd.edu.cn/8034/list.htm",
+      "title": "招生专业及入学要求",
+      "chars": 2267
+    },
+    {
+      "url": "https://ies.chd.edu.cn/8035/list.htm",
+      "title": "招生简章",
+      "chars": 1104
+    },
+    {
+      "url": "https://ies.chd.edu.cn/2026/0730/c8030a262152/page.htm",
+      "title": "我校国际学子首征全国大学生舞龙舞狮锦标赛斩获留学生组第二名",
+      "chars": 1666
+    },
+    {
+      "url": "https://ies.chd.edu.cn/2026/0525/c8029a260774/page.htm",
+      "title": "关于2026年中国政府奖学金生年度评审与博士研究生奖学金期限延长结果的公示",
+      "chars": 1553
+    }
+  ],
+  "db_row": {
+    "name_zh": "长安大学",
+    "name_en": "Chang'an University",
+    "name_fr": "Université Chang'an",
+    "slug": "changan-university",
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "country": "Chine",
+    "department": "Bureau de recrutement des étudiants internationaux - École d'éducation internationale",
+    "emails": [
+      "apply@chd.edu.cn",
+      "apply@chd.edu.cn"
+    ],
+    "phone": "+86-29-82334167 / +86-29-82334270 / +86-29-82335172",
+    "wechat": "留学长大",
+    "website": "https://en.chd.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "design",
+      "arts",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport",
+      "diplome_bachelor",
+      "releves_notes",
+      "certificat_langue",
+      "plan_etudes",
+      "examen_medical",
+      "casier_judiciaire",
+      "lettres_recommandation",
+      "garantie_financiere"
+    ],
+    "scholarship_amount": "Bourse du Gouvernement chinois (CSC) / Bourse Internationale Professeur de Chinois (TFSU) / Bourse Xi'an 'Cinq pays d'Asie centrale' / Bourse Xi'an 'Belt and Road' / Bourse du Président de l'Université Chang'an / Bourse Sanqin du Shaanxi / Bourse Excellent Étudiant Étranger",
+    "scholarship_min": 14000,
+    "scholarship_max": 21000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 6 / TOEFL 80",
+    "tuition_min": 14000,
+    "tuition_max": 21000,
+    "application_deadline": "31 mai (CSC Type A); 28 février (CSC Type B 1ère session); 15 juin (autofinancé)"
+  }
+}

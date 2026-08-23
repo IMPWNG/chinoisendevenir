@@ -1,0 +1,593 @@
+{
+  "identity": {
+    "name_en": "Chongqing University of Posts and Telecommunications",
+    "name_zh": "重庆邮电大学",
+    "name_fr": "Université des postes et télécommunications de Chongqing",
+    "aliases": [
+      "CQUPT",
+      "重邮"
+    ],
+    "website": "https://www.cqupt.edu.cn",
+    "international_website": "https://international.cqupt.edu.cn",
+    "application_portal_url": "https://www.cqupt.edu.cn"
+  },
+  "general": {
+    "presentation": "Université spécialisée dans les postes, télécommunications et TIC, offrant des programmes de licence, master et doctorat aux étudiants étrangers, principalement en chinois. Filiale conjointe avec l'Université fédérale d'Extrême-Orient.",
+    "history": "Fondée à Chongqing, école clé dans les domaines des TIC, de l'information et de la communication en Chine.",
+    "rankings": [
+      "Classée parmi les universités de niveau 'Projet Double First Class' (disciplines apparentées)"
+    ],
+    "strengths": [
+      "Télécommunications",
+      "TIC",
+      "Intelligence artificielle",
+      "Génie logiciel",
+      "Cybersécurité",
+      "Sciences de l'information",
+      "Microélectronique",
+      "Poste et logistique"
+    ],
+    "teaching_languages": [
+      "zh"
+    ],
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 2500,
+      "notes": "Estimation pour Chongqing, ville de 2e rang"
+    },
+    "campuses": [
+      {
+        "name": "Campus principal de Nan'an",
+        "city": "Chongqing",
+        "description": "Siège et campus principal, situé au 2 Chongwen Road, district de Nan'an"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Communication Engineering (通信工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare, partenariat sino-étranger"
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology (计算机科学与技术)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Software Engineering (软件工程)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Electronic Information Engineering (电子信息工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Information Security (信息安全)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Electronic Science and Technology (电子科学与技术)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Microelectronics (微电子学)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration (工商管理)",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Economics (经济学)",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Law (法学)",
+      "field": "law",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "English (英语)",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Communication and Information System (通信与信息系统)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent",
+      "min_gpa": null,
+      "age_max": 30,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire en langue chinoise (HSK4 requis pour admission dans les programmes académiques)",
+      "other": [
+        "Bonne moralité",
+        "Passeport valide"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bac+4) dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois si HSK insuffisant",
+      "other": [
+        "Deux lettres de recommandation",
+        "Plan d'études"
+      ]
+    },
+    "phd": {
+      "academic": "Master dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": 45,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Proposition de recherche",
+        "Accord d'un superviseur",
+        "Deux lettres de recommandation"
+      ]
+    },
+    "language": {
+      "academic": "Aucune exigence académique spécifique",
+      "age_max": null,
+      "other": [
+        "Programme de langue chinoise: 600 CNY/semaine, 6000 CNY/semestre, 12000 CNY/an"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "International College / 国际学院",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "+86 23-62480019",
+    "address": "重庆市南岸区崇文路2号重庆邮电大学国际学院, 邮编 400065"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "law",
+      "arts",
+      "chinese_language",
+      "sciences",
+      "medicine",
+      "pharmacy"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": 30,
+    "age_max_master": 40,
+    "age_max_phd": 45,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 12000,
+    "tuition_cny_max": 20000,
+    "housing_cny_year_min": null,
+    "deadline_typical": "30 juin (rentrée septembre)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": [
+      "CSC scholarship",
+      "Chongqing Mayor Scholarship",
+      "Huawei Scholarship",
+      "President Scholarship",
+      "specialized ICT",
+      "joint institute Far Eastern Federal University",
+      "Brunel University joint programs",
+      "medium-sized city",
+      "affordable living"
+    ]
+  },
+  "confidence": 0.75,
+  "missing_fields": [
+    "email_admissions",
+    "wechat",
+    "housing_cny_year",
+    "min_gpa",
+    "exact IELTS/TOEFL requirements for some programs"
+  ],
+  "notes": "CQUPT propose majoritairement des programmes en chinois (bachelor 15000 CNY/an, master 20000 CNY/an). Programmes de langue chinoise: 12000 CNY/an. Programmes sino-étrangers avec Brunel University (UK) en Communication Engineering et Software Engineering. Institut conjoint avec l'Université fédérale d'Extrême-Orient (Russie). Bourses disponibles: Bourse du gouvernement chinois (CSC), Bourse du maire de Chongqing, Bourse du président, Bourse Huawei. Aucun programme en anglais clairement identifié sur le portail CUCAS. Coût de la vie à Chongqing modéré (1500-2500 CNY/mois).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "diplome_dernier_niveau",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "releve_notes",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "certificat_physique",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "casier_judiciaire",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "CUCAS / portail admissions CQUPT",
+    "platform_url": "https://www.cqupt.edu.cn",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": 15000,
+        "max": 15000
+      },
+      "master": {
+        "min": 20000,
+        "max": 20000
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": 6000,
+        "max": 12000
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [
+      {
+        "name": "Wushu 1 semestre",
+        "amount": 7000
+      },
+      {
+        "name": "Wushu 1 an",
+        "amount": 14000
+      }
+    ],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chongqing Mayor Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "CQUPT President Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Huawei Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an ou 1 semestre",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [],
+    "instructions": "Consulter le service des entrées-sorties de Chongqing pour permis de résidence.",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "International College, +86 23-62480019",
+    "orientation": "",
+    "english_support": true,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "cqupt",
+  "scraped_at": "2026-08-23T14:38:18.357Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 4,
+  "sources": [
+    {
+      "url": "https://international.cqupt.edu.cn/",
+      "title": "重庆邮电大学国际学院",
+      "chars": 3407
+    },
+    {
+      "url": "https://english.cqupt.edu.cn/",
+      "title": "english2019",
+      "chars": 1628
+    },
+    {
+      "url": "https://www.cqupt.edu.cn/",
+      "title": "重庆邮电大学",
+      "chars": 4961
+    },
+    {
+      "url": "https://www.edu.cn/html/e/ChinaUniversity/programs_110.html",
+      "title": "Chongqing University of Posts and Telecommunications Programs - Apply Online",
+      "chars": 6692
+    }
+  ],
+  "db_row": {
+    "name_zh": "重庆邮电大学",
+    "name_en": "Chongqing University of Posts and Telecommunications",
+    "name_fr": "Université des postes et télécommunications de Chongqing",
+    "slug": "cqupt",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": "International College / 国际学院",
+    "emails": [],
+    "phone": "+86 23-62480019",
+    "wechat": null,
+    "website": "https://international.cqupt.edu.cn",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "law",
+      "arts",
+      "chinese_language",
+      "sciences",
+      "medicine",
+      "pharmacy"
+    ],
+    "required_documents": [
+      "passport",
+      "diplome_dernier_niveau",
+      "releve_notes",
+      "certificat_physique",
+      "casier_judiciaire",
+      "photo"
+    ],
+    "scholarship_amount": "Chongqing Mayor Scholarship / CQUPT President Scholarship / Huawei Scholarship",
+    "scholarship_min": 12000,
+    "scholarship_max": 20000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": 12000,
+    "tuition_max": 20000,
+    "application_deadline": "30 juin (rentrée septembre)"
+  }
+}

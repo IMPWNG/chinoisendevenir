@@ -1,0 +1,796 @@
+{
+  "identity": {
+    "name_en": "Beihang University",
+    "name_zh": "北京航空航天大学",
+    "name_fr": "Université Beihang",
+    "aliases": [
+      "BUAA",
+      "Beihang",
+      "北航"
+    ],
+    "website": "https://www.buaa.edu.cn",
+    "international_website": "https://is.buaa.edu.cn",
+    "application_portal_url": "http://admission.buaa.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université de référence en aéronautique, astronautique et ingénierie de haute technologie, membre du Projet 985 et Double First-Class, située à Pékin avec un campus international à Hangzhou. Plus de 2 200 étudiants internationaux.",
+    "history": "Fondée en 1952 sous le nom de Beijing Institute of Aeronautics, issue de la fusion des départements d'aéronautique de huit grandes universités, dont Tsinghua et Beihang. Pilier de l'industrie aérospatiale chinoise.",
+    "rankings": [
+      "Double First-Class (8 disciplines)",
+      "Projet 985",
+      "Université de référence aérospatiale"
+    ],
+    "strengths": [
+      "aéronautique",
+      "astronautique",
+      "intelligence artificielle",
+      "science des matériaux",
+      "mécanique",
+      "informatique",
+      "systèmes intégrés",
+      "fabrication intelligente"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en",
+      "fr"
+    ],
+    "location": {
+      "city": "Beijing",
+      "province": "Beijing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2500,
+      "max": 5000,
+      "notes": "Estimation Beijing pour étudiant international, hors loyer."
+    },
+    "campuses": [
+      {
+        "name": "Xueyuan Road Campus (学院路校区)",
+        "city": "Beijing",
+        "description": "Campus principal historique"
+      },
+      {
+        "name": "Shahe Campus (沙河校区)",
+        "city": "Beijing",
+        "description": "Campus principal moderne, sciences et ingénierie"
+      },
+      {
+        "name": "Hangzhou International Campus (杭州国际校园)",
+        "city": "Hangzhou",
+        "description": "Campus international en partenariat avec le gouvernement de Hangzhou"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology (英文授课)",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Anglais; CSCA requis"
+    },
+    {
+      "level": "bachelor",
+      "name": "Artificial Intelligence (英文授课)",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Mechanical Engineering (英文授课)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Communication Engineering (英文授课)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Flight Vehicle Design and Engineering (英文授课)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Biomedical Engineering (英文授课)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "30 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "International Economics and Trade (英文授课)",
+      "field": "business",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École d'économie et de management"
+    },
+    {
+      "level": "bachelor",
+      "name": "Mathématiques et Mathématiques Appliquées (L'École Centrale de Pékin, français)",
+      "field": "sciences",
+      "language": "fr",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Enseignement majoritairement en français"
+    },
+    {
+      "level": "master",
+      "name": "Master's Programs (硕士)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master pour étrangers; admission en ligne"
+    },
+    {
+      "level": "phd",
+      "name": "Doctoral Programs (博士)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Program (汉语进修生)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de langue chinoise"
+    },
+    {
+      "level": "exchange",
+      "name": "Visiting Scholar / Exchange Student",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Étudiants en échange"
+    },
+    {
+      "level": "bachelor",
+      "name": "Foundation + Bachelor (预本连读)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Année préparatoire + licence"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (高中毕业证书); réussite au test CSCA (China Scholastic Competency Assessment) avant le 30 mai; transmission du bulletin CSCA via le système d申请",
+      "min_gpa": null,
+      "age_max": 22,
+      "age_min": 18,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 90,
+      "preparatory_if_insufficient": "预本连读 (Foundation + Bachelor) disponible pour renforcer le chinois",
+      "other": [
+        "Test CSCA obligatoire",
+        "Preuve financière: épargne couvrant ≥ 4 ans de frais de scolarité ou revenu annuel ≥ 30 000 CNY",
+        "Certificat médical",
+        "Casier judiciaire",
+        "Acte de naissance + nationalité des parents"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de licence (bachelor) ou équivalent; conformité aux conditions d'admission des étudiants internationaux master de Beihang; soumission via admission.buaa.edu.cn",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Projet de recherche (selon filière)",
+        "Lettres de recommandation",
+        "Preuve linguistique selon langue d'enseignement"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master; conformité aux conditions d'admission du programme doctoral; coordination avec un superviseur",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Plan de recherche doctoral",
+        "Accord d'un directeur de thèse"
+      ]
+    },
+    "language": {
+      "academic": "Pour le programme 汉语进修生; niveau de chinois évalué à l'admission",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "北京航空航天大学国际学院 (International School of Beihang University)",
+    "iso_email": "international@buaa.edu.cn",
+    "admissions_email": "beihangadmission@buaa.edu.cn",
+    "wechat": "IntlBeihang",
+    "phone": "+86-10-82339158",
+    "address": "37 Xueyuan Road, Haidian District, Beijing 100191, China"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "finance",
+      "medicine",
+      "law",
+      "arts",
+      "design",
+      "chinese_language",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 5,
+    "min_ielts": 6,
+    "min_toefl": 90,
+    "age_max_bachelor": 22,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 25000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 10950,
+    "deadline_typical": "30 juin",
+    "intake_months": [
+      9
+    ],
+    "city": "Beijing",
+    "province": "Beijing",
+    "tags": [
+      "Double First-Class",
+      "Project 985",
+      "aerospace",
+      "CSC scholarships",
+      "Beijing",
+      "Hangzhou",
+      "English programs",
+      "French programs (Ecole Centrale de Pékin)",
+      "engineering focus"
+    ]
+  },
+  "confidence": 0.85,
+  "missing_fields": [
+    "details complets des frais de master/doctorat",
+    "scores TOEFL/IELTS précis pour master/doctorat",
+    "fourchette détaillée coût de la vie pour Hangzhou"
+  ],
+  "notes": "Beihang (BUAA) est une université de premier plan en aéronautique et ingénierie. Frais de scolarité bachelor 25 000–30 000 CNY/an. Programmes en anglais, chinois et français (Ecole Centrale de Pékin). Campus international à Hangzhou. Bourses CSC, municipales de Pékin et propres de Beihang disponibles. Examen CSCA requis pour les bachelors. Source 12 (本科招生简章) est la plus détaillée.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Page info passeport, validité après le 01/03/2027. Pour candidats en Chine continentale : visa ou permis de séjour valide"
+    },
+    {
+      "type": "high_school_diploma",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Diplôme de fin d'études secondaires. Les futurs diplômés peuvent fournir une attestation de l'établissement, diplôme officiel requis avant admission définitive et vérification de l'original à l'arrivée"
+    },
+    {
+      "type": "high_school_transcripts",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Relevés de notes complets du secondaire"
+    },
+    {
+      "type": "csca",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Résultat au China Scholastic Competency Assessment, à soumettre avant le 30/05"
+    },
+    {
+      "type": "language_proof",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Chinois : HSK5 ≥180 (validité 2 ans). Anglais : IELTS ≥6.0, TOEFL ≥90 ou preuve d'études secondaires en anglais"
+    },
+    {
+      "type": "physical_exam",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire d'examen médical étranger et bilan sanguin, validité 6 mois, rempli en chinois/anglais, signé et tamponné"
+    },
+    {
+      "type": "financial_guarantee_letter",
+      "required": true,
+      "count": 1,
+      "who": "garant",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Lettre de garantie du garant financier"
+    },
+    {
+      "type": "financial_proof",
+      "required": true,
+      "count": 1,
+      "who": "garant",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Justificatif de capacité financière : épargne ≥4 ans de frais de scolarité OU revenu annuel ≥30 000 CNY"
+    },
+    {
+      "type": "birth_certificate",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Acte de naissance du demandeur"
+    },
+    {
+      "type": "parents_nationality_proof",
+      "required": true,
+      "count": 2,
+      "who": "parents",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Preuve de nationalité des deux parents au moment de la naissance (passeport, pièce d'identité, résidence permanente, etc.)"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire délivré par les autorités locales, validité 6 mois. Candidats en Chine : certificat de l'administration de sortie-entrée"
+    },
+    {
+      "type": "integrity_commitment",
+      "required": true,
+      "count": 1,
+      "who": "demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Engagement d'intégrité sur l'authenticité des documents"
+    },
+    {
+      "type": "guardian_notarized",
+      "required": false,
+      "count": 1,
+      "who": "tuteur",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Si moins de 18 ans au 01/09/2026 : acte notarié de garantie par un tuteur résidant à Pékin/Hangzhou"
+    }
+  ],
+  "application": {
+    "platform_name": "Système de candidature en ligne pour étudiants internationaux de Beihang",
+    "platform_url": "http://admission.buaa.edu.cn/",
+    "steps": [
+      "Créer un compte sur le système de candidature en ligne avec un email personnel (non modifiable)",
+      "Passer le test CSCA et soumettre le résultat via le système avant le 30/05",
+      "Remplir le formulaire en ligne et téléverser les scans des documents requis",
+      "Payer les frais de dossier et téléverser la preuve de paiement",
+      "Soumettre officiellement la candidature",
+      "Suivre le statut sur la plateforme et via email"
+    ],
+    "opens_at": "2025-11-01",
+    "deadline": "2026-06-30",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": 400,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "online"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": 25000,
+        "max": 30000
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": 800,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": 10950,
+          "included": "Beijing Xueyuan Road campus, 30 CNY/bed/day"
+        },
+        {
+          "type": "double",
+          "price_cny_year": 2500,
+          "included": "Hangzhou International Campus, 2000-2500 CNY/year"
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du gouvernement chinois - Programme bilatéral (Type A)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Réservé aux programmes en chinois ; candidater via le service des bourses du pays d'origine ; boursier pour programmes en chinois",
+      "apply_via": "embassy",
+      "deadline": "",
+      "renewal": "Évaluation annuelle requise"
+    },
+    {
+      "name": "Bourse 'Youcai' (Excellent) de Beihang pour nouveaux étudiants en bachelor",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellent dossier au lycée, excellents résultats à l'examen d'admission, recommandation de l'école ; priorité aux talents/brevets/honneurs connexes ou awards artistiques/sportifs provinciaux+",
+      "apply_via": "university",
+      "deadline": "2026-05-30",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse spéciale de coopération Beihang pour étudiants autofinancés",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellent dossier ; recommandation par un organisme partenaire de Beihang",
+      "apply_via": "university",
+      "deadline": "2026-05-30",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse du gouvernement municipal de Pékin pour étudiants étrangers (nouveau campus Pékin)",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellents résultats académiques et d'admission ; limitée aux programmes du campus de Pékin",
+      "apply_via": "university",
+      "deadline": "2026-05-30",
+      "renewal": "Annuelle"
+    },
+    {
+      "name": "Bourse Beihang pour étudiants autofinancés (nouveaux étudiants)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellents résultats académiques et d'admission ; couvre 100/80/50/20% des frais de scolarité",
+      "apply_via": "university",
+      "deadline": "2026-05-30",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": "5 (≥180/300, validité 2 ans)",
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": "6.0 (programmes en anglais)",
+    "toefl_min": "90 (programmes en anglais)",
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme Pré-bachelor (préparatoire avant licence en 1 an)"
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Formulaire JW202",
+      "Lettre d'admission",
+      "VISA JW201 pour boursiers CSC"
+    ],
+    "instructions": "Voir la rubrique 'Visa et résidence' du Collège international",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Chambre double campus Xueyuan Road (Pékin)",
+      "Chambre double Campus international de Hangzhou",
+      "Réservation requise après admission officielle"
+    ],
+    "rules": "Réservation de logement requise à l'avance ; frais d'eau/électricité non inclus",
+    "international_office": "Collège international de Beihang, 37 Xueyuan Road, Haidian, Beijing 100191. Tél : +86-10-82339158 / 82339331 / 82316488. Email : undergraduate@buaa.edu.cn ; WeChat : IntlBeihang",
+    "orientation": "",
+    "english_support": true,
+    "clubs": "Festival international de la culture, associations étudiantes internationales, clubs de robotique et autres"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "beihang-university",
+  "scraped_at": "2026-08-23T14:52:03.217Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://is.buaa.edu.cn/",
+      "title": "北京航空航天大学国际学院",
+      "chars": 1555
+    },
+    {
+      "url": "http://is.buaa.edu.cn/",
+      "title": "北京航空航天大学国际学院",
+      "chars": 1555
+    },
+    {
+      "url": "https://ev.buaa.edu.cn/",
+      "title": "Beihang University",
+      "chars": 10775
+    },
+    {
+      "url": "https://www.buaa.edu.cn/",
+      "title": "北京航空航天大学",
+      "chars": 3678
+    },
+    {
+      "url": "https://is.buaa.edu.cn/info/1003/3065.htm",
+      "title": "关于2026年度北京来华留学生政府奖学金、北航外国留学生奖学金“自费在校生奖学金”申请及“专项合作奖学金”年度评审的通知-北京航空航天大学国际学院",
+      "chars": 1094
+    },
+    {
+      "url": "https://is.buaa.edu.cn/info/1003/3063.htm",
+      "title": "2026年北京来华留学生政府奖学金、北京航空航天大学自费外国留学生奖学金申请通知（研究生新生）-北京航空航天大学国际学院",
+      "chars": 1260
+    },
+    {
+      "url": "http://admission.buaa.edu.cn/",
+      "title": "北京航空航天大学",
+      "chars": 311
+    },
+    {
+      "url": "https://is.buaa.edu.cn/lxsq.htm",
+      "title": "留学申请-北京航空航天大学国际学院",
+      "chars": 611
+    },
+    {
+      "url": "https://is.buaa.edu.cn/jxj/zgzfjxj_zyjxj.htm",
+      "title": "中国政府来华留学卓越奖学金项目-北京航空航天大学国际学院",
+      "chars": 699
+    },
+    {
+      "url": "https://is.buaa.edu.cn/jxj/bjswglxsjxj.htm",
+      "title": "北京市外国留学生奖学金-北京航空航天大学国际学院",
+      "chars": 730
+    },
+    {
+      "url": "https://is.buaa.edu.cn/jxj/bjhkhtdxwglxsjxj.htm",
+      "title": "北京航空航天大学外国留学生奖学金-北京航空航天大学国际学院",
+      "chars": 801
+    },
+    {
+      "url": "https://is.buaa.edu.cn/lxsq/bks1.htm",
+      "title": "本科生-北京航空航天大学国际学院",
+      "chars": 8908
+    }
+  ],
+  "db_row": {
+    "name_zh": "北京航空航天大学",
+    "name_en": "Beihang University",
+    "name_fr": "Université Beihang",
+    "slug": "beihang-university",
+    "city": "Beijing",
+    "province": "Beijing",
+    "country": "Chine",
+    "department": "北京航空航天大学国际学院 (International School of Beihang University)",
+    "emails": [
+      "international@buaa.edu.cn",
+      "beihangadmission@buaa.edu.cn"
+    ],
+    "phone": "+86-10-82339158",
+    "wechat": "IntlBeihang",
+    "website": "https://is.buaa.edu.cn",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "finance",
+      "medicine",
+      "law",
+      "arts",
+      "design",
+      "chinese_language",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "high_school_diploma",
+      "high_school_transcripts",
+      "csca",
+      "language_proof",
+      "physical_exam",
+      "financial_guarantee_letter",
+      "financial_proof",
+      "birth_certificate",
+      "parents_nationality_proof",
+      "no_criminal_record",
+      "integrity_commitment"
+    ],
+    "scholarship_amount": "Bourse du gouvernement chinois - Programme bilatéral (Type A) / Bourse 'Youcai' (Excellent) de Beihang pour nouveaux étudiants en bachelor / Bourse spéciale de coopération Beihang pour étudiants autofinancés / Bourse du gouvernement municipal de Pékin pour étudiants étrangers (nouveau campus Pékin) / Bourse Beihang pour étudiants autofinancés (nouveaux étudiants)",
+    "scholarship_min": 25000,
+    "scholarship_max": 30000,
+    "min_hsk_level": 5,
+    "language_requirements": "HSK 5+ / IELTS 6 / TOEFL 90",
+    "tuition_min": 25000,
+    "tuition_max": 30000,
+    "application_deadline": "30 juin"
+  }
+}

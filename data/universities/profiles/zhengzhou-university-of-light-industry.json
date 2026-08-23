@@ -1,0 +1,196 @@
+{
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "International Education College (IEC), Bldg.2, No.5 Dongfeng Rd., Zhengzhou, Henan. Tél: 86-371-86601718",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "notes": "partial: Unexpected non-whitespace character after JSON at position 4171 (line 1 column 4172)",
+  "missing_fields": [],
+  "confidence": 0.35,
+  "scan_status": "ok",
+  "slug": "zhengzhou-university-of-light-industry",
+  "scraped_at": "2026-08-23T14:56:08.795Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 8,
+  "sources": [
+    {
+      "url": "https://www.zzuli.edu.cn/",
+      "title": "郑州轻工业大学欢迎您",
+      "chars": 2959
+    },
+    {
+      "url": "http://www.zzuli.edu.cn/_css/error/error.css",
+      "title": null,
+      "chars": 5700
+    },
+    {
+      "url": "http://www.zzuli.edu.cn/_js/themes/default/easyui.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "http://www.zzuli.edu.cn/_js/themes/icon.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/lxsjy/list.htm",
+      "title": "留学申请 Application",
+      "chars": 2365
+    },
+    {
+      "url": "https://www.zzuli.edu.cn/277/list.htm",
+      "title": "本科生教育",
+      "chars": 2504
+    },
+    {
+      "url": "https://www.zzuli.edu.cn/219/list.htm",
+      "title": "招生信息",
+      "chars": 1578
+    },
+    {
+      "url": "https://www.zzuli.edu.cn/220/list.htm",
+      "title": "招生信息",
+      "chars": 1578
+    }
+  ],
+  "db_row": {
+    "name_zh": "郑州轻工业大学",
+    "name_en": "Zhengzhou University of Light Industry",
+    "name_fr": "Université d'industrie légère de Zhengzhou",
+    "slug": "zhengzhou-university-of-light-industry",
+    "city": "Zhengzhou",
+    "province": "Henan",
+    "country": "Chine",
+    "department": null,
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://sie.zzuli.edu.cn/",
+    "majors": [],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

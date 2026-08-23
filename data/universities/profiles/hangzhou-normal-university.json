@@ -1,0 +1,454 @@
+{
+  "identity": {
+    "name_en": "Hangzhou Normal University",
+    "name_zh": "杭州师范大学",
+    "name_fr": "Université normale de Hangzhou",
+    "aliases": [
+      "HZNU"
+    ],
+    "website": "https://www.hznu.edu.cn/",
+    "international_website": "https://english.hznu.edu.cn/",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université publique complète fondée en 1908 (110+ ans d'histoire). Discipline: arts, sciences, humanités, éducation, musique, ingénierie, IT, commerce, droit, médecine et soins infirmiers.",
+    "history": "Fondée en 1908 comme école normale, plus de 110 ans d'histoire.",
+    "rankings": [],
+    "strengths": [
+      "Teacher education",
+      "Comprehensive disciplines",
+      "ESI Top 1% in 16 disciplines"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Hangzhou",
+      "province": "Zhejiang",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Cangqian",
+        "city": "Hangzhou",
+        "description": "Campus principal"
+      },
+      {
+        "name": "Xiasha",
+        "city": "Hangzhou",
+        "description": "Campus secondaire"
+      },
+      {
+        "name": "Yuhuangshan",
+        "city": "Hangzhou",
+        "description": "Campus historique"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (105 programmes undergradués)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "105 programmes undergradués couvrant lettres, sciences, éducation, musique, ingénierie, IT, commerce, droit, médecine"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes internationaux de licence",
+      "field": "other",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes internationaux disponibles"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (académique et professionnel)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "Programmes doctoraux (7 programmes PhD)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Admission académique et professionnelle, système '申请-考核'"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires équivalent au gaokao chinois",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "Diplôme de licence reconnu",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "Diplôme de master reconnu",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Examen via le système '申请-考核'"
+      ]
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "Office des étudiants internationaux",
+    "iso_email": "hxw@hznu.edu.cn",
+    "admissions_email": "Lcai@hznu.edu.cn (Master & PhD); hxw@hznu.edu.cn (Bachelor, CIS/CSC)",
+    "wechat": "",
+    "phone": "+86-571-28865012 (général); 0571-28865518 (admission licence); 0571-28865143 (admission master); 0571-28865193",
+    "address": "2318 Yuhangtang Rd, Yuhang, Hangzhou, Zhejiang, 311121, P.R.China"
+  },
+  "matching": {
+    "fields": [
+      "education",
+      "economics",
+      "business",
+      "law",
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "engineering",
+      "computer_science",
+      "sciences",
+      "arts",
+      "design",
+      "music",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": null,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "tags": [
+      "teacher education",
+      "comprehensive university",
+      "ESI Top 1%",
+      "CSC programs",
+      "sino-foreign cooperation (Kharkiv College)"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_limits",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "application_deadline",
+    "scholarship_details",
+    "cost_of_living",
+    "specific_hsk_scores",
+    "specific_program_list_for_internationals"
+  ],
+  "notes": "Sources principales: site officiel HZNU, site international english.hznu.edu.cn, sites d'admission undergrad et graduate. Informations spécifiques sur les conditions d'admission internationales (HSK, IELTS, TOEFL, frais de scolarité, bourses) non détaillées dans les sources fournies. Email 'hxw@hznu.edu.cn' gère programmes Bachelor, CIS et CSC, indiquant que les programmes du Chinese Government Scholarship sont disponibles.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Exigence standard pour étudiants étrangers; détails à confirmer auprès du bureau des admissions internationales."
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "CIS Program",
+      "type": "institutional",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "Contact admission par email: Lcai@hznu.edu.cn (Master & PhD), hxw@hznu.edu.cn (Bachelor, CIS/CSC). Adresse: 2318 Yuhangtang Rd, Yuhang, Hangzhou 311121.",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "hangzhou-normal-university",
+  "scraped_at": "2026-08-23T14:47:48.196Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.hznu.edu.cn/",
+      "title": "杭州师范大学",
+      "chars": 11286
+    },
+    {
+      "url": "http://undergrad.hznu.edu.cn/",
+      "title": "杭州师范大学本科招生网",
+      "chars": 2050
+    },
+    {
+      "url": "http://jwc.hznu.edu.cn/c/2025-11-03/3127901.shtml",
+      "title": "杭州师范大学教务处",
+      "chars": 3160
+    },
+    {
+      "url": "https://english.hznu.edu.cn/",
+      "title": "Hangzhou Normal University",
+      "chars": 2677
+    },
+    {
+      "url": "http://jwc.hznu.edu.cn/",
+      "title": "杭州师范大学教务处",
+      "chars": 4736
+    },
+    {
+      "url": "https://yjs.hznu.edu.cn/yjszs/",
+      "title": "杭州师范大学研究生招生信息网",
+      "chars": 1266
+    },
+    {
+      "url": "https://jxjy.hznu.edu.cn/c/2025-05-07/3081395.shtml",
+      "title": "杭州师范大学继续教育学院",
+      "chars": 1118
+    },
+    {
+      "url": "http://undergrad.hznu.edu.cn/zsjz_4.html",
+      "title": "杭州师范大学本科招生网",
+      "chars": 749
+    },
+    {
+      "url": "http://undergrad.hznu.edu.cn/EnrollmentSelect.aspx",
+      "title": "高考录取查询",
+      "chars": 261
+    }
+  ],
+  "db_row": {
+    "name_zh": "杭州师范大学",
+    "name_en": "Hangzhou Normal University",
+    "name_fr": "Université normale de Hangzhou",
+    "slug": "hangzhou-normal-university",
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "country": "Chine",
+    "department": "Office des étudiants internationaux",
+    "emails": [
+      "hxw@hznu.edu.cn",
+      "Lcai@hznu.edu.cn (Master & PhD); hxw@hznu.edu.cn (Bachelor, CIS/CSC)"
+    ],
+    "phone": "+86-571-28865012 (général); 0571-28865518 (admission licence); 0571-28865143 (admission master); 0571-28865193",
+    "wechat": null,
+    "website": "https://english.hznu.edu.cn/",
+    "majors": [
+      "education",
+      "economics",
+      "business",
+      "law",
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "engineering",
+      "computer_science",
+      "sciences",
+      "arts",
+      "design",
+      "music",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / CIS Program",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

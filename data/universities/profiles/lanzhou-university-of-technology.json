@@ -1,0 +1,669 @@
+{
+  "identity": {
+    "name_en": "Lanzhou University of Technology",
+    "name_zh": "兰州理工大学",
+    "name_fr": "Université de technologie de Lanzhou",
+    "aliases": [
+      "LUT"
+    ],
+    "website": "https://www.lut.edu.cn/",
+    "international_website": "http://international.lut.edu.cn/",
+    "application_portal_url": "https://zhaosheng.lut.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique de technologie située à Lanzhou (Gansu), issue de l'ancienne université technique du Gansu, avec deux campus principaux et un troisième à Jiuquan. Forte tradition en sciences de l'ingénieur, sciences des matériaux, mécanique, chimie et en formations internationales.",
+    "history": "Origines en 1939 (École industrielle de Lanzhou), devenue Université technique du Gansu puis renommée Université de technologie de Lanzhou. Plus de 60 ans d'enseignement en sciences des matériaux et en génie mécanique; premier doctorat en ingénierie à l'ouest de Xi'an en 1998.",
+    "rankings": [],
+    "strengths": [
+      "Sciences des matériaux (materiau processing, laboratoire national)",
+      "Mécanique et hydromécanique",
+      "Génie chimique et pétrolier",
+      "Génie civil et hydraulique",
+      "Informatique et intelligence artificielle",
+      "Énergie nouvelle et stockage"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Lanzhou",
+      "province": "Gansu",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation ville de Lanzhou, hors loyer"
+    },
+    "campuses": [
+      {
+        "name": "Langongping (兰工坪)",
+        "city": "Lanzhou",
+        "description": "287 Langongping Lu, district de Qilihe"
+      },
+      {
+        "name": "Pengjiaping (彭家坪)",
+        "city": "Lanzhou",
+        "description": "36 Pengjiaping Lu, district de Qilihe; siège du bureau international"
+      },
+      {
+        "name": "Jiuquan - Nouvelle énergie",
+        "city": "Jiuquan",
+        "description": "Institut de l'énergie verte et du stockage, district Suzhou"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Génie mécanique / Mécanique et conception",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Filière phare de l'École de génie mécanique (depuis 1939)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Sciences et ingénierie des matériaux",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Discipline phare nationale (Gansu)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Génie civil / Bâtiment et ponts",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Filière nationale de premier rang; 8 spécialités (génie civil, construction intelligente, routes, etc.)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Informatique / Intelligence artificielle",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "6 spécialités: informatique, communic., logiciel, IoT, cybersécurité, data science."
+    },
+    {
+      "level": "bachelor",
+      "name": "Énergie et动力 / Nouvelles énergies",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Hydraulique, mécatronique, hydroélectricité, nouvelles énergies."
+    },
+    {
+      "level": "bachelor",
+      "name": "Chimie / Génie chimique & pétrolier",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Génie des procédés, ingénierie chimique (filières nationales de premier rang)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture / Design industriel / Design visuel",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École d'architecture et de design artistique."
+    },
+    {
+      "level": "bachelor",
+      "name": "Commerce international / Finance / Comptabilité",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Comptabilité et commerce international, spécialités provinciales."
+    },
+    {
+      "level": "bachelor",
+      "name": "Sciences des aliments / Génie biologique / Pharmacie",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École des sciences de la vie et du génie (4 spécialités, dont pharmacie)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Anglais / Japonais / Russe",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École des langues étrangères; russe et japonais notamment."
+    },
+    {
+      "level": "bachelor",
+      "name": "Droit / Propriété intellectuelle",
+      "field": "law",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculté de droit depuis 2014, spécialité PI."
+    },
+    {
+      "level": "master",
+      "name": "Master en sciences (matériaux, méca., chimie, civil, info., etc.)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Plus de 30 programmes de master en sciences et ingénierie; inscriptions publiées sur le portail admissions."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires équivalent au gaokao chinois; dossier de candidature pour étudiants étrangers via le portail international.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": 16,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire / fondation (preparatory year) proposé si HSK insuffisant.",
+      "other": [
+        "Relevé de notes du secondaire",
+        "Passeport valide",
+        "Certificat de naissance",
+        "Formulaire de candidature international",
+        "Lettre de garantie financière"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de bachelor reconnu; candidature via la plateforme d'admission internationale. Programme High-level Graduate CSC disponible.",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Diplôme de licence",
+        "Relevés de notes",
+        "Plan d'études / proposition de recherche",
+        "2 lettres de recommandation",
+        "CV",
+        "Passeport"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master; programme de doctorat international via le bureau international. Premier doctorat à l'ouest de Xi'an (1998) en sciences des matériaux.",
+      "min_gpa": null,
+      "age_max": 45,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Diplôme master",
+        "Proposition de recherche",
+        "Lettres de recommandation",
+        "Accord d'un directeur de thèse",
+        "Publications recommandées"
+      ]
+    },
+    "language": {
+      "academic": "Programme de chinois langue étrangère (étudiants de langue chinoise); bourses International Chinese Language Teachers Scholarship (4 semaines, 1 semestre, 1 an).",
+      "age_max": null,
+      "other": [
+        "Étudiants étrangers sans HSK préalable peuvent rejoindre les cours de chinois",
+        "Bourse du gouvernement chinois du Hanban/Centre Confucius"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau international (international.lut.edu.cn) - Section admission internationale",
+    "iso_email": "study@lut.edu.cn",
+    "admissions_email": "study@lut.edu.cn",
+    "wechat": "",
+    "phone": "+86-0931-2973715 (campus), +86-0931-2757776 (bureau international)",
+    "address": "36 Pengjiaping Lu, district de Qilihe, Lanzhou, Gansu, Chine"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "finance",
+      "arts",
+      "design",
+      "law",
+      "education",
+      "chinese_language",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": 40,
+    "age_max_phd": 45,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 15000,
+    "tuition_cny_max": 25000,
+    "housing_cny_year_min": 4000,
+    "deadline_typical": "Juin (rentrée septembre)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Lanzhou",
+    "province": "Gansu",
+    "tags": [
+      "CSC scholarship",
+      "Silk Road Provincial Scholarship",
+      "President Scholarship",
+      "International Chinese Language Teachers Scholarship",
+      "Fondation - programme préparatoire",
+      "Projet Université de l'OCS",
+      "Laboratoire national"
+    ]
+  },
+  "confidence": 0.75,
+  "missing_fields": [
+    "min_gpa",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "coûts exacts tuition",
+    "durée exacte master en sciences"
+  ],
+  "notes": "Les programmes bachelor listés sur le portail sont largement en chinois. Les montants de frais de scolarité sont des estimations raisonnables pour une université technologique publique; les détails exacts se trouvent sur la page 'Fees' du portail d'admission. Les programmes internationalement enseignés en anglais existent en master (High-level Graduate) et en summer schools (Intelligence artificielle, Énergie nouvelle); le programme doctoral est plus fortement orienté en chinois. L'université héberge un institut Confucius et est active dans l'Organisation des universités de l'OCS.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Page d'identité valide, exigence standard non détaillée dans les sources"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes et diplômes requis, non précisés"
+    },
+    {
+      "type": "physical_examination",
+      "required": false,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "no_criminal_record",
+      "required": false,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "photos",
+      "required": false,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "Site admissions internationales LUT",
+    "platform_url": "https://zhaosheng.lut.edu.cn/",
+    "steps": [
+      "Remplir le formulaire en ligne",
+      "Soumettre les documents",
+      "Paiement des frais de dossier",
+      "Attente de l'admission",
+      "Inscription"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "中国政府奖学金 (CSC Scholarship)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellents résultats académiques",
+      "apply_via": "csc_or_university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "国际中文教师奖学金",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants sinophones",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "甘肃省丝绸之路奖学金",
+      "type": "provincial",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse provinciale du Gansu",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "校长奖学金 (President Scholarship)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse de l'université LUT",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "CSC International Summer School Program",
+      "type": "csc",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme d'été IA et nouvelles technologies énergétiques",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme préparatoire (预科项目) disponible"
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "Visa Application Form (JW202)"
+    ],
+    "instructions": "Service出入境管理 disponible au 2975306",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours après arrivée"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Chambre double sur campus"
+    ],
+    "rules": "",
+    "international_office": "国际合作部 (国际教育学院), study@lut.edu.cn, 2757776, 彭家坪校区 兰州市七里河区彭家坪路36号",
+    "orientation": "",
+    "english_support": null,
+    "clubs": "Conférence sur les arts du patrimoine de la Route de la Soie, camps d'été IA"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Russie et Ouzbékistan",
+      "notes": "Programmes de formation avancée en chinois organisés en 2026"
+    },
+    {
+      "region_or_country": "Egypte et Turquie",
+      "notes": "Promotions des admissions internationales en 2026"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "lanzhou-university-of-technology",
+  "scraped_at": "2026-08-23T14:49:55.398Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 8,
+  "sources": [
+    {
+      "url": "https://www.lut.edu.cn/",
+      "title": "兰州理工大学",
+      "chars": 3919
+    },
+    {
+      "url": "http://international.lut.edu.cn/",
+      "title": "兰州理工大学国际合作部（国际教育学院、港澳台事务办公室）",
+      "chars": 2174
+    },
+    {
+      "url": "https://jiaowu.lut.edu.cn/",
+      "title": "兰州理工大学教务处",
+      "chars": 1586
+    },
+    {
+      "url": "https://zhaosheng.lut.edu.cn/",
+      "title": "招生工作办公室",
+      "chars": 12000
+    },
+    {
+      "url": "https://www.lut.edu.cn/2024/layui/css/layui.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://www.lut.edu.cn/2024/css/swiper.min.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://international.lut.edu.cn/hzyjl/gjhw.htm",
+      "title": "国际会务-兰州理工大学国际合作部（国际教育学院、港澳台事务办公室）",
+      "chars": 895
+    },
+    {
+      "url": "https://international.lut.edu.cn/cglx/sqlc.htm",
+      "title": "申请流程-兰州理工大学国际合作部（国际教育学院、港澳台事务办公室）",
+      "chars": 891
+    }
+  ],
+  "db_row": {
+    "name_zh": "兰州理工大学",
+    "name_en": "Lanzhou University of Technology",
+    "name_fr": "Université de technologie de Lanzhou",
+    "slug": "lanzhou-university-of-technology",
+    "city": "Lanzhou",
+    "province": "Gansu",
+    "country": "Chine",
+    "department": "Bureau international (international.lut.edu.cn) - Section admission internationale",
+    "emails": [
+      "study@lut.edu.cn",
+      "study@lut.edu.cn"
+    ],
+    "phone": "+86-0931-2973715 (campus), +86-0931-2757776 (bureau international)",
+    "wechat": null,
+    "website": "http://international.lut.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "finance",
+      "arts",
+      "design",
+      "law",
+      "education",
+      "chinese_language",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "diploma"
+    ],
+    "scholarship_amount": "中国政府奖学金 (CSC Scholarship) / 国际中文教师奖学金 / 甘肃省丝绸之路奖学金 / 校长奖学金 (President Scholarship) / CSC International Summer School Program",
+    "scholarship_min": 15000,
+    "scholarship_max": 25000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": 15000,
+    "tuition_max": 25000,
+    "application_deadline": "Juin (rentrée septembre)"
+  }
+}

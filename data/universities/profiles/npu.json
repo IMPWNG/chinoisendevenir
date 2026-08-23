@@ -1,0 +1,430 @@
+{
+  "identity": {
+    "name_en": "Northwestern Polytechnical University",
+    "name_zh": "西北工业大学",
+    "name_fr": "Université polytechnique du Nord-Ouest",
+    "aliases": [
+      "NPU",
+      "NWPU"
+    ],
+    "website": "https://www.nwpu.edu.cn/",
+    "international_website": "https://en.nwpu.edu.cn/",
+    "application_portal_url": "https://en.nwpu.edu.cn/EnglishNew/Admission/OnlineApplication.htm"
+  },
+  "general": {
+    "presentation": "Université de recherche membre des projets 985, 211 et Double First Class, spécialisée dans l'aérospatial, les sciences et technologies marines, l'ingénierie et les sciences. Plus de 1300 étudiants internationaux, 61 laboratoires conjoints, 1 institut conjoint NPU-QMUL Engineering School, 1 programme conjoint NPU-Brand University of Applied Sciences, près de 300 partenaires internationaux.",
+    "history": "",
+    "rankings": [
+      "985 Project",
+      "211 Project",
+      "Double First Class"
+    ],
+    "strengths": [
+      "aérospatial",
+      "sciences et technologies marines",
+      "ingénierie",
+      "sciences",
+      "recherche"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Xi'an",
+      "province": "Shaanxi",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Youyi Campus",
+        "city": "Xi'an",
+        "description": "127 West Youyi Road, Beilin District, Xi'an, Shaanxi 710072"
+      },
+      {
+        "name": "Chang'an Campus",
+        "city": "Xi'an",
+        "description": "1 Dongxiang Road, Chang'an District, Xi'an, Shaanxi 710129"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence en ingénierie et sciences",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en chinois et en anglais disponibles"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master en ingénierie et sciences",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en chinois et en anglais disponibles"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat en ingénierie et sciences",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en chinois et en anglais disponibles"
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "Licence ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "Master ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "International College",
+    "iso_email": "admission@nwpu.edu.cn",
+    "admissions_email": "admission@nwpu.edu.cn",
+    "wechat": "",
+    "phone": "+86-29-88494381",
+    "address": "127 YouYi Xilu, Xi'an 710072, Shaanxi, P.R. China"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "sciences",
+      "computer_science",
+      "design",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "tags": [
+      "985",
+      "211",
+      "Double First Class",
+      "aérospatial",
+      "recherche",
+      "programme conjoint NPU-QMUL"
+    ]
+  },
+  "confidence": 0.45,
+  "missing_fields": [
+    "min_gpa",
+    "age_max",
+    "age_min",
+    "hsk_level",
+    "hsk_score_min",
+    "ielts_min",
+    "toefl_min",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "deadline_typical",
+    "cost_of_living_cny_month",
+    "preparatory_if_insufficient",
+    "provincial_scholarship_details"
+  ],
+  "notes": "Sources limitées : pages d'accueil et contacts uniquement. Les exigences détaillées d'admission (HSK, IELTS, TOEFL, frais, bourses) ne sont pas dans les sources fournies. CSC confirmé via annonce de programme CSC-Sponsored 2026 China-Mexico. Bourses universitaires mentionnées (NPU Scholarship).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "NPU Online Application",
+    "platform_url": "https://en.nwpu.edu.cn/International/Admission/Online_Application.htm",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "NPU Scholarship",
+      "type": "university",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "International College, Mr. Liu Meng, Tel:+86-29-88494381, admission@nwpu.edu.cn",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "npu",
+  "scraped_at": "2026-08-23T14:45:37.623Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 10,
+  "sources": [
+    {
+      "url": "https://en.nwpu.edu.cn/",
+      "title": "Northwestern Polytechnical University",
+      "chars": 4010
+    },
+    {
+      "url": "https://www.nwpu.edu.cn/",
+      "title": "西北工业大学",
+      "chars": 1796
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/EnglishNew/index/contactus.htm",
+      "title": "contactus-Northwestern Polytechnical University",
+      "chars": 2409
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/EnglishNew/International/Overview.htm",
+      "title": "Overview-Northwestern Polytechnical University",
+      "chars": 2901
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/img-css-js/bootstrap.min.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/img-css-js/style.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/img-css-js/zmyui.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/img-css-js/zmymedia.css",
+      "title": null,
+      "chars": 8030
+    },
+    {
+      "url": "https://en.nwpu.edu.cn/img-css-js/zmyanimation.css",
+      "title": null,
+      "chars": 2495
+    },
+    {
+      "url": "http://npuinternationalcollege.nwpu.edu.cn/",
+      "title": "国际教育学院",
+      "chars": 1647
+    }
+  ],
+  "db_row": {
+    "name_zh": "西北工业大学",
+    "name_en": "Northwestern Polytechnical University",
+    "name_fr": "Université polytechnique du Nord-Ouest",
+    "slug": "npu",
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "country": "Chine",
+    "department": "International College",
+    "emails": [
+      "admission@nwpu.edu.cn",
+      "admission@nwpu.edu.cn"
+    ],
+    "phone": "+86-29-88494381",
+    "wechat": null,
+    "website": "https://en.nwpu.edu.cn/",
+    "majors": [
+      "engineering",
+      "sciences",
+      "computer_science",
+      "design",
+      "other"
+    ],
+    "required_documents": [],
+    "scholarship_amount": "NPU Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

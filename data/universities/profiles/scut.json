@@ -1,0 +1,445 @@
+{
+  "identity": {
+    "name_en": "South China University of Technology",
+    "name_zh": "华南理工大学",
+    "name_fr": "Université de technologie de Chine du Sud",
+    "aliases": [
+      "SCUT"
+    ],
+    "website": "https://www.scut.edu.cn/",
+    "international_website": "https://www.scut.edu.cn/en/",
+    "application_portal_url": null
+  },
+  "general": {
+    "presentation": "Université de technologie de premier plan située à Guangzhou, reconnue pour son excellence en ingénierie et ses disciplines Double First-Class. Trois disciplines classées dans le top 0,01% mondial ESI, 20 dans le top 1%.",
+    "history": null,
+    "rankings": [
+      "3 disciplines dans le top 0,01% mondial ESI",
+      "20 disciplines dans le top 1% ESI",
+      "Université Double First-Class"
+    ],
+    "strengths": [
+      "Ingénierie",
+      "Ingénierie émergente",
+      "Médecine (développée depuis 2014)",
+      "Innovation et entrepreneuriat",
+      "Médecine + Ingénierie (modèle Medicine + X)"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Guangzhou",
+      "province": "Guangdong",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Wushan Campus",
+        "city": "Guangzhou",
+        "description": "381 Wushan Road, Tianhe District, Guangzhou, 510641"
+      },
+      {
+        "name": "University Town Campus",
+        "city": "Guangzhou",
+        "description": "Guangzhou Higher Education Mega Centre, Panyu District, Guangzhou, 510006"
+      },
+      {
+        "name": "Guangzhou International Campus (GZIC)",
+        "city": "Guangzhou",
+        "description": "777 Xingye Avenue East, Panyu District, Guangzhou, 511442"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de premier cycle (Degree Programs)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes internationaux disponibles via le Guangzhou International Campus"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (Degree Programs)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en ingénierie émergente"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes doctoraux (Degree Programs)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "language",
+      "name": "Programmes non-diplômants (Non-Degree Programs)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inclut Summer School Global d'Ingénierie Émergente"
+    },
+    {
+      "level": "exchange",
+      "name": "Programmes d'échange (CEP, YES)",
+      "field": "other",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Summer School Global d'Ingénierie Émergente (12-25 juillet)"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires requis",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "Diplôme de bachelor requis",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "Diplôme de master requis",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": null,
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "School of International Education (SIE)",
+    "iso_email": "sieinfo@scut.edu.cn",
+    "admissions_email": "sieinfo@scut.edu.cn",
+    "wechat": null,
+    "phone": "+86-20-81182580",
+    "address": "381 Wushan Road, Tianhe District, Guangzhou, 510641"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "sciences",
+      "medicine",
+      "business",
+      "design",
+      "computer_science"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "tags": [
+      "Double First-Class",
+      "Université 985",
+      "Université 211",
+      "Greater Bay Area",
+      "ESI top 1%",
+      "partenariats internationaux (Cambridge, Imperial College London, Université Paris Cité)"
+    ]
+  },
+  "confidence": 0.45,
+  "missing_fields": [
+    "min_gpa",
+    "hsk_level",
+    "hsk_score_min",
+    "ielts_min",
+    "toefl_min",
+    "age_max",
+    "tuition_cny",
+    "housing_cny",
+    "deadline_typical",
+    "has_csc",
+    "has_provincial_scholarship",
+    "durée exacte des programmes",
+    "exigences académiques détaillées"
+  ],
+  "notes": "Sources limitées au site web principal en anglais. Les détails spécifiques sur les frais de scolarité, les scores HSK/IELTS/TOEFL minimum, les dates limites et les exigences GPA ne sont pas disponibles dans les sources fournies. SCUT propose des programmes de bourses (mentionnés sur le site) et collabore avec des universités de premier plan mondial.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "sieinfo@scut.edu.cn, +86-20-81182580",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "scut",
+  "scraped_at": "2026-08-23T14:55:53.037Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.scut.edu.cn/en/",
+      "title": "South China University of Technology",
+      "chars": 11373
+    },
+    {
+      "url": "https://www2.scut.edu.cn/_css/error/error.css",
+      "title": null,
+      "chars": 5700
+    },
+    {
+      "url": "https://www2.scut.edu.cn/_js/themes/default/easyui.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://www2.scut.edu.cn/_js/themes/icon.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/606/list.htm",
+      "title": "Degree Programs",
+      "chars": 2650
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/607/list.htm",
+      "title": "Non-Degree Programs",
+      "chars": 2709
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/595/list.htm",
+      "title": "Admission",
+      "chars": 4964
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/738/list.htm",
+      "title": "Brochure",
+      "chars": 1658
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/608/list.htm",
+      "title": "Scholarship",
+      "chars": 3593
+    }
+  ],
+  "db_row": {
+    "name_zh": "华南理工大学",
+    "name_en": "South China University of Technology",
+    "name_fr": "Université de technologie de Chine du Sud",
+    "slug": "scut",
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "country": "Chine",
+    "department": "School of International Education (SIE)",
+    "emails": [
+      "sieinfo@scut.edu.cn",
+      "sieinfo@scut.edu.cn"
+    ],
+    "phone": "+86-20-81182580",
+    "wechat": null,
+    "website": "https://www.scut.edu.cn/en/",
+    "majors": [
+      "engineering",
+      "sciences",
+      "medicine",
+      "business",
+      "design",
+      "computer_science"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

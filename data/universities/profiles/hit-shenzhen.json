@@ -1,0 +1,529 @@
+{
+  "identity": {
+    "name_en": "Harbin Institute of Technology, Shenzhen",
+    "name_zh": "哈尔滨工业大学（深圳）",
+    "name_fr": "Institut de technologie de Harbin — campus Shenzhen",
+    "aliases": [
+      "HIT-SZ",
+      "HIT Shenzhen",
+      "HITSZ",
+      "哈工大（深圳）"
+    ],
+    "website": "https://www.hitsz.edu.cn/",
+    "international_website": "http://en.hitsz.edu.cn/",
+    "application_portal_url": "https://yzb.hitsz.edu.cn/"
+  },
+  "general": {
+    "presentation": "Campus de l'Institut de technologie de Harbin situé à Shenzhen, formant des talents d'ingénieurs et de chercheurs en sciences et technologies. Approche « 1+1+X » avec compétences en交叉学科, numérique et compétence globale. Plus de 2200 étudiants internationaux de 80+ pays.",
+    "history": "Fondé en 1920 (HIT), campus de Shenzhen créé en tant que校区 de HIT, intégré au réseau C9.",
+    "rankings": [
+      "Membre du projet 985",
+      "Membre du Double First-Class",
+      "Université C9"
+    ],
+    "strengths": [
+      "Ingénierie",
+      "Sciences des matériaux",
+      "Informatique",
+      "Intelligence artificielle",
+      "Robotique",
+      "Sciences spatiales",
+      "Architecture",
+      "Économie et gestion"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Shenzhen",
+      "province": "Guangdong",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2500,
+      "max": 4500,
+      "notes": "Estimation Shenzhen, ville de premier rang"
+    },
+    "campuses": [
+      {
+        "name": "Campus de Shenzhen (University Town)",
+        "city": "Shenzhen",
+        "description": "Situé dans le University Town de Shenzhen, district de Nanshan"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080901, Collège d'informatique"
+    },
+    {
+      "level": "bachelor",
+      "name": "Communication Engineering",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080703, version sino-étrangère disponible"
+    },
+    {
+      "level": "bachelor",
+      "name": "Mechanical Design, Manufacturing and Automation",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080202"
+    },
+    {
+      "level": "bachelor",
+      "name": "Automation",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080801"
+    },
+    {
+      "level": "bachelor",
+      "name": "Electrical Engineering and Automation",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080601"
+    },
+    {
+      "level": "bachelor",
+      "name": "Materials Science and Engineering",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080401"
+    },
+    {
+      "level": "bachelor",
+      "name": "Space Science and Technology",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 070802"
+    },
+    {
+      "level": "bachelor",
+      "name": "Data Science and Big Data Technology",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 080910T"
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 082801"
+    },
+    {
+      "level": "bachelor",
+      "name": "Economics",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 020101"
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 120201K"
+    },
+    {
+      "level": "bachelor",
+      "name": "Digital Media Art",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Code 130508"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent. Admission séparée pour étudiants internationaux avec programmes d'enseignement en anglais.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Programmes enseignés en anglais disponibles pour étudiants internationaux",
+        "Formation séparée avec plans d'études adaptés"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor degree) ou équivalent. Admission via examen unifié ou recommandation免试.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Programmes en anglais disponibles",
+        "Possibilité de硕博连读 (master-PhD intégré)"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent. Admission via申请考核 (candidature-évaluation) ou硕博连读.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Programmes en anglais disponibles",
+        "Possibilité de申请考核 (application-assessment)"
+      ]
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "教务部招生处 (Bureau des admissions)",
+    "iso_email": "ugadmissions@hit.edu.cn",
+    "admissions_email": "yzbsz@hit.edu.cn",
+    "wechat": "",
+    "phone": "0755-26035891 (undergraduate), 0755-86132651 (master), 0755-86560305 (PhD)",
+    "address": "HIT Campus of University Town of Shenzhen, Nanshan District, Shenzhen, Guangdong 518055"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "design",
+      "arts"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd"
+    ],
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": null,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Shenzhen",
+    "province": "Guangdong",
+    "tags": [
+      "C9",
+      "985",
+      "Double First-Class",
+      "English-taught programs",
+      "International students welcome",
+      "Sino-foreign cooperative programs"
+    ]
+  },
+  "confidence": 0.65,
+  "missing_fields": [
+    "min_gpa",
+    "min_ielts",
+    "min_toefl",
+    "min_hsk_level",
+    "age_max",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "deadline_typical",
+    "has_csc",
+    "has_university_scholarship",
+    "has_provincial_scholarship",
+    "chinese_language_program_available"
+  ],
+  "notes": "Sources principales: site officiel HITSZ, portail admissions undergrad et grad, page留学生培养 et国际合作. Informations spécifiques sur scores minimaux (HSK/IELTS/TOEFL), frais de scolarité et bourses non trouvées dans les sources fournies. 2200+ étudiants internationaux de 80+ pays. 80% des enseignants ont expérience internationale. Programmes bachelor/master/PhD en anglais disponibles pour étudiants internationaux.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide requis pour étudiants étrangers (non détaillé dans les sources)."
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "Service international mentionné via la section 国际合作 / 来华留学教育 (campus de Shenzhen). Contact: yzbsz@hit.edu.cn (admissions cycles supérieurs), ugadmissions@hit.edu.cn (admissions 1er cycle). Tél: 0755-26035891, 0755-86132651",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": "Campus situé à Shenzhen, districal University Town (南山区桃源街道). Métro lignes 5 et 7. Environ 2200 étudiants internationaux inscrits issus de plus de 80 pays. Formations bachelor, master et doctorat en anglais disponibles pour étudiants étrangers."
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "hit-shenzhen",
+  "scraped_at": "2026-08-23T14:53:08.174Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 8,
+  "sources": [
+    {
+      "url": "https://www.hitsz.edu.cn/",
+      "title": "哈尔滨工业大学（深圳）",
+      "chars": 4763
+    },
+    {
+      "url": "https://yzb.hitsz.edu.cn/zs",
+      "title": "研究生招生网",
+      "chars": 386
+    },
+    {
+      "url": "https://zsb.hitsz.edu.cn/",
+      "title": "哈尔滨工业大学（深圳）本科招生网",
+      "chars": 698
+    },
+    {
+      "url": "http://en.hitsz.edu.cn/",
+      "title": "英文网",
+      "chars": 1901
+    },
+    {
+      "url": "https://www.hitsz.edu.cn/41/list.htm",
+      "title": "本科生培养",
+      "chars": 1842
+    },
+    {
+      "url": "https://www.hitsz.edu.cn/43/list.htm",
+      "title": "留学生培养",
+      "chars": 1214
+    },
+    {
+      "url": "https://www.hitsz.edu.cn/25/list.htm",
+      "title": "国际合作",
+      "chars": 2001
+    },
+    {
+      "url": "http://www.hitsz.edu.cn/news/2026/0813/c6a18362/page.htm",
+      "title": "张倩、毛俊教授团队揭示MgAgSb热电材料非同素异构物相转变机制",
+      "chars": 3281
+    }
+  ],
+  "db_row": {
+    "name_zh": "哈尔滨工业大学（深圳）",
+    "name_en": "Harbin Institute of Technology, Shenzhen",
+    "name_fr": "Institut de technologie de Harbin — campus Shenzhen",
+    "slug": "hit-shenzhen",
+    "city": "Shenzhen",
+    "province": "Guangdong",
+    "country": "Chine",
+    "department": "教务部招生处 (Bureau des admissions)",
+    "emails": [
+      "ugadmissions@hit.edu.cn",
+      "yzbsz@hit.edu.cn"
+    ],
+    "phone": "0755-26035891 (undergraduate), 0755-86132651 (master), 0755-86560305 (PhD)",
+    "wechat": null,
+    "website": "http://en.hitsz.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "design",
+      "arts"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

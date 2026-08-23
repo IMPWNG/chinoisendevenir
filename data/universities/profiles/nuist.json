@@ -1,0 +1,535 @@
+{
+  "identity": {
+    "name_en": "Nanjing University of Information Science and Technology",
+    "name_zh": "南京信息工程大学",
+    "name_fr": "Université d'information scientifique et technologique de Nanjing",
+    "aliases": [
+      "NUIST"
+    ],
+    "website": "https://www.nuist.edu.cn/",
+    "international_website": "https://en.nuist.edu.cn/",
+    "application_portal_url": "https://gjy.nuist.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique chinoise spécialisée en sciences de l'atmosphère, météorologie et technologies de l'information. Membre du programme Double First-Class. Dispose d'un Centre régional de formation OMM.",
+    "history": "Fondée en 1960 (à l'origine Institut de météorologie de Nanjing). Devenue NUIST en 2004.",
+    "rankings": [
+      "11 disciplines dans le top 1% ESI",
+      "Double First-Class (météorologie)"
+    ],
+    "strengths": [
+      "Sciences atmosphériques et météorologie",
+      "Technologies de l'information",
+      "Ingénierie",
+      "Intelligence artificielle",
+      "Sciences de l'environnement",
+      "Hydrologie et ressources en eau",
+      "Télédétection"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Nanjing",
+      "province": "Jiangsu",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 3500,
+      "notes": "Estimation pour Nanjing, hors loyer"
+    },
+    "campuses": [
+      {
+        "name": "Campus principal (Jiangbei New Area)",
+        "city": "Nanjing",
+        "description": "Campus principal de plus de 2000 mu dans le Jiangbei New Area"
+      },
+      {
+        "name": "Campus Wuxi (Wuxi College)",
+        "city": "Wuxi",
+        "description": "Anciennement Binjiang College, transformé en Wuxi University"
+      },
+      {
+        "name": "Parc industriel Jinniuhu",
+        "city": "Tianchang",
+        "description": "Zone d'intégration industrie-éducation"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (diverses disciplines)",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "70+ programmes de premier cycle disponibles"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence en anglais",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes enseignés en anglais disponibles"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "60+ programmes de troisième cycle"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master en anglais",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes enseignés en anglais disponibles"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Doctorat en sciences atmosphériques et disciplines connexes"
+    },
+    {
+      "level": "language",
+      "name": "Programme préparatoire (langues et propédeutique)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme préparatoire pour étudiants étrangers"
+    },
+    {
+      "level": "foundation",
+      "name": "Programmes courts特色 (特色短期项目)",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": null,
+      "start_months": [
+        3,
+        7,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes courts特色 (été, hiver, culture)"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires (lycée) ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire d'un an disponible",
+      "other": [
+        "Dossier de candidature en ligne",
+        "Passeport valide",
+        "Certificat de diplôme"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor degree) ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Dossier académique",
+        "Lettre de recommandation",
+        "Projet de recherche"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Dossier académique",
+        "Lettres de recommandation",
+        "Plan de recherche",
+        "Accord d'un superviseur"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires",
+      "age_max": null,
+      "other": [
+        "Programme préparatoire HSK"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "College of International Education (国际教育学院)",
+    "iso_email": "cie@nuist.edu.cn",
+    "admissions_email": "cie@nuist.edu.cn",
+    "wechat": "cie-nuist",
+    "phone": "0086-25-58699848",
+    "address": "219 Ningliu Road, Nanjing, Jiangsu Province, P.R.C., 210044"
+  },
+  "matching": {
+    "fields": [
+      "sciences",
+      "engineering",
+      "computer_science",
+      "business",
+      "arts",
+      "chinese_language",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "Juin (rentrée septembre)",
+    "intake_months": [
+      9
+    ],
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "tags": [
+      "Double First-Class",
+      "OMM",
+      "météorologie",
+      "sciences atmosphériques",
+      "IA",
+      "télédétection",
+      "1800+ étudiants internationaux"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "min_gpa",
+    "deadline_typical exact",
+    "specific program names",
+    "duration_years exact"
+  ],
+  "notes": "Sources consultées: site principal NUIST, site du College of International Education (gjy.nuist.edu.cn) en chinois et anglais, Centre régional OMM. Informations spécifiques sur frais, scores HSK/IELTS/TOEFL, GPA minimum et délais exacts non trouvées dans les sources fournies. Recommandation: consulter directement https://gjy.nuist.edu.cn/ pour les détails d'admission. Bourses confirmées: Gouvernement chinois, MOFCOM, NUIST-WMO, NUIST Excellent Freshmen, International Chinese Language Teachers.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "MOFCOM Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "NUIST-WMO Fellowships Education Program",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "NUIST Excellent Freshmen Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "College of International Education, cie@nuist.edu.cn, +86-25-58699848 (admissions)",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "nuist",
+  "scraped_at": "2026-08-23T14:47:17.461Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://en.nuist.edu.cn/",
+      "title": "Nanjing University of Information Science & Technology",
+      "chars": 819
+    },
+    {
+      "url": "https://www.nuist.edu.cn/",
+      "title": "南京信息工程大学",
+      "chars": 7961
+    },
+    {
+      "url": "https://gjy.nuist.edu.cn/_upload/tpl/01/88/392/template392/style.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://gjy.nuist.edu.cn/_upload/tpl/01/88/392/template392/carousel.css",
+      "title": null,
+      "chars": 1521
+    },
+    {
+      "url": "https://gjy.nuist.edu.cn/_upload/tpl/01/88/392/template392/slick/slick.css",
+      "title": null,
+      "chars": 1599
+    },
+    {
+      "url": "https://gjy.nuist.edu.cn/_upload/tpl/01/88/392/template392/slick/slick-theme.css",
+      "title": null,
+      "chars": 2323
+    },
+    {
+      "url": "https://gjy.nuist.edu.cn/main.htm",
+      "title": "南京信息工程大学-国际教育学院",
+      "chars": 1505
+    },
+    {
+      "url": "https://rtc.nuist.edu.cn/",
+      "title": "南京信息工程大学WMO区域培训中心",
+      "chars": 1650
+    },
+    {
+      "url": "https://gjy.nuist.edu.cn/english/main.htm",
+      "title": "南京信息工程大学-国际教育学院",
+      "chars": 3448
+    }
+  ],
+  "db_row": {
+    "name_zh": "南京信息工程大学",
+    "name_en": "Nanjing University of Information Science and Technology",
+    "name_fr": "Université d'information scientifique et technologique de Nanjing",
+    "slug": "nuist",
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "country": "Chine",
+    "department": "College of International Education (国际教育学院)",
+    "emails": [
+      "cie@nuist.edu.cn",
+      "cie@nuist.edu.cn"
+    ],
+    "phone": "0086-25-58699848",
+    "wechat": "cie-nuist",
+    "website": "https://en.nuist.edu.cn/",
+    "majors": [
+      "sciences",
+      "engineering",
+      "computer_science",
+      "business",
+      "arts",
+      "chinese_language",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship / International Chinese Language Teachers Scholarship / MOFCOM Scholarship / NUIST-WMO Fellowships Education Program / NUIST Excellent Freshmen Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "Juin (rentrée septembre)"
+  }
+}

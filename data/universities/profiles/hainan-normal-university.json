@@ -1,0 +1,689 @@
+{
+  "identity": {
+    "name_en": "Hainan Normal University",
+    "name_zh": "海南师范大学",
+    "name_fr": "Université normale de Hainan",
+    "aliases": [
+      "HNNU",
+      "Hainnu"
+    ],
+    "website": "https://www.hainnu.edu.cn/",
+    "international_website": "https://eng.hainnu.edu.cn/",
+    "application_portal_url": "https://gjwh.hainnu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université normale de Hainan, co-construite par le gouvernement provincial de Hainan et le Ministère de l'Éducation, est une université clé de la province. Surnommée « université prestigieuse de Qiong, berceau des enseignants », elle forme des enseignants d'excellence et des spécialistes de haut niveau. Elle compte 25 écoles, 65 programmes de licence, 6 programmes doctoraux de premier niveau, 19 programmes de master de premier niveau et 21 programmes professionnels de master.",
+    "history": "Ses origines remontent à l'Académie Qiongtai (琼台书院), vieille de plus de 300 ans. C'est la première université publique de la province de Hainan. Devise : 崇德尚学 求是创新 (Vertu, savoir, quête de vérité, innovation).",
+    "rankings": [],
+    "strengths": [
+      "Formation des enseignants",
+      "Sciences tropicales",
+      "Études sur l'Asie du Sud-Est",
+      "Éducation chinoise internationale",
+      "Recherche géographique tropicale"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Haikou",
+      "province": "Hainan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 2500,
+      "notes": "Estimation pour Haikou, ville côtière de taille moyenne."
+    },
+    "campuses": [
+      {
+        "name": "Longkunnan (龙昆南)",
+        "city": "Haikou",
+        "description": "99 Longkun South Road, Qiongshan District. Code postal 571158."
+      },
+      {
+        "name": "Guilinyang (桂林洋)",
+        "city": "Haikou",
+        "description": "No.3, No.1 School Road, Meilan District. Code postal 571127. Campus principal moderne."
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (diverses disciplines)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en chinois principalement. Domaines : éducation, lettres, sciences, économie, droit, arts, etc."
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (recherche et professionnel)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "19 masters de premier niveau et 21 masters professionnels disponibles."
+    },
+    {
+      "level": "phd",
+      "name": "Programmes doctoraux",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "6 programmes doctoraux de premier niveau. 4 stations postdoctorales."
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de langue pour étudiants internationaux (进修生)."
+    },
+    {
+      "level": "language",
+      "name": "Programme court d'échange scientifique China Link",
+      "field": "other",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse China Link pour échange scientifique court terme."
+    },
+    {
+      "level": "master",
+      "name": "Programme CSC « High-level Graduate »",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de bourses du gouvernement chinois pour étudiants de haut niveau (master et doctorat)."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée). Dossier académique complet requis.",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de langue chinoise disponible si HSK insuffisant.",
+      "other": [
+        "Dossier académique",
+        "Formulaire de demande",
+        "Passeport valide",
+        "Certificat médical"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor degree) dans un domaine pertinent. Dossier académique et lettres de recommandation.",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de langue chinoise disponible.",
+      "other": [
+        "Diplôme de licence",
+        "Relevés de notes",
+        "Lettres de recommandation",
+        "Plan d'études ou proposition de recherche"
+      ]
+    },
+    "phd": {
+      "academic": "Master dans un domaine pertinent. Proposition de recherche requise.",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Diplôme de master",
+        "Proposition de recherche",
+        "Lettres de recommandation",
+        "Publications éventuelles"
+      ]
+    },
+    "language": {
+      "academic": "Pas d'exigence académique stricte pour les étudiants en langue.",
+      "age_max": null,
+      "other": [
+        "Formulaire de demande",
+        "Passeport valide"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Collège d'Éducation Internationale (国际教育学院)",
+    "iso_email": "hainnu@sina.com",
+    "admissions_email": "hszsb@hainnu.edu.cn",
+    "wechat": "",
+    "phone": "86-898-65882015 / 86-898-65819460 (international); 0898-65888710 (admissions)",
+    "address": "99 Longkun South Road, Qiongshan District, Haikou City, Hainan Province, 571158"
+  },
+  "matching": {
+    "fields": [
+      "education",
+      "chinese_language",
+      "arts",
+      "sciences",
+      "economics",
+      "law",
+      "computer_science",
+      "engineering",
+      "agriculture",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": 600,
+    "deadline_typical": "Avril-Juin pour rentrée de septembre",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Haikou",
+    "province": "Hainan",
+    "tags": [
+      "teacher training",
+      "tropical studies",
+      "Southeast Asia",
+      "co-construction provinciale",
+      "CSC scholarship",
+      "Hainan provincial scholarship",
+      "Chinese language teaching"
+    ]
+  },
+  "confidence": 0.72,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "min_ielts",
+    "min_toefl",
+    "exact HSK/IELTS/TOEFL scores",
+    "wechat ID"
+  ],
+  "notes": "Université clé de Hainan, co-construite avec le Ministère de l'Éducation. Forte tradition de formation des enseignants. Offre plusieurs bourses : Bourse du gouvernement chinois (CSC, programme « High-level Graduate »), Bourse du gouvernement provincial de Hainan, Bourse internationale pour enseignants de chinois, Bourse Hainan pour l'éducation chinoise à l'étranger. Frais de logement : 600-1470 CNY/an selon le type de chambre et le campus. Les scores précis HSK/IELTS/TOEFL ne sont pas mentionnés dans les sources fournies ; valeurs estimées basées sur les standards chinois typiques. Site du Collège d'éducation internationale : https://gjwh.hainnu.edu.cn/",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats étrangers",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide requis pour candidature"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo d'identité récente"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Selon niveau (bachelor/master/phd)",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme et relevés de notes notariés"
+    },
+    {
+      "type": "hsk_certificate",
+      "required": null,
+      "count": null,
+      "who": "Candidats programmes en chinois",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "language"
+      ],
+      "notes": "Certificat HSK exigé selon programme"
+    },
+    {
+      "type": "language_test",
+      "required": null,
+      "count": null,
+      "who": "Candidats programmes en anglais",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "IELTS/TOEFL requis selon programme"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "Tous étudiants étrangers",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Examen médical pour résidence"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "Tous étudiants étrangers",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire vierge"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "Candidats master/doctorat",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Plan d'études en chinois ou anglais"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Candidats master/doctorat",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 lettres de recommandation de professeurs"
+    },
+    {
+      "type": "guardian_letter",
+      "required": null,
+      "count": null,
+      "who": "Étudiants mineurs",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Lettre du tuteur légal pour étudiants de moins de 18 ans"
+    }
+  ],
+  "application": {
+    "platform_name": "Système de candidature en ligne HNNU / CSC",
+    "platform_url": "https://gjwh.hainnu.edu.cn/",
+    "steps": [
+      "Remplir le formulaire en ligne",
+      "Télécharger les documents requis",
+      "Payer les frais de dossier",
+      "Soumettre la candidature",
+      "Attendre la revue et l'admission",
+      "Recevoir le JW202/Admission Notice"
+    ],
+    "opens_at": "",
+    "deadline": "Variable selon programme (généralement mai-juin)",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": 600,
+          "included": "Lit, bureau, ventilateur, climatisation, balcon"
+        },
+        {
+          "type": "4-personne (niveau 2)",
+          "price_cny_year": 900,
+          "included": "Lit, bureau, salle de bain privée, balcon, clim"
+        },
+        {
+          "type": "4-personne (niveau 1 classe 2)",
+          "price_cny_year": 1300,
+          "included": "Meubles complets, salle de bain privée, balcon, eau chaude, clim"
+        },
+        {
+          "type": "4-personne (niveau 1 classe 4)",
+          "price_cny_year": 1470,
+          "included": "Meubles complets, salle de bain privée, balcon, eau chaude, clim"
+        },
+        {
+          "type": "6-personne (niveau 2)",
+          "price_cny_year": 1070,
+          "included": "Logement investissement socialisé"
+        },
+        {
+          "type": "6-personne (niveau 1)",
+          "price_cny_year": 1450,
+          "included": "Logement investissement gouvernemental (campus Guilin Yang)"
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du Gouvernement chinois (CSC) - Programme étudiants internationaux",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique, postuler via agence nationale CSC ou via HNNU",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Renouvelable annuellement sous condition académique"
+    },
+    {
+      "name": "CSC Programme \"Étudiants de haut niveau\" (High-level Graduate)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour master et doctorat, excellent dossier académique",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": "Renouvelable"
+    },
+    {
+      "name": "Bourse internationale du Gouvernement du Hainan",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Financée par le gouvernement provincial du Hainan",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse d'enseignement de la langue chinoise (International Chinese Language Teachers Scholarship)",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants de langue chinoise et enseignants",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse Hainan pour l'éducation chinoise d'outre-mer (华文教育奖学金)",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour descendants de Chinois d'outre-mer étudiant la langue et culture chinoises",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse CSC China Link (échange scientifique de courte durée)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme d'échange scientifique de courte durée",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Non applicable"
+    }
+  ],
+  "language": {
+    "hsk_bachelor": 4,
+    "hsk_master": 5,
+    "hsk_phd": 5,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "Formulaire JW202 / JW201"
+    ],
+    "instructions": "Étudiants étrangers doivent obtenir un visa X1 (long séjour) ou X2 (court séjour) avec la lettre d'admission et le JW202 de HNNU. Présenter les documents originaux au consulat chinois.",
+    "arrival_and_residence_permit": "À l'arrivée, se présenter au bureau international de HNNU dans les 24h. Permis de résidence à demander sous 30 jours au Bureau de la sécurité publique pour les séjours > 6 mois."
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Chambre individuelle",
+      "Chambre double (4 ou 6 personnes)",
+      "Appartement étudiant"
+    ],
+    "rules": "Conditions variables selon campus (Longkun Sud ou Guilin Yang). Meubles et équipements de base fournis.",
+    "international_office": "Collège d'éducation internationale - 86-898-65882015 / 86-898-65819460 - hainnu@sina.com",
+    "orientation": "Programme d'orientation organisé en septembre pour nouveaux étudiants internationaux",
+    "english_support": null,
+    "clubs": "Activités culturelles, sportives (golf, badminton), clubs étudiants"
+  },
+  "country_specific": [],
+  "scan_status": "ok",
+  "slug": "hainan-normal-university",
+  "scraped_at": "2026-08-23T14:46:18.978Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.hainnu.edu.cn/",
+      "title": "海南师范大学",
+      "chars": 6213
+    },
+    {
+      "url": "https://zhaosheng.hainnu.edu.cn/",
+      "title": "首页",
+      "chars": 1766
+    },
+    {
+      "url": "https://gjwh.hainnu.edu.cn/1348/list.htm",
+      "title": "各类奖学金招生",
+      "chars": 1961
+    },
+    {
+      "url": "https://eng.hainnu.edu.cn/",
+      "title": "英文网",
+      "chars": 3893
+    },
+    {
+      "url": "https://www.hainnu.edu.cn/bsh/list.htm",
+      "title": "招聘公告",
+      "chars": 1711
+    },
+    {
+      "url": "https://zjc.hainnu.edu.cn/",
+      "title": "海南师范大学招生就业处",
+      "chars": 609
+    },
+    {
+      "url": "https://yjsc.hainnu.edu.cn/1779/list.htm",
+      "title": "研究生招生",
+      "chars": 1514
+    },
+    {
+      "url": "https://jxjyxy.hainnu.edu.cn/1664/list.htm",
+      "title": "招生资讯",
+      "chars": 925
+    },
+    {
+      "url": "https://zhaosheng.hainnu.edu.cn/f/newsCenter/article/8d561520978e44e685eadd175af8e730",
+      "title": "海南师范大学住宿条件及收费标准",
+      "chars": 1077
+    }
+  ],
+  "db_row": {
+    "name_zh": "海南师范大学",
+    "name_en": "Hainan Normal University",
+    "name_fr": "Université normale de Hainan",
+    "slug": "hainan-normal-university",
+    "city": "Haikou",
+    "province": "Hainan",
+    "country": "Chine",
+    "department": "Collège d'Éducation Internationale (国际教育学院)",
+    "emails": [
+      "hainnu@sina.com",
+      "hszsb@hainnu.edu.cn"
+    ],
+    "phone": "86-898-65882015 / 86-898-65819460 (international); 0898-65888710 (admissions)",
+    "wechat": null,
+    "website": "https://eng.hainnu.edu.cn/",
+    "majors": [
+      "education",
+      "chinese_language",
+      "arts",
+      "sciences",
+      "economics",
+      "law",
+      "computer_science",
+      "engineering",
+      "agriculture",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "photo",
+      "diploma",
+      "physical_examination",
+      "no_criminal_record",
+      "study_plan",
+      "recommendation_letters"
+    ],
+    "scholarship_amount": "Bourse du Gouvernement chinois (CSC) - Programme étudiants internationaux / CSC Programme \"Étudiants de haut niveau\" (High-level Graduate) / Bourse internationale du Gouvernement du Hainan / Bourse d'enseignement de la langue chinoise (International Chinese Language Teachers Scholarship) / Bourse Hainan pour l'éducation chinoise d'outre-mer (华文教育奖学金) / Bourse CSC China Link (échange scientifique de courte durée)",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "Avril-Juin pour rentrée de septembre"
+  }
+}

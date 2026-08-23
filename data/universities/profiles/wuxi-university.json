@@ -1,0 +1,486 @@
+{
+  "identity": {
+    "name_en": "Wuxi University",
+    "name_zh": "无锡学院",
+    "name_fr": "Université de Wuxi",
+    "aliases": [
+      "WXU"
+    ],
+    "website": "https://www.cwxu.edu.cn/",
+    "international_website": "https://gjy.cwxu.edu.cn/",
+    "application_portal_url": "https://gjy.cwxu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique située à Wuxi (Jiangsu), issue de la transformation d'un collège professionnel en université. Elle propose des programmes de premier cycle aux étudiants internationaux.",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "Formation appliquée",
+      "Industrie automobile connectée (车联网产业学院)",
+      "Collaboration université-industrie"
+    ],
+    "teaching_languages": [
+      "en",
+      "zh"
+    ],
+    "location": {
+      "city": "Wuxi",
+      "province": "Jiangsu",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal",
+        "city": "Wuxi",
+        "description": "333 Xishan Avenue, Wuxi, Jiangsu"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "International Economy and Trade",
+      "field": "economics",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme enseigné en anglais"
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme enseigné en anglais"
+    },
+    {
+      "level": "bachelor",
+      "name": "Digital Media Arts",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme enseigné en chinois"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent, excellents résultats académiques, toutes les matières validées",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": 5.5,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Certificat de langue chinoise ou anglaise",
+        "Relevé de notes notarié",
+        "Casier judiciaire vierge",
+        "Examen médical",
+        "Relevé bancaire"
+      ]
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "International Affairs Office / College of International Students",
+    "iso_email": "",
+    "admissions_email": "xzbgs@cwxu.edu.cn",
+    "wechat": "",
+    "phone": "0510-88532333",
+    "address": "333 Xishan Avenue, Wuxi, Jiangsu 214105"
+  },
+  "matching": {
+    "fields": [
+      "economics",
+      "computer_science",
+      "arts"
+    ],
+    "degrees": [
+      "bachelor"
+    ],
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": 5.5,
+    "min_toefl": 80,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Wuxi",
+    "province": "Jiangsu",
+    "tags": [
+      "université publique",
+      "programmes en anglais",
+      "programmes en chinois",
+      "formation appliquée"
+    ]
+  },
+  "confidence": 0.65,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "deadline_typical",
+    "has_csc",
+    "has_university_scholarship",
+    "has_provincial_scholarship",
+    "age_max_bachelor",
+    "min_hsk_level",
+    "cost_of_living_cny_month",
+    "rankings",
+    "history"
+  ],
+  "notes": "Informations limitées : seuls 3 programmes de premier cycle sont proposés aux étudiants internationaux (2 en anglais, 1 en chinois). Aucun programme master ou doctorat n'est mentionné. Les frais de scolarité et bourses ne sont pas précisés dans les sources fournies.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Pages avec informations personnelles; passeport valide plus d'un an"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": 1,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo de face sans chapeau, fond blanc, moins de 6 mois"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Diplôme le plus élevé + relevés de notes, traduits en chinois ou anglais et notariés si autre langue"
+    },
+    {
+      "type": "transcript",
+      "required": true,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevés académiques traduits en chinois ou anglais et notariés"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certificat de niveau chinois ou anglais"
+    },
+    {
+      "type": "bank_statement",
+      "required": true,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevé bancaire"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certificat de non-condamnation, traduit et notarié"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Rapport d'examen médical de moins de 6 mois"
+    },
+    {
+      "type": "award_certificates",
+      "required": false,
+      "count": null,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certificats de prix ou distinctions scolaires (le cas échéant)"
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [
+      "Remplir le formulaire de candidature de l'Université de Wuxi",
+      "Préparer les documents requis",
+      "Soumettre la candidature",
+      "Recevoir la décision d'admission",
+      "Procéder à l'inscription et au paiement"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": 5.5,
+    "toefl_min": 80,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "Voir la section Visa du site de l'université pour les informations détaillées",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "College of International Students, 333 Xishan Avenue, Wuxi 214105",
+    "orientation": "",
+    "english_support": true,
+    "clubs": "Wuxi University International Ambassadors (WUGA)"
+  },
+  "country_specific": [],
+  "scan_status": "ok",
+  "slug": "wuxi-university",
+  "scraped_at": "2026-08-23T14:46:47.421Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://gjy.cwxu.edu.cn/",
+      "title": "WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 1265
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/info/1027/1062.htm",
+      "title": "Application Materials-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 1628
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/info/1027/1060.htm",
+      "title": "Undergraduate Program (taught in English)-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 1384
+    },
+    {
+      "url": "https://www.cwxu.edu.cn/",
+      "title": "无锡学院",
+      "chars": 3174
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_INFORMATION/Program.htm",
+      "title": "Program-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 855
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_INFORMATION/Requirement.htm",
+      "title": "Requirement-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 922
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_NOTICE/Visa.htm",
+      "title": "Visa-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 792
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_INFORMATION/Guide.htm",
+      "title": "Guide-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 785
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_INFORMATION/Process.htm",
+      "title": "Process-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 774
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_INFORMATION/Cost.htm",
+      "title": "Cost-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 756
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_NOTICE/Register.htm",
+      "title": "Register-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 815
+    },
+    {
+      "url": "https://gjy.cwxu.edu.cn/ADMISSION_NOTICE/Payment.htm",
+      "title": "Payment-WUXI UNIVERSITY INTERNATIONAL STUDENT ADMISSION",
+      "chars": 815
+    }
+  ],
+  "db_row": {
+    "name_zh": "无锡学院",
+    "name_en": "Wuxi University",
+    "name_fr": "Université de Wuxi",
+    "slug": "wuxi-university",
+    "city": "Wuxi",
+    "province": "Jiangsu",
+    "country": "Chine",
+    "department": "International Affairs Office / College of International Students",
+    "emails": [
+      "xzbgs@cwxu.edu.cn"
+    ],
+    "phone": "0510-88532333",
+    "wechat": null,
+    "website": "https://gjy.cwxu.edu.cn/",
+    "majors": [
+      "economics",
+      "computer_science",
+      "arts"
+    ],
+    "required_documents": [
+      "passport",
+      "photo",
+      "diploma",
+      "transcript",
+      "language_certificate",
+      "bank_statement",
+      "no_criminal_record",
+      "physical_examination"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": "IELTS 5.5 / TOEFL 80",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

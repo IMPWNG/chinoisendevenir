@@ -1,0 +1,718 @@
+{
+  "identity": {
+    "name_en": "Southwestern University of Finance and Economics",
+    "name_zh": "西南财经大学",
+    "name_fr": "Université du Sud-Ouest de finance et d'économie",
+    "aliases": [
+      "SWUFE",
+      "Southwest University of Finance and Economics"
+    ],
+    "website": "https://www.swufe.edu.cn",
+    "international_website": "https://international.swufe.edu.cn",
+    "application_portal_url": "http://swufe.17gz.org"
+  },
+  "general": {
+    "presentation": "Université nationale « Double First-Class » directement rattachée au Ministère de l'Éducation, spécialisée en finance, économie et gestion. Plus de 24 000 étudiants dont 15 300+ en licence, 8 500+ en master et 1 400+ en doctorat. 26 écoles/instituts, 47 majeures de licence, 10 disciplines doctorales.",
+    "history": "Fondée en 1925, fêtera son centenaire. L'Institut international d'éducation gère les admissions étrangères.",
+    "rankings": [
+      "Double First-Class (Ministère de l'Éducation)",
+      "Université de niveau Project 211"
+    ],
+    "strengths": [
+      "Finance",
+      "Économie",
+      "Comptabilité",
+      "Gestion d'entreprise",
+      "Sciences actuarielles",
+      "Mathématiques financières",
+      "Économie publique"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Chengdu",
+      "province": "Sichuan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 3500,
+      "notes": "Logement sur campus Guanghua single room: 1200 CNY/mois. Repas et transport variables."
+    },
+    "campuses": [
+      {
+        "name": "Liulin (campus principal)",
+        "city": "Chengdu",
+        "description": "555 Liutai Avenue, district de Wenjiang, code postal 611130"
+      },
+      {
+        "name": "Guanghua",
+        "city": "Chengdu",
+        "description": "55 Guanghuacun Street, district de Qingyang, code postal 610074. Siège de l'Institut international d'éducation."
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "Programme de chinois (Chinois langue étrangère)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "16 semaines/semestre, 8 niveaux (A0 à G), cours culturels inclus. Frais: 8000 CNY/semestre (présentiel), 5000 CNY (en ligne)."
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (chinois ou anglais)",
+      "field": "business",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais: 16000 CNY/an (chinois), 20000 CNY/an (anglais). Test CSCA requis pour candidats scholarship CSC."
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (chinois ou anglais)",
+      "field": "business",
+      "language": "bilingual",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais: 20000 CNY/an (chinois), 25000 CNY/an (anglais). Durée 2-3 ans selon programme."
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat (chinois ou anglais)",
+      "field": "business",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais: 25000 CNY/an (chinois), 30000 CNY/an (anglais)."
+    },
+    {
+      "level": "exchange",
+      "name": "Programme d'échange",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Pour étudiants partenaires via accords bilatéraux."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (high school)",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "1 année préparatoire en chinois (HSK) pour programmes en chinois",
+      "other": [
+        "Test CSCA (China Scholastic Competency Assessment) requis pour candidats scholarship CSC",
+        "2 lettres de recommandation non requises pour bachelor",
+        "Plan d'études ≥ 200 caractères"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor degree)",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "1 année préparatoire en chinois",
+      "other": [
+        "2 lettres de recommandation de professeurs/associés",
+        "Plan d'études ≥ 1000 caractères",
+        "Relevés de notes complets"
+      ]
+    },
+    "phd": {
+      "academic": "Master (master degree)",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6.5,
+      "toefl_min": 90,
+      "preparatory_if_insufficient": "1 année préparatoire en chinois",
+      "other": [
+        "2 lettres de recommandation de professeurs",
+        "Plan de recherche ≥ 1000 caractères",
+        "Relevés de notes complets"
+      ]
+    },
+    "language": {
+      "academic": "Aucun diplôme spécifique requis",
+      "age_max": 59,
+      "age_min": 16,
+      "other": [
+        "Test de placement à l'arrivée",
+        "8 niveaux de A0 (zéro) à G (HSK 6)"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "International Education College (国际教育学院)",
+    "iso_email": "international@swufe.edu.cn",
+    "admissions_email": "scholarship@swufe.edu.cn",
+    "wechat": "",
+    "phone": "+86-28-87355437",
+    "address": "55 Guanghuacun Street, Qingyang District, Chengdu, Sichuan 610074, Chine"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 16000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 8000,
+    "deadline_typical": "Printemps: 20 oct - 20 jan; Automne: 1er avril - 31 juillet",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "tags": [
+      "Double First-Class",
+      "Project 211",
+      "Finance",
+      "Économie",
+      "Comptabilité",
+      "Centenaire",
+      "CSC scholarship",
+      "Belt and Road scholarship",
+      "English-taught programs",
+      "Chengdu"
+    ]
+  },
+  "confidence": 0.85,
+  "missing_fields": [
+    "min_gpa exact",
+    "scores HSK/IELTS/TOEFL exacts par programme (estimations basées sur standards CSC)",
+    "deadlines précis pour programmes de diplôme (seuls ceux du programme chinois sont détaillés)"
+  ],
+  "notes": "SWUFE est une université de premier plan en finance/économie. Programmes en anglais disponibles en licence, master et doctorat. Frais de scolarité varient selon langue d'enseignement. Bourse du gouvernement chinois (CSC Type A) disponible avec critères d'âge stricts. Programme de chinois très structuré (8 niveaux).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Validité ≥6 mois (programme langue); pour CSC A: validité après mars 2027"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo d'identité sans chapeau, ≤6 mois"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme le plus élevé notarié; étudiants en cours: attestation de graduation prévue avant le 25 août 2026"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés complets du cycle d'études le plus élevé"
+    },
+    {
+      "type": "physical_exam",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire d'examen physique étrangers; validité 6 mois"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Délivré par autorités locales, ≤6 mois; signé en chinois/anglais"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "≥200 mots (bachelor), ≥500 mots (进修), ≥1000 mots (master/PhD)"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 professeurs ou associés (équivalent)"
+    },
+    {
+      "type": "csca_test",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Test CSCA du MOE chinois; test national d'aptitude pour admission bachelor"
+    },
+    {
+      "type": "language_certificate",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes en chinois; IELTS/TOEFL pour programmes en anglais (optionnel)"
+    },
+    {
+      "type": "transfer_proof",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "language"
+      ],
+      "notes": "Certificat de transfert/fin d'études pour ceux ayant étudié en Chine"
+    },
+    {
+      "type": "guardian_commitment",
+      "required": true,
+      "count": null,
+      "who": "under_18",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Engagement du tuteur pour les moins de 18 ans, chinois/anglais"
+    }
+  ],
+  "application": {
+    "platform_name": "SWUFE International Student Online Service System",
+    "platform_url": "http://swufe.17gz.org",
+    "steps": [
+      "Créer un compte sur swufe.17gz.org",
+      "Remplir le formulaire en ligne avec informations personnelles",
+      "Télécharger les documents requis (scans chinois/anglais)",
+      "Payer les frais de candidature 600 CNY en ligne",
+      "Attendre notification par email sous 20 jours ouvrables"
+    ],
+    "opens_at": "2025-10-20",
+    "deadline": "2026-07-31",
+    "results_at": "Sous 20 jours ouvrables après soumission complète",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 600,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "online",
+      "bank_transfer",
+      "wechat"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": 16000,
+        "max": 20000
+      },
+      "master": {
+        "min": 20000,
+        "max": 25000
+      },
+      "phd": {
+        "min": 25000,
+        "max": 30000
+      },
+      "language": {
+        "min": 16000,
+        "max": 16000
+      },
+      "english_taught_premium": 4000
+    },
+    "insurance_cny_year": 1000,
+    "other_fees": [
+      {
+        "name": "frais_application",
+        "amount_cny": 600,
+        "period": "unique",
+        "refundable": false
+      },
+      {
+        "name": "frais_inscription_programme_langue",
+        "amount_cny": 600,
+        "period": "unique",
+        "refundable": false
+      },
+      {
+        "name": "frais_manuel",
+        "amount_cny": "200-500",
+        "period": "semestre",
+        "refundable": false
+      },
+      {
+        "name": "electricite_dormitory",
+        "amount_cny": 0,
+        "period": "mensuel",
+        "refundable": false,
+        "notes": "30 kWh/mois gratuits"
+      }
+    ],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "single",
+          "price_cny_year": 14400,
+          "included": "Eau; électricité 30 kWh/mois gratuits",
+          "campus": "Guanghua",
+          "notes": "Programme langue: 1200 CNY/mois"
+        },
+        {
+          "type": "double",
+          "price_cny_year": 12000,
+          "included": "Eau; électricité 30 kWh/mois gratuits",
+          "campus": "Liulin",
+          "notes": "Boxue 2: 6000 CNY/semestre"
+        },
+        {
+          "type": "double",
+          "price_cny_year": 8000,
+          "included": "Eau; électricité 30 kWh/mois gratuits",
+          "campus": "Liulin",
+          "notes": "Shensi Yuan A: 4000 CNY/semestre"
+        }
+      ],
+      "deposit_cny": 1000,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": "Coût de la vie à Chengdu non spécifié dans les sources"
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du Gouvernement chinois Type A (中国政府奖学金A类)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "living"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via ambassade de Chine ou organisation d'envoi du pays d'origine; conditions d'âge: ≤25 ans (bachelor), ≤35 ans (master), ≤40 ans (PhD); évaluation annuelle obligatoire",
+      "apply_via": "embassy",
+      "deadline": "Variable selon pays",
+      "renewal": "Renouvellement annuel après évaluation positive"
+    },
+    {
+      "name": "Bourse SWUFE 'Ceinture et Route' (西南财经大学一带一路奖学金)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pays partenaires de l'initiative Belt and Road; détails sur site SWUFE",
+      "apply_via": "university",
+      "deadline": "Variable",
+      "renewal": "Annuel"
+    },
+    {
+      "name": "Bourse Internationale des Professeurs de Chinois (国际中文教师奖学金)",
+      "type": "institutional",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "housing"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour futurs professeurs de chinois",
+      "apply_via": "university",
+      "deadline": "Variable",
+      "renewal": "Annuel"
+    },
+    {
+      "name": "Bourse Complète (étudiants inscrits) (综合奖学金)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants déjà inscrits à SWUFE",
+      "apply_via": "university",
+      "deadline": "Annuel",
+      "renewal": "Annuel"
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "hsk_language": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true,
+      "notes": "Année préparatoire de chinois pour boursiers CSC et certains programmes; jusqu'à 1 an avant admission"
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme de chinois langue étrangère (汉语进修项目): 16 semaines/semestre, 8 niveaux de placement (A0 à G), basé sur HSK et vocabulaire",
+      "available_for_bachelor": true
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2",
+      "F"
+    ],
+    "documents_from_university": [
+      "Admission Notice (录取通知书)",
+      "Visa Application Form JW202 / DQ"
+    ],
+    "instructions": "Pour étudiants admis hors Chine: demander visa X1 (>180 jours) ou X2 (≤180 jours) avec JW202 à l'ambassade de Chine du pays d'origine. Documents nécessaires: passeport, lettre d'admission, JW202, formulaire examen physique. Pour résidents en Chine: fournir scan de la page visa/permis de séjour actuel",
+    "arrival_and_residence_permit": "À l'arrivée: s'enregistrer au bureau international sous 24h; demander le permis de résidence (居留许可) au Bureau de la Sécurité Publique local dans les 30 jours pour séjour >180 jours"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "single_room_guanghua",
+      "double_boxue2_liulin",
+      "double_shensiyuanA_liulin"
+    ],
+    "rules": "30 kWh/mois d'électricité gratuits; dépôt 1000 CNY remboursable au départ; paiement par semestre; pas de remboursement si expulsion pour faute; chauffage/climatisation selon tarif marché",
+    "international_office": "International Education College (国际教育学院), Guanghua Campus, 55 Guanghuacun Street, Qingyang District, Chengdu 610074. Email: international@swufe.edu.cn, scholarship@swufe.edu.cn. Tél: +86-28-87355437",
+    "orientation": "Oui, programme d'orientation pour nouveaux étudiants internationaux (开学典礼)",
+    "english_support": true,
+    "clubs": "Programme 'Sichuan Reading' (蜀读中国) en été; clubs internationaux; excursions culturelles à Chongzhou et sites du Sichuan"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Tous",
+      "notes": "CSC Type A: postuler via ambassade de Chine du pays d'origine; date limite varie selon pays; code de l'agence SWUFE requis"
+    },
+    {
+      "region_or_country": "Pays Belt and Road",
+      "notes": "Bourse SWUFE 'Ceinture et Route' disponible"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "swufe",
+  "scraped_at": "2026-08-23T14:50:51.295Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://international.swufe.edu.cn/",
+      "title": "西南财经大学国际教育学院",
+      "chars": 2592
+    },
+    {
+      "url": "https://e.swufe.edu.cn/",
+      "title": "Southwestern University of Finance and Economics",
+      "chars": 2837
+    },
+    {
+      "url": "https://www.swufe.edu.cn/",
+      "title": "西南财经大学",
+      "chars": 4648
+    },
+    {
+      "url": "https://international.swufe.edu.cn/en/search/search?page=1&keyword=",
+      "title": "西南财经大学",
+      "chars": 4648
+    },
+    {
+      "url": "https://international.swufe.edu.cn/zsxx1.htm",
+      "title": "招生信息-西南财经大学国际教育学院",
+      "chars": 723
+    },
+    {
+      "url": "https://international.swufe.edu.cn/zsxx1/hyjxxm2.htm",
+      "title": "汉语进修项目-西南财经大学国际教育学院",
+      "chars": 3439
+    },
+    {
+      "url": "https://international.swufe.edu.cn/zsxx1/jxj/zgzfjxjAl.htm",
+      "title": "中国政府奖学金A类-西南财经大学国际教育学院",
+      "chars": 4332
+    },
+    {
+      "url": "https://international.swufe.edu.cn/zsxx1/xf.htm",
+      "title": "学费-西南财经大学国际教育学院",
+      "chars": 1950
+    },
+    {
+      "url": "https://international.swufe.edu.cn/hytgjd1.htm",
+      "title": "汉语推广基地-西南财经大学国际教育学院",
+      "chars": 1005
+    },
+    {
+      "url": "https://international.swufe.edu.cn/hytgjd1/yyxm.htm",
+      "title": "语言项目-西南财经大学国际教育学院",
+      "chars": 748
+    },
+    {
+      "url": "https://international.swufe.edu.cn/xyshyfw1/xsrx.htm",
+      "title": "新生入学-西南财经大学国际教育学院",
+      "chars": 775
+    },
+    {
+      "url": "https://international.swufe.edu.cn/xyshyfw1/qzjjlxk.htm",
+      "title": "签证及居留许可-西南财经大学国际教育学院",
+      "chars": 754
+    }
+  ],
+  "db_row": {
+    "name_zh": "西南财经大学",
+    "name_en": "Southwestern University of Finance and Economics",
+    "name_fr": "Université du Sud-Ouest de finance et d'économie",
+    "slug": "swufe",
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "country": "Chine",
+    "department": "International Education College (国际教育学院)",
+    "emails": [
+      "international@swufe.edu.cn",
+      "scholarship@swufe.edu.cn"
+    ],
+    "phone": "+86-28-87355437",
+    "wechat": null,
+    "website": "https://international.swufe.edu.cn",
+    "majors": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "education"
+    ],
+    "required_documents": [
+      "passport",
+      "photo",
+      "diploma",
+      "transcripts",
+      "physical_exam",
+      "no_criminal_record",
+      "study_plan",
+      "recommendation_letters",
+      "csca_test",
+      "transfer_proof",
+      "guardian_commitment"
+    ],
+    "scholarship_amount": "Bourse du Gouvernement chinois Type A (中国政府奖学金A类) / Bourse SWUFE 'Ceinture et Route' (西南财经大学一带一路奖学金) / Bourse Internationale des Professeurs de Chinois (国际中文教师奖学金) / Bourse Complète (étudiants inscrits) (综合奖学金)",
+    "scholarship_min": 16000,
+    "scholarship_max": 30000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "tuition_min": 16000,
+    "tuition_max": 30000,
+    "application_deadline": "Printemps: 20 oct - 20 jan; Automne: 1er avril - 31 juillet"
+  }
+}

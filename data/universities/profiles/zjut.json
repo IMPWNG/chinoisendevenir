@@ -1,0 +1,458 @@
+{
+  "identity": {
+    "name_en": "Zhejiang University of Technology",
+    "name_zh": "浙江工业大学",
+    "name_fr": "Université de technologie du Zhejiang",
+    "aliases": [
+      "ZJUT"
+    ],
+    "website": "https://www.zjut.edu.cn/",
+    "international_website": "https://www.zjut.edu.cn/",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université provinciale clé du Zhejiang, fondée en 1953, regroupant 27 écoles et 1 département, avec 64 programmes de premier cycle (46 de niveau national) et plus de 40 500 étudiants dont 1390 internationaux.",
+    "history": "Fondée en 1953, ses origines remontent à l'École industrielle moyenne du Zhejiang créée en 1910.",
+    "rankings": [
+      "Plan national 2011 - chef de file de centre d'innovation collaborative",
+      "Première vague d'universités provinciales clés du Zhejiang"
+    ],
+    "strengths": [
+      "Chimie",
+      "Sciences de l'ingénieur",
+      "Habitat et immobilier (Institut chinois de l'habitat et de l'immobilier)",
+      "Pharmacologie marine",
+      "Intelligence artificielle",
+      "Géographie et information"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Hangzhou",
+      "province": "Zhejiang",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2500,
+      "max": 4500,
+      "notes": "Estimation pour Hangzhou (logement, restauration, transport)."
+    },
+    "campuses": [
+      {
+        "name": "Chaohui (朝晖)",
+        "city": "Hangzhou",
+        "description": "Campus principal, 18 Chao Wang Lu, district Gongshu"
+      },
+      {
+        "name": "Pingfeng (屏峰)",
+        "city": "Hangzhou",
+        "description": "Campus principal, lieu des cérémonies de remise des diplômes"
+      },
+      {
+        "name": "Moganshan (莫干山)",
+        "city": "Hangzhou",
+        "description": "Campus de 3334 mu au total"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de premier cycle (64 dont 46 nationaux de premier plan)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "64 spécialités de premier cycle incluant génie chimique, mécanique, informatique, science des matériaux, design industriel, pharmacie, etc."
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master en anglais (English-taught Master's)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Plusieurs masters enseignés en anglais disponibles pour étudiants internationaux"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes doctoraux",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Doctorats en chinois ou en anglais selon les programmes"
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours de langue chinoise pour étudiants internationaux"
+    },
+    {
+      "level": "bachelor",
+      "name": "Études chino-étrangères en coopération (Sino-foreign joint programs)",
+      "field": "business",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes de coopération internationale (sino-étrangers)"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires (HSK pour programmes en chinois), dossier académique",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Année préparatoire en langue chinoise proposée",
+      "other": [
+        "Examen national d'entrée à l'université (Gaokao) pour les étudiants chinois",
+        "Examen d'entrée ou évaluation du dossier"
+      ]
+    },
+    "master": {
+      "academic": "Licence / Bachelor pertinent",
+      "min_gpa": 3,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Année préparatoire en langue chinoise",
+      "other": [
+        "Lettre de recommandation",
+        "Plan d'études",
+        "Transcription académique"
+      ]
+    },
+    "phd": {
+      "academic": "Master pertinent",
+      "min_gpa": 3,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Lettre de recommandation",
+        "Proposition de recherche",
+        "Publication(s) conseillée(s)"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires",
+      "age_max": null,
+      "other": [
+        "Inscription semestre mars ou septembre"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau des étudiants étrangers (International Students Office)",
+    "iso_email": "iso@zjut.edu.cn",
+    "admissions_email": "zsb@zjut.edu.cn",
+    "wechat": "zjut-zsb",
+    "phone": "+86-571-88320032",
+    "address": "18 Chao Wang Lu, district Gongshu, Hangzhou, Zhejiang 310014, Chine"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "engineering",
+      "sciences",
+      "computer_science",
+      "design",
+      "medicine",
+      "pharmacy",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": 16000,
+    "tuition_cny_max": 28000,
+    "housing_cny_year_min": 4000,
+    "deadline_typical": "Juin (rentrée septembre)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "tags": [
+      "programme 2011",
+      "université clé provinciale",
+      "ingénierie",
+      "48 academiciens-sciences",
+      "6 academiciens académie"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "frais de scolarité exact",
+    "conditions d'admission détaillées par programme",
+    "bourses spécifiques (CSC, provinciales, université)",
+    "âge max master/phd",
+    "offre exacte de programmes en anglais",
+    "portail de candidature en ligne"
+  ],
+  "notes": "Données extraites principalement de la page d'accueil officielle. Les frais de scolarité (~16000-28000 CNY/an) et les seuils IELTS/TOEFL/HSK sont des estimations courantes pour ce type d'université provinciale clé, à confirmer sur https://ies.zjut.edu.cn/ (bureau international).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "",
+    "orientation": "",
+    "english_support": null,
+    "clubs": "111 associations étudiantes enregistrées"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "zjut",
+  "scraped_at": "2026-08-23T14:53:38.647Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://www.zjut.edu.cn/",
+      "title": "浙江工业大学",
+      "chars": 5056
+    },
+    {
+      "url": "http://www.zjut.edu.cn/_css/error/error.css",
+      "title": null,
+      "chars": 5700
+    },
+    {
+      "url": "http://www.zjut.edu.cn/_js/themes/default/easyui.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "http://www.zjut.edu.cn/_js/themes/icon.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4494/list.htm",
+      "title": "本科生招生",
+      "chars": 984
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4496/list.htm",
+      "title": "留学生招生",
+      "chars": 1662
+    },
+    {
+      "url": "http://www.english.zjut.edu.cn/",
+      "title": "Zhejiang University of Technology",
+      "chars": 4913
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4490/list.htm",
+      "title": "本科生培养",
+      "chars": 1668
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4492/list.htm",
+      "title": "留学生培养",
+      "chars": 1628
+    }
+  ],
+  "db_row": {
+    "name_zh": "浙江工业大学",
+    "name_en": "Zhejiang University of Technology",
+    "name_fr": "Université de technologie du Zhejiang",
+    "slug": "zjut",
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "country": "Chine",
+    "department": "Bureau des étudiants étrangers (International Students Office)",
+    "emails": [
+      "iso@zjut.edu.cn",
+      "zsb@zjut.edu.cn"
+    ],
+    "phone": "+86-571-88320032",
+    "wechat": "zjut-zsb",
+    "website": "https://www.zjut.edu.cn/",
+    "majors": [
+      "business",
+      "economics",
+      "engineering",
+      "sciences",
+      "computer_science",
+      "design",
+      "medicine",
+      "pharmacy",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": 16000,
+    "scholarship_max": 28000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "tuition_min": 16000,
+    "tuition_max": 28000,
+    "application_deadline": "Juin (rentrée septembre)"
+  }
+}

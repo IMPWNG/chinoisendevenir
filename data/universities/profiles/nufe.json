@@ -1,0 +1,636 @@
+{
+  "identity": {
+    "name_en": "Nanjing University of Finance and Economics",
+    "name_zh": "南京财经大学",
+    "name_fr": "Université de finance et d'économie de Nanjing",
+    "aliases": [
+      "NUFE"
+    ],
+    "website": "https://www.nufe.edu.cn/",
+    "international_website": "https://english.nufe.edu.cn/",
+    "application_portal_url": "https://english.nufe.edu.cn/Admission1/International_Student_Admission.htm"
+  },
+  "general": {
+    "presentation": "Université provinciale clé du Jiangsu, orientée vers l'économie et la gestion, complétée par le droit, les sciences humaines et les technologies. Compte 19 écoles/départements, 11 disciplines de master de niveau 1, 58 disciplines de master de niveau 2 et 38 programmes de premier cycle.",
+    "history": "Université publique du Jiangsu axée disciplines économiques et de gestion.",
+    "rankings": [],
+    "strengths": [
+      "Économie",
+      "Gestion",
+      "Finance",
+      "Commerce international",
+      "Comptabilité",
+      "Sciences alimentaires (céréales)",
+      "Logistique",
+      "Fiscalité"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Nanjing",
+      "province": "Jiangsu",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation Nanjing, ville de 1er rang"
+    },
+    "campuses": [
+      {
+        "name": "Xianlin (仙林校区)",
+        "city": "Nanjing",
+        "description": "Campus principal, No.3 Wenyuan Road, Xianlin University Town, 210023"
+      },
+      {
+        "name": "Fujian Road (福建路校区)",
+        "city": "Nanjing",
+        "description": "No.128 Tielubei Street, Gulou District, 210003"
+      },
+      {
+        "name": "Qiaotou (桥头校区)",
+        "city": "Zhenjiang",
+        "description": "Province du Jiangsu, 212413"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Bachelor of Business Administration (BBA)",
+      "field": "business",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme BBA entièrement en anglais, admission 2026 clôturée"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de premier cycle (enseignement en chinois)",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Couvre économie, finance, commerce international, comptabilité, logistique, droit, etc."
+    },
+    {
+      "level": "master",
+      "name": "Master (recherche) pour étudiants étrangers",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Couvre notamment économie appliquée et management"
+    },
+    {
+      "level": "master",
+      "name": "Programmes masters en chinois",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Disciplines de 1er et 2e niveau (58 disciplines)"
+    },
+    {
+      "level": "phd",
+      "name": "Doctorat étudiants étrangers (économie appliquée, management)",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "应用经济学、工商管理学"
+    },
+    {
+      "level": "foundation",
+      "name": "Programme préparatoire en langue chinoise (Chinese Foundation Program)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Année préparatoire linguistique pour étudiants étrangers"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programme 专接本 (top-up bachelor)",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Passerelle depuis diplôme associé vers bachelor"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires ou équivalent; base principale en économie/gestion pour BBA en anglais",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire (Foundation) en chinois disponible",
+      "other": [
+        "HSK 4 généralement requis pour programmes en chinois",
+        "BBA en anglais: pas de HSK requis mais compétences linguistiques solides"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de bachelor (ou équivalent) en discipline connexe",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire en chinois possible",
+      "other": [
+        "Superviseurs de postgraduate internationaux disponibles (liste publiée)"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master en discipline connexe",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Disciplines: économie appliquée (应用经济学), management des affaires (工商管理学)"
+      ]
+    },
+    "language": {
+      "academic": "Aucune exigence académique préalable pour le programme de chinois",
+      "age_max": null,
+      "other": [
+        "Programme Foundation ouvert aux débutants"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau de la coopération et des échanges internationaux (国际合作与交流处), Collège Confucius des Affaires, Bureau Hong Kong/Macao/Taiwan",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "南财微信",
+    "phone": "",
+    "address": "No.3 Wenyuan Road, Xianlin College Town, Nanjing, 210023, P.R. China; Email bureau du secrétaire du parti: dangban01@nufe.edu.cn; Email bureau du président: xiaoban01@nufe.edu.cn"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "law",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "arts",
+      "design",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "foundation",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "Juin (clôture admissions internationales 2026)",
+    "intake_months": [
+      9
+    ],
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "tags": [
+      "économie",
+      "gestion",
+      "finance",
+      "comptabilité",
+      "comptabilité",
+      "université provinciale clé",
+      "campus Xianlin",
+      "3 campus",
+      "partenariat Meixi (avec partenaire international)"
+    ]
+  },
+  "confidence": 0.42,
+  "missing_fields": [
+    "min_gpa",
+    "age_max",
+    "age_min",
+    "hsk_score_min",
+    "ielts_min",
+    "toefl_min",
+    "min_ielts",
+    "min_toefl",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "has_csc",
+    "has_provincial_scholarship",
+    "admissions_email",
+    "iso_email",
+    "phone",
+    "classement précis"
+  ],
+  "notes": "Site officiel NUFE liste les 7 programmes internationaux (PhD, Master, Foundation, Zhuanjieben, BBA-EN, Bachelor-ZH, Politique bourses) mais le contenu détaillé des PDFs n'est pas reproduit dans les sources. Données chiffrées (frais, scores, dates limites exactes) indisponibles dans la version extraite. Le collège 梅西 (Meixi) suggère une coopération sino-étrangère. Contact principal via Bureau international (国际合作与交流处) lié au Collège Confucius des Affaires (商务孔子学院).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide, copie de la page d'identité"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme ou certificat de fin d'études (notarié)"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes officiels"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour BBA en anglais"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Examen médical"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire vierge"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Plan d'études ou proposition de recherche"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Demandeur",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Lettres de recommandation de professeurs"
+    },
+    {
+      "type": "financial_proof",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Justificatif de ressources financières"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "Demandeur",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo d'identité récente"
+    }
+  ],
+  "application": {
+    "platform_name": "NUFE Online Application System",
+    "platform_url": "https://english.nufe.edu.cn/Admission1/International_Student_Admission.htm",
+    "steps": [
+      "Créer un compte sur la plateforme en ligne NUFE",
+      "Remplir le formulaire de candidature en ligne",
+      "Télécharger les documents requis",
+      "Payer les frais de candidature",
+      "Soumettre la candidature et attendre la notification d'admission",
+      "Recevoir la lettre d'admission et le formulaire JW202"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "NUFE Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique, voir politique de bourses NUFE",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chinese Government Scholarship (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via l'ambassade de Chine ou via NUFE",
+      "apply_via": "embassy_or_university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme préparatoire de chinois (Chinese Foundation Program) pour préparer les études en chinois"
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission NUFE",
+      "Formulaire JW202",
+      "Visa Application Form"
+    ],
+    "instructions": "Les étudiants doivent demander un visa X1 (études > 180 jours) ou X2 (études < 180 jours) auprès de l'ambassade ou du consulat de Chine avec la lettre d'admission et le formulaire JW202.",
+    "arrival_and_residence_permit": "À l'arrivée, enregistrement à l'hôtel de police local dans les 24h, examen médical, puis demande de permis de résidence dans les 30 jours."
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Chambre double sur le campus"
+    ],
+    "rules": "Voir règlement international NUFE",
+    "international_office": "International Education College (国际教育学院)",
+    "orientation": "Programme d'orientation et accueil aéroport pour nouveaux étudiants",
+    "english_support": true,
+    "clubs": "Association étudiante internationale, activités culturelles et sportives"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Asie (Thaïlande, Kazakhstan, Russie, Corée)",
+      "notes": "Principaux pays d'origine des étudiants internationaux"
+    },
+    {
+      "region_or_country": "Europe (Royaume-Uni)",
+      "notes": "Présence d'étudiants britanniques"
+    },
+    {
+      "region_or_country": "Amérique du Nord (États-Unis)",
+      "notes": "Présence d'étudiants américains"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "nufe",
+  "scraped_at": "2026-08-23T14:44:26.104Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://english.nufe.edu.cn/",
+      "title": "NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 2762
+    },
+    {
+      "url": "https://www.nufe.edu.cn/",
+      "title": "南京财经大学",
+      "chars": 5170
+    },
+    {
+      "url": "https://english.nufe.edu.cn/Admission1/International_Student_Admission.htm",
+      "title": "Admissions-NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 2091
+    },
+    {
+      "url": "https://english.nufe.edu.cn/Academics1/Majors_and_Degrees.htm",
+      "title": "Majors and Degrees-NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 1574
+    },
+    {
+      "url": "https://english.nufe.edu.cn/Admission1/orientation_arrival.htm",
+      "title": "Orientation & Arrival-NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 2001
+    },
+    {
+      "url": "https://english.nufe.edu.cn/Admission1/Academic_Resources.htm",
+      "title": "Academic Resources-NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 2055
+    },
+    {
+      "url": "https://english.nufe.edu.cn/Admission1/Student_Conduct.htm",
+      "title": "Student Conduct-NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 1829
+    },
+    {
+      "url": "https://english.nufe.edu.cn/Admission1/Student_Events___Alumni.htm",
+      "title": "Student Events & Alumni-NANJING UNIVERSITY OF FINANCE & ECONOMICS",
+      "chars": 1787
+    },
+    {
+      "url": "https://www.nufe.edu.cn/rcpy1/lxsjy.htm",
+      "title": "留学生教育-南京财经大学",
+      "chars": 2296
+    }
+  ],
+  "db_row": {
+    "name_zh": "南京财经大学",
+    "name_en": "Nanjing University of Finance and Economics",
+    "name_fr": "Université de finance et d'économie de Nanjing",
+    "slug": "nufe",
+    "city": "Nanjing",
+    "province": "Jiangsu",
+    "country": "Chine",
+    "department": "Bureau de la coopération et des échanges internationaux (国际合作与交流处), Collège Confucius des Affaires, Bureau Hong Kong/Macao/Taiwan",
+    "emails": [],
+    "phone": null,
+    "wechat": "南财微信",
+    "website": "https://english.nufe.edu.cn/",
+    "majors": [
+      "business",
+      "economics",
+      "finance",
+      "law",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "arts",
+      "design",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport",
+      "diploma",
+      "transcripts",
+      "language_certificate",
+      "physical_examination",
+      "no_criminal_record",
+      "study_plan",
+      "recommendation_letters",
+      "financial_proof",
+      "photo"
+    ],
+    "scholarship_amount": "NUFE Scholarship / Chinese Government Scholarship (CSC)",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "Juin (clôture admissions internationales 2026)"
+  }
+}
