@@ -13,7 +13,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "scan:universities": "node scripts/scan-universities.mjs"
+    "scan:universities": "node scripts/scan-universities.mjs",
+    "import:universities": "node scripts/import-scan-to-admin.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

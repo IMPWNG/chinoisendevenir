@@ -37,6 +37,7 @@ const EMPTY_FORM = {
   tuition_min: "",
   tuition_max: "",
   application_deadline: "",
+  extra: {},
 };
 
 const REPLY_STYLES = {
@@ -68,6 +69,7 @@ function universityToForm(row) {
     tuition_max: row.tuition_max ?? "",
     is_partner: row.is_partner !== false,
     is_active: row.is_active !== false,
+    extra: row.extra || {},
   };
 }
 
@@ -142,6 +144,7 @@ export default function AdminUniversities() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [importing, setImporting] = useState(false);
+  const [importingScan, setImportingScan] = useState(false);
 
   const fetchUniversities = async () => {
     setLoading(true);
@@ -179,7 +182,9 @@ export default function AdminUniversities() {
       u.name_zh?.toLowerCase().includes(q) ||
       u.name_en?.toLowerCase().includes(q) ||
       u.city?.toLowerCase().includes(q) ||
-      u.emails?.some((email) => email.toLowerCase().includes(q));
+      u.emails?.some((email) => email.toLowerCase().includes(q)) ||
+      u.majors?.some((major) => String(major).toLowerCase().includes(q)) ||
+      u.application_deadline?.toLowerCase().includes(q);
     const matchProvince =
       filterProvince === "tous" || u.province === filterProvince;
     return matchSearch && matchProvince;
@@ -275,6 +280,34 @@ export default function AdminUniversities() {
     }
   };
 
+  const importScan = async () => {
+    if (!confirm(t("universities.importScanConfirm"))) return;
+    setImportingScan(true);
+    try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session?.access_token) throw new Error("SESSION");
+      const response = await fetch("/api/admin/universities/import-scan", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Import impossible");
+      alert(
+        t("universities.importScanDone", {
+          updated: payload.updated,
+          inserted: payload.inserted,
+        }),
+      );
+      await fetchUniversities();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setImportingScan(false);
+    }
+  };
+
   const tableHeaders = [
     t("universities.colUniversity"),
     t("universities.colCity"),
@@ -305,10 +338,18 @@ export default function AdminUniversities() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
             <div className="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl p-6 text-white">
               <p className="text-4xl font-bold">{universities.length}</p>
               <p className="text-sm text-white/80 mt-1">{t("universities.count")}</p>
+            </div>
+            <div className="bg-gradient-to-br from-cyan-600 to-blue-500 rounded-2xl p-6 text-white">
+              <p className="text-4xl font-bold">
+                {universities.filter((u) => u.extra?.admission).length}
+              </p>
+              <p className="text-sm text-white/80 mt-1">
+                {t("universities.scannedCount")}
+              </p>
             </div>
             <div className="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-2xl p-6 text-white">
               <p className="text-4xl font-bold">
@@ -367,6 +408,16 @@ export default function AdminUniversities() {
               ) : null}
               <button
                 type="button"
+                disabled={importingScan}
+                onClick={importScan}
+                className="px-5 py-3 bg-gradient-to-r from-cyan-600 to-indigo-600 text-white rounded-xl font-bold disabled:opacity-50"
+              >
+                {importingScan
+                  ? t("universities.importing")
+                  : `📚 ${t("universities.importScan")}`}
+              </button>
+              <button
+                type="button"
                 onClick={openCreate}
                 className="px-5 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold"
               >
@@ -414,6 +465,7 @@ export default function AdminUniversities() {
                           <td className="px-4 py-4">
                             <p className="text-white font-semibold">{u.name_zh}</p>
                             <p className="text-xs text-slate-400">{u.name_en}</p>
+                            <AdmissionChips university={u} />
                           </td>
                           <td className="px-4 py-4 text-slate-300 text-sm">
                             {u.city || "—"}
@@ -507,6 +559,199 @@ export default function AdminUniversities() {
         />
       ) : null}
     </AdminShell>
+  );
+}
+
+function chipClass(tone = "slate") {
+  const tones = {
+    slate: "bg-slate-700/80 text-slate-200 border-slate-600/60",
+    cyan: "bg-cyan-500/15 text-cyan-200 border-cyan-500/30",
+    emerald: "bg-emerald-500/15 text-emerald-200 border-emerald-500/30",
+    amber: "bg-amber-500/15 text-amber-200 border-amber-500/30",
+    violet: "bg-violet-500/15 text-violet-200 border-violet-500/30",
+  };
+  return `inline-flex items-center px-2 py-0.5 rounded-md border text-[10px] font-bold ${tones[tone]}`;
+}
+
+function AdmissionChips({ university }) {
+  const admission = university.extra?.admission;
+  const chips = [];
+  if (university.is_partner) chips.push({ label: "Partenaire", tone: "emerald" });
+  if (university.min_hsk_level) {
+    chips.push({ label: `HSK ${university.min_hsk_level}+`, tone: "cyan" });
+  }
+  if (admission?.english_programs_available) {
+    chips.push({ label: "EN", tone: "violet" });
+  }
+  if (admission?.has_csc) chips.push({ label: "CSC", tone: "amber" });
+  if (university.tuition_min || university.tuition_max) {
+    const min = university.tuition_min ? `${university.tuition_min}` : "";
+    const max = university.tuition_max ? `${university.tuition_max}` : "";
+    chips.push({
+      label: [min, max].filter(Boolean).join("–") + " RMB",
+      tone: "slate",
+    });
+  }
+  if (!chips.length) return null;
+  return (
+    <div className="flex flex-wrap gap-1 mt-2">
+      {chips.map((chip) => (
+        <span key={chip.label} className={chipClass(chip.tone)}>
+          {chip.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function InfoBlock({ title, children }) {
+  if (!children) return null;
+  return (
+    <div className="bg-slate-900/40 border border-slate-700/50 rounded-xl p-4">
+      <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+        {title}
+      </p>
+      <div className="text-sm text-slate-200 space-y-1">{children}</div>
+    </div>
+  );
+}
+
+function AdmissionPanel({ extra }) {
+  const admission = extra?.admission;
+  if (!admission) return null;
+  const reqs = admission.requirements || {};
+  const programs = admission.programs || [];
+  const scholarships = admission.scholarships || [];
+  const docs = admission.documents || [];
+
+  return (
+    <div className="mb-6 space-y-3">
+      {admission.presentation ? (
+        <p className="text-sm text-slate-300 leading-relaxed">
+          {admission.presentation}
+        </p>
+      ) : null}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <InfoBlock title="Candidature">
+          {admission.application?.platform_name ? (
+            <p>Plateforme : {admission.application.platform_name}</p>
+          ) : null}
+          {admission.application?.platform_url ? (
+            <a
+              href={admission.application.platform_url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-cyan-300 hover:underline break-all"
+            >
+              {admission.application.platform_url}
+            </a>
+          ) : null}
+          {admission.application?.deadline ? (
+            <p>Deadline : {admission.application.deadline}</p>
+          ) : null}
+          {(admission.application?.intake_months || []).length ? (
+            <p>
+              Rentrée :{" "}
+              {admission.application.intake_months
+                .map((m) => `${String(m).padStart(2, "0")}`)
+                .join(", ")}
+            </p>
+          ) : null}
+          {admission.application?.application_fee_cny ? (
+            <p>Frais de dossier : {admission.application.application_fee_cny} RMB</p>
+          ) : null}
+        </InfoBlock>
+        <InfoBlock title="Langue & âge">
+          {admission.language?.hsk_bachelor ? (
+            <p>HSK bachelor : {admission.language.hsk_bachelor}</p>
+          ) : null}
+          {admission.language?.ielts_min ? (
+            <p>IELTS : {admission.language.ielts_min}</p>
+          ) : null}
+          {admission.language?.toefl_min ? (
+            <p>TOEFL : {admission.language.toefl_min}</p>
+          ) : null}
+          {admission.english_programs_available ? <p>Programmes en anglais</p> : null}
+          {admission.chinese_language_program_available ? (
+            <p>Programme de langue chinoise</p>
+          ) : null}
+          {admission.age_max?.bachelor ? (
+            <p>Âge max bachelor : {admission.age_max.bachelor} ans</p>
+          ) : null}
+          {admission.age_max?.master ? (
+            <p>Âge max master : {admission.age_max.master} ans</p>
+          ) : null}
+        </InfoBlock>
+        <InfoBlock title="Conditions d'admission">
+          {["bachelor", "master", "phd"].map((level) => {
+            const req = reqs[level];
+            if (!req?.academic && !req?.hsk_level) return null;
+            return (
+              <p key={level}>
+                <span className="text-slate-400 uppercase text-[10px] font-bold mr-2">
+                  {level}
+                </span>
+                {[req.academic, req.hsk_level ? `HSK ${req.hsk_level}` : null]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+            );
+          })}
+        </InfoBlock>
+        <InfoBlock title="Frais / logement">
+          {admission.fees?.tuition?.bachelor?.min ? (
+            <p>
+              Bachelor : {admission.fees.tuition.bachelor.min}
+              {admission.fees.tuition.bachelor.max
+                ? `–${admission.fees.tuition.bachelor.max}`
+                : ""}{" "}
+              RMB / an
+            </p>
+          ) : null}
+          {admission.fees?.tuition?.master?.min ? (
+            <p>
+              Master : {admission.fees.tuition.master.min}
+              {admission.fees.tuition.master.max
+                ? `–${admission.fees.tuition.master.max}`
+                : ""}{" "}
+              RMB / an
+            </p>
+          ) : null}
+          {(admission.fees?.housing || []).map((h) => (
+            <p key={`${h.type}-${h.price_cny_year}`}>
+              Dortoir {h.type || ""} {h.price_cny_year ? `: ${h.price_cny_year} RMB` : ""}
+            </p>
+          ))}
+        </InfoBlock>
+      </div>
+      {scholarships.length ? (
+        <InfoBlock title="Bourses">
+          {scholarships.slice(0, 8).map((s) => (
+            <p key={s.name}>
+              {s.name}
+              {s.coverage ? ` · ${s.coverage}` : ""}
+              {s.stipend_cny_month ? ` · ${s.stipend_cny_month} RMB/mois` : ""}
+            </p>
+          ))}
+        </InfoBlock>
+      ) : null}
+      {docs.length ? (
+        <InfoBlock title="Documents requis">
+          <p>{docs.map((d) => d.type).filter(Boolean).join(" · ")}</p>
+        </InfoBlock>
+      ) : null}
+      {programs.length ? (
+        <InfoBlock title="Programmes (extrait)">
+          {programs.slice(0, 10).map((p) => (
+            <p key={`${p.level}-${p.name}`}>
+              {p.level ? `${p.level} · ` : ""}
+              {p.name}
+              {p.language ? ` (${p.language})` : ""}
+            </p>
+          ))}
+        </InfoBlock>
+      ) : null}
+    </div>
   );
 }
 
@@ -709,6 +954,7 @@ function UniversityModal({ form, setForm, saving, isNew, onClose, onSubmit }) {
             <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wide mb-4">
               {t("universities.matching")}
             </h3>
+            <AdmissionPanel extra={form.extra} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field label={t("universities.majors")}>
                 <textarea
