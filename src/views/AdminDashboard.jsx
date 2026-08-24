@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
+import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import {
   isStudentSpaceUnlocked,
@@ -1010,7 +1011,11 @@ function ContactModal({
 
     if (!error) {
       setActions(
-        (data || []).filter((action) => action.action !== "matching_payload"),
+        (data || []).filter(
+          (action) =>
+            action.action !== "matching_payload" &&
+            !isMatchingPayloadAction(action),
+        ),
       );
     }
     setLoadingActions(false);

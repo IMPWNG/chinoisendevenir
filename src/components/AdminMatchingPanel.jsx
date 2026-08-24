@@ -137,7 +137,9 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
       setSavedInfo(
         payload.saved?.created_at
           ? `Sauvegardé automatiquement le ${new Date(payload.saved.created_at).toLocaleString("fr-FR")}`
-          : "Matching terminé. La sauvegarde automatique n'a pas abouti.",
+          : payload.save_error
+            ? `Matching terminé, mais la sauvegarde a échoué : ${payload.save_error}`
+            : "Matching terminé. La sauvegarde automatique n'a pas abouti.",
       );
       await loadRuns();
       onHistory?.();
@@ -268,7 +270,15 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
         {loading ? "Analyse en cours..." : "Lancer le matching"}
       </button>
       {savedInfo ? (
-        <p className="text-emerald-300 text-sm mt-3">{savedInfo}</p>
+        <p
+          className={`text-sm mt-3 ${
+            savedInfo.includes("échoué") || savedInfo.includes("n'a pas abouti")
+              ? "text-amber-300"
+              : "text-emerald-300"
+          }`}
+        >
+          {savedInfo}
+        </p>
       ) : null}
       {runs.length ? (
         <label className="block text-xs text-slate-400 mt-3">

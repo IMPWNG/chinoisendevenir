@@ -110,12 +110,18 @@ export async function POST(request) {
       });
     } catch (saveError) {
       console.warn("Matching save failed:", saveError.message);
+      return NextResponse.json({
+        success: true,
+        saved: null,
+        save_error: saveError.message,
+        ...result,
+      });
     }
 
     try {
       await auth.admin.from("suivi_actions").insert({
         contact_id: contactId,
-        action: "matching",
+        action: "note_ajoutee",
         description: matchingSummary(payload),
         user_admin: auth.user?.email || "admin",
       });

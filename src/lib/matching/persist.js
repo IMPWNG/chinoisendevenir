@@ -1,4 +1,9 @@
+export const MATCHING_JSON_PREFIX = "[[MATCHING_JSON]]";
+
 export function compactMatchingResult(result, overrides = {}) {
+  const student = result.student
+    ? { ...result.student, notes: String(result.student.notes || "").slice(0, 800) }
+    : result.student;
   return {
     version: 1,
     generated_at: result.generated_at,
@@ -6,9 +11,12 @@ export function compactMatchingResult(result, overrides = {}) {
     client_message: result.client_message,
     client_message_ai: Boolean(result.client_message_ai),
     brief: result.brief,
-    student: result.student,
+    student,
     matches: result.matches,
-    excluded: (result.excluded || []).slice(0, 30),
+    excluded: (result.excluded || []).slice(0, 30).map((item) => ({
+      university_name: item.university_name,
+      excludeReason: item.excludeReason,
+    })),
     overrides,
   };
 }
@@ -22,6 +30,31 @@ export function matchingSummary(payload) {
   return `Matching sauvegardé (${count} université${count > 1 ? "s" : ""}). Top : ${top.university_name} (${top.score}/100, ${top.category}). Formule recommandée : ${payload.recommended_formula}.`;
 }
 
+export function isMatchingPayloadAction(action) {
+  return String(action?.description || "").startsWith(MATCHING_JSON_PREFIX);
+}
+
+function parseStoredPayload(description) {
+  const raw = String(description || "");
+  if (!raw.startsWith(MATCHING_JSON_PREFIX)) return null;
+  return JSON.parse(raw.slice(MATCHING_JSON_PREFIX.length));
+}
+
+async function insertHistoryRow(admin, { contactId, createdBy, description }) {
+  const { data, error } = await admin
+    .from("suivi_actions")
+    .insert({
+      contact_id: contactId,
+      action: "note_ajoutee",
+      description,
+      user_admin: createdBy || "admin",
+    })
+    .select("id, created_at")
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 export async function saveMatchingRun(admin, { contactId, createdBy, payload }) {
   const row = {
     contact_id: String(contactId),
@@ -33,28 +66,27 @@ export async function saveMatchingRun(admin, { contactId, createdBy, payload }) 
     payload,
   };
 
-  const { data, error } = await admin
-    .from("matching_runs")
-    .insert(row)
-    .select("id, created_at")
-    .maybeSingle();
+  try {
+    const { data, error } = await admin
+      .from("matching_runs")
+      .insert(row)
+      .select("id, created_at")
+      .maybeSingle();
 
-  if (!error && data?.id) {
-    return { id: data.id, created_at: data.created_at, storage: "matching_runs" };
+    if (!error && data?.id) {
+      return { id: data.id, created_at: data.created_at, storage: "matching_runs" };
+    }
+  } catch {
+    // Table matching_runs absente : on bascule sur le journal.
   }
 
-  const { data: action, error: actionError } = await admin
-    .from("suivi_actions")
-    .insert({
-      contact_id: contactId,
-      action: "matching_payload",
-      description: JSON.stringify(payload),
-      user_admin: createdBy || "admin",
-    })
-    .select("id, created_at")
-    .maybeSingle();
+  const encoded = `${MATCHING_JSON_PREFIX}${JSON.stringify(payload)}`;
+  const action = await insertHistoryRow(admin, {
+    contactId,
+    createdBy,
+    description: encoded,
+  });
 
-  if (actionError) throw actionError;
   return {
     id: action?.id || null,
     created_at: action?.created_at || new Date().toISOString(),
@@ -63,35 +95,40 @@ export async function saveMatchingRun(admin, { contactId, createdBy, payload }) 
 }
 
 export async function listMatchingRuns(admin, contactId) {
-  const { data: rows, error } = await admin
-    .from("matching_runs")
-    .select("id, created_at, created_by, recommended_formula, top_university, top_score, client_message, payload")
-    .eq("contact_id", String(contactId))
-    .order("created_at", { ascending: false })
-    .limit(20);
+  try {
+    const { data: rows, error } = await admin
+      .from("matching_runs")
+      .select("id, created_at, created_by, recommended_formula, top_university, top_score, client_message, payload")
+      .eq("contact_id", String(contactId))
+      .order("created_at", { ascending: false })
+      .limit(20);
 
-  if (!error && rows?.length) {
-    return rows.map((row) => ({
-      id: row.id,
-      created_at: row.created_at,
-      created_by: row.created_by,
-      recommended_formula: row.recommended_formula,
-      top_university: row.top_university,
-      top_score: row.top_score,
-      result: {
-        ...row.payload,
-        client_message: row.client_message || row.payload?.client_message,
-        recommended_formula:
-          row.recommended_formula || row.payload?.recommended_formula,
-      },
-    }));
+    if (!error && rows?.length) {
+      return rows.map((row) => ({
+        id: row.id,
+        created_at: row.created_at,
+        created_by: row.created_by,
+        recommended_formula: row.recommended_formula,
+        top_university: row.top_university,
+        top_score: row.top_score,
+        result: {
+          ...(row.payload || {}),
+          client_message: row.client_message || row.payload?.client_message,
+          recommended_formula:
+            row.recommended_formula || row.payload?.recommended_formula,
+        },
+      }));
+    }
+  } catch {
+    // Table matching_runs absente : lecture via le journal.
   }
 
   const { data: actions, error: actionsError } = await admin
     .from("suivi_actions")
     .select("id, created_at, user_admin, description")
     .eq("contact_id", contactId)
-    .eq("action", "matching_payload")
+    .eq("action", "note_ajoutee")
+    .like("description", `${MATCHING_JSON_PREFIX}%`)
     .order("created_at", { ascending: false })
     .limit(20);
 
@@ -99,7 +136,8 @@ export async function listMatchingRuns(admin, contactId) {
   return (actions || [])
     .map((action) => {
       try {
-        const payload = JSON.parse(action.description || "{}");
+        const payload = parseStoredPayload(action.description);
+        if (!payload?.matches) return null;
         return {
           id: action.id,
           created_at: action.created_at,
@@ -113,7 +151,8 @@ export async function listMatchingRuns(admin, contactId) {
         return null;
       }
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .slice(0, 20);
 }
 
 export async function appendMessageToNotes(admin, contactId, message) {
