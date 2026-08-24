@@ -55,7 +55,8 @@ const Navigation = () => {
             className="landing-nav-cta"
             onClick={() => setMenuOpen(false)}
           >
-            📝 S'inscrire
+            <span aria-hidden="true">📝</span>
+            S'inscrire
           </Link>
         </div>
       </div>
