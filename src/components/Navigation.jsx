@@ -17,7 +17,7 @@ const Navigation = () => {
     { path: "/", label: "Accueil", icon: "🏠" },
     { path: "/bourses", label: "Bourses", icon: "💰" },
     { path: "/processus", label: "Processus", icon: "🔄" },
-    { path: "/about", label: "À propos", icon: "ℹ️" },
+    { path: "/tarifs", label: "Tarifs", icon: "💶" },
     { path: "/contact", label: "Contact", icon: "📧" },
     { path: "/espace-etudiant", label: "Espace étudiant", icon: "🎓" },
   ];

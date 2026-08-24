@@ -143,14 +143,14 @@ export function isStudentSpaceUnlocked(statut) {
 }
 
 export const FORMULE_OPTIONS = [
-  { value: "Orientation (50€)", label: "1️⃣ Orientation (50€)" },
+  { value: "Bilan personnalisé (100€)", label: "1️⃣ Bilan personnalisé (100€)" },
   {
-    value: "Accompagnement candidature (300€)",
-    label: "2️⃣ Accompagnement candidature (300€)",
+    value: "Accompagnement candidature (500€)",
+    label: "2️⃣ Accompagnement candidature (500€)",
   },
   {
-    value: "Accompagnement complet (500€)",
-    label: "3️⃣ Accompagnement complet (500€)",
+    value: "Accompagnement complet (1000€)",
+    label: "3️⃣ Accompagnement complet (1000€)",
   },
 ];
 

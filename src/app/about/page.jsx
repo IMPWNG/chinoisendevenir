@@ -1,3 +1,5 @@
-import AboutPage from "@/views/AboutPage";
+import { redirect } from "next/navigation";
 
-export default AboutPage;
+export default function AboutRedirect() {
+  redirect("/tarifs");
+}

@@ -10,6 +10,7 @@ const Footer = ({ t }) => {
           © {year} ChinoisEnDevenir — {t.footer_rights}
         </p>
         <div className="landing-footer-links">
+          <Link href="/tarifs">Tarifs</Link>
           <Link href="/politique-confidentialite">
             Politique de Confidentialité
           </Link>

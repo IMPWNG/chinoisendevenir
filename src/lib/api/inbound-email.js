@@ -8,6 +8,11 @@ import {
   logAction,
 } from "./auto-reply.js";
 import { getChosenFormule } from "../studentProgress.js";
+import {
+  FORMULE_1_VALUE,
+  FORMULE_2_VALUE,
+  FORMULE_3_VALUE,
+} from "../formules.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -52,18 +57,20 @@ const INTEREST_KEYWORDS = [
 const FORMULES = [
   {
     key: "orientation",
-    label: "Orientation (50€)",
+    label: FORMULE_1_VALUE,
     patterns: [
       /\bformule\s*1\b/i,
+      /\bbilan\b/i,
       /\borientation\b/i,
+      /\bstrat[ée]gie\b/i,
       /1️⃣/,
-      /\b1\s*[-–—:.]?\s*(formule\s*)?orientation\b/i,
+      /\b1\s*[-–—:.]?\s*(formule\s*)?(bilan|orientation|strat)/i,
       /^[\s"'«»]*1[\s"'«».!]*$/m,
     ],
   },
   {
     key: "candidature",
-    label: "Accompagnement candidature (300€)",
+    label: FORMULE_2_VALUE,
     patterns: [
       /\bformule\s*2\b/i,
       /\baccompagnement\s+(à\s+la\s+)?candidature\b/i,
@@ -75,13 +82,14 @@ const FORMULES = [
   },
   {
     key: "complet",
-    label: "Accompagnement complet (500€)",
+    label: FORMULE_3_VALUE,
     patterns: [
       /\bformule\s*3\b/i,
       /\baccompagnement\s+complet\b/i,
+      /\bjusqu['’]au d[ée]part\b/i,
       /\bcomplet\b/i,
       /3️⃣/,
-      /\b3\s*[-–:.]?\s*(accompagnement|complet)\b/i,
+      /\b3\s*[-–:.]?\s*(accompagnement|complet|d[ée]part)\b/i,
       /^[\s"'«»]*3[\s"'«».!]*$/m,
     ],
   },

@@ -294,10 +294,14 @@ export const adminTranslations = {
       Autre: "Autre",
     },
     formule: {
-      "Orientation (50€)": "1️⃣ Orientation (50€)",
+      "Bilan personnalisé (100€)": "1️⃣ Bilan personnalisé (100€)",
+      "Accompagnement candidature (500€)":
+        "2️⃣ Accompagnement candidature (500€)",
+      "Accompagnement complet (1000€)": "3️⃣ Accompagnement complet (1000€)",
+      "Orientation (50€)": "1️⃣ Bilan personnalisé (100€)",
       "Accompagnement candidature (300€)":
-        "2️⃣ Accompagnement candidature (300€)",
-      "Accompagnement complet (500€)": "3️⃣ Accompagnement complet (500€)",
+        "2️⃣ Accompagnement candidature (500€)",
+      "Accompagnement complet (500€)": "3️⃣ Accompagnement complet (1000€)",
     },
     step: {
       inscription: "Inscription",
@@ -605,9 +609,12 @@ export const adminTranslations = {
       Autre: "Other",
     },
     formule: {
-      "Orientation (50€)": "1️⃣ Orientation (€50)",
-      "Accompagnement candidature (300€)": "2️⃣ Application support (€300)",
-      "Accompagnement complet (500€)": "3️⃣ Full support (€500)",
+      "Bilan personnalisé (100€)": "1️⃣ Personalized assessment (€100)",
+      "Accompagnement candidature (500€)": "2️⃣ Application support (€500)",
+      "Accompagnement complet (1000€)": "3️⃣ Full support until departure (€1,000)",
+      "Orientation (50€)": "1️⃣ Personalized assessment (€100)",
+      "Accompagnement candidature (300€)": "2️⃣ Application support (€500)",
+      "Accompagnement complet (500€)": "3️⃣ Full support until departure (€1,000)",
     },
     step: {
       inscription: "Registration",
@@ -908,9 +915,12 @@ export const adminTranslations = {
       Autre: "其他",
     },
     formule: {
-      "Orientation (50€)": "1️⃣ 规划咨询（50€）",
-      "Accompagnement candidature (300€)": "2️⃣ 申请辅导（300€）",
-      "Accompagnement complet (500€)": "3️⃣ 全程辅导（500€）",
+      "Bilan personnalisé (100€)": "1️⃣ 个性化规划（100€）",
+      "Accompagnement candidature (500€)": "2️⃣ 申请辅导（500€）",
+      "Accompagnement complet (1000€)": "3️⃣ 全程辅导至出发（1000€）",
+      "Orientation (50€)": "1️⃣ 个性化规划（100€）",
+      "Accompagnement candidature (300€)": "2️⃣ 申请辅导（500€）",
+      "Accompagnement complet (500€)": "3️⃣ 全程辅导至出发（1000€）",
     },
     step: {
       inscription: "注册",

@@ -20,7 +20,7 @@ const Hero = ({ t }) => {
           >
             {t.hero_cta_primary}
           </button>
-          <a href="#programs" className="landing-btn landing-btn-secondary">
+          <a href="/tarifs" className="landing-btn landing-btn-secondary">
             {t.hero_cta_secondary}
           </a>
         </div>

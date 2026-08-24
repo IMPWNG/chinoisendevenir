@@ -19,7 +19,7 @@ export const fr = {
     "Nous vous accompagnons à chaque étape de votre projet : choix de la formation, sélection de l'université, admission, recherche de bourse, visa et préparation de votre arrivée en Chine.",
 
   hero_cta_primary: "Évaluer mon projet",
-  hero_cta_secondary: "Découvrir nos services",
+  hero_cta_secondary: "Voir nos tarifs",
 
   // Statistics
   stats_students: "Étudiants accompagnés",

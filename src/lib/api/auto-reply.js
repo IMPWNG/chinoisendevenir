@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
 import { getAuthenticatedAdmin } from "../studentAuth.js";
 import { wrapEmailHtml, SITE_URL, escapeHtml } from "../emailLayout.js";
+import { FORMULES, EXTRA_FEES, displayFormuleLabel } from "../formules.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -88,100 +89,77 @@ function generateRelance2Template(prenom) {
 }
 
 function generateFormulesPresentationTemplate(prenom) {
+  const cards = FORMULES.map((formule, index) => {
+    const featured = index === 1 ? " featured" : "";
+    const items = formule.includes
+      .map((item) => `<li>${escapeHtml(item)}</li>`)
+      .join("");
+    const footnote = formule.footnote
+      ? `<p class="formule-intro" style="margin-top:12px;">${escapeHtml(formule.footnote)}</p>`
+      : "";
+    return `
+            <div class="formule-card${featured}">
+              <div class="formule-title">Formule ${formule.number} — ${escapeHtml(formule.title)}</div>
+              <div class="formule-price">${escapeHtml(formule.priceLabel)}</div>
+              <p class="formule-intro">${escapeHtml(formule.intro)}</p>
+              <p class="formule-intro">Inclus :</p>
+              <ul class="formule-list">${items}</ul>
+              ${footnote}
+            </div>`;
+  }).join("");
+
+  const extraFees = EXTRA_FEES.map((item) => `<li>${escapeHtml(item)}</li>`).join(
+    "",
+  );
+  const choices = FORMULES.map(
+    (formule) =>
+      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(formule.price)}`,
+  ).join("<br>");
+
   return wrapEmailHtml({
-    title: "Formules d'accompagnement",
-    subtitle: "Études en Chine",
+    title: "Nos formules d'accompagnement",
+    subtitle: "Pour étudier en Chine",
     prenom,
     bodyHtml: `
             <div class="section">
-              <p>Merci pour l'intérêt que vous portez à notre accompagnement pour votre projet d'études en Chine.</p>
-              <p>Afin de vous orienter au mieux, nous proposons plusieurs formules. Votre choix nous permet de comprendre vos besoins, votre niveau d'avancement et les étapes pour lesquelles vous souhaitez être accompagné(e).</p>
-              <p>Notre objectif est de vous aider à préparer un dossier cohérent, complet et adapté aux exigences des universités et des organismes concernés.</p>
+              <p>Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.</p>
+              <p>Chaque projet est différent. Ces formules nous aident à comprendre votre besoin, à préparer notre premier appel et à vous proposer un accompagnement adapté.</p>
+              <p>Notre objectif : un projet cohérent et un dossier sérieux, complet, aligné avec les exigences des universités chinoises.</p>
             </div>
 
-            <div class="formule-card">
-              <div class="formule-title">Formule 1 — Orientation</div>
-              <div class="formule-price">50 euros</div>
-              <p class="formule-intro">Destinée aux personnes qui souhaitent obtenir des informations claires et personnalisées avant de commencer leurs démarches.</p>
-              <p class="formule-intro">Elle comprend :</p>
-              <ul class="formule-list">
-                <li>L'analyse de votre profil et de votre projet d'études</li>
-                <li>Des conseils concernant le choix du domaine et du niveau d'études</li>
-                <li>Une orientation vers les formations et universités adaptées</li>
-                <li>Des informations sur les possibilités de bourses</li>
-                <li>Une présentation des principales étapes de la procédure</li>
-                <li>Une liste personnalisée des documents à préparer</li>
-                <li>Des recommandations pour améliorer vos chances de réussite</li>
-              </ul>
-              <p class="formule-intro" style="margin-top:12px;">Cette formule vous permet d'avoir une vision plus claire de votre projet et d'organiser efficacement vos prochaines démarches.</p>
-            </div>
+            ${cards}
 
-            <div class="formule-card featured">
-              <div class="formule-title">Formule 2 — Accompagnement à la candidature</div>
-              <div class="formule-price">300 euros</div>
-              <p class="formule-intro">Destinée aux candidats qui souhaitent être accompagnés dans la préparation et le dépôt de leur dossier de candidature.</p>
-              <p class="formule-intro">Elle comprend :</p>
-              <ul class="formule-list">
-                <li>L'étude approfondie de votre profil</li>
-                <li>La recherche d'universités et de formations correspondant à votre projet</li>
-                <li>L'identification des opportunités de bourses adaptées</li>
-                <li>La préparation et la vérification de votre dossier</li>
-                <li>Des conseils pour la rédaction et l'amélioration des documents nécessaires</li>
-                <li>L'assistance lors du remplissage des formulaires de candidature</li>
-                <li>La traduction des documents selon les besoins du dossier</li>
-                <li>Le dépôt des candidatures auprès des établissements sélectionnés</li>
-                <li>Le suivi de votre dossier jusqu'à la réception des réponses des universités</li>
-                <li>Des échanges réguliers pour vous informer de l'avancement de la procédure</li>
-              </ul>
-              <p class="formule-intro" style="margin-top:12px;">Cette formule convient particulièrement aux personnes qui souhaitent mener les démarches de candidature avec un accompagnement professionnel, tout en restant impliquées dans leur projet.</p>
-            </div>
-
-            <div class="formule-card">
-              <div class="formule-title">Formule 3 — Accompagnement complet</div>
-              <div class="formule-price">500 euros</div>
-              <p class="formule-intro">Un accompagnement personnalisé, de l'analyse de votre projet jusqu'à la préparation de votre départ pour la Chine.</p>
-              <p class="formule-intro">Elle comprend :</p>
-              <ul class="formule-list">
-                <li>L'ensemble des services inclus dans la formule « Accompagnement à la candidature »</li>
-                <li>Un suivi personnalisé pendant toutes les étapes de la procédure</li>
-                <li>Une assistance renforcée pour la préparation des documents administratifs</li>
-                <li>Des conseils concernant les démarches après admission</li>
-                <li>Une orientation pour la demande de visa étudiant</li>
-                <li>Des informations concernant le logement et l'organisation de votre arrivée</li>
-                <li>Des conseils pratiques pour préparer votre installation en Chine</li>
-                <li>Un accompagnement jusqu'à la préparation de votre départ</li>
-              </ul>
-              <p class="formule-intro" style="margin-top:12px;">Cette formule s'adresse aux personnes qui souhaitent être guidées de manière plus complète et bénéficier d'un suivi continu tout au long de leur projet.</p>
+            <div class="note">
+              <h4>Traduction des documents</h4>
+              <p>Selon la formule, nous vous aidons à identifier les documents à traduire, les langues acceptées, et à préparer les versions en anglais ou en chinois.</p>
+              <p>Les traductions officielles, certifiées ou réalisées par un prestataire externe peuvent être facturées en plus. Elles vous sont toujours indiquées avant d'être engagées.</p>
             </div>
 
             <div class="note">
-              <h4>Informations importantes</h4>
-              <p>Le choix d'une formule ne constitue pas un engagement définitif. Il nous permet d'identifier le niveau d'accompagnement le plus adapté à votre situation et de préparer notre premier échange dans de bonnes conditions.</p>
-              <p>Après réception de votre choix, nous vous proposerons une première consultation téléphonique. Cet échange permettra notamment de :</p>
-              <ul>
-                <li>Mieux comprendre votre parcours et vos objectifs</li>
-                <li>Vérifier la cohérence de votre projet</li>
-                <li>Évaluer les démarches nécessaires dans votre situation</li>
-                <li>Répondre à vos principales questions</li>
-                <li>Vous expliquer le déroulement de l'accompagnement</li>
-                <li>Confirmer ensemble la formule la plus adaptée</li>
-              </ul>
-              <p style="margin-top:12px;">À l'issue de cette consultation, si vous souhaitez poursuivre avec notre agence, nous vous présenterons les conditions de service ainsi que les prochaines étapes. Le règlement des frais d'accompagnement intervient uniquement après cet échange et après validation de la formule choisie.</p>
-              <p>Les frais liés aux candidatures, aux examens, à la traduction officielle, à la légalisation des documents, au visa ou à d'autres démarches administratives peuvent être facturés séparément et ne sont pas nécessairement inclus dans les tarifs indiqués.</p>
-              <p>L'admission dans une université ou l'obtention d'une bourse ne peut pas être garantie. La décision finale appartient exclusivement aux universités et aux organismes concernés. Notre rôle est de vous conseiller, de vous aider à constituer un dossier sérieux et de vous accompagner dans vos démarches.</p>
+              <h4>Frais qui restent à votre charge</h4>
+              <p>Nos tarifs couvrent l'accompagnement. Les frais des universités, administrations ou prestataires externes ne sont pas inclus, notamment :</p>
+              <ul>${extraFees}</ul>
+              <p style="margin-top:12px;">Lorsque c'est possible, nous vous les signalons à l'avance pour que vous puissiez prévoir votre budget.</p>
+            </div>
+
+            <div class="note">
+              <h4>Comment ça se passe</h4>
+              <p>Votre choix n'est pas un engagement définitif. Après votre réponse, nous vous proposons un appel pour comprendre votre parcours, évaluer le projet, préciser les services inclus et confirmer la formule.</p>
+              <p>Si vous poursuivez, vous recevez les conditions de service et les modalités de règlement. Aucune démarche ne commence avant signature et confirmation du paiement. Le paiement intervient après cette première consultation.</p>
+            </div>
+
+            <div class="note">
+              <h4>À retenir</h4>
+              <p>Nous ne pouvons pas garantir une admission, une bourse ou un visa. La décision finale appartient aux universités et aux organismes concernés. Notre rôle : vous conseiller et vous aider à constituer un dossier cohérent et complet.</p>
             </div>
 
             <div class="cta">
-              <p>Pour nous faire part de votre choix, répondez simplement à cet e-mail en indiquant la formule qui correspond le mieux à votre besoin :</p>
-              <div class="cta-choice">
-                1 — Formule Orientation<br>
-                2 — Accompagnement à la candidature<br>
-                3 — Accompagnement complet
-              </div>
+              <p>Répondez à cet e-mail en indiquant la formule qui vous correspond le mieux :</p>
+              <div class="cta-choice">${choices}</div>
             </div>
             <div class="section">
-              <p>Nous reviendrons ensuite vers vous afin de convenir d'un échange téléphonique et de faire le point sur votre projet.</p>
-              <p>Nous restons à votre disposition pour toute question complémentaire.</p>
+              <p>Nous reviendrons ensuite vers vous pour convenir d'un échange téléphonique.</p>
+              <p>Merci pour votre confiance. Nous restons à votre disposition.</p>
             </div>
     `,
   });
@@ -225,21 +203,9 @@ function generateFormuleConfirmeeTemplate(contact, formuleLabel) {
   });
 }
 
-function displayFormuleLabel(formuleLabel) {
-  const labels = {
-    "Orientation (50€)": "Formule 1 — Orientation (50 euros)",
-    "Accompagnement candidature (300€)":
-      "Formule 2 — Accompagnement à la candidature (300 euros)",
-    "Accompagnement complet (500€)":
-      "Formule 3 — Accompagnement complet (500 euros)",
-  };
-  return labels[formuleLabel] || formuleLabel || "Formule sélectionnée";
-}
-
 const EMAIL_TEMPLATES = {
   formules_presentation: {
-    subject:
-      "Choisissez la formule d'accompagnement qui correspond à votre projet d'études en Chine",
+    subject: "Nos formules d'accompagnement pour étudier en Chine",
     generateHtml: (contact) =>
       generateFormulesPresentationTemplate(contact.prenom || ""),
     action: "email_formules",
