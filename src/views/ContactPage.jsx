@@ -39,9 +39,11 @@ function ContactPage() {
         <div className="container">
           {/* Titre */}
           <div className="text-center mb-16">
-            <h1 className="landing-section-title">📧 Nous Contacter</h1>
+            <h1 className="landing-section-title">Contact pour étudier en Chine</h1>
             <p className="landing-section-subtitle">
-              Nous sommes là pour répondre à vos questions
+              Une question sur l'admission, une bourse ou le visa étudiant ?
+              Écrivez-nous : nous vous aidons à y voir clair sur votre projet
+              d'études en Chine.
             </p>
           </div>
 

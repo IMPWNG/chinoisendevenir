@@ -1,14 +1,18 @@
 import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import FaqSection from "../components/FaqSection";
+import JsonLd from "../components/JsonLd";
 import { fr } from "../i18n/fr";
 import { EXTRA_FEES, FORMULES, PROCESS_STEPS } from "../lib/formules";
+import { FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
 
 function TarifsPage() {
   const t = fr;
 
   return (
     <div className="app app-page-fill">
+      <JsonLd data={[serviceJsonLd(), faqJsonLd(FAQS.tarifs)]} />
       <Navigation />
 
       <section className="landing-programs">
@@ -166,6 +170,13 @@ function TarifsPage() {
             <Link href="/#lead-form" className="landing-btn landing-btn-accent">
               Prendre contact avec Chinois en Devenir
             </Link>
+          </div>
+
+          <div className="mt-16 max-w-4xl mx-auto">
+            <FaqSection
+              items={FAQS.tarifs}
+              title="Questions fréquentes sur l'accompagnement"
+            />
           </div>
         </div>
       </section>

@@ -13,10 +13,10 @@ export const fr = {
   hero_badge: "🎓 Votre projet d'études en Chine commence ici",
 
   hero_title:
-    "Étudiez en Chine avec un accompagnement complet et personnalisé",
+    "Étudier en Chine : admission, bourse et visa, accompagnés de A à Z",
 
   hero_subtitle:
-    "Nous vous accompagnons à chaque étape de votre projet : choix de la formation, sélection de l'université, admission, recherche de bourse, visa et préparation de votre arrivée en Chine.",
+    "Vous voulez venir faire vos études en Chine ? Nous vous guidons à chaque étape : choix de la formation, université chinoise, dossier d'admission, bourses d'études et visa étudiant.",
 
   hero_cta_primary: "Évaluer mon projet",
   hero_cta_secondary: "Voir nos tarifs",
@@ -162,7 +162,7 @@ export const fr = {
 
   // Footer
   footer_description:
-    "Nous accompagnons les étudiants dans leur projet d'études en Chine, de l'orientation jusqu'à leur installation.",
+    "Accompagnement francophone pour étudier en Chine : orientation, admission universitaire, bourses et visa étudiant.",
 
   footer_rights: "Tous droits réservés",
   footer_privacy: "Politique de confidentialité",

@@ -1,6 +1,16 @@
+import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import FaqSection from "../components/FaqSection";
+import JsonLd from "../components/JsonLd";
+import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import { fr } from "../i18n/fr";
+import { breadcrumbJsonLd, FAQS, faqJsonLd } from "../lib/seo";
+
+const BREADCRUMBS = [
+  { name: "Accueil", path: "/" },
+  { name: "Bourses d'études en Chine", path: "/bourses" },
+];
 
 function BoursesPage() {
   const t = fr;
@@ -50,14 +60,27 @@ function BoursesPage() {
 
   return (
     <div className="app app-page-fill">
+      <JsonLd data={[breadcrumbJsonLd(BREADCRUMBS), faqJsonLd(FAQS.bourses)]} />
       <Navigation />
 
       <section className="landing-programs">
         <div className="container">
-          <h1 className="landing-section-title">💰 Bourses d'études</h1>
-          <p className="landing-section-subtitle mb-12">
-            Découvrez les différentes opportunités de financement pour étudier
-            en Chine
+          <PageBreadcrumbs items={BREADCRUMBS} />
+          <h1 className="landing-section-title">
+            Bourses d'études en Chine
+          </h1>
+          <p className="landing-section-subtitle mb-8">
+            Financer ses études en Chine est possible via la bourse CSC, une
+            bourse d'université, de province ou de ville. L'obtention dépend du
+            dossier : rien n'est automatique.
+          </p>
+          <p className="text-center text-slate-600 max-w-3xl mx-auto mb-12">
+            Nous vous aidons à identifier les options réalistes pour{" "}
+            <Link href="/etudier-en-chine" className="seo-inline-link">
+              étudier en Chine
+            </Link>{" "}
+            et à préparer un dossier cohérent. Nous ne garantissons pas
+            l'attribution d'une bourse.
           </p>
 
           {/* Section Attention */}
@@ -160,6 +183,13 @@ function BoursesPage() {
             <a href="/contact" className="landing-btn landing-btn-accent">
               Demander un conseil personnalisé
             </a>
+          </div>
+
+          <div className="mt-16 max-w-4xl mx-auto">
+            <FaqSection
+              items={FAQS.bourses}
+              title="Questions fréquentes sur les bourses pour étudier en Chine"
+            />
           </div>
         </div>
       </section>

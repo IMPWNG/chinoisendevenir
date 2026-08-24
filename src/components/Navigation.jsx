@@ -15,6 +15,7 @@ const Navigation = () => {
 
   const navLinks = [
     { path: "/", label: "Accueil", icon: "🏠" },
+    { path: "/etudier-en-chine", label: "Étudier en Chine", icon: "📘" },
     { path: "/bourses", label: "Bourses", icon: "💰" },
     { path: "/processus", label: "Processus", icon: "🔄" },
     { path: "/tarifs", label: "Tarifs", icon: "💶" },

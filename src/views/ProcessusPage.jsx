@@ -1,6 +1,16 @@
+import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import FaqSection from "../components/FaqSection";
+import JsonLd from "../components/JsonLd";
+import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import { fr } from "../i18n/fr";
+import { breadcrumbJsonLd, FAQS, faqJsonLd } from "../lib/seo";
+
+const BREADCRUMBS = [
+  { name: "Accueil", path: "/" },
+  { name: "Processus d'admission", path: "/processus" },
+];
 
 function ProcessusPage() {
   const t = fr;
@@ -105,7 +115,9 @@ function ProcessusPage() {
       description:
         "Bienvenue en Chine ! Nous vous accompagnons dans vos premiers pas.",
       details: [
-
+        "Accueil et premières orientations sur place",
+        "Aide aux démarches d'inscription et de résidence",
+        "Repères pour le campus, le logement et la vie quotidienne",
       ],
       durée: "1-2 semaines",
       icon: "🎓",
@@ -114,15 +126,24 @@ function ProcessusPage() {
 
   return (
     <div className="app app-page-fill">
+      <JsonLd
+        data={[breadcrumbJsonLd(BREADCRUMBS), faqJsonLd(FAQS.processus)]}
+      />
       <Navigation />
 
       <section className="landing-programs">
         <div className="container">
+          <PageBreadcrumbs items={BREADCRUMBS} />
           <h1 className="landing-section-title">
-            🔄 Notre processus d'admission
+            Venir étudier en Chine : le processus d'admission
           </h1>
-          <p className="landing-section-subtitle mb-12">
-            Suivez étape par étape votre parcours vers les études en Chine
+          <p className="landing-section-subtitle mb-8">
+            De la première évaluation jusqu'à l'installation : orientation,
+            université, dossier, résultats,{" "}
+            <Link href="/visa-etudiant-chine" className="seo-inline-link">
+              visa étudiant
+            </Link>{" "}
+            et départ. Comptez en général 4 à 6 mois.
           </p>
 
           {/* Timeline */}
@@ -203,6 +224,13 @@ function ProcessusPage() {
                 <p className="text-gray-700 font-semibold">Accompagnement</p>
               </div>
             </div>
+          </div>
+
+          <div className="mt-16 max-w-4xl mx-auto">
+            <FaqSection
+              items={FAQS.processus}
+              title="Questions fréquentes sur le processus pour étudier en Chine"
+            />
           </div>
         </div>
       </section>
