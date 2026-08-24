@@ -13,12 +13,14 @@ function TarifsPage() {
 
       <section className="landing-programs">
         <div className="container">
-          <h1 className="landing-section-title">Nos formules d'accompagnement</h1>
-          <p className="landing-section-subtitle mb-12 max-w-3xl mx-auto">
-            Vous souhaitez étudier en Chine, mais vous ne savez pas par où
-            commencer ? Nous vous accompagnons selon votre niveau d'avancement :
-            orientation, candidature, bourse, visa et préparation du départ.
-          </p>
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h1 className="landing-section-title">Nos formules d'accompagnement</h1>
+            <p className="landing-section-subtitle mb-0">
+              Vous souhaitez étudier en Chine, mais vous ne savez pas par où
+              commencer ? Nous vous accompagnons selon votre niveau d'avancement :
+              orientation, candidature, bourse, visa et préparation du départ.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
             {FORMULES.map((formule) => {
