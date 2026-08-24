@@ -2,6 +2,41 @@ import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { getRequiredDocumentsStatus } from "@/lib/studentDocuments";
 import { runMatching } from "@/lib/matching/run";
+import {
+  appendMessageToNotes,
+  compactMatchingResult,
+  listMatchingRuns,
+  matchingSummary,
+  saveMatchingRun,
+} from "@/lib/matching/persist";
+
+export async function GET(request) {
+  try {
+    const auth = await getAuthenticatedAdmin(request);
+    if (auth.error) {
+      return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+
+    const contactId = String(
+      request.nextUrl.searchParams.get("contactId") || "",
+    ).trim();
+    if (!contactId) {
+      return NextResponse.json({ error: "contactId manquant" }, { status: 400 });
+    }
+
+    const runs = await listMatchingRuns(auth.admin, contactId);
+    return NextResponse.json({
+      success: true,
+      runs,
+      latest: runs[0] || null,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error.message || "Lecture impossible" },
+      { status: 500 },
+    );
+  }
+}
 
 export async function POST(request) {
   try {
@@ -14,6 +49,24 @@ export async function POST(request) {
     const contactId = String(body.contactId || "").trim();
     if (!contactId) {
       return NextResponse.json({ error: "contactId manquant" }, { status: 400 });
+    }
+
+    if (body.saveNotes) {
+      const message = String(body.client_message || "").trim();
+      if (!message) {
+        return NextResponse.json(
+          { error: "Aucun message à enregistrer" },
+          { status: 400 },
+        );
+      }
+      const notes = await appendMessageToNotes(auth.admin, contactId, message);
+      await auth.admin.from("suivi_actions").insert({
+        contact_id: contactId,
+        action: "note_ajoutee",
+        description: "Réponse matching enregistrée dans les notes.",
+        user_admin: auth.user?.email || "admin",
+      });
+      return NextResponse.json({ success: true, notes_admin: notes });
     }
 
     const [{ data: contact, error: contactError }, { data: universities, error: uniError }] =
@@ -47,21 +100,34 @@ export async function POST(request) {
       overrides: body.overrides || {},
     });
 
+    const payload = compactMatchingResult(result, body.overrides || {});
+    let saved = null;
     try {
-      const top = result.matches[0];
+      saved = await saveMatchingRun(auth.admin, {
+        contactId,
+        createdBy: auth.user?.email || "admin",
+        payload,
+      });
+    } catch (saveError) {
+      console.warn("Matching save failed:", saveError.message);
+    }
+
+    try {
       await auth.admin.from("suivi_actions").insert({
         contact_id: contactId,
         action: "matching",
-        description: top
-          ? `Matching ${result.matches.length} universités. Top : ${top.university_name} (${top.score}/100, ${top.category}). Formule recommandée : ${result.recommended_formula}.`
-          : "Matching lancé : aucune université compatible.",
+        description: matchingSummary(payload),
         user_admin: auth.user?.email || "admin",
       });
     } catch {
       // history is optional
     }
 
-    return NextResponse.json({ success: true, ...result });
+    return NextResponse.json({
+      success: true,
+      saved,
+      ...result,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error.message || "Matching impossible" },

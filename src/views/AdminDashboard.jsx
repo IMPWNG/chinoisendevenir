@@ -163,6 +163,7 @@ const ACTIONS_TYPES = [
     label: "Inscription effectuée",
     icon: "✅",
   },
+  { value: "matching", label: "Matching universités", icon: "🎯" },
   { value: "contact_modifier", label: "Contact modifié", icon: "✏️" },
   { value: "dossier_complet", label: "Dossier complet", icon: "📂" },
 ];
@@ -1007,7 +1008,11 @@ function ContactModal({
       .eq("contact_id", contact.id)
       .order("created_at", { ascending: false });
 
-    if (!error) setActions(data);
+    if (!error) {
+      setActions(
+        (data || []).filter((action) => action.action !== "matching_payload"),
+      );
+    }
     setLoadingActions(false);
   };
 

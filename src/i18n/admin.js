@@ -251,6 +251,7 @@ export const adminTranslations = {
       paiement_recu: "Paiement reçu",
       inscription_effectuee: "Inscription effectuée",
       contact_modifier: "Contact modifié",
+      matching: "Matching universités",
       dossier_complet: "Dossier complet",
     },
     emailTemplate: {
@@ -566,6 +567,7 @@ export const adminTranslations = {
       paiement_recu: "Payment received",
       inscription_effectuee: "Enrollment completed",
       contact_modifier: "Contact updated",
+      matching: "University matching",
       dossier_complet: "File complete",
     },
     emailTemplate: {
@@ -872,6 +874,7 @@ export const adminTranslations = {
       paiement_recu: "已收到付款",
       inscription_effectuee: "已完成报名",
       contact_modifier: "已修改联系人",
+      matching: "院校匹配",
       dossier_complet: "材料齐全",
     },
     emailTemplate: {

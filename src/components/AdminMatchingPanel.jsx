@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { getFormuleByNumber } from "../lib/formules";
 
@@ -67,11 +67,50 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
   const [result, setResult] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [copied, setCopied] = useState("");
+  const [savedInfo, setSavedInfo] = useState("");
+  const [runs, setRuns] = useState([]);
+  const [savingNotes, setSavingNotes] = useState(false);
 
   const selected = useMemo(
     () => result?.matches?.find((item) => item.university_id === selectedId) || result?.matches?.[0],
     [result, selectedId],
   );
+
+  const applyResult = (payload, meta = {}) => {
+    if (!payload) return;
+    setResult(payload);
+    setSelectedId(payload.matches?.[0]?.university_id || null);
+    if (meta.created_at) {
+      setSavedInfo(
+        `Sauvegardé le ${new Date(meta.created_at).toLocaleString("fr-FR")}`,
+      );
+    }
+  };
+
+  const loadRuns = async ({ restore = false } = {}) => {
+    try {
+      const response = await authedFetch(
+        `/api/admin/matching?contactId=${encodeURIComponent(contact.id)}`,
+      );
+      const payload = await response.json();
+      if (!response.ok) return;
+      setRuns(payload.runs || []);
+      if (restore && payload.latest?.result) {
+        applyResult(payload.latest.result, payload.latest);
+      }
+    } catch {
+      // ignore
+    }
+  };
+
+  useEffect(() => {
+    setResult(null);
+    setRuns([]);
+    setSavedInfo("");
+    setError("");
+    loadRuns({ restore: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contact.id]);
 
   const run = async () => {
     setLoading(true);
@@ -93,8 +132,13 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Matching impossible");
-      setResult(payload);
-      setSelectedId(payload.matches?.[0]?.university_id || null);
+      applyResult(payload, payload.saved);
+      setSavedInfo(
+        payload.saved?.created_at
+          ? `Sauvegardé automatiquement le ${new Date(payload.saved.created_at).toLocaleString("fr-FR")}`
+          : "Matching terminé. La sauvegarde automatique n'a pas abouti.",
+      );
+      await loadRuns();
       onHistory?.();
     } catch (err) {
       setError(err.message === "SESSION" ? "Session expirée. Reconnectez-vous." : err.message);
@@ -106,6 +150,30 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
   const copy = async (text, key) => {
     await navigator.clipboard.writeText(text);
     setCopied(key);
+  };
+
+  const saveNotes = async () => {
+    if (!result?.client_message) return;
+    setSavingNotes(true);
+    setError("");
+    try {
+      const response = await authedFetch("/api/admin/matching", {
+        method: "POST",
+        body: JSON.stringify({
+          contactId: contact.id,
+          saveNotes: true,
+          client_message: result.client_message,
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Enregistrement impossible");
+      setCopied("notes");
+      onHistory?.();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSavingNotes(false);
+    }
   };
 
   const formula = result ? getFormuleByNumber(result.recommended_formula) : null;
@@ -198,6 +266,31 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
       >
         {loading ? "Analyse en cours..." : "Lancer le matching"}
       </button>
+      {savedInfo ? (
+        <p className="text-emerald-300 text-sm mt-3">{savedInfo}</p>
+      ) : null}
+      {runs.length ? (
+        <label className="block text-xs text-slate-400 mt-3">
+          Matchings sauvegardés
+          <select
+            defaultValue={runs[0]?.id || ""}
+            onChange={(e) => {
+              const run = runs.find((item) => String(item.id) === e.target.value);
+              if (run?.result) applyResult(run.result, run);
+            }}
+            className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
+          >
+            {runs.map((run) => (
+              <option key={run.id} value={run.id}>
+                {new Date(run.created_at).toLocaleString("fr-FR")}
+                {run.top_university
+                  ? ` — ${run.top_university} (${run.top_score}/100)`
+                  : ""}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
 
       {error ? <p className="text-rose-300 text-sm mt-3">{error}</p> : null}
 
@@ -310,21 +403,39 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2 gap-3">
               <p className="text-sm font-bold text-slate-300 uppercase tracking-wide">
                 Réponse destinée à l'étudiant
               </p>
-              <button
-                type="button"
-                onClick={() => copy(result.client_message, "message")}
-                className="text-xs font-bold text-cyan-300 hover:text-cyan-200"
-              >
-                {copied === "message" ? "Copié" : "Copier"}
-              </button>
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={saveNotes}
+                  disabled={savingNotes}
+                  className="text-xs font-bold text-emerald-300 hover:text-emerald-200 disabled:opacity-50"
+                >
+                  {copied === "notes"
+                    ? "Enregistré dans les notes"
+                    : savingNotes
+                      ? "Enregistrement..."
+                      : "Sauvegarder dans les notes"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => copy(result.client_message, "message")}
+                  className="text-xs font-bold text-cyan-300 hover:text-cyan-200"
+                >
+                  {copied === "message" ? "Copié" : "Copier"}
+                </button>
+              </div>
             </div>
             <textarea
-              readOnly
               value={result.client_message}
+              onChange={(e) =>
+                setResult((prev) =>
+                  prev ? { ...prev, client_message: e.target.value } : prev,
+                )
+              }
               rows={16}
               className="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-slate-100 text-sm leading-relaxed"
             />
