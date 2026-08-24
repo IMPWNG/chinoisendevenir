@@ -4,7 +4,10 @@
     "name_en": "East China Jiaotong University",
     "name_zh": "华东交通大学",
     "name_fr": "Université Jiaotong de Chine de l'Est",
-    "aliases": ["ECJTU", "East China jiatong university"],
+    "aliases": [
+      "ECJTU",
+      "East China jiatong university"
+    ],
     "city": "Nanchang",
     "province": "Jiangxi",
     "seed_urls": [
@@ -21,7 +24,9 @@
     "name_en": "Shenzhen University",
     "name_zh": "深圳大学",
     "name_fr": "Université de Shenzhen",
-    "aliases": ["SZU"],
+    "aliases": [
+      "SZU"
+    ],
     "city": "Shenzhen",
     "province": "Guangdong",
     "seed_urls": [
@@ -38,7 +43,9 @@
     "name_en": "Beijing University of Technology",
     "name_zh": "北京工业大学",
     "name_fr": "Université de technologie de Pékin",
-    "aliases": ["BJUT"],
+    "aliases": [
+      "BJUT"
+    ],
     "city": "Beijing",
     "province": "Beijing",
     "seed_urls": [
@@ -53,7 +60,9 @@
     "name_en": "Nanjing University of Science and Technology",
     "name_zh": "南京理工大学",
     "name_fr": "Université de science et technologie de Nanjing",
-    "aliases": ["NJUST"],
+    "aliases": [
+      "NJUST"
+    ],
     "city": "Nanjing",
     "province": "Jiangsu",
     "seed_urls": [
@@ -68,7 +77,10 @@
     "name_en": "Wuhan University of Technology",
     "name_zh": "武汉理工大学",
     "name_fr": "Université de technologie de Wuhan",
-    "aliases": ["WHUT", "WUT"],
+    "aliases": [
+      "WHUT",
+      "WUT"
+    ],
     "city": "Wuhan",
     "province": "Hubei",
     "seed_urls": [
@@ -83,7 +95,9 @@
     "name_en": "Chongqing University of Posts and Telecommunications",
     "name_zh": "重庆邮电大学",
     "name_fr": "Université des postes et télécommunications de Chongqing",
-    "aliases": ["CQUPT"],
+    "aliases": [
+      "CQUPT"
+    ],
     "city": "Chongqing",
     "province": "Chongqing",
     "seed_urls": [
@@ -98,7 +112,10 @@
     "name_en": "Chang'an University",
     "name_zh": "长安大学",
     "name_fr": "Université Chang'an",
-    "aliases": ["CHD", "Chang'an University"],
+    "aliases": [
+      "CHD",
+      "Chang'an University"
+    ],
     "city": "Xi'an",
     "province": "Shaanxi",
     "seed_urls": [
@@ -113,7 +130,11 @@
     "name_en": "Xi'an Jiaotong University",
     "name_zh": "西安交通大学",
     "name_fr": "Université Jiaotong de Xi'an",
-    "aliases": ["XJTU", "XI'AN JIAOTING UNIVERSITY", "Xi'an Jiaoting University"],
+    "aliases": [
+      "XJTU",
+      "XI'AN JIAOTING UNIVERSITY",
+      "Xi'an Jiaoting University"
+    ],
     "city": "Xi'an",
     "province": "Shaanxi",
     "seed_urls": [
@@ -128,7 +149,10 @@
     "name_en": "Xidian University",
     "name_zh": "西安电子科技大学",
     "name_fr": "Université Xidian",
-    "aliases": ["XDU", "XIDIAN UNIVERSITY - OLD ONE"],
+    "aliases": [
+      "XDU",
+      "XIDIAN UNIVERSITY - OLD ONE"
+    ],
     "notes": "Ancien portail / ancien compte de candidature.",
     "city": "Xi'an",
     "province": "Shaanxi",
@@ -144,7 +168,9 @@
     "name_en": "Nanjing University of Finance and Economics",
     "name_zh": "南京财经大学",
     "name_fr": "Université de finance et d'économie de Nanjing",
-    "aliases": ["NUFE"],
+    "aliases": [
+      "NUFE"
+    ],
     "city": "Nanjing",
     "province": "Jiangsu",
     "seed_urls": [
@@ -159,7 +185,9 @@
     "name_en": "University of Jinan",
     "name_zh": "济南大学",
     "name_fr": "Université de Jinan",
-    "aliases": ["UJN"],
+    "aliases": [
+      "UJN"
+    ],
     "city": "Jinan",
     "province": "Shandong",
     "seed_urls": [
@@ -174,7 +202,9 @@
     "name_en": "Jilin University",
     "name_zh": "吉林大学",
     "name_fr": "Université de Jilin",
-    "aliases": ["JLU"],
+    "aliases": [
+      "JLU"
+    ],
     "city": "Changchun",
     "province": "Jilin",
     "seed_urls": [
@@ -189,7 +219,10 @@
     "name_en": "Northwestern Polytechnical University",
     "name_zh": "西北工业大学",
     "name_fr": "Université polytechnique du Nord-Ouest",
-    "aliases": ["NPU", "NWPU"],
+    "aliases": [
+      "NPU",
+      "NWPU"
+    ],
     "city": "Xi'an",
     "province": "Shaanxi",
     "seed_urls": [
@@ -204,7 +237,9 @@
     "name_en": "Hainan Normal University",
     "name_zh": "海南师范大学",
     "name_fr": "Université normale de Hainan",
-    "aliases": ["HNNU"],
+    "aliases": [
+      "HNNU"
+    ],
     "city": "Haikou",
     "province": "Hainan",
     "seed_urls": [
@@ -219,7 +254,9 @@
     "name_en": "Guangdong University of Technology",
     "name_zh": "广东工业大学",
     "name_fr": "Université de technologie du Guangdong",
-    "aliases": ["GDUT"],
+    "aliases": [
+      "GDUT"
+    ],
     "city": "Guangzhou",
     "province": "Guangdong",
     "seed_urls": [
@@ -234,7 +271,9 @@
     "name_en": "Wuxi University",
     "name_zh": "无锡学院",
     "name_fr": "Université de Wuxi",
-    "aliases": ["WXU"],
+    "aliases": [
+      "WXU"
+    ],
     "city": "Wuxi",
     "province": "Jiangsu",
     "seed_urls": [
@@ -250,7 +289,9 @@
     "name_en": "Nanjing University of Information Science and Technology",
     "name_zh": "南京信息工程大学",
     "name_fr": "Université d'information scientifique et technologique de Nanjing",
-    "aliases": ["NUIST"],
+    "aliases": [
+      "NUIST"
+    ],
     "city": "Nanjing",
     "province": "Jiangsu",
     "seed_urls": [
@@ -265,7 +306,9 @@
     "name_en": "Huazhong University of Science and Technology",
     "name_zh": "华中科技大学",
     "name_fr": "Université de science et technologie Huazhong",
-    "aliases": ["HUST"],
+    "aliases": [
+      "HUST"
+    ],
     "city": "Wuhan",
     "province": "Hubei",
     "seed_urls": [
@@ -280,7 +323,10 @@
     "name_en": "Zhejiang A&F University",
     "name_zh": "浙江农林大学",
     "name_fr": "Université A&F du Zhejiang",
-    "aliases": ["ZAFU", "Zhejiang A and F University"],
+    "aliases": [
+      "ZAFU",
+      "Zhejiang A and F University"
+    ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "seed_urls": [
@@ -295,7 +341,9 @@
     "name_en": "Hangzhou Normal University",
     "name_zh": "杭州师范大学",
     "name_fr": "Université normale de Hangzhou",
-    "aliases": ["HZNU"],
+    "aliases": [
+      "HZNU"
+    ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "seed_urls": [
@@ -310,7 +358,9 @@
     "name_en": "Ningbo University",
     "name_zh": "宁波大学",
     "name_fr": "Université de Ningbo",
-    "aliases": ["NBU"],
+    "aliases": [
+      "NBU"
+    ],
     "city": "Ningbo",
     "province": "Zhejiang",
     "seed_urls": [
@@ -325,7 +375,10 @@
     "name_en": "Zhejiang Gongshang University",
     "name_zh": "浙江工商大学",
     "name_fr": "Université Gongshang du Zhejiang",
-    "aliases": ["ZJSU", "ZJGS"],
+    "aliases": [
+      "ZJSU",
+      "ZJGS"
+    ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "seed_urls": [
@@ -339,7 +392,10 @@
     "name_en": "Southwestern University of Finance and Economics",
     "name_zh": "西南财经大学",
     "name_fr": "Université du Sud-Ouest de finance et d'économie",
-    "aliases": ["SWUFE", "Southwest University of Finance and Economics"],
+    "aliases": [
+      "SWUFE",
+      "Southwest University of Finance and Economics"
+    ],
     "city": "Chengdu",
     "province": "Sichuan",
     "seed_urls": [
@@ -354,7 +410,9 @@
     "name_en": "Lanzhou University of Technology",
     "name_zh": "兰州理工大学",
     "name_fr": "Université de technologie de Lanzhou",
-    "aliases": ["LUT"],
+    "aliases": [
+      "LUT"
+    ],
     "city": "Lanzhou",
     "province": "Gansu",
     "seed_urls": [
@@ -369,7 +427,10 @@
     "name_en": "Northwest University",
     "name_zh": "西北大学",
     "name_fr": "Université du Nord-Ouest",
-    "aliases": ["NWU", "Northwestern University"],
+    "aliases": [
+      "NWU",
+      "Northwestern University"
+    ],
     "notes": "Interprété comme Northwest University (西北大学, Xi'an), pas Northwestern University (USA).",
     "city": "Xi'an",
     "province": "Shaanxi",
@@ -385,7 +446,9 @@
     "name_en": "Harbin Engineering University",
     "name_zh": "哈尔滨工程大学",
     "name_fr": "Université d'ingénierie de Harbin",
-    "aliases": ["HEU"],
+    "aliases": [
+      "HEU"
+    ],
     "city": "Harbin",
     "province": "Heilongjiang",
     "seed_urls": [
@@ -400,7 +463,9 @@
     "name_en": "Zhengzhou University",
     "name_zh": "郑州大学",
     "name_fr": "Université de Zhengzhou",
-    "aliases": ["ZZU"],
+    "aliases": [
+      "ZZU"
+    ],
     "city": "Zhengzhou",
     "province": "Henan",
     "seed_urls": [
@@ -415,7 +480,9 @@
     "name_en": "Jiangsu Normal University",
     "name_zh": "江苏师范大学",
     "name_fr": "Université normale du Jiangsu",
-    "aliases": ["JSNU"],
+    "aliases": [
+      "JSNU"
+    ],
     "city": "Xuzhou",
     "province": "Jiangsu",
     "seed_urls": [
@@ -430,7 +497,10 @@
     "name_en": "Beihang University",
     "name_zh": "北京航空航天大学",
     "name_fr": "Université Beihang",
-    "aliases": ["BUAA", "Beihang"],
+    "aliases": [
+      "BUAA",
+      "Beihang"
+    ],
     "city": "Beijing",
     "province": "Beijing",
     "seed_urls": [
@@ -445,7 +515,11 @@
     "name_en": "Harbin Institute of Technology, Shenzhen",
     "name_zh": "哈尔滨工业大学（深圳）",
     "name_fr": "Institut de technologie de Harbin — campus Shenzhen",
-    "aliases": ["HIT-SZ", "HIT Shenzhen", "HITSZ"],
+    "aliases": [
+      "HIT-SZ",
+      "HIT Shenzhen",
+      "HITSZ"
+    ],
     "city": "Shenzhen",
     "province": "Guangdong",
     "seed_urls": [
@@ -460,7 +534,9 @@
     "name_en": "Jinzhou Medical University",
     "name_zh": "锦州医科大学",
     "name_fr": "Université médicale de Jinzhou",
-    "aliases": ["JZMU"],
+    "aliases": [
+      "JZMU"
+    ],
     "city": "Jinzhou",
     "province": "Liaoning",
     "seed_urls": [
@@ -475,7 +551,9 @@
     "name_en": "Wenzhou Medical University",
     "name_zh": "温州医科大学",
     "name_fr": "Université médicale de Wenzhou",
-    "aliases": ["WMU"],
+    "aliases": [
+      "WMU"
+    ],
     "city": "Wenzhou",
     "province": "Zhejiang",
     "seed_urls": [
@@ -490,7 +568,9 @@
     "name_en": "Zhejiang University of Technology",
     "name_zh": "浙江工业大学",
     "name_fr": "Université de technologie du Zhejiang",
-    "aliases": ["ZJUT"],
+    "aliases": [
+      "ZJUT"
+    ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "seed_urls": [
@@ -505,7 +585,9 @@
     "name_en": "Liaoning University of Technology",
     "name_zh": "辽宁工业大学",
     "name_fr": "Université de technologie du Liaoning",
-    "aliases": ["LNUT"],
+    "aliases": [
+      "LNUT"
+    ],
     "city": "Jinzhou",
     "province": "Liaoning",
     "seed_urls": [
@@ -520,7 +602,10 @@
     "name_en": "Xidian University",
     "name_zh": "西安电子科技大学",
     "name_fr": "Université Xidian",
-    "aliases": ["XDU", "Xidian University - NEW ACC"],
+    "aliases": [
+      "XDU",
+      "Xidian University - NEW ACC"
+    ],
     "notes": "Nouveau portail / nouveau compte de candidature.",
     "city": "Xi'an",
     "province": "Shaanxi",
@@ -536,7 +621,9 @@
     "name_en": "South China University of Technology",
     "name_zh": "华南理工大学",
     "name_fr": "Université de technologie de Chine du Sud",
-    "aliases": ["SCUT"],
+    "aliases": [
+      "SCUT"
+    ],
     "city": "Guangzhou",
     "province": "Guangdong",
     "seed_urls": [
@@ -551,7 +638,9 @@
     "name_en": "Zhengzhou University of Light Industry",
     "name_zh": "郑州轻工业大学",
     "name_fr": "Université d'industrie légère de Zhengzhou",
-    "aliases": ["ZZULI"],
+    "aliases": [
+      "ZZULI"
+    ],
     "city": "Zhengzhou",
     "province": "Henan",
     "seed_urls": [
@@ -566,7 +655,9 @@
     "name_en": "Shanxi Medical University",
     "name_zh": "山西医科大学",
     "name_fr": "Université médicale du Shanxi",
-    "aliases": ["SXMU"],
+    "aliases": [
+      "SXMU"
+    ],
     "city": "Taiyuan",
     "province": "Shanxi",
     "seed_urls": [
@@ -574,6 +665,440 @@
       "http://gjxy.sxmu.edu.cn/",
       "https://www.sxmu.edu.cn/en/",
       "https://www.sxmu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "blcu",
+    "name_en": "Beijing Language and Culture University",
+    "name_zh": "北京语言大学",
+    "name_fr": "Université de langue et culture de Pékin",
+    "aliases": [
+      "BLCU"
+    ],
+    "city": "Beijing",
+    "province": "Beijing",
+    "seed_urls": [
+      "https://admission.blcu.edu.cn/main.htm",
+      "https://admission.blcu.edu.cn/",
+      "https://admission.blcu.edu.cn/main.htm/",
+      "https://english.blcu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "central-south-university",
+    "name_en": "Central South University",
+    "name_zh": "中南大学",
+    "name_fr": "Université du Centre-Sud",
+    "aliases": [
+      "CSU"
+    ],
+    "city": "Changsha",
+    "province": "Hunan",
+    "seed_urls": [
+      "https://intl.csu.edu.cn/zwb/lhlx.htm",
+      "https://intl.csu.edu.cn/",
+      "https://intl.csu.edu.cn/zwb/",
+      "https://en.csu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "chengdu-university-of-technology",
+    "name_en": "Chengdu University of Technology",
+    "name_zh": "成都理工大学",
+    "name_fr": "Université de technologie de Chengdu",
+    "aliases": [
+      "CDUT"
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://cie.cdut.edu.cn/",
+      "https://en.cdut.edu.cn/"
+    ]
+  },
+  {
+    "slug": "cqjtu",
+    "name_en": "Chongqing Jiaotong University",
+    "name_zh": "重庆交通大学",
+    "name_fr": "Université Jiaotong de Chongqing",
+    "aliases": [
+      "CQJTU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://oice.cqjtu.edu.cn/index.htm",
+      "https://oice.cqjtu.edu.cn/",
+      "https://oice.cqjtu.edu.cn/index.htm/",
+      "https://english.cqjtu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "chongqing-normal-university",
+    "name_en": "Chongqing Normal University",
+    "name_zh": "重庆师范大学",
+    "name_fr": "Université normale de Chongqing",
+    "aliases": [
+      "CQNU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://international.cqnu.edu.cn/lxzs/zsxx.htm",
+      "https://international.cqnu.edu.cn/",
+      "https://international.cqnu.edu.cn/lxzs/"
+    ]
+  },
+  {
+    "slug": "ctbu",
+    "name_en": "Chongqing Technology and Business University",
+    "name_zh": "重庆工商大学",
+    "name_fr": "Université de technologie et de commerce de Chongqing",
+    "aliases": [
+      "CTBU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://interoffice2014.ctbu.edu.cn/lxgsd.htm",
+      "https://interoffice2014.ctbu.edu.cn/",
+      "https://interoffice2014.ctbu.edu.cn/lxgsd.htm/"
+    ]
+  },
+  {
+    "slug": "chongqing-university",
+    "name_en": "Chongqing University",
+    "name_zh": "重庆大学",
+    "name_fr": "Université de Chongqing",
+    "aliases": [
+      "CQU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://study.cqu.edu.cn/index.htm",
+      "https://study.cqu.edu.cn/",
+      "https://study.cqu.edu.cn/index.htm/",
+      "https://english.cqu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "cqust",
+    "name_en": "Chongqing University of Science and Technology",
+    "name_zh": "重庆科技大学",
+    "name_fr": "Université de science et technologie de Chongqing",
+    "aliases": [
+      "CQUST"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://wsc.cqust.edu.cn/index.htm",
+      "https://wsc.cqust.edu.cn/",
+      "https://wsc.cqust.edu.cn/index.htm/"
+    ]
+  },
+  {
+    "slug": "cqut",
+    "name_en": "Chongqing University of Technology",
+    "name_zh": "重庆理工大学",
+    "name_fr": "Université de technologie de Chongqing",
+    "aliases": [
+      "CQUT"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://lic.cqut.edu.cn/xygk/xyjj.htm",
+      "https://lic.cqut.edu.cn/",
+      "https://lic.cqut.edu.cn/xygk/"
+    ]
+  },
+  {
+    "slug": "fudan-university",
+    "name_en": "Fudan University",
+    "name_zh": "复旦大学",
+    "name_fr": "Université Fudan",
+    "aliases": [
+      "Fudan"
+    ],
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "seed_urls": [
+      "https://iso.fudan.edu.cn/",
+      "https://iso.fudan.edu.cn/isoenglish/main.htm",
+      "https://www.fudan.edu.cn/en/admission/"
+    ]
+  },
+  {
+    "slug": "gdufs",
+    "name_en": "Guangdong University of Foreign Studies",
+    "name_zh": "广东外语外贸大学",
+    "name_fr": "Université des études étrangères du Guangdong",
+    "aliases": [
+      "GDUFS"
+    ],
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "seed_urls": [
+      "http://iie.gdufs.edu.cn",
+      "http://iie.gdufs.edu.cn/",
+      "https://iie.gdufs.edu.cn/",
+      "https://english.gdufs.edu.cn/"
+    ]
+  },
+  {
+    "slug": "kust",
+    "name_en": "Kunming University of Science and Technology",
+    "name_zh": "昆明理工大学",
+    "name_fr": "Université de science et technologie de Kunming",
+    "aliases": [
+      "KUST"
+    ],
+    "city": "Kunming",
+    "province": "Yunnan",
+    "seed_urls": [
+      "https://gjxy.kust.edu.cn/index.htm",
+      "https://gjxy.kust.edu.cn/",
+      "https://gjxy.kust.edu.cn/index.htm/"
+    ]
+  },
+  {
+    "slug": "shanghai-university",
+    "name_en": "Shanghai University",
+    "name_zh": "上海大学",
+    "name_fr": "Université de Shanghai",
+    "aliases": [
+      "SHU"
+    ],
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "seed_urls": [
+      "https://apply.shu.edu.cn/application/index?language=zh",
+      "https://apply.shu.edu.cn/",
+      "https://apply.shu.edu.cn/application/",
+      "https://apply.shu.edu.cn/application/index"
+    ]
+  },
+  {
+    "slug": "scfai",
+    "name_en": "Sichuan Fine Arts Institute",
+    "name_zh": "四川美术学院",
+    "name_fr": "Institut des beaux-arts du Sichuan",
+    "aliases": [
+      "SCFAI",
+      "SFAI"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://www.scfai.edu.cn",
+      "https://www.scfai.edu.cn/",
+      "https://www.scfai.edu.cn/gjjl/",
+      "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+      "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm"
+    ]
+  },
+  {
+    "slug": "sisu",
+    "name_en": "Sichuan International Studies University",
+    "name_zh": "四川外国语大学",
+    "name_fr": "Université des études internationales du Sichuan",
+    "aliases": [
+      "SISU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://studyinsisu.sisu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "sichuan-normal-university",
+    "name_en": "Sichuan Normal University",
+    "name_zh": "四川师范大学",
+    "name_fr": "Université normale du Sichuan",
+    "aliases": [
+      "SICNU"
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://lxs.sicnu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "sichuan-university",
+    "name_en": "Sichuan University",
+    "name_zh": "四川大学",
+    "name_fr": "Université du Sichuan",
+    "aliases": [
+      "SCU"
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://global.scu.edu.cn/oso/",
+      "https://global.scu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "swjtu",
+    "name_en": "Southwest Jiaotong University",
+    "name_zh": "西南交通大学",
+    "name_fr": "Université Jiaotong du Sud-Ouest",
+    "aliases": [
+      "SWJTU"
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://sie.swjtu.edu.cn/",
+      "https://en.swjtu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "southwest-minzu-university",
+    "name_en": "Southwest Minzu University",
+    "name_zh": "西南民族大学",
+    "name_fr": "Université des nationalités du Sud-Ouest",
+    "aliases": [
+      "SWUN"
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://gjc.swun.edu.cn/index.htm",
+      "https://gjc.swun.edu.cn/",
+      "https://gjc.swun.edu.cn/index.htm/"
+    ]
+  },
+  {
+    "slug": "southwest-university",
+    "name_en": "Southwest University",
+    "name_zh": "西南大学",
+    "name_fr": "Université du Sud-Ouest",
+    "aliases": [
+      "SWU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://gjxy.swu.edu.cn/index.htm",
+      "https://gjxy.swu.edu.cn/",
+      "https://gjxy.swu.edu.cn/index.htm/"
+    ]
+  },
+  {
+    "slug": "sun-yat-sen-university",
+    "name_en": "Sun Yat-sen University",
+    "name_zh": "中山大学",
+    "name_fr": "Université Sun Yat-sen",
+    "aliases": [
+      "SYSU"
+    ],
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "seed_urls": [
+      "https://iso.sysu.edu.cn/cn/index.htm",
+      "https://iso.sysu.edu.cn/",
+      "https://iso.sysu.edu.cn/cn/",
+      "https://iso.sysu.edu.cn/en/"
+    ]
+  },
+  {
+    "slug": "uestc",
+    "name_en": "University of Electronic Science and Technology of China",
+    "name_zh": "电子科技大学",
+    "name_fr": "Université de science et technologie électroniques de Chine",
+    "aliases": [
+      "UESTC"
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://www.oice.uestc.edu.cn/",
+      "https://en.uestc.edu.cn/"
+    ]
+  },
+  {
+    "slug": "xisu",
+    "name_en": "Xi'an International Studies University",
+    "name_zh": "西安外国语大学",
+    "name_fr": "Université des études internationales de Xi'an",
+    "aliases": [
+      "XISU"
+    ],
+    "city": "Xi'an",
+    "province": "Shaanxi",
+    "seed_urls": [
+      "http://six.xisu.edu.cn/gywm/lxwm.htm",
+      "http://six.xisu.edu.cn/",
+      "http://six.xisu.edu.cn/gywm/"
+    ]
+  },
+  {
+    "slug": "xiamen-university",
+    "name_en": "Xiamen University",
+    "name_zh": "厦门大学",
+    "name_fr": "Université de Xiamen",
+    "aliases": [
+      "XMU"
+    ],
+    "city": "Xiamen",
+    "province": "Fujian",
+    "seed_urls": [
+      "https://admissions.xmu.edu.cn/cn/index.htm",
+      "https://admissions.xmu.edu.cn/",
+      "https://admissions.xmu.edu.cn/cn/",
+      "https://admissions.xmu.edu.cn/Admissions.htm"
+    ]
+  },
+  {
+    "slug": "yangtze-normal-university",
+    "name_en": "Yangtze Normal University",
+    "name_zh": "长江师范学院",
+    "name_fr": "Université normale du Yangtsé",
+    "aliases": [
+      "YZNU"
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://guojjl.yznu.edu.cn/83/list.htm",
+      "https://guojjl.yznu.edu.cn/",
+      "https://guojjl.yznu.edu.cn/83/"
+    ]
+  },
+  {
+    "slug": "yanshan-university",
+    "name_en": "Yanshan University",
+    "name_zh": "燕山大学",
+    "name_fr": "Université de Yanshan",
+    "aliases": [
+      "YSU"
+    ],
+    "city": "Qinhuangdao",
+    "province": "Hebei",
+    "seed_urls": [
+      "https://admission.ysu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "zhejiang-university",
+    "name_en": "Zhejiang University",
+    "name_zh": "浙江大学",
+    "name_fr": "Université du Zhejiang",
+    "aliases": [
+      "ZJU"
+    ],
+    "city": "Hangzhou",
+    "province": "Zhejiang",
+    "seed_urls": [
+      "http://iczu.zju.edu.cn/admissions/",
+      "http://iczu.zju.edu.cn/",
+      "https://iczu.zju.edu.cn/admissionsen/",
+      "https://iczu.zju.edu.cn/iczuen/"
     ]
   }
 ]

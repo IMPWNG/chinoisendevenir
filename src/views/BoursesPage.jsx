@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import FaqSection from "../components/FaqSection";
 import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
+import PageCta from "../components/PageCta";
 import { fr } from "../i18n/fr";
 import { breadcrumbJsonLd, FAQS, faqJsonLd } from "../lib/seo";
 
@@ -172,18 +173,11 @@ function BoursesPage() {
             </div>
           </div>
 
-          {/* CTA supplémentaire */}
-          <div className="mt-16 text-center bg-[#1d3557] rounded-2xl p-10">
-            <p className="text-white text-lg font-semibold mb-2">
-              Besoin d'aide pour trouver la bourse adaptée à votre profil ?
-            </p>
-            <p className="text-white/80 mb-6">
-              Nous vous orientons vers les options les plus réalistes pour votre dossier.
-            </p>
-            <a href="/contact" className="landing-btn landing-btn-accent">
-              Demander un conseil personnalisé
-            </a>
-          </div>
+          <PageCta
+            title="Besoin d'aide pour trouver la bourse adaptée à votre profil ?"
+            subtitle="Nous vous orientons vers les options les plus réalistes pour votre dossier."
+            cta="Demander un conseil personnalisé"
+          />
 
           <div className="mt-16 max-w-4xl mx-auto">
             <FaqSection

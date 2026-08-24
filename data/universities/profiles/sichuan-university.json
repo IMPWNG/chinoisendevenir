@@ -1,0 +1,706 @@
+{
+  "identity": {
+    "name_en": "Sichuan University",
+    "name_zh": "四川大学",
+    "name_fr": "Université du Sichuan",
+    "aliases": [
+      "SCU"
+    ],
+    "website": "https://www.scu.edu.cn/",
+    "international_website": "https://en.scu.edu.cn/",
+    "application_portal_url": "https://scu.17gz.org/member/login.do"
+  },
+  "general": {
+    "presentation": "Université nationale majeure située à Chengdu, reconnue comme Double First-Class. Elle accueille un grand nombre d'étudiants étrangers via son Bureau des étudiants overseas (OSO). Institution code : 10610.",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "Médecine clinique (West China School of Medicine)",
+      "Stomatologie",
+      "Chinois langue étrangère",
+      "Sciences",
+      "Ingénierie"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Chengdu",
+      "province": "Sichuan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 3500,
+      "notes": "Estimation générale pour Chengdu. Preuve financière recommandée ≥ 5 000 USD."
+    },
+    "campuses": [
+      {
+        "name": "Wangjiang",
+        "city": "Chengdu",
+        "description": "Campus principal, abrite le bureau des étudiants overseas"
+      },
+      {
+        "name": "Jiang'an",
+        "city": "Chengdu",
+        "description": "Campus moderne au sud de Chengdu"
+      },
+      {
+        "name": "Huaxi",
+        "city": "Chengdu",
+        "description": "Campus médical historique (West China Medical Center)"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Undergraduate Program (Chinese-taught)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Nombreuses filières enseignées en chinois. Programmes spéciaux en anglais : Clinical Medicine (MBBS), Stomatology."
+    },
+    {
+      "level": "bachelor",
+      "name": "Clinical Medicine (MBBS)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 6,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme MBBS entièrement en anglais."
+    },
+    {
+      "level": "bachelor",
+      "name": "Stomatology",
+      "field": "dentistry",
+      "language": "en",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Enseigné en anglais."
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language Bachelor Degree Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9,
+        3
+      ],
+      "academic_calendar": "semester",
+      "notes": "Ouvert aussi au semestre de printemps."
+    },
+    {
+      "level": "master",
+      "name": "Master's Degree Program",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Aussi disponible en anglais pour certaines filières (médecine, etc.). Contact superviseur recommandé."
+    },
+    {
+      "level": "phd",
+      "name": "Doctor's Degree Program",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Contact superviseur fortement recommandé avant candidature."
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes semestre ou année académique. Printemps : 15 sept-30 nov. Automne : 15 mars-30 mai."
+    },
+    {
+      "level": "foundation",
+      "name": "Preparatory Program",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [],
+      "academic_calendar": "semester",
+      "notes": "Pas de programme préparatoire officiel selon le bureau OSO."
+    },
+    {
+      "level": "exchange",
+      "name": "Semester and Academic Year Program",
+      "field": "other",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        2,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours en anglais : Civil Engineering, International Business Management, Software Engineering, Tourism Management. Réservé aux universités partenaires."
+    },
+    {
+      "level": "exchange",
+      "name": "Exchange Program",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9,
+        3
+      ],
+      "academic_calendar": "semester",
+      "notes": "Via accord inter-universitaire. Au moins 1 an d'études préalable requis."
+    },
+    {
+      "level": "language",
+      "name": "Non-degree Program (General/Senior/Research Scholar)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes de recherche pour chercheurs invités."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) avec relevés de notes officiels. IB accepté en complément.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 70,
+      "preparatory_if_insufficient": "Aucun programme préparatoire proposé par SCU. Cours de chinois langue étrangère disponibles.",
+      "other": [
+        "Frais de candidature : 85 USD",
+        "Preuve financière ≥ 5 000 USD",
+        "Casier judiciaire vierge notarié",
+        "Examen médical",
+        "Mineurs (<18 ans) : tuteur légal en Chine requis"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor degree) avec relevés de notes. Preuve de diplôme attendue avant inscription.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 70,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Frais de candidature : 85 USD",
+        "Contact préalable avec superviseur recommandé",
+        "Lettres de recommandation signées par professeur",
+        "CV et personal statement",
+        "Preuve financière ≥ 5 000 USD"
+      ]
+    },
+    "phd": {
+      "academic": "Master degree. Preuve de diplôme attendue avant inscription.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 70,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Contact préalable avec superviseur fortement recommandé",
+        "Lettres de recommandation",
+        "Plan de recherche",
+        "CV et publications éventuelles",
+        "Frais de candidature : 85 USD"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme de lycée minimum",
+      "age_max": null,
+      "other": [
+        "Niveau chinois évalué à l'arrivée",
+        "Inscription semestre de printemps possible pour ce programme"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Overseas Students Office (OSO)",
+    "iso_email": "international@scu.edu.cn",
+    "admissions_email": "bioluo@scu.edu.cn",
+    "wechat": "Compte WeChat officiel SCU OSO",
+    "phone": "+86-28-85407199, +86-28-85405773, +86-28-85401808",
+    "address": "2nd Floor, West Overseas Students Dorm, Wangjiang Campus, No.24 South Section 1, Yihuan Road, Chengdu 610065, P.R. China"
+  },
+  "matching": {
+    "fields": [
+      "medicine",
+      "dentistry",
+      "chinese_language",
+      "business",
+      "economics",
+      "engineering",
+      "computer_science",
+      "sciences",
+      "law",
+      "arts",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 70,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 15000,
+    "tuition_cny_max": 50000,
+    "housing_cny_year_min": 5000,
+    "deadline_typical": "30 mai (automne) / 30 novembre (printemps)",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "tags": [
+      "Double First-Class",
+      "Project 985",
+      "Project 211",
+      "CSC",
+      "programme MBBS anglais",
+      "stomatologie anglais"
+    ]
+  },
+  "confidence": 0.65,
+  "missing_fields": [
+    "frais de scolarité exacts par programme",
+    "scores HSK/TOEFL/IELTS exacts par filière",
+    "classements détaillés",
+    "dates limites précises bachelor/master/phd",
+    "âge max par niveau",
+    "min GPA formel"
+  ],
+  "notes": "Données précises sur les frais, scores linguistiques minimaux exacts par filière, et classements non disponibles dans les sources. Sources officielles OSO consultées. Contact superviseur très important pour master/doctorat. Bourse du gouvernement chinois (CSC) disponible, ainsi que bourses 'Study at SCU' et 'Chengdu Sister Cities'.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide, scan couleur page identité et signature"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme + traduction notariée chinois/anglais si autre langue"
+    },
+    {
+      "type": "transcript",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés originaux ou notariés en chinois/anglais"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire traduit et notarié chinois/anglais, à soumettre avant la date limite"
+    },
+    {
+      "type": "financial_proof",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Justificatifs financiers ≥ 5000 USD (relevé bancaire ou revenus parents/tuteur)"
+    },
+    {
+      "type": "physical_exam",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire d'examen médical à télécharger sur le site"
+    },
+    {
+      "type": "recommendation_letter",
+      "required": false,
+      "count": 2,
+      "who": "professeur du domaine",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Signée personnellement par professeur du domaine de recherche"
+    },
+    {
+      "type": "language_certificate",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes en chinois; IELTS/TOEFL pour programmes en anglais"
+    },
+    {
+      "type": "guardian_documents",
+      "required": true,
+      "count": null,
+      "who": "parents et tuteur en Chine",
+      "applies_to": [
+        "under_18"
+      ],
+      "notes": "Procuration parentale apostillée par consulat chinois + lettre de garantie tuteur en Chine"
+    }
+  ],
+  "application": {
+    "platform_name": "SCU Online Application System",
+    "platform_url": "https://scu.17gz.org/member/login.do",
+    "steps": [
+      "Créer un compte sur la plateforme",
+      "Remplir le formulaire (parcours scolaire, famille, garant)",
+      "Télécharger les documents requis",
+      "Payer frais de dossier 85 USD",
+      "Soumettre et suivre le résultat en ligne"
+    ],
+    "opens_at": "",
+    "deadline": "Programme langue chinoise: Printemps 15 sept-30 nov; Automne 15 mars-30 mai",
+    "results_at": "4-8 semaines après soumission",
+    "intake_months": [
+      2,
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": [
+      "Virement bancaire USD 85$ (CCB Sichuan, compte 51014008100229888888, SWIFT PCBCCNBJSCX)",
+      "Paiement en ligne CNY"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via CSC ou via l'université (catégorie A ou B)",
+      "apply_via": "csc_or_university",
+      "deadline": "",
+      "renewal": "Annuel selon résultats académiques"
+    },
+    {
+      "name": "Study at SCU Outstanding Student Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique pour étudiants déjà inscrits",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chengdu Sister Cities Scholarship",
+      "type": "city",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Résidents des villes jumelées avec Chengdu",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants du programme de langue chinoise",
+      "apply_via": "cis.chinese.cn",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": false,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": false,
+      "description": "L'université n'offre pas de programme préparatoire selon sa FAQ officielle"
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [
+      "Admission Notice",
+      "Visa Application Form JW202"
+    ],
+    "instructions": "Demander visa étudiant X1 (>180 jours) ou X2 (<180 jours) au consulat chinois avec lettre d'admission et formulaire JW202",
+    "arrival_and_residence_permit": "Permis de résidence à obtenir dans les 30 jours suivant l'arrivée au bureau de sécurité publique local"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Dortoir international sur campus"
+    ],
+    "rules": "",
+    "international_office": "Overseas Students Office, 2ème étage Dortoir Ouest, Campus Wangjiang, No.24 South Section 1, Yihuan Road, Chengdu 610065. Tél: +86-28-85407199 / 85405773 / 85401808",
+    "orientation": "Programme d'orientation organisé chaque semestre pour nouveaux étudiants internationaux",
+    "english_support": true,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "sichuan-university",
+  "scraped_at": "2026-08-24T14:37:12.251Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://global.scu.edu.cn/oso/",
+      "title": "Home - Overseas Students Office, Sichuan University",
+      "chars": 2523
+    },
+    {
+      "url": "https://global.scu.edu.cn/",
+      "title": "首页 - SCU",
+      "chars": 2055
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/1052",
+      "title": "Master’s Degree Program - Overseas Students Office, Sichuan University",
+      "chars": 1670
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/12",
+      "title": "Undergraduate Program - Overseas Students Office, Sichuan University",
+      "chars": 1703
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/1053",
+      "title": "Doctor’s Degree Program - Overseas Students Office, Sichuan University",
+      "chars": 1672
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/15",
+      "title": "Chinese Language Program - Overseas Students Office, Sichuan University",
+      "chars": 1708
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/1054",
+      "title": "Non-degree Program - Overseas Students Office, Sichuan University",
+      "chars": 1628
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/1131",
+      "title": "Application and Admission - Overseas Students Office, Sichuan University",
+      "chars": 12000
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/10",
+      "title": "Contact Us - Overseas Students Office, Sichuan University",
+      "chars": 2034
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/5",
+      "title": "Admissions - Overseas Students Office, Sichuan University",
+      "chars": 1793
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/1123",
+      "title": "Semester and Academic Year Program - Overseas Students Office, Sichuan University",
+      "chars": 1975
+    },
+    {
+      "url": "https://global.scu.edu.cn/oso/article/index/1044?lang=zh",
+      "title": "奖学金 - 四川大学留学生管理办公室",
+      "chars": 550
+    }
+  ],
+  "db_row": {
+    "name_zh": "四川大学",
+    "name_en": "Sichuan University",
+    "name_fr": "Université du Sichuan",
+    "slug": "sichuan-university",
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "country": "Chine",
+    "department": "Overseas Students Office (OSO)",
+    "emails": [
+      "international@scu.edu.cn",
+      "bioluo@scu.edu.cn"
+    ],
+    "phone": "+86-28-85407199, +86-28-85405773, +86-28-85401808",
+    "wechat": "Compte WeChat officiel SCU OSO",
+    "website": "https://en.scu.edu.cn/",
+    "majors": [
+      "medicine",
+      "dentistry",
+      "chinese_language",
+      "business",
+      "economics",
+      "engineering",
+      "computer_science",
+      "sciences",
+      "law",
+      "arts",
+      "education"
+    ],
+    "required_documents": [
+      "passport",
+      "diploma",
+      "transcript",
+      "no_criminal_record",
+      "financial_proof",
+      "physical_exam",
+      "guardian_documents"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship / Study at SCU Outstanding Student Scholarship / Chengdu Sister Cities Scholarship / International Chinese Language Teachers Scholarship",
+    "scholarship_min": 15000,
+    "scholarship_max": 50000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 70",
+    "tuition_min": 15000,
+    "tuition_max": 50000,
+    "application_deadline": "30 mai (automne) / 30 novembre (printemps)"
+  }
+}

@@ -1,0 +1,548 @@
+{
+  "identity": {
+    "name_en": "Kunming University of Science and Technology",
+    "name_zh": "昆明理工大学",
+    "name_fr": "Université de science et technologie de Kunming",
+    "aliases": [
+      "KUST"
+    ],
+    "website": "https://www.kust.edu.cn",
+    "international_website": "https://gjxy.kust.edu.cn",
+    "application_portal_url": "http://kmust.at0086.cn/StuApplication/Login.aspx"
+  },
+  "general": {
+    "presentation": "Université publique du Yunnan accueillant des étudiants internationaux depuis plus de 40 ans, avec 11 500 anciens étudiants étrangers issus de 108 pays. Elle a obtenu en 2024 la certification de qualité pour l'enseignement supérieur aux étudiants étrangers (validité 6 ans), meilleur résultat pour une université du Yunnan lors de la certification initiale.",
+    "history": "Plus de 40 ans d'enseignement aux étudiants étrangers. Certification qualité de haut niveau obtenue en 2024. Création d'un système éducatif 'Étudier à KUST' axé sur les caractéristiques régionales, disciplinaires et de modèle liées à la position de centre de rayonnement du Yunnan.",
+    "rankings": [],
+    "strengths": [
+      "Études internationales du chinois (Teaching Chinese as a Foreign Language)",
+      "Coopération RCEP",
+      "Coopération avec les pays de la Route de la Soie",
+      "Programmes en anglais",
+      "Institut Confucius (Nicaragua UNA Managua, Laos Souphanouvong)"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Kunming",
+      "province": "Yunnan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal Chenggong",
+        "city": "Kunming",
+        "description": "Adresse : 727 rue Jingming Sud, district de Chenggong, Kunming, Yunnan, code postal 650500"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Études internationales du chinois (汉语国际教育)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de licence en enseignement du chinois langue étrangère"
+    },
+    {
+      "level": "master",
+      "name": "Études internationales du chinois (汉语国际教育)",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master professionnel en enseignement du chinois langue étrangère"
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise (自费语言生)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de langue à temps plein autofinancé"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes enseignés en anglais (English-Taught Programs)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Liste disponible via le catalogue 2026 des programmes de premier cycle et des cycles supérieurs"
+    },
+    {
+      "level": "master",
+      "name": "Programmes enseignés en anglais (English-Taught Programs)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Liste disponible via le catalogue 2026 des programmes de premier cycle et des cycles supérieurs"
+    },
+    {
+      "level": "exchange",
+      "name": "Bourse d'enseignant international de chinois (国际中文教师奖学金)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de bourse de l'ICLTS"
+    },
+    {
+      "level": "exchange",
+      "name": "Programme RCEP (RCEP教育合作区青年科技学者交流营)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Camp d'échange pour jeunes chercheurs en sciences et technologie de la zone de coopération éducative RCEP"
+    },
+    {
+      "level": "exchange",
+      "name": "Programme Route de la Soie (丝绸之路项目)",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme d'échange Route de la Soie"
+    },
+    {
+      "level": "exchange",
+      "name": "Programme d'expérience culturelle et de formation professionnelle à court terme",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes culturels courts et formations professionnelles"
+    },
+    {
+      "level": "language",
+      "name": "Camp d'été Pont du chinois (汉语桥夏令营)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Camp d'été linguistique et culturel (notamment pour le Laos et le Royaume-Uni)"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires. Voir le catalogue 2026 des programmes de premier cycle et des cycles supérieurs pour les exigences spécifiques.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois proposée",
+      "other": [
+        "Inscription en ligne via http://kmust.at0086.cn/StuApplication/Login.aspx"
+      ]
+    },
+    "master": {
+      "academic": "Licence / baccalauréat. Voir le catalogue 2026 pour les exigences spécifiques par programme.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": null,
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires pour les programmes de langue",
+      "age_max": null,
+      "other": [
+        "Inscription en ligne via http://kmust.at0086.cn/StuApplication/Login.aspx"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "International College, KUST (昆明理工大学国际学院)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "0871-65939901",
+    "address": "727 rue Jingming Sud, district de Chenggong, Kunming, Yunnan 650500"
+  },
+  "matching": {
+    "fields": [
+      "chinese_language",
+      "education",
+      "engineering",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      7,
+      9
+    ],
+    "city": "Kunming",
+    "province": "Yunnan",
+    "tags": [
+      "RCEP",
+      "Route de la Soie",
+      "Institut Confucius",
+      "Bourse ICLTS",
+      "Bourse gouvernement provincial du Yunnan",
+      "Bourse d'études chinoises du gouvernement chinois",
+      "Certification qualité étudiants étrangers 2024"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "détails des programmes enseignés en anglais (liste et conditions)",
+    "ranking officiel",
+    "frais de subsistance exacts",
+    "admissions_email direct"
+  ],
+  "notes": "Les sources consultées sont principalement la page de l'Institut international de KUST. Les détails chiffrés (frais, scores HSK/IELTS/TOEFL, limites d'âge) ne sont pas présents dans les pages fournies et devront être complétés via le catalogue 2026 des programmes (https://gjxy.kust.edu.cn/info/1259/1655.htm pour étudiants et https://gjxy.kust.edu.cn/info/1259/1480.htm pour 2026 International Students Admissions). Le numéro de téléphone 0871-65939901 provient de la notification d'avril 2026.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "Candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Documents types requis pour admission; détails non précisés dans les sources."
+    }
+  ],
+  "application": {
+    "platform_name": "KUST International Student Online Application",
+    "platform_url": "http://kmust.at0086.cn/StuApplication/Login.aspx",
+    "steps": [
+      "Créer un compte sur la plateforme en ligne",
+      "Remplir le formulaire de candidature en ligne",
+      "Soumettre les documents requis",
+      "Attendre la notification d'admission"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du Gouvernement de la province du Yunnan",
+      "type": "provincial",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Voir l'annonce officielle 2026",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse internationale des enseignants de chinois (CSC)",
+      "type": "csc",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme de l'Institut Confucius",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Programme de la Ceinture et Route (Belt and Road)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission",
+      "Formulaire JW202"
+    ],
+    "instructions": "Le service visa de l'université assiste les étudiants étrangers (cf. section 签证服务).",
+    "arrival_and_residence_permit": "Les étudiants doivent effectuer les formalités de résidence dans les délais prescrits après arrivée."
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Campus"
+    ],
+    "rules": "Voir règlements de gestion des étudiants internationaux.",
+    "international_office": "Bureau de gestion des étudiants internationaux (国际学院), téléphone: 0871-65939901",
+    "orientation": "",
+    "english_support": null,
+    "clubs": "Programmes de deuxième classe '留学昆工·筑梦红土'; activités culturelles; excursions patrimoine."
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Laos",
+      "notes": "Coopération étroite avec l'Université Souphanouvong; programmes Confucius."
+    },
+    {
+      "region_or_country": "Nicaragua",
+      "notes": "Recrutement 2026 de volontaires pour l'Institut Confucius UNAN-Managua."
+    },
+    {
+      "region_or_country": "Royaume-Uni",
+      "notes": "Programme d'été 'Chinese Excellence' 2026 accueilli à KUST."
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "kust",
+  "scraped_at": "2026-08-24T14:34:02.995Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 11,
+  "sources": [
+    {
+      "url": "https://gjxy.kust.edu.cn/",
+      "title": "昆明理工大学国际学院",
+      "chars": 1297
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/rcpy/hygjjybk.htm",
+      "title": "汉语国际教育本科-昆明理工大学国际学院",
+      "chars": 947
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/rcpy/hygjjyzyss.htm",
+      "title": "汉语国际教育专业硕士-昆明理工大学国际学院",
+      "chars": 767
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/rcpy/lhlxs.htm",
+      "title": "来华留学生-昆明理工大学国际学院",
+      "chars": 400
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/info/1260/1812.htm",
+      "title": "国际学院组织来华留学生开展“感知中国—点读世界遗产·领略中国文脉”社会实践活动-昆明理工大学国际学院",
+      "chars": 1216
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/lxkg/lxsgl.htm",
+      "title": "留学生管理-昆明理工大学国际学院",
+      "chars": 601
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/info/1260/1489.htm",
+      "title": "昆明理工大学高质量通过来华留学生高等教育质量初次认证-昆明理工大学国际学院",
+      "chars": 1443
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/info/1260/1814.htm",
+      "title": "2026汉语桥老挝来华夏令营在昆明理工大学结营-昆明理工大学国际学院",
+      "chars": 957
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/info/1259/1322.htm",
+      "title": "国际学生在线报名 Online Application Link-昆明理工大学国际学院",
+      "chars": 544
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/info/1259/1765.htm",
+      "title": "关于昆明理工大学申报2026年度来华留学生第二课堂培育项目评审结果公示的通知-昆明理工大学国际学院",
+      "chars": 840
+    },
+    {
+      "url": "https://gjxy.kust.edu.cn/lxkg.htm",
+      "title": "留学昆工-昆明理工大学国际学院",
+      "chars": 1237
+    }
+  ],
+  "db_row": {
+    "name_zh": "昆明理工大学",
+    "name_en": "Kunming University of Science and Technology",
+    "name_fr": "Université de science et technologie de Kunming",
+    "slug": "kust",
+    "city": "Kunming",
+    "province": "Yunnan",
+    "country": "Chine",
+    "department": "International College, KUST (昆明理工大学国际学院)",
+    "emails": [],
+    "phone": "0871-65939901",
+    "wechat": null,
+    "website": "https://gjxy.kust.edu.cn",
+    "majors": [
+      "chinese_language",
+      "education",
+      "engineering",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "Bourse du Gouvernement de la province du Yunnan / Bourse internationale des enseignants de chinois (CSC) / Programme de la Ceinture et Route (Belt and Road)",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

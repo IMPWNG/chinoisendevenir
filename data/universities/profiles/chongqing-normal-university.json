@@ -1,0 +1,508 @@
+{
+  "identity": {
+    "name_en": "Chongqing Normal University",
+    "name_zh": "重庆师范大学",
+    "name_fr": "Université normale de Chongqing",
+    "aliases": [
+      "CQNU",
+      "重师"
+    ],
+    "website": "https://www.cqnu.edu.cn",
+    "international_website": "https://international.cqnu.edu.cn",
+    "application_portal_url": "https://international.cqnu.edu.cn"
+  },
+  "general": {
+    "presentation": "Université normale de Chongqing (CQNU), située à Chongqing, dispose de 5 Instituts Confucius sur les 5 continents et accueille des étudiants internationaux depuis 1998. Sélectionnée en 2025 comme membre de l'Université de l'OCS côté chinois.",
+    "history": "Accueil d'étudiants étrangers depuis 1998; 7000+ étudiants internationaux accueillis.",
+    "rankings": [],
+    "strengths": [
+      "Formation des enseignants",
+      "Éducation internationale des enseignants",
+      "Enseignement du chinois",
+      "Études du russe (partenariat avec le Conservatoire de Moscou)"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en",
+      "ru"
+    ],
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal (Université Ville)",
+        "city": "Chongqing (arrondissement de Shapingba)",
+        "description": "37, rue Daxuecheng Zhonglu, 401331"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programme de premier cycle pour étudiants étrangers",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Annonces distinctes: licence (本科) en chinois; programmes en anglais possibles selon discipline"
+    },
+    {
+      "level": "master",
+      "name": "Programme de master pour étudiants étrangers",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Voir annonce 2026 (招生简章) avec modalités spécifiques par discipline"
+    },
+    {
+      "level": "phd",
+      "name": "Programme de doctorat pour étudiants étrangers",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Recrutement conjoint avec masters (硕/博) selon publication 2025-12-18"
+    },
+    {
+      "level": "language",
+      "name": "Étudiant linguistique (语言进修生)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de perfectionnement en chinois; bourses associées"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires (lycée) étranger, équivalent au gaozhong chinois",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "HSK requis pour filières en chinois",
+        "Programme préparatoire en chinois (预科) disponible"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de licence (équivalent bachelor), avec dossiers examinés individuellement",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "HSK requis pour programmes en chinois"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master pertinent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "HSK requis pour programmes en chinois"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires minimum",
+      "age_max": null,
+      "other": [
+        "Niveaux de chinois adaptés"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau de la coopération et des échanges internationaux (港澳台办公室)",
+    "iso_email": "interoff@cqnu.edu.cn",
+    "admissions_email": "cqnuws@foxmail.com",
+    "wechat": "重师国际",
+    "phone": "0086-23-65362300; 0086-23-65918980",
+    "address": "37, rue Daxuecheng Zhonglu, arrondissement de Shapingba, Chongqing 401331"
+  },
+  "matching": {
+    "fields": [
+      "education",
+      "chinese_language",
+      "arts",
+      "sciences",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "Juin (rentrée septembre); consulter annonces annuelles",
+    "intake_months": [
+      9
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": [
+      "Confucius Institute",
+      "CSC scholarship",
+      "Mayor scholarship",
+      "President scholarship",
+      "SCO University member",
+      "teacher-training"
+    ]
+  },
+  "confidence": 0.6,
+  "missing_fields": [
+    "min_gpa",
+    "age_max",
+    "hsk_level",
+    "hsk_score_min",
+    "ielts_min",
+    "toefl_min",
+    "tuition_cny_min/max",
+    "housing_cny_year_min",
+    "cost_of_living",
+    "specific_programs_list",
+    "preparatory_if_insufficient"
+  ],
+  "notes": "Sources principalement constituées des pages d'index du site international de CQNU. Les détails chiffrés (HSK, IELTS, frais de scolarité, plafond d'âge) ne sont pas présents dans les pages consultées et doivent être extraits des annonces spécifiques (招生简章) pour 2026. CQNU dispose de 5 Instituts Confucius (Rwanda, RU, Sri Lanka, Papouasie-Nouvelle-Guinée, USA Troy University), d'un programme conjoint avec le Conservatoire de Moscou et de partenariats avec Edge Hill University (Royaume-Uni).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport valide requis (inférence standard pour étudiants étrangers en Chine)"
+    }
+  ],
+  "application": {
+    "platform_name": "重庆师范大学在线申请",
+    "platform_url": "https://international.cqnu.edu.cn/lxzs/zxsq.htm",
+    "steps": [
+      "Remplir le formulaire en ligne",
+      "Téléverser les documents requis",
+      "Soumettre la candidature via la plateforme en ligne de CQNU",
+      "Attendre la notification d'admission",
+      "Postuler pour le visa X1/X2 avec la lettre d'admission"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "中国政府奖学金 (Bourse du gouvernement chinois)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via CSC ou l'ambassade de Chine, ou via l'université",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "重庆师范大学校长奖学金 (Bourse du président CQNU)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "重庆市人民政府外国留学生市长奖学金 (Bourse du maire de Chongqing)",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Étudiants étrangers à Chongqing",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "国际中文教师奖学金 (Bourse des enseignants de chinois)",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudier le chinois ou enseigner",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "中国政府奖学金国际暑期学校项目",
+      "type": "csc",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme d'été",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "中国政府奖学金短期科研交流项目",
+      "type": "csc",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Échange de recherche à court terme",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission (JW202)",
+      "Formulaire de demande de visa pour étudiants étrangers"
+    ],
+    "instructions": "Les étudiants doivent demander un visa X1 ou X2 avec la lettre d'admission et le formulaire JW202 émis par l'université",
+    "arrival_and_residence_permit": "Demander un permis de résidence dans les 30 jours suivant l'arrivée avec l'aide du bureau des affaires internationales"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Résidence universitaire sur le campus"
+    ],
+    "rules": "",
+    "international_office": "Service de la coopération et des échanges internationaux (国际合作与交流处), Tél: 0086-23-65362300 / 0086-23-65918980, Email: interoff@cqnu.edu.cn, cqnuws@foxmail.com, Adresse: No. 37, Middle Road, University Town, Shapingba District, Chongqing 401331, WeChat: 重师国际",
+    "orientation": "Programmes d'orientation et activités culturelles organisés pour les nouveaux étudiants internationaux",
+    "english_support": null,
+    "clubs": "Institut Confucius, activités de bénévolat communautaire, événements culturels, concours (ex. 诗教中国), compétitions d'e-commerce, sports"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": "Plus de 80 pays d'origine représentés, instituts Confucius au Rwanda (Université du Rwanda), au Royaume-Uni (Université de Edge Hill), au Sri Lanka (Université de Kelaniya), en Papouasie-Nouvelle-Guinée (Université de technologie), aux États-Unis (Université de Troy). Membre de l'Université de l'OCS depuis 2025."
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "chongqing-normal-university",
+  "scraped_at": "2026-08-24T14:28:13.893Z",
+  "model": "minimax-m3",
+  "pages_fetched": 9,
+  "pages_used": 8,
+  "sources": [
+    {
+      "url": "https://international.cqnu.edu.cn/lxzs/zsxx.htm",
+      "title": "招生信息-重庆师范大学 国际合作与交流处",
+      "chars": 1035
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/",
+      "title": "重庆师范大学 国际合作与交流处",
+      "chars": 3322
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/lxzs/lxsh.htm",
+      "title": "留学生活-重庆师范大学 国际合作与交流处",
+      "chars": 1280
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/fwdt/gjjzhysq.htm",
+      "title": "国际学术讲座、国际学术会议申请说明-重庆师范大学 国际合作与交流处",
+      "chars": 882
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/lxzs/zsxx/zsjz.htm",
+      "title": "招生简章-重庆师范大学 国际合作与交流处",
+      "chars": 925
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/lxzs/zsxx/ss_bs_sxm.htm",
+      "title": "硕士（博士）生项目-重庆师范大学 国际合作与交流处",
+      "chars": 914
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/lxzs/jxj.htm",
+      "title": "奖学金-重庆师范大学 国际合作与交流处",
+      "chars": 1238
+    },
+    {
+      "url": "https://international.cqnu.edu.cn/2025x/css25/style.css",
+      "title": null,
+      "chars": 12000
+    }
+  ],
+  "db_row": {
+    "name_zh": "重庆师范大学",
+    "name_en": "Chongqing Normal University",
+    "name_fr": "Université normale de Chongqing",
+    "slug": "chongqing-normal-university",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": "Bureau de la coopération et des échanges internationaux (港澳台办公室)",
+    "emails": [
+      "interoff@cqnu.edu.cn",
+      "cqnuws@foxmail.com"
+    ],
+    "phone": "0086-23-65362300; 0086-23-65918980",
+    "wechat": "重师国际",
+    "website": "https://international.cqnu.edu.cn",
+    "majors": [
+      "education",
+      "chinese_language",
+      "arts",
+      "sciences",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "中国政府奖学金 (Bourse du gouvernement chinois) / 重庆师范大学校长奖学金 (Bourse du président CQNU) / 重庆市人民政府外国留学生市长奖学金 (Bourse du maire de Chongqing) / 国际中文教师奖学金 (Bourse des enseignants de chinois) / 中国政府奖学金国际暑期学校项目 / 中国政府奖学金短期科研交流项目",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "Juin (rentrée septembre); consulter annonces annuelles"
+  }
+}

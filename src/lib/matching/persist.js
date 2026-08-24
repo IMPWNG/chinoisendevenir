@@ -39,7 +39,7 @@ export async function saveMatchingRun(admin, { contactId, createdBy, payload }) 
     .select("id, created_at")
     .maybeSingle();
 
-  if (!error && data) {
+  if (!error && data?.id) {
     return { id: data.id, created_at: data.created_at, storage: "matching_runs" };
   }
 
@@ -56,8 +56,8 @@ export async function saveMatchingRun(admin, { contactId, createdBy, payload }) 
 
   if (actionError) throw actionError;
   return {
-    id: action.id,
-    created_at: action.created_at,
+    id: action?.id || null,
+    created_at: action?.created_at || new Date().toISOString(),
     storage: "suivi_actions",
   };
 }

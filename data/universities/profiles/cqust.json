@@ -1,0 +1,352 @@
+{
+  "identity": {
+    "name_en": "Chongqing University of Science and Technology",
+    "name_zh": "重庆科技大学",
+    "name_fr": "Université de science et technologie de Chongqing",
+    "aliases": [
+      "CQUST"
+    ],
+    "website": "https://www.cqust.edu.cn",
+    "international_website": "https://wsc.cqust.edu.cn",
+    "application_portal_url": "https://cqust.at0086.cn/StuApplication/Login.aspx"
+  },
+  "general": {
+    "presentation": "Université publique chinoise située à Chongqing, disposant d'un bureau de coopération internationale et d'un collège d'éducation internationale accueillant des étudiants étrangers.",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "coopération internationale",
+      "sciences et technologie",
+      "ingénierie"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal",
+        "city": "Chongqing (Shapingba, University Town)",
+        "description": "Adresse : 20 rue Daxuecheng Est, district de Shapingba, Chongqing, code postal 401331"
+      }
+    ]
+  },
+  "programs": [],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau de coopération et d'échanges internationaux (Collège d'éducation internationale)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "20 rue Daxuecheng Est, district de Shapingba, Chongqing 401331"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "sciences",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": null,
+    "chinese_language_program_available": null,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": [
+      "université publique",
+      "sciences et technologie",
+      "Chongqing"
+    ]
+  },
+  "confidence": 0.35,
+  "missing_fields": [
+    "programs",
+    "admission_requirements",
+    "tuition",
+    "scholarships",
+    "contacts_email",
+    "age_limits",
+    "language_scores",
+    "cost_of_living",
+    "history",
+    "rankings"
+  ],
+  "notes": "Sources limitées : seule la page d'accueil du bureau de coopération internationale a été extraite. Pas d'informations sur les programmes spécifiques, frais, bourses, scores linguistiques requis. Le portail de candidature existe (cqust.at0086.cn). Partenariats connus : Haaga-Helia (Finlande), Université de Regina (Canada), Kazakhstan.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "Online Service Platform for International Students",
+    "platform_url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "国际合作与交流处（港澳台事务办公室、国际教育学院）",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "cqust",
+  "scraped_at": "2026-08-24T14:31:55.820Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
+  "sources": [
+    {
+      "url": "https://wsc.cqust.edu.cn/",
+      "title": "重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2041
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/index.htm/",
+      "title": null,
+      "chars": 2436
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/jlhz/gjhy.htm",
+      "title": "国际会议-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 423
+    },
+    {
+      "url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
+      "title": "Online Service Platform for International Students",
+      "chars": 1337
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/style/animate.min.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/style/slick.css",
+      "title": null,
+      "chars": 2466
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/style/public.css",
+      "title": null,
+      "chars": 10342
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/style/index.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/style/ny.css",
+      "title": null,
+      "chars": 8199
+    }
+  ],
+  "db_row": {
+    "name_zh": "重庆科技大学",
+    "name_en": "Chongqing University of Science and Technology",
+    "name_fr": "Université de science et technologie de Chongqing",
+    "slug": "cqust",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": "Bureau de coopération et d'échanges internationaux (Collège d'éducation internationale)",
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://wsc.cqust.edu.cn",
+    "majors": [
+      "engineering",
+      "sciences",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

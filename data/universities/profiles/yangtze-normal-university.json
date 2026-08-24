@@ -1,0 +1,478 @@
+{
+  "identity": {
+    "name_en": "Yangtze Normal University",
+    "name_zh": "长江师范学院",
+    "name_fr": "Université normale du Yangtsé",
+    "aliases": [
+      "YZNU",
+      "Changjiang Shifan Xueyuan"
+    ],
+    "website": "https://www.yznu.edu.cn",
+    "international_website": "https://guojjl.yznu.edu.cn",
+    "application_portal_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm"
+  },
+  "general": {
+    "presentation": "Université normale publique située à Chongqing. Le Collège international (国际学院), créé en septembre 2012, gère le recrutement et la formation des étudiants étrangers (étudiants diplomés, étudiants en échange, étudiants linguistiques, étudiants de Hong Kong/Macao/Taïwan), ainsi que la promotion internationale du chinois et les Instituts Confucius.",
+    "history": "Le Collège international a été fondé en septembre 2012, regroupant sous une même direction le Bureau de la coopération et des échanges internationaux et le Bureau des affaires Hong Kong/Macao/Taïwan.",
+    "rankings": [],
+    "strengths": [
+      "Formation en langue chinoise pour étrangers",
+      "Programmes d'échange international",
+      "Coopération avec Thaïlande (Nakhon Sawan Rajabhat University), Italie (Accademia de Perugia), Pologne, Corée, Japon"
+    ],
+    "teaching_languages": [
+      "zh"
+    ],
+    "location": {
+      "city": "Chongqing (district de Fuling)",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal",
+        "city": "Chongqing (Fuling)",
+        "description": "Adresse : 16 Juxian Avenue, district de Fuling, Chongqing"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise (语言进修生)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme destiné aux étudiants en formation linguistique."
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de bachelor pour étudiants étrangers (外籍学历生)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Domaines exacts non détaillés dans les sources."
+    },
+    {
+      "level": "exchange",
+      "name": "Programme d'échange (交换生)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Échanges avec universités partenaires (Thaïlande, Pologne, Corée, Italie, Japon)."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau de la coopération et des échanges internationaux / Collège international (国际合作与交流处 / 国际学院)",
+    "iso_email": "international@yznu.edu.cn",
+    "admissions_email": "international@yznu.edu.cn",
+    "wechat": "",
+    "phone": "+86-23-72791119",
+    "address": "16 Juxian Avenue, district de Fuling, Chongqing, Chine"
+  },
+  "matching": {
+    "fields": [
+      "chinese_language",
+      "arts",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": [
+      "programme langue chinoise",
+      "bourse présidentielle",
+      "bourse municipale de Chongqing",
+      "échanges internationaux"
+    ]
+  },
+  "confidence": 0.35,
+  "missing_fields": [
+    "Liste détaillée des programmes et domaines",
+    "Frais de scolarité (CNY)",
+    "Frais de logement (CNY)",
+    "Exigences HSK/IELTS/TOEFL",
+    "Conditions académiques (GPA)",
+    "Âge min/max",
+    "Dates limites d'admission",
+    "Calendrier détaillé",
+    "Coût de la vie mensuel"
+  ],
+  "notes": "Les sources sont principalement des pages de navigation du Bureau de la coopération internationale de YZNU. Détails disponibles : adresse, contacts, bourses (présidentielle + bourse municipale de Chongqing pour étudiants étrangers), coopération avec Thaïlande/Italie/Pologne/Corée/Japon, programmes de langue chinoise et d'échange. Brochure d'admission 2026 mentionnée mais contenu non détaillé dans les sources.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Documents standards non précisés dans les sources; se référer à Admission Brochure 2026"
+    },
+    {
+      "type": "admission_application_form",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "highest_diploma",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "language_certificate",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais si applicable"
+    }
+  ],
+  "application": {
+    "platform_name": "Online Application Entry (YZNU)",
+    "platform_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm",
+    "steps": [
+      "Remplir le formulaire de candidature en ligne",
+      "Soumettre les documents requis via la plateforme",
+      "Attendre la notification d'admission",
+      "Recevoir les documents pour le visa"
+    ],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金)",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Candidature via l'université;评选 annuelle",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "YZNU President Scholarship (留学生校长奖学金)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Attribuée sur critères académiques",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "JW202/JW201 form"
+    ],
+    "instructions": "Voir la section 签证材料 du site;警官 de l'Administration des sorties et entrées du district de Fuling donne des conférences sur les visas et permis de séjour",
+    "arrival_and_residence_permit": "Permis de séjour requis dans les 30 jours; lié à l'assiduité"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Résidence universitaire sur campus"
+    ],
+    "rules": "",
+    "international_office": "International College (国际学院), 重庆市涪陵区聚贤大道16号, international@yznu.edu.cn, 023-72791119",
+    "orientation": "Cérémonies d'ouverture et de remise des diplômes organisées;教育 à la sécurité et à la loi",
+    "english_support": null,
+    "clubs": "学生国际交流协会 (Student International Exchange Association)"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "yangtze-normal-university",
+  "scraped_at": "2026-08-24T14:44:16.156Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://guojjl.yznu.edu.cn/83/list.htm",
+      "title": "部门职能",
+      "chars": 1216
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/",
+      "title": "国际合作与交流处",
+      "chars": 1376
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/83/",
+      "title": "部门职能",
+      "chars": 1216
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/88/list.htm",
+      "title": "签证材料",
+      "chars": 576
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/3187/list.htm",
+      "title": "学生来华留学",
+      "chars": 791
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/lxsfc/list.htm",
+      "title": "留学生风采",
+      "chars": 773
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/lxzs/list.htm",
+      "title": "留学长师",
+      "chars": 862
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/3183/list.htm",
+      "title": "公派出国留学",
+      "chars": 597
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/3185/list.htm",
+      "title": "国际合作科研",
+      "chars": 659
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/3186/list.htm",
+      "title": "学生出国(境)留学",
+      "chars": 721
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/2026/0713/c97a284120/page.htm",
+      "title": "长江师范学院国际学院2026届留学生毕业典礼暨交换生结业典礼顺利举行",
+      "chars": 1069
+    },
+    {
+      "url": "https://guojjl.yznu.edu.cn/2026/0713/c97a284134/page.htm",
+      "title": "国际学院开展2026年春期留学生法治教育讲座",
+      "chars": 911
+    }
+  ],
+  "db_row": {
+    "name_zh": "长江师范学院",
+    "name_en": "Yangtze Normal University",
+    "name_fr": "Université normale du Yangtsé",
+    "slug": "yangtze-normal-university",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": "Bureau de la coopération et des échanges internationaux / Collège international (国际合作与交流处 / 国际学院)",
+    "emails": [
+      "international@yznu.edu.cn",
+      "international@yznu.edu.cn"
+    ],
+    "phone": "+86-23-72791119",
+    "wechat": null,
+    "website": "https://guojjl.yznu.edu.cn",
+    "majors": [
+      "chinese_language",
+      "arts",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "admission_application_form",
+      "highest_diploma",
+      "transcripts"
+    ],
+    "scholarship_amount": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金) / YZNU President Scholarship (留学生校长奖学金)",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

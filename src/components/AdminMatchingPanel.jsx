@@ -76,13 +76,14 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
     [result, selectedId],
   );
 
-  const applyResult = (payload, meta = {}) => {
+  const applyResult = (payload, meta) => {
     if (!payload) return;
+    const info = meta || {};
     setResult(payload);
     setSelectedId(payload.matches?.[0]?.university_id || null);
-    if (meta.created_at) {
+    if (info.created_at) {
       setSavedInfo(
-        `Sauvegardé le ${new Date(meta.created_at).toLocaleString("fr-FR")}`,
+        `Sauvegardé le ${new Date(info.created_at).toLocaleString("fr-FR")}`,
       );
     }
   };
@@ -132,7 +133,7 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Matching impossible");
-      applyResult(payload, payload.saved);
+      applyResult(payload, payload.saved || {});
       setSavedInfo(
         payload.saved?.created_at
           ? `Sauvegardé automatiquement le ${new Date(payload.saved.created_at).toLocaleString("fr-FR")}`
@@ -282,7 +283,9 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
           >
             {runs.map((run) => (
               <option key={run.id} value={run.id}>
-                {new Date(run.created_at).toLocaleString("fr-FR")}
+                {run.created_at
+                  ? new Date(run.created_at).toLocaleString("fr-FR")
+                  : "Matching"}
                 {run.top_university
                   ? ` — ${run.top_university} (${run.top_score}/100)`
                   : ""}

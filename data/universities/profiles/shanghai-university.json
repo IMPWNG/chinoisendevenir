@@ -1,0 +1,867 @@
+{
+  "identity": {
+    "name_en": "Shanghai University",
+    "name_zh": "上海大学",
+    "name_fr": "Université de Shanghai",
+    "aliases": [
+      "SHU"
+    ],
+    "website": "https://www.shu.edu.cn",
+    "international_website": "https://apply.shu.edu.cn",
+    "application_portal_url": "https://apply.shu.edu.cn"
+  },
+  "general": {
+    "presentation": "Université de recherche intensive, membre du Projet 211, fondée en 1922. Située à Shanghai, elle accueille les étudiants internationaux via le Collège d'éducation internationale.",
+    "history": "Fondée en 1922, fusion de plusieurs universités en 1994. Membre du Projet 211.",
+    "rankings": [
+      "Projet 211",
+      "Université de recherche intensive"
+    ],
+    "strengths": [
+      "Commerce international",
+      "Économie",
+      "Sciences des matériaux",
+      "Design",
+      "Études cinématographiques",
+      "Sciences de l'environnement",
+      "MTCSOL",
+      "MBA (SILC)"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Shanghai",
+      "province": "Shanghai",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2500,
+      "max": 3500,
+      "notes": "Environ 35000 CNY/an selon l'université"
+    },
+    "campuses": [
+      {
+        "name": "Campus principal de Baoshan",
+        "city": "Shanghai",
+        "description": "Siège principal, No. 99 Shangda Rd, district de Baoshan"
+      },
+      {
+        "name": "SILC Business School (Jiading)",
+        "city": "Shanghai",
+        "description": "École de commerce en partenariat, No. 20 Chengzhong Rd, district de Jiading"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Chinese Language (BA)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "HSK 4 ≥180 requis"
+    },
+    {
+      "level": "bachelor",
+      "name": "International Economics & Trade",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "HSK 5 ≥180"
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "HSK 5 ≥180"
+    },
+    {
+      "level": "bachelor",
+      "name": "Telecommunications Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "HSK 5 ≥180"
+    },
+    {
+      "level": "master",
+      "name": "MTCSOL (Teaching Chinese to Speakers of Other Languages)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Materials Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 2.5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Design Science",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 2.5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "International Trade",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Environmental Science and Engineering (MSc)",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Anglais"
+    },
+    {
+      "level": "master",
+      "name": "Journalism and Communication (MA)",
+      "field": "arts",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Anglais"
+    },
+    {
+      "level": "master",
+      "name": "Political Science (MA)",
+      "field": "law",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Anglais"
+    },
+    {
+      "level": "master",
+      "name": "Biology (MSc)",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Anglais"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (high school), GPA ≥3.0/4.0. Mathématiques et physique requises pour sciences/ingénierie; mathématiques pour économie/gestion; portfolio pour arts.",
+      "min_gpa": 3,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6.5,
+      "toefl_min": 90,
+      "preparatory_if_insufficient": "Programme préparatoire CCN (Foundation) disponible",
+      "other": [
+        "Test CSCA requis",
+        "Vidéo de présentation",
+        "Plan d'études ≥800 mots",
+        "Certificat de casier judiciaire",
+        "Preuve financière"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor) dans un domaine pertinent, GPA ≥2.5/4.0. Acceptation d'un superviseur requise (sauf管理学院, 经济学院, MBA中心, 悉尼工商学院, 国际教育学院).",
+      "min_gpa": 2.5,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6.5,
+      "toefl_min": 90,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "2 lettres de recommandation",
+        "Plan de recherche ≥800 mots",
+        "Portfolio pour arts",
+        "Entretien d'experts"
+      ]
+    },
+    "phd": {
+      "academic": "Master dans un domaine pertinent avec résultats académiques, GPA ≥3.0/4.0. Acceptation d'un superviseur requise (sauf 经济学院, 管理学院).",
+      "min_gpa": 3,
+      "age_max": 55,
+      "age_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
+      "ielts_min": 6.5,
+      "toefl_min": 90,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Publications académiques",
+        "Pour管理学院: ≥1 article SCI/SSCI requis",
+        "2 lettres de recommandation",
+        "Plan de recherche ≥800 mots"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires ou supérieur",
+      "age_max": 55,
+      "other": [
+        "Programme intensif de chinois (1 semestre ou 1 an)",
+        "Programme de chinois commercial",
+        "Programme d'été"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau des admissions internationales (International Education College)",
+    "iso_email": "apply1@oa.shu.edu.cn",
+    "admissions_email": "apply1@oa.shu.edu.cn",
+    "wechat": "StudyinSHU",
+    "phone": "+86 21 66136615",
+    "address": "No. 99 Shangda Rd, Baoshan District, Shanghai, Chine"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "engineering",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "design",
+      "music",
+      "law",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 6.5,
+    "min_toefl": 90,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": 12700,
+    "deadline_typical": "30 juin",
+    "intake_months": [
+      9
+    ],
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "tags": [
+      "Projet 211",
+      "Shanghai",
+      "recherche intensive",
+      "SILC",
+      "MBA",
+      "arts",
+      "design",
+      "MTCSOL",
+      "DBIC"
+    ]
+  },
+  "confidence": 0.92,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "frais de scolarité exacts par programme non précisés dans les sources"
+  ],
+  "notes": "Frais d'application: 500 CNY (non remboursables). Logement: simple 51000/an, double 25000/an, quadruple 12700/an (campus), 30000/an (hors campus). Frais de vie: ~35000 CNY/an. Bourses: CSC, Shanghai Government, International Chinese Language Teachers, Shanghai University, CCN Foundation. Période de candidature: 20 nov 2025 - 30 juin 2026. Inscription: fin août/début sept 2026. Code institution: 10280.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Copie du passeport valide"
+    },
+    {
+      "type": "id_photo",
+      "required": true,
+      "count": null,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo format passeport"
+    },
+    {
+      "type": "high_school_diploma",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Pré-certificat de graduation accepté pour les diplômés en attente"
+    },
+    {
+      "type": "bachelor_degree",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "master"
+      ],
+      "notes": "Pré-certificat accepté"
+    },
+    {
+      "type": "master_degree",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "phd"
+      ],
+      "notes": "Pré-certificat accepté"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes complets de tous les niveaux"
+    },
+    {
+      "type": "hsk",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "HSK4 ≥180 (langues chinoises BA), HSK5 ≥180 (sciences/ingénierie/économie/gestion/art), HSK5 ≥210 (sciences humaines)"
+    },
+    {
+      "type": "ielts_or_toefl",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "IELTS 6.5+ ou TOEFL iBT 90+ pour programmes en anglais"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "≥800 mots, en chinois ou anglais selon langue d'enseignement"
+    },
+    {
+      "type": "financial_proof",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Preuve de soutien financier (modèle téléchargeable)"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Ou engagement signé si non disponible au pays"
+    },
+    {
+      "type": "csca",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Test CSCA - boursiers avant 15 mai, autofinancés avant 30 juin"
+    },
+    {
+      "type": "selfie_video",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Présentation et plan d'études, AVI/mov/mp4, ≤50Mo"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Professeurs ou experts",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 lettres signées avec contact"
+    },
+    {
+      "type": "portfolio",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "≥2 œuvres pour arts; audio/vidéo pour musique"
+    },
+    {
+      "type": "academic_publications",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "phd"
+      ],
+      "notes": "Publications et brevets; PhD gestion: ≥1 article SCI/SSCI"
+    },
+    {
+      "type": "guarantee_statement",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Obligatoire pour moins de 18 ans"
+    },
+    {
+      "type": "physical_exam",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire étranger téléchargeable"
+    }
+  ],
+  "application": {
+    "platform_name": "Shanghai University Online Application System",
+    "platform_url": "https://apply.shu.edu.cn",
+    "steps": [
+      "Créer un compte sur apply.shu.edu.cn",
+      "Remplir le formulaire en ligne",
+      "Choisir la filière et le superviseur (master/PhD) sauf exceptions",
+      "Soumettre les documents scannés",
+      "Passer le test UQA et l'entretien téléphonique",
+      "Entretien comité expert (master/PhD)",
+      "Recevoir la pré-admission sous 2 semaines",
+      "Recevoir l'admission officielle avant le 15 juillet 2026",
+      "Payer les frais de scolarité",
+      "S'inscrire fin août/début septembre 2026"
+    ],
+    "opens_at": "2025-11-20",
+    "deadline": "2026-06-30",
+    "results_at": "2026-07-15",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": 500,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "wechat",
+      "alipay",
+      "unionpay",
+      "credit_card",
+      "bank_transfer"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [
+      {
+        "name": "Frais de demande",
+        "amount_cny": 500,
+        "refundable": false
+      }
+    ],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "single",
+          "price_cny_year": 51000,
+          "included": ""
+        },
+        {
+          "type": "double",
+          "price_cny_year": 25000,
+          "included": ""
+        },
+        {
+          "type": "quad",
+          "price_cny_year": 12700,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": true
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": "Coût de vie annuel estimé à environ 35000 CNY"
+    },
+    "scholarships": [
+      {
+        "name": "Chinese Government Scholarship (CSC)",
+        "type": "csc",
+        "coverage": "full",
+        "covers": [
+          "tuition",
+          "accommodation",
+          "stipend",
+          "insurance"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Non-Chinois,身体健康; bachelor ≤25 ans, master ≤35 ans, PhD ≤40 ans,进修 ≤45/50 ans",
+        "apply_via": "university",
+        "deadline": "2026-04-30",
+        "renewal": "Révision annuelle des résultats"
+      },
+      {
+        "name": "Shanghai Government Scholarship",
+        "type": "local",
+        "coverage": "partial",
+        "covers": [
+          "tuition",
+          "stipend"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Excellence académique",
+        "apply_via": "university",
+        "deadline": "",
+        "renewal": ""
+      },
+      {
+        "name": "International Chinese Language Teachers Scholarship (Confucius)",
+        "type": "csc",
+        "coverage": "full",
+        "covers": [
+          "tuition",
+          "accommodation",
+          "stipend"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Pour études en langue chinoise",
+        "apply_via": "university",
+        "deadline": "",
+        "renewal": ""
+      },
+      {
+        "name": "Shanghai University Scholarship",
+        "type": "university",
+        "coverage": "partial",
+        "covers": [
+          "tuition"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Étudiants autofinancés",
+        "apply_via": "university",
+        "deadline": "",
+        "renewal": ""
+      },
+      {
+        "name": "CCN Foundation Scholarship",
+        "type": "foundation",
+        "coverage": "full",
+        "covers": [
+          "tuition"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Programme préparatoire",
+        "apply_via": "university",
+        "deadline": "",
+        "renewal": ""
+      }
+    ]
+  },
+  "language": {
+    "hsk_bachelor": 4,
+    "hsk_master": 5,
+    "hsk_phd": 5,
+    "ielts_min": 6.5,
+    "toefl_min": 90,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme préparatoire international BA chinois (汉语言/汉语国际教育)"
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "Visa Application Form (JW202)"
+    ],
+    "instructions": "Demander un visa X1 (études >180 jours) ou X2 (≤180 jours) avec lettre d'admission et formulaire JW202",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours suivant l'arrivée au Bureau de l'immigration de Shanghai"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "single",
+      "double",
+      "quad",
+      "off-campus"
+    ],
+    "rules": "Réservation via le système en ligne; paiement annuel ou semestriel",
+    "international_office": "College of International Education, +86 21 66136615, apply1@oa.shu.edu.cn",
+    "orientation": "Oui, fin août/début septembre",
+    "english_support": true,
+    "clubs": "Clubs étudiants internationaux disponibles"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Anciens citoyens chinois",
+      "notes": "Doivent détenir un passeport étranger valide avant le 30 avril 2022 et justifier de 2+ ans de résidence à l'étranger entre 2022-2026"
+    },
+    {
+      "region_or_country": "Résidents de Chine continentale/HK/Macao/Taiwan naturalisés",
+      "notes": "Passeport étranger avant 30 avril 2022 + preuve de renonciation à la nationalité chinoise + 2 ans de résidence à l'étranger"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "shanghai-university",
+  "scraped_at": "2026-08-24T14:35:25.874Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://apply.shu.edu.cn/application/index?language=zh",
+      "title": null,
+      "chars": 9277
+    },
+    {
+      "url": "https://apply.shu.edu.cn/",
+      "title": null,
+      "chars": 5389
+    },
+    {
+      "url": "https://apply.shu.edu.cn/application/",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://apply.shu.edu.cn/application/index",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://apply.shu.edu.cn/application/scholarships",
+      "title": null,
+      "chars": 7490
+    },
+    {
+      "url": "https://apply.shu.edu.cn/application/index?language=en",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://apply.shu.edu.cn/css/application_detail.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://apply.shu.edu.cn/program/index",
+      "title": null,
+      "chars": 3244
+    },
+    {
+      "url": "https://apply.shu.edu.cn/contact-us/index",
+      "title": null,
+      "chars": 2117
+    },
+    {
+      "url": "https://apply.shu.edu.cn/application/index?type=apply_here",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://apply.shu.edu.cn/?language=en",
+      "title": null,
+      "chars": 5389
+    },
+    {
+      "url": "https://apply.shu.edu.cn/?language=zh",
+      "title": null,
+      "chars": 2176
+    }
+  ],
+  "db_row": {
+    "name_zh": "上海大学",
+    "name_en": "Shanghai University",
+    "name_fr": "Université de Shanghai",
+    "slug": "shanghai-university",
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "country": "Chine",
+    "department": "Bureau des admissions internationales (International Education College)",
+    "emails": [
+      "apply1@oa.shu.edu.cn",
+      "apply1@oa.shu.edu.cn"
+    ],
+    "phone": "+86 21 66136615",
+    "wechat": "StudyinSHU",
+    "website": "https://apply.shu.edu.cn",
+    "majors": [
+      "business",
+      "economics",
+      "engineering",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "design",
+      "music",
+      "law",
+      "education"
+    ],
+    "required_documents": [
+      "passport",
+      "id_photo",
+      "high_school_diploma",
+      "bachelor_degree",
+      "master_degree",
+      "transcripts",
+      "hsk",
+      "ielts_or_toefl",
+      "study_plan",
+      "financial_proof",
+      "no_criminal_record",
+      "csca",
+      "selfie_video",
+      "recommendation_letters",
+      "guarantee_statement"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 6.5 / TOEFL 90",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "30 juin"
+  }
+}

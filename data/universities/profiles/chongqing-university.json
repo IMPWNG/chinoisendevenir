@@ -1,0 +1,98 @@
+{
+  "slug": "chongqing-university",
+  "identity": {
+    "name_en": "Chongqing University",
+    "name_zh": "重庆大学",
+    "name_fr": "Université de Chongqing",
+    "aliases": [
+      "CQU"
+    ],
+    "website": "https://study.cqu.edu.cn/index.htm",
+    "international_website": "https://study.cqu.edu.cn/index.htm",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "",
+    "history": "",
+    "rankings": [],
+    "strengths": [],
+    "teaching_languages": [],
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": []
+  },
+  "programs": [],
+  "admission_requirements": {},
+  "documents": [],
+  "application": {},
+  "fees": {},
+  "scholarships": [],
+  "language": {},
+  "visa": {},
+  "housing_and_services": {},
+  "country_specific": [],
+  "contacts": {},
+  "matching": {
+    "fields": [],
+    "degrees": [],
+    "languages": [],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": []
+  },
+  "confidence": 0,
+  "missing_fields": [
+    "all"
+  ],
+  "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
+  "scan_status": "no_pages",
+  "sources": [
+    {
+      "url": "https://study.cqu.edu.cn/",
+      "title": null,
+      "status": 412
+    },
+    {
+      "url": "https://study.cqu.edu.cn/index.htm/",
+      "title": null,
+      "status": 412
+    },
+    {
+      "url": "https://english.cqu.edu.cn/",
+      "title": null,
+      "status": 412
+    }
+  ],
+  "db_row": {
+    "name_zh": "重庆大学",
+    "name_en": "Chongqing University",
+    "name_fr": "Université de Chongqing",
+    "slug": "chongqing-university",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": null,
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://study.cqu.edu.cn/index.htm",
+    "majors": [],
+    "required_documents": [],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

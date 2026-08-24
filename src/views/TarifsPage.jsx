@@ -3,28 +3,42 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import FaqSection from "../components/FaqSection";
 import JsonLd from "../components/JsonLd";
+import PageBreadcrumbs from "../components/PageBreadcrumbs";
+import PageCta from "../components/PageCta";
 import { fr } from "../i18n/fr";
 import { EXTRA_FEES, FORMULES, PROCESS_STEPS } from "../lib/formules";
-import { FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
+import { breadcrumbJsonLd, FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
+
+const BREADCRUMBS = [
+  { name: "Accueil", path: "/" },
+  { name: "Tarifs", path: "/tarifs" },
+];
 
 function TarifsPage() {
   const t = fr;
 
   return (
     <div className="app app-page-fill">
-      <JsonLd data={[serviceJsonLd(), faqJsonLd(FAQS.tarifs)]} />
+      <JsonLd
+        data={[
+          breadcrumbJsonLd(BREADCRUMBS),
+          serviceJsonLd(),
+          faqJsonLd(FAQS.tarifs),
+        ]}
+      />
       <Navigation />
 
       <section className="landing-programs">
         <div className="container">
-          <div className="text-center mb-12 max-w-3xl mx-auto">
-            <h1 className="landing-section-title">Nos formules d'accompagnement</h1>
-            <p className="landing-section-subtitle mb-0">
-              Vous souhaitez étudier en Chine, mais vous ne savez pas par où
-              commencer ? Nous vous accompagnons selon votre niveau d'avancement :
-              orientation, candidature, bourse, visa et préparation du départ.
-            </p>
-          </div>
+          <PageBreadcrumbs items={BREADCRUMBS} />
+          <h1 className="landing-section-title">
+            Nos formules d'accompagnement
+          </h1>
+          <p className="landing-section-subtitle mb-12">
+            Vous souhaitez étudier en Chine, mais vous ne savez pas par où
+            commencer ? Nous vous accompagnons selon votre niveau d'avancement :
+            orientation, candidature, bourse, visa et préparation du départ.
+          </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
             {FORMULES.map((formule) => {
@@ -158,19 +172,11 @@ function TarifsPage() {
             </p>
           </div>
 
-          <div className="text-center bg-gradient-to-r from-red-600 to-blue-700 text-white rounded-2xl p-10">
-            <h2 className="text-2xl font-bold mb-3">
-              Construisons ensemble votre projet d'études en Chine
-            </h2>
-            <p className="text-white/90 max-w-2xl mx-auto mb-6">
-              Que vous soyez encore au stade de la réflexion ou déjà prêt à
-              déposer vos candidatures, nous vous aidons à avancer avec une
-              méthode claire.
-            </p>
-            <Link href="/#lead-form" className="landing-btn landing-btn-accent">
-              Prendre contact avec Chinois en Devenir
-            </Link>
-          </div>
+          <PageCta
+            title="Construisons ensemble votre projet d'études en Chine"
+            subtitle="Que vous soyez encore au stade de la réflexion ou déjà prêt à déposer vos candidatures, nous vous aidons à avancer avec une méthode claire."
+            cta="Prendre contact avec Chinois en Devenir"
+          />
 
           <div className="mt-16 max-w-4xl mx-auto">
             <FaqSection

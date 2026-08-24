@@ -1,0 +1,415 @@
+{
+  "identity": {
+    "name_en": "Yanshan University",
+    "name_zh": "燕山大学",
+    "name_fr": "Université de Yanshan",
+    "aliases": [
+      "YSU"
+    ],
+    "website": "https://www.ysu.edu.cn/",
+    "international_website": "https://www.ysu.edu.cn/",
+    "application_portal_url": "https://admission.ysu.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université située à Qinhuangdao (Hebei), reconnue pour son excellence en ingénierie mécanique et sciences de l'information. Co-construite par la province du Hebei, le MIIT et le Ministère de l'Éducation.",
+    "history": "Fondée en 1920 (origines à Harbin Institute of Technology). 1958: branche Fulaerji. 1960: indépendante sous le nom Northeast Heavy Machinery Institute. 1978: université clé nationale. 1997:迁 à Qinhuangdao et renommée Yanshan University. 2020: politique provinciale pour accélérer la construction 'double première classe'.",
+    "rankings": [
+      "Classée dans le Shanghai Ranking (ARWU) 2026, progression de 94 places"
+    ],
+    "strengths": [
+      "Ingénierie mécanique",
+      "Sciences de l'information",
+      "Intelligence artificielle / logiciels",
+      "Matériaux avancés",
+      "Fabrication lourde"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Qinhuangdao",
+      "province": "Hebei",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 2500,
+      "notes": "Estimation pour Qinhuangdao, ville côtière de taille moyenne"
+    },
+    "campuses": [
+      {
+        "name": "Campus principal (东校区/西校区)",
+        "city": "Qinhuangdao",
+        "description": "Campus principal avec bâtiments mécaniques, bibliothèque, centres de recherche"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (diverses disciplines)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes principalement en chinois; quelques cours en anglais possibles"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (recherche et professionnel)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master en ingénierie, sciences, gestion"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Doctorat en ingénierie et sciences"
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Année préparatoire de chinois pour étudiants internationaux"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée)",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "other": [
+        "Dossier via admission.ysu.edu.cn"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor) dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "other": [
+        "Dossier via admission.ysu.edu.cn"
+      ]
+    },
+    "phd": {
+      "academic": "Master dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "other": [
+        "Dossier via admission.ysu.edu.cn"
+      ]
+    },
+    "language": {
+      "academic": "Aucune exigence académique spécifique",
+      "age_max": null,
+      "other": [
+        "Inscription via admission.ysu.edu.cn"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Bureau des étudiants internationaux (留学生招生)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "+86-335-8057100",
+    "address": "438 Hebei Street West, Qinhuangdao, Hebei 066000, Chine"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": null,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      9
+    ],
+    "city": "Qinhuangdao",
+    "province": "Hebei",
+    "tags": [
+      "double-first-class candidate",
+      "heavy machinery",
+      "engineering focus",
+      "coastal city"
+    ]
+  },
+  "confidence": 0.45,
+  "missing_fields": [
+    "tuition fees exact",
+    "housing costs",
+    "scholarship details (CSC, university, provincial)",
+    "specific HSK/IELTS/TOEFL minimum scores",
+    "age limits",
+    "application deadlines",
+    "specific English-taught programs list",
+    "international office email"
+  ],
+  "notes": "Sources limitées: page d'accueil du portail d'admission (login) et site principal de l'université. Le guide d'admission 2026 est mentionné (2025-11-07) mais le contenu détaillé n'est pas accessible dans les sources fournies. La plupart des détails spécifiques d'admission sont marqués null par prudence.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "燕山大学国际学生在线申请系统",
+    "platform_url": "https://admission.ysu.edu.cn",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "yanshan-university",
+  "scraped_at": "2026-08-24T14:41:56.518Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 12,
+  "sources": [
+    {
+      "url": "https://admission.ysu.edu.cn/",
+      "title": "国际学生在线申请系统 - 燕山大学",
+      "chars": 183
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/css/login.min.css",
+      "title": null,
+      "chars": 3019
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/password/reset",
+      "title": "燕山大学国际学生在线申请系统 | Verify",
+      "chars": 131
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/register",
+      "title": "国际学生在线申请系统 - 燕山大学",
+      "chars": 263
+    },
+    {
+      "url": "https://www.ysu.edu.cn/",
+      "title": "燕山大学",
+      "chars": 4673
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/css-Poppins300400500600700.css",
+      "title": null,
+      "chars": 4507
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/login-4-7.1.7.css",
+      "title": null,
+      "chars": 7474
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/plugins.bundle-7.1.7.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/prismjs.bundle-7.1.7.css",
+      "title": null,
+      "chars": 1968
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/style.bundle.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/light.rtl-7.1.7.css",
+      "title": null,
+      "chars": 3813
+    },
+    {
+      "url": "https://admission.ysu.edu.cn/static/css/light-7.1.7.css",
+      "title": null,
+      "chars": 12000
+    }
+  ],
+  "db_row": {
+    "name_zh": "燕山大学",
+    "name_en": "Yanshan University",
+    "name_fr": "Université de Yanshan",
+    "slug": "yanshan-university",
+    "city": "Qinhuangdao",
+    "province": "Hebei",
+    "country": "Chine",
+    "department": "Bureau des étudiants internationaux (留学生招生)",
+    "emails": [],
+    "phone": "+86-335-8057100",
+    "wechat": null,
+    "website": "https://www.ysu.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "chinese_language"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

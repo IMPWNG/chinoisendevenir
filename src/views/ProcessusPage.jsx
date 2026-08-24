@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import FaqSection from "../components/FaqSection";
 import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
+import PageCta from "../components/PageCta";
 import { fr } from "../i18n/fr";
 import { breadcrumbJsonLd, FAQS, faqJsonLd } from "../lib/seo";
 
@@ -225,6 +226,12 @@ function ProcessusPage() {
               </div>
             </div>
           </div>
+
+          <PageCta
+            title="Prêt à lancer votre admission en Chine ?"
+            subtitle="Décrivez votre parcours : nous vous indiquons les étapes réalistes, du choix de formation jusqu'au visa étudiant."
+            cta="Évaluer mon projet d'études en Chine"
+          />
 
           <div className="mt-16 max-w-4xl mx-auto">
             <FaqSection

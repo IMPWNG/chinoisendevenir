@@ -1,0 +1,292 @@
+{
+  "identity": {
+    "name_en": "University of Electronic Science and Technology of China",
+    "name_zh": "电子科技大学",
+    "name_fr": "Université de science et technologie électroniques de Chine",
+    "aliases": [
+      "UESTC",
+      "UETP"
+    ],
+    "website": "https://www.uestc.edu.cn",
+    "international_website": "https://en.uestc.edu.cn",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université publique chinoise de premier plan, spécialisée en sciences et technologies électroniques, classée projet 985 et Double First-Class.",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "electronic science and technology",
+      "information and communication engineering",
+      "computer science"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Chengdu",
+      "province": "Sichuan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Qingshuihe Campus",
+        "city": "Chengdu",
+        "description": "No.2006, Xiyuan Ave, West Hi-Tech Zone, code postal 611731"
+      },
+      {
+        "name": "Shahe Campus",
+        "city": "Chengdu",
+        "description": "No.4, Section 2, North Jianshe Road, code postal 610054"
+      }
+    ]
+  },
+  "programs": [],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "School of International Education",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "Chengdu, Sichuan, P.R.China"
+  },
+  "matching": {
+    "fields": [
+      "computer_science",
+      "engineering",
+      "sciences"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": null,
+    "chinese_language_program_available": null,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "1 décembre",
+    "intake_months": [
+      9
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "tags": [
+      "985",
+      "Double First-Class",
+      "project 211",
+      "electronic science and technology"
+    ]
+  },
+  "confidence": 0.35,
+  "missing_fields": [
+    "admission_requirements",
+    "tuition_fees",
+    "scholarships_details",
+    "specific_programs_list",
+    "language_requirements",
+    "application_portal_url",
+    "iso_email",
+    "history"
+  ],
+  "notes": "La source principale est le portail en anglais d'UESTC (en.uestc.edu.cn) qui fournit uniquement la navigation du site, des actualités récentes et deux adresses de campus. Aucune donnée détaillée sur les programmes, frais, conditions d'admission ou contacts spécifiques n'est présente dans la source.",
+  "documents": [],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "2025-12-01",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "School of International Education",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "uestc",
+  "scraped_at": "2026-08-24T14:38:58.109Z",
+  "model": "minimax-m3",
+  "pages_fetched": 8,
+  "pages_used": 1,
+  "sources": [
+    {
+      "url": "https://en.uestc.edu.cn/",
+      "title": "University of Electronic Science and Technology of China",
+      "chars": 3154
+    }
+  ],
+  "db_row": {
+    "name_zh": "电子科技大学",
+    "name_en": "University of Electronic Science and Technology of China",
+    "name_fr": "Université de science et technologie électroniques de Chine",
+    "slug": "uestc",
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "country": "Chine",
+    "department": "School of International Education",
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://en.uestc.edu.cn",
+    "majors": [
+      "computer_science",
+      "engineering",
+      "sciences"
+    ],
+    "required_documents": [],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "1 décembre"
+  }
+}

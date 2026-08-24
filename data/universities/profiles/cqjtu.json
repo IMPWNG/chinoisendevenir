@@ -1,0 +1,372 @@
+{
+  "identity": {
+    "name_en": "Chongqing Jiaotong University",
+    "name_zh": "重庆交通大学",
+    "name_fr": "Université Jiaotong de Chongqing",
+    "aliases": [
+      "CQJTU"
+    ],
+    "website": "https://www.cqjtu.edu.cn",
+    "international_website": "https://oice.cqjtu.edu.cn/English_Version.htm",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "Université chinoise spécialisée dans le transport, le génie civil et les infrastructures. Dispose d'un Institut Confucius au Bénin (Université d'Abomey-Calavi) et de partenariats internationaux, notamment avec l'Université de Northumbria (Royaume-Uni).",
+    "history": "",
+    "rankings": [],
+    "strengths": [
+      "transport",
+      "génie civil",
+      "ponts et tunnels",
+      "matériaux",
+      "voies navigables intérieures",
+      "construction navale",
+      "logistique"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus Nan'an (南岸校区)",
+        "city": "Chongqing",
+        "description": "Siège principal, No.66 Xuefu Road, district de Nan'an, code postal 400074"
+      },
+      {
+        "name": "Campus Science City (科学城校区)",
+        "city": "Chongqing",
+        "description": "Campus secondaire mentionné pour les rencontres officielles"
+      }
+    ]
+  },
+  "programs": [],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "master": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "Office of International Cooperation and Exchange (国际合作交流处)",
+    "iso_email": "waiban@vip.163.com",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "+86-023-62652602",
+    "address": "No.66, Xuefu Road, Nan'an District, Chongqing, P.R.China, 400074"
+  },
+  "matching": {
+    "fields": [
+      "engineering",
+      "sciences",
+      "chinese_language",
+      "design"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": null,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": null,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": [
+      "confucius_institute",
+      "benin",
+      "northumbria_partnership",
+      "transport_specialty",
+      "111_base"
+    ]
+  },
+  "confidence": 0.25,
+  "missing_fields": [
+    "tuition_fees",
+    "admission_requirements_specifics",
+    "application_portal",
+    "english_taught_programs_list",
+    "scholarship_details",
+    "age_limits",
+    "hsk_ielts_toefl_thresholds",
+    "intake_months",
+    "cost_of_living",
+    "specific_international_programs"
+  ],
+  "notes": "Les sources fournies concernent principalement le bureau de coopération internationale (actualités, Institut Confucius au Bénin, partenariats). Aucune information spécifique sur les frais de scolarité, scores HSK/IELTS/TOEFL, portail de candidature ou programmes internationaux détaillés n'a été trouvée dans ces sources. CSC confirmé (8 étudiants master en 2026). Programmes de coopération sino-étrangers avec Northumbria University (UK) confirmés.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "Bureau de la coopération et des échanges internationaux (Office of International Cooperation and Exchange), No.66 Xuefu Road, Nan'an District, Chongqing 400074. Tél/Fax: +86-023-62652602. Email: waiban@vip.163.com",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "cqjtu",
+  "scraped_at": "2026-08-24T14:29:58.306Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 10,
+  "sources": [
+    {
+      "url": "https://oice.cqjtu.edu.cn/",
+      "title": "重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 1339
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/info/1003/2374.htm",
+      "title": "关于2026年暑假期间办理学生出国留学英文翻译材料审核的通知-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 1057
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/English_Version.htm",
+      "title": "English Version-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 1129
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/gatsw/zsxx.htm",
+      "title": "招生信息-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 667
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/gjxxzx/gjxxzx.htm",
+      "title": "国际学习中心-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 629
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/info/1002/2363.htm",
+      "title": "贝宁孔子学院2026届本科生毕业论文答辩顺利举行-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 1546
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/info/1002/2361.htm",
+      "title": "贝宁孔院师生走进中国电建市政集团贝宁项目开展工程汉语研学-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 1699
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/info/1002/2360.htm",
+      "title": "贝宁孔子学院承办2026年“文明对话国际日”暨“茶和天下・雅集”主题文化活动-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 2009
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/info/1002/2358.htm",
+      "title": "粽趣端午·乐学汉语｜贝宁孔子学院端午趣味运动会顺利举办-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 1105
+    },
+    {
+      "url": "https://oice.cqjtu.edu.cn/info/1002/2345.htm",
+      "title": "深化国际合作 赋能协同发展——英国诺森比亚大学代表团访问我校-重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 2135
+    }
+  ],
+  "db_row": {
+    "name_zh": "重庆交通大学",
+    "name_en": "Chongqing Jiaotong University",
+    "name_fr": "Université Jiaotong de Chongqing",
+    "slug": "cqjtu",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": "Office of International Cooperation and Exchange (国际合作交流处)",
+    "emails": [
+      "waiban@vip.163.com"
+    ],
+    "phone": "+86-023-62652602",
+    "wechat": null,
+    "website": "https://oice.cqjtu.edu.cn/English_Version.htm",
+    "majors": [
+      "engineering",
+      "sciences",
+      "chinese_language",
+      "design"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

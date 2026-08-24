@@ -1473,9 +1473,15 @@ function ContactModal({
                             : action.action}
                         </span>
                         <span className="text-xs text-slate-500 font-medium">
-                          {new Date(action.created_at).toLocaleString(
-                            lang === "zh" ? "zh-CN" : lang === "en" ? "en-GB" : "fr-FR",
-                          )}
+                          {action.created_at
+                            ? new Date(action.created_at).toLocaleString(
+                                lang === "zh"
+                                  ? "zh-CN"
+                                  : lang === "en"
+                                    ? "en-GB"
+                                    : "fr-FR",
+                              )
+                            : ""}
                         </span>
                       </div>
                       {action.description && (

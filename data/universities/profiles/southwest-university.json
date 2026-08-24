@@ -1,0 +1,576 @@
+{
+  "identity": {
+    "name_en": "Southwest University",
+    "name_zh": "西南大学",
+    "name_fr": "Université du Sud-Ouest",
+    "aliases": [
+      "SWU"
+    ],
+    "website": "https://www.swu.edu.cn",
+    "international_website": "http://admissions.swu.edu.cn",
+    "application_portal_url": "https://swu.17gz.org/lxsgl"
+  },
+  "general": {
+    "presentation": "Université complète située à Chongqing, accueillant plus de 1400 étudiants internationaux de plus de 70 pays chaque année. Le Collège international (国际学院), créé en 2008, est l'unité de gestion des étudiants étrangers et l'unique établissement de l'ouest de la Chine habilité à recruter et former des étudiants en licence de pédagogie de l'enseignement du chinois (bourse Confucius).",
+    "history": "Recrutement d'étudiants étrangers depuis les années 1950. Collège international fondé en 2008. 7211 étudiants étrangers accueillis entre 2005 et 2015. Première promotion MTCSOL en septembre 2009.",
+    "rankings": [],
+    "strengths": [
+      "Enseignement du chinois (MTCSOL)",
+      "Sciences de l'éducation",
+      "Agronomie",
+      "Sciences alimentaires",
+      "Sciences des matériaux"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": [
+      {
+        "name": "Campus principal Beibei",
+        "city": "Chongqing (district de Beibei)",
+        "description": "Adresse: 重庆市北碚区天生路2号, code postal 400715"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (11 filières entièrement en anglais dont Économie et commerce international)",
+      "field": "other",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "11 programmes full-English dont Tea Science, Packaging Engineering, Food Quality and Safety"
+    },
+    {
+      "level": "bachelor",
+      "name": "Pédagogie de l'enseignement du chinois (MTCSOL) - bourse Confucius",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Seul établissement de l'ouest de la Chine habilité pour ce programme"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (12 filières entièrement en anglais dont Éducation)",
+      "field": "other",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "12 programmes full-English dont Educational Leadership and Management, Material Science and Engineering, Nanobiomedicine, Clean Energy Science, Food Science and Engineering"
+    },
+    {
+      "level": "master",
+      "name": "Pédagogie de l'enseignement du chinois (MTCSOL)",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "132 étudiants MTCSOL recrutés en 8 promotions depuis 2009"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat (7 filières entièrement en anglais dont Microbiologie)",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "7 programmes full-English dont Material Science and Engineering, Nanobiomedicine, Educational Leadership and Management"
+    },
+    {
+      "level": "language",
+      "name": "Programme préparatoire / Pré-universitaire (预科项目)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Pour étudiants nécessitant une préparation linguistique"
+    },
+    {
+      "level": "language",
+      "name": "Étudiants en langue chinoise (汉语进修生)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de formation linguistique"
+    },
+    {
+      "level": "language",
+      "name": "Étudiants visiteurs ordinaires (普通进修生)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme d'échange non-diplômant"
+    },
+    {
+      "level": "language",
+      "name": "Formation特色 à court terme",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes courts: Charming Chinese, Cloud Study Explore China (3 mois+), Summer Camp"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires. Inscription via le portail en ligne.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire (预科项目) d'un an disponible",
+      "other": [
+        "11 programmes full-English disponibles",
+        "Examen HSK organisé sur le campus"
+      ]
+    },
+    "master": {
+      "academic": "Licence/Bachelor. Inscription via le portail en ligne.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "12 programmes full-English disponibles"
+      ]
+    },
+    "phd": {
+      "academic": "Master. Inscription via le portail en ligne.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "7 programmes full-English disponibles"
+      ]
+    },
+    "language": {
+      "academic": "Pas de condition académique stricte",
+      "age_max": null,
+      "other": [
+        "Programme préparatoire pour études en chinois"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Collège international de l'Université du Sud-Ouest (西南大学国际学院)",
+    "iso_email": "guojixy@swu.edu.cn",
+    "admissions_email": "admission@swu.edu.cn",
+    "wechat": "留管助手 (application mobile)",
+    "phone": "+86-23-68252136 (bureau) / +86-23-68254425 (affaires étudiantes) / +86-23-68367823 (admissions étudiants internationaux) / +86-23-68366001 (CSC, New Silk Road) / +86-23-68366189 (admissions étudiants chinois en master/doctorat)",
+    "address": "重庆市北碚区天生路2号, code postal 400715"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "education",
+      "engineering",
+      "sciences",
+      "agriculture",
+      "chinese_language",
+      "arts",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
+    "intake_months": [
+      3,
+      9
+    ],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "tags": [
+      "MTCSOL",
+      "Confucius Institute Scholarship",
+      "Chongqing Mayor Scholarship",
+      "New Silk Road",
+      "SWU President Scholarship",
+      "programme préparatoire",
+      "HSK sur campus"
+    ]
+  },
+  "confidence": 0.72,
+  "missing_fields": [
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "deadline_typical",
+    "cost_of_living_cny_month",
+    "rankings"
+  ],
+  "notes": "Sources principalement issues du Collège international (gjxy.swu.edu.cn) et du portail d'admissions anglais (admissions.swu.edu.cn). Les frais de scolarité, scores minimaux HSK/IELTS/TOEFL et limites d'âge ne sont pas précisés dans les sources consultées. 11 programmes bachelor, 12 master et 7 doctorat entièrement en anglais sont confirmés. 5 types de bourses disponibles (CSC, Confucius, Maire de Chongqing, Président SWU, Nouvelle Route de la Soie).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "Southwest University Online Application",
+    "platform_url": "https://admissions.swu.edu.cn",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Candidats CSC postulent via ambassade/poste ou via SWU (programme de haut niveau)",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teacher Scholarship",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants en langue chinoise ou MTCSOL",
+      "apply_via": "center_for_language_education_cooperation",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chongqing Mayor Scholarship",
+      "type": "",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse municipale de Chongqing",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "SWU President Scholarship",
+      "type": "",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse du président de SWU",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "New Silk Road Scholarship",
+      "type": "",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse Nouvelle Route de la Soie pour pays le long de la Ceinture et Route",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme préparatoire (预科项目) pour étudiants étrangers avant études diplômantes"
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [
+      {
+        "type": "Ziyun Building (紫云楼)",
+        "description": ""
+      },
+      {
+        "type": "Zhuyuan International Student Apartment (竹园留学生公寓)",
+        "description": ""
+      }
+    ],
+    "rules": "Inspection des appareils électriques interdits dans les résidences",
+    "international_office": "admission@swu.edu.cn / tel +86-23-68367823 (admissions internationaux), +86-23-68366001 (CSC, New Silk Road)",
+    "orientation": "Guide d'accueil pour les nouveaux étudiants internationaux publié chaque semestre",
+    "english_support": true,
+    "clubs": "Association des étudiants internationaux (留学生会)"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "southwest-university",
+  "scraped_at": "2026-08-24T14:38:20.369Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 11,
+  "sources": [
+    {
+      "url": "https://gjxy.swu.edu.cn/",
+      "title": "西南大学国际学院",
+      "chars": 3469
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/gjzw/hskks/hyksjs.htm",
+      "title": "汉语考试介绍-西南大学国际学院",
+      "chars": 1809
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/xysh/lxsh.htm",
+      "title": "留学生会-西南大学国际学院",
+      "chars": 1204
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/xytd/lxsjygk.htm",
+      "title": "留学生教育概况-西南大学国际学院",
+      "chars": 3192
+    },
+    {
+      "url": "http://admissions.swu.edu.cn/",
+      "title": "国际学院英文",
+      "chars": 4240
+    },
+    {
+      "url": "https://swu.17gz.org/lxsgl",
+      "title": "管理中心 - 国际学生服务平台",
+      "chars": 712
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/css/base.css",
+      "title": null,
+      "chars": 12000
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/css/slick.css",
+      "title": null,
+      "chars": 3907
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/css/common.css",
+      "title": null,
+      "chars": 3913
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/css/index.css",
+      "title": null,
+      "chars": 9277
+    },
+    {
+      "url": "https://gjxy.swu.edu.cn/gjzw/pyfa.htm",
+      "title": "培养方案-西南大学国际学院",
+      "chars": 2919
+    }
+  ],
+  "db_row": {
+    "name_zh": "西南大学",
+    "name_en": "Southwest University",
+    "name_fr": "Université du Sud-Ouest",
+    "slug": "southwest-university",
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "country": "Chine",
+    "department": "Collège international de l'Université du Sud-Ouest (西南大学国际学院)",
+    "emails": [
+      "guojixy@swu.edu.cn",
+      "admission@swu.edu.cn"
+    ],
+    "phone": "+86-23-68252136 (bureau) / +86-23-68254425 (affaires étudiantes) / +86-23-68367823 (admissions étudiants internationaux) / +86-23-68366001 (CSC, New Silk Road) / +86-23-68366189 (admissions étudiants chinois en master/doctorat)",
+    "wechat": "留管助手 (application mobile)",
+    "website": "http://admissions.swu.edu.cn",
+    "majors": [
+      "business",
+      "economics",
+      "education",
+      "engineering",
+      "sciences",
+      "agriculture",
+      "chinese_language",
+      "arts",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship / International Chinese Language Teacher Scholarship / Chongqing Mayor Scholarship / SWU President Scholarship / New Silk Road Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

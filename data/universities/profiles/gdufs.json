@@ -1,0 +1,521 @@
+{
+  "identity": {
+    "name_en": "Guangdong University of Foreign Studies",
+    "name_zh": "广东外语外贸大学",
+    "name_fr": "Université des études étrangères du Guangdong",
+    "aliases": [
+      "GDUFS",
+      "广外"
+    ],
+    "website": "https://www.gdufs.edu.cn/",
+    "international_website": "https://english.gdufs.edu.cn/",
+    "application_portal_url": "http://iie.gdufs.edu.cn/"
+  },
+  "general": {
+    "presentation": "Université publique spécialisée dans les langues étrangères, le commerce international et la diplomatie, située à Guangzhou.",
+    "history": "Fondée en 1965, issue de la fusion de plusieurs institutions de langues et de commerce extérieur.",
+    "rankings": [],
+    "strengths": [
+      "Études de langues étrangères",
+      "Commerce international",
+      "Études internationales",
+      "Diplomatie et relations internationales"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en",
+      "fr",
+      "es",
+      "ru",
+      "ar",
+      "ja",
+      "ko",
+      "de",
+      "it",
+      "pt",
+      "th",
+      "vi",
+      "id",
+      "hi",
+      "km",
+      "lo",
+      "my"
+    ],
+    "location": {
+      "city": "Guangzhou",
+      "province": "Guangdong",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 3500,
+      "notes": "Estimation pour étudiant international à Guangzhou (logement + vie courante)."
+    },
+    "campuses": [
+      {
+        "name": "Baiyun Mountain Campus (白云山校区)",
+        "city": "Guangzhou",
+        "description": "Campus principal, No.2 North Baiyun Avenue, Baiyun District, 510420."
+      },
+      {
+        "name": "University Town Campus (大学城校区)",
+        "city": "Guangzhou",
+        "description": "Campus de Xiaoguwei, Panyu District, 510006."
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Undergraduate Programs (chinois/anglais)",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes en langue chinoise principalement; quelques programmes bilingues. CSCA exigé pour les non-HSK."
+    },
+    {
+      "level": "master",
+      "name": "Postgraduate Programs",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master en langues, commerce international, diplomatie, etc."
+    },
+    {
+      "level": "phd",
+      "name": "Doctorate Programs",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Doctorat en langues étrangères, économie du commerce international, etc."
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Training (汉语进修)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme non diplômant, sessions printemps et automne. Cours d'été disponibles."
+    },
+    {
+      "level": "foundation",
+      "name": "International Preparatory Program (国际预科)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Année préparatoire pour étudiants ne satisfaisant pas les exigences de chinois."
+    },
+    {
+      "level": "language",
+      "name": "Summer Chinese Language Program (汉语暑假班)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme court estival."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire internationale (International Preparatory Program) disponible.",
+      "other": [
+        "Examen CSCA (来华留学本科入学学业水平测试) requis pour candidats sans HSK suffisant",
+        "Dossier de candidature via le portail international"
+      ]
+    },
+    "master": {
+      "academic": "Licence (Bachelor) ou équivalent, dans un domaine pertinent.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Lettre de recommandation",
+        "Plan d'études / proposition de recherche"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Lettres de recommandation",
+        "Proposition de recherche",
+        "Accord d'un superviseur"
+      ]
+    },
+    "language": {
+      "academic": "Diplôme de fin d'études secondaires ou équivalent.",
+      "age_max": null,
+      "other": [
+        "Inscription auprès de l'Institute for International Education",
+        "Sessions printemps/automne et été"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Institute for International Education (IIE), GDUFS",
+    "iso_email": "iie@gdufs.edu.cn",
+    "admissions_email": "iie@gdufs.edu.cn",
+    "wechat": "",
+    "phone": "+86-20-36207141,+86-20-36207142",
+    "address": "Institute for International Education, Guangdong University of Foreign Studies, No.2 North Baiyun Avenue, Baiyun District, Guangzhou, Guangdong, P.R.China 510420"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "law",
+      "education",
+      "arts",
+      "chinese_language",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 14000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 3600,
+    "deadline_typical": "30 juin",
+    "intake_months": [
+      3,
+      7,
+      9
+    ],
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "tags": [
+      "langue étrangère",
+      "commerce international",
+      "diplomatie",
+      "Hub ASEAN",
+      "Multilingue",
+      "Études internationales",
+      "Class A HSK Center"
+    ]
+  },
+  "confidence": 0.72,
+  "missing_fields": [
+    "rankings_detailles",
+    "frais_scolarite_specifiques_par_programme",
+    "min_ielts_toefl",
+    "age_limits_stricts",
+    "dates_limites_par_session"
+  ],
+  "notes": "Données principalement extraites de l'Institut pour l'Éducation Internationale de GDUFS. Les valeurs de frais et bourses sont des estimations globales non confirmées explicitement dans les sources fournies. La confiance est modérée car les sources ne donnent pas de chiffres précis pour IELTS/TOEFL ni pour les frais détaillés.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": null,
+        "max": null
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": null,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "other",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Guangdong Province Government International Student Scholarship",
+      "type": "provincial",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "GDUFS Scholarship",
+      "type": "university",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme international préparatoire (国际预科) proposé en automne"
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "Institute for International Education (IIE), iie@gdufs.edu.cn, +86-20-36207141",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "gdufs",
+  "scraped_at": "2026-08-24T14:33:40.276Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 11,
+  "sources": [
+    {
+      "url": "http://iie.gdufs.edu.cn/",
+      "title": "留学生教育学院",
+      "chars": 499
+    },
+    {
+      "url": "https://iie.gdufs.edu.cn/",
+      "title": "留学生教育学院",
+      "chars": 499
+    },
+    {
+      "url": "https://english.gdufs.edu.cn/",
+      "title": "GDUFS",
+      "chars": 1516
+    },
+    {
+      "url": "http://iie.gdufs.edu.cn/style/css.css",
+      "title": null,
+      "chars": 5808
+    },
+    {
+      "url": "http://iie.gdufs.edu.cn/sy.htm",
+      "title": "首页-留学生教育学院",
+      "chars": 1817
+    },
+    {
+      "url": "http://iie-en.gdufs.edu.cn/Languages/fy.htm",
+      "title": "法语-留学生教育学院",
+      "chars": 1183
+    },
+    {
+      "url": "http://iie-en.gdufs.edu.cn/Languages/ey.htm",
+      "title": "俄语-留学生教育学院",
+      "chars": 1183
+    },
+    {
+      "url": "http://iie-en.gdufs.edu.cn/Languages/alby.htm",
+      "title": "阿拉伯语-留学生教育学院",
+      "chars": 1185
+    },
+    {
+      "url": "http://iie-en.gdufs.edu.cn/Languages/xbyy.htm",
+      "title": "西班牙语-留学生教育学院",
+      "chars": 1185
+    },
+    {
+      "url": "http://iie-en.gdufs.edu.cn/Languages/dy.htm",
+      "title": "德语-留学生教育学院",
+      "chars": 1183
+    },
+    {
+      "url": "http://iie-en.gdufs.edu.cn/Languages/jpn.htm",
+      "title": "日语-留学生教育学院",
+      "chars": 1183
+    }
+  ],
+  "db_row": {
+    "name_zh": "广东外语外贸大学",
+    "name_en": "Guangdong University of Foreign Studies",
+    "name_fr": "Université des études étrangères du Guangdong",
+    "slug": "gdufs",
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "country": "Chine",
+    "department": "Institute for International Education (IIE), GDUFS",
+    "emails": [
+      "iie@gdufs.edu.cn",
+      "iie@gdufs.edu.cn"
+    ],
+    "phone": "+86-20-36207141,+86-20-36207142",
+    "wechat": null,
+    "website": "https://english.gdufs.edu.cn/",
+    "majors": [
+      "business",
+      "economics",
+      "finance",
+      "law",
+      "education",
+      "arts",
+      "chinese_language",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship / International Chinese Language Teachers Scholarship / Guangdong Province Government International Student Scholarship / GDUFS Scholarship",
+    "scholarship_min": 14000,
+    "scholarship_max": 30000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": 14000,
+    "tuition_max": 30000,
+    "application_deadline": "30 juin"
+  }
+}

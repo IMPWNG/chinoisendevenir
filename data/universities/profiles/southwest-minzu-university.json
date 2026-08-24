@@ -1,0 +1,93 @@
+{
+  "slug": "southwest-minzu-university",
+  "identity": {
+    "name_en": "Southwest Minzu University",
+    "name_zh": "西南民族大学",
+    "name_fr": "Université des nationalités du Sud-Ouest",
+    "aliases": [
+      "SWUN"
+    ],
+    "website": "https://gjc.swun.edu.cn/index.htm",
+    "international_website": "https://gjc.swun.edu.cn/index.htm",
+    "application_portal_url": ""
+  },
+  "general": {
+    "presentation": "",
+    "history": "",
+    "rankings": [],
+    "strengths": [],
+    "teaching_languages": [],
+    "location": {
+      "city": "Chengdu",
+      "province": "Sichuan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": null,
+      "max": null,
+      "notes": ""
+    },
+    "campuses": []
+  },
+  "programs": [],
+  "admission_requirements": {},
+  "documents": [],
+  "application": {},
+  "fees": {},
+  "scholarships": [],
+  "language": {},
+  "visa": {},
+  "housing_and_services": {},
+  "country_specific": [],
+  "contacts": {},
+  "matching": {
+    "fields": [],
+    "degrees": [],
+    "languages": [],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "tags": []
+  },
+  "confidence": 0,
+  "missing_fields": [
+    "all"
+  ],
+  "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
+  "scan_status": "no_pages",
+  "sources": [
+    {
+      "url": "https://gjc.swun.edu.cn/",
+      "title": null,
+      "status": 412
+    },
+    {
+      "url": "https://gjc.swun.edu.cn/index.htm/",
+      "title": null,
+      "status": 412
+    }
+  ],
+  "db_row": {
+    "name_zh": "西南民族大学",
+    "name_en": "Southwest Minzu University",
+    "name_fr": "Université des nationalités du Sud-Ouest",
+    "slug": "southwest-minzu-university",
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "country": "Chine",
+    "department": null,
+    "emails": [],
+    "phone": null,
+    "wechat": null,
+    "website": "https://gjc.swun.edu.cn/index.htm",
+    "majors": [],
+    "required_documents": [],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
+  }
+}

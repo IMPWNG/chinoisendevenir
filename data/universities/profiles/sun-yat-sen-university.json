@@ -1,0 +1,769 @@
+{
+  "identity": {
+    "name_en": "Sun Yat-sen University",
+    "name_zh": "中山大学",
+    "name_fr": "Université Sun Yat-sen",
+    "aliases": [
+      "SYSU"
+    ],
+    "website": "https://www.sysu.edu.cn",
+    "international_website": "https://iso.sysu.edu.cn/en/",
+    "application_portal_url": "https://apply.sysu.edu.cn"
+  },
+  "general": {
+    "presentation": "Université综合性, de recherche et ouverte, fondée en 1924 par Sun Yat-sen. Enracinée dans la Grande Baie Guangdong-Hong Kong-Macao (Guangzhou, Zhuhai, Shenzhen), avec 3 campus, 5 sites et 10 hôpitaux affiliés.",
+    "history": "Fondée en 1924 par Sun Yat-sen. A célébré son centenaire en 2024. Université directement rattachée au Ministère de l'Éducation chinois.",
+    "rankings": [
+      "Top 10 universités chinoises",
+      "Projet Double First-Class"
+    ],
+    "strengths": [
+      "Médecine (10 hôpitaux affiliés)",
+      "Sciences de la vie",
+      "Affaires publiques et gouvernance",
+      "Économie (Lingnan College)",
+      "Tourisme (n°1 en Chine continentale)",
+      "Études internationales multilingues"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Guangzhou",
+      "province": "Guangdong",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 2000,
+      "max": 4000,
+      "notes": "Estimation pour Guangzhou; climat subtropical, moyenne annuelle 21,8°C"
+    },
+    "campuses": [
+      {
+        "name": "Campus Guangzhou (Nord, Sud, Est)",
+        "city": "Guangzhou",
+        "description": "Campus principal, siège de l'administration"
+      },
+      {
+        "name": "Campus Zhuhai",
+        "city": "Zhuhai",
+        "description": "Site du programme pré-universitaire et de l'École d'études internationales"
+      },
+      {
+        "name": "Campus Shenzhen",
+        "city": "Shenzhen",
+        "description": "Campus récent axé sur médecine et ingénierie"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (本科) pour étudiants internationaux",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Enseignement principalement en chinois; programmes en anglais disponibles dans certaines filières"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (硕士) pour étudiants internationaux",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inclut MBA et MPA enseignés en anglais"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat (博士) pour étudiants internationaux",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes CSC 'High-level Graduate' disponibles"
+    },
+    {
+      "level": "master",
+      "name": "MPA - Chinese Governance (MPA-CGDC)",
+      "field": "other",
+      "language": "en",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "1 an, 25 étudiants, entièrement en anglais, financé par le MOFCOM pour fonctionnaires de pays en développement"
+    },
+    {
+      "level": "foundation",
+      "name": "Programme pré-universitaire (预科项目)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "1 an (38 semaines, 1152h, 64 crédits) à Zhuhai; directions lettres-commerce ou sciences-ingénierie; prépare HSK et CSCA"
+    },
+    {
+      "level": "exchange",
+      "name": "China Link - Échange de recherche court terme CSC",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Durée 1-12 mois; bourses CSC; 普通进修生 ≤45 ans, 高级进修生 ≤50 ans"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin de lycée ou équivalent; non-citoyen chinois; conforme à la circulaire 教外函〔2020〕12号",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme pré-universitaire SYSU (1 an)",
+      "other": [
+        "Test CSCA (来华留学本科入学学业水平测试)",
+        "Plan d'étude ≥600 mots en chinois ou anglais",
+        "Certificat de casier judiciaire",
+        "Examen médical"
+      ]
+    },
+    "master": {
+      "academic": "Diplôme de bachelor; non-citoyen chinois",
+      "min_gpa": null,
+      "age_max": 45,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Plan d'étude/recherche ≥1500 mots",
+        "2 lettres de recommandation académique",
+        "CV en anglais",
+        "Relevé de notes officiel",
+        "Pour MPA-CGDC: ≥3 ans expérience professionnelle, fonctionnaire de niveau 处级 ou équivalent"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master; non-citoyen chinois",
+      "min_gpa": null,
+      "age_max": 50,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Plan de recherche",
+        "Lettres de recommandation",
+        "Publications ou travaux de recherche",
+        "Pour 高水平研究生 CSC: excellents résultats académiques"
+      ]
+    },
+    "language": {
+      "academic": "Pour programme 1 semestre: HSK4 requis",
+      "age_max": null,
+      "other": [
+        "Programme pré-universitaire: HSK4 pour admission directe 1 semestre",
+        "Test CSCA requis pour admission en bachelor"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "Office of International Students' Affairs (外国留学生办公室)",
+    "iso_email": "admissions@mail.sysu.edu.cn",
+    "admissions_email": "admissions@mail.sysu.edu.cn",
+    "wechat": "",
+    "phone": "+86-20-84110819",
+    "address": "No. 135, Xingang Xi Road, Guangzhou 510275, Guangdong, Chine"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "law",
+      "education",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 6,
+    "min_toefl": 80,
+    "age_max_bachelor": null,
+    "age_max_master": 45,
+    "age_max_phd": 50,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": 15200,
+    "tuition_cny_max": 30400,
+    "housing_cny_year_min": 4600,
+    "deadline_typical": "30 avril - 31 juillet selon programme",
+    "intake_months": [
+      2,
+      9
+    ],
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "tags": [
+      "Double First-Class",
+      "CSC scholarship",
+      "Silk Road program",
+      "MOFCOM scholarship",
+      "Foundation program",
+      "English-taught MPA",
+      "English-taught MBA",
+      "10 affiliated hospitals",
+      "3 campuses"
+    ]
+  },
+  "confidence": 0.85,
+  "missing_fields": [
+    "rankings détaillés et chiffrés",
+    "frais de scolarité bachelor/master/phd précis (seuls pré-universitaire et MPA-CGDC confirmés)",
+    "âge max bachelor",
+    "bourse provinciale Guangdong"
+  ],
+  "notes": "Données extraites principalement du site iso.sysu.edu.cn (2026). Frais de scolarité précis pour bachelor/master/phd non trouvés dans les sources; seul le programme pré-universitaire (30 400 CNY/an) et MPA-CGDC (gratuit, financé MOFCOM) sont confirmés. Nombreux programmes de bourses CSC: Silk Road, High-level Graduate, MOFCOM, China Link, Atomic Energy, International Chinese Teacher, New Sinology PhD, etc.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Validité > 1er décembre 2026. Si en Chine, joindre visa/résidence et tampon d'entrée."
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Diplôme lycée (fondation/bachelor) ou licence (master/PhD). Pré-diplôme accepté pour diplômés récents."
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevés complets lycée ou supérieur, en chinois ou anglais."
+    },
+    {
+      "type": "hsk",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK4 obligatoire pour programme fondation d'un semestre."
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "≥600 mots en chinois/anglais (fondation), ≥1500 mots (master MPA)."
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Délivré dans les 6 mois précédant la demande."
+    },
+    {
+      "type": "physical_exam",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire examen médical étranger; ≥6 mois de séjour requis."
+    },
+    {
+      "type": "guardian_guarantee",
+      "required": false,
+      "count": 1,
+      "who": "<18 ans au 1er sept. 2026",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Garantie notariée du tuteur résidant dans le Guangdong."
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 lettres académiques signées (professeurs)."
+    },
+    {
+      "type": "employer_recommendation",
+      "required": true,
+      "count": 1,
+      "who": "MPA-CGDC",
+      "applies_to": [
+        "master"
+      ],
+      "notes": "Lettre de l'institution du candidat."
+    },
+    {
+      "type": "cv",
+      "required": true,
+      "count": 1,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "CV en anglais avec parcours post-lycée."
+    },
+    {
+      "type": "english_proof",
+      "required": true,
+      "count": 1,
+      "who": "Programmes anglais",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "IELTS 6.0+ ou TOEFL 80+ pour non-anglophones."
+    },
+    {
+      "type": "degree_certification",
+      "required": true,
+      "count": 1,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Certification via zwfw.cscse.edu.cn pour diplômes hors Chine continentale."
+    }
+  ],
+  "application": {
+    "platform_name": "Système de candidature étudiants internationaux SYSU",
+    "platform_url": "https://apply.sysu.edu.cn",
+    "steps": [
+      "Créer un compte sur apply.sysu.edu.cn",
+      "Remplir informations personnelles",
+      "Télécharger documents requis",
+      "Signer formulaire généré et téléverser",
+      "Examen des dossiers par l'université",
+      "Liste de pré-admission publiée",
+      "Admission définitive et envoi des documents de visa"
+    ],
+    "opens_at": "",
+    "deadline": "2026-07-31",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": null,
+      "master": null,
+      "phd": null,
+      "language": {
+        "min": 30400,
+        "max": 30400
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": 800,
+    "other_fees": [
+      {
+        "name": "Frais d'assurance semestre",
+        "amount_cny": 400,
+        "notes": "Par semestre"
+      },
+      {
+        "name": "Frais d'examen médical",
+        "amount_cny": null,
+        "notes": ""
+      }
+    ],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": 4600,
+          "included": "Logement double Zhuhai campus, Liyuan 6, ~25m²"
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": "Allocation bourse MPA-CGDC: 36000 CNY/an; Bourse China Link: 3000-3500 CNY/mois."
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse Gouvernement chinois Silk Road (Route de la Soie)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour pays le long de la Route de la Soie, programmes指定",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse China Link (CSC échange recherche court terme)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": 3000,
+      "conditions": "Étudiants d'universités partenaires du CSC; durée 1-12 mois; <45 ans (général) ou <50 ans (senior)",
+      "apply_via": "csc",
+      "deadline": "2026-05-01",
+      "renewal": ""
+    },
+    {
+      "name": "MPA-CGDC (MOFCOM)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend",
+        "airfare"
+      ],
+      "stipend_cny_month": 3000,
+      "conditions": "Fonctionnaires niveau chef de service pays en développement; bac+3 ans expérience; IELTS 6.0/TOEFL 80; <45 ans",
+      "apply_via": "embassy",
+      "deadline": "2026-06-06",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse universitaire SYSU",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Sélection sur mérite académique",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse Institut Confucius (Enseignants chinois internationaux)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour futurs enseignants de chinois",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse Énergie Atomique (AEA)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Domaines liés à l'énergie atomique",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse Nouveaux Sinologues (doctorat)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Doctorat en études chinoises",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse d'Excellence CSC",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Étudiants excellents",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "hsk_foundation": 4,
+    "ielts_min": 6,
+    "toefl_min": 80,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an (38 semaines) ou 1 semestre",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": true,
+      "description": "Programme pré-universitaire à Zhuhai, 2 orientations (lettres-commerce ou sciences-ingénierie), 1152h/an, 64 crédits. Frais: 30400 CNY/an ou 15200/semestre. Prépare au HSK et CSCA pour entrée en bachelor."
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission",
+      "Formulaire de confirmation pour étudiants étrangers (JW202/201)"
+    ],
+    "instructions": "Étudiants admis doivent demander visa X1/X2 à l'ambassade chinoise avec lettre d'admission et formulaire de confirmation. Détenteurs X1 doivent obtenir permis de résidence étude sous 30 jours après entrée.",
+    "arrival_and_residence_permit": "Permis de résidence requis sous 30 jours pour X1. Visa/périmé = interdiction d'hébergement sur campus."
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Double room Zhuhai campus (fondation)",
+      "Single room Guangzhou campus (MPA-CGDC)"
+    ],
+    "rules": "Pas d'appareils haute puissance (cuisinières etc.). Électricité et eau non inclus pour boursiers MOFCOM.",
+    "international_office": "Bureau des étudiants étrangers, +86-20-84110819, admissions@mail.sysu.edu.cn",
+    "orientation": "Sessions d'information en ligne (Zoom) organisées annuellement",
+    "english_support": true,
+    "clubs": "Activités étudiantes, soutien psychologique, événements culturels"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Pays en développement",
+      "notes": "Programme MPA-CGDC réservé aux fonctionnaires de niveau chef de service ou équivalent"
+    },
+    {
+      "region_or_country": "Pays Route de la Soie",
+      "notes": "Bourse CSC Silk Road spécifique"
+    },
+    {
+      "region_or_country": "Cambodge",
+      "notes": "Programme spécial talents en ingénierie aérospatiale 2026"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "sun-yat-sen-university",
+  "scraped_at": "2026-08-24T14:38:42.550Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 10,
+  "sources": [
+    {
+      "url": "https://iso.sysu.edu.cn/cn/",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 1191
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/en/",
+      "title": "Office of International Students' Affairs 中山大学外国留学生办公室",
+      "chars": 2131
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/fxlxm/1421639.htm",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 3794
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/tz/1421464.htm",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 870
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/zfxm/",
+      "title": "Office of International Students' Affairs 中山大学留学生办公室",
+      "chars": 956
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/fxlxm/1421641.htm",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 2570
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/jxjxm/1421241.htm",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 8058
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/tz/1421465.htm",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 914
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/tz/1421297.htm",
+      "title": "中山大学外国留学生办公室 Office of International Students' Affairs",
+      "chars": 1079
+    },
+    {
+      "url": "https://iso.sysu.edu.cn/cn/zs/",
+      "title": "Office of International Students' Affairs 中山大学留学生办公室",
+      "chars": 1102
+    }
+  ],
+  "db_row": {
+    "name_zh": "中山大学",
+    "name_en": "Sun Yat-sen University",
+    "name_fr": "Université Sun Yat-sen",
+    "slug": "sun-yat-sen-university",
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "country": "Chine",
+    "department": "Office of International Students' Affairs (外国留学生办公室)",
+    "emails": [
+      "admissions@mail.sysu.edu.cn",
+      "admissions@mail.sysu.edu.cn"
+    ],
+    "phone": "+86-20-84110819",
+    "wechat": null,
+    "website": "https://iso.sysu.edu.cn/en/",
+    "majors": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "law",
+      "education",
+      "other"
+    ],
+    "required_documents": [
+      "passport",
+      "diploma",
+      "transcripts",
+      "hsk",
+      "study_plan",
+      "no_criminal_record",
+      "physical_exam",
+      "recommendation_letters",
+      "employer_recommendation",
+      "cv",
+      "english_proof",
+      "degree_certification"
+    ],
+    "scholarship_amount": "Bourse Gouvernement chinois Silk Road (Route de la Soie) / Bourse China Link (CSC échange recherche court terme) / MPA-CGDC (MOFCOM) / Bourse universitaire SYSU / Bourse Institut Confucius (Enseignants chinois internationaux) / Bourse Énergie Atomique (AEA) / Bourse Nouveaux Sinologues (doctorat) / Bourse d'Excellence CSC",
+    "scholarship_min": 15200,
+    "scholarship_max": 30400,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 6 / TOEFL 80",
+    "tuition_min": 15200,
+    "tuition_max": 30400,
+    "application_deadline": "30 avril - 31 juillet selon programme"
+  }
+}
