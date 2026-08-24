@@ -175,6 +175,18 @@ export default function AdminUniversities() {
     [universities],
   );
 
+  const cities = useMemo(
+    () => [...new Set(universities.map((u) => u.city).filter(Boolean))].sort(),
+    [universities],
+  );
+
+  const partnerCount = universities.filter((u) => u.is_partner).length;
+  const englishCount = universities.filter((u) => {
+    if (u.extra?.admission?.english_programs_available) return true;
+    const lang = String(u.language_requirements || "").toLowerCase();
+    return /anglais|english/.test(lang);
+  }).length;
+
   const filtered = universities.filter((u) => {
     const q = search.toLowerCase();
     const matchSearch =
@@ -344,22 +356,22 @@ export default function AdminUniversities() {
               <p className="text-sm text-white/80 mt-1">{t("universities.count")}</p>
             </div>
             <div className="bg-gradient-to-br from-cyan-600 to-blue-500 rounded-2xl p-6 text-white">
-              <p className="text-4xl font-bold">
-                {universities.filter((u) => u.extra?.admission).length}
-              </p>
+              <p className="text-4xl font-bold">{cities.length}</p>
               <p className="text-sm text-white/80 mt-1">
-                {t("universities.scannedCount")}
+                {t("universities.cities")}
               </p>
             </div>
             <div className="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-2xl p-6 text-white">
-              <p className="text-4xl font-bold">
-                {universities.filter((u) => u.reply_status === "replied").length}
+              <p className="text-4xl font-bold">{partnerCount}</p>
+              <p className="text-sm text-white/80 mt-1">
+                {t("universities.partners")}
               </p>
-              <p className="text-sm text-white/80 mt-1">{t("universities.replied")}</p>
             </div>
             <div className="bg-gradient-to-br from-violet-600 to-purple-500 rounded-2xl p-6 text-white">
-              <p className="text-4xl font-bold">{provinces.length}</p>
-              <p className="text-sm text-white/80 mt-1">{t("universities.provinces")}</p>
+              <p className="text-4xl font-bold">{englishCount}</p>
+              <p className="text-sm text-white/80 mt-1">
+                {t("universities.englishPrograms")}
+              </p>
             </div>
           </div>
 
