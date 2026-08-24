@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
+import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import {
   isStudentSpaceUnlocked,
@@ -1083,7 +1084,7 @@ function ContactModal({
       onClick={onClose}
     >
       <div
-        className="bg-slate-800 rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-700/50"
+        className="bg-slate-800 rounded-3xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-slate-700/50"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -1292,6 +1293,8 @@ function ContactModal({
               {t("dashboard.formuleHint")}
             </p>
           </div>
+
+          <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
 
           {/* Avancement dossier */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">

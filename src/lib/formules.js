@@ -125,6 +125,19 @@ export const PROCESS_STEPS = [
   },
 ];
 
+export function getFormuleNumber(formuleLabel) {
+  if (!formuleLabel) return null;
+  const value = String(formuleLabel).trim();
+  const found = FORMULES.find(
+    (item) => item.value === value || item.aliases.includes(value),
+  );
+  if (found) return found.number;
+  if (/complet|1000/i.test(value)) return 3;
+  if (/candidature|500/i.test(value)) return 2;
+  if (/bilan|orientation|100/i.test(value)) return 1;
+  return null;
+}
+
 export function displayFormuleLabel(formuleLabel) {
   const labels = {
     [FORMULE_1_VALUE]: `Formule 1 — ${FORMULES[0].title} (${FORMULES[0].price})`,
