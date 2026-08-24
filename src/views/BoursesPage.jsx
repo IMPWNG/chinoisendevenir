@@ -150,15 +150,15 @@ function BoursesPage() {
           </div>
 
           {/* CTA supplémentaire */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-700 mb-6">
+          <div className="mt-16 text-center bg-[#1d3557] rounded-2xl p-10">
+            <p className="text-white text-lg font-semibold mb-2">
               Besoin d'aide pour trouver la bourse adaptée à votre profil ?
             </p>
-            <a
-              href="/contact"
-              className="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition"
-            >
-              Contactez-nous pour un conseil personnalisé
+            <p className="text-white/80 mb-6">
+              Nous vous orientons vers les options les plus réalistes pour votre dossier.
+            </p>
+            <a href="/contact" className="landing-btn landing-btn-accent">
+              Demander un conseil personnalisé
             </a>
           </div>
         </div>

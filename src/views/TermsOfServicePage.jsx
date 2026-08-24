@@ -236,10 +236,7 @@ function TermsOfServicePage() {
               En utilisant notre site, vous acceptez ces conditions
               d'utilisation
             </p>
-            <a
-              href="/"
-              className="inline-block px-8 py-3 bg-white text-blue-600 font-bold rounded-lg hover:shadow-lg transition"
-            >
+            <a href="/" className="landing-btn landing-btn-accent">
               ← Retour à l'accueil
             </a>
           </div>

@@ -26,10 +26,9 @@ function ContactPage() {
     },
   ];
 
-  const socialLinks = [
+          const socialLinks = [
     { icon: "💬", name: "WeChat", handle: "@chinoisendevenir" },
     { icon: "📱", name: "WhatsApp", handle: "Nous contacter" },
-    { icon: "🔗", name: "LinkedIn", handle: "Etudier en Chine" },
   ];
 
   return (
@@ -83,7 +82,7 @@ function ContactPage() {
             <h2 className="text-2xl font-bold text-center mb-12 text-gray-900">
               🌐 Suivez-nous sur les réseaux
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               {socialLinks.map((social, index) => (
                 <div
                   key={index}
@@ -105,22 +104,11 @@ function ContactPage() {
               💡 Une question urgente ?
             </h2>
             <p className="text-blue-100 mb-8 text-lg">
-              Contactez-nous directement via email ou téléphone
+              Contactez-nous directement par téléphone
             </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <a
-                href="mailto:chinoisendevenir@gmail.com"
-                className="px-8 py-3 bg-white text-blue-600 font-bold rounded-lg hover:shadow-lg transition"
-              >
-                📧 Envoyer un email
-              </a>
-              <a
-                href="tel:+86XXXXXXXXXX"
-                className="px-8 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-400 transition"
-              >
-                📞 Nous appeler
-              </a>
-            </div>
+            <a href="tel:+86XXXXXXXXXX" className="landing-btn landing-btn-accent">
+              📞 Nous appeler
+            </a>
           </div>
 
           {/* FAQ rapide */}

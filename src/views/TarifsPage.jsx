@@ -73,10 +73,8 @@ function TarifsPage() {
 
                   <Link
                     href="/#lead-form"
-                    className={`mt-auto text-center rounded-xl px-4 py-3 font-bold ${
-                      featured
-                        ? "bg-red-600 text-white hover:bg-red-700"
-                        : "bg-slate-900 text-white hover:bg-slate-800"
+                    className={`landing-btn mt-auto ${
+                      featured ? "landing-btn-accent" : "landing-btn-primary"
                     }`}
                   >
                     {formule.cta}
@@ -163,10 +161,7 @@ function TarifsPage() {
               déposer vos candidatures, nous vous aidons à avancer avec une
               méthode claire.
             </p>
-            <Link
-              href="/#lead-form"
-              className="inline-block bg-white text-slate-900 font-bold px-6 py-3 rounded-xl hover:bg-slate-100"
-            >
+            <Link href="/#lead-form" className="landing-btn landing-btn-accent">
               Prendre contact avec Chinois en Devenir
             </Link>
           </div>

@@ -133,17 +133,17 @@ a {
 
 .landing-nav-cta {
   background: var(--primary);
-  color: white;
+  color: #fff !important;
   padding: 10px 20px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
 
 .landing-nav-cta:hover {
   background: var(--primary-dark);
-  color: white;
+  color: #fff !important;
 }
 
 .landing-mobile-toggle {
@@ -206,8 +206,8 @@ a {
 
 .landing-btn {
   padding: 14px 32px;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
   border: 2px solid transparent;
   transition: 0.2s;
@@ -215,25 +215,56 @@ a {
   display: inline-block;
   text-decoration: none;
   text-align: center;
+  box-shadow: 0 8px 18px rgba(29, 53, 87, 0.12);
 }
 
-.landing-btn-primary {
+a.landing-btn,
+button.landing-btn {
+  text-decoration: none;
+}
+
+.landing-btn-primary,
+a.landing-btn-primary,
+button.landing-btn-primary {
   background: var(--primary);
-  color: white;
+  color: #fff !important;
 }
 
-.landing-btn-primary:hover {
+.landing-btn-primary:hover,
+a.landing-btn-primary:hover {
   background: var(--primary-dark);
+  color: #fff !important;
+  transform: translateY(-1px);
 }
 
-.landing-btn-secondary {
-  background: white;
-  color: var(--secondary);
-  border-color: var(--border);
+.landing-btn-secondary,
+a.landing-btn-secondary,
+button.landing-btn-secondary {
+  background: #fff;
+  color: var(--secondary) !important;
+  border-color: var(--secondary);
 }
 
-.landing-btn-secondary:hover {
+.landing-btn-secondary:hover,
+a.landing-btn-secondary:hover {
   background: var(--light);
+  color: var(--secondary) !important;
+}
+
+.landing-btn-accent,
+a.landing-btn-accent,
+button.landing-btn-accent {
+  background: var(--accent);
+  color: #1d3557 !important;
+  border-color: #e0b40a;
+  box-shadow: 0 10px 22px rgba(241, 196, 15, 0.4);
+}
+
+.landing-btn-accent:hover,
+a.landing-btn-accent:hover {
+  background: #f7d44a;
+  color: #1d3557 !important;
+  transform: translateY(-1px);
 }
 
 .landing-btn-full {
