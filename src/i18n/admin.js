@@ -148,7 +148,7 @@ export const adminTranslations = {
       subtitle: "Base partenaires + admissions étudiants étrangers",
       count: "Universités",
       cities: "Villes",
-      partners: "Partenaires",
+      cscCount: "Bourses CSC",
       englishPrograms: "Cours en anglais",
       missingTable: "Table `universities` manquante",
       missingTableHint:
@@ -463,7 +463,7 @@ export const adminTranslations = {
       subtitle: "Partner database + international admissions",
       count: "Universities",
       cities: "Cities",
-      partners: "Partners",
+      cscCount: "CSC scholarships",
       englishPrograms: "English-taught",
       missingTable: "`universities` table is missing",
       missingTableHint:
@@ -770,7 +770,7 @@ export const adminTranslations = {
       subtitle: "合作院校库 + 留学生招生信息",
       count: "大学",
       cities: "城市",
-      partners: "合作院校",
+      cscCount: "CSC奖学金",
       englishPrograms: "英语授课",
       missingTable: "缺少 `universities` 表",
       missingTableHint:

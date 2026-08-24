@@ -383,7 +383,7 @@ export function toUniversityInsert(row) {
     last_contact_note: row.last_contact_note || null,
     reply_status: row.reply_status || null,
     notes: row.notes || null,
-    is_partner: true,
+    is_partner: false,
     is_active: true,
     majors: row.majors || [],
     required_documents: row.required_documents || [],

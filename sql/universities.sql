@@ -19,7 +19,7 @@ create table if not exists public.universities (
   last_contact_note text,
   reply_status text check (reply_status is null or reply_status in ('replied', 'no_reply', 'pending')),
   notes text,
-  is_partner boolean not null default true,
+  is_partner boolean not null default false,
   is_active boolean not null default true,
   majors text[] not null default '{}',
   required_documents text[] not null default '{}',

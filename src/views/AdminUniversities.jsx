@@ -25,7 +25,7 @@ const EMPTY_FORM = {
   last_contact_note: "",
   reply_status: "",
   notes: "",
-  is_partner: true,
+  is_partner: false,
   is_active: true,
   majors_text: "",
   required_documents_text: "",
@@ -67,7 +67,7 @@ function universityToForm(row) {
     min_hsk_level: row.min_hsk_level ?? "",
     tuition_min: row.tuition_min ?? "",
     tuition_max: row.tuition_max ?? "",
-    is_partner: row.is_partner !== false,
+    is_partner: row.is_partner === true,
     is_active: row.is_active !== false,
     extra: row.extra || {},
   };
@@ -180,7 +180,11 @@ export default function AdminUniversities() {
     [universities],
   );
 
-  const partnerCount = universities.filter((u) => u.is_partner).length;
+  const cscCount = universities.filter(
+    (u) =>
+      u.extra?.admission?.has_csc ||
+      /csc|china scholarship/i.test(String(u.scholarship_amount || "")),
+  ).length;
   const englishCount = universities.filter((u) => {
     if (u.extra?.admission?.english_programs_available) return true;
     const lang = String(u.language_requirements || "").toLowerCase();
@@ -362,9 +366,9 @@ export default function AdminUniversities() {
               </p>
             </div>
             <div className="bg-gradient-to-br from-emerald-600 to-teal-500 rounded-2xl p-6 text-white">
-              <p className="text-4xl font-bold">{partnerCount}</p>
+              <p className="text-4xl font-bold">{cscCount}</p>
               <p className="text-sm text-white/80 mt-1">
-                {t("universities.partners")}
+                {t("universities.cscCount")}
               </p>
             </div>
             <div className="bg-gradient-to-br from-violet-600 to-purple-500 rounded-2xl p-6 text-white">
