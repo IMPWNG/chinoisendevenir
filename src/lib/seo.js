@@ -336,6 +336,30 @@ export function serviceJsonLd() {
   };
 }
 
+export const ALL_FAQS = [
+  ...FAQS.home,
+  ...FAQS.etudier,
+  ...FAQS.visa,
+  ...FAQS.bourses,
+  ...FAQS.processus,
+  ...FAQS.tarifs,
+];
+
+export const FAQ_GROUPS = [
+  {
+    id: "etudier",
+    title: "Étudier en Chine",
+    items: [...FAQS.home, ...FAQS.etudier],
+  },
+  { id: "visa", title: "Visa étudiant", items: FAQS.visa },
+  { id: "bourses", title: "Bourses d'études", items: FAQS.bourses },
+  {
+    id: "processus",
+    title: "Processus et accompagnement",
+    items: [...FAQS.processus, ...FAQS.tarifs],
+  },
+];
+
 export const SITEMAP_ROUTES = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/etudier-en-chine", changeFrequency: "monthly", priority: 0.95 },
@@ -343,6 +367,7 @@ export const SITEMAP_ROUTES = [
   { path: "/bourses", changeFrequency: "monthly", priority: 0.85 },
   { path: "/processus", changeFrequency: "monthly", priority: 0.8 },
   { path: "/tarifs", changeFrequency: "monthly", priority: 0.75 },
+  { path: "/faq", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.6 },
   {
     path: "/politique-confidentialite",

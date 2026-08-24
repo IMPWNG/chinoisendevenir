@@ -1,12 +1,13 @@
 export default function FaqSection({
   items,
   title = "Questions fréquentes sur les études en Chine",
+  headingId = "faq-heading",
 }) {
   if (!items?.length) return null;
 
   return (
-    <section className="seo-faq" aria-labelledby="faq-heading">
-      <h2 id="faq-heading" className="seo-faq-title">
+    <section className="seo-faq" aria-labelledby={headingId}>
+      <h2 id={headingId} className="seo-faq-title">
         {title}
       </h2>
       <div className="seo-faq-list">

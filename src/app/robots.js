@@ -32,5 +32,9 @@ export default function robots() {
     ],
     sitemap: `${SITE.url}/sitemap.xml`,
     host: SITE.url,
+    other: {
+      "llms-txt": `${SITE.url}/llms.txt`,
+      "llms-full-txt": `${SITE.url}/llms-full.txt`,
+    },
   };
 }

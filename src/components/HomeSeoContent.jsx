@@ -179,6 +179,11 @@ export default function HomeSeoContent() {
       <section className="landing-programs seo-home-block">
         <div className="container max-w-4xl">
           <FaqSection items={FAQS.home} />
+          <p className="text-center mt-8">
+            <Link href="/faq" className="seo-inline-link">
+              Voir toutes les questions sur les études en Chine
+            </Link>
+          </p>
         </div>
       </section>
     </>

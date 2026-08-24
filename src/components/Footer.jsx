@@ -18,6 +18,7 @@ const Footer = ({ t }) => {
             <Link href="/visa-etudiant-chine">Visa étudiant</Link>
             <Link href="/bourses">Bourses d'études</Link>
             <Link href="/processus">Processus d'admission</Link>
+            <Link href="/faq">FAQ</Link>
           </div>
           <div className="landing-footer-col">
             <p className="landing-footer-heading">Accompagnement</p>
