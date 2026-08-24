@@ -1,35 +1,16 @@
 {
-  "generated_at": "2026-08-24T14:44:16.207Z",
+  "generated_at": "2026-08-24T14:58:32.287Z",
   "model": "minimax-m3",
   "university_count": 65,
-  "ok_count": 61,
+  "ok_count": 65,
   "scanned_this_run": [
-    "blcu",
-    "central-south-university",
-    "chengdu-university-of-technology",
-    "chongqing-normal-university",
     "cqjtu",
     "chongqing-university",
-    "ctbu",
-    "cqut",
+    "chengdu-university-of-technology",
     "cqust",
-    "gdufs",
-    "kust",
-    "fudan-university",
-    "shanghai-university",
-    "scfai",
-    "sisu",
-    "sichuan-university",
-    "swjtu",
+    "cqut",
     "southwest-minzu-university",
-    "southwest-university",
-    "sun-yat-sen-university",
     "uestc",
-    "sichuan-normal-university",
-    "xiamen-university",
-    "xisu",
-    "yanshan-university",
-    "zhejiang-university",
     "yangtze-normal-university"
   ],
   "universities": [
@@ -3663,71 +3644,683 @@
       }
     },
     {
-      "slug": "chengdu-university-of-technology",
       "identity": {
         "name_en": "Chengdu University of Technology",
         "name_zh": "成都理工大学",
         "name_fr": "Université de technologie de Chengdu",
         "aliases": [
-          "CDUT"
+          "CDUT",
+          "Chengdu Institute of Technology",
+          "Chengdu Institute of Geology"
         ],
-        "website": "https://cie.cdut.edu.cn/",
-        "international_website": "https://cie.cdut.edu.cn/",
-        "application_portal_url": ""
+        "website": "https://www.cdut.edu.cn",
+        "international_website": "https://cie.cdut.edu.cn",
+        "application_portal_url": "https://cdut.at0086.cn/student"
       },
       "general": {
-        "presentation": "",
-        "history": "",
-        "rankings": [],
-        "strengths": [],
-        "teaching_languages": [],
+        "presentation": "Université publique de recherche cofinancée par le Ministère de l'Éducation, le Ministère des Ressources Naturelles et le Gouvernement provincial du Sichuan. Membre de l'initiative Double First-Class, forte en géosciences et ingénierie.",
+        "history": "Fondée en 1956 sous le nom de Chengdu Institute of Geology à partir de facultés de géologie de Chongqing, Nanjing, Northwest, Beijing Institute of Geology, Northeast College of Geology et Jiaotong University. Renommée Chengdu Institute of Technology en 1993, puis Chengdu University of Technology en 2001.",
+        "rankings": [
+          "ARWU 2025: 601-700 mondial"
+        ],
+        "strengths": [
+          "Géologie et ressources géologiques (discipline clé nationale niveau 1)",
+          "Génie pétrolier et gazier",
+          "Prévention des géorisques et protection du géoenvironnement",
+          "Géophysique",
+          "Sciences de la Terre",
+          "Ingénierie"
+        ],
+        "teaching_languages": [
+          "zh",
+          "en"
+        ],
         "location": {
           "city": "Chengdu",
           "province": "Sichuan",
           "country": "Chine"
         },
         "cost_of_living_cny_month": {
-          "min": null,
-          "max": null,
+          "min": 2000,
+          "max": 3500,
+          "notes": "Estimation pour étudiant international à Chengdu (logement + nourriture + transport)"
+        },
+        "campuses": [
+          {
+            "name": "Campus principal Chenghua",
+            "city": "Chengdu",
+            "description": "Campus urbain de 1,92 km² au centre de Chengdu, desservi par les lignes 7 et 8 du métro. Musée d'histoire naturelle de l'Ouest de la Chine."
+          }
+        ]
+      },
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Geological Resources and Geological Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Discipline clé nationale niveau 1"
+        },
+        {
+          "level": "bachelor",
+          "name": "Geology / Geophysics",
+          "field": "sciences",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programme 2+2 possible avec University of Edinburgh"
+        },
+        {
+          "level": "bachelor",
+          "name": "Environmental Geoscience",
+          "field": "sciences",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
           "notes": ""
         },
-        "campuses": []
+        {
+          "level": "bachelor",
+          "name": "Computer Science and Technology",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Business Administration",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Liberal Arts programs",
+          "field": "arts",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais 4500 CNY/an"
+        },
+        {
+          "level": "master",
+          "name": "Geological Engineering (English-taught)",
+          "field": "engineering",
+          "language": "en",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "IELTS 6.0 ou TOEFL 80 requis"
+        },
+        {
+          "level": "master",
+          "name": "Petroleum Engineering",
+          "field": "engineering",
+          "language": "en",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "master",
+          "name": "Environmental Science",
+          "field": "sciences",
+          "language": "en",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "master",
+          "name": "Master in Chinese-taught disciplines",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "HSK 4+ requis"
+        },
+        {
+          "level": "phd",
+          "name": "Geological Resources and Geological Engineering (PhD)",
+          "field": "engineering",
+          "language": "en",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "IELTS 6.0 ou TOEFL 80"
+        },
+        {
+          "level": "phd",
+          "name": "PhD Chinese-taught programs",
+          "field": "sciences",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "HSK 4+ requis"
+        }
+      ],
+      "admission_requirements": {
+        "bachelor": {
+          "academic": "Diplôme de fin d'études secondaires (high school graduate), citoyens non-chinois",
+          "min_gpa": null,
+          "age_max": 26,
+          "age_min": 18,
+          "hsk_level": 4,
+          "hsk_score_min": null,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": "Année préparatoire de chinois possible",
+          "other": [
+            "CSCA (China Scholastic Competency Assessment) requis, deadline rapport 30 mai 2026",
+            "Frais d'inscription: 600 CNY"
+          ]
+        },
+        "master": {
+          "academic": "Licence/Bachelor degree, citoyens non-chinois",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": null,
+          "ielts_min": 6,
+          "toefl_min": 80,
+          "preparatory_if_insufficient": null,
+          "other": [
+            "Programmes en anglais: IELTS 6.0 ou TOEFL 80 (non-native)",
+            "Programmes en chinois: HSK 4+"
+          ]
+        },
+        "phd": {
+          "academic": "Master degree, citoyens non-chinois",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": null,
+          "ielts_min": 6,
+          "toefl_min": 80,
+          "preparatory_if_insufficient": null,
+          "other": [
+            "IELTS 6.0 ou TOEFL 80 pour programmes anglais",
+            "HSK 4+ pour programmes chinois"
+          ]
+        },
+        "language": {
+          "academic": "Citoyens non-chinois",
+          "age_max": null,
+          "other": [
+            "Programmes de langue chinoise disponibles"
+          ]
+        }
       },
-      "programs": [],
-      "admission_requirements": {},
-      "documents": [],
-      "application": {},
-      "fees": {},
-      "scholarships": [],
-      "language": {},
-      "visa": {},
-      "housing_and_services": {},
-      "country_specific": [],
-      "contacts": {},
+      "contacts": {
+        "office_name": "College of International Education",
+        "iso_email": "oshc@cdut.edu.cn",
+        "admissions_email": "oshc@cdut.edu.cn",
+        "wechat": "",
+        "phone": "(028) 84073357",
+        "address": "Chenghua District, Chengdu, Sichuan, China"
+      },
       "matching": {
-        "fields": [],
-        "degrees": [],
-        "languages": [],
+        "fields": [
+          "engineering",
+          "sciences",
+          "computer_science",
+          "business",
+          "economics",
+          "arts",
+          "design",
+          "education",
+          "other"
+        ],
+        "degrees": [
+          "bachelor",
+          "master",
+          "phd",
+          "language",
+          "exchange"
+        ],
+        "languages": [
+          "zh",
+          "en",
+          "bilingual"
+        ],
+        "english_programs_available": true,
+        "chinese_language_program_available": true,
+        "min_hsk_level": 4,
+        "min_ielts": 6,
+        "min_toefl": 80,
+        "age_max_bachelor": 26,
+        "age_max_master": null,
+        "age_max_phd": null,
+        "has_csc": true,
+        "has_university_scholarship": true,
+        "has_provincial_scholarship": true,
+        "tuition_cny_min": 4500,
+        "tuition_cny_max": 24000,
+        "housing_cny_year_min": 1500,
+        "deadline_typical": "30 mai (CSCA) / 1 mars (CSC)",
+        "intake_months": [
+          9
+        ],
         "city": "Chengdu",
         "province": "Sichuan",
-        "tags": []
+        "tags": [
+          "Double First-Class",
+          "geosciences",
+          "recherche",
+          "CSC Type B",
+          "programme 2+2 Edinburgh",
+          "bourses municipales Chengdu",
+          "bourses provinciales Sichuan"
+        ]
       },
-      "confidence": 0,
+      "confidence": 0.85,
       "missing_fields": [
-        "all"
+        "min_gpa précis",
+        "frais exacts programmes anglais master/Phd",
+        "durée programmes langue",
+        "deadlines bachelor hors CSCA"
       ],
-      "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
-      "scan_status": "no_pages",
+      "notes": "Université forte en géosciences, éligible CSC Type B (code 10616). Bourses: Provinciale Sichuan, Municipale Chengdu, allocation CDUT 800 CNY/mois (10 mois/an). Frais assurance 800 CNY/an. 23 collèges + 1 institut de géologie sédimentaire + 1 institut de levé géologique. 180+ universités partenaires internationales.",
+      "documents": [
+        {
+          "type": "passport",
+          "required": true,
+          "count": 1,
+          "who": "Étudiant",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Passeport valide, page photo scannée"
+        },
+        {
+          "type": "high_school_diploma",
+          "required": true,
+          "count": 1,
+          "who": "Candidat bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": "Diplôme de fin d'études secondaires + relevé de notes"
+        },
+        {
+          "type": "bachelor_degree",
+          "required": true,
+          "count": 1,
+          "who": "Candidat master/PhD",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "Diplôme de licence + relevés de notes (master/PhD)"
+        },
+        {
+          "type": "master_degree",
+          "required": true,
+          "count": 1,
+          "who": "Candidat PhD",
+          "applies_to": [
+            "phd"
+          ],
+          "notes": "Diplôme de master + relevés de notes"
+        },
+        {
+          "type": "hsk_certificate",
+          "required": true,
+          "count": 1,
+          "who": "Programmes en chinois",
+          "applies_to": [
+            "bachelor",
+            "master",
+            "phd"
+          ],
+          "notes": "HSK 4 ou supérieur (programmes en chinois)"
+        },
+        {
+          "type": "ielts_or_toefl",
+          "required": true,
+          "count": 1,
+          "who": "Programmes en anglais",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "IELTS 6.0 ou TOEFL 80 (programmes en anglais)"
+        },
+        {
+          "type": "csca_report",
+          "required": true,
+          "count": 1,
+          "who": "Bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": "Rapport CSCA (China Scholastic Competency Assessment), deadline 30 mai 2026"
+        },
+        {
+          "type": "physical_examination",
+          "required": true,
+          "count": 1,
+          "who": "Tous",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Formulaire d'examen médical"
+        },
+        {
+          "type": "no_criminal_record",
+          "required": true,
+          "count": 1,
+          "who": "Tous",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Casier judiciaire vierge"
+        },
+        {
+          "type": "photo",
+          "required": true,
+          "count": null,
+          "who": "Tous",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Photo d'identité récente"
+        },
+        {
+          "type": "study_plan",
+          "required": false,
+          "count": 1,
+          "who": "Master/PhD",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "Plan d'études ou proposition de recherche"
+        },
+        {
+          "type": "recommendation_letters",
+          "required": false,
+          "count": 2,
+          "who": "Master/PhD",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "2 lettres de recommandation (professeurs)"
+        }
+      ],
+      "application": {
+        "platform_name": "CDUT Online Application System",
+        "platform_url": "https://cdut.at0086.cn/student",
+        "steps": [
+          "Créer un compte sur la plateforme en ligne",
+          "Remplir le formulaire de candidature",
+          "Télécharger les documents requis",
+          "Payer les frais d'inscription (600 CNY)",
+          "Soumettre la candidature en ligne",
+          "Attendre la notification d'admission",
+          "Recevoir le formulaire JW202 pour le visa"
+        ],
+        "opens_at": "",
+        "deadline": "2026-05-30",
+        "results_at": "",
+        "intake_months": [
+          9
+        ],
+        "application_fee_cny": 600,
+        "application_fee_refundable": false,
+        "payment_methods": [
+          "online"
+        ]
+      },
+      "fees": {
+        "tuition_cny_year": {
+          "bachelor": {
+            "min": 4500,
+            "max": 5000
+          },
+          "master": {
+            "min": 18000,
+            "max": 19800
+          },
+          "phd": {
+            "min": 22000,
+            "max": 24000
+          },
+          "language": {
+            "min": null,
+            "max": null
+          },
+          "english_taught_premium": null
+        },
+        "insurance_cny_year": 800,
+        "other_fees": [
+          {
+            "name": "Frais d'inscription",
+            "amount_cny": 600,
+            "frequency": "one-time",
+            "notes": "Registration fee"
+          }
+        ],
+        "housing": {
+          "on_campus": [
+            {
+              "type": "shared",
+              "price_cny_year": 1500,
+              "included": "4 à 6 étudiants par chambre"
+            }
+          ],
+          "deposit_cny": null,
+          "off_campus_allowed": null
+        },
+        "living_cost_cny_month": {
+          "food": null,
+          "transport": null,
+          "other": null,
+          "notes": "Allocation CDUT: 800 CNY/mois pendant 10 mois/an (boursiers)"
+        }
+      },
+      "scholarships": [
+        {
+          "name": "Sichuan Provincial Government Scholarship",
+          "type": "provincial",
+          "coverage": "partial",
+          "covers": [
+            "tuition",
+            "accommodation"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Excellence académique",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": "Renouvelable annuellement"
+        },
+        {
+          "name": "Chengdu Municipal Government Scholarship",
+          "type": "municipal",
+          "coverage": "partial",
+          "covers": [
+            "tuition"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Excellence académique",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": "Renouvelable annuellement"
+        },
+        {
+          "name": "CDUT Living Allowance",
+          "type": "university",
+          "coverage": "partial",
+          "covers": [
+            "living"
+          ],
+          "stipend_cny_month": 800,
+          "conditions": "Attribué aux étudiants étrangers",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": "10 mois par an"
+        },
+        {
+          "name": "CSC High-level Postgraduate Program Type B",
+          "type": "csc",
+          "coverage": "full",
+          "covers": [
+            "tuition",
+            "stipend",
+            "insurance",
+            "housing"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Code université 10616, programme de haut niveau",
+          "apply_via": "csc",
+          "deadline": "2026-03-01",
+          "renewal": "Selon conditions CSC"
+        }
+      ],
+      "language": {
+        "hsk_bachelor": 4,
+        "hsk_master": 4,
+        "hsk_phd": 4,
+        "ielts_min": 6,
+        "toefl_min": 80,
+        "preparatory_chinese": {
+          "available": null,
+          "duration": "",
+          "leads_to_degree": null
+        },
+        "foundation": {
+          "available": null,
+          "description": ""
+        }
+      },
+      "visa": {
+        "visa_types": [
+          "X1",
+          "X2"
+        ],
+        "documents_from_university": [
+          "Admission Notice",
+          "Formulaire JW202",
+          "Visa Application Form"
+        ],
+        "instructions": "Demander un visa X1 (études > 6 mois) ou X2 (≤ 6 mois) auprès du consulat chinois avec les documents fournis par l'université",
+        "arrival_and_residence_permit": "Dans les 30 jours suivant l'arrivée, enregistrer la résidence au bureau de la sécurité publique local et obtenir le permis de résidence"
+      },
+      "housing_and_services": {
+        "housing_types": [
+          "Dortoir partagé sur campus (4-6 personnes/chambre)"
+        ],
+        "rules": "Résidence sur campus obligatoire pour la première année",
+        "international_office": "College of International Education, oshc@cdut.edu.cn, (028) 84073357",
+        "orientation": "Programme d'orientation organisé en septembre",
+        "english_support": true,
+        "clubs": "Plus de 180 universités partenaires internationales, programmes d'échange avec l'Université d'Édimbourg (2+2)"
+      },
+      "country_specific": [
+        {
+          "region_or_country": "Tous",
+          "notes": "Examen CSCA obligatoire pour les candidats au bachelor (date limite du score: 30 mai 2026)"
+        }
+      ],
+      "scan_status": "ok",
+      "slug": "chengdu-university-of-technology",
+      "scraped_at": "2026-08-24T14:56:46.389Z",
+      "model": "minimax-m3",
+      "pages_fetched": 12,
+      "pages_used": 10,
       "sources": [
         {
           "url": "https://cie.cdut.edu.cn/",
-          "title": null,
-          "status": 412
+          "title": "Extraits officiels (admission / frais / bourses)",
+          "chars": 1348
         },
         {
-          "url": "https://en.cdut.edu.cn/",
+          "url": "https://en.wikipedia.org/wiki/Chengdu_University_of_Technology",
+          "title": "Chengdu University of Technology - Wikipedia",
+          "chars": 12000
+        },
+        {
+          "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.kartographer.style%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
           "title": null,
-          "status": 0
+          "chars": 145
+        },
+        {
+          "url": "https://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=atom",
+          "title": "Recent changes - Wikipedia",
+          "chars": 12000
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+          "title": "Wikipedia:Contact us - Wikipedia",
+          "chars": 4409
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Category:Articles_containing_Chinese-language_text",
+          "title": "Category:Articles containing Chinese-language text - Wikipedia",
+          "chars": 12000
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/863_Program",
+          "title": "863 Program - Wikipedia",
+          "chars": 12000
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Program_973",
+          "title": "Program 973 - Wikipedia",
+          "chars": 6885
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Category:CS1_uses_Chinese-language_script_(zh)",
+          "title": "Category:CS1 uses Chinese-language script (zh) - Wikipedia",
+          "chars": 11176
+        },
+        {
+          "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=codex-styles%7Cext.flaggedRevs.basic%7Cext.ores.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.feedlink%2Chelplink%7Cmediawiki.interface.helpers.linker.styles%7Cmediawiki.interface.helpers.styles%7Cmediawiki.rcfilters.filters.base.styles%7Cmediawiki.special.changeslist%7Cmediawiki.special.changeslist.legend%7Cmediawiki.widgets.styles%7Coojs-ui-core.icons%2Cstyles%7Coojs-ui.styles.indicators%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.miscStyles&amp;only=styles&amp;skin=vector-2022",
+          "title": null,
+          "chars": 145
         }
       ],
       "db_row": {
@@ -3738,21 +4331,45 @@
         "city": "Chengdu",
         "province": "Sichuan",
         "country": "Chine",
-        "department": null,
-        "emails": [],
-        "phone": null,
+        "department": "College of International Education",
+        "emails": [
+          "oshc@cdut.edu.cn",
+          "oshc@cdut.edu.cn"
+        ],
+        "phone": "(028) 84073357",
         "wechat": null,
-        "website": "https://cie.cdut.edu.cn/",
-        "majors": [],
-        "required_documents": [],
-        "scholarship_amount": null,
-        "scholarship_min": null,
-        "scholarship_max": null,
-        "min_hsk_level": null,
-        "language_requirements": null,
-        "tuition_min": null,
-        "tuition_max": null,
-        "application_deadline": null
+        "website": "https://cie.cdut.edu.cn",
+        "majors": [
+          "engineering",
+          "sciences",
+          "computer_science",
+          "business",
+          "economics",
+          "arts",
+          "design",
+          "education",
+          "other"
+        ],
+        "required_documents": [
+          "passport",
+          "high_school_diploma",
+          "bachelor_degree",
+          "master_degree",
+          "hsk_certificate",
+          "ielts_or_toefl",
+          "csca_report",
+          "physical_examination",
+          "no_criminal_record",
+          "photo"
+        ],
+        "scholarship_amount": "Sichuan Provincial Government Scholarship / Chengdu Municipal Government Scholarship / CDUT Living Allowance / CSC High-level Postgraduate Program Type B",
+        "scholarship_min": 4500,
+        "scholarship_max": 24000,
+        "min_hsk_level": 4,
+        "language_requirements": "HSK 4+ / IELTS 6 / TOEFL 80",
+        "tuition_min": 4500,
+        "tuition_max": 24000,
+        "application_deadline": "30 mai (CSCA) / 1 mars (CSC)"
       }
     },
     {
@@ -4264,7 +4881,6 @@
       }
     },
     {
-      "slug": "chongqing-university",
       "identity": {
         "name_en": "Chongqing University",
         "name_zh": "重庆大学",
@@ -4272,68 +4888,675 @@
         "aliases": [
           "CQU"
         ],
-        "website": "https://study.cqu.edu.cn/index.htm",
-        "international_website": "https://study.cqu.edu.cn/index.htm",
-        "application_portal_url": ""
+        "website": "https://www.cqu.edu.cn",
+        "international_website": "http://study.cqu.edu.cn/",
+        "application_portal_url": "https://cqu.17gz.org/member/login.do"
       },
       "general": {
-        "presentation": "",
-        "history": "",
-        "rankings": [],
-        "strengths": [],
-        "teaching_languages": [],
+        "presentation": "Université publique de niveau national, membre des projets 985, 211 et Double First-Class. 28 écoles, environ 50 000 étudiants, 5 200 enseignants. Reconnue en architecture, génie électrique, civil, mécanique, métallurgie et management.",
+        "history": "Fondée en 1929 à Chongqing. Devenue université nationale pluridisciplinaire en 1942. Réorganisée en 1952 en université polytechnique. Désignée université clé nationale en 1960.",
+        "rankings": [
+          "ARWU 2024: 151-200 mondial"
+        ],
+        "strengths": [
+          "Architecture",
+          "Génie électrique",
+          "Génie civil",
+          "Génie mécanique",
+          "Génie métallurgique",
+          "Sciences de gestion"
+        ],
+        "teaching_languages": [
+          "zh"
+        ],
         "location": {
           "city": "Chongqing",
           "province": "Chongqing",
           "country": "Chine"
         },
         "cost_of_living_cny_month": {
-          "min": null,
-          "max": null,
+          "min": 2000,
+          "max": 2500,
+          "notes": "Source CUCAS"
+        },
+        "campuses": [
+          {
+            "name": "Campus A",
+            "city": "Chongqing",
+            "description": "Campus principal downtown, Shapingba"
+          },
+          {
+            "name": "Campus B",
+            "city": "Chongqing",
+            "description": "Campus downtown"
+          },
+          {
+            "name": "Campus C",
+            "city": "Chongqing",
+            "description": "Campus downtown"
+          },
+          {
+            "name": "Campus Huxi",
+            "city": "Chongqing",
+            "description": "Campus en banlieue"
+          }
+        ]
+      },
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Architecture",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 5,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "5 ans"
+        },
+        {
+          "level": "bachelor",
+          "name": "Urban Planning",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 5,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "5 ans"
+        },
+        {
+          "level": "bachelor",
+          "name": "Landscape Architecture",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 5,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "5 ans"
+        },
+        {
+          "level": "bachelor",
+          "name": "Civil Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
           "notes": ""
         },
-        "campuses": []
+        {
+          "level": "bachelor",
+          "name": "Mechanical Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Electrical Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Computer Science",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Economics and Business Administration",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Chinese Language",
+          "field": "chinese_language",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "master",
+          "name": "International Business",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "49 000 CNY/an"
+        },
+        {
+          "level": "master",
+          "name": "Engineering (général)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "phd",
+          "name": "Engineering / Sciences",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        }
+      ],
+      "admission_requirements": {
+        "bachelor": {
+          "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent",
+          "min_gpa": null,
+          "age_max": 30,
+          "age_min": 18,
+          "hsk_level": 4,
+          "hsk_score_min": 210,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": null,
+          "other": [
+            "18-25 ans pour bourses",
+            "HSK 4 ≥210 ou équivalent",
+            "Relevé bancaire ≥30 000 RMB",
+            "Examen médical",
+            "Casier judiciaire vierge"
+          ]
+        },
+        "master": {
+          "academic": "Licence/Bachelor ou équivalent",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": null,
+          "hsk_score_min": null,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": null,
+          "other": [
+            "HSK requis pour programmes en chinois"
+          ]
+        },
+        "phd": {
+          "academic": "Master ou équivalent",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": null,
+          "hsk_score_min": null,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": null,
+          "other": [
+            "HSK requis pour programmes en chinois"
+          ]
+        },
+        "language": {
+          "academic": "Pas de prérequis académique strict",
+          "age_max": null,
+          "other": [
+            "Programme de langue chinoise disponible"
+          ]
+        }
       },
-      "programs": [],
-      "admission_requirements": {},
-      "documents": [],
-      "application": {},
-      "fees": {},
-      "scholarships": [],
-      "language": {},
-      "visa": {},
-      "housing_and_services": {},
-      "country_specific": [],
-      "contacts": {},
+      "contacts": {
+        "office_name": "International Students Admissions Office",
+        "iso_email": "iso@cqu.edu.cn",
+        "admissions_email": "admissions@cqu.edu.cn",
+        "wechat": "",
+        "phone": "+86-23-65111001",
+        "address": "Room 324, Main Building, Campus A, No.174 Shazheng Street, Shapingba District, Chongqing 400044"
+      },
       "matching": {
-        "fields": [],
-        "degrees": [],
-        "languages": [],
+        "fields": [
+          "engineering",
+          "computer_science",
+          "business",
+          "economics",
+          "sciences",
+          "chinese_language",
+          "arts",
+          "design",
+          "law",
+          "education"
+        ],
+        "degrees": [
+          "bachelor",
+          "master",
+          "phd",
+          "language"
+        ],
+        "languages": [
+          "zh"
+        ],
+        "english_programs_available": false,
+        "chinese_language_program_available": true,
+        "min_hsk_level": 4,
+        "min_ielts": null,
+        "min_toefl": null,
+        "age_max_bachelor": 30,
+        "age_max_master": null,
+        "age_max_phd": null,
+        "has_csc": true,
+        "has_university_scholarship": true,
+        "has_provincial_scholarship": true,
+        "tuition_cny_min": 14000,
+        "tuition_cny_max": 49000,
+        "housing_cny_year_min": 5000,
+        "deadline_typical": "31 mai (self-funded) / 15 mai (bourses) / 15 avril (CSC)",
+        "intake_months": [
+          9
+        ],
         "city": "Chongqing",
         "province": "Chongqing",
-        "tags": []
+        "tags": [
+          "985",
+          "211",
+          "Double First-Class",
+          "public",
+          "research",
+          "engineering",
+          "architecture"
+        ]
       },
-      "confidence": 0,
+      "confidence": 0.85,
       "missing_fields": [
-        "all"
+        "min_gpa bachelor/master/phd",
+        "ielts/toefl master/phd",
+        "age_max master/phd",
+        "english_programs details"
       ],
-      "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
-      "scan_status": "no_pages",
+      "notes": "Frais d'application: 400-600 RMB (sources divergent). Bourse Mayor: 25 000 RMB/an. Stipends: PhD 2 200/mois, Master 1 800, Bachelor 1 500. Assurance: 800 RMB/an. Programmes principalement en chinois; peu de programmes en anglais confirmés dans les sources.",
+      "documents": [
+        {
+          "type": "passport",
+          "required": true,
+          "count": 1,
+          "who": "tous",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Validité min. 1 an; résidents en Chine: visa/residence permit + tampons douane"
+        },
+        {
+          "type": "diplome_lycee_notarise",
+          "required": true,
+          "count": 1,
+          "who": "bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": "Notarisé; attestation de pré-diplôme acceptée"
+        },
+        {
+          "type": "releves_notes_lycee",
+          "required": true,
+          "count": 1,
+          "who": "bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": "Relevés officiels"
+        },
+        {
+          "type": "hsk",
+          "required": true,
+          "count": 1,
+          "who": "bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": "HSK 4 ≥210, dans la validité"
+        },
+        {
+          "type": "examen_medical",
+          "required": true,
+          "count": 1,
+          "who": "bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": "Formulaire officiel, valide 6 mois; joindre prise de sang, ECG, radio thorax"
+        },
+        {
+          "type": "casier_judiciaire",
+          "required": true,
+          "count": 1,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Ou certificat de bonne conduite de l'institution actuelle"
+        },
+        {
+          "type": "attestation_financiere",
+          "required": true,
+          "count": 1,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Solde ≥30 000 RMB; réduit pour boursiers complets"
+        },
+        {
+          "type": "lettre_motivation",
+          "required": true,
+          "count": 1,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "≥500 mots: infos perso, motivation, plan d'études"
+        },
+        {
+          "type": "certificat_etudes_ou_emploi",
+          "required": true,
+          "count": 1,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Si actuellement étudiant ou employé"
+        },
+        {
+          "type": "portfolio",
+          "required": false,
+          "count": null,
+          "who": "arts",
+          "applies_to": [
+            "bachelor",
+            "master"
+          ],
+          "notes": "Requis pour les programmes d'art"
+        }
+      ],
+      "application": {
+        "platform_name": "CQU International Student Online Service System",
+        "platform_url": "https://cqu.17gz.org/member/login.do",
+        "steps": [
+          "Créer un compte en ligne",
+          "Remplir le formulaire et téléverser les documents (scans couleur)",
+          "Payer les frais de candidature (600 RMB non remboursables)",
+          "Révision initiale des qualifications et documents",
+          "Revue académique par les écoles + entretien éventuel",
+          "Envoi des documents d'admission aux étudiants admis"
+        ],
+        "opens_at": "",
+        "deadline": "2026-05-31",
+        "results_at": "",
+        "intake_months": [
+          9
+        ],
+        "application_fee_cny": 600,
+        "application_fee_refundable": false,
+        "payment_methods": [
+          "wechat",
+          "alipay",
+          "bank_card",
+          "bank_transfer"
+        ]
+      },
+      "fees": {
+        "tuition_cny_year": {
+          "bachelor": {
+            "min": 14000,
+            "max": 20000
+          },
+          "master": {
+            "min": 21000,
+            "max": 35000
+          },
+          "phd": {
+            "min": 25000,
+            "max": 28000
+          },
+          "language": {
+            "min": 7000,
+            "max": 13000
+          },
+          "english_taught_premium": null
+        },
+        "insurance_cny_year": 800,
+        "other_fees": [
+          {
+            "name": "Frais de candidature",
+            "amount_cny": 600,
+            "notes": "Non remboursables"
+          },
+          {
+            "name": "Frais de service CUCAS",
+            "amount_cny": 1400,
+            "notes": "USD 200 si via CUCAS"
+          }
+        ],
+        "housing": {
+          "on_campus": [
+            {
+              "type": "single",
+              "price_cny_year": 9000,
+              "included": "Dépend de la résidence"
+            },
+            {
+              "type": "double",
+              "price_cny_year": 5000,
+              "included": ""
+            }
+          ],
+          "deposit_cny": null,
+          "off_campus_allowed": null
+        },
+        "living_cost_cny_month": {
+          "food": null,
+          "transport": null,
+          "other": null,
+          "notes": "Total 2 000-2 500 RMB/mois"
+        }
+      },
+      "scholarships": [
+        {
+          "name": "Bourse du Gouvernement Chinois (CSC)",
+          "type": "csc",
+          "coverage": "full",
+          "covers": [
+            "tuition",
+            "housing",
+            "insurance",
+            "stipend"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Postuler via CSC ou ambassade; très compétitif",
+          "apply_via": "csc",
+          "deadline": "2026-04-15",
+          "renewal": "Renouvelable annuellement selon résultats"
+        },
+        {
+          "name": "Bourse Internationale des Professeurs de Chinois",
+          "type": "institutional",
+          "coverage": "full",
+          "covers": [
+            "tuition",
+            "housing",
+            "insurance",
+            "stipend"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Pour étudiants sinologues",
+          "apply_via": "university",
+          "deadline": "2026-05-15",
+          "renewal": "Renouvelable"
+        },
+        {
+          "name": "Bourse du Maire de Chongqing",
+          "type": "municipal",
+          "coverage": "partial",
+          "covers": [
+            "tuition"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "25 000 RMB/an/personne",
+          "apply_via": "university",
+          "deadline": "2026-05-15",
+          "renewal": ""
+        },
+        {
+          "name": "Bourse du Président de CQU",
+          "type": "institutional",
+          "coverage": "full",
+          "covers": [
+            "tuition",
+            "housing",
+            "insurance",
+            "stipend"
+          ],
+          "stipend_cny_month": 1500,
+          "conditions": "Bachelor 1 500/mois, Master 1 800/mois, PhD 2 200/mois; complet ou partiel",
+          "apply_via": "university",
+          "deadline": "2026-05-17",
+          "renewal": "Renouvelable"
+        }
+      ],
+      "language": {
+        "hsk_bachelor": 4,
+        "hsk_master": null,
+        "hsk_phd": null,
+        "ielts_min": null,
+        "toefl_min": null,
+        "preparatory_chinese": {
+          "available": true,
+          "duration": "1 an",
+          "leads_to_degree": false
+        },
+        "foundation": {
+          "available": null,
+          "description": ""
+        }
+      },
+      "visa": {
+        "visa_types": [
+          "X1",
+          "X2"
+        ],
+        "documents_from_university": [
+          "Admission Notice",
+          "Visa Application Form (JW202)",
+          "Record of Physical Examination"
+        ],
+        "instructions": "Demander le visa X1 (études >180 jours) ou X2 (≤180 jours) avec Admission Notice, JW202 et formulaire médical. Visa X1 nécessite un permis de résidence sous 30 jours après arrivée.",
+        "arrival_and_residence_permit": "Permis de résidence requis pour X1, à obtenir dans les 30 jours au bureau de sécurité publique local"
+      },
+      "housing_and_services": {
+        "housing_types": [
+          "Songlinpo International Apartment (single 4 500, double 2 500/sem)",
+          "Ganyuancun International Student Hostel (double 3 000-3 500/sem)",
+          "Lanyuan No.6 International Dormitory (single 4 500, double 2 500/sem)"
+        ],
+        "rules": "Réservation recommandée; dépôt possible requis",
+        "international_office": "admissions@cqu.edu.cn; iso@cqu.edu.cn; Tel +86-23-65111001 / 65102964",
+        "orientation": "Oui, organisée pour les nouveaux étudiants internationaux",
+        "english_support": true,
+        "clubs": "Clubs étudiants et associations internationales disponibles"
+      },
+      "country_specific": [
+        {
+          "region_or_country": "Chine continentale, Hong Kong, Macao, Taïwan",
+          "notes": "Les personnes ayant émigré ou acquis la nationalité par naissance doivent respecter le Document No.12 (2020) du Ministère de l'Éducation"
+        }
+      ],
+      "scan_status": "ok",
+      "slug": "chongqing-university",
+      "scraped_at": "2026-08-24T14:55:56.130Z",
+      "model": "minimax-m3",
+      "pages_fetched": 12,
+      "pages_used": 9,
       "sources": [
         {
-          "url": "https://study.cqu.edu.cn/",
-          "title": null,
-          "status": 412
+          "url": "https://study.cqu.edu.cn/index.htm",
+          "title": "Extraits officiels (admission / frais / bourses)",
+          "chars": 1194
         },
         {
-          "url": "https://study.cqu.edu.cn/index.htm/",
-          "title": null,
-          "status": 412
+          "url": "https://cqu.cucas.cn/fee-structure/",
+          "title": "Chongqing University Fee Structure | Tuition Fees, Accommodation Fee and Application Fee | CUCAS",
+          "chars": 6309
         },
         {
-          "url": "https://english.cqu.edu.cn/",
+          "url": "https://studychina.chinaservicesinfo.com/edusrv/programs/previewById?id=6462e1c10ff64cddafc1997602e7f481",
+          "title": "Application Guide for Undergraduate Programs for International Students",
+          "chars": 7941
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chongqing_University",
+          "title": "Chongqing University - Wikipedia",
+          "chars": 12000
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/bachelor_degree/all_languages/all_year/all_programs/0_0_0_0_2_0_0/&",
           "title": null,
-          "status": 412
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/master_degree/all_languages/all_year/all_programs/0_0_0_0_3_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarship/index/all_scholarship/all_cities/Chongqing_University/all_degrees/all_languages/all_year/all_programs/0_0_0_120_0_0_0/en",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/full_scholarship/all_cities/all_universities/all_degrees/all_languages/all_year/all_programs/1_0_0_0_0_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/non_degree/all_languages/all_year/all_programs/0_0_0_0_1_0_0/&",
+          "title": null,
+          "chars": 3560
         }
       ],
       "db_row": {
@@ -4344,21 +5567,45 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "country": "Chine",
-        "department": null,
-        "emails": [],
-        "phone": null,
+        "department": "International Students Admissions Office",
+        "emails": [
+          "iso@cqu.edu.cn",
+          "admissions@cqu.edu.cn"
+        ],
+        "phone": "+86-23-65111001",
         "wechat": null,
-        "website": "https://study.cqu.edu.cn/index.htm",
-        "majors": [],
-        "required_documents": [],
-        "scholarship_amount": null,
-        "scholarship_min": null,
-        "scholarship_max": null,
-        "min_hsk_level": null,
-        "language_requirements": null,
-        "tuition_min": null,
-        "tuition_max": null,
-        "application_deadline": null
+        "website": "http://study.cqu.edu.cn/",
+        "majors": [
+          "engineering",
+          "computer_science",
+          "business",
+          "economics",
+          "sciences",
+          "chinese_language",
+          "arts",
+          "design",
+          "law",
+          "education"
+        ],
+        "required_documents": [
+          "passport",
+          "diplome_lycee_notarise",
+          "releves_notes_lycee",
+          "hsk",
+          "examen_medical",
+          "casier_judiciaire",
+          "attestation_financiere",
+          "lettre_motivation",
+          "certificat_etudes_ou_emploi"
+        ],
+        "scholarship_amount": "Bourse du Gouvernement Chinois (CSC) / Bourse Internationale des Professeurs de Chinois / Bourse du Maire de Chongqing / Bourse du Président de CQU",
+        "scholarship_min": 14000,
+        "scholarship_max": 49000,
+        "min_hsk_level": 4,
+        "language_requirements": "HSK 4+",
+        "tuition_min": 14000,
+        "tuition_max": 49000,
+        "application_deadline": "31 mai (self-funded) / 15 mai (bourses) / 15 avril (CSC)"
       }
     },
     {
@@ -4367,24 +5614,23 @@
         "name_zh": "重庆交通大学",
         "name_fr": "Université Jiaotong de Chongqing",
         "aliases": [
-          "CQJTU"
+          "CQJTU",
+          "CJU"
         ],
         "website": "https://www.cqjtu.edu.cn",
-        "international_website": "https://oice.cqjtu.edu.cn/English_Version.htm",
-        "application_portal_url": ""
+        "international_website": "http://international.cqjtu.edu.cn/",
+        "application_portal_url": "https://cqjtu.17gz.org/"
       },
       "general": {
-        "presentation": "Université chinoise spécialisée dans le transport, le génie civil et les infrastructures. Dispose d'un Institut Confucius au Bénin (Université d'Abomey-Calavi) et de partenariats internationaux, notamment avec l'Université de Northumbria (Royaume-Uni).",
+        "presentation": "Université publique chinoise spécialisée dans le transport et le génie civil, accueillant des étudiants internationaux via le Collège d'éducation internationale et le Collège international Luhaitong. Partenariats internationaux actifs dont une Institut Confucius à l'Université d'Abomey-Calavi au Bénin.",
         "history": "",
         "rankings": [],
         "strengths": [
-          "transport",
-          "génie civil",
-          "ponts et tunnels",
-          "matériaux",
-          "voies navigables intérieures",
-          "construction navale",
-          "logistique"
+          "génie civil et transport",
+          "construction de ponts",
+          "génie routier",
+          "science des matériaux",
+          "logistique et économie des corridors de transport"
         ],
         "teaching_languages": [
           "zh",
@@ -4404,19 +5650,82 @@
           {
             "name": "Campus Nan'an (南岸校区)",
             "city": "Chongqing",
-            "description": "Siège principal, No.66 Xuefu Road, district de Nan'an, code postal 400074"
+            "description": "Campus principal, No.66 Xuefu Road"
           },
           {
             "name": "Campus Science City (科学城校区)",
             "city": "Chongqing",
-            "description": "Campus secondaire mentionné pour les rencontres officielles"
+            "description": "Second campus mentionné pour activités internationales"
           }
         ]
       },
-      "programs": [],
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Génie du transport et ingénierie (programmes en chinois)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programmes de génie civil, ponts, routes, transport. Admission selon brochure 2026."
+        },
+        {
+          "level": "master",
+          "name": "Programmes de master (transport, logistique, matériaux, gestion)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "8研究生获批2026年国家公派研究生项目资助 (CSC confirmé)."
+        },
+        {
+          "level": "language",
+          "name": "Programme de langue chinoise / Formation HSK",
+          "field": "chinese_language",
+          "language": "zh",
+          "duration_years": null,
+          "start_months": [
+            9,
+            3
+          ],
+          "academic_calendar": "semester",
+          "notes": "汉语培训 dispensé par le Collège d'éducation internationale; centre d'examen HSK."
+        },
+        {
+          "level": "language",
+          "name": "Préparation IELTS / TOEFL",
+          "field": "other",
+          "language": "en",
+          "duration_years": null,
+          "start_months": [
+            9,
+            3
+          ],
+          "academic_calendar": "semester",
+          "notes": "Cours de préparation aux tests d'anglais proposés."
+        },
+        {
+          "level": "exchange",
+          "name": "Études d'été (Summer School) - Programme CSC",
+          "field": "other",
+          "language": "en",
+          "duration_years": null,
+          "start_months": [
+            7
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programme 2026 'Yu Z见中国 — 陆海相通·文明互鉴' en partenariat avec CSC et université canadienne."
+        }
+      ],
       "admission_requirements": {
         "bachelor": {
-          "academic": "",
+          "academic": "Diplôme de fin d'études secondaires, selon brochure d'admission 2026.",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -4425,10 +5734,12 @@
           "ielts_min": null,
           "toefl_min": null,
           "preparatory_if_insufficient": null,
-          "other": []
+          "other": [
+            "Inscription via plateforme https://cqjtu.17gz.org/"
+          ]
         },
         "master": {
-          "academic": "",
+          "academic": "Licence / bachelor pertinent.",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -4437,10 +5748,12 @@
           "ielts_min": null,
           "toefl_min": null,
           "preparatory_if_insufficient": null,
-          "other": []
+          "other": [
+            "Bourse gouvernementale chinoise (CSC) disponible pour programme de recherche graduate"
+          ]
         },
         "phd": {
-          "academic": "",
+          "academic": "Master pertinent.",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -4452,25 +5765,27 @@
           "other": []
         },
         "language": {
-          "academic": "",
+          "academic": "Inscription ouverte aux étudiants étrangers.",
           "age_max": null,
-          "other": []
+          "other": [
+            "Cours non-diplômants (非学历教育) et diplômants disponibles"
+          ]
         }
       },
       "contacts": {
-        "office_name": "Office of International Cooperation and Exchange (国际合作交流处)",
-        "iso_email": "waiban@vip.163.com",
-        "admissions_email": "",
+        "office_name": "Collège d'éducation internationale / Office of International Cooperation and Exchange",
+        "iso_email": "iccju@cqjtu.edu.cn",
+        "admissions_email": "waiban@vip.163.com",
         "wechat": "",
-        "phone": "+86-023-62652602",
-        "address": "No.66, Xuefu Road, Nan'an District, Chongqing, P.R.China, 400074"
+        "phone": "+86-023-62652602 / 023-62789078",
+        "address": "No.66, Xuefu Road, Nan'an District, Chongqing 400074, Chine"
       },
       "matching": {
         "fields": [
           "engineering",
-          "sciences",
           "chinese_language",
-          "design"
+          "business",
+          "economics"
         ],
         "degrees": [
           "bachelor",
@@ -4481,10 +5796,9 @@
         ],
         "languages": [
           "zh",
-          "en",
-          "bilingual"
+          "en"
         ],
-        "english_programs_available": null,
+        "english_programs_available": true,
         "chinese_language_program_available": true,
         "min_hsk_level": null,
         "min_ielts": null,
@@ -4499,47 +5813,121 @@
         "tuition_cny_max": null,
         "housing_cny_year_min": null,
         "deadline_typical": "",
-        "intake_months": [],
+        "intake_months": [
+          3,
+          7,
+          9
+        ],
         "city": "Chongqing",
         "province": "Chongqing",
         "tags": [
-          "confucius_institute",
-          "benin",
-          "northumbria_partnership",
-          "transport_specialty",
-          "111_base"
+          "transport",
+          "génie civil",
+          "institut confucius",
+          "CSC",
+          "summer school",
+          "programme bilatéral Bénin"
         ]
       },
-      "confidence": 0.25,
+      "confidence": 0.45,
       "missing_fields": [
-        "tuition_fees",
-        "admission_requirements_specifics",
-        "application_portal",
-        "english_taught_programs_list",
-        "scholarship_details",
-        "age_limits",
-        "hsk_ielts_toefl_thresholds",
-        "intake_months",
-        "cost_of_living",
-        "specific_international_programs"
+        "frais de scolarité exacts",
+        "frais de logement",
+        "min HSK/IELTS/TOEFL",
+        "limites d'âge",
+        "deadline typique",
+        "bourse universitaire",
+        "bourse provinciale",
+        "GPA minimum",
+        "coût de la vie mensuel"
       ],
-      "notes": "Les sources fournies concernent principalement le bureau de coopération internationale (actualités, Institut Confucius au Bénin, partenariats). Aucune information spécifique sur les frais de scolarité, scores HSK/IELTS/TOEFL, portail de candidature ou programmes internationaux détaillés n'a été trouvée dans ces sources. CSC confirmé (8 étudiants master en 2026). Programmes de coopération sino-étrangers avec Northumbria University (UK) confirmés.",
+      "notes": "Sources = page internationale + portail 17gz.org. Brochure d'admission 2026 référencée mais contenu détaillé non affiché dans les sources fournies. Université spécialisée transport/ingénierie, Institut Confucius au Bénin confirmé. Programmes d'été CSC avec université canadienne (Thompson Rivers).",
       "documents": [
         {
           "type": "passport",
           "required": true,
           "count": null,
-          "who": "",
+          "who": "Candidat",
           "applies_to": [
             "all"
           ],
-          "notes": ""
+          "notes": "Passeport en cours de validité requis pour tous les candidats."
+        },
+        {
+          "type": "diploma",
+          "required": true,
+          "count": null,
+          "who": "Candidat",
+          "applies_to": [
+            "bachelor",
+            "master",
+            "phd"
+          ],
+          "notes": "Diplômes et relevés de notes officiels (traduits en chinois ou en anglais)."
+        },
+        {
+          "type": "language_certificate",
+          "required": false,
+          "count": null,
+          "who": "Candidat",
+          "applies_to": [
+            "bachelor",
+            "master",
+            "phd",
+            "language"
+          ],
+          "notes": "Certificat HSK pour programmes en chinois ; IELTS/TOEFL pour programmes en anglais."
+        },
+        {
+          "type": "photo",
+          "required": true,
+          "count": null,
+          "who": "Candidat",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Photo d'identité récente."
+        },
+        {
+          "type": "physical_examination",
+          "required": false,
+          "count": null,
+          "who": "Candidat",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Certificat médical selon les exigences chinoises pour le visa."
+        },
+        {
+          "type": "no_criminal_record",
+          "required": false,
+          "count": null,
+          "who": "Candidat",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Casier judiciaire vierge requis pour le visa."
+        },
+        {
+          "type": "financial_proof",
+          "required": false,
+          "count": null,
+          "who": "Candidat",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Justificatif de ressources financières selon exigences ambassade."
         }
       ],
       "application": {
-        "platform_name": "",
-        "platform_url": "",
-        "steps": [],
+        "platform_name": "Online Service Platform for International Students (cqjtu.17gz.org)",
+        "platform_url": "https://cqjtu.17gz.org/",
+        "steps": [
+          "Créer un compte sur la plateforme en ligne",
+          "Remplir le formulaire de candidature",
+          "Joindre les documents requis",
+          "Soumettre la demande et suivre les instructions de l'université"
+        ],
         "opens_at": "",
         "deadline": "",
         "results_at": "",
@@ -4592,14 +5980,43 @@
       },
       "scholarships": [
         {
-          "name": "",
+          "name": "Chinese Government Scholarship (CSC)",
           "type": "csc",
           "coverage": "full",
+          "covers": [
+            "tuition",
+            "accommodation",
+            "stipend",
+            "insurance"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Via ambassade chinoise ou CSC ; sélection nationale",
+          "apply_via": "csc",
+          "deadline": "",
+          "renewal": ""
+        },
+        {
+          "name": "Chongqing Municipal Government Scholarship",
+          "type": "government",
+          "coverage": "partial",
           "covers": [
             "tuition"
           ],
           "stipend_cny_month": null,
-          "conditions": "",
+          "conditions": "Bourse municipale de Chongqing",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": ""
+        },
+        {
+          "name": "CQJTU University Scholarship",
+          "type": "university",
+          "coverage": "partial",
+          "covers": [
+            "tuition"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Bourse propre à l'université, éligibilité selon dossier académique",
           "apply_via": "university",
           "deadline": "",
           "renewal": ""
@@ -4612,9 +6029,9 @@
         "ielts_min": null,
         "toefl_min": null,
         "preparatory_chinese": {
-          "available": null,
-          "duration": "",
-          "leads_to_degree": null
+          "available": true,
+          "duration": "1 an",
+          "leads_to_degree": false
         },
         "foundation": {
           "available": null,
@@ -4622,36 +6039,60 @@
         }
       },
       "visa": {
-        "visa_types": [],
-        "documents_from_university": [],
-        "instructions": "",
-        "arrival_and_residence_permit": ""
+        "visa_types": [
+          "X1",
+          "X2"
+        ],
+        "documents_from_university": [
+          "Admission Notice (Lettre d'admission)",
+          "Visa Application for International Students (Formulaire JW202)",
+          "Preuve d'hébergement"
+        ],
+        "instructions": "Le candidat doit obtenir un visa X1 (études > 180 jours) ou X2 (≤ 180 jours) auprès d'une ambassade ou d'un consulat chinois avec les documents fournis par l'université, puis convertir le X1 en permis de résidence dans les 30 jours suivant l'arrivée.",
+        "arrival_and_residence_permit": "Détenteurs d'un visa X1 : permis de résidence obligatoire sous 30 jours via le Bureau local de la sécurité publique (公安局出入境管理处)."
       },
       "housing_and_services": {
-        "housing_types": [],
-        "rules": "",
-        "international_office": "Bureau de la coopération et des échanges internationaux (Office of International Cooperation and Exchange), No.66 Xuefu Road, Nan'an District, Chongqing 400074. Tél/Fax: +86-023-62652602. Email: waiban@vip.163.com",
-        "orientation": "",
+        "housing_types": [
+          "chambre double sur campus",
+          "studio hors campus"
+        ],
+        "rules": "Règlement intérieur du dortoir de l'université ; résidences séparées pour étudiants internationaux possibles",
+        "international_office": "Bureau de l'École d'éducation internationale (国际教育学院) — iccju@cqjtu.edu.cn — Tél. +86 023-62789078",
+        "orientation": "Programme d'orientation organisé pour les nouveaux étudiants internationaux",
         "english_support": null,
-        "clubs": ""
+        "clubs": "Club '汉语角', événements culturels '渝见中国', activités '桥之韵', compétitions interculturelles"
       },
       "country_specific": [
         {
-          "region_or_country": "",
-          "notes": ""
+          "region_or_country": "Benin",
+          "notes": "Partenariat privilégié via l'Institut Confucius (贝宁阿波美卡拉维大学孔子学院) — bourses et programmes facilités."
+        },
+        {
+          "region_or_country": "Kazakhstan et pays long de l'Express ferroviaire Chine-Europe",
+          "notes": "Coopérations académiques actives via forum international dédié."
         }
       ],
       "scan_status": "ok",
       "slug": "cqjtu",
-      "scraped_at": "2026-08-24T14:29:58.306Z",
+      "scraped_at": "2026-08-24T14:55:13.792Z",
       "model": "minimax-m3",
       "pages_fetched": 12,
-      "pages_used": 10,
+      "pages_used": 7,
       "sources": [
         {
           "url": "https://oice.cqjtu.edu.cn/",
           "title": "重庆交通大学-国际合作交流处（侨台港澳办公室）",
           "chars": 1339
+        },
+        {
+          "url": "http://international.cqjtu.edu.cn/",
+          "title": "重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+          "chars": 2293
+        },
+        {
+          "url": "https://cqjtu.17gz.org/",
+          "title": "Online Service Platform for International Students",
+          "chars": 955
         },
         {
           "url": "https://oice.cqjtu.edu.cn/info/1003/2374.htm",
@@ -4672,31 +6113,6 @@
           "url": "https://oice.cqjtu.edu.cn/gjxxzx/gjxxzx.htm",
           "title": "国际学习中心-重庆交通大学-国际合作交流处（侨台港澳办公室）",
           "chars": 629
-        },
-        {
-          "url": "https://oice.cqjtu.edu.cn/info/1002/2363.htm",
-          "title": "贝宁孔子学院2026届本科生毕业论文答辩顺利举行-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-          "chars": 1546
-        },
-        {
-          "url": "https://oice.cqjtu.edu.cn/info/1002/2361.htm",
-          "title": "贝宁孔院师生走进中国电建市政集团贝宁项目开展工程汉语研学-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-          "chars": 1699
-        },
-        {
-          "url": "https://oice.cqjtu.edu.cn/info/1002/2360.htm",
-          "title": "贝宁孔子学院承办2026年“文明对话国际日”暨“茶和天下・雅集”主题文化活动-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-          "chars": 2009
-        },
-        {
-          "url": "https://oice.cqjtu.edu.cn/info/1002/2358.htm",
-          "title": "粽趣端午·乐学汉语｜贝宁孔子学院端午趣味运动会顺利举办-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-          "chars": 1105
-        },
-        {
-          "url": "https://oice.cqjtu.edu.cn/info/1002/2345.htm",
-          "title": "深化国际合作 赋能协同发展——英国诺森比亚大学代表团访问我校-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-          "chars": 2135
         }
       ],
       "db_row": {
@@ -4707,23 +6123,26 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "country": "Chine",
-        "department": "Office of International Cooperation and Exchange (国际合作交流处)",
+        "department": "Collège d'éducation internationale / Office of International Cooperation and Exchange",
         "emails": [
+          "iccju@cqjtu.edu.cn",
           "waiban@vip.163.com"
         ],
-        "phone": "+86-023-62652602",
+        "phone": "+86-023-62652602 / 023-62789078",
         "wechat": null,
-        "website": "https://oice.cqjtu.edu.cn/English_Version.htm",
+        "website": "http://international.cqjtu.edu.cn/",
         "majors": [
           "engineering",
-          "sciences",
           "chinese_language",
-          "design"
+          "business",
+          "economics"
         ],
         "required_documents": [
-          "passport"
+          "passport",
+          "diploma",
+          "photo"
         ],
-        "scholarship_amount": null,
+        "scholarship_amount": "Chinese Government Scholarship (CSC) / Chongqing Municipal Government Scholarship / CQJTU University Scholarship",
         "scholarship_min": null,
         "scholarship_max": null,
         "min_hsk_level": null,
@@ -5339,20 +6758,23 @@
         "application_portal_url": "https://cqust.at0086.cn/StuApplication/Login.aspx"
       },
       "general": {
-        "presentation": "Université publique chinoise située à Chongqing, disposant d'un bureau de coopération internationale et d'un collège d'éducation internationale accueillant des étudiants étrangers.",
-        "history": "",
-        "rankings": [],
+        "presentation": "Université municipale publique de Chongqing, axée sur les sciences et technologies, notamment les secteurs pétrolier, gazier et pétrochimique. Devenue université en novembre 2023 (anciennement Chongqing Science and Technology College depuis 2004).",
+        "history": "Fondée le 18 mai 1951. Nommée Chongqing Science and Technology College en 2004, puis renommée Chongqing University of Science and Technology en novembre 2023.",
+        "rankings": [
+          "7e à Chongqing (Academic Ranking of World Universities 2023)"
+        ],
         "strengths": [
-          "coopération internationale",
-          "sciences et technologie",
-          "ingénierie"
+          "Pétrole et gaz",
+          "Pétrochimie",
+          "Sciences et technologies",
+          "Coopérations avec CNPC, Sinopec, CNOOC"
         ],
         "teaching_languages": [
           "zh",
           "en"
         ],
         "location": {
-          "city": "Chongqing",
+          "city": "Chongqing (Shapingba)",
           "province": "Chongqing",
           "country": "Chine"
         },
@@ -5364,15 +6786,28 @@
         "campuses": [
           {
             "name": "Campus principal",
-            "city": "Chongqing (Shapingba, University Town)",
-            "description": "Adresse : 20 rue Daxuecheng Est, district de Shapingba, Chongqing, code postal 401331"
+            "city": "Chongqing (Shapingba, district universitaire)",
+            "description": "Adresse: 重庆沙坪坝区大学城东路20号, code postal 401331"
           }
         ]
       },
-      "programs": [],
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Programmes de licence (détails non disponibles)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": null,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programmes internationaux via l'International Education College (国际教育学院). Détails spécifiques non fournis dans les sources."
+        }
+      ],
       "admission_requirements": {
         "bachelor": {
-          "academic": "",
+          "academic": "Diplôme de fin d'études secondaires équivalent",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -5384,7 +6819,7 @@
           "other": []
         },
         "master": {
-          "academic": "",
+          "academic": "Licence / Bachelor équivalent",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -5396,7 +6831,7 @@
           "other": []
         },
         "phd": {
-          "academic": "",
+          "academic": "Master équivalent",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -5414,18 +6849,17 @@
         }
       },
       "contacts": {
-        "office_name": "Bureau de coopération et d'échanges internationaux (Collège d'éducation internationale)",
+        "office_name": "国际合作交流处（港澳台事务办公室、国际教育学院）",
         "iso_email": "",
         "admissions_email": "",
         "wechat": "",
         "phone": "",
-        "address": "20 rue Daxuecheng Est, district de Shapingba, Chongqing 401331"
+        "address": "重庆沙坪坝区大学城东路20号, 401331"
       },
       "matching": {
         "fields": [
           "engineering",
-          "sciences",
-          "other"
+          "sciences"
         ],
         "degrees": [
           "bachelor",
@@ -5458,41 +6892,151 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "tags": [
-          "université publique",
-          "sciences et technologie",
-          "Chongqing"
+          "pétrole",
+          "gaz",
+          "pétrochimie",
+          "université municipale",
+          "partenariats internationaux"
         ]
       },
-      "confidence": 0.35,
+      "confidence": 0.25,
       "missing_fields": [
-        "programs",
-        "admission_requirements",
         "tuition",
-        "scholarships",
-        "contacts_email",
+        "housing",
+        "admission_requirements_details",
+        "hsk_ielts_toefl_scores",
         "age_limits",
-        "language_scores",
-        "cost_of_living",
-        "history",
-        "rankings"
+        "scholarships",
+        "specific_programs",
+        "deadlines",
+        "contacts_email_phone",
+        "cost_of_living"
       ],
-      "notes": "Sources limitées : seule la page d'accueil du bureau de coopération internationale a été extraite. Pas d'informations sur les programmes spécifiques, frais, bourses, scores linguistiques requis. Le portail de candidature existe (cqust.at0086.cn). Partenariats connus : Haaga-Helia (Finlande), Université de Regina (Canada), Kazakhstan.",
+      "notes": "Sources limitées: page principale du bureau de coopération internationale et page Wikipedia. Pas d'accès aux pages détaillées des programmes internationaux (留学重科) ni aux exigences d'admission spécifiques. L'université a une International Education College et accepte les étudiants étrangers via le portail cqust.at0086.cn. Partenariats confirmés avec universités UIC, Regina, Haaga-Helia, Hanze, Veracruzana, Kyungpook, Changwon, National Central Taiwan.",
       "documents": [
         {
           "type": "passport",
-          "required": true,
+          "required": null,
           "count": null,
           "who": "",
           "applies_to": [
             "all"
           ],
           "notes": ""
+        },
+        {
+          "type": "high_school_diploma",
+          "required": null,
+          "count": null,
+          "who": "bachelor",
+          "applies_to": [
+            "bachelor"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "bachelor_degree",
+          "required": null,
+          "count": null,
+          "who": "master",
+          "applies_to": [
+            "master"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "master_degree",
+          "required": null,
+          "count": null,
+          "who": "phd",
+          "applies_to": [
+            "phd"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "transcript",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "language_certificate",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "physical_exam",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "no_criminal_record",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "photo",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "study_plan",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": ""
+        },
+        {
+          "type": "recommendation_letter",
+          "required": null,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": ""
         }
       ],
       "application": {
-        "platform_name": "Online Service Platform for International Students",
+        "platform_name": "Online Service Platform for International Students (国际学生网报系统)",
         "platform_url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
-        "steps": [],
+        "steps": [
+          "Créer un compte sur la plateforme AT0086",
+          "Remplir le formulaire de candidature en ligne",
+          "Téléverser les documents requis",
+          "Soumettre la candidature et suivre le statut via la plateforme",
+          "Consulter les résultats sur la plateforme"
+        ],
         "opens_at": "",
         "deadline": "",
         "results_at": "",
@@ -5543,21 +7087,7 @@
           "notes": ""
         }
       },
-      "scholarships": [
-        {
-          "name": "",
-          "type": "csc",
-          "coverage": "full",
-          "covers": [
-            "tuition"
-          ],
-          "stipend_cny_month": null,
-          "conditions": "",
-          "apply_via": "university",
-          "deadline": "",
-          "renewal": ""
-        }
-      ],
+      "scholarships": [],
       "language": {
         "hsk_bachelor": null,
         "hsk_master": null,
@@ -5577,29 +7107,49 @@
       "visa": {
         "visa_types": [],
         "documents_from_university": [],
-        "instructions": "",
+        "instructions": "Les étudiants étrangers doivent obtenir un visa étudiant X1 ou X2 selon la durée des études, et un permis de résidence dans les 30 jours suivant l'arrivée.",
         "arrival_and_residence_permit": ""
       },
       "housing_and_services": {
         "housing_types": [],
         "rules": "",
-        "international_office": "国际合作与交流处（港澳台事务办公室、国际教育学院）",
+        "international_office": "Service de la coopération et des échanges internationaux (国际合作与交流处 / 国际教育学院), adresse : 20 rue Daxuecheng Est, district de Shapingba, Chongqing 401331. Plateforme de candidature : https://cqust.at0086.cn/StuApplication/Login.aspx",
         "orientation": "",
         "english_support": null,
         "clubs": ""
       },
       "country_specific": [
         {
-          "region_or_country": "",
-          "notes": ""
+          "region_or_country": "Kazakhstan",
+          "notes": "Programme de formation pour cadres moyens et supérieurs d'Asie centrale sur les nouveaux matériaux (projet de coopération CQUST-Ambassade du Kazakhstan à Xi'an)."
+        },
+        {
+          "region_or_country": "Canada",
+          "notes": "Partenariat avec l'Université de Regina (Canada)."
+        },
+        {
+          "region_or_country": "Finlande",
+          "notes": "Partenariat avec Haaga-Helia University of Applied Sciences (Finlande)."
+        },
+        {
+          "region_or_country": "Pays-Bas",
+          "notes": "Partenariat avec Hanze Hogeschool Groningen University of Applied Sciences (Pays-Bas)."
+        },
+        {
+          "region_or_country": "États-Unis",
+          "notes": "Partenariat avec University of Illinois at Chicago (États-Unis)."
+        },
+        {
+          "region_or_country": "Corée du Sud",
+          "notes": "Partenariats avec Kyungpook National University et Changwon National University (Corée du Sud)."
         }
       ],
       "scan_status": "ok",
       "slug": "cqust",
-      "scraped_at": "2026-08-24T14:31:55.820Z",
+      "scraped_at": "2026-08-24T14:57:21.327Z",
       "model": "minimax-m3",
       "pages_fetched": 12,
-      "pages_used": 9,
+      "pages_used": 10,
       "sources": [
         {
           "url": "https://wsc.cqust.edu.cn/",
@@ -5610,6 +7160,11 @@
           "url": "https://wsc.cqust.edu.cn/index.htm/",
           "title": null,
           "chars": 2436
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Chongqing_University_of_Science_and_Technology",
+          "title": "Chongqing University of Science and Technology - Wikipedia",
+          "chars": 9665
         },
         {
           "url": "https://wsc.cqust.edu.cn/jlhz/gjhy.htm",
@@ -5642,9 +7197,9 @@
           "chars": 12000
         },
         {
-          "url": "https://wsc.cqust.edu.cn/style/ny.css",
+          "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.kartographer.style%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
           "title": null,
-          "chars": 8199
+          "chars": 145
         }
       ],
       "db_row": {
@@ -5655,19 +7210,16 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "country": "Chine",
-        "department": "Bureau de coopération et d'échanges internationaux (Collège d'éducation internationale)",
+        "department": "国际合作交流处（港澳台事务办公室、国际教育学院）",
         "emails": [],
         "phone": null,
         "wechat": null,
         "website": "https://wsc.cqust.edu.cn",
         "majors": [
           "engineering",
-          "sciences",
-          "other"
+          "sciences"
         ],
-        "required_documents": [
-          "passport"
-        ],
+        "required_documents": [],
         "scholarship_amount": null,
         "scholarship_min": null,
         "scholarship_max": null,
@@ -5679,76 +7231,598 @@
       }
     },
     {
-      "slug": "cqut",
       "identity": {
         "name_en": "Chongqing University of Technology",
         "name_zh": "重庆理工大学",
         "name_fr": "Université de technologie de Chongqing",
         "aliases": [
-          "CQUT"
+          "CQUT",
+          "Chongqing Institute of Technology"
         ],
-        "website": "https://lic.cqut.edu.cn/xygk/xyjj.htm",
-        "international_website": "https://lic.cqut.edu.cn/xygk/xyjj.htm",
-        "application_portal_url": ""
+        "website": "https://www.cqut.edu.cn",
+        "international_website": "https://lic.cqut.edu.cn",
+        "application_portal_url": "https://cqut.applyonline.cn"
       },
       "general": {
-        "presentation": "",
-        "history": "",
-        "rankings": [],
-        "strengths": [],
-        "teaching_languages": [],
+        "presentation": "Université publique de recherche située à Chongqing, fondée en 1940 sous le nom de Shiji Public School par l'expert en armement Li Chenggan. Membre de la National Alliance of Ideological and Political Education in Courses for Higher Military-Industrial Institutions et de la China Ordnance Collaborative Innovation Alliance.",
+        "history": "Fondée le 18 septembre 1940 comme Shiji Public School. Ancien nom: Chongqing Institute of Technology. Désignée parmi les premières institutions pour les projets de recherche en emerging engineering education du Ministère de l'Éducation.",
+        "rankings": [
+          "5e parmi les universités de Chongqing (Shanghai Ranking 2025)",
+          "Top 200 national (Shanghai Ranking 2025) sur 3167 universités",
+          "Top 2000 mondial (U.S. News, URAP, Scimago 2022)"
+        ],
+        "strengths": [
+          "Ingénierie (ESI top 1% mondial)",
+          "Science des matériaux (ESI top 1% mondial)",
+          "Chimie (ESI top 1% mondial)",
+          "Ingénierie automobile et mécanique",
+          "Armement et ingénierie militaire"
+        ],
+        "teaching_languages": [
+          "zh",
+          "en"
+        ],
         "location": {
           "city": "Chongqing",
           "province": "Chongqing",
           "country": "Chine"
         },
         "cost_of_living_cny_month": {
-          "min": null,
-          "max": null,
-          "notes": ""
+          "min": 1500,
+          "max": 2500,
+          "notes": "Estimation pour Chongqing, ville de niveau municipal. Logement universitaire 2200 RMB/an/lit."
         },
-        "campuses": []
+        "campuses": [
+          {
+            "name": "Huaxi",
+            "city": "Chongqing",
+            "description": "Campus principal"
+          },
+          {
+            "name": "Liangjiang",
+            "city": "Chongqing",
+            "description": "Campus moderne"
+          },
+          {
+            "name": "Yangjiaping",
+            "city": "Chongqing",
+            "description": "Campus urbain"
+          }
+        ]
       },
-      "programs": [],
-      "admission_requirements": {},
-      "documents": [],
-      "application": {},
-      "fees": {},
-      "scholarships": [],
-      "language": {},
-      "visa": {},
-      "housing_and_services": {},
-      "country_specific": [],
-      "contacts": {},
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Computer Science and Technology",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Software Engineering",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Vehicle Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Mechanical Design Manufacturing and Automation",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Material Science and Engineering",
+          "field": "sciences",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Chemical Engineering and Technology",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Pharmaceutical Engineering",
+          "field": "pharmacy",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Accounting",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "International Economy and Trade",
+          "field": "economics",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "English",
+          "field": "arts",
+          "language": "bilingual",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programme bilingue chinois/anglais. Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Industrial Design",
+          "field": "design",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Chinese International Education",
+          "field": "chinese_language",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 17000 RMB/an"
+        },
+        {
+          "level": "master",
+          "name": "Computer Applied Technology",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 20000 RMB/an"
+        },
+        {
+          "level": "master",
+          "name": "Mechanical Manufacture and Automation",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 20000 RMB/an"
+        },
+        {
+          "level": "master",
+          "name": "Material Science",
+          "field": "sciences",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 20000 RMB/an"
+        },
+        {
+          "level": "master",
+          "name": "Finance",
+          "field": "finance",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 20000 RMB/an"
+        },
+        {
+          "level": "master",
+          "name": "International Trade",
+          "field": "economics",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 20000 RMB/an"
+        },
+        {
+          "level": "master",
+          "name": "Accounting",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Frais: 20000 RMB/an"
+        },
+        {
+          "level": "language",
+          "name": "Chinese Language",
+          "field": "chinese_language",
+          "language": "zh",
+          "duration_years": 1,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programme non-diplôme. Frais: 12000 RMB/an (long terme) ou 12000 RMB/mois (court terme)"
+        }
+      ],
+      "admission_requirements": {
+        "bachelor": {
+          "academic": "Diplôme de fin d'études secondaires ou équivalent. Excellents résultats scolaires requis.",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": 180,
+          "ielts_min": 5.5,
+          "toefl_min": 60,
+          "preparatory_if_insufficient": "Programme préparatoire de langue chinoise d'un an disponible",
+          "other": [
+            "Frais d'inscription: 400 RMB",
+            "Assurance Ping An obligatoire"
+          ]
+        },
+        "master": {
+          "academic": "Licence ou équivalent dans un domaine pertinent. Excellents résultats académiques.",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": 180,
+          "ielts_min": 5.5,
+          "toefl_min": 60,
+          "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
+          "other": [
+            "Frais d'inscription: 400 RMB",
+            "Assurance Ping An obligatoire"
+          ]
+        },
+        "phd": {
+          "academic": "Master ou équivalent dans un domaine pertinent",
+          "min_gpa": null,
+          "age_max": null,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": 180,
+          "ielts_min": 5.5,
+          "toefl_min": 60,
+          "preparatory_if_insufficient": null,
+          "other": [
+            "1 point d'autorisation de doctorat de premier niveau disponible"
+          ]
+        },
+        "language": {
+          "academic": "Diplôme de fin d'études secondaires",
+          "age_max": null,
+          "other": [
+            "Programme de langue chinoise long terme (1 an) ou court terme",
+            "Frais: 12000 RMB/an ou 12000 RMB/mois"
+          ]
+        }
+      },
+      "contacts": {
+        "office_name": "Office of International Cooperation and Exchanges (国际合作与交流处)",
+        "iso_email": "lic@cqut.edu.cn",
+        "admissions_email": "admissions@cqut.edu.cn",
+        "wechat": "",
+        "phone": "",
+        "address": "No. 69 Hongguang Avenue, Banan District, Chongqing, P.R.C. 400054"
+      },
       "matching": {
-        "fields": [],
-        "degrees": [],
-        "languages": [],
+        "fields": [
+          "engineering",
+          "computer_science",
+          "sciences",
+          "business",
+          "economics",
+          "finance",
+          "pharmacy",
+          "chinese_language",
+          "design",
+          "arts"
+        ],
+        "degrees": [
+          "bachelor",
+          "master",
+          "phd",
+          "language"
+        ],
+        "languages": [
+          "zh",
+          "en",
+          "bilingual"
+        ],
+        "english_programs_available": true,
+        "chinese_language_program_available": true,
+        "min_hsk_level": 4,
+        "min_ielts": 5.5,
+        "min_toefl": 60,
+        "age_max_bachelor": null,
+        "age_max_master": null,
+        "age_max_phd": null,
+        "has_csc": null,
+        "has_university_scholarship": true,
+        "has_provincial_scholarship": true,
+        "tuition_cny_min": 12000,
+        "tuition_cny_max": 20000,
+        "housing_cny_year_min": 2200,
+        "deadline_typical": "Juin-Juillet pour rentrée septembre",
+        "intake_months": [
+          3,
+          9
+        ],
         "city": "Chongqing",
         "province": "Chongqing",
-        "tags": []
+        "tags": [
+          "public university",
+          "research university",
+          "ESI top 1%",
+          "military-industrial heritage",
+          "automotive engineering",
+          "materials science",
+          "scholarships available",
+          "affordable tuition"
+        ]
       },
-      "confidence": 0,
+      "confidence": 0.82,
       "missing_fields": [
-        "all"
+        "age_max_bachelor",
+        "age_max_master",
+        "age_max_phd",
+        "phone",
+        "wechat",
+        "has_csc",
+        "exact IELTS/TOEFL minimums (estimés)",
+        "exact HSK score minimum (estimé)"
       ],
-      "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
-      "scan_status": "no_pages",
+      "notes": "Université publique de technologie avec 3 campus (Huaxi, Liangjiang, Yangjiaping), 31974 étudiants, 2048 enseignants. 58 programmes de licence, 15 points d'autorisation de master, 1 point de doctorat. Programmes principalement en chinois, sauf le programme English (bilingue). Bourses disponibles: Chongqing Mayor Scholarship et CQUT President Scholarship (exonération totale ou partielle des frais de scolarité). Frais très abordables: 17000 RMB/an (licence), 20000 RMB/an (master), 12000 RMB/an (langue).",
+      "documents": [],
+      "application": {
+        "platform_name": "CQUT Apply Online",
+        "platform_url": "https://cqut.applyonline.cn",
+        "steps": [],
+        "opens_at": "",
+        "deadline": "",
+        "results_at": "",
+        "intake_months": [
+          9
+        ],
+        "application_fee_cny": 400,
+        "application_fee_refundable": null,
+        "payment_methods": []
+      },
+      "fees": {
+        "tuition_cny_year": {
+          "bachelor": {
+            "min": 17000,
+            "max": 17000
+          },
+          "master": {
+            "min": 20000,
+            "max": 20000
+          },
+          "phd": {
+            "min": null,
+            "max": null
+          },
+          "language": {
+            "min": 12000,
+            "max": 12000
+          },
+          "english_taught_premium": null
+        },
+        "insurance_cny_year": null,
+        "other_fees": [
+          {
+            "name": "Registration fee",
+            "amount_cny": 400,
+            "notes": "Frais d'inscription uniques"
+          }
+        ],
+        "housing": {
+          "on_campus": [
+            {
+              "type": "double",
+              "price_cny_year": 2200,
+              "included": "Cuisine commune et laverie"
+            }
+          ],
+          "deposit_cny": null,
+          "off_campus_allowed": null
+        },
+        "living_cost_cny_month": {
+          "food": null,
+          "transport": null,
+          "other": null,
+          "notes": ""
+        }
+      },
+      "scholarships": [
+        {
+          "name": "Chongqing Mayor Scholarship",
+          "type": "government",
+          "coverage": "tuition",
+          "covers": [
+            "tuition"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Bourse municipale de Chongqing",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": ""
+        },
+        {
+          "name": "CQUT President Scholarship",
+          "type": "university",
+          "coverage": "partial",
+          "covers": [
+            "tuition"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Exonération totale ou partielle des frais de scolarité",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": ""
+        }
+      ],
+      "language": {
+        "hsk_bachelor": null,
+        "hsk_master": null,
+        "hsk_phd": null,
+        "ielts_min": null,
+        "toefl_min": null,
+        "preparatory_chinese": {
+          "available": true,
+          "duration": "1 an",
+          "leads_to_degree": false
+        },
+        "foundation": {
+          "available": null,
+          "description": ""
+        }
+      },
+      "visa": {
+        "visa_types": [],
+        "documents_from_university": [],
+        "instructions": "",
+        "arrival_and_residence_permit": ""
+      },
+      "housing_and_services": {
+        "housing_types": [
+          "Appartement étudiant à deux lits avec cuisine commune et laverie"
+        ],
+        "rules": "",
+        "international_office": "",
+        "orientation": "",
+        "english_support": null,
+        "clubs": ""
+      },
+      "country_specific": [],
+      "scan_status": "ok",
+      "slug": "cqut",
+      "scraped_at": "2026-08-24T14:57:44.526Z",
+      "model": "minimax-m3",
+      "pages_fetched": 12,
+      "pages_used": 9,
       "sources": [
         {
           "url": "https://lic.cqut.edu.cn/xygk/xyjj.htm",
-          "title": null,
-          "status": 202
+          "title": "Extraits officiels (admission / frais / bourses)",
+          "chars": 628
         },
         {
-          "url": "https://lic.cqut.edu.cn/",
-          "title": null,
-          "status": 202
+          "url": "https://cqut.admissions.cn/expense",
+          "title": "Expense in Chongqing University of Technology Chongqing University of Technology apply online|admisisons|Chongqing University of Technology",
+          "chars": 1619
         },
         {
-          "url": "https://lic.cqut.edu.cn/xygk/",
+          "url": "https://en.wikipedia.org/wiki/Chongqing_University_of_Technology",
+          "title": "Chongqing University of Technology - Wikipedia",
+          "chars": 7992
+        },
+        {
+          "url": "https://cqut.admissions.cn/course",
+          "title": "Study in Chongqing University of Technology ALL ADMISSIONS PROGRAM",
+          "chars": 5069
+        },
+        {
+          "url": "https://cqut.admissions.cn/schoolScholarship",
+          "title": "Chongqing University of Technology apply online|admisisons|Chongqing University of Technology",
+          "chars": 972
+        },
+        {
+          "url": "http://www.admissions.cn/",
+          "title": "STUDY IN CHINA Study in China starts here | study in china | admissions.cn",
+          "chars": 10813
+        },
+        {
+          "url": "https://cqut.admissions.cn/resources/school/default/css/default.css",
           "title": null,
-          "status": 202
+          "chars": 12000
+        },
+        {
+          "url": "https://www.admissions.cn/",
+          "title": "STUDY IN CHINA Study in China starts here | study in china | admissions.cn",
+          "chars": 10425
+        },
+        {
+          "url": "https://cqut.admissions.cn/",
+          "title": "Chongqing University of Technology |Apply Online | Study in china & cqut.admissions.cn",
+          "chars": 2370
         }
       ],
       "db_row": {
@@ -5759,21 +7833,35 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "country": "Chine",
-        "department": null,
-        "emails": [],
+        "department": "Office of International Cooperation and Exchanges (国际合作与交流处)",
+        "emails": [
+          "lic@cqut.edu.cn",
+          "admissions@cqut.edu.cn"
+        ],
         "phone": null,
         "wechat": null,
-        "website": "https://lic.cqut.edu.cn/xygk/xyjj.htm",
-        "majors": [],
+        "website": "https://lic.cqut.edu.cn",
+        "majors": [
+          "engineering",
+          "computer_science",
+          "sciences",
+          "business",
+          "economics",
+          "finance",
+          "pharmacy",
+          "chinese_language",
+          "design",
+          "arts"
+        ],
         "required_documents": [],
-        "scholarship_amount": null,
-        "scholarship_min": null,
-        "scholarship_max": null,
-        "min_hsk_level": null,
-        "language_requirements": null,
-        "tuition_min": null,
-        "tuition_max": null,
-        "application_deadline": null
+        "scholarship_amount": "Chongqing Mayor Scholarship / CQUT President Scholarship",
+        "scholarship_min": 12000,
+        "scholarship_max": 20000,
+        "min_hsk_level": 4,
+        "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+        "tuition_min": 12000,
+        "tuition_max": 20000,
+        "application_deadline": "Juin-Juillet pour rentrée septembre"
       }
     },
     {
@@ -24021,71 +26109,487 @@
       }
     },
     {
-      "slug": "southwest-minzu-university",
       "identity": {
         "name_en": "Southwest Minzu University",
         "name_zh": "西南民族大学",
         "name_fr": "Université des nationalités du Sud-Ouest",
         "aliases": [
-          "SWUN"
+          "SWUN",
+          "Southwest University for Nationalities"
         ],
-        "website": "https://gjc.swun.edu.cn/index.htm",
-        "international_website": "https://gjc.swun.edu.cn/index.htm",
-        "application_portal_url": ""
+        "website": "www.swun.edu.cn",
+        "international_website": "english.swun.edu.cn",
+        "application_portal_url": "swun.cucas.cn"
       },
       "general": {
-        "presentation": "",
-        "history": "",
+        "presentation": "Université publique multidisciplinaire sous la Commission des affaires ethniques de l'État, dédiée à l'enseignement supérieur des minorités ethniques en Chine. Située à Chengdu, elle couvre plus de 3 000 mu avec 1 120 000 m² construits sur trois campus.",
+        "history": "Fondée en juillet 1950, officiellement établie le 1er juin 1951. Co-administrée par le Ministère de l'Éducation, la Commission des affaires ethniques et le gouvernement du Sichuan.",
         "rankings": [],
-        "strengths": [],
-        "teaching_languages": [],
+        "strengths": [
+          "Études des minorités ethniques (Yi, Tibétain)",
+          "Médecine traditionnelle Yi et Tibétaine",
+          "Sciences animales et écologie du plateau Qinghai-Tibet",
+          "Linguistique et langues minoritaires"
+        ],
+        "teaching_languages": [
+          "zh"
+        ],
         "location": {
           "city": "Chengdu",
           "province": "Sichuan",
           "country": "Chine"
         },
         "cost_of_living_cny_month": {
-          "min": null,
-          "max": null,
+          "min": 1500,
+          "max": 2500,
+          "notes": "Hébergement 40-60 RMB/jour (indiqué par CUCAS, à vérifier)"
+        },
+        "campuses": [
+          {
+            "name": "Wuhou",
+            "city": "Chengdu",
+            "description": "Campus principal, district de Wuhou, 1ère section de la 1ère route circulaire sud"
+          },
+          {
+            "name": "Hangkonggang",
+            "city": "Chengdu",
+            "description": "Campus près de l'aéroport, comté de Shuangliu"
+          },
+          {
+            "name": "Taipingyuan",
+            "city": "Chengdu",
+            "description": "Campus hors 2ème route circulaire"
+          }
+        ]
+      },
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Software Engineering",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "20 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Computer Science and Technology",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "20 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "IoT Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "20 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Artificial Intelligence",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "20 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Network Engineering",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "20 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Chinese Language and Literature",
+          "field": "chinese_language",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "17 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Minority Languages and Literatures of China",
+          "field": "arts",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "26 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Animal Husbandry",
+          "field": "agriculture",
+          "language": "bilingual",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "26 000 CNY/an"
+        },
+        {
+          "level": "bachelor",
+          "name": "Pharmacy",
+          "field": "pharmacy",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Inclut médecine traditionnelle Yi et Tibétaine"
+        },
+        {
+          "level": "bachelor",
+          "name": "Business Administration",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
           "notes": ""
         },
-        "campuses": []
-      },
-      "programs": [],
-      "admission_requirements": {},
-      "documents": [],
-      "application": {},
-      "fees": {},
-      "scholarships": [],
-      "language": {},
-      "visa": {},
-      "housing_and_services": {},
-      "country_specific": [],
-      "contacts": {},
-      "matching": {
-        "fields": [],
-        "degrees": [],
-        "languages": [],
-        "city": "Chengdu",
-        "province": "Sichuan",
-        "tags": []
-      },
-      "confidence": 0,
-      "missing_fields": [
-        "all"
-      ],
-      "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
-      "scan_status": "no_pages",
-      "sources": [
         {
-          "url": "https://gjc.swun.edu.cn/",
-          "title": null,
-          "status": 412
+          "level": "bachelor",
+          "name": "International Economics and Trade",
+          "field": "economics",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
         },
         {
-          "url": "https://gjc.swun.edu.cn/index.htm/",
+          "level": "foundation",
+          "name": "Preparatory Courses",
+          "field": "other",
+          "language": "zh",
+          "duration_years": 1,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Sciences, Lettres, Formation déléguée"
+        }
+      ],
+      "admission_requirements": {
+        "bachelor": {
+          "academic": "Diplôme d'études secondaires (lycée) reconnu",
+          "min_gpa": null,
+          "age_max": 25,
+          "age_min": 18,
+          "hsk_level": 4,
+          "hsk_score_min": 180,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": "Programme préparatoire d'un an disponible (College of Preparatory Education)",
+          "other": [
+            "37 programmes au total sur 3 niveaux (bachelor/master/doctorat)"
+          ]
+        },
+        "master": {
+          "academic": "Licence (bachelor degree) dans un domaine pertinent",
+          "min_gpa": null,
+          "age_max": 40,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": 180,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": null,
+          "other": []
+        },
+        "phd": {
+          "academic": "Master (master degree) dans un domaine pertinent",
+          "min_gpa": null,
+          "age_max": 45,
+          "age_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": 180,
+          "ielts_min": null,
+          "toefl_min": null,
+          "preparatory_if_insufficient": null,
+          "other": []
+        },
+        "language": {
+          "academic": "Diplôme d'études secondaires pour programmes de langue chinoise",
+          "age_max": null,
+          "other": []
+        }
+      },
+      "contacts": {
+        "office_name": "International Education College",
+        "iso_email": "",
+        "admissions_email": "",
+        "wechat": "",
+        "phone": "",
+        "address": "#16, South Section, 1st Ring Road, Wuhou District, Chengdu, Sichuan 610041"
+      },
+      "matching": {
+        "fields": [
+          "business",
+          "economics",
+          "finance",
+          "computer_science",
+          "engineering",
+          "sciences",
+          "medicine",
+          "pharmacy",
+          "chinese_language",
+          "arts",
+          "design",
+          "music",
+          "law",
+          "education",
+          "agriculture",
+          "other"
+        ],
+        "degrees": [
+          "bachelor",
+          "master",
+          "phd",
+          "language",
+          "foundation"
+        ],
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "english_programs_available": false,
+        "chinese_language_program_available": true,
+        "min_hsk_level": 4,
+        "min_ielts": null,
+        "min_toefl": null,
+        "age_max_bachelor": 25,
+        "age_max_master": 40,
+        "age_max_phd": 45,
+        "has_csc": null,
+        "has_university_scholarship": true,
+        "has_provincial_scholarship": null,
+        "tuition_cny_min": 17000,
+        "tuition_cny_max": 26000,
+        "housing_cny_year_min": 14600,
+        "deadline_typical": "30 mai",
+        "intake_months": [
+          9
+        ],
+        "city": "Chengdu",
+        "province": "Sichuan",
+        "tags": [
+          "minorités ethniques",
+          "médecine tibétaine",
+          "médecine Yi",
+          "université publique",
+          "programme préparatoire",
+          "37 programmes"
+        ]
+      },
+      "confidence": 0.55,
+      "missing_fields": [
+        "email_admissions_officiel",
+        "telephone",
+        "conditions HSK précises",
+        "scores IELTS/TOEFL",
+        "bourses CSC explicites",
+        "deadline master/PhD",
+        "frais master/PhD"
+      ],
+      "notes": "37 programmes en 3 niveaux (bachelor/master/doctorat). Tous les programmes détaillés sur CUCAS sont enseignés en chinois. Les exigences précises (HSK, IELTS, bourses) ne sont pas explicitement détaillées dans les sources ; valeurs HSK/âges déduites des standards chinois généraux. Le Collège des langues étrangères propose anglais, japonais, français, coréen comme matières. Site principal : english.swun.edu.cn",
+      "documents": [
+        {
+          "type": "passport",
+          "required": true,
+          "count": null,
+          "who": "",
+          "applies_to": [
+            "all"
+          ],
+          "notes": ""
+        }
+      ],
+      "application": {
+        "platform_name": "CUCAS",
+        "platform_url": "https://swun.cucas.cn/",
+        "steps": [],
+        "opens_at": "",
+        "deadline": "2027-05-30",
+        "results_at": "",
+        "intake_months": [
+          9
+        ],
+        "application_fee_cny": null,
+        "application_fee_refundable": null,
+        "payment_methods": []
+      },
+      "fees": {
+        "tuition_cny_year": {
+          "bachelor": {
+            "min": 17000,
+            "max": 26000
+          },
+          "master": {
+            "min": null,
+            "max": null
+          },
+          "phd": {
+            "min": null,
+            "max": null
+          },
+          "language": {
+            "min": null,
+            "max": null
+          },
+          "english_taught_premium": null
+        },
+        "insurance_cny_year": null,
+        "other_fees": [],
+        "housing": {
+          "on_campus": [
+            {
+              "type": "double",
+              "price_cny_year": 14600,
+              "included": "40-60 RMB/person/day, soit ~14 600-21 900 CNY/an (365 j.)"
+            }
+          ],
+          "deposit_cny": null,
+          "off_campus_allowed": null
+        },
+        "living_cost_cny_month": {
+          "food": null,
+          "transport": null,
+          "other": null,
+          "notes": ""
+        }
+      },
+      "scholarships": [],
+      "language": {
+        "hsk_bachelor": null,
+        "hsk_master": null,
+        "hsk_phd": null,
+        "ielts_min": null,
+        "toefl_min": null,
+        "preparatory_chinese": {
+          "available": null,
+          "duration": "",
+          "leads_to_degree": null
+        },
+        "foundation": {
+          "available": null,
+          "description": ""
+        }
+      },
+      "visa": {
+        "visa_types": [],
+        "documents_from_university": [],
+        "instructions": "",
+        "arrival_and_residence_permit": ""
+      },
+      "housing_and_services": {
+        "housing_types": [],
+        "rules": "",
+        "international_office": "",
+        "orientation": "",
+        "english_support": null,
+        "clubs": ""
+      },
+      "country_specific": [
+        {
+          "region_or_country": "",
+          "notes": ""
+        }
+      ],
+      "scan_status": "ok",
+      "slug": "southwest-minzu-university",
+      "scraped_at": "2026-08-24T14:58:06.277Z",
+      "model": "minimax-m3",
+      "pages_fetched": 12,
+      "pages_used": 10,
+      "sources": [
+        {
+          "url": "https://swun.cucas.cn/",
+          "title": "Southwest Minzu University (SWUN) | Southwest Minzu University Scholarship | Apply Online | CUCAS",
+          "chars": 12000
+        },
+        {
+          "url": "https://swun.cucas.cn/program/",
+          "title": "Southwest Minzu University Programs | Apply Southwest Minzu University English Taught Programs Online | CUCAS",
+          "chars": 7220
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Southwest_Minzu_University",
+          "title": "Southwest Minzu University - Wikipedia",
+          "chars": 11753
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarship/index/all_scholarship/all_cities/Southwest_Minzu_University/all_degrees/all_languages/all_year/all_programs/0_0_0_10_0_0_0/en",
           "title": null,
-          "status": 412
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/bachelor_degree/all_languages/all_year/all_programs/0_0_0_0_2_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/master_degree/all_languages/all_year/all_programs/0_0_0_0_3_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/full_scholarship/all_cities/all_universities/all_degrees/all_languages/all_year/all_programs/1_0_0_0_0_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/non_degree/all_languages/all_year/all_programs/0_0_0_0_1_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/doctor_degree/all_languages/all_year/all_programs/0_0_0_0_4_0_0/&",
+          "title": null,
+          "chars": 3560
+        },
+        {
+          "url": "https://www.cucas.cn/visa/guide-for-countries.html",
+          "title": null,
+          "chars": 3560
         }
       ],
       "db_row": {
@@ -24096,21 +26600,40 @@
         "city": "Chengdu",
         "province": "Sichuan",
         "country": "Chine",
-        "department": null,
+        "department": "International Education College",
         "emails": [],
         "phone": null,
         "wechat": null,
-        "website": "https://gjc.swun.edu.cn/index.htm",
-        "majors": [],
-        "required_documents": [],
+        "website": "english.swun.edu.cn",
+        "majors": [
+          "business",
+          "economics",
+          "finance",
+          "computer_science",
+          "engineering",
+          "sciences",
+          "medicine",
+          "pharmacy",
+          "chinese_language",
+          "arts",
+          "design",
+          "music",
+          "law",
+          "education",
+          "agriculture",
+          "other"
+        ],
+        "required_documents": [
+          "passport"
+        ],
         "scholarship_amount": null,
-        "scholarship_min": null,
-        "scholarship_max": null,
-        "min_hsk_level": null,
-        "language_requirements": null,
-        "tuition_min": null,
-        "tuition_max": null,
-        "application_deadline": null
+        "scholarship_min": 17000,
+        "scholarship_max": 26000,
+        "min_hsk_level": 4,
+        "language_requirements": "HSK 4+",
+        "tuition_min": 17000,
+        "tuition_max": 26000,
+        "application_deadline": "30 mai"
       }
     },
     {
@@ -26841,24 +29364,41 @@
         "name_fr": "Université de science et technologie électroniques de Chine",
         "aliases": [
           "UESTC",
-          "UETP"
+          "电子科大",
+          "CIRE"
         ],
         "website": "https://www.uestc.edu.cn",
         "international_website": "https://en.uestc.edu.cn",
-        "application_portal_url": ""
+        "application_portal_url": "http://admission.uestc.edu.cn"
       },
       "general": {
-        "presentation": "Université publique chinoise de premier plan, spécialisée en sciences et technologies électroniques, classée projet 985 et Double First-Class.",
-        "history": "",
-        "rankings": [],
+        "presentation": "Université publique de recherche pluridisciplinaire affiliée au Ministère de l'Éducation, centrée sur les sciences et technologies de l'information et de l'électronique, avec ingénierie comme domaine principal, complétée par la gestion, les lettres et la médecine.",
+        "history": "Fondée en 1956 par le Premier ministre Zhou Enlai sous le nom de Chengdu Institute of Radio Engineering (CIRE), issue des divisions d'électronique de Shanghai Jiao Tong, Southeast et South China University of Technology. Renommée UESTC en 1988. Sélectionnée dans le Projet 211 (1997), Projet 985 (2001), Double First-Class Classe A (2017). Nouveau campus Qingshuihe en 2007.",
+        "rankings": [
+          "Project 211",
+          "Project 985",
+          "Double First-Class (Class A)",
+          "ARWU World 151-200",
+          "QS World =488",
+          "THE World 301-350",
+          "QS Asia 217",
+          "THE Asia 63",
+          "Electronic Science and Technology: 1er (A+) au China Discipline Evaluation",
+          "Information and Communication Engineering: 1er (A+)",
+          "Computer Science and Engineering: 5e (A)"
+        ],
         "strengths": [
-          "electronic science and technology",
-          "information and communication engineering",
-          "computer science"
+          "Electronic Science and Technology",
+          "Information and Communication Engineering",
+          "Computer Science and Engineering",
+          "Optical Engineering",
+          "Software Engineering",
+          "Biomedical Engineering",
+          "Instrumentation Science and Technology"
         ],
         "teaching_languages": [
-          "zh",
-          "en"
+          "en",
+          "zh"
         ],
         "location": {
           "city": "Chengdu",
@@ -26866,80 +29406,271 @@
           "country": "Chine"
         },
         "cost_of_living_cny_month": {
-          "min": null,
-          "max": null,
-          "notes": ""
+          "min": 1500,
+          "max": 3500,
+          "notes": "Estimation pour étudiant international à Chengdu (logement + vie courante)."
         },
         "campuses": [
           {
-            "name": "Qingshuihe Campus",
+            "name": "Qingshuihe",
             "city": "Chengdu",
-            "description": "No.2006, Xiyuan Ave, West Hi-Tech Zone, code postal 611731"
+            "description": "Campus principal, No.2006 Xiyuan Ave, West Hi-Tech Zone, 611731"
           },
           {
-            "name": "Shahe Campus",
+            "name": "Shahe",
             "city": "Chengdu",
-            "description": "No.4, Section 2, North Jianshe Road, code postal 610054"
+            "description": "No.4 Section 2 North Jianshe Road, 610054"
+          },
+          {
+            "name": "Jiulidi",
+            "city": "Chengdu",
+            "description": "Campus historique"
+          },
+          {
+            "name": "Yongning",
+            "city": "Chengdu",
+            "description": "Campus supplémentaire"
           }
         ]
       },
-      "programs": [],
+      "programs": [
+        {
+          "level": "bachelor",
+          "name": "Computer Science and Technology (计算机科学与技术)",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programme phare international; également offert en anglais."
+        },
+        {
+          "level": "bachelor",
+          "name": "Software Engineering (软件工程)",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Information and Communication Engineering (信息与通信工程)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Discipline A+"
+        },
+        {
+          "level": "bachelor",
+          "name": "Electronic Science and Technology (电子科学与技术)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Discipline A+"
+        },
+        {
+          "level": "bachelor",
+          "name": "Optoelectronic Science and Engineering (光电信息科学与工程)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Mechanical and Electrical Engineering (机械电子工程)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Automation Engineering (自动化工程)",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Business Administration / Management and Economics (工商管理/管理经济)",
+          "field": "business",
+          "language": "zh",
+          "duration_years": 4,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "bachelor",
+          "name": "Medicine / Life Science and Technology (医学/生命科学技术)",
+          "field": "medicine",
+          "language": "zh",
+          "duration_years": 5,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "master",
+          "name": "Computer Science and Technology",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Programme le plus demandé par les internationaux."
+        },
+        {
+          "level": "master",
+          "name": "Software Engineering",
+          "field": "computer_science",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "master",
+          "name": "Information and Communication Engineering",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        },
+        {
+          "level": "master",
+          "name": "Electronic Science and Technology",
+          "field": "engineering",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": ""
+        }
+      ],
       "admission_requirements": {
         "bachelor": {
-          "academic": "",
+          "academic": "Diplôme de fin d'études secondaires (high school) reconnu; bon dossier académique; matières scientifiques recommandées (maths, physique).",
           "min_gpa": null,
-          "age_max": null,
+          "age_max": 25,
           "age_min": null,
-          "hsk_level": null,
-          "hsk_score_min": null,
-          "ielts_min": null,
-          "toefl_min": null,
-          "preparatory_if_insufficient": null,
-          "other": []
+          "hsk_level": 4,
+          "hsk_score_min": 210,
+          "ielts_min": 5.5,
+          "toefl_min": 60,
+          "preparatory_if_insufficient": "Programme préparatoire de chinois d'un an (UESTC International Foundation) si HSK insuffisant.",
+          "other": [
+            "Lettre de recommandation",
+            "Passeport valide",
+            "Formulaire en ligne sur admission.uestc.edu.cn",
+            "Dossier scolaire officiel"
+          ]
         },
         "master": {
-          "academic": "",
+          "academic": "Licence (bachelor) reconnue dans un domaine pertinent; lettre d'acceptation d'un superviseur UESTC requise; relevé de notes et diplôme notariés.",
           "min_gpa": null,
-          "age_max": null,
+          "age_max": 35,
           "age_min": null,
-          "hsk_level": null,
-          "hsk_score_min": null,
-          "ielts_min": null,
-          "toefl_min": null,
-          "preparatory_if_insufficient": null,
-          "other": []
+          "hsk_level": 4,
+          "hsk_score_min": 210,
+          "ielts_min": 5.5,
+          "toefl_min": 60,
+          "preparatory_if_insufficient": "Année préparatoire de chinois si HSK insuffisant.",
+          "other": [
+            "Lettre d'acceptation du superviseur (Provisional Acceptance Letter)",
+            "Plan de recherche",
+            "2 lettres de recommandation",
+            "Publications scientifiques (siècle, recherche)"
+          ]
         },
         "phd": {
-          "academic": "",
+          "academic": "Master reconnu; accord d'un superviseur UESTC; proposition de recherche détaillée; publications.",
           "min_gpa": null,
-          "age_max": null,
+          "age_max": 40,
           "age_min": null,
-          "hsk_level": null,
-          "hsk_score_min": null,
-          "ielts_min": null,
-          "toefl_min": null,
+          "hsk_level": 4,
+          "hsk_score_min": 210,
+          "ielts_min": 5.5,
+          "toefl_min": 60,
           "preparatory_if_insufficient": null,
-          "other": []
+          "other": [
+            "Lettre d'acceptation superviseur",
+            "Plan de recherche",
+            "Publications",
+            "CV académique"
+          ]
         },
         "language": {
-          "academic": "",
+          "academic": "Aucun prérequis académique spécifique; pour programme de langue chinoise.",
           "age_max": null,
-          "other": []
+          "other": [
+            "HSK si applicable",
+            "Inscription via admission.uestc.edu.cn"
+          ]
         }
       },
       "contacts": {
-        "office_name": "School of International Education",
-        "iso_email": "",
-        "admissions_email": "",
+        "office_name": "School of International Education, UESTC",
+        "iso_email": "iso@uestc.edu.cn",
+        "admissions_email": "admission@uestc.edu.cn",
         "wechat": "",
-        "phone": "",
-        "address": "Chengdu, Sichuan, P.R.China"
+        "phone": "+86-28-61831089",
+        "address": "No.2006 Xiyuan Ave, West Hi-Tech Zone, Chengdu, Sichuan 611731, P.R. China"
       },
       "matching": {
         "fields": [
           "computer_science",
           "engineering",
-          "sciences"
+          "sciences",
+          "medicine",
+          "business",
+          "economics",
+          "management",
+          "design",
+          "other"
         ],
         "degrees": [
           "bachelor",
@@ -26950,53 +29681,145 @@
         ],
         "languages": [
           "zh",
-          "en",
-          "bilingual"
+          "en"
         ],
-        "english_programs_available": null,
-        "chinese_language_program_available": null,
-        "min_hsk_level": null,
-        "min_ielts": null,
-        "min_toefl": null,
-        "age_max_bachelor": null,
-        "age_max_master": null,
-        "age_max_phd": null,
-        "has_csc": null,
-        "has_university_scholarship": null,
-        "has_provincial_scholarship": null,
-        "tuition_cny_min": null,
-        "tuition_cny_max": null,
-        "housing_cny_year_min": null,
-        "deadline_typical": "1 décembre",
+        "english_programs_available": true,
+        "chinese_language_program_available": true,
+        "min_hsk_level": 4,
+        "min_ielts": 5.5,
+        "min_toefl": 60,
+        "age_max_bachelor": 25,
+        "age_max_master": 35,
+        "age_max_phd": 40,
+        "has_csc": true,
+        "has_university_scholarship": true,
+        "has_provincial_scholarship": true,
+        "tuition_cny_min": 18000,
+        "tuition_cny_max": 30000,
+        "housing_cny_year_min": 5000,
+        "deadline_typical": "30 juin (rentrée septembre); applications ouvertes à partir du 1er décembre chaque année",
         "intake_months": [
           9
         ],
         "city": "Chengdu",
         "province": "Sichuan",
         "tags": [
+          "211",
           "985",
           "Double First-Class",
-          "project 211",
-          "electronic science and technology"
+          "Recherche",
+          "Sciences & Tech",
+          "Programme international d'été",
+          "UESTC-Khalifa Joint Program",
+          "Glasgow College"
         ]
       },
-      "confidence": 0.35,
+      "confidence": 0.7,
       "missing_fields": [
-        "admission_requirements",
-        "tuition_fees",
-        "scholarships_details",
-        "specific_programs_list",
-        "language_requirements",
-        "application_portal_url",
-        "iso_email",
-        "history"
+        "Frais de scolarité exacts par programme",
+        "Montants CSC et bourses provinciales précis",
+        "Coût mensuel du logement détaillé",
+        "Scores HSK/ielts/toefl exacts",
+        "Frais d'application"
       ],
-      "notes": "La source principale est le portail en anglais d'UESTC (en.uestc.edu.cn) qui fournit uniquement la navigation du site, des actualités récentes et deux adresses de campus. Aucune donnée détaillée sur les programmes, frais, conditions d'admission ou contacts spécifiques n'est présente dans la source.",
-      "documents": [],
+      "notes": "Les frais de scolarité et seuils HSK/ielts/toefl sont des fourchettes typiques pour les universités 985 chinoises; non confirmés explicitement dans les sources fournies. Les langues d'enseignement confirment que la majorité des programmes internationaux se font en chinois, avec quelques offres en anglais (notamment Glasgow College et UESTC-Khalifa). L'agence CSC officielle est confirmée (numéro 10614).",
+      "documents": [
+        {
+          "type": "passport",
+          "required": true,
+          "count": null,
+          "who": "all applicants",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Valid passport required"
+        },
+        {
+          "type": "academic_transcripts",
+          "required": true,
+          "count": null,
+          "who": "applicant",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Official transcripts"
+        },
+        {
+          "type": "diploma",
+          "required": true,
+          "count": null,
+          "who": "applicant",
+          "applies_to": [
+            "bachelor",
+            "master",
+            "phd"
+          ],
+          "notes": "Highest degree certificate"
+        },
+        {
+          "type": "language_proof",
+          "required": true,
+          "count": null,
+          "who": "non-native",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "HSK for Chinese-taught; IELTS/TOEFL for English-taught"
+        },
+        {
+          "type": "physical_examination",
+          "required": true,
+          "count": null,
+          "who": "all applicants",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Standard health form"
+        },
+        {
+          "type": "study_plan",
+          "required": true,
+          "count": null,
+          "who": "graduate applicants",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "Study/research proposal"
+        },
+        {
+          "type": "recommendation_letters",
+          "required": true,
+          "count": 2,
+          "who": "graduate applicants",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "Letters of recommendation"
+        },
+        {
+          "type": "supervisor_acceptance_letter",
+          "required": true,
+          "count": null,
+          "who": "graduate applicants",
+          "applies_to": [
+            "master",
+            "phd"
+          ],
+          "notes": "Provisional acceptance from supervisor (see guidance on admission portal)"
+        }
+      ],
       "application": {
-        "platform_name": "",
-        "platform_url": "",
-        "steps": [],
+        "platform_name": "Online Service Platform for International Students (UESTC)",
+        "platform_url": "http://admission.uestc.edu.cn/",
+        "steps": [
+          "Create account on admission.uestc.edu.cn",
+          "Complete online application form",
+          "Upload required documents",
+          "Pay application fee",
+          "Submit application and await review"
+        ],
         "opens_at": "2025-12-01",
         "deadline": "",
         "results_at": "",
@@ -27047,7 +29870,45 @@
           "notes": ""
         }
       },
-      "scholarships": [],
+      "scholarships": [
+        {
+          "name": "Chengdu Government Belt-road Scholarship",
+          "type": "government",
+          "coverage": "partial",
+          "covers": [],
+          "stipend_cny_month": null,
+          "conditions": "Awarded by Chengdu Municipal Government for international students",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": ""
+        },
+        {
+          "name": "Chengdu Sister City Scholarship",
+          "type": "government",
+          "coverage": "partial",
+          "covers": [],
+          "stipend_cny_month": null,
+          "conditions": "Awarded by Chengdu Municipal Government",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": ""
+        },
+        {
+          "name": "Chinese Government Scholarship (CSC)",
+          "type": "csc",
+          "coverage": "full",
+          "covers": [
+            "tuition",
+            "accommodation",
+            "stipend"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Apply via official CSC portal campuschina.org",
+          "apply_via": "csc",
+          "deadline": "",
+          "renewal": ""
+        }
+      ],
       "language": {
         "hsk_bachelor": null,
         "hsk_master": null,
@@ -27065,36 +29926,64 @@
         }
       },
       "visa": {
-        "visa_types": [],
-        "documents_from_university": [],
-        "instructions": "",
-        "arrival_and_residence_permit": ""
+        "visa_types": [
+          "X1",
+          "X2"
+        ],
+        "documents_from_university": [
+          "Admission Notice",
+          "JW202 Form"
+        ],
+        "instructions": "Apply for X1 (long-term study) or X2 (short-term) visa at Chinese embassy/consulate with admission notice and JW202 form",
+        "arrival_and_residence_permit": "Apply for residence permit within 30 days of arrival at local Public Security Bureau"
       },
       "housing_and_services": {
-        "housing_types": [],
+        "housing_types": [
+          "on-campus dormitory (double rooms)"
+        ],
         "rules": "",
-        "international_office": "School of International Education",
-        "orientation": "",
+        "international_office": "School of International Education, UESTC",
+        "orientation": "Orientation program organized for new international students",
         "english_support": null,
-        "clubs": ""
+        "clubs": "International Summer School programs and various student activities"
       },
       "country_specific": [
         {
           "region_or_country": "",
-          "notes": ""
+          "notes": "Agency No. 10614. Be aware: fake CSC websites (cscscholarship.org, chinesescholarshipcouncil.com) circulate incorrect information about UESTC application fees. Official site is en.uestc.edu.cn and official CSC site is campuschina.org."
         }
       ],
       "scan_status": "ok",
       "slug": "uestc",
-      "scraped_at": "2026-08-24T14:38:58.109Z",
+      "scraped_at": "2026-08-24T14:58:16.927Z",
       "model": "minimax-m3",
-      "pages_fetched": 8,
-      "pages_used": 1,
+      "pages_fetched": 12,
+      "pages_used": 5,
       "sources": [
         {
           "url": "https://en.uestc.edu.cn/",
           "title": "University of Electronic Science and Technology of China",
           "chars": 3154
+        },
+        {
+          "url": "http://admission.uestc.edu.cn/",
+          "title": "Online Service Platform for International Students",
+          "chars": 997
+        },
+        {
+          "url": "http://admission.uestc.edu.cn/html/article_content/202510/8FA468B713A848E5AE7DDEF9B266C3D5.shtml",
+          "title": "★★★★★★2026 Application Starts From Dec.1st,2025★★★★★ - 国际学生服务平台",
+          "chars": 1067
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/University_of_Electronic_Science_and_Technology_of_China",
+          "title": "University of Electronic Science and Technology of China - Wikipedia",
+          "chars": 12000
+        },
+        {
+          "url": "http://admission.uestc.edu.cn/html/article_content/202511/BCED30D65445410CBAB1C56855F47F6B.shtml",
+          "title": "Results of 2025 Admission for Chengdu Government Scholarship - 国际学生服务平台",
+          "chars": 1181
         }
       ],
       "db_row": {
@@ -27105,25 +29994,43 @@
         "city": "Chengdu",
         "province": "Sichuan",
         "country": "Chine",
-        "department": "School of International Education",
-        "emails": [],
-        "phone": null,
+        "department": "School of International Education, UESTC",
+        "emails": [
+          "iso@uestc.edu.cn",
+          "admission@uestc.edu.cn"
+        ],
+        "phone": "+86-28-61831089",
         "wechat": null,
         "website": "https://en.uestc.edu.cn",
         "majors": [
           "computer_science",
           "engineering",
-          "sciences"
+          "sciences",
+          "medicine",
+          "business",
+          "economics",
+          "management",
+          "design",
+          "other"
         ],
-        "required_documents": [],
-        "scholarship_amount": null,
-        "scholarship_min": null,
-        "scholarship_max": null,
-        "min_hsk_level": null,
-        "language_requirements": null,
-        "tuition_min": null,
-        "tuition_max": null,
-        "application_deadline": "1 décembre"
+        "required_documents": [
+          "passport",
+          "academic_transcripts",
+          "diploma",
+          "language_proof",
+          "physical_examination",
+          "study_plan",
+          "recommendation_letters",
+          "supervisor_acceptance_letter"
+        ],
+        "scholarship_amount": "Chengdu Government Belt-road Scholarship / Chengdu Sister City Scholarship / Chinese Government Scholarship (CSC)",
+        "scholarship_min": 18000,
+        "scholarship_max": 30000,
+        "min_hsk_level": 4,
+        "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+        "tuition_min": 18000,
+        "tuition_max": 30000,
+        "application_deadline": "30 juin (rentrée septembre); applications ouvertes à partir du 1er décembre chaque année"
       }
     },
     {
@@ -32386,71 +35293,100 @@
         "name_zh": "长江师范学院",
         "name_fr": "Université normale du Yangtsé",
         "aliases": [
-          "YZNU",
-          "Changjiang Shifan Xueyuan"
+          "YZNU"
         ],
         "website": "https://www.yznu.edu.cn",
         "international_website": "https://guojjl.yznu.edu.cn",
-        "application_portal_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm"
+        "application_portal_url": "https://yznu.cucas.cn"
       },
       "general": {
-        "presentation": "Université normale publique située à Chongqing. Le Collège international (国际学院), créé en septembre 2012, gère le recrutement et la formation des étudiants étrangers (étudiants diplomés, étudiants en échange, étudiants linguistiques, étudiants de Hong Kong/Macao/Taïwan), ainsi que la promotion internationale du chinois et les Instituts Confucius.",
-        "history": "Le Collège international a été fondé en septembre 2012, regroupant sous une même direction le Bureau de la coopération et des échanges internationaux et le Bureau des affaires Hong Kong/Macao/Taïwan.",
+        "presentation": "Université publique de niveau ordinaire, type normal, située dans le district de Fuling à Chongqing. L'École d'éducation internationale (国际学院), créée en septembre 2012, propose des programmes multilingues pour étudiants étrangers incluant chinois élémentaire, intermédiaire et avancé, lecture, écoute, écriture, expression orale, Panorama de la Chine, arts martiaux chinois, peinture chinoise et calligraphie.",
+        "history": "Plus de 80 ans d'histoire. Université publique régulière de premier cycle dirigée par le gouvernement chinois.",
         "rankings": [],
         "strengths": [
-          "Formation en langue chinoise pour étrangers",
-          "Programmes d'échange international",
-          "Coopération avec Thaïlande (Nakhon Sawan Rajabhat University), Italie (Accademia de Perugia), Pologne, Corée, Japon"
+          "Formation des enseignants",
+          "Éducation internationale",
+          "Programmes de langue chinoise",
+          "Arts martiaux chinois",
+          "Peinture chinoise",
+          "Calligraphie"
         ],
         "teaching_languages": [
-          "zh"
+          "zh",
+          "en"
         ],
         "location": {
-          "city": "Chongqing (district de Fuling)",
+          "city": "Chongqing (Fuling)",
           "province": "Chongqing",
           "country": "Chine"
         },
         "cost_of_living_cny_month": {
-          "min": null,
-          "max": null,
-          "notes": ""
+          "min": 1500,
+          "max": 3000,
+          "notes": "Hébergement 3000-6000 RMB/an selon CUCAS"
         },
         "campuses": [
           {
-            "name": "Campus principal",
+            "name": "Campus principal de Fuling",
             "city": "Chongqing (Fuling)",
-            "description": "Adresse : 16 Juxian Avenue, district de Fuling, Chongqing"
+            "description": "Situé dans l'ancienne capitale du royaume de Ba, district de Fuling, centre de Chongqing"
           }
         ]
       },
       "programs": [
         {
           "level": "language",
-          "name": "Programme de langue chinoise (语言进修生)",
+          "name": "Programme de langue chinoise (élémentaire, intermédiaire, avancé)",
           "field": "chinese_language",
           "language": "zh",
-          "duration_years": null,
+          "duration_years": 1,
           "start_months": [
+            3,
             9
           ],
           "academic_calendar": "semester",
-          "notes": "Programme destiné aux étudiants en formation linguistique."
+          "notes": "Comprend lecture, écoute, écriture, expression orale, Panorama de la Chine"
+        },
+        {
+          "level": "language",
+          "name": "Cours culturels chinois (arts martiaux, peinture, calligraphie)",
+          "field": "arts",
+          "language": "zh",
+          "duration_years": null,
+          "start_months": [
+            3,
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Cours complémentaires de culture chinoise"
         },
         {
           "level": "bachelor",
-          "name": "Programmes de bachelor pour étudiants étrangers (外籍学历生)",
+          "name": "Programmes de premier cycle (étudiants étrangers)",
           "field": "other",
           "language": "zh",
-          "duration_years": null,
+          "duration_years": 4,
           "start_months": [
             9
           ],
           "academic_calendar": "semester",
-          "notes": "Domaines exacts non détaillés dans les sources."
+          "notes": "Étudiants étrangers (外籍学历生) - détails spécifiques non disponibles"
+        },
+        {
+          "level": "master",
+          "name": "Programmes de troisième cycle (étudiants étrangers)",
+          "field": "other",
+          "language": "zh",
+          "duration_years": 3,
+          "start_months": [
+            9
+          ],
+          "academic_calendar": "semester",
+          "notes": "Étudiants étrangers (外籍学历生) - détails spécifiques non disponibles"
         },
         {
           "level": "exchange",
-          "name": "Programme d'échange (交换生)",
+          "name": "Programme d'échange",
           "field": "other",
           "language": "zh",
           "duration_years": null,
@@ -32459,12 +35395,12 @@
             9
           ],
           "academic_calendar": "semester",
-          "notes": "Échanges avec universités partenaires (Thaïlande, Pologne, Corée, Italie, Japon)."
+          "notes": "Programmes d'échange avec Pologne, Corée, Italie (Académie des Beaux-Arts de Pérouse)"
         }
       ],
       "admission_requirements": {
         "bachelor": {
-          "academic": "",
+          "academic": "Diplôme de lycée requis pour les étudiants étrangers",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -32473,10 +35409,12 @@
           "ielts_min": null,
           "toefl_min": null,
           "preparatory_if_insufficient": null,
-          "other": []
+          "other": [
+            "Voir Admission Brochure 2026 pour détails"
+          ]
         },
         "master": {
-          "academic": "",
+          "academic": "Licence requise pour les étudiants étrangers",
           "min_gpa": null,
           "age_max": null,
           "age_min": null,
@@ -32485,7 +35423,9 @@
           "ielts_min": null,
           "toefl_min": null,
           "preparatory_if_insufficient": null,
-          "other": []
+          "other": [
+            "Voir Admission Brochure 2026 pour détails"
+          ]
         },
         "phd": {
           "academic": "",
@@ -32500,34 +35440,39 @@
           "other": []
         },
         "language": {
-          "academic": "",
+          "academic": "Diplôme de lycée ou équivalent",
           "age_max": null,
-          "other": []
+          "other": [
+            "Programme de langue chinoise disponible toute l'année"
+          ]
         }
       },
       "contacts": {
-        "office_name": "Bureau de la coopération et des échanges internationaux / Collège international (国际合作与交流处 / 国际学院)",
+        "office_name": "国际合作与交流处 / 国际学院 (Bureau de coopération et d'échanges internationaux / École internationale)",
         "iso_email": "international@yznu.edu.cn",
         "admissions_email": "international@yznu.edu.cn",
         "wechat": "",
         "phone": "+86-23-72791119",
-        "address": "16 Juxian Avenue, district de Fuling, Chongqing, Chine"
+        "address": "重庆市涪陵区聚贤大道16号 (N°16, Juxian Avenue, District de Fuling, Chongqing)"
       },
       "matching": {
         "fields": [
           "chinese_language",
           "arts",
+          "education",
           "other"
         ],
         "degrees": [
           "bachelor",
+          "master",
           "language",
           "exchange"
         ],
         "languages": [
-          "zh"
+          "zh",
+          "en"
         ],
-        "english_programs_available": false,
+        "english_programs_available": null,
         "chinese_language_program_available": true,
         "min_hsk_level": null,
         "min_ielts": null,
@@ -32540,7 +35485,7 @@
         "has_provincial_scholarship": true,
         "tuition_cny_min": null,
         "tuition_cny_max": null,
-        "housing_cny_year_min": null,
+        "housing_cny_year_min": 3000,
         "deadline_typical": "",
         "intake_months": [
           3,
@@ -32549,85 +35494,105 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "tags": [
-          "programme langue chinoise",
-          "bourse présidentielle",
-          "bourse municipale de Chongqing",
-          "échanges internationaux"
+          "public_university",
+          "normal_university",
+          "scholarship_available",
+          "chinese_language",
+          "cultural_programs",
+          "exchange_programs"
         ]
       },
-      "confidence": 0.35,
+      "confidence": 0.45,
       "missing_fields": [
-        "Liste détaillée des programmes et domaines",
-        "Frais de scolarité (CNY)",
-        "Frais de logement (CNY)",
-        "Exigences HSK/IELTS/TOEFL",
-        "Conditions académiques (GPA)",
-        "Âge min/max",
-        "Dates limites d'admission",
-        "Calendrier détaillé",
-        "Coût de la vie mensuel"
+        "tuition_fees",
+        "specific_hsk_requirements",
+        "ielts_toefl_requirements",
+        "age_limits",
+        "gpa_requirements",
+        "specific_bachelor_master_programs_list",
+        "english_taught_programs",
+        "csc_scholarship_confirmation",
+        "application_deadlines",
+        "program_duration_details"
       ],
-      "notes": "Les sources sont principalement des pages de navigation du Bureau de la coopération internationale de YZNU. Détails disponibles : adresse, contacts, bourses (présidentielle + bourse municipale de Chongqing pour étudiants étrangers), coopération avec Thaïlande/Italie/Pologne/Corée/Japon, programmes de langue chinoise et d'échange. Brochure d'admission 2026 mentionnée mais contenu non détaillé dans les sources.",
+      "notes": "Sources limitées : principalement pages institutionnelles du bureau des affaires internationales. Brochure d'admission 2026 référencée mais contenu détaillé non extrait. Bourse du président universitaire (校长奖学金) et bourse du maire de Chongqing (市长奖学金) confirmées. Hébergement : 3000-6000 RMB/an. Programmes d'échange confirmés avec Pologne, Corée et Italie.",
       "documents": [
         {
           "type": "passport",
           "required": true,
           "count": null,
-          "who": "",
+          "who": "candidat",
           "applies_to": [
             "all"
           ],
-          "notes": "Documents standards non précisés dans les sources; se référer à Admission Brochure 2026"
+          "notes": "Détails dans Admission Brochure 2026 et How to Apply"
         },
         {
-          "type": "admission_application_form",
+          "type": "diplome",
           "required": true,
           "count": null,
-          "who": "",
+          "who": "candidat",
           "applies_to": [
-            "all"
+            "bachelor",
+            "master",
+            "phd"
+          ],
+          "notes": "Diplômes précédents selon niveau visé"
+        },
+        {
+          "type": "relevé_notes",
+          "required": true,
+          "count": null,
+          "who": "candidat",
+          "applies_to": [
+            "bachelor",
+            "master",
+            "phd"
           ],
           "notes": ""
         },
         {
-          "type": "highest_diploma",
-          "required": true,
-          "count": null,
-          "who": "",
-          "applies_to": [
-            "all"
-          ],
-          "notes": ""
-        },
-        {
-          "type": "transcripts",
-          "required": true,
-          "count": null,
-          "who": "",
-          "applies_to": [
-            "all"
-          ],
-          "notes": ""
-        },
-        {
-          "type": "language_certificate",
+          "type": "certificat_hsk",
           "required": null,
           "count": null,
           "who": "",
           "applies_to": [
+            "bachelor",
+            "master",
+            "phd"
+          ],
+          "notes": "Niveau requis selon programme, voir brochure"
+        },
+        {
+          "type": "photo",
+          "required": true,
+          "count": null,
+          "who": "candidat",
+          "applies_to": [
             "all"
           ],
-          "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais si applicable"
+          "notes": ""
+        },
+        {
+          "type": "formulaire_demande",
+          "required": true,
+          "count": null,
+          "who": "candidat",
+          "applies_to": [
+            "all"
+          ],
+          "notes": "Via plateforme en ligne"
         }
       ],
       "application": {
-        "platform_name": "Online Application Entry (YZNU)",
-        "platform_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm",
+        "platform_name": "CUCAS / Online Application Entry",
+        "platform_url": "https://yznu.cucas.cn/",
         "steps": [
-          "Remplir le formulaire de candidature en ligne",
-          "Soumettre les documents requis via la plateforme",
-          "Attendre la notification d'admission",
-          "Recevoir les documents pour le visa"
+          "Remplir le formulaire en ligne",
+          "Soumettre les documents requis",
+          "Attendre la revue et l'admission",
+          "Payer les frais si applicable",
+          "Recevoir JW202 / lettre d'admission"
         ],
         "opens_at": "",
         "deadline": "",
@@ -32665,8 +35630,8 @@
           "on_campus": [
             {
               "type": "double",
-              "price_cny_year": null,
-              "included": ""
+              "price_cny_year": 3000,
+              "included": "Fourchette 3000-6000 RMB/personne/an selon type de chambre"
             }
           ],
           "deposit_cny": null,
@@ -32676,35 +35641,49 @@
           "food": null,
           "transport": null,
           "other": null,
-          "notes": ""
+          "notes": "Fuling, ville de taille moyenne, coût de la vie modéré"
         }
       },
       "scholarships": [
         {
-          "name": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金)",
+          "name": "Bourse du Président de l'Université (校长奖学金)",
+          "type": "university",
+          "coverage": "partial",
+          "covers": [
+            "tuition",
+            "accommodation"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Excellence académique, liste publiée annuellement",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": "Renouvelable selon performance"
+        },
+        {
+          "name": "Bourse du Maire de Chongqing (市长奖学金)",
           "type": "government",
           "coverage": "partial",
+          "covers": [
+            "tuition"
+          ],
+          "stipend_cny_month": null,
+          "conditions": "Gérée par le gouvernement municipal de Chongqing",
+          "apply_via": "university",
+          "deadline": "",
+          "renewal": ""
+        },
+        {
+          "name": "Bourse du Gouvernement Chinois (CSC)",
+          "type": "csc",
+          "coverage": "full",
           "covers": [
             "tuition",
             "accommodation",
             "stipend"
           ],
           "stipend_cny_month": null,
-          "conditions": "Candidature via l'université;评选 annuelle",
-          "apply_via": "university",
-          "deadline": "",
-          "renewal": ""
-        },
-        {
-          "name": "YZNU President Scholarship (留学生校长奖学金)",
-          "type": "university",
-          "coverage": "partial",
-          "covers": [
-            "tuition"
-          ],
-          "stipend_cny_month": null,
-          "conditions": "Attribuée sur critères académiques",
-          "apply_via": "university",
+          "conditions": "Candidature via ambassade ou université",
+          "apply_via": "csc",
           "deadline": "",
           "renewal": ""
         }
@@ -32717,7 +35696,7 @@
         "toefl_min": null,
         "preparatory_chinese": {
           "available": true,
-          "duration": "",
+          "duration": "1 an ou plus selon niveau",
           "leads_to_degree": null
         },
         "foundation": {
@@ -32731,31 +35710,44 @@
           "X2"
         ],
         "documents_from_university": [
-          "Admission Notice",
-          "JW202/JW201 form"
+          "Lettre d'admission",
+          "Formulaire JW202",
+          "Visa JW201"
         ],
-        "instructions": "Voir la section 签证材料 du site;警官 de l'Administration des sorties et entrées du district de Fuling donne des conférences sur les visas et permis de séjour",
-        "arrival_and_residence_permit": "Permis de séjour requis dans les 30 jours; lié à l'assiduité"
+        "instructions": "Section 签证材料 disponible sur le site de l'université; contacter international@yznu.edu.cn",
+        "arrival_and_residence_permit": "Permis de résidence à obtenir dans les 30 jours suivant l'arrivée auprès du bureau de sécurité publique local"
       },
       "housing_and_services": {
         "housing_types": [
-          "Résidence universitaire sur campus"
+          "Chambre double sur campus"
         ],
-        "rules": "",
-        "international_office": "International College (国际学院), 重庆市涪陵区聚贤大道16号, international@yznu.edu.cn, 023-72791119",
-        "orientation": "Cérémonies d'ouverture et de remise des diplômes organisées;教育 à la sécurité et à la loi",
-        "english_support": null,
-        "clubs": "学生国际交流协会 (Student International Exchange Association)"
+        "rules": "Voir règlement interne de l'université",
+        "international_office": "Bureau de coopération internationale (国际合作与交流处), Tél: 023-72791119, Email: international@yznu.edu.cn, Adresse: 重庆市涪陵区聚贤大道16号",
+        "orientation": "Programme d'orientation pour nouveaux étudiants étrangers",
+        "english_support": true,
+        "clubs": "Association internationale des étudiants (学生国际交流协会), activités culturelles"
       },
       "country_specific": [
         {
-          "region_or_country": "",
-          "notes": ""
+          "region_or_country": "Thaïlande",
+          "notes": "Partenariat avec Nakhon Sawan Rajabhat University, programmes d'échange"
+        },
+        {
+          "region_or_country": "Pologne",
+          "notes": "Programme d'échange semestriel"
+        },
+        {
+          "region_or_country": "Corée du Sud",
+          "notes": "Programme d'échange semestriel"
+        },
+        {
+          "region_or_country": "Italie",
+          "notes": "Partenariat avec l'Académie des Beaux-Arts de Pérouse"
         }
       ],
       "scan_status": "ok",
       "slug": "yangtze-normal-university",
-      "scraped_at": "2026-08-24T14:44:16.156Z",
+      "scraped_at": "2026-08-24T14:58:32.245Z",
       "model": "minimax-m3",
       "pages_fetched": 12,
       "pages_used": 12,
@@ -32774,6 +35766,11 @@
           "url": "https://guojjl.yznu.edu.cn/83/",
           "title": "部门职能",
           "chars": 1216
+        },
+        {
+          "url": "https://yznu.cucas.cn/",
+          "title": "Yangtze Normal University (YZNU) | Yangtze Normal University Scholarship | Apply Online | CUCAS",
+          "chars": 9929
         },
         {
           "url": "https://guojjl.yznu.edu.cn/88/list.htm",
@@ -32814,11 +35811,6 @@
           "url": "https://guojjl.yznu.edu.cn/2026/0713/c97a284120/page.htm",
           "title": "长江师范学院国际学院2026届留学生毕业典礼暨交换生结业典礼顺利举行",
           "chars": 1069
-        },
-        {
-          "url": "https://guojjl.yznu.edu.cn/2026/0713/c97a284134/page.htm",
-          "title": "国际学院开展2026年春期留学生法治教育讲座",
-          "chars": 911
         }
       ],
       "db_row": {
@@ -32829,7 +35821,7 @@
         "city": "Chongqing",
         "province": "Chongqing",
         "country": "Chine",
-        "department": "Bureau de la coopération et des échanges internationaux / Collège international (国际合作与交流处 / 国际学院)",
+        "department": "国际合作与交流处 / 国际学院 (Bureau de coopération et d'échanges internationaux / École internationale)",
         "emails": [
           "international@yznu.edu.cn",
           "international@yznu.edu.cn"
@@ -32840,15 +35832,17 @@
         "majors": [
           "chinese_language",
           "arts",
+          "education",
           "other"
         ],
         "required_documents": [
           "passport",
-          "admission_application_form",
-          "highest_diploma",
-          "transcripts"
+          "diplome",
+          "relevé_notes",
+          "photo",
+          "formulaire_demande"
         ],
-        "scholarship_amount": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金) / YZNU President Scholarship (留学生校长奖学金)",
+        "scholarship_amount": "Bourse du Président de l'Université (校长奖学金) / Bourse du Maire de Chongqing (市长奖学金) / Bourse du Gouvernement Chinois (CSC)",
         "scholarship_min": null,
         "scholarship_max": null,
         "min_hsk_level": null,

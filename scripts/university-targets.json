@@ -713,8 +713,10 @@
     "province": "Sichuan",
     "seed_urls": [
       "https://cie.cdut.edu.cn/",
-      "https://en.cdut.edu.cn/"
-    ]
+      "https://en.cdut.edu.cn/",
+      "https://en.wikipedia.org/wiki/Chengdu_University_of_Technology"
+    ],
+    "seed_text": "Chengdu University of Technology (CDUT, 成都理工大学) — official international admissions excerpts.\n\nUndergraduate (Chinese-taught, 4 years):\n- Non-Chinese citizens, age 18-26, high school graduate, HSK Level 4 or above.\n- CSCA (China Scholastic Competency Assessment) required; score report deadline 30 May 2026.\n- Online application: https://cdut.at0086.cn/student\n- Tuition: Liberal Arts RMB 4,500/year; Science and Engineering RMB 5,000/year.\n- Accommodation: RMB 1,500/person/year (4-6 students/room).\n- Insurance: RMB 800/year. Registration fee: RMB 600.\n- Scholarships: Sichuan Provincial Government Scholarship; Chengdu Municipal Government Scholarship; CDUT living allowance RMB 800/month for 10 months/year.\n- Contact: College of International Education, oshc@cdut.edu.cn, (028) 84073357.\n\nPostgraduate (Chinese and English taught; master 3 years, PhD 4 years):\n- Master tuition: Liberal Arts RMB 18,000; Science & Engineering RMB 19,800 per year.\n- Doctoral tuition: Liberal Arts RMB 22,000; Science & Engineering RMB 24,000 per year.\n- Accommodation RMB 1,500/year; insurance RMB 800/year.\n- CSC High-level Postgraduate Program Type B, university code 10616. Coverage: tuition, stipend, insurance, on-campus housing.\n- English-taught: IELTS 6.0 or TOEFL 80 (non-native). Chinese-taught: HSK 4+.\n- CSC application typically until 1 March 2026."
   },
   {
     "slug": "cqjtu",
@@ -730,7 +732,12 @@
       "https://oice.cqjtu.edu.cn/index.htm",
       "https://oice.cqjtu.edu.cn/",
       "https://oice.cqjtu.edu.cn/index.htm/",
-      "https://english.cqjtu.edu.cn/"
+      "https://english.cqjtu.edu.cn/",
+      "http://international.cqjtu.edu.cn/",
+      "http://international.cqjtu.edu.cn/English/Introduction.htm",
+      "http://international.cqjtu.edu.cn/English/Admission.htm",
+      "http://international.cqjtu.edu.cn/info/1110/3703.htm",
+      "https://cqjtu.17gz.org/"
     ]
   },
   {
@@ -779,8 +786,12 @@
       "https://study.cqu.edu.cn/index.htm",
       "https://study.cqu.edu.cn/",
       "https://study.cqu.edu.cn/index.htm/",
-      "https://english.cqu.edu.cn/"
-    ]
+      "https://english.cqu.edu.cn/",
+      "https://cqu.cucas.cn/fee-structure/",
+      "https://studychina.chinaservicesinfo.com/edusrv/programs/previewById?id=6462e1c10ff64cddafc1997602e7f481",
+      "https://en.wikipedia.org/wiki/Chongqing_University"
+    ],
+    "seed_text": "Chongqing University (CQU, 重庆大学) — official / admissions excerpts for international students.\n\nUndergraduate: 4 years (Architecture/Urban Planning/Landscape 5 years), mainly Chinese-taught.\n- Age: self-funded 18-30; scholarship 18-25. High school graduate. HSK 4 (≥210).\n- Application via CQU International Student Online Service System https://cqu.17gz.org/member/login.do\n- Application fee 600 RMB (non-refundable). 2026 self-funded deadline 31 May 2026.\n- Tuition undergraduate 14,000-20,000 RMB/year.\n- Master 21,000-35,000 RMB/year (International Business 49,000). PhD 25,000-28,000 RMB/year.\n- Accommodation: single 4,500-5,000 RMB/semester; double 2,500-2,750 RMB/semester.\n- Scholarships: CSC (full: tuition, dorm, insurance, stipend); International Chinese Language Teachers Scholarship; Chongqing Mayor Scholarship; CQU President Scholarship (full or partial: tuition + insurance, full also dorm + stipend).\n- President Scholarship 2026 deadline 17 May 2026. Stipend: PhD 2,200/month, Master 1,800, Bachelor 1,500. Insurance 800 RMB/year.\n- Contacts: admissions@cqu.edu.cn (admissions), iso@cqu.edu.cn (management). Tel 0086-23-65111001 / 65102964.\n- Website: http://study.cqu.edu.cn/"
   },
   {
     "slug": "cqust",
@@ -795,7 +806,8 @@
     "seed_urls": [
       "https://wsc.cqust.edu.cn/index.htm",
       "https://wsc.cqust.edu.cn/",
-      "https://wsc.cqust.edu.cn/index.htm/"
+      "https://wsc.cqust.edu.cn/index.htm/",
+      "https://en.wikipedia.org/wiki/Chongqing_University_of_Science_and_Technology"
     ]
   },
   {
@@ -811,8 +823,11 @@
     "seed_urls": [
       "https://lic.cqut.edu.cn/xygk/xyjj.htm",
       "https://lic.cqut.edu.cn/",
-      "https://lic.cqut.edu.cn/xygk/"
-    ]
+      "https://lic.cqut.edu.cn/xygk/",
+      "https://cqut.admissions.cn/expense",
+      "https://en.wikipedia.org/wiki/Chongqing_University_of_Technology"
+    ],
+    "seed_text": "Chongqing University of Technology (CQUT, 重庆理工大学) — international student fee excerpts.\n- Registration fee: RMB 400.\n- Tuition: undergraduate (arts/science) RMB 17,000/year; graduate RMB 20,000/year; language long-term RMB 12,000/year.\n- Accommodation: two-bed apartment with communal kitchen/laundry RMB 2,200/bed/year.\n- Insurance required (Ping An overall insurance for people coming to China).\n- English/Chinese taught undergraduate English program listed at RMB 17,000/year, 4 years, September intake.\n- Scholarships commonly include Chongqing Mayor Scholarship and CQUT President Scholarship (full or half tuition waiver)."
   },
   {
     "slug": "fudan-university",
@@ -970,7 +985,10 @@
     "seed_urls": [
       "https://gjc.swun.edu.cn/index.htm",
       "https://gjc.swun.edu.cn/",
-      "https://gjc.swun.edu.cn/index.htm/"
+      "https://gjc.swun.edu.cn/index.htm/",
+      "https://swun.cucas.cn/",
+      "https://swun.cucas.cn/program/",
+      "https://en.wikipedia.org/wiki/Southwest_Minzu_University"
     ]
   },
   {
@@ -1018,7 +1036,10 @@
     "province": "Sichuan",
     "seed_urls": [
       "https://www.oice.uestc.edu.cn/",
-      "https://en.uestc.edu.cn/"
+      "https://en.uestc.edu.cn/",
+      "http://admission.uestc.edu.cn/",
+      "http://admission.uestc.edu.cn/html/article_content/202510/8FA468B713A848E5AE7DDEF9B266C3D5.shtml",
+      "https://en.wikipedia.org/wiki/University_of_Electronic_Science_and_Technology_of_China"
     ]
   },
   {
@@ -1067,7 +1088,8 @@
     "seed_urls": [
       "https://guojjl.yznu.edu.cn/83/list.htm",
       "https://guojjl.yznu.edu.cn/",
-      "https://guojjl.yznu.edu.cn/83/"
+      "https://guojjl.yznu.edu.cn/83/",
+      "https://yznu.cucas.cn/"
     ]
   },
   {

@@ -1,69 +1,485 @@
 {
-  "slug": "southwest-minzu-university",
   "identity": {
     "name_en": "Southwest Minzu University",
     "name_zh": "西南民族大学",
     "name_fr": "Université des nationalités du Sud-Ouest",
     "aliases": [
-      "SWUN"
+      "SWUN",
+      "Southwest University for Nationalities"
     ],
-    "website": "https://gjc.swun.edu.cn/index.htm",
-    "international_website": "https://gjc.swun.edu.cn/index.htm",
-    "application_portal_url": ""
+    "website": "www.swun.edu.cn",
+    "international_website": "english.swun.edu.cn",
+    "application_portal_url": "swun.cucas.cn"
   },
   "general": {
-    "presentation": "",
-    "history": "",
+    "presentation": "Université publique multidisciplinaire sous la Commission des affaires ethniques de l'État, dédiée à l'enseignement supérieur des minorités ethniques en Chine. Située à Chengdu, elle couvre plus de 3 000 mu avec 1 120 000 m² construits sur trois campus.",
+    "history": "Fondée en juillet 1950, officiellement établie le 1er juin 1951. Co-administrée par le Ministère de l'Éducation, la Commission des affaires ethniques et le gouvernement du Sichuan.",
     "rankings": [],
-    "strengths": [],
-    "teaching_languages": [],
+    "strengths": [
+      "Études des minorités ethniques (Yi, Tibétain)",
+      "Médecine traditionnelle Yi et Tibétaine",
+      "Sciences animales et écologie du plateau Qinghai-Tibet",
+      "Linguistique et langues minoritaires"
+    ],
+    "teaching_languages": [
+      "zh"
+    ],
     "location": {
       "city": "Chengdu",
       "province": "Sichuan",
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
+      "min": 1500,
+      "max": 2500,
+      "notes": "Hébergement 40-60 RMB/jour (indiqué par CUCAS, à vérifier)"
+    },
+    "campuses": [
+      {
+        "name": "Wuhou",
+        "city": "Chengdu",
+        "description": "Campus principal, district de Wuhou, 1ère section de la 1ère route circulaire sud"
+      },
+      {
+        "name": "Hangkonggang",
+        "city": "Chengdu",
+        "description": "Campus près de l'aéroport, comté de Shuangliu"
+      },
+      {
+        "name": "Taipingyuan",
+        "city": "Chengdu",
+        "description": "Campus hors 2ème route circulaire"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Software Engineering",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "20 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "20 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "IoT Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "20 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Artificial Intelligence",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "20 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Network Engineering",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "20 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language and Literature",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "17 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Minority Languages and Literatures of China",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "26 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Animal Husbandry",
+      "field": "agriculture",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "26 000 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Pharmacy",
+      "field": "pharmacy",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inclut médecine traditionnelle Yi et Tibétaine"
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
       "notes": ""
     },
-    "campuses": []
-  },
-  "programs": [],
-  "admission_requirements": {},
-  "documents": [],
-  "application": {},
-  "fees": {},
-  "scholarships": [],
-  "language": {},
-  "visa": {},
-  "housing_and_services": {},
-  "country_specific": [],
-  "contacts": {},
-  "matching": {
-    "fields": [],
-    "degrees": [],
-    "languages": [],
-    "city": "Chengdu",
-    "province": "Sichuan",
-    "tags": []
-  },
-  "confidence": 0,
-  "missing_fields": [
-    "all"
-  ],
-  "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
-  "scan_status": "no_pages",
-  "sources": [
     {
-      "url": "https://gjc.swun.edu.cn/",
-      "title": null,
-      "status": 412
+      "level": "bachelor",
+      "name": "International Economics and Trade",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
     },
     {
-      "url": "https://gjc.swun.edu.cn/index.htm/",
+      "level": "foundation",
+      "name": "Preparatory Courses",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Sciences, Lettres, Formation déléguée"
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme d'études secondaires (lycée) reconnu",
+      "min_gpa": null,
+      "age_max": 25,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire d'un an disponible (College of Preparatory Education)",
+      "other": [
+        "37 programmes au total sur 3 niveaux (bachelor/master/doctorat)"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor degree) dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "phd": {
+      "academic": "Master (master degree) dans un domaine pertinent",
+      "min_gpa": null,
+      "age_max": 45,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "Diplôme d'études secondaires pour programmes de langue chinoise",
+      "age_max": null,
+      "other": []
+    }
+  },
+  "contacts": {
+    "office_name": "International Education College",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "",
+    "address": "#16, South Section, 1st Ring Road, Wuhou District, Chengdu, Sichuan 610041"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "design",
+      "music",
+      "law",
+      "education",
+      "agriculture",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": 25,
+    "age_max_master": 40,
+    "age_max_phd": 45,
+    "has_csc": null,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": 17000,
+    "tuition_cny_max": 26000,
+    "housing_cny_year_min": 14600,
+    "deadline_typical": "30 mai",
+    "intake_months": [
+      9
+    ],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "tags": [
+      "minorités ethniques",
+      "médecine tibétaine",
+      "médecine Yi",
+      "université publique",
+      "programme préparatoire",
+      "37 programmes"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "email_admissions_officiel",
+    "telephone",
+    "conditions HSK précises",
+    "scores IELTS/TOEFL",
+    "bourses CSC explicites",
+    "deadline master/PhD",
+    "frais master/PhD"
+  ],
+  "notes": "37 programmes en 3 niveaux (bachelor/master/doctorat). Tous les programmes détaillés sur CUCAS sont enseignés en chinois. Les exigences précises (HSK, IELTS, bourses) ne sont pas explicitement détaillées dans les sources ; valeurs HSK/âges déduites des standards chinois généraux. Le Collège des langues étrangères propose anglais, japonais, français, coréen comme matières. Site principal : english.swun.edu.cn",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    }
+  ],
+  "application": {
+    "platform_name": "CUCAS",
+    "platform_url": "https://swun.cucas.cn/",
+    "steps": [],
+    "opens_at": "",
+    "deadline": "2027-05-30",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": 17000,
+        "max": 26000
+      },
+      "master": {
+        "min": null,
+        "max": null
+      },
+      "phd": {
+        "min": null,
+        "max": null
+      },
+      "language": {
+        "min": null,
+        "max": null
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": null,
+    "other_fees": [],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "double",
+          "price_cny_year": 14600,
+          "included": "40-60 RMB/person/day, soit ~14 600-21 900 CNY/an (365 j.)"
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": ""
+    }
+  },
+  "scholarships": [],
+  "language": {
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
+  },
+  "housing_and_services": {
+    "housing_types": [],
+    "rules": "",
+    "international_office": "",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
+  },
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "southwest-minzu-university",
+  "scraped_at": "2026-08-24T14:58:06.277Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 10,
+  "sources": [
+    {
+      "url": "https://swun.cucas.cn/",
+      "title": "Southwest Minzu University (SWUN) | Southwest Minzu University Scholarship | Apply Online | CUCAS",
+      "chars": 12000
+    },
+    {
+      "url": "https://swun.cucas.cn/program/",
+      "title": "Southwest Minzu University Programs | Apply Southwest Minzu University English Taught Programs Online | CUCAS",
+      "chars": 7220
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Southwest_Minzu_University",
+      "title": "Southwest Minzu University - Wikipedia",
+      "chars": 11753
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarship/index/all_scholarship/all_cities/Southwest_Minzu_University/all_degrees/all_languages/all_year/all_programs/0_0_0_10_0_0_0/en",
       "title": null,
-      "status": 412
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/bachelor_degree/all_languages/all_year/all_programs/0_0_0_0_2_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/master_degree/all_languages/all_year/all_programs/0_0_0_0_3_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/full_scholarship/all_cities/all_universities/all_degrees/all_languages/all_year/all_programs/1_0_0_0_0_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/non_degree/all_languages/all_year/all_programs/0_0_0_0_1_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/doctor_degree/all_languages/all_year/all_programs/0_0_0_0_4_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/visa/guide-for-countries.html",
+      "title": null,
+      "chars": 3560
     }
   ],
   "db_row": {
@@ -74,20 +490,39 @@
     "city": "Chengdu",
     "province": "Sichuan",
     "country": "Chine",
-    "department": null,
+    "department": "International Education College",
     "emails": [],
     "phone": null,
     "wechat": null,
-    "website": "https://gjc.swun.edu.cn/index.htm",
-    "majors": [],
-    "required_documents": [],
+    "website": "english.swun.edu.cn",
+    "majors": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "design",
+      "music",
+      "law",
+      "education",
+      "agriculture",
+      "other"
+    ],
+    "required_documents": [
+      "passport"
+    ],
     "scholarship_amount": null,
-    "scholarship_min": null,
-    "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
-    "tuition_min": null,
-    "tuition_max": null,
-    "application_deadline": null
+    "scholarship_min": 17000,
+    "scholarship_max": 26000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": 17000,
+    "tuition_max": 26000,
+    "application_deadline": "30 mai"
   }
 }

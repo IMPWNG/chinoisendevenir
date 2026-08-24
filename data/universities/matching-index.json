@@ -332,30 +332,60 @@
     "name_zh": "成都理工大学",
     "city": "Chengdu",
     "province": "Sichuan",
-    "fields": [],
-    "degrees": [],
-    "languages": [],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
-    "age_max_bachelor": null,
+    "fields": [
+      "engineering",
+      "sciences",
+      "computer_science",
+      "business",
+      "economics",
+      "arts",
+      "design",
+      "education",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "exchange"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 6,
+    "min_toefl": 80,
+    "age_max_bachelor": 26,
     "age_max_master": null,
     "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": null,
-    "intake_months": [],
-    "tags": [],
-    "application_url": null,
-    "contact_email": null,
-    "confidence": 0,
-    "scan_status": "no_pages"
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 4500,
+    "tuition_cny_max": 24000,
+    "housing_cny_year_min": 1500,
+    "deadline_typical": "30 mai (CSCA) / 1 mars (CSC)",
+    "intake_months": [
+      9
+    ],
+    "tags": [
+      "Double First-Class",
+      "geosciences",
+      "recherche",
+      "CSC Type B",
+      "programme 2+2 Edinburgh",
+      "bourses municipales Chengdu",
+      "bourses provinciales Sichuan"
+    ],
+    "application_url": "https://cdut.at0086.cn/student",
+    "contact_email": "oshc@cdut.edu.cn",
+    "confidence": 0.85,
+    "scan_status": "ok"
   },
   {
     "slug": "chongqing-normal-university",
@@ -418,30 +448,58 @@
     "name_zh": "重庆大学",
     "city": "Chongqing",
     "province": "Chongqing",
-    "fields": [],
-    "degrees": [],
-    "languages": [],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
+    "fields": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "design",
+      "law",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
     "min_ielts": null,
     "min_toefl": null,
-    "age_max_bachelor": null,
+    "age_max_bachelor": 30,
     "age_max_master": null,
     "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": null,
-    "intake_months": [],
-    "tags": [],
-    "application_url": null,
-    "contact_email": null,
-    "confidence": 0,
-    "scan_status": "no_pages"
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 14000,
+    "tuition_cny_max": 49000,
+    "housing_cny_year_min": 5000,
+    "deadline_typical": "31 mai (self-funded) / 15 mai (bourses) / 15 avril (CSC)",
+    "intake_months": [
+      9
+    ],
+    "tags": [
+      "985",
+      "211",
+      "Double First-Class",
+      "public",
+      "research",
+      "engineering",
+      "architecture"
+    ],
+    "application_url": "https://cqu.17gz.org/member/login.do",
+    "contact_email": "iso@cqu.edu.cn",
+    "confidence": 0.85,
+    "scan_status": "ok"
   },
   {
     "slug": "cqjtu",
@@ -451,9 +509,9 @@
     "province": "Chongqing",
     "fields": [
       "engineering",
-      "sciences",
       "chinese_language",
-      "design"
+      "business",
+      "economics"
     ],
     "degrees": [
       "bachelor",
@@ -464,10 +522,9 @@
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
-    "english_programs_available": null,
+    "english_programs_available": true,
     "chinese_language_program_available": true,
     "min_hsk_level": null,
     "min_ielts": null,
@@ -482,17 +539,22 @@
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
     "deadline_typical": null,
-    "intake_months": [],
-    "tags": [
-      "confucius_institute",
-      "benin",
-      "northumbria_partnership",
-      "transport_specialty",
-      "111_base"
+    "intake_months": [
+      3,
+      7,
+      9
     ],
-    "application_url": null,
-    "contact_email": "waiban@vip.163.com",
-    "confidence": 0.25,
+    "tags": [
+      "transport",
+      "génie civil",
+      "institut confucius",
+      "CSC",
+      "summer school",
+      "programme bilatéral Bénin"
+    ],
+    "application_url": "https://cqjtu.17gz.org/",
+    "contact_email": "iccju@cqjtu.edu.cn",
+    "confidence": 0.45,
     "scan_status": "ok"
   },
   {
@@ -565,8 +627,7 @@
     "province": "Chongqing",
     "fields": [
       "engineering",
-      "sciences",
-      "other"
+      "sciences"
     ],
     "degrees": [
       "bachelor",
@@ -597,13 +658,15 @@
       9
     ],
     "tags": [
-      "université publique",
-      "sciences et technologie",
-      "Chongqing"
+      "pétrole",
+      "gaz",
+      "pétrochimie",
+      "université municipale",
+      "partenariats internationaux"
     ],
     "application_url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
     "contact_email": null,
-    "confidence": 0.35,
+    "confidence": 0.25,
     "scan_status": "ok"
   },
   {
@@ -612,30 +675,62 @@
     "name_zh": "重庆理工大学",
     "city": "Chongqing",
     "province": "Chongqing",
-    "fields": [],
-    "degrees": [],
-    "languages": [],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
+    "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "business",
+      "economics",
+      "finance",
+      "pharmacy",
+      "chinese_language",
+      "design",
+      "arts"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en",
+      "bilingual"
+    ],
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
     "age_max_bachelor": null,
     "age_max_master": null,
     "age_max_phd": null,
     "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": null,
-    "intake_months": [],
-    "tags": [],
-    "application_url": null,
-    "contact_email": null,
-    "confidence": 0,
-    "scan_status": "no_pages"
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 12000,
+    "tuition_cny_max": 20000,
+    "housing_cny_year_min": 2200,
+    "deadline_typical": "Juin-Juillet pour rentrée septembre",
+    "intake_months": [
+      3,
+      9
+    ],
+    "tags": [
+      "public university",
+      "research university",
+      "ESI top 1%",
+      "military-industrial heritage",
+      "automotive engineering",
+      "materials science",
+      "scholarships available",
+      "affordable tuition"
+    ],
+    "application_url": "https://cqut.applyonline.cn",
+    "contact_email": "lic@cqut.edu.cn",
+    "confidence": 0.82,
+    "scan_status": "ok"
   },
   {
     "slug": "ctbu",
@@ -2440,30 +2535,65 @@
     "name_zh": "西南民族大学",
     "city": "Chengdu",
     "province": "Sichuan",
-    "fields": [],
-    "degrees": [],
-    "languages": [],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
+    "fields": [
+      "business",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "pharmacy",
+      "chinese_language",
+      "arts",
+      "design",
+      "music",
+      "law",
+      "education",
+      "agriculture",
+      "other"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language",
+      "foundation"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
     "min_ielts": null,
     "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
+    "age_max_bachelor": 25,
+    "age_max_master": 40,
+    "age_max_phd": 45,
     "has_csc": null,
-    "has_university_scholarship": null,
+    "has_university_scholarship": true,
     "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": null,
-    "intake_months": [],
-    "tags": [],
-    "application_url": null,
+    "tuition_cny_min": 17000,
+    "tuition_cny_max": 26000,
+    "housing_cny_year_min": 14600,
+    "deadline_typical": "30 mai",
+    "intake_months": [
+      9
+    ],
+    "tags": [
+      "minorités ethniques",
+      "médecine tibétaine",
+      "médecine Yi",
+      "université publique",
+      "programme préparatoire",
+      "37 programmes"
+    ],
+    "application_url": "https://swun.cucas.cn/",
     "contact_email": null,
-    "confidence": 0,
-    "scan_status": "no_pages"
+    "confidence": 0.55,
+    "scan_status": "ok"
   },
   {
     "slug": "southwest-university",
@@ -2732,7 +2862,13 @@
     "fields": [
       "computer_science",
       "engineering",
-      "sciences"
+      "sciences",
+      "medicine",
+      "business",
+      "economics",
+      "management",
+      "design",
+      "other"
     ],
     "degrees": [
       "bachelor",
@@ -2743,36 +2879,39 @@
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": "1 décembre",
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 18000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 5000,
+    "deadline_typical": "30 juin (rentrée septembre); applications ouvertes à partir du 1er décembre chaque année",
     "intake_months": [
       9
     ],
     "tags": [
+      "211",
       "985",
       "Double First-Class",
-      "project 211",
-      "electronic science and technology"
+      "Recherche",
+      "Sciences & Tech",
+      "Programme international d'été",
+      "UESTC-Khalifa Joint Program",
+      "Glasgow College"
     ],
-    "application_url": null,
-    "contact_email": null,
-    "confidence": 0.35,
+    "application_url": "http://admission.uestc.edu.cn/",
+    "contact_email": "iso@uestc.edu.cn",
+    "confidence": 0.7,
     "scan_status": "ok"
   },
   {
@@ -3302,17 +3441,20 @@
     "fields": [
       "chinese_language",
       "arts",
+      "education",
       "other"
     ],
     "degrees": [
       "bachelor",
+      "master",
       "language",
       "exchange"
     ],
     "languages": [
-      "zh"
+      "zh",
+      "en"
     ],
-    "english_programs_available": false,
+    "english_programs_available": null,
     "chinese_language_program_available": true,
     "min_hsk_level": null,
     "min_ielts": null,
@@ -3325,21 +3467,23 @@
     "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
-    "housing_cny_year_min": null,
+    "housing_cny_year_min": 3000,
     "deadline_typical": null,
     "intake_months": [
       3,
       9
     ],
     "tags": [
-      "programme langue chinoise",
-      "bourse présidentielle",
-      "bourse municipale de Chongqing",
-      "échanges internationaux"
+      "public_university",
+      "normal_university",
+      "scholarship_available",
+      "chinese_language",
+      "cultural_programs",
+      "exchange_programs"
     ],
-    "application_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm",
+    "application_url": "https://yznu.cucas.cn/",
     "contact_email": "international@yznu.edu.cn",
-    "confidence": 0.35,
+    "confidence": 0.45,
     "scan_status": "ok"
   },
   {

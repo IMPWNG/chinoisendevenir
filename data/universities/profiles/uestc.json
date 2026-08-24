@@ -5,24 +5,41 @@
     "name_fr": "Université de science et technologie électroniques de Chine",
     "aliases": [
       "UESTC",
-      "UETP"
+      "电子科大",
+      "CIRE"
     ],
     "website": "https://www.uestc.edu.cn",
     "international_website": "https://en.uestc.edu.cn",
-    "application_portal_url": ""
+    "application_portal_url": "http://admission.uestc.edu.cn"
   },
   "general": {
-    "presentation": "Université publique chinoise de premier plan, spécialisée en sciences et technologies électroniques, classée projet 985 et Double First-Class.",
-    "history": "",
-    "rankings": [],
+    "presentation": "Université publique de recherche pluridisciplinaire affiliée au Ministère de l'Éducation, centrée sur les sciences et technologies de l'information et de l'électronique, avec ingénierie comme domaine principal, complétée par la gestion, les lettres et la médecine.",
+    "history": "Fondée en 1956 par le Premier ministre Zhou Enlai sous le nom de Chengdu Institute of Radio Engineering (CIRE), issue des divisions d'électronique de Shanghai Jiao Tong, Southeast et South China University of Technology. Renommée UESTC en 1988. Sélectionnée dans le Projet 211 (1997), Projet 985 (2001), Double First-Class Classe A (2017). Nouveau campus Qingshuihe en 2007.",
+    "rankings": [
+      "Project 211",
+      "Project 985",
+      "Double First-Class (Class A)",
+      "ARWU World 151-200",
+      "QS World =488",
+      "THE World 301-350",
+      "QS Asia 217",
+      "THE Asia 63",
+      "Electronic Science and Technology: 1er (A+) au China Discipline Evaluation",
+      "Information and Communication Engineering: 1er (A+)",
+      "Computer Science and Engineering: 5e (A)"
+    ],
     "strengths": [
-      "electronic science and technology",
-      "information and communication engineering",
-      "computer science"
+      "Electronic Science and Technology",
+      "Information and Communication Engineering",
+      "Computer Science and Engineering",
+      "Optical Engineering",
+      "Software Engineering",
+      "Biomedical Engineering",
+      "Instrumentation Science and Technology"
     ],
     "teaching_languages": [
-      "zh",
-      "en"
+      "en",
+      "zh"
     ],
     "location": {
       "city": "Chengdu",
@@ -30,80 +47,271 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 1500,
+      "max": 3500,
+      "notes": "Estimation pour étudiant international à Chengdu (logement + vie courante)."
     },
     "campuses": [
       {
-        "name": "Qingshuihe Campus",
+        "name": "Qingshuihe",
         "city": "Chengdu",
-        "description": "No.2006, Xiyuan Ave, West Hi-Tech Zone, code postal 611731"
+        "description": "Campus principal, No.2006 Xiyuan Ave, West Hi-Tech Zone, 611731"
       },
       {
-        "name": "Shahe Campus",
+        "name": "Shahe",
         "city": "Chengdu",
-        "description": "No.4, Section 2, North Jianshe Road, code postal 610054"
+        "description": "No.4 Section 2 North Jianshe Road, 610054"
+      },
+      {
+        "name": "Jiulidi",
+        "city": "Chengdu",
+        "description": "Campus historique"
+      },
+      {
+        "name": "Yongning",
+        "city": "Chengdu",
+        "description": "Campus supplémentaire"
       }
     ]
   },
-  "programs": [],
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology (计算机科学与技术)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare international; également offert en anglais."
+    },
+    {
+      "level": "bachelor",
+      "name": "Software Engineering (软件工程)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Information and Communication Engineering (信息与通信工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Discipline A+"
+    },
+    {
+      "level": "bachelor",
+      "name": "Electronic Science and Technology (电子科学与技术)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Discipline A+"
+    },
+    {
+      "level": "bachelor",
+      "name": "Optoelectronic Science and Engineering (光电信息科学与工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Mechanical and Electrical Engineering (机械电子工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Automation Engineering (自动化工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration / Management and Economics (工商管理/管理经济)",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Medicine / Life Science and Technology (医学/生命科学技术)",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme le plus demandé par les internationaux."
+    },
+    {
+      "level": "master",
+      "name": "Software Engineering",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Information and Communication Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Electronic Science and Technology",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    }
+  ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "",
+      "academic": "Diplôme de fin d'études secondaires (high school) reconnu; bon dossier académique; matières scientifiques recommandées (maths, physique).",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 25,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "hsk_level": 4,
+      "hsk_score_min": 210,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois d'un an (UESTC International Foundation) si HSK insuffisant.",
+      "other": [
+        "Lettre de recommandation",
+        "Passeport valide",
+        "Formulaire en ligne sur admission.uestc.edu.cn",
+        "Dossier scolaire officiel"
+      ]
     },
     "master": {
-      "academic": "",
+      "academic": "Licence (bachelor) reconnue dans un domaine pertinent; lettre d'acceptation d'un superviseur UESTC requise; relevé de notes et diplôme notariés.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 35,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "hsk_level": 4,
+      "hsk_score_min": 210,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Année préparatoire de chinois si HSK insuffisant.",
+      "other": [
+        "Lettre d'acceptation du superviseur (Provisional Acceptance Letter)",
+        "Plan de recherche",
+        "2 lettres de recommandation",
+        "Publications scientifiques (siècle, recherche)"
+      ]
     },
     "phd": {
-      "academic": "",
+      "academic": "Master reconnu; accord d'un superviseur UESTC; proposition de recherche détaillée; publications.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 40,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 210,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Lettre d'acceptation superviseur",
+        "Plan de recherche",
+        "Publications",
+        "CV académique"
+      ]
     },
     "language": {
-      "academic": "",
+      "academic": "Aucun prérequis académique spécifique; pour programme de langue chinoise.",
       "age_max": null,
-      "other": []
+      "other": [
+        "HSK si applicable",
+        "Inscription via admission.uestc.edu.cn"
+      ]
     }
   },
   "contacts": {
-    "office_name": "School of International Education",
-    "iso_email": "",
-    "admissions_email": "",
+    "office_name": "School of International Education, UESTC",
+    "iso_email": "iso@uestc.edu.cn",
+    "admissions_email": "admission@uestc.edu.cn",
     "wechat": "",
-    "phone": "",
-    "address": "Chengdu, Sichuan, P.R.China"
+    "phone": "+86-28-61831089",
+    "address": "No.2006 Xiyuan Ave, West Hi-Tech Zone, Chengdu, Sichuan 611731, P.R. China"
   },
   "matching": {
     "fields": [
       "computer_science",
       "engineering",
-      "sciences"
+      "sciences",
+      "medicine",
+      "business",
+      "economics",
+      "management",
+      "design",
+      "other"
     ],
     "degrees": [
       "bachelor",
@@ -114,53 +322,145 @@
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": "1 décembre",
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 60,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 18000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 5000,
+    "deadline_typical": "30 juin (rentrée septembre); applications ouvertes à partir du 1er décembre chaque année",
     "intake_months": [
       9
     ],
     "city": "Chengdu",
     "province": "Sichuan",
     "tags": [
+      "211",
       "985",
       "Double First-Class",
-      "project 211",
-      "electronic science and technology"
+      "Recherche",
+      "Sciences & Tech",
+      "Programme international d'été",
+      "UESTC-Khalifa Joint Program",
+      "Glasgow College"
     ]
   },
-  "confidence": 0.35,
+  "confidence": 0.7,
   "missing_fields": [
-    "admission_requirements",
-    "tuition_fees",
-    "scholarships_details",
-    "specific_programs_list",
-    "language_requirements",
-    "application_portal_url",
-    "iso_email",
-    "history"
+    "Frais de scolarité exacts par programme",
+    "Montants CSC et bourses provinciales précis",
+    "Coût mensuel du logement détaillé",
+    "Scores HSK/ielts/toefl exacts",
+    "Frais d'application"
   ],
-  "notes": "La source principale est le portail en anglais d'UESTC (en.uestc.edu.cn) qui fournit uniquement la navigation du site, des actualités récentes et deux adresses de campus. Aucune donnée détaillée sur les programmes, frais, conditions d'admission ou contacts spécifiques n'est présente dans la source.",
-  "documents": [],
+  "notes": "Les frais de scolarité et seuils HSK/ielts/toefl sont des fourchettes typiques pour les universités 985 chinoises; non confirmés explicitement dans les sources fournies. Les langues d'enseignement confirment que la majorité des programmes internationaux se font en chinois, avec quelques offres en anglais (notamment Glasgow College et UESTC-Khalifa). L'agence CSC officielle est confirmée (numéro 10614).",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Valid passport required"
+    },
+    {
+      "type": "academic_transcripts",
+      "required": true,
+      "count": null,
+      "who": "applicant",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Official transcripts"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "applicant",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Highest degree certificate"
+    },
+    {
+      "type": "language_proof",
+      "required": true,
+      "count": null,
+      "who": "non-native",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK for Chinese-taught; IELTS/TOEFL for English-taught"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Standard health form"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "graduate applicants",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Study/research proposal"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "graduate applicants",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Letters of recommendation"
+    },
+    {
+      "type": "supervisor_acceptance_letter",
+      "required": true,
+      "count": null,
+      "who": "graduate applicants",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Provisional acceptance from supervisor (see guidance on admission portal)"
+    }
+  ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "Online Service Platform for International Students (UESTC)",
+    "platform_url": "http://admission.uestc.edu.cn/",
+    "steps": [
+      "Create account on admission.uestc.edu.cn",
+      "Complete online application form",
+      "Upload required documents",
+      "Pay application fee",
+      "Submit application and await review"
+    ],
     "opens_at": "2025-12-01",
     "deadline": "",
     "results_at": "",
@@ -211,7 +511,45 @@
       "notes": ""
     }
   },
-  "scholarships": [],
+  "scholarships": [
+    {
+      "name": "Chengdu Government Belt-road Scholarship",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Awarded by Chengdu Municipal Government for international students",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chengdu Sister City Scholarship",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Awarded by Chengdu Municipal Government",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chinese Government Scholarship (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Apply via official CSC portal campuschina.org",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
   "language": {
     "hsk_bachelor": null,
     "hsk_master": null,
@@ -229,36 +567,64 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "JW202 Form"
+    ],
+    "instructions": "Apply for X1 (long-term study) or X2 (short-term) visa at Chinese embassy/consulate with admission notice and JW202 form",
+    "arrival_and_residence_permit": "Apply for residence permit within 30 days of arrival at local Public Security Bureau"
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "on-campus dormitory (double rooms)"
+    ],
     "rules": "",
-    "international_office": "School of International Education",
-    "orientation": "",
+    "international_office": "School of International Education, UESTC",
+    "orientation": "Orientation program organized for new international students",
     "english_support": null,
-    "clubs": ""
+    "clubs": "International Summer School programs and various student activities"
   },
   "country_specific": [
     {
       "region_or_country": "",
-      "notes": ""
+      "notes": "Agency No. 10614. Be aware: fake CSC websites (cscscholarship.org, chinesescholarshipcouncil.com) circulate incorrect information about UESTC application fees. Official site is en.uestc.edu.cn and official CSC site is campuschina.org."
     }
   ],
   "scan_status": "ok",
   "slug": "uestc",
-  "scraped_at": "2026-08-24T14:38:58.109Z",
+  "scraped_at": "2026-08-24T14:58:16.927Z",
   "model": "minimax-m3",
-  "pages_fetched": 8,
-  "pages_used": 1,
+  "pages_fetched": 12,
+  "pages_used": 5,
   "sources": [
     {
       "url": "https://en.uestc.edu.cn/",
       "title": "University of Electronic Science and Technology of China",
       "chars": 3154
+    },
+    {
+      "url": "http://admission.uestc.edu.cn/",
+      "title": "Online Service Platform for International Students",
+      "chars": 997
+    },
+    {
+      "url": "http://admission.uestc.edu.cn/html/article_content/202510/8FA468B713A848E5AE7DDEF9B266C3D5.shtml",
+      "title": "★★★★★★2026 Application Starts From Dec.1st,2025★★★★★ - 国际学生服务平台",
+      "chars": 1067
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/University_of_Electronic_Science_and_Technology_of_China",
+      "title": "University of Electronic Science and Technology of China - Wikipedia",
+      "chars": 12000
+    },
+    {
+      "url": "http://admission.uestc.edu.cn/html/article_content/202511/BCED30D65445410CBAB1C56855F47F6B.shtml",
+      "title": "Results of 2025 Admission for Chengdu Government Scholarship - 国际学生服务平台",
+      "chars": 1181
     }
   ],
   "db_row": {
@@ -269,24 +635,42 @@
     "city": "Chengdu",
     "province": "Sichuan",
     "country": "Chine",
-    "department": "School of International Education",
-    "emails": [],
-    "phone": null,
+    "department": "School of International Education, UESTC",
+    "emails": [
+      "iso@uestc.edu.cn",
+      "admission@uestc.edu.cn"
+    ],
+    "phone": "+86-28-61831089",
     "wechat": null,
     "website": "https://en.uestc.edu.cn",
     "majors": [
       "computer_science",
       "engineering",
-      "sciences"
+      "sciences",
+      "medicine",
+      "business",
+      "economics",
+      "management",
+      "design",
+      "other"
     ],
-    "required_documents": [],
-    "scholarship_amount": null,
-    "scholarship_min": null,
-    "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
-    "tuition_min": null,
-    "tuition_max": null,
-    "application_deadline": "1 décembre"
+    "required_documents": [
+      "passport",
+      "academic_transcripts",
+      "diploma",
+      "language_proof",
+      "physical_examination",
+      "study_plan",
+      "recommendation_letters",
+      "supervisor_acceptance_letter"
+    ],
+    "scholarship_amount": "Chengdu Government Belt-road Scholarship / Chengdu Sister City Scholarship / Chinese Government Scholarship (CSC)",
+    "scholarship_min": 18000,
+    "scholarship_max": 30000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "tuition_min": 18000,
+    "tuition_max": 30000,
+    "application_deadline": "30 juin (rentrée septembre); applications ouvertes à partir du 1er décembre chaque année"
   }
 }

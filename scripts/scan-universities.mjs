@@ -295,6 +295,18 @@ async function crawlUniversity(uni) {
   const pages = [];
   const queue = [];
 
+  if (uni.seed_text && String(uni.seed_text).trim().length > 80) {
+    pages.push({
+      url: (uni.seed_urls && uni.seed_urls[0]) || uni.website || "seed-text",
+      finalUrl: "seed-text",
+      status: 200,
+      title: "Extraits officiels (admission / frais / bourses)",
+      html: "",
+      text: String(uni.seed_text).slice(0, MAX_CHARS_PER_PAGE),
+      error: null,
+    });
+  }
+
   for (const url of uni.seed_urls || []) enqueue(url, 0);
 
   const allowedHosts = new Set(

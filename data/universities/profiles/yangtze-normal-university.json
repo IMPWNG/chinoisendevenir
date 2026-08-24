@@ -4,71 +4,100 @@
     "name_zh": "长江师范学院",
     "name_fr": "Université normale du Yangtsé",
     "aliases": [
-      "YZNU",
-      "Changjiang Shifan Xueyuan"
+      "YZNU"
     ],
     "website": "https://www.yznu.edu.cn",
     "international_website": "https://guojjl.yznu.edu.cn",
-    "application_portal_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm"
+    "application_portal_url": "https://yznu.cucas.cn"
   },
   "general": {
-    "presentation": "Université normale publique située à Chongqing. Le Collège international (国际学院), créé en septembre 2012, gère le recrutement et la formation des étudiants étrangers (étudiants diplomés, étudiants en échange, étudiants linguistiques, étudiants de Hong Kong/Macao/Taïwan), ainsi que la promotion internationale du chinois et les Instituts Confucius.",
-    "history": "Le Collège international a été fondé en septembre 2012, regroupant sous une même direction le Bureau de la coopération et des échanges internationaux et le Bureau des affaires Hong Kong/Macao/Taïwan.",
+    "presentation": "Université publique de niveau ordinaire, type normal, située dans le district de Fuling à Chongqing. L'École d'éducation internationale (国际学院), créée en septembre 2012, propose des programmes multilingues pour étudiants étrangers incluant chinois élémentaire, intermédiaire et avancé, lecture, écoute, écriture, expression orale, Panorama de la Chine, arts martiaux chinois, peinture chinoise et calligraphie.",
+    "history": "Plus de 80 ans d'histoire. Université publique régulière de premier cycle dirigée par le gouvernement chinois.",
     "rankings": [],
     "strengths": [
-      "Formation en langue chinoise pour étrangers",
-      "Programmes d'échange international",
-      "Coopération avec Thaïlande (Nakhon Sawan Rajabhat University), Italie (Accademia de Perugia), Pologne, Corée, Japon"
+      "Formation des enseignants",
+      "Éducation internationale",
+      "Programmes de langue chinoise",
+      "Arts martiaux chinois",
+      "Peinture chinoise",
+      "Calligraphie"
     ],
     "teaching_languages": [
-      "zh"
+      "zh",
+      "en"
     ],
     "location": {
-      "city": "Chongqing (district de Fuling)",
+      "city": "Chongqing (Fuling)",
       "province": "Chongqing",
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 1500,
+      "max": 3000,
+      "notes": "Hébergement 3000-6000 RMB/an selon CUCAS"
     },
     "campuses": [
       {
-        "name": "Campus principal",
+        "name": "Campus principal de Fuling",
         "city": "Chongqing (Fuling)",
-        "description": "Adresse : 16 Juxian Avenue, district de Fuling, Chongqing"
+        "description": "Situé dans l'ancienne capitale du royaume de Ba, district de Fuling, centre de Chongqing"
       }
     ]
   },
   "programs": [
     {
       "level": "language",
-      "name": "Programme de langue chinoise (语言进修生)",
+      "name": "Programme de langue chinoise (élémentaire, intermédiaire, avancé)",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 1,
       "start_months": [
+        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme destiné aux étudiants en formation linguistique."
+      "notes": "Comprend lecture, écoute, écriture, expression orale, Panorama de la Chine"
+    },
+    {
+      "level": "language",
+      "name": "Cours culturels chinois (arts martiaux, peinture, calligraphie)",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours complémentaires de culture chinoise"
     },
     {
       "level": "bachelor",
-      "name": "Programmes de bachelor pour étudiants étrangers (外籍学历生)",
+      "name": "Programmes de premier cycle (étudiants étrangers)",
       "field": "other",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Domaines exacts non détaillés dans les sources."
+      "notes": "Étudiants étrangers (外籍学历生) - détails spécifiques non disponibles"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de troisième cycle (étudiants étrangers)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Étudiants étrangers (外籍学历生) - détails spécifiques non disponibles"
     },
     {
       "level": "exchange",
-      "name": "Programme d'échange (交换生)",
+      "name": "Programme d'échange",
       "field": "other",
       "language": "zh",
       "duration_years": null,
@@ -77,12 +106,12 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Échanges avec universités partenaires (Thaïlande, Pologne, Corée, Italie, Japon)."
+      "notes": "Programmes d'échange avec Pologne, Corée, Italie (Académie des Beaux-Arts de Pérouse)"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "",
+      "academic": "Diplôme de lycée requis pour les étudiants étrangers",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -91,10 +120,12 @@
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Voir Admission Brochure 2026 pour détails"
+      ]
     },
     "master": {
-      "academic": "",
+      "academic": "Licence requise pour les étudiants étrangers",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -103,7 +134,9 @@
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Voir Admission Brochure 2026 pour détails"
+      ]
     },
     "phd": {
       "academic": "",
@@ -118,34 +151,39 @@
       "other": []
     },
     "language": {
-      "academic": "",
+      "academic": "Diplôme de lycée ou équivalent",
       "age_max": null,
-      "other": []
+      "other": [
+        "Programme de langue chinoise disponible toute l'année"
+      ]
     }
   },
   "contacts": {
-    "office_name": "Bureau de la coopération et des échanges internationaux / Collège international (国际合作与交流处 / 国际学院)",
+    "office_name": "国际合作与交流处 / 国际学院 (Bureau de coopération et d'échanges internationaux / École internationale)",
     "iso_email": "international@yznu.edu.cn",
     "admissions_email": "international@yznu.edu.cn",
     "wechat": "",
     "phone": "+86-23-72791119",
-    "address": "16 Juxian Avenue, district de Fuling, Chongqing, Chine"
+    "address": "重庆市涪陵区聚贤大道16号 (N°16, Juxian Avenue, District de Fuling, Chongqing)"
   },
   "matching": {
     "fields": [
       "chinese_language",
       "arts",
+      "education",
       "other"
     ],
     "degrees": [
       "bachelor",
+      "master",
       "language",
       "exchange"
     ],
     "languages": [
-      "zh"
+      "zh",
+      "en"
     ],
-    "english_programs_available": false,
+    "english_programs_available": null,
     "chinese_language_program_available": true,
     "min_hsk_level": null,
     "min_ielts": null,
@@ -158,7 +196,7 @@
     "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
-    "housing_cny_year_min": null,
+    "housing_cny_year_min": 3000,
     "deadline_typical": "",
     "intake_months": [
       3,
@@ -167,85 +205,105 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "tags": [
-      "programme langue chinoise",
-      "bourse présidentielle",
-      "bourse municipale de Chongqing",
-      "échanges internationaux"
+      "public_university",
+      "normal_university",
+      "scholarship_available",
+      "chinese_language",
+      "cultural_programs",
+      "exchange_programs"
     ]
   },
-  "confidence": 0.35,
+  "confidence": 0.45,
   "missing_fields": [
-    "Liste détaillée des programmes et domaines",
-    "Frais de scolarité (CNY)",
-    "Frais de logement (CNY)",
-    "Exigences HSK/IELTS/TOEFL",
-    "Conditions académiques (GPA)",
-    "Âge min/max",
-    "Dates limites d'admission",
-    "Calendrier détaillé",
-    "Coût de la vie mensuel"
+    "tuition_fees",
+    "specific_hsk_requirements",
+    "ielts_toefl_requirements",
+    "age_limits",
+    "gpa_requirements",
+    "specific_bachelor_master_programs_list",
+    "english_taught_programs",
+    "csc_scholarship_confirmation",
+    "application_deadlines",
+    "program_duration_details"
   ],
-  "notes": "Les sources sont principalement des pages de navigation du Bureau de la coopération internationale de YZNU. Détails disponibles : adresse, contacts, bourses (présidentielle + bourse municipale de Chongqing pour étudiants étrangers), coopération avec Thaïlande/Italie/Pologne/Corée/Japon, programmes de langue chinoise et d'échange. Brochure d'admission 2026 mentionnée mais contenu non détaillé dans les sources.",
+  "notes": "Sources limitées : principalement pages institutionnelles du bureau des affaires internationales. Brochure d'admission 2026 référencée mais contenu détaillé non extrait. Bourse du président universitaire (校长奖学金) et bourse du maire de Chongqing (市长奖学金) confirmées. Hébergement : 3000-6000 RMB/an. Programmes d'échange confirmés avec Pologne, Corée et Italie.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "candidat",
       "applies_to": [
         "all"
       ],
-      "notes": "Documents standards non précisés dans les sources; se référer à Admission Brochure 2026"
+      "notes": "Détails dans Admission Brochure 2026 et How to Apply"
     },
     {
-      "type": "admission_application_form",
+      "type": "diplome",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "candidat",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplômes précédents selon niveau visé"
+    },
+    {
+      "type": "relevé_notes",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
       ],
       "notes": ""
     },
     {
-      "type": "highest_diploma",
-      "required": true,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "transcripts",
-      "required": true,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "language_certificate",
+      "type": "certificat_hsk",
       "required": null,
       "count": null,
       "who": "",
       "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Niveau requis selon programme, voir brochure"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
         "all"
       ],
-      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais si applicable"
+      "notes": ""
+    },
+    {
+      "type": "formulaire_demande",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Via plateforme en ligne"
     }
   ],
   "application": {
-    "platform_name": "Online Application Entry (YZNU)",
-    "platform_url": "https://guojjl.yznu.edu.cn/lxzs/list.htm",
+    "platform_name": "CUCAS / Online Application Entry",
+    "platform_url": "https://yznu.cucas.cn/",
     "steps": [
-      "Remplir le formulaire de candidature en ligne",
-      "Soumettre les documents requis via la plateforme",
-      "Attendre la notification d'admission",
-      "Recevoir les documents pour le visa"
+      "Remplir le formulaire en ligne",
+      "Soumettre les documents requis",
+      "Attendre la revue et l'admission",
+      "Payer les frais si applicable",
+      "Recevoir JW202 / lettre d'admission"
     ],
     "opens_at": "",
     "deadline": "",
@@ -283,8 +341,8 @@
       "on_campus": [
         {
           "type": "double",
-          "price_cny_year": null,
-          "included": ""
+          "price_cny_year": 3000,
+          "included": "Fourchette 3000-6000 RMB/personne/an selon type de chambre"
         }
       ],
       "deposit_cny": null,
@@ -294,35 +352,49 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Fuling, ville de taille moyenne, coût de la vie modéré"
     }
   },
   "scholarships": [
     {
-      "name": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金)",
+      "name": "Bourse du Président de l'Université (校长奖学金)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique, liste publiée annuellement",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Renouvelable selon performance"
+    },
+    {
+      "name": "Bourse du Maire de Chongqing (市长奖学金)",
       "type": "government",
       "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Gérée par le gouvernement municipal de Chongqing",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse du Gouvernement Chinois (CSC)",
+      "type": "csc",
+      "coverage": "full",
       "covers": [
         "tuition",
         "accommodation",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Candidature via l'université;评选 annuelle",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "YZNU President Scholarship (留学生校长奖学金)",
-      "type": "university",
-      "coverage": "partial",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Attribuée sur critères académiques",
-      "apply_via": "university",
+      "conditions": "Candidature via ambassade ou université",
+      "apply_via": "csc",
       "deadline": "",
       "renewal": ""
     }
@@ -335,7 +407,7 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "",
+      "duration": "1 an ou plus selon niveau",
       "leads_to_degree": null
     },
     "foundation": {
@@ -349,31 +421,44 @@
       "X2"
     ],
     "documents_from_university": [
-      "Admission Notice",
-      "JW202/JW201 form"
+      "Lettre d'admission",
+      "Formulaire JW202",
+      "Visa JW201"
     ],
-    "instructions": "Voir la section 签证材料 du site;警官 de l'Administration des sorties et entrées du district de Fuling donne des conférences sur les visas et permis de séjour",
-    "arrival_and_residence_permit": "Permis de séjour requis dans les 30 jours; lié à l'assiduité"
+    "instructions": "Section 签证材料 disponible sur le site de l'université; contacter international@yznu.edu.cn",
+    "arrival_and_residence_permit": "Permis de résidence à obtenir dans les 30 jours suivant l'arrivée auprès du bureau de sécurité publique local"
   },
   "housing_and_services": {
     "housing_types": [
-      "Résidence universitaire sur campus"
+      "Chambre double sur campus"
     ],
-    "rules": "",
-    "international_office": "International College (国际学院), 重庆市涪陵区聚贤大道16号, international@yznu.edu.cn, 023-72791119",
-    "orientation": "Cérémonies d'ouverture et de remise des diplômes organisées;教育 à la sécurité et à la loi",
-    "english_support": null,
-    "clubs": "学生国际交流协会 (Student International Exchange Association)"
+    "rules": "Voir règlement interne de l'université",
+    "international_office": "Bureau de coopération internationale (国际合作与交流处), Tél: 023-72791119, Email: international@yznu.edu.cn, Adresse: 重庆市涪陵区聚贤大道16号",
+    "orientation": "Programme d'orientation pour nouveaux étudiants étrangers",
+    "english_support": true,
+    "clubs": "Association internationale des étudiants (学生国际交流协会), activités culturelles"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Thaïlande",
+      "notes": "Partenariat avec Nakhon Sawan Rajabhat University, programmes d'échange"
+    },
+    {
+      "region_or_country": "Pologne",
+      "notes": "Programme d'échange semestriel"
+    },
+    {
+      "region_or_country": "Corée du Sud",
+      "notes": "Programme d'échange semestriel"
+    },
+    {
+      "region_or_country": "Italie",
+      "notes": "Partenariat avec l'Académie des Beaux-Arts de Pérouse"
     }
   ],
   "scan_status": "ok",
   "slug": "yangtze-normal-university",
-  "scraped_at": "2026-08-24T14:44:16.156Z",
+  "scraped_at": "2026-08-24T14:58:32.245Z",
   "model": "minimax-m3",
   "pages_fetched": 12,
   "pages_used": 12,
@@ -392,6 +477,11 @@
       "url": "https://guojjl.yznu.edu.cn/83/",
       "title": "部门职能",
       "chars": 1216
+    },
+    {
+      "url": "https://yznu.cucas.cn/",
+      "title": "Yangtze Normal University (YZNU) | Yangtze Normal University Scholarship | Apply Online | CUCAS",
+      "chars": 9929
     },
     {
       "url": "https://guojjl.yznu.edu.cn/88/list.htm",
@@ -432,11 +522,6 @@
       "url": "https://guojjl.yznu.edu.cn/2026/0713/c97a284120/page.htm",
       "title": "长江师范学院国际学院2026届留学生毕业典礼暨交换生结业典礼顺利举行",
       "chars": 1069
-    },
-    {
-      "url": "https://guojjl.yznu.edu.cn/2026/0713/c97a284134/page.htm",
-      "title": "国际学院开展2026年春期留学生法治教育讲座",
-      "chars": 911
     }
   ],
   "db_row": {
@@ -447,7 +532,7 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "Bureau de la coopération et des échanges internationaux / Collège international (国际合作与交流处 / 国际学院)",
+    "department": "国际合作与交流处 / 国际学院 (Bureau de coopération et d'échanges internationaux / École internationale)",
     "emails": [
       "international@yznu.edu.cn",
       "international@yznu.edu.cn"
@@ -458,15 +543,17 @@
     "majors": [
       "chinese_language",
       "arts",
+      "education",
       "other"
     ],
     "required_documents": [
       "passport",
-      "admission_application_form",
-      "highest_diploma",
-      "transcripts"
+      "diplome",
+      "relevé_notes",
+      "photo",
+      "formulaire_demande"
     ],
-    "scholarship_amount": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金) / YZNU President Scholarship (留学生校长奖学金)",
+    "scholarship_amount": "Bourse du Président de l'Université (校长奖学金) / Bourse du Maire de Chongqing (市长奖学金) / Bourse du Gouvernement Chinois (CSC)",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,

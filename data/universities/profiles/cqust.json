@@ -11,20 +11,23 @@
     "application_portal_url": "https://cqust.at0086.cn/StuApplication/Login.aspx"
   },
   "general": {
-    "presentation": "Université publique chinoise située à Chongqing, disposant d'un bureau de coopération internationale et d'un collège d'éducation internationale accueillant des étudiants étrangers.",
-    "history": "",
-    "rankings": [],
+    "presentation": "Université municipale publique de Chongqing, axée sur les sciences et technologies, notamment les secteurs pétrolier, gazier et pétrochimique. Devenue université en novembre 2023 (anciennement Chongqing Science and Technology College depuis 2004).",
+    "history": "Fondée le 18 mai 1951. Nommée Chongqing Science and Technology College en 2004, puis renommée Chongqing University of Science and Technology en novembre 2023.",
+    "rankings": [
+      "7e à Chongqing (Academic Ranking of World Universities 2023)"
+    ],
     "strengths": [
-      "coopération internationale",
-      "sciences et technologie",
-      "ingénierie"
+      "Pétrole et gaz",
+      "Pétrochimie",
+      "Sciences et technologies",
+      "Coopérations avec CNPC, Sinopec, CNOOC"
     ],
     "teaching_languages": [
       "zh",
       "en"
     ],
     "location": {
-      "city": "Chongqing",
+      "city": "Chongqing (Shapingba)",
       "province": "Chongqing",
       "country": "Chine"
     },
@@ -36,15 +39,28 @@
     "campuses": [
       {
         "name": "Campus principal",
-        "city": "Chongqing (Shapingba, University Town)",
-        "description": "Adresse : 20 rue Daxuecheng Est, district de Shapingba, Chongqing, code postal 401331"
+        "city": "Chongqing (Shapingba, district universitaire)",
+        "description": "Adresse: 重庆沙坪坝区大学城东路20号, code postal 401331"
       }
     ]
   },
-  "programs": [],
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (détails non disponibles)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes internationaux via l'International Education College (国际教育学院). Détails spécifiques non fournis dans les sources."
+    }
+  ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "",
+      "academic": "Diplôme de fin d'études secondaires équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -56,7 +72,7 @@
       "other": []
     },
     "master": {
-      "academic": "",
+      "academic": "Licence / Bachelor équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -68,7 +84,7 @@
       "other": []
     },
     "phd": {
-      "academic": "",
+      "academic": "Master équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -86,18 +102,17 @@
     }
   },
   "contacts": {
-    "office_name": "Bureau de coopération et d'échanges internationaux (Collège d'éducation internationale)",
+    "office_name": "国际合作交流处（港澳台事务办公室、国际教育学院）",
     "iso_email": "",
     "admissions_email": "",
     "wechat": "",
     "phone": "",
-    "address": "20 rue Daxuecheng Est, district de Shapingba, Chongqing 401331"
+    "address": "重庆沙坪坝区大学城东路20号, 401331"
   },
   "matching": {
     "fields": [
       "engineering",
-      "sciences",
-      "other"
+      "sciences"
     ],
     "degrees": [
       "bachelor",
@@ -130,41 +145,151 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "tags": [
-      "université publique",
-      "sciences et technologie",
-      "Chongqing"
+      "pétrole",
+      "gaz",
+      "pétrochimie",
+      "université municipale",
+      "partenariats internationaux"
     ]
   },
-  "confidence": 0.35,
+  "confidence": 0.25,
   "missing_fields": [
-    "programs",
-    "admission_requirements",
     "tuition",
-    "scholarships",
-    "contacts_email",
+    "housing",
+    "admission_requirements_details",
+    "hsk_ielts_toefl_scores",
     "age_limits",
-    "language_scores",
-    "cost_of_living",
-    "history",
-    "rankings"
+    "scholarships",
+    "specific_programs",
+    "deadlines",
+    "contacts_email_phone",
+    "cost_of_living"
   ],
-  "notes": "Sources limitées : seule la page d'accueil du bureau de coopération internationale a été extraite. Pas d'informations sur les programmes spécifiques, frais, bourses, scores linguistiques requis. Le portail de candidature existe (cqust.at0086.cn). Partenariats connus : Haaga-Helia (Finlande), Université de Regina (Canada), Kazakhstan.",
+  "notes": "Sources limitées: page principale du bureau de coopération internationale et page Wikipedia. Pas d'accès aux pages détaillées des programmes internationaux (留学重科) ni aux exigences d'admission spécifiques. L'université a une International Education College et accepte les étudiants étrangers via le portail cqust.at0086.cn. Partenariats confirmés avec universités UIC, Regina, Haaga-Helia, Hanze, Veracruzana, Kyungpook, Changwon, National Central Taiwan.",
   "documents": [
     {
       "type": "passport",
-      "required": true,
+      "required": null,
       "count": null,
       "who": "",
       "applies_to": [
         "all"
       ],
       "notes": ""
+    },
+    {
+      "type": "high_school_diploma",
+      "required": null,
+      "count": null,
+      "who": "bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "bachelor_degree",
+      "required": null,
+      "count": null,
+      "who": "master",
+      "applies_to": [
+        "master"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "master_degree",
+      "required": null,
+      "count": null,
+      "who": "phd",
+      "applies_to": [
+        "phd"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "transcript",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "language_certificate",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "physical_exam",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "no_criminal_record",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "photo",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "study_plan",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "recommendation_letter",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": ""
     }
   ],
   "application": {
-    "platform_name": "Online Service Platform for International Students",
+    "platform_name": "Online Service Platform for International Students (国际学生网报系统)",
     "platform_url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
-    "steps": [],
+    "steps": [
+      "Créer un compte sur la plateforme AT0086",
+      "Remplir le formulaire de candidature en ligne",
+      "Téléverser les documents requis",
+      "Soumettre la candidature et suivre le statut via la plateforme",
+      "Consulter les résultats sur la plateforme"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
@@ -215,21 +340,7 @@
       "notes": ""
     }
   },
-  "scholarships": [
-    {
-      "name": "",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
-    }
-  ],
+  "scholarships": [],
   "language": {
     "hsk_bachelor": null,
     "hsk_master": null,
@@ -249,29 +360,49 @@
   "visa": {
     "visa_types": [],
     "documents_from_university": [],
-    "instructions": "",
+    "instructions": "Les étudiants étrangers doivent obtenir un visa étudiant X1 ou X2 selon la durée des études, et un permis de résidence dans les 30 jours suivant l'arrivée.",
     "arrival_and_residence_permit": ""
   },
   "housing_and_services": {
     "housing_types": [],
     "rules": "",
-    "international_office": "国际合作与交流处（港澳台事务办公室、国际教育学院）",
+    "international_office": "Service de la coopération et des échanges internationaux (国际合作与交流处 / 国际教育学院), adresse : 20 rue Daxuecheng Est, district de Shapingba, Chongqing 401331. Plateforme de candidature : https://cqust.at0086.cn/StuApplication/Login.aspx",
     "orientation": "",
     "english_support": null,
     "clubs": ""
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Kazakhstan",
+      "notes": "Programme de formation pour cadres moyens et supérieurs d'Asie centrale sur les nouveaux matériaux (projet de coopération CQUST-Ambassade du Kazakhstan à Xi'an)."
+    },
+    {
+      "region_or_country": "Canada",
+      "notes": "Partenariat avec l'Université de Regina (Canada)."
+    },
+    {
+      "region_or_country": "Finlande",
+      "notes": "Partenariat avec Haaga-Helia University of Applied Sciences (Finlande)."
+    },
+    {
+      "region_or_country": "Pays-Bas",
+      "notes": "Partenariat avec Hanze Hogeschool Groningen University of Applied Sciences (Pays-Bas)."
+    },
+    {
+      "region_or_country": "États-Unis",
+      "notes": "Partenariat avec University of Illinois at Chicago (États-Unis)."
+    },
+    {
+      "region_or_country": "Corée du Sud",
+      "notes": "Partenariats avec Kyungpook National University et Changwon National University (Corée du Sud)."
     }
   ],
   "scan_status": "ok",
   "slug": "cqust",
-  "scraped_at": "2026-08-24T14:31:55.820Z",
+  "scraped_at": "2026-08-24T14:57:21.327Z",
   "model": "minimax-m3",
   "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_used": 10,
   "sources": [
     {
       "url": "https://wsc.cqust.edu.cn/",
@@ -282,6 +413,11 @@
       "url": "https://wsc.cqust.edu.cn/index.htm/",
       "title": null,
       "chars": 2436
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Chongqing_University_of_Science_and_Technology",
+      "title": "Chongqing University of Science and Technology - Wikipedia",
+      "chars": 9665
     },
     {
       "url": "https://wsc.cqust.edu.cn/jlhz/gjhy.htm",
@@ -314,9 +450,9 @@
       "chars": 12000
     },
     {
-      "url": "https://wsc.cqust.edu.cn/style/ny.css",
+      "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.kartographer.style%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
       "title": null,
-      "chars": 8199
+      "chars": 145
     }
   ],
   "db_row": {
@@ -327,19 +463,16 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "Bureau de coopération et d'échanges internationaux (Collège d'éducation internationale)",
+    "department": "国际合作交流处（港澳台事务办公室、国际教育学院）",
     "emails": [],
     "phone": null,
     "wechat": null,
     "website": "https://wsc.cqust.edu.cn",
     "majors": [
       "engineering",
-      "sciences",
-      "other"
+      "sciences"
     ],
-    "required_documents": [
-      "passport"
-    ],
+    "required_documents": [],
     "scholarship_amount": null,
     "scholarship_min": null,
     "scholarship_max": null,

@@ -1,5 +1,4 @@
 {
-  "slug": "chongqing-university",
   "identity": {
     "name_en": "Chongqing University",
     "name_zh": "重庆大学",
@@ -7,68 +6,675 @@
     "aliases": [
       "CQU"
     ],
-    "website": "https://study.cqu.edu.cn/index.htm",
-    "international_website": "https://study.cqu.edu.cn/index.htm",
-    "application_portal_url": ""
+    "website": "https://www.cqu.edu.cn",
+    "international_website": "http://study.cqu.edu.cn/",
+    "application_portal_url": "https://cqu.17gz.org/member/login.do"
   },
   "general": {
-    "presentation": "",
-    "history": "",
-    "rankings": [],
-    "strengths": [],
-    "teaching_languages": [],
+    "presentation": "Université publique de niveau national, membre des projets 985, 211 et Double First-Class. 28 écoles, environ 50 000 étudiants, 5 200 enseignants. Reconnue en architecture, génie électrique, civil, mécanique, métallurgie et management.",
+    "history": "Fondée en 1929 à Chongqing. Devenue université nationale pluridisciplinaire en 1942. Réorganisée en 1952 en université polytechnique. Désignée université clé nationale en 1960.",
+    "rankings": [
+      "ARWU 2024: 151-200 mondial"
+    ],
+    "strengths": [
+      "Architecture",
+      "Génie électrique",
+      "Génie civil",
+      "Génie mécanique",
+      "Génie métallurgique",
+      "Sciences de gestion"
+    ],
+    "teaching_languages": [
+      "zh"
+    ],
     "location": {
       "city": "Chongqing",
       "province": "Chongqing",
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
+      "min": 2000,
+      "max": 2500,
+      "notes": "Source CUCAS"
+    },
+    "campuses": [
+      {
+        "name": "Campus A",
+        "city": "Chongqing",
+        "description": "Campus principal downtown, Shapingba"
+      },
+      {
+        "name": "Campus B",
+        "city": "Chongqing",
+        "description": "Campus downtown"
+      },
+      {
+        "name": "Campus C",
+        "city": "Chongqing",
+        "description": "Campus downtown"
+      },
+      {
+        "name": "Campus Huxi",
+        "city": "Chongqing",
+        "description": "Campus en banlieue"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Architecture",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "5 ans"
+    },
+    {
+      "level": "bachelor",
+      "name": "Urban Planning",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "5 ans"
+    },
+    {
+      "level": "bachelor",
+      "name": "Landscape Architecture",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "5 ans"
+    },
+    {
+      "level": "bachelor",
+      "name": "Civil Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
       "notes": ""
     },
-    "campuses": []
+    {
+      "level": "bachelor",
+      "name": "Mechanical Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Electrical Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Economics and Business Administration",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "International Business",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "49 000 CNY/an"
+    },
+    {
+      "level": "master",
+      "name": "Engineering (général)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "Engineering / Sciences",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent",
+      "min_gpa": null,
+      "age_max": 30,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 210,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "18-25 ans pour bourses",
+        "HSK 4 ≥210 ou équivalent",
+        "Relevé bancaire ≥30 000 RMB",
+        "Examen médical",
+        "Casier judiciaire vierge"
+      ]
+    },
+    "master": {
+      "academic": "Licence/Bachelor ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "HSK requis pour programmes en chinois"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "HSK requis pour programmes en chinois"
+      ]
+    },
+    "language": {
+      "academic": "Pas de prérequis académique strict",
+      "age_max": null,
+      "other": [
+        "Programme de langue chinoise disponible"
+      ]
+    }
   },
-  "programs": [],
-  "admission_requirements": {},
-  "documents": [],
-  "application": {},
-  "fees": {},
-  "scholarships": [],
-  "language": {},
-  "visa": {},
-  "housing_and_services": {},
-  "country_specific": [],
-  "contacts": {},
+  "contacts": {
+    "office_name": "International Students Admissions Office",
+    "iso_email": "iso@cqu.edu.cn",
+    "admissions_email": "admissions@cqu.edu.cn",
+    "wechat": "",
+    "phone": "+86-23-65111001",
+    "address": "Room 324, Main Building, Campus A, No.174 Shazheng Street, Shapingba District, Chongqing 400044"
+  },
   "matching": {
-    "fields": [],
-    "degrees": [],
-    "languages": [],
+    "fields": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "design",
+      "law",
+      "education"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": 30,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
+    "tuition_cny_min": 14000,
+    "tuition_cny_max": 49000,
+    "housing_cny_year_min": 5000,
+    "deadline_typical": "31 mai (self-funded) / 15 mai (bourses) / 15 avril (CSC)",
+    "intake_months": [
+      9
+    ],
     "city": "Chongqing",
     "province": "Chongqing",
-    "tags": []
+    "tags": [
+      "985",
+      "211",
+      "Double First-Class",
+      "public",
+      "research",
+      "engineering",
+      "architecture"
+    ]
   },
-  "confidence": 0,
+  "confidence": 0.85,
   "missing_fields": [
-    "all"
+    "min_gpa bachelor/master/phd",
+    "ielts/toefl master/phd",
+    "age_max master/phd",
+    "english_programs details"
   ],
-  "notes": "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
-  "scan_status": "no_pages",
+  "notes": "Frais d'application: 400-600 RMB (sources divergent). Bourse Mayor: 25 000 RMB/an. Stipends: PhD 2 200/mois, Master 1 800, Bachelor 1 500. Assurance: 800 RMB/an. Programmes principalement en chinois; peu de programmes en anglais confirmés dans les sources.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": 1,
+      "who": "tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Validité min. 1 an; résidents en Chine: visa/residence permit + tampons douane"
+    },
+    {
+      "type": "diplome_lycee_notarise",
+      "required": true,
+      "count": 1,
+      "who": "bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Notarisé; attestation de pré-diplôme acceptée"
+    },
+    {
+      "type": "releves_notes_lycee",
+      "required": true,
+      "count": 1,
+      "who": "bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Relevés officiels"
+    },
+    {
+      "type": "hsk",
+      "required": true,
+      "count": 1,
+      "who": "bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "HSK 4 ≥210, dans la validité"
+    },
+    {
+      "type": "examen_medical",
+      "required": true,
+      "count": 1,
+      "who": "bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Formulaire officiel, valide 6 mois; joindre prise de sang, ECG, radio thorax"
+    },
+    {
+      "type": "casier_judiciaire",
+      "required": true,
+      "count": 1,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Ou certificat de bonne conduite de l'institution actuelle"
+    },
+    {
+      "type": "attestation_financiere",
+      "required": true,
+      "count": 1,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Solde ≥30 000 RMB; réduit pour boursiers complets"
+    },
+    {
+      "type": "lettre_motivation",
+      "required": true,
+      "count": 1,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "≥500 mots: infos perso, motivation, plan d'études"
+    },
+    {
+      "type": "certificat_etudes_ou_emploi",
+      "required": true,
+      "count": 1,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Si actuellement étudiant ou employé"
+    },
+    {
+      "type": "portfolio",
+      "required": false,
+      "count": null,
+      "who": "arts",
+      "applies_to": [
+        "bachelor",
+        "master"
+      ],
+      "notes": "Requis pour les programmes d'art"
+    }
+  ],
+  "application": {
+    "platform_name": "CQU International Student Online Service System",
+    "platform_url": "https://cqu.17gz.org/member/login.do",
+    "steps": [
+      "Créer un compte en ligne",
+      "Remplir le formulaire et téléverser les documents (scans couleur)",
+      "Payer les frais de candidature (600 RMB non remboursables)",
+      "Révision initiale des qualifications et documents",
+      "Revue académique par les écoles + entretien éventuel",
+      "Envoi des documents d'admission aux étudiants admis"
+    ],
+    "opens_at": "",
+    "deadline": "2026-05-31",
+    "results_at": "",
+    "intake_months": [
+      9
+    ],
+    "application_fee_cny": 600,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "wechat",
+      "alipay",
+      "bank_card",
+      "bank_transfer"
+    ]
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "bachelor": {
+        "min": 14000,
+        "max": 20000
+      },
+      "master": {
+        "min": 21000,
+        "max": 35000
+      },
+      "phd": {
+        "min": 25000,
+        "max": 28000
+      },
+      "language": {
+        "min": 7000,
+        "max": 13000
+      },
+      "english_taught_premium": null
+    },
+    "insurance_cny_year": 800,
+    "other_fees": [
+      {
+        "name": "Frais de candidature",
+        "amount_cny": 600,
+        "notes": "Non remboursables"
+      },
+      {
+        "name": "Frais de service CUCAS",
+        "amount_cny": 1400,
+        "notes": "USD 200 si via CUCAS"
+      }
+    ],
+    "housing": {
+      "on_campus": [
+        {
+          "type": "single",
+          "price_cny_year": 9000,
+          "included": "Dépend de la résidence"
+        },
+        {
+          "type": "double",
+          "price_cny_year": 5000,
+          "included": ""
+        }
+      ],
+      "deposit_cny": null,
+      "off_campus_allowed": null
+    },
+    "living_cost_cny_month": {
+      "food": null,
+      "transport": null,
+      "other": null,
+      "notes": "Total 2 000-2 500 RMB/mois"
+    }
+  },
+  "scholarships": [
+    {
+      "name": "Bourse du Gouvernement Chinois (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via CSC ou ambassade; très compétitif",
+      "apply_via": "csc",
+      "deadline": "2026-04-15",
+      "renewal": "Renouvelable annuellement selon résultats"
+    },
+    {
+      "name": "Bourse Internationale des Professeurs de Chinois",
+      "type": "institutional",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants sinologues",
+      "apply_via": "university",
+      "deadline": "2026-05-15",
+      "renewal": "Renouvelable"
+    },
+    {
+      "name": "Bourse du Maire de Chongqing",
+      "type": "municipal",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "25 000 RMB/an/personne",
+      "apply_via": "university",
+      "deadline": "2026-05-15",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse du Président de CQU",
+      "type": "institutional",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": 1500,
+      "conditions": "Bachelor 1 500/mois, Master 1 800/mois, PhD 2 200/mois; complet ou partiel",
+      "apply_via": "university",
+      "deadline": "2026-05-17",
+      "renewal": "Renouvelable"
+    }
+  ],
+  "language": {
+    "hsk_bachelor": 4,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
+    "preparatory_chinese": {
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
+    },
+    "foundation": {
+      "available": null,
+      "description": ""
+    }
+  },
+  "visa": {
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "Visa Application Form (JW202)",
+      "Record of Physical Examination"
+    ],
+    "instructions": "Demander le visa X1 (études >180 jours) ou X2 (≤180 jours) avec Admission Notice, JW202 et formulaire médical. Visa X1 nécessite un permis de résidence sous 30 jours après arrivée.",
+    "arrival_and_residence_permit": "Permis de résidence requis pour X1, à obtenir dans les 30 jours au bureau de sécurité publique local"
+  },
+  "housing_and_services": {
+    "housing_types": [
+      "Songlinpo International Apartment (single 4 500, double 2 500/sem)",
+      "Ganyuancun International Student Hostel (double 3 000-3 500/sem)",
+      "Lanyuan No.6 International Dormitory (single 4 500, double 2 500/sem)"
+    ],
+    "rules": "Réservation recommandée; dépôt possible requis",
+    "international_office": "admissions@cqu.edu.cn; iso@cqu.edu.cn; Tel +86-23-65111001 / 65102964",
+    "orientation": "Oui, organisée pour les nouveaux étudiants internationaux",
+    "english_support": true,
+    "clubs": "Clubs étudiants et associations internationales disponibles"
+  },
+  "country_specific": [
+    {
+      "region_or_country": "Chine continentale, Hong Kong, Macao, Taïwan",
+      "notes": "Les personnes ayant émigré ou acquis la nationalité par naissance doivent respecter le Document No.12 (2020) du Ministère de l'Éducation"
+    }
+  ],
+  "scan_status": "ok",
+  "slug": "chongqing-university",
+  "scraped_at": "2026-08-24T14:55:56.130Z",
+  "model": "minimax-m3",
+  "pages_fetched": 12,
+  "pages_used": 9,
   "sources": [
     {
-      "url": "https://study.cqu.edu.cn/",
-      "title": null,
-      "status": 412
+      "url": "https://study.cqu.edu.cn/index.htm",
+      "title": "Extraits officiels (admission / frais / bourses)",
+      "chars": 1194
     },
     {
-      "url": "https://study.cqu.edu.cn/index.htm/",
-      "title": null,
-      "status": 412
+      "url": "https://cqu.cucas.cn/fee-structure/",
+      "title": "Chongqing University Fee Structure | Tuition Fees, Accommodation Fee and Application Fee | CUCAS",
+      "chars": 6309
     },
     {
-      "url": "https://english.cqu.edu.cn/",
+      "url": "https://studychina.chinaservicesinfo.com/edusrv/programs/previewById?id=6462e1c10ff64cddafc1997602e7f481",
+      "title": "Application Guide for Undergraduate Programs for International Students",
+      "chars": 7941
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Chongqing_University",
+      "title": "Chongqing University - Wikipedia",
+      "chars": 12000
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/bachelor_degree/all_languages/all_year/all_programs/0_0_0_0_2_0_0/&",
       "title": null,
-      "status": 412
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/master_degree/all_languages/all_year/all_programs/0_0_0_0_3_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarship/index/all_scholarship/all_cities/Chongqing_University/all_degrees/all_languages/all_year/all_programs/0_0_0_120_0_0_0/en",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/full_scholarship/all_cities/all_universities/all_degrees/all_languages/all_year/all_programs/1_0_0_0_0_0_0/&",
+      "title": null,
+      "chars": 3560
+    },
+    {
+      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/non_degree/all_languages/all_year/all_programs/0_0_0_0_1_0_0/&",
+      "title": null,
+      "chars": 3560
     }
   ],
   "db_row": {
@@ -79,20 +685,44 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": null,
-    "emails": [],
-    "phone": null,
+    "department": "International Students Admissions Office",
+    "emails": [
+      "iso@cqu.edu.cn",
+      "admissions@cqu.edu.cn"
+    ],
+    "phone": "+86-23-65111001",
     "wechat": null,
-    "website": "https://study.cqu.edu.cn/index.htm",
-    "majors": [],
-    "required_documents": [],
-    "scholarship_amount": null,
-    "scholarship_min": null,
-    "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
-    "tuition_min": null,
-    "tuition_max": null,
-    "application_deadline": null
+    "website": "http://study.cqu.edu.cn/",
+    "majors": [
+      "engineering",
+      "computer_science",
+      "business",
+      "economics",
+      "sciences",
+      "chinese_language",
+      "arts",
+      "design",
+      "law",
+      "education"
+    ],
+    "required_documents": [
+      "passport",
+      "diplome_lycee_notarise",
+      "releves_notes_lycee",
+      "hsk",
+      "examen_medical",
+      "casier_judiciaire",
+      "attestation_financiere",
+      "lettre_motivation",
+      "certificat_etudes_ou_emploi"
+    ],
+    "scholarship_amount": "Bourse du Gouvernement Chinois (CSC) / Bourse Internationale des Professeurs de Chinois / Bourse du Maire de Chongqing / Bourse du Président de CQU",
+    "scholarship_min": 14000,
+    "scholarship_max": 49000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
+    "tuition_min": 14000,
+    "tuition_max": 49000,
+    "application_deadline": "31 mai (self-funded) / 15 mai (bourses) / 15 avril (CSC)"
   }
 }
