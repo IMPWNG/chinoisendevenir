@@ -64,7 +64,9 @@ export const adminTranslations = {
       bulkTitle: "Envoi groupé",
       bulkSelected: "{count} sélectionné(s)",
       bulkHint:
-        "Cochez des contacts dans la liste, puis envoyez une relance ou les formules.",
+        "Cochez des contacts, choisissez Email ou WhatsApp, puis envoyez une relance ou les formules.",
+      bulkChannelEmail: "Email",
+      bulkChannelWhatsapp: "WhatsApp",
       bulkProgress: "Envoi {current}/{total} — {name}",
       selectFiltered: "Sélectionner les filtrés",
       deselectAll: "Tout désélectionner",
@@ -72,8 +74,11 @@ export const adminTranslations = {
       send: "Envoyer ({count})",
       sendingCount: "Envoi {current}/{total}",
       noEmail: "Aucun contact avec email dans la sélection.",
+      noPhone: "Aucun contact avec un numéro WhatsApp valide dans la sélection.",
       bulkConfirm:
         "Envoyer « {template} » à {count} personne(s) ?\n\nLes emails partent un par un. Ne fermez pas la page.",
+      bulkConfirmWhatsapp:
+        "Envoyer « {template} » par WhatsApp à {count} personne(s) ?\n\nLes messages partent un par un. Ne fermez pas la page.",
       bulkDone:
         "Envoi groupé terminé.\n✅ {sent} envoyé(s)\n❌ {failed} échec(s){details}",
       emailSection: "Envoyer un email",
@@ -82,6 +87,23 @@ export const adminTranslations = {
         "Action : Email formules • Statut : choix des formules (espace encore verrouillé)",
       emailHintRelance1: "Action : Relance 1 • Statut : relance 1 envoyée",
       emailHintRelance2: "Action : Relance 2 • Statut : relance 2 envoyée",
+      whatsappSection: "Envoyer un WhatsApp",
+      sendWhatsapp: "Envoyer",
+      openWhatsapp: "Ouvrir WhatsApp",
+      whatsappCustomPlaceholder: "Écrivez le message WhatsApp…",
+      whatsappHintFormules:
+        "Action : WhatsApp formules • Statut : choix des formules",
+      whatsappHintRelance1: "Action : Relance 1 • Statut : relance 1 envoyée",
+      whatsappHintRelance2: "Action : Relance 2 • Statut : relance 2 envoyée",
+      whatsappHintCustom: "Action : WhatsApp envoyé • Le statut n'est pas modifié",
+      noPhoneOnContact:
+        "Ajoutez un numéro international (ex. +225 07 00 00 00 00) pour envoyer un WhatsApp.",
+      whatsappEmpty: "Le message WhatsApp est vide.",
+      whatsappOk: "WhatsApp envoyé !",
+      whatsappFail: "Erreur : {error}",
+      sendWhatsappConfirm: "Envoyer le WhatsApp « {template} » à {name} ?",
+      whatsappOpenFallback:
+        "{error}\n\nOuvrir WhatsApp avec le message prérempli ?",
       formuleSection: "Formule d'accompagnement",
       noFormule: "-- Aucune formule --",
       formuleHint:
@@ -237,7 +259,10 @@ export const adminTranslations = {
       appel: "Appel effectué",
       email_envoye: "Email envoyé",
       email_formules: "Email formules envoyé",
+      whatsapp_envoye: "WhatsApp envoyé",
+      whatsapp_formules: "WhatsApp formules envoyé",
       reponse_client: "Réponse client (email)",
+      reponse_whatsapp: "Réponse client (WhatsApp)",
       formule_choisie: "Formule choisie",
       relance_1: "Relance 1",
       relance_2: "Relance 2",
@@ -258,6 +283,9 @@ export const adminTranslations = {
       relance_1: "Relance 1 — Formulaire à remplir",
       relance_2: "Relance 2 — Toujours intéressé(e) ?",
       formules_presentation: "Formules d'accompagnement",
+    },
+    whatsappTemplate: {
+      custom: "Message libre",
     },
     niveau: {
       bac: "Bac",
@@ -377,10 +405,12 @@ export const adminTranslations = {
       noContacts: "No contacts found",
       adjustFilters: "Adjust your filters",
       loadingContacts: "Loading contacts...",
-      bulkTitle: "Bulk email",
+      bulkTitle: "Bulk send",
       bulkSelected: "{count} selected",
       bulkHint:
-        "Check contacts in the list, then send a follow-up or the packages email.",
+        "Check contacts, choose Email or WhatsApp, then send a follow-up or the packages message.",
+      bulkChannelEmail: "Email",
+      bulkChannelWhatsapp: "WhatsApp",
       bulkProgress: "Sending {current}/{total} — {name}",
       selectFiltered: "Select filtered",
       deselectAll: "Deselect all",
@@ -388,8 +418,11 @@ export const adminTranslations = {
       send: "Send ({count})",
       sendingCount: "Sending {current}/{total}",
       noEmail: "No contact with an email in the selection.",
+      noPhone: "No contact with a valid WhatsApp number in the selection.",
       bulkConfirm:
         "Send “{template}” to {count} people?\n\nEmails are sent one by one. Do not close the page.",
+      bulkConfirmWhatsapp:
+        "Send “{template}” on WhatsApp to {count} people?\n\nMessages are sent one by one. Do not close the page.",
       bulkDone:
         "Bulk send finished.\n✅ {sent} sent\n❌ {failed} failed{details}",
       emailSection: "Send an email",
@@ -398,6 +431,23 @@ export const adminTranslations = {
         "Action: Packages email • Status: choosing a package (student space still locked)",
       emailHintRelance1: "Action: Follow-up 1 • Status: follow-up 1 sent",
       emailHintRelance2: "Action: Follow-up 2 • Status: follow-up 2 sent",
+      whatsappSection: "Send a WhatsApp",
+      sendWhatsapp: "Send",
+      openWhatsapp: "Open WhatsApp",
+      whatsappCustomPlaceholder: "Write the WhatsApp message…",
+      whatsappHintFormules:
+        "Action: WhatsApp packages • Status: choosing a package",
+      whatsappHintRelance1: "Action: Follow-up 1 • Status: follow-up 1 sent",
+      whatsappHintRelance2: "Action: Follow-up 2 • Status: follow-up 2 sent",
+      whatsappHintCustom: "Action: WhatsApp sent • Status is not changed",
+      noPhoneOnContact:
+        "Add an international number (e.g. +225 07 00 00 00 00) to send a WhatsApp.",
+      whatsappEmpty: "The WhatsApp message is empty.",
+      whatsappOk: "WhatsApp sent!",
+      whatsappFail: "Error: {error}",
+      sendWhatsappConfirm: "Send WhatsApp “{template}” to {name}?",
+      whatsappOpenFallback:
+        "{error}\n\nOpen WhatsApp with the pre-filled message?",
       formuleSection: "Support package",
       noFormule: "-- No package --",
       formuleHint:
@@ -553,7 +603,10 @@ export const adminTranslations = {
       appel: "Call made",
       email_envoye: "Email sent",
       email_formules: "Packages email sent",
+      whatsapp_envoye: "WhatsApp sent",
+      whatsapp_formules: "WhatsApp packages sent",
       reponse_client: "Client reply (email)",
+      reponse_whatsapp: "Client reply (WhatsApp)",
       formule_choisie: "Package chosen",
       relance_1: "Follow-up 1",
       relance_2: "Follow-up 2",
@@ -574,6 +627,9 @@ export const adminTranslations = {
       relance_1: "Follow-up 1 — Form to complete",
       relance_2: "Follow-up 2 — Still interested?",
       formules_presentation: "Support packages",
+    },
+    whatsappTemplate: {
+      custom: "Free-text message",
     },
     niveau: {
       bac: "High school",
@@ -690,9 +746,11 @@ export const adminTranslations = {
       noContacts: "未找到联系人",
       adjustFilters: "请调整筛选条件",
       loadingContacts: "正在加载联系人...",
-      bulkTitle: "群发邮件",
+      bulkTitle: "群发",
       bulkSelected: "已选 {count} 人",
-      bulkHint: "勾选联系人后，可发送跟进邮件或套餐介绍。",
+      bulkHint: "勾选联系人后，选择邮件或 WhatsApp，发送跟进或套餐介绍。",
+      bulkChannelEmail: "邮件",
+      bulkChannelWhatsapp: "WhatsApp",
       bulkProgress: "发送 {current}/{total} — {name}",
       selectFiltered: "全选筛选结果",
       deselectAll: "取消全选",
@@ -700,14 +758,33 @@ export const adminTranslations = {
       send: "发送（{count}）",
       sendingCount: "发送中 {current}/{total}",
       noEmail: "所选联系人中没有邮箱。",
+      noPhone: "所选联系人中没有有效的 WhatsApp 号码。",
       bulkConfirm:
         "向 {count} 人发送「{template}」？\n\n邮件将逐封发送，请勿关闭页面。",
+      bulkConfirmWhatsapp:
+        "通过 WhatsApp 向 {count} 人发送「{template}」？\n\n消息将逐条发送，请勿关闭页面。",
       bulkDone: "群发完成。\n✅ 成功 {sent}\n❌ 失败 {failed}{details}",
       emailSection: "发送邮件",
       sendEmail: "发送",
       emailHintFormules: "操作：套餐邮件 • 状态：选择套餐（学生空间仍锁定）",
       emailHintRelance1: "操作：跟进 1 • 状态：跟进 1 已发送",
       emailHintRelance2: "操作：跟进 2 • 状态：跟进 2 已发送",
+      whatsappSection: "发送 WhatsApp",
+      sendWhatsapp: "发送",
+      openWhatsapp: "打开 WhatsApp",
+      whatsappCustomPlaceholder: "填写 WhatsApp 消息…",
+      whatsappHintFormules: "操作：WhatsApp 套餐 • 状态：选择套餐",
+      whatsappHintRelance1: "操作：跟进 1 • 状态：跟进 1 已发送",
+      whatsappHintRelance2: "操作：跟进 2 • 状态：跟进 2 已发送",
+      whatsappHintCustom: "操作：已发 WhatsApp • 不更改状态",
+      noPhoneOnContact:
+        "请填写国际格式号码（如 +225 07 00 00 00 00）才能发送 WhatsApp。",
+      whatsappEmpty: "WhatsApp 消息为空。",
+      whatsappOk: "WhatsApp 已发送！",
+      whatsappFail: "错误：{error}",
+      sendWhatsappConfirm: "向 {name} 发送 WhatsApp「{template}」？",
+      whatsappOpenFallback:
+        "{error}\n\n用预填内容打开 WhatsApp？",
       formuleSection: "辅导套餐",
       noFormule: "-- 暂无套餐 --",
       formuleHint:
@@ -860,7 +937,10 @@ export const adminTranslations = {
       appel: "已通话",
       email_envoye: "已发邮件",
       email_formules: "已发送套餐邮件",
+      whatsapp_envoye: "已发 WhatsApp",
+      whatsapp_formules: "已发 WhatsApp 套餐",
       reponse_client: "客户回复（邮件）",
+      reponse_whatsapp: "客户回复（WhatsApp）",
       formule_choisie: "已选套餐",
       relance_1: "跟进 1",
       relance_2: "跟进 2",
@@ -881,6 +961,9 @@ export const adminTranslations = {
       relance_1: "跟进 1 — 请填写表单",
       relance_2: "跟进 2 — 是否仍有意向？",
       formules_presentation: "辅导套餐介绍",
+    },
+    whatsappTemplate: {
+      custom: "自定义消息",
     },
     niveau: {
       bac: "高中",

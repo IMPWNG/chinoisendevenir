@@ -95,7 +95,7 @@ const FORMULES = [
   },
 ];
 
-const FORMULE_ALREADY_CHOSEN = new Set([
+export const FORMULE_ALREADY_CHOSEN = new Set([
   "formule_choisie",
   "offre_envoyée",
   "attente_paiement",
@@ -238,7 +238,7 @@ function normalizeText(text) {
     .replace(/['’]/g, "'");
 }
 
-function detectFormule(text) {
+export function detectFormule(text) {
   const matches = FORMULES.filter((formule) =>
     formule.patterns.some((pattern) => pattern.test(text)),
   );
@@ -251,14 +251,14 @@ function detectFormule(text) {
   return null;
 }
 
-function detectInterest(text) {
+export function detectInterest(text) {
   const normalized = normalizeText(text);
   return INTEREST_KEYWORDS.some((keyword) =>
     normalized.includes(normalizeText(keyword)),
   );
 }
 
-function looksLikeQuestion(text) {
+export function looksLikeQuestion(text) {
   const normalized = normalizeText(text);
   return (
     text.includes("?") ||
@@ -272,7 +272,7 @@ function looksLikeQuestion(text) {
   );
 }
 
-function truncate(text, max = 1200) {
+export function truncate(text, max = 1200) {
   const value = String(text || "").trim();
   if (value.length <= max) return value;
   return `${value.slice(0, max)}…`;
@@ -338,7 +338,7 @@ async function findContactByEmail(email) {
   return rows?.[0] || null;
 }
 
-async function saveChosenFormule(contact, formuleLabel) {
+export async function saveChosenFormule(contact, formuleLabel) {
   const noteLine = `Formule choisie: ${formuleLabel}`;
   const notes = contact.notes_admin
     ? contact.notes_admin.includes(noteLine)

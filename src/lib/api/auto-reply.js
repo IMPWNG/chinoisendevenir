@@ -34,7 +34,7 @@ const STATUS_RANK = {
   dossier_terminé: 13,
 };
 
-function shouldAdvanceStatus(currentStatus, nextStatus) {
+export function shouldAdvanceStatus(currentStatus, nextStatus) {
   if (!nextStatus) return false;
   if (!currentStatus) return true;
   const currentRank = STATUS_RANK[currentStatus];
@@ -319,7 +319,13 @@ async function updateContactStatus(contactId, newStatus) {
 }
 
 // 📝 Logger l'action dans suivi_actions
-async function logAction(contactId, email, actionType, description) {
+async function logAction(
+  contactId,
+  email,
+  actionType,
+  description,
+  userAdmin = "système_automatique",
+) {
   console.log("\n📝 === LOGGING ACTION ===");
   console.log(`Action: ${actionType}`);
   console.log(`Description: ${description}`);
@@ -330,6 +336,9 @@ async function logAction(contactId, email, actionType, description) {
     email_formules: "email_envoye",
     reponse_client: "note_ajoutee",
     formule_choisie: "changement_statut",
+    whatsapp_envoye: "email_envoye",
+    whatsapp_formules: "email_formules",
+    reponse_whatsapp: "reponse_client",
   };
 
   const actionCandidates = [actionType, fallbacks[actionType]].filter(
@@ -343,7 +352,7 @@ async function logAction(contactId, email, actionType, description) {
           contact_id: contactId,
           action,
           description: description,
-          user_admin: "système_automatique",
+          user_admin: userAdmin,
           created_at: new Date().toISOString(),
         },
       ]);
@@ -360,7 +369,7 @@ async function logAction(contactId, email, actionType, description) {
           contact_id: contactId,
           action,
           description: description,
-          user_admin: "système_automatique",
+          user_admin: userAdmin,
         },
       ]);
 

@@ -8,6 +8,13 @@ import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
+import {
+  WHATSAPP_TEMPLATE_OPTIONS,
+  generateWhatsAppText,
+  whatsappNumberFromContact,
+  isValidWhatsAppNumber,
+  buildWhatsAppLink,
+} from "../lib/whatsapp/messages";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import {
   isStudentSpaceUnlocked,
@@ -147,7 +154,10 @@ const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
   { value: "email_envoye", label: "Email envoyé", icon: "📧" },
   { value: "email_formules", label: "Email formules envoyé", icon: "📋" },
+  { value: "whatsapp_envoye", label: "WhatsApp envoyé", icon: "📱" },
+  { value: "whatsapp_formules", label: "WhatsApp formules envoyé", icon: "📋" },
   { value: "reponse_client", label: "Réponse client (email)", icon: "📥" },
+  { value: "reponse_whatsapp", label: "Réponse client (WhatsApp)", icon: "💬" },
   { value: "formule_choisie", label: "Formule choisie", icon: "✔️" },
   { value: "relance_1", label: "Relance 1", icon: "🔔" },
   { value: "relance_2", label: "Relance 2", icon: "🔔" },
@@ -182,6 +192,7 @@ export default function AdminDashboard() {
   const [selectedContact, setSelectedContact] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const [bulkTemplate, setBulkTemplate] = useState("relance_1");
+  const [bulkChannel, setBulkChannel] = useState("email");
   const [bulkSending, setBulkSending] = useState(false);
   const [bulkProgress, setBulkProgress] = useState(null);
   const [pays, setPays] = useState([]);
@@ -218,19 +229,24 @@ export default function AdminDashboard() {
     );
   };
 
-  const sendBulkEmails = async () => {
+  const sendBulkMessages = async () => {
     const selected = contacts.filter((c) => selectedIds.includes(c.id));
-    const withEmail = selected.filter((c) => c.email);
-    if (withEmail.length === 0) {
-      alert(t("dashboard.noEmail"));
+    const viaWhatsapp = bulkChannel === "whatsapp";
+    const recipients = selected.filter((c) =>
+      viaWhatsapp
+        ? isValidWhatsAppNumber(whatsappNumberFromContact(c))
+        : Boolean(c.email),
+    );
+    if (recipients.length === 0) {
+      alert(viaWhatsapp ? t("dashboard.noPhone") : t("dashboard.noEmail"));
       return;
     }
 
     const templateLabel = t(`emailTemplate.${bulkTemplate}`);
     const confirmed = confirm(
-      t("dashboard.bulkConfirm", {
+      t(viaWhatsapp ? "dashboard.bulkConfirmWhatsapp" : "dashboard.bulkConfirm", {
         template: templateLabel,
-        count: withEmail.length,
+        count: recipients.length,
       }),
     );
     if (!confirmed) return;
@@ -240,22 +256,32 @@ export default function AdminDashboard() {
     const failed = [];
 
     try {
-      for (let i = 0; i < withEmail.length; i++) {
-        const contact = withEmail[i];
+      for (let i = 0; i < recipients.length; i++) {
+        const contact = recipients[i];
         setBulkProgress({
           current: i + 1,
-          total: withEmail.length,
+          total: recipients.length,
           name: `${contact.prenom || ""} ${contact.nom || ""}`.trim(),
         });
 
         try {
-          const response = await authedFetch("/api/email/auto-reply", {
-            method: "POST",
-            body: JSON.stringify({
-              contactId: String(contact.id),
-              emailTemplate: bulkTemplate,
-            }),
-          });
+          const response = await authedFetch(
+            viaWhatsapp ? "/api/whatsapp/send" : "/api/email/auto-reply",
+            {
+              method: "POST",
+              body: JSON.stringify(
+                viaWhatsapp
+                  ? {
+                      contactId: String(contact.id),
+                      whatsappTemplate: bulkTemplate,
+                    }
+                  : {
+                      contactId: String(contact.id),
+                      emailTemplate: bulkTemplate,
+                    },
+              ),
+            },
+          );
           const data = await response.json();
           if (data.success) {
             sent.push(contact);
@@ -689,7 +715,11 @@ const stats = {
               {bulkSending && bulkProgress ? (
                 <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300"
+                    className={`h-full bg-gradient-to-r transition-all duration-300 ${
+                      bulkChannel === "whatsapp"
+                        ? "from-emerald-500 to-green-500"
+                        : "from-amber-500 to-orange-500"
+                    }`}
                     style={{
                       width: `${Math.round(
                         (bulkProgress.current / bulkProgress.total) * 100,
@@ -699,6 +729,17 @@ const stats = {
                 </div>
               ) : null}
             </div>
+            <select
+              value={bulkChannel}
+              disabled={bulkSending}
+              onChange={(e) => setBulkChannel(e.target.value)}
+              className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-300 font-semibold cursor-pointer disabled:opacity-50"
+            >
+              <option value="email">📧 {t("dashboard.bulkChannelEmail")}</option>
+              <option value="whatsapp">
+                📱 {t("dashboard.bulkChannelWhatsapp")}
+              </option>
+            </select>
             <select
               value={bulkTemplate}
               disabled={bulkSending}
@@ -750,8 +791,12 @@ const stats = {
               <button
                 type="button"
                 disabled={bulkSending || selectedIds.length === 0}
-                onClick={sendBulkEmails}
-                className="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                onClick={sendBulkMessages}
+                className={`px-6 py-3 bg-gradient-to-r text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap ${
+                  bulkChannel === "whatsapp"
+                    ? "from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500"
+                    : "from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500"
+                }`}
               >
                 {bulkSending
                   ? `⏳ ${t("dashboard.sendingCount", {
@@ -989,6 +1034,11 @@ function ContactModal({
   const [loadingActions, setLoadingActions] = useState(true);
   const [emailTemplate, setEmailTemplate] = useState("formules_presentation");
   const [sendingEmail, setSendingEmail] = useState(false);
+  const [whatsappTemplate, setWhatsappTemplate] = useState(
+    "formules_presentation",
+  );
+  const [customWhatsappMessage, setCustomWhatsappMessage] = useState("");
+  const [sendingWhatsapp, setSendingWhatsapp] = useState(false);
   const [selectedFormule, setSelectedFormule] = useState(
     getChosenFormule(contact),
   );
@@ -1088,6 +1138,81 @@ function ContactModal({
     }
   }
 
+  const whatsappNumber = whatsappNumberFromContact(contact);
+  const whatsappReady = isValidWhatsAppNumber(whatsappNumber);
+  const whatsappPreview = generateWhatsAppText(whatsappTemplate, contact, {
+    customMessage: customWhatsappMessage,
+  });
+  const whatsappLink = whatsappReady
+    ? buildWhatsAppLink(whatsappNumber, whatsappPreview)
+    : "";
+
+  async function sendSelectedWhatsapp() {
+    if (!whatsappReady) {
+      alert(t("dashboard.noPhoneOnContact"));
+      return;
+    }
+    if (whatsappTemplate === "custom" && !customWhatsappMessage.trim()) {
+      alert(t("dashboard.whatsappEmpty"));
+      return;
+    }
+
+    const templateLabel =
+      whatsappTemplate === "custom"
+        ? t("whatsappTemplate.custom")
+        : t(`emailTemplate.${whatsappTemplate}`);
+    const confirmed = confirm(
+      t("dashboard.sendWhatsappConfirm", {
+        template: templateLabel,
+        name: contact.prenom,
+      }),
+    );
+    if (!confirmed) return;
+
+    setSendingWhatsapp(true);
+    try {
+      const response = await authedFetch("/api/whatsapp/send", {
+        method: "POST",
+        body: JSON.stringify({
+          contactId: String(contact.id),
+          whatsappTemplate,
+          customMessage: customWhatsappMessage,
+        }),
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        alert(`✅ ${t("dashboard.whatsappOk")}`);
+        fetchActions();
+        onContactUpdated?.();
+        return data;
+      }
+
+      if (data.code === "NOT_CONFIGURED" && data.waLink) {
+        const openAnyway = confirm(
+          t("dashboard.whatsappOpenFallback", {
+            error: data.message || data.error,
+          }),
+        );
+        if (openAnyway) {
+          window.open(data.waLink, "_blank", "noopener,noreferrer");
+        }
+        return null;
+      }
+
+      alert(
+        "❌ " + t("dashboard.whatsappFail", { error: data.message || data.error }),
+      );
+      return null;
+    } catch (error) {
+      console.error("❌ Erreur WhatsApp:", error);
+      alert("❌ " + t("dashboard.networkError", { error: error.message }));
+      return null;
+    } finally {
+      setSendingWhatsapp(false);
+    }
+  }
+
   return (
     <div
       className="fixed inset-0 bg-black/70 backdrop-blur-xl flex items-center justify-center p-4 z-50"
@@ -1143,7 +1268,22 @@ function ContactModal({
                     📱 {t("dashboard.phone")}
                   </td>
                   <td className="px-4 py-3 text-white">
-                    {contact.phone || "—"}
+                    {contact.phone ? (
+                      whatsappReady ? (
+                        <a
+                          href={`https://wa.me/${whatsappNumber}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-emerald-300 hover:text-emerald-200 underline-offset-2 hover:underline"
+                        >
+                          {contact.phone}
+                        </a>
+                      ) : (
+                        contact.phone
+                      )
+                    ) : (
+                      "—"
+                    )}
                   </td>
                 </tr>
                 <tr className="border-b border-slate-700/50">
@@ -1245,6 +1385,75 @@ function ContactModal({
                 t("dashboard.emailHintRelance1")}
               {emailTemplate === "relance_2" &&
                 t("dashboard.emailHintRelance2")}
+            </p>
+          </div>
+
+          {/* Envoi WhatsApp */}
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              📱 {t("dashboard.whatsappSection")}
+            </label>
+            <div className="flex flex-col md:flex-row gap-3">
+              <select
+                value={whatsappTemplate}
+                onChange={(e) => setWhatsappTemplate(e.target.value)}
+                className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all duration-300 font-semibold cursor-pointer"
+              >
+                {WHATSAPP_TEMPLATE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.value === "custom"
+                      ? t("whatsappTemplate.custom")
+                      : t(`emailTemplate.${option.value}`)}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={sendSelectedWhatsapp}
+                disabled={sendingWhatsapp || !whatsappReady}
+                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {sendingWhatsapp
+                  ? `⏳ ${t("sending")}`
+                  : `📤 ${t("dashboard.sendWhatsapp")}`}
+              </button>
+              <button
+                type="button"
+                disabled={!whatsappReady || !whatsappPreview}
+                onClick={() => {
+                  if (whatsappLink) {
+                    window.open(whatsappLink, "_blank", "noopener,noreferrer");
+                  }
+                }}
+                className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                💬 {t("dashboard.openWhatsapp")}
+              </button>
+            </div>
+            {whatsappTemplate === "custom" ? (
+              <textarea
+                value={customWhatsappMessage}
+                onChange={(e) => setCustomWhatsappMessage(e.target.value)}
+                placeholder={t("dashboard.whatsappCustomPlaceholder")}
+                rows={5}
+                className="mt-3 w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all duration-300 resize-none"
+              />
+            ) : null}
+            {whatsappPreview ? (
+              <pre className="mt-3 whitespace-pre-wrap text-xs text-slate-300 bg-slate-900/50 border border-slate-700/50 rounded-xl p-4 max-h-40 overflow-y-auto">
+                {whatsappPreview}
+              </pre>
+            ) : null}
+            <p className="text-xs text-slate-500 mt-3">
+              {!whatsappReady
+                ? t("dashboard.noPhoneOnContact")
+                : whatsappTemplate === "formules_presentation"
+                  ? t("dashboard.whatsappHintFormules")
+                  : whatsappTemplate === "relance_1"
+                    ? t("dashboard.whatsappHintRelance1")
+                    : whatsappTemplate === "relance_2"
+                      ? t("dashboard.whatsappHintRelance2")
+                      : t("dashboard.whatsappHintCustom")}
             </p>
           </div>
 
