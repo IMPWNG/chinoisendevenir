@@ -18,12 +18,12 @@ function ContactPage() {
     {
       icon: "📍",
       title: "Adresse",
-      details: ["Chongqing", "Chengdu", "Shanghai"],
+      details: ["Chongqing", "Chengdu", "Shanghai", "Beijing"],
     },
     {
       icon: "📞",
       title: "Téléphone",
-      details: ["+86 (0) XXX XXX XXXX", "Lun-Ven : 9h-18h"],
+      details: ["+86 (136) 4050 5272", "Lun-Ven : 9h-18h"],
     },
     {
       icon: "📧",
@@ -34,8 +34,8 @@ function ContactPage() {
   ];
 
   const socialLinks = [
-    { icon: "💬", name: "WeChat", handle: "@chinoisendevenir" },
-    { icon: "📱", name: "WhatsApp", handle: "Nous contacter" },
+    { icon: "💬", name: "WeChat", handle: "@MCisec" },
+    { icon: "📱", name: "WhatsApp", handle: "+33767523361" },
   ];
 
   const faqs = [
