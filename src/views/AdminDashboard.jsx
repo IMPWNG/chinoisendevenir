@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
+import AdminContactInfo from "../components/AdminContactInfo";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import {
   WHATSAPP_TEMPLATE_OPTIONS,
@@ -16,6 +17,7 @@ import {
   buildWhatsAppLink,
 } from "../lib/whatsapp/messages";
 import { useAdminI18n } from "../context/AdminI18nContext";
+import { generateCustomEmailHtml } from "../lib/emailLayout";
 import {
   isStudentSpaceUnlocked,
   getChosenFormule,
@@ -95,7 +97,7 @@ const STATUT_ICONS = {
   dossier_terminé: "🏆",
 };
 
-const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat"];
+const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat", "autre"];
 
 const DOMAINES_ETUDES = [
   "Informatique / IA / Data Science",
@@ -141,6 +143,11 @@ const EMAIL_TEMPLATE_OPTIONS = [
     value: "formules_presentation",
     label: "📋 Formules d'accompagnement",
   },
+];
+
+const CONTACT_EMAIL_TEMPLATE_OPTIONS = [
+  ...EMAIL_TEMPLATE_OPTIONS,
+  { value: "custom", label: "✏️ Message libre" },
 ];
 
 function translatedOrRaw(t, prefix, value) {
@@ -190,6 +197,7 @@ export default function AdminDashboard() {
   const [filterNiveau, setFilterNiveau] = useState("tous");
   const [filterDomaine, setFilterDomaine] = useState("tous");
   const [selectedContact, setSelectedContact] = useState(null);
+  const [editOnOpen, setEditOnOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
   const [bulkTemplate, setBulkTemplate] = useState("relance_1");
   const [bulkChannel, setBulkChannel] = useState("email");
@@ -950,10 +958,22 @@ const stats = {
                       <td className="px-6 py-4">
                         <div className="flex gap-2">
                           <button
-                            onClick={() => setSelectedContact(c)}
+                            onClick={() => {
+                              setEditOnOpen(false);
+                              setSelectedContact(c);
+                            }}
                             className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/20 px-3 py-1 rounded-lg text-sm font-semibold transition-all duration-200"
                           >
                             👁️ {t("dashboard.view")}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setEditOnOpen(true);
+                              setSelectedContact(c);
+                            }}
+                            className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/20 px-3 py-1 rounded-lg text-sm font-semibold transition-all duration-200"
+                          >
+                            ✏️ {t("dashboard.editShort")}
                           </button>
                           <button
                             onClick={() => deleteContact(c.id)}
@@ -985,12 +1005,26 @@ const stats = {
       {selectedContact && (
         <ContactModal
           contact={selectedContact}
-          onClose={() => setSelectedContact(null)}
+          onClose={() => {
+            setSelectedContact(null);
+            setEditOnOpen(false);
+          }}
           onUpdateStatut={updateStatut}
           onUpdateFormule={updateFormule}
           onUpdateDossierEtape={updateDossierEtape}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
+          onContactPatched={(updated) => {
+            setContacts((prev) =>
+              prev.map((c) =>
+                c.id === updated.id ? { ...c, ...updated } : c,
+              ),
+            );
+            setSelectedContact((prev) =>
+              prev && prev.id === updated.id ? { ...prev, ...updated } : prev,
+            );
+          }}
+          startEditing={editOnOpen}
         />
       )}
     </AdminShell>
@@ -1025,6 +1059,8 @@ function ContactModal({
   onUpdateDossierEtape,
   userEmail,
   onContactUpdated,
+  onContactPatched,
+  startEditing,
 }) {
   const { t, lang } = useAdminI18n();
   const [actions, setActions] = useState([]);
@@ -1034,6 +1070,13 @@ function ContactModal({
   const [loadingActions, setLoadingActions] = useState(true);
   const [emailTemplate, setEmailTemplate] = useState("formules_presentation");
   const [sendingEmail, setSendingEmail] = useState(false);
+  const [customEmailSubject, setCustomEmailSubject] = useState("");
+  const [customEmailTitle, setCustomEmailTitle] = useState("");
+  const [customEmailSubtitle, setCustomEmailSubtitle] = useState("");
+  const [customEmailMessage, setCustomEmailMessage] = useState("");
+  const [emailAiNotes, setEmailAiNotes] = useState("");
+  const [composingEmail, setComposingEmail] = useState(false);
+  const [emailAiError, setEmailAiError] = useState("");
   const [whatsappTemplate, setWhatsappTemplate] = useState(
     "formules_presentation",
   );
@@ -1050,6 +1093,15 @@ function ContactModal({
     setNotes(contact.notes_admin || "");
     setSelectedFormule(getChosenFormule(contact));
   }, [contact.id, contact.formule, contact.notes_admin]);
+
+  useEffect(() => {
+    setCustomEmailSubject("");
+    setCustomEmailTitle("");
+    setCustomEmailSubtitle("");
+    setCustomEmailMessage("");
+    setEmailAiNotes("");
+    setEmailAiError("");
+  }, [contact.id]);
 
   const fetchActions = async () => {
     setLoadingActions(true);
@@ -1096,10 +1148,64 @@ function ContactModal({
       .eq("id", contact.id);
   };
 
+  async function composeEmailWithAi() {
+    const notes = emailAiNotes.trim();
+    if (notes.length < 8) {
+      setEmailAiError(t("dashboard.emailAiEmpty"));
+      return;
+    }
+
+    setComposingEmail(true);
+    setEmailAiError("");
+    try {
+      const response = await authedFetch("/api/admin/compose-email", {
+        method: "POST",
+        body: JSON.stringify({
+          contactId: String(contact.id),
+          notes,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        setEmailAiError(
+          t("dashboard.emailAiFail", {
+            error: data.error || data.message || t("unknownError"),
+          }),
+        );
+        return;
+      }
+      setCustomEmailSubject(data.subject || "");
+      setCustomEmailTitle(data.title || "");
+      setCustomEmailSubtitle(data.subtitle || "");
+      setCustomEmailMessage(data.body || "");
+    } catch (error) {
+      setEmailAiError(
+        t("dashboard.emailAiFail", {
+          error:
+            error.message === "SESSION"
+              ? t("sessionExpired")
+              : error.message || t("unknownError"),
+        }),
+      );
+    } finally {
+      setComposingEmail(false);
+    }
+  }
+
   async function sendSelectedEmail() {
+    if (emailTemplate === "custom") {
+      if (!customEmailSubject.trim() || !customEmailMessage.trim()) {
+        alert(t("dashboard.emailCustomEmpty"));
+        return;
+      }
+    }
+
     const confirmed = confirm(
       t("dashboard.sendEmailConfirm", {
-        template: t(`emailTemplate.${emailTemplate}`),
+        template:
+          emailTemplate === "custom" && customEmailSubject.trim()
+            ? customEmailSubject.trim()
+            : t(`emailTemplate.${emailTemplate}`),
         name: contact.prenom,
       }),
     );
@@ -1110,6 +1216,14 @@ function ContactModal({
       const payload = {
         contactId: String(contact.id),
         emailTemplate,
+        ...(emailTemplate === "custom"
+          ? {
+              customSubject: customEmailSubject.trim(),
+              customTitle: customEmailTitle.trim(),
+              customSubtitle: customEmailSubtitle.trim(),
+              customMessage: customEmailMessage.trim(),
+            }
+          : {}),
       };
 
       const response = await authedFetch("/api/email/auto-reply", {
@@ -1253,104 +1367,14 @@ function ContactModal({
         </div>
 
         <div className="p-8">
-          {/* Infos Grid - Style tableau */}
-          <div className="mb-8 overflow-x-auto">
-            <table className="w-full border-collapse">
-              <tbody>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20 w-1/3">
-                    📧 {t("dashboard.email")}
-                  </td>
-                  <td className="px-4 py-3 text-white">{contact.email}</td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📱 {t("dashboard.phone")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.phone ? (
-                      whatsappReady ? (
-                        <a
-                          href={`https://wa.me/${whatsappNumber}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-emerald-300 hover:text-emerald-200 underline-offset-2 hover:underline"
-                        >
-                          {contact.phone}
-                        </a>
-                      ) : (
-                        contact.phone
-                      )
-                    ) : (
-                      "—"
-                    )}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    🌍 {t("dashboard.country")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.pays || "—"}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    🎓 {t("dashboard.studyLevel")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.dernier_diplome
-                      ? translatedOrRaw(t, "niveau", contact.dernier_diplome)
-                      : "—"}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📚 {t("dashboard.domain")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.domaine_etudes
-                      ? translatedOrRaw(t, "domaine", contact.domaine_etudes)
-                      : "—"}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    💰 {t("dashboard.budget")}
-                  </td>
-                  <td className="px-4 py-3 text-white font-semibold">
-                    {contact.budget
-                      ? translatedOrRaw(t, "budget", contact.budget)
-                      : "—"}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    📅 {t("dashboard.intakeDate")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.date_rentree || "—"}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-700/50">
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    🔍 {t("dashboard.source")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.source || "—"}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-bold text-slate-300 bg-slate-700/20">
-                    ⭐ {t("dashboard.qualityScore")}
-                  </td>
-                  <td className="px-4 py-3 text-white">
-                    {contact.score_qualite || "—"}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <AdminContactInfo
+            contact={contact}
+            startEditing={startEditing}
+            onSaved={(updated) => {
+              onContactPatched?.(updated);
+              fetchActions();
+            }}
+          />
 
           {/* Envoi d'email */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -1363,7 +1387,7 @@ function ContactModal({
                 onChange={(e) => setEmailTemplate(e.target.value)}
                 className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold cursor-pointer"
               >
-                {EMAIL_TEMPLATE_OPTIONS.map((option) => (
+                {CONTACT_EMAIL_TEMPLATE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
                     {t(`emailTemplate.${option.value}`)}
                   </option>
@@ -1372,12 +1396,119 @@ function ContactModal({
               <button
                 type="button"
                 onClick={sendSelectedEmail}
-                disabled={sendingEmail}
+                disabled={
+                  sendingEmail ||
+                  composingEmail ||
+                  (emailTemplate === "custom" &&
+                    (!customEmailSubject.trim() || !customEmailMessage.trim()))
+                }
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {sendingEmail ? `⏳ ${t("sending")}` : `📤 ${t("dashboard.sendEmail")}`}
               </button>
             </div>
+            {emailTemplate === "custom" ? (
+              <div className="mt-4 space-y-4">
+                <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4">
+                  <p className="text-xs font-bold uppercase tracking-wide text-violet-200">
+                    ✨ {t("dashboard.emailAiSection")}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">
+                    {t("dashboard.emailAiHint")}
+                  </p>
+                  <textarea
+                    value={emailAiNotes}
+                    onChange={(e) => setEmailAiNotes(e.target.value)}
+                    placeholder={t("dashboard.emailAiPlaceholder")}
+                    rows={4}
+                    className="mt-3 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all duration-300 resize-none"
+                  />
+                  <div className="mt-3 flex flex-col sm:flex-row sm:items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={composeEmailWithAi}
+                      disabled={composingEmail}
+                      className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                    >
+                      {composingEmail
+                        ? `⏳ ${t("dashboard.emailAiWorking")}`
+                        : `✨ ${t("dashboard.emailAiButton")}`}
+                    </button>
+                    {emailAiError ? (
+                      <p className="text-sm text-rose-300">{emailAiError}</p>
+                    ) : null}
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                    {t("dashboard.emailCustomSubject")}
+                  </label>
+                  <input
+                    type="text"
+                    value={customEmailSubject}
+                    onChange={(e) => setCustomEmailSubject(e.target.value)}
+                    placeholder={t("dashboard.emailCustomSubjectPlaceholder")}
+                    className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                      {t("dashboard.emailCustomTitle")}
+                    </label>
+                    <input
+                      type="text"
+                      value={customEmailTitle}
+                      onChange={(e) => setCustomEmailTitle(e.target.value)}
+                      placeholder={t("dashboard.emailCustomTitlePlaceholder")}
+                      className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                      {t("dashboard.emailCustomSubtitle")}
+                    </label>
+                    <input
+                      type="text"
+                      value={customEmailSubtitle}
+                      onChange={(e) => setCustomEmailSubtitle(e.target.value)}
+                      placeholder={t(
+                        "dashboard.emailCustomSubtitlePlaceholder",
+                      )}
+                      className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                    {t("dashboard.emailCustomBody")}
+                  </label>
+                  <textarea
+                    value={customEmailMessage}
+                    onChange={(e) => setCustomEmailMessage(e.target.value)}
+                    placeholder={t("dashboard.emailCustomPlaceholder")}
+                    rows={8}
+                    className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+                    {t("dashboard.emailPreview")}
+                  </p>
+                  <iframe
+                    title={t("dashboard.emailPreview")}
+                    sandbox=""
+                    className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
+                    srcDoc={generateCustomEmailHtml(contact, {
+                      customSubject: customEmailSubject,
+                      customTitle: customEmailTitle,
+                      customSubtitle: customEmailSubtitle,
+                      customMessage: customEmailMessage,
+                    })}
+                  />
+                </div>
+              </div>
+            ) : null}
             <p className="text-xs text-slate-500 mt-3">
               {emailTemplate === "formules_presentation" &&
                 t("dashboard.emailHintFormules")}
@@ -1385,6 +1516,7 @@ function ContactModal({
                 t("dashboard.emailHintRelance1")}
               {emailTemplate === "relance_2" &&
                 t("dashboard.emailHintRelance2")}
+              {emailTemplate === "custom" && t("dashboard.emailHintCustom")}
             </p>
           </div>
 

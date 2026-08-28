@@ -36,6 +36,7 @@ export async function GET(request) {
       unlocked: profile.unlocked,
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("student me:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

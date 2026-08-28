@@ -31,6 +31,19 @@ export async function PATCH(request) {
       updated_at: new Date().toISOString(),
     };
 
+    if (payload.prenom && payload.prenom.length > 80) {
+      return NextResponse.json({ error: "Prénom trop long" }, { status: 400 });
+    }
+    if (payload.nom && payload.nom.length > 80) {
+      return NextResponse.json({ error: "Nom trop long" }, { status: 400 });
+    }
+    if (
+      payload.age !== null &&
+      (!Number.isFinite(payload.age) || payload.age < 15 || payload.age > 60)
+    ) {
+      return NextResponse.json({ error: "Âge invalide" }, { status: 400 });
+    }
+
     if (!payload.prenom || !payload.nom || !payload.pays) {
       return NextResponse.json(
         { error: "Prénom, nom et pays sont obligatoires" },
@@ -76,6 +89,7 @@ export async function PATCH(request) {
       profile: publicStudentProfile(updated),
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("student profile:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

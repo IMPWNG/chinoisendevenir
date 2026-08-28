@@ -17,8 +17,9 @@ export async function POST(request) {
     const result = await importScanCatalog(auth.admin, catalog);
     return NextResponse.json({ success: true, ...result });
   } catch (error) {
+    console.error("universities import-scan:", error);
     return NextResponse.json(
-      { error: error.message || "Import impossible" },
+      { error: "Import impossible" },
       { status: 500 },
     );
   }

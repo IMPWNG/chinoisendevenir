@@ -210,12 +210,53 @@ export function wrapEmailHtml({ title, subtitle, prenom, bodyHtml }) {
   `;
 }
 
+export function plainTextToEmailBodyHtml(text) {
+  const blocks = String(text || "")
+    .replace(/\r\n/g, "\n")
+    .trim()
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  if (!blocks.length) {
+    return `<div class="section"><p></p></div>`;
+  }
+
+  return blocks
+    .map((block) => {
+      const html = escapeHtml(block).replaceAll("\n", "<br>");
+      return `<div class="section"><p>${html}</p></div>`;
+    })
+    .join("\n");
+}
+
+export function generateCustomEmailHtml(contact, extras = {}) {
+  const title =
+    String(extras.customTitle || extras.customSubject || "").trim() ||
+    "Votre projet d'études en Chine";
+  const subtitle = String(extras.customSubtitle || "").trim();
+  return wrapEmailHtml({
+    title,
+    subtitle,
+    prenom: contact?.prenom || "",
+    bodyHtml: plainTextToEmailBodyHtml(extras.customMessage),
+  });
+}
+
 function escapeHtml(value) {
   return String(value || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+export function sanitizeEmailSubject(value, maxLen = 180) {
+  return String(value ?? "")
+    .replace(/[\r\n\u0000-\u001f\u007f\u2028\u2029]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLen);
 }
 
 export { SITE_URL, escapeHtml };

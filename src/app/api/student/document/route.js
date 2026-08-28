@@ -46,7 +46,8 @@ export async function GET(request) {
 
     return NextResponse.json({ success: true, url, name });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("student document:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
 
@@ -108,6 +109,7 @@ export async function POST(request) {
       adminDocuments,
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("student document:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

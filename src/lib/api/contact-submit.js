@@ -2,7 +2,8 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, INBOUND_REPLY_TO } from "../emailConfig.js";
-import { wrapEmailHtml } from "../emailLayout.js";
+import { wrapEmailHtml, sanitizeEmailSubject } from "../emailLayout.js";
+import { applyCorsHeaders, getClientIp, rateLimit } from "../httpSecurity.js";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -92,23 +93,7 @@ function mergeNotes(existingNotes, incomingNotes) {
 }
 
 export default async function handler(req, res) {
-  // ✅ DEBUG Variables env
-  console.log("🔍 DEBUG Variables env:");
-  console.log("SUPABASE_URL:", supabaseUrl ? "✅" : "❌");
-  console.log("SUPABASE_SERVICE_ROLE_KEY:", serviceRoleKey ? "✅" : "❌");
-  console.log("RESEND_API_KEY:", resendApiKey ? "✅" : "❌");
-
-  // ✅ CORS Headers (Vercel serverless)
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-  );
+  applyCorsHeaders(req, res, { methods: "POST, OPTIONS" });
 
   // ✅ Handle preflight
   if (req.method === "OPTIONS") {
@@ -121,15 +106,22 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
 
-  // ✅ Vérifier les variables d'environnement
+  const limited = rateLimit({
+    key: `contact-submit:${getClientIp(req.headers)}`,
+    limit: 8,
+    windowMs: 15 * 60 * 1000,
+  });
+  if (!limited.ok) {
+    res.setHeader("Retry-After", String(limited.retryAfter));
+    return res.status(429).json({
+      error: "Trop de requêtes. Réessayez plus tard.",
+    });
+  }
+
   if (!supabaseUrl || !serviceRoleKey || !resendApiKey) {
+    console.error("❌ Variables d'environnement manquantes pour contact-submit");
     return res.status(500).json({
-      error: "Variables d'environnement manquantes en Vercel",
-      missing: {
-        SUPABASE_URL: !supabaseUrl,
-        SUPABASE_SERVICE_ROLE_KEY: !serviceRoleKey,
-        RESEND_API_KEY: !resendApiKey,
-      },
+      error: "Service temporairement indisponible",
     });
   }
 
@@ -148,13 +140,27 @@ export default async function handler(req, res) {
       notes_admin,
     } = req.body;
 
-    // ✅ Validation stricte
-    if (!email || !email.includes("@")) {
+    if (!email || !email.includes("@") || String(email).length > 254) {
       return res.status(400).json({ error: "Email invalide" });
     }
 
-    if (!prenom || !nom || !pays) {
+    if (
+      !prenom ||
+      !nom ||
+      !pays ||
+      String(prenom).length > 80 ||
+      String(nom).length > 80 ||
+      String(pays).length > 80
+    ) {
       return res.status(400).json({ error: "Champs obligatoires manquants" });
+    }
+
+    if (notes_admin && String(notes_admin).length > 2000) {
+      return res.status(400).json({ error: "Message trop long" });
+    }
+
+    if (phone && String(phone).length > 30) {
+      return res.status(400).json({ error: "Téléphone invalide" });
     }
 
     // ✅ Validation du domaine d'études
@@ -319,7 +325,9 @@ export default async function handler(req, res) {
         from: CONTACT_FROM,
         replyTo: INBOUND_REPLY_TO,
         to: normalizedEmail,
-        subject: `Nous avons bien reçu votre demande, ${prenom}`,
+        subject: sanitizeEmailSubject(
+          `Nous avons bien reçu votre demande, ${prenom}`,
+        ),
         html: generateEmailTemplate(prenom),
       });
 
@@ -336,15 +344,12 @@ export default async function handler(req, res) {
     return res.status(isUpdate ? 200 : 201).json({
       success: true,
       updated: isUpdate,
-      contact_id: contact.id,
-      message: `Bienvenue ${prenom} ✅`,
-      environment: "vercel_production",
+      message: `Bienvenue ${String(prenom).trim()} ✅`,
     });
   } catch (error) {
     console.error("❌ Erreur serveur:", error);
     return res.status(500).json({
-      error: error.message,
-      timestamp: new Date().toISOString(),
+      error: "Erreur serveur",
     });
   }
 }

@@ -20,6 +20,7 @@ export async function POST(request) {
       profile: publicStudentProfile(contact),
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("student ensure-profile:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

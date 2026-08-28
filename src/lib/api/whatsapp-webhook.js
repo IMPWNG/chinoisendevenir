@@ -3,6 +3,7 @@ import { createHmac, timingSafeEqual } from "crypto";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { CONTACT_FROM, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
+import { escapeHtml, sanitizeEmailSubject } from "../emailLayout.js";
 import {
   logAction,
   updateContactStatus,
@@ -32,7 +33,7 @@ const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export function verifyWhatsAppSignature(rawBody, signatureHeader, appSecret) {
-  if (!appSecret) return true;
+  if (!appSecret) return false;
   const expected = `sha256=${createHmac("sha256", appSecret)
     .update(rawBody)
     .digest("hex")}`;
@@ -105,18 +106,21 @@ async function findContactByWhatsAppId(waId) {
 async function notifyAdminWhatsApp({ contact, text, intent, from }) {
   if (!resend) return;
   try {
+    const name = `${contact.prenom || ""} ${contact.nom || ""}`.trim();
     await resend.emails.send({
       from: CONTACT_FROM,
       to: ADMIN_NOTIFY_EMAIL,
       replyTo: contact.email || undefined,
-      subject: `WhatsApp de ${contact.prenom || ""} ${contact.nom || ""} — ${intent}`,
+      subject: sanitizeEmailSubject(
+        `WhatsApp de ${name} — ${intent}`,
+      ),
       html: `
-        <p><strong>${contact.prenom || ""} ${contact.nom || ""}</strong> (${contact.email || "sans email"})</p>
-        <p><strong>WhatsApp :</strong> ${from}</p>
-        <p><strong>Intent détecté :</strong> ${intent}</p>
-        <p><strong>Statut actuel :</strong> ${contact.suivi_statut || "—"}</p>
+        <p><strong>${escapeHtml(name)}</strong> (${escapeHtml(contact.email || "sans email")})</p>
+        <p><strong>WhatsApp :</strong> ${escapeHtml(from)}</p>
+        <p><strong>Intent détecté :</strong> ${escapeHtml(intent)}</p>
+        <p><strong>Statut actuel :</strong> ${escapeHtml(contact.suivi_statut || "—")}</p>
         <hr>
-        <pre style="white-space:pre-wrap;font-family:inherit">${truncate(text, 4000)}</pre>
+        <pre style="white-space:pre-wrap;font-family:inherit">${escapeHtml(truncate(text, 4000))}</pre>
       `,
     });
   } catch (error) {
@@ -228,7 +232,12 @@ export function verifySubscribeChallenge(searchParams) {
   const token = searchParams.get("hub.verify_token");
   const challenge = searchParams.get("hub.challenge");
 
-  if (mode === "subscribe" && token && token === config.verifyToken) {
+  if (
+    mode === "subscribe" &&
+    config.verifyToken &&
+    token &&
+    token === config.verifyToken
+  ) {
     return { ok: true, challenge };
   }
 

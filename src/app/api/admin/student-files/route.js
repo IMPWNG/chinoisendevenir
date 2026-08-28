@@ -60,7 +60,8 @@ export async function GET(request) {
     const files = await loadFiles(auth.admin, contactId);
     return NextResponse.json({ success: true, ...files });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("admin student-files:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
 
@@ -101,7 +102,7 @@ export async function POST(request) {
 
     if (uploadError) {
       return NextResponse.json(
-        { error: uploadError.message || "Échec de l'envoi du document" },
+        { error: "Échec de l'envoi du document" },
         { status: 500 },
       );
     }
@@ -109,7 +110,8 @@ export async function POST(request) {
     const files = await loadFiles(auth.admin, contactId);
     return NextResponse.json({ success: true, ...files });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("admin student-files:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
 
@@ -137,7 +139,7 @@ export async function DELETE(request) {
 
     if (removeError) {
       return NextResponse.json(
-        { error: removeError.message || "Impossible de supprimer le document" },
+        { error: "Impossible de supprimer le document" },
         { status: 500 },
       );
     }
@@ -152,6 +154,7 @@ export async function DELETE(request) {
     const files = await loadFiles(auth.admin, contactId);
     return NextResponse.json({ success: true, ...files });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("admin student-files:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

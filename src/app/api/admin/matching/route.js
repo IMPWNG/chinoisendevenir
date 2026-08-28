@@ -31,8 +31,9 @@ export async function GET(request) {
       latest: runs[0] || null,
     });
   } catch (error) {
+    console.error("matching GET:", error);
     return NextResponse.json(
-      { error: error.message || "Lecture impossible" },
+      { error: "Lecture impossible" },
       { status: 500 },
     );
   }
@@ -135,8 +136,9 @@ export async function POST(request) {
       ...result,
     });
   } catch (error) {
+    console.error("matching POST:", error);
     return NextResponse.json(
-      { error: error.message || "Matching impossible" },
+      { error: "Matching impossible" },
       { status: 500 },
     );
   }

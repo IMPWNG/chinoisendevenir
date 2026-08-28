@@ -1,61 +1,76 @@
 /* eslint-disable no-undef */
-import { processInboundEmail } from "./inbound-email.js";
+import { createHmac, timingSafeEqual } from "crypto";
 
-const resendWebhookSecret = process.env.RESEND_WEBHOOK_SECRET;
+const MAX_TIMESTAMP_AGE_SECONDS = 5 * 60;
 
-function verifyResendSignature(req, secret) {
-  if (!secret) {
-    console.warn("⚠️ RESEND_WEBHOOK_SECRET non configuré — vérification ignorée");
-    return true;
+function headerValue(headers, name) {
+  if (!headers) return "";
+  if (typeof headers.get === "function") {
+    return headers.get(name) || "";
   }
-
-  const headers = req.headers || {};
-  const hasSvix =
-    headers["svix-id"] && headers["svix-timestamp"] && headers["svix-signature"];
-  const hasLegacy = headers["resend-timestamp"] && headers["resend-signature"];
-
-  if (!hasSvix && !hasLegacy) {
-    console.warn("⚠️ Headers de signature absents — on continue");
-    return true;
+  const lower = name.toLowerCase();
+  for (const [key, value] of Object.entries(headers)) {
+    if (key.toLowerCase() === lower) {
+      return Array.isArray(value) ? value[0] : value || "";
+    }
   }
-
-  return true;
+  return "";
 }
 
-export default async function handler(req, res) {
-  if (req.method === "GET") {
-    return res.status(200).json({
-      success: true,
-      message: "Webhook Resend actif",
-    });
+function decodeWebhookSecret(secret) {
+  const value = String(secret || "").trim();
+  if (!value) return null;
+  const payload = value.startsWith("whsec_") ? value.slice(6) : value;
+  const decoded = Buffer.from(payload, "base64");
+  return decoded.length ? decoded : null;
+}
+
+function signaturesMatch(expected, received) {
+  const a = Buffer.from(String(expected || ""));
+  const b = Buffer.from(String(received || ""));
+  if (!a.length || a.length !== b.length) return false;
+  return timingSafeEqual(a, b);
+}
+
+export function verifyResendWebhook({ rawBody, headers, secret }) {
+  const key = decodeWebhookSecret(secret);
+  if (!key) {
+    return { ok: false, reason: "missing_secret" };
   }
 
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  const svixId = String(headerValue(headers, "svix-id") || "").trim();
+  const timestamp = String(headerValue(headers, "svix-timestamp") || "").trim();
+  const signatureHeader = String(
+    headerValue(headers, "svix-signature") || "",
+  ).trim();
+
+  if (!svixId || !timestamp || !signatureHeader) {
+    return { ok: false, reason: "missing_headers" };
   }
 
-  try {
-    if (!verifyResendSignature(req, resendWebhookSecret)) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    const body = req.body || {};
-    console.log("📨 Webhook Resend:", body.type, body.data?.email_id || body.data?.id);
-
-    if (body.type && body.type !== "email.received") {
-      return res.status(200).json({
-        success: true,
-        message: `Event ignored: ${body.type}`,
-      });
-    }
-
-    const result = await processInboundEmail(body);
-    return res.status(result.httpStatus || 200).json(result);
-  } catch (error) {
-    console.error("❌ Erreur webhook:", error);
-    return res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+  const ts = Number(timestamp);
+  if (!Number.isFinite(ts)) {
+    return { ok: false, reason: "invalid_timestamp" };
   }
+
+  const now = Math.floor(Date.now() / 1000);
+  if (Math.abs(now - ts) > MAX_TIMESTAMP_AGE_SECONDS) {
+    return { ok: false, reason: "expired_timestamp" };
+  }
+
+  const signedContent = `${svixId}.${timestamp}.${rawBody}`;
+  const expected = createHmac("sha256", key)
+    .update(signedContent, "utf8")
+    .digest("base64");
+
+  const candidates = signatureHeader.split(/\s+/).map((item) => {
+    const comma = item.indexOf(",");
+    return comma === -1 ? "" : item.slice(comma + 1);
+  });
+
+  if (!candidates.some((sig) => signaturesMatch(expected, sig))) {
+    return { ok: false, reason: "invalid_signature" };
+  }
+
+  return { ok: true };
 }

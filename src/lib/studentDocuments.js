@@ -38,13 +38,20 @@ export function adminFolder(contactId) {
 }
 
 export function isOwnedStoragePath(contactId, path) {
-  const prefix = `${contactId}/`;
+  const id = String(contactId || "");
   const value = String(path || "");
-  return (
-    value.startsWith(prefix) &&
-    !value.includes("..") &&
-    value.length > prefix.length
-  );
+  if (!id || !value) return false;
+  if (
+    value.includes("\\") ||
+    value.includes("\0") ||
+    value.includes("..") ||
+    value.startsWith("/") ||
+    value.includes("//")
+  ) {
+    return false;
+  }
+  const parts = value.split("/");
+  return parts[0] === id && parts.length >= 2 && parts.every(Boolean);
 }
 
 export function isAdminSentPath(contactId, path) {

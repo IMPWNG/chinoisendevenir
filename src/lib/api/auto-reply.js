@@ -3,8 +3,15 @@ import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConfig.js";
 import { getAuthenticatedAdmin } from "../studentAuth.js";
-import { wrapEmailHtml, SITE_URL, escapeHtml } from "../emailLayout.js";
+import {
+  wrapEmailHtml,
+  SITE_URL,
+  escapeHtml,
+  generateCustomEmailHtml,
+  sanitizeEmailSubject,
+} from "../emailLayout.js";
 import { FORMULES, EXTRA_FEES, displayFormuleLabel } from "../formules.js";
+import { applyCorsHeaders } from "../httpSecurity.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -234,6 +241,16 @@ const EMAIL_TEMPLATES = {
     description: "Confirmation de la formule choisie",
     status: "formule_choisie",
   },
+  custom: {
+    subject: (_contact, extras = {}) =>
+      String(extras.customSubject || "").trim() ||
+      "Votre projet d'études en Chine",
+    generateHtml: (contact, extras = {}) =>
+      generateCustomEmailHtml(contact, extras),
+    action: "email_envoye",
+    description: "Email libre envoyé",
+    status: null,
+  },
 };
 
 // ✉️ Envoyer un email selon le template choisi
@@ -253,19 +270,41 @@ async function sendTemplatedEmail(
   console.log(`À: ${contact.email}`);
   console.log(`Prenom: ${contact.prenom}`);
 
+  if (templateKey === "custom") {
+    extras.customSubject = sanitizeEmailSubject(extras.customSubject, 180);
+    extras.customTitle = sanitizeEmailSubject(extras.customTitle, 120);
+    extras.customSubtitle = sanitizeEmailSubject(extras.customSubtitle, 160);
+    extras.customMessage = String(extras.customMessage || "").slice(0, 8000);
+    if (!String(extras.customMessage || "").trim()) {
+      return { success: false, error: "Message vide" };
+    }
+    if (!extras.customSubject) {
+      return { success: false, error: "Objet manquant" };
+    }
+  }
+
+  const subject = sanitizeEmailSubject(
+    typeof template.subject === "function"
+      ? template.subject(contact, extras)
+      : template.subject,
+  );
+
   try {
     console.log(`📤 Envoi via Resend...`);
-    const response = await resend.emails.send({
+    const payload = {
       from: CONTACT_FROM,
       to: contact.email,
-      subject: template.subject,
+      subject,
       html: template.generateHtml(contact, extras),
       replyTo: INBOUND_REPLY_TO,
-      headers: {
+    };
+    if (templateKey !== "custom") {
+      payload.headers = {
         "Auto-Submitted": "auto-replied",
         "X-Auto-Response-Suppress": "All",
-      },
-    });
+      };
+    }
+    const response = await resend.emails.send(payload);
 
     if (response.error) {
       console.error("❌ Erreur Resend:", response.error);
@@ -409,29 +448,15 @@ export default async function handler(req, res) {
   console.log(`⏰ ${new Date().toISOString()}`);
   console.log("=".repeat(80));
 
-  // ✅ CORS Headers
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
-  );
+  applyCorsHeaders(req, res, { methods: "POST, OPTIONS" });
 
   if (req.method === "OPTIONS") {
     res.status(200).end();
     return;
   }
 
-  // ✅ Accepter GET
   if (req.method === "GET") {
-    return res.status(200).json({
-      success: true,
-      message: "Endpoint auto-reply actif ✅",
-    });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   if (req.method !== "POST") {
@@ -470,12 +495,43 @@ export default async function handler(req, res) {
       const { contactId } = body;
       const emailTemplate = body.emailTemplate || "formules_presentation";
       const template = EMAIL_TEMPLATES[emailTemplate];
+      const extras = {
+        customSubject: String(body.customSubject || "").trim(),
+        customTitle: String(body.customTitle || "").trim(),
+        customSubtitle: String(body.customSubtitle || "").trim(),
+        customMessage: String(body.customMessage || "").trim(),
+        formuleLabel: body.formuleLabel,
+      };
 
       if (!template) {
         return res.status(400).json({
           success: false,
           message: "Template email inconnu",
         });
+      }
+
+      if (emailTemplate === "custom") {
+        if (!extras.customSubject) {
+          return res.status(400).json({
+            success: false,
+            message: "L'objet de l'email est manquant",
+          });
+        }
+        if (!extras.customMessage) {
+          return res.status(400).json({
+            success: false,
+            message: "Le message est vide",
+          });
+        }
+        if (extras.customMessage.length > 8000) {
+          return res.status(400).json({
+            success: false,
+            message: "Le message est trop long",
+          });
+        }
+        extras.customSubject = extras.customSubject.slice(0, 180);
+        extras.customTitle = extras.customTitle.slice(0, 120);
+        extras.customSubtitle = extras.customSubtitle.slice(0, 160);
       }
 
       // Chercher le contact
@@ -496,8 +552,13 @@ export default async function handler(req, res) {
 
       console.log(`✅ Contact trouvé: ${contact.prenom} ${contact.nom}`);
 
-      const replySent = await sendTemplatedEmail(contact, emailTemplate);
+      const replySent = await sendTemplatedEmail(
+        contact,
+        emailTemplate,
+        extras,
+      );
       if (!replySent.success) {
+        console.error("❌ Échec envoi email:", replySent.error);
         return res.status(500).json({
           success: false,
           message: "Erreur envoi email",
@@ -522,13 +583,18 @@ export default async function handler(req, res) {
         );
       }
 
+      const actionDescription =
+        emailTemplate === "custom"
+          ? `${template.description} — ${extras.customSubject}`
+          : nextStatus && canAdvance
+            ? `${template.description} - Statut visé: ${nextStatus}`
+            : template.description;
+
       await logAction(
         contactId,
         contact.email,
         template.action,
-        nextStatus && canAdvance
-          ? `${template.description} - Statut visé: ${nextStatus}`
-          : template.description,
+        actionDescription,
       );
 
       console.log("\n" + "✅".repeat(40));
@@ -556,7 +622,7 @@ export default async function handler(req, res) {
     console.error("\n❌ ERREUR GÉNÉRALE:", error.message);
     return res.status(500).json({
       success: false,
-      error: error.message,
+      error: "Erreur serveur",
     });
   }
 }

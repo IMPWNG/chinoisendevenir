@@ -185,7 +185,7 @@ export async function ensureStudentContact(admin, user, extras = {}) {
     .single();
 
   if (insertError) {
-    throw new Error(insertError.message || "Impossible de créer le dossier");
+    throw new Error("Impossible de créer le dossier");
   }
 
   try {
@@ -210,7 +210,8 @@ export async function getAuthenticatedContact(request) {
     const contact = await ensureStudentContact(auth.admin, auth.user);
     return { user: auth.user, contact, admin: auth.admin };
   } catch (error) {
-    return { error: error.message || "Erreur recherche dossier", status: 500 };
+    console.error("getAuthenticatedContact:", error);
+    return { error: "Erreur recherche dossier", status: 500 };
   }
 }
 

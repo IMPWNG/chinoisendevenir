@@ -2,6 +2,7 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, CONTACT_FROM_EMAIL, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
+import { escapeHtml, sanitizeEmailSubject } from "../emailLayout.js";
 import {
   sendTemplatedEmail,
   updateContactStatus,
@@ -382,18 +383,19 @@ export async function saveChosenFormule(contact, formuleLabel) {
 
 async function notifyAdmin({ contact, subject, text, intent }) {
   try {
+    const name = `${contact.prenom || ""} ${contact.nom || ""}`.trim();
     await resend.emails.send({
       from: CONTACT_FROM,
       to: ADMIN_NOTIFY_EMAIL,
       replyTo: contact.email,
-      subject: `Réponse de ${contact.prenom || ""} ${contact.nom || ""} — ${intent}`,
+      subject: sanitizeEmailSubject(`Réponse de ${name} — ${intent}`),
       html: `
-        <p><strong>${contact.prenom || ""} ${contact.nom || ""}</strong> (${contact.email})</p>
-        <p><strong>Sujet :</strong> ${subject || "—"}</p>
-        <p><strong>Intent détecté :</strong> ${intent}</p>
-        <p><strong>Statut actuel :</strong> ${contact.suivi_statut || "—"}</p>
+        <p><strong>${escapeHtml(name)}</strong> (${escapeHtml(contact.email)})</p>
+        <p><strong>Sujet :</strong> ${escapeHtml(subject || "—")}</p>
+        <p><strong>Intent détecté :</strong> ${escapeHtml(intent)}</p>
+        <p><strong>Statut actuel :</strong> ${escapeHtml(contact.suivi_statut || "—")}</p>
         <hr>
-        <pre style="white-space:pre-wrap;font-family:inherit">${truncate(text, 4000)}</pre>
+        <pre style="white-space:pre-wrap;font-family:inherit">${escapeHtml(truncate(text, 4000))}</pre>
       `,
     });
   } catch (error) {
@@ -423,10 +425,26 @@ export async function processInboundEmail(payload) {
     };
   }
 
+  if (!emailId) {
+    return {
+      success: false,
+      message: "email_id manquant",
+      httpStatus: 400,
+    };
+  }
+
   const received = await fetchReceivedEmail(emailId);
-  const envelopeFrom = extractEmailAddress(received?.from || webhookFrom);
-  const subject = received?.subject || webhookSubject;
-  const rawText = received?.text || htmlToText(received?.html) || data.text || "";
+  if (!received) {
+    return {
+      success: false,
+      message: "Email Resend indisponible",
+      httpStatus: 503,
+    };
+  }
+
+  const envelopeFrom = extractEmailAddress(received.from);
+  const subject = received.subject || "";
+  const rawText = received.text || htmlToText(received.html) || "";
   const replyText = extractLatestReply(rawText);
   const from =
     extractForwardedSender(rawText, received?.headers) || envelopeFrom;
@@ -488,6 +506,13 @@ export async function processInboundEmail(payload) {
     `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
   );
 
+  await notifyAdmin({
+    contact,
+    subject,
+    text: replyText || rawText,
+    intent,
+  });
+
   if (formule) {
     const alreadySameFormule = existingFormule === formule.label;
 
@@ -505,7 +530,6 @@ export async function processInboundEmail(payload) {
         return {
           success: false,
           message: "Erreur envoi confirmation formule",
-          error: sent.error,
           httpStatus: 500,
         };
       }
@@ -543,7 +567,6 @@ export async function processInboundEmail(payload) {
       return {
         success: false,
         message: "Erreur envoi des formules",
-        error: sent.error,
         httpStatus: 500,
       };
     }

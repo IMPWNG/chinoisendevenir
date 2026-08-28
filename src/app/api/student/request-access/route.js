@@ -1,43 +1,32 @@
 import { NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
+import { getClientIp, rateLimit } from "@/lib/httpSecurity";
 
 export async function POST(request) {
   try {
-    const { email } = await request.json();
+    const limited = rateLimit({
+      key: `student-access:${getClientIp(request.headers)}`,
+      limit: 10,
+      windowMs: 15 * 60 * 1000,
+    });
+    if (!limited.ok) {
+      return NextResponse.json(
+        { error: "Trop de requêtes. Réessayez plus tard." },
+        { status: 429, headers: { "Retry-After": String(limited.retryAfter) } },
+      );
+    }
+
+    const { email } = await request.json().catch(() => ({}));
     const normalized = String(email || "")
       .trim()
       .toLowerCase();
 
-    if (!normalized || !normalized.includes("@")) {
+    if (!normalized || !normalized.includes("@") || normalized.length > 254) {
       return NextResponse.json({ error: "Email invalide" }, { status: 400 });
-    }
-
-    const admin = getSupabaseAdmin();
-    const { data: rows, error } = await admin
-      .from("contacts")
-      .select("id, email")
-      .ilike("email", normalized)
-      .limit(1);
-
-    if (error) {
-      return NextResponse.json(
-        { error: "Erreur de vérification" },
-        { status: 500 },
-      );
-    }
-
-    if (!rows?.[0]) {
-      return NextResponse.json(
-        {
-          error:
-            "Aucun dossier trouvé pour cet email. Utilisez l'adresse enregistrée lors de votre inscription.",
-        },
-        { status: 404 },
-      );
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("student request-access:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

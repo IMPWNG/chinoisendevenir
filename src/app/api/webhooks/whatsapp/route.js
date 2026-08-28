@@ -42,7 +42,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("❌ Webhook WhatsApp:", error);
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: "Webhook error" },
       { status: 500 },
     );
   }
