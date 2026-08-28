@@ -147,6 +147,10 @@ function ProcessusPage() {
             et départ. Comptez en général 4 à 6 mois.
           </p>
 
+          <h2 className="text-2xl font-bold text-gray-800 mb-10 text-center">
+            Les 8 étapes
+          </h2>
+
           {/* Timeline */}
           <div className="relative mb-16">
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-red-600 to-blue-600 opacity-30"></div>

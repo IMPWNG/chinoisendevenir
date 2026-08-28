@@ -14,20 +14,21 @@ const Navigation = () => {
       : pathname === path;
 
   const navLinks = [
-    { path: "/", label: "Accueil", icon: "🏠" },
-    { path: "/etudier-en-chine", label: "Étudier en Chine", icon: "📘" },
-    { path: "/bourses", label: "Bourses", icon: "💰" },
-    { path: "/processus", label: "Processus", icon: "🔄" },
-    { path: "/tarifs", label: "Tarifs", icon: "💶" },
-    { path: "/contact", label: "Contact", icon: "📧" },
-    { path: "/espace-etudiant", label: "Espace étudiant", icon: "🎓" },
+    { path: "/", label: "Accueil" },
+    { path: "/etudier-en-chine", label: "Étudier en Chine" },
+    { path: "/bourses", label: "Bourses" },
+    { path: "/visa-etudiant-chine", label: "Visa" },
+    { path: "/processus", label: "Processus" },
+    { path: "/faq", label: "FAQ" },
+    { path: "/tarifs", label: "Tarifs" },
+    { path: "/contact", label: "Contact" },
   ];
 
   return (
     <nav className="landing-header">
       <div className="container landing-header-content">
         <Link href="/" className="landing-logo">
-          🎓 Chinois en Devenir 
+          🎓 Chinois en Devenir
         </Link>
 
         <button
@@ -46,7 +47,6 @@ const Navigation = () => {
               onClick={() => setMenuOpen(false)}
               className={`landing-nav-link ${isActive(link.path) ? "is-active" : ""}`}
             >
-              <span>{link.icon}</span>
               {link.label}
             </Link>
           ))}
@@ -55,7 +55,6 @@ const Navigation = () => {
             className="landing-nav-cta"
             onClick={() => setMenuOpen(false)}
           >
-            <span aria-hidden="true">📝</span>
             S'inscrire
           </Link>
         </div>

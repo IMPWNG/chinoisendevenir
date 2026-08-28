@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export const metadata = {
   robots: { index: false, follow: false },
 };
 
 export default function AboutRedirect() {
-  redirect("/tarifs");
+  permanentRedirect("/tarifs");
 }

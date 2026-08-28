@@ -89,9 +89,9 @@ function BoursesPage() {
             <div className="flex gap-4">
               <div className="text-3xl mt-1">⚠️</div>
               <div>
-                <h3 className="font-bold text-lg text-amber-900 mb-3">
+                <h2 className="font-bold text-lg text-amber-900 mb-3">
                   À savoir avant de postuler
-                </h3>
+                </h2>
                 <p className="text-amber-800 mb-3">
                   Bien que de nombreuses bourses soient accessibles, l'obtention
                   d'un financement dépend de plusieurs critères importants : vos
@@ -117,9 +117,9 @@ function BoursesPage() {
                 <div className="landing-program-icon text-5xl mb-4">
                   {bourse.icon}
                 </div>
-                <h3 className="font-bold text-lg text-gray-800 mb-2">
+                <h2 className="font-bold text-lg text-gray-800 mb-2">
                   {bourse.nom}
-                </h3>
+                </h2>
                 <div className="mb-4 space-y-2 text-sm text-gray-600">
                   <p>
                     <strong>Montant:</strong> {bourse.montant}

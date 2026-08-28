@@ -1,6 +1,7 @@
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { fr } from "../i18n/fr";
+import { SITE } from "../lib/seo";
 
 function TermsOfServicePage() {
   const t = fr;
@@ -14,7 +15,7 @@ function TermsOfServicePage() {
           {/* Titre */}
           <div className="text-center mb-16">
             <h1 className="landing-section-title">
-              📋 Conditions d'Utilisation
+              Conditions d'Utilisation
             </h1>
             <p className="text-gray-600 text-sm">
               Dernière mise à jour : Août 2026
@@ -217,10 +218,10 @@ function TermsOfServicePage() {
                 <p className="text-gray-900">
                   <strong>Email :</strong>{" "}
                   <a
-                    href="mailto:chinoisendevenir@gmail.com"
+                    href={`mailto:${SITE.email}`}
                     className="text-blue-600 hover:underline"
                   >
-                    chinoisendevenir@gmail.com
+                    {SITE.email}
                   </a>
                 </p>
                 <p className="text-gray-900">

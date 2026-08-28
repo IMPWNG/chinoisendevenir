@@ -1,10 +1,5 @@
 import JsonLd from "@/components/JsonLd";
-import {
-  organizationJsonLd,
-  SEO_KEYWORDS,
-  SITE,
-  websiteJsonLd,
-} from "@/lib/seo";
+import { organizationJsonLd, SITE, websiteJsonLd } from "@/lib/seo";
 import Providers from "./providers";
 import "./globals.css";
 
@@ -15,22 +10,27 @@ export const metadata = {
       "Étudier en Chine : admission, bourse et visa | Chinois en Devenir",
     template: "%s | Chinois en Devenir",
   },
-  description: SITE.description,
-  keywords: SEO_KEYWORDS,
+  description: SITE.metaDescription,
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
   publisher: SITE.name,
   category: "education",
-  icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>",
-  },
   openGraph: {
     siteName: SITE.name,
     locale: SITE.locale,
     type: "website",
+    images: [
+      {
+        url: SITE.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SITE.name} — accompagnement pour étudier en Chine`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: [SITE.ogImage],
   },
   robots: {
     index: true,

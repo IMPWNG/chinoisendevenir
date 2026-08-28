@@ -4,27 +4,18 @@ export const SITE = {
   locale: "fr_FR",
   language: "fr",
   email: "contact@chinoisendevenir.com",
+  phone: "+86 136 4050 5272",
+  whatsapp: "+33 7 67 52 33 61",
   tagline:
     "Accompagnement francophone pour étudier en Chine : orientation, admission, bourses et visa étudiant.",
   description:
     "Chinois en Devenir accompagne les étudiants francophones qui veulent étudier en Chine : choix de formation, universités chinoises, dossier d'admission, bourses d'études et visa étudiant.",
+  metaDescription:
+    "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
+  contentUpdatedAt: "2026-08-24",
+  ogImage: "https://chinoisendevenir.com/opengraph-image",
+  logo: "https://chinoisendevenir.com/apple-icon",
 };
-
-export const SEO_KEYWORDS = [
-  "étudier en Chine",
-  "etudier en chine",
-  "études en Chine",
-  "venir faire ses études en Chine",
-  "études supérieures en Chine",
-  "admission université Chine",
-  "bourse d'études Chine",
-  "bourse CSC",
-  "visa étudiant Chine",
-  "visa X1 Chine",
-  "étudier à l'étranger Chine",
-  "accompagnement études Chine",
-  "Chinois en Devenir",
-];
 
 export const NAV_GUIDE_LINKS = [
   { href: "/etudier-en-chine", label: "Étudier en Chine" },
@@ -162,18 +153,25 @@ export function pageMetadata({
   title,
   description,
   path,
-  keywords = SEO_KEYWORDS,
+  keywords,
   absoluteTitle,
   index = true,
   type = "website",
 }) {
   const url = absoluteUrl(path);
   const fullTitle = absoluteTitle || `${title} | ${SITE.name}`;
+  const images = [
+    {
+      url: SITE.ogImage,
+      width: 1200,
+      height: 630,
+      alt: `${SITE.name} — accompagnement pour étudier en Chine`,
+    },
+  ];
 
-  return {
+  const metadata = {
     title: absoluteTitle ? { absolute: absoluteTitle } : title,
     description,
-    keywords,
     authors: [{ name: SITE.name, url: SITE.url }],
     creator: SITE.name,
     publisher: SITE.name,
@@ -185,16 +183,24 @@ export function pageMetadata({
       siteName: SITE.name,
       locale: SITE.locale,
       type,
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: [SITE.ogImage],
     },
     robots: index
       ? { index: true, follow: true }
       : { index: false, follow: false },
   };
+
+  if (Array.isArray(keywords) && keywords.length > 0) {
+    metadata.keywords = keywords;
+  }
+
+  return metadata;
 }
 
 export function organizationJsonLd() {
@@ -204,6 +210,9 @@ export function organizationJsonLd() {
     name: SITE.name,
     url: SITE.url,
     email: SITE.email,
+    telephone: SITE.phone,
+    logo: SITE.logo,
+    image: SITE.ogImage,
     description: SITE.description,
     inLanguage: SITE.language,
     areaServed: [
@@ -235,6 +244,7 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       email: SITE.email,
+      telephone: SITE.phone,
       contactType: "customer service",
       availableLanguage: ["French"],
     },
@@ -253,6 +263,7 @@ export function websiteJsonLd() {
       "@type": "Organization",
       name: SITE.name,
       url: SITE.url,
+      logo: SITE.logo,
     },
   };
 }
@@ -292,6 +303,7 @@ export function articleJsonLd({ title, description, path, datePublished }) {
     "@type": "Article",
     headline: title,
     description,
+    image: SITE.ogImage,
     inLanguage: SITE.language,
     mainEntityOfPage: url,
     url,
@@ -306,6 +318,10 @@ export function articleJsonLd({ title, description, path, datePublished }) {
       "@type": "Organization",
       name: SITE.name,
       url: SITE.url,
+      logo: {
+        "@type": "ImageObject",
+        url: SITE.logo,
+      },
     },
     about: [
       "Étudier en Chine",

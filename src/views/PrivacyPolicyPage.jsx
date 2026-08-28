@@ -1,6 +1,7 @@
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { fr } from "../i18n/fr";
+import { SITE } from "../lib/seo";
 
 function PrivacyPolicyPage() {
   const t = fr;
@@ -14,7 +15,7 @@ function PrivacyPolicyPage() {
           {/* Titre */}
           <div className="text-center mb-16">
             <h1 className="landing-section-title">
-              🔒 Politique de Confidentialité
+              Politique de Confidentialité
             </h1>
             <p className="text-gray-600 text-sm">
               Dernière mise à jour : Août 2026
@@ -148,10 +149,10 @@ function PrivacyPolicyPage() {
               <p className="text-gray-700 leading-relaxed mt-4">
                 Pour exercer ces droits, contactez-nous à :{" "}
                 <a
-                  href="mailto:chinoisendevenir@gmail.com"
+                  href={`mailto:${SITE.email}`}
                   className="text-blue-600 hover:underline"
                 >
-                  chinoisendevenir@gmail.com
+                  {SITE.email}
                 </a>
               </p>
             </div>
@@ -183,10 +184,10 @@ function PrivacyPolicyPage() {
                 <p className="text-gray-900">
                   <strong>Email :</strong>{" "}
                   <a
-                    href="mailto:chinoisendevenir@gmail.com"
+                    href={`mailto:${SITE.email}`}
                     className="text-blue-600 hover:underline"
                   >
-                    chinoisendevenir@gmail.com
+                    {SITE.email}
                   </a>
                 </p>
                 <p className="text-gray-900">

@@ -646,14 +646,14 @@ a.landing-btn-accent:hover {
   }
 }
 
-@media (min-width: 1101px) {
+@media (min-width: 1281px) {
   .landing-nav-link span,
   .landing-nav-cta span {
     display: none;
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
   .landing-mobile-toggle {
     display: block;
   }

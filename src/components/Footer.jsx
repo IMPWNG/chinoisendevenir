@@ -34,6 +34,7 @@ const Footer = ({ t }) => {
             </Link>
             <Link href="/conditions-utilisation">Conditions d'utilisation</Link>
             <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            <a href={`tel:${SITE.phone.replace(/\s/g, "")}`}>{SITE.phone}</a>
           </div>
         </div>
         <div className="landing-footer-bottom">

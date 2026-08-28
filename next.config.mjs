@@ -36,6 +36,22 @@ const nextConfig = {
       process.env.VITE_SUPABASE_ANON_KEY,
   },
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        has: [{ type: "host", value: "www.chinoisendevenir.com" }],
+        destination: "https://chinoisendevenir.com/",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.chinoisendevenir.com" }],
+        destination: "https://chinoisendevenir.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

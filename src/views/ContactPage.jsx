@@ -4,7 +4,7 @@ import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
 import { fr } from "../i18n/fr";
-import { breadcrumbJsonLd } from "../lib/seo";
+import { breadcrumbJsonLd, SITE } from "../lib/seo";
 
 const BREADCRUMBS = [
   { name: "Accueil", path: "/" },
@@ -17,39 +17,39 @@ function ContactPage() {
   const contactMethods = [
     {
       icon: "📍",
-      title: "Adresse",
+      title: "Présence en Chine",
       details: ["Chongqing", "Chengdu", "Shanghai", "Beijing"],
     },
     {
       icon: "📞",
       title: "Téléphone",
-      details: ["+86 (136) 4050 5272", "Lun-Ven : 9h-18h"],
+      details: [SITE.phone, "Lun-Ven : 9h-18h"],
     },
     {
       icon: "📧",
       title: "Email",
-      details: ["chinoisendevenir@gmail.com"],
-      href: "mailto:chinoisendevenir@gmail.com",
+      details: [SITE.email],
+      href: `mailto:${SITE.email}`,
     },
   ];
 
   const socialLinks = [
     { icon: "💬", name: "WeChat", handle: "@MCisec" },
-    { icon: "📱", name: "WhatsApp", handle: "+33767523361" },
+    { icon: "📱", name: "WhatsApp", handle: SITE.whatsapp },
   ];
 
   const faqs = [
     {
       q: "Quel est le temps de réponse ?",
-      a: "Nous répondons généralement sous 24-48h",
+      a: "Nous répondons généralement sous 24 à 48 heures, selon le fuseau horaire et le volume de demandes.",
     },
     {
       q: "Avez-vous un support en direct ?",
-      a: "Oui, via WeChat et WhatsApp pendant les heures de bureau",
+      a: "Vous pouvez nous écrire par e-mail, WeChat ou WhatsApp pendant les heures de bureau (heure de Pékin).",
     },
     {
       q: "Pouvez-vous m'aider avec mon visa ?",
-      a: "Absolument ! C'est l'une de nos spécialités",
+      a: "Oui : nous vous guidons pour constituer un dossier cohérent (X1 ou X2, JW201 ou JW202). L'octroi du visa reste une décision du consulat.",
     },
     {
       q: "Quels sont vos horaires ?",

@@ -2,7 +2,7 @@ import BoursesPage from "@/views/BoursesPage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Bourses d'études en Chine",
+  title: "Bourses d'études en Chine : CSC et universités",
   description:
     "Bourses pour étudier en Chine : CSC, bourses universitaires, provinciales et municipales. Comment candidater, ce qui est financé, et comment préparer un dossier réaliste.",
   path: "/bourses",
