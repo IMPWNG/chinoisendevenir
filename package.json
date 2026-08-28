@@ -17,7 +17,7 @@
     "import:universities": "node scripts/import-scan-to-admin.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.112.3",
+    "@supabase/supabase-js": "^2.112.4",
     "next": "^16.1.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
