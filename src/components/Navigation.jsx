@@ -24,11 +24,10 @@ const Navigation = () => {
     { path: "/faq", label: "FAQ" },
     { path: "/tarifs", label: "Tarifs" },
     { path: "/contact", label: "Contact" },
-    {
-      path: user ? "/espace-etudiant" : "/espace-etudiant/connexion",
-      label: user ? "Mon espace" : "Espace étudiant",
-    },
   ];
+
+  const studentPath = user ? "/espace-etudiant" : "/espace-etudiant/connexion";
+  const studentLabel = user ? "Mon espace" : "Espace étudiant";
 
   return (
     <nav className="landing-header">
@@ -56,6 +55,15 @@ const Navigation = () => {
               {link.label}
             </Link>
           ))}
+          <Link
+            href={studentPath}
+            className={`landing-nav-cta landing-nav-cta-student ${
+              isActive(studentPath) ? "is-active" : ""
+            }`}
+            onClick={() => setMenuOpen(false)}
+          >
+            {studentLabel}
+          </Link>
           <Link
             href="/#lead-form"
             className="landing-nav-cta"

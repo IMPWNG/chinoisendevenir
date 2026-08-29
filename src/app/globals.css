@@ -161,6 +161,20 @@ a {
   color: #fff !important;
 }
 
+.landing-nav-cta-student {
+  background: var(--secondary);
+}
+
+.landing-nav-cta-student:hover,
+.landing-nav-cta-student.is-active {
+  background: #457b9d;
+  color: #fff !important;
+}
+
+.landing-nav-cta + .landing-nav-cta {
+  margin-left: 6px;
+}
+
 .landing-mobile-toggle {
   display: none;
   background: none;
@@ -678,6 +692,11 @@ a.landing-btn-accent:hover {
     width: 100%;
     justify-content: flex-start;
     white-space: normal;
+  }
+
+  .landing-nav-cta + .landing-nav-cta {
+    margin-left: 0;
+    margin-top: 6px;
   }
 
   .landing-nav-link.is-active {
