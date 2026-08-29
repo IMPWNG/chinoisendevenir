@@ -1,4 +1,4 @@
-import { getFormuleAccess } from "../formules";
+import { getUnlockedStudentAccess } from "../formules";
 
 function money(cny) {
   if (cny == null) return null;
@@ -42,18 +42,8 @@ function publicMatch(item, depth) {
   };
 }
 
-function upgradeHint(number) {
-  if (number === 1) {
-    return "La formule 2 débloque les délais, les frais et le suivi de candidature.";
-  }
-  if (number === 2) {
-    return "La formule 3 débloque le suivi jusqu'au visa, au logement et au départ.";
-  }
-  return null;
-}
-
 export function matchingForStudent(result, formuleNumber) {
-  const access = getFormuleAccess(formuleNumber);
+  const access = getUnlockedStudentAccess(formuleNumber);
   if (!result || access.depth === "none") return null;
 
   const matches = (result.matches || [])
@@ -67,7 +57,7 @@ export function matchingForStudent(result, formuleNumber) {
 
   return {
     depth: access.depth,
-    formuleNumber: access.number,
+    formuleNumber: Number(formuleNumber) || access.number,
     generated_at: result.generated_at || null,
     profile_summary: {
       field: student.field || null,
@@ -83,6 +73,6 @@ export function matchingForStudent(result, formuleNumber) {
     scholarships: [
       ...new Set(matches.flatMap((item) => item.scholarships_possible || [])),
     ],
-    upgrade_hint: upgradeHint(access.number),
+    upgrade_hint: null,
   };
 }

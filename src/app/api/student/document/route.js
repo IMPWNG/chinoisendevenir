@@ -3,8 +3,7 @@ import {
   getAuthenticatedContact,
   ensureStudentBucket,
 } from "@/lib/studentAuth";
-import { getFormuleAccess } from "@/lib/formules";
-import { isFormulePaid, getPaidFormuleNumber } from "@/lib/studentProgress";
+import { isStudentAccessGranted } from "@/lib/studentProgress";
 import {
   createDocumentSignedUrl,
   getRequiredDocumentsStatus,
@@ -23,22 +22,11 @@ export async function GET(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!auth.contact || !isFormulePaid(auth.contact)) {
+    if (!auth.contact || !isStudentAccessGranted(auth.contact)) {
       return NextResponse.json(
         {
           error:
-            "Les documents seront disponibles une fois votre formule réglée.",
-        },
-        { status: 403 },
-      );
-    }
-
-    const access = getFormuleAccess(getPaidFormuleNumber(auth.contact));
-    if (!access.documents) {
-      return NextResponse.json(
-        {
-          error:
-            "Le dépôt de documents est inclus à partir de la formule 2.",
+            "Les documents seront disponibles une fois votre formule débloquée.",
         },
         { status: 403 },
       );
@@ -70,22 +58,11 @@ export async function POST(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!auth.contact || !isFormulePaid(auth.contact)) {
+    if (!auth.contact || !isStudentAccessGranted(auth.contact)) {
       return NextResponse.json(
         {
           error:
-            "Les documents seront disponibles une fois votre formule réglée.",
-        },
-        { status: 403 },
-      );
-    }
-
-    const access = getFormuleAccess(getPaidFormuleNumber(auth.contact));
-    if (!access.documents) {
-      return NextResponse.json(
-        {
-          error:
-            "Le dépôt de documents est inclus à partir de la formule 2.",
+            "Les documents seront disponibles une fois votre formule débloquée.",
         },
         { status: 403 },
       );

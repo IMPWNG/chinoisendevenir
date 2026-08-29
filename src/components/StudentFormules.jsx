@@ -1,23 +1,28 @@
 "use client";
 
-import { FORMULES } from "../lib/formules";
+import { FORMULES, getFormuleNumber } from "../lib/formules";
 
-export default function StudentFormules({ currentFormule = "", paid = false }) {
+export default function StudentFormules({
+  currentFormule = "",
+  unlocked = false,
+}) {
+  const selectedNumber = getFormuleNumber(currentFormule);
+
   return (
     <div className="student-card student-card-wide">
       <h2 className="card-title">
-        {paid ? "Votre formule" : "Choisissez votre formule"}
+        {unlocked ? "Votre formule" : "Nos formules"}
       </h2>
       <p className="card-subtitle">
-        {paid
-          ? "Votre accompagnement est débloqué selon la formule réglée."
-          : "Une fois le règlement effectué, vous accéderez aux informations correspondant à la formule choisie. Le paiement en ligne sera bientôt disponible."}
+        {unlocked
+          ? "Votre accompagnement est débloqué. La formule choisie est mise en avant ci-dessus."
+          : "Une fois votre formule débloquée par Chinois en Devenir, vous accéderez à l'orientation, au suivi et aux documents."}
       </p>
 
       <div className="student-formule-grid">
         {FORMULES.map((formule) => {
           const featured = formule.number === 2;
-          const selected = currentFormule === formule.value;
+          const selected = selectedNumber === formule.number;
           return (
             <article
               key={formule.number}
@@ -36,9 +41,9 @@ export default function StudentFormules({ currentFormule = "", paid = false }) {
               {formule.footnote ? (
                 <p className="student-formule-note">{formule.footnote}</p>
               ) : null}
-              {paid && selected ? (
+              {unlocked && selected ? (
                 <div className="landing-alert landing-alert-success">
-                  Formule active
+                  Formule {formule.number} active
                 </div>
               ) : (
                 <button

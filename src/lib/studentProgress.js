@@ -157,6 +157,19 @@ export function isFormulePaid(contact) {
   return PAID_STATUSES.has(contact?.suivi_statut);
 }
 
+export function isStudentAccessGranted(contact) {
+  if (!contact) return false;
+  if (!getChosenFormule(contact)) return false;
+  return (
+    isStudentSpaceUnlocked(contact.suivi_statut) || isFormulePaid(contact)
+  );
+}
+
+export function getGrantedFormuleNumber(contact) {
+  if (!isStudentAccessGranted(contact)) return null;
+  return getFormuleNumber(getChosenFormule(contact)) || 1;
+}
+
 export function hasFilledLeadForm(contact) {
   if (!contact) return false;
   const required = [

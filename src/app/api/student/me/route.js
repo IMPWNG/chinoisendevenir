@@ -23,14 +23,12 @@ export async function GET(request) {
     let adminDocuments = [];
     let matching = null;
 
-    if (profile.hasForm && profile.paid && auth.contact) {
-      if (profile.access.documents) {
-        await ensureStudentBucket(auth.admin);
-        [requiredDocuments, adminDocuments] = await Promise.all([
-          getRequiredDocumentsStatus(auth.admin, auth.contact.id),
-          listAdminSentDocuments(auth.admin, auth.contact.id),
-        ]);
-      }
+    if (profile.hasForm && profile.unlocked && auth.contact) {
+      await ensureStudentBucket(auth.admin);
+      [requiredDocuments, adminDocuments] = await Promise.all([
+        getRequiredDocumentsStatus(auth.admin, auth.contact.id),
+        listAdminSentDocuments(auth.admin, auth.contact.id),
+      ]);
 
       try {
         const runs = await listMatchingRuns(auth.admin, auth.contact.id);

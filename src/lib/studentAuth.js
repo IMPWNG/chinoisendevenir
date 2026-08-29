@@ -1,12 +1,16 @@
 import { getSupabaseAdmin } from "./supabaseAdmin";
-import { getFormuleAccess, getFormuleNumber } from "./formules";
+import {
+  displayFormuleLabel,
+  getFormuleNumber,
+  getUnlockedStudentAccess,
+} from "./formules";
 import {
   isStudentSpaceUnlocked,
-  isFormulePaid,
+  isStudentAccessGranted,
   hasFilledLeadForm,
   getChosenFormule,
   getDisplayedStepIndex,
-  getPaidFormuleNumber,
+  getGrantedFormuleNumber,
 } from "./studentProgress";
 
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
@@ -30,18 +34,17 @@ export function publicStudentProfile(contact, userEmail = "") {
       paid: false,
       unlocked: false,
       formule: "",
+      formuleLabel: "",
       formuleNumber: null,
-      access: getFormuleAccess(0),
+      access: getUnlockedStudentAccess(0),
       suivi_statut: "",
       dossier_etape: 0,
     };
   }
 
   const formule = getChosenFormule(contact);
-  const paid = isFormulePaid(contact);
-  const formuleNumber = paid
-    ? getPaidFormuleNumber(contact)
-    : getFormuleNumber(formule);
+  const unlocked = isStudentAccessGranted(contact);
+  const formuleNumber = getGrantedFormuleNumber(contact) || getFormuleNumber(formule);
   const hasForm = hasFilledLeadForm(contact);
 
   return {
@@ -57,11 +60,12 @@ export function publicStudentProfile(contact, userEmail = "") {
     budget: contact.budget || "",
     date_rentree: contact.date_rentree || "",
     hasForm,
-    paid,
-    unlocked: paid,
+    paid: unlocked,
+    unlocked,
     formule,
+    formuleLabel: formule ? displayFormuleLabel(formule) : "",
     formuleNumber: formuleNumber || null,
-    access: getFormuleAccess(paid ? formuleNumber : 0),
+    access: getUnlockedStudentAccess(unlocked ? formuleNumber || 1 : 0),
     suivi_statut: contact.suivi_statut || "",
     dossier_etape: getDisplayedStepIndex(contact),
     adminUnlocked: isStudentSpaceUnlocked(contact.suivi_statut),

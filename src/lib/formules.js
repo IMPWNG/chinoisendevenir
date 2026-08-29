@@ -154,6 +154,12 @@ export function getFormuleByNumber(number) {
   return FORMULES.find((item) => item.number === number) || null;
 }
 
+export function canonicalFormuleValue(formuleLabel) {
+  const found = getFormuleByNumber(getFormuleNumber(formuleLabel));
+  if (found) return found.value;
+  return formuleLabel ? String(formuleLabel).trim() : "";
+}
+
 export function getFormuleAccess(number) {
   const n = Number(number) || 0;
   if (n >= 3) {
@@ -194,4 +200,10 @@ export function getFormuleAccess(number) {
     progress: false,
     visa: false,
   };
+}
+
+/** Same unlocked student view for formulas 1–3 until per-formula views exist. */
+export function getUnlockedStudentAccess(formuleNumber) {
+  if (!formuleNumber) return getFormuleAccess(0);
+  return getFormuleAccess(3);
 }

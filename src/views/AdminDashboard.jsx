@@ -20,14 +20,20 @@ import { useAdminI18n } from "../context/AdminI18nContext";
 import { generateCustomEmailHtml } from "../lib/emailLayout";
 import {
   isStudentSpaceUnlocked,
+  isStudentAccessGranted,
   getChosenFormule,
   getDisplayedStepIndex,
   STUDENT_PROCESS_STEPS,
-  FORMULE_OPTIONS,
   mergeFormuleNote,
   stripFormuleNote,
   mergeAvancementNote,
 } from "../lib/studentProgress";
+import {
+  FORMULES,
+  canonicalFormuleValue,
+  displayFormuleLabel,
+  getFormuleNumber,
+} from "../lib/formules";
 
 async function authedFetch(path, options = {}) {
   const {
@@ -1083,7 +1089,7 @@ function ContactModal({
   const [customWhatsappMessage, setCustomWhatsappMessage] = useState("");
   const [sendingWhatsapp, setSendingWhatsapp] = useState(false);
   const [selectedFormule, setSelectedFormule] = useState(
-    getChosenFormule(contact),
+    canonicalFormuleValue(getChosenFormule(contact)),
   );
   const [savingFormule, setSavingFormule] = useState(false);
 
@@ -1091,7 +1097,7 @@ function ContactModal({
     // eslint-disable-next-line react-hooks/immutability
     fetchActions();
     setNotes(contact.notes_admin || "");
-    setSelectedFormule(getChosenFormule(contact));
+    setSelectedFormule(canonicalFormuleValue(getChosenFormule(contact)));
   }, [contact.id, contact.formule, contact.notes_admin]);
 
   useEffect(() => {
@@ -1102,6 +1108,29 @@ function ContactModal({
     setEmailAiNotes("");
     setEmailAiError("");
   }, [contact.id]);
+
+  const accessGranted = isStudentAccessGranted(contact);
+  const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
+  const selectedFormuleNumber = getFormuleNumber(selectedFormule);
+  const sameActiveFormule =
+    accessGranted &&
+    selectedFormuleNumber != null &&
+    selectedFormuleNumber === chosenFormuleNumber;
+
+  const saveChosenFormule = async () => {
+    const value = canonicalFormuleValue(selectedFormule);
+    if (!value) {
+      alert(t("dashboard.unlockNeedFormule"));
+      return;
+    }
+    setSavingFormule(true);
+    try {
+      await onUpdateFormule(contact.id, value);
+      fetchActions();
+    } finally {
+      setSavingFormule(false);
+    }
+  };
 
   const fetchActions = async () => {
     setLoadingActions(true);
@@ -1589,56 +1618,78 @@ function ContactModal({
             </p>
           </div>
 
-          {/* Formule d'accompagnement */}
+          {/* Formule + déblocage espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📋 {t("dashboard.formuleSection")}
+              🎓 {t("dashboard.studentSpace")}
             </label>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <select
-                value={
-                  FORMULE_OPTIONS.some((o) => o.value === selectedFormule)
-                    ? selectedFormule
-                    : selectedFormule
-                      ? "__custom__"
-                      : ""
-                }
-                onChange={(e) => {
-                  if (e.target.value === "__custom__") return;
-                  setSelectedFormule(e.target.value);
-                }}
-                className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold cursor-pointer"
-              >
-                <option value="">{t("dashboard.noFormule")}</option>
-                {FORMULE_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {t(`formule.${option.value}`)}
-                  </option>
-                ))}
-                {selectedFormule &&
-                  !FORMULE_OPTIONS.some((o) => o.value === selectedFormule) && (
-                    <option value="__custom__">{selectedFormule}</option>
-                  )}
-              </select>
+            {accessGranted ? (
+              <p className="text-sm text-emerald-300 mb-4">
+                {t("dashboard.unlockedWithFormule", {
+                  formule: displayFormuleLabel(getChosenFormule(contact)),
+                })}
+              </p>
+            ) : (
+              <p className="text-sm text-slate-400 mb-4">
+                {t("dashboard.locked")}
+              </p>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              {FORMULES.map((formule) => {
+                const active =
+                  accessGranted && chosenFormuleNumber === formule.number;
+                const selected = selectedFormuleNumber === formule.number;
+                return (
+                  <button
+                    key={formule.number}
+                    type="button"
+                    onClick={() => setSelectedFormule(formule.value)}
+                    className={`text-left px-4 py-4 rounded-xl border transition-all duration-200 ${
+                      active
+                        ? "bg-emerald-500/20 border-emerald-400 text-white"
+                        : selected
+                          ? "bg-cyan-500/20 border-cyan-400 text-white"
+                          : "bg-slate-700/40 border-slate-600/50 text-slate-300 hover:bg-slate-700"
+                    }`}
+                  >
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                      Formule {formule.number}
+                    </p>
+                    <p className="font-bold mt-1">{formule.shortTitle}</p>
+                    <p className="text-sm mt-1">{formule.price}</p>
+                    {active ? (
+                      <p className="text-xs text-emerald-300 mt-2">
+                        {t("dashboard.formuleActive")}
+                      </p>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex flex-wrap gap-3">
               <button
                 type="button"
-                disabled={
-                  savingFormule ||
-                  (selectedFormule || "") === getChosenFormule(contact)
-                }
-                onClick={async () => {
-                  setSavingFormule(true);
-                  try {
-                    await onUpdateFormule(contact.id, selectedFormule);
-                    fetchActions();
-                  } finally {
-                    setSavingFormule(false);
-                  }
-                }}
-                className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                disabled={savingFormule || !selectedFormule || sameActiveFormule}
+                onClick={saveChosenFormule}
+                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {savingFormule ? `⏳ ${t("saving")}` : `💾 ${t("save")}`}
+                {savingFormule
+                  ? `⏳ ${t("saving")}`
+                  : accessGranted
+                    ? t("dashboard.applyFormule")
+                    : t("dashboard.unlockSpace")}
               </button>
+              {isStudentSpaceUnlocked(contact.suivi_statut) ? (
+                <button
+                  type="button"
+                  onClick={() =>
+                    onUpdateStatut(contact.id, "choix_des_formules")
+                  }
+                  className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
+                >
+                  {t("dashboard.lockSpace")}
+                </button>
+              ) : null}
             </div>
             <p className="text-xs text-slate-500 mt-3">
               {t("dashboard.formuleHint")}
@@ -1683,40 +1734,6 @@ function ContactModal({
           </div>
 
           <AdminStudentFiles contactId={contact.id} />
-
-          {/* Accès espace étudiant */}
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              🎓 {t("dashboard.studentSpace")}
-            </label>
-            {isStudentSpaceUnlocked(contact.suivi_statut) ? (
-              <>
-                <p className="text-sm text-emerald-300 mb-3">
-                  {t("dashboard.unlocked")}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => onUpdateStatut(contact.id, "choix_des_formules")}
-                  className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
-                >
-                  {t("dashboard.lockSpace")}
-                </button>
-              </>
-            ) : (
-              <>
-                <p className="text-sm text-slate-400 mb-3">
-                  {t("dashboard.locked")}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => onUpdateStatut(contact.id, "formule_choisie")}
-                  className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300"
-                >
-                  {t("dashboard.unlockSpace")}
-                </button>
-              </>
-            )}
-          </div>
 
           {/* Statut Selector */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">

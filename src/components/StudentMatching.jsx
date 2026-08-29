@@ -1,11 +1,5 @@
 "use client";
 
-const DEPTH_LABELS = {
-  orientation: "Bilan personnalisé",
-  candidature: "Accompagnement candidature",
-  complete: "Accompagnement complet",
-};
-
 export default function StudentMatching({ matching, formuleNumber }) {
   if (!matching) {
     return (
@@ -21,13 +15,14 @@ export default function StudentMatching({ matching, formuleNumber }) {
   }
 
   const summary = matching.profile_summary || {};
-  const depthLabel = DEPTH_LABELS[matching.depth] || "Orientation";
 
   return (
     <div className="student-card student-card-wide">
       <h2 className="card-title">Votre orientation</h2>
       <p className="card-subtitle">
-        Informations débloquées pour la formule {formuleNumber} — {depthLabel}.
+        {formuleNumber
+          ? `Informations débloquées pour la formule ${formuleNumber}.`
+          : "Informations débloquées selon votre formule."}{" "}
         Aucune admission, bourse ou visa n'est garantie.
       </p>
 
