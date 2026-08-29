@@ -79,13 +79,13 @@ function TarifsPage() {
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
                     Idéale si
                   </p>
-                  <ul className="space-y-1.5 text-sm text-slate-600">
+                  <ul className="space-y-1.5 text-sm text-slate-600 mb-0">
                     {formule.idealIf.map((item) => (
                       <li key={item}>• {item}</li>
                     ))}
                   </ul>
 
-                  <div className="mt-auto">
+                  <div className="mt-auto pt-6">
                     {formule.footnote ? (
                       <p className="formule-footnote">
                         {displayFormuleFootnote(formule.footnote)}
