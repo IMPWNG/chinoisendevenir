@@ -1,159 +1,121 @@
 "use client";
 
-const DIPLOMA_SHORT = {
-  bac: "Bac",
-  licence: "Licence",
-  master: "Master",
-  doctorat: "Doctorat",
-  autre: "Autre diplôme",
+import { useState } from "react";
+
+const ROAD_STATUS = {
+  fait: { label: "Fait", mark: "fait" },
+  en_cours: { label: "En cours", mark: "cours" },
+  a_venir: { label: "À venir", mark: "venir" },
+  bloquant: { label: "Bloquant", mark: "bloc" },
 };
 
-const STUDENT_TITLES = {
-  analyse: "Votre projet",
-  langue: "Langue",
-  conseils: "Domaine et niveau",
-  bourses: "Bourses",
-  recommandations: "Pour le dossier",
-  admission: "Critères d’admission",
-  dossier: "Votre dossier",
-  visa: "Visa",
-  logement: "Logement",
-};
-
-function keysForFormule(formuleNumber) {
-  const n = Number(formuleNumber) || 1;
-  if (n >= 3) return ["analyse", "langue", "visa", "logement"];
-  if (n === 2) return ["analyse", "langue", "admission", "dossier"];
-  return ["analyse", "langue", "bourses", "recommandations"];
-}
-
-function normalizeItem(item) {
-  if (item && typeof item === "object" && item.text) {
-    return {
-      text: scrubClient(item.text),
-      tone: item.tone || "info",
-    };
+function ScoreBar({ points, max }) {
+  if (points == null || !max) {
+    return <span className="student-meter-empty">à préciser</span>;
   }
-  return { text: scrubClient(item), tone: "info" };
-}
-
-function scrubClient(text) {
-  return String(text || "")
-    .replace(/\*?Aucune admission[\s\S]*?garantie\.?\*?/gi, "")
-    .replace(/\bmatching\b/gi, "sélection")
-    .replace(/Mix d[’']universités[^.]{0,140}\.?/gi, "")
-    .replace(/écarts à combler[^.]{0,80}\.?/gi, "")
-    .replace(/feuille de route[^.]{0,80}\.?/gi, "")
-    .replace(/sans promesse d[’']admission[^.]{0,40}\.?/gi, "")
-    .replace(/\*{1,2}/g, "")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-}
-
-function firstParagraph(body) {
-  const block = String(body || "")
-    .split(/\n{2,}/)
-    .map((part) => part.trim())
-    .find(Boolean);
-  if (!block) return "";
-  const sentences = block.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [block];
-  return sentences
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .slice(0, 2)
-    .join(" ");
-}
-
-function formatDiploma(value) {
-  const raw = String(value || "").trim();
-  if (!raw) return "";
-  return DIPLOMA_SHORT[raw.toLowerCase()] || raw;
-}
-
-function ficheLine(summary) {
-  return [
-    summary.field,
-    formatDiploma(summary.diploma),
-    summary.country,
-    summary.hsk,
-    summary.english,
-    summary.intake,
-  ]
-    .map((value) => String(value || "").trim())
-    .filter(Boolean)
-    .join(" · ");
-}
-
-function depthLabel(formuleNumber) {
-  if (Number(formuleNumber) >= 3) return "Jusqu’au départ";
-  if (Number(formuleNumber) === 2) return "Candidature";
-  return "Bilan";
-}
-
-function introFor(formuleNumber) {
-  if (Number(formuleNumber) >= 3) {
-    return "Voici le compte rendu pour viser jusqu’à 5 candidatures, puis le visa et le logement.";
-  }
-  if (Number(formuleNumber) === 2) {
-    return "Voici le compte rendu pour préparer jusqu’à 3 candidatures.";
-  }
-  return "Voici le compte rendu de votre projet, et les universités à viser en priorité.";
-}
-
-function uniqueGaps(gaps) {
-  const seen = new Set();
-  const out = [];
-  for (const gap of gaps || []) {
-    const conseil = scrubClient(gap?.conseil);
-    if (!conseil) continue;
-    const key = gap.type || conseil;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push({ ...gap, conseil });
-  }
-  return out.slice(0, 3);
-}
-
-function UniColumn({ title, items, tone }) {
-  if (!items?.length) return null;
+  const pct = Math.max(0, Math.min(100, Math.round((points / max) * 100)));
   return (
-    <section className={`student-uni-col is-${tone}`}>
-      <p className="student-uni-stamp">{title}</p>
-      <ul className="student-uni-list">
-        {items.map((uni) => {
-          const language = String(uni.language || "").trim();
-          const showLanguage =
-            language && !/^à confirmer$/i.test(language);
-          return (
-            <li key={`${tone}-${uni.name}`} className="student-uni-card">
-              <p className="student-uni-name">{uni.name}</p>
-              {uni.city ? <p className="student-uni-city">{uni.city}</p> : null}
-              {showLanguage ? (
-                <p className="student-uni-note">{language}</p>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <span className="student-meter" title={`${points}/${max}`}>
+      <span className="student-meter-fill" style={{ width: `${pct}%` }} />
+    </span>
   );
 }
 
-function OrientationBilan({ matching, formuleNumber }) {
-  const bilan =
-    matching?.orientation_bilan || matching?.formule1_bilan || null;
-  const summary = matching?.profile_summary || {};
-  const mix = matching?.mix || {};
-  const gaps = uniqueGaps(matching?.gaps || bilan?.gaps);
-  const hasUnis = Boolean(
-    mix.safety?.length || mix.match?.length || mix.reach?.length,
-  );
-  const meta = ficheLine(summary);
-  const intro = introFor(formuleNumber);
-  const allowed = new Set(keysForFormule(formuleNumber));
-  if (gaps.length) allowed.delete("recommandations");
+function UniCard({ uni, open, onToggle }) {
+  return (
+    <article
+      className={`student-uni-full is-${uni.categoryKey}${
+        uni.best_match ? " is-best" : ""
+      }${open ? " is-open" : ""}`}
+    >
+      <button type="button" className="student-uni-full-head" onClick={onToggle}>
+        <div>
+          <p className="student-uni-full-name">{uni.name}</p>
+          <p className="student-uni-full-city">{uni.city}</p>
+        </div>
+        <div className="student-uni-full-aside">
+          {uni.best_match ? (
+            <span className="student-uni-best">Meilleur alignement</span>
+          ) : null}
+          <span className={`student-uni-stamp is-${uni.categoryKey}`}>
+            {uni.category}
+          </span>
+        </div>
+      </button>
 
-  if (!bilan?.sections?.length) {
+      <p className="student-uni-score">{uni.score_phrase}</p>
+      <div className="student-meters">
+        {(uni.breakdown || []).map((row) => (
+          <div key={row.key} className="student-meter-row">
+            <span>{row.label}</span>
+            <ScoreBar points={row.points} max={row.max} />
+          </div>
+        ))}
+      </div>
+
+      {open ? (
+        <div className="student-uni-full-body">
+          {uni.strengths?.length ? (
+            <div>
+              <p className="student-uni-kicker">Points forts</p>
+              <ul>
+                {uni.strengths.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {uni.vigilance?.length ? (
+            <div>
+              <p className="student-uni-kicker">À préparer</p>
+              <ul>
+                {uni.vigilance.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <p className="student-uni-facts">
+            Frais : {uni.cost?.label || "à vérifier auprès de l’université"}
+            <br />
+            Deadline : {uni.deadline}
+            <br />
+            Langue : {uni.language}
+            {uni.scholarships?.length ? (
+              <>
+                <br />
+                Bourses listées : {uni.scholarships.join(", ")}
+              </>
+            ) : (
+              <>
+                <br />
+                Bourses : à vérifier auprès de l’université
+              </>
+            )}
+          </p>
+          {uni.documents?.length ? (
+            <p className="student-uni-facts">
+              Pièces propres à cet établissement : {uni.documents.join(", ")}
+            </p>
+          ) : null}
+        </div>
+      ) : (
+        <p className="student-uni-more">Voir le détail</p>
+      )}
+    </article>
+  );
+}
+
+export default function StudentMatching({ matching, formuleNumber }) {
+  const report = matching?.student_report || matching?.orientation_bilan;
+  const unis = report?.universities || [];
+  const [openId, setOpenId] = useState(null);
+  const [openGrant, setOpenGrant] = useState(null);
+
+  const hasReport = Boolean(report?.profile_blurb || report?.universities);
+  const grants = report?.scholarships?.groups || [];
+
+  if (!hasReport) {
     return (
       <div className="student-card student-card-wide student-bilan-sheet">
         <header className="student-bilan-head">
@@ -161,7 +123,13 @@ function OrientationBilan({ matching, formuleNumber }) {
             函
           </span>
           <div className="student-bilan-head-copy">
-            <p className="student-bilan-kicker">{depthLabel(formuleNumber)}</p>
+            <p className="student-bilan-kicker">
+              {Number(formuleNumber) >= 3
+                ? "Jusqu’au départ"
+                : Number(formuleNumber) === 2
+                  ? "Candidature"
+                  : "Bilan"}
+            </p>
             <h2 className="student-bilan-title">Votre orientation</h2>
             <p className="student-bilan-lede">
               Votre compte rendu n’est pas encore prêt. Il apparaîtra ici dès
@@ -173,103 +141,164 @@ function OrientationBilan({ matching, formuleNumber }) {
     );
   }
 
-  const sections = (bilan.sections || []).filter((section) =>
-    allowed.has(section.key),
-  );
-  const groupCount = new Set(
-    sections.map((section) => section.group).filter(Boolean),
-  ).size;
-
   return (
-    <div className="student-card student-card-wide student-bilan-sheet">
+    <div className="student-card student-card-wide student-bilan-sheet student-report">
       <header className="student-bilan-head">
         <span className="student-bilan-chop" aria-hidden="true">
           函
         </span>
         <div className="student-bilan-head-copy">
-          <p className="student-bilan-kicker">{depthLabel(formuleNumber)}</p>
+          <p className="student-bilan-kicker">
+            {Number(formuleNumber) >= 3
+              ? "Jusqu’au départ"
+              : Number(formuleNumber) === 2
+                ? "Candidature"
+                : "Bilan"}
+          </p>
           <h2 className="student-bilan-title">Votre orientation</h2>
-          <p className="student-bilan-lede">{intro}</p>
-          {meta ? <p className="student-bilan-meta">{meta}</p> : null}
         </div>
       </header>
 
-      {hasUnis ? (
-        <div className="student-unis">
-          <p className="student-unis-label">Universités à viser</p>
-          <div className="student-unis-grid">
-            <UniColumn title="Sûre" items={mix.safety} tone="safety" />
-            <UniColumn title="Réaliste" items={mix.match} tone="match" />
-            <UniColumn title="Ambitieuse" items={mix.reach} tone="reach" />
+      <section className="student-profile-card">
+        <p className="student-profile-blurb">{report.profile_blurb}</p>
+        <p className="student-profile-complete">
+          {report.completeness?.remaining_note}
+        </p>
+      </section>
+
+      {unis.length ? (
+        <section className="student-report-block">
+          <h3 className="student-report-title">Universités retenues</h3>
+          <div className="student-uni-full-list">
+            {unis.map((uni) => {
+              const key = uni.id || uni.name;
+              return (
+                <UniCard
+                  key={key}
+                  uni={uni}
+                  open={openId === key}
+                  onToggle={() => setOpenId(openId === key ? null : key)}
+                />
+              );
+            })}
           </div>
-        </div>
+        </section>
+      ) : (
+        <section className="student-report-block">
+          <h3 className="student-report-title">Universités retenues</h3>
+          <p className="student-report-copy">
+            Aucune université assez compatible n’a été retenue avec les données
+            actuelles. Précisez le domaine, la langue ou le budget pour affiner
+            les recommandations.
+          </p>
+        </section>
+      )}
+
+      {report.options_synthesis ? (
+        <section className="student-report-block">
+          <h3 className="student-report-title">
+            Quelles sont les meilleures options pour vous
+          </h3>
+          <p className="student-report-copy">{report.options_synthesis.why_top}</p>
+          <p className="student-report-copy">
+            {report.options_synthesis.application_mix}
+          </p>
+          {report.options_synthesis.no_safety_note ? (
+            <p className="student-report-copy is-note">
+              {report.options_synthesis.no_safety_note}
+            </p>
+          ) : null}
+        </section>
       ) : null}
 
-      {gaps.length ? (
-        <div className="student-next">
-          <p className="student-next-label">Avant de candidater</p>
-          <ol>
-            {gaps.map((gap, index) => (
-              <li key={`${gap.type}-${index}`}>{gap.conseil}</li>
-            ))}
+      {report.roadmap?.length ? (
+        <section className="student-report-block">
+          <h3 className="student-report-title">Prochaines étapes</h3>
+          <ol className="student-roadmap">
+            {report.roadmap.map((row) => {
+              const status = ROAD_STATUS[row.status] || ROAD_STATUS.a_venir;
+              return (
+                <li key={row.n} className={`is-${status.mark}`}>
+                  <div className="student-roadmap-top">
+                    <span className="student-roadmap-n">{row.n}</span>
+                    <p className="student-roadmap-step">{row.step}</p>
+                    <span className={`student-roadmap-status is-${status.mark}`}>
+                      {status.label}
+                    </span>
+                  </div>
+                  <p>
+                    <strong>Vous :</strong> {row.you}
+                  </p>
+                  <p>
+                    <strong>Nous :</strong> {row.we}
+                  </p>
+                </li>
+              );
+            })}
           </ol>
-        </div>
+        </section>
       ) : null}
 
-      <div className="student-bilan">
-        {sections.map((section, index) => {
-          const items = (section.items || [])
-            .map(normalizeItem)
-            .filter((item) => item.text)
-            .slice(0, 3);
-          const paragraph = scrubClient(firstParagraph(section.body));
-          const previous = sections[index - 1];
-          const showGroup =
-            groupCount > 1 &&
-            Boolean(section.group) &&
-            section.group !== previous?.group;
+      {report.documents?.length ? (
+        <section className="student-report-block">
+          <h3 className="student-report-title">Documents à préparer</h3>
+          <ul className="student-doc-check">
+            {report.documents.map((doc) => (
+              <li
+                key={doc.key || doc.name}
+                className={doc.status === "fourni" ? "is-ok" : "is-miss"}
+              >
+                <span>{doc.status === "fourni" ? "Fourni" : "À fournir"}</span>
+                <p>
+                  {doc.name}
+                  {doc.note ? ` — ${doc.note}` : ""}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
-          return (
-            <div key={section.key}>
-              {showGroup ? (
-                <p className="student-bilan-group">{section.groupLabel}</p>
-              ) : null}
-              <article className="student-bilan-qa">
-                <div className="student-bilan-qa-main">
-                  <h3 className="student-bilan-question">
-                    {STUDENT_TITLES[section.key] || section.title}
-                  </h3>
-                  {paragraph ? (
-                    <p className="student-bilan-answer">{paragraph}</p>
-                  ) : null}
-                  {items.length ? (
-                    <ul className="student-bilan-facts">
-                      {items.map((item, itemIndex) => (
-                        <li
-                          key={`${section.key}-${itemIndex}`}
-                          className={`is-${item.tone}`}
-                        >
-                          {item.text}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              </article>
-            </div>
-          );
-        })}
-      </div>
+      {grants.length ? (
+        <section className="student-report-block">
+          <h3 className="student-report-title">Bourses possibles</h3>
+          <div className="student-grant-list">
+            {grants.map((group) => (
+              <div key={group.type} className="student-grant">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenGrant(openGrant === group.type ? null : group.type)
+                  }
+                >
+                  {group.title}
+                </button>
+                {openGrant === group.type ? (
+                  <div>
+                    <p>{group.explanation}</p>
+                    {group.names?.length ? (
+                      <p>{group.names.join(", ")}</p>
+                    ) : (
+                      <p>Aucune piste nommée dans le catalogue pour l’instant.</p>
+                    )}
+                  </div>
+                ) : null}
+              </div>
+            ))}
+          </div>
+          <p className="student-report-copy is-note">
+            {report.scholarships?.disclaimer}
+          </p>
+        </section>
+      ) : null}
 
+      {report.closing ? (
+        <p className="student-report-close">{report.closing}</p>
+      ) : null}
       <p className="student-bilan-foot">
-        Aucune admission, bourse ou visa n’est garantie.
+        {report.disclaimer ||
+          "Aucune admission, bourse ou visa n’est garantie."}
       </p>
     </div>
-  );
-}
-
-export default function StudentMatching({ matching, formuleNumber }) {
-  return (
-    <OrientationBilan matching={matching} formuleNumber={formuleNumber} />
   );
 }

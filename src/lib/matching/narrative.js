@@ -120,7 +120,7 @@ export function buildClientMessage(student, analyses, overallFormula, { gaps = [
   lines.push(`${name},`);
   lines.push("");
   lines.push(
-    "Après lecture de votre profil, voici une orientation réaliste : un mix d'universités sûres, réalistes et ambitieuses, plus ce qu'il faut renforcer avant de candidater. Aucune admission, bourse ou visa n'est garantie.",
+    "Après lecture de votre profil, voici une orientation réaliste, avec des universités sûres, réalistes et ambitieuses, et ce qu'il faut préciser avant de candidater. Aucune admission, bourse ou visa n'est garantie.",
   );
   lines.push("");
   lines.push("Profil retenu");

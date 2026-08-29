@@ -5,13 +5,15 @@ export function compactMatchingResult(result, overrides = {}) {
     ? { ...result.student, notes: String(result.student.notes || "").slice(0, 800) }
     : result.student;
   return {
-    version: 2,
+    version: 3,
     mix: result.mix || null,
     gaps: result.gaps || [],
     generated_at: result.generated_at,
     recommended_formula: result.recommended_formula,
     client_message: result.client_message,
     client_message_ai: Boolean(result.client_message_ai),
+    admin_report: result.admin_report || null,
+    student_report: result.student_report || null,
     orientation_bilan: result.orientation_bilan || result.formule1_bilan || null,
     formule1_bilan: result.formule1_bilan || null,
     brief: result.brief,

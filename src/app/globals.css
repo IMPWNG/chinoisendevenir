@@ -1486,6 +1486,366 @@ a.formule-card-btn {
   outline-offset: 3px;
 }
 
+.student-report-block {
+  margin: 28px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--bilan-rule);
+}
+
+.student-report-title {
+  margin: 0 0 12px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--bilan-ink);
+}
+
+.student-report-copy {
+  margin: 0 0 10px;
+  max-width: 42rem;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #334155;
+}
+
+.student-report-copy.is-note {
+  color: #6b4f52;
+}
+
+.student-profile-card {
+  margin-top: 18px;
+  padding: 18px 0 4px;
+}
+
+.student-profile-blurb {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--bilan-ink);
+}
+
+.student-profile-complete {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  color: #5b6573;
+  max-width: 40rem;
+}
+
+.student-uni-full-list {
+  display: grid;
+  gap: 12px;
+}
+
+.student-uni-full {
+  border: 1px solid var(--bilan-rule);
+  background: #fff;
+  text-align: left;
+}
+
+.student-uni-full.is-best {
+  border-color: var(--bilan-jade);
+  box-shadow: inset 3px 0 0 var(--bilan-jade);
+}
+
+.student-uni-full-head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 14px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.student-uni-full-name {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--bilan-ink);
+}
+
+.student-uni-full-city {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.student-uni-full-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.student-uni-best {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bilan-jade);
+}
+
+.student-uni-stamp {
+  display: inline-block;
+  padding: 3px 8px 2px;
+  border: 1.5px solid currentColor;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.student-uni-stamp.is-safety,
+.student-uni-col.is-safety .student-uni-stamp {
+  color: var(--bilan-jade);
+}
+
+.student-uni-stamp.is-match {
+  color: var(--bilan-ink);
+}
+
+.student-uni-stamp.is-reach,
+.student-uni-col.is-reach .student-uni-stamp {
+  color: var(--bilan-amber);
+}
+
+.student-uni-score {
+  margin: 10px 14px 0;
+  font-size: 0.88rem;
+  color: #334155;
+}
+
+.student-meters {
+  display: grid;
+  gap: 6px;
+  padding: 10px 14px 8px;
+}
+
+.student-meter-row {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.student-meter,
+.student-meter-empty {
+  display: block;
+  height: 6px;
+  background: #ece7dc;
+}
+
+.student-meter-fill {
+  display: block;
+  height: 100%;
+  background: var(--bilan-ink);
+}
+
+.student-uni-full.is-safety .student-meter-fill {
+  background: var(--bilan-jade);
+}
+
+.student-uni-full.is-reach .student-meter-fill {
+  background: var(--bilan-amber);
+}
+
+.student-meter-empty {
+  height: auto;
+  background: none;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #94a3b8;
+}
+
+.student-uni-full-body {
+  padding: 4px 14px 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.student-uni-kicker {
+  margin: 0 0 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bilan-ink);
+}
+
+.student-uni-full-body ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #334155;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.student-uni-facts {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #475569;
+}
+
+.student-uni-more {
+  margin: 0;
+  padding: 0 14px 12px;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.student-roadmap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.student-roadmap li {
+  padding-left: 0;
+}
+
+.student-roadmap-top {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.student-roadmap-n {
+  flex: 0 0 1.6rem;
+  font-weight: 800;
+  color: var(--bilan-lacquer);
+  font-variant-numeric: tabular-nums;
+}
+
+.student-roadmap-step {
+  margin: 0;
+  flex: 1;
+  font-weight: 700;
+  color: var(--bilan-ink);
+}
+
+.student-roadmap-status {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.student-roadmap-status.is-fait {
+  color: var(--bilan-jade);
+}
+
+.student-roadmap-status.is-cours {
+  color: var(--bilan-ink);
+}
+
+.student-roadmap-status.is-venir {
+  color: #64748b;
+}
+
+.student-roadmap-status.is-bloc {
+  color: var(--bilan-miss);
+}
+
+.student-roadmap li p {
+  margin: 0 0 4px 2.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.student-doc-check {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.student-doc-check li {
+  display: grid;
+  grid-template-columns: 6.2rem minmax(0, 1fr);
+  gap: 10px;
+  font-size: 0.92rem;
+}
+
+.student-doc-check span {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+
+.student-doc-check .is-ok span {
+  color: var(--bilan-jade);
+}
+
+.student-doc-check .is-miss span {
+  color: var(--bilan-miss);
+}
+
+.student-doc-check p {
+  margin: 0;
+  color: var(--bilan-ink);
+}
+
+.student-grant-list {
+  display: grid;
+  gap: 8px;
+}
+
+.student-grant button {
+  width: 100%;
+  text-align: left;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--bilan-rule);
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--bilan-ink);
+  cursor: pointer;
+}
+
+.student-grant div {
+  padding: 8px 0 12px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #475569;
+}
+
+.student-report-close {
+  margin: 28px 0 0;
+  max-width: 40rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--bilan-ink);
+}
+
+@media (max-width: 640px) {
+  .student-roadmap li p {
+    margin-left: 0;
+  }
+
+  .student-doc-check li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
 .student-bilan-section {
   border: 1px solid var(--border);
   border-radius: 16px;

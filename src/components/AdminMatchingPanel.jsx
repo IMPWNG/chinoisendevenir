@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
-import { getFormuleByNumber, getFormuleNumber } from "../lib/formules";
+import { getFormuleNumber } from "../lib/formules";
 import { getChosenFormule } from "../lib/studentProgress";
+import AdminMatchingReport from "./AdminMatchingReport";
+import { reportsFromStored } from "../lib/matching/reports";
 
 async function authedFetch(path, options = {}) {
   const {
@@ -212,8 +214,10 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
     }
   };
 
-  const formula = result ? getFormuleByNumber(result.recommended_formula) : null;
   const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
+  const adminReport = result
+    ? result.admin_report || reportsFromStored(result).admin_report
+    : null;
   const bilanLabels = {
     1: "Générer le bilan personnalisé",
     2: "Générer le bilan candidature",
@@ -387,107 +391,11 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
 
       {result ? (
         <div className="mt-6 space-y-5">
-          <div className="bg-slate-900/50 border border-slate-700/50 rounded-2xl p-4">
-            <p className="text-white font-semibold">
-              {result.matches.length} université{result.matches.length > 1 ? "s" : ""} classée
-              {result.matches.length > 1 ? "s" : ""}
-              {result.excluded?.length
-                ? ` · ${result.excluded.length} exclue(s)`
-                : ""}
-            </p>
-            <p className="text-sm text-slate-300 mt-1">
-              Formule recommandée :{" "}
-              <span className="text-white font-bold">
-                {formula
-                  ? `Formule ${formula.number} — ${formula.shortTitle} (${formula.price})`
-                  : result.recommended_formula}
-              </span>
-            </p>
-            {result.student?.qualityScore != null ? (
-              <p className="text-sm text-slate-400 mt-1">
-                Complétude du dossier : {result.student.qualityScore}/100
-                {result.student.iaEnriched ? " · texte projet lu par l'IA" : ""}
-              </p>
-            ) : null}
-            {result.brief?.mix ? (
-              <p className="text-sm text-slate-400 mt-1">
-                Mix : {result.brief.mix.safety} sûre(s) · {result.brief.mix.match}{" "}
-                réaliste(s) · {result.brief.mix.reach} ambitieuse(s)
-              </p>
-            ) : null}
-            {result.brief?.top_match ? (
-              <p className="text-sm text-slate-400 mt-1">
-                Meilleur match : {result.brief.top_match.name} (
-                {result.brief.top_match.score}/100)
-              </p>
-            ) : (
-              <p className="text-sm text-amber-300 mt-1">
-                Aucun match exploitable avec les données actuelles.
-              </p>
-            )}
-            {result.client_message_ai ? (
-              <p className="text-[11px] text-cyan-400 mt-2">
-                Réponse client relue par l'IA, à partir des scores (sans invention de faits).
-              </p>
-            ) : (
-              <p className="text-[11px] text-slate-500 mt-2">
-                Réponse client générée à partir du score. Relisez avant envoi.
-              </p>
-            )}
-          </div>
+          <AdminMatchingReport report={adminReport} />
 
-          {result.gaps?.length ? (
-            <div className="bg-slate-900/40 border border-amber-700/40 rounded-2xl p-4">
-              <p className="text-sm font-bold text-amber-200 uppercase tracking-wide">
-                Écarts à combler
-              </p>
-              <ul className="mt-2 space-y-1 text-sm text-slate-200">
-                {result.gaps.slice(0, 8).map((gap, index) => (
-                  <li key={`${gap.type}-${index}`}>
-                    {gap.universite ? `${gap.universite} — ` : ""}
-                    {gap.conseil}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          {result.orientation_bilan?.sections?.length ||
-          result.formule1_bilan?.sections?.length ? (
-            <div className="bg-slate-900/40 border border-cyan-700/40 rounded-2xl p-4 space-y-3">
-              <p className="text-sm font-bold text-cyan-200 uppercase tracking-wide">
-                Compte rendu (visible dans l'espace étudiant)
-              </p>
-              {(result.orientation_bilan || result.formule1_bilan).ai ? (
-                <p className="text-[11px] text-cyan-400">
-                  Rédaction relue par l'IA à partir du matching et des documents.
-                </p>
-              ) : null}
-              <div className="max-h-[28rem] overflow-y-auto space-y-4 pr-1">
-                {(
-                  result.orientation_bilan || result.formule1_bilan
-                ).sections.map((section) => (
-                  <div key={section.key}>
-                    <p className="text-[11px] font-bold uppercase tracking-wide text-cyan-400/80">
-                      {section.title}
-                    </p>
-                    <p className="text-sm font-semibold text-white mt-0.5">
-                      {section.question || section.title}
-                    </p>
-                    {section.verdict ? (
-                      <p className="text-[11px] text-amber-200 mt-1">
-                        {section.verdict}
-                      </p>
-                    ) : null}
-                    <p className="text-sm text-slate-300 mt-1 whitespace-pre-line">
-                      {section.body}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
+          <p className="text-sm font-bold text-slate-300 uppercase tracking-wide">
+            Tableau des universités
+          </p>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
             <div className="lg:col-span-2 space-y-2">
               {result.matches.map((item) => (
@@ -546,17 +454,24 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
                 <KindList title="Documents manquants" items={selected.missing_documents} tone="missing" />
                 <KindList title="Prochaines actions" items={selected.recommended_actions} tone="verify" />
                 <div className="text-sm text-slate-300 space-y-1">
-                  <p>Langue : {selected.teaching_language}</p>
+                  <p>
+                    Langue :{" "}
+                    {selected.teaching_language &&
+                    !/^à (confirmer|vérifier)/i.test(selected.teaching_language)
+                      ? selected.teaching_language
+                      : "à vérifier auprès de l’université"}
+                  </p>
                   <p>
                     Frais :{" "}
                     {selected.cost_estimate?.tuition_cny
                       ? `${selected.cost_estimate.tuition_cny} RMB / an (${selected.cost_estimate.status})`
-                      : "à vérifier"}
+                      : "à vérifier auprès de l’université"}
                   </p>
                   <p>Deadline : {selected.deadline}</p>
                   <p>
                     Bourses :{" "}
-                    {selected.scholarships_possible?.join(", ") || "à vérifier"}
+                    {selected.scholarships_possible?.join(", ") ||
+                      "à vérifier auprès de l’université"}
                   </p>
                 </div>
               </div>
@@ -566,7 +481,7 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
           <div>
             <div className="flex items-center justify-between mb-2 gap-3">
               <p className="text-sm font-bold text-slate-300 uppercase tracking-wide">
-                Réponse destinée à l'étudiant
+                Brouillon de réponse client
               </p>
               <div className="flex gap-3">
                 <button
@@ -590,6 +505,13 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
                 </button>
               </div>
             </div>
+            <p className="text-xs text-amber-200 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2 mb-2">
+              ⚠️ Relire avant envoi — générée automatiquement
+              {adminReport?.inconsistency_flag
+                ? " · incohérence bloquante détectée, appeler d’abord"
+                : ""}
+              {result.client_message_ai ? " · relue par l’IA" : ""}.
+            </p>
             <textarea
               value={result.client_message}
               onChange={(e) =>

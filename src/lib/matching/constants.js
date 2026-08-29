@@ -147,20 +147,20 @@ export const CATEGORY_META = {
   safety: {
     key: "safety",
     label: "Sûre",
-    subtitle: "Forte probabilité d'admission",
-    clientLabel: "Sûre — forte probabilité d'admission",
+    subtitle: "Profil bien aligné avec les critères connus",
+    clientLabel: "Sûre",
   },
   match: {
     key: "match",
     label: "Réaliste",
-    subtitle: "Probabilité correcte, dossier à soigner",
-    clientLabel: "Réaliste — dossier à soigner",
+    subtitle: "Compatible, quelques points à confirmer",
+    clientLabel: "Réaliste",
   },
   reach: {
     key: "reach",
     label: "Ambitieuse",
-    subtitle: "Dossier à renforcer",
-    clientLabel: "Ambitieuse — dossier à renforcer",
+    subtitle: "Plus exigeante — dossier à renforcer",
+    clientLabel: "Ambitieuse",
   },
   unready: {
     key: "unready",
