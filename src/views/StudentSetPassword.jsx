@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { fr } from "../i18n/fr";
-import { supabase } from "../lib/supabase";
+import { studentSupabase } from "../lib/supabase";
 
 export default function StudentSetPassword() {
   const t = fr;
@@ -29,7 +29,7 @@ export default function StudentSetPassword() {
     }
 
     setStatus("submitting");
-    const { error } = await supabase.auth.updateUser({ password });
+    const { error } = await studentSupabase.auth.updateUser({ password });
     if (error) {
       setStatus("error");
       setMessage(error.message || "Impossible de mettre à jour le mot de passe.");

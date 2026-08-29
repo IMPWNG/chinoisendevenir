@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { DOMAINES_ETUDES } from "../lib/studentProgress";
 import {
@@ -59,7 +59,7 @@ function contactToForm(contact) {
 async function adminFetch(path, options = {}) {
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+    } = await adminSupabase.auth.getSession();
   if (!session?.access_token) {
     throw new Error("SESSION");
   }

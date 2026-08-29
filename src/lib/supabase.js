@@ -8,7 +8,7 @@ const supabaseAnonKey =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
   process.env.VITE_SUPABASE_ANON_KEY;
 
-function createBrowserClient() {
+function createScopedBrowserClient(storageKey, detectSessionInUrl) {
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error(
       "Configuration Supabase manquante (NEXT_PUBLIC_SUPABASE_URL / ANON_KEY)",
@@ -18,29 +18,19 @@ function createBrowserClient() {
   return createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
-      detectSessionInUrl: true,
       autoRefreshToken: true,
-      storageKey: "chinoisendevenir-auth",
+      detectSessionInUrl,
+      storageKey,
     },
   });
 }
 
-let browserClient;
+export const studentSupabase = createScopedBrowserClient(
+  "ced-student-auth",
+  true,
+);
 
-function getBrowserClient() {
-  if (!browserClient) {
-    browserClient = createBrowserClient();
-  }
-  return browserClient;
-}
-
-export const supabase = new Proxy(
-  {},
-  {
-    get(_target, prop) {
-      const client = getBrowserClient();
-      const value = client[prop];
-      return typeof value === "function" ? value.bind(client) : value;
-    },
-  },
+export const adminSupabase = createScopedBrowserClient(
+  "ced-admin-auth",
+  false,
 );

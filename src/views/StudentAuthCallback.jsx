@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "../lib/supabase";
+import { studentSupabase } from "../lib/supabase";
 
 export default function StudentAuthCallback() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function StudentAuthCallback() {
         }
 
         if (code) {
-          const { error } = await supabase.auth.exchangeCodeForSession(code);
+          const { error } = await studentSupabase.auth.exchangeCodeForSession(code);
           if (error) {
             setMessage(error.message);
             return;

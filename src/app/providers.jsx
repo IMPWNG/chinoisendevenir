@@ -1,7 +1,12 @@
 "use client";
 
-import { AuthProvider } from "@/context/AuthContext";
+import { AdminAuthProvider } from "@/context/AdminAuthContext";
+import { StudentAuthProvider } from "@/context/AuthContext";
 
 export default function Providers({ children }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <AdminAuthProvider>
+      <StudentAuthProvider>{children}</StudentAuthProvider>
+    </AdminAuthProvider>
+  );
 }

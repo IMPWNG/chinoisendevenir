@@ -7,7 +7,7 @@ import LeadForm from "../components/LeadForm";
 import StudentFormules from "../components/StudentFormules";
 import StudentMatching from "../components/StudentMatching";
 import { fr } from "../i18n/fr";
-import { supabase } from "../lib/supabase";
+import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import {
   DOMAINES_ETUDES,
@@ -19,7 +19,7 @@ import {
 async function studentFetch(path, options = {}) {
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+    } = await studentSupabase.auth.getSession();
 
   if (!session?.access_token) {
     throw new Error("Session expirée. Veuillez vous reconnecter.");

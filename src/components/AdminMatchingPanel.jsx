@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { adminSupabase } from "../lib/supabase";
 import { getFormuleByNumber } from "../lib/formules";
 
 async function authedFetch(path, options = {}) {
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+    } = await adminSupabase.auth.getSession();
   if (!session?.access_token) throw new Error("SESSION");
   return fetch(path, {
     ...options,

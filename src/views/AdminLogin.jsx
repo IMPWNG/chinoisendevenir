@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
+import { useAdminAuth } from "../context/AdminAuthContext";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { ADMIN_LANGS } from "../i18n/admin";
-import { supabase } from "../lib/supabase";
+import { adminSupabase } from "../lib/supabase";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signIn, signOut } = useAuth();
+  const { signIn, signOut } = useAdminAuth();
   const { lang, setLang, t } = useAdminI18n();
   const router = useRouter();
 
@@ -38,7 +38,7 @@ export default function AdminLogin() {
 
     const {
       data: { session },
-    } = await supabase.auth.getSession();
+    } = await adminSupabase.auth.getSession();
     const token = session?.access_token;
     const me = token
       ? await fetch("/api/admin/me", {

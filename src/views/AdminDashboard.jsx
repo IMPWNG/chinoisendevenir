@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../context/AuthContext";
+import { adminSupabase } from "../lib/supabase";
+import { useAdminAuth } from "../context/AdminAuthContext";
 import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
@@ -32,7 +32,7 @@ import {
 async function authedFetch(path, options = {}) {
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } = await adminSupabase.auth.getSession();
   if (!session?.access_token) {
     throw new Error("SESSION");
   }
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
   const [bulkSending, setBulkSending] = useState(false);
   const [bulkProgress, setBulkProgress] = useState(null);
   const [pays, setPays] = useState([]);
-  const { signOut, user } = useAuth();
+  const { signOut, user } = useAdminAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -214,7 +214,7 @@ export default function AdminDashboard() {
 
   const fetchContacts = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    const { data, error } = await adminSupabase
       .from("contacts")
       .select("*")
       .order("created_at", { ascending: false });
@@ -337,7 +337,7 @@ export default function AdminDashboard() {
 
   const updateStatut = async (id, newStatut) => {
     try {
-      const { error } = await supabase
+      const { error } = await adminSupabase
         .from("contacts")
         .update({
           suivi_statut: newStatut,
@@ -352,7 +352,7 @@ export default function AdminDashboard() {
       }
 
       // Enregistrer l'action
-      const { error: actionError } = await supabase
+      const { error: actionError } = await adminSupabase
         .from("suivi_actions")
         .insert({
           contact_id: id,
@@ -412,7 +412,7 @@ export default function AdminDashboard() {
     try {
       let saved = false;
       for (const payload of payloads) {
-        const { error } = await supabase
+        const { error } = await adminSupabase
           .from("contacts")
           .update(payload)
           .eq("id", id);
@@ -428,7 +428,7 @@ export default function AdminDashboard() {
         return;
       }
 
-      await supabase.from("suivi_actions").insert({
+      await adminSupabase.from("suivi_actions").insert({
         contact_id: id,
         action: nextFormule ? "formule_choisie" : "contact_modifier",
         description: nextFormule
@@ -482,7 +482,7 @@ export default function AdminDashboard() {
     try {
       let saved = false;
       for (const payload of payloads) {
-        const { error } = await supabase
+        const { error } = await adminSupabase
           .from("contacts")
           .update(payload)
           .eq("id", id);
@@ -498,7 +498,7 @@ export default function AdminDashboard() {
         return;
       }
 
-      await supabase.from("suivi_actions").insert({
+      await adminSupabase.from("suivi_actions").insert({
         contact_id: id,
         action: "changement_statut",
         description: t("dashboard.progressActionNote", {
@@ -526,7 +526,7 @@ export default function AdminDashboard() {
 
   const deleteContact = async (id) => {
     if (!confirm(t("dashboard.deleteConfirm"))) return;
-    const { error } = await supabase.from("contacts").delete().eq("id", id);
+    const { error } = await adminSupabase.from("contacts").delete().eq("id", id);
     if (!error) {
       setContacts((prev) => prev.filter((c) => c.id !== id));
       setSelectedContact(null);
@@ -1105,7 +1105,7 @@ function ContactModal({
 
   const fetchActions = async () => {
     setLoadingActions(true);
-    const { data, error } = await supabase
+    const { data, error } = await adminSupabase
       .from("suivi_actions")
       .select("*")
       .eq("contact_id", contact.id)
@@ -1127,7 +1127,7 @@ function ContactModal({
     e.preventDefault();
     if (!newAction) return;
 
-    const { error } = await supabase.from("suivi_actions").insert({
+    const { error } = await adminSupabase.from("suivi_actions").insert({
       contact_id: contact.id,
       action: newAction,
       description: newDescription,
@@ -1142,7 +1142,7 @@ function ContactModal({
   };
 
   const saveNotes = async () => {
-    await supabase
+    await adminSupabase
       .from("contacts")
       .update({ notes_admin: notes })
       .eq("id", contact.id);

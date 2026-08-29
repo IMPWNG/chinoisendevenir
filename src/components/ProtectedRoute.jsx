@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
+import { useAdminAuth } from "../context/AdminAuthContext";
 import { useAdminI18n } from "../context/AdminI18nContext";
-import { supabase } from "../lib/supabase";
+import { adminSupabase } from "../lib/supabase";
 
 export default function ProtectedRoute({ children }) {
-  const { user, loading, signOut } = useAuth();
+  const { user, loading, signOut } = useAdminAuth();
   const { t } = useAdminI18n();
   const router = useRouter();
   const [allowed, setAllowed] = useState(false);
@@ -25,7 +25,7 @@ export default function ProtectedRoute({ children }) {
 
       const {
         data: { session },
-      } = await supabase.auth.getSession();
+      } = await adminSupabase.auth.getSession();
       const token = session?.access_token;
       if (!token) {
         router.replace("/admin/login");

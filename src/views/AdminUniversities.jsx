@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../context/AuthContext";
+import { adminSupabase } from "../lib/supabase";
+import { useAdminAuth } from "../context/AdminAuthContext";
 import AdminShell from "../components/AdminShell";
 import { UNIVERSITY_SEED, toUniversityInsert } from "../lib/universitySeed";
 import { useAdminI18n } from "../context/AdminI18nContext";
@@ -131,7 +131,7 @@ function replyLabel(status, t) {
 }
 
 export default function AdminUniversities() {
-  const { signOut, user } = useAuth();
+  const { signOut, user } = useAdminAuth();
   const { t } = useAdminI18n();
   const router = useRouter();
   const [universities, setUniversities] = useState([]);
@@ -149,7 +149,7 @@ export default function AdminUniversities() {
   const fetchUniversities = async () => {
     setLoading(true);
     setError("");
-    const { data, error: fetchError } = await supabase
+    const { data, error: fetchError } = await adminSupabase
       .from("universities")
       .select("*")
       .order("name_zh", { ascending: true });
@@ -233,18 +233,18 @@ export default function AdminUniversities() {
     try {
       if (editing === "new") {
         const { updated_at: _ignored, ...insertPayload } = payload;
-        const { error: insertError } = await supabase
+        const { error: insertError } = await adminSupabase
           .from("universities")
           .insert(insertPayload);
         if (insertError) throw insertError;
       } else {
-        const { error: updateError } = await supabase
+        const { error: updateError } = await adminSupabase
           .from("universities")
           .update(payload)
           .eq("id", editing);
         if (updateError) {
           const { updated_at: _ignored, ...withoutUpdatedAt } = payload;
-          const retry = await supabase
+          const retry = await adminSupabase
             .from("universities")
             .update(withoutUpdatedAt)
             .eq("id", editing);
@@ -262,7 +262,7 @@ export default function AdminUniversities() {
 
   const deleteUniversity = async (row) => {
     if (!confirm(t("universities.deleteConfirm", { name: row.name_zh }))) return;
-    const { error: deleteError } = await supabase
+    const { error: deleteError } = await adminSupabase
       .from("universities")
       .delete()
       .eq("id", row.id);
@@ -284,7 +284,7 @@ export default function AdminUniversities() {
     setImporting(true);
     try {
       const payload = UNIVERSITY_SEED.map(toUniversityInsert);
-      const { error: insertError } = await supabase
+      const { error: insertError } = await adminSupabase
         .from("universities")
         .upsert(payload, { onConflict: "name_zh" });
       if (insertError) throw insertError;
@@ -302,7 +302,7 @@ export default function AdminUniversities() {
     try {
       const {
         data: { session },
-      } = await supabase.auth.getSession();
+      } = await adminSupabase.auth.getSession();
       if (!session?.access_token) throw new Error("SESSION");
       const response = await fetch("/api/admin/universities/import-scan", {
         method: "POST",
