@@ -23,6 +23,8 @@ export function matchingForStudent(
       country: student.country || null,
       budget: budgetLabel,
       intake: student.intake?.label || student.intake || null,
+      hsk: student.hsk === 0 || student.hsk ? `HSK ${student.hsk}` : null,
+      english: student.english || null,
     },
     orientation_bilan: buildOrientationBilanFromResult(result, n, {
       documents,

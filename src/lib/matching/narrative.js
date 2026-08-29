@@ -54,6 +54,7 @@ export function buildUniversityAnalysis(match, student) {
     student_id: student.id,
     university_id: match.university_id,
     university_name: match.university_name,
+    city: match.city || null,
     score: match.score,
     category: match.category,
     priority: match.priority,

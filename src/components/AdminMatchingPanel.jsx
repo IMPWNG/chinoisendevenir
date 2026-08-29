@@ -390,14 +390,28 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
                   Rédaction relue par l'IA à partir du matching et des documents.
                 </p>
               ) : null}
-              {(
-                result.orientation_bilan || result.formule1_bilan
-              ).sections.map((section) => (
-                <div key={section.key}>
-                  <p className="text-sm font-semibold text-white">{section.title}</p>
-                  <p className="text-sm text-slate-300 mt-1">{section.body}</p>
-                </div>
-              ))}
+              <div className="max-h-[28rem] overflow-y-auto space-y-4 pr-1">
+                {(
+                  result.orientation_bilan || result.formule1_bilan
+                ).sections.map((section) => (
+                  <div key={section.key}>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-cyan-400/80">
+                      {section.title}
+                    </p>
+                    <p className="text-sm font-semibold text-white mt-0.5">
+                      {section.question || section.title}
+                    </p>
+                    {section.verdict ? (
+                      <p className="text-[11px] text-amber-200 mt-1">
+                        {section.verdict}
+                      </p>
+                    ) : null}
+                    <p className="text-sm text-slate-300 mt-1 whitespace-pre-line">
+                      {section.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
 
