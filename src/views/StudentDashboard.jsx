@@ -202,7 +202,7 @@ export default function StudentDashboard() {
   const subtitle = !hasForm
     ? "Aucun dossier ne correspond à cet email. Complétez le formulaire pour continuer."
     : unlocked
-      ? "Consultez les informations débloquées selon votre formule, mettez à jour votre profil et suivez votre dossier."
+      ? "Consultez vos informations, mettez à jour votre profil et suivez votre dossier."
       : "Votre dossier est bien enregistré. Une formule sera débloquée par Chinois en Devenir.";
 
   return (
@@ -444,7 +444,11 @@ export default function StudentDashboard() {
                     </p>
                     <div
                       className={`student-progress${
-                        visibleSteps.length <= 2 ? " is-short" : ""
+                        visibleSteps.length <= 2
+                          ? " is-short"
+                          : visibleSteps.length === 6
+                            ? " is-six"
+                            : ""
                       }`}
                     >
                       {visibleSteps.map((step, index) => {

@@ -61,10 +61,13 @@ const QUESTIONS = {
 };
 
 const GROUP_LABELS = {
-  formule1: "Formule 1 — bilan",
-  formule2: "Formule 2 — candidature",
-  formule3: "Formule 3 — jusqu’au départ",
+  formule1: "— Bilan",
+  formule2: "— Candidature",
+  formule3: "— La suite",
 };
+
+export const BILAN_DISCLAIMER =
+  "*Aucune admission, bourse ou visa n’est garantie.*";
 
 function packDefs(formule, keys, group) {
   const titles =
@@ -81,15 +84,23 @@ function packDefs(formule, keys, group) {
 export function getBilanSectionDefs(formuleNumber) {
   const n = Number(formuleNumber) || 1;
   const f1 = packDefs(FORMULES[0], F1_KEYS, "formule1");
+  const f2 = packDefs(FORMULES[1], F2_KEYS, "formule2");
+  const f3 = packDefs(FORMULES[2], F3_KEYS, "formule3");
+
   if (n >= 3) {
     return [
-      ...f1,
-      ...packDefs(FORMULES[1], F2_KEYS, "formule2"),
-      ...packDefs(FORMULES[2], F3_KEYS, "formule3"),
+      ...f1.filter((section) => section.key !== "selection"),
+      ...f2.filter(
+        (section) => section.key !== "depot" && section.key !== "suivi_reponses",
+      ),
+      ...f3,
     ];
   }
   if (n === 2) {
-    return [...f1, ...packDefs(FORMULES[1], F2_KEYS, "formule2")];
+    return [
+      ...f1.filter((section) => section.key !== "selection"),
+      ...f2,
+    ];
   }
   return f1;
 }
@@ -413,7 +424,7 @@ function buildSectionMap(ctx) {
     },
     bourses: {
       verdict: top.some((uni) => uni.scholarships.length)
-        ? "Pistes documentées — aucune bourse n’est garantie"
+        ? "Pistes documentées dans le catalogue"
         : "Peu de bourses clairement documentées",
       body: top.some((uni) => uni.scholarships.length)
         ? `Des pistes apparaissent dans le catalogue (CSC, bourse d’université, bourse provinciale). L’obtention n’est jamais automatique : elle dépend du dossier, des quotas et du calendrier.\n\nCi-dessous, la comparaison université par université, sans inventer d’appel qui n’est pas dans la base.`
@@ -426,22 +437,22 @@ function buildSectionMap(ctx) {
         n >= 3
           ? `Pour ${name}, la procédure va du dossier jusqu’au départ : candidatures, réponses, puis conseils visa, logement et arrivée.\n\nLes deadlines connues du catalogue sont listées plus bas. Les démarches officielles (visa, résidence) restent à votre charge.`
           : n === 2
-            ? `Pour ${name}, la procédure va jusqu’aux réponses des universités : caler 3 candidatures, déposer, suivre.\n\nVisa, logement et départ ne sont pas inclus dans cette formule.`
-            : `Pour un projet d’études en Chine, on clarifie d’abord le projet, puis on rassemble les pièces, puis on candidate.\n\nLa formule 1 pose le cadre. Le dépôt et le suivi jusqu’à l’admission relèvent des formules 2 et 3.`,
+            ? `Pour ${name}, la procédure va jusqu’aux réponses des universités : caler 3 candidatures, déposer, suivre.\n\nVisa, logement et départ ne sont pas traités dans ce compte rendu.`
+            : `Pour un projet d’études en Chine, on clarifie d’abord le projet, puis on rassemble les pièces, puis on candidate.\n\nCe compte rendu pose le cadre. Le dépôt et le suivi jusqu’à l’admission relèvent d’un accompagnement candidature.`,
       items: [
         factItem("Clarifier le projet (domaine, niveau, langue, budget)", "info"),
         factItem("Rassembler et faire traduire les documents nécessaires", "info"),
         factItem(
           n >= 2
             ? `Candidater aux universités retenues (${applyMax} maximum)`
-            : "Candidater aux universités retenues (formule 2 ou 3)",
+            : "Candidater aux universités retenues",
           "info",
         ),
         factItem("Recevoir les réponses / lettres d’admission", "info"),
         factItem(
           n >= 3
             ? "Puis visa, logement et départ (conseils, sans démarches officielles à votre place)"
-            : "Visa, logement et départ : hors formule actuelle",
+            : "Visa, logement et départ : hors de ce compte rendu",
           n >= 3 ? "info" : "warn",
         ),
         ...toApply
@@ -542,8 +553,8 @@ function buildSectionMap(ctx) {
       ].filter(Boolean),
     },
     depot: {
-      verdict: `Jusqu’à ${applyMax} candidatures — aucune admission garantie`,
-      body: `Dépôt de ${applyMax} candidatures maximum. L’ordre ci-dessous est celui du matching (score et cohérence avec la fiche).\n\nAucune admission n’est garantie.`,
+      verdict: `Jusqu’à ${applyMax} candidatures`,
+      body: `Dépôt de ${applyMax} candidatures maximum. L’ordre ci-dessous est celui du matching (score et cohérence avec la fiche).`,
       items: toApply.length
         ? toApply.map((uni, index) =>
             factItem(`Candidature ${index + 1} : ${uniLine(uni)}`, "ok"),
@@ -655,14 +666,28 @@ function buildSectionMap(ctx) {
   };
 }
 
-function introFor(formuleNumber, name) {
-  if (formuleNumber >= 3) {
-    return `Compte rendu pour ${name} : chaque service des formules 1, 2 et 3 est traité comme une question, à partir de votre fiche et du catalogue d’universités. Aucune admission, bourse ou visa n’est garantie. Ce document pourra être mis à jour.`;
+function introFor(formuleNumber) {
+  const n = Number(formuleNumber) || 1;
+  const parts = [
+    "Selon vos informations et votre projet, vous trouverez ci-dessous notre compte rendu pour vous permettre de préparer au mieux vos candidatures aux universités chinoises sélectionnées.",
+  ];
+  if (n >= 2) {
+    parts.push(
+      "Vous y trouverez notre sélection d’universités selon votre profil et votre projet, ainsi que les documents nécessaires.",
+    );
   }
-  if (formuleNumber === 2) {
-    return `Compte rendu pour ${name} : le bilan de la formule 1 et l’accompagnement candidature sont répondus point par point (universités, critères, documents, dépôts). Aucune admission n’est garantie. Ce document pourra être mis à jour.`;
+  if (n >= 3) {
+    parts.push("Le compte rendu couvre aussi le visa et le logement.");
   }
-  return `Bilan pour ${name} : chaque point de la formule 1 est une réponse précise, recoupée avec votre fiche et le catalogue. Aucune admission, bourse ou visa n’est garantie. Ce document pourra être mis à jour.`;
+  return parts.join(" ");
+}
+
+function stripIntroExtras(text) {
+  return String(text || "")
+    .replace(/\*?Aucune admission[\s\S]*?garantie\.?\*?/gi, "")
+    .replace(/Ce document pourra être mis à jour\.?/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 function finalizeSection(def, content) {
@@ -696,12 +721,12 @@ export function buildOrientationBilanDraft({
     documents,
     adminDocuments,
   });
-  const name = student.prenom || student.name || "vous";
   const status = summarizeDocuments(documents, adminDocuments);
 
   return {
     formuleNumber: n,
-    intro: introFor(n, name),
+    intro: introFor(n),
+    disclaimer: BILAN_DISCLAIMER,
     documents_status: status,
     universities: topMatches(analyses, applicationLimit(n)).map((item) => ({
       name: item.university_name,
@@ -753,9 +778,12 @@ function refreshDocumentSections(bilan, status, formuleNumber) {
 
 function storedBilanIsComplete(stored, formuleNumber) {
   if (!stored?.sections?.length) return false;
-  const keys = new Set(stored.sections.map((section) => section.key));
-  if (keys.has("f1_included") || keys.has("f12_included")) return false;
-  return getBilanSectionDefs(formuleNumber).every((def) => keys.has(def.key));
+  const keys = stored.sections.map((section) => section.key);
+  if (keys.includes("f1_included") || keys.includes("f12_included")) return false;
+  const expected = getBilanSectionDefs(formuleNumber).map((def) => def.key);
+  if (expected.length !== keys.length) return false;
+  const actual = new Set(keys);
+  return expected.every((key) => actual.has(key));
 }
 
 export function buildOrientationBilanFromResult(
@@ -785,14 +813,18 @@ export function buildOrientationBilanFromResult(
     return {
       ...live,
       formuleNumber: n,
+      intro: introFor(n),
+      disclaimer: BILAN_DISCLAIMER,
       documents_status: status,
-      sections: (live.sections || []).map((section) => {
+      sections: (live.sections || [])
+        .filter((section) => byKey.has(section.key))
+        .map((section) => {
         const def = byKey.get(section.key);
         return {
           ...section,
-          question: section.question || def?.question || section.title,
-          group: section.group || def?.group,
-          groupLabel: section.groupLabel || def?.groupLabel,
+          question: def?.question || section.question || section.title,
+          group: def?.group || section.group,
+          groupLabel: def?.groupLabel || section.groupLabel,
           items: (section.items || []).map(normalizeBilanItem),
         };
       }),
@@ -829,16 +861,20 @@ async function polishOrientationBilan(draft, payload) {
         messages: [
           {
             role: "system",
-            content: `Tu es conseiller d'une agence francophone d'études en Chine. Tu rédiges le compte rendu étudiant pour la formule ${draft.formuleNumber}${formule ? ` (${formule.shortTitle})` : ""}.
+            content: `Tu es conseiller d'une agence francophone d'études en Chine. Tu rédiges « Votre orientation », un compte rendu complet et cohérent, calé sur le profil de l'étudiant et sur la formule ${draft.formuleNumber}${formule ? ` (${formule.shortTitle})` : ""}.
 
-Règle principale : chaque section est une QUESTION. Tu y réponds de façon précise, en comparant les universités du brief et la fiche client. Tu ne résumes pas « tous les services de la formule 1 / 2 ». Tu ne recopies pas un profil générique.
+Chaque section est une QUESTION à laquelle tu réponds avec la fiche client et le catalogue d'universités. Compare les établissements. Distingue établi / à vérifier / manquant.
 
-Français clair, concret, professionnel. 2 à 5 phrases dans body, avec \\n\\n entre les idées. Ne jamais garantir admission, bourse ou visa. Ne pas inventer de frais, deadlines, HSK, programmes, universités ou documents absents du brief. Distingue clairement : établi / à vérifier / manquant.
+Relis l'ensemble avant d'écrire : aucun doublon. Interdiction de répéter la même liste d'universités, les mêmes bourses ou le même conseil dans deux sections. Une seule liste de candidatures : formule 2 = 3 maximum ; formule 3 = jusqu'à 5 (jamais les deux). Si deux questions se recoupent, la seconde n'ajoute que ce qui n'a pas encore été dit.
+
+Ne mentionne jamais « formule 1 », « formule 2 » ou « formule 3 » dans les titres, les questions ou les réponses. N'inclus pas la mention d'absence de garantie dans l'intro : elle est affichée à part.
+
+Français clair, concret, professionnel. 2 à 5 phrases dans body, avec \\n\\n entre les idées. Ne jamais garantir admission, bourse ou visa. Ne pas inventer de frais, deadlines, HSK, programmes, universités ou documents absents du brief.
 
 Pour chaque item, préfixe obligatoire : [ok] fait établi, [warn] à vérifier, [miss] manque ou blocage, [info] consigne.
 verdict : une courte conclusion (moins de 12 mots).
 
-Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict }] } avec les mêmes keys.`,
+Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict }] } avec les mêmes keys. L'intro reprend le sens du brouillon, sans disclaimer.`,
           },
           {
             role: "user",
@@ -868,7 +904,8 @@ Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict 
     );
     return {
       ...draft,
-      intro: String(parsed.intro || draft.intro).trim(),
+      intro: stripIntroExtras(parsed.intro || draft.intro) || draft.intro,
+      disclaimer: BILAN_DISCLAIMER,
       sections: draft.sections.map((section) => {
         const updated = byKey.get(section.key);
         if (!updated) return section;
@@ -913,7 +950,7 @@ export async function generateOrientationBilan({
     formuleNumber: n,
     formuleTitle: getFormuleByNumber(n)?.title,
     instruction:
-      "Réponds à chaque question avec la fiche client + les universités. Compare. Vérifie. Pas de résumé de formule.",
+      "Compte rendu complet, cohérent avec le profil. Pas de doublon. Une seule liste de candidatures. Pas de mention des numéros de formule. L'intro ne contient pas la mention d'absence de garantie.",
     student: {
       name: student.name,
       prenom: student.prenom,

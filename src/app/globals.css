@@ -771,6 +771,16 @@ a.landing-btn-accent:hover {
 
 .student-progress.is-short {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.student-progress.is-six {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .student-step {
@@ -1080,11 +1090,20 @@ a.formule-card-btn {
 }
 
 .student-bilan-lede {
-  margin: 8px 0 18px;
+  margin: 8px 0 10px;
   color: var(--secondary);
   font-size: 1.02rem;
   line-height: 1.65;
   max-width: 46rem;
+}
+
+.student-bilan-disclaimer {
+  margin: 0 0 18px;
+  max-width: 46rem;
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--bilan-lacquer, #c1121f);
 }
 
 .student-bilan-fiche {
@@ -1467,6 +1486,11 @@ a.formule-card-btn {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .student-progress.is-six {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 640px;
+  }
+
   .student-formule-grid {
     grid-template-columns: 1fr;
   }
@@ -1478,8 +1502,11 @@ a.formule-card-btn {
 }
 
 @media (max-width: 768px) {
-  .student-progress {
+  .student-progress,
+  .student-progress.is-short,
+  .student-progress.is-six {
     grid-template-columns: 1fr;
+    max-width: none;
   }
 }
 

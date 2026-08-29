@@ -44,8 +44,10 @@ function OrientationBilan({ matching, formuleNumber }) {
         <h2 className="card-title">Votre orientation</h2>
         <p className="student-bilan-lede">
           Votre compte rendu est en cours de préparation. Dès qu’il sera généré
-          depuis le matching, chaque service de votre formule y sera répondu.
-          Il pourra être mis à jour plus tard.
+          depuis le matching, il apparaîtra ici selon votre projet.
+        </p>
+        <p className="student-bilan-disclaimer">
+          *Aucune admission, bourse ou visa n’est garantie.*
         </p>
       </div>
     );
@@ -60,7 +62,11 @@ function OrientationBilan({ matching, formuleNumber }) {
         <h2 className="card-title">Votre orientation</h2>
         <p className="student-bilan-lede">
           {bilan.intro ||
-            "Chaque point de votre formule est traité comme une question, à partir de votre fiche et du catalogue d’universités. Aucune admission, bourse ou visa n’est garantie."}
+            "Selon vos informations et votre projet, vous trouverez ci-dessous notre compte rendu pour vous permettre de préparer au mieux vos candidatures aux universités chinoises sélectionnées."}
+        </p>
+        <p className="student-bilan-disclaimer">
+          {bilan.disclaimer ||
+            "*Aucune admission, bourse ou visa n’est garantie.*"}
         </p>
 
         {chips.length ? (
