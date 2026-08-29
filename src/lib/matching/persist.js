@@ -5,7 +5,9 @@ export function compactMatchingResult(result, overrides = {}) {
     ? { ...result.student, notes: String(result.student.notes || "").slice(0, 800) }
     : result.student;
   return {
-    version: 1,
+    version: 2,
+    mix: result.mix || null,
+    gaps: result.gaps || [],
     generated_at: result.generated_at,
     recommended_formula: result.recommended_formula,
     client_message: result.client_message,

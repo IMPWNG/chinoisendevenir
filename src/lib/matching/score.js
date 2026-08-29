@@ -1,293 +1,331 @@
 import {
-  DOMAIN_FAMILIES,
-  DOMAIN_KEYS,
-  EUR_TO_CNY,
-  categoryFromScore,
+  CATEGORY_META,
+  categoryMetaFromScore,
+  englishToIelts,
   infoStatus,
   normalizeText,
   priorityFromScore,
 } from "./constants";
+import { scoreMotivationIa } from "./enrich";
+import { domainPassesHardFilter, domainSimilarity } from "./semantic";
+import { MATCHING_WEIGHTS } from "./weights";
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
-function familyOf(field) {
-  return Object.entries(DOMAIN_FAMILIES).find(([, fields]) =>
-    fields.includes(field),
-  )?.[0];
-}
-
-function domainOverlap(studentField, university) {
-  if (!studentField || studentField === "Autre") {
-    return { score: null, related: false, hit: false, unknownStudent: true };
-  }
-  const keys = (DOMAIN_KEYS[studentField] || [normalizeText(studentField)]).map(
-    normalizeText,
-  );
-  const structured = (university.fieldKeys || []).map(normalizeText).filter(Boolean);
-  const haystack = normalizeText(
-    [
-      ...(university.fields || []),
-      ...(university.majors || []),
-      ...(university.programs || []).map((p) => `${p.name} ${p.field}`),
-    ].join(" "),
-  );
-
-  const matchesKeys = (pool) =>
-    keys.some((key) => pool.some((item) => item.includes(key) || key.includes(item)));
-
-  if (structured.length) {
-    if (matchesKeys(structured) || keys.some((key) => haystack.includes(key))) {
-      return { score: "strong", related: false, hit: true };
-    }
-    const studentFamily = familyOf(studentField);
-    if (studentFamily) {
-      const related = DOMAIN_FAMILIES[studentFamily].some((label) => {
-        const aliases = (DOMAIN_KEYS[label] || []).map(normalizeText);
-        return aliases.some(
-          (key) => structured.some((item) => item.includes(key)) || haystack.includes(key),
-        );
-      });
-      if (related) return { score: "related", related: true, hit: true };
-    }
-    return { score: "none", related: false, hit: false };
-  }
-
-  if (!haystack) {
-    return { score: null, related: false, hit: false, unknownUniversity: true };
-  }
-  if (keys.some((key) => haystack.includes(key))) {
-    return { score: "strong", related: false, hit: true };
-  }
-  const hasLatin = /[a-z]/.test(haystack);
-  if (!hasLatin) {
-    return { score: null, related: false, hit: false, unknownUniversity: true };
-  }
-  return { score: "none", related: false, hit: false };
-}
-
-function englishLevelScore(english) {
-  const value = normalizeText(english);
-  if (!value || value === "none" || value === "aucun") return 0;
-  if (value.includes("c1") || value.includes("ielts7") || value.includes("ielts 7")) return 4;
-  if (value.includes("b2") || value.includes("ielts6") || value.includes("ielts 6")) return 3;
-  if (value.includes("b1") || value.includes("ielts5")) return 2;
-  if (value.includes("a2") || value.includes("a1")) return 1;
-  return 2;
-}
-
-function scoreDomain(student, university, flags) {
-  const overlap = domainOverlap(student.field, university);
-  if (overlap.unknownStudent) {
-    flags.toVerify.push("Domaine d'études de l'étudiant à préciser");
-    return { points: 12, max: 25, status: "missing", note: "Domaine étudiant manquant." };
-  }
-  if (overlap.unknownUniversity) {
-    flags.toVerify.push("Domaines et programmes de l'université à vérifier");
-    return {
-      points: 14,
-      max: 25,
-      status: "missing",
-      note: "Programmes universitaires non renseignés.",
-    };
-  }
-  if (overlap.score === "strong") {
-    flags.confirmed.push("Domaine correspondant aux programmes identifiés");
-    return { points: 25, max: 25, status: "confirmed", note: "Forte correspondance de domaine." };
-  }
-  if (overlap.score === "related") {
-    flags.estimated.push("Domaine proche, pas une correspondance exacte");
-    return { points: 16, max: 25, status: "estimated", note: "Domaine connexe." };
-  }
-  return { points: 0, max: 25, status: "confirmed", note: "Domaine incompatible.", exclude: true };
-}
-
-function scoreLevel(student, university, flags) {
+function diplomaFitsTarget(student) {
+  const diploma = normalizeText(student.dernierDiplome);
   const target = student.targetDegree;
-  if (!target) {
-    flags.toVerify.push("Niveau d'études visé à confirmer");
-    return { points: 8, max: 15, status: "missing", note: "Niveau visé non confirmé." };
+  if (!diploma || !target) return null;
+  if (target === "bachelor") return diploma.includes("bac") || diploma.includes("lycee");
+  if (target === "master") {
+    return diploma.includes("licence") || diploma.includes("bachelor");
   }
-  if (!university.degrees.length) {
-    flags.toVerify.push("Niveaux d'études acceptés par l'université à vérifier");
-    return { points: 8, max: 15, status: "missing", note: "Niveaux universitaires inconnus." };
+  if (target === "phd") {
+    return diploma.includes("master") || diploma.includes("doctorat") || diploma.includes("phd");
   }
-  if (university.degrees.includes(target)) {
-    flags.confirmed.push(`Niveau ${target} proposé`);
-    return { points: 15, max: 15, status: "confirmed", note: `Niveau ${target} disponible.` };
-  }
-  if (university.chineseLanguageProgram && target !== "language") {
-    flags.estimated.push("Année de langue possible comme passerelle");
-    return {
-      points: 8,
-      max: 15,
-      status: "estimated",
-      note: "Niveau visé absent, mais année de langue possible.",
-      signal: "level_bridge",
-    };
-  }
-  return {
-    points: 0,
-    max: 15,
-    status: "confirmed",
-    note: "Niveau d'études incompatible.",
-    exclude: true,
-  };
+  if (target === "language") return true;
+  return null;
 }
 
-function scoreBudget(student, university, flags) {
-  const tuition = university.tuitionMin;
-  if (!student.budget) {
-    flags.missing.push("Budget annuel de l'étudiant");
-    return { points: 10, max: 20, status: "missing", note: "Budget non renseigné." };
-  }
-  if (tuition == null) {
-    flags.toVerify.push("Frais de scolarité exacts à demander à l'université");
-    return { points: 11, max: 20, status: "missing", note: "Frais universitaires inconnus." };
-  }
-  const maxCny = student.budget.maxEur * EUR_TO_CNY;
-  const housing = university.housingMin || 0;
-  const yearly = tuition + housing;
-  const hasScholarship =
-    university.hasCsc || university.hasUniScholarship || university.hasProvincial;
-  if (maxCny >= yearly) {
-    flags.confirmed.push("Budget a priori suffisant pour les frais connus");
-    return { points: 20, max: 20, status: "confirmed", note: "Budget couvre les frais connus." };
-  }
-  if (maxCny >= tuition) {
-    flags.estimated.push("Budget tendu une fois le logement inclus");
-    return { points: 14, max: 20, status: "estimated", note: "Scolarité OK, logement à arbitrer." };
-  }
-  if (hasScholarship && student.scholarshipGoal !== "none") {
-    flags.warnings.push("Budget insuffisant sans bourse");
-    return {
-      points: 10,
-      max: 20,
-      status: "estimated",
-      note: "Budget inférieur aux frais ; bourse probablement nécessaire.",
-    };
-  }
-  flags.warnings.push("Budget insuffisant par rapport aux frais connus");
-  return {
-    points: 5,
-    max: 20,
-    status: "confirmed",
-    note: "Budget insuffisant.",
-  };
+function intakeTooFar(student, university) {
+  if (student.intake?.flexible) return false;
+  const months = university.intakeMonths || [];
+  if (!student.intake?.month || !months.length) return false;
+  if (months.includes(student.intake.month)) return false;
+  const closest = months.reduce(
+    (best, month) => Math.min(best, Math.abs(month - student.intake.month)),
+    12,
+  );
+  return closest >= 5;
 }
 
-function scoreLanguage(student, university, flags) {
-  const hskRequired = university.hsk;
-  const englishOk = university.englishAvailable;
+function hardFilter(student, university) {
+  if (!university.isActive) {
+    return { pass: false, reason: "Université inactive (hors matching)." };
+  }
+  if (student.age && university.ageMin && student.age < university.ageMin) {
+    return { pass: false, reason: `Âge ${student.age} ans inférieur au minimum connu (${university.ageMin}).` };
+  }
+  const ageMax = university.ageMaxForDegree?.(student.targetDegree);
+  if (student.age && ageMax && student.age > ageMax) {
+    return {
+      pass: false,
+      reason: `Âge ${student.age} ans supérieur à la limite connue (${ageMax}).`,
+    };
+  }
+  if (student.targetDegree && university.degrees.length) {
+    const ok =
+      university.degrees.includes(student.targetDegree) ||
+      (student.targetDegree !== "language" && university.chineseLanguageProgram);
+    if (!ok) {
+      return { pass: false, reason: "Niveau d'études incompatible." };
+    }
+  }
+  const overlap = domainSimilarity(student.field, university);
+  if (!domainPassesHardFilter(overlap)) {
+    return { pass: false, reason: "Domaine d'études incompatible.", overlap };
+  }
+  if (intakeTooFar(student, university)) {
+    return { pass: false, reason: "Rentrée visée trop éloignée du calendrier connu." };
+  }
+  return { pass: true, overlap };
+}
+
+function scoreLangue(student, university, flags) {
+  const hskRequired = university.hskForDegree?.(student.targetDegree) ?? university.hsk;
+  const ieltsRequired = university.ielts;
   const studentHsk = student.hsk;
-  const studentEnglish = englishLevelScore(student.english);
+  const studentIelts =
+    student.ielts != null ? student.ielts : englishToIelts(student.english);
 
-  if (hskRequired == null && !englishOk && !university.languageRequirements) {
-    flags.toVerify.push("Exigences linguistiques à confirmer");
-    return { points: 8, max: 15, status: "missing", note: "Langue d'enseignement à vérifier." };
+  if (studentHsk == null && studentIelts == null && !university.englishAvailable) {
+    flags.estimated.push("Langue : niveau débutant retenu par défaut");
+    return { points: 20, max: 100, status: "missing", note: "Aucun score de langue : plancher débutant." };
   }
 
-  if (englishOk && studentHsk == null) {
+  if (studentHsk == null && studentIelts == null) {
+    flags.estimated.push("Langue non documentée — score plancher");
+    const points = university.englishAvailable ? 35 : 20;
+    return { points, max: 100, status: "missing", note: "Score plancher, débutant total." };
+  }
+
+  let score = 50;
+  if (studentHsk != null && hskRequired != null) {
+    const ecart = studentHsk - hskRequired;
+    if (ecart >= 0) {
+      score += Math.min(ecart * 15, 30);
+      flags.confirmed.push(`HSK ${studentHsk} ≥ HSK ${hskRequired} requis`);
+    } else {
+      score += Math.max(ecart * 25, -50);
+      flags.warnings.push(`HSK insuffisant (HSK ${studentHsk} vs HSK ${hskRequired})`);
+      if (university.chineseLanguageProgram) {
+        flags.estimated.push("Année de langue chinoise possible pour rattraper le HSK");
+        score += 8;
+      }
+    }
+  } else if (university.englishAvailable && (studentIelts != null || student.english)) {
     flags.confirmed.push("Programmes en anglais identifiés");
-    const points = studentEnglish >= 2 ? 13 : studentEnglish === 1 ? 9 : 8;
-    if (student.english == null) flags.missing.push("Niveau d'anglais de l'étudiant");
+    score += studentIelts >= 6 ? 20 : studentIelts >= 5 ? 10 : 0;
+  }
+
+  if (studentIelts != null && ieltsRequired != null) {
+    const ecartIelts = studentIelts - ieltsRequired;
+    if (ecartIelts >= 0) score += Math.min(ecartIelts * 3, 20);
+    else score += Math.max(ecartIelts * 8, -25);
+  }
+
+  return {
+    points: clamp(Math.round(score), 0, 100),
+    max: 100,
+    status: studentHsk == null ? "estimated" : "confirmed",
+    note: "Compatibilité linguistique (HSK / IELTS / anglais).",
+    required: hskRequired,
+  };
+}
+
+function scoreAcademique(student, university, flags, overlap) {
+  let score = 50;
+  const gpaMin = university.gpaMinForDegree?.(student.targetDegree);
+  if (student.gpa && gpaMin) {
+    const diff = student.gpa - gpaMin;
+    score += diff * 30;
+    if (diff >= 0) flags.confirmed.push(`GPA ${student.gpa} ≥ ${gpaMin}`);
+    else flags.warnings.push(`GPA ${student.gpa} sous le seuil ${gpaMin}`);
+  } else if (student.gpa == null) {
+    flags.toVerify.push("GPA / moyenne à préciser");
+    score -= 8;
+  }
+
+  const fit = diplomaFitsTarget(student);
+  if (fit === true) {
+    score += 20;
+    flags.confirmed.push("Diplôme cohérent avec le niveau visé");
+  } else if (fit === false) {
+    score -= 40;
+    flags.warnings.push("Diplôme actuel peu aligné avec le niveau visé");
+  } else {
+    flags.toVerify.push("Correspondance diplôme / niveau visé à confirmer");
+  }
+
+  if (overlap?.hit === "strong") score += 8;
+  else if (overlap?.hit === "related") score += 3;
+  else if (overlap?.hit === "none") score -= 15;
+
+  if (student.targetDegree && university.degrees.includes(student.targetDegree)) {
+    flags.confirmed.push(`Niveau ${student.targetDegree} proposé`);
+  }
+
+  return {
+    points: clamp(Math.round(score), 0, 100),
+    max: 100,
+    status: student.gpa ? "confirmed" : "estimated",
+    note: "GPA, diplôme et correspondance de domaine.",
+    required: gpaMin,
+  };
+}
+
+function scoreFinancier(student, university, flags) {
+  const cout =
+    university.costTotalCny ||
+    (university.tuitionMean || 0) +
+      (university.housingMean || 0) +
+      (university.livingCostYearly || 0);
+  const budget = student.budgetCny;
+  if (!budget) {
+    flags.missing.push("Budget annuel de l'étudiant");
+    return { points: 40, max: 100, status: "missing", note: "Budget non renseigné.", cost: cout };
+  }
+  if (!university.tuitionMean && university.tuitionMin == null) {
+    flags.toVerify.push("Frais de scolarité exacts à demander à l'université");
+    return { points: 45, max: 100, status: "missing", note: "Frais universitaires inconnus.", cost: cout };
+  }
+  const ratio = budget / Math.max(cout, 1);
+  let points = 10;
+  if (ratio >= 1.2) points = 100;
+  else if (ratio >= 1.0) points = 80;
+  else if (ratio >= 0.8) points = 50;
+  else if (ratio >= 0.5) points = 25;
+  else points = 10;
+
+  if (points >= 80) flags.confirmed.push("Budget a priori suffisant pour le coût estimé");
+  else if (points >= 50) flags.estimated.push("Budget tendu : bourse partielle probablement nécessaire");
+  else flags.warnings.push("Budget insuffisant sans bourse complète");
+
+  return {
+    points,
+    max: 100,
+    status: points >= 80 ? "confirmed" : "estimated",
+    note: `Ratio budget / coût estimé : ${ratio.toFixed(2)}.`,
+    cost: cout,
+  };
+}
+
+function scoreBourse(student, university, flags) {
+  if (!student.besoinBourse) {
+    return { points: 100, max: 100, status: "confirmed", note: "Pas de contrainte bourse." };
+  }
+  const types = university.scholarshipTypes || [];
+  const hasAny =
+    university.hasCsc || university.hasUniScholarship || university.hasProvincial || types.length;
+  if (hasAny) {
+    flags.confirmed.push(`Bourses possibles : ${types.slice(0, 3).join(", ")}`);
     return {
-      points,
-      max: 15,
-      status: student.english ? "confirmed" : "estimated",
-      note: "Cours en anglais possibles.",
+      points: Math.min(60 + types.length * 10, 100),
+      max: 100,
+      status: "confirmed",
+      note: "Bourses documentées pour ce besoin de financement.",
+    };
+  }
+  if (!university.scholarshipText) {
+    flags.toVerify.push("Bourses à confirmer auprès de l'université");
+    return { points: 25, max: 100, status: "missing", note: "Bourses non documentées." };
+  }
+  flags.warnings.push("Objectif bourse, mais peu de pistes listées");
+  return { points: 10, max: 100, status: "estimated", note: "Gros risque si le dossier dépend d'une bourse." };
+}
+
+function scoreAge(student, university, flags) {
+  if (!student.age) {
+    flags.toVerify.push("Âge de l'étudiant à confirmer");
+    return { points: 60, max: 100, status: "missing", note: "Âge non renseigné." };
+  }
+  const ageMax = university.ageMaxForDegree?.(student.targetDegree);
+  if (!ageMax) {
+    flags.toVerify.push("Âge maximum à vérifier selon le programme");
+    return { points: 70, max: 100, status: "missing", note: "Limite d'âge inconnue." };
+  }
+  const marge = ageMax - student.age;
+  if (marge >= 5) return { points: 100, max: 100, status: "confirmed", note: "Marge d'âge confortable." };
+  if (marge >= 2) return { points: 80, max: 100, status: "confirmed", note: "Marge d'âge correcte." };
+  if (marge >= 0) {
+    flags.warnings.push("Âge proche de la limite connue");
+    return { points: 60, max: 100, status: "estimated", note: "Âge proche du plafond." };
+  }
+  return { points: 0, max: 100, status: "confirmed", note: "Au-dessus de la limite d'âge." };
+}
+
+function scoreLocalisation(student, university) {
+  const cities = (student.preferredCities || []).map(normalizeText).filter(Boolean);
+  if (!cities.length) {
+    return { points: 80, max: 100, status: "confirmed", note: "Pas de préférence de ville." };
+  }
+  const city = normalizeText(university.city);
+  const province = normalizeText(university.province);
+  if (cities.some((item) => item && (city.includes(item) || item.includes(city)))) {
+    return { points: 100, max: 100, status: "confirmed", note: "Ville demandée." };
+  }
+  if (cities.some((item) => item && (province.includes(item) || item.includes(province)))) {
+    return { points: 75, max: 100, status: "estimated", note: "Région proche de la préférence." };
+  }
+  return { points: 35, max: 100, status: "confirmed", note: "Hors des villes préférées." };
+}
+
+function weighted(parts) {
+  const score = Object.entries(MATCHING_WEIGHTS).reduce((sum, [key, weight]) => {
+    const value = parts[key]?.points ?? 0;
+    return sum + weight * value;
+  }, 0);
+  return Math.round(clamp(score, 0, 100));
+}
+
+function recommendFormula(student, breakdown, flags) {
+  const languageGap = breakdown.langue.points <= 40;
+  const budgetTight = breakdown.financier.points <= 40;
+  const manyWarnings = flags.warnings.length >= 3;
+  if (languageGap || budgetTight || manyWarnings) return 3;
+  if (student.formuleNumber) return student.formuleNumber;
+  if (breakdown.academique.points >= 70 && breakdown.langue.points >= 60) return 2;
+  return 1;
+}
+
+export function matchUniversity(student, university, { pedagogical = false } = {}) {
+  const flags = {
+    confirmed: [],
+    estimated: [],
+    missing: [],
+    toVerify: [],
+    warnings: [],
+  };
+
+  const filter = hardFilter(student, university);
+  if (!filter.pass && !pedagogical) {
+    return {
+      excluded: true,
+      excludeReason: filter.reason,
+      university_id: university.id,
+      university_name: university.displayName,
     };
   }
 
-  if (hskRequired != null) {
-    if (studentHsk == null) {
-      flags.missing.push("Niveau HSK de l'étudiant");
-      if (englishOk) {
-        flags.estimated.push("HSK requis, mais une piste en anglais existe");
-        return { points: 8, max: 15, status: "missing", note: "HSK non renseigné." };
-      }
-      return { points: 7, max: 15, status: "missing", note: "HSK étudiant inconnu." };
-    }
-    if (studentHsk >= hskRequired) {
-      flags.confirmed.push(`HSK ${studentHsk} ≥ HSK ${hskRequired} requis`);
-      return { points: 15, max: 15, status: "confirmed", note: "Niveau de chinois suffisant." };
-    }
-    const gap = hskRequired - studentHsk;
-    const points = gap === 1 ? 6 : 3;
-    flags.warnings.push(`HSK insuffisant (HSK ${studentHsk} vs HSK ${hskRequired})`);
-    if (university.chineseLanguageProgram) {
-      flags.estimated.push("Année de langue chinoise possible pour rattraper le HSK");
-      return { points: points + 3, max: 15, status: "estimated", note: "HSK insuffisant, passerelle langue." };
-    }
-    return { points, max: 15, status: "confirmed", note: "Pénalité linguistique importante." };
-  }
+  const overlap = filter.overlap || domainSimilarity(student.field, university);
+  const langue = scoreLangue(student, university, flags);
+  const academique = scoreAcademique(student, university, flags, overlap);
+  const financier = scoreFinancier(student, university, flags);
+  const bourse = scoreBourse(student, university, flags);
+  const age = scoreAge(student, university, flags);
+  const localisation = scoreLocalisation(student, university);
+  const motivation = {
+    points: scoreMotivationIa(student.iaAnalysis),
+    max: 100,
+    status: student.iaEnriched ? "estimated" : "missing",
+    note: student.iaEnriched
+      ? "Clarté du projet extraite du texte libre."
+      : "Pas assez de texte projet pour scorer la motivation.",
+  };
 
-  if (englishOk) {
-    return { points: studentEnglish >= 2 ? 12 : 8, max: 15, status: "estimated", note: "Anglais possible." };
-  }
-  return { points: 8, max: 15, status: "estimated", note: "Langue à confirmer." };
-}
-
-function scoreIntake(student, university, flags) {
-  if (student.intake.flexible) {
-    return { points: 10, max: 10, status: "confirmed", note: "Rentrée flexible." };
-  }
-  const months = university.intakeMonths;
-  if (!months.length) {
-    flags.toVerify.push("Mois de rentrée à confirmer");
-    return { points: 6, max: 10, status: "missing", note: "Calendrier universitaire inconnu." };
-  }
-  if (student.intake.month && months.includes(student.intake.month)) {
-    const now = new Date();
-    if (
-      student.intake.year === now.getFullYear() &&
-      student.intake.month <= now.getMonth() + 1
-    ) {
-      flags.warnings.push("Rentrée visée très proche ou déjà commencée");
-      return { points: 4, max: 10, status: "estimated", note: "Rentrée possible mais délai critique." };
-    }
-    flags.confirmed.push("Mois de rentrée compatible");
-    return { points: 10, max: 10, status: "confirmed", note: "Rentrée compatible." };
-  }
-  flags.warnings.push("Rentrée visée absente du calendrier connu");
-  return { points: 3, max: 10, status: "confirmed", note: "Pénalité de rentrée." };
-}
-
-function scoreScholarship(student, university, flags) {
-  const wants =
-    student.scholarshipGoal === "required" || student.scholarshipGoal === "helpful";
-  const hasAny =
-    university.hasCsc || university.hasUniScholarship || university.hasProvincial;
-  if (!hasAny && !university.scholarshipText) {
-    flags.toVerify.push("Bourses à confirmer auprès de l'université");
-    return { points: 2, max: 5, status: "missing", note: "Bourses non documentées." };
-  }
-  if (hasAny) {
-    const names = [
-      university.hasCsc ? "CSC" : null,
-      university.hasUniScholarship ? "universitaire" : null,
-      university.hasProvincial ? "provinciale / municipale" : null,
-    ].filter(Boolean);
-    flags.confirmed.push(`Bourses possibles : ${names.join(", ")}`);
-    if (student.scholarshipGoal === "required") return { points: 5, max: 5, status: "confirmed", note: "Pistes de bourse identifiées." };
-    return { points: wants ? 5 : 4, max: 5, status: "confirmed", note: "Bourses disponibles." };
-  }
-  if (student.scholarshipGoal === "required") {
-    flags.warnings.push("Objectif bourse, mais aucune bourse listée");
-    return { points: 1, max: 5, status: "estimated", note: "Peu de pistes de financement." };
-  }
-  return { points: 3, max: 5, status: "estimated", note: "Financement à préciser." };
-}
-
-function scoreAdmission(student, university, flags) {
-  let points = 2;
-  if (university.applicationUrl || university.emails.length) points += 1;
-  if (university.documents.length) points += 1;
-  if (university.confidence >= 0.6) points += 1;
-  if (university.isPartner) points += 1;
-  points = clamp(points, 0, 5);
-  if (points <= 2) flags.toVerify.push("Procédure d'admission à vérifier");
+  const breakdown = {
+    langue,
+    academique,
+    financier,
+    bourse,
+    age,
+    localisation,
+    motivation,
+  };
+  const score = weighted(breakdown);
+  const meta = filter.pass ? categoryMetaFromScore(score) : CATEGORY_META.unready;
   const missingDocs = (university.documents || []).filter((doc) => {
     const key = normalizeText(doc);
     if (key.includes("passeport") || key.includes("passport")) {
@@ -301,100 +339,11 @@ function scoreAdmission(student, university, flags) {
   if (missingDocs.length) {
     flags.missing.push(...missingDocs.slice(0, 6).map((d) => `Document : ${d}`));
   }
-  return {
-    points,
-    max: 5,
-    status: points >= 4 ? "confirmed" : "estimated",
-    note: "Faisabilité d'admission selon la complétude du dossier université.",
-    missingDocs,
-  };
-}
-
-function scoreFormule(student, university, flags) {
-  const n = student.formuleNumber;
-  if (!n) {
-    flags.estimated.push("Aucune formule choisie pour l'instant");
-    return { points: 3, max: 5, status: "estimated", note: "Formule non choisie." };
-  }
-  if (n === 1) return { points: 4, max: 5, status: "confirmed", note: "Adapté à une première orientation." };
-  if (n === 2) {
-    const ready = Boolean(university.applicationUrl || university.emails.length);
-    return {
-      points: ready ? 5 : 3,
-      max: 5,
-      status: ready ? "confirmed" : "estimated",
-      note: ready
-        ? "Candidature accompagnée possible."
-        : "Canal de candidature à confirmer.",
-    };
-  }
-  const complete = Boolean(university.housingMin || university.contacts?.email);
-  return {
-    points: complete ? 5 : 3,
-    max: 5,
-    status: complete ? "confirmed" : "estimated",
-    note: "Suivi jusqu'au départ possible, infos logement/visa à compléter.",
-  };
-}
-
-function recommendFormula(student, breakdown, flags) {
-  const languageGap = breakdown.language.points <= 6;
-  const budgetTight = breakdown.budget.points <= 10;
-  const manyWarnings = flags.warnings.length >= 3;
-  if (languageGap || budgetTight || manyWarnings) return 3;
-  if (student.formuleNumber) return student.formuleNumber;
-  if (breakdown.domain.points >= 20 && breakdown.level.points >= 12) return 2;
-  return 1;
-}
-
-export function matchUniversity(student, university) {
-  const flags = {
-    confirmed: [],
-    estimated: [],
-    missing: [],
-    toVerify: [],
-    warnings: [],
-  };
-
-  if (!university.isActive) {
-    return { excluded: true, excludeReason: "Université inactive (hors matching)." };
-  }
-
-  const ageLimit = student.targetDegree
-    ? university.ageMax[student.targetDegree]
-    : null;
-  if (student.age && ageLimit && student.age > ageLimit) {
-    return {
-      excluded: true,
-      excludeReason: `Âge ${student.age} ans supérieur à la limite connue (${ageLimit}).`,
-    };
-  }
-  if (student.age && !ageLimit) {
-    flags.toVerify.push("Âge maximum à vérifier selon le programme");
-  }
-
-  const domain = scoreDomain(student, university, flags);
-  if (domain.exclude) {
-    return { excluded: true, excludeReason: "Domaine d'études incompatible." };
-  }
-  const level = scoreLevel(student, university, flags);
-  if (level.exclude) {
-    return { excluded: true, excludeReason: "Niveau d'études incompatible." };
-  }
-
-  const budget = scoreBudget(student, university, flags);
-  const language = scoreLanguage(student, university, flags);
-  const intake = scoreIntake(student, university, flags);
-  const scholarship = scoreScholarship(student, university, flags);
-  const admission = scoreAdmission(student, university, flags);
-  const formule = scoreFormule(student, university, flags);
-
-  const breakdown = { domain, level, budget, language, intake, scholarship, admission, formule };
-  const score = Object.values(breakdown).reduce((sum, item) => sum + item.points, 0);
-  const recommendedFormula = recommendFormula(student, breakdown, flags);
 
   return {
     excluded: false,
+    pedagogical: Boolean(filter.pass === false),
+    excludeReason: filter.pass ? null : filter.reason,
     university_id: university.id,
     university_name: university.displayName,
     university_name_zh: university.nameZh,
@@ -402,27 +351,30 @@ export function matchUniversity(student, university) {
     city: university.city,
     province: university.province,
     score,
-    category: categoryFromScore(score),
+    categoryKey: meta.key,
+    category: meta.label,
+    category_subtitle: meta.subtitle,
     priority: priorityFromScore(score),
     breakdown,
+    weights: MATCHING_WEIGHTS,
     confirmed_information: [...new Set(flags.confirmed)],
     estimated_information: [...new Set(flags.estimated)],
     missing_information: [...new Set(flags.missing)],
     to_verify: [...new Set(flags.toVerify)],
     warnings: [...new Set(flags.warnings)],
-    missing_documents: admission.missingDocs || [],
-    scholarships_possible: [
-      university.hasCsc ? "CSC" : null,
-      university.hasUniScholarship ? "Bourse universitaire" : null,
-      university.hasProvincial ? "Bourse provinciale / municipale" : null,
-    ].filter(Boolean),
+    missing_documents: missingDocs,
+    scholarships_possible: university.scholarshipTypes || [],
+    hsk_required: university.hskForDegree?.(student.targetDegree) ?? university.hsk,
+    gpa_required: university.gpaMinForDegree?.(student.targetDegree) ?? null,
+    cost_total_cny: financier.cost ?? university.costTotalCny,
     cost_estimate: {
       tuition_cny: university.tuitionMin,
       tuition_cny_max: university.tuitionMax,
       housing_cny: university.housingMin,
+      living_cny: university.livingCostYearly,
+      total_cny: financier.cost ?? university.costTotalCny,
       currency: "CNY",
-      status:
-        university.tuitionMin == null ? "missing" : "estimated",
+      status: university.tuitionMin == null ? "missing" : "estimated",
     },
     teaching_language: university.englishAvailable
       ? university.hsk
@@ -433,19 +385,31 @@ export function matchUniversity(student, university) {
         : "À vérifier",
     deadline: university.deadline,
     website: university.website,
-    recommended_formula: recommendedFormula,
+    recommended_formula: recommendFormula(student, breakdown, flags),
+    domain_similarity: overlap,
     university,
   };
 }
 
 export function rankMatches(student, universities) {
+  const pedagogical = student.formuleNumber === 1;
   const ranked = [];
   const excluded = [];
   for (const university of universities) {
-    const result = matchUniversity(student, university);
-    if (result.excluded) excluded.push({ ...result, university_name: university.displayName });
+    if (!university.isActive) {
+      excluded.push({
+        excluded: true,
+        university_name: university.displayName,
+        excludeReason: "Université inactive (hors matching).",
+      });
+      continue;
+    }
+    const result = matchUniversity(student, university, { pedagogical });
+    if (result.excluded) excluded.push(result);
     else ranked.push(result);
   }
   ranked.sort((a, b) => b.score - a.score);
   return { ranked, excluded };
 }
+
+export { infoStatus };

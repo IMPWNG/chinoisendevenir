@@ -29,6 +29,38 @@ function ficheChips(summary) {
   ].filter(Boolean);
 }
 
+function depthLabel(formuleNumber) {
+  if (Number(formuleNumber) >= 3) return "Jusqu’au départ";
+  if (Number(formuleNumber) === 2) return "Candidature";
+  return "Bilan";
+}
+
+function MixColumn({ title, hint, items, formuleNumber, tone }) {
+  if (!items?.length) return null;
+  const showScore = Number(formuleNumber) >= 2;
+  return (
+    <section className={`student-mix-col is-${tone}`}>
+      <p className="student-mix-col-title">{title}</p>
+      <p className="student-mix-col-hint">{hint}</p>
+      <ul className="student-mix-list">
+        {items.map((uni) => (
+          <li key={`${tone}-${uni.name}`} className="student-mix-card">
+            <p className="student-mix-name">{uni.name}</p>
+            <p className="student-mix-meta">
+              {[uni.city, uni.language].filter(Boolean).join(" · ")}
+            </p>
+            {showScore && uni.score != null ? (
+              <p className="student-mix-score">{uni.score}/100</p>
+            ) : (
+              <p className="student-mix-qual">{uni.qualitative}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 function OrientationBilan({ matching, formuleNumber }) {
   const bilan =
     matching?.orientation_bilan || matching?.formule1_bilan || null;
@@ -36,15 +68,20 @@ function OrientationBilan({ matching, formuleNumber }) {
   const docs = bilan?.documents_status;
   const showDocs = Number(formuleNumber) >= 2 && docs;
   const chips = ficheChips(summary);
+  const mix = matching?.mix || {};
+  const gaps = matching?.gaps || bilan?.gaps || [];
+  const quality = matching?.quality_score ?? summary.quality;
+  const hasMix = Boolean(mix.safety?.length || mix.match?.length || mix.reach?.length);
 
   if (!bilan?.sections?.length) {
     return (
       <div className="student-card student-card-wide student-bilan-sheet">
-        <p className="student-bilan-kicker">Compte rendu · Formule {formuleNumber}</p>
+        <p className="student-bilan-kicker">Compte rendu · {depthLabel(formuleNumber)}</p>
         <h2 className="card-title">Votre orientation</h2>
         <p className="student-bilan-lede">
-          Votre compte rendu est en cours de préparation. Dès qu’il sera généré
-          depuis le matching, il apparaîtra ici selon votre projet.
+          Votre compte rendu n’est pas encore prêt. Dès que l’analyse sera lancée,
+          vous verrez ici un mix d’universités à viser — et ce qu’il faut renforcer
+          avant de candidater.
         </p>
         <p className="student-bilan-disclaimer">
           *Aucune admission, bourse ou visa n’est garantie.*
@@ -57,17 +94,26 @@ function OrientationBilan({ matching, formuleNumber }) {
     <div className="student-card student-card-wide student-bilan-sheet">
       <header className="student-bilan-head">
         <p className="student-bilan-kicker">
-          Compte rendu · Formule {formuleNumber}
+          Compte rendu · {depthLabel(formuleNumber)}
         </p>
         <h2 className="card-title">Votre orientation</h2>
         <p className="student-bilan-lede">
           {bilan.intro ||
-            "Selon vos informations et votre projet, vous trouverez ci-dessous notre compte rendu pour vous permettre de préparer au mieux vos candidatures aux universités chinoises sélectionnées."}
+            "Voici où votre profil se situe aujourd’hui : un mix d’universités sûres, réalistes et ambitieuses, plus ce qu’il faut renforcer avant de candidater."}
         </p>
         <p className="student-bilan-disclaimer">
           {bilan.disclaimer ||
             "*Aucune admission, bourse ou visa n’est garantie.*"}
         </p>
+
+        {quality != null ? (
+          <p className="student-quality">
+            Complétude du dossier <strong>{quality}/100</strong>
+            {quality < 70
+              ? " — plus le dossier est complet, plus le matching est fiable."
+              : " — assez d’éléments pour une première sélection solide."}
+          </p>
+        ) : null}
 
         {chips.length ? (
           <dl className="student-bilan-fiche">
@@ -78,6 +124,54 @@ function OrientationBilan({ matching, formuleNumber }) {
               </div>
             ))}
           </dl>
+        ) : null}
+
+        {hasMix ? (
+          <div className="student-mix">
+            <p className="student-mix-kicker">Votre mix d’universités</p>
+            <p className="student-mix-lede">
+              Pas le top 5 brut : des pistes sûres, des pistes réalistes, et au moins une ambitieuse — pour ne pas tout miser sur un seul dossier trop juste.
+            </p>
+            <div className="student-mix-grid">
+              <MixColumn
+                title="Sûres"
+                hint="Forte probabilité d’admission"
+                items={mix.safety}
+                formuleNumber={formuleNumber}
+                tone="safety"
+              />
+              <MixColumn
+                title="Réalistes"
+                hint="Dossier à soigner"
+                items={mix.match}
+                formuleNumber={formuleNumber}
+                tone="match"
+              />
+              <MixColumn
+                title="Ambitieuses"
+                hint="Dossier à renforcer"
+                items={mix.reach}
+                formuleNumber={formuleNumber}
+                tone="reach"
+              />
+            </div>
+          </div>
+        ) : null}
+
+        {gaps.length ? (
+          <div className="student-gaps">
+            <p className="student-gaps-title">À combler avant de déposer</p>
+            <ul>
+              {gaps.slice(0, 6).map((gap, index) => (
+                <li key={`${gap.type}-${index}`}>
+                  {gap.universite ? (
+                    <strong>{gap.universite} — </strong>
+                  ) : null}
+                  {gap.conseil}
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
 
         {showDocs ? (

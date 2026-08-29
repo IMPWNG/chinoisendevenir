@@ -165,11 +165,12 @@ export function getFormuleAccess(number) {
   if (n >= 3) {
     return {
       number: 3,
-      matchLimit: 10,
+      matchLimit: 8,
       depth: "complete",
       documents: true,
       progress: true,
       visa: true,
+      applications: 5,
     };
   }
   if (n >= 2) {
@@ -180,16 +181,18 @@ export function getFormuleAccess(number) {
       documents: true,
       progress: true,
       visa: false,
+      applications: 3,
     };
   }
   if (n >= 1) {
     return {
       number: 1,
-      matchLimit: 5,
+      matchLimit: 8,
       depth: "orientation",
       documents: false,
       progress: true,
       visa: false,
+      applications: 0,
     };
   }
   return {

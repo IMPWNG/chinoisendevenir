@@ -21,10 +21,32 @@ async function authedFetch(path, options = {}) {
 }
 
 const CATEGORY_STYLES = {
+  Sûre: "bg-emerald-500/20 text-emerald-200 border-emerald-500/40",
+  Réaliste: "bg-cyan-500/20 text-cyan-200 border-cyan-500/40",
+  Ambitieuse: "bg-amber-500/20 text-amber-200 border-amber-500/40",
+  "Non recommandée": "bg-rose-500/20 text-rose-200 border-rose-500/40",
   "Très bon match": "bg-emerald-500/20 text-emerald-200 border-emerald-500/40",
   "Match intéressant à vérifier": "bg-cyan-500/20 text-cyan-200 border-cyan-500/40",
   "Option possible avec conditions": "bg-amber-500/20 text-amber-200 border-amber-500/40",
   "Faible compatibilité": "bg-rose-500/20 text-rose-200 border-rose-500/40",
+};
+
+const BREAKDOWN_LABELS = {
+  langue: "Langue",
+  academique: "Parcours",
+  financier: "Budget",
+  bourse: "Bourse",
+  age: "Âge",
+  localisation: "Ville",
+  motivation: "Projet",
+  domain: "Domaine",
+  level: "Niveau",
+  budget: "Budget",
+  language: "Langue",
+  intake: "Rentrée",
+  scholarship: "Bourse",
+  admission: "Admission",
+  formule: "Formule",
 };
 
 function Badge({ children, className = "" }) {
@@ -62,6 +84,7 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
   const [english, setEnglish] = useState("");
   const [targetDegree, setTargetDegree] = useState("");
   const [scholarshipGoal, setScholarshipGoal] = useState("");
+  const [gpa, setGpa] = useState("");
   const [extraNotes, setExtraNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -82,6 +105,13 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
     const info = meta || {};
     setResult(payload);
     setSelectedId(payload.matches?.[0]?.university_id || null);
+    const ov = payload.overrides || {};
+    if (ov.hsk === 0 || ov.hsk) setHsk(String(ov.hsk));
+    if (ov.english) setEnglish(ov.english);
+    if (ov.targetDegree) setTargetDegree(ov.targetDegree);
+    if (ov.scholarshipGoal) setScholarshipGoal(ov.scholarshipGoal);
+    if (ov.gpa === 0 || ov.gpa) setGpa(String(ov.gpa));
+    if (ov.extraNotes) setExtraNotes(ov.extraNotes);
     if (info.created_at) {
       setSavedInfo(
         `Sauvegardé le ${new Date(info.created_at).toLocaleString("fr-FR")}`,
@@ -128,6 +158,7 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
             english: english || null,
             targetDegree: targetDegree || null,
             scholarshipGoal: scholarshipGoal || null,
+            gpa: gpa === "" ? null : Number(gpa),
             extraNotes: extraNotes || null,
           },
           forceBilan,
@@ -202,13 +233,14 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
             Matching universités
           </p>
           <p className="text-xs text-slate-500 mt-1">
-            Score sur 100 à partir du profil et du catalogue. Les infos manquantes
-            n'excluent pas une université : elles apparaissent en « à vérifier ».
+            Score pondéré sur 100 (langue, parcours, budget, bourse, âge, ville,
+            clarté du projet). Les universités sont classées en sûre / réaliste /
+            ambitieuse, puis un mix est proposé — pas le top brut.
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-3">
         <label className="text-xs text-slate-400">
           Niveau visé
           <select
@@ -266,12 +298,25 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
             <option value="required">Indispensable</option>
           </select>
         </label>
+        <label className="text-xs text-slate-400">
+          GPA /4
+          <input
+            type="number"
+            min="0"
+            max="4"
+            step="0.1"
+            value={gpa}
+            onChange={(e) => setGpa(e.target.value)}
+            placeholder="Non renseigné"
+            className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
+          />
+        </label>
       </div>
       <textarea
         value={extraNotes}
         onChange={(e) => setExtraNotes(e.target.value)}
         rows={2}
-        placeholder="Notes complémentaires pour l'analyse (optionnel)"
+        placeholder="Texte projet / motivation (analysé par l'IA si assez long)"
         className="w-full mb-3 px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
       />
       <div className="flex flex-wrap gap-3">
@@ -358,6 +403,18 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
                   : result.recommended_formula}
               </span>
             </p>
+            {result.student?.qualityScore != null ? (
+              <p className="text-sm text-slate-400 mt-1">
+                Complétude du dossier : {result.student.qualityScore}/100
+                {result.student.iaEnriched ? " · texte projet lu par l'IA" : ""}
+              </p>
+            ) : null}
+            {result.brief?.mix ? (
+              <p className="text-sm text-slate-400 mt-1">
+                Mix : {result.brief.mix.safety} sûre(s) · {result.brief.mix.match}{" "}
+                réaliste(s) · {result.brief.mix.reach} ambitieuse(s)
+              </p>
+            ) : null}
             {result.brief?.top_match ? (
               <p className="text-sm text-slate-400 mt-1">
                 Meilleur match : {result.brief.top_match.name} (
@@ -378,6 +435,22 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
               </p>
             )}
           </div>
+
+          {result.gaps?.length ? (
+            <div className="bg-slate-900/40 border border-amber-700/40 rounded-2xl p-4">
+              <p className="text-sm font-bold text-amber-200 uppercase tracking-wide">
+                Écarts à combler
+              </p>
+              <ul className="mt-2 space-y-1 text-sm text-slate-200">
+                {result.gaps.slice(0, 8).map((gap, index) => (
+                  <li key={`${gap.type}-${index}`}>
+                    {gap.universite ? `${gap.universite} — ` : ""}
+                    {gap.conseil}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
 
           {result.orientation_bilan?.sections?.length ||
           result.formule1_bilan?.sections?.length ? (
@@ -436,7 +509,11 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
                     <Badge className={CATEGORY_STYLES[item.category] || "border-slate-600 text-slate-300"}>
                       {item.category}
                     </Badge>
-                    <Badge className="border-slate-600 text-slate-300">{item.priority}</Badge>
+                    {item.category_subtitle ? (
+                      <span className="text-[10px] text-slate-400">{item.category_subtitle}</span>
+                    ) : (
+                      <Badge className="border-slate-600 text-slate-300">{item.priority}</Badge>
+                    )}
                   </div>
                 </button>
               ))}
@@ -451,7 +528,9 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {Object.entries(selected.breakdown || {}).map(([key, value]) => (
                     <div key={key} className="bg-slate-800/80 rounded-lg p-2">
-                      <p className="text-[10px] uppercase text-slate-500">{key}</p>
+                      <p className="text-[10px] uppercase text-slate-500">
+                        {BREAKDOWN_LABELS[key] || key}
+                      </p>
                       <p className="text-white font-bold">
                         {value.points}/{value.max}
                       </p>

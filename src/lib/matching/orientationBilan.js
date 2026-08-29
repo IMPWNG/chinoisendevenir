@@ -1,4 +1,6 @@
 import { getFormuleByNumber, getFormuleAccess, FORMULES } from "../formules";
+import { matchingLlm } from "./llm";
+import { CATEGORY_META } from "./constants";
 
 const F1_KEYS = [
   "analyse",
@@ -33,31 +35,32 @@ const F3_KEYS = [
 
 const QUESTIONS = {
   analyse:
-    "Que dit l’analyse de votre parcours, de votre profil et de votre projet ?",
+    "Où en est votre projet, concrètement — et qu’est-ce qui manque encore ?",
   langue:
-    "Quel est votre niveau de langue, et que cela change-t-il pour les universités ?",
-  conseils: "Quel domaine et quel niveau d’études sont les plus cohérents pour vous ?",
-  selection: "Quelles universités et formations ressortent en première sélection ?",
-  bourses: "Quelles bourses sont documentées pour votre profil ?",
-  procedure: "Quelles sont les étapes de la procédure, dans votre cas ?",
-  documents: "Quels documents devez-vous préparer, concrètement ?",
-  recommandations: "Comment renforcer votre dossier avant de candidater ?",
+    "Votre niveau de langue ouvre-t-il les portes, ou faut-il un détour ?",
+  conseils: "Quel domaine et quel niveau visent vraiment, pour vous ?",
+  selection:
+    "Quelles universités former votre mix : sûres, réalistes, ambitieuses ?",
+  bourses: "Quelles bourses sont réellement documentées pour ces établissements ?",
+  procedure: "Par où commencer, dans votre cas — et dans quel ordre ?",
+  documents: "Quelles pièces préparer maintenant, sans tout traduire trop tôt ?",
+  recommandations: "Que faut-il combler avant de déposer un dossier ?",
   echange:
-    "Que retenir pour l’échange téléphonique, et quelles sont les prochaines étapes ?",
+    "Que retenir pour l’appel, et quelle décision prendre ensuite ?",
   recherche:
-    "Quelles universités, formations et bourses correspondent le mieux à votre fiche ?",
-  admission: "Remplissez-vous les critères d’admission connus ?",
-  dossier: "Où en est votre dossier : pièces reçues, manquantes, à aligner ?",
-  formulaires: "Que faut-il caler avant de remplir les formulaires de candidature ?",
-  depot: "Quelles candidatures déposer en priorité (3 maximum) ?",
-  suivi_reponses: "Comment suivre les réponses, et quelles deadlines surveiller ?",
-  echanges: "Où en est l’avancement, et que traiter au prochain échange ?",
-  cinq_candidatures: "Quelles sont les candidatures à retenir (jusqu’à 5) ?",
-  suivi_complet: "Comment se déroule le suivi sur toute la procédure ?",
-  apres_admission: "Que faire après une admission, et quels documents relire ?",
-  visa: "Que préparer pour le dossier de visa et les démarches avant le départ ?",
-  logement: "Comment s’orienter pour le logement, le voyage et l’arrivée en Chine ?",
-  demarches_depart: "Quelles démarches restent à faire avant le départ ?",
+    "Quelles universités, formations et bourses collent à votre fiche ?",
+  admission: "Sur quels critères connus êtes-vous déjà dans les clous ?",
+  dossier: "Quelles pièces sont reçues, lesquelles bloquent encore ?",
+  formulaires: "Quoi caler avant de remplir les formulaires ?",
+  depot: "Quelles candidatures déposer en premier (3 maximum) ?",
+  suivi_reponses: "Quelles deadlines surveiller jusqu’aux réponses ?",
+  echanges: "Que traiter au prochain échange ?",
+  cinq_candidatures: "Quelles candidatures retenir (jusqu’à 5) ?",
+  suivi_complet: "Comment se déroule le suivi, du dossier jusqu’au départ ?",
+  apres_admission: "Que relire dès qu’une offre arrive ?",
+  visa: "Que préparer pour le visa — sans faire les démarches à votre place ?",
+  logement: "Comment s’orienter pour le logement, le voyage et l’arrivée ?",
+  demarches_depart: "Que reste-t-il à faire avant de partir ?",
 };
 
 const GROUP_LABELS = {
@@ -103,20 +106,6 @@ export function getBilanSectionDefs(formuleNumber) {
     ];
   }
   return f1;
-}
-
-function extractJsonObject(text) {
-  const trimmed = String(text || "").trim();
-  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i);
-  const raw = (fenced ? fenced[1] : trimmed).trim();
-  const start = raw.indexOf("{");
-  const end = raw.lastIndexOf("}");
-  if (start === -1 || end === -1 || end <= start) return null;
-  try {
-    return JSON.parse(raw.slice(start, end + 1));
-  } catch {
-    return null;
-  }
 }
 
 function diplomaLabel(value) {
@@ -217,6 +206,8 @@ function uniFacts(item) {
     city: item.city || null,
     score: item.score,
     category: item.category,
+    categoryKey: item.categoryKey || null,
+    qualitative: item.qualitative || null,
     language: item.teaching_language || "à confirmer",
     deadline:
       item.deadline && !/^à vérifier/i.test(item.deadline) ? item.deadline : null,
@@ -227,11 +218,12 @@ function uniFacts(item) {
     toVerify: item.to_verify || [],
     confirmed: item.confirmed_information || [],
     missingDocs: item.missing_documents || [],
-    domainNote: item.breakdown?.domain?.note || null,
-    languageNote: item.breakdown?.language?.note || null,
-    languageStatus: item.breakdown?.language?.status || null,
-    admissionNote: item.breakdown?.admission?.note || null,
-    admissionStatus: item.breakdown?.admission?.status || null,
+    domainNote: item.breakdown?.academique?.note || item.breakdown?.domain?.note || null,
+    languageNote: item.breakdown?.langue?.note || item.breakdown?.language?.note || null,
+    languageStatus: item.breakdown?.langue?.status || item.breakdown?.language?.status || null,
+    admissionNote: item.breakdown?.admission?.note || item.breakdown?.academique?.note || null,
+    admissionStatus: item.breakdown?.admission?.status || item.breakdown?.academique?.status || null,
+    breakdown: item.breakdown || {},
   };
 }
 
@@ -276,8 +268,31 @@ function documentItems(status, extraRequested = []) {
   return items.filter(Boolean);
 }
 
+function mixLine(uni, formuleNumber) {
+  const meta = CATEGORY_META[uni.categoryKey] || null;
+  const tag = meta?.label || uni.category || "Piste";
+  if (Number(formuleNumber) === 1) {
+    return `${tag} — ${uni.name}${uni.city ? ` (${uni.city})` : ""}. ${uni.qualitative || uni.domainNote || ""}`.trim();
+  }
+  const scores = uni.breakdown
+    ? [
+        uni.breakdown.langue ? `langue ${uni.breakdown.langue.points}` : null,
+        uni.breakdown.academique ? `parcours ${uni.breakdown.academique.points}` : null,
+        uni.breakdown.financier ? `budget ${uni.breakdown.financier.points}` : null,
+        uni.breakdown.bourse ? `bourse ${uni.breakdown.bourse.points}` : null,
+      ].filter(Boolean)
+    : [];
+  return `${tag} — ${uni.name}${uni.city ? ` (${uni.city})` : ""} · ${uni.score}/100${scores.length ? ` (${scores.join(" · ")})` : ""}`;
+}
+
+function gapTone(type) {
+  if (type === "langue" || type === "financier") return "miss";
+  if (type === "academique") return "warn";
+  return "info";
+}
+
 function buildSectionMap(ctx) {
-  const { student, analyses, formuleNumber, documents, adminDocuments } = ctx;
+  const { student, analyses, formuleNumber, documents, adminDocuments, gaps = [] } = ctx;
   const n = Number(formuleNumber) || 1;
   const limit = getFormuleAccess(n).matchLimit || applicationLimit(n);
   const applyMax = applicationLimit(n);
@@ -299,8 +314,18 @@ function buildSectionMap(ctx) {
   const status = summarizeDocuments(documents, adminDocuments);
   const missingCount = status.missing.length;
   const scholarshipGoal = student.scholarshipGoal;
+  const quality = student.qualityScore;
+  const gapItems = (gaps || []).map((gap) =>
+    factItem(
+      gap.universite ? `${gap.universite} — ${gap.conseil}` : gap.conseil,
+      gapTone(gap.type),
+    ),
+  );
 
   const analyseItems = [
+    quality != null
+      ? factItem(`Complétude du dossier : ${quality}/100`, quality >= 70 ? "ok" : quality >= 45 ? "warn" : "miss")
+      : null,
     factItem(`Pays de résidence : ${country}`, "ok"),
     factItem(`Domaine indiqué : ${field}`, field === "votre domaine" ? "warn" : "ok"),
     factItem(`Dernier diplôme : ${diploma}`, "ok"),
@@ -314,8 +339,10 @@ function buildSectionMap(ctx) {
 
   const langueItems = [
     factItem(
-      hsk ? `Chinois : ${hsk}` : "Chinois : HSK non renseigné — à confirmer",
-      hsk ? "ok" : "miss",
+      hsk
+        ? `Chinois : ${hsk}${student.hskSource === "default_beginner" ? " (débutant par défaut)" : ""}`
+        : "Chinois : HSK non renseigné — à confirmer",
+      hsk && student.hskSource !== "default_beginner" ? "ok" : "miss",
     ),
     factItem(
       english ? `Anglais : ${english}` : "Anglais : niveau non renseigné — à confirmer",
@@ -332,8 +359,12 @@ function buildSectionMap(ctx) {
   const selectionItems = top.length
     ? top.map((uni) =>
         factItem(
-          `${uni.name}${uni.city ? ` (${uni.city})` : ""} — ${uni.score}/100, ${uni.category}. ${uni.domainNote || uni.strengths[0] || ""}`.trim(),
-          uni.score >= 70 ? "ok" : uni.score >= 50 ? "warn" : "miss",
+          mixLine(uni, n),
+          uni.categoryKey === "safety" || uni.score >= 80
+            ? "ok"
+            : uni.categoryKey === "unready" || uni.score < 40
+              ? "miss"
+              : "warn",
         ),
       )
     : [factItem("Aucune université assez compatible avec les données actuelles.", "miss")];
@@ -390,15 +421,18 @@ function buildSectionMap(ctx) {
 
   return {
     analyse: {
-      verdict: `${field} · ${diploma} · rentrée ${intake}`,
-      body: `À partir de la fiche de ${name} (${country}), le projet s’oriente vers ${field}.\n\nDernier diplôme retenu : ${diploma}. Niveau visé : ${degree}. Rentrée : ${intake}.\n\nCe n’est pas une admission : c’est une lecture réaliste de votre situation, recoupée avec le catalogue d’universités.`,
+      verdict:
+        quality != null
+          ? `Dossier ${quality}/100 · ${field} · rentrée ${intake}`
+          : `${field} · ${diploma} · rentrée ${intake}`,
+      body: `À partir de la fiche de ${name} (${country}), le projet s’oriente vers ${field}.\n\nDernier diplôme retenu : ${diploma}. Niveau visé : ${degree}. Rentrée : ${intake}.\n\nCe n’est pas une admission : c’est une lecture réaliste de votre situation, recoupée avec le catalogue. Le mix ci-dessous vise à ne pas tout miser sur un seul établissement trop juste.`,
       items: analyseItems,
     },
     langue: {
       verdict: hsk || english ? `${hsk || "HSK à confirmer"} · ${english || "anglais à confirmer"}` : "Niveaux de langue à confirmer",
       body: hsk || english
-        ? `État actuel : ${hsk || "HSK non renseigné"} ; ${english ? `anglais ${english}` : "anglais non renseigné"}.\n\nLa langue d’enseignement décide des universités possibles. Ci-dessous, chaque piste du catalogue est comparée à votre niveau. Si le HSK manque, un cursus en anglais ou une année de langue peut rester ouvert — à vérifier établissement par établissement.`
-        : `Le chinois (HSK) et l’anglais ne sont pas encore assez renseignés sur la fiche.\n\nSans ces niveaux, on ne peut pas trancher entre un cursus en chinois, un cursus en anglais, ou une année de langue. L’échange téléphonique servira à le caler.`,
+        ? `État actuel : ${hsk || "HSK non renseigné"}${student.hskSource === "default_beginner" ? " (hypothèse débutant, à confirmer)" : ""} ; ${english ? `anglais ${english}` : "anglais non renseigné"}.\n\nSans le bon niveau, une admission directe se ferme. Un cursus en anglais ou une année de langue peut rester ouvert — à vérifier établissement par établissement.`
+        : `Le chinois (HSK) et l’anglais ne sont pas encore assez renseignés.\n\nSans ces niveaux, on ne tranche pas entre un cursus en chinois, un cursus en anglais, ou une année de langue. L’échange téléphonique servira à le caler.`,
       items: langueItems,
     },
     conseils: {
@@ -415,10 +449,12 @@ function buildSectionMap(ctx) {
     },
     selection: {
       verdict: top.length
-        ? `${top.length} piste${top.length > 1 ? "s" : ""} issue${top.length > 1 ? "s" : ""} du catalogue`
+        ? `${top.length} établissement${top.length > 1 ? "s" : ""} en mix sûr / réaliste / ambitieux`
         : "Sélection encore insuffisante",
       body: top.length
-        ? `Première sélection à partir de votre fiche et du catalogue. Chaque piste reste à vérifier (programme exact, langue, frais, deadline).\n\nLe score compare le domaine, le niveau, la langue, le budget et le calendrier — ce n’est pas une promesse d’admission.`
+        ? n === 1
+          ? `Voici un mix, pas un classement brut : des pistes sûres, des pistes réalistes, et au moins une ambitieuse.\n\nChaque établissement reste à vérifier (programme exact, langue, frais, deadline). Ce n’est pas une promesse d’admission.`
+          : `Mix d’universités à partir de votre fiche et du catalogue. Le score (langue, parcours, budget, bourse, âge, ville, clarté du projet) classe chaque piste en sûre, réaliste ou ambitieuse.\n\nCe n’est pas une promesse d’admission.`
         : "Les données actuelles ne permettent pas une sélection fiable. Précisez le domaine, le niveau visé ou le budget, puis relancez l’analyse.",
       items: selectionItems,
     },
@@ -476,12 +512,20 @@ function buildSectionMap(ctx) {
       ].slice(0, 10),
     },
     recommandations: {
-      verdict: "Points à traiter avant de déposer",
-      body: "Pour renforcer le dossier : préciser le projet, documenter la langue, et éviter les pièces manquantes. Les points ci-dessous viennent du matching et des zones d’ombre de la fiche.",
+      verdict: gapItems.length
+        ? `${gapItems.length} écart${gapItems.length > 1 ? "s" : ""} à combler avant de candidater`
+        : "Dossier déjà assez clair pour viser le mix",
+      body: gapItems.length
+        ? n >= 3
+          ? "Voici le plan de remédiation : langue, moyenne, budget. Traitez ces écarts avant de déposer, ou intégrez-les au calendrier de candidature."
+          : n === 2
+            ? "Voici les écarts identifiés, université par université. C’est ce qui transforme une liste d’écoles en plan d’action."
+            : "Ce n’est pas une liste d’écoles. C’est ce qu’il manque pour y entrer. Traitez ces points avant de multiplier les candidatures."
+        : "Aucun écart bloquant n’apparaît sur les données actuelles. Confirmez encore la langue et les pièces avant de déposer.",
       items: [
+        ...gapItems.slice(0, 8),
         ...recommended.map((line) => factItem(line, "warn")),
-        factItem("Rédiger une version claire du projet d’études (domaine + objectif)", "info"),
-        hsk
+        hsk && student.hskSource !== "default_beginner"
           ? null
           : factItem("Faire évaluer le chinois (HSK) ou confirmer un cursus en anglais", "miss"),
         /préciser/i.test(String(budget))
@@ -668,18 +712,13 @@ function buildSectionMap(ctx) {
 
 function introFor(formuleNumber) {
   const n = Number(formuleNumber) || 1;
-  const parts = [
-    "Selon vos informations et votre projet, vous trouverez ci-dessous notre compte rendu pour vous permettre de préparer au mieux vos candidatures aux universités chinoises sélectionnées.",
-  ];
-  if (n >= 2) {
-    parts.push(
-      "Vous y trouverez notre sélection d’universités selon votre profil et votre projet, ainsi que les documents nécessaires.",
-    );
-  }
   if (n >= 3) {
-    parts.push("Le compte rendu couvre aussi le visa et le logement.");
+    return "Voici le compte rendu pour viser jusqu’à 5 candidatures, puis le visa et le logement. Mix d’universités, écarts à combler, et feuille de route jusqu’au départ — sans promesse d’admission.";
   }
-  return parts.join(" ");
+  if (n === 2) {
+    return "Voici le compte rendu pour caler jusqu’à 3 candidatures. Mix d’universités, critères connus, pièces à fournir — et les écarts à traiter avant de déposer.";
+  }
+  return "Voici où votre profil se situe aujourd’hui : un mix d’universités sûres, réalistes et ambitieuses, plus ce qu’il faut renforcer avant de candidater. Aucune admission n’est promise.";
 }
 
 function stripIntroExtras(text) {
@@ -711,6 +750,7 @@ export function buildOrientationBilanDraft({
   formuleNumber = 1,
   documents = [],
   adminDocuments = [],
+  gaps = [],
 } = {}) {
   const n = Number(formuleNumber) || 1;
   const defs = getBilanSectionDefs(n);
@@ -720,6 +760,7 @@ export function buildOrientationBilanDraft({
     formuleNumber: n,
     documents,
     adminDocuments,
+    gaps,
   });
   const status = summarizeDocuments(documents, adminDocuments);
 
@@ -728,11 +769,17 @@ export function buildOrientationBilanDraft({
     intro: introFor(n),
     disclaimer: BILAN_DISCLAIMER,
     documents_status: status,
-    universities: topMatches(analyses, applicationLimit(n)).map((item) => ({
+    universities: topMatches(analyses, getFormuleAccess(n).matchLimit || 8).map((item) => ({
       name: item.university_name,
       city: item.city || null,
       language: item.teaching_language || "à confirmer",
+      category: item.category || null,
+      categoryKey: item.categoryKey || null,
+      score: n === 1 ? null : item.score,
+      qualitative: item.qualitative || null,
     })),
+    gaps,
+    quality_score: student.qualityScore ?? null,
     sections: defs.map((section) =>
       finalizeSection(section, map[section.key] || {
         body: "Cette partie du compte rendu sera complétée au prochain échange.",
@@ -837,97 +884,80 @@ export function buildOrientationBilanFromResult(
     formuleNumber: n,
     documents,
     adminDocuments,
+    gaps: result?.gaps || [],
   });
 }
 
 async function polishOrientationBilan(draft, payload) {
-  const apiKey = process.env.MAMMOUTH_API_KEY;
-  if (!apiKey) return { ...draft, ai: false };
-
   const formule = getFormuleByNumber(draft.formuleNumber);
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 55000);
-  try {
-    const response = await fetch("https://api.mammouth.ai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: process.env.MAMMOUTH_MODEL || "minimax-m3",
-        temperature: 0.15,
-        max_tokens: 8000,
-        messages: [
-          {
-            role: "system",
-            content: `Tu es conseiller d'une agence francophone d'études en Chine. Tu rédiges « Votre orientation », un compte rendu complet et cohérent, calé sur le profil de l'étudiant et sur la formule ${draft.formuleNumber}${formule ? ` (${formule.shortTitle})` : ""}.
+  const depth =
+    draft.formuleNumber >= 3
+      ? "complet + feuille de route visa/logement"
+      : draft.formuleNumber === 2
+        ? "score détaillé par critère + écarts"
+        : "synthèse qualitative, sans tableau de scores bruts";
+  const polished = await matchingLlm({
+    system: `Tu es conseiller d'une agence francophone d'études en Chine. Tu rédiges « Votre orientation », un compte rendu calé sur le profil et sur un mix sûr / réaliste / ambitieux.
 
-Chaque section est une QUESTION à laquelle tu réponds avec la fiche client et le catalogue d'universités. Compare les établissements. Distingue établi / à vérifier / manquant.
+Profondeur demandée : ${depth}${formule ? ` (${formule.shortTitle})` : ""}.
 
-Relis l'ensemble avant d'écrire : aucun doublon. Interdiction de répéter la même liste d'universités, les mêmes bourses ou le même conseil dans deux sections. Une seule liste de candidatures : formule 2 = 3 maximum ; formule 3 = jusqu'à 5 (jamais les deux). Si deux questions se recoupent, la seconde n'ajoute que ce qui n'a pas encore été dit.
+Chaque section est une QUESTION. Réponds avec la fiche et le catalogue. Distingue établi / à vérifier / manquant.
 
-Ne mentionne jamais « formule 1 », « formule 2 » ou « formule 3 » dans les titres, les questions ou les réponses. N'inclus pas la mention d'absence de garantie dans l'intro : elle est affichée à part.
+Aucun doublon. Une seule liste de candidatures : accompagnement candidature = 3 maximum ; accompagnement complet = jusqu'à 5. Si deux questions se recoupent, la seconde n'ajoute que du nouveau.
+
+Ne mentionne jamais « formule 1 », « formule 2 » ou « formule 3 ». N'inclus pas la mention d'absence de garantie dans l'intro.
 
 Français clair, concret, professionnel. 2 à 5 phrases dans body, avec \\n\\n entre les idées. Ne jamais garantir admission, bourse ou visa. Ne pas inventer de frais, deadlines, HSK, programmes, universités ou documents absents du brief.
+
+Pour la formule synthèse : décris les universités sans aligner des scores /100. Pour le détail : tu peux citer langue / parcours / budget / bourse.
 
 Pour chaque item, préfixe obligatoire : [ok] fait établi, [warn] à vérifier, [miss] manque ou blocage, [info] consigne.
 verdict : une courte conclusion (moins de 12 mots).
 
-Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict }] } avec les mêmes keys. L'intro reprend le sens du brouillon, sans disclaimer.`,
-          },
-          {
-            role: "user",
-            content: `Brief (JSON) :\n${JSON.stringify(payload).slice(0, 18000)}\n\nQuestions à traiter, sans changer les keys ni les titres :\n${JSON.stringify({
-              intro: draft.intro,
-              sections: draft.sections.map((section) => ({
-                key: section.key,
-                title: section.title,
-                question: section.question,
-                verdict: section.verdict,
-                body: section.body,
-                items: section.items,
-              })),
-            })}`,
-          },
-        ],
-      }),
-      signal: controller.signal,
-    });
-    if (!response.ok) return { ...draft, ai: false };
-    const data = await response.json();
-    const parsed = extractJsonObject(data?.choices?.[0]?.message?.content);
-    if (!parsed?.sections?.length) return { ...draft, ai: false };
+Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict }] } avec les mêmes keys.`,
+    user: `Brief (JSON) :\n${JSON.stringify(payload).slice(0, 18000)}\n\nQuestions à traiter, sans changer les keys ni les titres :\n${JSON.stringify({
+      intro: draft.intro,
+      sections: draft.sections.map((section) => ({
+        key: section.key,
+        title: section.title,
+        question: section.question,
+        verdict: section.verdict,
+        body: section.body,
+        items: section.items,
+      })),
+    })}`,
+    temperature: 0.15,
+    maxTokens: 8000,
+    timeoutMs: 55000,
+  });
 
-    const byKey = new Map(
-      (parsed.sections || []).map((section) => [section.key, section]),
-    );
-    return {
-      ...draft,
-      intro: stripIntroExtras(parsed.intro || draft.intro) || draft.intro,
-      disclaimer: BILAN_DISCLAIMER,
-      sections: draft.sections.map((section) => {
-        const updated = byKey.get(section.key);
-        if (!updated) return section;
-        const items = Array.isArray(updated.items)
-          ? updated.items.map(normalizeBilanItem).filter((item) => item.text)
-          : section.items;
-        const nextItems = items.length ? items : section.items;
-        return {
-          ...section,
-          body: String(updated.body || section.body).trim(),
-          verdict: String(updated.verdict || section.verdict).trim(),
-          items: nextItems,
-          verdictTone: verdictToneFromItems(nextItems, section.verdictTone),
-        };
-      }),
-      ai: true,
-    };
-  } catch {
-    return { ...draft, ai: false };
-  } finally {
-    clearTimeout(timer);
-  }
+  const parsed = polished.json;
+  if (!polished.ok || !parsed?.sections?.length) return { ...draft, ai: false };
+
+  const byKey = new Map(
+    (parsed.sections || []).map((section) => [section.key, section]),
+  );
+  return {
+    ...draft,
+    intro: stripIntroExtras(parsed.intro || draft.intro) || draft.intro,
+    disclaimer: BILAN_DISCLAIMER,
+    sections: draft.sections.map((section) => {
+      const updated = byKey.get(section.key);
+      if (!updated) return section;
+      const items = Array.isArray(updated.items)
+        ? updated.items.map(normalizeBilanItem).filter((item) => item.text)
+        : section.items;
+      const nextItems = items.length ? items : section.items;
+      return {
+        ...section,
+        body: String(updated.body || section.body).trim(),
+        verdict: String(updated.verdict || section.verdict).trim(),
+        items: nextItems,
+        verdictTone: verdictToneFromItems(nextItems, section.verdictTone),
+      };
+    }),
+    ai: true,
+  };
 }
 
 export async function generateOrientationBilan({
@@ -936,6 +966,7 @@ export async function generateOrientationBilan({
   formuleNumber,
   documents = [],
   adminDocuments = [],
+  gaps = [],
 }) {
   const n = Number(formuleNumber) || 1;
   const draft = buildOrientationBilanDraft({
@@ -944,13 +975,14 @@ export async function generateOrientationBilan({
     formuleNumber: n,
     documents,
     adminDocuments,
+    gaps,
   });
   const top = topMatches(analyses, getFormuleAccess(n).matchLimit || 8);
   return polishOrientationBilan(draft, {
     formuleNumber: n,
     formuleTitle: getFormuleByNumber(n)?.title,
     instruction:
-      "Compte rendu complet, cohérent avec le profil. Pas de doublon. Une seule liste de candidatures. Pas de mention des numéros de formule. L'intro ne contient pas la mention d'absence de garantie.",
+      "Compte rendu calé sur le mix sûr/réaliste/ambitieux et les écarts à combler. Pas de doublon. Une seule liste de candidatures. Pas de mention des numéros de formule.",
     student: {
       name: student.name,
       prenom: student.prenom,
@@ -964,14 +996,19 @@ export async function generateOrientationBilan({
       intake: student.intake?.label,
       hsk: student.hsk,
       english: student.english,
+      gpa: student.gpa,
+      qualityScore: student.qualityScore,
       scholarshipGoal: student.scholarshipGoal,
     },
+    gaps,
     documents: summarizeDocuments(documents, adminDocuments),
     matches: top.map((item) => ({
       name: item.university_name,
       city: item.city || null,
-      score: item.score,
+      score: n === 1 ? undefined : item.score,
       category: item.category,
+      categoryKey: item.categoryKey,
+      qualitative: item.qualitative,
       language: item.teaching_language,
       deadline: item.deadline,
       cost: item.cost_estimate,
@@ -982,8 +1019,9 @@ export async function generateOrientationBilan({
       documents: item.missing_documents,
       actions: item.recommended_actions,
       to_verify: item.to_verify,
-      languageNote: item.breakdown?.language?.note,
-      domainNote: item.breakdown?.domain?.note,
+      breakdown: n === 1 ? undefined : item.breakdown,
+      languageNote: item.breakdown?.langue?.note || item.breakdown?.language?.note,
+      domainNote: item.breakdown?.academique?.note || item.breakdown?.domain?.note,
     })),
   });
 }
