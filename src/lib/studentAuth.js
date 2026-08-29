@@ -161,10 +161,14 @@ export async function getAuthenticatedAdmin(request) {
 }
 
 export async function findContactByEmail(admin, email) {
+  const normalized = String(email || "")
+    .trim()
+    .toLowerCase();
+
   const { data: rows, error } = await admin
     .from("contacts")
     .select("*")
-    .ilike("email", email)
+    .eq("email", normalized)
     .order("created_at", { ascending: true })
     .limit(1);
 
@@ -172,7 +176,20 @@ export async function findContactByEmail(admin, email) {
     throw new Error("Erreur recherche dossier");
   }
 
-  return rows?.[0] || null;
+  if (rows?.[0]) return rows[0];
+
+  const { data: fallback, error: fallbackError } = await admin
+    .from("contacts")
+    .select("*")
+    .ilike("email", normalized)
+    .order("created_at", { ascending: true })
+    .limit(1);
+
+  if (fallbackError) {
+    throw new Error("Erreur recherche dossier");
+  }
+
+  return fallback?.[0] || null;
 }
 
 export async function ensureStudentContact(admin, user, extras = {}) {

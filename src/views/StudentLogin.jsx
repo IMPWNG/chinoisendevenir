@@ -47,7 +47,7 @@ export default function StudentLogin() {
       );
       if (error) {
         setStatus("error");
-        setMessage("Email ou mot de passe incorrect.");
+        setMessage(error.message || "Email ou mot de passe incorrect.");
         return;
       }
 
@@ -77,24 +77,18 @@ export default function StudentLogin() {
 
     try {
       const email = form.email.trim().toLowerCase();
-      const { data, error } = await signUp(email, form.password);
+      const { error } = await signUp(email, form.password);
 
       if (error) {
+        const already =
+          error.message?.includes("déjà") || error.message?.includes("already");
         setStatus("error");
         setMessage(
-          error.message?.includes("already")
+          already
             ? "Un compte existe déjà avec cet email. Connectez-vous."
             : error.message || "Impossible de créer le compte.",
         );
-        return;
-      }
-
-      if (!data.session) {
-        setStatus("success");
-        setMessage(
-          "Compte créé. Vérifiez votre email pour confirmer l'inscription, puis connectez-vous.",
-        );
-        setMode("login");
+        if (already) setMode("login");
         return;
       }
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl =
@@ -6,18 +8,39 @@ const supabaseAnonKey =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
   process.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error("❌ Variables Supabase manquantes dans .env.local");
-}
+function createBrowserClient() {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error(
+      "Configuration Supabase manquante (NEXT_PUBLIC_SUPABASE_URL / ANON_KEY)",
+    );
+  }
 
-export const supabase = createClient(
-  supabaseUrl || "https://placeholder.supabase.co",
-  supabaseAnonKey || "placeholder",
-  {
+  return createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
       detectSessionInUrl: true,
       autoRefreshToken: true,
+      storageKey: "chinoisendevenir-auth",
+    },
+  });
+}
+
+let browserClient;
+
+function getBrowserClient() {
+  if (!browserClient) {
+    browserClient = createBrowserClient();
+  }
+  return browserClient;
+}
+
+export const supabase = new Proxy(
+  {},
+  {
+    get(_target, prop) {
+      const client = getBrowserClient();
+      const value = client[prop];
+      return typeof value === "function" ? value.bind(client) : value;
     },
   },
 );

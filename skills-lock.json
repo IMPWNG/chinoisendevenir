@@ -18,6 +18,12 @@
       "sourceType": "github",
       "skillPath": "plugins/payment-processing/skills/stripe-integration/SKILL.md",
       "computedHash": "4621fa0a1ee27f92961628115f1a2dd305569acb777f4933bcbffcda3037bd53"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "e14e276241805c97dbcfe40dcbea1a3035269cc7293cac4b1832dda41a835e60"
     }
   }
 }
