@@ -7,6 +7,7 @@ import {
   buildInternalBrief,
   buildUniversityAnalysis,
 } from "./narrative";
+import { generateFormule1Bilan } from "./formule1Bilan";
 
 function limitForFormula(formuleNumber) {
   return getFormuleAccess(formuleNumber).matchLimit || 5;
@@ -55,7 +56,13 @@ async function polishClientMessage(message, payload) {
   }
 }
 
-export async function runMatching({ contact, universities, documents, overrides }) {
+export async function runMatching({
+  contact,
+  universities,
+  documents,
+  overrides,
+  forceBilan = false,
+}) {
   const student = normalizeStudent(contact, overrides, documents);
   const catalog = universities.map(normalizeUniversity);
   const { ranked, excluded } = rankMatches(student, catalog);
@@ -93,6 +100,11 @@ export async function runMatching({ contact, universities, documents, overrides 
     formula: getFormuleByNumber(overallFormula)?.shortTitle,
   });
 
+  let formule1_bilan = null;
+  if (student.formuleNumber === 1 || forceBilan) {
+    formule1_bilan = await generateFormule1Bilan({ student, analyses });
+  }
+
   return {
     student,
     brief: buildInternalBrief(student, analyses, excluded, overallFormula),
@@ -101,6 +113,7 @@ export async function runMatching({ contact, universities, documents, overrides 
     client_message: polished.message,
     client_message_ai: polished.ai,
     recommended_formula: overallFormula,
+    formule1_bilan,
     generated_at: new Date().toISOString(),
   };
 }

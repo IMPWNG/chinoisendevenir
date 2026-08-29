@@ -99,6 +99,7 @@ export async function POST(request) {
       universities,
       documents,
       overrides: body.overrides || {},
+      forceBilan: Boolean(body.forceBilan) || body.mode === "formule1",
     });
 
     const payload = compactMatchingResult(result, body.overrides || {});

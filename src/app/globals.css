@@ -1080,6 +1080,48 @@ a.landing-btn-accent:hover {
   margin-top: 20px;
 }
 
+.student-bilan-intro {
+  color: var(--secondary);
+  line-height: 1.55;
+  margin: 0 0 20px;
+}
+
+.student-bilan {
+  display: grid;
+  gap: 14px;
+}
+
+.student-bilan-section {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  background: #fff;
+}
+
+.student-bilan-section h3 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+  color: var(--secondary);
+}
+
+.student-bilan-section p {
+  margin: 0;
+  color: var(--gray);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.student-bilan-section ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--secondary);
+  font-size: 0.9rem;
+}
+
+.student-bilan-section li {
+  margin-bottom: 6px;
+}
+
 .student-toolbar .landing-section-subtitle {
   margin-bottom: 0;
 }

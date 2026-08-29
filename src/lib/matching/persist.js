@@ -10,6 +10,7 @@ export function compactMatchingResult(result, overrides = {}) {
     recommended_formula: result.recommended_formula,
     client_message: result.client_message,
     client_message_ai: Boolean(result.client_message_ai),
+    formule1_bilan: result.formule1_bilan || null,
     brief: result.brief,
     student,
     matches: result.matches,

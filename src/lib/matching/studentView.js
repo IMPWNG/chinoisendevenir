@@ -1,4 +1,5 @@
 import { getFormuleAccess } from "../formules";
+import { buildFormule1BilanFromResult } from "./formule1Bilan";
 
 function money(cny) {
   if (cny == null) return null;
@@ -43,18 +44,39 @@ function publicMatch(item, depth) {
 }
 
 export function matchingForStudent(result, formuleNumber) {
-  const granted = Number(formuleNumber) > 0;
-  const access = granted ? getFormuleAccess(3) : getFormuleAccess(0);
-  if (!result || access.depth === "none") return null;
-
-  const matches = (result.matches || [])
-    .slice(0, access.matchLimit)
-    .map((item) => publicMatch(item, access.depth));
+  const n = Number(formuleNumber) || 0;
+  if (!result || n < 1) return null;
 
   const student = result.student || {};
   const budgetLabel =
     student.budget?.label ||
     (typeof student.budget === "string" ? student.budget : null);
+  const profile_summary = {
+    field: student.field || null,
+    diploma: student.dernierDiplome || student.diploma || null,
+    country: student.country || null,
+    budget: budgetLabel,
+    intake: student.intake?.label || student.intake || null,
+  };
+
+  if (n === 1) {
+    return {
+      depth: "orientation",
+      formuleNumber: 1,
+      generated_at: result.generated_at || null,
+      profile_summary,
+      formule1_bilan: buildFormule1BilanFromResult(result),
+      matches: [],
+      documents_to_prepare: [],
+      scholarships: [],
+      upgrade_hint: null,
+    };
+  }
+
+  const access = getFormuleAccess(3);
+  const matches = (result.matches || [])
+    .slice(0, access.matchLimit)
+    .map((item) => publicMatch(item, access.depth));
 
   return {
     depth: access.depth,

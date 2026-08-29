@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
-import { getFormuleByNumber } from "../lib/formules";
+import { getFormuleByNumber, getFormuleNumber } from "../lib/formules";
+import { getChosenFormule } from "../lib/studentProgress";
 
 async function authedFetch(path, options = {}) {
   const {
@@ -113,7 +114,7 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contact.id]);
 
-  const run = async () => {
+  const run = async ({ forceBilan = false } = {}) => {
     setLoading(true);
     setError("");
     setCopied("");
@@ -129,6 +130,8 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
             scholarshipGoal: scholarshipGoal || null,
             extraNotes: extraNotes || null,
           },
+          forceBilan,
+          mode: forceBilan ? "formule1" : undefined,
         }),
       });
       const payload = await response.json();
@@ -180,6 +183,8 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
   };
 
   const formula = result ? getFormuleByNumber(result.recommended_formula) : null;
+  const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
+  const isFormule1 = chosenFormuleNumber === 1;
 
   return (
     <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -261,14 +266,36 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
         placeholder="Notes complémentaires pour l'analyse (optionnel)"
         className="w-full mb-3 px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
       />
-      <button
-        type="button"
-        onClick={run}
-        disabled={loading}
-        className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white rounded-xl font-bold disabled:opacity-50"
-      >
-        {loading ? "Analyse en cours..." : "Lancer le matching"}
-      </button>
+      <div className="flex flex-wrap gap-3">
+        {isFormule1 ? (
+          <button
+            type="button"
+            onClick={() => run({ forceBilan: true })}
+            disabled={loading}
+            className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl font-bold disabled:opacity-50"
+          >
+            {loading
+              ? "Génération du bilan..."
+              : "Générer le bilan personnalisé"}
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => run()}
+            disabled={loading}
+            className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white rounded-xl font-bold disabled:opacity-50"
+          >
+            {loading ? "Analyse en cours..." : "Lancer le matching"}
+          </button>
+        )}
+      </div>
+      {isFormule1 ? (
+        <p className="text-xs text-slate-500 mt-2">
+          Génère le bilan formule 1 (analyse, langues, universités, bourses,
+          documents, prochaines étapes) à partir du matching, puis l'affiche
+          dans l'espace étudiant.
+        </p>
+      ) : null}
       {savedInfo ? (
         <p
           className={`text-sm mt-3 ${
@@ -345,6 +372,25 @@ export default function AdminMatchingPanel({ contact, onHistory }) {
               </p>
             )}
           </div>
+
+          {result.formule1_bilan?.sections?.length ? (
+            <div className="bg-slate-900/40 border border-cyan-700/40 rounded-2xl p-4 space-y-3">
+              <p className="text-sm font-bold text-cyan-200 uppercase tracking-wide">
+                Bilan personnalisé (visible dans l'espace étudiant)
+              </p>
+              {result.formule1_bilan.ai ? (
+                <p className="text-[11px] text-cyan-400">
+                  Rédaction relue par l'IA à partir du matching.
+                </p>
+              ) : null}
+              {result.formule1_bilan.sections.map((section) => (
+                <div key={section.key}>
+                  <p className="text-sm font-semibold text-white">{section.title}</p>
+                  <p className="text-sm text-slate-300 mt-1">{section.body}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
             <div className="lg:col-span-2 space-y-2">
