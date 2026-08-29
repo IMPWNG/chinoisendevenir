@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import {
-  ensureStudentContact,
+  findContactByEmail,
   getAuthenticatedUser,
   publicStudentProfile,
 } from "@/lib/studentAuth";
@@ -12,12 +12,11 @@ export async function POST(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    const body = await request.json().catch(() => ({}));
-    const contact = await ensureStudentContact(auth.admin, auth.user, body);
+    const contact = await findContactByEmail(auth.admin, auth.user.email);
 
     return NextResponse.json({
       success: true,
-      profile: publicStudentProfile(contact),
+      profile: publicStudentProfile(contact, auth.user.email),
     });
   } catch (error) {
     console.error("student ensure-profile:", error);

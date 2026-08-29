@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { fr } from "../i18n/fr";
-import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 
 export default function StudentLogin() {
@@ -16,9 +15,6 @@ export default function StudentLogin() {
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
   const [form, setForm] = useState({
-    prenom: "",
-    nom: "",
-    pays: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -27,23 +23,6 @@ export default function StudentLogin() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const ensureProfile = async (extras = {}) => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session?.access_token) return;
-
-    await fetch("/api/student/ensure-profile", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session.access_token}`,
-      },
-      body: JSON.stringify(extras),
-    });
   };
 
   const goToDashboard = () => {
@@ -72,7 +51,6 @@ export default function StudentLogin() {
         return;
       }
 
-      await ensureProfile();
       goToDashboard();
     } catch (err) {
       setStatus("error");
@@ -99,11 +77,7 @@ export default function StudentLogin() {
 
     try {
       const email = form.email.trim().toLowerCase();
-      const { data, error } = await signUp(email, form.password, {
-        prenom: form.prenom.trim(),
-        nom: form.nom.trim(),
-        pays: form.pays.trim(),
-      });
+      const { data, error } = await signUp(email, form.password);
 
       if (error) {
         setStatus("error");
@@ -124,11 +98,6 @@ export default function StudentLogin() {
         return;
       }
 
-      await ensureProfile({
-        prenom: form.prenom.trim(),
-        nom: form.nom.trim(),
-        pays: form.pays.trim(),
-      });
       goToDashboard();
     } catch (err) {
       setStatus("error");
@@ -158,8 +127,8 @@ export default function StudentLogin() {
           </h1>
           <p className="landing-section-subtitle">
             {mode === "login"
-              ? "Connectez-vous pour accéder à votre dossier."
-              : "Créez votre compte pour enregistrer vos informations."}
+              ? "Connectez-vous avec l'email utilisé dans le formulaire."
+              : "Créez un compte avec votre email et un mot de passe. Utilisez la même adresse que sur le formulaire de projet."}
           </p>
 
           {status === "success" && (
@@ -256,38 +225,6 @@ export default function StudentLogin() {
               className="landing-form landing-form-narrow"
               onSubmit={handleRegister}
             >
-              <div className="landing-form-row">
-                <div className="landing-form-group">
-                  <label htmlFor="register-prenom">Prénom *</label>
-                  <input
-                    id="register-prenom"
-                    name="prenom"
-                    value={form.prenom}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="landing-form-group">
-                  <label htmlFor="register-nom">Nom *</label>
-                  <input
-                    id="register-nom"
-                    name="nom"
-                    value={form.nom}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="landing-form-group">
-                <label htmlFor="register-pays">Pays *</label>
-                <input
-                  id="register-pays"
-                  name="pays"
-                  value={form.pays}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
               <div className="landing-form-group">
                 <label htmlFor="register-email">Adresse e-mail *</label>
                 <input

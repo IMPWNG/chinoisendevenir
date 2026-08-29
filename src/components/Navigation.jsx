@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { user } = useAuth();
 
   const isActive = (path) =>
     path.startsWith("/espace-etudiant")
@@ -22,6 +24,10 @@ const Navigation = () => {
     { path: "/faq", label: "FAQ" },
     { path: "/tarifs", label: "Tarifs" },
     { path: "/contact", label: "Contact" },
+    {
+      path: user ? "/espace-etudiant" : "/espace-etudiant/connexion",
+      label: user ? "Mon espace" : "Espace étudiant",
+    },
   ];
 
   return (

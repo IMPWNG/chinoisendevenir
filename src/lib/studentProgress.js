@@ -1,3 +1,5 @@
+import { getFormuleNumber } from "./formules";
+
 export const DOMAINES_ETUDES = [
   "Informatique / IA / Data Science",
   "Ingénierie / Génie civil",
@@ -140,6 +142,39 @@ export function isStudentSpaceUnlocked(statut) {
     "dossier_terminé",
   ]);
   return unlocked.has(statut);
+}
+
+const PAID_STATUSES = new Set([
+  "client_payé",
+  "appel_réservé",
+  "dossier_préparation",
+  "candidature_envoyée",
+  "admission_reçue",
+  "dossier_terminé",
+]);
+
+export function isFormulePaid(contact) {
+  return PAID_STATUSES.has(contact?.suivi_statut);
+}
+
+export function hasFilledLeadForm(contact) {
+  if (!contact) return false;
+  const required = [
+    contact.prenom,
+    contact.nom,
+    contact.pays,
+    contact.dernier_diplome,
+    contact.domaine_etudes,
+  ];
+  return required.every((value) => {
+    if (value === null || value === undefined) return false;
+    return String(value).trim() !== "";
+  });
+}
+
+export function getPaidFormuleNumber(contact) {
+  if (!isFormulePaid(contact)) return null;
+  return getFormuleNumber(getChosenFormule(contact)) || 1;
 }
 
 export const FORMULE_OPTIONS = [

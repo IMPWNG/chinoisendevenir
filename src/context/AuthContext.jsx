@@ -3,7 +3,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 
-const AuthContext = createContext();
+const AuthContext = createContext({
+  user: null,
+  loading: true,
+  signIn: async () => ({ error: new Error("Auth indisponible") }),
+  signUp: async () => ({ error: new Error("Auth indisponible") }),
+  signOut: async () => {},
+  resetPassword: async () => ({ error: new Error("Auth indisponible") }),
+});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);

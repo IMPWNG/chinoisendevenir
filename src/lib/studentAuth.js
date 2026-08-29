@@ -1,20 +1,54 @@
 import { getSupabaseAdmin } from "./supabaseAdmin";
+import { getFormuleAccess, getFormuleNumber } from "./formules";
 import {
   isStudentSpaceUnlocked,
+  isFormulePaid,
+  hasFilledLeadForm,
   getChosenFormule,
   getDisplayedStepIndex,
+  getPaidFormuleNumber,
 } from "./studentProgress";
 
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
 export const STUDENT_DOCUMENT_FOLDER = "document-requis";
 
-export function publicStudentProfile(contact) {
-  if (!contact) return null;
+export function publicStudentProfile(contact, userEmail = "") {
+  if (!contact) {
+    return {
+      id: null,
+      prenom: "",
+      nom: "",
+      email: userEmail || "",
+      age: "",
+      phone: "",
+      pays: "",
+      dernier_diplome: "",
+      domaine_etudes: "",
+      budget: "",
+      date_rentree: "",
+      hasForm: false,
+      paid: false,
+      unlocked: false,
+      formule: "",
+      formuleNumber: null,
+      access: getFormuleAccess(0),
+      suivi_statut: "",
+      dossier_etape: 0,
+    };
+  }
+
+  const formule = getChosenFormule(contact);
+  const paid = isFormulePaid(contact);
+  const formuleNumber = paid
+    ? getPaidFormuleNumber(contact)
+    : getFormuleNumber(formule);
+  const hasForm = hasFilledLeadForm(contact);
+
   return {
     id: contact.id,
     prenom: contact.prenom || "",
     nom: contact.nom || "",
-    email: contact.email || "",
+    email: contact.email || userEmail || "",
     age: contact.age || "",
     phone: contact.phone || "",
     pays: contact.pays || "",
@@ -22,10 +56,15 @@ export function publicStudentProfile(contact) {
     domaine_etudes: contact.domaine_etudes || "",
     budget: contact.budget || "",
     date_rentree: contact.date_rentree || "",
-    unlocked: isStudentSpaceUnlocked(contact.suivi_statut),
-    formule: getChosenFormule(contact),
+    hasForm,
+    paid,
+    unlocked: paid,
+    formule,
+    formuleNumber: formuleNumber || null,
+    access: getFormuleAccess(paid ? formuleNumber : 0),
     suivi_statut: contact.suivi_statut || "",
     dossier_etape: getDisplayedStepIndex(contact),
+    adminUnlocked: isStudentSpaceUnlocked(contact.suivi_statut),
   };
 }
 
@@ -207,7 +246,7 @@ export async function getAuthenticatedContact(request) {
   if (auth.error) return auth;
 
   try {
-    const contact = await ensureStudentContact(auth.admin, auth.user);
+    const contact = await findContactByEmail(auth.admin, auth.user.email);
     return { user: auth.user, contact, admin: auth.admin };
   } catch (error) {
     console.error("getAuthenticatedContact:", error);

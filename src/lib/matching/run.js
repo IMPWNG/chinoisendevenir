@@ -1,4 +1,4 @@
-import { getFormuleByNumber } from "../formules";
+import { getFormuleAccess, getFormuleByNumber } from "../formules";
 import { normalizeStudent } from "./student";
 import { normalizeUniversity } from "./university";
 import { rankMatches } from "./score";
@@ -9,9 +9,7 @@ import {
 } from "./narrative";
 
 function limitForFormula(formuleNumber) {
-  if (formuleNumber === 3) return 10;
-  if (formuleNumber === 2) return 8;
-  return 5;
+  return getFormuleAccess(formuleNumber).matchLimit || 5;
 }
 
 async function polishClientMessage(message, payload) {

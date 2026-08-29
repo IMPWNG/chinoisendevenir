@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import LeadForm from "../components/LeadForm";
+import StudentFormules from "../components/StudentFormules";
+import StudentMatching from "../components/StudentMatching";
 import { fr } from "../i18n/fr";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
@@ -11,7 +14,6 @@ import {
   STUDENT_PROCESS_STEPS,
   REQUIRED_STUDENT_DOCUMENTS,
   getDisplayedStepIndex,
-  getChosenFormule,
 } from "../lib/studentProgress";
 
 async function studentFetch(path, options = {}) {
@@ -44,6 +46,7 @@ export default function StudentDashboard() {
   const t = fr;
   const { user, signOut } = useAuth();
   const [profile, setProfile] = useState(null);
+  const [matching, setMatching] = useState(null);
   const [requiredDocuments, setRequiredDocuments] = useState([]);
   const [adminDocuments, setAdminDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,8 +56,9 @@ export default function StudentDashboard() {
   const [error, setError] = useState("");
   const [selectedFiles, setSelectedFiles] = useState({});
 
-  const unlocked = Boolean(profile?.unlocked);
-  const chosenFormule = getChosenFormule(profile);
+  const hasForm = Boolean(profile?.hasForm);
+  const paid = Boolean(profile?.paid);
+  const access = profile?.access || {};
   const currentStep = getDisplayedStepIndex(profile);
   const docsToShow =
     requiredDocuments.length > 0
@@ -68,12 +72,13 @@ export default function StudentDashboard() {
     (doc) => doc.status === "missing",
   ).length;
 
-  const loadProfile = async () => {
-    setLoading(true);
+  const loadProfile = async ({ silent = false } = {}) => {
+    if (!silent) setLoading(true);
     setError("");
     try {
       const data = await studentFetch("/api/student/me");
       setProfile(data.profile);
+      setMatching(data.matching || null);
       setRequiredDocuments(data.requiredDocuments || []);
       setAdminDocuments(data.adminDocuments || []);
     } catch (err) {
@@ -188,22 +193,24 @@ export default function StudentDashboard() {
     );
   }
 
+  const subtitle = !hasForm
+    ? "Aucun dossier ne correspond à cet email. Complétez le formulaire pour continuer."
+    : paid
+      ? "Consultez les informations débloquées selon votre formule, mettez à jour votre profil et suivez votre dossier."
+      : "Votre dossier est bien enregistré. Choisissez une formule pour débloquer votre orientation.";
+
   return (
     <div className="app app-page-fill">
       <Navigation />
       <section className="landing-form-section">
         <div className="container">
-          <div className="student-toolbar">
+          <div className="student-toolbar student-toolbar-wide">
             <div>
               <span className="landing-hero-badge">Espace étudiant</span>
               <h1 className="landing-section-title is-left">
-                Bonjour {profile.prenom || ""}
+                Bonjour {profile?.prenom || ""}
               </h1>
-              <p className="landing-section-subtitle is-left">
-                {unlocked
-                  ? "Consultez l'avancement de votre dossier, mettez à jour vos informations et déposez vos documents."
-                  : "Complétez vos informations. Le suivi et les documents seront débloqués une fois votre formule validée."}
-              </p>
+              <p className="landing-section-subtitle is-left">{subtitle}</p>
             </div>
             <button
               type="button"
@@ -221,330 +228,367 @@ export default function StudentDashboard() {
             <div className="landing-alert landing-alert-error">{message.text}</div>
           )}
 
-          {chosenFormule ? (
-            <div className="student-card">
-              <h2 className="card-title">Votre formule</h2>
+          {!hasForm ? (
+            <div className="student-card student-card-wide">
+              <h2 className="card-title">Complétez votre projet</h2>
               <p className="card-subtitle">
-                Formule confirmée pour votre accompagnement.
+                Connecté avec {user?.email}. Utilisez cet email : s'il a déjà
+                été renseigné dans le formulaire, votre dossier sera associé
+                automatiquement.
               </p>
-              <div className="landing-alert landing-alert-success">
-                {chosenFormule}
-              </div>
+              <LeadForm
+                t={t}
+                embedded
+                lockedEmail={user?.email || ""}
+                initialValues={{
+                  prenom: profile?.prenom || "",
+                  nom: profile?.nom || "",
+                  age: profile?.age || "",
+                  phone: profile?.phone || "",
+                  pays: profile?.pays || "",
+                  dernier_diplome: profile?.dernier_diplome || "",
+                  domaine_etudes: DOMAINES_ETUDES.includes(profile?.domaine_etudes)
+                    ? profile.domaine_etudes
+                    : profile?.domaine_etudes
+                      ? "Autre"
+                      : "",
+                  domaine_etudes_precision:
+                    profile?.domaine_etudes &&
+                    !DOMAINES_ETUDES.includes(profile.domaine_etudes)
+                      ? profile.domaine_etudes
+                      : "",
+                  budget: profile?.budget || "",
+                  date_rentree: profile?.date_rentree || "",
+                }}
+                onSuccess={() => loadProfile({ silent: true })}
+              />
             </div>
           ) : (
-            <div className="student-card">
-              <h2 className="card-title">Votre formule</h2>
-              <p className="card-subtitle">
-                Aucune formule n'a encore été confirmée. Répondez à notre email
-                avec le numéro de la formule souhaitée (1, 2 ou 3).
-              </p>
-            </div>
-          )}
-
-          <form className="student-card" onSubmit={handleSave}>
-            <h2 className="card-title">Mes informations</h2>
-            <p className="card-subtitle">
-              Connecté avec {user?.email}. L'adresse email ne peut pas être
-              modifiée ici.
-            </p>
-
-            <div className="landing-form-row">
-              <div className="landing-form-group">
-                <label htmlFor="student-prenom">Prénom *</label>
-                <input
-                  id="student-prenom"
-                  name="prenom"
-                  value={profile.prenom}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="landing-form-group">
-                <label htmlFor="student-nom">Nom *</label>
-                <input
-                  id="student-nom"
-                  name="nom"
-                  value={profile.nom}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="landing-form-row">
-              <div className="landing-form-group">
-                <label htmlFor="student-email">Email</label>
-                <input id="student-email" value={profile.email} disabled />
-              </div>
-              <div className="landing-form-group">
-                <label htmlFor="student-phone">Téléphone</label>
-                <input
-                  id="student-phone"
-                  name="phone"
-                  value={profile.phone}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="landing-form-row">
-              <div className="landing-form-group">
-                <label htmlFor="student-age">Âge</label>
-                <input
-                  id="student-age"
-                  type="number"
-                  name="age"
-                  min="15"
-                  max="60"
-                  value={profile.age}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="landing-form-group">
-                <label htmlFor="student-pays">Pays *</label>
-                <input
-                  id="student-pays"
-                  name="pays"
-                  value={profile.pays}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="landing-form-row">
-              <div className="landing-form-group">
-                <label htmlFor="student-diplome">Dernier diplôme</label>
-                <select
-                  id="student-diplome"
-                  name="dernier_diplome"
-                  value={profile.dernier_diplome}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Sélectionner --</option>
-                  <option value="bac">Baccalauréat</option>
-                  <option value="licence">Licence</option>
-                  <option value="master">Master</option>
-                  <option value="doctorat">Doctorat</option>
-                  <option value="autre">Autre</option>
-                </select>
-              </div>
-              <div className="landing-form-group">
-                <label htmlFor="student-domaine">Domaine d'études</label>
-                <select
-                  id="student-domaine"
-                  name="domaine_etudes"
-                  value={profile.domaine_etudes}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Sélectionner --</option>
-                  {profile.domaine_etudes &&
-                  !DOMAINES_ETUDES.includes(profile.domaine_etudes) ? (
-                    <option value={profile.domaine_etudes}>
-                      {profile.domaine_etudes}
-                    </option>
-                  ) : null}
-                  {DOMAINES_ETUDES.map((domaine) => (
-                    <option key={domaine} value={domaine}>
-                      {domaine}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="landing-form-row">
-              <div className="landing-form-group">
-                <label htmlFor="student-budget">Budget annuel estimé</label>
-                <select
-                  id="student-budget"
-                  name="budget"
-                  value={profile.budget}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Sélectionner --</option>
-                  <option value="<5000">Moins de 5 000 $</option>
-                  <option value="5000-10000">5 000 - 10 000 $</option>
-                  <option value="10000-20000">10 000 - 20 000 $</option>
-                  <option value=">20000">Plus de 20 000 $</option>
-                </select>
-              </div>
-              <div className="landing-form-group">
-                <label htmlFor="student-rentree">Rentrée souhaitée</label>
-                <select
-                  id="student-rentree"
-                  name="date_rentree"
-                  value={profile.date_rentree}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Sélectionner --</option>
-                  <option value="septembre_2026">Septembre 2026</option>
-                  <option value="mars_2027">Mars 2027</option>
-                  <option value="septembre_2027">Septembre 2027</option>
-                  <option value="flexible">Flexible</option>
-                </select>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="landing-btn landing-btn-primary"
-              disabled={saving}
-            >
-              {saving ? "Enregistrement..." : "Enregistrer mes informations"}
-            </button>
-          </form>
-
-          {unlocked ? (
             <>
-              <div className="student-card">
-                <h2 className="card-title">Avancement de votre dossier</h2>
+              <form className="student-card student-card-wide" onSubmit={handleSave}>
+                <h2 className="card-title">Mes informations</h2>
                 <p className="card-subtitle">
-                  Étape {currentStep + 1} sur {STUDENT_PROCESS_STEPS.length}
+                  Connecté avec {user?.email}. L'adresse email ne peut pas être
+                  modifiée ici.
                 </p>
-                <div className="student-progress">
-                  {STUDENT_PROCESS_STEPS.map((step, index) => {
-                    const state =
-                      index < currentStep
-                        ? "student-step-done"
-                        : index === currentStep
-                          ? "student-step-current"
-                          : "";
-                    return (
-                      <div key={step.key} className={`student-step ${state}`}>
-                        <div className="student-step-icon">{step.icon}</div>
-                        <div className="student-step-label">
-                          {index < currentStep ? "✓ " : ""}
-                          {step.label}
-                        </div>
-                        <div className="student-step-desc">{step.description}</div>
-                      </div>
-                    );
-                  })}
+
+                <div className="landing-form-row">
+                  <div className="landing-form-group">
+                    <label htmlFor="student-prenom">Prénom *</label>
+                    <input
+                      id="student-prenom"
+                      name="prenom"
+                      value={profile.prenom}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="landing-form-group">
+                    <label htmlFor="student-nom">Nom *</label>
+                    <input
+                      id="student-nom"
+                      name="nom"
+                      value={profile.nom}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="student-card">
-                <h2 className="card-title">Documents à fournir</h2>
-                <p className="card-subtitle">
-                  {missingCount > 0
-                    ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
-                    : "Tous les documents demandés ont été reçus."}
-                </p>
+                <div className="landing-form-row">
+                  <div className="landing-form-group">
+                    <label htmlFor="student-email">Email</label>
+                    <input id="student-email" value={profile.email} disabled />
+                  </div>
+                  <div className="landing-form-group">
+                    <label htmlFor="student-phone">Téléphone</label>
+                    <input
+                      id="student-phone"
+                      name="phone"
+                      value={profile.phone}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
 
-                <div className="doc-list">
-                  {docsToShow.map((doc) => {
-                    const missing = doc.status !== "received";
-                    return (
-                      <div
-                        key={doc.key}
-                        className={`doc-row ${missing ? "doc-missing" : "doc-received"}`}
-                      >
-                        <div className="doc-row-main">
-                          <div className="doc-row-title">
-                            <span>{doc.icon}</span>
-                            {doc.label}
-                            <span
-                              className={
-                                missing ? "doc-badge-missing" : "doc-badge-ok"
-                              }
-                            >
-                              {missing ? "Manquant" : "Reçu"}
-                            </span>
-                          </div>
-                          <p className="doc-row-desc">{doc.description}</p>
-                          {doc.file ? (
-                            <p className="doc-row-file">
-                              Fichier actuel : <strong>{doc.file.name}</strong>
-                            </p>
-                          ) : null}
-                        </div>
-                        <form
-                          className="doc-row-actions"
-                          onSubmit={(e) => handleUpload(e, doc.key)}
-                        >
-                          <input
-                            type="file"
-                            accept=".pdf,.jpg,.jpeg,.png,.webp"
-                            onChange={(e) =>
-                              setSelectedFiles((prev) => ({
-                                ...prev,
-                                [doc.key]: e.target.files?.[0] || null,
-                              }))
-                            }
-                          />
-                          <div className="landing-hero-actions landing-actions-start">
-                            <button
-                              type="submit"
-                              className="landing-btn landing-btn-primary"
-                              disabled={
-                                uploadingKey === doc.key || !selectedFiles[doc.key]
-                              }
-                            >
-                              {uploadingKey === doc.key
-                                ? "Envoi..."
-                                : doc.file
-                                  ? "Remplacer"
-                                  : "Envoyer"}
-                            </button>
-                            {doc.file ? (
-                              <button
-                                type="button"
-                                className="landing-btn landing-btn-secondary"
-                                onClick={() => handleDownload(doc.file.path)}
+                <div className="landing-form-row">
+                  <div className="landing-form-group">
+                    <label htmlFor="student-age">Âge</label>
+                    <input
+                      id="student-age"
+                      type="number"
+                      name="age"
+                      min="15"
+                      max="60"
+                      value={profile.age}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="landing-form-group">
+                    <label htmlFor="student-pays">Pays *</label>
+                    <input
+                      id="student-pays"
+                      name="pays"
+                      value={profile.pays}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="landing-form-row">
+                  <div className="landing-form-group">
+                    <label htmlFor="student-diplome">Dernier diplôme</label>
+                    <select
+                      id="student-diplome"
+                      name="dernier_diplome"
+                      value={profile.dernier_diplome}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">-- Sélectionner --</option>
+                      <option value="bac">Baccalauréat</option>
+                      <option value="licence">Licence</option>
+                      <option value="master">Master</option>
+                      <option value="doctorat">Doctorat</option>
+                      <option value="autre">Autre</option>
+                    </select>
+                  </div>
+                  <div className="landing-form-group">
+                    <label htmlFor="student-domaine">Domaine d'études</label>
+                    <select
+                      id="student-domaine"
+                      name="domaine_etudes"
+                      value={profile.domaine_etudes}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">-- Sélectionner --</option>
+                      {profile.domaine_etudes &&
+                      !DOMAINES_ETUDES.includes(profile.domaine_etudes) ? (
+                        <option value={profile.domaine_etudes}>
+                          {profile.domaine_etudes}
+                        </option>
+                      ) : null}
+                      {DOMAINES_ETUDES.map((domaine) => (
+                        <option key={domaine} value={domaine}>
+                          {domaine}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="landing-form-row">
+                  <div className="landing-form-group">
+                    <label htmlFor="student-budget">Budget annuel estimé</label>
+                    <select
+                      id="student-budget"
+                      name="budget"
+                      value={profile.budget}
+                      onChange={handleChange}
+                    >
+                      <option value="">-- Sélectionner --</option>
+                      <option value="<5000">Moins de 5 000 $</option>
+                      <option value="5000-10000">5 000 - 10 000 $</option>
+                      <option value="10000-20000">10 000 - 20 000 $</option>
+                      <option value=">20000">Plus de 20 000 $</option>
+                    </select>
+                  </div>
+                  <div className="landing-form-group">
+                    <label htmlFor="student-rentree">Rentrée souhaitée</label>
+                    <select
+                      id="student-rentree"
+                      name="date_rentree"
+                      value={profile.date_rentree}
+                      onChange={handleChange}
+                    >
+                      <option value="">-- Sélectionner --</option>
+                      <option value="septembre_2026">Septembre 2026</option>
+                      <option value="mars_2027">Mars 2027</option>
+                      <option value="septembre_2027">Septembre 2027</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="landing-btn landing-btn-primary"
+                  disabled={saving}
+                >
+                  {saving ? "Enregistrement..." : "Enregistrer mes informations"}
+                </button>
+              </form>
+
+              <StudentFormules
+                currentFormule={profile.formule || ""}
+                paid={paid}
+              />
+
+              {paid ? (
+                <>
+                  <StudentMatching
+                    matching={matching}
+                    formuleNumber={profile.formuleNumber}
+                  />
+
+                  {access.progress ? (
+                    <div className="student-card student-card-wide">
+                      <h2 className="card-title">Avancement de votre dossier</h2>
+                      <p className="card-subtitle">
+                        Étape {currentStep + 1} sur {STUDENT_PROCESS_STEPS.length}
+                      </p>
+                      <div className="student-progress">
+                        {STUDENT_PROCESS_STEPS.map((step, index) => {
+                          const state =
+                            index < currentStep
+                              ? "student-step-done"
+                              : index === currentStep
+                                ? "student-step-current"
+                                : "";
+                          return (
+                            <div key={step.key} className={`student-step ${state}`}>
+                              <div className="student-step-icon">{step.icon}</div>
+                              <div className="student-step-label">
+                                {index < currentStep ? "✓ " : ""}
+                                {step.label}
+                              </div>
+                              <div className="student-step-desc">{step.description}</div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {access.documents ? (
+                    <>
+                      <div className="student-card student-card-wide">
+                        <h2 className="card-title">Documents à fournir</h2>
+                        <p className="card-subtitle">
+                          {missingCount > 0
+                            ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
+                            : "Tous les documents demandés ont été reçus."}
+                        </p>
+
+                        <div className="doc-list">
+                          {docsToShow.map((doc) => {
+                            const missing = doc.status !== "received";
+                            return (
+                              <div
+                                key={doc.key}
+                                className={`doc-row ${missing ? "doc-missing" : "doc-received"}`}
                               >
-                                Télécharger
-                              </button>
-                            ) : null}
-                          </div>
-                        </form>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="student-card">
-                <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
-                <p className="card-subtitle">
-                  Fichiers transmis par Chinois en Devenir pour votre dossier.
-                </p>
-                {adminDocuments.length === 0 ? (
-                  <div className="landing-alert landing-alert-warning">
-                    Aucun document n'a encore été envoyé par l'équipe.
-                  </div>
-                ) : (
-                  <div className="doc-list">
-                    {adminDocuments.map((doc) => (
-                      <div key={doc.path} className="doc-row doc-received">
-                        <div className="doc-row-main">
-                          <div className="doc-row-title">
-                            <span>📄</span>
-                            {doc.name}
-                            <span className="doc-badge-ok">Reçu</span>
-                          </div>
+                                <div className="doc-row-main">
+                                  <div className="doc-row-title">
+                                    <span>{doc.icon}</span>
+                                    {doc.label}
+                                    <span
+                                      className={
+                                        missing ? "doc-badge-missing" : "doc-badge-ok"
+                                      }
+                                    >
+                                      {missing ? "Manquant" : "Reçu"}
+                                    </span>
+                                  </div>
+                                  <p className="doc-row-desc">{doc.description}</p>
+                                  {doc.file ? (
+                                    <p className="doc-row-file">
+                                      Fichier actuel : <strong>{doc.file.name}</strong>
+                                    </p>
+                                  ) : null}
+                                </div>
+                                <form
+                                  className="doc-row-actions"
+                                  onSubmit={(e) => handleUpload(e, doc.key)}
+                                >
+                                  <input
+                                    type="file"
+                                    accept=".pdf,.jpg,.jpeg,.png,.webp"
+                                    onChange={(e) =>
+                                      setSelectedFiles((prev) => ({
+                                        ...prev,
+                                        [doc.key]: e.target.files?.[0] || null,
+                                      }))
+                                    }
+                                  />
+                                  <div className="landing-hero-actions landing-actions-start">
+                                    <button
+                                      type="submit"
+                                      className="landing-btn landing-btn-primary"
+                                      disabled={
+                                        uploadingKey === doc.key || !selectedFiles[doc.key]
+                                      }
+                                    >
+                                      {uploadingKey === doc.key
+                                        ? "Envoi..."
+                                        : doc.file
+                                          ? "Remplacer"
+                                          : "Envoyer"}
+                                    </button>
+                                    {doc.file ? (
+                                      <button
+                                        type="button"
+                                        className="landing-btn landing-btn-secondary"
+                                        onClick={() => handleDownload(doc.file.path)}
+                                      >
+                                        Télécharger
+                                      </button>
+                                    ) : null}
+                                  </div>
+                                </form>
+                              </div>
+                            );
+                          })}
                         </div>
-                        <button
-                          type="button"
-                          className="landing-btn landing-btn-secondary"
-                          onClick={() => handleDownload(doc.path)}
-                        >
-                          Télécharger
-                        </button>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+
+                      <div className="student-card student-card-wide">
+                        <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
+                        <p className="card-subtitle">
+                          Fichiers transmis par Chinois en Devenir pour votre dossier.
+                        </p>
+                        {adminDocuments.length === 0 ? (
+                          <div className="landing-alert landing-alert-warning">
+                            Aucun document n'a encore été envoyé par l'équipe.
+                          </div>
+                        ) : (
+                          <div className="doc-list">
+                            {adminDocuments.map((doc) => (
+                              <div key={doc.path} className="doc-row doc-received">
+                                <div className="doc-row-main">
+                                  <div className="doc-row-title">
+                                    <span>📄</span>
+                                    {doc.name}
+                                    <span className="doc-badge-ok">Reçu</span>
+                                  </div>
+                                </div>
+                                <button
+                                  type="button"
+                                  className="landing-btn landing-btn-secondary"
+                                  onClick={() => handleDownload(doc.path)}
+                                >
+                                  Télécharger
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="student-card student-locked student-card-wide">
+                      <h2 className="card-title">Suivi et documents</h2>
+                      <p className="card-subtitle">
+                        Le dépôt de documents et le suivi de candidature sont
+                        inclus à partir de la formule 2.
+                      </p>
+                    </div>
+                  )}
+                </>
+              ) : null}
             </>
-          ) : (
-            <div className="student-card student-locked">
-              <h2 className="card-title">Suivi et documents verrouillés</h2>
-              <p className="card-subtitle">
-                Une fois votre formule validée par notre équipe, vous pourrez
-                consulter l'avancement de votre dossier et déposer vos documents.
-              </p>
-            </div>
           )}
         </div>
       </section>

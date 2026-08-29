@@ -3,7 +3,8 @@ import {
   getAuthenticatedContact,
   ensureStudentBucket,
 } from "@/lib/studentAuth";
-import { isStudentSpaceUnlocked } from "@/lib/studentProgress";
+import { getFormuleAccess } from "@/lib/formules";
+import { isFormulePaid, getPaidFormuleNumber } from "@/lib/studentProgress";
 import {
   createDocumentSignedUrl,
   getRequiredDocumentsStatus,
@@ -22,11 +23,22 @@ export async function GET(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!isStudentSpaceUnlocked(auth.contact.suivi_statut)) {
+    if (!auth.contact || !isFormulePaid(auth.contact)) {
       return NextResponse.json(
         {
           error:
-            "Les documents seront disponibles une fois votre formule validée.",
+            "Les documents seront disponibles une fois votre formule réglée.",
+        },
+        { status: 403 },
+      );
+    }
+
+    const access = getFormuleAccess(getPaidFormuleNumber(auth.contact));
+    if (!access.documents) {
+      return NextResponse.json(
+        {
+          error:
+            "Le dépôt de documents est inclus à partir de la formule 2.",
         },
         { status: 403 },
       );
@@ -58,11 +70,22 @@ export async function POST(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!isStudentSpaceUnlocked(auth.contact.suivi_statut)) {
+    if (!auth.contact || !isFormulePaid(auth.contact)) {
       return NextResponse.json(
         {
           error:
-            "Les documents seront disponibles une fois votre formule validée.",
+            "Les documents seront disponibles une fois votre formule réglée.",
+        },
+        { status: 403 },
+      );
+    }
+
+    const access = getFormuleAccess(getPaidFormuleNumber(auth.contact));
+    if (!access.documents) {
+      return NextResponse.json(
+        {
+          error:
+            "Le dépôt de documents est inclus à partir de la formule 2.",
         },
         { status: 403 },
       );

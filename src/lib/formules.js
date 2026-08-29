@@ -153,3 +153,45 @@ export function displayFormuleLabel(formuleLabel) {
 export function getFormuleByNumber(number) {
   return FORMULES.find((item) => item.number === number) || null;
 }
+
+export function getFormuleAccess(number) {
+  const n = Number(number) || 0;
+  if (n >= 3) {
+    return {
+      number: 3,
+      matchLimit: 10,
+      depth: "complete",
+      documents: true,
+      progress: true,
+      visa: true,
+    };
+  }
+  if (n >= 2) {
+    return {
+      number: 2,
+      matchLimit: 8,
+      depth: "candidature",
+      documents: true,
+      progress: true,
+      visa: false,
+    };
+  }
+  if (n >= 1) {
+    return {
+      number: 1,
+      matchLimit: 5,
+      depth: "orientation",
+      documents: false,
+      progress: false,
+      visa: false,
+    };
+  }
+  return {
+    number: 0,
+    matchLimit: 0,
+    depth: "none",
+    documents: false,
+    progress: false,
+    visa: false,
+  };
+}

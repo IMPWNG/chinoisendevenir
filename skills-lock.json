@@ -12,6 +12,12 @@
       "sourceType": "github",
       "skillPath": "skills/seo-audit/SKILL.md",
       "computedHash": "01f9f8a3feb3ea69c6c212d61189c610f96ef2cc363adc27fd314d78254bf6ae"
+    },
+    "stripe-integration": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/payment-processing/skills/stripe-integration/SKILL.md",
+      "computedHash": "4621fa0a1ee27f92961628115f1a2dd305569acb777f4933bcbffcda3037bd53"
     }
   }
 }

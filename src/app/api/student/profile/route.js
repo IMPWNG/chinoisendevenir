@@ -17,6 +17,13 @@ export async function PATCH(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
+    if (!auth.contact) {
+      return NextResponse.json(
+        { error: "Complétez d'abord le formulaire de projet." },
+        { status: 404 },
+      );
+    }
+
     const body = await request.json();
     const payload = {
       prenom: filled(body.prenom),
@@ -47,6 +54,12 @@ export async function PATCH(request) {
     if (!payload.prenom || !payload.nom || !payload.pays) {
       return NextResponse.json(
         { error: "Prénom, nom et pays sont obligatoires" },
+        { status: 400 },
+      );
+    }
+    if (!payload.dernier_diplome || !payload.domaine_etudes) {
+      return NextResponse.json(
+        { error: "Diplôme et domaine d'études sont obligatoires" },
         { status: 400 },
       );
     }
@@ -86,7 +99,7 @@ export async function PATCH(request) {
 
     return NextResponse.json({
       success: true,
-      profile: publicStudentProfile(updated),
+      profile: publicStudentProfile(updated, auth.user.email),
     });
   } catch (error) {
     console.error("student profile:", error);

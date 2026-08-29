@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 // ✅ Liste standardisée des domaines d'études
 const DOMAINES_ETUDES = [
@@ -24,20 +25,32 @@ const DOMAINES_ETUDES = [
   "Autre",
 ];
 
-const LeadForm = ({ t }) => {
+const EMPTY_FORM = {
+  prenom: "",
+  nom: "",
+  age: "",
+  email: "",
+  phone: "",
+  pays: "",
+  dernier_diplome: "",
+  domaine_etudes: "",
+  domaine_etudes_precision: "",
+  budget: "",
+  date_rentree: "",
+  notes_admin: "",
+};
+
+const LeadForm = ({
+  t,
+  lockedEmail,
+  initialValues,
+  onSuccess,
+  embedded = false,
+}) => {
   const [formData, setFormData] = useState({
-    prenom: "",
-    nom: "",
-    age: "",
-    email: "",
-    phone: "",
-    pays: "",
-    dernier_diplome: "",
-    domaine_etudes: "",
-    domaine_etudes_precision: "",
-    budget: "",
-    date_rentree: "",
-    notes_admin: "",
+    ...EMPTY_FORM,
+    ...initialValues,
+    email: lockedEmail || initialValues?.email || "",
   });
 
   const [errors, setErrors] = useState({});
@@ -51,10 +64,12 @@ const LeadForm = ({ t }) => {
     if (!formData.prenom.trim()) newErrors.prenom = t.form_error_required;
     if (!formData.nom.trim()) newErrors.nom = t.form_error_required;
 
-    if (!formData.email.trim()) {
-      newErrors.email = t.form_error_required;
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = t.form_error_email;
+    if (!lockedEmail) {
+      if (!formData.email.trim()) {
+        newErrors.email = t.form_error_required;
+      } else if (!emailRegex.test(formData.email)) {
+        newErrors.email = t.form_error_email;
+      }
     }
 
     if (formData.phone && !phoneRegex.test(formData.phone)) {
@@ -116,7 +131,7 @@ const LeadForm = ({ t }) => {
           prenom: formData.prenom.trim(),
           nom: formData.nom.trim(),
           age: formData.age ? parseInt(formData.age, 10) : null,
-          email: formData.email.trim().toLowerCase(),
+          email: lockedEmail || formData.email.trim().toLowerCase(),
           phone: formData.phone.trim() || null,
           pays: formData.pays.trim(),
           dernier_diplome: formData.dernier_diplome || null,
@@ -144,21 +159,13 @@ const LeadForm = ({ t }) => {
       // ✅ Succès
       setStatus("success");
       setFormData({
-        prenom: "",
-        nom: "",
-        age: "",
-        email: "",
-        phone: "",
-        pays: "",
-        dernier_diplome: "",
-        domaine_etudes: "",
-        domaine_etudes_precision: "",
-        budget: "",
-        date_rentree: "",
-        notes_admin: "",
+        ...EMPTY_FORM,
+        email: lockedEmail || "",
       });
-
-      setTimeout(() => setStatus("idle"), 3000);
+      onSuccess?.();
+      if (!embedded) {
+        setTimeout(() => setStatus("idle"), 3000);
+      }
     } catch (err) {
       console.error("❌ Erreur fetch:", err);
       setStatus("error");
@@ -166,15 +173,16 @@ const LeadForm = ({ t }) => {
     }
   };
 
-  return (
-    <section id="lead-form" className="landing-form-section">
-      <div className="container">
-        <h2 className="landing-section-title">{t.form_title}</h2>
-        <p className="landing-section-subtitle">{t.form_subtitle}</p>
-
+  const formBody = (
+    <>
         {status === "success" && (
           <div className="landing-alert landing-alert-success">
-            ✅ {t.form_success}
+            ✅ {t.form_success}{" "}
+            {!embedded ? (
+              <Link href="/espace-etudiant/connexion">
+                Créer mon espace étudiant
+              </Link>
+            ) : null}
           </div>
         )}
         {status === "error" && (
@@ -233,6 +241,7 @@ const LeadForm = ({ t }) => {
                 onChange={handleChange}
                 className={errors.email ? "error" : ""}
                 placeholder="jean@example.com"
+                disabled={Boolean(lockedEmail)}
               />
               {errors.email && (
                 <span className="landing-error-msg">{errors.email}</span>
@@ -414,6 +423,19 @@ const LeadForm = ({ t }) => {
               : t.form_submit}
           </button>
         </form>
+    </>
+  );
+
+  if (embedded) {
+    return <div className="student-lead-form">{formBody}</div>;
+  }
+
+  return (
+    <section id="lead-form" className="landing-form-section">
+      <div className="container">
+        <h2 className="landing-section-title">{t.form_title}</h2>
+        <p className="landing-section-subtitle">{t.form_subtitle}</p>
+        {formBody}
       </div>
     </section>
   );
