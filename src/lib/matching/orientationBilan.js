@@ -34,43 +34,38 @@ const F3_KEYS = [
 ];
 
 const QUESTIONS = {
-  analyse:
-    "Où en est votre projet, concrètement — et qu’est-ce qui manque encore ?",
-  langue:
-    "Votre niveau de langue ouvre-t-il les portes, ou faut-il un détour ?",
-  conseils: "Quel domaine et quel niveau visent vraiment, pour vous ?",
-  selection:
-    "Quelles universités former votre mix : sûres, réalistes, ambitieuses ?",
-  bourses: "Quelles bourses sont réellement documentées pour ces établissements ?",
-  procedure: "Par où commencer, dans votre cas — et dans quel ordre ?",
-  documents: "Quelles pièces préparer maintenant, sans tout traduire trop tôt ?",
-  recommandations: "Que faut-il combler avant de déposer un dossier ?",
-  echange:
-    "Que retenir pour l’appel, et quelle décision prendre ensuite ?",
-  recherche:
-    "Quelles universités, formations et bourses collent à votre fiche ?",
-  admission: "Sur quels critères connus êtes-vous déjà dans les clous ?",
-  dossier: "Quelles pièces sont reçues, lesquelles bloquent encore ?",
-  formulaires: "Quoi caler avant de remplir les formulaires ?",
-  depot: "Quelles candidatures déposer en premier (3 maximum) ?",
-  suivi_reponses: "Quelles deadlines surveiller jusqu’aux réponses ?",
+  analyse: "Où en est votre projet ?",
+  langue: "Votre niveau de langue suffit-il ?",
+  conseils: "Quel domaine et quel niveau viser ?",
+  selection: "Quelles universités retenir ?",
+  bourses: "Quelles bourses sont documentées ?",
+  procedure: "Par où commencer ?",
+  documents: "Quelles pièces préparer ?",
+  recommandations: "Que faire avant de candidater ?",
+  echange: "Que retenir pour l’appel ?",
+  recherche: "Quels établissements correspondent à votre fiche ?",
+  admission: "Remplissez-vous les critères connus ?",
+  dossier: "Quelles pièces manquent encore ?",
+  formulaires: "Quoi caler avant les formulaires ?",
+  depot: "Quelles candidatures déposer en premier ?",
+  suivi_reponses: "Quelles dates surveiller ?",
   echanges: "Que traiter au prochain échange ?",
-  cinq_candidatures: "Quelles candidatures retenir (jusqu’à 5) ?",
-  suivi_complet: "Comment se déroule le suivi, du dossier jusqu’au départ ?",
-  apres_admission: "Que relire dès qu’une offre arrive ?",
-  visa: "Que préparer pour le visa — sans faire les démarches à votre place ?",
-  logement: "Comment s’orienter pour le logement, le voyage et l’arrivée ?",
-  demarches_depart: "Que reste-t-il à faire avant de partir ?",
+  cinq_candidatures: "Quelles candidatures retenir ?",
+  suivi_complet: "Comment se passe le suivi ?",
+  apres_admission: "Que faire dès qu’une offre arrive ?",
+  visa: "Que préparer pour le visa ?",
+  logement: "Comment s’orienter pour le logement ?",
+  demarches_depart: "Que reste-t-il avant le départ ?",
 };
 
 const GROUP_LABELS = {
-  formule1: "— Bilan",
-  formule2: "— Candidature",
-  formule3: "— La suite",
+  formule1: "Votre situation",
+  formule2: "Candidatures",
+  formule3: "Départ",
 };
 
 export const BILAN_DISCLAIMER =
-  "*Aucune admission, bourse ou visa n’est garantie.*";
+  "Aucune admission, bourse ou visa n’est garantie.";
 
 function packDefs(formule, keys, group) {
   const titles =
@@ -285,22 +280,14 @@ function mixLine(uni, formuleNumber) {
   return `${tag} — ${uni.name}${uni.city ? ` (${uni.city})` : ""} · ${uni.score}/100${scores.length ? ` (${scores.join(" · ")})` : ""}`;
 }
 
-function gapTone(type) {
-  if (type === "langue" || type === "financier") return "miss";
-  if (type === "academique") return "warn";
-  return "info";
-}
-
 function buildSectionMap(ctx) {
-  const { student, analyses, formuleNumber, documents, adminDocuments, gaps = [] } = ctx;
+  const { student, analyses, formuleNumber, documents, adminDocuments } = ctx;
   const n = Number(formuleNumber) || 1;
   const limit = getFormuleAccess(n).matchLimit || applicationLimit(n);
   const applyMax = applicationLimit(n);
   const top = topMatches(analyses, limit).map(uniFacts);
   const toApply = top.slice(0, applyMax);
-  const name = student.prenom || student.name || "vous";
   const field = student.field || "votre domaine";
-  const country = student.country || "votre pays";
   const diploma = diplomaLabel(student.dernierDiplome || student.diploma);
   const degree = degreeLabel(student.targetDegree);
   const budget = student.budget?.label || student.budget || "à préciser";
@@ -314,45 +301,23 @@ function buildSectionMap(ctx) {
   const status = summarizeDocuments(documents, adminDocuments);
   const missingCount = status.missing.length;
   const scholarshipGoal = student.scholarshipGoal;
-  const quality = student.qualityScore;
-  const gapItems = (gaps || []).map((gap) =>
-    factItem(
-      gap.universite ? `${gap.universite} — ${gap.conseil}` : gap.conseil,
-      gapTone(gap.type),
-    ),
-  );
 
   const analyseItems = [
-    quality != null
-      ? factItem(`Complétude du dossier : ${quality}/100`, quality >= 70 ? "ok" : quality >= 45 ? "warn" : "miss")
-      : null,
-    factItem(`Pays de résidence : ${country}`, "ok"),
-    factItem(`Domaine indiqué : ${field}`, field === "votre domaine" ? "warn" : "ok"),
-    factItem(`Dernier diplôme : ${diploma}`, "ok"),
-    factItem(
-      `Niveau visé : ${degree}`,
-      student.targetDegreeSource === "confirmed" ? "ok" : "warn",
-    ),
-    factItem(`Budget annuel : ${budget}`, /préciser/i.test(String(budget)) ? "miss" : "ok"),
-    factItem(`Rentrée visée : ${intake}`, "info"),
+    factItem(`Domaine : ${field}`, field === "votre domaine" ? "warn" : "ok"),
+    factItem(`Diplôme : ${diploma} · niveau visé : ${degree}`, student.targetDegreeSource === "confirmed" ? "ok" : "warn"),
+    factItem(`Budget : ${budget}`, /préciser/i.test(String(budget)) ? "miss" : "ok"),
   ].filter(Boolean);
 
   const langueItems = [
     factItem(
       hsk
-        ? `Chinois : ${hsk}${student.hskSource === "default_beginner" ? " (débutant par défaut)" : ""}`
-        : "Chinois : HSK non renseigné — à confirmer",
+        ? `Chinois : ${hsk}${student.hskSource === "default_beginner" ? " (à confirmer)" : ""}`
+        : "Chinois : HSK à confirmer",
       hsk && student.hskSource !== "default_beginner" ? "ok" : "miss",
     ),
     factItem(
-      english ? `Anglais : ${english}` : "Anglais : niveau non renseigné — à confirmer",
+      english ? `Anglais : ${english}` : "Anglais : à confirmer",
       english ? "ok" : "miss",
-    ),
-    ...top.map((uni) =>
-      factItem(
-        `${uni.name} — ${uni.language}${uni.languageNote ? ` (${uni.languageNote})` : ""}`,
-        toneFromStatus(uni.languageStatus),
-      ),
     ),
   ].filter(Boolean);
 
@@ -395,18 +360,12 @@ function buildSectionMap(ctx) {
   const admissionItems = toApply.flatMap((uni) => {
     const rows = [
       factItem(
-        `${uni.name} — ${uni.admissionNote || "critères à recouper avec le programme"}. ${uniLine(uni)}`,
+        `${uni.name} — ${uni.admissionNote || "critères à recouper"}.`,
         toneFromStatus(uni.admissionStatus),
       ),
     ];
-    uni.confirmed.slice(0, 2).forEach((line) => {
-      rows.push(factItem(`${uni.name} — établi : ${line}`, "ok"));
-    });
-    uni.toVerify.slice(0, 3).forEach((line) => {
-      rows.push(factItem(`${uni.name} — à vérifier : ${line}`, "warn"));
-    });
-    uni.warnings.slice(0, 2).forEach((line) => {
-      rows.push(factItem(`${uni.name} — vigilance : ${line}`, "miss"));
+    uni.warnings.slice(0, 1).forEach((line) => {
+      rows.push(factItem(`${uni.name} — ${line}`, "miss"));
     });
     return rows;
   });
@@ -421,81 +380,66 @@ function buildSectionMap(ctx) {
 
   return {
     analyse: {
-      verdict:
-        quality != null
-          ? `Dossier ${quality}/100 · ${field} · rentrée ${intake}`
-          : `${field} · ${diploma} · rentrée ${intake}`,
-      body: `À partir de la fiche de ${name} (${country}), le projet s’oriente vers ${field}.\n\nDernier diplôme retenu : ${diploma}. Niveau visé : ${degree}. Rentrée : ${intake}.\n\nCe n’est pas une admission : c’est une lecture réaliste de votre situation, recoupée avec le catalogue. Le mix ci-dessous vise à ne pas tout miser sur un seul établissement trop juste.`,
-      items: analyseItems,
+      verdict: `${field} · rentrée ${intake}`,
+      body: `Votre projet vise ${field} (${diploma}, ${degree}), pour une rentrée ${intake}.`,
+      items: analyseItems.slice(0, 3),
     },
     langue: {
-      verdict: hsk || english ? `${hsk || "HSK à confirmer"} · ${english || "anglais à confirmer"}` : "Niveaux de langue à confirmer",
+      verdict: hsk || english ? `${hsk || "HSK à confirmer"} · ${english || "anglais à confirmer"}` : "Niveaux à confirmer",
       body: hsk || english
-        ? `État actuel : ${hsk || "HSK non renseigné"}${student.hskSource === "default_beginner" ? " (hypothèse débutant, à confirmer)" : ""} ; ${english ? `anglais ${english}` : "anglais non renseigné"}.\n\nSans le bon niveau, une admission directe se ferme. Un cursus en anglais ou une année de langue peut rester ouvert — à vérifier établissement par établissement.`
-        : `Le chinois (HSK) et l’anglais ne sont pas encore assez renseignés.\n\nSans ces niveaux, on ne tranche pas entre un cursus en chinois, un cursus en anglais, ou une année de langue. L’échange téléphonique servira à le caler.`,
-      items: langueItems,
+        ? `Niveaux indiqués : ${hsk || "HSK à confirmer"}${student.hskSource === "default_beginner" ? " (à confirmer)" : ""}${english ? ` ; anglais ${english}` : " ; anglais à confirmer"}.`
+        : "Le chinois et l’anglais restent à préciser avant de figer la langue d’enseignement.",
+      items: langueItems.slice(0, 3),
     },
     conseils: {
       verdict: `${field} · ${degree}`,
-      body: `Pour ce profil, le niveau d’études le plus cohérent est ${degree}, dans ${field}.\n\nMieux vaut figer le domaine et la langue avant de multiplier les candidatures. Si le projet n’est pas tranché, on confirme ${field} plutôt que de viser trop d’établissements.`,
+      body: `Le niveau le plus cohérent est ${degree}, dans ${field}. Mieux vaut figer le domaine et la langue avant de multiplier les candidatures.`,
       items: [
-        factItem(`Domaine retenu : ${field}`, "ok"),
+        factItem(`Domaine : ${field}`, "ok"),
         factItem(
-          `Niveau visé : ${degree}${student.targetDegreeSource === "confirmed" ? " (confirmé)" : " (estimé à partir du dernier diplôme)"}`,
+          `Niveau visé : ${degree}${student.targetDegreeSource === "confirmed" ? "" : " (estimé)"}`,
           student.targetDegreeSource === "confirmed" ? "ok" : "warn",
         ),
-        factItem("Valider le domaine et la langue avant de déposer un dossier", "info"),
       ],
     },
     selection: {
       verdict: top.length
-        ? `${top.length} établissement${top.length > 1 ? "s" : ""} en mix sûr / réaliste / ambitieux`
+        ? `${top.length} établissement${top.length > 1 ? "s" : ""} retenu${top.length > 1 ? "s" : ""}`
         : "Sélection encore insuffisante",
       body: top.length
-        ? n === 1
-          ? `Voici un mix, pas un classement brut : des pistes sûres, des pistes réalistes, et au moins une ambitieuse.\n\nChaque établissement reste à vérifier (programme exact, langue, frais, deadline). Ce n’est pas une promesse d’admission.`
-          : `Mix d’universités à partir de votre fiche et du catalogue. Le score (langue, parcours, budget, bourse, âge, ville, clarté du projet) classe chaque piste en sûre, réaliste ou ambitieuse.\n\nCe n’est pas une promesse d’admission.`
-        : "Les données actuelles ne permettent pas une sélection fiable. Précisez le domaine, le niveau visé ou le budget, puis relancez l’analyse.",
+        ? `Voici les universités à viser en priorité. Chaque piste reste à vérifier (programme, langue, frais, dates).`
+        : "Les données actuelles ne permettent pas une sélection fiable. Précisez le domaine, le niveau visé ou le budget.",
       items: selectionItems,
     },
     bourses: {
       verdict: top.some((uni) => uni.scholarships.length)
-        ? "Pistes documentées dans le catalogue"
-        : "Peu de bourses clairement documentées",
+        ? "Pistes documentées"
+        : "Peu de bourses documentées",
       body: top.some((uni) => uni.scholarships.length)
-        ? `Des pistes apparaissent dans le catalogue (CSC, bourse d’université, bourse provinciale). L’obtention n’est jamais automatique : elle dépend du dossier, des quotas et du calendrier.\n\nCi-dessous, la comparaison université par université, sans inventer d’appel qui n’est pas dans la base.`
-        : "Peu de bourses clairement documentées pour les pistes actuelles. Un financement personnel reste à prévoir, sauf vérification contraire auprès des universités.",
-      items: bourseItems,
+        ? `Des pistes apparaissent dans le catalogue (CSC, bourse d’université, bourse provinciale). L’obtention n’est jamais automatique.`
+        : "Peu de bourses clairement documentées pour ces établissements. Un financement personnel reste à prévoir, sauf vérification contraire.",
+      items: bourseItems.slice(0, 5),
     },
     procedure: {
       verdict: n >= 3 ? "Jusqu’au départ" : n === 2 ? "Jusqu’aux réponses" : "Clarifier, puis décider",
       body:
         n >= 3
-          ? `Pour ${name}, la procédure va du dossier jusqu’au départ : candidatures, réponses, puis conseils visa, logement et arrivée.\n\nLes deadlines connues du catalogue sont listées plus bas. Les démarches officielles (visa, résidence) restent à votre charge.`
+          ? `La procédure va du dossier jusqu’au départ : candidatures, réponses, puis conseils visa et logement. Les démarches officielles restent à votre charge.`
           : n === 2
-            ? `Pour ${name}, la procédure va jusqu’aux réponses des universités : caler 3 candidatures, déposer, suivre.\n\nVisa, logement et départ ne sont pas traités dans ce compte rendu.`
-            : `Pour un projet d’études en Chine, on clarifie d’abord le projet, puis on rassemble les pièces, puis on candidate.\n\nCe compte rendu pose le cadre. Le dépôt et le suivi jusqu’à l’admission relèvent d’un accompagnement candidature.`,
+            ? `La procédure va jusqu’aux réponses des universités : caler 3 candidatures, déposer, suivre.`
+            : `On clarifie d’abord le projet, puis on rassemble les pièces, puis on candidate.`,
       items: [
-        factItem("Clarifier le projet (domaine, niveau, langue, budget)", "info"),
-        factItem("Rassembler et faire traduire les documents nécessaires", "info"),
+        factItem("Clarifier le projet", "info"),
+        factItem("Rassembler les documents nécessaires", "info"),
         factItem(
           n >= 2
-            ? `Candidater aux universités retenues (${applyMax} maximum)`
+            ? `Candidater (${applyMax} maximum)`
             : "Candidater aux universités retenues",
           "info",
         ),
-        factItem("Recevoir les réponses / lettres d’admission", "info"),
-        factItem(
-          n >= 3
-            ? "Puis visa, logement et départ (conseils, sans démarches officielles à votre place)"
-            : "Visa, logement et départ : hors de ce compte rendu",
-          n >= 3 ? "info" : "warn",
-        ),
-        ...toApply
-          .filter((uni) => uni.deadline)
-          .map((uni) =>
-            factItem(`${uni.name} — deadline indiquée : ${uni.deadline}`, "warn"),
-          ),
+        n >= 3
+          ? factItem("Puis visa, logement et départ (conseils uniquement)", "info")
+          : null,
       ].filter(Boolean),
     },
     documents: {
@@ -512,64 +456,55 @@ function buildSectionMap(ctx) {
       ].slice(0, 10),
     },
     recommandations: {
-      verdict: gapItems.length
-        ? `${gapItems.length} écart${gapItems.length > 1 ? "s" : ""} à combler avant de candidater`
-        : "Dossier déjà assez clair pour viser le mix",
-      body: gapItems.length
-        ? n >= 3
-          ? "Voici le plan de remédiation : langue, moyenne, budget. Traitez ces écarts avant de déposer, ou intégrez-les au calendrier de candidature."
-          : n === 2
-            ? "Voici les écarts identifiés, université par université. C’est ce qui transforme une liste d’écoles en plan d’action."
-            : "Ce n’est pas une liste d’écoles. C’est ce qu’il manque pour y entrer. Traitez ces points avant de multiplier les candidatures."
-        : "Aucun écart bloquant n’apparaît sur les données actuelles. Confirmez encore la langue et les pièces avant de déposer.",
+      verdict: "Points à traiter avant de déposer",
+      body: "Précisez le projet, documentez la langue, et évitez les pièces manquantes avant de candidater.",
       items: [
-        ...gapItems.slice(0, 8),
-        ...recommended.map((line) => factItem(line, "warn")),
+        ...recommended.slice(0, 3).map((line) => factItem(line, "warn")),
         hsk && student.hskSource !== "default_beginner"
           ? null
           : factItem("Faire évaluer le chinois (HSK) ou confirmer un cursus en anglais", "miss"),
         /préciser/i.test(String(budget))
-          ? factItem("Indiquer un budget annuel pour recouper les frais du catalogue", "miss")
+          ? factItem("Indiquer un budget annuel", "miss")
           : null,
-      ].filter(Boolean),
+      ].filter(Boolean).slice(0, 4),
     },
     echange: {
-      verdict: "Compte rendu de départ pour l’appel",
-      body: `Ce bilan sert de compte rendu de départ pour l’échange téléphonique avec ${name}.\n\nRelisez-le, notez ce qui vous semble juste ou incomplet, et nous l’ajustons ensemble. Le document pourra être mis à jour.`,
+      verdict: "À relire avant l’appel",
+      body: `Relisez ce compte rendu, notez ce qui vous semble incomplet, et nous l’ajustons ensemble.`,
       items: [
         factItem("Confirmer le domaine et le niveau visé", "info"),
         factItem("Trancher la langue d’enseignement", hsk || english ? "info" : "warn"),
         factItem(
           n >= 2
             ? "Valider les universités de dépôt"
-            : "Décider si vous restez sur un bilan ou si vous passez à un accompagnement candidature",
+            : "Décider de la suite après ce bilan",
           "info",
         ),
       ],
     },
     recherche: {
       verdict: top.length
-        ? `${top.length} université${top.length > 1 ? "s" : ""} recoupée${top.length > 1 ? "s" : ""} avec la fiche`
-        : "Matching encore insuffisant",
+        ? `${top.length} établissement${top.length > 1 ? "s" : ""} retenu${top.length > 1 ? "s" : ""}`
+        : "Pas encore assez d’éléments",
       body: top.length
-        ? `Recherche personnalisée à partir de votre fiche et du catalogue, pour ${field}.\n\nChaque ligne compare langue, frais connus, deadline et bourses documentées. Rien n’est inventé : si une information manque dans la base, elle est marquée à confirmer.`
-        : "Le matching n’a pas encore identifié d’université suffisamment compatible. Mettez à jour le profil ou relancez l’analyse.",
+        ? `Voici les établissements retenus pour ${field}, d’après votre fiche et le catalogue.`
+        : "Pas assez d’éléments pour retenir un établissement. Mettez à jour le profil.",
       items: top.length
-        ? top.map((uni) =>
+        ? top.slice(0, applyMax).map((uni) =>
             factItem(
-              `${uniLine(uni)}${uni.scholarships.length ? ` · bourses : ${uni.scholarships.join(", ")}` : " · bourses : non documentées"}`,
-              uni.scholarships.length ? "ok" : "warn",
+              `${uni.name}${uni.city ? ` (${uni.city})` : ""} — ${uni.language}`,
+              "ok",
             ),
           )
-        : [factItem("Aucune piste assez solide pour une recherche personnalisée.", "miss")],
+        : [factItem("Aucune piste assez solide pour le moment.", "miss")],
     },
     admission: {
       verdict: toApply.length
-        ? "Critères connus — points à vérifier avant dépôt"
+        ? "Critères connus, à confirmer avant dépôt"
         : "Pas encore de critères à recouper",
-      body: "Vérification des critères d’admission connus (langue, niveau, pièces, calendrier). Les points « à vérifier » doivent être confirmés auprès de l’université avant de déposer un dossier.",
+      body: "Les critères connus sont listés ci-dessous. Confirmez-les auprès de l’université avant de déposer.",
       items: admissionItems.length
-        ? admissionItems
+        ? admissionItems.slice(0, 6)
         : [factItem("Pas d’université assez compatible pour vérifier des critères.", "miss")],
     },
     dossier: {
@@ -581,10 +516,10 @@ function buildSectionMap(ctx) {
             : "Dossier à constituer",
       body:
         missingCount > 0
-          ? `Le dossier n’est pas complet : ${missingCount} document${missingCount > 1 ? "s" : ""} encore à fournir.\n\nLes pièces reçues, celles qui manquent, et celles demandées par les universités du catalogue sont listées ci-dessous.`
+          ? `Le dossier n’est pas complet : ${missingCount} document${missingCount > 1 ? "s" : ""} encore à fournir.`
           : status.received.length
-            ? "Les documents demandés dans l’espace étudiant ont été reçus. Vérifiez encore les pièces spécifiques aux universités (traductions, relevés, lettres)."
-            : "Aucun document n’a encore été déposé dans l’espace étudiant. Commencez par les pièces de base, puis les demandes propres à chaque université.",
+            ? "Les pièces demandées dans l’espace étudiant ont été reçues. Vérifiez encore celles propres à chaque université."
+            : "Aucun document n’a encore été déposé. Commencez par les pièces de base.",
       items: documentItems(status, extraDocs),
     },
     formulaires: {
@@ -598,10 +533,10 @@ function buildSectionMap(ctx) {
     },
     depot: {
       verdict: `Jusqu’à ${applyMax} candidatures`,
-      body: `Dépôt de ${applyMax} candidatures maximum. L’ordre ci-dessous est celui du matching (score et cohérence avec la fiche).`,
+      body: `Jusqu’à ${applyMax} candidatures. L’ordre ci-dessous est celui de la sélection.`,
       items: toApply.length
         ? toApply.map((uni, index) =>
-            factItem(`Candidature ${index + 1} : ${uniLine(uni)}`, "ok"),
+            factItem(`${index + 1}. ${uni.name}${uni.city ? ` (${uni.city})` : ""}`, "ok"),
           )
         : [factItem("Aucune université assez compatible pour déposer un dossier pour le moment.", "miss")],
     },
@@ -635,16 +570,16 @@ function buildSectionMap(ctx) {
     },
     cinq_candidatures: {
       verdict: `Jusqu’à ${applyMax} dépôts`,
-      body: `Jusqu’à ${applyMax} candidatures universitaires. Voici la sélection issue du matching, à valider avant dépôt.`,
+      body: `Jusqu’à ${applyMax} candidatures, à valider avant dépôt.`,
       items: toApply.length
         ? toApply.map((uni, index) =>
-            factItem(`Candidature ${index + 1} : ${uniLine(uni)}`, "ok"),
+            factItem(`${index + 1}. ${uni.name}${uni.city ? ` (${uni.city})` : ""}`, "ok"),
           )
-        : [factItem("Matching insuffisant pour figer 5 candidatures. Relancer l’analyse après mise à jour du profil.", "miss")],
+        : [factItem("Pas assez d’éléments pour figer 5 candidatures.", "miss")],
     },
     suivi_complet: {
       verdict: "Du dossier jusqu’au départ",
-      body: `Suivi personnalisé pendant toute la procédure, pour ${name} : du dossier jusqu’aux réponses, puis après admission.\n\nCe compte rendu sera mis à jour au fil des étapes.`,
+      body: `Suivi du dossier jusqu’aux réponses, puis après admission. Ce compte rendu sera mis à jour au fil des étapes.`,
       items: [
         factItem(
           missingCount
@@ -671,25 +606,25 @@ function buildSectionMap(ctx) {
     },
     visa: {
       verdict: "Conseils — démarches officielles à votre charge",
-      body: "Conseils pour le dossier de visa et les démarches avant le départ. Nous orientons et vérifions la cohérence des pièces ; nous ne réalisons pas les démarches officielles à votre place.",
+      body: "Nous vous orientons sur le dossier de visa. Les démarches officielles restent à votre charge.",
       items: [
-        factItem("Rassembler passeport, admission et documents exigés par le consulat", "info"),
-        factItem("Vérifier les délais après réception du JW201 / JW202", "warn"),
-        factItem("Anticiper rendez-vous, photos, assurances et frais consulaires", "info"),
+        factItem("Passeport, admission et pièces exigées par le consulat", "info"),
+        factItem("Délais à vérifier dès réception du JW201 / JW202", "warn"),
+        factItem("Rendez-vous, photos, assurances et frais consulaires à anticiper", "info"),
       ],
     },
     logement: {
       verdict: "Orientation — réservations à votre charge",
-      body: "Orientation logement, voyage et arrivée en Chine : pistes, calendrier et points de vigilance. La réservation et les démarches restent à votre charge.",
+      body: "Nous vous orientons pour le logement et l’arrivée. La réservation et les démarches restent à votre charge.",
       items: [
         factItem(
           top[0]?.city
-            ? `Logement : campus vs ville à ${top[0].city}${top[0].name ? ` (${top[0].name})` : ""} — dépôt et dates d’arrivée`
-            : "Logement : campus vs ville, dépôt, dates d’arrivée",
+            ? `À ${top[0].city} : comparer campus et ville, puis caler le dépôt et la date d’arrivée`
+            : "Comparer campus et ville, puis caler le dépôt et la date d’arrivée",
           "info",
         ),
-        factItem("Voyage : billet après visa, arrivée alignée sur l’inscription", "info"),
-        factItem("Arrivée : residence permit, inscription universitaire, premières démarches locales", "info"),
+        factItem("Billet après le visa, arrivée calée sur l’inscription", "info"),
+        factItem("À l’arrivée : inscription à l’université et titre de séjour", "info"),
       ],
     },
     demarches_depart: {
@@ -713,20 +648,66 @@ function buildSectionMap(ctx) {
 function introFor(formuleNumber) {
   const n = Number(formuleNumber) || 1;
   if (n >= 3) {
-    return "Voici le compte rendu pour viser jusqu’à 5 candidatures, puis le visa et le logement. Mix d’universités, écarts à combler, et feuille de route jusqu’au départ — sans promesse d’admission.";
+    return "Voici le compte rendu pour viser jusqu’à 5 candidatures, puis le visa et le logement.";
   }
   if (n === 2) {
-    return "Voici le compte rendu pour caler jusqu’à 3 candidatures. Mix d’universités, critères connus, pièces à fournir — et les écarts à traiter avant de déposer.";
+    return "Voici le compte rendu pour préparer jusqu’à 3 candidatures.";
   }
-  return "Voici où votre profil se situe aujourd’hui : un mix d’universités sûres, réalistes et ambitieuses, plus ce qu’il faut renforcer avant de candidater. Aucune admission n’est promise.";
+  return "Voici le compte rendu de votre projet, et les universités à viser en priorité.";
 }
 
-function stripIntroExtras(text) {
+function tightenBody(body) {
+  const block = String(body || "")
+    .split(/\n{2,}/)
+    .map((part) => part.trim())
+    .find(Boolean);
+  if (!block) return "";
+  const sentences = block.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [block];
+  return sentences
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .slice(0, 2)
+    .join(" ");
+}
+
+function scrubJargon(text) {
   return String(text || "")
-    .replace(/\*?Aucune admission[\s\S]*?garantie\.?\*?/gi, "")
-    .replace(/Ce document pourra être mis à jour\.?/gi, "")
+    .replace(/un mix d[’']universités[^.,]*/gi, "les universités retenues")
+    .replace(/mix d[’']universités/gi, "universités retenues")
+    .replace(/\bmatching\b/gi, "sélection")
+    .replace(/formule\s*[123]/gi, "")
+    .replace(/écarts à combler/gi, "points à traiter")
+    .replace(/feuille de route/gi, "étapes")
+    .replace(/sans promesse d[’']admission/gi, "")
+    .replace(/\*{1,2}([^*]+)\*{1,2}/g, "$1")
     .replace(/\s{2,}/g, " ")
+    .replace(/\s+([.,])/g, "$1")
     .trim();
+}
+
+export function tightenBilan(bilan, formuleNumber) {
+  const n = Number(formuleNumber || bilan?.formuleNumber) || 1;
+  if (!bilan) return bilan;
+  return {
+    ...bilan,
+    formuleNumber: n,
+    intro: introFor(n),
+    disclaimer: BILAN_DISCLAIMER,
+    sections: (bilan.sections || []).map((section) => {
+      const items = (section.items || [])
+        .map(normalizeBilanItem)
+        .filter((item) => item.text)
+        .slice(0, 3)
+        .map((item) => ({ ...item, text: scrubJargon(item.text) }));
+      return {
+        ...section,
+        body: scrubJargon(tightenBody(section.body)),
+        verdict: scrubJargon(String(section.verdict || "")).slice(0, 72),
+        items,
+        verdictTone: verdictToneFromItems(items, section.verdictTone),
+      };
+    }),
+  };
 }
 
 function finalizeSection(def, content) {
@@ -764,7 +745,7 @@ export function buildOrientationBilanDraft({
   });
   const status = summarizeDocuments(documents, adminDocuments);
 
-  return {
+  return tightenBilan({
     formuleNumber: n,
     intro: introFor(n),
     disclaimer: BILAN_DISCLAIMER,
@@ -782,12 +763,12 @@ export function buildOrientationBilanDraft({
     quality_score: student.qualityScore ?? null,
     sections: defs.map((section) =>
       finalizeSection(section, map[section.key] || {
-        body: "Cette partie du compte rendu sera complétée au prochain échange.",
+        body: "Cette partie sera complétée au prochain échange.",
         items: [],
         verdict: "À compléter",
       }),
     ),
-  };
+  }, n);
 }
 
 function refreshDocumentSections(bilan, status, formuleNumber) {
@@ -857,7 +838,7 @@ export function buildOrientationBilanFromResult(
           };
     const defs = getBilanSectionDefs(n);
     const byKey = new Map(defs.map((def) => [def.key, def]));
-    return {
+    return tightenBilan({
       ...live,
       formuleNumber: n,
       intro: introFor(n),
@@ -875,47 +856,69 @@ export function buildOrientationBilanFromResult(
           items: (section.items || []).map(normalizeBilanItem),
         };
       }),
-    };
+    }, n);
   }
 
-  return buildOrientationBilanDraft({
-    student: result?.student || {},
-    analyses: result?.matches || [],
-    formuleNumber: n,
-    documents,
-    adminDocuments,
-    gaps: result?.gaps || [],
-  });
+  return tightenBilan(
+    buildOrientationBilanDraft({
+      student: result?.student || {},
+      analyses: result?.matches || [],
+      formuleNumber: n,
+      documents,
+      adminDocuments,
+      gaps: result?.gaps || [],
+    }),
+    n,
+  );
+}
+
+function applyPolishedJson(draft, parsed) {
+  const byKey = new Map(
+    (parsed.sections || []).map((section) => [section.key, section]),
+  );
+  return {
+    ...draft,
+    intro: introFor(draft.formuleNumber),
+    disclaimer: BILAN_DISCLAIMER,
+    sections: draft.sections.map((section) => {
+      const updated = byKey.get(section.key);
+      if (!updated) return section;
+      const items = Array.isArray(updated.items)
+        ? updated.items.map(normalizeBilanItem).filter((item) => item.text).slice(0, 3)
+        : section.items;
+      const nextItems = (items.length ? items : section.items).slice(0, 3);
+      return {
+        ...section,
+        body: scrubJargon(tightenBody(String(updated.body || section.body))),
+        verdict: scrubJargon(String(updated.verdict || section.verdict)).slice(0, 72),
+        items: nextItems,
+        verdictTone: verdictToneFromItems(nextItems, section.verdictTone),
+      };
+    }),
+    ai: true,
+  };
 }
 
 async function polishOrientationBilan(draft, payload) {
   const formule = getFormuleByNumber(draft.formuleNumber);
-  const depth =
-    draft.formuleNumber >= 3
-      ? "complet + feuille de route visa/logement"
-      : draft.formuleNumber === 2
-        ? "score détaillé par critère + écarts"
-        : "synthèse qualitative, sans tableau de scores bruts";
   const polished = await matchingLlm({
-    system: `Tu es conseiller d'une agence francophone d'études en Chine. Tu rédiges « Votre orientation », un compte rendu calé sur le profil et sur un mix sûr / réaliste / ambitieux.
+    system: `Tu es conseiller d'une agence francophone d'études en Chine. Tu rédiges « Votre orientation », un compte rendu d'agence : sobre, précis, cohérent.
 
-Profondeur demandée : ${depth}${formule ? ` (${formule.shortTitle})` : ""}.
-
-Chaque section est une QUESTION. Réponds avec la fiche et le catalogue. Distingue établi / à vérifier / manquant.
-
-Aucun doublon. Une seule liste de candidatures : accompagnement candidature = 3 maximum ; accompagnement complet = jusqu'à 5. Si deux questions se recoupent, la seconde n'ajoute que du nouveau.
-
-Ne mentionne jamais « formule 1 », « formule 2 » ou « formule 3 ». N'inclus pas la mention d'absence de garantie dans l'intro.
-
-Français clair, concret, professionnel. 2 à 5 phrases dans body, avec \\n\\n entre les idées. Ne jamais garantir admission, bourse ou visa. Ne pas inventer de frais, deadlines, HSK, programmes, universités ou documents absents du brief.
-
-Pour la formule synthèse : décris les universités sans aligner des scores /100. Pour le détail : tu peux citer langue / parcours / budget / bourse.
-
-Pour chaque item, préfixe obligatoire : [ok] fait établi, [warn] à vérifier, [miss] manque ou blocage, [info] consigne.
-verdict : une courte conclusion (moins de 12 mots).
+${formule ? `Prestation : ${formule.shortTitle}.` : ""}
+Règles :
+- Français professionnel, vouvoiement. Pas de marketing, pas de familier, pas d'emojis.
+- UNE phrase par body (deux maximum si indispensable). 3 items maximum par section.
+- Ne répète pas une liste d'universités : elles sont déjà affichées à part.
+- Interdit : « mix », « matching », « formule 1/2/3 », « feuille de route », « écarts à combler », « sans promesse d'admission ».
+- L'intro est imposée : recopie-la telle quelle, sans rien ajouter.
+- Distingue établi / à vérifier / manquant. Ne garantis jamais admission, bourse ou visa.
+- N'invente aucun frais, date, HSK, programme, université ou document absent du brief.
+- Cohérence stricte : mêmes universités, mêmes niveaux de langue, pas de contradiction entre sections.
+- Items : préfixe [ok] / [warn] / [miss] / [info]. Un fait par item, phrase courte.
+- verdict : moins de 6 mots.
 
 Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict }] } avec les mêmes keys.`,
-    user: `Brief (JSON) :\n${JSON.stringify(payload).slice(0, 18000)}\n\nQuestions à traiter, sans changer les keys ni les titres :\n${JSON.stringify({
+    user: `Brief (JSON) :\n${JSON.stringify(payload).slice(0, 14000)}\n\nBrouillon à réécrire, sans changer les keys :\n${JSON.stringify({
       intro: draft.intro,
       sections: draft.sections.map((section) => ({
         key: section.key,
@@ -923,41 +926,50 @@ Réponds uniquement par un JSON { intro, sections: [{ key, body, items, verdict 
         question: section.question,
         verdict: section.verdict,
         body: section.body,
-        items: section.items,
+        items: (section.items || []).slice(0, 3),
       })),
     })}`,
-    temperature: 0.15,
-    maxTokens: 8000,
-    timeoutMs: 55000,
+    temperature: 0.12,
+    maxTokens: 4000,
+    timeoutMs: 45000,
   });
 
-  const parsed = polished.json;
-  if (!polished.ok || !parsed?.sections?.length) return { ...draft, ai: false };
+  if (!polished.ok || !polished.json?.sections?.length) {
+    return { ...tightenBilan(draft, draft.formuleNumber), ai: false };
+  }
 
-  const byKey = new Map(
-    (parsed.sections || []).map((section) => [section.key, section]),
-  );
-  return {
-    ...draft,
-    intro: stripIntroExtras(parsed.intro || draft.intro) || draft.intro,
-    disclaimer: BILAN_DISCLAIMER,
-    sections: draft.sections.map((section) => {
-      const updated = byKey.get(section.key);
-      if (!updated) return section;
-      const items = Array.isArray(updated.items)
-        ? updated.items.map(normalizeBilanItem).filter((item) => item.text)
-        : section.items;
-      const nextItems = items.length ? items : section.items;
-      return {
-        ...section,
-        body: String(updated.body || section.body).trim(),
-        verdict: String(updated.verdict || section.verdict).trim(),
-        items: nextItems,
-        verdictTone: verdictToneFromItems(nextItems, section.verdictTone),
-      };
-    }),
-    ai: true,
-  };
+  let next = applyPolishedJson(draft, polished.json);
+
+  const edited = await matchingLlm({
+    system: `Tu es relecteur d'une agence d'études en Chine. Relis le compte rendu comme un document client.
+
+Corrige : ton peu professionnel, phrases trop longues, jargon interne, incohérences (HSK, universités, dates, budget), doublons.
+Coupe : listes d'universités déjà dites, détails inutiles, formules vagues (« optimiser », « accompagner au mieux »).
+Garde : les faits du brief. Une phrase par body, 3 items max.
+Interdit : mix, matching, numéros de formule, « sans promesse d'admission » dans l'intro.
+L'intro reste exactement : « ${draft.intro} »
+
+JSON uniquement : { intro, sections: [{ key, body, items, verdict }] }.`,
+    user: JSON.stringify({
+      intro: draft.intro,
+      sections: next.sections.map((section) => ({
+        key: section.key,
+        title: section.title,
+        verdict: section.verdict,
+        body: section.body,
+        items: (section.items || []).slice(0, 3),
+      })),
+    }).slice(0, 14000),
+    temperature: 0.08,
+    maxTokens: 3500,
+    timeoutMs: 25000,
+  });
+
+  if (edited.ok && edited.json?.sections?.length) {
+    next = applyPolishedJson(next, edited.json);
+  }
+
+  return tightenBilan(next, draft.formuleNumber);
 }
 
 export async function generateOrientationBilan({
@@ -982,7 +994,7 @@ export async function generateOrientationBilan({
     formuleNumber: n,
     formuleTitle: getFormuleByNumber(n)?.title,
     instruction:
-      "Compte rendu calé sur le mix sûr/réaliste/ambitieux et les écarts à combler. Pas de doublon. Une seule liste de candidatures. Pas de mention des numéros de formule.",
+      "Compte rendu court, professionnel, sans jargon. Une phrase d’intro imposée. Pas de doublon. Les universités sont listées à part : ne pas les répéter.",
     student: {
       name: student.name,
       prenom: student.prenom,

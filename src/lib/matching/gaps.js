@@ -38,7 +38,7 @@ export function identifyGaps(student, universities = []) {
           universite: name,
           type: "academique",
           manque: Math.round((gpaMin - student.gpa) * 10) / 10,
-          conseil: `GPA ${student.gpa}/4 inférieur au seuil connu (${gpaMin}/4) pour ${name}.`,
+          conseil: `La moyenne indiquée (${student.gpa}/4) est sous le seuil connu (${gpaMin}/4) pour ${name}.`,
         });
       }
     }
@@ -68,7 +68,7 @@ export function identifyGaps(student, universities = []) {
       type: "langue",
       manque: null,
       conseil:
-        "Le HSK n'est pas documenté : le matching part d'un niveau débutant. Faire évaluer le chinois, ou confirmer un cursus en anglais.",
+        "Le HSK n’est pas encore renseigné : nous partons d’un niveau débutant. Faites évaluer le chinois, ou confirmez un cursus en anglais.",
     });
   }
 
@@ -78,7 +78,7 @@ export function identifyGaps(student, universities = []) {
       type: "academique",
       manque: null,
       conseil:
-        "La moyenne / GPA n'est pas renseignée : le dossier académique reste flou pour les universités les plus sélectives.",
+        "La moyenne n’est pas renseignée : les universités les plus sélectives auront du mal à juger le dossier.",
     });
   }
 

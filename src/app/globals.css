@@ -1073,68 +1073,83 @@ a.formule-card-btn {
   --bilan-jade: #0f766e;
   --bilan-amber: #b45309;
   --bilan-miss: #be123c;
-  --bilan-rule: #d8dee8;
+  --bilan-rule: #e4d9c8;
+  --bilan-paper: #fbf6ee;
+  background:
+    linear-gradient(180deg, #fffdf8 0%, #fff 120px);
+  border-color: #eadfce;
 }
 
 .student-bilan-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
   margin-bottom: 8px;
 }
 
+.student-bilan-chop {
+  flex: 0 0 3.4rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  display: grid;
+  place-items: center;
+  border: 2.5px solid var(--bilan-lacquer);
+  border-radius: 50%;
+  color: var(--bilan-lacquer);
+  font-family: "Songti SC", "STSong", "Noto Serif SC", "Songti TC", serif;
+  font-size: 1.45rem;
+  line-height: 1;
+  transform: rotate(-8deg);
+  box-shadow: inset 0 0 0 3px rgba(193, 18, 31, 0.18);
+}
+
+.student-bilan-head-copy {
+  min-width: 0;
+  flex: 1;
+}
+
 .student-bilan-kicker {
-  margin: 0 0 6px;
-  font-size: 0.72rem;
+  margin: 0 0 4px;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--bilan-lacquer);
 }
 
+.student-bilan-title {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--bilan-ink);
+  line-height: 1.15;
+}
+
 .student-bilan-lede {
-  margin: 8px 0 10px;
+  margin: 10px 0 0;
   color: var(--secondary);
-  font-size: 1.02rem;
-  line-height: 1.65;
-  max-width: 46rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 36rem;
 }
 
 .student-bilan-disclaimer {
-  margin: 0 0 18px;
-  max-width: 46rem;
+  margin: 0 0 12px;
+  max-width: 38rem;
   font-style: italic;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--bilan-lacquer, #c1121f);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #8a6a6e;
 }
 
-.student-bilan-fiche {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px 16px;
-  margin: 0 0 18px;
-  padding: 14px 0;
+.student-bilan-meta {
+  margin: 12px 0 0;
+  padding-top: 12px;
   border-top: 1px solid var(--bilan-rule);
-  border-bottom: 1px solid var(--bilan-rule);
-}
-
-.student-bilan-fiche-item {
-  min-width: 0;
-}
-
-.student-bilan-fiche-item dt {
-  margin: 0;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #64748b;
-}
-
-.student-bilan-fiche-item dd {
-  margin: 3px 0 0;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--bilan-ink);
-  line-height: 1.35;
+  font-size: 0.86rem;
+  color: #5b6573;
+  letter-spacing: 0.01em;
 }
 
 .student-bilan-group {
@@ -1193,62 +1208,52 @@ a.formule-card-btn {
   margin-top: 20px;
 }
 
-.student-quality {
-  margin: 0 0 14px;
-  font-size: 0.92rem;
-  color: #334155;
-  line-height: 1.5;
+.student-unis {
+  margin: 28px 0 8px;
+  padding-top: 22px;
+  border-top: 1px solid var(--bilan-rule);
 }
 
-.student-quality strong {
-  color: var(--bilan-ink, #1d3557);
+.student-unis-label,
+.student-next-label {
+  margin: 0 0 12px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bilan-ink);
 }
 
-.student-mix {
-  margin: 0 0 22px;
-  padding: 16px 0 4px;
-  border-top: 1px solid var(--bilan-rule, #d8dee8);
+.student-unis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 18px 24px;
 }
 
-.student-mix-kicker {
-  margin: 0 0 4px;
-  font-size: 0.72rem;
+.student-uni-stamp {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 3px 8px 2px;
+  border: 1.5px solid currentColor;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--bilan-lacquer, #c1121f);
 }
 
-.student-mix-lede {
-  margin: 0 0 14px;
-  max-width: 42rem;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: #475569;
+.student-uni-col.is-safety .student-uni-stamp {
+  color: var(--bilan-jade);
 }
 
-.student-mix-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+.student-uni-col.is-match .student-uni-stamp {
+  color: var(--bilan-ink);
 }
 
-.student-mix-col-title {
-  margin: 0;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--bilan-ink, #1d3557);
+.student-uni-col.is-reach .student-uni-stamp {
+  color: var(--bilan-amber);
 }
 
-.student-mix-col-hint {
-  margin: 2px 0 10px;
-  font-size: 0.78rem;
-  color: #64748b;
-}
-
-.student-mix-list {
+.student-uni-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1256,81 +1261,56 @@ a.formule-card-btn {
   gap: 8px;
 }
 
-.student-mix-card {
-  padding: 10px 12px;
-  border: 1px solid var(--bilan-rule, #d8dee8);
-  background: #fff;
+.student-uni-card {
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--bilan-rule);
 }
 
-.student-mix-col.is-safety .student-mix-card {
-  border-left: 3px solid var(--bilan-jade, #0f766e);
+.student-uni-list li:last-child {
+  border-bottom: none;
 }
 
-.student-mix-col.is-match .student-mix-card {
-  border-left: 3px solid #1d3557;
+.student-uni-list li:last-child .student-uni-card {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.student-mix-col.is-reach .student-mix-card {
-  border-left: 3px solid var(--bilan-amber, #b45309);
-}
-
-.student-mix-name {
+.student-uni-name {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--bilan-ink, #1d3557);
+  color: var(--bilan-ink);
   line-height: 1.3;
 }
 
-.student-mix-meta,
-.student-mix-qual,
-.student-mix-score {
-  margin: 4px 0 0;
+.student-uni-city,
+.student-uni-note {
+  margin: 3px 0 0;
   font-size: 0.78rem;
-  color: #64748b;
+  color: #6b7280;
   line-height: 1.4;
 }
 
-.student-mix-score {
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  color: var(--bilan-ink, #1d3557);
+.student-next {
+  margin: 8px 0 4px;
+  padding: 18px 0 8px;
+  border-top: 1px solid var(--bilan-rule);
 }
 
-.student-gaps {
-  margin: 0 0 20px;
-  padding: 14px 16px;
-  border: 1px solid #f1d4b5;
-  background: #fffaf3;
-}
-
-.student-gaps-title {
-  margin: 0 0 8px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--bilan-amber, #b45309);
-}
-
-.student-gaps ul {
+.student-next ol {
   margin: 0;
-  padding-left: 18px;
-  color: #334155;
-  font-size: 0.9rem;
+  padding-left: 1.2rem;
+  color: var(--bilan-ink);
+  font-size: 0.94rem;
   line-height: 1.55;
 }
 
-.student-gaps li {
-  margin-bottom: 6px;
-}
-
-.student-gaps li:last-child {
-  margin-bottom: 0;
+.student-next li + li {
+  margin-top: 6px;
 }
 
 @media (max-width: 860px) {
-  .student-mix-grid {
+  .student-unis-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1377,11 +1357,9 @@ a.formule-card-btn {
 }
 
 .student-bilan-qa {
-  display: grid;
-  grid-template-columns: 3.1rem minmax(0, 1fr);
-  gap: 0 18px;
-  padding: 22px 0 24px;
-  border-top: 1px solid var(--bilan-rule, #d8dee8);
+  padding: 16px 0 18px;
+  border-top: 1px solid var(--bilan-rule);
+  max-width: 40rem;
 }
 
 .student-bilan-index {
@@ -1407,12 +1385,11 @@ a.formule-card-btn {
 }
 
 .student-bilan-question {
-  margin: 0 0 10px;
-  font-size: 1.18rem;
+  margin: 0 0 8px;
+  font-size: 1.08rem;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--bilan-ink, #1d3557);
-  max-width: 40rem;
 }
 
 .student-bilan-verdict {
@@ -1495,6 +1472,20 @@ a.formule-card-btn {
   background: #1d3557;
 }
 
+.student-bilan-foot {
+  margin: 10px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--bilan-rule);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #8a6a6e;
+}
+
+.student-bilan-sheet :focus-visible {
+  outline: 2px solid var(--bilan-lacquer);
+  outline-offset: 3px;
+}
+
 .student-bilan-section {
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -1527,17 +1518,31 @@ a.formule-card-btn {
 }
 
 @media (max-width: 640px) {
-  .student-bilan-qa {
-    grid-template-columns: 1fr;
-    gap: 4px 0;
+  .student-bilan-head {
+    gap: 12px;
+  }
+
+  .student-bilan-chop {
+    flex-basis: 2.8rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.2rem;
+  }
+
+  .student-bilan-title {
+    font-size: 1.5rem;
   }
 
   .student-bilan-question {
-    font-size: 1.08rem;
+    font-size: 1.05rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .student-bilan-chop {
+    transform: none;
+  }
+
   .student-bilan-qa {
     scroll-margin-top: 0;
   }
