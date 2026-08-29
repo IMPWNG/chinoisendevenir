@@ -967,6 +967,30 @@ a.landing-btn-accent:hover {
   margin: 0 0 14px;
 }
 
+.formule-card-cta {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formule-card-cta .formule-footnote {
+  min-height: 4.5em;
+  margin: 0 0 14px;
+}
+
+.formule-card-btn,
+a.formule-card-btn {
+  width: 100%;
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 16px;
+  box-sizing: border-box;
+}
+
 .student-formule-note {
   margin: 8px 0 16px;
 }
@@ -1078,6 +1102,30 @@ a.landing-btn-accent:hover {
 
 .student-match-block {
   margin-top: 20px;
+}
+
+.student-bilan-docs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.student-bilan-doc {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.student-bilan-doc.is-ok {
+  background: #d4edda;
+  color: #155724;
+}
+
+.student-bilan-doc.is-missing {
+  background: #f8d7da;
+  color: #721c24;
 }
 
 .student-bilan-intro {

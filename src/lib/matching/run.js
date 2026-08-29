@@ -7,7 +7,7 @@ import {
   buildInternalBrief,
   buildUniversityAnalysis,
 } from "./narrative";
-import { generateFormule1Bilan } from "./formule1Bilan";
+import { generateOrientationBilan } from "./orientationBilan";
 
 function limitForFormula(formuleNumber) {
   return getFormuleAccess(formuleNumber).matchLimit || 5;
@@ -60,6 +60,7 @@ export async function runMatching({
   contact,
   universities,
   documents,
+  adminDocuments = [],
   overrides,
   forceBilan = false,
 }) {
@@ -100,9 +101,16 @@ export async function runMatching({
     formula: getFormuleByNumber(overallFormula)?.shortTitle,
   });
 
-  let formule1_bilan = null;
-  if (student.formuleNumber === 1 || forceBilan) {
-    formule1_bilan = await generateFormule1Bilan({ student, analyses });
+  let orientation_bilan = null;
+  const bilanFormule = student.formuleNumber || (forceBilan ? 1 : null);
+  if (bilanFormule) {
+    orientation_bilan = await generateOrientationBilan({
+      student,
+      analyses,
+      formuleNumber: bilanFormule,
+      documents,
+      adminDocuments,
+    });
   }
 
   return {
@@ -113,7 +121,8 @@ export async function runMatching({
     client_message: polished.message,
     client_message_ai: polished.ai,
     recommended_formula: overallFormula,
-    formule1_bilan,
+    orientation_bilan,
+    formule1_bilan: bilanFormule === 1 ? orientation_bilan : null,
     generated_at: new Date().toISOString(),
   };
 }

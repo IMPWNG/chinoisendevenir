@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
-import { getRequiredDocumentsStatus } from "@/lib/studentDocuments";
+import {
+  getRequiredDocumentsStatus,
+  listAdminSentDocuments,
+} from "@/lib/studentDocuments";
 import { runMatching } from "@/lib/matching/run";
 import {
   appendMessageToNotes,
@@ -89,17 +92,23 @@ export async function POST(request) {
     }
 
     let documents = [];
+    let adminDocuments = [];
     try {
-      documents = await getRequiredDocumentsStatus(auth.admin, contactId);
+      [documents, adminDocuments] = await Promise.all([
+        getRequiredDocumentsStatus(auth.admin, contactId),
+        listAdminSentDocuments(auth.admin, contactId),
+      ]);
     } catch {
       documents = [];
+      adminDocuments = [];
     }
     const result = await runMatching({
       contact,
       universities,
       documents,
+      adminDocuments,
       overrides: body.overrides || {},
-      forceBilan: Boolean(body.forceBilan) || body.mode === "formule1",
+      forceBilan: Boolean(body.forceBilan),
     });
 
     const payload = compactMatchingResult(result, body.overrides || {});

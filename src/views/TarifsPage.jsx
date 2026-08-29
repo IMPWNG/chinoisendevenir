@@ -46,9 +46,9 @@ function TarifsPage() {
               return (
                 <article
                   key={formule.number}
-                  className={`flex flex-col rounded-2xl border bg-white p-6 shadow-lg ${
+                  className={`flex flex-col rounded-2xl border bg-white p-6 shadow-lg h-full ${
                     featured
-                      ? "border-red-500 ring-2 ring-red-100 lg:-translate-y-2"
+                      ? "border-red-500 ring-2 ring-red-100"
                       : "border-slate-200"
                   }`}
                 >
@@ -85,15 +85,18 @@ function TarifsPage() {
                     ))}
                   </ul>
 
-                  <div className="mt-auto pt-6">
-                    {formule.footnote ? (
-                      <p className="formule-footnote">
-                        {displayFormuleFootnote(formule.footnote)}
-                      </p>
-                    ) : null}
+                  <div className="formule-card-cta">
+                    <p
+                      className="formule-footnote"
+                      aria-hidden={!formule.footnote}
+                    >
+                      {formule.footnote
+                        ? displayFormuleFootnote(formule.footnote)
+                        : "\u00a0"}
+                    </p>
                     <Link
                       href="/#lead-form"
-                      className={`landing-btn ${
+                      className={`landing-btn landing-btn-full formule-card-btn ${
                         featured ? "landing-btn-accent" : "landing-btn-primary"
                       }`}
                     >

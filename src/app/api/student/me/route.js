@@ -24,20 +24,23 @@ export async function GET(request) {
     let matching = null;
 
     if (profile.hasForm && profile.unlocked && auth.contact) {
-      try {
-        const runs = await listMatchingRuns(auth.admin, auth.contact.id);
-        const latest = runs[0]?.result || null;
-        matching = matchingForStudent(latest, profile.formuleNumber);
-      } catch (error) {
-        console.warn("student matching:", error.message);
-      }
-
       if (profile.access?.documents) {
         await ensureStudentBucket(auth.admin);
         [requiredDocuments, adminDocuments] = await Promise.all([
           getRequiredDocumentsStatus(auth.admin, auth.contact.id),
           listAdminSentDocuments(auth.admin, auth.contact.id),
         ]);
+      }
+
+      try {
+        const runs = await listMatchingRuns(auth.admin, auth.contact.id);
+        const latest = runs[0]?.result || null;
+        matching = matchingForStudent(latest, profile.formuleNumber, {
+          documents: requiredDocuments,
+          adminDocuments,
+        });
+      } catch (error) {
+        console.warn("student matching:", error.message);
       }
     }
 
