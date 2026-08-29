@@ -750,6 +750,10 @@ a.landing-btn-accent:hover {
   margin-bottom: 0;
 }
 
+.student-progress.is-short {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .student-step {
   background: white;
   border: 1px solid var(--border);
@@ -930,6 +934,32 @@ a.landing-btn-accent:hover {
   color: var(--gray);
   font-size: 0.88rem;
   line-height: 1.45;
+}
+
+.formule-footnote,
+.student-formule-note {
+  font-style: italic;
+  color: #64748b;
+}
+
+.formule-footnote {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 16px 0 14px;
+}
+
+.student-formule-note {
+  margin: 8px 0 16px;
+}
+
+.student-formule-card .landing-btn {
+  margin-top: 16px;
+}
+
+.student-formule-card .student-formule-note + .landing-btn,
+.formule-footnote + .landing-btn,
+.formule-footnote + a.landing-btn {
+  margin-top: 0;
 }
 
 .student-formule-label {

@@ -1,4 +1,4 @@
-import { getUnlockedStudentAccess } from "../formules";
+import { getFormuleAccess } from "../formules";
 
 function money(cny) {
   if (cny == null) return null;
@@ -43,7 +43,8 @@ function publicMatch(item, depth) {
 }
 
 export function matchingForStudent(result, formuleNumber) {
-  const access = getUnlockedStudentAccess(formuleNumber);
+  const granted = Number(formuleNumber) > 0;
+  const access = granted ? getFormuleAccess(3) : getFormuleAccess(0);
   if (!result || access.depth === "none") return null;
 
   const matches = (result.matches || [])

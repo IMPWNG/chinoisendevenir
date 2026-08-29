@@ -1,22 +1,21 @@
 "use client";
 
-import { FORMULES, getFormuleNumber } from "../lib/formules";
+import {
+  FORMULES,
+  displayFormuleFootnote,
+  getFormuleNumber,
+} from "../lib/formules";
 
-export default function StudentFormules({
-  currentFormule = "",
-  unlocked = false,
-}) {
+export default function StudentFormules({ currentFormule = "" }) {
   const selectedNumber = getFormuleNumber(currentFormule);
 
   return (
     <div className="student-card student-card-wide">
-      <h2 className="card-title">
-        {unlocked ? "Votre formule" : "Nos formules"}
-      </h2>
+      <h2 className="card-title">Nos formules</h2>
       <p className="card-subtitle">
-        {unlocked
-          ? "Votre accompagnement est débloqué. La formule choisie est mise en avant ci-dessus."
-          : "Une fois votre formule débloquée par Chinois en Devenir, vous accéderez à l'orientation, au suivi et aux documents."}
+        Une fois votre formule débloquée par Chinois en Devenir, vous
+        accéderez à l'orientation, au suivi et aux documents correspondant à
+        votre accompagnement.
       </p>
 
       <div className="student-formule-grid">
@@ -39,23 +38,19 @@ export default function StudentFormules({
                 ))}
               </ul>
               {formule.footnote ? (
-                <p className="student-formule-note">{formule.footnote}</p>
+                <p className="student-formule-note formule-footnote">
+                  {displayFormuleFootnote(formule.footnote)}
+                </p>
               ) : null}
-              {unlocked && selected ? (
-                <div className="landing-alert landing-alert-success">
-                  Formule {formule.number} active
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  className={`landing-btn landing-btn-full ${featured ? "landing-btn-accent" : "landing-btn-primary"}`}
-                  disabled
-                  aria-disabled="true"
-                  title="Le paiement en ligne sera bientôt disponible"
-                >
-                  Payer {formule.price}
-                </button>
-              )}
+              <button
+                type="button"
+                className={`landing-btn landing-btn-full ${featured ? "landing-btn-accent" : "landing-btn-primary"}`}
+                disabled
+                aria-disabled="true"
+                title="Le paiement en ligne sera bientôt disponible"
+              >
+                Payer {formule.price}
+              </button>
             </article>
           );
         })}

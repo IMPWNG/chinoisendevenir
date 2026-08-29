@@ -190,6 +190,29 @@ export function getPaidFormuleNumber(contact) {
   return getFormuleNumber(getChosenFormule(contact)) || 1;
 }
 
+export function studentCanAccessDocuments(contact) {
+  if (!isStudentAccessGranted(contact)) return false;
+  return Number(getGrantedFormuleNumber(contact)) >= 2;
+}
+
+export function getVisibleStudentSteps(formuleNumber) {
+  const n = Number(formuleNumber) || 0;
+  if (n <= 1) {
+    return STUDENT_PROCESS_STEPS.slice(0, 2).map((step) =>
+      step.key === "consultation"
+        ? { ...step, label: "Consultation" }
+        : step,
+    );
+  }
+  if (n === 2) {
+    const admissionIndex = STUDENT_PROCESS_STEPS.findIndex(
+      (step) => step.key === "admission",
+    );
+    return STUDENT_PROCESS_STEPS.slice(0, admissionIndex + 1);
+  }
+  return STUDENT_PROCESS_STEPS;
+}
+
 export const FORMULE_OPTIONS = [
   { value: "Bilan personnalisé (100€)", label: "1️⃣ Bilan personnalisé (100€)" },
   {

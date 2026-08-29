@@ -12,9 +12,9 @@ import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import {
   DOMAINES_ETUDES,
-  STUDENT_PROCESS_STEPS,
   REQUIRED_STUDENT_DOCUMENTS,
   getDisplayedStepIndex,
+  getVisibleStudentSteps,
 } from "../lib/studentProgress";
 
 async function studentFetch(path, options = {}) {
@@ -60,7 +60,12 @@ export default function StudentDashboard() {
   const hasForm = Boolean(profile?.hasForm);
   const unlocked = Boolean(profile?.unlocked ?? profile?.paid);
   const formuleNumber = profile?.formuleNumber || null;
-  const currentStep = getDisplayedStepIndex(profile);
+  const access = profile?.access || {};
+  const visibleSteps = getVisibleStudentSteps(formuleNumber);
+  const currentStep = Math.min(
+    getDisplayedStepIndex(profile),
+    Math.max(visibleSteps.length - 1, 0),
+  );
   const docsToShow =
     requiredDocuments.length > 0
       ? requiredDocuments
@@ -428,25 +433,21 @@ export default function StudentDashboard() {
                 </button>
               </form>
 
-              <StudentFormules
-                currentFormule={profile.formule || ""}
-                unlocked={unlocked}
-              />
-
-              {unlocked ? (
+              {!unlocked ? (
+                <StudentFormules currentFormule={profile.formule || ""} />
+              ) : (
                 <>
-                  <StudentMatching
-                    matching={matching}
-                    formuleNumber={formuleNumber}
-                  />
-
                   <div className="student-card student-card-wide">
                     <h2 className="card-title">Avancement de votre dossier</h2>
                     <p className="card-subtitle">
-                      Étape {currentStep + 1} sur {STUDENT_PROCESS_STEPS.length}
+                      Étape {currentStep + 1} sur {visibleSteps.length}
                     </p>
-                    <div className="student-progress">
-                      {STUDENT_PROCESS_STEPS.map((step, index) => {
+                    <div
+                      className={`student-progress${
+                        visibleSteps.length <= 2 ? " is-short" : ""
+                      }`}
+                    >
+                      {visibleSteps.map((step, index) => {
                         const state =
                           index < currentStep
                             ? "student-step-done"
@@ -467,120 +468,129 @@ export default function StudentDashboard() {
                     </div>
                   </div>
 
-                  <div className="student-card student-card-wide">
-                    <h2 className="card-title">Documents à fournir</h2>
-                    <p className="card-subtitle">
-                      {missingCount > 0
-                        ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
-                        : "Tous les documents demandés ont été reçus."}
-                    </p>
+                  <StudentMatching
+                    matching={matching}
+                    formuleNumber={formuleNumber}
+                  />
 
-                    <div className="doc-list">
-                      {docsToShow.map((doc) => {
-                        const missing = doc.status !== "received";
-                        return (
-                          <div
-                            key={doc.key}
-                            className={`doc-row ${missing ? "doc-missing" : "doc-received"}`}
-                          >
-                            <div className="doc-row-main">
-                              <div className="doc-row-title">
-                                <span>{doc.icon}</span>
-                                {doc.label}
-                                <span
-                                  className={
-                                    missing ? "doc-badge-missing" : "doc-badge-ok"
-                                  }
+                  {access.documents ? (
+                    <>
+                      <div className="student-card student-card-wide">
+                        <h2 className="card-title">Documents à fournir</h2>
+                        <p className="card-subtitle">
+                          {missingCount > 0
+                            ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
+                            : "Tous les documents demandés ont été reçus."}
+                        </p>
+
+                        <div className="doc-list">
+                          {docsToShow.map((doc) => {
+                            const missing = doc.status !== "received";
+                            return (
+                              <div
+                                key={doc.key}
+                                className={`doc-row ${missing ? "doc-missing" : "doc-received"}`}
+                              >
+                                <div className="doc-row-main">
+                                  <div className="doc-row-title">
+                                    <span>{doc.icon}</span>
+                                    {doc.label}
+                                    <span
+                                      className={
+                                        missing ? "doc-badge-missing" : "doc-badge-ok"
+                                      }
+                                    >
+                                      {missing ? "Manquant" : "Reçu"}
+                                    </span>
+                                  </div>
+                                  <p className="doc-row-desc">{doc.description}</p>
+                                  {doc.file ? (
+                                    <p className="doc-row-file">
+                                      Fichier actuel : <strong>{doc.file.name}</strong>
+                                    </p>
+                                  ) : null}
+                                </div>
+                                <form
+                                  className="doc-row-actions"
+                                  onSubmit={(e) => handleUpload(e, doc.key)}
                                 >
-                                  {missing ? "Manquant" : "Reçu"}
-                                </span>
+                                  <input
+                                    type="file"
+                                    accept=".pdf,.jpg,.jpeg,.png,.webp"
+                                    onChange={(e) =>
+                                      setSelectedFiles((prev) => ({
+                                        ...prev,
+                                        [doc.key]: e.target.files?.[0] || null,
+                                      }))
+                                    }
+                                  />
+                                  <div className="landing-hero-actions landing-actions-start">
+                                    <button
+                                      type="submit"
+                                      className="landing-btn landing-btn-primary"
+                                      disabled={
+                                        uploadingKey === doc.key || !selectedFiles[doc.key]
+                                      }
+                                    >
+                                      {uploadingKey === doc.key
+                                        ? "Envoi..."
+                                        : doc.file
+                                          ? "Remplacer"
+                                          : "Envoyer"}
+                                    </button>
+                                    {doc.file ? (
+                                      <button
+                                        type="button"
+                                        className="landing-btn landing-btn-secondary"
+                                        onClick={() => handleDownload(doc.file.path)}
+                                      >
+                                        Télécharger
+                                      </button>
+                                    ) : null}
+                                  </div>
+                                </form>
                               </div>
-                              <p className="doc-row-desc">{doc.description}</p>
-                              {doc.file ? (
-                                <p className="doc-row-file">
-                                  Fichier actuel : <strong>{doc.file.name}</strong>
-                                </p>
-                              ) : null}
-                            </div>
-                            <form
-                              className="doc-row-actions"
-                              onSubmit={(e) => handleUpload(e, doc.key)}
-                            >
-                              <input
-                                type="file"
-                                accept=".pdf,.jpg,.jpeg,.png,.webp"
-                                onChange={(e) =>
-                                  setSelectedFiles((prev) => ({
-                                    ...prev,
-                                    [doc.key]: e.target.files?.[0] || null,
-                                  }))
-                                }
-                              />
-                              <div className="landing-hero-actions landing-actions-start">
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div className="student-card student-card-wide">
+                        <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
+                        <p className="card-subtitle">
+                          Fichiers transmis par Chinois en Devenir pour votre dossier.
+                        </p>
+                        {adminDocuments.length === 0 ? (
+                          <div className="landing-alert landing-alert-warning">
+                            Aucun document n'a encore été envoyé par l'équipe.
+                          </div>
+                        ) : (
+                          <div className="doc-list">
+                            {adminDocuments.map((doc) => (
+                              <div key={doc.path} className="doc-row doc-received">
+                                <div className="doc-row-main">
+                                  <div className="doc-row-title">
+                                    <span>📄</span>
+                                    {doc.name}
+                                    <span className="doc-badge-ok">Reçu</span>
+                                  </div>
+                                </div>
                                 <button
-                                  type="submit"
-                                  className="landing-btn landing-btn-primary"
-                                  disabled={
-                                    uploadingKey === doc.key || !selectedFiles[doc.key]
-                                  }
+                                  type="button"
+                                  className="landing-btn landing-btn-secondary"
+                                  onClick={() => handleDownload(doc.path)}
                                 >
-                                  {uploadingKey === doc.key
-                                    ? "Envoi..."
-                                    : doc.file
-                                      ? "Remplacer"
-                                      : "Envoyer"}
+                                  Télécharger
                                 </button>
-                                {doc.file ? (
-                                  <button
-                                    type="button"
-                                    className="landing-btn landing-btn-secondary"
-                                    onClick={() => handleDownload(doc.file.path)}
-                                  >
-                                    Télécharger
-                                  </button>
-                                ) : null}
                               </div>
-                            </form>
+                            ))}
                           </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="student-card student-card-wide">
-                    <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
-                    <p className="card-subtitle">
-                      Fichiers transmis par Chinois en Devenir pour votre dossier.
-                    </p>
-                    {adminDocuments.length === 0 ? (
-                      <div className="landing-alert landing-alert-warning">
-                        Aucun document n'a encore été envoyé par l'équipe.
+                        )}
                       </div>
-                    ) : (
-                      <div className="doc-list">
-                        {adminDocuments.map((doc) => (
-                          <div key={doc.path} className="doc-row doc-received">
-                            <div className="doc-row-main">
-                              <div className="doc-row-title">
-                                <span>📄</span>
-                                {doc.name}
-                                <span className="doc-badge-ok">Reçu</span>
-                              </div>
-                            </div>
-                            <button
-                              type="button"
-                              className="landing-btn landing-btn-secondary"
-                              onClick={() => handleDownload(doc.path)}
-                            >
-                              Télécharger
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                    </>
+                  ) : null}
                 </>
-              ) : null}
+              )}
             </>
           )}
         </div>

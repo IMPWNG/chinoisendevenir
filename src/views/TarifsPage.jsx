@@ -6,7 +6,7 @@ import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
 import { fr } from "../i18n/fr";
-import { EXTRA_FEES, FORMULES, PROCESS_STEPS } from "../lib/formules";
+import { EXTRA_FEES, FORMULES, PROCESS_STEPS, displayFormuleFootnote } from "../lib/formules";
 import { breadcrumbJsonLd, FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
 
 const BREADCRUMBS = [
@@ -76,29 +76,30 @@ function TarifsPage() {
                       </li>
                     ))}
                   </ul>
-                  {formule.footnote ? (
-                    <p className="text-xs text-slate-500 mt-3 leading-relaxed">
-                      {formule.footnote}
-                    </p>
-                  ) : null}
-
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
                     Idéale si
                   </p>
-                  <ul className="space-y-1.5 text-sm text-slate-600 mb-6">
+                  <ul className="space-y-1.5 text-sm text-slate-600">
                     {formule.idealIf.map((item) => (
                       <li key={item}>• {item}</li>
                     ))}
                   </ul>
 
-                  <Link
-                    href="/#lead-form"
-                    className={`landing-btn mt-auto ${
-                      featured ? "landing-btn-accent" : "landing-btn-primary"
-                    }`}
-                  >
-                    {formule.cta}
-                  </Link>
+                  <div className="mt-auto">
+                    {formule.footnote ? (
+                      <p className="formule-footnote">
+                        {displayFormuleFootnote(formule.footnote)}
+                      </p>
+                    ) : null}
+                    <Link
+                      href="/#lead-form"
+                      className={`landing-btn ${
+                        featured ? "landing-btn-accent" : "landing-btn-primary"
+                      }`}
+                    >
+                      {formule.cta}
+                    </Link>
+                  </div>
                 </article>
               );
             })}

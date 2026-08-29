@@ -3,7 +3,7 @@ import {
   getAuthenticatedContact,
   ensureStudentBucket,
 } from "@/lib/studentAuth";
-import { isStudentAccessGranted } from "@/lib/studentProgress";
+import { studentCanAccessDocuments } from "@/lib/studentProgress";
 import {
   createDocumentSignedUrl,
   getRequiredDocumentsStatus,
@@ -22,11 +22,11 @@ export async function GET(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!auth.contact || !isStudentAccessGranted(auth.contact)) {
+    if (!auth.contact || !studentCanAccessDocuments(auth.contact)) {
       return NextResponse.json(
         {
           error:
-            "Les documents seront disponibles une fois votre formule débloquée.",
+            "Les documents sont inclus à partir de la formule 2.",
         },
         { status: 403 },
       );
@@ -58,11 +58,11 @@ export async function POST(request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!auth.contact || !isStudentAccessGranted(auth.contact)) {
+    if (!auth.contact || !studentCanAccessDocuments(auth.contact)) {
       return NextResponse.json(
         {
           error:
-            "Les documents seront disponibles une fois votre formule débloquée.",
+            "Les documents sont inclus à partir de la formule 2.",
         },
         { status: 403 },
       );

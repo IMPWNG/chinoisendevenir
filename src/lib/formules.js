@@ -188,7 +188,7 @@ export function getFormuleAccess(number) {
       matchLimit: 5,
       depth: "orientation",
       documents: false,
-      progress: false,
+      progress: true,
       visa: false,
     };
   }
@@ -202,8 +202,14 @@ export function getFormuleAccess(number) {
   };
 }
 
-/** Same unlocked student view for formulas 1–3 until per-formula views exist. */
+/** Access flags for the unlocked student space, by chosen formula. */
 export function getUnlockedStudentAccess(formuleNumber) {
   if (!formuleNumber) return getFormuleAccess(0);
-  return getFormuleAccess(3);
+  return getFormuleAccess(formuleNumber);
+}
+
+export function displayFormuleFootnote(footnote) {
+  if (!footnote) return "";
+  const text = String(footnote).trim();
+  return text.startsWith("*") ? text : `* ${text}`;
 }
