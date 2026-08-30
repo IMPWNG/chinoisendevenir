@@ -5,22 +5,30 @@
     "name_fr": "Université Gongshang du Zhejiang",
     "aliases": [
       "ZJSU",
-      "ZJGS"
+      "ZJGS",
+      "浙商大",
+      "杭州商学院"
     ],
     "website": "http://www.zjgsu.edu.cn/",
     "international_website": "http://english.zjgsu.edu.cn/",
-    "application_portal_url": "http://cis.zjgsu.edu.cn:1149/zjgsdx/"
+    "application_portal_url": "https://hzic.at0086.cn/StuApplication/Login.aspx"
   },
   "general": {
-    "presentation": "Université publique du Zhejiang spécialisée dans le business, l'économie, le commerce et la statistique. Co-construite par le gouvernement provincial du Zhejiang, le Ministère du Commerce et le Ministère de l'Éducation. Plus de 90 universités partenaires dans 50+ pays.",
-    "history": "Fondée en 1911 comme Hangzhou Secondary Business School. Devenue Hangzhou Institute of Commerce en 1980. Renommée Zhejiang Gongshang University en 2004. Identifiée comme université clé du Zhejiang en 2017.",
-    "rankings": [],
+    "presentation": "Université publique chinoise axée sur l'économie, le commerce, la gestion et les sciences alimentaires. Co-construite par le gouvernement du Zhejiang, le Ministère du Commerce et le Ministère de l'Éducation. Partenariats avec plus de 90 universités dans 50+ pays.",
+    "history": "Fondée en 1911 (Hangzhou Secondary Business School). Devenue université publique en 1980 (Hangzhou Institute of Commerce). Renommée Zhejiang Gongshang University en 2004. Identifiée en 2015 comme co-construction avec Ministère du Commerce. Université clé du Zhejiang depuis 2017.",
+    "rankings": [
+      "Classement provincial clé du Zhejiang (2017)",
+      "Disciplines Statistiques et Administration des Affaires : disciplines provinciales de premier plan",
+      "Science alimentaire ESI top 1,35‰ en 2025"
+    ],
     "strengths": [
-      "Statistiques (discipline provinciale de premier plan)",
-      "Administration des affaires (discipline provinciale caractéristique)",
-      "Économie appliquée et commerce",
-      "Sciences alimentaires",
-      "Intelligence artificielle (Institut conjoint ZJSU-Sussex)"
+      "Économie et commerce (cœur historique)",
+      "Statistiques et Big Data",
+      "Science alimentaire (discipline provinciale de première classe)",
+      "Intelligence artificielle (Institut conjoint ZJSU-Sussex)",
+      "Finance (programme CFA)",
+      "Tourisme et gestion des loisirs (Top 41 mondial ShanghaiRanking 2025)",
+      "E-commerce et affaires internationales"
     ],
     "teaching_languages": [
       "zh",
@@ -32,25 +40,25 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 2500,
+      "max": 4000,
+      "notes": "Estimation pour étudiant international à Hangzhou, hors loyer."
     },
     "campuses": [
       {
-        "name": "Xiasha Campus",
+        "name": "Xiasha (Qiantang)",
         "city": "Hangzhou",
-        "description": "Campus principal"
+        "description": "Campus principal, 18 Xuezheng Str., Qiantang District, 310018"
       },
       {
-        "name": "Downtown Campus",
+        "name": "Downtown (Jiaogong Lu)",
         "city": "Hangzhou",
-        "description": "Campus historique"
+        "description": "Campus historique du centre-ville"
       },
       {
-        "name": "Tonglu Campus",
+        "name": "Tonglu",
         "city": "Hangzhou",
-        "description": "Campus tertiaire"
+        "description": "Campus Tonglu"
       }
     ]
   },
@@ -60,7 +68,7 @@
       "name": "Finance",
       "field": "finance",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
@@ -72,137 +80,138 @@
       "name": "Accounting",
       "field": "business",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "E-commerce",
       "field": "business",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "International Business",
       "field": "business",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "Economic Statistics",
       "field": "economics",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "Computer Science and Technology",
       "field": "computer_science",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "Law",
       "field": "law",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "Art Design",
       "field": "design",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "Environmental Science",
       "field": "sciences",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": ""
     },
     {
       "level": "bachelor",
       "name": "Food Science",
       "field": "sciences",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme en anglais disponible"
+      "notes": "Discipline de première classe provinciale"
     },
     {
       "level": "master",
-      "name": "Programs in English",
+      "name": "Project Management (MPM)",
       "field": "business",
-      "language": "en",
-      "duration_years": null,
+      "language": "bilingual",
+      "duration_years": 2,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Master disponibles dans les mêmes domaines que le bachelor en anglais"
+      "notes": "Programme conjoint avec UQAC Canada (chinois/anglais)"
     },
     {
       "level": "language",
       "name": "Chinese Language & Culture",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 1,
       "start_months": [
+        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours Essential, Intermediate, Advanced Chinese, Business Chinese, Understanding China"
+      "notes": "Niveaux élémentaire, intermédiaire, avancé, business chinois, Understanding China"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires équivalent au gaokao chinois. Pour programmes en anglais, compétences en chinois requises pour certains cours.",
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent. Dossier académique complet requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -210,11 +219,16 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Cours de chinois et business culture obligatoires pour les programmes en anglais",
-      "other": []
+      "preparatory_if_insufficient": "Année préparatoire de chinois (programme linguistique) avant admission en licence si HSK insuffisant",
+      "other": [
+        "Dossier de candidature via portail en ligne",
+        "Certificat de diplôme",
+        "Relevés de notes",
+        "Passeport valide"
+      ]
     },
     "master": {
-      "academic": "Licence / Bachelor degree. Diplôme universitaire équivalent requis.",
+      "academic": "Licence (Bachelor) ou équivalent. Dossier académique + lettre de motivation / projet de recherche selon le programme.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -223,10 +237,16 @@
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Dossier candidature portail",
+        "Diplôme licence",
+        "Relevés de notes",
+        "CV",
+        "Lettre de recommandation"
+      ]
     },
     "phd": {
-      "academic": "Master degree requis. Direction de thèse disponible.",
+      "academic": "Master ou équivalent, projet de recherche.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -235,21 +255,29 @@
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Dossier candidature",
+        "Projet recherche",
+        "Lettres de recommandation",
+        "Accord d'un superviseur"
+      ]
     },
     "language": {
-      "academic": "Ouvert aux étudiants internationaux apprenant le chinois",
+      "academic": "Pas de prérequis académique strict, ouvert aux débutants.",
       "age_max": null,
-      "other": []
+      "other": [
+        "Inscription via portail hzic.at0086.cn",
+        "Paiement frais de scolarité"
+      ]
     }
   },
   "contacts": {
-    "office_name": "College of International Education - Admission Office",
+    "office_name": "College of International Education / 国际教育学院",
     "iso_email": "international@mail.zjgsu.edu.cn",
     "admissions_email": "admission@zjgsu.edu.cn",
-    "wechat": "",
-    "phone": "+86 571-28008687",
-    "address": "No.18, Xuezheng Str., Zhejiang Gongshang University, Qiantang District, Hangzhou, China, 310018"
+    "wechat": "浙商大 / 浙商大新闻",
+    "phone": "+86 571-28008687 (admissions) ; +86 571-28877322 (international office)",
+    "address": "Bureau 519, College of International Education, No.18 Xuezheng Str., Qiantang District, Hangzhou, Zhejiang 310018, Chine"
   },
   "matching": {
     "fields": [
@@ -261,13 +289,15 @@
       "sciences",
       "law",
       "design",
-      "chinese_language"
+      "chinese_language",
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language"
+      "language",
+      "exchange"
     ],
     "languages": [
       "zh",
@@ -288,97 +318,110 @@
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "",
+    "deadline_typical": "Juin (rentrée septembre)",
     "intake_months": [
+      3,
       9
     ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "tags": [
-      "business school tradition",
-      "statistics forte",
-      "Silk Road School",
-      "partenaires 50+ pays",
+      "Belt and Road",
+      "CFA",
+      "Food Science Top",
+      "AI Institute Sussex",
+      "MPM UQAC",
+      "Confucius Institute",
       "Alliance Française",
-      "Institut Confucius"
+      "Silk Road School"
     ]
   },
-  "confidence": 0.78,
+  "confidence": 0.62,
   "missing_fields": [
-    "tuition_cny_min",
-    "tuition_cny_max",
-    "housing_cny_year_min",
-    "min_hsk_level",
-    "min_ielts",
-    "min_toefl",
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
-    "deadline_typical",
-    "cost_of_living_cny_month",
-    "rankings détaillés",
-    "CSC confirmation",
-    "bourse provinciale confirmation"
+    "Frais de scolarité détaillés (CNY)",
+    "Frais de dossier",
+    "Frais de logement annuels",
+    "Scores HSK/IELTS/TOEFL minimums précis",
+    "Dates limites d'application 2026",
+    "Plafonds d'âge exacts",
+    "Montants bourses (université, provincial, CSC)"
   ],
-  "notes": "Université spécialisée en commerce/économie/statistiques. Programmes en anglais disponibles du bachelor au doctorat dans les domaines business, finance, computer science, law, design, sciences. Programme de langue chinoise et culture chinoise offert. Partenariats internationaux avec 90+ universités incluant Columbia, UC Berkeley, Manchester, Waseda. Alliance Française et Institut Confucius sur campus. Information spécifique sur frais, HSK/IELTS scores minimaux, deadlines et bourses non trouvée dans les sources.",
+  "notes": "Université reconnue en commerce, économie, statistiques et science alimentaire. 3 campus à Hangzhou. Partenariats internationaux avec Columbia, UC Berkeley, Manchester, Waseda, Canterbury, Chulalongkorn. Programme MPM conjoint avec UQAC (Canada). Programme AI conjoint avec University of Sussex (Royaume-Uni). Dossier d'admission et montants de frais à confirmer sur sie.zjgsu.edu.cn.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "Étudiant international",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Document d'identité principal exigé pour toute candidature."
+      "notes": "Standard requirement for international applicants"
     },
     {
       "type": "diploma",
       "required": true,
       "count": null,
-      "who": "Candidat en programme de diplôme",
+      "who": "Degree applicants",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "Diplômes et relevés de notes requis pour l'admission en licence, master ou doctorat."
+      "notes": "Highest degree certificate; required transcripts"
     },
     {
       "type": "language_certificate",
-      "required": null,
+      "required": true,
       "count": null,
-      "who": "Candidat en programme anglophone",
+      "who": "",
       "applies_to": [
-        "bachelor",
+        "all"
+      ],
+      "notes": "HSK for Chinese-taught programs; IELTS/TOEFL for English-taught programs"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passport-style photos"
+    },
+    {
+      "type": "study_plan",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "Justificatif de niveau d'anglais exigé pour les programmes enseignés en anglais."
+      "notes": "Recommended for graduate applicants"
     },
     {
-      "type": "language_certificate",
-      "required": null,
+      "type": "recommendation_letters",
+      "required": false,
       "count": null,
-      "who": "Candidat en programme chinois",
+      "who": "",
       "applies_to": [
-        "bachelor",
         "master",
-        "phd",
-        "language"
+        "phd"
       ],
-      "notes": "Certificat HSK exigé pour les programmes enseignés en chinois."
+      "notes": "Typically 2 letters for graduate applicants"
     }
   ],
   "application": {
-    "platform_name": "Système d'admission du College of International Education (CIS)",
-    "platform_url": "http://cis.zjgsu.edu.cn:1149/zjgsdx/",
+    "platform_name": "ZJSU International Education College Online Application System",
+    "platform_url": "https://hzic.at0086.cn/StuApplication/Login.aspx",
     "steps": [
-      "Remplir le formulaire de candidature en ligne sur la plateforme CIS",
-      "Joindre les documents requis (passeport, diplômes, relevés, certificats linguistiques)",
-      "Payer les frais de candidature",
-      "Attendre la notification d'admission",
-      "Recevoir la lettre d'admission et le formulaire JW201/visa"
+      "Créer un compte sur la plateforme en ligne du Collège d'éducation internationale",
+      "Remplir le formulaire de candidature en ligne",
+      "Téléverser les documents requis (passeport, diplômes, relevés de notes, certificats linguistiques, photo)",
+      "Soumettre la candidature et attendre l'évaluation",
+      "Recevoir la lettre d'admission et le formulaire JW202 pour le visa"
     ],
     "opens_at": "",
     "deadline": "",
@@ -432,14 +475,43 @@
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Demande via l'université ou l'ambassade de Chine; couvre bachelor, master, doctorat et programmes linguistiques",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Renouvelable annuellement sous conditions académiques"
+    },
+    {
+      "name": "ZJSU Provincial Government Scholarship",
+      "type": "university",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Demande via admission@zjgsu.edu.cn / adm1@zjgsu.edu.cn",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Hangzhou Government Scholarship",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Couverte par le gouvernement municipal de Hangzhou; détails auprès du bureau des admissions",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -452,9 +524,9 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
     },
     "foundation": {
       "available": null,
@@ -462,86 +534,124 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "Contacter le Bureau d'admission (admission@zjgsu.edu.cn) pour les documents de visa (lettre d'admission, formulaire JW201).",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission ZJSU",
+      "Formulaire JW202 / JW201",
+      "Visa Application Form"
+    ],
+    "instructions": "Les étudiants doivent obtenir un visa étudiant X1 (programmes >180 jours) ou X2 (<180 jours). Le service 新生报到 fournit une assistance pour le rendez-vous de visa.",
+    "arrival_and_residence_permit": "Les étudiants doivent effectuer un examen médical et obtenir un permis de résidence dans les 30 jours suivant l'arrivée au bureau de l'immigration local."
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "Résidences sur campus (Xiasha, Downtown, Tonglu)"
+    ],
     "rules": "",
-    "international_office": "College of International Education, admission@zjgsu.edu.cn, +86 571-28008687",
-    "orientation": "",
+    "international_office": "Bureau des admissions du Collège d'éducation internationale: +86 571-28008687, admission@zjgsu.edu.cn; bureau international: international@mail.zjgsu.edu.cn, +86 571-28877322",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux organisé par le Collège d'éducation internationale",
     "english_support": true,
-    "clubs": ""
+    "clubs": "Alliance Française, Confucius Institute, Global Forum Lectures, International Activities & Conferences, Silk Road School"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Tous pays",
+      "notes": "L'université accueille des étudiants internationaux de plus de 50 pays; partenariats avec plus de 90 universités (Columbia, Berkeley, Manchester, Waseda, Canterbury, Chulalongkorn, etc.)"
+    },
+    {
+      "region_or_country": "Pays francophones",
+      "notes": "Présence d'une Alliance Française sur le campus"
     }
   ],
   "scan_status": "ok",
   "slug": "zhejiang-gongshang-university",
-  "scraped_at": "2026-08-23T14:58:55.211Z",
+  "scraped_at": "2026-08-30T11:03:27.948Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "http://english.zjgsu.edu.cn/",
-      "title": "Zhejiang GongShang University",
-      "chars": 2409
-    },
     {
       "url": "http://www.zjgsu.edu.cn/",
       "title": "浙江工商大学",
-      "chars": 1543
+      "chars": 5240
     },
     {
-      "url": "http://english.zjgsu.edu.cn/list-51.html",
+      "url": "http://english.zjgsu.edu.cn/",
       "title": "Zhejiang GongShang University",
-      "chars": 1606
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/list-39.html",
-      "title": "Zhejiang GongShang University",
-      "chars": 2667
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/list-6.html",
-      "title": "Zhejiang GongShang University",
-      "chars": 2335
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/css/style.css",
-      "title": null,
-      "chars": 4390
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/css/fonts.css",
-      "title": "IIS 10.0 详细错误 - 404.0 - Not Found",
-      "chars": 536
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/js/nav-y.css",
-      "title": null,
-      "chars": 1091
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/css/focusStyle.css",
-      "title": null,
-      "chars": 1322
-    },
-    {
-      "url": "http://english.zjgsu.edu.cn/List-59.html",
-      "title": "Zhejiang GongShang University",
-      "chars": 1618
+      "chars": 5694
     },
     {
       "url": "http://news.zjgsu.edu.cn/17/View_23700.html",
       "title": "校长王永贵应邀出席南京审计大学2026年本科人才培养创新论坛并作主旨报告_浙江工商大学新闻网",
-      "chars": 1687
+      "chars": 3911
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/list-51.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 2820
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/list-39.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 4176
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/List-46.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 3205
+    },
+    {
+      "url": "http://news.zjgsu.edu.cn/2/view_23575.html",
+      "title": "学校全面启动来华留学生高等教育质量认证工作_浙江工商大学新闻网",
+      "chars": 3902
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/list-6.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 3341
+    },
+    {
+      "url": "https://sie.zjgsu.edu.cn/main.htm",
+      "title": "国际教育学院",
+      "chars": 6016
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/view-629.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 6687
+    },
+    {
+      "url": "http://news.zjgsu.edu.cn/18/View_23500.html",
+      "title": "浙江工商大学2024年度中外合作办学项目管理硕士项目办学报告公示_浙江工商大学新闻网",
+      "chars": 3187
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/list-46.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 3205
+    },
+    {
+      "url": "http://news.zjgsu.edu.cn/3/view_23767.html",
+      "title": "学校召开国际学生管理工作暨来华留学质量认证工作推进会_浙江工商大学新闻网",
+      "chars": 3619
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/List-59.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 3406
+    },
+    {
+      "url": "http://english.zjgsu.edu.cn/List-10.html",
+      "title": "Zhejiang GongShang University",
+      "chars": 2266
+    },
+    {
+      "url": "http://news.zjgsu.edu.cn/4/view_23548.html",
+      "title": "国家级一流本科课程，浙商大+15！_浙江工商大学新闻网",
+      "chars": 2795
     }
   ],
   "db_row": {
@@ -552,13 +662,13 @@
     "city": "Hangzhou",
     "province": "Zhejiang",
     "country": "Chine",
-    "department": "College of International Education - Admission Office",
+    "department": "College of International Education / 国际教育学院",
     "emails": [
       "international@mail.zjgsu.edu.cn",
       "admission@zjgsu.edu.cn"
     ],
-    "phone": "+86 571-28008687",
-    "wechat": null,
+    "phone": "+86 571-28008687 (admissions) ; +86 571-28877322 (international office)",
+    "wechat": "浙商大 / 浙商大新闻",
     "website": "http://english.zjgsu.edu.cn/",
     "majors": [
       "business",
@@ -569,19 +679,22 @@
       "sciences",
       "law",
       "design",
-      "chinese_language"
+      "chinese_language",
+      "other"
     ],
     "required_documents": [
       "passport",
-      "diploma"
+      "diploma",
+      "language_certificate",
+      "photo"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / ZJSU Provincial Government Scholarship / Hangzhou Government Scholarship",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,
     "language_requirements": null,
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Juin (rentrée septembre)"
   }
 }

@@ -4,28 +4,26 @@
     "name_zh": "深圳大学",
     "name_fr": "Université de Shenzhen",
     "aliases": [
-      "SZU"
+      "SZU",
+      "深大"
     ],
     "website": "https://www.szu.edu.cn",
-    "international_website": "https://lxs.szu.edu.cn/en",
-    "application_portal_url": "https://status.szu.edu.cn/szulxs/"
+    "international_website": "https://lxs.szu.edu.cn",
+    "application_portal_url": "https://status.szu.edu.cn/szulxs/stuzs/stuLogin.action?fpage_id=216"
   },
   "general": {
-    "presentation": "Université publique de Shenzhen, fondée en 1983, accueillant des étudiants internationaux via son Collège des Échanges Internationaux (CIE). Offre des programmes de licence, master, doctorat et cours de langue chinoise.",
-    "history": "Fondée en 1983 dans la zone économique spéciale de Shenzhen.",
+    "presentation": "Université publique de Shenzhen, gérée par la province du Guangdong et la municipalité de Shenzhen. Le College of International Exchange (CIE / 国际交流学院) est l'entité chargée des admissions et de la gestion des étudiants internationaux. SZU propose des programmes de licence, master et doctorat pour étudiants étrangers, ainsi que des programmes non-diplômants de langue chinoise.",
+    "history": "Fondée en 1983. Le College of International Exchange coordonne le recrutement international, notamment via son Tokyo College (东京学院) et son partenariat avec le Hong Kong College.",
     "rankings": [],
     "strengths": [
-      "Architecture et urbanisme",
-      "Médecine",
-      "Ingénierie",
-      "Sciences informatiques",
-      "Économie",
-      "Gestion"
+      "Chinese Language & Literature (汉语言文学)",
+      "programmes bilatéraux Tokyo College",
+      "programmes Hong Kong College",
+      "centre officiel de test HSK"
     ],
     "teaching_languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
     "location": {
       "city": "Shenzhen",
@@ -35,374 +33,278 @@
     "cost_of_living_cny_month": {
       "min": 2500,
       "max": 5000,
-      "notes": "Hors logement; Shenzhen est une ville coûteuse."
+      "notes": "Estimation Shenzhen (Nanshan); non confirmée dans les sources."
     },
     "campuses": [
       {
-        "name": "Yuehai Campus",
+        "name": "Yuehai Campus (粤海校区)",
         "city": "Shenzhen",
-        "description": "Campus principal, 3688 Nanhai Avenue, district de Nanshan. Chambres simples et doubles."
-      },
-      {
-        "name": "Lihu Campus",
-        "city": "Shenzhen",
-        "description": "Campus secondaire, Xueyuan Avenue, district de Nanshan. Chambres quadruples."
+        "description": "Campus principal, 3688 Nanhai Ave, Nanshan. Siège du CIE au 3e étage du Zonghe building."
       }
     ]
   },
   "programs": [
     {
-      "level": "bachelor",
-      "name": "Programmes de licence (tous domaines)",
-      "field": "other",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "4 ans (max 8 ans). Domaines: architecture, médecine, ingénierie, informatique, économie, gestion, droit, éducation, sciences, lettres, langues étrangères."
-    },
-    {
-      "level": "master",
-      "name": "Programmes de master (tous domaines)",
-      "field": "other",
-      "language": "bilingual",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Durée 2 à 3 ans selon le programme. Contact préalable avec un superviseur requis."
-    },
-    {
-      "level": "phd",
-      "name": "Programmes de doctorat (tous domaines)",
-      "field": "other",
-      "language": "bilingual",
-      "duration_years": 4,
+      "level": "language",
+      "name": "Chinese Language (Long-term)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
       "start_months": [
         2,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Admissions en février et septembre."
+      "notes": "Programme non-diplômant; sessions février et septembre."
     },
     {
       "level": "language",
-      "name": "Cours de chinois long terme",
+      "name": "Chinese Language Short-term",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
+      "duration_years": null,
       "start_months": [
+        2,
+        7,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Sessions courtes proposées par le CIE."
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language and Literature (汉语言文学)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme phare du CIE pour étudiants internationaux. Cours de reconnaissance de crédits possible."
+    },
+    {
+      "level": "bachelor",
+      "name": "Bachelor programs (autres domaines)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Liste des majeures non détaillée dans les sources; voir brochure 2026 Bachelor."
+    },
+    {
+      "level": "master",
+      "name": "Master programs for International Students",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Voir brochure 2026 Master (programmes zh et en selon filière)."
+    },
+    {
+      "level": "phd",
+      "name": "Doctoral programs for International Students",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        2,
         3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours de langue chinoise long terme (printemps et automne)."
+      "notes": "Intake February/March possible en plus de septembre. Voir brochure 2026 PhD."
     },
     {
-      "level": "language",
-      "name": "Cours de chinois court terme",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": null,
+      "level": "bachelor",
+      "name": "Shenzhen University Hong Kong College Bachelor",
+      "field": "business",
+      "language": "bilingual",
+      "duration_years": 4,
       "start_months": [
-        7
+        9
       ],
       "academic_calendar": "semester",
-      "notes": "Stages d'été et classes courtes."
-    },
-    {
-      "level": "language",
-      "name": "Cours de chinois weekend",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [],
-      "academic_calendar": "semester",
-      "notes": "Cours de week-end, y compris cours de商务 (business)."
+      "notes": "Programme conjoint avec Hong Kong College."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires ou supérieur. Les candidats en dernière année peuvent fournir un certificat de graduation prévu.",
+      "academic": "Diplôme de fin d'études secondaires (high school) équivalent; pour Hong Kong College, admission séparée.",
       "min_gpa": null,
-      "age_max": 25,
-      "age_min": 18,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 80,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible au CIE.",
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de langue chinoise (1 an) si HSK insuffisant.",
       "other": [
-        "HSK5 ≥180 pour Lettres, Médecine, Arts",
-        "Pas d'exigence HSK pour Langue et Littérature chinoises et TCSOL",
-        "Duolingo ≥100 accepté pour programmes en anglais",
-        "Frais de candidature: 400 RMB / 60 USD (non remboursables)"
+        "nationalité étrangère valide",
+        "casier judiciaire vierge",
+        "examen de santé"
       ]
     },
     "master": {
-      "academic": "Diplôme de licence ou supérieur. Les candidats en dernière année peuvent fournir un certificat prévu.",
+      "academic": "Licence (bachelor) reconnue; dossier académique + lettre de motivation + lettres de recommandation.",
       "min_gpa": null,
-      "age_max": 35,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible.",
+      "preparatory_if_insufficient": null,
       "other": [
-        "HSK5 ≥180 pour Lettres, Médecine, Arts",
-        "Lettre de recommandation du superviseur potentiel requise",
-        "Auto-description ~800 mots",
-        "Frais de candidature: 400 RMB / 60 USD (non remboursables)"
+        "plan de recherche",
+        "2 lettres de recommandation"
       ]
     },
     "phd": {
-      "academic": "Diplôme de master. Lettre de recommandation du superviseur requise.",
+      "academic": "Master (diplôme équivalent) requis; accord préalable d'un superviseur (博导) recommandé.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible.",
+      "preparatory_if_insufficient": null,
       "other": [
-        "Voir brochure spécifique doctorat",
-        "Frais de candidature: 400 RMB / 60 USD"
+        "accord superviseur",
+        "plan de recherche détaillé"
       ]
     },
     "language": {
-      "academic": "Pas d'exigence académique stricte.",
+      "academic": "Pas de diplôme spécifique requis pour les programmes non-diplômants.",
       "age_max": null,
       "other": [
-        "Cours long terme, court terme, weekend et camps d'été disponibles",
-        "Inscription auprès du CIE"
+        "visa X1/X2",
+        "casier judiciaire",
+        "examen de santé"
       ]
     }
   },
   "contacts": {
-    "office_name": "Admission Office of College of International Exchange, Shenzhen University",
+    "office_name": "College of International Exchange (CIE / 国际交流学院)",
     "iso_email": "ciec@szu.edu.cn",
     "admissions_email": "szulxs@szu.edu.cn",
-    "wechat": "WeChat officiel mentionné sur le site du CIE",
-    "phone": "+86-755-26558894 (degree students), +86-755-86937695 (language students)",
-    "address": "301 3/F, Zhaoxi building, Shenzhen University, 3688 Nanhai Ave, Nanshan District, Shenzhen, Guangdong 518060"
+    "wechat": "",
+    "phone": "+86-755-26558894 (Degree student); +86-755-86937695 (Language student)",
+    "address": "3rd Floor, Zonghe building, Shenzhen University, 3688 Nanhai Ave, Nanshan District, Shenzhen, China"
   },
   "matching": {
     "fields": [
+      "chinese_language",
       "business",
-      "economics",
-      "finance",
-      "computer_science",
       "engineering",
       "sciences",
-      "medicine",
-      "law",
-      "education",
-      "arts",
+      "computer_science",
       "design",
-      "chinese_language",
+      "arts",
       "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language",
-      "exchange"
+      "language"
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 80,
-    "age_max_bachelor": 25,
-    "age_max_master": 35,
+    "min_hsk_level": 3,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
     "age_max_phd": null,
     "has_csc": null,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": 26000,
-    "tuition_cny_max": 45000,
-    "housing_cny_year_min": 1500,
-    "deadline_typical": "Bachelor: 31 mai; Master: 31 mai; PhD: variable selon session",
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "Mai-juin (pour rentrée septembre)",
     "intake_months": [
       2,
       3,
-      7,
       9
     ],
     "city": "Shenzhen",
     "province": "Guangdong",
     "tags": [
-      "université publique",
-      "recherche",
-      "programmes bilingues",
-      "bourses provinciales",
-      "bourses municipales",
-      "Shenzhen"
+      "CIE",
+      "Tokyo College",
+      "Hong Kong College",
+      "HSK test center",
+      "Universiade Scholarship",
+      "Guangdong Provincial Scholarship",
+      "International Chinese Language Teachers Scholarship"
     ]
   },
-  "confidence": 0.82,
+  "confidence": 0.55,
   "missing_fields": [
-    "rankings spécifiques (classements non mentionnés dans les sources)",
-    "CSC scholarship non explicitement mentionné",
-    "Détails GPA minimum non spécifiés",
-    "Âge maximum doctorat"
+    "tuition_cny_min/max",
+    "housing_cny_year_min",
+    "min_gpa bachelor/master/phd",
+    "min_ielts",
+    "min_toefl",
+    "Hsk score minimum exact par niveau",
+    "age_min/max",
+    "classement officiel",
+    "détail des programmes non-langue"
   ],
-  "notes": "Frais de scolarité annuels: Licence 26,000-40,000 CNY; Master 30,000-45,000 CNY. Logement: 750-8,000 CNY/semestre. Bourses: Guangdong Government (10,000 CNY bachelor, 20,000 CNY master), Shenzhen Universiade (30,000-35,000 CNY), Liyuan International (exonération frais + 1,000 CNY/mois), International Chinese Language Teachers Scholarship. Procédure conforme au document MOE [2020] No.12 (4 ans passeport, 2 ans résidence).",
+  "notes": "Sources limitées au site du CIE (lxs.szu.edu.cn) et liste des brochures 2026. Pas d'accès aux brochures elles-mêmes ni au site principal SZU. Le CIE gère surtout le chinois langue étrangère; les majeures STEM/business ont des exigences détaillées dans les brochures non récupérées. HSK niveau 3 estimé pour entrée en année préparatoire.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "Tous",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Page info du passeport, photocopie"
-    },
-    {
-      "type": "high_school_certificate",
-      "required": true,
-      "count": 1,
-      "who": "Candidat bachelor",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": "Diplôme et relevés de notes du lycée, traduction notarisée si non chinois/anglais"
-    },
-    {
-      "type": "bachelor_degree",
-      "required": true,
-      "count": 1,
-      "who": "Candidat master",
-      "applies_to": [
-        "master"
-      ],
-      "notes": "Diplôme licence + relevés de toutes les années"
-    },
-    {
-      "type": "passport_photo",
-      "required": true,
-      "count": 1,
-      "who": "Tous",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
       "notes": ""
-    },
-    {
-      "type": "language_certificate",
-      "required": true,
-      "count": 1,
-      "who": "Tous",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "HSK4 ≥180 (Sciences/Ingénierie) ou HSK5 ≥180 (Lettres/Médecine/Arts); IELTS 5.5/TOEFL 80/Duolingo 100 pour programmes en anglais"
-    },
-    {
-      "type": "physical_exam",
-      "required": true,
-      "count": 1,
-      "who": "Tous",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Formulaire d'examen médical pour étrangers"
-    },
-    {
-      "type": "resume",
-      "required": true,
-      "count": 1,
-      "who": "Tous",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "CV du primaire à aujourd'hui"
-    },
-    {
-      "type": "recommendation_letters",
-      "required": true,
-      "count": 2,
-      "who": "Tous",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Avec email, téléphone et signature"
-    },
-    {
-      "type": "study_plan",
-      "required": true,
-      "count": 1,
-      "who": "Candidat bachelor",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": "Plan d'études ~500 mots"
-    },
-    {
-      "type": "self_statement",
-      "required": true,
-      "count": 1,
-      "who": "Candidat master",
-      "applies_to": [
-        "master"
-      ],
-      "notes": "~800 mots en chinois ou anglais"
-    },
-    {
-      "type": "scholarship_form",
-      "required": false,
-      "count": 1,
-      "who": "Candidats bourse Guangdong",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "À télécharger, remplir et téléverser"
     }
   ],
   "application": {
-    "platform_name": "SZU Online Application System (CIE)",
-    "platform_url": "https://lxs.szu.edu.cn",
+    "platform_name": "SZU International Student Online Application System",
+    "platform_url": "https://status.szu.edu.cn/szulxs/stuzs/stuLogin.action?fpage_id=216",
     "steps": [
-      "Créer un compte sur le portail CIE",
-      "Se connecter et remplir informations personnelles et visa",
-      "Téléverser tous les documents requis",
-      "Payer les frais de dossier par virement",
-      "Soumettre la candidature en ligne"
+      "Créer un compte sur la plateforme en ligne SZU",
+      "Remplir le formulaire de candidature en ligne",
+      "Téléverser les documents requis",
+      "Soumettre la candidature et suivre le statut via le portail"
     ],
-    "opens_at": "2026-01-01",
-    "deadline": "2026-05-31",
-    "results_at": "2026-06",
+    "opens_at": "",
+    "deadline": "",
+    "results_at": "",
     "intake_months": [
-      2,
       9
     ],
-    "application_fee_cny": 400,
-    "application_fee_refundable": false,
-    "payment_methods": [
-      "wire_transfer"
-    ]
+    "application_fee_cny": null,
+    "application_fee_refundable": null,
+    "payment_methods": []
   },
   "fees": {
     "tuition_cny_year": {
       "bachelor": {
-        "min": 26000,
-        "max": 40000
+        "min": null,
+        "max": null
       },
       "master": {
-        "min": 30000,
-        "max": 45000
+        "min": null,
+        "max": null
       },
       "phd": {
         "min": null,
@@ -414,35 +316,14 @@
       },
       "english_taught_premium": null
     },
-    "insurance_cny_year": 800,
-    "other_fees": [
-      {
-        "name": "Frais d'examen médical",
-        "amount_cny": null,
-        "notes": "Variable selon le pays"
-      },
-      {
-        "name": "Eau et électricité",
-        "amount_cny": null,
-        "notes": "Non inclus dans le logement"
-      }
-    ],
+    "insurance_cny_year": null,
+    "other_fees": [],
     "housing": {
       "on_campus": [
         {
-          "type": "single",
-          "price_cny_year": 4800,
-          "included": "Eau/électricité non inclus"
-        },
-        {
           "type": "double",
-          "price_cny_year": 4800,
-          "included": "Eau/électricité non inclus"
-        },
-        {
-          "type": "quadruple",
-          "price_cny_year": 1500,
-          "included": "Campus Lihu uniquement"
+          "price_cny_year": null,
+          "included": ""
         }
       ],
       "deposit_cny": null,
@@ -452,177 +333,183 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Shenzhen est une ville coûteuse; budget mensuel indicatif non précisé dans les sources"
+      "notes": ""
     }
   },
   "scholarships": [
     {
-      "name": "Guangdong Government Outstanding International Student Scholarship",
+      "name": "Guangdong Provincial Government Scholarship for International Students in Guangdong",
       "type": "provincial",
       "coverage": "partial",
       "covers": [
-        "living"
+        "tuition",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Bachelor: 10000 CNY/an; Master: 20000 CNY/an",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "Renouvelable selon performance"
-    },
-    {
-      "name": "Shenzhen Universiade Scholarship",
-      "type": "municipal",
-      "coverage": "partial",
-      "covers": [
-        "living"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Bachelor: 30000 CNY/an; Master: 35000 CNY/an",
+      "conditions": "Pour étudiants internationaux étudient à Shenzhen University",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Liyuan International Scholarship",
+      "name": "Universiade Scholarship (大运奖学金)",
       "type": "university",
       "coverage": "partial",
       "covers": [
-        "tuition",
-        "living"
+        "tuition"
       ],
-      "stipend_cny_month": 1000,
-      "conditions": "1ère classe: exonération tuition + 1000 CNY/mois; 2ème: exonération tuition; 3ème: 50% réduction tuition",
+      "stipend_cny_month": null,
+      "conditions": "",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
       "name": "International Chinese Language Teachers Scholarship",
-      "type": "csc",
+      "type": "government",
       "coverage": "full",
       "covers": [
         "tuition",
-        "living",
-        "housing"
+        "housing",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Candidature via http://cis.chinese.cn et système SZU",
-      "apply_via": "external",
+      "conditions": "Pour étudiants en programmes de langue chinoise ou de diplômes liés",
+      "apply_via": "university",
       "deadline": "",
       "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": 4,
-    "hsk_master": 4,
+    "hsk_bachelor": null,
+    "hsk_master": null,
     "hsk_phd": null,
-    "ielts_min": 5.5,
-    "toefl_min": 80,
+    "ielts_min": null,
+    "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 semestre à 1 an",
-      "leads_to_degree": false
+      "duration": "",
+      "leads_to_degree": null
     },
     "foundation": {
       "available": null,
-      "description": "Cours de chinois longue durée disponibles (programme non-diplômant)"
+      "description": ""
     }
   },
   "visa": {
     "visa_types": [
-      "X1"
+      "X1",
+      "X2"
     ],
     "documents_from_university": [
       "Admission Notice",
-      "Confirmation Form for Study in China (JW202)"
+      "JW202 Form"
     ],
-    "instructions": "Demander le visa X1 à l'ambassade ou consulat de Chine avec Admission Notice et JW202. SZU n'accepte pas les étudiants avec visa non-étudiant.",
-    "arrival_and_residence_permit": "Convertir le visa X1 en Residence Permit dans les 30 jours suivant l'entrée en Chine"
+    "instructions": "Les étudiants doivent demander un visa X1 (long terme) ou X2 (court terme) avec les documents fournis par l'université",
+    "arrival_and_residence_permit": "Après arrivée, demander un permis de résidence au bureau de sécurité publique local dans les 30 jours"
   },
   "housing_and_services": {
     "housing_types": [
-      "single",
-      "double",
-      "quadruple"
+      "Résidence universitaire sur campus"
     ],
-    "rules": "Réservation et paiement à effectuer par l'étudiant; eau/électricité non inclus",
-    "international_office": "College of International Exchange, 301 3/F Zhaoxi building, 3688 Nanhai Ave, Shenzhen. Tel: 0086-755-26558894, Email: szulxs@szu.edu.cn",
-    "orientation": "Programme d'orientation organisé pour les nouveaux étudiants internationaux",
+    "rules": "Voir les directives de logement sur le site du CIE",
+    "international_office": "College of International Exchange (国际交流学院), 3ème étage, Bâtiment Zonghe, 3688 Nanhai Ave, Nanshan, Shenzhen. Tel: 086-755-26558894 (degree), 086-755-86937695 (language). Email: szulxs@szu.edu.cn / ciec@szu.edu.cn",
+    "orientation": "",
     "english_support": true,
-    "clubs": "Festival culturel international, activités de découverte culturelle, clubs étudiants"
+    "clubs": "Diverses activités culturelles et clubs étudiants internationaux disponibles"
   },
   "country_specific": [
     {
-      "region_or_country": "Tous",
-      "notes": "Conforme au document No.12 du Ministère de l'Éducation (2020): passeport étranger valide ≥4 ans et résidence à l'étranger >2 ans sur les 4 dernières années (avant le 30 avril de l'année d'inscription)"
+      "region_or_country": "",
+      "notes": ""
     }
   ],
   "scan_status": "ok",
   "slug": "shenzhen-university",
-  "scraped_at": "2026-08-23T14:40:07.194Z",
+  "scraped_at": "2026-08-30T10:58:49.582Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://lxs.szu.edu.cn/",
       "title": "国际交流学院",
-      "chars": 2352
+      "chars": 9110
     },
     {
       "url": "https://lxs.szu.edu.cn/en/",
       "title": "国际交流学院",
-      "chars": 3862
+      "chars": 12507
+    },
+    {
+      "url": "https://lxs.szu.edu.cn/info/1002/7907.htm",
+      "title": "深耕国际教育 提质来华留学——李猛副校长深入国际交流学院把脉发展-国际交流学院",
+      "chars": 5576
     },
     {
       "url": "https://lxs.szu.edu.cn/en/Admissions/Student_Recruitment_Brochure/Degree_student.htm",
       "title": "Degree student-国际交流学院",
-      "chars": 3857
+      "chars": 10119
     },
     {
-      "url": "https://en.szu.edu.cn/",
-      "title": "Shenzhen University (SZU)",
-      "chars": 2025
+      "url": "https://lxs.szu.edu.cn/en/Admissions/Student_Recruitment_Brochure.htm",
+      "title": "Student Recruitment Brochure-国际交流学院",
+      "chars": 6102
     },
     {
-      "url": "https://en.szu.edu.cn/info/1023/1903.htm",
-      "title": "2026 SZU Admission Brochure for the Bachelor Program of International Students-Shenzhen University (SZU)",
-      "chars": 10243
+      "url": "https://lxs.szu.edu.cn/info/1002/8147.htm",
+      "title": "2026年第三期来华留学生午餐会顺利举行-国际交流学院",
+      "chars": 5295
     },
     {
-      "url": "https://en.szu.edu.cn/info/1024/1905.htm",
-      "title": "2026 SZU Admission Brochure for the Master Program of International Students-Shenzhen University (SZU)",
-      "chars": 9008
+      "url": "https://lxs.szu.edu.cn/en/info/1112/3083.htm",
+      "title": "Admission Brochure for the Doctoral Program of International Students (September 2026 Intake)-国际交流学院",
+      "chars": 16000
     },
     {
-      "url": "https://lxs.szu.edu.cn/zsxx1.htm",
-      "title": "招生信息-国际交流学院",
-      "chars": 2599
+      "url": "https://lxs.szu.edu.cn/en/info/1112/3093.htm",
+      "title": "2026 SZU Admission Brochure for the Master Program of International Students-国际交流学院",
+      "chars": 16000
     },
     {
-      "url": "https://lxs.szu.edu.cn/zsxx1/jzml1.htm",
-      "title": "简章目录-国际交流学院",
-      "chars": 2729
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2893.htm",
+      "title": "SZU Admission Brochure for the Doctoral Program of International Students (March 2026 Intake)-国际交流学院",
+      "chars": 15214
     },
     {
-      "url": "https://lxs.szu.edu.cn/zsxx1/sqzn.htm",
-      "title": "申请指南-国际交流学院",
-      "chars": 1290
+      "url": "https://lxs.szu.edu.cn/en/info/1112/3103.htm",
+      "title": "2026 SZU Admission Brochure for the Bachelor Program of International Students-国际交流学院",
+      "chars": 16000
     },
     {
-      "url": "https://lxs.szu.edu.cn/zsxx1/xxfy.htm",
-      "title": "学习费用-国际交流学院",
-      "chars": 2007
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2684.htm",
+      "title": "SZU Admission Brochure for the Doctoral Program of International Students (September 2025 Intake)-国际交流学院",
+      "chars": 16000
     },
     {
-      "url": "https://lxs.szu.edu.cn/lxsh.htm",
-      "title": "留学生活-国际交流学院",
-      "chars": 2016
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2685.htm",
+      "title": "2025 SZU Admission Brochure for the Master Program of International Students-国际交流学院",
+      "chars": 16000
     },
     {
-      "url": "https://lxs.szu.edu.cn/lxsh/jxj.htm",
-      "title": "奖学金-国际交流学院",
-      "chars": 2111
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2686.htm",
+      "title": "2025 SZU Admission Brochure for the Bachelor Program of International Students-国际交流学院",
+      "chars": 16000
+    },
+    {
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2621.htm",
+      "title": "SZU Admission Brochure for the Doctoral Program of International Students (February 2025 Intake)-国际交流学院",
+      "chars": 16000
+    },
+    {
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2615.htm",
+      "title": "SZU Admission Brochure for the Doctoral Program of International Students (September 2024 Intake)-国际交流学院",
+      "chars": 16000
+    },
+    {
+      "url": "https://lxs.szu.edu.cn/en/info/1112/2453.htm",
+      "title": "2024 SZU Admission Brochure for the Master Program of International Students-国际交流学院",
+      "chars": 16000
     }
   ],
   "db_row": {
@@ -633,48 +520,34 @@
     "city": "Shenzhen",
     "province": "Guangdong",
     "country": "Chine",
-    "department": "Admission Office of College of International Exchange, Shenzhen University",
+    "department": "College of International Exchange (CIE / 国际交流学院)",
     "emails": [
       "ciec@szu.edu.cn",
       "szulxs@szu.edu.cn"
     ],
-    "phone": "+86-755-26558894 (degree students), +86-755-86937695 (language students)",
-    "wechat": "WeChat officiel mentionné sur le site du CIE",
-    "website": "https://lxs.szu.edu.cn/en",
+    "phone": "+86-755-26558894 (Degree student); +86-755-86937695 (Language student)",
+    "wechat": null,
+    "website": "https://lxs.szu.edu.cn",
     "majors": [
+      "chinese_language",
       "business",
-      "economics",
-      "finance",
-      "computer_science",
       "engineering",
       "sciences",
-      "medicine",
-      "law",
-      "education",
-      "arts",
+      "computer_science",
       "design",
-      "chinese_language",
+      "arts",
       "other"
     ],
     "required_documents": [
-      "passport",
-      "high_school_certificate",
-      "bachelor_degree",
-      "passport_photo",
-      "language_certificate",
-      "physical_exam",
-      "resume",
-      "recommendation_letters",
-      "study_plan",
-      "self_statement"
+      "passport"
     ],
-    "scholarship_amount": "Guangdong Government Outstanding International Student Scholarship / Shenzhen Universiade Scholarship / Liyuan International Scholarship / International Chinese Language Teachers Scholarship",
-    "scholarship_min": 26000,
-    "scholarship_max": 45000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 80",
-    "tuition_min": 26000,
-    "tuition_max": 45000,
-    "application_deadline": "Bachelor: 31 mai; Master: 31 mai; PhD: variable selon session"
+    "scholarship_amount": "Guangdong Provincial Government Scholarship for International Students in Guangdong / Universiade Scholarship (大运奖学金) / International Chinese Language Teachers Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": 3,
+    "language_requirements": "HSK 3+",
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "Mai-juin (pour rentrée septembre)"
   }
 }

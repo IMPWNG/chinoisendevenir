@@ -4,23 +4,23 @@
     "name_zh": "重庆交通大学",
     "name_fr": "Université Jiaotong de Chongqing",
     "aliases": [
-      "CQJTU",
-      "CJU"
+      "CQJTU"
     ],
-    "website": "https://www.cqjtu.edu.cn",
+    "website": "https://www.cqjtu.edu.cn/",
     "international_website": "http://international.cqjtu.edu.cn/",
     "application_portal_url": "https://cqjtu.17gz.org/"
   },
   "general": {
-    "presentation": "Université publique chinoise spécialisée dans le transport et le génie civil, accueillant des étudiants internationaux via le Collège d'éducation internationale et le Collège international Luhaitong. Partenariats internationaux actifs dont une Institut Confucius à l'Université d'Abomey-Calavi au Bénin.",
+    "presentation": "Université publique chinoise spécialisée dans les transports, le génie civil et les ponts, située à Chongqing. Elle accueille des étudiants internationaux via son Collège d'éducation internationale (国际教育学院) et gère un Institut Confucius à l'Université d'Abomey-Calavi au Bénin.",
     "history": "",
     "rankings": [],
     "strengths": [
-      "génie civil et transport",
-      "construction de ponts",
-      "génie routier",
+      "transport et logistique",
+      "génie civil et ponts",
+      "génie routier et ferroviaire",
       "science des matériaux",
-      "logistique et économie des corridors de transport"
+      "sciences du transport maritime (陆海通)",
+      "langue et culture chinoises"
     ],
     "teaching_languages": [
       "zh",
@@ -38,21 +38,28 @@
     },
     "campuses": [
       {
-        "name": "Campus Nan'an (南岸校区)",
+        "name": "Campus principal Nan'an",
         "city": "Chongqing",
-        "description": "Campus principal, No.66 Xuefu Road"
-      },
-      {
-        "name": "Campus Science City (科学城校区)",
-        "city": "Chongqing",
-        "description": "Second campus mentionné pour activités internationales"
+        "description": "Adresse: No.66 Xuefu Road, district de Nan'an, Chongqing 400074"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Génie du transport et ingénierie (programmes en chinois)",
+      "name": "Programmes de licence (全英文授课本科项目)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes enseignés en anglais disponibles dans les domaines du transport et du génie civil"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence en chinois",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -60,11 +67,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes de génie civil, ponts, routes, transport. Admission selon brochure 2026."
+      "notes": "Diverses spécialités en génie, gestion, langues, etc."
     },
     {
       "level": "master",
-      "name": "Programmes de master (transport, logistique, matériaux, gestion)",
+      "name": "Programmes de master (recherche)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 3,
@@ -72,50 +79,73 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "8研究生获批2026年国家公派研究生项目资助 (CSC confirmé)."
+      "notes": "8 étudiants ont obtenu la bourse CSC en 2026"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master en anglais",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours en anglais disponibles"
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
     },
     {
       "level": "language",
-      "name": "Programme de langue chinoise / Formation HSK",
+      "name": "Programme de langue chinoise",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": null,
       "start_months": [
-        9,
-        3
+        9
       ],
       "academic_calendar": "semester",
-      "notes": "汉语培训 dispensé par le Collège d'éducation internationale; centre d'examen HSK."
+      "notes": "Cours préparatoire de chinois pour étudiants internationaux"
     },
     {
       "level": "language",
-      "name": "Préparation IELTS / TOEFL",
-      "field": "other",
-      "language": "en",
+      "name": "Bourse Institut Confucius (孔子学院奖学金)",
+      "field": "chinese_language",
+      "language": "zh",
       "duration_years": null,
       "start_months": [
-        9,
-        3
+        9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours de préparation aux tests d'anglais proposés."
+      "notes": "Programme de langue et enseignement du chinois"
     },
     {
       "level": "exchange",
-      "name": "Études d'été (Summer School) - Programme CSC",
+      "name": "Programmes d'échange sortant (学生出国)",
       "field": "other",
-      "language": "en",
+      "language": "bilingual",
       "duration_years": null,
       "start_months": [
-        7
+        3,
+        9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme 2026 'Yu Z见中国 — 陆海相通·文明互鉴' en partenariat avec CSC et université canadienne."
+      "notes": "Programmes de mobilité pour étudiants chinois sortants"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires, selon brochure d'admission 2026.",
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -123,13 +153,17 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
       "other": [
-        "Inscription via plateforme https://cqjtu.17gz.org/"
+        "Dossier via portail cqjtu.17gz.org",
+        "Passeport valide",
+        "Certificat de diplôme",
+        "Relevés de notes",
+        "Certificat de langue (HSK pour programmes chinois, IELTS/TOEFL pour programmes anglais)"
       ]
     },
     "master": {
-      "academic": "Licence / bachelor pertinent.",
+      "academic": "Licence (bac+4) ou équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -139,11 +173,16 @@
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Bourse gouvernementale chinoise (CSC) disponible pour programme de recherche graduate"
+        "Dossier via portail cqjtu.17gz.org",
+        "Diplôme de licence",
+        "Relevés de notes",
+        "Lettre de recommandation",
+        "Plan d'études",
+        "Certificat de langue"
       ]
     },
     "phd": {
-      "academic": "Master pertinent.",
+      "academic": "Master ou équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -152,30 +191,40 @@
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Dossier via portail cqjtu.17gz.org",
+        "Diplôme de master",
+        "Publications",
+        "Lettres de recommandation",
+        "Plan de recherche",
+        "Accord d'un superviseur"
+      ]
     },
     "language": {
-      "academic": "Inscription ouverte aux étudiants étrangers.",
+      "academic": "Diplôme de fin d'études secondaires minimum",
       "age_max": null,
       "other": [
-        "Cours non-diplômants (非学历教育) et diplômants disponibles"
+        "Inscription via portail cqjtu.17gz.org",
+        "Passeport valide",
+        "Certificat HSK si disponible"
       ]
     }
   },
   "contacts": {
-    "office_name": "Collège d'éducation internationale / Office of International Cooperation and Exchange",
+    "office_name": "Collège d'éducation internationale (国际教育学院) / Bureau de coopération et d'échanges internationaux",
     "iso_email": "iccju@cqjtu.edu.cn",
-    "admissions_email": "waiban@vip.163.com",
+    "admissions_email": "iccju@cqjtu.edu.cn",
     "wechat": "",
-    "phone": "+86-023-62652602 / 023-62789078",
-    "address": "No.66, Xuefu Road, Nan'an District, Chongqing 400074, Chine"
+    "phone": "+86 023 62789078",
+    "address": "No.66 Xuefu Road, district de Nan'an, Chongqing 400074, Chine"
   },
   "matching": {
     "fields": [
       "engineering",
-      "chinese_language",
+      "sciences",
       "business",
-      "economics"
+      "chinese_language",
+      "other"
     ],
     "degrees": [
       "bachelor",
@@ -186,7 +235,8 @@
     ],
     "languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
@@ -197,15 +247,13 @@
     "age_max_master": null,
     "age_max_phd": null,
     "has_csc": true,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "",
+    "deadline_typical": "Juin (rentrée septembre)",
     "intake_months": [
-      3,
-      7,
       9
     ],
     "city": "Chongqing",
@@ -213,25 +261,31 @@
     "tags": [
       "transport",
       "génie civil",
-      "institut confucius",
-      "CSC",
-      "summer school",
-      "programme bilatéral Bénin"
+      "ponts",
+      "Institut Confucius Bénin",
+      "陆海通",
+      "bourses multiples",
+      "programmes en anglais"
     ]
   },
-  "confidence": 0.45,
+  "confidence": 0.55,
   "missing_fields": [
-    "frais de scolarité exacts",
-    "frais de logement",
-    "min HSK/IELTS/TOEFL",
-    "limites d'âge",
-    "deadline typique",
-    "bourse universitaire",
-    "bourse provinciale",
-    "GPA minimum",
-    "coût de la vie mensuel"
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "min_gpa",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "cost_of_living_cny_month",
+    "rankings",
+    "history",
+    "détails des programmes spécifiques"
   ],
-  "notes": "Sources = page internationale + portail 17gz.org. Brochure d'admission 2026 référencée mais contenu détaillé non affiché dans les sources fournies. Université spécialisée transport/ingénierie, Institut Confucius au Bénin confirmé. Programmes d'été CSC avec université canadienne (Thompson Rivers).",
+  "notes": "Sources principalement issues du Bureau de coopération internationale et du Collège d'éducation internationale. Informations sur les bourses confirmées (CSC, Bourse du Maire de Chongqing, Bourse du Président CQJTU, Bourse Institut Confucius). Les détails chiffrés (frais, scores linguistiques minimums, GPA) ne sont pas présents dans les sources fournies.",
   "documents": [
     {
       "type": "passport",
@@ -241,82 +295,72 @@
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport en cours de validité requis pour tous les candidats."
+      "notes": "Passeport valide requis pour candidature en ligne sur cqjtu.17gz.org et pour le visa X1/X2"
     },
     {
-      "type": "diploma",
+      "type": "diplome",
       "required": true,
       "count": null,
-      "who": "Candidat",
+      "who": "Bachelor/Master/PhD",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "Diplômes et relevés de notes officiels (traduits en chinois ou en anglais)."
+      "notes": "Diplôme le plus élevé + relevés de notes traduits (chinois/anglais notariés) requis"
     },
     {
-      "type": "language_certificate",
-      "required": false,
+      "type": "physical_exam",
+      "required": null,
       "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd",
-        "language"
-      ],
-      "notes": "Certificat HSK pour programmes en chinois ; IELTS/TOEFL pour programmes en anglais."
-    },
-    {
-      "type": "photo",
-      "required": true,
-      "count": null,
-      "who": "Candidat",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Photo d'identité récente."
-    },
-    {
-      "type": "physical_examination",
-      "required": false,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Certificat médical selon les exigences chinoises pour le visa."
+      "notes": null
     },
     {
       "type": "no_criminal_record",
-      "required": false,
+      "required": null,
       "count": null,
-      "who": "Candidat",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Casier judiciaire vierge requis pour le visa."
+      "notes": null
     },
     {
-      "type": "financial_proof",
-      "required": false,
+      "type": "study_plan",
+      "required": null,
       "count": null,
-      "who": "Candidat",
+      "who": "Master/PhD",
       "applies_to": [
-        "all"
+        "master",
+        "phd"
       ],
-      "notes": "Justificatif de ressources financières selon exigences ambassade."
+      "notes": null
+    },
+    {
+      "type": "recommendation_letters",
+      "required": null,
+      "count": null,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": null
     }
   ],
   "application": {
-    "platform_name": "Online Service Platform for International Students (cqjtu.17gz.org)",
+    "platform_name": "CQJTU Online Application System",
     "platform_url": "https://cqjtu.17gz.org/",
     "steps": [
-      "Créer un compte sur la plateforme en ligne",
-      "Remplir le formulaire de candidature",
-      "Joindre les documents requis",
-      "Soumettre la demande et suivre les instructions de l'université"
+      "Créer un compte sur cqjtu.17gz.org",
+      "Remplir le formulaire de candidature en ligne",
+      "Joindre les documents requis (passeport, diplômes, relevés, HSK/IELTS, photo, lettre de motivation)",
+      "Soumettre la candidature en ligne",
+      "Suivre l'instruction de l'École internationale pour l'admission et la bourse"
     ],
     "opens_at": "",
     "deadline": "",
@@ -365,7 +409,7 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Frais de subsistance à Chongqing non précisés sur les sources fournies"
     }
   },
   "scholarships": [
@@ -380,34 +424,67 @@
         "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "Via ambassade chinoise ou CSC ; sélection nationale",
-      "apply_via": "csc",
+      "conditions": "Excellents résultats académiques; candidature via ambassade ou via université (programme bilatéral)",
+      "apply_via": "ambassade ou université",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Chongqing Municipal Government Scholarship",
-      "type": "government",
+      "name": "Chongqing Municipal Government Mayor Scholarship",
+      "type": "local",
       "coverage": "partial",
       "covers": [
-        "tuition"
+        "tuition",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Bourse municipale de Chongqing",
+      "conditions": "Étudiants étrangers à Chongqing; mérite académique",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "CQJTU University Scholarship",
+      "name": "CQJTU President Scholarship",
       "type": "university",
       "coverage": "partial",
       "covers": [
-        "tuition"
+        "tuition",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Bourse propre à l'université, éligibilité selon dossier académique",
+      "conditions": "Candidats internationaux admis à CQJTU",
       "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Confucius Institute Scholarship",
+      "type": "institute",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Étudiants de l'Institut Confucius, notamment en langue chinoise",
+      "apply_via": "institute/university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chinese Government Scholarship (Country-specific / 国别奖学金)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Candidats de pays spécifiques désignés",
+      "apply_via": "ambassade",
       "deadline": "",
       "renewal": ""
     }
@@ -419,9 +496,9 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": true,
-      "duration": "1 an",
-      "leads_to_degree": false
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
     },
     "foundation": {
       "available": null,
@@ -434,75 +511,118 @@
       "X2"
     ],
     "documents_from_university": [
-      "Admission Notice (Lettre d'admission)",
-      "Visa Application for International Students (Formulaire JW202)",
-      "Preuve d'hébergement"
+      "Admission Notice (JW202)",
+      "Visa Application for Study in China (JW201 ou formulaire équivalent)"
     ],
-    "instructions": "Le candidat doit obtenir un visa X1 (études > 180 jours) ou X2 (≤ 180 jours) auprès d'une ambassade ou d'un consulat chinois avec les documents fournis par l'université, puis convertir le X1 en permis de résidence dans les 30 jours suivant l'arrivée.",
-    "arrival_and_residence_permit": "Détenteurs d'un visa X1 : permis de résidence obligatoire sous 30 jours via le Bureau local de la sécurité publique (公安局出入境管理处)."
+    "instructions": "Page dédiée '来华准备 - 签证申请' sur international.cqjtu.edu.cn/lhlx/lhzb/qzsq.htm; l'université délivre le JW202 et l'avis d'admission après acceptation",
+    "arrival_and_residence_permit": "Permis de résidence à obtenir dans les 30 jours après arrivée via Bureau de la sécurité publique de Nan'an; voir international.cqjtu.edu.cn/lhlx/zxxx/rxxz.htm"
   },
   "housing_and_services": {
     "housing_types": [
-      "chambre double sur campus",
-      "studio hors campus"
+      "Résidence universitaire sur campus"
     ],
-    "rules": "Règlement intérieur du dortoir de l'université ; résidences séparées pour étudiants internationaux possibles",
-    "international_office": "Bureau de l'École d'éducation internationale (国际教育学院) — iccju@cqjtu.edu.cn — Tél. +86 023-62789078",
-    "orientation": "Programme d'orientation organisé pour les nouveaux étudiants internationaux",
+    "rules": "Voir la section '在校学习 - 住宿管理' (international.cqjtu.edu.cn/lhlx/zxxx/zsgl.htm); informations sur '来华准备 - 住宿介绍' (zsjs.htm)",
+    "international_office": "École internationale (国际教育学院), No.66 Xuefu Road, Nan'an District, Chongqing 400074. Tél: +86 023-62789078. Email: iccju@cqjtu.edu.cn. Bureau de gestion des études à l'étranger: 023-62652670",
+    "orientation": null,
     "english_support": null,
-    "clubs": "Club '汉语角', événements culturels '渝见中国', activités '桥之韵', compétitions interculturelles"
+    "clubs": "Student clubs: tw.cqjtu.edu.cn; événements internationaux organisés (Fête de la mi-automne, Festival culturel international)"
   },
   "country_specific": [
     {
-      "region_or_country": "Benin",
-      "notes": "Partenariat privilégié via l'Institut Confucius (贝宁阿波美卡拉维大学孔子学院) — bourses et programmes facilités."
+      "region_or_country": "Bénin",
+      "notes": "Programme Confucius actif (重庆交通大学-贝宁阿波美卡拉维大学孔子学院); bourses de l'Institut Confucius, bourses du gouvernement chinois et bourses de l'ambassade de Chine disponibles pour candidats béninois"
     },
     {
-      "region_or_country": "Kazakhstan et pays long de l'Express ferroviaire Chine-Europe",
-      "notes": "Coopérations académiques actives via forum international dédié."
+      "region_or_country": "Pays d'Europe centrale et orientale / CEI",
+      "notes": "Coopération via le Centre de recherche européen (nsrijrc.cqjtu.edu.cn); bourses du gouvernement chinois accessibles"
     }
   ],
   "scan_status": "ok",
   "slug": "cqjtu",
-  "scraped_at": "2026-08-24T14:55:13.792Z",
+  "scraped_at": "2026-08-30T11:06:42.552Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 7,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://oice.cqjtu.edu.cn/",
       "title": "重庆交通大学-国际合作交流处（侨台港澳办公室）",
-      "chars": 1339
+      "chars": 3609
     },
     {
-      "url": "http://international.cqjtu.edu.cn/",
-      "title": "重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
-      "chars": 2293
+      "url": "https://oice.cqjtu.edu.cn/index.htm",
+      "title": "重庆交通大学-国际合作交流处（侨台港澳办公室）",
+      "chars": 3609
     },
     {
-      "url": "https://cqjtu.17gz.org/",
-      "title": "Online Service Platform for International Students",
-      "chars": 955
+      "url": "http://international.cqjtu.edu.cn/lxjd.htm",
+      "title": "留学交大-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 2287
     },
     {
       "url": "https://oice.cqjtu.edu.cn/info/1003/2374.htm",
       "title": "关于2026年暑假期间办理学生出国留学英文翻译材料审核的通知-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-      "chars": 1057
+      "chars": 2444
     },
     {
       "url": "https://oice.cqjtu.edu.cn/English_Version.htm",
       "title": "English Version-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-      "chars": 1129
+      "chars": 2689
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/2739.htm",
+      "title": "重庆市人民政府外国留学生市长奖学金申请表APPLICATION FORM FOR CHONGQING MUNICIPAL GOVERNMENT-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1526
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/2736.htm",
+      "title": "重庆交通大学外国留学生校长奖学金申请表Application Form for the CQJTU President Scholarship for International Students-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1589
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/2721.htm",
+      "title": "重庆交通大学校长奖学金申请流程CQJTU President Scholarship Application Procedure-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1359
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/2715.htm",
+      "title": "中国政府国别奖学金申请流程Chinese Government Scholarship Application Procedure-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1343
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/2712.htm",
+      "title": "孔子学院奖学金申请流程Confucius Institute Scholarship Application Procedure-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1456
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/2724.htm",
+      "title": "重庆市市长奖学金申请流程Chongqing Municipal Government Mayor Scholarship Application Procedure-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1423
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/lhlx.htm",
+      "title": "来华留学-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 2935
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/hlt/_qzy_lhlxwhtyjd.htm",
+      "title": "“桥之韵”来华留学文化体验基地-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1318
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/hlt/_jtqg_lhlxgqjyjd.htm",
+      "title": "“交通强国”来华留学国情教育基地-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 1323
+    },
+    {
+      "url": "http://international.cqjtu.edu.cn/info/1062/3448.htm",
+      "title": "重庆交通大学来华留学生全英文一流课程申报通知-重庆交通大学-国际教育学院 Welcome to Chongqing Jiaotong University !",
+      "chars": 3411
     },
     {
       "url": "https://oice.cqjtu.edu.cn/gatsw/zsxx.htm",
       "title": "招生信息-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-      "chars": 667
-    },
-    {
-      "url": "https://oice.cqjtu.edu.cn/gjxxzx/gjxxzx.htm",
-      "title": "国际学习中心-重庆交通大学-国际合作交流处（侨台港澳办公室）",
-      "chars": 629
+      "chars": 1963
     }
   ],
   "db_row": {
@@ -513,32 +633,32 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "Collège d'éducation internationale / Office of International Cooperation and Exchange",
+    "department": "Collège d'éducation internationale (国际教育学院) / Bureau de coopération et d'échanges internationaux",
     "emails": [
       "iccju@cqjtu.edu.cn",
-      "waiban@vip.163.com"
+      "iccju@cqjtu.edu.cn"
     ],
-    "phone": "+86-023-62652602 / 023-62789078",
+    "phone": "+86 023 62789078",
     "wechat": null,
     "website": "http://international.cqjtu.edu.cn/",
     "majors": [
       "engineering",
-      "chinese_language",
+      "sciences",
       "business",
-      "economics"
+      "chinese_language",
+      "other"
     ],
     "required_documents": [
       "passport",
-      "diploma",
-      "photo"
+      "diplome"
     ],
-    "scholarship_amount": "Chinese Government Scholarship (CSC) / Chongqing Municipal Government Scholarship / CQJTU University Scholarship",
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / Chongqing Municipal Government Mayor Scholarship / CQJTU President Scholarship / Confucius Institute Scholarship / Chinese Government Scholarship (Country-specific / 国别奖学金)",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,
     "language_requirements": null,
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Juin (rentrée septembre)"
   }
 }

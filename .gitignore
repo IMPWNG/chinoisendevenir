@@ -30,3 +30,4 @@ out
 *.sw?
 
 data/universities/raw/
+.venv-scrapling/

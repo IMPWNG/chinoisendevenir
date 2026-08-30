@@ -8,22 +8,26 @@
     ],
     "website": "https://www.scut.edu.cn/",
     "international_website": "https://www.scut.edu.cn/en/",
-    "application_portal_url": null
+    "application_portal_url": ""
   },
   "general": {
-    "presentation": "Université de technologie de premier plan située à Guangzhou, reconnue pour son excellence en ingénierie et ses disciplines Double First-Class. Trois disciplines classées dans le top 0,01% mondial ESI, 20 dans le top 1%.",
-    "history": null,
+    "presentation": "Université de technologie de rang « Double First-Class » située à Guangzhou. 3 disciplines dans le top 0,01% mondial ESI, 20 dans le top 1%. Pilier de la Greater Bay Area.",
+    "history": "Fondée en 1952 comme l'un des principaux instituts polytechniques de Chine.",
     "rankings": [
-      "3 disciplines dans le top 0,01% mondial ESI",
-      "20 disciplines dans le top 1% ESI",
-      "Université Double First-Class"
+      "QS World Ranking 2026: 162",
+      "THE World Ranking 2026: 129",
+      "ARWU 2026: 279",
+      "US News 2026: 342"
     ],
     "strengths": [
       "Ingénierie",
-      "Ingénierie émergente",
-      "Médecine (développée depuis 2014)",
-      "Innovation et entrepreneuriat",
-      "Médecine + Ingénierie (modèle Medicine + X)"
+      "Sciences",
+      "Technologie",
+      "Médecine",
+      "Architecture",
+      "Design",
+      "Management",
+      "Économie"
     ],
     "teaching_languages": [
       "zh",
@@ -35,223 +39,331 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 2500,
+      "max": 5000,
+      "notes": "Estimation pour étudiant international à Guangzhou"
     },
     "campuses": [
       {
         "name": "Wushan Campus",
         "city": "Guangzhou",
-        "description": "381 Wushan Road, Tianhe District, Guangzhou, 510641"
+        "description": "381 Wushan Road, Tianhe District - Campus principal et administratif"
       },
       {
         "name": "University Town Campus",
         "city": "Guangzhou",
-        "description": "Guangzhou Higher Education Mega Centre, Panyu District, Guangzhou, 510006"
+        "description": "Guangzhou Higher Education Mega Centre, Panyu District"
       },
       {
         "name": "Guangzhou International Campus (GZIC)",
         "city": "Guangzhou",
-        "description": "777 Xingye Avenue East, Panyu District, Guangzhou, 511442"
+        "description": "777 Xingye Avenue East, Panyu District - Campus dédié aux programmes internationaux"
       }
-    ]
-  },
-  "programs": [
-    {
-      "level": "bachelor",
-      "name": "Programmes de premier cycle (Degree Programs)",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
+    ],
+    "programs": [
+      {
+        "level": "bachelor",
+        "name": "Undergraduate Programs (CN/EN)",
+        "field": "engineering",
+        "language": "bilingual",
+        "duration_years": 4,
+        "start_months": [
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "Sciences, ingénierie, lettres, économie, management, langues, arts, architecture"
+      },
+      {
+        "level": "master",
+        "name": "Master Programs (Academic/Professional)",
+        "field": "engineering",
+        "language": "bilingual",
+        "duration_years": 3,
+        "start_months": [
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "Master académique en 26 majeures couvrant 9 disciplines: philosophie, économie, droit, éducation, littérature, science, ingénierie, administration"
+      },
+      {
+        "level": "phd",
+        "name": "Doctor Programs (PhD)",
+        "field": "engineering",
+        "language": "bilingual",
+        "duration_years": 4,
+        "start_months": [
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "Doctorat académique en 8 disciplines: économie, droit, littérature, science, ingénierie, médecine, management, études interdisciplinaires"
+      },
+      {
+        "level": "language",
+        "name": "Intensive Chinese Language Program",
+        "field": "chinese_language",
+        "language": "zh",
+        "duration_years": null,
+        "start_months": [
+          3,
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "Programme intensif court pour améliorer le chinois (écoute, oral, lecture, écriture)"
+      },
+      {
+        "level": "foundation",
+        "name": "International Foundation Program",
+        "field": "other",
+        "language": "bilingual",
+        "duration_years": 1,
+        "start_months": [
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "Programme préparatoire en chinois ou anglais pour étudiants ne remplissant pas les critères d'admission directe en licence"
+      },
+      {
+        "level": "exchange",
+        "name": "International Summer Camp Program",
+        "field": "chinese_language",
+        "language": "zh",
+        "duration_years": null,
+        "start_months": [
+          7
+        ],
+        "academic_calendar": "summer",
+        "notes": "Plus de 10 ans d'expérience, langue et culture chinoises"
+      },
+      {
+        "level": "bachelor",
+        "name": "Undergraduate Programs at GZIC (English-medium)",
+        "field": "engineering",
+        "language": "en",
+        "duration_years": 4,
+        "start_months": [
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "9 nouveaux programmes d'ingénierie émergente sur le Guangzhou International Campus"
+      },
+      {
+        "level": "master",
+        "name": "Graduate Programmes at GZIC",
+        "field": "engineering",
+        "language": "en",
+        "duration_years": 3,
+        "start_months": [
+          9
+        ],
+        "academic_calendar": "semester",
+        "notes": "Programmes de master et doctorat en anglais sur le campus international"
+      }
+    ],
+    "admission_requirements": {
+      "bachelor": {
+        "academic": "Diplôme de fin d'études secondaires / équivalent baccalauréat. Bonne performance académique.",
+        "min_gpa": null,
+        "age_max": null,
+        "age_min": null,
+        "hsk_level": null,
+        "hsk_score_min": null,
+        "ielts_min": null,
+        "toefl_min": null,
+        "preparatory_if_insufficient": "International Foundation Program (chinois ou anglais) disponible pour candidats ne remplissant pas les critères",
+        "other": [
+          "Conditions spécifiques selon le programme",
+          "Programmes en chinois: HSK requis",
+          "Programmes en anglais: IELTS/TOEFL requis"
+        ]
+      },
+      "master": {
+        "academic": "Licence (bachelor degree) dans un domaine pertinent",
+        "min_gpa": null,
+        "age_max": null,
+        "age_min": null,
+        "hsk_level": null,
+        "hsk_score_min": null,
+        "ielts_min": null,
+        "toefl_min": null,
+        "preparatory_if_insufficient": null,
+        "other": [
+          "Examen d'entrée ou entretien selon le programme",
+          "Lettres de recommandation",
+          "Relevés de notes"
+        ]
+      },
+      "phd": {
+        "academic": "Master (master degree) dans un domaine pertinent",
+        "min_gpa": null,
+        "age_max": null,
+        "age_min": null,
+        "hsk_level": null,
+        "hsk_score_min": null,
+        "ielts_min": null,
+        "toefl_min": null,
+        "preparatory_if_insufficient": null,
+        "other": [
+          "Lettres de recommandation",
+          "Relevés de notes",
+          "Plan de recherche",
+          "Approbation d'un superviseur SCUT"
+        ]
+      },
+      "language": {
+        "academic": "Diplôme d'études secondaires / équivalent",
+        "age_max": null,
+        "other": [
+          "Inscription possible sans HSK pour débutants"
+        ]
+      }
+    },
+    "contacts": {
+      "office_name": "School of International Education (SIE), SCUT",
+      "iso_email": "international@scut.edu.cn",
+      "admissions_email": "sieinfo@scut.edu.cn",
+      "wechat": "",
+      "phone": "+86-20-81182580",
+      "address": "Wushan Campus, 381 Wushan Road, Tianhe District, Guangzhou 510641, China"
+    },
+    "matching": {
+      "fields": [
+        "engineering",
+        "sciences",
+        "computer_science",
+        "business",
+        "economics",
+        "finance",
+        "medicine",
+        "design",
+        "architecture",
+        "arts",
+        "law",
+        "education",
+        "chinese_language"
+      ],
+      "degrees": [
+        "bachelor",
+        "master",
+        "phd",
+        "language",
+        "foundation",
+        "exchange"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "english_programs_available": true,
+      "chinese_language_program_available": true,
+      "min_hsk_level": null,
+      "min_ielts": null,
+      "min_toefl": null,
+      "age_max_bachelor": null,
+      "age_max_master": null,
+      "age_max_phd": null,
+      "has_csc": null,
+      "has_university_scholarship": null,
+      "has_provincial_scholarship": null,
+      "tuition_cny_min": null,
+      "tuition_cny_max": null,
+      "housing_cny_year_min": null,
+      "deadline_typical": "",
+      "intake_months": [
+        3,
+        7,
         9
       ],
-      "academic_calendar": "semester",
-      "notes": "Programmes internationaux disponibles via le Guangzhou International Campus"
+      "city": "Guangzhou",
+      "province": "Guangdong",
+      "tags": [
+        "Double First-Class",
+        "Project 985",
+        "Project 211",
+        "Greater Bay Area",
+        "ESI top 1%",
+        "Guangzhou International Campus",
+        "English-medium programs",
+        "Strong in engineering"
+      ]
     },
-    {
-      "level": "master",
-      "name": "Programmes de master (Degree Programs)",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programmes en ingénierie émergente"
-    },
-    {
-      "level": "phd",
-      "name": "Programmes doctoraux (Degree Programs)",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "language",
-      "name": "Programmes non-diplômants (Non-Degree Programs)",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Inclut Summer School Global d'Ingénierie Émergente"
-    },
-    {
-      "level": "exchange",
-      "name": "Programmes d'échange (CEP, YES)",
-      "field": "other",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
-        7
-      ],
-      "academic_calendar": "semester",
-      "notes": "Summer School Global d'Ingénierie Émergente (12-25 juillet)"
-    }
-  ],
-  "admission_requirements": {
-    "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires requis",
-      "min_gpa": null,
-      "age_max": null,
-      "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
-    },
-    "master": {
-      "academic": "Diplôme de bachelor requis",
-      "min_gpa": null,
-      "age_max": null,
-      "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
-    },
-    "phd": {
-      "academic": "Diplôme de master requis",
-      "min_gpa": null,
-      "age_max": null,
-      "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
-    },
-    "language": {
-      "academic": null,
-      "age_max": null,
-      "other": []
-    }
+    "confidence": 0.55,
+    "missing_fields": [
+      "application_portal_url",
+      "min_gpa",
+      "age_max",
+      "age_min",
+      "hsk_level",
+      "hsk_score_min",
+      "ielts_min",
+      "toefl_min",
+      "tuition_cny_min",
+      "tuition_cny_max",
+      "housing_cny_year_min",
+      "deadline_typical",
+      "has_csc",
+      "has_university_scholarship",
+      "has_provincial_scholarship",
+      "scholarship details",
+      "visa details",
+      "specific eligibility criteria per program",
+      "application fees"
+    ],
+    "notes": "Données extraites principalement du site officiel SCUT (en) et du portail GZIC. Les exigences détaillées (HSK, IELTS, TOEFL, GPA, âge, frais, bourses, calendrier de candidature, portail de candidature) ne sont pas présentes dans les sources fournies et restent à compléter via les pages School of International Education et Scholarship. Coordonnées vérifiées: admissions sieinfo@scut.edu.cn, +86-20-81182580."
   },
-  "contacts": {
-    "office_name": "School of International Education (SIE)",
-    "iso_email": "sieinfo@scut.edu.cn",
-    "admissions_email": "sieinfo@scut.edu.cn",
-    "wechat": null,
-    "phone": "+86-20-81182580",
-    "address": "381 Wushan Road, Tianhe District, Guangzhou, 510641"
-  },
-  "matching": {
-    "fields": [
-      "engineering",
-      "sciences",
-      "medicine",
-      "business",
-      "design",
-      "computer_science"
-    ],
-    "degrees": [
-      "bachelor",
-      "master",
-      "phd",
-      "language",
-      "exchange"
-    ],
-    "languages": [
-      "zh",
-      "en"
-    ],
-    "english_programs_available": true,
-    "chinese_language_program_available": true,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": true,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": "",
-    "intake_months": [
-      9
-    ],
-    "city": "Guangzhou",
-    "province": "Guangdong",
-    "tags": [
-      "Double First-Class",
-      "Université 985",
-      "Université 211",
-      "Greater Bay Area",
-      "ESI top 1%",
-      "partenariats internationaux (Cambridge, Imperial College London, Université Paris Cité)"
-    ]
-  },
-  "confidence": 0.45,
-  "missing_fields": [
-    "min_gpa",
-    "hsk_level",
-    "hsk_score_min",
-    "ielts_min",
-    "toefl_min",
-    "age_max",
-    "tuition_cny",
-    "housing_cny",
-    "deadline_typical",
-    "has_csc",
-    "has_provincial_scholarship",
-    "durée exacte des programmes",
-    "exigences académiques détaillées"
-  ],
-  "notes": "Sources limitées au site web principal en anglais. Les détails spécifiques sur les frais de scolarité, les scores HSK/IELTS/TOEFL minimum, les dates limites et les exigences GPA ne sont pas disponibles dans les sources fournies. SCUT propose des programmes de bourses (mentionnés sur le site) et collabore avec des universités de premier plan mondial.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "Étudiants internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Passeport valide requis pour tous les candidats internationaux"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Candidats bachelor/master/phd",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme d'études secondaires pour bachelor; licence pour master; master pour doctorat"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevés de notes officiels"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": null,
+      "who": "Candidats programmes chinois/anglais",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais (détails non précisés dans les sources)"
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "Portail SCUT International Students",
+    "platform_url": "https://www.scut.edu.cn/en/595/list.htm",
+    "steps": [
+      "Vérifier l'éligibilité sur le site SCUT",
+      "Préparer les documents requis",
+      "Soumettre la candidature via le portail international de SCUT",
+      "Attendre la notification d'admission",
+      "Postuler pour le visa X1/X2 avec les documents fournis par l'université"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
@@ -304,9 +416,37 @@
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via CSC ou via l'ambassade de Chine",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Guangdong Government Scholarship",
+      "type": "provincial",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "SCUT Scholarship",
+      "type": "university",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
@@ -324,86 +464,107 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "Programme intensif de chinois",
+      "leads_to_degree": false
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "International Foundation Program en chinois ou anglais pour étudiants ne remplissant pas les critères d'admission directe en bachelor"
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission JW202",
+      "Formulaire de demande de visa"
+    ],
+    "instructions": "Les étudiants doivent demander un visa X1 (études > 180 jours) ou X2 (études < 180 jours) avec la lettre d'admission et le formulaire JW202 fournis par SCUT",
+    "arrival_and_residence_permit": "Permis de résidence requis dans les 30 jours suivant l'arrivée pour les détenteurs de visa X1"
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "Résidences sur les trois campus"
+    ],
     "rules": "",
-    "international_office": "sieinfo@scut.edu.cn, +86-20-81182580",
+    "international_office": "School of International Education, SCUT - sieinfo@scut.edu.cn, +86-20-81182580",
     "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "english_support": true,
+    "clubs": "Programmes d'été, clubs internationaux, activités culturelles"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Tous pays",
+      "notes": "SCUT accepte les étudiants internationaux de tous pays. Contact: sieinfo@scut.edu.cn"
     }
   ],
+  "notes": "",
+  "missing_fields": [],
+  "confidence": 0.6,
   "scan_status": "ok",
   "slug": "scut",
-  "scraped_at": "2026-08-23T14:55:53.037Z",
+  "scraped_at": "2026-08-30T11:05:37.495Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 15,
+  "pages_used": 11,
   "sources": [
     {
       "url": "https://www.scut.edu.cn/en/",
       "title": "South China University of Technology",
-      "chars": 11373
-    },
-    {
-      "url": "https://www2.scut.edu.cn/_css/error/error.css",
-      "title": null,
-      "chars": 5700
-    },
-    {
-      "url": "https://www2.scut.edu.cn/_js/themes/default/easyui.css",
-      "title": null,
-      "chars": 12000
-    },
-    {
-      "url": "https://www2.scut.edu.cn/_js/themes/icon.css",
-      "title": null,
-      "chars": 12000
+      "chars": 16000
     },
     {
       "url": "https://www.scut.edu.cn/en/606/list.htm",
       "title": "Degree Programs",
-      "chars": 2650
+      "chars": 5563
     },
     {
       "url": "https://www.scut.edu.cn/en/607/list.htm",
       "title": "Non-Degree Programs",
-      "chars": 2709
+      "chars": 5623
     },
     {
-      "url": "https://www.scut.edu.cn/en/595/list.htm",
-      "title": "Admission",
-      "chars": 4964
+      "url": "https://www.scut.edu.cn/en/2026/0818/c640a60433/page.htm",
+      "title": "Significant Improvement in Student Caliber! SCUT’s 2026 Undergraduate Admissions Successfully Concludes",
+      "chars": 6719
     },
     {
-      "url": "https://www.scut.edu.cn/en/738/list.htm",
-      "title": "Brochure",
-      "chars": 1658
+      "url": "https://www2.scut.edu.cn/gzic_en/",
+      "title": "华南理工大学广州国际校区英文版",
+      "chars": 8689
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/616/list.htm",
+      "title": "Contact",
+      "chars": 6285
+    },
+    {
+      "url": "https://www2.scut.edu.cn/gzic_en/44830/list.htm",
+      "title": "Undergraduate Programmes",
+      "chars": 16000
     },
     {
       "url": "https://www.scut.edu.cn/en/608/list.htm",
       "title": "Scholarship",
-      "chars": 3593
+      "chars": 6616
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/GlobalNetwork/list.htm",
+      "title": "Global Network",
+      "chars": 10207
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/595/list.htm",
+      "title": "Admission",
+      "chars": 8316
+    },
+    {
+      "url": "https://www.scut.edu.cn/en/614/list.htm",
+      "title": "Inbound",
+      "chars": 5594
     }
   ],
   "db_row": {
@@ -414,26 +575,19 @@
     "city": "Guangzhou",
     "province": "Guangdong",
     "country": "Chine",
-    "department": "School of International Education (SIE)",
-    "emails": [
-      "sieinfo@scut.edu.cn",
-      "sieinfo@scut.edu.cn"
-    ],
-    "phone": "+86-20-81182580",
+    "department": null,
+    "emails": [],
+    "phone": null,
     "wechat": null,
     "website": "https://www.scut.edu.cn/en/",
-    "majors": [
-      "engineering",
-      "sciences",
-      "medicine",
-      "business",
-      "design",
-      "computer_science"
-    ],
+    "majors": [],
     "required_documents": [
-      "passport"
+      "passport",
+      "diploma",
+      "transcripts",
+      "language_certificate"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / Guangdong Government Scholarship / SCUT Scholarship",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,

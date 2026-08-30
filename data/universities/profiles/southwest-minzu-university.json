@@ -7,22 +7,27 @@
       "SWUN",
       "Southwest University for Nationalities"
     ],
-    "website": "www.swun.edu.cn",
-    "international_website": "english.swun.edu.cn",
-    "application_portal_url": "swun.cucas.cn"
+    "website": "https://www.swun.edu.cn",
+    "international_website": "https://english.swun.edu.cn",
+    "application_portal_url": "https://swun.cucas.cn"
   },
   "general": {
-    "presentation": "Université publique multidisciplinaire sous la Commission des affaires ethniques de l'État, dédiée à l'enseignement supérieur des minorités ethniques en Chine. Située à Chengdu, elle couvre plus de 3 000 mu avec 1 120 000 m² construits sur trois campus.",
-    "history": "Fondée en juillet 1950, officiellement établie le 1er juin 1951. Co-administrée par le Ministère de l'Éducation, la Commission des affaires ethniques et le gouvernement du Sichuan.",
-    "rankings": [],
+    "presentation": "Université pluridisciplinaire publique sous la tutelle de la Commission des affaires ethniques de l'État (SEAC), co-financée par le Ministère de l'Éducation et le gouvernement du Sichuan. Dédiée à l'enseignement supérieur des minorités ethniques, elle propose plus de 37 programmes internationaux en 3 niveaux.",
+    "history": "Fondée en juillet 1950, officiellement établie le 1er juin 1951. Anciennement appelée Southwest University for Nationalities (SWUN).",
+    "rankings": [
+      "Projet Double First-Class - Discipline (Économie ethnique chinoise)"
+    ],
     "strengths": [
-      "Études des minorités ethniques (Yi, Tibétain)",
-      "Médecine traditionnelle Yi et Tibétaine",
-      "Sciences animales et écologie du plateau Qinghai-Tibet",
-      "Linguistique et langues minoritaires"
+      "Études des minorités ethniques",
+      "Médecine vétérinaire et élevage (plateau tibétain)",
+      "Arts (Beaux-arts, Musique, Danse, Design)",
+      "Langues étrangères (EN, JP, FR, KR)",
+      "Informatique et IA",
+      "Économie et gestion"
     ],
     "teaching_languages": [
-      "zh"
+      "zh",
+      "en"
     ],
     "location": {
       "city": "Chengdu",
@@ -30,25 +35,25 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 2500,
-      "notes": "Hébergement 40-60 RMB/jour (indiqué par CUCAS, à vérifier)"
+      "min": 2220,
+      "max": 2820,
+      "notes": "Estimation CUCAS incluant logement et nourriture"
     },
     "campuses": [
       {
-        "name": "Wuhou",
+        "name": "Wuhou Campus",
         "city": "Chengdu",
-        "description": "Campus principal, district de Wuhou, 1ère section de la 1ère route circulaire sud"
+        "description": "Campus principal près du temple Wuhou, district de Wuhou"
       },
       {
-        "name": "Hangkonggang",
-        "city": "Chengdu",
-        "description": "Campus près de l'aéroport, comté de Shuangliu"
+        "name": "Hangkonggang Campus",
+        "city": "Chengdu (Shuangliu)",
+        "description": "Campus près de l'aéroport"
       },
       {
-        "name": "Taipingyuan",
+        "name": "Taipingyuan Campus",
         "city": "Chengdu",
-        "description": "Campus hors 2ème route circulaire"
+        "description": "Campus hors du 2e périphérique"
       }
     ]
   },
@@ -63,7 +68,7 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "20 000 CNY/an"
+      "notes": "RMB 20 000/an"
     },
     {
       "level": "bachelor",
@@ -75,7 +80,7 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "20 000 CNY/an"
+      "notes": "RMB 20 000/an"
     },
     {
       "level": "bachelor",
@@ -87,7 +92,7 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "20 000 CNY/an"
+      "notes": "RMB 20 000/an"
     },
     {
       "level": "bachelor",
@@ -99,19 +104,19 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "20 000 CNY/an"
+      "notes": "RMB 20 000/an"
     },
     {
       "level": "bachelor",
       "name": "Network Engineering",
-      "field": "computer_science",
+      "field": "engineering",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "20 000 CNY/an"
+      "notes": "RMB 20 000/an"
     },
     {
       "level": "bachelor",
@@ -123,50 +128,14 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "17 000 CNY/an"
+      "notes": "RMB 17 000/an"
     },
     {
-      "level": "bachelor",
-      "name": "Minority Languages and Literatures of China",
+      "level": "master",
+      "name": "Fine Art",
       "field": "arts",
       "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "26 000 CNY/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Animal Husbandry",
-      "field": "agriculture",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "26 000 CNY/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Pharmacy",
-      "field": "pharmacy",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Inclut médecine traditionnelle Yi et Tibétaine"
-    },
-    {
-      "level": "bachelor",
-      "name": "Business Administration",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 4,
+      "duration_years": 3,
       "start_months": [
         9
       ],
@@ -174,8 +143,56 @@
       "notes": ""
     },
     {
-      "level": "bachelor",
-      "name": "International Economics and Trade",
+      "level": "master",
+      "name": "Applied Economics",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Spécialisations: Finance, Économie régionale, Commerce international"
+    },
+    {
+      "level": "master",
+      "name": "Foreign Language and Literature",
+      "field": "other",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inclut traduction et interprétation"
+    },
+    {
+      "level": "master",
+      "name": "Jurisprudence",
+      "field": "law",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Tourism Management",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "Chinese Ethnic Economics",
       "field": "economics",
       "language": "zh",
       "duration_years": 4,
@@ -184,89 +201,80 @@
       ],
       "academic_calendar": "semester",
       "notes": ""
-    },
-    {
-      "level": "foundation",
-      "name": "Preparatory Courses",
-      "field": "other",
-      "language": "zh",
-      "duration_years": 1,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Sciences, Lettres, Formation déléguée"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (lycée) reconnu",
+      "academic": "Diplôme de fin d'études secondaires (lycée)",
       "min_gpa": null,
-      "age_max": 25,
+      "age_max": null,
       "age_min": 18,
       "hsk_level": 4,
       "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire d'un an disponible (College of Preparatory Education)",
+      "preparatory_if_insufficient": "Programmes préparatoires de chinois disponibles (année préparatoire HSK)",
       "other": [
-        "37 programmes au total sur 3 niveaux (bachelor/master/doctorat)"
+        "Non-Chinois en bonne santé mentale et physique",
+        "Respecter les lois chinoises et le règlement de l'université"
       ]
     },
     "master": {
-      "academic": "Licence (bachelor degree) dans un domaine pertinent",
+      "academic": "Diplôme de Bachelor / Licence",
       "min_gpa": null,
-      "age_max": 40,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
+      "hsk_level": 5,
       "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Plan d'études / projet de recherche requis (1000 mots min)"
+      ]
     },
     "phd": {
-      "academic": "Master (master degree) dans un domaine pertinent",
+      "academic": "Diplôme de Master",
       "min_gpa": null,
-      "age_max": 45,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": []
     },
     "language": {
-      "academic": "Diplôme d'études secondaires pour programmes de langue chinoise",
+      "academic": "Pas de diplôme spécifique requis",
       "age_max": null,
-      "other": []
+      "other": [
+        "Cours de chinois court terme et long terme disponibles"
+      ]
     }
   },
   "contacts": {
-    "office_name": "International Education College",
-    "iso_email": "",
-    "admissions_email": "",
+    "office_name": "Bureau des affaires internationales / International Students Office",
+    "iso_email": "iso@swun.edu.cn",
+    "admissions_email": "admission@swun.edu.cn",
     "wechat": "",
-    "phone": "",
-    "address": "#16, South Section, 1st Ring Road, Wuhou District, Chengdu, Sichuan 610041"
+    "phone": "+86-28-85522204",
+    "address": "1st Ring Road (South Section), Wuhou District, Chengdu, Sichuan 610041, Chine"
   },
   "matching": {
     "fields": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "arts",
+      "music",
+      "design",
+      "law",
+      "education",
       "business",
       "economics",
       "finance",
-      "computer_science",
-      "engineering",
-      "sciences",
-      "medicine",
-      "pharmacy",
       "chinese_language",
-      "arts",
-      "design",
-      "music",
-      "law",
-      "education",
       "agriculture",
       "other"
     ],
@@ -274,84 +282,155 @@
       "bachelor",
       "master",
       "phd",
-      "language",
-      "foundation"
+      "language"
     ],
     "languages": [
       "zh",
       "en"
     ],
-    "english_programs_available": false,
+    "english_programs_available": true,
     "chinese_language_program_available": true,
     "min_hsk_level": 4,
     "min_ielts": null,
     "min_toefl": null,
-    "age_max_bachelor": 25,
-    "age_max_master": 40,
-    "age_max_phd": 45,
-    "has_csc": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": null,
+    "has_provincial_scholarship": true,
     "tuition_cny_min": 17000,
-    "tuition_cny_max": 26000,
-    "housing_cny_year_min": 14600,
+    "tuition_cny_max": 20000,
+    "housing_cny_year_min": 1100,
     "deadline_typical": "30 mai",
     "intake_months": [
+      3,
       9
     ],
     "city": "Chengdu",
     "province": "Sichuan",
     "tags": [
-      "minorités ethniques",
-      "médecine tibétaine",
-      "médecine Yi",
-      "université publique",
-      "programme préparatoire",
-      "37 programmes"
+      "minorités_ethniques",
+      "publique",
+      "double_first_class",
+      "affaires_ethniques",
+      "chino_long_terme",
+      "bourses_csc",
+      "plat_tibétain"
     ]
   },
-  "confidence": 0.55,
+  "confidence": 0.75,
   "missing_fields": [
-    "email_admissions_officiel",
-    "telephone",
-    "conditions HSK précises",
-    "scores IELTS/TOEFL",
-    "bourses CSC explicites",
-    "deadline master/PhD",
-    "frais master/PhD"
+    "contacts.wechat",
+    "min_gpa précis",
+    "age_max pour tous niveaux",
+    "frais de dossier exacts hors CUCAS",
+    "anglais-programmes listée précise pour master",
+    "liste complète des 37 programmes"
   ],
-  "notes": "37 programmes en 3 niveaux (bachelor/master/doctorat). Tous les programmes détaillés sur CUCAS sont enseignés en chinois. Les exigences précises (HSK, IELTS, bourses) ne sont pas explicitement détaillées dans les sources ; valeurs HSK/âges déduites des standards chinois généraux. Le Collège des langues étrangères propose anglais, japonais, français, coréen comme matières. Site principal : english.swun.edu.cn",
+  "notes": "Données issues principalement de CUCAS (swun.cucas.cn) et Wikipedia. SWUN propose 37 programmes internationaux en 3 niveaux (bachelor/master/doctorat), la majorité enseignés en chinois. Frais de dossier: USD 57-85 + service CUCAS USD 200. Logement international: single 1200 RMB, double 600 RMB, quadruple 300 RMB. Bourses CSC, provinciales du Sichuan et bourses de l'université disponibles. CUCAS est le portail d'application principal. Programmes anglais existent (ex. certains master en langues étrangères) mais la majorité est en chinois. Date limite typique: 30 mai pour rentrée septembre.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "Tous candidats",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Scan couleur clair de la page d'information, valable"
+    },
+    {
+      "type": "photo",
+      "required": true,
+      "count": 1,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Format passeport 2x2 pouces, fond blanc, récente 6 mois"
+    },
+    {
+      "type": "diplome",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Certificat de graduation le plus élevé (lycée pour bachelor, bachelor pour master), traduit et notarié si non chinois/anglais, avec sceau officiel"
+    },
+    {
+      "type": "releves_notes",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Transcriptions de toutes les années, traduites et notariées si non chinois/anglais, avec sceau officiel"
+    },
+    {
+      "type": "certificat_langue",
+      "required": true,
+      "count": null,
+      "who": "Programmes en chinois",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "HSK 4+ (≥180) pour bachelor, HSK 5+ (≥180) pour master"
+    },
+    {
+      "type": "examen_medical",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire standard, en anglais ou chinois, valable 6 mois"
+    },
+    {
+      "type": "plan_etudes",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "≥1000 mots en chinois ou anglais, signé, inclure auto-intro, motivation, plan de carrière"
     }
   ],
   "application": {
     "platform_name": "CUCAS",
-    "platform_url": "https://swun.cucas.cn/",
-    "steps": [],
+    "platform_url": "https://swun.cucas.cn",
+    "steps": [
+      "Créer un compte CUCAS avec email valide",
+      "Cliquer sur 'Apply Now' du programme choisi",
+      "Remplir le formulaire en ligne (~10 min)",
+      "Télécharger les documents requis (~5 min)",
+      "Payer les frais de dossier et frais de service CUCAS (~5 min)",
+      "Cliquer sur 'Submit' pour soumettre"
+    ],
     "opens_at": "",
     "deadline": "2027-05-30",
     "results_at": "",
     "intake_months": [
       9
     ],
-    "application_fee_cny": null,
-    "application_fee_refundable": null,
-    "payment_methods": []
+    "application_fee_cny": 400,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "carte bancaire en ligne via CUCAS"
+    ]
   },
   "fees": {
     "tuition_cny_year": {
       "bachelor": {
         "min": 17000,
-        "max": 26000
+        "max": 20000
       },
       "master": {
         "min": null,
@@ -368,13 +447,34 @@
       "english_taught_premium": null
     },
     "insurance_cny_year": null,
-    "other_fees": [],
+    "other_fees": [
+      {
+        "name": "Frais de service CUCAS",
+        "amount_cny": 1400,
+        "notes": "USD 200"
+      },
+      {
+        "name": "Frais de dossier",
+        "amount_cny": 400,
+        "notes": "USD 57-85, non remboursable"
+      }
+    ],
     "housing": {
       "on_campus": [
         {
+          "type": "single",
+          "price_cny_year": 14400,
+          "included": "Résidence internationale"
+        },
+        {
           "type": "double",
-          "price_cny_year": 14600,
-          "included": "40-60 RMB/person/day, soit ~14 600-21 900 CNY/an (365 j.)"
+          "price_cny_year": 7200,
+          "included": "Résidence internationale"
+        },
+        {
+          "type": "quad",
+          "price_cny_year": 3600,
+          "included": "Résidence internationale"
         }
       ],
       "deposit_cny": null,
@@ -384,20 +484,35 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "RMB 2 220 à 2 820 par mois (toutes dépenses comprises)"
     }
   },
-  "scholarships": [],
+  "scholarships": [
+    {
+      "name": "Bourse d'études SWUN (CSC et bourses de l'université)",
+      "type": "csc",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique, varie selon le type de bourse",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Renouvelable selon résultats académiques"
+    }
+  ],
   "language": {
-    "hsk_bachelor": null,
-    "hsk_master": null,
+    "hsk_bachelor": 4,
+    "hsk_master": 5,
     "hsk_phd": null,
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
     },
     "foundation": {
       "available": null,
@@ -405,81 +520,120 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Formulaire JW202/JW201",
+      "Lettre d'admission officielle",
+      "Visa Application Study Form"
+    ],
+    "instructions": "Demander le visa X1 (études >180 jours) ou X2 (<180 jours) avec JW202/JW201 et lettre d'admission. Documents originaux ou copies certifiées.",
+    "arrival_and_residence_permit": "S'enregistrer au bureau de sécurité publique local dans les 30 jours pour permis de résidence"
   },
   "housing_and_services": {
-    "housing_types": [],
-    "rules": "",
-    "international_office": "",
-    "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "housing_types": [
+      "Appartement pour étudiants internationaux (chambres simple, double, quadruple)"
+    ],
+    "rules": "Règlement intérieur de l'université; paiement mensuel",
+    "international_office": "Office of International Cooperation and Exchange, SWUN",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux",
+    "english_support": true,
+    "clubs": "Associations étudiantes diverses, clubs culturels liés aux minorités ethniques"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Tous pays",
+      "notes": "Conditions identiques pour étudiants non-chinois, sans restriction de nationalité spécifique"
     }
   ],
   "scan_status": "ok",
   "slug": "southwest-minzu-university",
-  "scraped_at": "2026-08-24T14:58:06.277Z",
+  "scraped_at": "2026-08-30T11:11:38.938Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 10,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
-      "url": "https://swun.cucas.cn/",
-      "title": "Southwest Minzu University (SWUN) | Southwest Minzu University Scholarship | Apply Online | CUCAS",
-      "chars": 12000
+      "url": "https://en.wikipedia.org/wiki/Southwest_Minzu_University",
+      "title": "Southwest Minzu University - Wikipedia",
+      "chars": 16000
     },
     {
       "url": "https://swun.cucas.cn/program/",
       "title": "Southwest Minzu University Programs | Apply Southwest Minzu University English Taught Programs Online | CUCAS",
-      "chars": 7220
+      "chars": 6145
     },
     {
-      "url": "https://en.wikipedia.org/wiki/Southwest_Minzu_University",
-      "title": "Southwest Minzu University - Wikipedia",
-      "chars": 11753
+      "url": "https://swun.cucas.cn/",
+      "title": "Southwest Minzu University (SWUN) | Southwest Minzu University Scholarship | Apply Online | CUCAS",
+      "chars": 16000
     },
     {
-      "url": "https://www.cucas.cn/china_scholarship/index/all_scholarship/all_cities/Southwest_Minzu_University/all_degrees/all_languages/all_year/all_programs/0_0_0_10_0_0_0/en",
-      "title": null,
-      "chars": 3560
+      "url": "https://swun.cucas.cn/program/Computer-Science-and-Technology-3043.html",
+      "title": "Southwest Minzu University Computer Science and Technology Program | Apply Online | CUCAS",
+      "chars": 14772
     },
     {
-      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/bachelor_degree/all_languages/all_year/all_programs/0_0_0_0_2_0_0/&",
-      "title": null,
-      "chars": 3560
+      "url": "https://swun.cucas.cn/program/Ancient-Chinese-Literature-3079.html",
+      "title": "Southwest Minzu University Ancient Chinese Literature Program | Apply Online | CUCAS",
+      "chars": 15437
     },
     {
-      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/master_degree/all_languages/all_year/all_programs/0_0_0_0_3_0_0/&",
-      "title": null,
-      "chars": 3560
+      "url": "https://news.cucas.cn/school_news/The-Achievements-of-Our-University-s-Scientific-Research-Are-Published-in-the-Top-International-Journal-ACS-CATALYSIS-in-the-Field-of-Catalysis-/4224",
+      "title": "The Achievements of Our University's Scientific Research Are Published in the Top International Journal ACS CATALYSIS in the Field of Catalysis. | CUCAS Study in China News",
+      "chars": 13422
     },
     {
-      "url": "https://www.cucas.cn/china_scholarships/index/full_scholarship/all_cities/all_universities/all_degrees/all_languages/all_year/all_programs/1_0_0_0_0_0_0/&",
-      "title": null,
-      "chars": 3560
+      "url": "https://news.cucas.cn/school_news/Successful-Completion-of-the-Japanese-Language-Proficiency-Test-at-the-Examination-Site-of-SMU/4215",
+      "title": "Successful Completion of the Japanese Language Proficiency Test at the Examination Site of SMU | CUCAS Study in China News",
+      "chars": 11418
     },
     {
-      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/non_degree/all_languages/all_year/all_programs/0_0_0_0_1_0_0/&",
-      "title": null,
-      "chars": 3560
+      "url": "https://news.cucas.cn/school_news/The-46th-Korean-Language-Proficiency-Test-Came-to-a-Full-Ending/4056",
+      "title": "The 46th Korean Language Proficiency Test Came to a Full Ending | CUCAS Study in China News",
+      "chars": 11569
     },
     {
-      "url": "https://www.cucas.cn/china_scholarships/index/all_scholarship/all_cities/all_universities/doctor_degree/all_languages/all_year/all_programs/0_0_0_0_4_0_0/&",
-      "title": null,
-      "chars": 3560
+      "url": "https://news.cucas.cn/admission_express/%E4%B8%AD%E5%9B%BD%E6%9D%A5%E5%8D%8E%E7%95%99%E5%AD%A6%E6%9C%AC%E7%A7%91%E5%85%A5%E5%AD%A6%E5%AD%A6%E4%B8%9A%E6%B0%B4%E5%B9%B3%E6%B5%8B%E8%AF%95%EF%BC%88CSCA%EF%BC%89%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/7477",
+      "title": "中国来华留学本科入学学业水平测试（CSCA）完整指南 | CUCAS Study in China News",
+      "chars": 16000
     },
     {
-      "url": "https://www.cucas.cn/visa/guide-for-countries.html",
-      "title": null,
-      "chars": 3560
+      "url": "https://news.cucas.cn/admission_express/Last-Chance-to-Apply:-Chinese-Universities-Still-Open-for-Applications-in-September---October-2025---And-2026-March-Intake-Program-Recommendations/7471",
+      "title": "Last Chance to Apply: Chinese Universities Still Open for Applications in September & October 2025 - And 2026 March Intake Program Recommendations | CUCAS Study in China News",
+      "chars": 16000
+    },
+    {
+      "url": "https://news.cucas.cn/admission_express/Application-Documents-Sample---Standard-for-Applying-Chinese-Universities/3624",
+      "title": "Application Documents Sample & Standard for Applying Chinese Universities | CUCAS Study in China News",
+      "chars": 16000
+    },
+    {
+      "url": "https://news.cucas.cn/admission_express/Last-Chance-to-Apply:-Chinese-Universities-Still-Open-for-Applications-in-July---August-2025--Scholarships---Self-Funded-/7455",
+      "title": "Last Chance to Apply: Chinese Universities Still Open for Applications in July & August 2025 (Scholarships & Self-Funded) | CUCAS Study in China News",
+      "chars": 16000
+    },
+    {
+      "url": "https://news.cucas.cn/admission_express/Chinese-Universities-Agency-Number-List:-Complete-List-for-Applying-Chinese-Government-Scholarship/2484",
+      "title": "Chinese Universities Agency Number List: Complete List for Applying Chinese Government Scholarship | CUCAS Study in China News",
+      "chars": 16000
+    },
+    {
+      "url": "https://news.cucas.cn/Admission_Express/Chinese-Universities-Agency-Number-List:-Complete-List-for-Applying-Chinese-Government-Scholarship_2484.html",
+      "title": "Chinese Universities Agency Number List: Complete List for Applying Chinese Government Scholarship | CUCAS Study in China News",
+      "chars": 16000
+    },
+    {
+      "url": "https://news.cucas.cn/admission_express/About-CUCAS-Scholarship-Application-Service/3439",
+      "title": "About CUCAS Scholarship Application Service | CUCAS Study in China News",
+      "chars": 12500
+    },
+    {
+      "url": "https://news.cucas.cn/admission_express/CUCAS-Coupon-Code-For-Scholarship-Programs-:-How-it-Works/3662",
+      "title": "CUCAS Coupon Code(For Scholarship Programs): How it Works | CUCAS Study in China News",
+      "chars": 15910
     }
   ],
   "db_row": {
@@ -490,39 +644,46 @@
     "city": "Chengdu",
     "province": "Sichuan",
     "country": "Chine",
-    "department": "International Education College",
-    "emails": [],
-    "phone": null,
+    "department": "Bureau des affaires internationales / International Students Office",
+    "emails": [
+      "iso@swun.edu.cn",
+      "admission@swun.edu.cn"
+    ],
+    "phone": "+86-28-85522204",
     "wechat": null,
-    "website": "english.swun.edu.cn",
+    "website": "https://english.swun.edu.cn",
     "majors": [
+      "engineering",
+      "computer_science",
+      "sciences",
+      "arts",
+      "music",
+      "design",
+      "law",
+      "education",
       "business",
       "economics",
       "finance",
-      "computer_science",
-      "engineering",
-      "sciences",
-      "medicine",
-      "pharmacy",
       "chinese_language",
-      "arts",
-      "design",
-      "music",
-      "law",
-      "education",
       "agriculture",
       "other"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "photo",
+      "diplome",
+      "releves_notes",
+      "certificat_langue",
+      "examen_medical",
+      "plan_etudes"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Bourse d'études SWUN (CSC et bourses de l'université)",
     "scholarship_min": 17000,
-    "scholarship_max": 26000,
+    "scholarship_max": 20000,
     "min_hsk_level": 4,
     "language_requirements": "HSK 4+",
     "tuition_min": 17000,
-    "tuition_max": 26000,
+    "tuition_max": 20000,
     "application_deadline": "30 mai"
   }
 }

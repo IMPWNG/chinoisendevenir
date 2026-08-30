@@ -4,39 +4,25 @@
     "name_zh": "四川外国语大学",
     "name_fr": "Université des études internationales du Sichuan",
     "aliases": [
-      "SISU",
-      "Chuanwai",
-      "川外"
+      "SISU"
     ],
-    "website": "https://www.sisu.edu.cn/",
+    "website": "http://www.sisu.edu.cn/",
     "international_website": "https://studyinsisu.sisu.edu.cn/",
-    "application_portal_url": "https://studyinsisu.sisu.edu.cn/"
+    "application_portal_url": "https://sisu.at0086.cn/StuApplication/Login.aspx"
   },
   "general": {
-    "presentation": "Université publique spécialisée dans les langues étrangères et les études internationales, accueillant des étudiants internationaux pour des programmes de langue chinoise, de licence, de master et de doctorat.",
-    "history": "Fondée en 1950, SISU est l'une des principales universités de langues étrangères en Chine, située à Chongqing.",
+    "presentation": "Université publique chinoise spécialisée dans les langues étrangères et les études internationales, accueillant les étudiants internationaux.",
+    "history": "",
     "rankings": [],
     "strengths": [
       "Langues étrangères",
       "Études internationales",
-      "Traduction",
       "Études chinoises",
-      "Linguistique",
-      "Commerce international"
+      "Formation en langue chinoise"
     ],
     "teaching_languages": [
       "zh",
-      "en",
-      "fr",
-      "es",
-      "de",
-      "ja",
-      "ru",
-      "ar",
-      "ko",
-      "it",
-      "pt",
-      "th"
+      "en"
     ],
     "location": {
       "city": "Chongqing",
@@ -44,147 +30,124 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Estimation pour Chongqing, ville de municipalité"
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
-        "name": "Campus principal Shapingba",
+        "name": "Campus principal SISU",
         "city": "Chongqing",
-        "description": "Campus principal situé dans le district de Shapingba, au cœur de Chongqing"
+        "description": "Campus situé à Chongqing, municipalité directement rattachée au gouvernement central."
       }
     ]
   },
   "programs": [
     {
       "level": "language",
-      "name": "Programme de langue chinoise (汉语进修)",
+      "name": "Chinese Language Program (汉语进修)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": null,
       "start_months": [
-        2,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme non-diplôme pour étudiants internationaux"
+      "notes": "Programme de langue chinoise pour étudiants internationaux."
     },
     {
       "level": "bachelor",
-      "name": "Programmes de licence (本科生)",
-      "field": "arts",
+      "name": "Undergraduate Program (本科生)",
+      "field": "other",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Diverses spécialités en langues, traduction, commerce international, droit international"
+      "notes": "Programmes de licence principalement en chinois, axés sur les langues et études internationales."
     },
     {
       "level": "master",
-      "name": "Programmes de master (硕士研究生)",
-      "field": "arts",
+      "name": "Master Program (硕士研究生)",
+      "field": "other",
       "language": "zh",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Masters en langues étrangères, traduction, études chinoises, linguistique"
+      "notes": "Programmes de master en langues étrangères, traduction, études internationales."
     },
     {
       "level": "phd",
-      "name": "Programmes de doctorat (博士研究生)",
-      "field": "arts",
+      "name": "Ph.D. Program (博士研究生)",
+      "field": "other",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Doctorats en linguistique, littérature, traduction"
+      "notes": "Programmes doctoraux en langues étrangères et disciplines connexes."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent",
+      "academic": "Diplôme de fin d'études secondaires (lycée)",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise d'un an disponible",
-      "other": [
-        "Passeport valide",
-        "Certificat de diplôme",
-        "Relevés de notes",
-        "Formulaire de candidature en ligne"
-      ]
+      "preparatory_if_insufficient": null,
+      "other": []
     },
     "master": {
-      "academic": "Licence (bachelor degree) ou équivalent",
+      "academic": "Licence (bachelor degree) dans un domaine pertinent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 5,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
-      "other": [
-        "Passeport valide",
-        "Diplôme de licence",
-        "Relevés de notes",
-        "Plan de recherche",
-        "Deux lettres de recommandation"
-      ]
+      "preparatory_if_insufficient": null,
+      "other": []
     },
     "phd": {
-      "academic": "Master ou équivalent",
+      "academic": "Master dans un domaine pertinent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 5,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
-      "other": [
-        "Passeport valide",
-        "Diplôme de master",
-        "Plan de recherche détaillé",
-        "Deux lettres de recommandation",
-        "Publications éventuelles"
-      ]
+      "preparatory_if_insufficient": null,
+      "other": []
     },
     "language": {
-      "academic": "Diplôme de fin d'études secondaires minimum",
+      "academic": "Diplôme de fin d'études secondaires",
       "age_max": null,
-      "other": [
-        "Passeport valide",
-        "Formulaire de candidature"
-      ]
+      "other": []
     }
   },
   "contacts": {
-    "office_name": "Bureau des étudiants internationaux (国际学院)",
-    "iso_email": "studyinsisu@sisu.edu.cn",
-    "admissions_email": "studyinsisu@sisu.edu.cn",
+    "office_name": "Office of International Student Admissions, SISU",
+    "iso_email": "",
+    "admissions_email": "",
     "wechat": "",
-    "phone": "0086-23-65380021",
-    "address": "No.33, Zhuangzhi Road, Lieshimu, Shapingba District, Chongqing, 400031, Chine"
+    "phone": "",
+    "address": "Chongqing, Chine"
   },
   "matching": {
     "fields": [
       "chinese_language",
       "arts",
       "education",
-      "business",
-      "law",
       "other"
     ],
     "degrees": [
@@ -195,12 +158,11 @@
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
-    "english_programs_available": true,
+    "english_programs_available": null,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
+    "min_hsk_level": null,
     "min_ielts": null,
     "min_toefl": null,
     "age_max_bachelor": null,
@@ -209,56 +171,58 @@
     "has_csc": true,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": 14000,
-    "tuition_cny_max": 28000,
-    "housing_cny_year_min": 2400,
-    "housing_cny_year_max": 6000,
-    "deadline_typical": "30 juin",
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
     "intake_months": [
-      2,
       9
     ],
     "city": "Chongqing",
     "province": "Chongqing",
     "tags": [
-      "université de langues",
-      "bourse CSC",
-      "bourse municipale Chongqing",
-      "bourse du président SISU",
-      "programme de langue chinoise",
+      "langues",
+      "études internationales",
       "traduction",
-      "études internationales"
+      "Chongqing",
+      "bourses disponibles"
     ]
   },
-  "confidence": 0.55,
+  "confidence": 0.35,
   "missing_fields": [
-    "frais de scolarité exacts",
-    "scores IELTS/TOEFL précis",
-    "limites d'âge précises",
-    "GPA minimum exact",
-    "durée exacte des programmes de langue",
-    "classements spécifiques"
+    "tuition_fees",
+    "hsk_ielts_toefl_minimum_scores",
+    "gpa_requirements",
+    "age_limits",
+    "application_deadlines",
+    "cost_of_living",
+    "housing_costs",
+    "specific_program_list",
+    "contact_email_phone",
+    "english_taught_programs_details",
+    "duration_exact"
   ],
-  "notes": "Université spécialisée en langues étrangères et études internationales. Offre des bourses du gouvernement chinois (CSC), bourses municipales de Chongqing, bourses du président SISU et bourses pour enseignants de chinois. Les programmes sont principalement en chinois, certains en anglais. Les montants de scolarité et de logement sont des estimations basées sur les standards des universités de langues en Chine.",
+  "notes": "Les sources fournies ne contiennent que les menus de navigation du site studyinsisu.sisu.edu.cn sans le contenu détaillé des pages. Seules les informations structurelles ont pu être extraites: 4 niveaux de programmes (langue chinoise, bachelor, master, doctorat) et 4 types de bourses (CSC, International Chinese Language Teachers Scholarship, Chongqing Mayor Scholarship, SISU President Scholarship). Les détails chiffrés (frais, scores HSK/IELTS/TOEFL, GPA, dates limites, contacts directs) ne sont pas disponibles dans les sources et restent à vérifier sur les pages détaillées.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "Étudiant international",
+      "count": null,
+      "who": "Étudiants internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Document standard requis; détails non précisés sur le site"
     }
   ],
   "application": {
-    "platform_name": "Online application (site officiel studyinsisu.sisu.edu.cn)",
-    "platform_url": "https://studyinsisu.sisu.edu.cn/",
+    "platform_name": "SISU Online Application System",
+    "platform_url": "https://sisu.at0086.cn/StuApplication/Login.aspx",
     "steps": [
-      "Compléter la candidature en ligne",
-      "Joindre les documents requis",
-      "Soumettre la demande"
+      "Créer un compte sur la plateforme en ligne de SISU",
+      "Remplir le formulaire de candidature (programme: langue chinoise, licence, master ou doctorat)",
+      "Téléverser les documents requis",
+      "Soumettre la candidature en ligne"
     ],
     "opens_at": "",
     "deadline": "",
@@ -307,64 +271,63 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Ville: Chongqing"
     }
   },
   "scholarships": [
     {
-      "name": "Chinese Government Scholarship",
+      "name": "Chinese Government Scholarship (中国政府奖学金)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
         "accommodation",
-        "insurance",
-        "stipend"
+        "stipend",
+        "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "Candidature via ambassade ou université",
-      "apply_via": "embassy_or_university",
+      "conditions": "Candidature via l'ambassade de Chine ou l'université",
+      "apply_via": "university",
       "deadline": "",
-      "renewal": ""
+      "renewal": "Annuel, sous conditions de résultats"
     },
     {
-      "name": "International Chinese Language Teachers Scholarship",
-      "type": "other",
-      "coverage": "full",
+      "name": "International Chinese Language Teachers Scholarship (国际中文教师奖学金)",
+      "type": "institutional",
+      "coverage": "partial",
       "covers": [
         "tuition",
         "accommodation",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Pour formation en langue chinoise ou professorat",
+      "conditions": "Pour les étudiants du programme de langue chinoise",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Chongqing Municipal Government Mayor Scholarship",
-      "type": "other",
-      "coverage": "partial",
-      "covers": [
-        "tuition",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Bourse municipale de Chongqing",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "SISU President Scholarship",
-      "type": "university",
+      "name": "Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金)",
+      "type": "municipal",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Bourse du président de l'université",
+      "conditions": "Géré par le gouvernement municipal de Chongqing",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "SISU President Scholarship (四川外国语大学校长奖学金)",
+      "type": "institutional",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse propre à SISU",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -378,7 +341,7 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "",
+      "duration": "Variable selon le programme",
       "leads_to_degree": false
     },
     "foundation": {
@@ -393,78 +356,89 @@
     ],
     "documents_from_university": [
       "Admission Notice",
-      "JW202 / JW201 form"
+      "JW202 Form",
+      "Visa Application Form"
     ],
-    "instructions": "Demander un visa X1/X2 avec le JW202 et la lettre d'admission",
-    "arrival_and_residence_permit": ""
+    "instructions": "Demander un visa étudiant X1 (long séjour) ou X2 (court séjour) avec les documents fournis par SISU",
+    "arrival_and_residence_permit": "Demander le permis de résidence dans les 30 jours suivant l'arrivée"
   },
   "housing_and_services": {
     "housing_types": [
-      "Résidence universitaire sur le campus"
+      "Dortoir sur le campus (chambre double)"
     ],
-    "rules": "",
-    "international_office": "studyinsisu@sisu.edu.cn (degré) / studyinsisu-sis@sisu.edu.cn (non-degré)",
-    "orientation": "",
-    "english_support": true,
+    "rules": "Règles internes de SISU applicables; consulter la section Règlements du site",
+    "international_office": "Bureau des étudiants internationaux de SISU, studyinsisu.sisu.edu.cn",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux",
+    "english_support": null,
     "clubs": ""
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Tous pays",
+      "notes": "Université des études internationales, programmes en langues étrangères; admission ouverte aux étudiants internationaux"
     }
   ],
   "scan_status": "ok",
   "slug": "sisu",
-  "scraped_at": "2026-08-24T14:36:35.150Z",
+  "scraped_at": "2026-08-30T11:10:25.842Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 11,
+  "pages_used": 11,
   "sources": [
     {
       "url": "https://studyinsisu.sisu.edu.cn/",
       "title": "留学川外",
-      "chars": 2581
+      "chars": 1965
     },
     {
-      "url": "https://studyinsisu.sisu.edu.cn/css/normalize.css",
-      "title": null,
-      "chars": 9627
-    },
-    {
-      "url": "https://studyinsisu.sisu.edu.cn/css/common.css",
-      "title": null,
-      "chars": 7024
-    },
-    {
-      "url": "https://studyinsisu.sisu.edu.cn/css/index.css",
-      "title": null,
-      "chars": 11911
-    },
-    {
-      "url": "https://studyinsisu.sisu.edu.cn/gywm/gycq/",
+      "url": "https://studyinsisu.sisu.edu.cn/jxj/cqsrmzfwglxsscjxj/index.htm",
       "title": "留学川外",
-      "chars": 4454
+      "chars": 2071
     },
     {
-      "url": "https://studyinsisu.sisu.edu.cn/gywm/gycw/",
+      "url": "https://studyinsisu.sisu.edu.cn/zsxx/hyjx/index.htm",
       "title": "留学川外",
-      "chars": 2541
+      "chars": 2071
     },
     {
-      "url": "https://studyinsisu.sisu.edu.cn/jxj/gjzwjsjxj/",
+      "url": "https://studyinsisu.sisu.edu.cn/jxj/zgzfjxj/index.htm",
       "title": "留学川外",
-      "chars": 2044
+      "chars": 2070
     },
     {
-      "url": "https://studyinsisu.sisu.edu.cn/jxj/cqsrmzfwglxsscjxj/",
+      "url": "https://studyinsisu.sisu.edu.cn/jxj/gjzwjsjxj/index.htm",
       "title": "留学川外",
-      "chars": 2100
+      "chars": 2079
     },
     {
-      "url": "https://studyinsisu.sisu.edu.cn/zsxx/hyjx/",
+      "url": "https://studyinsisu.sisu.edu.cn/zsxx/bks/index.htm",
       "title": "留学川外",
-      "chars": 1967
+      "chars": 2080
+    },
+    {
+      "url": "https://studyinsisu.sisu.edu.cn/zsxx/ssyjs/index.htm",
+      "title": "留学川外",
+      "chars": 2078
+    },
+    {
+      "url": "https://studyinsisu.sisu.edu.cn/zsxx/bsyjs/index.htm",
+      "title": "留学川外",
+      "chars": 2078
+    },
+    {
+      "url": "https://studyinsisu.sisu.edu.cn/jxj/scwgydxxcjxj/index.htm",
+      "title": "留学川外",
+      "chars": 2076
+    },
+    {
+      "url": "https://studyinsisu.sisu.edu.cn/gzzd/flfg/index.htm",
+      "title": "留学川外",
+      "chars": 2087
+    },
+    {
+      "url": "https://studyinsisu.sisu.edu.cn/index.htm",
+      "title": "留学川外",
+      "chars": 1965
     }
   ],
   "db_row": {
@@ -475,32 +449,27 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "Bureau des étudiants internationaux (国际学院)",
-    "emails": [
-      "studyinsisu@sisu.edu.cn",
-      "studyinsisu@sisu.edu.cn"
-    ],
-    "phone": "0086-23-65380021",
+    "department": "Office of International Student Admissions, SISU",
+    "emails": [],
+    "phone": null,
     "wechat": null,
     "website": "https://studyinsisu.sisu.edu.cn/",
     "majors": [
       "chinese_language",
       "arts",
       "education",
-      "business",
-      "law",
       "other"
     ],
     "required_documents": [
       "passport"
     ],
-    "scholarship_amount": "Chinese Government Scholarship / International Chinese Language Teachers Scholarship / Chongqing Municipal Government Mayor Scholarship / SISU President Scholarship",
-    "scholarship_min": 14000,
-    "scholarship_max": 28000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+",
-    "tuition_min": 14000,
-    "tuition_max": 28000,
-    "application_deadline": "30 juin"
+    "scholarship_amount": "Chinese Government Scholarship (中国政府奖学金) / International Chinese Language Teachers Scholarship (国际中文教师奖学金) / Chongqing Municipal Government Mayor Scholarship (重庆市人民政府外国留学生市长奖学金) / SISU President Scholarship (四川外国语大学校长奖学金)",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
   }
 }

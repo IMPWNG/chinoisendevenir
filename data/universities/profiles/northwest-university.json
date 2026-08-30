@@ -5,36 +5,29 @@
     "name_fr": "Université du Nord-Ouest",
     "aliases": [
       "NWU",
-      "Xibei Daxue",
-      "西北大学 (Xi'an)"
+      "Université du Nord-Ouest de Xi'an"
     ],
     "website": "https://www.nwu.edu.cn/",
     "international_website": "https://sie.nwu.edu.cn/",
-    "application_portal_url": "https://sie.nwu.edu.cn/"
+    "application_portal_url": "https://nwu.17gz.org/member/login.do"
   },
   "general": {
-    "presentation": "Université nationale clé de niveau « 211 Project » et « Double First-Class », située à Xi'an. Université complète et pluridisciplinaire axée sur les sciences humaines, sciences sociales, sciences naturelles, ingénierie et médecine. Dispose d'une école d'éducation internationale (国际教育学院) accueillant les étudiants étrangers.",
-    "history": "Fondée en 1902 (Shaanxi Daxuetang et Jingshi Daxuetang Suxueke Shixueguan). Nommée « Northwest University » en 1912. Devenue université nationale en 1923. Fusionnée en 1937-1938 en National Northwest Union University. Reprise sous le nom de National Northwest University en 1939. Université directement rattachée au ministère de l'Éducation après 1949. Sous tutelle du Shaanxi depuis 1958. Université clé nationale en 1978. Membre du « 211 Project » et du « Double First-Class ».",
+    "presentation": "Université chinoise publique de premier plan (Projet 211 / Double First-Class) située à Xi'an, Shaanxi. Offre aux étudiants internationaux des programmes de licence, master, doctorat et non-diplômants (langue chinoise, visiting students) avec bourses du gouvernement chinois (Silk Road, CSC).",
+    "history": "Fondée en 1902, l'une des plus anciennes universités du Nord-Ouest de la Chine. Ancien président honoraire : Zhang Qizhi (1927-2026), historien réputé.",
     "rankings": [
-      "211 Project (国家211工程)",
-      "Double First-Class (双一流)",
-      "2024 ShanghaiRanking (ARWU) World University Academic Ranking (entrée)"
+      "Première entrée dans le Top 400 mondial ARWU en 2024"
     ],
     "strengths": [
-      "Géologie (国家双一流)",
-      "Archéologie (国家双一流)",
-      "Histoire",
-      "Sciences de la Terre et paléontologie",
-      "Littérature et langue chinoises",
-      "Chimie, sciences des matériaux",
-      "Économie et gestion",
-      "Études de l'Asie centrale (中亚学院)",
-      "Géo-ressources"
+      "Géologie et paléobiologie (recherche Early Life & Environment reconnue par Nature)",
+      "Histoire et pensée chinoise (École Hou Wailu)",
+      "Sciences de la Terre",
+      "Chimie, Physique",
+      "Études sur l'Asie centrale",
+      "Archéologie"
     ],
     "teaching_languages": [
       "zh",
-      "en",
-      "ru"
+      "en"
     ],
     "location": {
       "city": "Xi'an",
@@ -43,55 +36,80 @@
     },
     "cost_of_living_cny_month": {
       "min": 1500,
-      "max": 3500,
-      "notes": "Estimation pour étudiant à Xi'an. Repas, transport, logement à l'international."
+      "max": 3000,
+      "notes": "Estimation Xi'an pour étudiant international"
     },
     "campuses": [
       {
         "name": "Campus Chang'an (长安校区)",
         "city": "Xi'an",
-        "description": "Campus principal moderne. Adresse : No.1 Xuefu Street, Guodu Education Sci-Tech Industrial Zone, Chang'an District. Code postal 710127."
+        "description": "Campus principal moderne"
       },
       {
         "name": "Campus Taibai (太白校区)",
         "city": "Xi'an",
-        "description": "Campus historique. Adresse : No.229 North Taibai Road, Beilin District. Code postal 710069. Siège de l'École d'éducation internationale et centre HSK."
+        "description": "Adresse internationale: No. 229 North Taibai Avenue"
       },
       {
         "name": "Campus Taoyuan (桃园校区)",
         "city": "Xi'an",
-        "description": "Campus tertiaire. Adresse : No.155 Gaoxin 4th Road. Code postal 710075."
+        "description": ""
       }
     ]
   },
   "programs": [
     {
+      "level": "language",
+      "name": "Cours de chinois (Chinese Language Program)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "1 semestre ou plus ; 20 cours/semaine ; 18-45 ans"
+    },
+    {
       "level": "bachelor",
-      "name": "Programmes de licence pour étudiants internationaux (本科)",
+      "name": "Programme de licence (Bachelor)",
       "field": "other",
-      "language": "bilingual",
+      "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Liste des spécialités disponibles : 汉语言文学, 中国语言文学, 文艺美学, 语言及应用语言学, 汉语国际教育, 国际经济与贸易, 工商管理, 公共管理, etc. Enseignement principalement en chinois, certains cours en anglais."
+      "notes": "Liste complète sur /info/1122/2526.htm (2026)"
+    },
+    {
+      "level": "bachelor",
+      "name": "Bourse Silk Road - Licence",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse du gouvernement chinois pour pays 'Belt and Road'"
     },
     {
       "level": "master",
-      "name": "Programmes de master pour étudiants internationaux (硕士)",
+      "name": "Master (M.Sc./M.A.) - chinois ou anglais",
       "field": "other",
       "language": "bilingual",
-      "duration_years": 3,
+      "duration_years": 2.5,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Liste des directeurs de thèse enseignant en chinois et en anglais publiée annuellement (ex : 2026). Programmes de master en chinois principalement, quelques options en anglais."
+      "notes": "Liste des superviseurs EN/ZH: /info/1123/2405.htm"
     },
     {
       "level": "phd",
-      "name": "Programmes doctoraux pour étudiants internationaux (博士)",
+      "name": "Doctorat (Ph.D.) - chinois ou anglais",
       "field": "other",
       "language": "bilingual",
       "duration_years": 4,
@@ -99,101 +117,116 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Liste des directeurs de thèse en chinois/anglais publiée. Inscription via le bureau des études supérieures (yjs.nwu.edu.cn)."
+      "notes": "Liste des superviseurs EN/ZH: /info/1143/2406.htm"
     },
     {
-      "level": "language",
-      "name": "Programme non-diplômant de langue chinoise (非学历项目)",
-      "field": "chinese_language",
+      "level": "exchange",
+      "name": "Visiting Student (专业进修生)",
+      "field": "other",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 0.5,
       "start_months": [
-        2,
+        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours de chinois langue étrangère (CFSL/HSK prep). Centre HSK officiel sur le campus Taibai."
+      "notes": "Étudiant non-diplômant, cours parmi tous les programmes bachelor/master/doctorat"
+    },
+    {
+      "level": "foundation",
+      "name": "Année préparatoire (Foundation/Chinese language preparatory)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours de chinois avant études officielles"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent. Dossier via le portail international de NWU.",
+      "academic": "Diplôme de fin d'études secondaires (lycée) équivalent au Gaokao chinois. Pour la bourse Silk Road: candidats des pays Belt and Road.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de chinois (预科) proposée si HSK insuffisant. Cours de langue chinoise longue durée (长期).",
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
       "other": [
-        "Passeport valide",
-        "Formulaire de demande en ligne",
-        "Relevés de notes du lycée",
-        "Certificat de diplôme"
+        "Passeport étranger valide",
+        "Bonne santé et bonne moralité",
+        "Dossier via portail nwu.17gz.org"
       ]
     },
     "master": {
-      "academic": "Licence (bachelor degree) ou équivalent. Demande via l'École d'éducation internationale.",
+      "academic": "Diplôme de licence équivalent. Sélection selon superviseur (liste publiée chaque année).",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Année préparatoire de chinois disponible.",
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Cours de chinois préalable si non-locuteur",
       "other": [
-        "Deux lettres de recommandation",
-        "Plan d'études (study plan)",
-        "Diplôme de licence + relevés",
-        "Accord d'un directeur de thèse NWU"
+        "Accord d'un superviseur (professeur chinois ou anglais)",
+        "Lettre de motivation",
+        "Relevés de notes"
       ]
     },
     "phd": {
-      "academic": "Master ou équivalent. Inscription via yjs.nwu.edu.cn et sie.nwu.edu.cn.",
+      "academic": "Diplôme de master équivalent. Accord obligatoire d'un superviseur de thèse.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Accord préalable d'un superviseur de thèse",
         "Plan de recherche",
-        "Publications (recommandé)"
+        "Publications recommandées",
+        "Accord superviseur (liste EN/ZH)"
       ]
     },
     "language": {
-      "academic": "Pas de diplôme requis. Inscription ouverte toute l'année selon les sessions.",
-      "age_max": null,
+      "academic": "Aucune exigence académique ; >=18 ans et <=45 ans.",
+      "age_max": 45,
+      "age_min": 18,
       "other": [
-        "Passeport",
-        "Formulaire d'inscription"
+        "Passeport étranger valide",
+        "Bonne santé",
+        "Inscription : printemps (déc 30) ou automne (juin 30)"
       ]
     }
   },
   "contacts": {
-    "office_name": "École d'éducation internationale (国际教育学院) / School of International Education",
+    "office_name": "School of International Education (国际教育学院)",
     "iso_email": "sie@nwu.edu.cn",
     "admissions_email": "zsb@nwu.edu.cn",
-    "wechat": "xibeidaxue-zhaosheng (招生办)",
-    "phone": "+86-29-88302211 (admissions); +86-29-88305066 (HSK); +86-29-88308162 (études supérieures)",
-    "address": "No.229 North Taibai Road, Xi'an, Shaanxi 710069, Chine (Taibai Campus, Bâtiment de coopération internationale)"
+    "wechat": "",
+    "phone": "+86-29-88302211",
+    "address": "No. 229 North Taibai Avenue, Xi'an, Shaanxi 710069 (International Office) / 学府大道1号, 长安区, 西安 710127 (Undergrad Admissions)"
   },
   "matching": {
     "fields": [
-      "chinese_language",
-      "arts",
-      "economics",
-      "business",
-      "computer_science",
-      "engineering",
       "sciences",
-      "law",
+      "computer_science",
+      "business",
+      "economics",
+      "engineering",
+      "arts",
+      "design",
+      "music",
       "education",
+      "chinese_language",
+      "law",
+      "medicine",
       "other"
     ],
     "degrees": [
@@ -201,7 +234,8 @@
       "master",
       "phd",
       "language",
-      "exchange"
+      "exchange",
+      "foundation"
     ],
     "languages": [
       "zh",
@@ -210,22 +244,21 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 60,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
     "age_max_bachelor": null,
     "age_max_master": null,
     "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": true,
-    "tuition_cny_min": 16000,
-    "tuition_cny_max": 32000,
-    "housing_cny_year_min": 4000,
-    "housing_cny_year_max": 10000,
-    "deadline_typical": "Mai (programme Bourse du gouvernement chinois Silk Road : 20 mai)",
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "Juin (automne) / Decembre (printemps) - bourses CSC: voir studyinchina.csc.edu.cn",
     "intake_months": [
-      2,
+      3,
       9
     ],
     "city": "Xi'an",
@@ -233,144 +266,97 @@
     "tags": [
       "211",
       "Double First-Class",
-      "Silk Road",
-      "Central Asia Studies",
-      "UNESCO",
-      "CSC",
-      "HSK Test Center",
-      "multidisciplinaire"
+      "Silk Road Scholarship",
+      "Belt and Road",
+      "Geology",
+      "Paleontology",
+      "History",
+      "Central Asia Studies"
     ]
   },
-  "confidence": 0.7,
+  "confidence": 0.55,
   "missing_fields": [
-    "tuition_cny_exact",
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
-    "housing_cny_exact",
-    "cost_of_living_min_max_précis",
-    "taux_acceptance",
-    "liste_complète_programmes_anglais",
-    "deadlines_2026_précis"
+    "min_gpa (tous niveaux)",
+    "hsk_min_score par niveau",
+    "ielts_min / toefl_min exacts",
+    "age_max bachelor/master/phd",
+    "tuition_cny_min/max (non trouvé dans sources)",
+    "housing_cny_year_min",
+    "frais de dossier",
+    "durée exacte doctorat",
+    "listes complètes des programmes ouverts aux internationaux"
   ],
-  "notes": "Source 8 mentionne explicitement un programme Bourse du gouvernement chinois « Silk Road » pour les étudiants des pays de la Belt and Road. Le centre HSK officiel (XUE laoshi, 029-88305066) opère sur le campus Taibai. Frais HSK : HSK3=350, HSK4=450, HSK5=550, HSK6=650 CNY ; HSKK 初/中/高 = 200/300/400 CNY. Liste des directeurs de thèse en anglais/chinois publiée. Le site international (sie.nwu.edu.cn) accepte les candidatures en ligne. Mention « 中亚学院 » (Institut d'Asie centrale) soulignant la spécialisation régionale. Trois campus identifiés. Frais de scolarité et de logement non précisés dans les sources : fourchettes estimatives. Documents de candidature 2026 mentionnés mais non entièrement extraits.",
+  "notes": "Sources principalement des pages d'accueil/d'index SIE et NWU. Les pages de détails (/info/1122/2526.htm pour licence 2026, /info/1123/2405.htm pour master, /info/1143/2406.htm pour doctorat, /info/1124/1932.htm pour non-diplômants) n'ont pas été extraites en profondeur - contiennent vraisemblablement HSK score, GPA min, frais. Recommandation: consulter https://sie.nwu.edu.cn/zsxx/bksxm.htm et /sqzn.htm directement.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "Étudiants internationaux",
+      "who": "Tous candidats internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport valide requis pour la candidature."
+      "notes": "Passeport étranger ordinaire valide"
     },
     {
-      "type": "hsk",
-      "required": false,
-      "count": null,
-      "who": "Candidats en chinois",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd",
-        "language"
-      ],
-      "notes": "Diplôme HSK selon le programme visé (programmes en chinois)."
-    },
-    {
-      "type": "ielts_or_toefl",
-      "required": false,
-      "count": null,
-      "who": "Candidats aux programmes en anglais",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Pour les programmes English-Taught."
-    },
-    {
-      "type": "diplome_academique",
+      "type": "photo",
       "required": true,
       "count": null,
-      "who": "Candidats",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Diplôme le plus élevé (relevés de notes + diplôme)."
-    },
-    {
-      "type": "releve_notes",
-      "required": true,
-      "count": null,
-      "who": "Candidats",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Relevés de notes officiels."
-    },
-    {
-      "type": "lettre_recommandation",
-      "required": false,
-      "count": null,
-      "who": "Candidats master/doctorat",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": "Lettres de recommandation selon programme."
-    },
-    {
-      "type": "plan_etude",
-      "required": false,
-      "count": null,
-      "who": "Candidats master/doctorat",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": "Plan d'études / projet de recherche."
-    },
-    {
-      "type": "examen_physique",
-      "required": true,
-      "count": null,
-      "who": "Tous candidats",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire d'examen médical (obligatoire pour le visa)."
+      "notes": ""
+    },
+    {
+      "type": "diplome",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme précédent + relevés de notes"
+    },
+    {
+      "type": "certificat_langue",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais"
     }
   ],
   "application": {
-    "platform_name": "Plateforme internationale Northwest University / chinoisetest.cn pour HSK",
-    "platform_url": "https://sie.nwu.edu.cn (lien en ligne candidature) + www.chinesetest.cn (HSK)",
+    "platform_name": "Plateforme internationale NWU (17gz)",
+    "platform_url": "https://nwu.17gz.org/member/login.do",
     "steps": [
-      "Remplir la demande en ligne via la plateforme internationale de l'Université du Nord-Ouest",
-      "Soumettre les documents requis",
-      "Payer les frais de candidature via la plateforme de paiement en ligne",
-      "Attendre la revue et la lettre d'admission / JW202",
-      "Enregistrement auprès du Bureau des étudiants internationaux"
+      "Créer un compte sur nwu.17gz.org",
+      "Remplir le formulaire en ligne",
+      "Téléverser les documents requis",
+      "Soumettre la candidature et payer les frais de dossier",
+      "Attendre la notification d'admission",
+      "Demander le visa X1/X2 avec lettre d'admission"
     ],
     "opens_at": "",
-    "deadline": "2025-05-20 (ex. Silk Road Scholarship bachelor); 2026招生简章 publié 2025-11-28",
+    "deadline": "Programme langue: 30 juin (automne) / 30 déc (printemps); Bourse Route de la Soie 2025: 20 mai",
     "results_at": "",
     "intake_months": [
+      3,
       9
     ],
     "application_fee_cny": null,
     "application_fee_refundable": null,
-    "payment_methods": [
-      "online_payment"
-    ]
+    "payment_methods": []
   },
   "fees": {
-    "tuition_cnn_year": {
+    "tuition_cny_year": {
       "bachelor": {
         "min": null,
         "max": null
@@ -390,40 +376,7 @@
       "english_taught_premium": null
     },
     "insurance_cny_year": null,
-    "other_fees": [
-      {
-        "item": "Frais HSK HSK3",
-        "amount_cny": 350
-      },
-      {
-        "item": "Frais HSK HSK4",
-        "amount_cny": 450
-      },
-      {
-        "item": "Frais HSK HSK5",
-        "amount_cny": 550
-      },
-      {
-        "item": "Frais HSK HSK6",
-        "amount_cny": 650
-      },
-      {
-        "item": "Frais HSKK Débutant",
-        "amount_cny": 200
-      },
-      {
-        "item": "Frais HSKK Intermédiaire",
-        "amount_cny": 300
-      },
-      {
-        "item": "Frais HSKK Avancé",
-        "amount_cny": 400
-      },
-      {
-        "item": "Envoi relevé de notes HSK",
-        "amount_cny": 60
-      }
-    ],
+    "other_fees": [],
     "housing": {
       "on_campus": [
         {
@@ -444,58 +397,58 @@
   },
   "scholarships": [
     {
-      "name": "Bourse du Gouvernement chinois (CSC) – Programme Route de la Soie",
+      "name": "Bourse du Gouvernement chinois - Programme Route de la Soie",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "housing",
+        "lodging",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Réservé aux étudiants originaires des pays de l'Initiative la Ceinture et la Route (Belt and Road).",
-      "apply_via": "CSC via l'université",
-      "deadline": "2025-05-20 (candidature 2025)",
-      "renewal": "Renouvelable selon résultats scolaires"
+      "conditions": "Réservé aux ressortissants des pays de la Ceinture et Route; candidature via studyinchina.csc.edu.cn",
+      "apply_via": "csc",
+      "deadline": "2025-05-20",
+      "renewal": "Renouvelable annuellement selon résultats"
     },
     {
-      "name": "Bourse du Gouvernement chinois (CSC) standard",
+      "name": "Bourse du Gouvernement chinois (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "housing",
+        "lodging",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Sur sélection académique. Candidature via l'université ou directement au CSC.",
-      "apply_via": "CSC / université",
+      "conditions": "Candidature via studyinchina.csc.edu.cn ou ambassade de Chine",
+      "apply_via": "csc",
       "deadline": "",
-      "renewal": "Renouvelable"
+      "renewal": ""
     },
     {
-      "name": "Bourse de l'Université du Nord-Ouest",
-      "type": "university",
+      "name": "Bourse du Confucius Institute (Hanban)",
+      "type": "institutional",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Selon mérite académique et disponibilité.",
-      "apply_via": "university",
+      "conditions": "Pour étudiants chinois langue; via cis.chinese.cn",
+      "apply_via": "hanban",
       "deadline": "",
       "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": 4,
-    "hsk_master": 4,
-    "hsk_phd": 4,
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an (programme langue non-diplôme)",
+      "duration": "1 semestre ou plus",
       "leads_to_degree": false
     },
     "foundation": {
@@ -506,92 +459,117 @@
   "visa": {
     "visa_types": [
       "X1",
-      "X2",
-      "F"
+      "X2"
     ],
     "documents_from_university": [
-      "Lettre d'admission (Admission Notice)",
-      "Formulaire JW201 / JW202 (Visa Application for Study in China)"
+      "Lettre d'admission (JW202)",
+      "Formulaire de demande de visa"
     ],
-    "instructions": "Demander un visa étudiant X1 (long séjour > 6 mois) ou X2 (≤ 6 mois) auprès de l'ambassade de Chine. Les ressortissants de certains pays peuvent bénéficier d'exemptions unilatérales de visa.",
-    "arrival_and_residence_permit": "À l'arrivée : enregistrement auprès du Bureau de la sécurité publique (PSB) sous 24 h via la résidence universitaire. Demander le permis de résidence (居留许可) pour études de plus de 6 mois."
+    "instructions": "Demander visa X1 (programme >180 jours) ou X2 (<180 jours) au consulat chinois avec JW202 et lettre d'admission",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours à Xi'an; enregistrement temporaire via police.xa.gov.cn"
   },
   "housing_and_services": {
     "housing_types": [
-      "Chambre double sur campus",
-      "Résidences du campus Taibai / Chang'an / Taoyuan"
+      "Chambre double sur campus"
     ],
-    "rules": "Selon les règlements du dortoir international (voir 规章制度 sur le site du Collège d'éducation internationale).",
-    "international_office": "Office of International Education (国际教育学院), Taibai Campus, No. 229 Taibai North Road, Xi'an — Tél. 029-88305066 (HSK), 029-88308162 (admissions).",
-    "orientation": "Programme d'orientation pour nouveaux étudiants (新生导览 et 新生手册).",
+    "rules": "",
+    "international_office": "Collège d'éducation internationale (sie.nwu.edu.cn), 229 North Taibai Avenue, Xi'an 710069",
+    "orientation": "Manuel du nouvel étudiant disponible (xssc.htm)",
     "english_support": true,
-    "clubs": [
-      "Association des étudiants internationaux (International Students Union)",
-      "Clubs culturels, sportifs et communautés étudiantes diverses"
-    ],
-    "country_specific": null
+    "clubs": "Associations étudiantes internationales, activités culturelles"
   },
   "country_specific": [
     {
-      "region_or_country": "Pays de l'Initiative Ceinture et Route (Belt and Road)",
-      "notes": "Éligibles à la bourse gouvernementale chinoise « Route de la Soie » (Silk Road Scholarship)."
-    },
-    {
-      "region_or_country": "Pays d'Asie centrale",
-      "notes": "Relations fortes (échange pédagogique, Centre d'Asie centrale de NWU), soutien linguistique et culturel renforcé."
+      "region_or_country": "Pays de la Ceinture et Route",
+      "notes": "Éligibles à la Bourse Route de la Soie du gouvernement chinois (programme bachelor)"
     }
   ],
   "scan_status": "ok",
   "slug": "northwest-university",
-  "scraped_at": "2026-08-23T14:50:29.817Z",
+  "scraped_at": "2026-08-30T11:04:06.065Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.nwu.edu.cn/",
       "title": "西北大学",
-      "chars": 5679
+      "chars": 16000
+    },
+    {
+      "url": "https://zsb.nwu.edu.cn/index.htm",
+      "title": "西北大学本科生招生信息网",
+      "chars": 4214
     },
     {
       "url": "https://sie.nwu.edu.cn/",
       "title": "西北大学国际教育学院",
-      "chars": 2643
+      "chars": 7158
     },
     {
-      "url": "https://zsb.nwu.edu.cn/",
-      "title": "西北大学本科生招生信息网",
-      "chars": 2455
-    },
-    {
-      "url": "https://yjs.nwu.edu.cn/zsgz/sszs/zsjz.htm",
-      "title": "招生简章-西北大学研究生院（党委研究生工作部）",
-      "chars": 1284
-    },
-    {
-      "url": "https://sie.nwu.edu.cn/info/1145/2485.htm",
-      "title": "西北大学国际教育学院 2025 年秋季 HSK, HSKK 考试计划（NWU HSK Test Center 2025 Autumn Semester HSK, HSKK Test Schedule）-西北大学国际教育学院",
-      "chars": 3502
-    },
-    {
-      "url": "https://sie.nwu.edu.cn/info/1135/2160.htm",
-      "title": "活动回顾 | 2024年 HSK&HSKK汉语水平考试前期交流会-西北大学国际教育学院",
-      "chars": 2146
-    },
-    {
-      "url": "https://sie.nwu.edu.cn/zsxx/sqzn.htm",
-      "title": "申请指南-西北大学国际教育学院",
-      "chars": 723
+      "url": "https://sie.nwu.edu.cn/index.htm",
+      "title": "西北大学国际教育学院",
+      "chars": 7158
     },
     {
       "url": "https://sie.nwu.edu.cn/zsxx/bksxm.htm",
       "title": "本科生项目-西北大学国际教育学院",
-      "chars": 1099
+      "chars": 3513
     },
     {
       "url": "https://sie.nwu.edu.cn/zsxx/sssxm.htm",
       "title": "硕士生项目-西北大学国际教育学院",
-      "chars": 768
+      "chars": 3037
+    },
+    {
+      "url": "https://sie.nwu.edu.cn/zsxx/bssxm.htm",
+      "title": "博士生项目-西北大学国际教育学院",
+      "chars": 3041
+    },
+    {
+      "url": "https://sie.nwu.edu.cn/zsxx/fxlxm.htm",
+      "title": "非学历项目-西北大学国际教育学院",
+      "chars": 3494
+    },
+    {
+      "url": "https://sie.nwu.edu.cn/zsxx/jxj.htm",
+      "title": "奖学金-西北大学国际教育学院",
+      "chars": 4952
+    },
+    {
+      "url": "https://sie.nwu.edu.cn/zsxx/sqzn.htm",
+      "title": "申请指南-西北大学国际教育学院",
+      "chars": 2823
+    },
+    {
+      "url": "https://sie.nwu.edu.cn/info/1145/2485.htm",
+      "title": "西北大学国际教育学院 2025 年秋季 HSK, HSKK 考试计划（NWU HSK Test Center 2025 Autumn Semester HSK, HSKK Test Schedule）-西北大学国际教育学院",
+      "chars": 5474
+    },
+    {
+      "url": "https://sie.nwu.edu.cn/info/1135/2160.htm",
+      "title": "活动回顾 | 2024年 HSK&HSKK汉语水平考试前期交流会-西北大学国际教育学院",
+      "chars": 4487
+    },
+    {
+      "url": "https://zsb.nwu.edu.cn/info/1049/3126.htm",
+      "title": "西北大学2026年本科招生计划-西北大学本科生招生信息网",
+      "chars": 1776
+    },
+    {
+      "url": "https://yjs.nwu.edu.cn/zsgz/sszs/zsjz.htm",
+      "title": "招生简章-西北大学研究生院（党委研究生工作部）",
+      "chars": 5478
+    },
+    {
+      "url": "https://zsb.nwu.edu.cn/info/1049/2984.htm",
+      "title": "西北大学2025年本科招生计划-西北大学本科生招生信息网",
+      "chars": 2042
+    },
+    {
+      "url": "https://zsb.nwu.edu.cn/info/1049/2688.htm",
+      "title": "西北大学2024年本科招生计划-西北大学本科生招生信息网",
+      "chars": 1774
     }
   ],
   "db_row": {
@@ -602,39 +580,41 @@
     "city": "Xi'an",
     "province": "Shaanxi",
     "country": "Chine",
-    "department": "École d'éducation internationale (国际教育学院) / School of International Education",
+    "department": "School of International Education (国际教育学院)",
     "emails": [
       "sie@nwu.edu.cn",
       "zsb@nwu.edu.cn"
     ],
-    "phone": "+86-29-88302211 (admissions); +86-29-88305066 (HSK); +86-29-88308162 (études supérieures)",
-    "wechat": "xibeidaxue-zhaosheng (招生办)",
+    "phone": "+86-29-88302211",
+    "wechat": null,
     "website": "https://sie.nwu.edu.cn/",
     "majors": [
-      "chinese_language",
-      "arts",
-      "economics",
-      "business",
-      "computer_science",
-      "engineering",
       "sciences",
-      "law",
+      "computer_science",
+      "business",
+      "economics",
+      "engineering",
+      "arts",
+      "design",
+      "music",
       "education",
+      "chinese_language",
+      "law",
+      "medicine",
       "other"
     ],
     "required_documents": [
       "passport",
-      "diplome_academique",
-      "releve_notes",
-      "examen_physique"
+      "photo",
+      "diplome"
     ],
-    "scholarship_amount": "Bourse du Gouvernement chinois (CSC) – Programme Route de la Soie / Bourse du Gouvernement chinois (CSC) standard / Bourse de l'Université du Nord-Ouest",
-    "scholarship_min": 16000,
-    "scholarship_max": 32000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
-    "tuition_min": 16000,
-    "tuition_max": 32000,
-    "application_deadline": "Mai (programme Bourse du gouvernement chinois Silk Road : 20 mai)"
+    "scholarship_amount": "Bourse du Gouvernement chinois - Programme Route de la Soie / Bourse du Gouvernement chinois (CSC) / Bourse du Confucius Institute (Hanban)",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "Juin (automne) / Decembre (printemps) - bourses CSC: voir studyinchina.csc.edu.cn"
   }
 }

@@ -4,27 +4,26 @@
     "name_zh": "复旦大学",
     "name_fr": "Université Fudan",
     "aliases": [
-      "Fudan",
-      "FDU"
+      "Fudan"
     ],
-    "website": "https://www.fudan.edu.cn",
-    "international_website": "https://iso.fudan.edu.cn",
-    "application_portal_url": "https://iso.fudan.edu.cn"
+    "website": "http://www.fudan.edu.cn/",
+    "international_website": "https://iso.fudan.edu.cn/isoenglish/main.htm",
+    "application_portal_url": "https://istudent.fudan.edu.cn/apply/#/user/login"
   },
   "general": {
-    "presentation": "Université de recherche de premier plan en Chine, membre du Projet 985 et du Double First-Class. Offre des programmes de licence, master, doctorat, formation linguistique, pré-universitaire et été pour étudiants étrangers.",
-    "history": "Fondée en 1905. Célèbre son 120e anniversaire en 2025. Centre majeur de recherche en sciences, médecine, sciences sociales et humanités.",
+    "presentation": "Université de recherche de premier plan (projet 985/211/Double First-Class), membre du C9. Offre des programmes de licence, master, doctorat, pré-universitaire, formation linguistique et programmes d'été pour étudiants internationaux.",
+    "history": "Fondée en 1905. Célèbre son 120e anniversaire en 2025.",
     "rankings": [
-      "Top 3 universités chinoises (QS, THE)",
-      "Membre du C9 League",
-      "Double First-Class"
+      "Top 3-5 universités en Chine (classements domestiques)",
+      "Top 50-100 mondial (QS/THE)"
     ],
     "strengths": [
-      "Sciences sociales et politiques",
+      "Sciences sociales",
       "Médecine (Shanghai Medical College)",
-      "Sciences naturelles et mathématiques",
-      "Sciences humaines",
-      "Affaires internationales et politique publique"
+      "Sciences",
+      "Économie",
+      "Sciences politiques",
+      "Lettres chinoises"
     ],
     "teaching_languages": [
       "zh",
@@ -36,32 +35,32 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 3000,
-      "max": 6000,
-      "notes": "Estimation générale Shanghai pour étudiants"
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
-        "name": "Handan Campus (principal)",
+        "name": "Handan Campus (campus principal)",
         "city": "Shanghai",
-        "description": "Campus principal au 220 Handan Road, district de Yangpu"
+        "description": "220 Handan Road, Yangpu District, Shanghai 200433. Campus historique principal."
       },
       {
         "name": "Fenglin Campus",
         "city": "Shanghai",
-        "description": "Campus médecine et sciences de la santé"
+        "description": "Campus médecine (Shanghai Medical College)."
       },
       {
         "name": "Zhangjiang Campus",
         "city": "Shanghai",
-        "description": "Campus sciences et technologies"
+        "description": "Campus sciences et technologies."
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Programmes de licence en chinois (Chinese-taught Undergraduate)",
+      "name": "Undergraduate Programs (本科生)",
       "field": "other",
       "language": "zh",
       "duration_years": 4,
@@ -69,144 +68,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Liste des spécialités disponible dans le catalogue 2026. Test CSCA requis pour certaines filières."
-    },
-    {
-      "level": "bachelor",
-      "name": "International Organizations and Global Governance (IOGG)",
-      "field": "law",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme entièrement en anglais"
+      "notes": "Programmes principalement en chinois. Voir liste sur iso.fudan.edu.cn/isoenglish/51327/list.htm"
     },
     {
       "level": "master",
-      "name": "Master of Public Administration (IMPA)",
-      "field": "business",
-      "language": "en",
-      "duration_years": 2,
+      "name": "Graduate Programs (研究生)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme phare en anglais"
-    },
-    {
-      "level": "master",
-      "name": "Master in Global Public Policy",
-      "field": "law",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Master of International Public Policy",
-      "field": "law",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Master of Chinese Politics and Diplomacy",
-      "field": "law",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Master in BRICS Countries and the Global South",
-      "field": "law",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "phd",
-      "name": "Doctoral Program in International Politics (DPIP)",
-      "field": "law",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "phd",
-      "name": "Doctoral Program in Global Public Policy",
-      "field": "law",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "phd",
-      "name": "Doctoral Program of Mathematics",
-      "field": "sciences",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "phd",
-      "name": "Doctoral Program in Physics",
-      "field": "sciences",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Master et doctorat. Détails: iso.fudan.edu.cn/isoenglish/51328/list.htm"
     },
     {
       "level": "language",
-      "name": "Programme de langue chinoise (Chinese Language Training)",
+      "name": "Language Training (语言进修)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": null,
       "start_months": [
-        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes automne et printemps. Options: langue, économie et commerce, culture et société"
+      "notes": "Programmes de chinois pour étudiants non-diplômants."
     },
     {
       "level": "foundation",
-      "name": "Pre-University Program (Pré-universitaire)",
+      "name": "Pre-University Program (预科)",
       "field": "other",
       "language": "zh",
       "duration_years": 1,
@@ -214,12 +104,36 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme préparatoire pour études de licence en chinois"
+      "notes": "Année préparatoire pour étudiants internationaux."
+    },
+    {
+      "level": "exchange",
+      "name": "Summer Programs (暑期项目)",
+      "field": "other",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes d'été courts. Aussi Winter Programs (FIWS)."
+    },
+    {
+      "level": "bachelor",
+      "name": "English-Taught Certified Program (SSDPP)",
+      "field": "other",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Certificat School of Social Development and Public Policy: population, santé, culture."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (high school). Test CSCA requis pour les programmes en chinois.",
+      "academic": "Diplôme de fin d'études secondaires (lycée). Candidats non-chinois, en bonne santé.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -227,14 +141,13 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme pré-universitaire (Pre-University) disponible",
+      "preparatory_if_insufficient": "Pre-University Program (预科) disponible",
       "other": [
-        "Test CSCA pour certaines spécialités",
-        "Examen physique"
+        "Examen d'entrée ou évaluation du dossier académique"
       ]
     },
     "master": {
-      "academic": "Licence (bachelor degree) dans un domaine pertinent",
+      "academic": "Licence (bachelor degree) reconnue. Candidats non-chinois.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -244,13 +157,13 @@
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
+        "Lettres de recommandation",
         "Relevés de notes",
-        "Lettre de recommandation",
-        "Plan de recherche"
+        "Projet de recherche"
       ]
     },
     "phd": {
-      "academic": "Master dans un domaine pertinent",
+      "academic": "Master degree reconnu. Candidats non-chinois.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -260,35 +173,40 @@
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Plan de recherche",
         "Lettres de recommandation",
-        "Publications préférables"
+        "Plan de recherche",
+        "Accord d'un superviseur"
       ]
     },
     "language": {
-      "academic": "Diplôme de fin d'études secondaires",
+      "academic": "Pas de prérequis académique spécifique.",
       "age_max": null,
       "other": [
-        "Inscription ouverte aux étudiants de tous niveaux de chinois"
+        "Inscription via portail istudent.fudan.edu.cn"
       ]
     }
   },
   "contacts": {
-    "office_name": "复旦大学外国留学生工作处 (International Students Office, Fudan University)",
-    "iso_email": "iso@fudan.edu.cn",
-    "admissions_email": "iso@fudan.edu.cn",
-    "wechat": "留学复旦 (Study at Fudan)",
+    "office_name": "International Students Office (外国留学生工作处)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "Study at Fudan (留学复旦)",
     "phone": "",
-    "address": "220 Handan Road, Yangpu District, Shanghai 200433, Chine"
+    "address": "220 Handan Road, Yangpu District, Shanghai 200433, China"
   },
   "matching": {
     "fields": [
       "business",
-      "law",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
       "sciences",
       "medicine",
-      "chinese_language",
+      "law",
       "education",
+      "arts",
+      "chinese_language",
       "other"
     ],
     "degrees": [
@@ -314,85 +232,74 @@
     "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": true,
+    "has_provincial_scholarship": null,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "Avril-Mai (rentrée septembre)",
+    "deadline_typical": "",
     "intake_months": [
-      3,
+      2,
       9
     ],
     "city": "Shanghai",
     "province": "Shanghai",
     "tags": [
+      "985",
+      "211",
       "Double First-Class",
-      "C9 League",
-      "985 Project",
+      "C9",
       "top-tier",
-      "recherche",
-      "Shanghai",
-      "English-taught programs",
-      "CSC scholarship",
-      "Shanghai Government Scholarship"
+      "research",
+      "english-taught",
+      "pre-university",
+      "summer-program",
+      "winter-program",
+      "scholarships",
+      "dormitory-handan"
     ]
   },
-  "confidence": 0.72,
+  "confidence": 0.55,
   "missing_fields": [
-    "tuition_cny_min",
-    "tuition_cny_max",
-    "housing_cny_year_min",
+    "min_gpa",
     "min_hsk_level",
     "min_ielts",
     "min_toefl",
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
-    "phone",
-    "specific_deadlines_2026"
+    "age_limits",
+    "tuition_cny",
+    "housing_cny",
+    "application_deadlines",
+    "application_fee",
+    "specific_program_list",
+    "cost_of_living",
+    "scholarship_amounts"
   ],
-  "notes": "Sources consultées: site ISO Fudan (iso.fudan.edu.cn) en chinois et anglais. Informations détaillées sur les frais, scores HSK/IELTS/TOEFL minimaux et dates limites précises non disponibles dans les sources fournies. Fudan propose une large gamme de programmes en anglais au niveau master et doctorat, principalement en sciences politiques, politique publique et relations internationales. Programmes de licence principalement en chinois avec test CSCA requis.",
+  "notes": "Sources = pages d'accueil ISO (chinois/anglais) + 1 article programme SSDPP + 2 articles salon emploi. Pas de détails chiffrés sur GPA, HSK, IELTS, TOEFL, frais, délais. Portail candidature: istudent.fudan.edu.cn/apply. Bourse CSC confirmée (lien externe). Dortoir sur campus Handan. Inscriptions automne 2026 en cours (numéros étudiants publiés 07/2026).",
   "documents": [
     {
-      "type": "physical_examination",
+      "type": "passport",
       "required": true,
       "count": null,
-      "who": "tous candidats",
+      "who": "Étudiants internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire '外国人体格检查表' requis"
-    },
-    {
-      "type": "financial_guarantee",
-      "required": true,
-      "count": null,
-      "who": "tous candidats",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "复旦大学外国留学生经济担保书"
-    },
-    {
-      "type": "guardian_guarantee",
-      "required": true,
-      "count": null,
-      "who": "mineurs",
-      "applies_to": [
-        "bachelor",
-        "language"
-      ],
-      "notes": "监护人保证书 pour candidats mineurs"
+      "notes": "Documents standard requis pour toute candidature; liste détaillée non disponible dans les sources."
     }
   ],
   "application": {
-    "platform_name": "网上申请 Fudan ISO",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "Fudan Online Application System (istudent)",
+    "platform_url": "https://istudent.fudan.edu.cn/apply/#/user/login",
+    "steps": [
+      "Créer un compte sur istudent.fudan.edu.cn",
+      "Remplir le formulaire en ligne",
+      "Téléverser les documents requis",
+      "Soumettre la candidature et payer les frais via la plateforme"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
     "intake_months": [
+      2,
       9
     ],
     "application_fee_cny": null,
@@ -420,19 +327,17 @@
       "english_taught_premium": null
     },
     "insurance_cny_year": null,
-    "other_fees": [
-      "Frais CSCA pour certaines filières chinoises (détails non publiés)"
-    ],
+    "other_fees": [],
     "housing": {
       "on_campus": [
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "Résidence Handan, réservation en ligne"
+          "included": ""
         }
       ],
       "deposit_cny": null,
-      "off_campus_allowed": true
+      "off_campus_allowed": null
     },
     "living_cost_cny_month": {
       "food": null,
@@ -443,33 +348,32 @@
   },
   "scholarships": [
     {
-      "name": "Shanghai Municipal Government Scholarship 上海市政府奖学金",
-      "type": "shanghai",
-      "coverage": "partial",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Réévaluation annuelle requise",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "Annuelle"
-    },
-    {
       "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
         "accommodation",
-        "stipend",
-        "insurance"
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Candidature via 国家留学基金管理委员会",
-      "apply_via": "csc",
+      "conditions": "Postuler via CSC ou ambassade de Chine, ou via Fudan",
+      "apply_via": "csc_or_university",
       "deadline": "",
-      "renewal": "Annuelle"
+      "renewal": "Renouvellement annuel sur dossier"
+    },
+    {
+      "name": "Bourses de Fudan",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique; allocation via l'ISO",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
     }
   ],
   "language": {
@@ -480,87 +384,130 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "",
-      "leads_to_degree": null
+      "duration": "1 an (programme pré-universitaire)",
+      "leads_to_degree": true
     },
     "foundation": {
       "available": true,
-      "description": "Programme 预科 (Pre-University), inclut HSK留学中国国际课程-名校预科项目. Programmes en anglais disponibles (ENGLISH-TAUGHT PROGRAMS: bachelor, master, doctorat)"
+      "description": "Programme pré-universitaire HSK menant aux études de licence"
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "Service VISA (签证事务) disponible auprès du Bureau des étudiants internationaux (ISO)",
-    "arrival_and_residence_permit": "新生报到 (enregistrement nouveaux étudiants) requis à l'arrivée; permis de résidence à obtenir"
+    "visa_types": [
+      "X1",
+      "X2",
+      "J1"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "Formulaire JW202",
+      "Visa Application Form"
+    ],
+    "instructions": "Service visa assuré par le Bureau des étudiants internationaux (ISO). Présenter les documents émis par Fudan au consulat chinois.",
+    "arrival_and_residence_permit": "Inscription à l'arrivée + rendez-vous au poste de police pour permis de séjour; calendrier publié par l'ISO (ex. août 2026)"
   },
   "housing_and_services": {
     "housing_types": [
-      "résidence internationale du campus Handan (邯郸校区外国留学生公寓)"
+      "Dortoir international du campus Handan"
     ],
-    "rules": "Réservation en ligne obligatoire (网上订房) avant arrivée",
-    "international_office": "复旦大学外国留学生工作处 (ISO), 220 Handan Road, Yangpu District, Shanghai 200433",
-    "orientation": "Programme d'orientation (新生报到) pour nouveaux étudiants internationaux",
+    "rules": "Réservation en ligne via le système e-booking de l'ISO; allocation selon disponibilité",
+    "international_office": "International Students Office (ISO), 220 Handan Road, Yangpu District, Shanghai 200433",
+    "orientation": "Programme d'orientation organisé pour les nouveaux étudiants chaque semestre",
     "english_support": true,
-    "clubs": "Équipe internationale de bateaux-dragons (18 pays), salons emploi/carrière, excursions culturelles, Nordic Center (30 ans)"
+    "clubs": "Activités étudiantes, excursions culturelles, soutien carrière (ex. Career Expo HSK)"
   },
-  "country_specific": [],
+  "country_specific": [
+    {
+      "region_or_country": "",
+      "notes": ""
+    }
+  ],
   "scan_status": "ok",
   "slug": "fudan-university",
-  "scraped_at": "2026-08-24T14:34:19.192Z",
+  "scraped_at": "2026-08-30T11:08:43.107Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 10,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://iso.fudan.edu.cn/",
-      "title": "复旦大学外国留学生工作处",
-      "chars": 3603
-    },
     {
       "url": "https://iso.fudan.edu.cn/isoenglish/main.htm",
       "title": "International Students Office，Fudan University",
-      "chars": 4743
+      "chars": 13550
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/",
+      "title": "复旦大学外国留学生工作处",
+      "chars": 11830
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/isoenglish/9b/2f/c16214a695087/page.htm",
+      "title": "English-taught certified program, a window to see the real China",
+      "chars": 9529
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/isoenglish/03/c3/c16215a787395/page.htm",
+      "title": "Student Number of 2026 Fall Non-Degree New International Students",
+      "chars": 3174
     },
     {
       "url": "https://iso.fudan.edu.cn/e5/92/c16057a779666/page.htm",
       "title": "2026（第二届）上海高质量国际人才交流会暨HSK高校来华留学就业展举行",
-      "chars": 2741
+      "chars": 5836
     },
     {
       "url": "https://iso.fudan.edu.cn/11/fa/c16057a725498/page.htm",
       "title": "2025上海高质量国际人才交流会暨高校来华留学生就业展在复旦大学举行",
-      "chars": 1390
+      "chars": 3962
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/isoenglish/07/4e/c16215a788302/page.htm",
+      "title": "Student Number for 2026 New International Postgraduate Students",
+      "chars": 3172
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/isoenglish/00/a0/c16215a786592/page.htm",
+      "title": "Student Number for 2026 New International Undergraduate Students",
+      "chars": 3173
     },
     {
       "url": "https://iso.fudan.edu.cn/00/9f/c16058a786591/page.htm",
       "title": "2026级外国留学生本科新生学号",
-      "chars": 370
+      "chars": 2107
     },
     {
-      "url": "https://iso.fudan.edu.cn/51263/list.htm",
-      "title": "招生信息",
-      "chars": 581
+      "url": "https://iso.fudan.edu.cn/isoenglish/ff/ac/c16215a786348/page.htm",
+      "title": "Autumn 2026 Online Room Reservation for International Student Dormitory on Handan Campus",
+      "chars": 4593
     },
     {
-      "url": "https://iso.fudan.edu.cn/51269/list.htm",
-      "title": "本科生",
-      "chars": 739
+      "url": "https://iso.fudan.edu.cn/isoenglish/51314/list.htm",
+      "title": "ADMISSIONS",
+      "chars": 4798
     },
     {
-      "url": "https://iso.fudan.edu.cn/51272/list.htm",
-      "title": "语言进修",
-      "chars": 689
+      "url": "https://iso.fudan.edu.cn/isoenglish/51327/list.htm",
+      "title": "Undergraduate",
+      "chars": 6796
     },
     {
-      "url": "https://iso.fudan.edu.cn/ENGLISHwTAUGHTPROGRAMS/list.htm",
-      "title": "ENGLISH-TAUGHT PROGRAMS",
-      "chars": 1366
+      "url": "https://iso.fudan.edu.cn/isoenglish/SummerPrograms/list.htm",
+      "title": "Summer Programs",
+      "chars": 4681
     },
     {
-      "url": "https://iso.fudan.edu.cn/51279/list.htm",
-      "title": "奖学金",
-      "chars": 520
+      "url": "https://iso.fudan.edu.cn/isoenglish/LanguageTraining/list.htm",
+      "title": "Language Training",
+      "chars": 4913
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/isoenglish/f2/a1/c51327a783009/page.htm",
+      "title": "2026 List of English-taught Undergraduate Programs of Fudan University",
+      "chars": 3182
+    },
+    {
+      "url": "https://iso.fudan.edu.cn/isoenglish/7b/ec/c51327a752620/page.htm",
+      "title": "2026 Undergraduate International Program in Economics (UIPE) (English-taught)",
+      "chars": 3188
     }
   ],
   "db_row": {
@@ -571,35 +518,35 @@
     "city": "Shanghai",
     "province": "Shanghai",
     "country": "Chine",
-    "department": "复旦大学外国留学生工作处 (International Students Office, Fudan University)",
-    "emails": [
-      "iso@fudan.edu.cn",
-      "iso@fudan.edu.cn"
-    ],
+    "department": "International Students Office (外国留学生工作处)",
+    "emails": [],
     "phone": null,
-    "wechat": "留学复旦 (Study at Fudan)",
-    "website": "https://iso.fudan.edu.cn",
+    "wechat": "Study at Fudan (留学复旦)",
+    "website": "https://iso.fudan.edu.cn/isoenglish/main.htm",
     "majors": [
       "business",
-      "law",
+      "economics",
+      "finance",
+      "computer_science",
+      "engineering",
       "sciences",
       "medicine",
-      "chinese_language",
+      "law",
       "education",
+      "arts",
+      "chinese_language",
       "other"
     ],
     "required_documents": [
-      "physical_examination",
-      "financial_guarantee",
-      "guardian_guarantee"
+      "passport"
     ],
-    "scholarship_amount": "Shanghai Municipal Government Scholarship 上海市政府奖学金 / Chinese Government Scholarship (CSC)",
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / Bourses de Fudan",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,
     "language_requirements": null,
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": "Avril-Mai (rentrée septembre)"
+    "application_deadline": null
   }
 }

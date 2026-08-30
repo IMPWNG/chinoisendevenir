@@ -7,25 +7,26 @@
       "WMU"
     ],
     "website": "https://www.wmu.edu.cn/",
-    "international_website": "http://en.wmu.edu.cn/",
-    "application_portal_url": "http://sis.wmu.edu.cn/"
+    "international_website": "https://en.wmu.edu.cn/",
+    "application_portal_url": "https://wmu.at0086.cn/StuApplication/Login.aspx"
   },
   "general": {
-    "presentation": "Université clé de médecine du Zhejiang, reconnue pour l'ophtalmologie, les sciences de la vision, la médecine clinique et la pharmacie. 16 804 étudiants L3, 8 727 étudiants postgraduate, 550 étudiants internationaux. Plus de 170 partenaires académiques internationaux.",
-    "history": "Histoire remontant à 1912 (école de médecine). Devenue Wenzhou Medical University en tant qu'université publique de médecine.",
+    "presentation": "Université clé de la province du Zhejiang, spécialisée dans les sciences médicales et la santé. 16 804 étudiants en undergraduate, 8 727 en postgraduate, 550 étudiants internationaux. Plus de 170 partenaires internationaux.",
+    "history": "Fondée en 1912 (école de médecine), devenue Wenzhou Medical University. Plus d'un siècle d'histoire en formation médicale.",
     "rankings": [
-      "Université clé de construction du Zhejiang"
+      "2025软科中国最好学科排名 : 8 disciplines classées",
+      "10+59 chercheurs dans le top 2% mondial (Stanford 2025)"
     ],
     "strengths": [
-      "Ophtalmologie et optométrie (Eye Hospital réputé)",
+      "Ophtalmologie et optométrie (Eye Hospital de référence)",
       "Médecine clinique",
-      "Stomatologie",
-      "Sciences pharmaceutiques",
+      "Stomatologie/Dentisterie",
+      "Pharmacie",
       "Sciences de laboratoire et sciences de la vie",
-      "Santé publique",
       "Soins infirmiers",
+      "Santé publique",
       "Génie biomédical",
-      "Médecine chinoise traditionnelle"
+      "Médecine traditionnelle chinoise"
     ],
     "teaching_languages": [
       "zh",
@@ -37,20 +38,15 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Estimation pour étudiant international à Wenzhou"
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
-        "name": "Campus Chashan (principal)",
+        "name": "Campus principal Chashan",
         "city": "Wenzhou",
-        "description": "University Town, Chashan, campus principal"
-      },
-      {
-        "name": "Campus Binhai",
-        "city": "Wenzhou",
-        "description": "Campus secondaire"
+        "description": "University Town, Chashan, district éducatif supérieur de Wenzhou"
       }
     ]
   },
@@ -65,35 +61,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme phare pour étudiants internationaux"
+      "notes": "Programme MBBS en anglais pour étudiants internationaux"
     },
     {
       "level": "bachelor",
-      "name": "Médecine clinique (zh)",
-      "field": "medicine",
-      "language": "zh",
-      "duration_years": 5,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Ophtalmologie et Optométrie",
-      "field": "medicine",
-      "language": "zh",
-      "duration_years": 5,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Discipline phare WMU"
-    },
-    {
-      "level": "bachelor",
-      "name": "Stomatologie",
+      "name": "Stomatology",
       "field": "dentistry",
       "language": "zh",
       "duration_years": 5,
@@ -117,7 +89,7 @@
     },
     {
       "level": "bachelor",
-      "name": "Sciences infirmières",
+      "name": "Nursing",
       "field": "medicine",
       "language": "zh",
       "duration_years": 4,
@@ -129,7 +101,19 @@
     },
     {
       "level": "bachelor",
-      "name": "Sciences de laboratoire médical / Sciences de la vie",
+      "name": "Public Health",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Laboratory Science / Life Sciences",
       "field": "sciences",
       "language": "zh",
       "duration_years": 4,
@@ -141,7 +125,7 @@
     },
     {
       "level": "bachelor",
-      "name": "Santé publique",
+      "name": "Ophthalmology & Optometry",
       "field": "medicine",
       "language": "zh",
       "duration_years": 4,
@@ -149,11 +133,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Discipline phare de WMU"
     },
     {
       "level": "bachelor",
-      "name": "Génie biomédical / Information et Ingénierie",
+      "name": "Biomedical Engineering",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -164,112 +148,112 @@
       "notes": ""
     },
     {
-      "level": "bachelor",
-      "name": "Médecine chinoise traditionnelle",
+      "level": "master",
+      "name": "Clinical Medicine (Master)",
       "field": "medicine",
       "language": "zh",
-      "duration_years": 5,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Programmes de master (médecine, pharmacie, santé publique, soins infirmiers)",
-      "field": "medicine",
-      "language": "en",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes de master internationaux, notamment Sino-Thai Nursing Master"
+      "notes": "Inclut formation hospitalière (规培)"
+    },
+    {
+      "level": "master",
+      "name": "Sino-Thai Nursing Master",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme conjoint avec université thaïlandaise"
     },
     {
       "level": "phd",
-      "name": "Programmes de doctorat (sciences médicales)",
+      "name": "Clinical Medicine (Doctor professionnel)",
       "field": "medicine",
-      "language": "en",
-      "duration_years": 4,
+      "language": "zh",
+      "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Inclut option pour cliniciens en exercice (在职临床医师)"
     },
     {
-      "level": "foundation",
-      "name": "Programme préparatoire / pré-universitaire",
+      "level": "language",
+      "name": "Chinese Language Program",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Pour étudiants n'ayant pas le HSK requis"
+      "notes": "Proposé via International Education College (sis.wmu.edu.cn)"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires reconnu, bons résultats en sciences (biologie, chimie, physique, mathématiques) pour MBBS et programmes médicaux",
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent. Pour MBBS en anglais : dossier via portail international.",
       "min_gpa": null,
-      "age_max": 25,
-      "age_min": 18,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Programme préparatoire d'un an disponible à l'École internationale (sis.wmu.edu.cn)",
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
       "other": [
-        "Examen médical",
-        "Passeport valide",
-        "Casier judiciaire vierge"
+        "Dossier via https://wmu.at0086.cn/StuApplication/Login.aspx",
+        "Brochure d'admission disponible sur sis.wmu.edu.cn/en"
       ]
     },
     "master": {
-      "academic": "Licence (Bachelor) dans un domaine connexe, transcripts académiques, 2 lettres de recommandation",
+      "academic": "Diplôme de bachelor (licence) dans un domaine pertinent. Pour申请学术型 : mémoire + publications. Pour申请专业型 : formation clinique + thèse.",
       "min_gpa": null,
-      "age_max": 40,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 6,
-      "toefl_min": 80,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Plan d'études / proposition de recherche pour la recherche master",
-        "Publications préférables pour doctorat"
+        "Moyenne pondérée des cours ≥75 pour candidats en service (同等学力)",
+        "3+ années d'expérience après bachelor pour申请同等学力",
+        "Examen national d'anglais et examen综合水平 requis pour同等学力"
       ]
     },
     "phd": {
-      "academic": "Master dans un domaine connexe, proposition de recherche, 2 lettres de recommandation",
+      "academic": "Diplôme de master. Pour申请临床医学博士专业学位 en exercice : certificat de formation clinique requise.",
       "min_gpa": null,
-      "age_max": 45,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 6,
-      "toefl_min": 80,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Proposition de recherche détaillée",
-        "Accord préalable d'un superviseur WMU"
+        "Avis de 2 experts (副教授 ou équivalent)",
+        "Approbation du superviseur (导师) requise"
       ]
     },
     "language": {
-      "academic": "Diplôme de fin d'études secondaires",
-      "age_max": 55,
+      "academic": "Pas de prérequis académique spécifique",
+      "age_max": null,
       "other": [
-        "Programme de langue chinoise (中文+医学特色)"
+        "Inscription via International Education College (sis.wmu.edu.cn)"
       ]
     }
   },
   "contacts": {
-    "office_name": "International Education College (国际教育学院) / School of International Studies",
-    "iso_email": "sis@wmu.edu.cn",
+    "office_name": "International Education College / Office des admissions internationales",
+    "iso_email": "",
     "admissions_email": "zsb@wmu.edu.cn",
     "wechat": "",
     "phone": "+86-577-86689885",
@@ -288,29 +272,27 @@
       "bachelor",
       "master",
       "phd",
-      "language",
-      "foundation"
+      "language"
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 60,
-    "age_max_bachelor": 25,
-    "age_max_master": 40,
-    "age_max_phd": 45,
-    "has_csc": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
     "has_university_scholarship": null,
-    "has_provincial_scholarship": true,
-    "tuition_cny_min": 18000,
-    "tuition_cny_max": 35000,
-    "housing_cny_year_min": 4000,
-    "deadline_typical": "30 juin",
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
     "intake_months": [
       9
     ],
@@ -318,31 +300,34 @@
     "province": "Zhejiang",
     "tags": [
       "médecine",
-      "MBBS",
       "ophtalmologie",
-      "optométrie",
-      "sciences de la vision",
-      "stomatologie",
-      "pharmacie",
-      "santé publique",
-      "soins infirmiers",
-      "génie biomédical",
-      "CSC Silk Road",
-      "CSC High-Level Graduate",
+      "MBBS anglais",
+      "programme sino-thaïlandais",
       "recherche médicale",
-      "affiliations hospitalières multiples",
-      "Sino-Thai Nursing"
+      "hôpital universitaire"
     ]
   },
-  "confidence": 0.72,
+  "confidence": 0.55,
   "missing_fields": [
-    "tuition_cny_min/max confirmés par source",
-    "min_gpa exact",
-    "has_university_scholarship non explicitement confirmé",
-    "wechat officiel",
-    "contact email direct du International Education College"
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "has_csc",
+    "has_university_scholarship",
+    "has_provincial_scholarship",
+    "deadline_typical",
+    "cost_of_living_cny_month",
+    "frais de dossier",
+    "documents détaillés",
+    "HSK/IELTS/TOEFL scores exacts"
   ],
-  "notes": "Université médicale majeure du Zhejiang, 550 étudiants internationaux. 17 écoles dont médecine clinique (avec programme MBBS en anglais), ophtalmologie (discipline phare nationale), stomatologie, pharmacie, sciences infirmières, sciences de laboratoire, santé publique, génie biomédical, et école de médecine chinoise traditionnelle. 13 hôpitaux affiliés. Partenaires internationaux : +170 institutions, programmes conjoints avec Université de l'Alberta (Canada) via Alberta College, et coopération avec universités thaïlandaises (programmes master nursing sino-thaïlandais). Bourses : Gouvernement chinois (CSC - Silk Road et High-Level Graduate), bourses provinciales du Zhejiang. École internationale (sis.wmu.edu.cn) gère admissions étudiants étrangers, avec programmes undergrad, pré-universitaire (foundation), graduate et non-degree. Calendrier académique semestriel, rentrée septembre.",
+  "notes": "Sources principales : site officiel wmu.edu.cn, en.wmu.edu.cn, sis.wmu.edu.cn (International Education College), zhaosheng.wmu.edu.cn (admissions undergraduate), yjsy.wmu.edu.cn (graduate school). Les frais, scores linguistiques exacts et délais ne sont pas précisés dans les sources fournies — consulter les brochures d'admission (Admission_Brochure) et Fees & Bank Accounts sur sis.wmu.edu.cn/en. Programme phare : MBBS en anglais, ophtalmologie, stomatologie. Partenariats internationaux avec 170+ institutions.",
   "documents": [
     {
       "type": "passport",
@@ -352,17 +337,39 @@
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport valide requis pour étudiants étrangers"
+      "notes": "Passeport valide requis pour candidature en ligne"
     },
     {
-      "type": "diplôme",
+      "type": "diplome",
+      "required": true,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme précédent (lycée/bachelor/master) avec traduction officielle"
+    },
+    {
+      "type": "releve_notes",
       "required": true,
       "count": null,
       "who": "candidat",
       "applies_to": [
         "all"
       ],
-      "notes": "Diplômes et relevés de notes traduits"
+      "notes": "Relevés de notes officiels traduits"
+    },
+    {
+      "type": "certificat_langue",
+      "required": false,
+      "count": null,
+      "who": "candidat",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais (détails non précisés)"
     },
     {
       "type": "photo",
@@ -372,28 +379,40 @@
       "applies_to": [
         "all"
       ],
-      "notes": "Photos d'identité"
+      "notes": "Photo format passeport"
     },
     {
-      "type": "certificat de langue",
+      "type": "formulaire_demande",
       "required": true,
       "count": null,
       "who": "candidat",
       "applies_to": [
         "all"
       ],
-      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour anglais"
+      "notes": "Formulaire rempli via portail en ligne"
+    },
+    {
+      "type": "lettre_recommandation",
+      "required": false,
+      "count": 2,
+      "who": "professeurs",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Deux lettres de professeurs (pour master/PhD)"
     }
   ],
   "application": {
-    "platform_name": "Système de gestion des étudiants étrangers WMU",
-    "platform_url": "http://sis.wmu.edu.cn/",
+    "platform_name": "WMU International Student Application System",
+    "platform_url": "https://wmu.at0086.cn/StuApplication/Login.aspx",
     "steps": [
-      "S'inscrire sur la plateforme de gestion des étudiants étrangers",
+      "Créer un compte sur le portail en ligne WMU",
       "Remplir le formulaire de candidature",
-      "Soumettre les documents requis",
+      "Télécharger les documents requis",
+      "Soumettre la candidature en ligne",
       "Attendre la notification d'admission",
-      "Payer les frais"
+      "Recevoir la lettre d'admission et le formulaire JW202"
     ],
     "opens_at": "",
     "deadline": "",
@@ -447,7 +466,7 @@
   },
   "scholarships": [
     {
-      "name": "Bourse du gouvernement chinois - Programme Route de la Soie",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
@@ -456,22 +475,20 @@
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Candidats des pays le long de la Route de la Soie",
-      "apply_via": "university",
+      "conditions": "Postuler via ambassade de Chine ou université",
+      "apply_via": "csc",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Bourse du gouvernement chinois - Programme haut niveau pour étudiants graduate",
-      "type": "csc",
-      "coverage": "full",
+      "name": "WMU University Scholarship",
+      "type": "university",
+      "coverage": "partial",
       "covers": [
-        "tuition",
-        "housing",
-        "stipend"
+        "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Étudiants graduate",
+      "conditions": "Excellence académique",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -486,7 +503,7 @@
     "preparatory_chinese": {
       "available": true,
       "duration": "1 an",
-      "leads_to_degree": true
+      "leads_to_degree": false
     },
     "foundation": {
       "available": null,
@@ -499,28 +516,24 @@
       "X2"
     ],
     "documents_from_university": [
-      "Formulaire JW202",
       "Lettre d'admission",
-      "Visa Application for Study in China"
+      "Formulaire JW202/Visa Application for Study in China"
     ],
-    "instructions": "L'université fournit les documents nécessaires à la demande de visa X1 ou X2 selon la durée du programme",
-    "arrival_and_residence_permit": "À l'arrivée, les étudiants doivent se présenter au Bureau international pour les formalités de permis de séjour"
+    "instructions": "Demander un visa X1 (études >180 jours) ou X2 (études <180 jours) au consulat chinois avec lettre d'admission et JW202",
+    "arrival_and_residence_permit": "S'enregistrer au bureau de sécurité publique local dans les 30 jours suivant l'arrivée pour obtenir le permis de résidence"
   },
   "housing_and_services": {
     "housing_types": [
-      "dortoir sur campus"
+      "chambre double campus",
+      "chambre simple campus"
     ],
-    "rules": "Règlement intérieur du dortoir de l'université",
-    "international_office": "Collège d'éducation internationale (国际教育学院) - sis.wmu.edu.cn",
-    "orientation": true,
+    "rules": "Logement sur campus disponible pour étudiants internationaux",
+    "international_office": "School of International Studies (国际教育学院), sis.wmu.edu.cn",
+    "orientation": "Programme d'orientation organisé pour nouveaux étudiants internationaux",
     "english_support": true,
-    "clubs": "Troupe artistique des étudiants internationaux, associations étudiantes"
+    "clubs": "International Student Arts Troupe et autres associations étudiantes"
   },
   "country_specific": [
-    {
-      "region_or_country": "Pays de la Route de la Soie",
-      "notes": "Éligibles au programme de bourse gouvernementale spécifique"
-    },
     {
       "region_or_country": "",
       "notes": ""
@@ -528,55 +541,90 @@
   ],
   "scan_status": "ok",
   "slug": "wenzhou-medical-university",
-  "scraped_at": "2026-08-23T14:53:09.837Z",
+  "scraped_at": "2026-08-30T11:05:00.074Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.wmu.edu.cn/",
       "title": "温州医科大学",
-      "chars": 2243
+      "chars": 7750
     },
     {
-      "url": "http://en.wmu.edu.cn/",
-      "title": "WENZHOU MEDICAL UNIVERSITY",
-      "chars": 4853
-    },
-    {
-      "url": "http://sis.wmu.edu.cn/",
-      "title": "国际教育学院",
-      "chars": 3869
-    },
-    {
-      "url": "http://zhaosheng.wmu.edu.cn/",
+      "url": "https://zhaosheng.wmu.edu.cn/",
       "title": "本科招生网-温州医科大学",
-      "chars": 1739
+      "chars": 7673
     },
     {
-      "url": "https://www.wmu.edu.cn/css/base.css?ac",
-      "title": null,
-      "chars": 7552
+      "url": "https://yjsy.wmu.edu.cn/",
+      "title": "研究生院、研究生工作部（新）",
+      "chars": 13254
     },
     {
-      "url": "https://www.wmu.edu.cn/css/style.css?act=3",
-      "title": null,
-      "chars": 7170
+      "url": "https://en.wmu.edu.cn/",
+      "title": "WENZHOU MEDICAL UNIVERSITY",
+      "chars": 8808
     },
     {
-      "url": "https://www.wmu.edu.cn/css/common.css?act=12",
-      "title": null,
-      "chars": 12000
+      "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program.htm",
+      "title": "Undergraduate Program-国际教育学院",
+      "chars": 1724
     },
     {
-      "url": "https://www.wmu.edu.cn/css/common1000.css?act=7",
-      "title": null,
-      "chars": 12000
+      "url": "https://sis.wmu.edu.cn/en/Admission/Postgraduate_Program.htm",
+      "title": "Postgraduate Program-国际教育学院",
+      "chars": 1938
     },
     {
-      "url": "https://www.wmu.edu.cn/css/font-awesome.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://yjsy.wmu.edu.cn/info/3731/162864.htm",
+      "title": "关于做好2026年下半年同等学力在职申请硕士学位人员进入学位论文阶段资格审查工作的通知-研究生院、研究生工作部（新）",
+      "chars": 6730
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/zsgz1/zsjz.htm",
+      "title": "招生简章-研究生院、研究生工作部（新）",
+      "chars": 5788
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/info/2961/162874.htm",
+      "title": "关于做好2026年下半年同等学力在职申请硕士学位人员进入学位论文阶段资格审查工作的通知-研究生院、研究生工作部（新）",
+      "chars": 6655
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/zsgz1/sszs.htm",
+      "title": "硕士招生-研究生院、研究生工作部（新）",
+      "chars": 6386
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/zsgz1/bszs.htm",
+      "title": "博士招生-研究生院、研究生工作部（新）",
+      "chars": 6344
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/zzyjs1/zsjz1.htm",
+      "title": "招生简章-研究生院、研究生工作部（新）",
+      "chars": 5432
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/info/2481/162724.htm",
+      "title": "温州医科大学2026级博士研究生新生入学须知-研究生院、研究生工作部（新）",
+      "chars": 8065
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/info/2481/162814.htm",
+      "title": "温州医科大学2026级在职临床医师申请临床医学博士专业学位报到须知-研究生院、研究生工作部（新）",
+      "chars": 5619
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/info/2481/162584.htm",
+      "title": "温州医科大学2026级硕士研究生新生入学须知-研究生院、研究生工作部（新）",
+      "chars": 8673
+    },
+    {
+      "url": "https://yjsy.wmu.edu.cn/info/2871/162764.htm",
+      "title": "关于做好2026年温州医科大学研究生毕业生基层就业学费补偿国家助学贷款代偿申请报送工作的通知-研究生院、研究生工作部（新）",
+      "chars": 4566
     }
   ],
   "db_row": {
@@ -587,14 +635,13 @@
     "city": "Wenzhou",
     "province": "Zhejiang",
     "country": "Chine",
-    "department": "International Education College (国际教育学院) / School of International Studies",
+    "department": "International Education College / Office des admissions internationales",
     "emails": [
-      "sis@wmu.edu.cn",
       "zsb@wmu.edu.cn"
     ],
     "phone": "+86-577-86689885",
     "wechat": null,
-    "website": "http://en.wmu.edu.cn/",
+    "website": "https://en.wmu.edu.cn/",
     "majors": [
       "medicine",
       "dentistry",
@@ -605,17 +652,18 @@
     ],
     "required_documents": [
       "passport",
-      "diplôme",
+      "diplome",
+      "releve_notes",
       "photo",
-      "certificat de langue"
+      "formulaire_demande"
     ],
-    "scholarship_amount": "Bourse du gouvernement chinois - Programme Route de la Soie / Bourse du gouvernement chinois - Programme haut niveau pour étudiants graduate",
-    "scholarship_min": 18000,
-    "scholarship_max": 35000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
-    "tuition_min": 18000,
-    "tuition_max": 35000,
-    "application_deadline": "30 juin"
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / WMU University Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
   }
 }

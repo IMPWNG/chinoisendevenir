@@ -8,28 +8,24 @@
     ],
     "website": "https://www.xmu.edu.cn",
     "international_website": "https://admissions.xmu.edu.cn",
-    "application_portal_url": "https://admissions.xmu.edu.cn"
+    "application_portal_url": "http://application.xmu.edu.cn/"
   },
   "general": {
-    "presentation": "Université fondée en 1921 par Tan Kah Kee, première université créée par un Chinois d'outre-mer. Membre des projets 211, 985 et Double First-Class. 19 disciplines dans le top 1% ESI (chimie, science des matériaux, ingénierie dans le top 1‰). 6 disciplines Double First-Class: chimie, sciences marines, biologie, écologie, statistique, éducation.",
-    "history": "Fondée en 1921 par le leader patriotique Tan Kah Kee. Première université chinoise d'outre-mer. Campus malaisien approuvé en 2013, première université chinoise à construire un campus indépendant à l'étranger.",
+    "presentation": "Université publique de recherche fondée en 1921 par M. Tan Kah Kee, l'une des plus prestigieuses de Chine (projet 985/211/Double First-Class). Offre des programmes en chinois et en anglais aux étudiants internationaux de tous niveaux.",
+    "history": "Fondée en 1921 par l'industriel sino-singapourien Tan Kah Kee à Xiamen. A célébré son centenaire en 2021. Dispose d'une branche en Malaisie.",
     "rankings": [
-      "Projet 211",
-      "Projet 985",
-      "Double First-Class",
-      "19 disciplines top 1% ESI"
+      "Double First-Class University",
+      "Project 985",
+      "Project 211"
     ],
     "strengths": [
-      "Chimie",
-      "Sciences marines",
-      "Biologie",
-      "Écologie",
-      "Statistique",
-      "Éducation",
-      "Science des matériaux",
-      "Ingénierie",
-      "Économie",
-      "Droit international"
+      "Sciences marines et océanographie",
+      "Chimie et génie chimique",
+      "Économie et gestion",
+      "Droit (droit fiscal international)",
+      "Mathématiques",
+      "Sciences de la Terre",
+      "Médecine et sciences de la vie"
     ],
     "teaching_languages": [
       "zh",
@@ -41,214 +37,195 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 2500,
-      "max": 3500,
-      "notes": "Allocation mensuelle bourse enseignant chinois: licence/1an/1sem 2500 CNY, master 3000 CNY, doctorat 3500 CNY. Logement doctorat 1000 CNY/mois, autres 700 CNY/mois."
+      "min": 2000,
+      "max": 4000,
+      "notes": "Estimation standard pour Xiamen; non confirmée dans les sources"
     },
     "campuses": [
       {
-        "name": "Siming",
+        "name": "Siming Campus (思明校区)",
         "city": "Xiamen",
-        "description": "Campus principal historique"
+        "description": "Campus principal face à la mer, considéré comme l'un des plus beaux de Chine"
       },
       {
-        "name": "Zhangzhou",
+        "name": "Zhangzhou Campus (漳州校区)",
         "city": "Zhangzhou",
-        "description": "Campus annexe"
+        "description": "Nouveau campus"
       },
       {
-        "name": "Xiang'an",
-        "city": "Xiamen",
-        "description": "Campus moderne"
-      },
-      {
-        "name": "Malaysia Campus",
+        "name": "Malaysia Branch (马来西亚分校)",
         "city": "Sepang",
-        "description": "Première université chinoise avec campus indépendant à l'étranger (2013)"
+        "description": "Première université chinoise à établir un campus à l'étranger"
       }
     ]
   },
   "programs": [
     {
-      "level": "master",
-      "name": "Urban and Regional Planning",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme Excellence Scholarship. TOEFL 80+ ou IELTS 6.0+. 3+ ans expérience professionnelle requise. Âge max 45."
-    },
-    {
-      "level": "master",
-      "name": "Chemical Engineering",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme Excellence Scholarship. TOEFL 80+ ou IELTS 6.0+. 3+ ans expérience professionnelle requise. Âge max 45."
-    },
-    {
       "level": "bachelor",
-      "name": "MBBS",
-      "field": "medicine",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme en anglais mentionné dans les vidéos d'info sessions."
-    },
-    {
-      "level": "master",
-      "name": "International Chinese Education (TCSOL)",
-      "field": "education",
-      "language": "zh",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse International Chinese Language Teachers. HSK 5 (210) + HSKK intermédiaire (60)."
-    },
-    {
-      "level": "bachelor",
-      "name": "Chinese Language (汉语言)",
-      "field": "chinese_language",
+      "name": "Chinese-Medium Bachelor's Programs",
+      "field": "other",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Bourse International Chinese Language Teachers. HSK 4 (210) + HSKK intermédiaire (60)."
+      "notes": "6 divisions: humanités/arts, sciences sociales, sciences naturelles, ingénierie, médecine/sciences de la vie, sciences de la Terre"
+    },
+    {
+      "level": "bachelor",
+      "name": "English-Medium Bachelor's Programs",
+      "field": "other",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Plusieurs spécialités enseignées en anglais (ex. Creative and Innovation Institute)"
+    },
+    {
+      "level": "master",
+      "name": "Chinese-Medium Master's Programs",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Catalogue complet disponible sur le portail"
+    },
+    {
+      "level": "master",
+      "name": "English-Medium Master's Programs",
+      "field": "other",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "China-OECD LLM Programme on Taxation",
+      "field": "law",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme conjoint Master en droit fiscal international"
+    },
+    {
+      "level": "master",
+      "name": "Urban and Regional Planning (Youth of Excellence)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse d'excellence du gouvernement chinois"
+    },
+    {
+      "level": "master",
+      "name": "Chemical Engineering (Youth of Excellence)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse d'excellence du gouvernement chinois"
+    },
+    {
+      "level": "master",
+      "name": "Marine Affairs (Youth of Excellence)",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse d'excellence du gouvernement chinois"
+    },
+    {
+      "level": "phd",
+      "name": "Chinese-Medium Doctoral Programs",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "English-Medium Doctoral Programs",
+      "field": "other",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "phd",
+      "name": "China Studies Program PhD Fellowships",
+      "field": "other",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse doctorale du programme d'études sur la Chine"
     },
     {
       "level": "language",
-      "name": "Chinese Language Program (long-term)",
+      "name": "Learn Chinese / Chinese Language Program",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 1,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme de langue chinoise long terme. Voir oec.xmu.edu.cn/lhlx/zsxm.htm"
-    },
-    {
-      "level": "master",
-      "name": "Taxation Law (LLM)",
-      "field": "law",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme conjoint China-OECD en droit fiscal. Mentionné dans les annonces 2026."
-    },
-    {
-      "level": "master",
-      "name": "Marine Affairs",
-      "field": "sciences",
-      "language": "en",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme Excellence Scholarship Youth of Excellence Scheme."
-    },
-    {
-      "level": "bachelor",
-      "name": "Programs in Humanities and Arts",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programmes en chinois disponibles."
-    },
-    {
-      "level": "bachelor",
-      "name": "Programs in Social Sciences",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Économie, gestion, droit, relations internationales, etc."
-    },
-    {
-      "level": "bachelor",
-      "name": "Programs in Natural Science and Engineering",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Mathématiques, physique, chimie, informatique, matériaux, etc."
-    },
-    {
-      "level": "bachelor",
-      "name": "Programs in Medicine and Life Sciences",
-      "field": "medicine",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Médecine, pharmacie, sciences de la vie, santé publique."
+      "notes": "Proposé par l'International Chinese Education College (OEC); bourses International Chinese Language Teachers Scholarship disponibles"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (high school). Excellents résultats académiques.",
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent; exigences spécifiques selon le programme",
       "min_gpa": null,
-      "age_max": 25,
-      "age_min": 16,
-      "hsk_level": 4,
-      "hsk_score_min": 210,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
+      "preparatory_if_insufficient": "Pré-universitaire d'un an (Chinese Foundation Program) proposé pour les programmes en chinois si HSK insuffisant",
       "other": [
-        "HSKK intermédiaire 60 pour bourse TCSOL",
-        "HSK 3 (270) pour programme 1 an TCSOL"
+        "Nationalité non chinoise et diplôme obtenu hors de Chine (ou conditions spécifiques)",
+        "Dossier via portail en ligne http://application.xmu.edu.cn/",
+        "Examen d'entrée ou entretien selon le programme"
       ]
     },
     "master": {
-      "academic": "Licence/bachelor degree. Pour bourses Excellence: 3+ ans expérience professionnelle.",
+      "academic": "Licence/Bachelor ou équivalent; domaine lié au master demandé",
       "min_gpa": null,
-      "age_max": 45,
-      "age_min": null,
-      "hsk_level": 5,
-      "hsk_score_min": 210,
-      "ielts_min": 6,
-      "toefl_min": 80,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
-      "other": [
-        "HSKK intermédiaire 60 pour TCSOL",
-        "Lettre d'intention superviseur requise pour bourses Excellence"
-      ]
-    },
-    "phd": {
-      "academic": "Master degree. Lettres de recommandation de 2 professeurs associés ou plus.",
-      "min_gpa": null,
-      "age_max": 45,
+      "age_max": null,
       "age_min": null,
       "hsk_level": null,
       "hsk_score_min": null,
@@ -256,26 +233,47 @@
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Déclaration personnelle en chinois (3000 mots)",
-        "Protocole de recherche proposé"
+        "Candidature via portail en ligne",
+        "Lettre de recommandation",
+        "Plan d'études / Statement of purpose",
+        "CV",
+        "Publication(s) pour la recherche"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent; projet de recherche",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Accord préalable avec un superviseur XMU",
+        "Candidature via portail en ligne",
+        "Plan de recherche",
+        "Lettres de recommandation",
+        "Publications"
       ]
     },
     "language": {
-      "academic": "Pas de diplôme spécifique requis pour programmes de langue",
-      "age_max": 45,
+      "academic": "Diplôme d'études secondaires; avoir entre 18 et 65 ans (programme bourses enseignants)",
+      "age_max": 65,
       "other": [
-        "HSK 3 minimum selon programme",
-        "HSKK requis pour certaines orientations"
+        "Candidature via International Chinese Language Teachers Scholarship system",
+        "Différents niveaux de langue chinoise"
       ]
     }
   },
   "contacts": {
-    "office_name": "Admissions Office of Xiamen University (招生与考试办公室)",
+    "office_name": "Admissions Office of Xiamen University / 国际学生招生办公室",
     "iso_email": "admissions@xmu.edu.cn",
     "admissions_email": "admissions@xmu.edu.cn",
-    "wechat": "Groupe WeChat XMU pour étudiants internationaux (QR code disponible)",
+    "wechat": "QR code WeChat disponible sur le site d'admissions (XMU WeChat Group)",
     "phone": "+86 (0) 592 2184792",
-    "address": "422 South Siming Road, Xiamen, Fujian Province, China, 361005"
+    "address": "422 Siming South Road (思明南路422号), Siming District, Xiamen, Fujian Province, China 361005"
   },
   "matching": {
     "fields": [
@@ -293,6 +291,7 @@
       "music",
       "law",
       "education",
+      "agriculture",
       "other"
     ],
     "degrees": [
@@ -309,130 +308,136 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 3,
-    "min_ielts": 6,
-    "min_toefl": 80,
-    "age_max_bachelor": 25,
-    "age_max_master": 45,
-    "age_max_phd": 45,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
-    "housing_cny_year_min": 8400,
-    "deadline_typical": "31 mars pour bourses Excellence; 15 mai pour bourses TCSOL septembre",
+    "housing_cny_year_min": null,
+    "deadline_typical": "Variable selon bourse/programme; généralement entre mars et juin pour rentrée septembre",
     "intake_months": [
       9
     ],
     "city": "Xiamen",
     "province": "Fujian",
     "tags": [
-      "211",
       "985",
+      "211",
       "Double First-Class",
-      "campus malaisien",
-      "14 Instituts Confucius",
-      "campus côtier",
-      "programmes en anglais disponibles",
-      "bourses multiples"
+      "campus-mer",
+      "université-complet",
+      "programmes-anglais",
+      "bourse-CSC",
+      "bourse-Tan Kah Kee",
+      "bourse-Fujian",
+      "campagne-Malaisie",
+      "sciences-marines",
+      "excellent-pour-internationaux"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.72,
   "missing_fields": [
+    "min_gpa",
+    "min_ielts",
+    "min_toefl",
+    "min_hsk_level",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
     "tuition_cny_min",
     "tuition_cny_max",
-    "coût de la vie détaillé hors bourses",
-    "GPA minimum exact",
-    "scores HSK minimum pour programmes non-bourse"
+    "housing_cny_year_min",
+    "frais_dossier",
+    "frais_scolarite_precis",
+    "delai_application_precis"
   ],
-  "notes": "Sources principales: portail admissions.xmu.edu.cn (CN/EN). Informations détaillées sur bourses Excellence (Urban Planning, Chemical Engineering, Marine Affairs) et bourse International Chinese Language Teachers. Frais de scolarité non précisés dans les sources. Programmes généraux en chinois et anglais disponibles dans 6 domaines: Humanités/Arts, Sciences sociales, Sciences naturelles, Ingénierie/Technologie, Médecine/Sciences de la vie, Sciences de la Terre/Technologie.",
+  "notes": "Sources limitées aux pages d'accueil et listes de programmes/bourses. Données chiffrées précises (GPA, HSK, IELTS, TOEFL, frais de scolarité) à vérifier via les pages Admissions/Undergraduate_Students.htm, Master's_Students.htm, Doctoral_students.htm et Costs.htm du site d'admissions. XMU propose programmes en chinois et en anglais aux 3 niveaux + programme de langue chinoise. Nombreuses bourses disponibles: gouvernement chinois (CSC), provinciale (Fujian), municipale (Xiamen Tan Kah Kee), universitaire (XMU Scholarship) et bourses spécifiques (Marine, Silk Road, Sustainable Coastal, China Studies PhD, Youth of Excellence).",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "",
+      "count": null,
+      "who": "Candidat international",
       "applies_to": [
         "all"
       ],
-      "notes": "Page photo du passeport, valide"
+      "notes": "Passeport valide requis pour candidature en ligne sur application.xmu.edu.cn"
     },
     {
-      "type": "hsk",
+      "type": "diploma",
       "required": true,
       "count": null,
-      "who": "",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd",
-        "language"
-      ],
-      "notes": "Niveau variable selon programme"
-    },
-    {
-      "type": "ielts_or_toefl",
-      "required": true,
-      "count": null,
-      "who": "",
+      "who": "Bachelor/Master/Doctorat",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "IELTS 6.0+ ou TOEFL iBT 80+ pour anglais"
+      "notes": "Diplôme d'études secondaires (licence), licence (master) ou master (doctorat) selon le niveau"
     },
     {
-      "type": "diplome",
+      "type": "transcripts",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "Tous candidats",
       "applies_to": [
-        "bachelor",
+        "all"
+      ],
+      "notes": "Relevés de notes officiels"
+    },
+    {
+      "type": "language_certificate",
+      "required": null,
+      "count": null,
+      "who": "Programmes en chinois ou en anglais",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour programmes en anglais (voir guide d'admission)"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "Candidats master/doctorat",
+      "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "Plus haut diplome obtenu"
+      "notes": "Projet d'études / plan de recherche"
     },
     {
-      "type": "releves_notes",
-      "required": true,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Releves de notes officiels"
-    },
-    {
-      "type": "lettres_recommandation",
+      "type": "recommendation_letters",
       "required": true,
       "count": 2,
-      "who": "",
+      "who": "Candidats master/doctorat",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "2 lettres de professeurs titulaires"
+      "notes": "2 lettres de recommandation de professeurs"
     },
     {
-      "type": "examen_medical",
-      "required": true,
+      "type": "physical_examination",
+      "required": null,
       "count": null,
-      "who": "",
+      "who": "Tous candidats",
       "applies_to": [
         "all"
       ],
-      "notes": "Certificat medical"
+      "notes": "Formulaire d'examen médical à l'arrivée"
     },
     {
-      "type": "casier_judiciaire",
-      "required": true,
+      "type": "no_criminal_record",
+      "required": null,
       "count": null,
-      "who": "",
+      "who": "Tous candidats",
       "applies_to": [
         "all"
       ],
@@ -440,13 +445,14 @@
     }
   ],
   "application": {
-    "platform_name": "Xiamen University Online Application System",
-    "platform_url": "https://admissions.xmu.edu.cn",
+    "platform_name": "XMU Online Application System",
+    "platform_url": "http://application.xmu.edu.cn/",
     "steps": [
-      "Creer un compte",
-      "Remplir le formulaire",
-      "Televerser les documents",
-      "Soumettre en ligne"
+      "Créer un compte sur application.xmu.edu.cn",
+      "Remplir le formulaire de candidature en ligne",
+      "Télécharger les documents requis (passeport, diplômes, relevés, certificats linguistiques, projet d'études, lettres de recommandation)",
+      "Payer les frais de dossier en ligne",
+      "Soumettre la candidature et suivre le statut"
     ],
     "opens_at": "",
     "deadline": "",
@@ -456,7 +462,9 @@
     ],
     "application_fee_cny": null,
     "application_fee_refundable": null,
-    "payment_methods": []
+    "payment_methods": [
+      "online"
+    ]
   },
   "fees": {
     "tuition_cny_year": {
@@ -478,14 +486,14 @@
       },
       "english_taught_premium": null
     },
-    "insurance_cny_year": 800,
+    "insurance_cny_year": null,
     "other_fees": [],
     "housing": {
       "on_campus": [
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "boursiers: gratuit"
+          "included": ""
         }
       ],
       "deposit_cny": null,
@@ -495,57 +503,25 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Voir page '学习费用' (Costs) sur admissions.xmu.edu.cn"
     }
   },
   "scholarships": [
     {
-      "name": "Chinese Government Scholarship",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "housing",
-        "living",
-        "insurance"
+        "accommodation",
+        "insurance",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Selon programme CSC",
+      "conditions": "Pour étudiants étrangers, candidature via ambassade de Chine ou programme universitaire XMU",
       "apply_via": "university",
       "deadline": "",
-      "renewal": "annuel"
-    },
-    {
-      "name": "International Chinese Language Teachers Scholarship",
-      "type": "government",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "living",
-        "insurance"
-      ],
-      "stipend_cny_month": 2500,
-      "conditions": "HSK requis, 16-35 ans",
-      "apply_via": "chinese.cn",
-      "deadline": "2026-05-15",
-      "renewal": "annuel"
-    },
-    {
-      "name": "China Studies Program PhD Fellowship",
-      "type": "government",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "living",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Doctorat en etudes chinoises",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
+      "renewal": "Annuel, sous conditions de résultats"
     },
     {
       "name": "Fujian Provincial Government Scholarship",
@@ -555,36 +531,36 @@
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Gouvernement du Fujian",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "annuel"
-    },
-    {
-      "name": "Xiamen Tan Kah Kee Scholarship",
-      "type": "university",
-      "coverage": "partial",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Fonde par Tan Kah Kee",
+      "conditions": "Gouvernorat du Fujian, pour étudiants internationaux",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Xiamen University Scholarship",
+      "name": "Xiamen University New International Students Scholarship",
       "type": "university",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Etudiants nouveaux",
+      "conditions": "Programme propre à XMU pour nouveaux étudiants internationaux",
       "apply_via": "university",
       "deadline": "",
-      "renewal": "annuel"
+      "renewal": ""
+    },
+    {
+      "name": "Xiamen Tan Kah Kee Scholarship",
+      "type": "private",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Fondation Tan Kah Kee, Xiamen",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
     },
     {
       "name": "XMU Sustainable Coastal Development Scholarship",
@@ -594,7 +570,36 @@
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Developpement cotier",
+      "conditions": "Pour études en développement côtier durable",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudier le chinois / formation de professeurs de chinois",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "China Studies Program PhD Fellowships (Xinxue)",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Doctorat en études chinoises",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -605,159 +610,149 @@
       "coverage": "full",
       "covers": [
         "tuition",
-        "housing",
-        "living",
-        "insurance"
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Sciences marines",
-      "apply_via": "csc",
+      "conditions": "Pour étudiants en sciences marines",
+      "apply_via": "university",
       "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "Silk Road Program",
-      "type": "government",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "living",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Pays Route de la Soie",
-      "apply_via": "csc",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "Youth of Excellence Scheme of China",
-      "type": "government",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "living",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Cadres, fonctionnaires, <=45 ans",
-      "apply_via": "csc",
-      "deadline": "2026-03-31",
       "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": 4,
-    "hsk_master": 5,
-    "hsk_phd": 5,
-    "ielts_min": 6,
-    "toefl_min": 80,
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
+    "ielts_min": null,
+    "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1-2 ans",
-      "leads_to_degree": false
+      "duration": "1 an",
+      "leads_to_degree": null
     },
     "foundation": {
       "available": null,
-      "description": ""
-    }
+      "description": "Voir International Chinese Education College (oec.xmu.edu.cn)"
+    },
+    "chinese_taught_required_hsk": null,
+    "english_taught_required": "IELTS/TOEFL requis pour programmes en anglais (voir guide)"
   },
   "visa": {
     "visa_types": [
       "X1",
-      "X2"
+      "X2",
+      "J1"
     ],
     "documents_from_university": [
       "Admission Notice",
-      "JW201/JW202"
+      "JW202 Form",
+      "Visa Application Form"
     ],
-    "instructions": "X1 pour etudes >6 mois, X2 pour <6 mois",
-    "arrival_and_residence_permit": "Permis de residence dans les 30 jours"
+    "instructions": "Demander un visa X1 (long séjour >6 mois) ou X2 (court séjour) avec la lettre d'admission et le formulaire JW202 envoyés par XMU après acceptation",
+    "arrival_and_residence_permit": "À l'arrivée, l'université aide à convertir le visa en permis de résidence. Examen médical requis."
   },
   "housing_and_services": {
     "housing_types": [
-      "double",
-      "single"
+      "Dortoir universitaire sur campus Siming, chambre double standard"
     ],
-    "rules": "",
-    "international_office": "admissions@xmu.edu.cn, +86-592-2184792",
-    "orientation": "Sessions d info en ligne 'Studying in XMU'",
+    "rules": "Réservation après admission, dépôt requis",
+    "international_office": "Admissions Office, +86 (0) 592 2184792, admissions@xmu.edu.cn, 422 Siming South Road, Siming District, Xiamen",
+    "orientation": "Sessions d'orientation pour nouveaux étudiants internationaux, info-sessions en ligne 'Studying in XMU' chaque année",
     "english_support": true,
-    "clubs": "Associations etudiantes variees"
+    "clubs": "Plus de 100 associations étudiantes: danse hip-hop, escalade, calligraphie, art du papier, BASEBALL, course colorée, water festival, etc."
   },
   "country_specific": [
     {
       "region_or_country": "Malaisie",
-      "notes": "Plan de recommandation par les ecoles chinoises independantes"
-    },
-    {
-      "region_or_country": "Pays Route de la Soie",
-      "notes": "Programme bourses Silk Road"
+      "notes": "Programme spécial de recommandation du directeur pour écoles indépendantes chinoises de Malaisie (Xiamen University New International Students Scholarship)"
     }
   ],
   "scan_status": "ok",
   "slug": "xiamen-university",
-  "scraped_at": "2026-08-24T14:40:50.240Z",
+  "scraped_at": "2026-08-30T11:14:51.816Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://admissions.xmu.edu.cn/cn/",
-      "title": "厦门大学国际学生招生网",
-      "chars": 4568
-    },
     {
       "url": "https://admissions.xmu.edu.cn/",
       "title": "Admissions Office of Xiamen University",
-      "chars": 9995
+      "chars": 16000
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/cn/index.htm",
+      "title": "厦门大学国际学生招生网",
+      "chars": 14320
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/cn/",
+      "title": "厦门大学国际学生招生网",
+      "chars": 14320
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/Scholarships/China_Studies_Program_PhD_Fellowships.htm",
+      "title": "China Studies Program PhD Fellowships-Admissions Office of Xiamen University",
+      "chars": 14743
     },
     {
       "url": "https://admissions.xmu.edu.cn/cn/Admissions/BA.htm",
       "title": "本科生-厦门大学国际学生招生网",
-      "chars": 1264
+      "chars": 2774
     },
     {
       "url": "https://admissions.xmu.edu.cn/cn/Admissions/MA.htm",
       "title": "硕士生-厦门大学国际学生招生网",
-      "chars": 1264
+      "chars": 2774
     },
     {
       "url": "https://admissions.xmu.edu.cn/cn/Admissions/DR.htm",
       "title": "博士生-厦门大学国际学生招生网",
-      "chars": 1265
+      "chars": 2775
     },
     {
       "url": "https://admissions.xmu.edu.cn/cn/info/1063/9143.htm",
       "title": "中国政府来华留学卓越奖学金项目申请办法（厦门大学城乡规划）-厦门大学国际学生招生网",
-      "chars": 5277
+      "chars": 6625
     },
     {
       "url": "https://admissions.xmu.edu.cn/cn/info/1063/9133.htm",
       "title": "中国政府来华留学卓越奖学金项目申请办法（厦门大学化学工程）-厦门大学国际学生招生网",
-      "chars": 5388
+      "chars": 6710
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/Scholarships/International_Chinese_Language_Teachers_Scholars.htm",
+      "title": "International Chinese Language Teachers Scholarship-Admissions Office of Xiamen University",
+      "chars": 16000
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/info/1061/4110.htm",
+      "title": "Awardees of 2026 Chinese Government Scholarship High-Level Postgraduate Program-Admissions Office of Xiamen University",
+      "chars": 6224
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/info/1061/4020.htm",
+      "title": "International Chinese Language Teachers Scholarship 2026, Xiamen University-Admissions Office of Xiamen University",
+      "chars": 16000
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/info/1061/1864.htm",
+      "title": "2026 Application Guide to Chinese Government Scholarship- University Program-Admissions Office of Xiamen University",
+      "chars": 12664
+    },
+    {
+      "url": "https://admissions.xmu.edu.cn/Programs/English_Medium_Bachelor_s.htm",
+      "title": "English-Medium Bachelor's-Admissions Office of Xiamen University",
+      "chars": 6849
     },
     {
       "url": "https://admissions.xmu.edu.cn/cn/Scholarships/gjzwjsjxj.htm",
       "title": "国际中文教师奖学金-厦门大学国际学生招生网",
-      "chars": 5955
+      "chars": 7346
     },
     {
-      "url": "https://admissions.xmu.edu.cn/info/1131/3800.htm",
-      "title": "\"STUDYING IN XMU\" International Admissions Online Info Sessions 2026-Admissions Office of Xiamen University",
-      "chars": 10923
-    },
-    {
-      "url": "https://admissions.xmu.edu.cn/cn/info/1063/2282.htm",
-      "title": "厦门大学2026年国际中文教师奖学金申请办法-厦门大学国际学生招生网",
-      "chars": 5906
-    },
-    {
-      "url": "https://admissions.xmu.edu.cn/cn/info/1063/9013.htm",
-      "title": "厦门大学2026年“中国政府奖学金-高校自主招生项目”申请办法-厦门大学国际学生招生网",
-      "chars": 3673
+      "url": "https://admissions.xmu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1732774152&wbfileid=8DB08A40FC428AB9719483C01294261B",
+      "title": null,
+      "chars": 16000
     }
   ],
   "db_row": {
@@ -768,13 +763,13 @@
     "city": "Xiamen",
     "province": "Fujian",
     "country": "Chine",
-    "department": "Admissions Office of Xiamen University (招生与考试办公室)",
+    "department": "Admissions Office of Xiamen University / 国际学生招生办公室",
     "emails": [
       "admissions@xmu.edu.cn",
       "admissions@xmu.edu.cn"
     ],
     "phone": "+86 (0) 592 2184792",
-    "wechat": "Groupe WeChat XMU pour étudiants internationaux (QR code disponible)",
+    "wechat": "QR code WeChat disponible sur le site d'admissions (XMU WeChat Group)",
     "website": "https://admissions.xmu.edu.cn",
     "majors": [
       "business",
@@ -791,25 +786,23 @@
       "music",
       "law",
       "education",
+      "agriculture",
       "other"
     ],
     "required_documents": [
       "passport",
-      "hsk",
-      "ielts_or_toefl",
-      "diplome",
-      "releves_notes",
-      "lettres_recommandation",
-      "examen_medical",
-      "casier_judiciaire"
+      "diploma",
+      "transcripts",
+      "study_plan",
+      "recommendation_letters"
     ],
-    "scholarship_amount": "Chinese Government Scholarship / International Chinese Language Teachers Scholarship / China Studies Program PhD Fellowship / Fujian Provincial Government Scholarship / Xiamen Tan Kah Kee Scholarship / Xiamen University Scholarship / XMU Sustainable Coastal Development Scholarship / Marine Scholarship of China / Silk Road Program / Youth of Excellence Scheme of China",
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / Fujian Provincial Government Scholarship / Xiamen University New International Students Scholarship / Xiamen Tan Kah Kee Scholarship / XMU Sustainable Coastal Development Scholarship / International Chinese Language Teachers Scholarship / China Studies Program PhD Fellowships (Xinxue) / Marine Scholarship of China",
     "scholarship_min": null,
     "scholarship_max": null,
-    "min_hsk_level": 3,
-    "language_requirements": "HSK 3+ / IELTS 6 / TOEFL 80",
+    "min_hsk_level": null,
+    "language_requirements": null,
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": "31 mars pour bourses Excellence; 15 mai pour bourses TCSOL septembre"
+    "application_deadline": "Variable selon bourse/programme; généralement entre mars et juin pour rentrée septembre"
   }
 }

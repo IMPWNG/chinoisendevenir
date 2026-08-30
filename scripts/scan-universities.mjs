@@ -8,6 +8,10 @@
  *   node scripts/scan-universities.mjs --only hust,scut
  *   node scripts/scan-universities.mjs --limit 2 --force
  *   node scripts/scan-universities.mjs --concurrency 2
+ *   node scripts/scan-universities.mjs --force --from-raw
+ *
+ * --from-raw uses pages crawled by scripts/scrapling-crawl-universities.py
+ * instead of the built-in HTML fetch.
  *
  * Reads MAMMOUTH_API_KEY from .env.local (never hardcode the key).
  */
@@ -30,9 +34,9 @@ const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
 const PAGE_TIMEOUT_MS = 25000;
-const MAX_PAGES_PER_UNI = 12;
-const MAX_CHARS_PER_PAGE = 12000;
-const MAX_CHARS_TOTAL = 36000;
+const MAX_PAGES_PER_UNI = 16;
+const MAX_CHARS_PER_PAGE = 16000;
+const MAX_CHARS_TOTAL = 48000;
 const FETCH_DELAY_MS = 350;
 const AI_MAX_TOKENS = 7000;
 const AI_RETRIES = 3;
@@ -106,6 +110,7 @@ async function main() {
 
   console.log(`Universités à scanner : ${targets.length}`);
   console.log(`Modèle Mammouth      : ${DEFAULT_MODEL}`);
+  console.log(`Source pages         : ${args.fromRaw ? "Scrapling raw/" : "fetch HTTP"}`);
   console.log(`Sortie               : ${OUT_DIR}\n`);
 
   const results = [];
@@ -145,10 +150,11 @@ async function main() {
 }
 
 function parseArgs(argv) {
-  const out = { only: null, limit: null, force: false, concurrency: 1 };
+  const out = { only: null, limit: null, force: false, concurrency: 1, fromRaw: false };
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === "--force") out.force = true;
+    else if (a === "--from-raw") out.fromRaw = true;
     else if (a === "--only") out.only = String(argv[++i] || "")
       .split(",")
       .map((s) => s.trim().toLowerCase())
@@ -224,30 +230,48 @@ async function scanUniversity(uni, apiKey) {
 
   console.log(`→  ${uni.name_en}`);
   const started = Date.now();
-  const pages = await crawlUniversity(uni);
   const rawPath = join(RAW_DIR, `${uni.slug}.json`);
-  await writeFile(
-    rawPath,
-    JSON.stringify(
-      {
-        slug: uni.slug,
-        fetched_at: new Date().toISOString(),
-        pages: pages.map((p) => ({
-          url: p.url,
-          title: p.title,
-          status: p.status,
-          error: p.error || null,
-          text: p.text,
-        })),
-      },
-      null,
-      2,
-    ),
-    "utf8",
-  );
+  let pages;
+  if (args.fromRaw) {
+    pages = await loadRawPages(uni, rawPath);
+    if (!pages) {
+      console.log(`   ↷ pas de raw Scrapling, fallback crawl HTTP`);
+      pages = await crawlUniversity(uni);
+    }
+  } else {
+    pages = await crawlUniversity(uni);
+    await writeFile(
+      rawPath,
+      JSON.stringify(
+        {
+          slug: uni.slug,
+          fetched_at: new Date().toISOString(),
+          pages: pages.map((p) => ({
+            url: p.url,
+            title: p.title,
+            status: p.status,
+            error: p.error || null,
+            text: p.text,
+          })),
+        },
+        null,
+        2,
+      ),
+      "utf8",
+    );
+  }
 
   const usable = pages.filter((p) => p.text && p.text.length > 80);
   if (!usable.length) {
+    if (await exists(profilePath)) {
+      const previous = JSON.parse(await readFile(profilePath, "utf8"));
+      if (previous.scan_status === "ok") {
+        console.log(
+          `   ↷ aucun nouveau contenu, on garde le profil existant (${Math.round((Date.now() - started) / 1000)}s)`,
+        );
+        return previous;
+      }
+    }
     const empty = emptyProfile(uni, {
       scan_status: "no_pages",
       notes: "Aucun contenu HTML exploitable. Vérifier les URLs manuellement.",
@@ -263,6 +287,15 @@ async function scanUniversity(uni, apiKey) {
     profile = await extractWithMammouth(uni, usable, apiKey);
     profile.scan_status = "ok";
   } catch (err) {
+    if (await exists(profilePath)) {
+      const previous = JSON.parse(await readFile(profilePath, "utf8"));
+      if (previous.scan_status === "ok") {
+        console.log(
+          `   ↷ erreur IA (${err.message}), on garde le profil existant`,
+        );
+        return previous;
+      }
+    }
     profile = emptyProfile(uni, {
       scan_status: "ai_error",
       notes: `Erreur Mammouth: ${err.message}`,
@@ -288,6 +321,41 @@ async function scanUniversity(uni, apiKey) {
     `   ✓ ${usable.length} pages, confiance ${conf} (${Math.round((Date.now() - started) / 1000)}s)`,
   );
   return profile;
+}
+
+async function loadRawPages(uni, rawPath) {
+  if (!(await exists(rawPath))) return null;
+  try {
+    const raw = JSON.parse(await readFile(rawPath, "utf8"));
+    const pages = (raw.pages || [])
+      .map((p) => ({
+        url: p.url,
+        finalUrl: p.url,
+        status: p.status || 0,
+        title: p.title || null,
+        html: "",
+        text: String(p.text || "").slice(0, MAX_CHARS_PER_PAGE),
+        error: p.error || null,
+      }))
+      .filter((p) => p.url);
+    if (uni.seed_text && String(uni.seed_text).trim().length > 80) {
+      const already = pages.some((p) => (p.title || "").includes("Extraits officiels"));
+      if (!already) {
+        pages.unshift({
+          url: (uni.seed_urls && uni.seed_urls[0]) || uni.website || "seed-text",
+          finalUrl: "seed-text",
+          status: 200,
+          title: "Extraits officiels (admission / frais / bourses)",
+          html: "",
+          text: String(uni.seed_text).slice(0, MAX_CHARS_PER_PAGE),
+          error: null,
+        });
+      }
+    }
+    return pages.length ? pages : null;
+  } catch {
+    return null;
+  }
 }
 
 async function crawlUniversity(uni) {
@@ -547,10 +615,11 @@ function normalizeUrl(url) {
   }
 }
 
-const SYSTEM_PROMPT = `Tu extrais des données d'admission en Chine pour étudiants étrangers.
+const SYSTEM_PROMPT = `Tu extrais des données d'admission en Chine pour étudiants internationaux.
 Réponds UNIQUEMENT avec un JSON valide, sans markdown.
 N'invente rien. Si une info n'est pas dans les sources: null, [] ou "".
-Chiffres exacts (CNY, HSK, IELTS, TOEFL, dates, âges).
+Priorité: qui peut postuler (nationalité, âge, diplôme, GPA, HSK/IELTS/TOEFL), comment postuler (portail, étapes, documents, frais de dossier, dates), sélection/éligibilité, bourses, frais, visa, logement.
+Chiffres exacts (CNY, HSK, IELTS, TOEFL, dates, âges). Préfère l'année en cours ou la plus récente.
 matching.fields: business, economics, finance, computer_science, engineering, sciences, medicine, dentistry, pharmacy, chinese_language, arts, design, music, law, education, agriculture, other.
 matching.degrees: bachelor, master, phd, language, foundation, exchange.
 Langues: zh, en, bilingual. Montants en CNY.
@@ -608,12 +677,12 @@ async function extractWithMammouth(uni, pages, apiKey) {
   const settled = await Promise.allSettled([
     callMammouthJson(
       apiKey,
-      `${SYSTEM_PROMPT}\nFocus: identité, programmes (max 12), conditions d'admission, contacts, matching. JSON compact, chaque string < 350 caractères.`,
+      `${SYSTEM_PROMPT}\nFocus: identité, programmes (max 12), critères de sélection / éligibilité par niveau, contacts, matching. JSON compact, chaque string < 350 caractères.`,
       `Université:\n${meta}\n\nRemplis exactement ce JSON, compact:\n${pass1Schema}\n\nSOURCES:\n${corpus}`,
     ),
     callMammouthJson(
       apiKey,
-      `${SYSTEM_PROMPT}\nFocus: documents, procédure, frais, bourses, langue, visa, logement. JSON compact, chaque string < 350 caractères.`,
+      `${SYSTEM_PROMPT}\nFocus: documents, comment postuler (étapes + portail + dates), frais, bourses, langue, visa, logement. JSON compact, chaque string < 350 caractères.`,
       `Université:\n${meta}\n\nRemplis exactement ce JSON, compact:\n${pass2Schema}\n\nSOURCES:\n${corpus}`,
     ),
   ]);

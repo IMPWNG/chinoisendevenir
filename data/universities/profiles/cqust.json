@@ -11,23 +11,19 @@
     "application_portal_url": "https://cqust.at0086.cn/StuApplication/Login.aspx"
   },
   "general": {
-    "presentation": "Université municipale publique de Chongqing, axée sur les sciences et technologies, notamment les secteurs pétrolier, gazier et pétrochimique. Devenue université en novembre 2023 (anciennement Chongqing Science and Technology College depuis 2004).",
-    "history": "Fondée le 18 mai 1951. Nommée Chongqing Science and Technology College en 2004, puis renommée Chongqing University of Science and Technology en novembre 2023.",
-    "rankings": [
-      "7e à Chongqing (Academic Ranking of World Universities 2023)"
-    ],
+    "presentation": "Université publique de science et technologie située à Chongqing, disposant d'un bureau de coopération internationale et d'un Collège d'éducation internationale (国际教育学院) accueillant des étudiants internationaux.",
+    "history": "",
+    "rankings": [],
     "strengths": [
       "Pétrole et gaz",
-      "Pétrochimie",
-      "Sciences et technologies",
-      "Coopérations avec CNPC, Sinopec, CNOOC"
+      "Science des matériaux",
+      "Coopérations internationales (Finlande, Canada, Kazakhstan)"
     ],
     "teaching_languages": [
-      "zh",
-      "en"
+      "zh"
     ],
     "location": {
-      "city": "Chongqing (Shapingba)",
+      "city": "Chongqing",
       "province": "Chongqing",
       "country": "Chine"
     },
@@ -39,28 +35,15 @@
     "campuses": [
       {
         "name": "Campus principal",
-        "city": "Chongqing (Shapingba, district universitaire)",
-        "description": "Adresse: 重庆沙坪坝区大学城东路20号, code postal 401331"
+        "city": "Chongqing (Shapingba, University Town)",
+        "description": "Adresse: 重庆市沙坪坝区大学城东路20号, code postal 401331"
       }
     ]
   },
-  "programs": [
-    {
-      "level": "bachelor",
-      "name": "Programmes de licence (détails non disponibles)",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programmes internationaux via l'International Education College (国际教育学院). Détails spécifiques non fournis dans les sources."
-    }
-  ],
+  "programs": [],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires équivalent",
+      "academic": "Diplôme de fin d'études secondaires (équivalent gaokao). Détails non précisés dans les sources.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -69,10 +52,12 @@
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Règlement sur le statut académique des étudiants internationaux de premier cycle publié (2026-05-25)"
+      ]
     },
     "master": {
-      "academic": "Licence / Bachelor équivalent",
+      "academic": "",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -84,7 +69,7 @@
       "other": []
     },
     "phd": {
-      "academic": "Master équivalent",
+      "academic": "",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -102,27 +87,28 @@
     }
   },
   "contacts": {
-    "office_name": "国际合作交流处（港澳台事务办公室、国际教育学院）",
+    "office_name": "国际合作与交流处 (港澳台事务办公室、国际教育学院)",
     "iso_email": "",
     "admissions_email": "",
     "wechat": "",
     "phone": "",
-    "address": "重庆沙坪坝区大学城东路20号, 401331"
+    "address": "重庆市沙坪坝区大学城东路20号, 邮编 401331"
   },
   "matching": {
     "fields": [
       "engineering",
-      "sciences"
+      "sciences",
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language"
+      "language",
+      "exchange"
     ],
     "languages": [
-      "zh",
-      "en"
+      "zh"
     ],
     "english_programs_available": null,
     "chinese_language_program_available": null,
@@ -145,150 +131,76 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "tags": [
-      "pétrole",
-      "gaz",
-      "pétrochimie",
-      "université municipale",
-      "partenariats internationaux"
+      "public_university",
+      "international_students",
+      "international_dormitory",
+      "cooperation_finland",
+      "cooperation_canada"
     ]
   },
   "confidence": 0.25,
   "missing_fields": [
-    "tuition",
-    "housing",
-    "admission_requirements_details",
-    "hsk_ielts_toefl_scores",
-    "age_limits",
-    "scholarships",
-    "specific_programs",
-    "deadlines",
-    "contacts_email_phone",
-    "cost_of_living"
+    "admission_criteria_details",
+    "tuition_fees",
+    "scholarship_details",
+    "specific_programs_list",
+    "language_requirements",
+    "application_deadlines",
+    "contact_email_phone",
+    "cost_of_living",
+    "english_taught_programs"
   ],
-  "notes": "Sources limitées: page principale du bureau de coopération internationale et page Wikipedia. Pas d'accès aux pages détaillées des programmes internationaux (留学重科) ni aux exigences d'admission spécifiques. L'université a une International Education College et accepte les étudiants étrangers via le portail cqust.at0086.cn. Partenariats confirmés avec universités UIC, Regina, Haaga-Helia, Hanze, Veracruzana, Kyungpook, Changwon, National Central Taiwan.",
+  "notes": "Les sources fournies sont principalement la page d'accueil du bureau de coopération internationale et des règlements internes (gestion des dortoirs, statut académique des étudiants internationaux de premier cycle, formulaires de demande d'échange). Aucune information spécifique sur les critères d'admission (HSK/IELTS/TOEFL), frais de scolarité, bourses, programmes offerts ou dates limites n'est disponible dans les sources. Le portail de candidature '留学重科' (https://cqust.at0086.cn/StuApplication/Login.aspx) existe mais son contenu n'a pas été extrait. L'université accueille des étudiants internationaux (mentionnés dans les actualités: Thaïlande, Laos, Mexique, Kirghizistan, Ouzbékistan, Tadjikistan, Bangladesh, Inde).",
   "documents": [
     {
       "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Passeport requis (standard pour étudiants internationaux en Chine)."
+    },
+    {
+      "type": "diplome",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Diplômes et relevés de notes traduits (modèles disponibles sur le site)."
+    },
+    {
+      "type": "HSK/IELTS/TOEFL",
       "required": null,
       "count": null,
       "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Exigences linguistiques non précisées dans les sources publiques consultées."
     },
     {
-      "type": "high_school_diploma",
-      "required": null,
-      "count": null,
-      "who": "bachelor",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "bachelor_degree",
-      "required": null,
-      "count": null,
-      "who": "master",
-      "applies_to": [
-        "master"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "master_degree",
-      "required": null,
-      "count": null,
-      "who": "phd",
-      "applies_to": [
-        "phd"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "transcript",
-      "required": null,
+      "type": "formulaire_demande",
+      "required": true,
       "count": null,
       "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": ""
-    },
-    {
-      "type": "language_certificate",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "physical_exam",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "no_criminal_record",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "photo",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "study_plan",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "recommendation_letter",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": ""
+      "notes": "À remplir via le portail en ligne 留学重科."
     }
   ],
   "application": {
-    "platform_name": "Online Service Platform for International Students (国际学生网报系统)",
+    "platform_name": "留学重科 (CQUST Online Application)",
     "platform_url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
     "steps": [
-      "Créer un compte sur la plateforme AT0086",
+      "Créer un compte sur le portail 留学重科",
       "Remplir le formulaire de candidature en ligne",
-      "Téléverser les documents requis",
-      "Soumettre la candidature et suivre le statut via la plateforme",
-      "Consulter les résultats sur la plateforme"
+      "Joindre les documents requis (passeport, diplômes, relevés)",
+      "Soumettre la candidature et attendre l'évaluation"
     ],
     "opens_at": "",
     "deadline": "",
@@ -340,7 +252,19 @@
       "notes": ""
     }
   },
-  "scholarships": [],
+  "scholarships": [
+    {
+      "name": "",
+      "type": "",
+      "coverage": "",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "",
+      "apply_via": "",
+      "deadline": "",
+      "renewal": ""
+    }
+  ],
   "language": {
     "hsk_bachelor": null,
     "hsk_master": null,
@@ -358,101 +282,119 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "Les étudiants étrangers doivent obtenir un visa étudiant X1 ou X2 selon la durée des études, et un permis de résidence dans les 30 jours suivant l'arrivée.",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Formulaire d'admission JW202/JW201",
+      "Avis d'admission"
+    ],
+    "instructions": "L'université fournit les documents d'admission (JW202, lettre d'admission) après acceptation. Demander le visa X1 (long séjour >180j) ou X2 (court séjour) auprès de l'ambassade de Chine.",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours suivant l'arrivée auprès du bureau de sécurité publique local."
   },
   "housing_and_services": {
-    "housing_types": [],
-    "rules": "",
-    "international_office": "Service de la coopération et des échanges internationaux (国际合作与交流处 / 国际教育学院), adresse : 20 rue Daxuecheng Est, district de Shapingba, Chongqing 401331. Plateforme de candidature : https://cqust.at0086.cn/StuApplication/Login.aspx",
+    "housing_types": [
+      "Appartement international sur campus"
+    ],
+    "rules": "Voir 重庆科技大学国际学生公寓管理办法 (règlement disponible en PDF sur le site). Interdiction d'utiliser des appareils électriques non conformes.",
+    "international_office": "重庆科技大学国际合作与交流处 (港澳台事务办公室, 国际教育学院), 地址: 重庆沙坪坝区大学城东路20号, 邮编 401331",
     "orientation": "",
     "english_support": null,
-    "clubs": ""
+    "clubs": "Activités pour étudiants internationaux: visites culturelles, éducation aux réalités chinoises (ex: visite du Musée d'urbanisme de Chongqing)."
   },
   "country_specific": [
     {
-      "region_or_country": "Kazakhstan",
-      "notes": "Programme de formation pour cadres moyens et supérieurs d'Asie centrale sur les nouveaux matériaux (projet de coopération CQUST-Ambassade du Kazakhstan à Xi'an)."
-    },
-    {
-      "region_or_country": "Canada",
-      "notes": "Partenariat avec l'Université de Regina (Canada)."
-    },
-    {
-      "region_or_country": "Finlande",
-      "notes": "Partenariat avec Haaga-Helia University of Applied Sciences (Finlande)."
-    },
-    {
-      "region_or_country": "Pays-Bas",
-      "notes": "Partenariat avec Hanze Hogeschool Groningen University of Applied Sciences (Pays-Bas)."
-    },
-    {
-      "region_or_country": "États-Unis",
-      "notes": "Partenariat avec University of Illinois at Chicago (États-Unis)."
-    },
-    {
-      "region_or_country": "Corée du Sud",
-      "notes": "Partenariats avec Kyungpook National University et Changwon National University (Corée du Sud)."
+      "region_or_country": "",
+      "notes": ""
     }
   ],
   "scan_status": "ok",
   "slug": "cqust",
-  "scraped_at": "2026-08-24T14:57:21.327Z",
+  "scraped_at": "2026-08-30T11:08:30.843Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 10,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://wsc.cqust.edu.cn/",
       "title": "重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
-      "chars": 2041
+      "chars": 4728
     },
     {
-      "url": "https://wsc.cqust.edu.cn/index.htm/",
-      "title": null,
-      "chars": 2436
+      "url": "https://wsc.cqust.edu.cn/index.htm",
+      "title": "重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 4728
     },
     {
-      "url": "https://en.wikipedia.org/wiki/Chongqing_University_of_Science_and_Technology",
-      "title": "Chongqing University of Science and Technology - Wikipedia",
-      "chars": 9665
+      "url": "https://wsc.cqust.edu.cn/info/1013/1398.htm",
+      "title": "重庆科技大学国际学生（本科）学籍管理规定-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2523
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/info/1014/1187.htm",
+      "title": "重庆科技大学本科学生赴国（境）外学习交流申请表-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 3715
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/info/1014/1186.htm",
+      "title": "赴国（境）外学习交流普通本科学生课程与成绩认定申请审批表-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2413
     },
     {
       "url": "https://wsc.cqust.edu.cn/jlhz/gjhy.htm",
       "title": "国际会议-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
-      "chars": 423
+      "chars": 1893
     },
     {
-      "url": "https://cqust.at0086.cn/StuApplication/Login.aspx",
-      "title": "Online Service Platform for International Students",
-      "chars": 1337
-    },
-    {
-      "url": "https://wsc.cqust.edu.cn/style/animate.min.css",
+      "url": "https://wsc.cqust.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2122299078&wbfileid=18167092",
       "title": null,
-      "chars": 12000
+      "chars": 7205
     },
     {
-      "url": "https://wsc.cqust.edu.cn/style/slick.css",
+      "url": "https://wsc.cqust.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2122299078&wbfileid=18167258",
       "title": null,
-      "chars": 2466
+      "chars": 11112
     },
     {
-      "url": "https://wsc.cqust.edu.cn/style/public.css",
-      "title": null,
-      "chars": 10342
+      "url": "https://wsc.cqust.edu.cn/info/1030/1492.htm",
+      "title": "国际教育学院开展国际学生公寓安全检查-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2556
     },
     {
-      "url": "https://wsc.cqust.edu.cn/style/index.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://wsc.cqust.edu.cn/info/1030/1382.htm",
+      "title": "沉浸式感受巴渝魅力 我校国际学生走进重庆市规划展览馆-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2889
     },
     {
-      "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.kartographer.style%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
+      "url": "https://wsc.cqust.edu.cn/info/1013/1399.htm",
+      "title": "重庆科技大学国际学生公寓管理办法-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2518
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/info/1014/1185.htm",
+      "title": "重庆科技大学研究生出国（境）学习与学术交流申请表-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2393
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/info/1030/1374.htm",
+      "title": "学校举行2026年秋季普通本科生赴海外友好高校交换学习项目面试评审会-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2752
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2122299078&wbfileid=18167261",
       "title": null,
-      "chars": 145
+      "chars": 13336
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/gk/bmjj.htm",
+      "title": "部门简介-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2631
+    },
+    {
+      "url": "https://wsc.cqust.edu.cn/gk/lxwm.htm",
+      "title": "联系我们-重庆科技大学国际合作交流处（港澳台事务办公室.国际教育学院）",
+      "chars": 2168
     }
   ],
   "db_row": {
@@ -463,16 +405,21 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "国际合作交流处（港澳台事务办公室、国际教育学院）",
+    "department": "国际合作与交流处 (港澳台事务办公室、国际教育学院)",
     "emails": [],
     "phone": null,
     "wechat": null,
     "website": "https://wsc.cqust.edu.cn",
     "majors": [
       "engineering",
-      "sciences"
+      "sciences",
+      "other"
     ],
-    "required_documents": [],
+    "required_documents": [
+      "passport",
+      "diplome",
+      "formulaire_demande"
+    ],
     "scholarship_amount": null,
     "scholarship_min": null,
     "scholarship_max": null,

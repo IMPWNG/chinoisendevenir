@@ -7,23 +7,27 @@
       "ZJUT"
     ],
     "website": "https://www.zjut.edu.cn/",
-    "international_website": "https://www.zjut.edu.cn/",
-    "application_portal_url": ""
+    "international_website": "https://www.gjxy.zjut.edu.cn/index.php/en/home",
+    "application_portal_url": "https://zjut.at0086.cn/student"
   },
   "general": {
-    "presentation": "Université provinciale clé du Zhejiang, fondée en 1953, regroupant 27 écoles et 1 département, avec 64 programmes de premier cycle (46 de niveau national) et plus de 40 500 étudiants dont 1390 internationaux.",
-    "history": "Fondée en 1953, ses origines remontent à l'École industrielle moyenne du Zhejiang créée en 1910.",
+    "presentation": "Université de technologie du Zhejiang (ZJUT), fondée en 1953 (prédécesseur dès 1910), université provinciale clé du Zhejiang, première université provinciale co-construite avec un ministère dans les provinces côtières orientales. 33 500 étudiants dont 1 041 internationaux de 80+ pays. 64 programmes de licence, 46 programmes nationaux de premier niveau.",
+    "history": "Fondée en 1953, son prédécesseur remonte à 1910 (École secondaire industrielle du Zhejiang). Reçue des étudiants internationaux depuis 1954 (70 ans d'expérience).",
     "rankings": [
-      "Plan national 2011 - chef de file de centre d'innovation collaborative",
-      "Première vague d'universités provinciales clés du Zhejiang"
+      "Première vague du Plan national 2011 d'innovation",
+      "Université co-construite province-ministère",
+      "Université provinciale clé du Zhejiang (première vague)",
+      "Top 100 universités nationales"
     ],
     "strengths": [
-      "Chimie",
-      "Sciences de l'ingénieur",
-      "Habitat et immobilier (Institut chinois de l'habitat et de l'immobilier)",
-      "Pharmacologie marine",
-      "Intelligence artificielle",
-      "Géographie et information"
+      "Génie chimique",
+      "Génie biochimique",
+      "Pharmacie",
+      "Science des matériaux",
+      "Génie mécanique",
+      "Génie informatique",
+      "Sciences de l'environnement",
+      "Économie et gestion"
     ],
     "teaching_languages": [
       "zh",
@@ -35,32 +39,32 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 2500,
-      "max": 4500,
-      "notes": "Estimation pour Hangzhou (logement, restauration, transport)."
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
         "name": "Chaohui (朝晖)",
         "city": "Hangzhou",
-        "description": "Campus principal, 18 Chao Wang Lu, district Gongshu"
+        "description": "Campus historique"
       },
       {
         "name": "Pingfeng (屏峰)",
         "city": "Hangzhou",
-        "description": "Campus principal, lieu des cérémonies de remise des diplômes"
+        "description": "Campus principal moderne"
       },
       {
-        "name": "Moganshan (莫干山)",
+        "name": "Mount Mogan (莫干山)",
         "city": "Hangzhou",
-        "description": "Campus de 3334 mu au total"
+        "description": "Campus de recherche"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Programmes de premier cycle (64 dont 46 nationaux de premier plan)",
+      "name": "Programmes de licence en chinois (29 programmes)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -68,11 +72,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "64 spécialités de premier cycle incluant génie chimique, mécanique, informatique, science des matériaux, design industriel, pharmacie, etc."
+      "notes": "29 programmes en chinois répartis dans 14 collèges: Génie chimique, Bioingénierie, Pharmacie, Environnement, Matériaux, Agroalimentaire, Mécanique, Informatique, Génie civil, Gestion, Économie, Éducation, Sciences humaines, Collège international."
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence en anglais (14 programmes)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "14 programmes enseignés en anglais dans les mêmes domaines."
     },
     {
       "level": "master",
-      "name": "Programmes de master en anglais (English-taught Master's)",
+      "name": "Programmes de master en chinois (39 programmes)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "39 programmes master/doctorat en chinois."
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master en anglais (11 programmes)",
       "field": "engineering",
       "language": "en",
       "duration_years": 3,
@@ -80,11 +108,23 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Plusieurs masters enseignés en anglais disponibles pour étudiants internationaux"
+      "notes": "11 programmes master/doctorat en anglais."
     },
     {
       "level": "phd",
-      "name": "Programmes doctoraux",
+      "name": "Programmes de doctorat en chinois",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inclus dans les 39 programmes master/doctorat en chinois."
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat en anglais",
       "field": "engineering",
       "language": "en",
       "duration_years": 4,
@@ -92,108 +132,99 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Doctorats en chinois ou en anglais selon les programmes"
+      "notes": "Inclus dans les 11 programmes master/doctorat en anglais."
     },
     {
       "level": "language",
-      "name": "Programme de langue chinoise",
+      "name": "Programme de langue et culture chinoises",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
-      "start_months": [
-        3,
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Cours de langue chinoise pour étudiants internationaux"
-    },
-    {
-      "level": "bachelor",
-      "name": "Études chino-étrangères en coopération (Sino-foreign joint programs)",
-      "field": "business",
-      "language": "bilingual",
-      "duration_years": 4,
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes de coopération internationale (sino-étrangers)"
+      "notes": "Cours de langue chinoise et culture pour étudiants non-diplômants, cours de courte durée et perfectionnement avancé."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (HSK pour programmes en chinois), dossier académique",
+      "academic": "Diplôme de fin d'études secondaires, équivalent au gaokao chinois",
       "min_gpa": null,
-      "age_max": 25,
-      "age_min": 18,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Année préparatoire en langue chinoise proposée",
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
       "other": [
-        "Examen national d'entrée à l'université (Gaokao) pour les étudiants chinois",
-        "Examen d'entrée ou évaluation du dossier"
+        "Examen d'entrée ou évaluation du dossier",
+        "Pour programmes en chinois: HSK requis (niveau non précisé)",
+        "Pour programmes en anglais: IELTS/TOEFL requis (score non précisé)"
       ]
     },
     "master": {
-      "academic": "Licence / Bachelor pertinent",
-      "min_gpa": 3,
+      "academic": "Licence/Bachelor dans un domaine connexe",
+      "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 6,
-      "toefl_min": 80,
-      "preparatory_if_insufficient": "Année préparatoire en langue chinoise",
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
       "other": [
-        "Lettre de recommandation",
-        "Plan d'études",
-        "Transcription académique"
+        "Examen d'entrée ou évaluation du dossier",
+        "Pour programmes en chinois: HSK requis",
+        "Pour programmes en anglais: IELTS/TOEFL requis"
       ]
     },
     "phd": {
-      "academic": "Master pertinent",
-      "min_gpa": 3,
+      "academic": "Master dans un domaine connexe",
+      "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 6,
-      "toefl_min": 80,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Lettre de recommandation",
-        "Proposition de recherche",
-        "Publication(s) conseillée(s)"
+        "Lettre de recommandation d'un superviseur de thèse",
+        "Pour programmes en chinois: HSK requis",
+        "Pour programmes en anglais: IELTS/TOEFL requis"
       ]
     },
     "language": {
-      "academic": "Diplôme d'études secondaires",
+      "academic": "Aucune exigence académique préalable",
       "age_max": null,
       "other": [
-        "Inscription semestre mars ou septembre"
+        "Inscription ouverte toute l'année selon disponibilité"
       ]
     }
   },
   "contacts": {
-    "office_name": "Bureau des étudiants étrangers (International Students Office)",
-    "iso_email": "iso@zjut.edu.cn",
-    "admissions_email": "zsb@zjut.edu.cn",
-    "wechat": "zjut-zsb",
-    "phone": "+86-571-88320032",
-    "address": "18 Chao Wang Lu, district Gongshu, Hangzhou, Zhejiang 310014, Chine"
+    "office_name": "International College (国际学院) - Bureau d'admission des étudiants internationaux",
+    "iso_email": "iec@zjut.edu.cn",
+    "admissions_email": "iec@zjut.edu.cn",
+    "wechat": "你好工大HelloZJUT",
+    "phone": "86-571-88320160 / 86-571-88320445",
+    "address": "Bâtiment mécanique A603, 18 rue Chaowang, Hangzhou, Zhejiang 310014, Chine"
   },
   "matching": {
     "fields": [
-      "business",
-      "economics",
       "engineering",
       "sciences",
       "computer_science",
-      "design",
+      "business",
+      "economics",
       "medicine",
       "pharmacy",
+      "design",
+      "arts",
+      "law",
+      "education",
       "chinese_language"
     ],
     "degrees": [
@@ -209,59 +240,113 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 60,
-    "age_max_bachelor": 25,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
     "age_max_master": null,
     "age_max_phd": null,
-    "has_csc": null,
+    "has_csc": true,
     "has_university_scholarship": null,
     "has_provincial_scholarship": null,
-    "tuition_cny_min": 16000,
-    "tuition_cny_max": 28000,
-    "housing_cny_year_min": 4000,
-    "deadline_typical": "Juin (rentrée septembre)",
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
     "intake_months": [
-      3,
       9
     ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "tags": [
-      "programme 2011",
-      "université clé provinciale",
-      "ingénierie",
-      "48 academiciens-sciences",
-      "6 academiciens académie"
+      "université provinciale clé",
+      "Plan 2011",
+      "70 ans d'accueil international",
+      "bilingue zh/en",
+      "CSC acceptée",
+      "bourse professeur de chinois international"
     ]
   },
-  "confidence": 0.55,
+  "confidence": 0.72,
   "missing_fields": [
-    "frais de scolarité exact",
-    "conditions d'admission détaillées par programme",
-    "bourses spécifiques (CSC, provinciales, université)",
-    "âge max master/phd",
-    "offre exacte de programmes en anglais",
-    "portail de candidature en ligne"
+    "scores HSK/IELTS/TOEFL exacts",
+    "frais de scolarité détaillés",
+    "frais de dossier",
+    "dates limites précises",
+    "frais de logement",
+    "coût de la vie mensuel",
+    "âge maximum",
+    "GPA minimum",
+    "bourse universitaire spécifique",
+    "bourse provinciale spécifique"
   ],
-  "notes": "Données extraites principalement de la page d'accueil officielle. Les frais de scolarité (~16000-28000 CNY/an) et les seuils IELTS/TOEFL/HSK sont des estimations courantes pour ce type d'université provinciale clé, à confirmer sur https://ies.zjut.edu.cn/ (bureau international).",
+  "notes": "ZJUT accueille ~1 041 étudiants internationaux de 80+ pays. 29 programmes bachelor en chinois, 14 en anglais; 39 programmes master/PhD en chinois, 11 en anglais. Unité de gestion: International College (国际学院). Bourse du gouvernement chinois (CSC) et Bourse internationale des professeurs de chinois acceptées. Site d'admission: https://zjut.at0086.cn/student. Scores linguistiques exacts non publiés sur les pages consultées.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "international applicants",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "non confirmé dans les sources; documents standards chinois habituels"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "international applicants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "non listé explicitement"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "international applicants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "non listé explicitement"
+    },
+    {
+      "type": "language_certificate",
+      "required": null,
+      "count": null,
+      "who": "international applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais - seuils non précisés"
+    },
+    {
+      "type": "passport_photo",
+      "required": null,
+      "count": null,
+      "who": "international applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "non listé explicitement"
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "ZJUT Online Application System (at0086)",
+    "platform_url": "https://zjut.at0086.cn/student",
+    "steps": [
+      "Créer un compte sur https://zjut.at0086.cn/student",
+      "Remplir le formulaire de candidature en ligne",
+      "Soumettre les documents requis",
+      "Attendre la notification d'admission",
+      "Postuler pour le visa X1/X2 avec l'admission"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
@@ -314,14 +399,31 @@
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
-        "tuition"
+        "tuition",
+        "accommodation",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Postuler via l'ambassade de Chine ou via ZJUT",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "other",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants en langue chinoise",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -344,76 +446,113 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "JW202/JW201 Visa Application Form"
+    ],
+    "instructions": "Demander un visa X1 (long terme >180 jours) ou X2 (court terme) avec la lettre d'admission ZJUT et le formulaire JW202",
+    "arrival_and_residence_permit": "Permis de résidence requis dans les 30 jours pour X1"
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "on-campus dormitory"
+    ],
     "rules": "",
-    "international_office": "",
+    "international_office": "International College (国际学院), 86-571-88320160/88320445, iec@zjut.edu.cn",
     "orientation": "",
     "english_support": null,
-    "clubs": "111 associations étudiantes enregistrées"
+    "clubs": "HelloZJUT (WeChat/Facebook/Instagram/Twitter/Youtube/Tiktok)"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Ghana",
+      "notes": "Confucius Institute à l'Université du Ghana - partenariat stratégique"
+    },
+    {
+      "region_or_country": "all",
+      "notes": "Étudiants de 80+ pays actuellement inscrits (France, Italie, Russie, Corée, Indonésie, Thaïlande, Malaisie, Chili, Égypte, Maroc, Ghana, etc.)"
     }
   ],
   "scan_status": "ok",
   "slug": "zjut",
-  "scraped_at": "2026-08-23T14:53:38.647Z",
+  "scraped_at": "2026-08-30T11:05:25.099Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 14,
   "sources": [
     {
       "url": "https://www.zjut.edu.cn/",
       "title": "浙江工业大学",
-      "chars": 5056
-    },
-    {
-      "url": "http://www.zjut.edu.cn/_css/error/error.css",
-      "title": null,
-      "chars": 5700
-    },
-    {
-      "url": "http://www.zjut.edu.cn/_js/themes/default/easyui.css",
-      "title": null,
-      "chars": 12000
-    },
-    {
-      "url": "http://www.zjut.edu.cn/_js/themes/icon.css",
-      "title": null,
-      "chars": 12000
+      "chars": 16000
     },
     {
       "url": "https://www.zjut.edu.cn/4494/list.htm",
       "title": "本科生招生",
-      "chars": 984
+      "chars": 3898
     },
     {
       "url": "https://www.zjut.edu.cn/4496/list.htm",
       "title": "留学生招生",
-      "chars": 1662
+      "chars": 4572
     },
     {
       "url": "http://www.english.zjut.edu.cn/",
       "title": "Zhejiang University of Technology",
-      "chars": 4913
+      "chars": 16000
     },
     {
       "url": "https://www.zjut.edu.cn/4490/list.htm",
       "title": "本科生培养",
-      "chars": 1668
+      "chars": 4495
+    },
+    {
+      "url": "https://zs.zjut.edu.cn/html/index.html",
+      "title": "浙江工业大学本科招生网",
+      "chars": 4668
+    },
+    {
+      "url": "http://www.english.zjut.edu.cn/2026/0721/c9267a338713/page.htm",
+      "title": "ZJUT hosted the 2026 AsRES-GCREC Joint International Real Estate Conference",
+      "chars": 4365
+    },
+    {
+      "url": "https://www.gjxy.zjut.edu.cn/index.php/en/home",
+      "title": "ZJUT",
+      "chars": 5603
+    },
+    {
+      "url": "http://www.english.zjut.edu.cn/2026/0721/c9268a338712/page.htm",
+      "title": "ZJUT led and received three national science and technology awards",
+      "chars": 3332
+    },
+    {
+      "url": "http://www.english.zjut.edu.cn/2026/0513/c9268a332877/page.htm",
+      "title": "ZJUT students achieved excellent results in the 2026 International Mathematical Contest in Modeling for College Students",
+      "chars": 3328
     },
     {
       "url": "https://www.zjut.edu.cn/4492/list.htm",
       "title": "留学生培养",
-      "chars": 1628
+      "chars": 4458
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4473/list.htm",
+      "title": "招生就业",
+      "chars": 4154
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4495/list.htm",
+      "title": "研究生招生",
+      "chars": 3871
+    },
+    {
+      "url": "https://www.zjut.edu.cn/4497/list.htm",
+      "title": "继续教育招生",
+      "chars": 4312
     }
   ],
   "db_row": {
@@ -424,35 +563,40 @@
     "city": "Hangzhou",
     "province": "Zhejiang",
     "country": "Chine",
-    "department": "Bureau des étudiants étrangers (International Students Office)",
+    "department": "International College (国际学院) - Bureau d'admission des étudiants internationaux",
     "emails": [
-      "iso@zjut.edu.cn",
-      "zsb@zjut.edu.cn"
+      "iec@zjut.edu.cn",
+      "iec@zjut.edu.cn"
     ],
-    "phone": "+86-571-88320032",
-    "wechat": "zjut-zsb",
-    "website": "https://www.zjut.edu.cn/",
+    "phone": "86-571-88320160 / 86-571-88320445",
+    "wechat": "你好工大HelloZJUT",
+    "website": "https://www.gjxy.zjut.edu.cn/index.php/en/home",
     "majors": [
-      "business",
-      "economics",
       "engineering",
       "sciences",
       "computer_science",
-      "design",
+      "business",
+      "economics",
       "medicine",
       "pharmacy",
+      "design",
+      "arts",
+      "law",
+      "education",
       "chinese_language"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "diploma",
+      "transcripts"
     ],
-    "scholarship_amount": null,
-    "scholarship_min": 16000,
-    "scholarship_max": 28000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
-    "tuition_min": 16000,
-    "tuition_max": 28000,
-    "application_deadline": "Juin (rentrée septembre)"
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / International Chinese Language Teachers Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
   }
 }

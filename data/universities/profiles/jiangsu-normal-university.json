@@ -6,19 +6,18 @@
     "aliases": [
       "JSNU"
     ],
-    "website": "http://www.jsnu.edu.cn/",
-    "international_website": "http://international.jsnu.edu.cn/",
-    "application_portal_url": "http://international.jsnu.edu.cn/"
+    "website": "http://www.jsnu.edu.cn",
+    "international_website": "http://international.jsnu.edu.cn",
+    "application_portal_url": "http://jsnu.17gz.org"
   },
   "general": {
-    "presentation": "Université normale du Jiangsu (JSNU), située à Xuzhou, accueille des étudiants internationaux via son Collège international (国际学院). Elle propose des programmes de licence, master, doctorat, des cours de langue chinoise et un programme préparatoire CSCA.",
+    "presentation": "Université normale du Jiangsu (JSNU), située à Xuzhou dans le Jiangsu, accueille des étudiants internationaux via son Collège international. Propose des programmes de licence, master, formation préparatoire CSCA et formation en langue chinoise.",
     "history": "",
     "rankings": [],
     "strengths": [
-      "Formation des enseignants",
-      "Programmes préparatoires pour étudiants internationaux",
-      "Cours de langue chinoise",
-      "Coopérations internationales multiples"
+      "Enseignement aux étudiants internationaux",
+      "Institut Confucius partenaires (Miami Dade College, QUT)",
+      "Coopérations internationales (UCL, Edimbourg, NYU...)"
     ],
     "teaching_languages": [
       "zh",
@@ -36,48 +35,36 @@
     },
     "campuses": [
       {
-        "name": "Quanshan (泉山校区)",
+        "name": "Tongshan New District Campus",
         "city": "Xuzhou",
-        "description": "Campus principal, adresse: 江苏省徐州市铜山新区上海路101号, code postal 221116"
+        "description": "Campus principal au 101 Shanghai Road, district de Tongshan"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Programmes de licence (本科专业)",
-      "field": "education",
+      "name": "Programmes de licence (diverses disciplines)",
+      "field": "other",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Liste détaillée disponible sur le portail international"
+      "notes": "Liste détaillée des spécialités non extraite des sources; voir PDF brochure"
     },
     {
       "level": "master",
-      "name": "Programmes de master (研究生专业)",
-      "field": "education",
+      "name": "Programmes de master (diverses disciplines)",
+      "field": "other",
       "language": "zh",
-      "duration_years": 3,
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "phd",
-      "name": "Programmes de doctorat",
-      "field": "education",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Voir brochure 2026 pour liste complète"
     },
     {
       "level": "language",
@@ -93,20 +80,20 @@
     },
     {
       "level": "foundation",
-      "name": "Programme préparatoire CSCA (留学预科)",
-      "field": "education",
-      "language": "bilingual",
-      "duration_years": 1,
+      "name": "Programme préparatoire CSCA (留学预科中心)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Préparation à l'examen CSCA pour admission en licence"
+      "notes": "Préparation au test CSCA pour admission en licence"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires; réussite au CSCA ou programme préparatoire",
+      "academic": "Diplôme de fin d'études secondaires; conditions détaillées dans la brochure 2026",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -114,11 +101,11 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire CSCA disponible",
+      "preparatory_if_insufficient": "Programme pré-universitaire CSCA offert via le Centre préparatoire JSNU",
       "other": []
     },
     "master": {
-      "academic": "Licence ou équivalent",
+      "academic": "Diplôme de licence; conditions détaillées dans la brochure 2026",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -130,7 +117,7 @@
       "other": []
     },
     "phd": {
-      "academic": "Master ou équivalent",
+      "academic": null,
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -142,38 +129,35 @@
       "other": []
     },
     "language": {
-      "academic": "",
+      "academic": "Pas de prérequis académiques spécifiques",
       "age_max": null,
       "other": []
     }
   },
   "contacts": {
-    "office_name": "江苏师范大学国际学院 (Collège international)",
-    "iso_email": "",
-    "admissions_email": "",
+    "office_name": "Admissions Office, International College of Jiangsu Normal University",
+    "iso_email": "admission@jsnu.edu.cn",
+    "admissions_email": "admission@jsnu.edu.cn",
     "wechat": "",
-    "phone": "+86-0516-83656836",
-    "address": "江苏省徐州市铜山新区上海路101号, 221116"
+    "phone": "+86-0516-83656836 / +86-0516-83656837",
+    "address": "No. 101 Shanghai Road, Tongshan New District, Xuzhou City, Jiangsu Province, China (邮编 221116)"
   },
   "matching": {
     "fields": [
-      "education",
       "chinese_language",
-      "arts",
-      "sciences",
-      "engineering",
-      "business"
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
-      "phd",
       "language",
-      "foundation"
+      "foundation",
+      "exchange"
     ],
     "languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
     "english_programs_available": null,
     "chinese_language_program_available": true,
@@ -196,44 +180,119 @@
     "city": "Xuzhou",
     "province": "Jiangsu",
     "tags": [
-      "normal_university",
-      "teacher_training",
-      "csca_preparatory",
-      "chinese_language"
+      "CSCA_preparatory",
+      "language_program",
+      "confucius_institute_partners",
+      "multiple_partners"
     ]
   },
-  "confidence": 0.45,
+  "confidence": 0.4,
   "missing_fields": [
-    "tuition_fees",
-    "hsk_required_scores",
-    "ielts_toefl_requirements",
-    "age_limits",
-    "scholarship_details",
-    "specific_program_list",
-    "application_deadlines",
-    "cost_of_living"
+    "frais de scolarité détaillés",
+    "frais de logement",
+    "exigences HSK/IELTS/TOEFL précises",
+    "GPA minimum",
+    "âges limites",
+    "bourses disponibles",
+    "programmes détaillés par discipline",
+    "dates limites précises",
+    "frais de dossier"
   ],
-  "notes": "Les brochures d'admission 2026 sont des PDFs non extraits dans les sources. Seules les informations générales (contacts, localisation, existence des programmes) sont confirmées. Email du programme préparatoire: preparatory@jsnu.edu.cn. Heures de bureau: 8:00-11:45, 14:30-17:15.",
+  "notes": "Sources principalement navigationnelles; informations détaillées (frais, HSK, IELTS, programmes spécifiques) se trouvent dans les brochures PDF (2026 Fall, 2025, 2024) qui sont référencées mais leur contenu textuel n'a pas été extrait. Adresse email preparatory@jsnu.edu.cn pour le programme pré-universitaire. Heures de bureau: 8:00-11:45, 14:30-17:17.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "candidat",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Documents standards non détaillés dans les sources; se référer aux brochures PDF 2026."
+      "notes": ""
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master"
+      ],
+      "notes": "Diplôme du plus haut niveau d'études"
+    },
+    {
+      "type": "transcript",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master"
+      ],
+      "notes": "Relevés de notes"
+    },
+    {
+      "type": "hs_certificate",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "language"
+      ],
+      "notes": "Certificat HSK exigé pour les programmes en chinois"
+    },
+    {
+      "type": "physical_exam",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "photos",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "study_plan",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "master"
+      ],
+      "notes": ""
     }
   ],
   "application": {
-    "platform_name": "留学生在线申请系统 (JSNU Online Application System)",
-    "platform_url": "http://international.jsnu.edu.cn",
+    "platform_name": "Système de candidature en ligne JSNU",
+    "platform_url": "https://jsnu.17gz.org/",
     "steps": [
-      "Consulter la brochure 2026 sur le site",
-      "Postuler via le système en ligne",
-      "Soumettre les pièces requises",
-      "Attendre la notification d'admission"
+      "Créer un compte sur https://jsnu.17gz.org/",
+      "Remplir le formulaire en ligne",
+      "Téléverser les documents requis",
+      "Soumettre la candidature et attendre l'examen"
     ],
     "opens_at": "",
     "deadline": "",
@@ -282,19 +341,34 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Voir page '学习生活费用' sur le site de l'université"
     }
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Bourse du gouvernement chinois CSC",
       "type": "csc",
       "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via le CSC ou l'ambassade de Chine",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse du Jiangsu / programmes de réduction des frais",
+      "type": "university",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Excellents résultats académiques",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -308,12 +382,12 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an (CSCA Preparation Program)",
-      "leads_to_degree": true
+      "duration": "1 an (programme pré-universitaire CSCA)",
+      "leads_to_degree": false
     },
     "foundation": {
       "available": true,
-      "description": "Programme préparatoire CSCA pour admission en licence; cours de chinois et matières académiques."
+      "description": "Programme de fondation CSCA (留学中国本科入学学业水平测试预科班) – prépare au test CSCA pour admission en licence. Contact : preparatory@jsnu.edu.cn"
     }
   },
   "visa": {
@@ -322,21 +396,22 @@
       "X2"
     ],
     "documents_from_university": [
-      "Admission Notice",
-      "JW202"
+      "Formulaire JW202 / JW201",
+      "Admission Letter",
+      "Visa Application Form"
     ],
-    "instructions": "Voir section 签证/居住证 du site international.jsnu.edu.cn",
-    "arrival_and_residence_permit": "Enregistrement obligatoire dans les 24h; permis de résidence à demander selon durée du visa."
+    "instructions": "Demander un visa étudiant X1 ou X2 à l'ambassade de Chine avec les documents fournis par l'université après admission.",
+    "arrival_and_residence_permit": "Dans les 24h suivant l'arrivée, s'enregistrer à l'hôtel de ville et demander un permis de résidence au bureau de l'université (居住信息登记及签证延期)."
   },
   "housing_and_services": {
     "housing_types": [
-      "résidence universitaire sur campus"
+      "chambre double sur campus"
     ],
-    "rules": "Voir 居住信息登记 et 规章制度 sur le site",
-    "international_office": "国际学院, +86-0516-83656836, international.jsnu.edu.cn",
-    "orientation": "Oui, via le service 新生服务",
+    "rules": "Résidence sur campus recommandée pour les nouveaux étudiants",
+    "international_office": "Bureau des admissions du Collège international, +86-0516-83656836 / 0516-83656837, admission@jsnu.edu.cn, 101 Shanghai Road, Xuzhou",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux",
     "english_support": true,
-    "clubs": "Oui, voir section 社团 du site"
+    "clubs": "Diverses activités culturelles (fête des bateaux-dragons, Nouvel An chinois, etc.) et clubs étudiants"
   },
   "country_specific": [
     {
@@ -346,65 +421,90 @@
   ],
   "scan_status": "ok",
   "slug": "jiangsu-normal-university",
-  "scraped_at": "2026-08-23T14:59:24.814Z",
+  "scraped_at": "2026-08-30T11:04:22.737Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "http://international.jsnu.edu.cn/",
       "title": "国际学院",
-      "chars": 1685
+      "chars": 6661
     },
     {
       "url": "http://international.jsnu.edu.cn/47/06/c13968a411398/page.htm",
       "title": "江苏师范大学留学生招生简章（2026年秋季）Jiangsu Normal University Admission Brochure for International Students (Fall 2026)",
-      "chars": 1375
-    },
-    {
-      "url": "http://www.jsnu.edu.cn/",
-      "title": "江苏师范大学",
-      "chars": 2098
-    },
-    {
-      "url": "http://international.jsnu.edu.cn/5a/3c/c7279a416316/page.htm",
-      "title": "国际学院开展毕业生宿舍走访慰问活动",
-      "chars": 1123
-    },
-    {
-      "url": "http://international.jsnu.edu.cn/5a/3e/c7279a416318/page.htm",
-      "title": "国际学院开展留学生端午文化体验活动",
-      "chars": 1244
-    },
-    {
-      "url": "http://international.jsnu.edu.cn/41/a4/c12209a410020/page.htm",
-      "title": "江苏师范大学国际学院留学预科中心数学代课教师招聘公告",
-      "chars": 1478
+      "chars": 4482
     },
     {
       "url": "http://international.jsnu.edu.cn/lxsd/list.htm",
       "title": "研究生专业",
-      "chars": 818
+      "chars": 2871
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/zsjz/list.htm",
+      "title": "招生简章",
+      "chars": 3878
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/12/27/c13968a397863/page.htm",
+      "title": "江苏师范大学留学生招生简章（2025）",
+      "chars": 3342
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/be/fb/c13968a376571/page.htm",
+      "title": "2024年江苏师范大学留学生招生简章",
+      "chars": 2704
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/5a/3c/c7279a416316/page.htm",
+      "title": "国际学院开展毕业生宿舍走访慰问活动",
+      "chars": 3221
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/5a/3e/c7279a416318/page.htm",
+      "title": "国际学院开展留学生端午文化体验活动",
+      "chars": 3639
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/41/a4/c12209a410020/page.htm",
+      "title": "江苏师范大学国际学院留学预科中心数学代课教师招聘公告",
+      "chars": 3475
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/12/28/c13968a397864/page.htm",
+      "title": "Jiangsu Normal University  Admission Prospectus (Fall 2025)",
+      "chars": 3526
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/bkzy/list.htm",
+      "title": "本科专业",
+      "chars": 2906
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/zsxx/list.htm",
+      "title": "招生简章",
+      "chars": 3878
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/zslxxx/list.htm",
+      "title": "招生联系",
+      "chars": 3266
+    },
+    {
+      "url": "http://international.jsnu.edu.cn/qzwjzz/list.htm",
+      "title": "签证/居住证",
+      "chars": 3983
     },
     {
       "url": "http://international.jsnu.edu.cn/61/4d/c7279a418125/page.htm",
       "title": "国际学院开展暑期留校学生专题安全教育",
-      "chars": 1358
+      "chars": 3636
     },
     {
       "url": "http://international.jsnu.edu.cn/5f/ef/c7279a417775/page.htm",
       "title": "国际学院开展“感知中国——彭城七里寻脉汉风” 社会实践和文化体验活动",
-      "chars": 1712
-    },
-    {
-      "url": "http://international.jsnu.edu.cn/58/4a/c7279a415818/page.htm",
-      "title": "国际处（国际学院）召开国际学生班主任工作会议",
-      "chars": 1253
-    },
-    {
-      "url": "http://international.jsnu.edu.cn/54/b9/c7279a414905/page.htm",
-      "title": "国际学院举办“心沐阳光 温暖同行”心理团辅活动",
-      "chars": 1287
+      "chars": 4295
     }
   ],
   "db_row": {
@@ -415,23 +515,27 @@
     "city": "Xuzhou",
     "province": "Jiangsu",
     "country": "Chine",
-    "department": "江苏师范大学国际学院 (Collège international)",
-    "emails": [],
-    "phone": "+86-0516-83656836",
+    "department": "Admissions Office, International College of Jiangsu Normal University",
+    "emails": [
+      "admission@jsnu.edu.cn",
+      "admission@jsnu.edu.cn"
+    ],
+    "phone": "+86-0516-83656836 / +86-0516-83656837",
     "wechat": null,
-    "website": "http://international.jsnu.edu.cn/",
+    "website": "http://international.jsnu.edu.cn",
     "majors": [
-      "education",
       "chinese_language",
-      "arts",
-      "sciences",
-      "engineering",
-      "business"
+      "other"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "diploma",
+      "transcript",
+      "physical_exam",
+      "no_criminal_record",
+      "photos"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Bourse du gouvernement chinois CSC / Bourse du Jiangsu / programmes de réduction des frais",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,

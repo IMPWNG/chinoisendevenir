@@ -4,25 +4,24 @@
     "name_zh": "四川师范大学",
     "name_fr": "Université normale du Sichuan",
     "aliases": [
-      "SICNU",
-      "川师大"
+      "SICNU"
     ],
     "website": "https://www.sicnu.edu.cn",
-    "international_website": "http://lxs.sicnu.edu.cn",
+    "international_website": "http://en.lxs.sicnu.edu.cn",
     "application_portal_url": "https://cis.chinese.cn"
   },
   "general": {
-    "presentation": "Université normale du Sichuan, première université de la province du Sichuan dispensant une formation normale de premier cycle et au plus long historique parmi les universités normales. Centre d'échanges internationaux du Sichuan, elle dispose de 3 Instituts Confucius et 1 Classe Confucius à l'étranger, et de plus de 100 universités partenaires.",
-    "history": "Ouverture du programme de chinois pour étrangers en 2005; le programme TCSOL a été reconnu comme spécialité de premier niveau du Sichuan en 2020; plus de 35 ans de formation pour étudiants internationaux, plus de 10 000 étudiants formés.",
+    "presentation": "Établissement public normal du Sichuan, l'un des plus anciens et des plus réputés pour la formation des enseignants dans la province. Centre d'échange international des universités du Sichuan, formé en partenariat avec plus de 100 universités à l'étranger. L'École d'éducation internationale en langue chinoise forme des étudiants internationaux depuis plus de 35 ans (plus de 10 000 étudiants formés).",
+    "history": "Première université du Sichuan à proposer une formation normale de niveau licence; plus longue histoire parmi les universités normales de la province.",
     "rankings": [],
     "strengths": [
-      "Enseignement du chinois langue étrangère",
-      "TCSOL (Teaching Chinese to Speakers of Other Languages)",
-      "Formation des enseignants de chinois",
-      "Études culturelles Bashu (Tianfu)"
+      "Éducation internationale en langue chinoise (TCSOL)",
+      "Formation d'enseignants de chinois",
+      "3 Instituts Confucius à l'étranger et 1 Classe Confucius"
     ],
     "teaching_languages": [
-      "zh"
+      "zh",
+      "en"
     ],
     "location": {
       "city": "Chengdu",
@@ -30,22 +29,22 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Hébergement sur campus 3000 RMB/semestre (chambre double), assurance 800 RMB/an"
+      "min": 2000,
+      "max": 3500,
+      "notes": "Hébergement double 3000 CNY/personne/semestre; assurance 800 CNY/an (diplôme) ou 400 CNY/6 mois."
     },
     "campuses": [
       {
         "name": "Campus principal (Jinjiang)",
         "city": "Chengdu",
-        "description": "Siège de l'École d'éducation internationale en chinois, Bâtiment A du parc Yingming, 5 rue Jing'an, district de Jinjiang"
+        "description": "Adresse: 5 route Jing'an, district Jinjiang. Bibliothèque de plus de 2,5 millions de volumes, accessible aux étudiants internationaux."
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Enseignement international du chinois (TCSOL)",
+      "name": "Éducation internationale en langue chinoise (TCSOL)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 4,
@@ -53,35 +52,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais de scolarité 15000 RMB/an. Diplôme requis : fin d'études secondaires. HSK-4 requis."
+      "notes": "Diplôme de 4 ans (bourse d'enseignant de chinois internationale). Frais 15000 CNY/an."
     },
     {
       "level": "master",
-      "name": "Enseignement international du chinois (TCSOL)",
-      "field": "chinese_language",
+      "name": "Éducation internationale en langue chinoise (TCSOL)",
+      "field": "education",
       "language": "zh",
       "duration_years": 2,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais de scolarité 18000 RMB/an. Diplôme requis : licence. HSK-5 requis."
+      "notes": "Frais 18000 CNY/an."
     },
     {
       "level": "phd",
-      "name": "Enseignement international du chinois (TCSOL)",
-      "field": "chinese_language",
+      "name": "Éducation internationale en langue chinoise (TCSOL)",
+      "field": "education",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais selon Bourse internationale des professeurs de chinois. HSK-6 ≥200, HSKK avancé ≥60. Lettre de motivation en chinois 3000 mots."
+      "notes": "Bourse d'enseignant de chinois internationale; déclaration personnelle en chinois ~3000 mots."
     },
     {
       "level": "language",
-      "name": "Cours de langue chinoise (non diplômant)",
+      "name": "Cours de chinois (programme non-diplômant)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": null,
@@ -90,11 +89,34 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "7400 RMB/16 semaines. Niveaux : débutant à avancé. Petites classes (5 min, 15 max). Inscription toute l'année."
+      "notes": "16 semaines/semestre, 20h/semaine. Frais 7400 CNY/16 sem (présentiel). Inscription toute l'année."
     },
     {
       "level": "language",
-      "name": "Formation spéciale HSK (niveaux 4-6)",
+      "name": "Formation intensive HSK (niveaux 4-6)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "academic_calendar": "rolling",
+      "notes": "32h (écoute 8, lecture 8, écriture 12, guidage 4). Frais 2300 CNY. Réduction 5% pour 2+ inscrits."
+    },
+    {
+      "level": "language",
+      "name": "Programme d'étude d'un semestre (boursier)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": null,
@@ -103,24 +125,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "2300 RMB pour 32 heures de cours (écoute, lecture, écriture, conseils d'examen). Sessions le week-end."
+      "notes": "Bourse d'enseignant de chinois: HSK-3 minimum 180pts + HSKK."
     },
     {
-      "level": "exchange",
-      "name": "Programme d'études d'un semestre (boursier)",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": 0.5,
-      "start_months": [
-        3,
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse CIS. HSK-3 ≥180. Lettres chinoises."
-    },
-    {
-      "level": "exchange",
-      "name": "Programme d'études d'un an (boursier)",
+      "level": "language",
+      "name": "Programme d'étude d'un an (boursier)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
@@ -128,47 +137,44 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Bourse CIS. HSK-3 ≥270 (TCSOL) ou ≥210 (langue chinoise)."
+      "notes": "Bourse d'enseignant de chinois: HSK-3 270pts (TCSOL) ou 210pts (langue) + HSKK."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires ou équivalent",
+      "academic": "Diplôme d'études secondaires ou équivalent; obtenir un HSK-4 pour la bourse d'enseignant de chinois (210pts) + HSKK intermédiaire 60pts.",
       "min_gpa": null,
       "age_max": 25,
       "age_min": 16,
       "hsk_level": 4,
-      "hsk_score_min": null,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Cours de chinois non diplômant proposé par l'École",
+      "preparatory_if_insufficient": "Cours de chinois non-diplômant (programme de perfectionnement linguistique)",
       "other": [
-        "Passeport valide",
-        "Certificat de santé",
-        "Certificat de non-condamnation",
-        "Relevés de notes"
+        "Non-Chinois",
+        "Pas de casier judiciaire",
+        "Bonne santé physique et mentale",
+        "Lettre de recommandation d'un Institut Confucius ou d'une institution recommandante"
       ]
     },
     "master": {
-      "academic": "Licence ou équivalent",
+      "academic": "Licence ou équivalent; HSK-5 210pts + HSKK intermédiaire 60pts pour la bourse.",
       "min_gpa": null,
       "age_max": 35,
       "age_min": 16,
       "hsk_level": 5,
-      "hsk_score_min": null,
+      "hsk_score_min": 210,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Cours de chinois non diplômant proposé par l'École",
+      "preparatory_if_insufficient": null,
       "other": [
-        "Passeport valide",
-        "Certificat de santé",
-        "Certificat de non-condamnation",
-        "Relevés de notes",
-        "Deux lettres de recommandation de professeurs"
+        "2 lettres de recommandation de professeurs/maîtres de conférences",
+        "Contrat de travail avec établissement d'enseignement post-diplôme (prioritaire)"
       ]
     },
     "phd": {
-      "academic": "Master en enseignement du chinois, linguistique ou domaine connexe",
+      "academic": "Maîtrise en langue chinoise, linguistique, éducation internationale du chinois ou domaine connexe.",
       "min_gpa": null,
       "age_max": 35,
       "age_min": 16,
@@ -178,30 +184,27 @@
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Deux lettres de recommandation de professeurs/associés",
-        "HSKK avancé ≥60",
-        "Lettre de motivation en chinois 3000 mots",
-        "Relevés et diplôme de Master"
+        "2 lettres de recommandation de professeurs/maîtres de conférences",
+        "Déclaration personnelle en chinois ~3000 mots"
       ]
     },
     "language": {
-      "academic": "Aucune exigence académique",
+      "academic": "Aucune condition académique formelle",
       "age_max": 60,
       "other": [
         "Non-Chinois",
-        "Bonne santé mentale et physique",
-        "Sans casier judiciaire",
-        "Mineurs (16-18) : tuteur requis"
+        "Bonne santé et pas de casier judiciaire",
+        "Programme HSK: passeport étranger + permis de séjour valide en Chine requis"
       ]
     }
   },
   "contacts": {
-    "office_name": "École d'éducation internationale en chinois (国际中文教育学院)",
+    "office_name": "École d'éducation internationale en langue chinoise (国际中文教育学院)",
     "iso_email": "guoxxiaolei@sicnu.edu.cn",
     "admissions_email": "guoxxiaolei@sicnu.edu.cn",
-    "wechat": "",
+    "wechat": "disponible sur demande (QR code affiché sur le site)",
     "phone": "0086-28-84767720 / 0086-28-84761093",
-    "address": "Bâtiment A du parc Yingming, 5 rue Jing'an, district de Jinjiang, Chengdu, Sichuan 610068"
+    "address": "Bâtiment A, parc Yingming, 5 route Jing'an, district Jinjiang, Chengdu, Sichuan, Chine 610068"
   },
   "matching": {
     "fields": [
@@ -212,11 +215,11 @@
       "bachelor",
       "master",
       "phd",
-      "language",
-      "exchange"
+      "language"
     ],
     "languages": [
-      "zh"
+      "zh",
+      "en"
     ],
     "english_programs_available": false,
     "chinese_language_program_available": true,
@@ -226,13 +229,13 @@
     "age_max_bachelor": 25,
     "age_max_master": 35,
     "age_max_phd": 35,
-    "has_csc": false,
+    "has_csc": null,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": false,
+    "has_provincial_scholarship": null,
     "tuition_cny_min": 7400,
     "tuition_cny_max": 18000,
     "housing_cny_year_min": 6000,
-    "deadline_typical": "15 mai pour rentrée septembre; 31 octobre pour rentrée mars",
+    "deadline_typical": "2026-05-15 pour rentrée septembre (bourse internationale d'enseignant de chinois)",
     "intake_months": [
       3,
       9
@@ -240,140 +243,135 @@
     "city": "Chengdu",
     "province": "Sichuan",
     "tags": [
-      "TCSOL",
-      "Institut Confucius",
-      "HSK test center",
-      "Bourse CIS",
-      "Formation des enseignants",
-      "Culture Bashu/Tianfu"
+      "bourse_enseignant_chinois",
+      "normal_university",
+      "instituts_confucius",
+      "programme_TCSOL"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.82,
   "missing_fields": [
-    "Classements précis",
-    "GPA minimum exact",
-    "Partenaires internationaux détaillés",
-    "Sites web en anglais autres que lxs.sicnu.edu.cn"
+    "frais_de_dossier",
+    "portail_de_candidature_interne_université",
+    "visa_X1_X2",
+    "liste_complete_programmes_hors_TCSOL"
   ],
-  "notes": "Les programmes pour étudiants étrangers sont essentiellement axés sur l'enseignement du chinois (TCSOL) et les cours de langue chinoise, via la Bourse internationale des professeurs de chinois (CIS/CLEC). Frais : bachelor 15000 RMB/an, master 18000 RMB/an, cours langue 7400 RMB/16 semaines. Bourse CIS couvre frais de scolarité, logement double, assurance, subsides (2500-3500 RMB/mois selon niveau).",
+  "notes": "Forte spécialisation en éducation internationale du chinois (TCSOL) et bourses gérées via le Centre de coopération linguistique internationale (cis.chinese.cn), pas de portail propre. Inscription programme linguistique flexible toute l'année.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "Tous candidats (扫描件, photo page)",
       "applies_to": [
         "all"
       ],
-      "notes": "Scan de la page photo du passeport"
+      "notes": "Passeport en cours de validité"
     },
     {
       "type": "hsk_hskk",
       "required": true,
       "count": null,
-      "who": "all",
+      "who": "Tous candidats à la bourse; niveau selon programme",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master",
+        "phd",
+        "language"
       ],
-      "notes": "Rapports HSK/HSKK valides 2 ans"
+      "notes": "HSK+HSKK valides 2 ans. Bachelor HSK4 ≥210 + HSKK intermédiaire ≥60; Master HSK5 ≥210 + HSKK intermédiaire ≥60; Doctorat HSK6 ≥200 + HSKK avancé ≥60; Bourse 1 an HSK3 ≥270; Bourse 1 semestre HSK3 ≥180"
     },
     {
       "type": "recommendation_letter",
       "required": true,
       "count": 1,
-      "who": "all",
+      "who": "Tous candidats à la bourse",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master",
+        "phd",
+        "language"
       ],
-      "notes": "Lettre du responsable de l'institution recommandante (Confucius ou autre)"
+      "notes": "Lettre du chef d'une institution de recommandation (Confucius Institute ou autre); SICNU est recommandeur éligible"
     },
     {
       "type": "diploma_transcript",
       "required": true,
       "count": null,
-      "who": "degree applicants",
+      "who": "Candidats diplôme (licence/master/doctorat)",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "Plus haut diplôme (ou preuve de graduation prévue) et relevés de notes"
+      "notes": "Plus haut diplôme (ou attestation de diplomation prévue) + relevés de notes officiels"
     },
     {
       "type": "recommendation_letters_professors",
       "required": true,
       "count": 2,
-      "who": "master and phd",
+      "who": "Master et Doctorat",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "2 lettres de professeurs/maîtres de conférences"
-    },
-    {
-      "type": "personal_statement_chinese",
-      "required": true,
-      "count": 1,
-      "who": "phd",
-      "applies_to": [
-        "phd"
-      ],
-      "notes": "Exposé personnel en chinois ~3000 mots avec plan de recherche"
+      "notes": "Doctorat: 2 lettres de profs/associés en 国际中文教育 + 个人陈述 chinois ~3000 mots. Master: 2 lettres de profs associés+"
     },
     {
       "type": "employment_proof",
       "required": false,
       "count": null,
-      "who": "in-service teachers",
+      "who": "Professeurs de chinois en poste",
       "applies_to": [
         "all"
       ],
-      "notes": "Certificat de travail et lettre de recommandation de l'employeur"
+      "notes": "Priorité si fournie"
     },
     {
-      "type": "guardian_designation",
+      "type": "guardian_document",
       "required": true,
-      "count": 1,
-      "who": "under 18",
+      "count": null,
+      "who": "Candidats <18 ans",
       "applies_to": [
         "all"
       ],
-      "notes": "Document signé par le tuteur légal en Chine"
+      "notes": "Document de tutelle signé par un guardian en Chine"
     },
     {
-      "type": "physical_examination",
+      "type": "physical_exam",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "Programme TCSOL degré",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master"
       ],
-      "notes": "Certificat médical"
+      "notes": "Certificat médical original"
     },
     {
       "type": "no_criminal_record",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "Programme TCSOL degré",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master"
       ],
-      "notes": "Casier judiciaire vierge"
+      "notes": ""
     }
   ],
   "application": {
-    "platform_name": "CLEC International Chinese Language Teachers Scholarship (pour bourse)",
+    "platform_name": "Centre for Language Education and Cooperation (中外语言交流合作中心) - International Chinese Language Teachers Scholarship",
     "platform_url": "https://cis.chinese.cn",
     "steps": [
-      "Se connecter au site de la bourse",
-      "Soumettre les documents en ligne",
-      "Suivre la progression et les résultats",
-      "Confirmer avec l'université d'accueil",
-      "Imprimer le certificat de bourse en ligne",
-      "S'inscrire selon la lettre d'admission"
+      "Obtenir lettre de recommandation d'un Confucius Institute ou institution éligible (SICNU peut recommander)",
+      "Se connecter au portail cis.chinese.cn, colonne International Chinese Language Teachers Scholarship",
+      "Soumettre les documents en ligne et suivre statut et résultats",
+      "Avec la bourse confirmée: finaliser procédures avec SICNU, imprimer certificat de bourse en ligne",
+      "S'enregistrer à SICNU selon la lettre d'admission"
     ],
     "opens_at": "2026-03-01",
-    "deadline": "2026-05-15 (rentrée septembre) / 2026-10-31 (rentrée mars)",
+    "deadline": "2026-05-15",
     "results_at": "",
     "intake_months": [
       3,
@@ -398,22 +396,22 @@
         "max": null
       },
       "language": {
-        "min": 7400,
-        "max": 7400
+        "min": null,
+        "max": null
       },
       "english_taught_premium": null
     },
     "insurance_cny_year": 800,
     "other_fees": [
       {
-        "name": "HSK Special Training",
-        "amount_cny": 2300,
-        "notes": "32 heures"
+        "item": "Cours langue non-diplômant (offline)",
+        "amount_cny": 7400,
+        "period": "16 semaines"
       },
       {
-        "name": "Frais divers",
-        "amount_cny": null,
-        "notes": "Selon circonstances"
+        "item": "Formation spéciale HSK (32h)",
+        "amount_cny": 2300,
+        "period": "forfait"
       }
     ],
     "housing": {
@@ -421,7 +419,7 @@
         {
           "type": "double",
           "price_cny_year": 6000,
-          "included": "Meublé, double"
+          "included": "Non-boursiers: 3000 CNY/personne/semestre. Boursiers: gratuit"
         }
       ],
       "deposit_cny": null,
@@ -431,7 +429,7 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Autres frais de subsistance à prévoir"
+      "notes": "Bourse couvrant 2500 (bachelor/1an-1sem)/3000 (master)/3500 (doctorat) CNY/mois. Appartement étudiants SICNU ou location hors campus possible"
     }
   },
   "scholarships": [
@@ -446,13 +444,13 @@
         "living"
       ],
       "stipend_cny_month": 2500,
-      "conditions": "Non-chinois, 16-35 ans (45 pour enseignants en poste, 25 max pour bachelor), HSK requis selon niveau, lettre de recommandation d'institution habilitée",
-      "apply_via": "cis.chinese.cn",
-      "deadline": "2026-05-15 (sept) / 2026-10-31 (mars)",
-      "renewal": "Évaluation annuelle obligatoire"
+      "conditions": "Non-Chinois; 16-35 ans (boursier licence <25; prof en poste jusqu'à 45); niveau HSK/HSKK requis selon programme; lettre de recommandation d'institution éligible; recommandation de prof en poste donne priorité",
+      "apply_via": "university",
+      "deadline": "15 mai (rentrée sept) ou 31 oct (rentrée mars)",
+      "renewal": "Évaluation annuelle pour étudiants en diplôme (Measures for Annual Assessment)"
     },
     {
-      "name": "ICLTS Master (TCSOL)",
+      "name": "Bourse TCSOL - Master",
       "type": "csc",
       "coverage": "full",
       "covers": [
@@ -462,13 +460,13 @@
         "living"
       ],
       "stipend_cny_month": 3000,
-      "conditions": "HSK 5 ≥210, HSKK intermédiaire ≥60, licence, 2 lettres de recommandation",
-      "apply_via": "cis.chinese.cn",
-      "deadline": "2026-05-15",
+      "conditions": "HSK5 ≥210, HSKK intermédiaire ≥60; licence; priorité si contrat d'enseignement futur",
+      "apply_via": "university",
+      "deadline": "15 mai (rentrée sept) ou 31 oct (rentrée mars)",
       "renewal": "Évaluation annuelle"
     },
     {
-      "name": "ICLTS Doctorat (TCSOL)",
+      "name": "Bourse TCSOL - Doctorat",
       "type": "csc",
       "coverage": "full",
       "covers": [
@@ -478,10 +476,10 @@
         "living"
       ],
       "stipend_cny_month": 3500,
-      "conditions": "HSK 6 ≥200, HSKK avancé ≥60, master en domaine pertinent, 2 lettres, exposé chinois 3000 mots",
-      "apply_via": "cis.chinese.cn",
-      "deadline": "2026-05-15",
-      "renewline": "Évaluation annuelle"
+      "conditions": "HSK6 ≥200, HSKK avancé ≥60; master en langue/éducation connexe; 个人陈述 chinois 3000 mots; 2 lettres de profs",
+      "apply_via": "university",
+      "deadline": "15 mai (rentrée sept) ou 31 oct (rentrée mars)",
+      "renewal": "Évaluation annuelle (4 ans)"
     }
   ],
   "language": {
@@ -492,12 +490,12 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "16 semaines par semestre, 20h/semaine",
+      "duration": "16 semaines par semestre (1 mars, 1 sept); 4 niveaux (base, intro, intermédiaire, avancé)",
       "leads_to_degree": false
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "Cours langue non-diplômant, accès aux bourses SICOL; tests HSK au centre SICNU"
     }
   },
   "visa": {
@@ -506,96 +504,116 @@
       "X2"
     ],
     "documents_from_university": [
-      "Lettre d'admission",
-      "Formulaire JW202 (bourse)",
-      "Certificat de bourse"
+      "Lettre d'admission (Letter of Admission)",
+      "Formulaire de demande de visa (JW202)",
+      "Certificat de bourse (le cas échéant)"
     ],
-    "instructions": "Les titulaires de visa X1/X2 ne sont pas admis au programme d'études d'un semestre",
-    "arrival_and_residence_permit": "Permis de résidence à obtenir dans les délais légaux après arrivée"
+    "instructions": "Avec la confirmation d'admission, demander visa X1 (programme >180 jours) ou X2 (<180 jours) à l'ambassade/consulat de Chine. Documents fournis par SICNU après admission.",
+    "arrival_and_residence_permit": "S'enregistrer à SICNU à la date indiquée; permis de résidence à obtenir dans les 30 jours auprès du bureau de sécurité publique local"
   },
   "housing_and_services": {
     "housing_types": [
-      "Appartement pour étudiants internationaux (chambre double)",
+      "Appartement étudiants (double) sur campus",
       "Location hors campus autorisée"
     ],
-    "rules": "Respecter les règlements de l'université et lois chinoises",
-    "international_office": "Bureau des étudiants internationaux - Tél: 0086-28-84767720 / 84761093 - Email: guoxxiaolei@sicnu.edu.cn",
-    "orientation": "Non spécifié",
+    "rules": "Boursiers: chambre double gratuite fournie. Non-boursiers: 3000 CNY/personne/semestre",
+    "international_office": "Bureau des étudiants internationaux, College of International Chinese Language Education. Tél: 0086-28-84767720 / 84761093. Email: guoxxiaolei@sicnu.edu.cn",
+    "orientation": "WeChat de contact disponible; assistance à l'arrivée",
     "english_support": true,
-    "clubs": "Concours de chansons chinoises, excursions culturelles, activités d'échange international"
+    "clubs": "Activités culturelles 天府 (Tianfu), événements '嘤鸣之星', excursions, intégration Sino-étrangère"
   },
   "country_specific": [
     {
-      "region_or_country": "Tous",
-      "notes": "Réservé aux non-Chinois, casier judiciaire vierge, bonne santé physique et mentale"
+      "region_or_country": "Tous pays non-Chine",
+      "notes": "Candidats doivent être non-Chinois; équivalence diplômes étrangers requise; HSK/HSKK valides 2 ans"
     }
   ],
   "scan_status": "ok",
   "slug": "sichuan-normal-university",
-  "scraped_at": "2026-08-24T14:39:22.108Z",
+  "scraped_at": "2026-08-30T11:18:06.016Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://lxs.sicnu.edu.cn/",
       "title": "四川师范大学国际中文教育学院",
-      "chars": 1414
+      "chars": 7745
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x639081519364042574",
       "title": "四川师范大学国际中文教师奖学金申请办法（2026年）Application Guidelines for International Chinese Language Teachers Scholarship of Sichuan Normal University (2026)",
-      "chars": 8200
+      "chars": 8922
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638755592571790783",
       "title": "四川师范大学国际中文教师奖学金申请办法（2025年）",
-      "chars": 1743
+      "chars": 2529
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638233690352995397",
       "title": "四川师范大学国际教育学院留学生非学历语言进修课程招生简章（中英文版）",
-      "chars": 10070
+      "chars": 12167
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638452310767909524",
       "title": "四川师范大学国际中文教师奖学金申请办法（2024年）",
-      "chars": 2108
+      "chars": 3149
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x639147235839462241",
       "title": "四川师范大学国际中文教育学院硕士研究生学位论文答辩公告",
-      "chars": 447
+      "chars": 1249
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x639100463641050035",
       "title": "学校组织留学生学习习近平主席给法国国际学校中文班师生的复信精神",
-      "chars": 1601
+      "chars": 2728
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638233805645326081",
       "title": "四川师范大学国际中文教育学院汉语国际教育专业留学生招生简章（中英文版）",
-      "chars": 3893
+      "chars": 4864
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/36/",
       "title": "本科生工作 - 四川师范大学国际中文教育学院",
-      "chars": 920
+      "chars": 3554
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/30/",
       "title": "留学生工作 - 四川师范大学国际中文教育学院",
-      "chars": 964
+      "chars": 3315
     },
     {
       "url": "https://lxs.sicnu.edu.cn/p/5/",
-      "title": "HSK考试 - 四川师范大学国际中文教育学院",
-      "chars": 575
+      "title": "HSK考试  - 四川师范大学国际中文教育学院",
+      "chars": 1789
     },
     {
-      "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_search_x_x__x__x_0_x_0",
-      "title": "站内信息",
-      "chars": 1107
+      "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638360131477324730",
+      "title": "国际教育学院更名为国际中文教育学院",
+      "chars": 1665
+    },
+    {
+      "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638126524672391384",
+      "title": "四川师范大学国际中文教师奖学金申请办法（2023年）",
+      "chars": 3486
+    },
+    {
+      "url": "https://lxs.sicnu.edu.cn/p/10/",
+      "title": "入学申请 - 四川师范大学国际中文教育学院",
+      "chars": 982
+    },
+    {
+      "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x638379992359106447",
+      "title": "我校获评2023年国际中文考试（HSK）优秀考点",
+      "chars": 1914
+    },
+    {
+      "url": "https://lxs.sicnu.edu.cn/p/0/?StId=st_app_news_i_x637266972640869807",
+      "title": "四川师范大学汉语水平考试（HSK&HSKK）考点举办第70次考试",
+      "chars": 1944
     }
   ],
   "db_row": {
@@ -606,14 +624,14 @@
     "city": "Chengdu",
     "province": "Sichuan",
     "country": "Chine",
-    "department": "École d'éducation internationale en chinois (国际中文教育学院)",
+    "department": "École d'éducation internationale en langue chinoise (国际中文教育学院)",
     "emails": [
       "guoxxiaolei@sicnu.edu.cn",
       "guoxxiaolei@sicnu.edu.cn"
     ],
     "phone": "0086-28-84767720 / 0086-28-84761093",
-    "wechat": null,
-    "website": "http://lxs.sicnu.edu.cn",
+    "wechat": "disponible sur demande (QR code affiché sur le site)",
+    "website": "http://en.lxs.sicnu.edu.cn",
     "majors": [
       "chinese_language",
       "education"
@@ -624,18 +642,17 @@
       "recommendation_letter",
       "diploma_transcript",
       "recommendation_letters_professors",
-      "personal_statement_chinese",
-      "guardian_designation",
-      "physical_examination",
+      "guardian_document",
+      "physical_exam",
       "no_criminal_record"
     ],
-    "scholarship_amount": "International Chinese Language Teachers Scholarship (国际中文教师奖学金) / ICLTS Master (TCSOL) / ICLTS Doctorat (TCSOL)",
+    "scholarship_amount": "International Chinese Language Teachers Scholarship (国际中文教师奖学金) / Bourse TCSOL - Master / Bourse TCSOL - Doctorat",
     "scholarship_min": 7400,
     "scholarship_max": 18000,
     "min_hsk_level": 3,
     "language_requirements": "HSK 3+",
     "tuition_min": 7400,
     "tuition_max": 18000,
-    "application_deadline": "15 mai pour rentrée septembre; 31 octobre pour rentrée mars"
+    "application_deadline": "2026-05-15 pour rentrée septembre (bourse internationale d'enseignant de chinois)"
   }
 }

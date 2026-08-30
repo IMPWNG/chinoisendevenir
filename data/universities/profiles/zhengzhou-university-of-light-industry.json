@@ -1,21 +1,406 @@
 {
+  "identity": {
+    "name_en": "Zhengzhou University of Light Industry",
+    "name_zh": "郑州轻工业大学",
+    "name_fr": "Université d'industrie légère de Zhengzhou",
+    "aliases": [
+      "ZZULI"
+    ],
+    "website": "https://www.zzuli.edu.cn/",
+    "international_website": "https://iec.zzuli.edu.cn/",
+    "application_portal_url": "http://apply.zzuli.cucas.cn"
+  },
+  "general": {
+    "presentation": "Université publique de l'industrie légère située à Zhengzhou, Henan. Domaine d'expertise historique: industrie légère, alimentation, ingénierie électrique, électronique, design. Recrute des étudiants internationaux via le Collège d'éducation internationale (IEC).",
+    "history": "Fondée en 1977, historiquement liée à l'industrie légère nationale.",
+    "rankings": [],
+    "strengths": [
+      "Industrie légère",
+      "Génie alimentaire",
+      "Génie électrique",
+      "Électronique et technologies de l'information",
+      "Design",
+      "Intelligence artificielle",
+      "Génie logiciel",
+      "Génie chimique",
+      "Catalyse et énergie"
+    ],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
+    "location": {
+      "city": "Zhengzhou",
+      "province": "Henan",
+      "country": "Chine"
+    },
+    "cost_of_living_cny_month": {
+      "min": 1500,
+      "max": 2500,
+      "notes": "Estimation pour étudiants internationaux à Zhengzhou (2025-2026)."
+    },
+    "campuses": [
+      {
+        "name": "Campus principal Dongfeng",
+        "city": "Zhengzhou",
+        "description": "Campus historique, adresse officielle: No. 5 Dongfeng Rd."
+      },
+      {
+        "name": "Campus haute technologie",
+        "city": "Zhengzhou",
+        "description": "Adresse légale: No. 136 Kexue Dadao, district de haute technologie."
+      }
+    ]
+  },
+  "programs": [
+    {
+      "level": "master",
+      "name": "MBA International Business (工商管理硕士国际商务方向)",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures d'avril à juillet. Contact préalable du superviseur requis."
+    },
+    {
+      "level": "master",
+      "name": "Mécanique (Mechanical Engineering)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Électrique (Electrical Engineering)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Génie chimique et technologie (Chemical Engineering and Technology)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Génie logiciel (Software Engineering)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Science et technologie électroniques (Electronics Science and Technology)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Intelligence artificielle (Artificial Intelligence)",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Design (Design)",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Éducation internationale en chinois (国际汉语教育)",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet. Voir PDF pour détails."
+    },
+    {
+      "level": "master",
+      "name": "Sciences du sport (Sports Science)",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "master",
+      "name": "Sciences et génie alimentaires (Food Science and Engineering)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Candidatures avril-juillet."
+    },
+    {
+      "level": "bachelor",
+      "name": "Éducation internationale en chinois (国际汉语教育)",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Admission au niveau bachelor également ouverte."
+    }
+  ],
+  "admission_requirements": {
+    "bachelor": {
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent. Détails dans le guide 2026 PDF.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible.",
+      "other": [
+        "Voir guide d'admission 2026 (PDF) sur iec.zzuli.edu.cn"
+      ]
+    },
+    "master": {
+      "academic": "Licence/Bachelor ou équivalent. Pour les masters de recherche: contacter un superviseur et obtenir son accord AVANT la candidature.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible.",
+      "other": [
+        "Période de candidature: avril à juillet chaque année",
+        "Accord préalable du superviseur requis pour les masters",
+        "Voir PDF du programme spécifique pour conditions détaillées"
+      ]
+    },
+    "phd": {
+      "academic": "Master ou équivalent. Contacter superviseur au préalable. Voir appel Power Electronics Lab.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Voir annonce 'Power Electronics and Renewable Power Generation Lab Call for International Graduate and PHD Students'"
+      ]
+    },
+    "language": {
+      "academic": "Pas de prérequis académique formel pour le programme de langue chinoise.",
+      "age_max": null,
+      "other": [
+        "Programme de langue chinoise (汉语语言教学) disponible toute l'année"
+      ]
+    }
+  },
+  "contacts": {
+    "office_name": "International Education College (IEC) / 留学生招生办公室",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "",
+    "phone": "+86-371-86601718",
+    "address": "Building 2 (教二楼), No. 5 Dongfeng Rd., Zhengzhou, Henan, P. R. China"
+  },
+  "matching": {
+    "fields": [
+      "business",
+      "economics",
+      "engineering",
+      "computer_science",
+      "sciences",
+      "design",
+      "education",
+      "chinese_language"
+    ],
+    "degrees": [
+      "bachelor",
+      "master",
+      "phd",
+      "language"
+    ],
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "english_programs_available": false,
+    "chinese_language_program_available": true,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
+    "has_csc": null,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "Avril à juillet (pour masters et PhD)",
+    "intake_months": [
+      9
+    ],
+    "city": "Zhengzhou",
+    "province": "Henan",
+    "tags": [
+      "industrie légère",
+      "génie électrique",
+      "alimentation",
+      "design",
+      "intelligence artificielle",
+      "génie logiciel",
+      "partenaires internationaux",
+      "campus IELTS"
+    ]
+  },
+  "confidence": 0.55,
+  "missing_fields": [
+    "frais de dossier",
+    "frais de scolarité exacts CNY",
+    "scores HSK/IELTS minimaux",
+    "conditions GPA précises",
+    "détails bourse (university scholarship)",
+    "dates limites bachelor",
+    "statut CSC",
+    "disponibilité bourses provinciales",
+    "informations logement détaillées"
+  ],
+  "notes": "Données très partielles issues principalement des pages d'index du portail international. Les guides PDF (2026 Admissions Guide 1.pdf et 2.pdf) et les annexes programmes contiennent les détails chiffrés (frais, HSK, IELTS, bourses, logement) qui n'ont pas été extraits. Site d'application officiel: apply.zzuli.cucas.cn. Domaines identifiés pour master: business, mechanical eng., electrical eng., chemical eng., software eng., electronics sci/tech, AI, design, Chinese education, sports, food eng. Bachelor identifié: Chinese international education. PhD: contacter Power Electronics Lab. Programmes principalement en chinois. Partenaires internationaux: Camerino (IT), Griffith (AU), Edinburgh Napier (UK), Fontys (NL).",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "Étudiants internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Passeport valide requis pour la candidature"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Étudiants internationaux",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Diplôme du secondaire (licence) ou licence + master (master), avec traduction officielle"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "Étudiants internationaux",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevés de notes officiels avec traduction"
+    },
+    {
+      "type": "language_certificate",
+      "required": false,
+      "count": null,
+      "who": "Programmes en chinois/anglais",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes chinois, IELTS/TOEFL pour programmes anglais"
+    },
+    {
+      "type": "supervisor_consent_letter",
+      "required": true,
+      "count": null,
+      "who": "Candidats master/recherche",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Accord préalable du superviseur requis pour les étudiants diplômés (avril-juillet)"
+    },
+    {
+      "type": "physical_examination",
+      "required": false,
+      "count": null,
+      "who": "Tous étudiants internationaux",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Examen médical et certificat de non-antiécédents"
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
-    "opens_at": "",
+    "platform_name": "CUCAS (China University of Light Industry official portal)",
+    "platform_url": "http://apply.zzuli.cucas.cn",
+    "steps": [
+      "Créer un compte sur apply.zzuli.cucas.cn",
+      "Remplir le formulaire en ligne",
+      "Joindre les documents requis (passeport, diplômes, relevés, certificats linguistiques)",
+      "Pour les masters: contacter et obtenir l'accord d'un superviseur (avril-juillet)",
+      "Soumettre la candidature",
+      "Payer les frais de dossier",
+      "Attendre la décision d'admission",
+      "Recevoir la lettre d'admission et le formulaire JW202 pour le visa"
+    ],
+    "opens_at": "2026-03-15",
     "deadline": "",
     "results_at": "",
     "intake_months": [
@@ -23,9 +408,12 @@
     ],
     "application_fee_cny": null,
     "application_fee_refundable": null,
-    "payment_methods": []
+    "payment_methods": [
+      "online"
+    ]
   },
   "fees": {
+    "tuition_cnn_year": null,
     "tuition_cny_year": {
       "bachelor": {
         "min": null,
@@ -67,17 +455,17 @@
   },
   "scholarships": [
     {
-      "name": "",
-      "type": "csc",
-      "coverage": "full",
+      "name": "ZZULI International Student Scholarship",
+      "type": "university",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Sur la base du mérite académique; détails dans la section Bourses du site IEC",
       "apply_via": "university",
       "deadline": "",
-      "renewal": ""
+      "renewal": "Renouvelable annuellement selon performance"
     }
   ],
   "language": {
@@ -87,9 +475,9 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": false
     },
     "foundation": {
       "available": null,
@@ -97,18 +485,26 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice (lettre d'admission)",
+      "Formulaire JW202 / JW201"
+    ],
+    "instructions": "Demander un visa étudiant X1 (programme >6 mois) ou X2 (<6 mois) auprès de l'ambassade/consulat chinois avec la lettre d'admission et le JW202",
+    "arrival_and_residence_permit": "S'enregistrer au bureau des affaires internationales de ZZULI dans les 7 jours; permis de résidence délivré si séjour >6 mois"
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "Dortoir sur campus (chambre double)"
+    ],
     "rules": "",
-    "international_office": "International Education College (IEC), Bldg.2, No.5 Dongfeng Rd., Zhengzhou, Henan. Tél: 86-371-86601718",
-    "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "international_office": "International Education College (IEC), Bâtiment 2, No. 5 Dongfeng Rd, Zhengzhou - Tél: 86-371-86601718",
+    "orientation": null,
+    "english_support": true,
+    "clubs": "Activités étudiantes internationales"
   },
   "country_specific": [
     {
@@ -116,55 +512,92 @@
       "notes": ""
     }
   ],
-  "notes": "partial: Unexpected non-whitespace character after JSON at position 4171 (line 1 column 4172)",
-  "missing_fields": [],
-  "confidence": 0.35,
   "scan_status": "ok",
   "slug": "zhengzhou-university-of-light-industry",
-  "scraped_at": "2026-08-23T14:56:08.795Z",
+  "scraped_at": "2026-08-30T11:05:50.410Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 8,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.zzuli.edu.cn/",
       "title": "郑州轻工业大学欢迎您",
-      "chars": 2959
+      "chars": 16000
     },
     {
-      "url": "http://www.zzuli.edu.cn/_css/error/error.css",
-      "title": null,
-      "chars": 5700
-    },
-    {
-      "url": "http://www.zzuli.edu.cn/_js/themes/default/easyui.css",
-      "title": null,
-      "chars": 12000
-    },
-    {
-      "url": "http://www.zzuli.edu.cn/_js/themes/icon.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://www.zzuli.edu.cn/2026/0824/c284a358009/page.htm",
+      "title": "材料与化学工程学院张宏忠教授团队在环境与能源领域国际权威期刊《Applied Catalysis B: Environment and Energy》上发表研究论文",
+      "chars": 7045
     },
     {
       "url": "https://iec.zzuli.edu.cn/lxsjy/list.htm",
       "title": "留学申请 Application",
-      "chars": 2365
+      "chars": 4642
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/2026/0315/c18425a346846/page.htm",
+      "title": "2026 年郑州轻工业大学来华留学生招生简章  2026 Admissions Guide for International Students of ZZULI",
+      "chars": 3115
+    },
+    {
+      "url": "http://iec.zzuli.edu.cn/lxsjy/list.htm",
+      "title": "留学申请 Application",
+      "chars": 4642
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/2025/0628/c18425a335974/page.htm",
+      "title": "郑州轻工业大学来华留学研究生招生录取安排 Admission Arrangements for International Graduate Students of ZZULI",
+      "chars": 3014
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/2025/0530/c18425a334485/page.htm",
+      "title": "工商管理硕士（国际商务方向）招生信息 Master of Business Administration (International Business) Admission Information",
+      "chars": 3112
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/2025/0530/c18425a334484/page.htm",
+      "title": "国际汉语教育专业招生信息 International Chinese Education Admission Information",
+      "chars": 3252
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/18425/list.htm",
+      "title": "留学申请 Application",
+      "chars": 4642
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/18421/list.htm",
+      "title": "汉语语言教学  Chinese Program",
+      "chars": 11566
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/2025/0530/c18425a334496/page.htm",
+      "title": "体育学招生信息 Sports Science Admission Information",
+      "chars": 2977
+    },
+    {
+      "url": "https://iec.zzuli.edu.cn/2025/0530/c18425a334491/page.htm",
+      "title": "食品科学与工程招生信息 Food Science and Engineering Admission Information",
+      "chars": 3254
     },
     {
       "url": "https://www.zzuli.edu.cn/277/list.htm",
       "title": "本科生教育",
-      "chars": 2504
+      "chars": 6906
     },
     {
       "url": "https://www.zzuli.edu.cn/219/list.htm",
       "title": "招生信息",
-      "chars": 1578
+      "chars": 6434
     },
     {
       "url": "https://www.zzuli.edu.cn/220/list.htm",
       "title": "招生信息",
-      "chars": 1578
+      "chars": 6434
+    },
+    {
+      "url": "http://iec.zzuli.edu.cn/",
+      "title": "国际教育学院",
+      "chars": 5726
     }
   ],
   "db_row": {
@@ -175,22 +608,34 @@
     "city": "Zhengzhou",
     "province": "Henan",
     "country": "Chine",
-    "department": null,
+    "department": "International Education College (IEC) / 留学生招生办公室",
     "emails": [],
-    "phone": null,
+    "phone": "+86-371-86601718",
     "wechat": null,
-    "website": "https://sie.zzuli.edu.cn/",
-    "majors": [],
-    "required_documents": [
-      "passport"
+    "website": "https://iec.zzuli.edu.cn/",
+    "majors": [
+      "business",
+      "economics",
+      "engineering",
+      "computer_science",
+      "sciences",
+      "design",
+      "education",
+      "chinese_language"
     ],
-    "scholarship_amount": null,
+    "required_documents": [
+      "passport",
+      "diploma",
+      "transcripts",
+      "supervisor_consent_letter"
+    ],
+    "scholarship_amount": "ZZULI International Student Scholarship",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,
     "language_requirements": null,
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Avril à juillet (pour masters et PhD)"
   }
 }

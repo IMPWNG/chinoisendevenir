@@ -7,20 +7,26 @@
       "XDU",
       "Xidian University - NEW ACC"
     ],
-    "website": "https://www.xidian.edu.cn",
-    "international_website": "https://en.xidian.edu.cn",
-    "application_portal_url": "https://sie.xidian.edu.cn"
+    "website": "https://en.xidian.edu.cn/",
+    "international_website": "https://sie.xidian.edu.cn/EN/Home.htm",
+    "application_portal_url": "https://xdgjxs.xidian.edu.cn/internationalEducationStudent/2026/1"
   },
   "general": {
-    "presentation": "Université publique chinoise spécialisée dans les technologies de l'information et de la communication, l'électronique et la défense. Dispose d'un collège international (国际教育学院) gérant les admissions des étudiants étrangers, les programmes conjoints et l'Institut Confucius.",
-    "history": "",
-    "rankings": [],
+    "presentation": "Université nationale clé directement sous le Ministère de l'Éducation de la République populaire de Chine, figurant dans les « universités et disciplines de classe mondiale » (Double First-Class). Spécialisée en technologies de l'information et de la communication.",
+    "history": "Fondée en 1931 sous le nom de Central Military Engineering Institute, l'université a une longue tradition dans les domaines de l'électronique, des télécommunications et de l'informatique.",
+    "rankings": [
+      "Double First-Class University (Chine)",
+      "National Key University sous le Ministère de l'Éducation"
+    ],
     "strengths": [
-      "technologies de l'information",
-      "électronique",
-      "télécommunications",
-      "défense nationale",
-      "ingénierie"
+      "Télécommunications",
+      "Ingénierie électronique",
+      "Informatique",
+      "Microélectronique",
+      "Intelligence artificielle",
+      "Cybersécurité",
+      "Optoélectronique",
+      "Aérospatial"
     ],
     "teaching_languages": [
       "zh",
@@ -32,9 +38,9 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation pour Xi'an, à confirmer auprès du SIE."
     },
     "campuses": [
       {
@@ -46,153 +52,361 @@
         "name": "North Campus",
         "city": "Xi'an",
         "description": "No. 2 South Taibai Road, Xi'an, Shaanxi 710071"
+      },
+      {
+        "name": "Chang'an Campus",
+        "city": "Xi'an",
+        "description": "Campus mentionné pour les événements académiques"
       }
     ]
   },
-  "programs": [],
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Undergraduate Programs (59 programmes)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Admission uniquement en septembre. 4 majeures enseignées en anglais dont Communication Engineering, Computer Science and Technology, Electronic Information Engineering."
+    },
+    {
+      "level": "master",
+      "name": "Graduate Programs (49 masters)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Admission en septembre. Voir Annexe 1 pour la liste des majeures."
+    },
+    {
+      "level": "phd",
+      "name": "Doctoral Programs (21 doctorats)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Admission en septembre."
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de langue chinoise pour étudiants internationaux."
+    },
+    {
+      "level": "foundation",
+      "name": "Preparatory Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme préparatoire d'un an en langue chinoise pour intégrer une licence à Xidian."
+    },
+    {
+      "level": "exchange",
+      "name": "Exchange Programs",
+      "field": "other",
+      "language": "en",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes d'échange pour étudiants internationaux."
+    },
+    {
+      "level": "language",
+      "name": "Short-term Programs in China",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes de courte durée en Chine."
+    }
+  ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "",
+      "academic": "Diplôme de fin d'études secondaires (high school) reconnu, équivalent au gaokao chinois.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "Programme préparatoire d'un an en chinois (Preparatory Program) proposé.",
+      "other": [
+        "4 majeures enseignées en anglais (Communication Engineering, Computer Science and Technology, Electronic Information Engineering, etc.)",
+        "Frais de dossier: 600 RMB"
+      ]
     },
     "master": {
-      "academic": "",
+      "academic": "Diplôme de licence (bachelor) reconnu, dans un domaine pertinent.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "49 programmes de master disponibles",
+        "Frais de dossier: 600 RMB"
+      ]
     },
     "phd": {
-      "academic": "",
+      "academic": "Diplôme de master reconnu, dans un domaine pertinent.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "21 programmes doctoraux disponibles",
+        "Frais de dossier: 600 RMB"
+      ]
     },
     "language": {
-      "academic": "",
+      "academic": "Aucun prérequis académique spécifique.",
       "age_max": null,
-      "other": []
+      "other": [
+        "Programme de langue chinoise ouvert aux étudiants internationaux aimant le chinois",
+        "Programme préparatoire d'un an pour futurs étudiants en licence"
+      ]
     }
   },
   "contacts": {
-    "office_name": "School of International Education (国际教育学院)",
-    "iso_email": "",
-    "admissions_email": "",
+    "office_name": "School of International Education (SIE), Xidian University",
+    "iso_email": "sie@xidian.edu.cn",
+    "admissions_email": "sie@xidian.edu.cn",
     "wechat": "",
-    "phone": "",
-    "address": "South Campus: 266 Xinglong Section of Xifeng Road, Xi'an, Shaanxi 710126 / North Campus: No. 2 South Taibai Road, Xi'an, Shaanxi 710071"
+    "phone": "+86-29-81891161, +86-29-88202811",
+    "address": "266 Xinglong Section of Xifeng Road, Xi'an, Shaanxi Province 710126, P.R. China"
   },
   "matching": {
     "fields": [
-      "computer_science",
       "engineering",
-      "sciences"
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "chinese_language",
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language"
+      "language",
+      "foundation",
+      "exchange"
     ],
     "languages": [
       "zh",
       "en"
     ],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
     "min_ielts": null,
     "min_toefl": null,
     "age_max_bachelor": null,
     "age_max_master": null,
     "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "",
-    "intake_months": [],
+    "deadline_typical": "Juin (pour rentrée septembre)",
+    "intake_months": [
+      9
+    ],
     "city": "Xi'an",
     "province": "Shaanxi",
     "tags": [
-      "technologies de l'information",
-      "électronique",
-      "défense",
-      "double campus",
-      "institut Confucius"
+      "Double First-Class",
+      "key university",
+      "telecommunications",
+      "electronics",
+      "computer science",
+      "microelectronics",
+      "AI",
+      "cybersecurity",
+      "Confucius Institute",
+      "CSC scholarship",
+      "CIS scholarship",
+      "Five Central Asian Countries Scholarship"
     ]
   },
-  "confidence": 0.15,
+  "confidence": 0.75,
   "missing_fields": [
-    "tuition_cny_min",
-    "tuition_cny_max",
-    "housing_cny_year_min",
-    "hsk_level",
-    "hsk_score_min",
-    "ielts_min",
-    "toefl_min",
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
-    "admissions_email",
-    "iso_email",
-    "phone",
-    "wechat",
-    "deadline_typical",
-    "intake_months",
-    "programs",
-    "scholarship_info",
-    "min_gpa",
-    "academic_requirements",
-    "cost_of_living"
+    "frais de scolarité exacts (CNY)",
+    "frais de logement exacts (CNY)",
+    "scores IELTS/TOEFL minimum précis",
+    "GPA minimum précis",
+    "âge maximum précis",
+    "dates limites exactes pour 2026",
+    "HSK score minimum exact"
   ],
-  "notes": "Sources très pauvres : uniquement menus de navigation et fichiers CSS. Aucune donnée chiffrée (frais, scores, délais, contacts) extraite. Identité, localisation et deux campus confirmés via en.xidian.edu.cn. Le portail sie.xidian.edu.cn (国际教育学院) gère les admissions internationales mais son contenu détaillé n'a pas été récupéré. Confiance très basse.",
+  "notes": "Nouveau portail de candidature (NEW ACC). Frais de dossier confirmés à 600 RMB (donnée 2019). 4 majeures de licence enseignées en anglais. Bourses disponibles: Chinese Government Scholarship (CSC), Confucius Institute Scholarship (CIS), Bourse « Five Central Asian Countries », bourses de l'université. 196 universités partenaires, 68 laboratoires internationaux conjoints. Instituts internationaux: Sino-Malaysian Institute for Science and Technology Innovation, XIDIAN-FIAS International Joint Research Center. Instituts Confucius: Paderborn (Allemagne), Shen Jai (Malaisie), Dominica.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": null,
-      "who": "",
+      "count": 1,
+      "who": "Tous candidats",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Passeport valide requis pour la candidature en ligne."
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Licence/Master/Doctorat selon le niveau",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme d'études secondaires pour licence; licence pour master; master pour doctorat."
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "Tous niveaux académiques",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes officiels requis."
+    },
+    {
+      "type": "language_certificate",
+      "required": false,
+      "count": null,
+      "who": "Programmes en chinois ou en anglais",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes en anglais (4 majeures enseignées en anglais: Communication Engineering, Computer Science and Technology, Electronic Information, etc.)."
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Examen médical standard pour étudiants étrangers entrant en Chine."
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire vierge requis."
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "Master/Doctorat",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Plan d'études ou proposition de recherche requis pour les cycles supérieurs."
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Master/Doctorat",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 lettres de recommandation requises pour les cycles supérieurs."
+    },
+    {
+      "type": "passport_photo",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photo format passeport pour dossier."
+    },
+    {
+      "type": "application_form",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire rempli via le portail en ligne XDGJXS."
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "Xidian University International Education Student Application System (XDGJXS)",
+    "platform_url": "https://xdgjxs.xidian.edu.cn/internationalEducationStudent/2026/1",
+    "steps": [
+      "Créer un compte sur le portail XDGJXS (nouveau portail 2026)",
+      "Choisir le programme (Licence, Master, Doctorat, Langue chinoise, Préparatoire, Échange, Court terme)",
+      "Remplir le formulaire de candidature en ligne",
+      "Télécharger les documents requis (passeport, diplômes, relevés, certificats linguistiques, lettres de recommandation, plan d'études)",
+      "Payer les frais de dossier de 600 CNY par virement bancaire (Bank of Communications)",
+      "Soumettre la candidature et attendre la notification d'admission"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
     "intake_months": [
       9
     ],
-    "application_fee_cny": null,
-    "application_fee_refundable": null,
-    "payment_methods": []
+    "application_fee_cny": 600,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "Virement bancaire (Bank of Communications)"
+    ]
   },
   "fees": {
     "tuition_cny_year": {
@@ -215,7 +429,13 @@
       "english_taught_premium": null
     },
     "insurance_cny_year": null,
-    "other_fees": [],
+    "other_fees": [
+      {
+        "item": "Frais de dossier / registration fee",
+        "amount_cny": 600,
+        "notes": "Paiement par virement bancaire Bank of Communications"
+      }
+    ],
     "housing": {
       "on_campus": [
         {
@@ -231,20 +451,50 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Coûts de subsistance non précisés sur le portail."
     }
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Candidature via l'ambassade de Chine ou le département d'envoi; pré-admission Xidian requise.",
+      "apply_via": "ambassade ou département d'envoi",
+      "deadline": "",
+      "renewal": "Renouvelable annuellement selon résultats académiques"
+    },
+    {
+      "name": "Xidian \"Five Central Asian Countries\" Scholarship",
+      "type": "university",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Réservé aux candidats d'Asie centrale (5 pays).",
       "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Confucius Institute Scholarship (CIS)",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Candidature via la plateforme Confucius Institute Scholarship.",
+      "apply_via": "Confucius Institute",
       "deadline": "",
       "renewal": ""
     }
@@ -256,81 +506,129 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "Programme préparatoire d'un an en langue chinoise pour futurs étudiants de licence."
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission officielle (JW202)",
+      "Formulaire de demande de visa étudiant"
+    ],
+    "instructions": "Service Visa fourni par la School of International Education (SIE). Contacter sie@xidian.edu.cn ou +86-29-81891161.",
+    "arrival_and_residence_permit": "Permis de résidence à obtenir dans les 30 jours suivant l'arrivée auprès du Bureau de l'entrée-sortie de la sécurité publique de Xi'an."
   },
   "housing_and_services": {
-    "housing_types": [],
-    "rules": "",
-    "international_office": "School of International Education (国际教育学院), sie.xidian.edu.cn",
-    "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "housing_types": [
+      "Résidence universitaire sur campus (South Campus et North Campus)"
+    ],
+    "rules": "Logement sur les campus Sud (266 Xinglong Section of Xifeng Road) et Nord (No. 2 South Taibai Road), Xi'an.",
+    "international_office": "School of International Education (SIE), sie@xidian.edu.cn, +86-29-81891161 / +86-29-88202811",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux organisé par SIE.",
+    "english_support": true,
+    "clubs": "Concours interculturels, événements culturels, compétition de chant et danse sur campus, excursions culturelles (perception de la Chine)."
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Asie centrale (5 pays)",
+      "notes": "Bourse spécifique \"Five Central Asian Countries\" Scholarship disponible."
     }
   ],
   "scan_status": "ok",
   "slug": "xidian-university-new",
-  "scraped_at": "2026-08-23T14:54:42.647Z",
+  "scraped_at": "2026-08-30T11:05:39.161Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 8,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://sie.xidian.edu.cn/",
-      "title": "国际教育学院",
-      "chars": 281
-    },
     {
       "url": "https://en.xidian.edu.cn/Admission.htm",
       "title": "Admission-XIDIAN UNIVERSITY",
-      "chars": 788
+      "chars": 2121
     },
     {
-      "url": "https://sie.xidian.edu.cn/css/a_animate.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants.htm",
+      "title": "International Applicants-XIDIAN UNIVERSITY",
+      "chars": 2616
     },
     {
-      "url": "https://sie.xidian.edu.cn/css/swiper.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://en.xidian.edu.cn/Global_Initiatives/Joint_International_Institutes.htm",
+      "title": "Joint International Institutes-XIDIAN UNIVERSITY",
+      "chars": 2742
     },
     {
-      "url": "https://sie.xidian.edu.cn/css/a_style.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants/Undergraduate_Programs.htm",
+      "title": "Undergraduate Programs-XIDIAN UNIVERSITY",
+      "chars": 2770
     },
     {
-      "url": "https://sie.xidian.edu.cn/lhlx.htm",
-      "title": "来华留学-国际教育学院",
-      "chars": 873
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants/Non_Degree_Programs.htm",
+      "title": "Non-Degree Programs-XIDIAN UNIVERSITY",
+      "chars": 2719
     },
     {
-      "url": "https://sie.xidian.edu.cn/EN/Study_in_China.htm",
-      "title": "Study in China-国际教育学院",
-      "chars": 2634
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants/Graduate_Programs.htm",
+      "title": "Graduate Programs-XIDIAN UNIVERSITY",
+      "chars": 2960
+    },
+    {
+      "url": "https://en.xidian.edu.cn/Global_Initiatives/Contact_Us.htm",
+      "title": "Contact Us-XIDIAN UNIVERSITY",
+      "chars": 3288
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/",
+      "title": "国际教育学院",
+      "chars": 1798
+    },
+    {
+      "url": "https://en.xidian.edu.cn/index.htm",
+      "title": "XIDIAN UNIVERSITY",
+      "chars": 7083
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/EN/Home.htm",
+      "title": "Home-国际教育学院",
+      "chars": 16000
+    },
+    {
+      "url": "https://en.xidian.edu.cn/info/1070/1534.htm",
+      "title": "Notice on Application for 2020 Chinese Government Scholarship Programs for Study in China-XIDIAN UNIVERSITY",
+      "chars": 10732
     },
     {
       "url": "https://sie.xidian.edu.cn/cglx.htm",
       "title": "出国留学-国际教育学院",
-      "chars": 800
+      "chars": 3127
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx.htm",
+      "title": "来华留学-国际教育学院",
+      "chars": 4453
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/index.htm",
+      "title": "国际教育学院",
+      "chars": 1798
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/info/1111/1829.htm",
+      "title": "《西安电子科技大学本科生国（境）外交流项目申请人学习计划表》-国际教育学院",
+      "chars": 3264
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx/zsjz.htm",
+      "title": "招生简章-国际教育学院",
+      "chars": 3680
     }
   ],
   "db_row": {
@@ -341,26 +639,41 @@
     "city": "Xi'an",
     "province": "Shaanxi",
     "country": "Chine",
-    "department": "School of International Education (国际教育学院)",
-    "emails": [],
-    "phone": null,
+    "department": "School of International Education (SIE), Xidian University",
+    "emails": [
+      "sie@xidian.edu.cn",
+      "sie@xidian.edu.cn"
+    ],
+    "phone": "+86-29-81891161, +86-29-88202811",
     "wechat": null,
-    "website": "https://en.xidian.edu.cn",
+    "website": "https://sie.xidian.edu.cn/EN/Home.htm",
     "majors": [
-      "computer_science",
       "engineering",
-      "sciences"
+      "computer_science",
+      "sciences",
+      "economics",
+      "business",
+      "chinese_language",
+      "other"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "diploma",
+      "transcripts",
+      "physical_examination",
+      "no_criminal_record",
+      "study_plan",
+      "recommendation_letters",
+      "passport_photo",
+      "application_form"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / Xidian \"Five Central Asian Countries\" Scholarship / Confucius Institute Scholarship (CIS)",
     "scholarship_min": null,
     "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Juin (pour rentrée septembre)"
   }
 }

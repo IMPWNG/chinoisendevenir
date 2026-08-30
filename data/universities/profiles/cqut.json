@@ -7,24 +7,25 @@
       "CQUT",
       "Chongqing Institute of Technology"
     ],
-    "website": "https://www.cqut.edu.cn",
-    "international_website": "https://lic.cqut.edu.cn",
-    "application_portal_url": "https://cqut.applyonline.cn"
+    "website": "http://www.cqut.edu.cn/",
+    "international_website": "https://cqut.admissions.cn/",
+    "application_portal_url": "https://cqut.applyonline.cn/"
   },
   "general": {
-    "presentation": "Université publique de recherche située à Chongqing, fondée en 1940 sous le nom de Shiji Public School par l'expert en armement Li Chenggan. Membre de la National Alliance of Ideological and Political Education in Courses for Higher Military-Industrial Institutions et de la China Ordnance Collaborative Innovation Alliance.",
-    "history": "Fondée le 18 septembre 1940 comme Shiji Public School. Ancien nom: Chongqing Institute of Technology. Désignée parmi les premières institutions pour les projets de recherche en emerging engineering education du Ministère de l'Éducation.",
+    "presentation": "Université publique de recherche située à Chongqing, axée sur l'ingénierie, les sciences des matériaux et la chimie. Membre de l'Alliance nationale d'éducation idéologique et politique des institutions militaires-industrielles et de l'Alliance d'innovation collaborative de l'industrie de l'armement chinoise.",
+    "history": "Fondée le 18 septembre 1940 sous le nom de Shiji Public School par l'expert en armement Li Chenggan. Ancien nom: Chongqing Institute of Technology.",
     "rankings": [
-      "5e parmi les universités de Chongqing (Shanghai Ranking 2025)",
-      "Top 200 national (Shanghai Ranking 2025) sur 3167 universités",
-      "Top 2000 mondial (U.S. News, URAP, Scimago 2022)"
+      "5e à Chongqing (Shanghai Ranking 2025)",
+      "Top 200 national (Shanghai Ranking 2025)",
+      "Top 2000 mondial (US News, URAP, Scimago 2022)"
     ],
     "strengths": [
-      "Ingénierie (ESI top 1% mondial)",
-      "Science des matériaux (ESI top 1% mondial)",
-      "Chimie (ESI top 1% mondial)",
-      "Ingénierie automobile et mécanique",
-      "Armement et ingénierie militaire"
+      "Engineering (ESI top 1%)",
+      "Materials Science (ESI top 1%)",
+      "Chemistry (ESI top 1%)",
+      "Mechanical Engineering",
+      "Vehicle Engineering",
+      "Computer Science"
     ],
     "teaching_languages": [
       "zh",
@@ -37,8 +38,8 @@
     },
     "cost_of_living_cny_month": {
       "min": 1500,
-      "max": 2500,
-      "notes": "Estimation pour Chongqing, ville de niveau municipal. Logement universitaire 2200 RMB/an/lit."
+      "max": 3000,
+      "notes": "Estimation Chongqing, ville de niveau 1"
     },
     "campuses": [
       {
@@ -54,34 +55,22 @@
       {
         "name": "Yangjiaping",
         "city": "Chongqing",
-        "description": "Campus urbain"
+        "description": "Campus historique"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Computer Science and Technology",
-      "field": "computer_science",
+      "name": "Automobile Service Engineering",
+      "field": "engineering",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Software Engineering",
-      "field": "computer_science",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
+      "notes": ""
     },
     {
       "level": "bachelor",
@@ -93,91 +82,7 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Mechanical Design Manufacturing and Automation",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Material Science and Engineering",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Chemical Engineering and Technology",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Pharmaceutical Engineering",
-      "field": "pharmacy",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Accounting",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "International Economy and Trade",
-      "field": "economics",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "English",
-      "field": "arts",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme bilingue chinois/anglais. Frais: 17000 RMB/an"
+      "notes": ""
     },
     {
       "level": "bachelor",
@@ -189,31 +94,79 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
+      "notes": ""
     },
     {
       "level": "bachelor",
-      "name": "Chinese International Education",
-      "field": "chinese_language",
+      "name": "Ground Weapon Mobility Engineering",
+      "field": "engineering",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 17000 RMB/an"
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "International Economics and Trade",
+      "field": "economics",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Accounting",
+      "field": "finance",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "English-taught Undergraduate Program",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme en anglais, 17 000 RMB/an"
     },
     {
       "level": "master",
-      "name": "Computer Applied Technology",
-      "field": "computer_science",
+      "name": "Automobile Engineering",
+      "field": "engineering",
       "language": "zh",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 20000 RMB/an"
+      "notes": ""
     },
     {
       "level": "master",
@@ -225,23 +178,23 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 20000 RMB/an"
+      "notes": ""
     },
     {
       "level": "master",
-      "name": "Material Science",
-      "field": "sciences",
+      "name": "Computer Software and Theory",
+      "field": "computer_science",
       "language": "zh",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 20000 RMB/an"
+      "notes": ""
     },
     {
       "level": "master",
-      "name": "Finance",
+      "name": "Accounting",
       "field": "finance",
       "language": "zh",
       "duration_years": 3,
@@ -249,104 +202,82 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais: 20000 RMB/an"
-    },
-    {
-      "level": "master",
-      "name": "International Trade",
-      "field": "economics",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 20000 RMB/an"
-    },
-    {
-      "level": "master",
-      "name": "Accounting",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais: 20000 RMB/an"
+      "notes": ""
     },
     {
       "level": "language",
-      "name": "Chinese Language",
+      "name": "Chinese Language Program (long-term)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
       "start_months": [
+        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme non-diplôme. Frais: 12000 RMB/an (long terme) ou 12000 RMB/mois (court terme)"
+      "notes": "12 000 RMB/an; cours court 12 000 RMB/mois"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires ou équivalent. Excellents résultats scolaires requis.",
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
       "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise d'un an disponible",
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise (1 an)",
       "other": [
-        "Frais d'inscription: 400 RMB",
-        "Assurance Ping An obligatoire"
+        "Examen d'entrée ou évaluation académique",
+        "Bonne santé"
       ]
     },
     "master": {
-      "academic": "Licence ou équivalent dans un domaine pertinent. Excellents résultats académiques.",
+      "academic": "Licence (Bachelor) ou équivalent dans un domaine connexe",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
       "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise disponible",
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise",
       "other": [
-        "Frais d'inscription: 400 RMB",
-        "Assurance Ping An obligatoire"
+        "Deux lettres de recommandation",
+        "Relevés de notes",
+        "Plan d'études ou proposition de recherche"
       ]
     },
     "phd": {
-      "academic": "Master ou équivalent dans un domaine pertinent",
+      "academic": "Master ou équivalent",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
       "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "1 point d'autorisation de doctorat de premier niveau disponible"
+        "Lettres de recommandation",
+        "Proposition de recherche"
       ]
     },
     "language": {
       "academic": "Diplôme de fin d'études secondaires",
       "age_max": null,
       "other": [
-        "Programme de langue chinoise long terme (1 an) ou court terme",
-        "Frais: 12000 RMB/an ou 12000 RMB/mois"
+        "Pas d'exigence HSK pour les débutants"
       ]
     }
   },
   "contacts": {
-    "office_name": "Office of International Cooperation and Exchanges (国际合作与交流处)",
-    "iso_email": "lic@cqut.edu.cn",
-    "admissions_email": "admissions@cqut.edu.cn",
-    "wechat": "",
+    "office_name": "Office of International Cooperation and Exchange (lic.cqut.edu.cn)",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "kfc965a6f8f1e2c89f5",
     "phone": "",
     "address": "No. 69 Hongguang Avenue, Banan District, Chongqing, P.R.C. 400054"
   },
@@ -358,10 +289,8 @@
       "business",
       "economics",
       "finance",
-      "pharmacy",
-      "chinese_language",
       "design",
-      "arts"
+      "chinese_language"
     ],
     "degrees": [
       "bachelor",
@@ -371,14 +300,13 @@
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
     "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 60,
+    "min_ielts": null,
+    "min_toefl": null,
     "age_max_bachelor": null,
     "age_max_master": null,
     "age_max_phd": null,
@@ -388,7 +316,7 @@
     "tuition_cny_min": 12000,
     "tuition_cny_max": 20000,
     "housing_cny_year_min": 2200,
-    "deadline_typical": "Juin-Juillet pour rentrée septembre",
+    "deadline_typical": "Juin/juillet pour rentrée septembre",
     "intake_months": [
       3,
       9
@@ -397,36 +325,125 @@
     "province": "Chongqing",
     "tags": [
       "public university",
-      "research university",
+      "engineering",
       "ESI top 1%",
-      "military-industrial heritage",
-      "automotive engineering",
-      "materials science",
+      "vehicle engineering",
+      "ordnance",
       "scholarships available",
-      "affordable tuition"
+      "insurance required"
     ]
   },
-  "confidence": 0.82,
+  "confidence": 0.78,
   "missing_fields": [
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
+    "iso_email exact",
+    "admissions_email exact",
     "phone",
-    "wechat",
-    "has_csc",
-    "exact IELTS/TOEFL minimums (estimés)",
-    "exact HSK score minimum (estimé)"
+    "min_ielts",
+    "min_toefl",
+    "age limits",
+    "specific GPA requirements",
+    "CSC scholarship confirmation",
+    "deadline exact date"
   ],
-  "notes": "Université publique de technologie avec 3 campus (Huaxi, Liangjiang, Yangjiaping), 31974 étudiants, 2048 enseignants. 58 programmes de licence, 15 points d'autorisation de master, 1 point de doctorat. Programmes principalement en chinois, sauf le programme English (bilingue). Bourses disponibles: Chongqing Mayor Scholarship et CQUT President Scholarship (exonération totale ou partielle des frais de scolarité). Frais très abordables: 17000 RMB/an (licence), 20000 RMB/an (master), 12000 RMB/an (langue).",
-  "documents": [],
+  "notes": "Données issues du portail admissions.cn de CQUT et de Wikipedia. 34 programmes bachelor, 20 master, 1 non-degree. Frais: inscription 400 RMB, licence 17 000 RMB/an, master 20 000 RMB/an, langue 12 000 RMB/an, logement 2 200 RMB/lit/an. Bourses: Chongqing Mayor Scholarship et CQUT President Scholarship (exemption totale ou partielle des frais de scolarité). Assurance Ping An obligatoire. Trois campus: Huaxi, Liangjiang, Yangjiaping.",
+  "documents": [
+    {
+      "type": "passport",
+      "required": true,
+      "count": null,
+      "who": "Candidat international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "diplome_etudes_secondaires",
+      "required": true,
+      "count": null,
+      "who": "Licence",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Diplôme de fin d'études secondaires requis pour les candidats au bachelor."
+    },
+    {
+      "type": "diplome_licence",
+      "required": true,
+      "count": null,
+      "who": "Master",
+      "applies_to": [
+        "master"
+      ],
+      "notes": "Diplôme de licence requis pour les candidats au master."
+    },
+    {
+      "type": "releves_notes",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "certificat_langue",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Exigé pour les programmes en chinois (HSK) ou en anglais (IELTS/TOEFL) selon la langue d'enseignement."
+    },
+    {
+      "type": "photo_identite",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "formulaire_demande",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "À remplir via la plateforme en ligne."
+    },
+    {
+      "type": "attestation_assurance",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Assurance Ping An obligatoire pour les étudiants internationaux en Chine."
+    }
+  ],
   "application": {
-    "platform_name": "CQUT Apply Online",
+    "platform_name": "CQUT Apply Online (admissions.cn)",
     "platform_url": "https://cqut.applyonline.cn",
-    "steps": [],
+    "steps": [
+      "Créer un compte sur la plateforme d'admission en ligne de CQUT",
+      "Remplir le formulaire de demande",
+      "Joindre les documents requis (passeport, diplômes, relevés, photo, certificat de langue)",
+      "Payer les frais d'inscription de 400 RMB",
+      "Soumettre la candidature en ligne",
+      "Attendre la confirmation d'admission et le formulaire JW202/visa"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
     "intake_months": [
+      3,
       9
     ],
     "application_fee_cny": 400,
@@ -456,9 +473,10 @@
     "insurance_cny_year": null,
     "other_fees": [
       {
-        "name": "Registration fee",
+        "name": "Frais d'inscription",
         "amount_cny": 400,
-        "notes": "Frais d'inscription uniques"
+        "frequency": "unique",
+        "notes": "Registration fee, payable une seule fois."
       }
     ],
     "housing": {
@@ -466,7 +484,7 @@
         {
           "type": "double",
           "price_cny_year": 2200,
-          "included": "Cuisine commune et laverie"
+          "included": "Cuisine commune et buanderie"
         }
       ],
       "deposit_cny": null,
@@ -476,19 +494,20 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Coût de la vie à Chongqing (centre urbain du sud-ouest de la Chine)."
     }
   },
   "scholarships": [
     {
       "name": "Chongqing Mayor Scholarship",
-      "type": "government",
-      "coverage": "tuition",
+      "type": "municipal",
+      "coverage": "partial",
       "covers": [
-        "tuition"
+        "tuition",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Bourse municipale de Chongqing",
+      "conditions": "Attribuée aux étudiants internationaux méritants par la municipalité de Chongqing.",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -496,13 +515,29 @@
     {
       "name": "CQUT President Scholarship",
       "type": "university",
-      "coverage": "partial",
+      "coverage": "full",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Exonération totale ou partielle des frais de scolarité",
+      "conditions": "Bourse du président de CQUT, exonération totale ou partielle des frais de scolarité.",
       "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chinese Government Scholarship (CSC)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Bourse du gouvernement chinois, éligible via l'ambassade de Chine ou l'université.",
+      "apply_via": "embassy_or_university",
       "deadline": "",
       "renewal": ""
     }
@@ -515,7 +550,7 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an",
+      "duration": "1 année (long terme) ou court terme",
       "leads_to_degree": false
     },
     "foundation": {
@@ -524,28 +559,40 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Formulaire d'admission (Admission Notice)",
+      "Formulaire JW201/JW202 pour visa étudiant",
+      "Relevé de notes officiel"
+    ],
+    "instructions": "Le visa X1 est requis pour les études de plus de 180 jours, X2 pour les séjours courts. Documents nécessaires : passeport, formulaire JW202, lettre d'admission, formulaire de demande de visa, photo, certificat de santé.",
+    "arrival_and_residence_permit": "Après arrivée en Chine, un permis de résidence doit être demandé dans les 30 jours au bureau local de la sécurité publique avec l'aide du bureau international de CQUT."
   },
   "housing_and_services": {
     "housing_types": [
-      "Appartement étudiant à deux lits avec cuisine commune et laverie"
+      "Appartement étudiant deux lits avec cuisine commune et buanderie"
     ],
-    "rules": "",
-    "international_office": "",
-    "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "rules": "Réservation via le bureau international de CQUT; dépôt possible selon disponibilité.",
+    "international_office": "Bureau des affaires internationales (International Office), CQUT, No. 69 Hongguang Avenue, Banan District, Chongqing 400054",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux organisé par le bureau international.",
+    "english_support": true,
+    "clubs": "Associations étudiantes disponibles sur les campus Huaxi, Liangjiang et Yangjiaping."
   },
-  "country_specific": [],
+  "country_specific": [
+    {
+      "region_or_country": "Tous pays",
+      "notes": "CQUT accepte les candidatures internationales sans restriction de nationalité mentionnée."
+    }
+  ],
   "scan_status": "ok",
   "slug": "cqut",
-  "scraped_at": "2026-08-24T14:57:44.526Z",
+  "scraped_at": "2026-08-30T11:08:40.780Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 17,
+  "pages_used": 17,
   "sources": [
     {
       "url": "https://lic.cqut.edu.cn/xygk/xyjj.htm",
@@ -553,44 +600,84 @@
       "chars": 628
     },
     {
-      "url": "https://cqut.admissions.cn/expense",
-      "title": "Expense in Chongqing University of Technology Chongqing University of Technology apply online|admisisons|Chongqing University of Technology",
-      "chars": 1619
-    },
-    {
       "url": "https://en.wikipedia.org/wiki/Chongqing_University_of_Technology",
       "title": "Chongqing University of Technology - Wikipedia",
-      "chars": 7992
+      "chars": 16000
     },
     {
-      "url": "https://cqut.admissions.cn/course",
-      "title": "Study in Chongqing University of Technology ALL ADMISSIONS PROGRAM",
-      "chars": 5069
+      "url": "https://cqut.admissions.cn/expense",
+      "title": "Expense in Chongqing University of Technology Chongqing University of Technology apply online|admisisons|Chongqing University of Technology",
+      "chars": 2121
     },
     {
       "url": "https://cqut.admissions.cn/schoolScholarship",
       "title": "Chongqing University of Technology apply online|admisisons|Chongqing University of Technology",
-      "chars": 972
-    },
-    {
-      "url": "http://www.admissions.cn/",
-      "title": "STUDY IN CHINA Study in China starts here | study in china | admissions.cn",
-      "chars": 10813
-    },
-    {
-      "url": "https://cqut.admissions.cn/resources/school/default/css/default.css",
-      "title": null,
-      "chars": 12000
+      "chars": 1459
     },
     {
       "url": "https://www.admissions.cn/",
       "title": "STUDY IN CHINA Study in China starts here | study in china | admissions.cn",
-      "chars": 10425
+      "chars": 16000
     },
     {
-      "url": "https://cqut.admissions.cn/",
-      "title": "Chongqing University of Technology |Apply Online | Study in china & cqut.admissions.cn",
-      "chars": 2370
+      "url": "https://cqut.admissions.cn/course",
+      "title": "Study in Chongqing University of Technology ALL ADMISSIONS PROGRAM",
+      "chars": 16000
+    },
+    {
+      "url": "https://cqut.admissions.cn/index.html",
+      "title": "STUDY IN CHINA 来华留学联盟",
+      "chars": 16000
+    },
+    {
+      "url": "https://www.admissions.cn/courses/level/Bachelor-Program",
+      "title": "STUDY IN CHINA 来华留学联盟",
+      "chars": 16000
+    },
+    {
+      "url": "https://www.admissions.cn/courses/level/Master-Program",
+      "title": "STUDY IN CHINA 来华留学联盟",
+      "chars": 16000
+    },
+    {
+      "url": "https://ustcsuzhou.admissions.cn/course/degree/Master-Program",
+      "title": "Master-Program Online appliaction|Study in Suzhou Institute for Advanced Research of USTC all program",
+      "chars": 2934
+    },
+    {
+      "url": "https://cqut.admissions.cn/course/degree/Bachelor-Program",
+      "title": "Bachelor-Program Online appliaction|Study in Chongqing University of Technology all program",
+      "chars": 15287
+    },
+    {
+      "url": "https://hitsz.admissions.cn/course/view/27344-Architecture%20(Master%20of%20Science)",
+      "title": "Architecture (Master of Science) apply online|admisisons|Harbin Institute of Technology, Shenzhen",
+      "chars": 3329
+    },
+    {
+      "url": "https://cqut.admissions.cn/course/degree/Master-Program",
+      "title": "Master-Program Online appliaction|Study in Chongqing University of Technology all program",
+      "chars": 9613
+    },
+    {
+      "url": "https://cqut.admissions.cn/news/395939.shtml",
+      "title": "Four year Full scholarship for undergraduate degree in Changzhou University in Jiangsu province_Study In China",
+      "chars": 4488
+    },
+    {
+      "url": "https://www.admissions.cn/courses/level/Doctor-Program",
+      "title": "STUDY IN CHINA 来华留学联盟",
+      "chars": 16000
+    },
+    {
+      "url": "https://www.admissions.cn/hsk/",
+      "title": "Chinese Course -- Study, Stay, Succeed in China",
+      "chars": 2303
+    },
+    {
+      "url": "https://www.admissions.cn/courses/search?keyword=ChineseLanguage%20and%20Literature(International%20Business)",
+      "title": "Search Keyword:ChineseLanguage and Literature(International Business) Program STUDY IN CHINA|Admissions| Apply Online",
+      "chars": 4762
     }
   ],
   "db_row": {
@@ -601,14 +688,11 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "Office of International Cooperation and Exchanges (国际合作与交流处)",
-    "emails": [
-      "lic@cqut.edu.cn",
-      "admissions@cqut.edu.cn"
-    ],
+    "department": "Office of International Cooperation and Exchange (lic.cqut.edu.cn)",
+    "emails": [],
     "phone": null,
-    "wechat": null,
-    "website": "https://lic.cqut.edu.cn",
+    "wechat": "kfc965a6f8f1e2c89f5",
+    "website": "https://cqut.admissions.cn/",
     "majors": [
       "engineering",
       "computer_science",
@@ -616,19 +700,25 @@
       "business",
       "economics",
       "finance",
-      "pharmacy",
-      "chinese_language",
       "design",
-      "arts"
+      "chinese_language"
     ],
-    "required_documents": [],
-    "scholarship_amount": "Chongqing Mayor Scholarship / CQUT President Scholarship",
+    "required_documents": [
+      "passport",
+      "diplome_etudes_secondaires",
+      "diplome_licence",
+      "releves_notes",
+      "photo_identite",
+      "formulaire_demande",
+      "attestation_assurance"
+    ],
+    "scholarship_amount": "Chongqing Mayor Scholarship / CQUT President Scholarship / Chinese Government Scholarship (CSC)",
     "scholarship_min": 12000,
     "scholarship_max": 20000,
     "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "language_requirements": "HSK 4+",
     "tuition_min": 12000,
     "tuition_max": 20000,
-    "application_deadline": "Juin-Juillet pour rentrée septembre"
+    "application_deadline": "Juin/juillet pour rentrée septembre"
   }
 }

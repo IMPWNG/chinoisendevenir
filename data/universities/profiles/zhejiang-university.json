@@ -6,22 +6,28 @@
     "aliases": [
       "ZJU"
     ],
-    "website": "https://www.zju.edu.cn",
-    "international_website": "https://iczu.zju.edu.cn",
+    "website": "https://www.zju.edu.cn/",
+    "international_website": "https://iczu.zju.edu.cn/",
     "application_portal_url": "https://intlstudent.zju.edu.cn/"
   },
   "general": {
-    "presentation": "Université de premier plan en Chine, membre du projet 985 et du Double First-Class. Offre des programmes de licence, master et doctorat en chinois et en anglais aux étudiants internationaux.",
-    "history": "Fondée en 1897, l'une des universités les plus anciennes et prestigieuses de Chine.",
+    "presentation": "Université de recherche de premier plan (Projet 985/211/Double First-Class), membre du C9. Large éventail de programmes en chinois et anglais, bourses gouvernementales et provinciales, campus internationaux (紫金港, 海宁国际联合学院, 一带一路国际医学院).",
+    "history": "Fondée en 1897 (前身求是书院). Devenue l'une des universités les plus prestigieuses de Chine.",
     "rankings": [
-      "Classée parmi les meilleures universités de Chine (985, Double First-Class)"
+      "QS Top 50 mondial",
+      "ARWU Top 100",
+      "Projet Double First-Class",
+      "C9 League"
     ],
     "strengths": [
-      "Médecine clinique (MBBS en anglais)",
-      "Sciences et technologies",
-      "Ingénierie",
-      "Commerce et gestion",
-      "Études chinoises (MCS)"
+      "ingénierie",
+      "informatique",
+      "médecine (MBBS)",
+      "sciences",
+      "agriculture",
+      "économie et gestion",
+      "mathématiques",
+      "éducation"
     ],
     "teaching_languages": [
       "zh",
@@ -34,48 +40,43 @@
     },
     "cost_of_living_cny_month": {
       "min": 2500,
-      "max": 4000,
-      "notes": "Estimation pour Hangzhou"
+      "max": 4500,
+      "notes": "Estimation vie étudiante à Hangzhou (logement + nourriture + transport)"
     },
     "campuses": [
       {
         "name": "Zijingang (紫金港)",
         "city": "Hangzhou",
-        "description": "Campus principal, siège du Collège international"
+        "description": "Campus principal, siège du Collège international d'éducation"
       },
       {
-        "name": "Haining International Campus",
+        "name": "Haining International Campus (海宁国际联合学院)",
         "city": "Haining",
-        "description": "Campus international avec ZJU-UoE et ZJU-UIUC"
+        "description": "Campus international ZJU-UoE et ZJU-ZIBS"
       },
       {
-        "name": "Yiwu",
-        "city": "Yiwu",
-        "description": "ZJU-ISM International Medical School"
-      },
-      {
-        "name": "Ningbo",
-        "city": "Ningbo",
-        "description": "Centre d'innovation scientifique et technologique"
+        "name": "ZJU-ISM 一带一路国际医学院",
+        "city": "Hangzhou",
+        "description": "Institut international de médecine MBBS en anglais"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Chinese Language (汉语言专业)",
-      "field": "chinese_language",
+      "name": "Programmes de licence (本科生)",
+      "field": "other",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Frais: 19 800-29 800 CNY/an selon filière. Frais de dossier: 800 CNY."
     },
     {
       "level": "bachelor",
-      "name": "MBBS - Clinical Medicine (English-taught)",
+      "name": "MBBS Clinical Medicine (English-taught)",
       "field": "medicine",
       "language": "en",
       "duration_years": 6,
@@ -83,47 +84,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme phare en anglais, éligible bourse ZJU-ISM"
-    },
-    {
-      "level": "bachelor",
-      "name": "ZJU-UoE Dual Degree Programme (English-taught)",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Zhejiang University-University of Edinburgh"
-    },
-    {
-      "level": "bachelor",
-      "name": "Global Communication and Management",
-      "field": "business",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
+      "notes": "42 800 CNY/an. Programme phare ZJU-ISM."
     },
     {
       "level": "master",
-      "name": "Master of China Studies (MCS)",
-      "field": "arts",
-      "language": "en",
+      "name": "Programmes de master (硕士研究生)",
+      "field": "other",
+      "language": "zh",
       "duration_years": 2,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Frais: 22 800-32 800 CNY/an. Anglais: +8 000 CNY."
     },
     {
       "level": "master",
-      "name": "China Economics (English-taught)",
+      "name": "Master of China Studies (MCS)",
+      "field": "other",
+      "language": "en",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme en anglais, éligible bourse d'excellence CSC."
+    },
+    {
+      "level": "master",
+      "name": "Chinese Economy Master Program",
       "field": "economics",
       "language": "en",
       "duration_years": 2,
@@ -131,59 +120,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Mode 1+1: 1 an à ZJU + 1 an rédaction thèse."
     },
     {
       "level": "master",
-      "name": "Management Science and Engineering / Business Analytics (English-taught)",
-      "field": "business",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Global MBA (English-taught)",
-      "field": "business",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Industrial Design Engineering IDE (English-taught)",
-      "field": "design",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "iMBA / iMF / iMDS / iMFA (English-taught)",
-      "field": "business",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "International Business School, Haining"
-    },
-    {
-      "level": "master",
-      "name": "Electrical Engineering (English-taught)",
+      "name": "Energy & Power \"Belt and Road\" International Master",
       "field": "engineering",
       "language": "en",
       "duration_years": 2,
@@ -191,23 +132,23 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Mode 1+1, anglais."
     },
     {
       "level": "phd",
-      "name": "Global Communication (English-taught)",
-      "field": "arts",
-      "language": "en",
+      "name": "Programmes de doctorat (博士研究生)",
+      "field": "other",
+      "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Frais: 29 800-39 800 CNY/an."
     },
     {
       "level": "language",
-      "name": "Chinese Language and Culture Program (汉语言进修生)",
+      "name": "Programme de langue chinoise (汉语言进修生)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
@@ -216,75 +157,103 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Long terme 18 000 CNY/an ou 9 000 CNY/semestre; court terme 800 CNY/semaine"
+      "notes": "Long terme 18 000 CNY/an ou 9 000/semestre; court terme 800/semaine. Frais dossier 400 CNY."
+    },
+    {
+      "level": "exchange",
+      "name": "Étudiants d'échange / visiteurs (交流生/进修生)",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": null,
+      "start_months": [
+        2,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inscription via portail ZJU."
+    },
+    {
+      "level": "language",
+      "name": "Programme court terme (短期项目)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        6,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "800 CNY/semaine."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (high school), équivalent au gaokao chinois ou supérieur",
+      "academic": "Diplôme de fin d'études secondaires (lycée), non citoyen chinois, pas de double nationalité sino-étrangère.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Programme préparatoire de chinois (汉语言进修生)",
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire en langue chinoise (汉语言进修生) possible.",
       "other": [
-        "Frais de dossier: 800 CNY",
-        "Documents requis via système en ligne intlstudent.zju.edu.cn"
+        "examen d'entrée ou évaluation du dossier",
+        "entretien vidéo possible"
       ]
     },
     "master": {
-      "academic": "Licence (bachelor degree) ou équivalent reconnu",
+      "academic": "Diplôme de licence (bac+4) ou équivalent, non citoyen chinois. Excellents résultats académiques.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 45,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 6,
-      "toefl_min": 80,
-      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible",
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible.",
       "other": [
-        "Frais de dossier: 800 CNY",
-        "Programmes en anglais disponibles (IELTS/TOEFL requis)",
-        "Lettre de recommandation"
+        "lettre de recommandation",
+        "recherche antérieure ou expérience professionnelle",
+        "entretien vidéo",
+        "certificat médical",
+        "casier judiciaire (si bourse)"
       ]
     },
     "phd": {
-      "academic": "Master (master degree) ou équivalent reconnu",
+      "academic": "Diplôme de master ou équivalent, non citoyen chinois. Capacités de recherche.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 6,
-      "toefl_min": 80,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Frais de dossier: 800 CNY",
-        "Plan de recherche",
-        "Lettres de recommandation",
-        "Accord avec superviseur"
+        "lettre de recommandation",
+        "projet de recherche",
+        "accord superviseur",
+        "casier judiciaire (si bourse)",
+        "certificat médical"
       ]
     },
     "language": {
-      "academic": "Diplôme d'études secondaires",
-      "age_max": 35,
+      "academic": "Niveau lycée minimum, non citoyen chinois.",
+      "age_max": null,
       "other": [
-        "18-35 ans (45 ans pour enseignants en exercice)",
-        "Bourse International Chinese Teacher Scholarship: HSK4 180, HSKK intermédiaire 60 pour programme 1 an; HSK3 180 + HSKK pour 1 semestre",
-        "Frais de dossier: 400 CNY"
+        "examen HSK ou test interne ZJU"
       ]
     }
   },
   "contacts": {
     "office_name": "International College, Zhejiang University (浙江大学国际教育学院)",
-    "iso_email": "admission3@zju.edu.cn",
-    "admissions_email": "admission3@zju.edu.cn",
-    "wechat": "Study at ZJU (留学浙大)",
-    "phone": "+86 571 87953089",
-    "address": "International College Zhejiang University, West District of Zijingang Campus, 866 Yuhangtang Road, Hangzhou, Zhejiang 310058, China"
+    "iso_email": "admission@zju.edu.cn",
+    "admissions_email": "admission2@zju.edu.cn",
+    "wechat": "留学浙大 (liuxuezju)",
+    "phone": "+86 571 87951456 (bachelor) | +86 571 87951537 (master/PhD)",
+    "address": "Bureau 416/418, Collège international d'éducation, Campus Zijingang Ouest, 866 Yuhangtang Road, Hangzhou, Zhejiang 310058, Chine"
   },
   "matching": {
     "fields": [
@@ -295,6 +264,7 @@
       "engineering",
       "sciences",
       "medicine",
+      "dentistry",
       "pharmacy",
       "chinese_language",
       "arts",
@@ -310,6 +280,7 @@
       "master",
       "phd",
       "language",
+      "foundation",
       "exchange"
     ],
     "languages": [
@@ -319,73 +290,104 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 60,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
     "age_max_bachelor": null,
-    "age_max_master": null,
+    "age_max_master": 45,
     "age_max_phd": null,
-    "age_max_language": 35,
     "has_csc": true,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
     "tuition_cny_min": 19800,
     "tuition_cny_max": 42800,
     "housing_cny_year_min": null,
-    "deadline_typical": "15 mai pour rentrée septembre (CSC)",
+    "deadline_typical": "2026-02-28 (bachelor/master/PhD); 2026-05-31 (chinois)",
     "intake_months": [
+      2,
       3,
       9
     ],
     "city": "Hangzhou",
     "province": "Zhejiang",
     "tags": [
-      "985",
-      "Double First-Class",
       "C9",
-      "Université de premier plan",
-      "Programmes en anglais",
-      "MBBS",
-      "MBBS-anglais",
-      "Doubles diplômes ZJU-UoE"
+      "985",
+      "211",
+      "Double First-Class",
+      "QS Top 50",
+      "campus international Haining",
+      "MBBS anglais",
+      "CSC Type A & B",
+      "bourse Zhejiang"
     ]
   },
-  "confidence": 0.78,
+  "confidence": 0.75,
   "missing_fields": [
-    "Frais de logement précis (CNY/an)",
-    "Plafonds d'âge spécifiques pour licence/master/PhD (non confirmés dans les sources)",
-    "Exigences GPA précises",
-    "Classements QS/Shanghai précis",
-    "Historique détaillé",
-    "Présentation complète en français"
+    "GPA minimum exact",
+    "scores HSK/IELTS/TOEFL seuils précis",
+    "frais de logement précis par an",
+    "âge max bachelor et PhD"
   ],
-  "notes": "Sources principalement issues du portail d'admissions internationales (iczu.zju.edu.cn) et du Collège international. Frais de scolarité 2024-2025 confirmés pour toutes les catégories (Arts, Sciences/Ingénierie, Médecine, MBBS anglais). Programmes en anglais confirmés en licence (MBBS, ZJU-UoE), master (MCS, MBA, IDE, etc.) et doctorat (Global Communication). Date limite typique 15 mai pour bourse du gouvernement chinois rentrée septembre. Des sources supplémentaires seraient nécessaires pour confirmer les seuils IELTS/TOEFL par programme et les plafonds d'âge par niveau.",
+  "notes": "Données 2026 (admissions, bourses, frais). Frais pour MBBS anglais: 42 800 CNY/an; +8 000 CNY/an pour tout programme研究生/进修 en anglais. Bourse provinciale Zhejiang: 20 000 CNY/an (bachelor) ou 30 000 CNY/an (master/PhD). Bourse d'excellence CSC: 3 programmes ciblés (China Studies, Chinese Economy, Energy & Power). Contact principal: admission2@zju.edu.cn (undergrad), admissionmaster@zju.edu.cn, admissionphd@zju.edu.cn. Date limite générale bourses provinciales: 28/02/2026.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "candidat",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Scan de la page photo, validité jusqu'au 1er mars 2027 minimum (bourse professeur de chinois)"
+      "notes": "Passeport valide requis pour tous les candidats"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplômes et relevés de notes requis selon le niveau"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Examen médical (modèle Foreigner Physical Examination Form) requis pour bourses CSC"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Certificat de non-condamnation (validité 6 mois) requis pour bourses provinciales et CSC"
     }
   ],
   "application": {
-    "platform_name": "Système de candidature étudiants internationaux ZJU",
-    "platform_url": "https://intlstudent.zju.edu.cn/#/login",
+    "platform_name": "ZJU International Student Application System",
+    "platform_url": "https://intlstudent.zju.edu.cn/",
     "steps": [
-      "Lire le guide de candidature",
-      "Créer un compte sur la plateforme",
-      "Remplir le formulaire en ligne",
-      "Téléverser les pièces justificatives",
-      "Payer les frais de candidature en ligne ou par virement",
-      "Suivre l'état de la candidature"
+      "Créer un compte sur le portail intlstudent.zju.edu.cn",
+      "Remplir le formulaire de demande en ligne",
+      "Téléverser les documents requis (passeport, diplômes, relevés, lettre de motivation, etc.)",
+      "Payer les frais de dossier en ligne ou par virement bancaire",
+      "Soumettre la candidature et suivre le statut via le portail"
     ],
     "opens_at": "",
-    "deadline": "",
-    "results_at": "",
+    "deadline": "Variable selon le programme; bourses provinciales: 28 février 2026; bourses CSC Excellence: 28 février 2026",
+    "results_at": "Juillet 2026 (vérifier via le portail)",
     "intake_months": [
       9
     ],
@@ -419,26 +421,9 @@
     "insurance_cny_year": null,
     "other_fees": [
       {
-        "name": "frais_dossier",
-        "amount_cny": 400,
-        "applies_to": "language"
-      },
-      {
-        "name": "frais_dossier",
-        "amount_cny": 800,
-        "applies_to": "degree"
-      },
-      {
-        "name": "frais_manuel",
-        "amount_cny": null,
-        "applies_to": "all",
-        "notes": "facturation au réel"
-      },
-      {
-        "name": "cours_court_chinois",
-        "amount_cny": 800,
-        "applies_to": "language",
-        "notes": "par semaine"
+        "name": "Frais de manuels",
+        "amount_cny": "À la charge réelle",
+        "notes": "按实收取"
       }
     ],
     "housing": {
@@ -450,101 +435,143 @@
         }
       ],
       "deposit_cny": null,
-      "off_campus_allowed": null
+      "off_campus_allowed": true
     },
     "living_cost_cny_month": {
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Coût de la vie à Hangzhou; bourses CSC couvrent l'hébergement et la subsistance"
     }
   },
   "scholarships": [
     {
-      "name": "Bourse du gouvernement chinois type A",
+      "name": "Chinese Government Scholarship Type A (中国政府奖学金A类)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "living",
+        "housing",
+        "stipend",
         "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "Postuler via ambassade ou agence CSC",
+      "conditions": "Candidats selon accords bilatéraux; postuler via ambassade ou CSC",
       "apply_via": "csc",
-      "deadline": "",
-      "renewal": ""
+      "deadline": "Variable selon le programme",
+      "renewal": "Renouvelable selon performance"
     },
     {
-      "name": "Bourse du gouvernement chinois type B",
+      "name": "Chinese Government Scholarship Type B (中国政府奖学金B类)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "living",
+        "housing",
+        "stipend",
         "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "Postuler via l'université",
+      "conditions": "Programmes de master/doctorat spécifiques",
       "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
+      "deadline": "Variable",
+      "renewal": "Renouvelable"
     },
     {
-      "name": "Bourse du gouvernement du Zhejiang",
+      "name": "Chinese Government Excellence Scholarship (中国政府来华留学卓越奖学金)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Âge ≤45 ans; bac+ minimum; 3+ ans d'expérience; profils: fonctionnaires, cadres, chercheurs; programmes: Énergie, China Studies, Économie chinoise",
+      "apply_via": "university",
+      "deadline": "2026-02-28",
+      "renewal": "Selon règlement CSC"
+    },
+    {
+      "name": "Zhejiang Provincial Government Scholarship - Bachelor (浙江省政府来华留学生奖学金)",
       "type": "provincial",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Nouveaux étudiants internationaux degré bachelor/master/PhD",
+      "conditions": "20 000 CNY/an; programmes en chinois; durée 1 an; non cumulable",
       "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
+      "deadline": "2026-02-28 (2026-05-31 pour filière langue chinoise)",
+      "renewal": "Renouvelable si excellents résultats"
     },
     {
-      "name": "Bourse ZJU-ISM MBBS",
+      "name": "Zhejiang Provincial Government Scholarship - Graduate (浙江省政府来华留学生奖学金)",
+      "type": "provincial",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "30 000 CNY/an; durée 1 an; non cumulable",
+      "apply_via": "university",
+      "deadline": "2026-02-28",
+      "renewal": "Renouvelable si excellents résultats"
+    },
+    {
+      "name": "ZJU-ISM MBBS Scholarship (一带一路国际医学院MBBS奖学金)",
       "type": "university",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Programme MBBS anglais, nouveaux inscrits",
+      "conditions": "Programme MBBS en anglais",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Bourse ZJU-UoE Joint Institute",
+      "name": "ZJU-UoE Joint Institute Scholarship (ZJE双学位奖学金)",
       "type": "university",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Programme double diplôme anglais",
+      "conditions": "Programmes conjoints ZJU-Edinburgh en anglais",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "Bourse professeur de chinois international",
-      "type": "other",
+      "name": "ZIBS Global Communication & Management Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme ZIBS en anglais",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "New Sinology Doctoral Program (新汉学计划博士生项目)",
+      "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "living",
+        "housing",
+        "stipend",
         "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "HSK4 180 + HSKK intermédiaire 60 (1 an) ou HSK3 180 (1 semestre); 18-35 ans (45 pour enseignants en poste)",
-      "apply_via": "cis.chinese.cn",
-      "deadline": "2026-05-15",
+      "conditions": "Doctorat en sinologie",
+      "apply_via": "csc",
+      "deadline": "",
       "renewal": ""
     }
   ],
@@ -556,7 +583,7 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an ou 1 semestre",
+      "duration": "1 an (long terme) ou courte durée",
       "leads_to_degree": false
     },
     "foundation": {
@@ -570,95 +597,101 @@
       "X2"
     ],
     "documents_from_university": [
-      "admission_letter",
-      "JW202"
+      "Admission Notice",
+      "JW202 Form",
+      "Visa Application Form"
     ],
-    "instructions": "Demander un visa X1 (long terme >180j) ou X2 (court terme) à l'ambassade de Chine avec lettre d'admission et formulaire JW202",
-    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours après arrivée auprès du bureau de sortie-entrées"
+    "instructions": "L'université émet les documents nécessaires après admission; les étudiants doivent demander un visa X (X1 pour >180 jours, X2 pour <180 jours) à l'ambassade de Chine",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours suivant l'arrivée auprès du bureau de l'immigration du campus"
   },
   "housing_and_services": {
     "housing_types": [
-      "on_campus",
-      "off_campus"
+      "Résidences sur campus (紫金港校区)",
+      "Logement hors campus autorisé"
     ],
-    "rules": "Réservation en ligne pour étudiants internationaux; consulter l'avis annuel",
-    "international_office": "Bureau international, Collège international ZJU, campus Zijingang Ouest, 866 Yuhangtang Road, Hangzhou",
-    "orientation": "Programme Nouvel Étudiant 101 disponible",
+    "rules": "Réservation en ligne pour nouveaux étudiants 2026 (WeChat officiel); dépôt possible",
+    "international_office": "International Education College, West Zone, Zijingang Campus, 866 Yuhangtang Road, Hangzhou; admission2@zju.edu.cn (bachelor), admissionmaster@zju.edu.cn (master), admissionphd@zju.edu.cn (PhD); +86 571 87951456 / 87951537",
+    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux chaque semestre",
     "english_support": true,
-    "clubs": "Programmes Culture+, Compass+, Career+, ISAG, Zhiyuan"
+    "clubs": "Clubs étudiants internationaux, activités culturelles, programmes Culture+, excursions"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Tous",
+      "notes": "Conditions générales pour étudiants non-chinois; vérifier éligibilité selon nationalité et accords bilatéraux"
     }
   ],
   "scan_status": "ok",
   "slug": "zhejiang-university",
-  "scraped_at": "2026-08-24T14:42:26.789Z",
+  "scraped_at": "2026-08-30T11:14:35.579Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 13,
+  "pages_used": 13,
   "sources": [
     {
-      "url": "http://iczu.zju.edu.cn/admissions/",
+      "url": "https://iczu.zju.edu.cn/admissions/",
       "title": "浙江大学国际学生招生网",
-      "chars": 537
+      "chars": 5118
     },
     {
-      "url": "http://iczu.zju.edu.cn/",
+      "url": "https://iczu.zju.edu.cn/",
       "title": "浙江大学国际教育学院",
-      "chars": 1909
+      "chars": 9987
     },
     {
       "url": "https://iczu.zju.edu.cn/admissionsen/",
       "title": "International Admissions Of Zhejiang University",
-      "chars": 1168
+      "chars": 5931
     },
     {
-      "url": "https://iczu.zju.edu.cn/iczuen/",
-      "title": "International College of Zhejiang University",
-      "chars": 4043
+      "url": "https://iczu.zju.edu.cn/admissions/2025/0918/c68434a3082877/page.htm",
+      "title": "浙江大学国际学生招生宣传片",
+      "chars": 1926
     },
     {
       "url": "https://iczu.zju.edu.cn/admissions/sqzn/list.htm",
       "title": "本科生",
-      "chars": 326
+      "chars": 2992
     },
     {
       "url": "https://iczu.zju.edu.cn/admissions/jxjjz/list.htm",
       "title": "国际本科生奖学金",
-      "chars": 682
+      "chars": 3306
     },
     {
       "url": "https://iczu.zju.edu.cn/admissions/fyhyxzh/list.htm",
       "title": "费用和银行账户",
-      "chars": 1116
+      "chars": 3322
     },
     {
-      "url": "https://iczu.zju.edu.cn/admissions/main.htm",
-      "title": "浙江大学国际学生招生网",
-      "chars": 537
+      "url": "https://iczu.zju.edu.cn/admissions/2022/0530/c68875a2568326/page.htm",
+      "title": "浙江省政府来华留学生（国际本科生新生）奖学金",
+      "chars": 3127
     },
     {
-      "url": "https://iczu.zju.edu.cn/admissions/xywxw/list.htm",
-      "title": "人文学部",
-      "chars": 1267
+      "url": "https://iczu.zju.edu.cn/admissions/2022/1020/c68876a2649678/page.htm",
+      "title": "浙江省政府来华留学生（国际研究生新生）奖学金",
+      "chars": 3262
     },
     {
-      "url": "https://iczu.zju.edu.cn/admissions/tsxm/list.htm",
-      "title": "本科生",
-      "chars": 545
+      "url": "https://iczu.zju.edu.cn/admissions/2024/1031/c68877a2982220/page.htm",
+      "title": "浙江省政府来华留学生（国际研究生新生）奖学金",
+      "chars": 3262
     },
     {
-      "url": "https://iczu.zju.edu.cn/admissions/tzgg/list.htm",
-      "title": "通知公告",
-      "chars": 983
+      "url": "https://iczu.zju.edu.cn/admissions/2023/0118/c68876a2711456/page.htm",
+      "title": "中国政府来华留学卓越奖学金",
+      "chars": 4139
     },
     {
-      "url": "https://iczu.zju.edu.cn/gjzwjsjxj/list.htm",
-      "title": "国际中文教师奖学金",
-      "chars": 2681
+      "url": "https://iczu.zju.edu.cn/admissions/2022/1118/c68875a2680881/page.htm",
+      "title": "浙江大学\"一带一路”国际医学院MBBS项目（英语授课）新生奖学金",
+      "chars": 3730
+    },
+    {
+      "url": "https://iczu.zju.edu.cn/admissions/2022/0530/c68877a2568295/page.htm",
+      "title": "浙江大学“一带一路”国际医学院奖学金",
+      "chars": 5665
     }
   ],
   "db_row": {
@@ -671,12 +704,12 @@
     "country": "Chine",
     "department": "International College, Zhejiang University (浙江大学国际教育学院)",
     "emails": [
-      "admission3@zju.edu.cn",
-      "admission3@zju.edu.cn"
+      "admission@zju.edu.cn",
+      "admission2@zju.edu.cn"
     ],
-    "phone": "+86 571 87953089",
-    "wechat": "Study at ZJU (留学浙大)",
-    "website": "https://iczu.zju.edu.cn",
+    "phone": "+86 571 87951456 (bachelor) | +86 571 87951537 (master/PhD)",
+    "wechat": "留学浙大 (liuxuezju)",
+    "website": "https://iczu.zju.edu.cn/",
     "majors": [
       "business",
       "economics",
@@ -685,6 +718,7 @@
       "engineering",
       "sciences",
       "medicine",
+      "dentistry",
       "pharmacy",
       "chinese_language",
       "arts",
@@ -696,15 +730,18 @@
       "other"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "diploma",
+      "physical_examination",
+      "no_criminal_record"
     ],
-    "scholarship_amount": "Bourse du gouvernement chinois type A / Bourse du gouvernement chinois type B / Bourse du gouvernement du Zhejiang / Bourse ZJU-ISM MBBS / Bourse ZJU-UoE Joint Institute / Bourse professeur de chinois international",
+    "scholarship_amount": "Chinese Government Scholarship Type A (中国政府奖学金A类) / Chinese Government Scholarship Type B (中国政府奖学金B类) / Chinese Government Excellence Scholarship (中国政府来华留学卓越奖学金) / Zhejiang Provincial Government Scholarship - Bachelor (浙江省政府来华留学生奖学金) / Zhejiang Provincial Government Scholarship - Graduate (浙江省政府来华留学生奖学金) / ZJU-ISM MBBS Scholarship (一带一路国际医学院MBBS奖学金) / ZJU-UoE Joint Institute Scholarship (ZJE双学位奖学金) / ZIBS Global Communication & Management Scholarship / New Sinology Doctoral Program (新汉学计划博士生项目)",
     "scholarship_min": 19800,
     "scholarship_max": 42800,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
+    "min_hsk_level": null,
+    "language_requirements": null,
     "tuition_min": 19800,
     "tuition_max": 42800,
-    "application_deadline": "15 mai pour rentrée septembre (CSC)"
+    "application_deadline": "2026-02-28 (bachelor/master/PhD); 2026-05-31 (chinois)"
   }
 }

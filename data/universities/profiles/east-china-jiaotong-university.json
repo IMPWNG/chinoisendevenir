@@ -4,28 +4,26 @@
     "name_zh": "华东交通大学",
     "name_fr": "Université Jiaotong de Chine de l'Est",
     "aliases": [
-      "ECJTU",
-      "华东交大"
+      "ECJTU"
     ],
     "website": "http://www.ecjtu.edu.cn",
     "international_website": "https://hjlx.ecjtu.edu.cn",
     "application_portal_url": "http://ecjtu.at0086.cn/student"
   },
   "general": {
-    "presentation": "Université multidisciplinaire de type enseignement-recherche, spécialisée dans le transport avec un cœur ferroviaire. Disciplines: ingénierie, économie, gestion, littérature, droit, éducation, art, sciences. 18 écoles, 4 doctorats de 1er rang, 19 masters de 1er rang, 63 licences. Plus de 23 500 étudiants, 1 930 personnels dont 530+ professeurs.",
-    "history": "Fondée en 1971, située à Nanchang (Jiangxi), ville historique surnommée « Ville des Héros ».",
+    "presentation": "Université multidisciplinaire orientée recherche et enseignement, spécialisée dans le transport avec focus sur le ferroviaire (notamment haute vitesse et métro). 8 disciplines: ingénierie, économie, gestion, littérature, sciences, droit, éducation, arts. Plus de 30 000 étudiants, 2 000+ personnels dont 1 600 enseignants et 650+ professeurs/maîtres de conférences. Partenariats avec plus de 100 universités dans une dizaine de pays (Royaume-Uni, Russie, États-Unis, Allemagne, Japon, Australie, Nouvelle-Zélande, Malaisie, Thaïlande). Aligné sur l'initiative Belt and Road.",
+    "history": "Fondée en 1971, située à Nanchang, province du Jiangxi. Dispose de 4 programmes doctoraux de premier rang et 19 programmes de master de premier rang.",
     "rankings": [],
     "strengths": [
-      "Transport et ferroviaire",
-      "Ingénierie civile",
-      "Génie mécanique",
-      "Génie électrique",
-      "Contrôle et ingénierie",
-      "Logistique"
+      "Transport et ferroviaire (caractéristique principale)",
+      "Cœur ferroviaire (轨道为核心)",
+      "Bourses provinciales du Jiangxi",
+      "Frais de scolarité bas",
+      "Ville de Nanchang (Hero City) avec faible coût de la vie"
     ],
     "teaching_languages": [
-      "zh",
-      "en"
+      "en",
+      "zh"
     ],
     "location": {
       "city": "Nanchang",
@@ -35,152 +33,104 @@
     "cost_of_living_cny_month": {
       "min": 1500,
       "max": 2500,
-      "notes": "Nanchang: coût de la vie inférieur aux grandes villes chinoises."
+      "notes": "Coût de la vie faible comparé aux autres villes chinoises selon l'université. Estimation basée sur le contexte Nanchang/Jiangxi."
     },
     "campuses": [
       {
         "name": "Campus principal",
         "city": "Nanchang",
-        "description": "2 820 mu, 810 000 m² bâtis, entre montagnes et rivières, à 5 min du métro et 20 min de l'aéroport."
+        "description": "808 East Shuanggang Street, Economic and Technological Development Zone. Cadre montagneux avec bâtiments élégants, installations sportives de premier ordre, métro à 5 min, aéroport à 20 min."
       }
     ]
   },
   "programs": [
     {
-      "level": "bachelor",
-      "name": "Civil Engineering",
+      "level": "phd",
+      "name": "Civil Engineering (土木工程)",
       "field": "engineering",
       "language": "en",
-      "duration_years": 4,
+      "duration_years": 5,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "16 000 CNY/an. Bourse 10 000 CNY 1ère-2ème année pour la classe personnalisée."
+      "notes": "English-taught. Full tuition waiver."
     },
     {
-      "level": "bachelor",
-      "name": "Electrical Engineering and Automation",
+      "level": "phd",
+      "name": "Control Science and Engineering (控制科学与工程)",
       "field": "engineering",
       "language": "en",
-      "duration_years": 4,
+      "duration_years": 5,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "16 000 CNY/an. Bourse 10 000 CNY 1ère-2ème année."
+      "notes": "English-taught. Full tuition waiver."
     },
     {
-      "level": "bachelor",
-      "name": "Transportation Engineering",
+      "level": "phd",
+      "name": "Transportation Engineering - Logistics System Optimization (交通运输工程)",
       "field": "engineering",
       "language": "en",
-      "duration_years": 4,
+      "duration_years": 5,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "16 000 CNY/an. Bourse 10 000 CNY 1ère-2ème année."
+      "notes": "English-taught. Full tuition waiver."
     },
     {
-      "level": "bachelor",
-      "name": "Vehicle Engineering",
+      "level": "phd",
+      "name": "Mechanical Engineering (机械工程)",
       "field": "engineering",
       "language": "en",
-      "duration_years": 4,
+      "duration_years": 5,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "15 400 CNY/an (sciences)."
+      "notes": "English-taught. Full tuition waiver."
     },
     {
-      "level": "bachelor",
-      "name": "Mechanical Design, Manufacture and Automation",
+      "level": "phd",
+      "name": "Electronic Information (电子信息)",
       "field": "engineering",
       "language": "en",
-      "duration_years": 4,
+      "duration_years": 5,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "15 400 CNY/an (sciences)."
-    },
-    {
-      "level": "bachelor",
-      "name": "International Trade",
-      "field": "business",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "16 000 CNY/an. Bourse 10 000 CNY 1ère-2ème année."
-    },
-    {
-      "level": "bachelor",
-      "name": "Accounting",
-      "field": "business",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "14 000 CNY/an (lettres)."
-    },
-    {
-      "level": "bachelor",
-      "name": "Chinese Language and Literature",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "16 000 CNY/an."
+      "notes": "English-taught. Full tuition waiver."
     },
     {
       "level": "master",
-      "name": "Control Science and Engineering",
-      "field": "engineering",
+      "name": "Business Administration (工商管理)",
+      "field": "business",
       "language": "en",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "17 600 CNY/an (sciences)."
+      "notes": "English-taught. Tuition 16 000 CNY/an."
     },
     {
       "level": "master",
-      "name": "MBA",
-      "field": "business",
+      "name": "International Chinese Language Education (国际中文教育)",
+      "field": "education",
       "language": "en",
-      "duration_years": 2.5,
+      "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "16 000 CNY/an."
+      "notes": "English-taught. HSK 4 requis. Tuition 16 000 CNY/an."
     },
     {
-      "level": "master",
-      "name": "Master of Finance",
-      "field": "finance",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "16 000 CNY/an."
-    },
-    {
-      "level": "phd",
-      "name": "Civil Engineering",
+      "level": "bachelor",
+      "name": "Civil Engineering (土木工程)",
       "field": "engineering",
       "language": "en",
       "duration_years": 4,
@@ -188,12 +138,60 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Exonération totale des frais de scolarité (Full Tuition Waiver)."
+      "notes": "English-taught. Tuition 16 000 CNY/an."
+    },
+    {
+      "level": "bachelor",
+      "name": "Electrical Engineering and Automation (电气工程及其自动化)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "English-taught. Tuition 16 000 CNY/an."
+    },
+    {
+      "level": "bachelor",
+      "name": "Transportation Engineering (交通运输)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "English-taught. Tuition 16 000 CNY/an."
+    },
+    {
+      "level": "bachelor",
+      "name": "International Trade (国际经济与贸易)",
+      "field": "business",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "English-taught. Tuition 16 000 CNY/an."
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language and Literature (汉语言文学)",
+      "field": "chinese_language",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "English-taught. HSK 4 requis. Tuition 16 000 CNY/an."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires + relevés de notes. Passeport étranger valide depuis au moins 4 ans avec résidence effective à l'étranger > 2 ans sur les 4 dernières années (au 30 avril).",
+      "academic": "Diplôme d'études secondaires (high school) avec relevés de notes. Conditions équivalentes pour candidats internationaux.",
       "min_gpa": null,
       "age_max": 25,
       "age_min": null,
@@ -203,15 +201,16 @@
       "toefl_min": 80,
       "preparatory_if_insufficient": null,
       "other": [
-        "Preuve de capacité économique: certificat bancaire ≥ 30 000 CNY",
-        "Examen médical valide",
+        "Passeport étranger valide depuis au moins 4 ans avec résidence effective à l'étranger > 2 ans sur les 4 dernières années (au 30 avril de l'année d'admission)",
+        "Justificatif bancaire ≥ 30 000 CNY",
+        "Certificat médical valide",
         "Casier judiciaire vierge",
-        "Photo format passeport",
+        "HSK 4 requis pour la spécialisation Chinese Language and Literature",
         "Entretien en ligne obligatoire"
       ]
     },
     "master": {
-      "academic": "Licence + relevés. CV et plan d'études ≥ 600 mots requis. Passeport étranger valide depuis 4 ans, résidence effective à l'étranger > 2 ans.",
+      "academic": "Bachelor (licence) avec relevés de notes. CV + plan d'études ≥ 600 mots requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -221,14 +220,15 @@
       "toefl_min": 80,
       "preparatory_if_insufficient": null,
       "other": [
-        "CV détaillé (parcours, recherche)",
-        "Plan d'études ≥ 600 mots",
-        "Certificat bancaire ≥ 30 000 CNY",
-        "Entretien en ligne"
+        "Passeport étranger valide depuis au moins 4 ans avec résidence effective à l'étranger > 2 ans sur les 4 dernières années",
+        "Justificatif bancaire ≥ 30 000 CNY",
+        "HSK 4 requis pour International Chinese Language Education",
+        "CV détaillé et plan d'études ≥ 600 mots",
+        "Entretien en ligne obligatoire"
       ]
     },
     "phd": {
-      "academic": "Master + relevés. CV et plan d'études ≥ 600 mots. Passeport étranger valide depuis 4 ans, résidence effective à l'étranger > 2 ans.",
+      "academic": "Master avec relevés de notes. CV + plan d'études ≥ 600 mots requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -238,67 +238,59 @@
       "toefl_min": 80,
       "preparatory_if_insufficient": null,
       "other": [
-        "CV détaillé",
-        "Plan d'études ≥ 600 mots",
-        "Certificat bancaire ≥ 30 000 CNY",
-        "Entretien en ligne"
+        "Passeport étranger valide depuis au moins 4 ans avec résidence effective à l'étranger > 2 ans sur les 4 dernières années",
+        "Justificatif bancaire ≥ 30 000 CNY",
+        "CV détaillé et plan d'études ≥ 600 mots",
+        "Entretien en ligne obligatoire"
       ]
     },
     "language": {
-      "academic": "Programme de langue chinoise (汉语言文学).",
+      "academic": "",
       "age_max": null,
-      "other": [
-        "Frais de scolarité 12 000 CNY/an"
-      ]
+      "other": []
     }
   },
   "contacts": {
-    "office_name": "International Student Affairs Office, International School (Bureau Christina CUI)",
+    "office_name": "International Student Affairs Office, International School (华东交通大学国际学院留学生管理办公室)",
     "iso_email": "studyatecjtu@163.com",
     "admissions_email": "studyatecjtu@163.com",
     "wechat": "",
     "phone": "0086-791-87045364",
-    "address": "808 East Shuanggang Street, Economic and Technological Development Zone, Nanchang, Jiangxi, China"
+    "address": "808 East Shuanggang Street, Economic and Technological Development Zone, Nanchang, Jiangxi, P.R. China (江西省南昌市经济技术开发区双港东大街808号北区教37栋). Contact: Christina CUI (崔老师)"
   },
   "matching": {
     "fields": [
       "engineering",
       "business",
-      "economics",
-      "finance",
-      "computer_science",
-      "sciences",
-      "law",
       "chinese_language",
-      "arts",
-      "design"
+      "education",
+      "economics"
     ],
     "degrees": [
       "bachelor",
       "master",
-      "phd",
-      "language"
+      "phd"
     ],
     "languages": [
-      "zh",
       "en",
-      "bilingual"
+      "zh"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": null,
+    "min_hsk_level": 4,
     "min_ielts": 5.5,
     "min_toefl": 80,
     "age_max_bachelor": 25,
     "age_max_master": null,
     "age_max_phd": null,
     "has_csc": null,
-    "has_university_scholarship": true,
+    "has_university_scholarship": null,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": 12000,
-    "tuition_cny_max": 19800,
+    "tuition_cny_min": 0,
+    "tuition_cny_max": 16000,
     "housing_cny_year_min": 4000,
-    "deadline_typical": "Juin (rentrée septembre)",
+    "housing_cny_year_max": 4000,
+    "deadline_typical": "June 2026",
     "intake_months": [
       9
     ],
@@ -307,145 +299,131 @@
     "tags": [
       "transport",
       "railway",
-      "Belt and Road",
-      "exonération PhD Civil Engineering",
-      "programmes en anglais",
-      "entretien en ligne"
+      "belt-and-road",
+      "english-taught",
+      "provincial-scholarship",
+      "tuition-waiver-phd"
     ]
   },
   "confidence": 0.92,
   "missing_fields": [
-    "rankings précis",
-    "date limite exacte",
-    "bourse universitaire CSC",
-    "WeChat officiel"
+    "classement précis",
+    "GPA minimum explicite",
+    "frais de dossier",
+    "frais d'application",
+    "existence de bourses CSC ou d'université (mentionnées mais pas détaillées)",
+    "âge max master/PhD",
+    "programme préparatoire de langue (non mentionné)",
+    "WeChat du bureau",
+    "date limite d'application exacte pour cycle 2026 (seulement mois)"
   ],
-  "notes": "Exonération totale pour PhD Civil Engineering. Bourse provinciale du Jiangxi pour étudiants internationaux. Classe personnalisée licence (Civil Eng, Electrical Eng, Transportation, International Trade): bourse 10 000 CNY en 1ère-2ème année, puis selon mérite. Frais de résidence: 400 ou 800 CNY/an selon source.",
+  "notes": "Source principale: brochure 2026 d'admission (gjc.ecjtu.edu.cn/lhlx/zszc.htm). Frais 'RMB 1,6000' dans la source = 16 000 CNY. Tous les programmes listés sont sous 'English Taught Majors' mais deux (International Chinese Language Education master, Chinese Language and Literature bachelor) exigent HSK 4 — composante en chinois probable. PhD: full tuition waiver officiel. Master/Bachelor: 16 000 CNY/an. Bourse provinciale Jiangxi mentionnée (sélection compétitive). Pas de mention explicite de bourse d'université propre ou de programme CSC — laissé null. Tous candidats passent un entretien en ligne.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "Scanned copy of passport front page, visa page (or residence permit page)"
+      "notes": "Page d'accueil du passeport + page visa ou permis de séjour scannées"
     },
     {
-      "type": "diploma",
+      "type": "diploma_and_transcripts",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "Highest diploma certificate and transcript"
+      "notes": "Plus haut diplôme et relevés de notes"
     },
     {
-      "type": "financial_proof",
+      "type": "bank_statement",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "Bank-issued asset certificate of at least RMB 30,000"
+      "notes": "Certificat bancaire d'au moins 30 000 CNY ou équivalent"
     },
     {
-      "type": "medical_report",
+      "type": "medical_exam",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "Valid health examination certificate"
+      "notes": "Certificat médical valide"
     },
     {
       "type": "non_criminal_record",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Casier judiciaire vierge"
     },
     {
-      "type": "language_certificate",
+      "type": "language_proof",
       "required": true,
       "count": 1,
-      "who": "non-English native applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "IELTS 5.5, TOEFL 80+, or proof of English-taught education"
+      "notes": "Pays anglophone, IELTS 5.5+, TOEFL 80+, ou formation antérieure en anglais"
     },
     {
       "type": "application_form",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "ECJTU Application Form"
+      "notes": "Formulaire ECJTU téléchargeable"
     },
     {
-      "type": "photo",
+      "type": "passport_photo",
       "required": true,
       "count": 1,
-      "who": "all applicants",
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "2-inch electronic passport-size photo"
+      "notes": "Photo d'identité numérique 2 pouces"
     },
     {
-      "type": "cv",
+      "type": "cv_and_study_plan",
       "required": true,
       "count": 1,
-      "who": "Master and PhD applicants",
+      "who": "Candidats Master/Doctorat",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "CV including academic background and research achievements"
-    },
-    {
-      "type": "study_plan",
-      "required": true,
-      "count": 1,
-      "who": "Master and PhD applicants",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": "No less than 600 words"
-    },
-    {
-      "type": "guardian_documents",
-      "required": true,
-      "count": 1,
-      "who": "Applicants under 18",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Legal guardian documents in China"
+      "notes": "CV (parcours, recherche) + plan d'études ≥600 mots"
     }
   ],
   "application": {
-    "platform_name": "ECJTU International Student Online Application Portal",
-    "platform_url": "https://ecjtu.at0086.cn/student",
+    "platform_name": "International Student Online Application Portal (ECJTU)",
+    "platform_url": "http://ecjtu.at0086.cn/student",
     "steps": [
-      "Register on the online portal",
-      "Complete application form and upload required documents",
-      "Submit application and monitor status",
-      "Attend online interview (mandatory, schedule notified via portal)"
+      "Se connecter au portail ecjtu.at0086.cn/student et créer un compte",
+      "Remplir le formulaire de candidature ECJTU",
+      "Téléverser les documents requis",
+      "Attendre la convocation à l'entretien en ligne via le portail",
+      "Passer l'entretien en ligne",
+      "Suivre l'avancement de la demande sur le portail"
     ],
     "opens_at": "",
-    "deadline": "",
+    "deadline": "2026-06-30",
     "results_at": "",
     "intake_months": [
       9
@@ -457,34 +435,36 @@
   "fees": {
     "tuition_cny_year": {
       "bachelor": {
-        "min": 14000,
+        "min": 16000,
         "max": 16000
       },
       "master": {
         "min": 16000,
-        "max": 17600
+        "max": 16000
       },
       "phd": {
-        "min": 18000,
-        "max": 19800
+        "min": 0,
+        "max": 0
       },
       "language": {
-        "min": 12000,
-        "max": 12000
+        "min": null,
+        "max": null
       },
       "english_taught_premium": null
     },
     "insurance_cny_year": 800,
     "other_fees": [
       {
-        "name": "Medical Examination",
+        "name": "Certificat médical",
         "amount_cny": 450,
-        "frequency": "once"
+        "unit": "once",
+        "notes": ""
       },
       {
-        "name": "Residence Permit",
+        "name": "Permis de résidence",
         "amount_cny": 400,
-        "frequency": "yearly"
+        "unit": "year",
+        "notes": ""
       }
     ],
     "housing": {
@@ -492,7 +472,7 @@
         {
           "type": "double",
           "price_cny_year": 4000,
-          "included": "Twin room only"
+          "included": "Chambre double uniquement"
         }
       ],
       "deposit_cny": null,
@@ -502,74 +482,34 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Nanchang cost of living is relatively low compared to other Chinese cities"
+      "notes": "Nanchang a un niveau de consommation inférieur à la moyenne des villes chinoises"
     }
   },
   "scholarships": [
     {
-      "name": "Jiangxi Provincial Scholarship for International Students",
+      "name": "Bourse provinciale pour étudiants internationaux en Chine",
       "type": "provincial",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Awarded on competitive basis; nominations by ECJTU based on provincial quota and criteria",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "Annual selection"
-    },
-    {
-      "name": "Bachelor Customized Class Scholarship (Civil Engineering, Electrical Engineering, Transportation, International Trade)",
-      "type": "institutional",
-      "coverage": "partial",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "10000 RMB/year for 1st and 2nd academic year; 3rd and 4th year based on academic performance (1st prize 10000 RMB up to 10%, 2nd prize 5000 RMB up to 20%, 3rd prize 2000 RMB up to 70%)",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "Conditional on academic performance"
-    },
-    {
-      "name": "PhD Full Tuition Waiver",
-      "type": "institutional",
-      "coverage": "full",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Available for PhD in Civil Engineering, Control Science and Engineering, Transportation Engineering, Mechanical Engineering, Electronic Information",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "PhD Tuition Decrease, Scholarship and Allowance",
-      "type": "institutional",
-      "coverage": "partial",
-      "covers": [
-        "tuition",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "PhD students may apply after registration",
+      "conditions": "Étudiants excellents sélectionnés selon quotas annuels; résultat final selon autorités provinciales",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": null,
-    "hsk_master": null,
+    "hsk_bachelor": 4,
+    "hsk_master": 4,
     "hsk_phd": null,
     "ielts_min": 5.5,
     "toefl_min": 80,
     "preparatory_chinese": {
-      "available": true,
-      "duration": "1 year",
-      "leads_to_degree": false
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
     },
     "foundation": {
       "available": null,
@@ -578,98 +518,118 @@
   },
   "visa": {
     "visa_types": [
-      "X1",
-      "X2"
+      "X1"
     ],
     "documents_from_university": [
-      "Admission Notice",
-      "JW202/JW201 Form"
+      "Formulaire de candidature ECJTU",
+      "Documents d'admission de l'université",
+      "JW202 (formulaire de visa étude)"
     ],
-    "instructions": "Apply for X visa at Chinese embassy/consulate with admission documents; X1 visa holders must apply for residence permit within 30 days of arrival",
-    "arrival_and_residence_permit": "Residence permit required for stays over 180 days; annual renewal fee RMB 400"
+    "instructions": "L'université fournit les documents d'admission et le JW202 pour la demande de visa X1; frais de permis de résidence 400 CNY/an à régler à l'arrivée",
+    "arrival_and_residence_permit": "À l'arrivée, effectuer un examen médical et obtenir le permis de résidence dans les délais requis"
   },
   "housing_and_services": {
     "housing_types": [
-      "On-campus double room only"
+      "Chambre double sur campus uniquement"
     ],
-    "rules": "Only twin/double rooms available on campus",
-    "international_office": "Christina CUI, International Student Affairs Office, International School; Tel: 0086-791-87045364; Email: studyatecjtu@163.com",
+    "rules": "L'université ne propose que des chambres doubles",
+    "international_office": "Christina CUI - International Student Affairs Office, International School - studyatecjtu@163.com - 0086-791-87045364",
     "orientation": "",
     "english_support": true,
-    "clubs": "International student activities organized (e.g., Spring Festival gatherings, cultural events)"
+    "clubs": "Activités culturelles organisées (visites mémorial 1er août, Nouvel An chinois, etc.)"
   },
   "country_specific": [
     {
-      "region_or_country": "All",
-      "notes": "Applicants must hold a valid foreign passport for at least 4 years and have resided abroad for more than 2 years within the past 4 years (up to April 30 of admission year). Bachelor applicants must be under 25 years old."
+      "region_or_country": "Tous",
+      "notes": "Passeport étranger valide depuis au moins 4 ans ET résidence effective à l'étranger >2 ans durant les 4 dernières années (au 30 avril de l'année d'admission). Age: <25 ans pour licence; <18 ans requiert documents tuteur légal en Chine."
     }
   ],
   "scan_status": "ok",
   "slug": "east-china-jiaotong-university",
-  "scraped_at": "2026-08-23T14:40:52.600Z",
+  "scraped_at": "2026-08-30T10:58:51.462Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://hjlx.ecjtu.edu.cn/",
-      "title": "华交留学",
-      "chars": 1981
-    },
     {
       "url": "https://hjlx.ecjtu.edu.cn/lxsq1/sqzn.htm",
       "title": "申请指南-华交留学",
-      "chars": 922
+      "chars": 1399
     },
     {
-      "url": "https://gjc.ecjtu.edu.cn/lhlx/sqlc.htm",
-      "title": "申请流程-国际交流处、港澳台事务办公室",
-      "chars": 3221
-    },
-    {
-      "url": "https://eng.ecjtu.edu.cn/",
-      "title": "Welcome to East China jiaoTong University",
-      "chars": 2182
-    },
-    {
-      "url": "https://gjcen.ecjtu.edu.cn/info/1041/1136.htm",
-      "title": "ECJTU International Students Prospectus-Welcome to East China jiaoTong University",
-      "chars": 3714
-    },
-    {
-      "url": "https://www.ecjtu.edu.cn/",
-      "title": "华东交通大学",
-      "chars": 2121
-    },
-    {
-      "url": "https://hjlx.ecjtu.edu.cn/info/1023/1033.htm",
-      "title": "费用及奖学金 Fee Structure and Scholarship-华交留学",
-      "chars": 1765
+      "url": "https://hjlx.ecjtu.edu.cn/",
+      "title": "华交留学",
+      "chars": 3591
     },
     {
       "url": "https://hjlx.ecjtu.edu.cn/lxsq1.htm",
       "title": "留学申请-华交留学",
-      "chars": 3798
+      "chars": 4093
     },
     {
-      "url": "https://hjlx.ecjtu.edu.cn/info/1025/1094.htm",
-      "title": "申请指南 How to Apply-华交留学",
-      "chars": 957
+      "url": "https://hjlx.ecjtu.edu.cn/info/1023/1033.htm",
+      "title": "费用及奖学金 Fee Structure and Scholarship-华交留学",
+      "chars": 2107
     },
     {
-      "url": "https://hjlx.ecjtu.edu.cn/info/1022/1032.htm",
-      "title": "申请条件 Entrance Condition-华交留学",
-      "chars": 2293
+      "url": "https://gjc.ecjtu.edu.cn/lhlx/sqlc.htm",
+      "title": "申请流程-国际交流处、港澳台事务办公室",
+      "chars": 3536
     },
     {
       "url": "https://hjlx.ecjtu.edu.cn/lxsq1/sqtj.htm",
       "title": "申请条件-华交留学",
-      "chars": 2246
+      "chars": 2555
     },
     {
       "url": "https://hjlx.ecjtu.edu.cn/lxsq1/fyjjxj.htm",
       "title": "费用及奖学金-华交留学",
-      "chars": 1694
+      "chars": 2143
+    },
+    {
+      "url": "https://hjlx.ecjtu.edu.cn/info/1025/1094.htm",
+      "title": "申请指南 How to Apply-华交留学",
+      "chars": 1344
+    },
+    {
+      "url": "https://hjlx.ecjtu.edu.cn/info/1022/1032.htm",
+      "title": "申请条件 Entrance Condition-华交留学",
+      "chars": 2506
+    },
+    {
+      "url": "https://gjc.ecjtu.edu.cn/lhlx/lxshd.htm",
+      "title": "留学生活动-国际交流处、港澳台事务办公室",
+      "chars": 1113
+    },
+    {
+      "url": "https://hjlx.ecjtu.edu.cn/lxsq1/xxjj.htm",
+      "title": "学校简介-华交留学",
+      "chars": 4105
+    },
+    {
+      "url": "https://hjlx.ecjtu.edu.cn/lxsq1/zyjs.htm",
+      "title": "专业介绍-华交留学",
+      "chars": 1540
+    },
+    {
+      "url": "https://hjlx.ecjtu.edu.cn/lxsq1/jfzn.htm",
+      "title": "缴费指南-华交留学",
+      "chars": 2153
+    },
+    {
+      "url": "https://gjc.ecjtu.edu.cn/lhlx/zszc.htm",
+      "title": "招收政策-国际交流处、港澳台事务办公室",
+      "chars": 6724
+    },
+    {
+      "url": "https://hjlx.ecjtu.edu.cn/index.htm",
+      "title": "华交留学",
+      "chars": 3591
+    },
+    {
+      "url": "https://gjc.ecjtu.edu.cn/lxxm/xlxm.htm",
+      "title": "学历项目-国际交流处、港澳台事务办公室",
+      "chars": 1780
     }
   ],
   "db_row": {
@@ -680,7 +640,7 @@
     "city": "Nanchang",
     "province": "Jiangxi",
     "country": "Chine",
-    "department": "International Student Affairs Office, International School (Bureau Christina CUI)",
+    "department": "International Student Affairs Office, International School (华东交通大学国际学院留学生管理办公室)",
     "emails": [
       "studyatecjtu@163.com",
       "studyatecjtu@163.com"
@@ -691,35 +651,28 @@
     "majors": [
       "engineering",
       "business",
-      "economics",
-      "finance",
-      "computer_science",
-      "sciences",
-      "law",
       "chinese_language",
-      "arts",
-      "design"
+      "education",
+      "economics"
     ],
     "required_documents": [
       "passport",
-      "diploma",
-      "financial_proof",
-      "medical_report",
+      "diploma_and_transcripts",
+      "bank_statement",
+      "medical_exam",
       "non_criminal_record",
-      "language_certificate",
+      "language_proof",
       "application_form",
-      "photo",
-      "cv",
-      "study_plan",
-      "guardian_documents"
+      "passport_photo",
+      "cv_and_study_plan"
     ],
-    "scholarship_amount": "Jiangxi Provincial Scholarship for International Students / Bachelor Customized Class Scholarship (Civil Engineering, Electrical Engineering, Transportation, International Trade) / PhD Full Tuition Waiver / PhD Tuition Decrease, Scholarship and Allowance",
-    "scholarship_min": 12000,
-    "scholarship_max": 19800,
-    "min_hsk_level": null,
-    "language_requirements": "IELTS 5.5 / TOEFL 80",
-    "tuition_min": 12000,
-    "tuition_max": 19800,
-    "application_deadline": "Juin (rentrée septembre)"
+    "scholarship_amount": "Bourse provinciale pour étudiants internationaux en Chine",
+    "scholarship_min": 0,
+    "scholarship_max": 16000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 80",
+    "tuition_min": 0,
+    "tuition_max": 16000,
+    "application_deadline": "June 2026"
   }
 }

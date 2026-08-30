@@ -6,24 +6,32 @@
     "aliases": [
       "XISU"
     ],
-    "website": "https://www.xisu.edu.cn",
-    "international_website": "http://six.xisu.edu.cn",
-    "application_portal_url": "http://six.xisu.edu.cn"
+    "website": "https://www.xisu.edu.cn/",
+    "international_website": "http://six.xisu.edu.cn/",
+    "application_portal_url": "http://xisu.chiwest.cn/"
   },
   "general": {
-    "presentation": "Université spécialisée dans les langues étrangères et l'enseignement du chinois, située à Xi'an. Depuis 1979, elle accueille des étudiants internationaux et a formé plus de 20 000 diplômés originaires de 45 pays. Elle propose des programmes de licence, master et doctorat ainsi que des formations non diplômantes en chinois.",
-    "history": "1979: début du recrutement d'étudiants internationaux (première institution du nord-ouest de la Chine pour l'enseignement du chinois aux étrangers). 1985: Centre de formation en langue et culture chinoises. 1994: École de langue et culture chinoises. 1995: première unité du nord-ouest dispensant une licence en langue chinoise. 2006: désignée pour accueillir les boursiers du gouvernement chinois. 2019: ouverture complète des programmes de licence, master et doctorat aux étudiants internationaux.",
+    "presentation": "Université de langues étrangères fondée en 1952, l'une des 4 premières écoles de langues de Chine nouvelle. Spécialisée en langues étrangères et formation internationale, elle accueille des étudiants internationaux depuis 1979 (première institution du nord-ouest à enseigner le chinois aux étrangers). Plus de 20 000 diplômés de 45 pays.",
+    "history": "Recrutement international dès 1979 (stage court), 1983 (formation langue), 1985 (centre formation langue et culture chinoises), 1994 (faculté langue et culture chinoises), 1995 (1er établissement du nord-ouest pour la licence en langue chinoise), 2006 (délégation bourse du gouvernement chinois), 2009 (bourse Hanban/Confucius), 2012 (base multilingue de promotion du chinois), 2019 (ouverture complète bachelor/master/doctorat aux internationaux).",
     "rankings": [],
     "strengths": [
-      "Enseignement du chinois langue étrangère",
-      "Langues étrangères et traduction",
-      "Études internationales et relations diplomatiques",
-      "Coopération culturelle Route de la Soie",
-      "Formation des enseignants de chinois"
+      "Langues étrangères (membre CIUTI)",
+      "Formation en traduction",
+      "Études chinoises pour étrangers",
+      "Diplôme de 1er cycle en langue et littérature étrangères (16 sous-discipl doctorales)",
+      "Doctorat en traduction"
     ],
     "teaching_languages": [
       "zh",
-      "en"
+      "en",
+      "ja",
+      "ko",
+      "ru",
+      "fr",
+      "de",
+      "es",
+      "it",
+      "ar"
     ],
     "location": {
       "city": "Xi'an",
@@ -31,135 +39,63 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Estimation pour Xi'an, ville de second rang."
+      "min": 2000,
+      "max": 3500,
+      "notes": "Estimation Xi'an, ville de 2e rang"
     },
     "campuses": [
       {
         "name": "Campus Yanta (雁塔校区)",
         "city": "Xi'an",
-        "description": "437 South Chang'an Road, district de Yanta, Xi'an, 710061. Siège historique, abrite le Centre d'expérience culturelle chinoise."
+        "description": "Centre international, bureau admissions, Centre d'expérience culturelle chinoise. Adresse: 437 Chang'an Nan Lu, district Yanta (710061)."
       },
       {
         "name": "Campus Chang'an (长安校区)",
         "city": "Xi'an",
-        "description": "Wenyuan South Road, zone de développement éducatif et technologique Guodu, Xi'an, 710128. Bâtiment administratif B204."
+        "description": "Campus principal, bureau des étudiants internationaux Bâtiment B204. Adresse: Wenyuan Nan Lu, zone éducative Guodu (710128)."
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Licence en langue chinoise (汉语言文学)",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme phare en chinois langue et littérature. HSK 4 (180+) requis pour les programmes en chinois."
-    },
-    {
-      "level": "bachelor",
-      "name": "Licence en enseignement du chinois langue étrangère (汉语国际教育)",
-      "field": "education",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Formation des futurs enseignants de chinois."
-    },
-    {
-      "level": "bachelor",
-      "name": "Licence en traduction (翻译)",
+      "name": "Programmes de licence (toutes spécialités ouvertes aux internationaux depuis 2019)",
       "field": "arts",
-      "language": "bilingual",
+      "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme bilingue chinois/anglais."
-    },
-    {
-      "level": "bachelor",
-      "name": "Licence en commerce international (国际经济与贸易)",
-      "field": "business",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme bilingue avec cours en anglais."
+      "notes": "Spécialités en langues étrangères, traduction, économie,管理等. Bourse Xi'an Belt & Road: HSK 4 ≥180 requis."
     },
     {
       "level": "master",
-      "name": "Master en enseignement du chinois langue étrangère",
-      "field": "education",
+      "name": "Programmes de master (incl. traduction multilingue)",
+      "field": "arts",
       "language": "zh",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "HSK 5 (180+) requis pour les programmes en chinois. TOEFL 60 ou IELTS 5.5 pour les programmes en anglais."
+      "notes": "Programmes en chinois ou anglais. Bourse Xi'an Belt & Road: HSK 5 ≥180 (zh) ou TOEFL 60/IELTS 5.5 (en)."
     },
     {
-      "level": "master",
-      "name": "Master en traduction (外国翻译硕士)",
+      "level": "phd",
+      "name": "Programmes doctoraux (langue et littérature étrangères, traduction)",
       "field": "arts",
-      "language": "bilingual",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme 'New Sinology Plan' pour la formation de traducteurs étrangers."
-    },
-    {
-      "level": "master",
-      "name": "Master en langue et littérature chinoises",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "phd",
-      "name": "Doctorat en langue et littérature chinoises",
-      "field": "chinese_language",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Bourse du gouvernement chinois: jusqu'à 40 ans."
-    },
-    {
-      "level": "phd",
-      "name": "Doctorat en enseignement du chinois langue étrangère",
-      "field": "education",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Doctorat en langue et littérature étrangères (16 sous-disciplines) et doctorat professionnel en traduction."
     },
     {
       "level": "language",
-      "name": "Programme de chinois langue étrangère (进修生)",
+      "name": "Programme régulier de chinois (普通汉语进修生)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
@@ -168,11 +104,50 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours réguliers de chinois, chinois des affaires, cours intensifs et préparation HSK."
+      "notes": "Cours de langue chinoise tous niveaux, durée flexible."
     },
     {
       "level": "language",
-      "name": "Programme préparatoire (预科)",
+      "name": "Chinois des affaires (商务汉语)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Chinois orienté affaires."
+    },
+    {
+      "level": "language",
+      "name": "Cours intensif de chinois (汉语强化班)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "language",
+      "name": "Cours intensif HSK (HSK强化班)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "foundation",
+      "name": "Programme préparatoire (预科进修)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
@@ -180,39 +155,53 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Année préparatoire pour étudiants ne satisfaisant pas les exigences linguistiques."
+      "notes": "Année préparatoire avant études en chinois."
     },
     {
       "level": "exchange",
-      "name": "Programme international de crédits en anglais",
-      "field": "other",
-      "language": "en",
-      "duration_years": 1,
+      "name": "Programme échange (汉语进修/专业进修/学分 anglais)",
+      "field": "chinese_language",
+      "language": "bilingual",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Échanges avec universités partenaires."
+    },
+    {
+      "level": "master",
+      "name": "Programme Nouveau Sinologie - Master traduction (新汉学计划外国翻译硕士)",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme d'échange avec universités partenaires, cours en anglais."
+      "notes": "Spécialités: traduction JP/RU/EN/FR/DE (écrite/orale). 5 places. Bourse complète (frais, logement, vie, assurance). HSK 6+ requis, âge ≤40."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent. Excellents résultats académiques.",
+      "academic": "Diplôme équivalent fin lycée (高中毕业及以上)",
       "min_gpa": null,
-      "age_max": 25,
+      "age_max": 30,
       "age_min": null,
       "hsk_level": 4,
       "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de chinois (预科) disponible pour les étudiants ne satisfaisant pas le HSK 4.",
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
       "other": [
-        "Bourse Xi'an Belt & Road: âge maximum 30 ans",
-        "Lettre de recommandation de l'établissement d'origine"
+        "Non-Chinois",
+        "Bonne santé, casier vierge",
+        "Lettre de recommandation de l'école"
       ]
     },
     "master": {
-      "academic": "Licence (bac+4) avec bons résultats académiques. Deux lettres de recommandation de professeurs ou maîtres de conférences.",
+      "academic": "Licence (bac+4) avec bons résultats",
       "min_gpa": null,
       "age_max": 35,
       "age_min": null,
@@ -220,16 +209,17 @@
       "hsk_score_min": 180,
       "ielts_min": 5.5,
       "toefl_min": 60,
-      "preparatory_if_insufficient": "Année préparatoire de chinois disponible.",
+      "preparatory_if_insufficient": null,
       "other": [
-        "Plan d'études ou de recherche (800 mots en chinois ou anglais)",
-        "Bourse Shaanxi Sanqin: âge maximum 30 ans"
+        "2 lettres de recommandation (prof/assoc.)",
+        "Plan d'études 800 mots",
+        "Certificat médical étranger <6 mois"
       ]
     },
     "phd": {
-      "academic": "Master avec deux lettres de recommandation de professeurs ou maîtres de conférences.",
+      "academic": "Master + 2 lettres de recommandation prof/assoc.",
       "min_gpa": null,
-      "age_max": 40,
+      "age_max": 35,
       "age_min": null,
       "hsk_level": null,
       "hsk_score_min": null,
@@ -237,16 +227,16 @@
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Plan de recherche (800 mots minimum)",
-        "Bourse Shaanxi Sanqin: âge maximum 35 ans"
+        "Non-Chinois",
+        "Bonne santé"
       ]
     },
     "language": {
-      "academic": "Diplôme de fin d'études secondaires minimum, excellents résultats.",
+      "academic": "Diplôme lycée minimum, bons résultats",
       "age_max": 45,
       "other": [
-        "HSK valide ou certificats de concours (ex: Concours Pont du Chinois) privilégiés",
-        "Bourse Xi'an Belt & Road: durée maximale 10 mois"
+        "HSK valide ou prix Concours Pont Chinois privilégié",
+        "Bourse Xi'an: durée cumulée ≤10 mois"
       ]
     }
   },
@@ -256,7 +246,7 @@
     "admissions_email": "admission@xisu.edu.cn",
     "wechat": "",
     "phone": "+86-29-85309431 / +86-29-85319331",
-    "address": "Campus Yanta: 437 South Chang'an Road, district de Yanta, Xi'an, Shaanxi 710061. Campus Chang'an: Bâtiment administratif B204, Wenyuan South Road, zone Guodu, Xi'an 710128."
+    "address": "Campus Chang'an: Bâtiment B204, Wenyuan Nan Lu, zone éducative Guodu, Xi'an (710128). Campus Yanta: 437 Chang'an Nan Lu, district Yanta, Xi'an (710061)."
   },
   "matching": {
     "fields": [
@@ -264,8 +254,8 @@
       "arts",
       "education",
       "business",
-      "law",
-      "other"
+      "economics",
+      "law"
     ],
     "degrees": [
       "bachelor",
@@ -285,16 +275,16 @@
     "min_hsk_level": 4,
     "min_ielts": 5.5,
     "min_toefl": 60,
-    "age_max_bachelor": 25,
+    "age_max_bachelor": 30,
     "age_max_master": 35,
-    "age_max_phd": 40,
+    "age_max_phd": 35,
     "has_csc": true,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
+    "tuition_cny_min": 13000,
+    "tuition_cny_max": 25000,
     "housing_cny_year_min": null,
-    "deadline_typical": "15 juin",
+    "deadline_typical": "15 juin (bourse Xi'an Belt & Road); 31 mars (Nouveau Sinologie)",
     "intake_months": [
       3,
       9
@@ -303,149 +293,130 @@
     "province": "Shaanxi",
     "tags": [
       "langues étrangères",
-      "Route de la Soie",
-      "boursiers CSC",
-      "programme Confucius",
       "traduction",
-      "enseignement du chinois"
+      "CIUTI",
+      "45 pays",
+      "depuis 1979",
+      "bourse Belt & Road",
+      "Nouveau Sinologie",
+      "HSK",
+      "multilingue"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.78,
   "missing_fields": [
-    "tuition_cny_min",
-    "tuition_cny_max",
-    "housing_cny_year_min",
-    "min_gpa",
-    "wechat"
+    "frais de scolarité exacts par programme",
+    "frais de logement annuels",
+    "coût de la vie détaillé",
+    "classements précis",
+    "frais de dossier",
+    "dates limites bachelor/master standards hors bourses"
   ],
-  "notes": "Université spécialisée en langues étrangères et enseignement du chinois. Sources principales: portail international six.xisu.edu.cn. Frais de scolarité et de logement non précisés dans les sources consultées. Plusieurs bourses disponibles: gouvernement chinois (国别双边, Route de la Soie), International Chinese Language Teachers, province du Shaanxi (三秦), municipalité de Xi'an (Belt & Road), et bourse XISU. Délai typique pour bourse Xi'an Belt & Road: 15 juin. Inscription principale en septembre, certains programmes en mars.",
+  "notes": "Université spécialisée en langues étrangères et traduction. Forte expertise en formation chinoise pour étrangers (depuis 1979). 5 types de bourses disponibles (CSC, Hanban/ICLTS, Shaanxi Sanqin, Xi'an Belt & Road, XISU). Programme Nouveau Sinologie très sélectif (5 places). Portail de candidature: xisu.chiwest.cn. Site international multilingue (zh/en/ja/ko/ru).",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Page photo avec signature, copie scannée"
+      "notes": "Passeport valide, page photo avec signature"
     },
     {
       "type": "application_form",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire en ligne sur six.xisu.edu.cn"
+      "notes": "Formulaire XISU + formulaire bourse concernée"
     },
     {
-      "type": "diploma",
+      "type": "highest_diploma",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Plus haut diplôme, notarié, avec traduction chinoise/anglaise si autre langue"
+      "notes": "Notarisé, traduction chinoise/anglaise si autre langue"
     },
     {
       "type": "transcripts",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Relevés de notes notariés"
+      "notes": "Relevés de notes"
     },
     {
       "type": "study_plan",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "800 mots, chinois ou anglais; 200 mots (licence), 500 (perfectionnement), 800 (master/doctorat) pour CSC"
+      "notes": "800 mots, chinois ou anglais"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": 1,
+      "who": "all",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "HSK ou TOEFL/IELTS selon programme"
     },
     {
       "type": "recommendation_letters",
       "required": true,
       "count": 2,
-      "who": "professeurs ou associés",
-      "applies_to": [
-        "master",
-        "phd",
-        "language"
-      ],
-      "notes": "Chinois ou anglais; non requis pour licence hors CSC"
-    },
-    {
-      "type": "hsk_or_english",
-      "required": true,
-      "count": 1,
-      "who": "demandeur",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "HSK 4 (180+) ou 5 (180+) selon programme; TOEFL 60 ou IELTS 5.5 pour masters en anglais"
-    },
-    {
-      "type": "physical_exam",
-      "required": true,
-      "count": 1,
-      "who": "demandeur",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire 'Foreigner Physical Examination' en anglais, validité 6 mois, obligatoire si séjour > 6 mois"
+      "notes": "Professeurs ou associés"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": 1,
+      "who": "all",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire étranger, anglais, validité 6 mois"
     },
     {
       "type": "non_criminal_record",
       "required": false,
       "count": 1,
-      "who": "demandeur",
+      "who": "certains pays",
       "applies_to": [
-        "all"
+        "specific"
       ],
-      "notes": "Requis pour certains pays, notarié en chinois"
-    },
-    {
-      "type": "scholarship_form",
-      "required": false,
-      "count": 1,
-      "who": "demandeur",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Formulaire spécifique selon bourse visée"
-    },
-    {
-      "type": "passport_photos",
-      "required": true,
-      "count": null,
-      "who": "demandeur",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Standard pour documents officiels"
+      "notes": "Selon nationalité, notarisé chinois"
     }
   ],
   "application": {
-    "platform_name": "XISU Online Application",
-    "platform_url": "http://six.xisu.edu.cn",
+    "platform_name": "XISU International Student Online Application System",
+    "platform_url": "http://xisu.chiwest.cn/",
     "steps": [
-      "Créer un compte et compléter le formulaire en ligne sur six.xisu.edu.cn",
-      "Télécharger et remplir le formulaire de bourse concerné (le cas échéant) et l'envoyer à admission@xisu.edu.cn",
-      "Passer l'examen (écrit et/ou entretien)",
-      "Recevoir la notification d'admission"
+      "Créer un compte sur http://xisu.chiwest.cn/",
+      "Remplir le formulaire en ligne",
+      "Télécharger et remplir le formulaire bourse (le cas échéant) et l'envoyer à admission@xisu.edu.cn",
+      "Passer examen/entretien",
+      "Recevoir admission"
     ],
     "opens_at": "",
-    "deadline": "2025-06-15",
+    "deadline": "",
     "results_at": "",
     "intake_months": [
       9
@@ -481,7 +452,7 @@
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "Gratuit pour boursiers CSC"
+          "included": ""
         }
       ],
       "deposit_cny": null,
@@ -496,7 +467,7 @@
   },
   "scholarships": [
     {
-      "name": "Bourse du Gouvernement chinois (CSC) - Programme bilatéral",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
@@ -506,14 +477,14 @@
         "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "Âge: licence ≤25, master ≤35, doctorat ≤40. Candidature via le service d'envoi de bourses du pays d'origine. Bourse entière: frais de scolarité, hébergement, allocations (2500/mois licence, 3000/mois master/perfectionnement, 3500/mois doctorat/senior) et assurance médicale. Délai candidature: janvier à début avril.",
-      "apply_via": "agency",
-      "deadline": "2025-04-01",
-      "renewal": "Annuelle selon performance académique"
+      "conditions": "Postuler via ambassade Chine ou agence CSC; programmes bilatéraux ou Silk Road",
+      "apply_via": "embassy_or_csc",
+      "deadline": "",
+      "renewal": "Annuel selon résultats"
     },
     {
-      "name": "Bourse Internationale des Professeurs de Chinois (ICLTS)",
-      "type": "other",
+      "name": "International Chinese Language Teachers Scholarship",
+      "type": "government",
       "coverage": "full",
       "covers": [
         "tuition",
@@ -522,50 +493,65 @@
         "insurance"
       ],
       "stipend_cny_month": null,
-      "conditions": "Programme 'Master en traduction pour étrangers' (Nouvelles études chinoises). Détails sur six.xisu.edu.cn",
-      "apply_via": "agency",
+      "conditions": "Pour étudiants en enseignement du chinois; HSK requis selon programme",
+      "apply_via": "chinese.cn",
       "deadline": "",
+      "renewal": "Annuel"
+    },
+    {
+      "name": "Shaanxi Sanqin Foreign Student Scholarship",
+      "type": "provincial",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "PhD 25000 CNY/an (A), Master 20000 CNY/an (B), Bachelor 13000 CNY/an (C), Kazakhstan 10000 CNY/an (D); déjà inscrit 1 an; HSK requis; non cumulable avec autres bourses",
+      "apply_via": "university",
+      "deadline": "30 septembre",
+      "renewal": "Annuel"
+    },
+    {
+      "name": "Xi'an Belt and Road Scholarship",
+      "type": "municipal",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Citoyens non-chinois pays BRI; Bachelor <30 ans HSK4 ≥180; Master <35 ans HSK5 ≥180 ou TOEFL 60/IELTS 5.5; non-cumulable",
+      "apply_via": "university",
+      "deadline": "15 juin",
       "renewal": ""
     },
     {
-      "name": "Bourse Sanqin du Gouvernement du Shaanxi",
-      "type": "government",
-      "coverage": "partial",
-      "covers": [
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Type A doctorat 25000 CNY/an, Type B master 20000 CNY/an, Type C licence 13000 CNY/an, Type D étudiants kazakhs nécessiteux 10000 CNY/an. Avoir terminé au moins 1 an d'études dans une université du Shaanxi, excellents résultats, pas d'autre bourse en cours. Licence ≤25 ans, master ≤30 ans, doctorat ≤35 ans.",
-      "apply_via": "university",
-      "deadline": "2025-09-30",
-      "renewal": "Annuelle"
-    },
-    {
-      "name": "Bourse 'Une Ceinture, Une Route' du Gouvernement municipal de Xi'an",
-      "type": "government",
-      "coverage": "partial",
-      "covers": [
-        "tuition",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Réservée aux ressortissants des pays 'B&R'. Licence HSK4 ≥180, master HSK5 ≥180 ou TOEFL 60/IELTS 5.5. Licence ≤30 ans, master ≤35 ans, langue ≤45 ans. Maximum 10 mois pour non-diplômant. Non cumulable avec autre bourse.",
-      "apply_via": "university",
-      "deadline": "2025-06-15",
-      "renewal": ""
-    },
-    {
-      "name": "Bourse de l'Université des études internationales de Xi'an (XISU)",
+      "name": "XISU University Scholarship",
       "type": "university",
       "coverage": "partial",
       "covers": [
-        "stipend"
+        "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Pour étudiants internationaux aux résultats académiques excellents. Détails à confirmer auprès de admission@xisu.edu.cn",
+      "conditions": "Détails sur demande à admission@xisu.edu.cn",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
+    },
+    {
+      "name": "New Sinology Plan - Foreign Translation Master",
+      "type": "government",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Master traduction; <40 ans; HSK6; licence en traduction/chinois; 5 places; durée 3 ans",
+      "apply_via": "chinese.cn_and_university",
+      "deadline": "31 mars 2026",
+      "renewal": "Annuel selon résultats"
     }
   ],
   "language": {
@@ -581,117 +567,127 @@
     },
     "foundation": {
       "available": true,
-      "description": "Programmes de pré-stage (préparatoire) et stages spécialisés en chinois disponibles"
+      "description": "Préparatoire (预科进修) et cours de chinois intensifs disponibles"
     }
   },
   "visa": {
     "visa_types": [
       "X1",
-      "X2",
-      "F"
+      "X2"
     ],
     "documents_from_university": [
-      "Formulaire JW201 (boursiers CSC)",
-      "Lettre d'admission",
-      "Formulaire de demande de visa pour étudiants étrangers"
+      "Admission Notice",
+      "JW202/JW201"
     ],
-    "instructions": "Les boursiers CSC reçoivent le formulaire JW201 via l'ambassade de Chine. Les étudiants autofinancés reçoivent une lettre d'admission et le formulaire JW202 pour la demande de visa X1 (programme > 6 mois) ou X2 (≤ 6 mois).",
-    "arrival_and_residence_permit": "S'enregistrer au Bureau de l'entrée-sortie dans les 30 jours suivant l'arrivée pour obtenir le permis de séjour. Le Bureau des étudiants internationaux assiste dans les démarches (admission@xisu.edu.cn)."
+    "instructions": "Demander visa X1 (long séjour >180j) ou X2 (court séjour) avec Admission Notice et JW202",
+    "arrival_and_residence_permit": "Résidence permit à obtenir dans les 30 jours après arrivée auprès du bureau de sécurité publique local"
   },
   "housing_and_services": {
     "housing_types": [
-      "Chambre double sur campus"
+      "on-campus dormitory"
     ],
-    "rules": "Hébergement sur campus disponible, notamment gratuit pour les boursiers CSC. Règlement intérieur géré par le Bureau des étudiants internationaux.",
-    "international_office": "Bureau des étudiants internationaux, admission@xisu.edu.cn, +86-29-85309431 / +86-29-85319331. Campus Yanta: 437 Chang'an Sud, Xi'an. Campus Chang'an: Wenyuan Sud, édifice admin B204, 710128.",
-    "orientation": "Programme d'accueil et activités d'intégration culturelle (concours de talents, festival culturel, sport, homestay Mid-Autumn).",
-    "english_support": true,
-    "clubs": "Concours de talents en chinois (novembre), Festival culturel sino-étranger (mai), Journée sportive (avril), Concours d'aérobic chinois (mars), Dumplings冬至, Homestay Mid-Autumn, projets d'études Silk Road"
+    "rules": "",
+    "international_office": "admission@xisu.edu.cn; +86-29-85309431 / 85319331; Bureaux: Yanta campus (437 South Chang'an Rd) et Chang'an campus (Wenyuan South Rd, Guodu)",
+    "orientation": "",
+    "english_support": null,
+    "clubs": "Concours de talent chinois (nov), Dumplings Winter Solstice (déc), Mid-Autumn homestay (oct), Festival culturel (mai), Sports (avril), Compétition aérobic (mars)"
   },
   "country_specific": [
     {
-      "region_or_country": "Pays 'Belt & Road' (Une Ceinture, Une Route)",
-      "notes": "Priorité et bourse municipale dédiée (jusqu'à 10 mois pour non-diplômants). Non cumulable avec bourse gouvernementale chinoise."
+      "region_or_country": "Belt and Road countries",
+      "notes": "Bourse municipale Xi'an prioritaire pour ressortissants BRI"
     },
     {
       "region_or_country": "Kazakhstan",
-      "notes": "Bourse Type D spécifique (10000 CNY/an) via la Fondation d'intégration économique du Kazakhstan."
-    },
-    {
-      "region_or_country": "Étudiants non anglophones",
-      "notes": "Documents en langues autres que chinois/anglais doivent être traduits et notariés."
-    },
-    {
-      "region_or_country": "Moins de 18 ans",
-      "notes": "Documents juridiques du tuteur légal en Chine requis."
+      "notes": "Bourse Sanqin catégorie D (10000 CNY/an) via Fondation intégration économique Kazakhstan"
     }
   ],
   "scan_status": "ok",
   "slug": "xisu",
-  "scraped_at": "2026-08-24T14:41:24.422Z",
+  "scraped_at": "2026-08-30T11:12:53.357Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "http://six.xisu.edu.cn/gywm/lxwm.htm",
-      "title": "联系我们-留学西外",
-      "chars": 971
-    },
     {
       "url": "http://six.xisu.edu.cn/",
       "title": "留学西外",
-      "chars": 3824
+      "chars": 8330
     },
     {
-      "url": "http://six.xisu.edu.cn/gywm/",
-      "title": null,
-      "chars": 2946
-    },
-    {
-      "url": "http://six.xisu.edu.cn/jxj/gjzwjsjxj1/gjzwjsjxj.htm",
-      "title": "国际中文教师奖学金-留学西外",
-      "chars": 752
+      "url": "http://six.xisu.edu.cn/gywm/lxwm.htm",
+      "title": "联系我们-留学西外",
+      "chars": 3086
     },
     {
       "url": "http://six.xisu.edu.cn/jxj/sxszfjxj1/sxssqwglxsjxj.htm",
       "title": "陕西省三秦外国留学生奖学金-留学西外",
-      "chars": 3049
+      "chars": 5572
+    },
+    {
+      "url": "http://six.xisu.edu.cn/info/1077/5141.htm",
+      "title": "2026年西安外国语大学国际中文教师奖学金申请指南-留学西外",
+      "chars": 3722
     },
     {
       "url": "http://six.xisu.edu.cn/jxj/xaszfjxj1/xas_ydyl_wglxsjxj.htm",
       "title": "西安市“一带一路”外国留学生奖学金-留学西外",
-      "chars": 4427
+      "chars": 6868
+    },
+    {
+      "url": "http://six.xisu.edu.cn/info/1077/4591.htm",
+      "title": "2026年西安外国语大学“新汉学计划”外国翻译硕士培养项目招生简章-留学西外",
+      "chars": 4515
+    },
+    {
+      "url": "http://six.xisu.edu.cn/jxj/gjzwjsjxj1/gjzwjsjxj.htm",
+      "title": "国际中文教师奖学金-留学西外",
+      "chars": 3670
+    },
+    {
+      "url": "http://six.xisu.edu.cn/info/1078/3661.htm",
+      "title": "留学生汉语风采大赛（11月）-留学西外",
+      "chars": 3263
     },
     {
       "url": "http://six.xisu.edu.cn/gywm/gjxsjy.htm",
       "title": "国际学生教育-留学西外",
-      "chars": 890
+      "chars": 2802
     },
     {
       "url": "http://six.xisu.edu.cn/zsxm1.htm",
       "title": "招生项目-留学西外",
-      "chars": 892
+      "chars": 3154
     },
     {
       "url": "http://six.xisu.edu.cn/jxj.htm",
       "title": "奖学金-留学西外",
-      "chars": 813
+      "chars": 2761
     },
     {
       "url": "http://six.xisu.edu.cn/jxj/zgzfjxj1/gbsbxm.htm",
       "title": "国别双边项目-留学西外",
-      "chars": 3404
+      "chars": 5699
+    },
+    {
+      "url": "http://six.xisu.edu.cn/zsxm1/jx/gjywxfxm.htm",
+      "title": "国际英文学分项目-留学西外",
+      "chars": 3364
+    },
+    {
+      "url": "http://six.xisu.edu.cn/zsxm1/jlxm1/gjywxf.htm",
+      "title": "国际英文学分-留学西外",
+      "chars": 3166
     },
     {
       "url": "http://six.xisu.edu.cn/jxj/xawgydxjxj1/xawgydxjxj.htm",
       "title": "西安外国语大学奖学金-留学西外",
-      "chars": 678
+      "chars": 2738
     },
     {
-      "url": "http://six.xisu.edu.cn/css/animate.css",
-      "title": null,
-      "chars": 12000
+      "url": "http://six.xisu.edu.cn/xysh/XISUzn/zs.htm",
+      "title": "住宿-留学西外",
+      "chars": 5274
     }
   ],
   "db_row": {
@@ -709,33 +705,32 @@
     ],
     "phone": "+86-29-85309431 / +86-29-85319331",
     "wechat": null,
-    "website": "http://six.xisu.edu.cn",
+    "website": "http://six.xisu.edu.cn/",
     "majors": [
       "chinese_language",
       "arts",
       "education",
       "business",
-      "law",
-      "other"
+      "economics",
+      "law"
     ],
     "required_documents": [
       "passport",
       "application_form",
-      "diploma",
+      "highest_diploma",
       "transcripts",
       "study_plan",
+      "language_certificate",
       "recommendation_letters",
-      "hsk_or_english",
-      "physical_exam",
-      "passport_photos"
+      "physical_examination"
     ],
-    "scholarship_amount": "Bourse du Gouvernement chinois (CSC) - Programme bilatéral / Bourse Internationale des Professeurs de Chinois (ICLTS) / Bourse Sanqin du Gouvernement du Shaanxi / Bourse 'Une Ceinture, Une Route' du Gouvernement municipal de Xi'an / Bourse de l'Université des études internationales de Xi'an (XISU)",
-    "scholarship_min": null,
-    "scholarship_max": null,
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / International Chinese Language Teachers Scholarship / Shaanxi Sanqin Foreign Student Scholarship / Xi'an Belt and Road Scholarship / XISU University Scholarship / New Sinology Plan - Foreign Translation Master",
+    "scholarship_min": 13000,
+    "scholarship_max": 25000,
     "min_hsk_level": 4,
     "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
-    "tuition_min": null,
-    "tuition_max": null,
-    "application_deadline": "15 juin"
+    "tuition_min": 13000,
+    "tuition_max": 25000,
+    "application_deadline": "15 juin (bourse Xi'an Belt & Road); 31 mars (Nouveau Sinologie)"
   }
 }

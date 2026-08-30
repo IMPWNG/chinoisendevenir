@@ -5,29 +5,29 @@
     "name_fr": "Université Xidian",
     "aliases": [
       "XDU",
-      "XIDIAN UNIVERSITY - OLD ONE"
+      "Xidian University - Old"
     ],
     "website": "https://www.xidian.edu.cn/",
     "international_website": "https://en.xidian.edu.cn/",
-    "application_portal_url": "https://sie.xidian.edu.cn/"
+    "application_portal_url": "https://xidian.17gz.org"
   },
   "general": {
-    "presentation": "Université nationale clé directement rattachée au Ministère de l'Éducation, spécialisée dans l'information et l'électronique, avec un développement coordonné en ingénierie, sciences, gestion et sciences humaines. 18 écoles, projet 985 (plateforme d'innovation disciplinaire) et 211.",
-    "history": "Université fondée à l'origine à Yan'an, avec un long héritage dans l'électronique et les technologies de l'information en Chine.",
+    "presentation": "Université publique chinoise (Projet 211/985) spécialisée en technologies de l'information, électronique, télécommunications, informatique, intelligence artificielle et microélectronique. Campus principal à Xi'an, Shaanxi.",
+    "history": "Fondée en 1931 à Ruijin sous le nom de Central Radio Engineering School; l'une des premières institutions chinoises spécialisées en radio et communications.",
     "rankings": [
-      "Double First-Class (双一流)",
-      "Project 985 Advantage Platform",
-      "Project 211"
+      "Projet 985",
+      "Projet 211",
+      "Double First-Class Discipline"
     ],
     "strengths": [
-      "Télécommunications et ingénierie électronique",
-      "Sciences et technologies informatiques (Double First-Class)",
+      "Télécommunications",
+      "Électronique",
+      "Informatique",
       "Microélectronique",
-      "Cybersécurité et cryptographie",
       "Intelligence artificielle",
+      "Cybersécurité",
       "Optoélectronique",
-      "Sciences spatiales",
-      "Sciences des matériaux et nanotechnologies"
+      "Sciences spatiales"
     ],
     "teaching_languages": [
       "zh",
@@ -39,27 +39,39 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation pour étudiant international à Xi'an (logement, repas, transports)."
     },
     "campuses": [
       {
         "name": "South Campus (Chang'an)",
         "city": "Xi'an",
-        "description": "266 Xinglong Section of Xifeng Road, Xi'an, Shaanxi 710126"
+        "description": "266 Xinglong Section of Xifeng Road, Xi'an 710126"
       },
       {
-        "name": "North Campus (Yanta)",
+        "name": "North Campus",
         "city": "Xi'an",
-        "description": "No. 2 South Taibai Road, Xi'an, Shaanxi 710071"
+        "description": "No. 2 South Taibai Road, Xi'an 710071"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Télécommunications et ingénierie électronique",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programs taught in Chinese or English depending on major."
+    },
+    {
+      "level": "bachelor",
+      "name": "Information and Telecommunications Engineering",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -67,11 +79,59 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "École de Télécommunications et École d'Ingénierie Électronique"
+      "notes": ""
     },
     {
       "level": "bachelor",
-      "name": "Sciences et technologies informatiques",
+      "name": "Communication Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Electronic Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Microelectronics",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Optoelectronic Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Artificial Intelligence",
       "field": "computer_science",
       "language": "zh",
       "duration_years": 4,
@@ -79,11 +139,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Discipline Double First-Class, École nationale de logiciels"
+      "notes": ""
     },
     {
       "level": "bachelor",
-      "name": "Microélectronique",
+      "name": "Mechano-Electronic Engineering",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -91,47 +151,23 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Parmi les premières écoles nationales de démonstration en microélectronique"
+      "notes": ""
     },
     {
       "level": "bachelor",
-      "name": "Cybersécurité et ingénierie",
-      "field": "engineering",
+      "name": "Cybersecurity",
+      "field": "computer_science",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Première université nationale de démonstration en cybersécurité"
+      "notes": ""
     },
     {
       "level": "bachelor",
-      "name": "Intelligence artificielle",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École d'Intelligence Artificielle"
-    },
-    {
-      "level": "bachelor",
-      "name": "Optoélectronique",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École d'Ingénierie Optoélectronique"
-    },
-    {
-      "level": "bachelor",
-      "name": "Économie et gestion",
+      "name": "Economics and Management",
       "field": "business",
       "language": "zh",
       "duration_years": 4,
@@ -139,215 +175,305 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "École d'Économie et de Gestion"
+      "notes": ""
     },
     {
-      "level": "bachelor",
-      "name": "Mathématiques et statistiques",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École de Mathématiques et Statistiques"
-    },
-    {
-      "level": "bachelor",
-      "name": "Physique",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École de Physique"
-    },
-    {
-      "level": "bachelor",
-      "name": "Sciences humaines (philosophie, langue et littérature chinoises)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École des Sciences Humaines"
-    },
-    {
-      "level": "bachelor",
-      "name": "Langues étrangères (anglais, japonais, traduction)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École des Langues Étrangères"
-    },
-    {
-      "level": "bachelor",
-      "name": "Sciences et technologies spatiales",
+      "level": "master",
+      "name": "Information and Telecommunications Engineering",
       "field": "engineering",
-      "language": "zh",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master Type B eligible for CSC scholarship."
+    },
+    {
+      "level": "phd",
+      "name": "Information and Telecommunications Engineering",
+      "field": "engineering",
+      "language": "en",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "École des Sciences et Technologies Spatiales"
+      "notes": "Doctoral Type B eligible for CSC scholarship."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée)",
+      "academic": "Diplôme de fin d'études secondaires (high school graduate).",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 25,
       "age_min": null,
-      "hsk_level": null,
+      "hsk_level": 4,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "1 an préparatoire en chinois si HSK insuffisant.",
+      "other": [
+        "Bonne moralité",
+        "Respect de la culture chinoise",
+        "Pas d'autre bourse du gouvernement chinois"
+      ]
     },
     "master": {
-      "academic": "Licence (bachelor degree) dans un domaine pertinent",
+      "academic": "Licence (bachelor's degree holder).",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 35,
       "age_min": null,
-      "hsk_level": null,
+      "hsk_level": 4,
       "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "ielts_min": 5.5,
+      "toefl_min": 75,
+      "preparatory_if_insufficient": "1 an préparatoire en chinois si HSK insuffisant.",
+      "other": [
+        "Recommandation de 2 professeurs ou professeurs associés"
+      ]
     },
     "phd": {
-      "academic": "Master dans un domaine pertinent",
+      "academic": "Master (master's degree holder).",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 40,
       "age_min": null,
-      "hsk_level": null,
+      "hsk_level": 4,
       "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "ielts_min": 5.5,
+      "toefl_min": 75,
+      "preparatory_if_insufficient": "1 an préparatoire en chinois si HSK insuffisant.",
+      "other": [
+        "Recommandation de 2 professeurs ou professeurs associés",
+        "Contact préalable superviseur recommandé"
+      ]
     },
     "language": {
-      "academic": "",
-      "age_max": null,
-      "other": []
+      "academic": "Niveau secondaire minimum pour General Scholar (max 45 ans). Senior Scholar: master minimum (max 50 ans).",
+      "age_max": 50,
+      "other": [
+        "Chinois ou anglais selon programme"
+      ]
     }
   },
   "contacts": {
-    "office_name": "School of International Education (国际教育学院)",
-    "iso_email": "",
-    "admissions_email": "",
+    "office_name": "Office of Admission and Quality Assurance / School of International Education (SIE)",
+    "iso_email": "sie@xidian.edu.cn",
+    "admissions_email": "sie@xidian.edu.cn",
     "wechat": "",
-    "phone": "029-88201000",
-    "address": "South Campus: 266 Xinglong Section of Xifeng Road, Xi'an, Shaanxi 710126; North Campus: No. 2 South Taibai Road, Xi'an, Shaanxi 710071"
+    "phone": "+86-29-81891038 / +86-29-81891653",
+    "address": "266 Xinglong Section of Xifeng Road, Xi'an, Shaanxi 710126"
   },
   "matching": {
     "fields": [
-      "engineering",
       "computer_science",
-      "sciences",
+      "engineering",
       "business",
-      "arts"
+      "sciences"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language"
+      "language",
+      "foundation",
+      "exchange"
     ],
     "languages": [
       "zh",
       "en"
     ],
-    "english_programs_available": null,
-    "chinese_language_program_available": null,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
+    "english_programs_available": true,
+    "chinese_language_program_available": true,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 75,
+    "age_max_bachelor": 25,
+    "age_max_master": 35,
+    "age_max_phd": 40,
+    "has_csc": true,
+    "has_university_scholarship": true,
     "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": "",
+    "tuition_cny_min": 15000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 5000,
+    "deadline_typical": "31 mars (bourse CSC); autres candidats généralement avant fin juin",
     "intake_months": [
       9
     ],
     "city": "Xi'an",
     "province": "Shaanxi",
     "tags": [
+      "211",
+      "985",
       "Double First-Class",
-      "Project 985",
-      "Project 211",
-      "Ministry of Education",
-      "STEM",
-      "electronics",
+      "IT",
       "telecommunications",
-      "cybersecurity",
-      "AI",
-      "microelectronics"
+      "CSC Type A",
+      "CSC Type B",
+      "ancien-portail"
     ]
   },
-  "confidence": 0.45,
+  "confidence": 0.78,
   "missing_fields": [
-    "hsk_level",
-    "hsk_score_min",
-    "ielts_min",
-    "toefl_min",
-    "tuition_cny_min",
-    "tuition_cny_max",
-    "housing_cny_year_min",
-    "deadline_typical",
-    "has_csc",
-    "has_university_scholarship",
-    "has_provincial_scholarship",
-    "english_programs_available",
-    "chinese_language_program_available",
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
-    "admissions_email",
-    "iso_email",
-    "wechat",
-    "cost_of_living_cny_month",
-    "min_gpa",
-    "preparatory_if_insufficient"
+    "frais de dossier exacts",
+    "frais de scolarité détaillés programme par programme",
+    "dates limites précises hors CSC 2020",
+    "adresses email départementales par programme"
   ],
-  "notes": "Ancien portail / ancien compte de candidature. Sources limitées : pages d'accueil et navigation uniquement, sans détails sur les conditions d'admission spécifiques (HSK, IELTS, TOEFL), frais de scolarité, délais ou bourses. Le Collège d'Éducation Internationale (sie.xidian.edu.cn) gère les admissions pour étudiants étrangers. 18 écoles couvrant principalement l'ingénierie électronique, l'informatique, les microélectroniques, la cybersécurité, l'IA, les sciences spatiales, la physique, les mathématiques, l'économie/gestion et les sciences humaines. 41 800+ étudiants, 196 universités partenaires, 9 laboratoires nationaux.",
+  "notes": "Ancien compte/portail. Date limite 2020 mentionnée (31 mars 2020). Site principal de candidature: https://xidian.17gz.org (ancien) et https://xdgjxs.xidian.edu.cn/internationalEducationStudent/2026/1 (courant). Bourses CSC Type A et Type B disponibles; agent number Xidian = 10701.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": null,
-      "who": "",
+      "count": 1,
+      "who": "all international applicants",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Valid passport scan required"
+    },
+    {
+      "type": "highest_education_certificate",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "With study certificate if currently student, employment certificate if employed"
+    },
+    {
+      "type": "academic_transcript",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Official transcript of academic record"
+    },
+    {
+      "type": "hsk_certificate",
+      "required": false,
+      "count": 1,
+      "who": "Chinese-taught program applicants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "HSK 4+ required; absence accepted but then 1-year Chinese preparatory required"
+    },
+    {
+      "type": "ielts_or_toefl",
+      "required": false,
+      "count": 1,
+      "who": "English-taught program applicants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "IELTS 5.5 or TOEFL 75+; native English speakers exempt"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Physical Examination Record for Foreigner; bring original on arrival"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Minimum 800 words, in English or Chinese"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "master's and doctoral applicants",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "From professors or associate professors"
+    },
+    {
+      "type": "cv",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Personal resume"
+    },
+    {
+      "type": "publications_list",
+      "required": false,
+      "count": 1,
+      "who": "research applicants",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "List of published papers with title, publication, time"
+    },
+    {
+      "type": "awards_certificates",
+      "required": false,
+      "count": null,
+      "who": "outstanding talent applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Attach if applicable"
+    },
+    {
+      "type": "non_criminal_record",
+      "required": true,
+      "count": 1,
+      "who": "all applicants",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Original + Chinese translation stamped by official translation agency"
+    },
+    {
+      "type": "conditional_acceptance_letter",
+      "required": false,
+      "count": 1,
+      "who": "doctoral applicants",
+      "applies_to": [
+        "phd"
+      ],
+      "notes": "Recommended; contact supervisor in advance for priority designation"
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "Online Application System for International Students of Xidian University (and CSC system for scholarships)",
+    "platform_url": "https://xdgjxs.xidian.edu.cn/internationalEducationStudent/2026/1 ; CSC: http://studyinchina.csc.edu.cn",
+    "steps": [
+      "Create personal account on Xidian Online Application System (https://xidian.17gz.org) and complete online application",
+      "For CSC scholarship Type A: also apply at CSC Information System (studyinchina.csc.edu.cn) with study program Type A",
+      "For CSC scholarship Type B (master/PhD only): apply at both CSC system (select Type B, Agency Number 10701) and Xidian system",
+      "Upload all required application materials in English or Chinese via the online systems",
+      "Inform university by email (sie@xidian.edu.cn) after submission",
+      "For doctoral applicants: contact Xidian supervisor in advance to obtain Conditional Acceptance Letter",
+      "Await admission and scholarship decision; begin program in September"
+    ],
     "opens_at": "",
-    "deadline": "",
+    "deadline": "March 31 (historical example: 2020-03-31)",
     "results_at": "",
     "intake_months": [
       9
@@ -357,6 +483,7 @@
     "payment_methods": []
   },
   "fees": {
+    "tuition_cnn_year": null,
     "tuition_cny_year": {
       "bachelor": {
         "min": null,
@@ -398,106 +525,152 @@
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Chinese Government Scholarship (CSC) - Type A and Type B",
       "type": "csc",
       "coverage": "full",
       "covers": [
-        "tuition"
+        "tuition",
+        "accommodation",
+        "stipend",
+        "comprehensive_medical_insurance"
       ],
-      "stipend_cny_month": null,
-      "conditions": "",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
+      "stipend_cny_month": 2500,
+      "conditions": "Type A: apply via dispatching authority or Chinese embassy in home country; Type B (master/PhD only): apply directly to Xidian (Agency Number 10701). Must not hold other Chinese government scholarships. Age limits: bachelor ≤25, master ≤35, PhD ≤40, general scholar ≤45, senior scholar ≤50. HSK 4+ for Chinese-taught, IELTS 5.5/TOEFL 75+ for English-taught",
+      "apply_via": "Type A: dispatching authority or embassy; Type B: directly to Xidian + CSC",
+      "deadline": "March 31 (historical 2020-03-31)",
+      "renewal": "Covers specified study period; not extended in principle"
     }
   ],
   "language": {
-    "hsk_bachelor": null,
-    "hsk_master": null,
-    "hsk_phd": null,
-    "ielts_min": null,
-    "toefl_min": null,
+    "hsk_bachelor": 4,
+    "hsk_master": 4,
+    "hsk_phd": 4,
+    "ielts_min": 5.5,
+    "toefl_min": 75,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 year",
+      "leads_to_degree": false
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "Foundation/preparatory program available for non-degree students (预科项目); Chinese language preparatory for degree programs if HSK not met"
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "JW202 Visa Application Form"
+    ],
+    "instructions": "Apply at Chinese embassy/consulate with passport, Admission Notice, JW202, physical exam, and other standard materials",
+    "arrival_and_residence_permit": "X1 visa holders must apply for residence permit within 30 days at Xi'an Public Security Bureau Exit-Entry Administration"
   },
   "housing_and_services": {
-    "housing_types": [],
-    "rules": "",
-    "international_office": "",
-    "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "housing_types": [
+      "on-campus dormitory"
+    ],
+    "rules": "CSC scholarship covers accommodation; details via International Education College",
+    "international_office": "International Education College (sie.xidian.edu.cn), email: sie@xidian.edu.cn, +86-29-81891038 / +86-29-81891653",
+    "orientation": "Available; details not specified in sources",
+    "english_support": true,
+    "clubs": "Confucius Institute, cultural events, cross-cultural competitions"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "All foreign nationals",
+      "notes": "Must be foreigners; abide by Chinese laws and university disciplines; respect Chinese culture"
     }
   ],
   "scan_status": "ok",
   "slug": "xidian-university-old",
-  "scraped_at": "2026-08-23T14:43:32.769Z",
+  "scraped_at": "2026-08-30T11:01:25.132Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://sie.xidian.edu.cn/",
-      "title": "国际教育学院",
-      "chars": 281
-    },
     {
       "url": "https://en.xidian.edu.cn/",
       "title": "XIDIAN UNIVERSITY",
-      "chars": 3283
+      "chars": 7083
     },
     {
-      "url": "https://www.xidian.edu.cn/",
-      "title": "西安电子科技大学",
-      "chars": 8931
+      "url": "https://sie.xidian.edu.cn/",
+      "title": "国际教育学院",
+      "chars": 1798
     },
     {
-      "url": "https://sie.xidian.edu.cn/css/a_animate.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://en.xidian.edu.cn/info/1070/1534.htm",
+      "title": "Notice on Application for 2020 Chinese Government Scholarship Programs for Study in China-XIDIAN UNIVERSITY",
+      "chars": 10732
     },
     {
-      "url": "https://sie.xidian.edu.cn/css/swiper.css",
-      "title": null,
-      "chars": 12000
-    },
-    {
-      "url": "https://sie.xidian.edu.cn/css/a_style.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants.htm",
+      "title": "International Applicants-XIDIAN UNIVERSITY",
+      "chars": 2616
     },
     {
       "url": "https://sie.xidian.edu.cn/lhlx.htm",
       "title": "来华留学-国际教育学院",
-      "chars": 873
+      "chars": 4453
     },
     {
-      "url": "https://sie.xidian.edu.cn/EN/Study_in_China.htm",
-      "title": "Study in China-国际教育学院",
-      "chars": 2634
+      "url": "https://en.xidian.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2133202801&wbfileid=3C9474040AAF6B486F168D6023B44CC9",
+      "title": null,
+      "chars": 16000
+    },
+    {
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants/Undergraduate_Programs.htm",
+      "title": "Undergraduate Programs-XIDIAN UNIVERSITY",
+      "chars": 2770
+    },
+    {
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants/Non_Degree_Programs.htm",
+      "title": "Non-Degree Programs-XIDIAN UNIVERSITY",
+      "chars": 2719
+    },
+    {
+      "url": "https://en.xidian.edu.cn/Admission/International_Applicants/Graduate_Programs.htm",
+      "title": "Graduate Programs-XIDIAN UNIVERSITY",
+      "chars": 2960
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx/zsjz.htm",
+      "title": "招生简章-国际教育学院",
+      "chars": 3680
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx/zsjz/yjsxm/zsjz2.htm",
+      "title": "招生简章-国际教育学院",
+      "chars": 3111
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx/zsjz/fxlxm/hyyjxxm.htm",
+      "title": "汉语言进修项目-国际教育学院",
+      "chars": 5740
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx/zsjz/bksxm/zsjz.htm",
+      "title": "招生简章-国际教育学院",
+      "chars": 3060
+    },
+    {
+      "url": "https://sie.xidian.edu.cn/lhlx/xzxd/fxljy/hyyjx.htm",
+      "title": "汉语言教学-国际教育学院",
+      "chars": 2684
     },
     {
       "url": "https://sie.xidian.edu.cn/cglx.htm",
       "title": "出国留学-国际教育学院",
-      "chars": 800
+      "chars": 3127
+    },
+    {
+      "url": "https://en.xidian.edu.cn/info/1070/1532.htm",
+      "title": "Application Guide For 2020 Confucius Institute Scholarship-XIDIAN UNIVERSITY",
+      "chars": 12604
     }
   ],
   "db_row": {
@@ -508,28 +681,37 @@
     "city": "Xi'an",
     "province": "Shaanxi",
     "country": "Chine",
-    "department": "School of International Education (国际教育学院)",
-    "emails": [],
-    "phone": "029-88201000",
+    "department": "Office of Admission and Quality Assurance / School of International Education (SIE)",
+    "emails": [
+      "sie@xidian.edu.cn",
+      "sie@xidian.edu.cn"
+    ],
+    "phone": "+86-29-81891038 / +86-29-81891653",
     "wechat": null,
     "website": "https://en.xidian.edu.cn/",
     "majors": [
-      "engineering",
       "computer_science",
-      "sciences",
+      "engineering",
       "business",
-      "arts"
+      "sciences"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "highest_education_certificate",
+      "academic_transcript",
+      "physical_examination",
+      "study_plan",
+      "recommendation_letters",
+      "cv",
+      "non_criminal_record"
     ],
-    "scholarship_amount": null,
-    "scholarship_min": null,
-    "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
-    "tuition_min": null,
-    "tuition_max": null,
-    "application_deadline": null
+    "scholarship_amount": "Chinese Government Scholarship (CSC) - Type A and Type B",
+    "scholarship_min": 15000,
+    "scholarship_max": 30000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 75",
+    "tuition_min": 15000,
+    "tuition_max": 30000,
+    "application_deadline": "31 mars (bourse CSC); autres candidats généralement avant fin juin"
   }
 }

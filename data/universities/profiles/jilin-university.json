@@ -6,32 +6,26 @@
     "aliases": [
       "JLU"
     ],
-    "website": "https://www.jlu.edu.cn",
-    "international_website": "https://en.jlu.edu.cn",
-    "application_portal_url": "http://apply.jlu.edu.cn"
+    "website": "http://www.jlu.edu.cn",
+    "international_website": "http://cie.jlu.edu.cn",
+    "application_portal_url": "http://apply.jlu.edu.cn/member/login.do"
   },
   "general": {
-    "presentation": "Université nationale clé sous tutelle directe du Ministère de l'Éducation, fondée en 1946. Membre des projets 985, 211 et Double First-Class (catégorie A). 13 disciplines couvrant philosophie, économie, droit, éducation, littérature, histoire, sciences, ingénierie, agriculture, médecine, gestion, arts et interdisciplinaire. Système complet licence-master-doctorat.",
-    "history": "Fondée en 1946. Sélectionnée en 2017 dans le programme Double First-Class (catégorie A). En 2022, 6 disciplines retenues dans la 2e vague de Double First-Class.",
+    "presentation": "Université nationale clé sous tutelle du Ministère de l'Éducation, fondée en 1946, située à Changchun. 72904 étudiants à temps plein, 6585 enseignants dont 2391 professeurs, 11 académiciens CAS/CAE, 50 écoles couvrant 12 disciplines (philosophie, économie, droit, éducation, lettres, histoire, sciences, ingénierie, agriculture, médecine, gestion, arts). 1239 programmes de licence, 63 masters niveau 1, 49 doctorats niveau 1. 15 disciplines dans le top 1% ESI, 2 dans le top 1‰.",
+    "history": "Fondée en 1946. Membre des projets 985 et 211. Sélectionnée en 2017 dans la construction 'Double First-Class' (catégorie A). 6 disciplines retenues au 2e round 2022.",
     "rankings": [
-      "Project 985",
-      "Project 211",
-      "Double First-Class (catégorie A)",
-      "Top 1% ESI dans 20 disciplines",
-      "Top 1‰ ESI dans 5 disciplines",
-      "Top 1‱ ESI en Chimie"
+      "Double First-Class A (2017, 2022)",
+      "Projets 985 et 211",
+      "15 disciplines ESI top 1%",
+      "2 disciplines ESI top 1‰"
     ],
     "strengths": [
-      "13 disciplines principales",
-      "1239 programmes de licence",
-      "63 masters niveau 1, 49 doctorats niveau 1",
-      "4 disciplines nationales clés niveau 1",
-      "15 disciplines nationales clés niveau 2",
-      "5 laboratoires nationaux clés",
-      "6 centres clés sciences humaines MOE",
-      "Coopération avec 302 institutions dans 40 pays",
-      "2453 étudiants internationaux de 129 pays",
-      "Bibliothèques avec 7,57 millions de volumes"
+      "12 disciplines complètes",
+      "Bibliothèques riches (7,57M volumes, dépôt UNESCO/UNIDO/Banque mondiale)",
+      "6 campus / 7 sites (6,11M m²)",
+      "7 résidences internationales (928 chambres, 1669 lits)",
+      "Coopérations avec 302 universités dans 40 pays",
+      "2453 étudiants internationaux de 129 pays"
     ],
     "teaching_languages": [
       "zh",
@@ -45,122 +39,80 @@
     "cost_of_living_cny_month": {
       "min": 1500,
       "max": 3000,
-      "notes": "Estimation pour Changchun, ville de niveau 2. Climat continental, chauffage de nov. à mars."
+      "notes": "Estimation pour Changchun, ville de 2e rang; non confirmé par les sources."
     },
     "campuses": [
       {
-        "name": "Quanqian (前卫南区)",
+        "name": "Campus principal (autour de l'Université)",
         "city": "Changchun",
-        "description": "Campus principal avec le Friendship Hall (友谊会馆), siège du Collège d'éducation internationale."
-      },
-      {
-        "name": "Nanling (南岭)",
-        "city": "Changchun",
-        "description": "Campus d'ingénierie."
-      },
-      {
-        "name": "Nanhu (南湖)",
-        "city": "Changchun",
-        "description": "Campus sciences et technologies."
-      },
-      {
-        "name": "Heping (和平)",
-        "city": "Changchun",
-        "description": "Campus médical (Bethune)."
-      },
-      {
-        "name": "Xinmin (新民)",
-        "city": "Changchun",
-        "description": "Campus médecine dentaire."
-      },
-      {
-        "name": "Chaoyang (朝阳)",
-        "city": "Changchun",
-        "description": "Campus sciences de la terre."
-      },
-      {
-        "name": "Nanling/Heping",
-        "city": "Changchun",
-        "description": "7 campus au total couvrant 6,11 millions m², 2,76 millions m² bâtis."
+        "description": "6 campus / 7 sites couvrant 6,11 millions m², 2,76 millions m² de bâtiments."
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Clinical Medicine (MBBS) 5-year Chinese program",
-      "field": "medicine",
-      "language": "zh",
-      "duration_years": 5,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Conditions d'admission ajustées - voir notification sur le site CIE."
-    },
-    {
-      "level": "bachelor",
-      "name": "International Economics and Trade (2+2)",
-      "field": "economics",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme bilingue 2 ans en Chine + 2 ans à l'étranger. Conditions linguistiques ajustées."
-    },
-    {
-      "level": "bachelor",
-      "name": "Diplomacy (Public Diplomacy School)",
-      "field": "law",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Conditions linguistiques ajustées."
-    },
-    {
-      "level": "bachelor",
-      "name": "Law (English-taught)",
-      "field": "law",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme en anglais récemment ouvert."
-    },
-    {
-      "level": "bachelor",
-      "name": "Public Health (English-taught)",
-      "field": "medicine",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme en anglais récemment ouvert."
-    },
-    {
-      "level": "bachelor",
-      "name": "3.5-year undergraduate programs",
+      "name": "Programmes de licence (zh)",
       "field": "other",
       "language": "zh",
-      "duration_years": 3.5,
+      "duration_years": 4,
       "start_months": [
-        3
+        9
       ],
       "academic_calendar": "semester",
-      "notes": "Inscription printemps ouverte depuis 2018."
+      "notes": "Inclut médecine clinique 5 ans (chinois), Économie et commerce international 2+2, Études diplomatiques. Préparatoire (yuke) disponible."
+    },
+    {
+      "level": "bachelor",
+      "name": "MBBS (médecine, en)",
+      "field": "medicine",
+      "language": "en",
+      "duration_years": 6,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Voir https://mbbs.jlu.edu.cn"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes en anglais (Law, Public Health, etc.)",
+      "field": "law",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Law School et School of Public Health proposent des cursus en anglais."
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (zh/en)",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse CSC 'High-Level Graduate Program' ouverte pour 2026/2027."
+    },
+    {
+      "level": "phd",
+      "name": "Programmes de doctorat (zh/en)",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Contact préalable avec un superviseur requis (lxds)."
     },
     {
       "level": "language",
-      "name": "Chinese Language Program (汉语进修)",
+      "name": "Cours de langue chinoise",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": null,
@@ -169,11 +121,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours pratiques de chinois pour étudiants internationaux."
+      "notes": "Programmes non-diplômants et courts (dqb) disponibles."
     },
     {
       "level": "foundation",
-      "name": "Preparatory Program (预科教育)",
+      "name": "Année préparatoire (yuke)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
@@ -181,135 +133,81 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Année préparatoire pour étudiants sans HSK suffisant. Cérémonie de remise des diplômes annuelle."
+      "notes": "Cérémonie de fin 2026 mentionnée; prépare aux cursus en chinois."
     },
     {
-      "level": "bachelor",
-      "name": "Software Engineering",
-      "field": "computer_science",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme régulier de licence."
-    },
-    {
-      "level": "master",
-      "name": "Master programs (various fields)",
+      "level": "exchange",
+      "name": "Programmes courts / non-diplômants",
       "field": "other",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "63 disciplines niveau 1 avec autorisation master."
-    },
-    {
-      "level": "phd",
-      "name": "PhD programs (various fields)",
-      "field": "other",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "49 disciplines niveau 1 avec autorisation doctorat."
-    },
-    {
-      "level": "language",
-      "name": "Short-term Chinese Programs",
-      "field": "chinese_language",
-      "language": "zh",
+      "language": "bilingual",
       "duration_years": null,
       "start_months": [
         3,
         6,
-        9,
-        12
+        9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes non-diplômants, camps d'été, programmes culturels."
+      "notes": "Cours d'été, stages culturels, programmes 'Chinese Bridge'."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (lycée) ou équivalent. Certificat de diplôme d'études secondaires + relevés de notes.",
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent; pour 2+2 et certains cursus, conditions spécifiques publiées dans les avis (cf. fichiers .docx sur la page 申请流程).",
       "min_gpa": null,
-      "age_max": 25,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
+      "hsk_level": null,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire (预科) d'un an disponible pour étudiants sans HSK suffisant. Cours de chinois intensif.",
+      "preparatory_if_insufficient": "Année préparatoire (yuke) proposée par l'École d'éducation internationale.",
       "other": [
-        "Passeport valide",
-        "Formulaire de demande en ligne sur apply.jlu.edu.cn",
-        "Certificat médical",
-        "Certificat de non-condamnation",
-        "Examen physique à l'arrivée (400 CNY)",
-        "Assurance obligatoire"
+        "Pour MBBS: voir mbbs.jlu.edu.cn",
+        "Pour Économie et commerce international 2+2: exigences linguistiques spécifiques (avis 2018)",
+        "Pour Études diplomatiques: exigences linguistiques spécifiques (avis 2018)"
       ]
     },
     "master": {
-      "academic": "Licence (bachelor degree) ou équivalent. Relevés de notes universitaires. Lettre de recommandation (2). Plan d'étude.",
+      "academic": "Diplôme de licence (bachelor) ou équivalent; contact préalable avec un superviseur recommandé.",
       "min_gpa": null,
-      "age_max": 40,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 5,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Cours préparatoire de chinois disponible si HSK insuffisant.",
-      "other": [
-        "Diplôme de licence",
-        "Transcrits",
-        "Lettres de recommandation",
-        "Plan de recherche",
-        "Contact préalable avec un superviseur (导师)",
-        "Pour programmes en anglais : preuve de compétence linguistique"
-      ]
-    },
-    "phd": {
-      "academic": "Master degree ou équivalent. Lettre de recommandation (2). Plan de recherche détaillé. Contact préalable obligatoire avec un superviseur.",
-      "min_gpa": null,
-      "age_max": 45,
-      "age_min": null,
-      "hsk_level": 5,
+      "hsk_level": null,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Diplôme de master",
-        "Transcrits",
-        "Lettres de recommandation (2)",
-        "Plan de recherche",
-        "Accord d'un superviseur (导师)",
-        "Publications (recommandé)"
+        "Bourse CSC 'High-Level Graduate Program' ouverte pour 2026/2027"
       ]
     },
+    "phd": {
+      "academic": "Diplôme de master ou équivalent; contact obligatoire avec un superviseur (page lxds).",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
     "language": {
-      "academic": "Diplôme d'études secondaires ou équivalent. Inscription ouverte toute l'année pour programmes courts.",
+      "academic": "Aucun prérequis académique spécifique.",
       "age_max": null,
       "other": [
-        "Passeport valide",
-        "Formulaire de demande",
-        "Paiement des frais de scolarité"
+        "Programmes courts et non-diplômants ouverts toute l'année"
       ]
     }
   },
   "contacts": {
-    "office_name": "International Education College (国际教育学院)",
+    "office_name": "吉林大学国际教育学院 (École d'éducation internationale)",
     "iso_email": "study@jlu.edu.cn",
     "admissions_email": "study@jlu.edu.cn",
     "wechat": "吉林大学国际教育学院",
-    "phone": "+86-431-85166885 / 85166518 / 85166877",
-    "address": "中国吉林省长春市修正路1505号 友谊会馆 / No.2699 Qianjin Street, Changchun City, China. Zip Code: 130012"
+    "phone": "+86-431-85166885 / +86-431-85166518",
+    "address": "中国吉林省长春市修正路1505号 友谊会馆 (1505 Xiuzheng Road, Friendship Hall, Changchun, Jilin, Chine)"
   },
   "matching": {
     "fields": [
@@ -318,16 +216,11 @@
       "finance",
       "law",
       "education",
+      "arts",
       "engineering",
-      "computer_science",
       "sciences",
       "medicine",
-      "pharmacy",
-      "arts",
-      "design",
-      "music",
       "agriculture",
-      "chinese_language",
       "other"
     ],
     "degrees": [
@@ -345,19 +238,19 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
+    "min_hsk_level": null,
     "min_ielts": null,
     "min_toefl": null,
-    "age_max_bachelor": 25,
-    "age_max_master": 40,
-    "age_max_phd": 45,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
     "has_csc": true,
-    "has_university_scholarship": true,
+    "has_university_scholarship": null,
     "has_provincial_scholarship": null,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "Mai-juin pour rentrée septembre",
+    "deadline_typical": "Variable selon le programme; candidature via apply.jlu.edu.cn",
     "intake_months": [
       3,
       9
@@ -367,118 +260,142 @@
     "tags": [
       "985",
       "211",
-      "Double First-Class",
-      "Université nationale clé",
-      "Médecine (MBBS)",
-      "Chimie top mondial",
-      "Médecine",
-      "Ingénierie automobile (ville automobile)",
-      "Coopération internationale étendue"
+      "Double First-Class A",
+      "comprehensive",
+      "MBBS",
+      "CSC scholarship",
+      "preparatory year",
+      "6 campuses"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.55,
   "missing_fields": [
-    "frais de scolarité exacts (CNY)",
-    "scores HSK/IELTS/TOEFL minimaux précis",
-    "frais de logement détaillés",
-    "bourses provinciales",
-    "montants CSC spécifiques",
-    "durée exacte par programme pour master/PhD",
-    "exigences GPA précises"
+    "min_gpa",
+    "age_min",
+    "age_max",
+    "hsk_level",
+    "hsk_score_min",
+    "ielts_min",
+    "toefl_min",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "has_university_scholarship",
+    "has_provincial_scholarship",
+    "frais_de_dossier",
+    "dates limites précises par programme"
   ],
-  "notes": "Université de premier plan (985/211/Double First-Class). Informations clés extraites du Collège d'Éducation Internationale (CIE). Programmes spécifiques en anglais confirmés : Droit et Santé publique. MBBS en chinois (5 ans). Préparatoire (预科) disponible. Service gratuit de navette aéroport. Hébergement obligatoire 1ère année en résidence internationale. Visa X1 (>180 jours) ou X2 (<180 jours). Frais d'examen physique: 400 CNY. Frais visa 1 an: 400 CNY. Pénalité de dépassement de visa: 500 CNY/jour (max 10000). Service de mise en relation 'Familles chinoises' pour nouveaux étudiants. 2 contacts emails distincts : study@jlu.edu.cn (admissions) et jluglobal@jlu.edu.cn (Office of Global Engagement). 2453 étudiants internationaux de 129 pays. Pas d'exigences HSK/IELTS/TOEFL chiffrées dans les sources - valeurs mises par défaut (HSK 4 pour bachelor, HSK 5 pour master/PhD) sont des standards chinois typiques mais non confirmés.",
+  "notes": "Sources = pages institutionnelles de l'École d'éducation internationale (cie.jlu.edu.cn). Informations détaillées sur les critères (GPA, HSK, IELTS, TOEFL, frais, dates) non publiées sur ces pages; consulter les fichiers .docx/PDF listés sous 申请流程 (sqlc.htm) et le portail apply.jlu.edu.cn. Bourse CSC 'High-Level Graduate Program' confirmée pour 2026/2027. 160 étudiants évalués pour la bourse CSC en 2026.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": 1,
-      "who": "étudiant",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport valide, page d'identité et page visa à fournir"
+      "notes": "Passeport valide requis pour tous les candidats"
     },
     {
-      "type": "admission_notice",
+      "type": "diplome",
       "required": true,
-      "count": 1,
-      "who": "étudiant",
+      "count": null,
+      "who": "",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master",
+        "phd"
       ],
-      "notes": "Notification d'admission originale de l'Université de Jilin + copie"
+      "notes": "Diplôme du niveau précédent (lycée/licence/master) avec traduction notariée"
     },
     {
-      "type": "visa_application_form",
+      "type": "releves_notes",
       "required": true,
-      "count": 1,
-      "who": "étudiant",
+      "count": null,
+      "who": "",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master",
+        "phd"
       ],
-      "notes": "Formulaire JW201 ou JW202 (外国留学人员来华签证申请表)"
+      "notes": "Relevés de notes officiels du cursus antérieur"
     },
     {
-      "type": "health_examination",
+      "type": "attestation_langue",
       "required": true,
-      "count": 1,
-      "who": "étudiant",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Certificat médical du pays d'origine (si disponible); examen physique complet à Changchun (400 CNY)"
+      "notes": "HSK pour les programmes en chinois; IELTS/TOEFL pour les programmes en anglais. Exigences spécifiques variables selon le programme (voir notifications par faculté)"
+    },
+    {
+      "type": "examen_medical",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire d'examen physique pour étranger"
+    },
+    {
+      "type": "casier_judiciaire",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire vierge"
+    },
+    {
+      "type": "projet_etude",
+      "required": null,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Plan d'étude ou projet de recherche (exigé pour les cycles supérieurs)"
+    },
+    {
+      "type": "lettre_recommandation",
+      "required": null,
+      "count": 2,
+      "who": "",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 lettres de recommandation pour master/doctorat"
     },
     {
       "type": "photo",
       "required": true,
       "count": null,
-      "who": "étudiant",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Photo 33x45mm fond blanc avec code numérique, prise au point photo désigné"
-    },
-    {
-      "type": "residence_address",
-      "required": true,
-      "count": 1,
-      "who": "étudiant",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Adresse détaillée fournie par le commissariat ou l'appartement"
-    },
-    {
-      "type": "attendance_certificate",
-      "required": true,
-      "count": 1,
-      "who": "étudiant",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Certificat d'assiduité délivré par l'unité de formation (pour renouvellement)"
-    },
-    {
-      "type": "introduction_letter",
-      "required": true,
-      "count": 1,
-      "who": "université",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Lettre d'introduction du Collège d'éducation internationale"
+      "notes": "Photo d'identité"
     }
   ],
   "application": {
-    "platform_name": "Système de candidature en ligne JLU",
-    "platform_url": "http://apply.jlu.edu.cn",
+    "platform_name": "Système de candidature en ligne de l'Université de Jilin",
+    "platform_url": "http://apply.jlu.edu.cn/member/login.do",
     "steps": [
-      "Candidature en ligne sur apply.jlu.edu.cn",
-      "Réception de la notification d'admission",
-      "Demande de visa X1/X2 à l'ambassade de Chine",
-      "Réservation du service de navette aéroportuaire en ligne",
-      "Arrivée à Changchun et enregistrement au 友谊会馆",
-      "Examen médical et demande de permis de séjour"
+      "Créer un compte sur http://apply.jlu.edu.cn/member/login.do",
+      "Remplir le formulaire de candidature en ligne",
+      "Télécharger les documents requis (passeport, diplômes, relevés, certificats de langue, etc.)",
+      "Soumettre la candidature en ligne",
+      "Attendre l'examen et la décision d'admission",
+      "Recevoir la lettre d'admission et le formulaire JW202 pour le visa",
+      "Procéder à la demande de visa X1/X2",
+      "Service gratuit de navette aéroport à l'arrivée"
     ],
     "opens_at": "",
     "deadline": "",
@@ -488,14 +405,10 @@
     ],
     "application_fee_cny": null,
     "application_fee_refundable": null,
-    "payment_methods": [
-      "cash",
-      "bank_card",
-      "wire_transfer"
-    ]
+    "payment_methods": []
   },
   "fees": {
-    "tuition_cny_year": {
+    "tuition_cnn_year": {
       "bachelor": {
         "min": null,
         "max": null
@@ -515,62 +428,57 @@
       "english_taught_premium": null
     },
     "insurance_cny_year": null,
-    "other_fees": [
-      {
-        "name": "examen_médical",
-        "amount_cny": 400,
-        "notes": "Examen physique complet à l'arrivée"
-      },
-      {
-        "name": "permis_de_séjour_1an",
-        "amount_cny": 400,
-        "notes": "Frais annuels"
-      },
-      {
-        "name": "permis_de_séjour_1_3ans",
-        "amount_cny": 800,
-        "notes": ""
-      },
-      {
-        "name": "permis_de_séjour_3_5ans",
-        "amount_cny": 1000,
-        "notes": ""
-      }
-    ],
+    "other_fees": [],
     "housing": {
       "on_campus": [
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "7 dortoirs internationaux, 928 chambres, 1669 lits répartis sur les campus"
+          "included": ""
         }
       ],
       "deposit_cny": null,
-      "off_campus_allowed": true
+      "off_campus_allowed": null
     },
     "living_cost_cny_month": {
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Taxi aéroport vers JLU: ~130 CNY; bus aéroport: ~40 CNY; train sud: ~35 CNY; train ouest: ~30 CNY"
+      "notes": "Université située à Changchun (Jilin), coût de la vie relativement bas par rapport aux grandes villes côtières"
     }
   },
   "scholarships": [
     {
-      "name": "Bourse du gouvernement chinois (CSC) - Programme haut niveau研究生",
+      "name": "Bourse du Gouvernement chinois (中国政府奖学金) - Programme haut niveau",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
+        "housing",
+        "insurance",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Évaluation annuelle obligatoire; 160 étudiants évalués en 2026",
+      "conditions": "Candidature via l'université (JLU) ou via l'ambassade de Chine / CSC. Niveau d'excellence académique requis. Programme 'haut niveau' pour master et doctorat.",
       "apply_via": "university",
       "deadline": "",
-      "renewal": "Évaluation annuelle requise"
+      "renewal": "Réévaluation annuelle obligatoire (评审) selon performance académique et comportement"
+    },
+    {
+      "name": "Bourse du Gouvernement chinois - Type universitaire",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "insurance",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants internationaux des niveaux学士/硕士/博士 désignés par les universités partenaires",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
     }
   ],
   "language": {
@@ -581,12 +489,12 @@
     "toefl_min": null,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an",
-      "leads_to_degree": false
+      "duration": "1 an (programme pré-universitaire)",
+      "leads_to_degree": true
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "Programme pré-universitaire (预科教育) dispensé à l'Institut d'éducation internationale. Cérémonie de remise des diplômes organisée chaque année."
     }
   },
   "visa": {
@@ -595,92 +503,114 @@
       "X2"
     ],
     "documents_from_university": [
-      "Notification d'admission",
-      "Formulaire JW201 ou JW202",
-      "Lettre d'introduction du Collège d'éducation internationale"
+      "Lettre d'admission",
+      "Formulaire JW202 (Visa Application for Study in China)"
     ],
-    "instructions": "X1 pour études >180 jours, X2 pour <180 jours. Demande auprès de l'ambassade ou du consulat chinois du pays de résidence. Surstay: 500 CNY/jour, max 10000 CNY.",
-    "arrival_and_residence_permit": "Permis de séjour obligatoire pour études >6 mois. Bureau: 长春市公安局出入境管理局 (光明路 688号). Horaires: Lun-Ven 09:00-11:30, 13:00-17:00. Frais: 400 CNY (1 an), 800 CNY (1-3 ans), 1000 CNY (3-5 ans)."
+    "instructions": "Les étudiants doivent demander un visa X1 (long séjour > 180 jours) ou X2 (court séjour). Le service des visas de l'université aide les étudiants pour les démarches (voir section 签证手续).",
+    "arrival_and_residence_permit": "Après l'arrivée, les étudiants doivent demander un permis de résidence (居留许可) au bureau de la sécurité publique dans les 30 jours. Service d'aide disponible à l'Institut d'éducation internationale."
   },
   "housing_and_services": {
     "housing_types": [
-      "7 dortoirs internationaux répartis sur les campus",
-      "928 chambres",
-      "1669 lits"
+      "Appartements internationaux sur le campus (7 résidences, 928 chambres, 1669 lits répartis sur différents campus)"
     ],
-    "rules": "Première année obligatoire en résidence sur campus. Après une année, location hors campus autorisée (responsabilité personnelle).",
-    "international_office": "Collège d'éducation internationale, 友谊会馆, 修正路1505号, Changchun. Tél: +86-431-85166885 / 85166518. Email: study@jlu.edu.cn",
-    "orientation": "Réunion d'information pour nouveaux étudiants en début de semestre (date et lieu communiqués ultérieurement)",
+    "rules": "Les étudiants internationaux sont prioritaires pour l'hébergement sur le campus. Le règlement de gestion est précisé sur le site de l'Institut d'éducation internationale.",
+    "international_office": "Institut d'éducation internationale (国际教育学院), adresse : 友谊会馆, 1505 修正路, Changchun. Tél : +86-431-85166885 / 85166518. Email : study@jlu.edu.cn",
+    "orientation": "Programme d'accueil organisé au début de chaque semestre (迎新活动). Service gratuit de navette aéroport pendant la période d'inscription. Mise en relation avec une famille chinoise (中国家庭) au début du semestre.",
     "english_support": true,
-    "clubs": "374 clubs étudiants (science, langue, pratique, arts, sport, bénévolat, académique). Association des étudiants internationaux, iCare Volunteer Association,联谊会."
+    "clubs": "374 clubs étudiants enregistrés au total. Pour les étudiants internationaux : Association des étudiants étrangers (留学生会, fondée en nov. 2018), Association des étudiants internationaux (国际学生联谊会), Association iCare (iCare志愿者协会)."
   },
   "country_specific": [
     {
       "region_or_country": "",
-      "notes": ""
+      "notes": "Jilin University accueille des étudiants de 129 pays. Université du Projet 985/211, Double First-Class (双一流 A). 6 campus, 47 unités de formation, 50 écoles couvrant 12 disciplines (philosophie, économie, droit, éducation, littérature, histoire, sciences, ingénierie, agriculture, médecine, gestion, arts)."
     }
   ],
   "scan_status": "ok",
   "slug": "jilin-university",
-  "scraped_at": "2026-08-23T14:45:26.302Z",
+  "scraped_at": "2026-08-30T11:01:45.729Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://cie.jlu.edu.cn/",
-      "title": "国际教育学院",
-      "chars": 2237
-    },
     {
       "url": "http://cie.jlu.edu.cn/",
       "title": "国际教育学院",
-      "chars": 2237
+      "chars": 7125
     },
     {
-      "url": "https://en.jlu.edu.cn/",
-      "title": "吉林大学英文",
-      "chars": 2526
+      "url": "https://cie.jlu.edu.cn/",
+      "title": "国际教育学院",
+      "chars": 7125
+    },
+    {
+      "url": "http://cie.jlu.edu.cn/lxsq1/xxgk.htm",
+      "title": "学校概况-国际教育学院",
+      "chars": 5677
+    },
+    {
+      "url": "http://cie.jlu.edu.cn/lxsq1/sqlc.htm",
+      "title": "申请流程-国际教育学院",
+      "chars": 5290
     },
     {
       "url": "https://cie.jlu.edu.cn/lxsq1/xxgk.htm",
       "title": "学校概况-国际教育学院",
-      "chars": 2735
+      "chars": 5677
     },
     {
-      "url": "https://cie.jlu.edu.cn/info/1048/3604.htm",
+      "url": "http://cie.jlu.edu.cn/info/1048/3604.htm",
       "title": "吉林大学接受来华留学生高等教育质量认证（再认证）现场审查-国际教育学院",
-      "chars": 1723
+      "chars": 5473
+    },
+    {
+      "url": "http://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847351",
+      "title": null,
+      "chars": 6208
     },
     {
       "url": "https://cie.jlu.edu.cn/lxsq1/sqlc.htm",
       "title": "申请流程-国际教育学院",
-      "chars": 1211
+      "chars": 5290
     },
     {
-      "url": "https://cie.jlu.edu.cn/rxxz.htm",
-      "title": "入学须知-国际教育学院",
-      "chars": 1699
+      "url": "https://cie.jlu.edu.cn/info/1048/3604.htm",
+      "title": "吉林大学接受来华留学生高等教育质量认证（再认证）现场审查-国际教育学院",
+      "chars": 5473
     },
     {
-      "url": "https://cie.jlu.edu.cn/rxxz/lhqdzb1.htm",
-      "title": "来华前的准备-国际教育学院",
-      "chars": 3772
+      "url": "http://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847340",
+      "title": null,
+      "chars": 7918
     },
     {
-      "url": "https://cie.jlu.edu.cn/zxxx/qzsx1.htm",
-      "title": "签证手续-国际教育学院",
-      "chars": 1586
+      "url": "https://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847351",
+      "title": null,
+      "chars": 6208
     },
     {
-      "url": "https://cie.jlu.edu.cn/gjxsfc.htm",
-      "title": "国际学生风采-国际教育学院",
-      "chars": 959
+      "url": "http://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847352",
+      "title": null,
+      "chars": 6860
     },
     {
-      "url": "https://cie.jlu.edu.cn/gjxsfc/gjxsfc.htm",
-      "title": "国际学生风采-国际教育学院",
-      "chars": 868
+      "url": "http://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847355",
+      "title": null,
+      "chars": 7825
+    },
+    {
+      "url": "https://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847340",
+      "title": null,
+      "chars": 7918
+    },
+    {
+      "url": "https://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847352",
+      "title": null,
+      "chars": 6860
+    },
+    {
+      "url": "https://cie.jlu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1407748499&wbfileid=2847355",
+      "title": null,
+      "chars": 7825
     }
   ],
   "db_row": {
@@ -691,49 +621,43 @@
     "city": "Changchun",
     "province": "Jilin",
     "country": "Chine",
-    "department": "International Education College (国际教育学院)",
+    "department": "吉林大学国际教育学院 (École d'éducation internationale)",
     "emails": [
       "study@jlu.edu.cn",
       "study@jlu.edu.cn"
     ],
-    "phone": "+86-431-85166885 / 85166518 / 85166877",
+    "phone": "+86-431-85166885 / +86-431-85166518",
     "wechat": "吉林大学国际教育学院",
-    "website": "https://en.jlu.edu.cn",
+    "website": "http://cie.jlu.edu.cn",
     "majors": [
       "business",
       "economics",
       "finance",
       "law",
       "education",
+      "arts",
       "engineering",
-      "computer_science",
       "sciences",
       "medicine",
-      "pharmacy",
-      "arts",
-      "design",
-      "music",
       "agriculture",
-      "chinese_language",
       "other"
     ],
     "required_documents": [
       "passport",
-      "admission_notice",
-      "visa_application_form",
-      "health_examination",
-      "photo",
-      "residence_address",
-      "attendance_certificate",
-      "introduction_letter"
+      "diplome",
+      "releves_notes",
+      "attestation_langue",
+      "examen_medical",
+      "casier_judiciaire",
+      "photo"
     ],
-    "scholarship_amount": "Bourse du gouvernement chinois (CSC) - Programme haut niveau研究生",
+    "scholarship_amount": "Bourse du Gouvernement chinois (中国政府奖学金) - Programme haut niveau / Bourse du Gouvernement chinois - Type universitaire",
     "scholarship_min": null,
     "scholarship_max": null,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+",
+    "min_hsk_level": null,
+    "language_requirements": null,
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": "Mai-juin pour rentrée septembre"
+    "application_deadline": "Variable selon le programme; candidature via apply.jlu.edu.cn"
   }
 }

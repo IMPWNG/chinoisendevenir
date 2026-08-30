@@ -6,23 +6,24 @@
     "aliases": [
       "CSU"
     ],
-    "website": "https://en.csu.edu.cn/",
+    "website": "https://www.csu.edu.cn/",
     "international_website": "https://intl.csu.edu.cn/",
     "application_portal_url": "https://csu.17gz.org/"
   },
   "general": {
-    "presentation": "Université de premier plan directement sous le Ministère de l'Éducation de la RPC, située à Changsha. CSU dispose de systèmes disciplinaires complets couvrant les métaux non ferreux, la médecine, le transport ferroviaire, ainsi que la philosophie, l'économie, le droit, l'éducation, la littérature, les sciences, l'ingénierie, la médecine, le management et l'art. Plus de 55 000 étudiants à temps plein dont plus de 34 000 en licence, plus de 20 000 en master/doctorat et près de 1 000 étudiants internationaux.",
-    "history": "",
-    "rankings": [],
+    "presentation": "Université nationale clé (Projet 211/985/Double First-Class) issue de la fusion en 2000 des universités du Centre-Sud, de Hunan Medical et de Changsha Railway. Forte en ingénierie, médecine, métallurgie et transports.",
+    "history": "Fondée en 2000 par fusion; ancêtres remontent à 1952 (instituts du chemin de fer et de métallurgie).",
+    "rankings": [
+      "Projet 985",
+      "Projet 211",
+      "Double First-Class"
+    ],
     "strengths": [
-      "Non-ferrous Metals",
-      "Medicine",
-      "Rail Transit",
-      "Engineering",
-      "Materials Science",
-      "Computer Science",
-      "Stomatology",
-      "Transportation Engineering"
+      "Métallurgie et mines",
+      "Ingénierie des transports",
+      "Médecine clinique",
+      "Science des matériaux",
+      "Génie civil"
     ],
     "teaching_languages": [
       "zh",
@@ -36,23 +37,18 @@
     "cost_of_living_cny_month": {
       "min": 1500,
       "max": 3000,
-      "notes": "Estimation générale pour étudiant international à Changsha"
+      "notes": "Estimation standard pour étudiant international à Changsha"
     },
     "campuses": [
       {
-        "name": "Yuelushan Campus (Main Campus)",
+        "name": "Yuelushan (岳麓山校区)",
         "city": "Changsha",
-        "description": "Campus principal, 932 Lushan South Road, Yuelu District"
+        "description": "Campus principal, 932 Lushan Nanlu"
       },
       {
-        "name": "Xinglin Campus",
+        "name": "Xinglin (杏林校区)",
         "city": "Changsha",
-        "description": "Campus médical, 172 Tongzipo Road"
-      },
-      {
-        "name": "Xiaoxiang Campus",
-        "city": "Changsha",
-        "description": "Campus accueillant le DIICSU (Dundee International Institute)"
+        "description": "Campus médical, 172 Tongzipo Lu"
       }
     ]
   },
@@ -60,30 +56,18 @@
     {
       "level": "bachelor",
       "name": "Programmes de licence (chinois)",
-      "field": "other",
+      "field": "engineering",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "4-5 ans selon filière. Programmes en chinois."
+      "notes": "HSK 4 ≥260 (sciences/ingé) ou HSK 5 ≥200 (lettres/médecine). Inscription sept."
     },
     {
       "level": "bachelor",
       "name": "Programmes de licence (anglais)",
-      "field": "other",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programmes en anglais disponibles"
-    },
-    {
-      "level": "bachelor",
-      "name": "DIICSU 4+0 (avec University of Dundee)",
       "field": "engineering",
       "language": "en",
       "duration_years": 4,
@@ -91,47 +75,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Double diplôme CSU + University of Dundee. Filières: Civil Engineering, Mathematics, Computing Science, Mechanical Engineering, Mechanical Engineering with Transportation. Frais: 69 000 CNY/an, logement 1 200 CNY/an."
+      "notes": "IELTS 6.0 ou TOEFL 85. Catalogue de spécialités en anglais disponible."
     },
     {
       "level": "master",
-      "name": "Programmes de master (chinois)",
-      "field": "other",
-      "language": "zh",
+      "name": "Programmes de master (chinois/anglais)",
+      "field": "engineering",
+      "language": "bilingual",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "3 ans"
-    },
-    {
-      "level": "master",
-      "name": "Programmes de master (anglais)",
-      "field": "other",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programmes en anglais disponibles"
+      "notes": "Master 3 ans; programmes intégralement en anglais en métallurgie, transports, génie civil."
     },
     {
       "level": "phd",
       "name": "Programmes de doctorat",
-      "field": "other",
+      "field": "engineering",
       "language": "bilingual",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "4 ans, chinois ou anglais"
+      "notes": "Doctorat 4 ans. Lettre d'acceptation préalable du superviseur exigée."
     },
     {
       "level": "language",
-      "name": "Programme de langue chinoise",
+      "name": "Cours de chinois (汉语进修生)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 1,
@@ -140,29 +112,40 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme de langue chinoise pour étudiants internationaux, durée 1 an"
+      "notes": "1 an ou 1 semestre; niveaux débutant à avancé; cours spéciaux (HSK, business)."
+    },
+    {
+      "level": "master",
+      "name": "Bourse d'Excellence (卓越奖学金) – 1+1",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Master 1+1: 1 an en Chine + 1 an dans le pays d'origine. Pour cadres/gestionnaires."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (high school)",
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent",
       "min_gpa": null,
-      "age_max": 30,
-      "age_min": 18,
+      "age_max": null,
+      "age_min": null,
       "hsk_level": 4,
-      "hsk_score_min": 180,
+      "hsk_score_min": 260,
       "ielts_min": 6,
       "toefl_min": 85,
-      "preparatory_if_insufficient": "Formation préparatoire d'un an en chinois à CSU puis test HSK4 requis",
+      "preparatory_if_insufficient": "Année préparatoire de chinois possible (programme de langue)",
       "other": [
-        "Examen physique",
-        "Casier judiciaire vierge",
-        "Vidéo de présentation d'1 minute",
-        "Frais de candidature 500 CNY"
+        "Non-citoyen chinois",
+        "Pas de casier judiciaire",
+        "Bonne santé"
       ]
     },
     "master": {
-      "academic": "Diplôme de licence (bachelor degree)",
+      "academic": "Diplôme de licence (bachelor) ou équivalent",
       "min_gpa": null,
       "age_max": 35,
       "age_min": 18,
@@ -170,18 +153,16 @@
       "hsk_score_min": 260,
       "ielts_min": 6,
       "toefl_min": 85,
-      "preparatory_if_insufficient": "Formation en chinois d'un an si HSK insuffisant",
+      "preparatory_if_insufficient": "Année préparatoire de chinois; HSK 5 ≥200 pour médecine/lettres",
       "other": [
-        "Plan d'études ≥1000 mots",
-        "2 lettres de recommandation",
         "Lettre d'acceptation du superviseur",
-        "CV et publications",
-        "Examen physique",
-        "Casier judiciaire vierge"
+        "2 lettres de recommandation",
+        "Plan d'études ≥1000 mots",
+        "Vidéo de présentation ≤1 min en chinois (si HSK)"
       ]
     },
     "phd": {
-      "academic": "Diplôme de master",
+      "academic": "Diplôme de master ou équivalent",
       "min_gpa": null,
       "age_max": 40,
       "age_min": 18,
@@ -189,47 +170,41 @@
       "hsk_score_min": 260,
       "ielts_min": 6,
       "toefl_min": 85,
-      "preparatory_if_insufficient": "Formation en chinois d'un an si HSK insuffisant",
+      "preparatory_if_insufficient": "Année préparatoire de chinois",
       "other": [
-        "Plan d'études ≥1000 mots signé par superviseur CSU",
-        "2 lettres de recommandation",
         "Lettre d'acceptation du superviseur",
-        "CV et publications",
-        "Examen physique",
-        "Casier judiciaire vierge"
+        "2 lettres de recommandation",
+        "Plan d'études signé par le superviseur"
       ]
     },
     "language": {
-      "academic": "Aucun prérequis académique spécifique",
-      "age_max": 30,
+      "academic": "Diplôme de fin d'études secondaires",
+      "age_max": 50,
       "other": [
-        "Débutant total sans expérience d'étude en Chine",
-        "Âge 18-30"
+        "16-18 ans avec tuteur légal en Chine",
+        "Relevé bancaire ≥50 000 CNY pour candidats autofinancés"
       ]
     }
   },
   "contacts": {
-    "office_name": "School of International Education (SIE), Central South University",
+    "office_name": "School of International Education, Central South University",
     "iso_email": "sie@csu.edu.cn",
     "admissions_email": "admissions@csu.edu.cn",
-    "wechat": "Plateforme officielle WeChat du SIE",
-    "phone": "+86-731-88836410 (non-médical), +86-731-89667206 (médical)",
-    "address": "Library 210, Main Campus, 932 Lushan South Road, Changsha City, Hunan Province, P.R. China"
+    "wechat": "Plateforme officielle de l'École d'Éducation Internationale (QR code)",
+    "phone": "+86-731-88836410 (non-medical) / +86-731-89667206 (médecine) / +86-731-88836661 (programme de langue)",
+    "address": "Library 210 (bureau 214 admissions), 932 Lushan Nanlu, Yuelushan, Changsha, Hunan, Chine; Médical: 172 Tongzipo Lu, Xinglin"
   },
   "matching": {
     "fields": [
       "engineering",
       "sciences",
       "medicine",
-      "dentistry",
-      "pharmacy",
-      "computer_science",
       "business",
       "economics",
+      "computer_science",
       "law",
       "education",
       "arts",
-      "design",
       "chinese_language",
       "other"
     ],
@@ -238,7 +213,7 @@
       "master",
       "phd",
       "language",
-      "exchange"
+      "foundation"
     ],
     "languages": [
       "zh",
@@ -250,16 +225,16 @@
     "min_hsk_level": 4,
     "min_ielts": 6,
     "min_toefl": 85,
-    "age_max_bachelor": 30,
+    "age_max_bachelor": null,
     "age_max_master": 35,
     "age_max_phd": 40,
     "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": 18000,
-    "tuition_cny_max": 69000,
-    "housing_cny_year_min": 1200,
-    "deadline_typical": "31 mai",
+    "has_provincial_scholarship": false,
+    "tuition_cny_min": 16000,
+    "tuition_cny_max": 40000,
+    "housing_cny_year_min": 3000,
+    "deadline_typical": "31 mai (bourse CSU); 15 mars (CSC Excellence); 10 juin (programme de langue)",
     "intake_months": [
       3,
       9
@@ -267,157 +242,182 @@
     "city": "Changsha",
     "province": "Hunan",
     "tags": [
-      "MOE直属",
       "985",
       "211",
-      "Double Diplôme Dundee",
-      "Médecine réputée",
-      "Transport ferroviaire",
-      "Métaux non-ferreux"
+      "Double First-Class",
+      "CSC",
+      "Excellence Scholarship",
+      "Silk Road",
+      "High-Level Graduate",
+      "programme de chinois",
+      "programmes en anglais",
+      "médecine",
+      "métallurgie",
+      "transports"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.82,
   "missing_fields": [
-    "rankings précis",
-    "coût de la vie exact",
-    "frais de scolarité détaillés hors DIICSU"
+    "frais de scolarité détaillés (PDF non extrait)",
+    "frais de logement exacts",
+    "coût de la vie vérifié par source officielle",
+    "exigences GPA chiffrées",
+    "classements internationaux précis"
   ],
-  "notes": "CSU propose des bourses complètes (CSC, Université, MOFCOM, Silk Road, Excellence) couvrant frais de scolarité, logement et stipend mensuel (2000 CNY bachelor, 2500 master, 3000 PhD). Bourses partielles couvrent uniquement les frais de scolarité. Date limite candidature bourse 2026: 31 mai 2026. Programme DIICSU avec University of Dundee: 69 000 CNY/an. HSK4 ≥260 pour sciences/ingénierie, HSK5 ≥200 pour arts/sociaux/médical (nouveau guide 2026).",
+  "notes": "Université de premier plan avec programmes en anglais et bourses multiples (CSC types A, Excellence, High-Level Graduate, Silk Road; bourses CSU complètes/partielles; MOFCOM; International Chinese Teacher). Frais de dossier: 500 CNY non remboursables. Documents en chinois ou anglais uniquement. Étudiants étrangers résidents longue durée doivent acheter l'assurance 'Comprehensive Insurance Plan for Foreigners'.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Validité supérieure à 1 an, page d'identité"
+      "notes": "Validité passeport ≥1 an après la date d'entrée. Pour la bourse Excellence CSC, validité après sept. 2026"
     },
     {
-      "type": "diploma",
+      "type": "highest_degree_certificate",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Plus haut diplôme, traduction notariée chinois/anglais si autre langue"
+      "notes": "Pré-attestation de diplôme requise pour les diplômés en cours. Traduction certifiée chinois/anglais si autre langue"
     },
     {
-      "type": "transcript",
+      "type": "academic_transcripts",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Relevé de notes du plus haut diplôme, tamponné, traduit si nécessaire"
+      "notes": "Sceau de l'établissement. Traduction certifiée chinois/anglais si autre langue"
     },
     {
-      "type": "language_certificate",
+      "type": "hsk_or_toefl_ielts",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour programmes en anglais"
+      "notes": "HSK 4 ≥260 (sciences/ingénierie) ou HSK 5 ≥200 (lettres/médecine) pour chinois; IELTS ≥6 ou TOEFL ≥85 pour anglais. Exemptions possibles"
     },
     {
-      "type": "non_criminal_record",
+      "type": "no_criminal_record",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "En chinois/anglais avec tampon officiel, daté après le 1er octobre 2025"
+      "notes": "Délivré après le 01/10/2025 par les autorités locales"
     },
     {
       "type": "physical_examination",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire Foreigner Physical Examination, daté après le 1er octobre 2025, original requis à l'inscription"
+      "notes": "Formulaire étranger standard, examen après 01/10/2025, avec photo tamponnée et signatures médecin+hôpital"
     },
     {
       "type": "self_introduction_video",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
-        "all"
+        "graduate"
       ],
-      "notes": "Vidéo d'1 minute max, format MP4, moins de 40MB, en chinois si titulaire HSK"
+      "notes": "≤1 min, format mp4, ≤40MB. En chinois obligatoire pour titulaires HSK"
     },
     {
-      "type": "scholarship_statement",
+      "type": "declaration_no_other_scholarship",
       "required": true,
-      "count": 1,
-      "who": "all",
+      "count": null,
+      "who": "",
       "applies_to": [
-        "all"
+        "graduate"
       ],
-      "notes": "Déclaration de non-bénéfice d'autres bourses"
+      "notes": "Modèle CSU"
     },
     {
-      "type": "recommendation_letter",
+      "type": "recommendation_letters",
       "required": true,
       "count": 2,
-      "who": "graduate",
+      "who": "Professeurs ou maîtres de conférences",
       "applies_to": [
-        "master",
+        "graduate",
         "phd"
       ],
-      "notes": "Deux lettres de professeurs/maîtres de conférences différents, datées après le 1er octobre 2025"
+      "notes": "En chinois ou anglais, coordonnées du recommandeur, datées après 01/10/2025"
     },
     {
       "type": "study_plan",
       "required": true,
-      "count": 1,
-      "who": "graduate",
+      "count": null,
+      "who": "",
       "applies_to": [
-        "master",
+        "graduate",
         "phd"
       ],
-      "notes": "Minimum 1000 mots, signé par le superviseur CSU pour les doctorants"
+      "notes": "≥1000 mots, doit être signé par le superviseur pour doctorat. Modèle CSU"
     },
     {
-      "type": "acceptance_letter",
+      "type": "supervisor_acceptance_letter",
       "required": true,
-      "count": 1,
-      "who": "graduate",
+      "count": null,
+      "who": "",
       "applies_to": [
-        "master",
+        "graduate",
         "phd"
       ],
-      "notes": "Lettre de pré-acceptation d'un professeur de CSU"
+      "notes": "Modèle CSU. Liste des superviseurs dans PDF contact"
     },
     {
       "type": "cv",
-      "required": false,
-      "count": 1,
-      "who": "graduate",
+      "required": true,
+      "count": null,
+      "who": "",
       "applies_to": [
-        "master",
-        "phd"
+        "all"
       ],
-      "notes": "CV et publications éventuelles comme pièces complémentaires"
+      "notes": "+ publications et autres pièces justificatives"
+    },
+    {
+      "type": "bank_proof",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "language_self_funded"
+      ],
+      "notes": "≥50 000 RMB sur compte personnel"
+    },
+    {
+      "type": "guardian_guarantee",
+      "required": false,
+      "count": null,
+      "who": "Pour candidats <18 ans",
+      "applies_to": [
+        "language"
+      ],
+      "notes": "+ pièce d'identité et attestation de travail du garant en Chine"
     }
   ],
   "application": {
-    "platform_name": "CSU School of International Education Online Application System",
+    "platform_name": "Système en ligne étudiants internationaux CSU",
     "platform_url": "https://csu.17gz.org/",
     "steps": [
-      "Inscription en ligne et soumission du formulaire sur csu.17gz.org",
-      "Examen préliminaire par l'École d'éducation internationale (identité, langue, santé)",
-      "Paiement des frais de candidature de 500 CNY via la plateforme de paiement unifiée CSU (WeChat, Alipay, UnionPay) sous 2 semaines après examen préliminaire",
-      "Examen académique par les écoles concernées",
-      "Publication des résultats finaux par email d'admission"
+      "Créer un compte sur csu.17gz.org et remplir la demande en ligne",
+      "Pré-examen du dossier (identité, langue, état de santé). Paiement des frais de dossier 500 RMB sous 2 semaines via WeChat/Alipay/UnionPay si accepté",
+      "Examen par le département/filière concernée (parcours académique, recherche)",
+      "Admission finale par l'université, catégorie de financement selon lettre d'admission"
     ],
     "opens_at": "",
     "deadline": "2026-05-31",
@@ -428,9 +428,9 @@
     "application_fee_cny": 500,
     "application_fee_refundable": false,
     "payment_methods": [
-      "WeChat",
-      "Alipay",
-      "UnionPay"
+      "wechat",
+      "alipay",
+      "unionpay"
     ]
   },
   "fees": {
@@ -455,18 +455,14 @@
     },
     "insurance_cny_year": null,
     "other_fees": [
-      {
-        "name": "Frais de candidature",
-        "amount_cny": 500,
-        "notes": "Non remboursable"
-      }
+      "Frais de dossier 500 CNY (non remboursables)"
     ],
     "housing": {
       "on_campus": [
         {
           "type": "double",
-          "price_cny_year": 1200,
-          "included": "Programme DIICSU uniquement (dortoir)"
+          "price_cny_year": null,
+          "included": "Couvert par la bourse intégrale CSU"
         }
       ],
       "deposit_cny": null,
@@ -476,149 +472,143 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Voir Charging Standards of Central South University.pdf"
+      "notes": "Voir PDF 标准 sur le site CSU (non extrait du PDF fourni)"
     }
   },
   "scholarships": [
     {
-      "name": "CSU University Scholarship (Full)",
+      "name": "Bourse CSU intégrale",
       "type": "university",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
+        "housing",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Excellence académique, 18-35 ans (master), 18-40 ans (doctorat), HSK4 ≥260 (sciences/ingénierie) ou HSK5 ≥200 (lettres/sciences sociales/médecine) ou IELTS ≥6/TOEFL ≥85",
+      "conditions": "Master: licence, 18-35 ans; Doctorat: master, 18-40 ans. Excellence académique, pas de casier judiciaire",
       "apply_via": "university",
       "deadline": "2026-05-31",
-      "renewal": "Revue annuelle basée sur performances académiques et comportementales"
+      "renewal": "Réussite examen annuel"
     },
     {
-      "name": "CSU University Scholarship (Partial)",
+      "name": "Bourse CSU partielle",
       "type": "university",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Mêmes conditions d'éligibilité que la bourse complète",
+      "conditions": "Mêmes conditions que bourse intégrale, sans allocation",
       "apply_via": "university",
       "deadline": "2026-05-31",
-      "renewal": "Revue annuelle"
+      "renewal": "Réussite examen annuel"
     },
     {
-      "name": "CSC Chinese Government Scholarship - Bilateral Program",
+      "name": "Bourse d'excellence CSC (卓越奖学金)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
+        "housing",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Via ambassade de Chine ou autorité nationale d'envoi",
-      "apply_via": "embassy",
-      "deadline": "",
-      "renewal": "Revue annuelle"
-    },
-    {
-      "name": "CSC Chinese Government Scholarship - University Program (High-level Graduate)",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Master 3 ans, Doctorat 4 ans",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "Revue annuelle"
-    },
-    {
-      "name": "CSC Silk Road Scholarship",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Pays le long de la Ceinture et Route",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": "Revue annuelle"
-    },
-    {
-      "name": "CSC Excellence Scholarship (卓越奖学金)",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Master uniquement, anglais, ≤45 ans, 3+ ans expérience, fonctionnaires de niveau chef ou cadres supérieurs",
+      "conditions": "Master anglais, ≤45 ans, licence+3 ans expérience, cadres/gestionnaires/fonctionnaires, 3 programmes: Mines/Métallurgie, Génie civil infrastructures, Transport. Modèle 1+1",
       "apply_via": "csc",
       "deadline": "2026-03-15",
-      "renewal": "Revue annuelle"
+      "renewal": ""
     },
     {
-      "name": "MOFCOM Scholarship (Ministère du Commerce)",
+      "name": "Bourse bilatérale CSC (国别双边)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Via ambassades chinoises ou CSC selon accords bilatéraux",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse Route de la Soie CSC (丝绸之路)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pays沿线丝路; selon directives CSC",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse haut niveau研究生 CSC (高水平研究生)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Master/PhD excellence académique",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse MOFCOM (商务部)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pays en développement, programmes spécifiques",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse professeur de chinois (国际中文教师)",
       "type": "other",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
+        "housing",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Pays en développement, via MOFCOM",
-      "apply_via": "mofta",
+      "conditions": "Pour étudiants en langue chinoise ou futurs professeurs de chinois",
+      "apply_via": "center_for_language_education",
       "deadline": "",
-      "renewal": "Revue annuelle"
-    },
-    {
-      "name": "International Chinese Language Teachers Scholarship",
-      "type": "other",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "stipend",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Étudiants en langue chinoise ou futurs enseignants de chinois",
-      "apply_via": "campus",
-      "deadline": "",
-      "renewal": "Revue annuelle"
+      "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": 4,
+    "hsk_bachelor": null,
     "hsk_master": 4,
-    "hsk_phd": 4,
+    "hsk_phd": null,
     "ielts_min": 6,
     "toefl_min": 85,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an",
+      "duration": "1 semestre ou 1 an (sept-juil.)",
       "leads_to_degree": false
     },
     "foundation": {
       "available": null,
-      "description": "Formation préparatoire en chinois d'un an si HSK non atteint, doit réussir HSK4 pour commencer les études de licence"
+      "description": ""
     }
   },
   "visa": {
@@ -627,89 +617,114 @@
       "X2"
     ],
     "documents_from_university": [
-      "Admission Letter",
-      "Visa Application for Study in China (JW202 form)"
+      "Lettre d'admission (录取通知书)",
+      "Formulaire JW201/JW202 (Visa Application for Study in China)"
     ],
-    "instructions": "La lettre d'admission et le formulaire JW202 sont envoyés aux candidats admis par courrier postal",
-    "arrival_and_residence_permit": "Permis de résidence requis pour les séjours de plus de 6 mois, à obtenir dans les 30 jours suivant l'arrivée auprès du bureau de l'immigration local"
+    "instructions": "Étudiants étrangers doivent demander le visa X1 (≥180 jours) ou X2 (<180 jours) auprès de l'ambassade de Chine avec lettre d'admission et formulaires JW201/202. Permis de résidence à obtenir dans les 30 jours suivant l'arrivée via l'Office international",
+    "arrival_and_residence_permit": "À l'arrivée: enregistrement au Bureau international, examen médical si requis, demande du permis de résidence à l'Exit-Entry Administration sous 30 jours"
   },
   "housing_and_services": {
     "housing_types": [
-      "Dortoir sur campus (chambre double)"
+      "Résidence universitaire sur campus (chambres doubles principalement)"
     ],
-    "rules": "Voir Administration Regulations on Non-academic International Students",
-    "international_office": "School of International Education, Library 210, Main Campus, 932 Lushan South Road, Changsha. Tel: +86-731-88836410 (non-médical), +86-731-89667206 (médical). Email: sie@csu.edu.cn",
-    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux disponible",
+    "rules": "Bourse CSU intégrale couvre l'hébergement sur campus. Les frais de logement sont détaillés dans le PDF 标准",
+    "international_office": "International Education Institute (国际教育学院), Bureau 210, Bibliothèque campus Yuelushan, 932 Lushan South Rd, Changsha",
+    "orientation": "Programme d'orientation disponible pour nouveaux étudiants (新生指南)",
     "english_support": true,
-    "clubs": "Activités étudiantes et clubs internationaux disponibles"
+    "clubs": "Associations étudiantes, activités culturelles (danse chinoise, wushu, tai-chi, calligraphie, etc.), excursions locales Hunan"
   },
   "country_specific": [
     {
-      "region_or_country": "Chine (résidents d'outre-mer)",
-      "notes": "Candidats avec un parent chinois et nationalité étrangère pour licence: passeport étranger valide depuis plus de 4 ans et résidence à l'étranger de plus de 2 ans dans les 4 dernières années (avant le 30 avril de l'année d'admission). Preuve de renonciation à la nationalité chinoise requise."
+      "region_or_country": "Chine (anciens citoyens chinois naturalisés)",
+      "notes": "Doivent détenir un passeport étranger valide ≥4 ans et avoir résidé à l'étranger ≥2 ans durant les 4 dernières années (avant 30 avril). Preuve de renonciation à la nationalité chinoise requise"
     }
   ],
   "scan_status": "ok",
   "slug": "central-south-university",
-  "scraped_at": "2026-08-24T14:27:28.937Z",
+  "scraped_at": "2026-08-30T11:06:13.027Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://intl.csu.edu.cn/zwb/lhlx.htm",
       "title": "来华留学-中南大学国际教育学院",
-      "chars": 1776
+      "chars": 3184
+    },
+    {
+      "url": "https://intl.csu.edu.cn/info/1079/3830.htm",
+      "title": "2026年中南大学国际学生奖学金招生简章-中南大学国际教育学院",
+      "chars": 8325
     },
     {
       "url": "https://intl.csu.edu.cn/",
       "title": "中南大学国际教育学院",
-      "chars": 902
+      "chars": 1824
     },
     {
-      "url": "https://en.csu.edu.cn/",
-      "title": "Central South University",
-      "chars": 4925
-    },
-    {
-      "url": "https://intl.csu.edu.cn/info/1144/3831.htm",
-      "title": "2026 Application Guide to Central South University Scholarship for International Students-中南大学国际教育学院",
-      "chars": 10205
-    },
-    {
-      "url": "https://en.csu.edu.cn/info/1039/1913.htm",
-      "title": "Application Guide to Central South University Scholarship for International Students 2018-Central South University",
-      "chars": 6956
-    },
-    {
-      "url": "https://en.csu.edu.cn/Int_l_Student/International_Students.htm",
-      "title": "International Students-Central South University",
-      "chars": 3855
-    },
-    {
-      "url": "https://dii.csu.edu.cn/EN/ADMISSIONS/Admission.htm",
-      "title": "Admission-中南大学邓迪国际学院门户网站",
-      "chars": 1934
-    },
-    {
-      "url": "https://soa.csu.edu.cn/English/Admission_Policy.htm",
-      "title": "Admission Policy-自动化学院官方网站",
-      "chars": 1552
+      "url": "https://intl.csu.edu.cn/info/1077/3797.htm",
+      "title": "2026年中南大学国际学生汉语进修生招生简章-中南大学国际教育学院",
+      "chars": 6276
     },
     {
       "url": "https://intl.csu.edu.cn/zwb/lhlx/jxjlb/zgzflhlxzyjxjxm.htm",
       "title": "中国政府来华留学卓越奖学金项目-中南大学国际教育学院",
-      "chars": 3918
+      "chars": 7442
     },
     {
-      "url": "https://intl.csu.edu.cn/zwb/lhlx/jxjlb/zndxgjxsxxjxj.htm",
-      "title": "中南大学国际学生学校奖学金-中南大学国际教育学院",
-      "chars": 4196
+      "url": "https://intl.csu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1667182464&wbfileid=16622520",
+      "title": null,
+      "chars": 16000
     },
     {
-      "url": "https://intl.csu.edu.cn/zwb/lhlx/jxjlb/gjzwjsjxj.htm",
-      "title": "国际中文教师奖学金-中南大学国际教育学院",
-      "chars": 3908
+      "url": "https://intl.csu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1667182464&wbfileid=16605578",
+      "title": null,
+      "chars": 16000
+    },
+    {
+      "url": "https://intl.csu.edu.cn/info/1075/3804.htm",
+      "title": "2026年中南大学国际学生本科生（中文授课）招生简章-中南大学国际教育学院",
+      "chars": 7744
+    },
+    {
+      "url": "https://intl.csu.edu.cn/info/1081/3869.htm",
+      "title": "2026年中南大学国际中文教师奖学金申请办法-中南大学国际教育学院",
+      "chars": 6686
+    },
+    {
+      "url": "https://intl.csu.edu.cn/info/1075/3814.htm",
+      "title": "2026年中南大学国际学生本科生（英文授课）招生简章-中南大学国际教育学院",
+      "chars": 7326
+    },
+    {
+      "url": "https://intl.csu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1667182464&wbfileid=16612812",
+      "title": null,
+      "chars": 11530
+    },
+    {
+      "url": "https://intl.csu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1667182464&wbfileid=16609787",
+      "title": null,
+      "chars": 16000
+    },
+    {
+      "url": "https://intl.csu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1667182464&wbfileid=16616635",
+      "title": null,
+      "chars": 6778
+    },
+    {
+      "url": "https://intl.csu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1667182464&wbfileid=16612809",
+      "title": null,
+      "chars": 16000
+    },
+    {
+      "url": "https://intl.csu.edu.cn/info/1234/3786.htm",
+      "title": "2026年中国政府奖学金国别双边项目招生简章-中南大学国际教育学院",
+      "chars": 7944
+    },
+    {
+      "url": "https://intl.csu.edu.cn/info/1077/3779.htm",
+      "title": "2026年春季学期中南大学汉语进修生招生简章-中南大学国际教育学院",
+      "chars": 6229
     }
   ],
   "db_row": {
@@ -720,50 +735,49 @@
     "city": "Changsha",
     "province": "Hunan",
     "country": "Chine",
-    "department": "School of International Education (SIE), Central South University",
+    "department": "School of International Education, Central South University",
     "emails": [
       "sie@csu.edu.cn",
       "admissions@csu.edu.cn"
     ],
-    "phone": "+86-731-88836410 (non-médical), +86-731-89667206 (médical)",
-    "wechat": "Plateforme officielle WeChat du SIE",
+    "phone": "+86-731-88836410 (non-medical) / +86-731-89667206 (médecine) / +86-731-88836661 (programme de langue)",
+    "wechat": "Plateforme officielle de l'École d'Éducation Internationale (QR code)",
     "website": "https://intl.csu.edu.cn/",
     "majors": [
       "engineering",
       "sciences",
       "medicine",
-      "dentistry",
-      "pharmacy",
-      "computer_science",
       "business",
       "economics",
+      "computer_science",
       "law",
       "education",
       "arts",
-      "design",
       "chinese_language",
       "other"
     ],
     "required_documents": [
       "passport",
-      "diploma",
-      "transcript",
-      "language_certificate",
-      "non_criminal_record",
+      "highest_degree_certificate",
+      "academic_transcripts",
+      "hsk_or_toefl_ielts",
+      "no_criminal_record",
       "physical_examination",
       "self_introduction_video",
-      "scholarship_statement",
-      "recommendation_letter",
+      "declaration_no_other_scholarship",
+      "recommendation_letters",
       "study_plan",
-      "acceptance_letter"
+      "supervisor_acceptance_letter",
+      "cv",
+      "bank_proof"
     ],
-    "scholarship_amount": "CSU University Scholarship (Full) / CSU University Scholarship (Partial) / CSC Chinese Government Scholarship - Bilateral Program / CSC Chinese Government Scholarship - University Program (High-level Graduate) / CSC Silk Road Scholarship / CSC Excellence Scholarship (卓越奖学金) / MOFCOM Scholarship (Ministère du Commerce) / International Chinese Language Teachers Scholarship",
-    "scholarship_min": 18000,
-    "scholarship_max": 69000,
+    "scholarship_amount": "Bourse CSU intégrale / Bourse CSU partielle / Bourse d'excellence CSC (卓越奖学金) / Bourse bilatérale CSC (国别双边) / Bourse Route de la Soie CSC (丝绸之路) / Bourse haut niveau研究生 CSC (高水平研究生) / Bourse MOFCOM (商务部) / Bourse professeur de chinois (国际中文教师)",
+    "scholarship_min": 16000,
+    "scholarship_max": 40000,
     "min_hsk_level": 4,
     "language_requirements": "HSK 4+ / IELTS 6 / TOEFL 85",
-    "tuition_min": 18000,
-    "tuition_max": 69000,
-    "application_deadline": "31 mai"
+    "tuition_min": 16000,
+    "tuition_max": 40000,
+    "application_deadline": "31 mai (bourse CSU); 15 mars (CSC Excellence); 10 juin (programme de langue)"
   }
 }

@@ -9,26 +9,29 @@
     ],
     "website": "https://www.swjtu.edu.cn/",
     "international_website": "https://en.swjtu.edu.cn/",
-    "application_portal_url": "https://sie.swjtu.edu.cn/"
+    "application_portal_url": "https://admission.swjtu.edu.cn/"
   },
   "general": {
-    "presentation": "Université chinoise de premier plan, spécialisée dans le transport ferroviaire, les transports et la logistique. Célébration de son 130e anniversaire.",
-    "history": "Fondée en 1896, l'une des plus anciennes universités d'ingénierie en Chine, à l'origine de l'éducation en génie ferroviaire.",
+    "presentation": "Université publique de classe A (Project 211/985 Innovation Platform) fondée en 1896 à Shanhai, spécialisée en ingénierie du transport ferroviaire, génie civil, mécanique, électricité et informatique. Campus principal à Chengdu (Pidu) avec campus historiques à Emei et Tianfu.",
+    "history": "Fondée en 1896 lors du mouvement d'industrialisation, transférée à Emei en 1946 puis Chengdu. Célèbre pour le chemin de fer chinois (première école de transport ferroviaire). Célébration du 130e anniversaire en 2026.",
     "rankings": [
-      "Project 211",
-      "Double First-Class"
+      "Top 50 Chine (classe A)",
+      "Classée en ingénierie du transport et chemins de fer",
+      "Membre Project 211 et 985 Innovation Platform"
     ],
     "strengths": [
-      "Génie ferroviaire et transports",
+      "Transport ferroviaire et ingénierie ferroviaire",
       "Génie civil",
+      "Mécanique",
+      "Génie électrique",
+      "Informatique et systèmes intelligents",
       "Logistique",
-      "Sciences et technologies de l'information",
-      "Matériaux",
-      "Architecture"
+      "Science des matériaux"
     ],
     "teaching_languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
     "location": {
       "city": "Chengdu",
@@ -38,25 +41,30 @@
     "cost_of_living_cny_month": {
       "min": 2000,
       "max": 3500,
-      "notes": "Estimation générale pour Chengdu"
+      "notes": "Estimation pour étudiant international à Chengdu, incluant logement, nourriture et transport."
     },
     "campuses": [
       {
-        "name": "Campus Jiuli (九里校区)",
+        "name": "Campus Pidu (Xinan Lu)",
         "city": "Chengdu",
-        "description": "Campus historique"
+        "description": "Campus principal moderne, adresse: No.999 Xi'an Road, Pidu District, Chengdu, Sichuan 611756"
       },
       {
-        "name": "Campus Xipu (犀浦校区)",
+        "name": "Campus Emei",
+        "city": "Emeishan",
+        "description": "Campus historique avec écoles d'ingénierie"
+      },
+      {
+        "name": "Campus Tianfu",
         "city": "Chengdu",
-        "description": "Campus principal moderne, adresse: 999 Xi'an Road, Pidu District"
+        "description": "Nouveau campus en développement"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "SWJTU Undergraduate Program (Self-sponsored)",
+      "name": "SWJTU Undergraduate Program",
       "field": "engineering",
       "language": "bilingual",
       "duration_years": 4,
@@ -64,23 +72,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme général licence, deadline 30 juin 2026"
-    },
-    {
-      "level": "bachelor",
-      "name": "SWJTU Undergraduate Program (Presidential Scholarship)",
-      "field": "engineering",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Avec bourse du président, deadline 1er juin 2026"
+      "notes": "Programmes en chinois et anglais. Spécialités fortes: Railway Engineering, Civil Engineering, Mechanical, Electrical, Computer Science. Bourse du Président ou autofinancement."
     },
     {
       "level": "master",
-      "name": "SWJTU Postgraduate Program (Self-sponsored)",
+      "name": "SWJTU Postgraduate Program (Master)",
       "field": "engineering",
       "language": "bilingual",
       "duration_years": 3,
@@ -88,47 +84,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Master autofinancé, deadline 30 juin 2026"
-    },
-    {
-      "level": "master",
-      "name": "SWJTU Postgraduate Program (Presidential Scholarship)",
-      "field": "engineering",
-      "language": "bilingual",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Avec bourse du président, deadline 1er juin 2026"
-    },
-    {
-      "level": "master",
-      "name": "CSC High-level Postgraduate Program",
-      "field": "engineering",
-      "language": "bilingual",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse du gouvernement chinois Type B, deadline 22 février 2026"
-    },
-    {
-      "level": "master",
-      "name": "Silk Road Scholarship Program",
-      "field": "engineering",
-      "language": "bilingual",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse CSC Route de la Soie, deadline 25 mai 2026"
+      "notes": "Programmes MSc. Bourse présidentielle ou autofinancement. Specialites incluent Transportation Planning, Mechanical, Road & Railway Eng., Electrical, Computer Science."
     },
     {
       "level": "phd",
-      "name": "SWJTU PhD Program (Self-sponsored)",
+      "name": "SWJTU Postgraduate Program (Ph.D.)",
       "field": "engineering",
       "language": "bilingual",
       "duration_years": 4,
@@ -136,262 +96,313 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Doctorat autofinancé, deadline 30 juin 2026"
-    },
-    {
-      "level": "phd",
-      "name": "SWJTU PhD Program (Presidential Scholarship)",
-      "field": "engineering",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Avec bourse du président, deadline 1er juin 2026"
-    },
-    {
-      "level": "phd",
-      "name": "CSC High-level PhD Program",
-      "field": "engineering",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse du gouvernement chinois Type B, deadline 22 février 2026"
+      "notes": "Programmes doctoraux avec bourses CSC, Silk Road, MOFCOM ou Presidential."
     },
     {
       "level": "language",
-      "name": "Chinese Language Training Program (汉语进修生)",
+      "name": "Beginner's Chinese Program",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 1,
+      "start_months": [
+        2,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours de chinois pour débutants, autofinancé. Inscriptions Feb et Sept."
+    },
+    {
+      "level": "language",
+      "name": "Intermediate Chinese Program",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        2,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Cours de chinois intermédiaire, autofinancé."
+    },
+    {
+      "level": "master",
+      "name": "CSC High-level Postgraduate Program (Type B)",
+      "field": "engineering",
+      "language": "bilingual",
+      "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme long (1 semestre ou plus), axé sur la langue et la culture chinoises"
+      "notes": "Bourse du gouvernement chinois (CSC Type B), Master et PhD. Deadline 22 février 2026."
+    },
+    {
+      "level": "phd",
+      "name": "CSC Silk Road Scholarship Program",
+      "field": "engineering",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Bourse gouvernementale chinoise Silk Road. Master (3 ans) et PhD (4 ans). Deadline 25 mai 2026."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires, équivalent baccalauréat",
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent, non-Chinois, en bonne santé physique et mentale.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire en chinois disponible",
-      "other": []
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible via International Education College.",
+      "other": [
+        "Nationalité non-chinoise requise",
+        "Score report IELTS/TOEFL pour programmes en anglais ou certificat universitaire prouvant études en anglais"
+      ]
     },
     "master": {
-      "academic": "Licence (Bachelor) dans un domaine pertinent",
+      "academic": "Baccalauréat (bachelor) ou équivalent, avec bons résultats académiques.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 35,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible si HSK insuffisant.",
       "other": [
-        "Superviseur (advisor) requis pour le doctorat"
+        "HSK5 ≥180 pour programmes en chinois en STEM",
+        "HSK4 ≥180 pour programmes en chinois en sciences sociales/management",
+        "Non-Chinois, physiquement et mentalement en bonne santé"
       ]
     },
     "phd": {
-      "academic": "Master dans un domaine pertinent",
+      "academic": "Master (master's degree) ou équivalent, excellents résultats académiques.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 40,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Programme préparatoire de chinois disponible.",
       "other": [
-        "Superviseur (advisor) requis"
+        "HSK5 ≥180 pour STEM en chinois",
+        "HSK4 ≥180 pour sciences sociales/management",
+        "Non-Chinois, bonne santé",
+        "Accord d'un superviseur de thèse requis"
       ]
     },
     "language": {
-      "academic": "Aucune condition académique stricte",
+      "academic": "Nationalité non-chinoise. Cours ouverts tous niveaux.",
       "age_max": null,
-      "other": []
+      "other": [
+        "Inscription en février et septembre"
+      ]
     }
   },
   "contacts": {
-    "office_name": "School of International Education (国际教育学院)",
+    "office_name": "International Education College (国际教育学院) / International Students Office",
     "iso_email": "iso@swjtu.edu.cn",
     "admissions_email": "is@swjtu.edu.cn",
     "wechat": "",
     "phone": "",
-    "address": "999 Xi'an Road (Xipu Campus), Pidu District, Chengdu, Sichuan, China, 611756"
+    "address": "No.999 Xi'an Road, Pidu District, Chengdu, Sichuan, China 611756"
   },
   "matching": {
     "fields": [
       "engineering",
       "computer_science",
+      "business",
       "sciences",
       "design",
-      "business",
-      "economics"
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language",
-      "exchange"
+      "language"
     ],
     "languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
+    "min_hsk_level": 4,
+    "min_ielts": 6,
+    "min_toefl": 80,
     "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
+    "age_max_master": 35,
+    "age_max_phd": 40,
     "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": true,
+    "has_provincial_scholarship": null,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
-    "housing_cny_year_min": 7200,
-    "deadline_typical": "30 juin",
+    "housing_cny_year_min": null,
+    "deadline_typical": "1er juin (bourse présidentielle) / 30 juin (autofinancement)",
     "intake_months": [
+      2,
       9
     ],
     "city": "Chengdu",
     "province": "Sichuan",
     "tags": [
-      "transport",
-      "railway",
-      "logistics",
-      "211",
-      "Double First-Class",
-      "CSC",
+      "Project 211",
+      "985 Innovation Platform",
+      "railway engineering",
+      "transportation",
+      "CSC scholarship",
+      "MOFCOM scholarship",
+      "presidential scholarship",
       "Silk Road",
-      "MOFCOM",
-      "presidential-scholarship",
-      "sister-city",
-      "ancien"
+      "Top chinois",
+      "130e anniversaire 2026"
     ]
   },
-  "confidence": 0.55,
+  "confidence": 0.75,
   "missing_fields": [
     "tuition_cny_min",
     "tuition_cny_max",
-    "min_hsk_level",
-    "min_ielts",
-    "min_toefl",
-    "age_max",
-    "min_gpa",
+    "housing_cny_year_min",
+    "age_max_bachelor",
+    "has_provincial_scholarship",
     "phone",
     "wechat",
-    "cost_of_living_cny_month_min",
-    "cost_of_living_cny_month_max"
+    "coût exact du logement",
+    "GPA minimum exact",
+    "frais de dossier pour programmes non-CSC"
   ],
-  "notes": "Université de référence en génie ferroviaire et transports. Sources confirmées: programmes bachelor/master/PhD bilingues, 5 types de bourses (CSC Type B, Silk Road, MOFCOM, Presidential, Sister City). Frais de logement: 600-1000 CNY/mois selon campus et type chambre. Détails spécifiques (HSK, IELTS, frais de scolarité exacts) non présents dans les sources fournies.",
+  "notes": "SWJTU est l'université historique du chemin de fer chinois (premier institut ferroviaire). Spécialités fortes: ingénierie ferroviaire, transport, génie civil, mécanique, électricité, informatique. Frais de dossier: RMB 400 (non remboursable) pour la bourse CSC. Procédure d'application: remplir le système CSC (studyinchina.csc.edu.cn) ET le système universitaire (admission.swjtu.edu.cn). Pour le Silk Road scholarship, deadline mai 2026; résultat final juillet/août 2026. Programmes Silk Road couvrent: Transportation Planning and Management, Mechanical Engineering, Road and Railway Engineering, Electrical Engineering, Computer Science and Technology. Sources: sie.swjtu.edu.cn (chinois), en.swjtu.edu.cn (anglais).",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "Tous les candidats",
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport en cours de validité requis pour toute candidature"
+      "notes": "Passeport valide, vérification à l'arrivée"
     },
     {
-      "type": "diploma",
-      "required": true,
+      "type": "hsк",
+      "required": false,
       "count": null,
-      "who": "bachelor, master, phd",
+      "who": "Candidats en chinois",
       "applies_to": [
-        "degree"
+        "bachelor",
+        "master",
+        "phd"
       ],
-      "notes": "Diplômes et relevés de notes notariés selon le programme"
+      "notes": "HSK4 ≥180 (lettres/gestion) ou HSK5 ≥180 (sciences/ingénierie); exempté si diplôme antérieur en chinois"
     },
     {
-      "type": "language_certificate",
-      "required": true,
+      "type": "ielts_or_toefl",
+      "required": false,
       "count": null,
-      "who": "",
-      "applies_to": [
-        "degree"
-      ],
-      "notes": "HSK pour programmes chinois; IELTS/TOEFL pour programmes anglais"
-    },
-    {
-      "type": "study_plan",
-      "required": true,
-      "count": 1,
-      "who": "master, phd",
+      "who": "Candidats en anglais (non-anglophones)",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "Plan d'études ou proposition de recherche"
+      "notes": "IELTS 6.0+ ou TOEFL iBT 80+, ou attestation d'études en anglais"
     },
     {
-      "type": "recommendation_letters",
+      "type": "diplome",
       "required": true,
-      "count": 2,
-      "who": "master, phd",
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Bachelor pour master; Master pour doctorat; originaux vérifiés à l'inscription"
+    },
+    {
+      "type": "releves_notes",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Relevés de notes officiels"
+    },
+    {
+      "type": "plan_etudes",
+      "required": true,
+      "count": null,
+      "who": "",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "2 lettres de recommandation pour cycles supérieurs"
+      "notes": "Study plan selon modèle Annexe II"
     },
     {
-      "type": "physical_exam",
+      "type": "formulaire_examen_medical",
       "required": true,
       "count": null,
       "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Examen médical pour visa et inscription"
+      "notes": "Foreigner Physical Examination Form (Annexe III)"
     },
     {
-      "type": "no_criminal_record",
-      "required": true,
+      "type": "formulaire_csc",
+      "required": false,
+      "count": null,
+      "who": "Candidats CSC",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Télécharger depuis studyinchina.csc.edu.cn"
+    },
+    {
+      "type": "lettres_recommandation",
+      "required": false,
       "count": null,
       "who": "",
       "applies_to": [
-        "all"
+        "master",
+        "phd"
       ],
-      "notes": "Casier judiciaire vierge"
+      "notes": "Voir Annexe I pour détails CSC"
     }
   ],
   "application": {
-    "platform_name": "SWJTU Système de candidature en ligne",
-    "platform_url": "https://sie.swjtu.edu.cn/",
+    "platform_name": "SWJTU Admission System",
+    "platform_url": "https://admission.swjtu.edu.cn/#/login",
     "steps": [
-      "Créer un compte sur la plateforme SWJTU",
-      "Remplir le formulaire en ligne",
-      "Soumettre les documents requis",
-      "Payer les frais de candidature",
-      "Attendre la notification d'admission",
-      "Postuler pour la bourse CSC via le système CSC si éligible"
+      "Créer un compte sur https://admission.swjtu.edu.cn",
+      "Remplir le formulaire en ligne et téléverser tous les documents requis",
+      "Pour CSC: aussi postuler sur studyinchina.csc.edu.cn (Type B, code 10613)",
+      "Payer les frais de dossier de 400 CNY (non remboursables)",
+      "Attendre l'examen préliminaire de SWJTU",
+      "Examen académique par l'unité de formation (entretien/écrit)",
+      "Révision finale CSC (pour boursiers)",
+      "Recevoir la notification d'admission par e-mail (juillet-août 2026)"
     ],
     "opens_at": "",
-    "deadline": "Variable selon programme: 22 février 2026 (CSC haut niveau); 25 mai 2026 (CSC Silk Road); 1 juin 2026 (bourse présidentielle); 30 juin 2026 (autofinancé)",
-    "results_at": "",
+    "deadline": "2026-06-30",
+    "results_at": "2026-07",
     "intake_months": [
       9
     ],
-    "application_fee_cny": null,
-    "application_fee_refundable": null,
+    "application_fee_cny": 400,
+    "application_fee_refundable": false,
     "payment_methods": []
   },
   "fees": {
@@ -420,197 +431,213 @@
       "on_campus": [
         {
           "type": "double",
-          "price_cny_year": 7200,
-          "included": "Non précisé; séjour >15 jours facturé au mois complet"
+          "price_cny_year": null,
+          "included": "Logement fourni par bourse CSC"
         }
       ],
       "deposit_cny": null,
-      "off_campus_allowed": true
+      "off_campus_allowed": null
     },
     "living_cost_cny_month": {
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Campus Jiuli double CNY 600/mois; Campus Xipu simple CNY 1000/mois, double CNY 700/mois, triple CNY 600/mois"
-    }
-  },
-  "scholarships": [
-    {
-      "name": "Chinese Government Scholarship (CSC)",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "stipend",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "CSC haut niveau (Type B) et Silk Road; excellent dossier académique; pré-bourse via ambassade ou SWJTU",
-      "apply_via": "university",
-      "deadline": "22 février 2026 (haut niveau) ou 25 mai 2026 (Silk Road)",
-      "renewal": "Renouvelable annuellement sur résultats"
+      "notes": ""
     },
-    {
-      "name": "Presidential Scholarship",
-      "type": "university",
-      "coverage": "partial",
-      "covers": [
-        "tuition",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Bourse du Président SWJTU; mérite académique élevé",
-      "apply_via": "university",
-      "deadline": "1 juin 2026",
-      "renewal": "Renouvelable"
-    },
-    {
-      "name": "Sister City Scholarship",
-      "type": "local",
-      "coverage": "partial",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Réservé aux étudiants issus de villes jumelées",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "MOFCOM Scholarship",
-      "type": "government",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "stipend",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Programme du Ministère du Commerce; réservé pays en développement",
-      "apply_via": "university",
-      "deadline": "TBD",
-      "renewal": ""
-    }
-  ],
-  "language": {
-    "hsk_bachelor": null,
-    "hsk_master": null,
-    "hsk_phd": null,
-    "ielts_min": null,
-    "toefl_min": null,
-    "preparatory_chinese": {
-      "available": true,
-      "duration": "1 semestre ou plus",
-      "leads_to_degree": false
-    },
-    "foundation": {
-      "available": null,
-      "description": ""
-    }
-  },
-  "visa": {
-    "visa_types": [
-      "X1",
-      "X2"
+    "scholarships": [
+      {
+        "name": "Chinese Government Scholarship - Silk Road (CSC Type B)",
+        "type": "csc",
+        "coverage": "full",
+        "covers": [
+          "tuition",
+          "housing",
+          "stipend",
+          "insurance"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Non-Chinois, master ≤35 ans ou doctorat ≤40 ans, HSK/IELTS/TOEFL requis",
+        "apply_via": "university",
+        "deadline": "2026-05-25",
+        "renewal": ""
+      },
+      {
+        "name": "Chinese Government Scholarship - High-level Postgraduate (CSC Type B)",
+        "type": "csc",
+        "coverage": "full",
+        "covers": [
+          "tuition",
+          "housing",
+          "stipend",
+          "insurance"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Non-Chinois, master ≤35 ans ou doctorat ≤40 ans",
+        "apply_via": "university",
+        "deadline": "2026-02-22",
+        "renewal": ""
+      },
+      {
+        "name": "Presidential Scholarship",
+        "type": "university",
+        "coverage": "partial",
+        "covers": [
+          "tuition"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Excellence académique",
+        "apply_via": "university",
+        "deadline": "2026-06-01",
+        "renewal": ""
+      },
+      {
+        "name": "MOFCOM Scholarship",
+        "type": "government",
+        "coverage": "full",
+        "covers": [
+          "tuition",
+          "housing",
+          "stipend",
+          "insurance"
+        ],
+        "stipend_cny_month": null,
+        "conditions": "Candidats de pays éligibles",
+        "apply_via": "university",
+        "deadline": "TBD",
+        "renewal": ""
+      }
     ],
-    "documents_from_university": [
-      "Formulaire de demande de visa de séjour SWJTU",
-      "Lettre d'admission JW202",
-      "Visa de résidence pour X1"
-    ],
-    "instructions": "Les étudiants demandant un programme de plus de 6 mois doivent obtenir un visa X1; convertir en permis de résidence dans les 30 jours suivant l'arrivée",
-    "arrival_and_residence_permit": "Permis de résidence requis pour séjours >6 mois; à demander au Bureau de la sécurité publique de Chengdu"
-  },
-  "housing_and_services": {
-    "housing_types": [
-      "Chambre double (Jiuli Yanghua 7)",
-      "Chambre simple/double/triple (Xipu Hongzhe 11)"
-    ],
-    "rules": "Séjour >15 jours facturé un mois complet; demande de logement hors campus possible via formulaire",
-    "international_office": "iso@swjtu.edu.cn (bachelor/master); is@swjtu.edu.cn (bourse CSC) - Adresse: 999 Xi'an Road, Pidu District, Chengdu, Sichuan 611756",
-    "orientation": "",
-    "english_support": true,
-    "clubs": "Diverses associations étudiantes internationales"
-  },
-  "country_specific": [
-    {
-      "region_or_country": "Pays en développement",
-      "notes": "Éligibles au programme MOFCOM et Silk Road CSC"
+    "language": {
+      "hsk_bachelor": 4,
+      "hsk_master": 4,
+      "hsk_phd": 4,
+      "ielts_min": 6,
+      "toefl_min": 80,
+      "preparatory_chinese": {
+        "available": null,
+        "duration": "",
+        "leads_to_degree": null
+      },
+      "foundation": {
+        "available": null,
+        "description": ""
+      }
     },
-    {
-      "region_or_country": "Pays de villes jumelées avec Chengdu",
-      "notes": "Éligibles à la Sister City Scholarship"
-    }
-  ],
+    "visa": {
+      "visa_types": [
+        "X1",
+        "X2"
+      ],
+      "documents_from_university": [
+        "Lettre d'admission (JW201/JW202)",
+        "Formulaire de visa étudiant"
+      ],
+      "instructions": "Les étudiants doivent demander un visa X1/X2 avec la lettre d'admission SWJTU et le formulaire JW201/JW202",
+      "arrival_and_residence_permit": "Permis de résidence à obtenir dans les 30 jours suivant l'arrivée via le bureau de sécurité publique de Chengdu"
+    },
+    "housing_and_services": {
+      "housing_types": [
+        "Chambre double sur campus"
+      ],
+      "rules": "Voir guide de logement sur sie.swjtu.edu.cn/xysh/zszy.htm",
+      "international_office": "iso@swjtu.edu.cn / is@swjtu.edu.cn / sie@swjtu.edu.cn",
+      "orientation": "Oui, programme de préparation avant arrivée",
+      "english_support": true,
+      "clubs": "Associations étudiantes internationales disponibles"
+    },
+    "country_specific": [
+      {
+        "region_or_country": "",
+        "notes": ""
+      }
+    ]
+  },
   "scan_status": "ok",
   "slug": "swjtu",
-  "scraped_at": "2026-08-24T14:37:55.287Z",
+  "scraped_at": "2026-08-30T11:11:39.470Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://sie.swjtu.edu.cn/",
       "title": "西南交通大学国际教育学院",
-      "chars": 835
+      "chars": 3600
     },
     {
-      "url": "https://en.swjtu.edu.cn/",
+      "url": "https://en.swjtu.edu.cn/index.jsp",
       "title": "Southwest Jiaotong University",
-      "chars": 12000
+      "chars": 16000
     },
     {
       "url": "https://sie.swjtu.edu.cn/info/1014/2602.htm",
-      "title": "2026/2027学年学历项目一览表 List of Degree Program-西南交通大学国际教育学院",
-      "chars": 4233
+      "title": "2026/2027学年学历项目一览表  List of Degree Program-西南交通大学国际教育学院",
+      "chars": 6738
+    },
+    {
+      "url": "https://sie.swjtu.edu.cn/info/1029/2512.htm",
+      "title": "2026/2027学年学历项目一览表  List of Degree Program-西南交通大学国际教育学院",
+      "chars": 6931
+    },
+    {
+      "url": "https://sie.swjtu.edu.cn/info/1030/1932.htm",
+      "title": "2025-2026非学历项目一览表-西南交通大学国际教育学院",
+      "chars": 3023
+    },
+    {
+      "url": "https://sie.swjtu.edu.cn/info/1029/3192.htm",
+      "title": "西南交通大学2026/2027学年“丝绸之路”中国政府奖学金项目招生简章（CSC Type B）  Southwest Jiaotong University Chinese Government Scholarship Program for the 2026/2027 Academic Year - Silk Road Scholarship Progr",
+      "chars": 13496
     },
     {
       "url": "https://sie.swjtu.edu.cn/zsxx/xlxwxm.htm",
       "title": "学历学位项目-西南交通大学国际教育学院",
-      "chars": 1443
+      "chars": 4801
+    },
+    {
+      "url": "https://sie.swjtu.edu.cn/info/1030/2562.htm",
+      "title": "西南交通大学2025/2026学年语言生项目招生简章-西南交通大学国际教育学院",
+      "chars": 4362
     },
     {
       "url": "https://sie.swjtu.edu.cn/zsxx/jxj.htm",
       "title": "奖学金-西南交通大学国际教育学院",
-      "chars": 652
+      "chars": 2708
     },
     {
-      "url": "https://sie.swjtu.edu.cn/jyjx/bks.htm",
-      "title": "本科生-西南交通大学国际教育学院",
-      "chars": 493
+      "url": "https://sie.swjtu.edu.cn/info/1029/3052.htm",
+      "title": "西南交通大学2026-2027年度校长奖学金招生简章  SWJTU Presidential Scholarship 2026-2027 Admission Guide-西南交通大学国际教育学院",
+      "chars": 11295
     },
     {
-      "url": "https://sie.swjtu.edu.cn/jyjx/yys.htm",
-      "title": "语言生-西南交通大学国际教育学院",
-      "chars": 457
+      "url": "https://sie.swjtu.edu.cn/info/1029/3032.htm",
+      "title": "西南交通大学2026/2027学年中国政府奖学金高水平研究生项目招生简章（CSC Type B）    Southwest Jiaotong University Chinese Government Scholarship (CSC) Program for the 2026/2027 Academic Year High-level Postgradua",
+      "chars": 13540
     },
     {
-      "url": "https://sie.swjtu.edu.cn/jyjx/yywhxm.htm",
-      "title": "语言文化项目-西南交通大学国际教育学院",
-      "chars": 597
+      "url": "https://sie.swjtu.edu.cn/info/1029/2752.htm",
+      "title": "西南交通大学2025/2026学年中国政府奖学金丝路奖项目招生简章-西南交通大学国际教育学院",
+      "chars": 5401
     },
     {
-      "url": "https://sie.swjtu.edu.cn/xysh/zszy.htm",
-      "title": "住宿指引-西南交通大学国际教育学院",
-      "chars": 637
+      "url": "https://sie.swjtu.edu.cn/info/1029/2682.htm",
+      "title": "西南交通大学2025/2026学年自费本科生项目招生简章-西南交通大学国际教育学院",
+      "chars": 4193
     },
     {
-      "url": "https://sie.swjtu.edu.cn/cglx/pxjj.htm",
-      "title": "培训简介-西南交通大学国际教育学院",
-      "chars": 569
+      "url": "https://sie.swjtu.edu.cn/info/1029/2662.htm",
+      "title": "西南交通大学2025/2026学年校长奖学金项目招生简章-西南交通大学国际教育学院",
+      "chars": 4294
     },
     {
-      "url": "https://sie.swjtu.edu.cn/xzzx/qzxg.htm",
-      "title": "签证相关-西南交通大学国际教育学院",
-      "chars": 527
+      "url": "https://sie.swjtu.edu.cn/info/1029/3092.htm",
+      "title": "西南交通大学2026-2027自费生项目招生简章    SWJTU 2026-2027 Self-Supported International Student Program Admission Guide-西南交通大学国际教育学院",
+      "chars": 10749
     },
     {
-      "url": "https://sie.swjtu.edu.cn/xzzx/zsxg.htm",
-      "title": "住宿相关-西南交通大学国际教育学院",
-      "chars": 565
+      "url": "https://sie.swjtu.edu.cn/info/1029/2672.htm",
+      "title": "西南交通大学2025/2026学年自费研究生项目招生简章-西南交通大学国际教育学院",
+      "chars": 4182
     }
   ],
   "db_row": {
@@ -621,7 +648,7 @@
     "city": "Chengdu",
     "province": "Sichuan",
     "country": "Chine",
-    "department": "School of International Education (国际教育学院)",
+    "department": "International Education College (国际教育学院) / International Students Office",
     "emails": [
       "iso@swjtu.edu.cn",
       "is@swjtu.edu.cn"
@@ -632,27 +659,25 @@
     "majors": [
       "engineering",
       "computer_science",
+      "business",
       "sciences",
       "design",
-      "business",
-      "economics"
+      "other"
     ],
     "required_documents": [
       "passport",
-      "diploma",
-      "language_certificate",
-      "study_plan",
-      "recommendation_letters",
-      "physical_exam",
-      "no_criminal_record"
+      "diplome",
+      "releves_notes",
+      "plan_etudes",
+      "formulaire_examen_medical"
     ],
-    "scholarship_amount": "Chinese Government Scholarship (CSC) / Presidential Scholarship / Sister City Scholarship / MOFCOM Scholarship",
+    "scholarship_amount": null,
     "scholarship_min": null,
     "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 6 / TOEFL 80",
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": "30 juin"
+    "application_deadline": "1er juin (bourse présidentielle) / 30 juin (autofinancement)"
   }
 }

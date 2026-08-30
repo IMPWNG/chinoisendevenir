@@ -7,23 +7,21 @@
       "GDUT"
     ],
     "website": "https://www.gdut.edu.cn",
-    "international_website": "https://english.gdut.edu.cn",
+    "international_website": "https://iec.gdut.edu.cn",
     "application_portal_url": "https://apply.gdut.edu.cn/"
   },
   "general": {
-    "presentation": "Université provinciale multidisciplinaire de haut niveau centrée sur l'ingénierie, combinant ingénierie, sciences, économie, gestion, lettres, droit, arts et éducation. Créée en 1958 (formation de premier cycle), formée en 1995 par la fusion de l'Institut de technologie du Guangdong, de l'Institut de mécanique du Guangdong et de l'Institut de construction de Chine du Sud (campus est).",
-    "history": "Fondée en 1958, fusionnée en 1995.",
+    "presentation": "Université provinciale clé du Guangdong, à dominante ingénierie, combinant sciences, ingénierie, économie, gestion, droit, lettres, arts et éducation. 26 écoles, 94 programmes de licence, 16 programmes doctoraux de premier niveau, 46 programmes de master de premier niveau. Plus de 4200 personnels, plus de 55000 étudiants dont internationaux.",
+    "history": "Fondée en 1958 (enseignement de licence). Formée en 1995 par la fusion de Guangdong Institute of Technology, Guangdong Mechanical Institute et South China Construction Institute (East).",
     "rankings": [
-      "ARWU Soft Science 301-400 (2025)",
-      "THE Times 601-800 (2025)",
-      "US News 473 (2025)",
-      "QS Asia 334 (2025)",
-      "Natural Index 145 (2025)"
+      "2025 THE World University Ranking: 45-59e en Chine continentale",
+      "2025 Shanghai Ranking (ARWU): 301-400 mondial"
     ],
     "strengths": [
-      "Ingénierie",
-      "Sciences",
-      "Économie et gestion"
+      "11 disciplines dans le top 1% ESI (4 dans le top 1‰, ingénierie dans le top 0.3‰)",
+      "94 programmes de licence",
+      "16 programmes doctoraux de premier niveau",
+      "46 programmes de master de premier niveau"
     ],
     "teaching_languages": [
       "zh",
@@ -35,234 +33,257 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 2500,
+      "max": 4000,
+      "notes": "Estimation pour Guangzhou; logement sur campus 4000-21600 CNY/an selon campus et type de chambre"
     },
     "campuses": [
       {
-        "name": "Higher Education Mega Center (University Town)",
+        "name": "University Town (大学城)",
         "city": "Guangzhou",
-        "description": "Campus principal de l'Université Ville de Guangzhou (HEMC)"
+        "description": "Campus principal, hébergement international bâtiment Est 11"
       },
       {
-        "name": "Dongfeng",
+        "name": "Dongfeng Road (东风路)",
         "city": "Guangzhou",
-        "description": "Siège des affaires internationales et de la gestion des étudiants internationaux (bibliothèque, salle 721)"
+        "description": "Bureau des affaires internationales, bibliothèque 7e étage; hébergement bâtiment 8"
       },
       {
-        "name": "Longdong",
+        "name": "Longdong (龙洞)",
         "city": "Guangzhou",
-        "description": "Campus Longdong"
+        "description": "Hébergement bâtiment G"
       },
       {
-        "name": "Panyu",
+        "name": "Panyu (番禺)",
         "city": "Guangzhou",
-        "description": "Campus Panyu"
+        "description": "Campus supplémentaire"
       },
       {
-        "name": "Shahe",
+        "name": "Shahe (沙河)",
         "city": "Guangzhou",
-        "description": "Campus Shahe"
+        "description": "Campus supplémentaire"
       },
       {
-        "name": "Jieyang",
+        "name": "Jieyang (揭阳)",
         "city": "Jieyang",
-        "description": "Campus Jieyang"
+        "description": "Campus supplémentaire"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Programmes de premier cycle (Lettres, Arts, Sciences sociales)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais 18000 CNY/an (Beaux-Arts 26000 CNY/an)"
-    },
-    {
-      "level": "bachelor",
-      "name": "Programmes de premier cycle (Sciences et Ingénierie)",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais 21000 CNY/an"
-    },
-    {
-      "level": "bachelor",
-      "name": "Programmes de premier cycle (anglais)",
-      "field": "engineering",
+      "name": "Computer Science and Technology (全英授课)",
+      "field": "computer_science",
       "language": "en",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais 23000 CNY/an"
+      "notes": "Programme entièrement en anglais"
     },
     {
-      "level": "master",
-      "name": "Programmes de master (Lettres, Arts, Sciences sociales)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": null,
+      "level": "bachelor",
+      "name": "International Economics and Trade (全英授课)",
+      "field": "economics",
+      "language": "en",
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais 21000 CNY/an (Beaux-Arts 30000 CNY/an)"
+      "notes": "Programme entièrement en anglais"
     },
     {
-      "level": "master",
-      "name": "Programmes de master (Sciences et Ingénierie)",
+      "level": "bachelor",
+      "name": "E-commerce (全英授课)",
+      "field": "business",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme entièrement en anglais (printemps 2026)"
+    },
+    {
+      "level": "bachelor",
+      "name": "Civil Engineering (中文国际学生班)",
       "field": "engineering",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais 25000 CNY/an"
+      "notes": "Classe internationale en chinois"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes en chinois (人文社科/理工/艺术)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Voir annexe 6 pour la liste complète; architecture 5 ans"
+    },
+    {
+      "level": "master",
+      "name": "Programmes de master (人文社科/理工/艺术)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Voir annexe 7; durée 2-3 ans; chinois"
     },
     {
       "level": "phd",
-      "name": "Programmes de doctorat (Lettres, Arts, Sciences sociales)",
-      "field": "arts",
+      "name": "Programmes doctoraux (人文社科/理工/艺术)",
+      "field": "other",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Frais 28000 CNY/an (Beaux-Arts 34000 CNY/an)"
-    },
-    {
-      "level": "phd",
-      "name": "Programmes de doctorat (Sciences et Ingénierie)",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais 32000 CNY/an"
+      "notes": "Voir annexe 7; durée 4 ans; chinois"
     },
     {
       "level": "language",
-      "name": "Formation en langue chinoise",
+      "name": "Formation en langue chinoise (汉语言培训)",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 1,
       "start_months": [
+        1,
         3,
+        7,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "2300 CNY/mois; 8000 CNY/semestre; 16000 CNY/an"
+      "notes": "Programmes 1 mois, 2 mois, 1 semestre, 1 an; max 2 ans"
     },
     {
       "level": "language",
-      "name": "Camp d'expérience linguistique et culturelle (LCE)",
+      "name": "Camp d'été langue et culture chinoises (LCE)",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 0.25,
       "start_months": [
         7
       ],
-      "academic_calendar": "short-term",
-      "notes": "2000 CNY/2 semaines; 3000 CNY/4 semaines"
+      "academic_calendar": "annual",
+      "notes": "Programme estival 4 semaines; min 15 participants"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (ou supérieur). Pour diplôme > lycée, fournir relevés de notes et 2 lettres de recommandation de professeurs.",
+      "academic": "Diplôme équivalent à la fin du lycée chinois (高中毕业); candidats actuels: certificat de pré-diplôme",
       "min_gpa": null,
       "age_max": 30,
-      "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
+      "age_min": 18,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Formation en langue chinoise à GDUT avant admission en programme",
       "other": [
-        "Recommandation du proviseur + 1 enseignant du lycée",
-        "Lettres de recommandation de 2 professeurs ou maîtres de conférences pour candidats post-bac"
+        "HSK 5 180+ pour les programmes en chinois en sciences humaines/sociales/arts",
+        "Exigences pour les descendants chinois: naturalisation ≥4 ans et résidence à l'étranger ≥2 ans sur les 4 dernières années",
+        "Examen médical valide 6 mois",
+        "Passeport valide >1 an"
       ]
     },
     "master": {
-      "academic": "Baccalauréat ou diplôme équivalent; 2 lettres de recommandation de professeurs ou maîtres de conférences et relevés de notes officiels.",
-      "min_gpa": null,
-      "age_max": 35,
-      "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": [
-        "Plan d'études clair",
-        "Lettres de recommandation de 2 professeurs/maîtres de conférences du programme de bachelor"
-      ]
-    },
-    "phd": {
-      "academic": "Maîtrise ou diplôme équivalent; 2 lettres de recommandation et relevés de notes officiels du programme de master.",
+      "academic": "Diplôme équivalent à la licence chinoise (bachelor); candidats actuels: certificat de pré-diplôme",
       "min_gpa": null,
       "age_max": 40,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Formation en langue chinoise à GDUT avant admission",
       "other": [
-        "Plan de recherche",
-        "Lettres de recommandation de 2 professeurs/maîtres de conférences du programme de master"
+        "HSK 5 180+ pour sciences humaines/sociales/arts en chinois",
+        "Lettre d'acceptation préalable du superviseur",
+        "2 lettres de recommandation (professeur associé ou plus)",
+        "Plan d'étude (800 mots)",
+        "CV et relevé de notes officiel",
+        "Exigences descendants chinois identiques au bachelor"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme équivalent au master chinois",
+      "min_gpa": null,
+      "age_max": 40,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 80,
+      "preparatory_if_insufficient": "Formation en langue chinoise à GDUT",
+      "other": [
+        "HSK 5 180+ pour sciences humaines/sociales/arts en chinois",
+        "Lettre d'acceptation préalable du superviseur",
+        "2 lettres de recommandation",
+        "Plan d'étude + expérience de recherche",
+        "Exigences descendants chinois identiques"
       ]
     },
     "language": {
-      "academic": "Inscription ouverte aux étudiants étrangers",
+      "academic": "Pas d'exigence académique spécifique; certificat du plus haut diplôme",
       "age_max": null,
       "other": [
-        "Frais d'inscription non remboursables: 400 CNY (formation langue)"
+        "Âge ≥18 ans (60 max pour LCE)",
+        "Passeport valide",
+        "Certificat médical valide 6 mois",
+        "Pour LCE: 18-60 ans, amical envers la Chine"
       ]
     }
   },
   "contacts": {
-    "office_name": "Bureau des affaires étudiantes internationales (International Student Affairs Office)",
-    "iso_email": "",
+    "office_name": "International Exchange College (国际交流学院) - Bureau des affaires étudiantes internationales",
+    "iso_email": "admission@gdut.edu.cn",
     "admissions_email": "admission@gdut.edu.cn",
     "wechat": "",
-    "phone": "+86-20-37626172, +86-20-37626171",
-    "address": "Salle 721, Bâtiment de la bibliothèque, Campus Dongfeng, No. 729 Dongfengdong Road, District Yuexiu, Guangzhou 510090, Chine"
+    "phone": "0086-20-37626172, 0086-20-37626171",
+    "address": "729 Dongfeng East Road, Yuexiu District, Guangzhou, Guangdong University of Technology Library Building 7F Room 721, 510090"
   },
   "matching": {
     "fields": [
-      "engineering",
-      "sciences",
       "business",
       "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "chinese_language",
       "arts",
       "design",
-      "computer_science",
+      "music",
+      "law",
       "education",
-      "law"
+      "agriculture",
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
       "language",
-      "foundation"
+      "foundation",
+      "exchange"
     ],
     "languages": [
       "zh",
@@ -271,19 +292,19 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
+    "min_hsk_level": 4,
+    "min_ielts": 5.5,
+    "min_toefl": 80,
     "age_max_bachelor": 30,
-    "age_max_master": 35,
+    "age_max_master": 40,
     "age_max_phd": 40,
     "has_csc": null,
     "has_university_scholarship": null,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": 18000,
+    "tuition_cny_min": 16000,
     "tuition_cny_max": 34000,
     "housing_cny_year_min": 4000,
-    "deadline_typical": "Mai-juin pour bourse gouvernementale; recrutement semestriel (printemps/automne)",
+    "deadline_typical": "30 juin",
     "intake_months": [
       3,
       9
@@ -291,133 +312,191 @@
     "city": "Guangzhou",
     "province": "Guangdong",
     "tags": [
-      "multidisciplinaire",
-      "polytechnique",
-      "6 campus",
-      "50000 étudiants",
-      "provincial clé"
+      "université provinciale clé",
+      "programmes en anglais disponibles",
+      "bourses provinciales du Guangdong",
+      "multi-campus",
+      "dominante ingénierie",
+      "ESI top 1%"
     ]
   },
-  "confidence": 0.88,
+  "confidence": 0.92,
   "missing_fields": [
-    "scores HSK/IELTS/TOEFL précis exigés pour les programmes en anglais/chinois",
-    "URL du formulaire en ligne exact pour 2026",
-    "conditions GPA précises",
-    "informations CSC non confirmées dans les sources"
+    "min_gpa exact",
+    "détails des programmes spécifiques en master/PhD (annexes non accessibles)",
+    "informations sur logement hors campus",
+    "frais d'assurance exacts",
+    "bourse CSC non mentionnée explicitement"
   ],
-  "notes": "Frais de scolarité confirmés (Source 6). Bourse du gouvernement du Guangdong (10000-30000 CNY/personne) confirmée. Programmes enseignés en anglais confirmés (23000 CNY/an en undergraduate). 2 admissions par an (mars et septembre). Pas de mention explicite du programme CSC dans les sources.",
+  "notes": "Sources principales: brochures d'admission printemps 2026 et automne 2025 de GDUT. Frais de dossier: 400 CNY (programmes chinois), 500 CNY (programmes anglais). Frais d'inscription non remboursables. Maximum 2 programmes par candidat. Bourse du gouvernement provincial du Guangdong disponible pour étudiants excellents. Assurance obligatoire pour tous les étudiants internationaux.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": null,
-      "who": "",
+      "count": 1,
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport étranger valide requis"
+      "notes": "Validité ≥ 1 an, couvrant toute la durée des études. Ne pas renouveler avant l'inscription."
     },
     {
-      "type": "application_form",
+      "type": "high_school_diploma",
       "required": true,
       "count": 1,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Formulaire GDUT pour étudiants en diplôme ou en langue/préparatoire"
-    },
-    {
-      "type": "diploma",
-      "required": true,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Diplôme précédent (lycée/bachelor/master) avec relevés de notes"
-    },
-    {
-      "type": "recommendation_letters",
-      "required": true,
-      "count": 2,
-      "who": "",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": "2 lettres de professeurs ou maîtres de conférences"
-    },
-    {
-      "type": "recommendation_letters",
-      "required": true,
-      "count": 2,
-      "who": "",
+      "who": "bachelor",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Lettre du proviseur + 1 enseignant du lycée"
+      "notes": "Ou attestation de pré-diplôme pour les diplômés récents. Original + traduction CN/EN ou notarié."
     },
     {
-      "type": "study_plan",
+      "type": "transcripts",
       "required": true,
-      "count": null,
-      "who": "",
+      "count": 1,
+      "who": "bachelor",
+      "applies_to": [
+        "bachelor"
+      ],
+      "notes": "Relevés de notes complets du lycée, originaux en CN/EN ou notariés."
+    },
+    {
+      "type": "highest_degree_certificate",
+      "required": true,
+      "count": 1,
+      "who": "master_phd",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Original + traduction CN/EN ou notarié. Attestation de pré-diplôme acceptée pour diplômés récents."
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": 1,
+      "who": "master_phd",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes officiels de l'établissement d'origine, originaux CN/EN ou notariés."
+    },
+    {
+      "type": "personal_statement",
+      "required": true,
+      "count": 1,
+      "who": "master_phd",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Exposé personnel + plan de recherche ≤ 800 caractères. Doctorat : ajouter résumé de l'expérience de recherche."
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "master_phd",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Deux lettres de professeurs associés ou de rang supérieur."
+    },
+    {
+      "type": "pre_acceptance_letter",
+      "required": true,
+      "count": 1,
+      "who": "master_phd",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Lettre de pré-acceptation du directeur de recherche visé (modèle en annexe 2)."
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": 1,
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Plan d'études clair"
+      "notes": "Rapport médical avec cachet officiel, validité 6 mois."
     },
     {
       "type": "hsk_certificate",
-      "required": false,
-      "count": null,
-      "who": "",
+      "required": true,
+      "count": 1,
+      "who": "chinese_taught",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "Exigé pour programmes en chinois, assoupli pour programmes en anglais"
+      "notes": "HSK 4 ≥ 180 (sciences/ingénierie) ou HSK 5 ≥ 180 (sciences humaines/sociaux/art). Exemption possible si enseignement antérieur en chinois."
     },
     {
-      "type": "transfer_certificate",
+      "type": "english_test",
+      "required": true,
+      "count": 1,
+      "who": "english_taught_non_native",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "TOEFL ≥ 80 ou IELTS ≥ 5.5. Test interne de l'université possible."
+    },
+    {
+      "type": "nationality_proof",
       "required": false,
-      "count": null,
-      "who": "",
+      "count": 1,
+      "who": "chinese_descent",
       "applies_to": [
         "all"
       ],
-      "notes": "Si transfert depuis une autre université chinoise"
+      "notes": "Pour descendants chinois : preuve de naturalisation ≥ 4 ans, résidence à l'étranger ≥ 2 ans sur 4 ans, certificats de renonciation à la nationalité chinoise, etc."
+    },
+    {
+      "type": "in_china_study_proof",
+      "required": false,
+      "count": 1,
+      "who": "previously_in_china",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Pour étudiants ayant déjà étudié en Chine : attestation de comportement, visa, relevés, présence, transferts."
     }
   ],
   "application": {
-    "platform_name": "GDUT Online Application",
+    "platform_name": "GDUT International Student Online Application System",
     "platform_url": "https://apply.gdut.edu.cn/",
     "steps": [
-      "Créer un compte sur la plateforme en ligne",
-      "Compléter le formulaire de candidature en ligne",
-      "Télécharger et soumettre le formulaire GDUT + documents requis",
-      "Évaluation et approbation par GDUT",
-      "Délivrance du formulaire JW202 par l'École des échanges internationaux",
-      "Envoi de la lettre d'admission et du JW202 au candidat",
-      "Demande de visa X1/X2 à l'ambassade de Chine",
-      "Arrivée à GDUT et enregistrement dans les 30 jours (X1)"
+      "Créer un compte sur https://apply.gdut.edu.cn/",
+      "Remplir le formulaire en ligne (annexe 3 pour étudiants en formation diplômante, annexe 4 pour étudiants en formation linguistique)",
+      "Télécharger les pièces justificatives (diplômes, relevés, passeport, lettre de recommandation, lettre de pré-acceptation, etc.)",
+      "Payer les frais de dossier en ligne",
+      "Évaluation des dossiers (material review)",
+      "Entretien / examen (notification ultérieure)",
+      "Recevoir la notification d'admission",
+      "Demander le visa X1 ou X2 à l'ambassade de Chine",
+      "S'inscrire fin août - début septembre"
     ],
     "opens_at": "",
-    "deadline": "",
+    "deadline": "2026-06-30",
     "results_at": "",
     "intake_months": [
-      3,
+      2,
       9
     ],
-    "application_fee_cny": 500,
+    "application_fee_cny": 400,
     "application_fee_refundable": false,
     "payment_methods": [
-      "bank_transfer",
-      "online"
+      "online",
+      "bank_transfer_China",
+      "bank_transfer_outside_China"
     ]
   },
   "fees": {
@@ -443,19 +522,24 @@
     "insurance_cny_year": null,
     "other_fees": [
       {
-        "name": "Frais d'inscription WiFi",
-        "amount_cny": 30,
-        "notes": "une fois"
+        "name": "application_fee",
+        "amount_cny": 400,
+        "notes": "400 CNY/programme (500 CNY pour bachelor en anglais). Max 2 programmes. Non remboursable."
       },
       {
-        "name": "WiFi mensuel",
-        "amount_cny": 30,
-        "notes": "par mois"
+        "name": "textbooks",
+        "amount_cny": null,
+        "notes": "Frais réels selon les supports de cours."
       },
       {
-        "name": "Caution logement",
-        "amount_cny": 1500,
-        "notes": "remboursable au départ"
+        "name": "physical_exam",
+        "amount_cny": null,
+        "notes": "Selon l'établissement de santé."
+      },
+      {
+        "name": "visa_fee",
+        "amount_cny": null,
+        "notes": "Selon l'ambassade/consulat."
       }
     ],
     "housing": {
@@ -463,32 +547,32 @@
         {
           "type": "single",
           "price_cny_year": 16000,
-          "included": "HEMC Block 11"
+          "included": "University Town East Building 11"
         },
         {
           "type": "double",
           "price_cny_year": 8000,
-          "included": "HEMC Block 11"
+          "included": "University Town East Building 11"
         },
         {
           "type": "quad",
           "price_cny_year": 4000,
-          "included": "HEMC Block 11"
+          "included": "University Town East Building 11"
         },
         {
           "type": "single",
           "price_cny_year": 21600,
-          "included": "Dongfeng Block 8"
+          "included": "Dongfeng Road Building 8"
         },
         {
           "type": "double",
           "price_cny_year": 13200,
-          "included": "Dongfeng Block 8"
+          "included": "Dongfeng Road Building 8"
         },
         {
           "type": "double",
           "price_cny_year": 7200,
-          "included": "Longdong Block G"
+          "included": "Longdong G Building"
         }
       ],
       "deposit_cny": 1500,
@@ -503,47 +587,33 @@
   },
   "scholarships": [
     {
-      "name": "Guangdong Government Outstanding International Student Scholarship",
+      "name": "Bourse du gouvernement de la province du Guangdong pour étudiants étrangers",
       "type": "provincial",
       "coverage": "partial",
       "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Nationalité étrangère, passeport valide, ami de la Chine. Pour étudiants en cours: inscrit à GDUT depuis ≥1 an, <40 ans, bonnes notes, pas d'autre bourse chinoise la même année. Pour nouveaux étudiants: <30 ans (bachelor), <35 ans (master), <40 ans (doctorat), avec lettres de recommandation et relevés",
-      "apply_via": "university",
-      "deadline": "2026-05-01 to 2026-06-30",
-      "renewal": "Renouvelable annuellement selon performance"
-    },
-    {
-      "name": "Chinese Government Scholarship (CSC)",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
         "tuition",
-        "accommodation",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Candidature via ambassade de Chine ou agence CSC",
-      "apply_via": "embassy",
+      "conditions": "Étudiants internationaux ayant d'excellents résultats scolaires, des qualités de leadership ou des talents particuliers.",
+      "apply_via": "university",
       "deadline": "",
-      "renewal": ""
+      "renewal": "Renouvelable selon performance académique."
     }
   ],
   "language": {
-    "hsk_bachelor": null,
-    "hsk_master": null,
-    "hsk_phd": null,
-    "ielts_min": null,
-    "toefl_min": null,
+    "hsk_bachelor": 4,
+    "hsk_master": 4,
+    "hsk_phd": 4,
+    "ielts_min": 5.5,
+    "toefl_min": 80,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 semestre à 1 an",
+      "duration": "1 mois à 2 ans (1 mois, 2 mois, 1 semestre, 1 an, ou personnalisé)",
       "leads_to_degree": false
     },
     "foundation": {
-      "available": null,
+      "available": false,
       "description": ""
     }
   },
@@ -553,86 +623,118 @@
       "X2"
     ],
     "documents_from_university": [
-      "Admission Letter",
-      "Formulaire JW202"
+      "Admission Notice (录取通知书)",
+      "Visa Application Form for Foreign Students (JW202 pour ≥180 jours, DQ pour <180 jours)",
+      "Foreigner Physical Examination Form"
     ],
-    "instructions": "Étudiants séjournant >6 mois: visa X1 (valide 30 jours après arrivée). Étudiants <6 mois: visa X2. Demander le visa à l'ambassade/consulat de Chine avec lettre d'admission et JW202",
-    "arrival_and_residence_permit": "Demander le permis de résidence dans les 30 jours suivant l'arrivée à l'École des échanges internationaux"
+    "instructions": "Demander le visa X1 (≥180 jours) ou X2 (<180 jours) à l'ambassade ou au consulat de Chine dans le pays d'origine ou de résidence avant l'entrée en Chine. Documents requis : passeport, lettre d'admission, formulaire de demande de visa, examen médical.",
+    "arrival_and_residence_permit": "Après arrivée, enregistrement à l'hôtel de police local dans les 24h. Les étudiants hors campus doivent obtenir un certificat de résidence temporaire."
   },
   "housing_and_services": {
     "housing_types": [
       "single",
       "double",
-      "quad"
+      "quad",
+      "off_campus"
     ],
-    "rules": "Allocation selon le majeur, premier arrivé premier servi. Si complet, logement hors campus à organiser indépendamment",
-    "international_office": "International Student Affairs Office, Room 721, Library Building, Dongfeng Campus, No.729 Dongfengdong Road, Yuexiu District, Guangzhou. Tel: 0086-20-37626172, Email: admission@gdut.edu.cn",
+    "rules": "Réservation requise pour le logement sur campus, premier arrivé premier servi. Caution 1500 CNY/personne remboursable. Logement hors campus autorisé avec déclaration officielle et enregistrement à la police dans les 24h.",
+    "international_office": "International Exchange College, 7th floor, Library Building, 729 Dongfeng East Road, Yuexiu District, Guangzhou. Tél: 0086-20-37626172 / 37626171. Email: admission@gdut.edu.cn",
     "orientation": "",
     "english_support": true,
     "clubs": ""
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "chinese_descent",
+      "notes": "Les candidats dont l'un ou les deux parents sont citoyens chinois ou ont immigré depuis la Chine continentale, Hong Kong, Macao ou Taïwan doivent avoir acquis la nationalité étrangère depuis ≥ 4 ans ET avoir résidé à l'étranger ≥ 2 ans au cours des 4 dernières années (avant le 30 avril de l'année d'inscription). Documents supplémentaires requis : preuve de renonciation à la nationalité chinoise, preuve de naturalisation étrangère, relevés d'entrée/sortie du passeport."
     }
   ],
   "scan_status": "ok",
   "slug": "gdut",
-  "scraped_at": "2026-08-23T14:46:21.722Z",
+  "scraped_at": "2026-08-30T11:02:21.972Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 10,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://iec.gdut.edu.cn/",
       "title": "国际交流学院",
-      "chars": 1897
+      "chars": 4982
     },
     {
-      "url": "https://english.gdut.edu.cn/",
-      "title": "Guangdong University of Technology",
-      "chars": 5585
+      "url": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+      "title": "广东工业大学2026年春季学期国际学生招生简章-国际交流学院",
+      "chars": 11044
+    },
+    {
+      "url": "https://iec.gdut.edu.cn/info/1005/5171.htm",
+      "title": "广东工业大学2025年秋季学期国际学生招生简章-国际交流学院",
+      "chars": 11089
     },
     {
       "url": "https://iec.gdut.edu.cn/zsxx/zsjz.htm",
       "title": "招生简章-国际交流学院",
-      "chars": 769
+      "chars": 3189
     },
     {
-      "url": "https://iec.gdut.edu.cn/EN.htm",
-      "title": "EN-国际交流学院",
-      "chars": 3441
+      "url": "https://iec.gdut.edu.cn/info/1005/5013.htm",
+      "title": "广东工业大学2025年暑期汉语言文化体验营招生简章-国际交流学院",
+      "chars": 7288
     },
     {
-      "url": "https://iec.gdut.edu.cn/zsxx.htm",
-      "title": "招生信息-国际交流学院",
-      "chars": 799
+      "url": "https://iec.gdut.edu.cn/info/1171/5057.htm",
+      "title": "广东工业大学2025年暑期汉语言文化体验营招生简章-国际交流学院",
+      "chars": 7313
     },
     {
-      "url": "https://iec.gdut.edu.cn/zsxx/sqlc.htm",
-      "title": "申请流程-国际交流学院",
-      "chars": 6602
+      "url": "https://iec.gdut.edu.cn/info/1171/5060.htm",
+      "title": "广东工业大学2024年暑期汉语言文化体验营（LCE）招生简章-国际交流学院",
+      "chars": 4315
     },
     {
-      "url": "https://iec.gdut.edu.cn/zsxx/yypx.htm",
-      "title": "语言培训-国际交流学院",
-      "chars": 588
+      "url": "https://apply.gdut.edu.cn/",
+      "title": "广东工业大学",
+      "chars": 9528
     },
     {
-      "url": "https://iec.gdut.edu.cn/jxj.htm",
-      "title": "奖学金-国际交流学院",
-      "chars": 5209
+      "url": "https://iec.gdut.edu.cn/info/1171/5184.htm",
+      "title": "广东工业大学2025年秋季学期国际学生招生简章-国际交流学院",
+      "chars": 11073
     },
     {
-      "url": "https://iec.gdut.edu.cn/jxj/gdszfjxj.htm",
-      "title": "广东省政府奖学金-国际交流学院",
-      "chars": 5232
+      "url": "https://iec.gdut.edu.cn/info/1171/5058.htm",
+      "title": "广东工业大学2025年春季学期国际学生招生简章-国际交流学院",
+      "chars": 11108
     },
     {
-      "url": "https://iec.gdut.edu.cn/gjxy.htm",
-      "title": "国际校友-国际交流学院",
-      "chars": 1150
+      "url": "https://iec.gdut.edu.cn/info/1171/5059.htm",
+      "title": "广东工业大学2024年秋季学期国际学生招生简章-国际交流学院",
+      "chars": 10891
+    },
+    {
+      "url": "https://iec.gdut.edu.cn/info/1171/5061.htm",
+      "title": "广东工业大学2024年春季学期国际学生招生简章-国际交流学院",
+      "chars": 9495
+    },
+    {
+      "url": "https://iec.gdut.edu.cn/info/1171/5062.htm",
+      "title": "2023年国际学生招生简章-国际交流学院",
+      "chars": 8325
+    },
+    {
+      "url": "https://iec.gdut.edu.cn/info/1171/5063.htm",
+      "title": "2022年国际学生招生简章-国际交流学院",
+      "chars": 8421
+    },
+    {
+      "url": "https://iec.gdut.edu.cn/info/1171/1885.htm",
+      "title": "2021年国际学生招生简章-国际交流学院",
+      "chars": 8379
+    },
+    {
+      "url": "https://apply.gdut.edu.cn/en/student/login?back_url=http%3A%2F%2Fapply.gdut.edu.cn%2Fen%2Fstudent%2Fapply%2Findex",
+      "title": "GDUT",
+      "chars": 629
     }
   ],
   "db_row": {
@@ -643,39 +745,53 @@
     "city": "Guangzhou",
     "province": "Guangdong",
     "country": "Chine",
-    "department": "Bureau des affaires étudiantes internationales (International Student Affairs Office)",
+    "department": "International Exchange College (国际交流学院) - Bureau des affaires étudiantes internationales",
     "emails": [
+      "admission@gdut.edu.cn",
       "admission@gdut.edu.cn"
     ],
-    "phone": "+86-20-37626172, +86-20-37626171",
+    "phone": "0086-20-37626172, 0086-20-37626171",
     "wechat": null,
-    "website": "https://english.gdut.edu.cn",
+    "website": "https://iec.gdut.edu.cn",
     "majors": [
-      "engineering",
-      "sciences",
       "business",
       "economics",
+      "finance",
+      "computer_science",
+      "engineering",
+      "sciences",
+      "medicine",
+      "dentistry",
+      "pharmacy",
+      "chinese_language",
       "arts",
       "design",
-      "computer_science",
+      "music",
+      "law",
       "education",
-      "law"
+      "agriculture",
+      "other"
     ],
     "required_documents": [
       "passport",
-      "application_form",
-      "diploma",
+      "high_school_diploma",
+      "transcripts",
+      "highest_degree_certificate",
+      "transcripts",
+      "personal_statement",
       "recommendation_letters",
-      "recommendation_letters",
-      "study_plan"
+      "pre_acceptance_letter",
+      "physical_examination",
+      "hsk_certificate",
+      "english_test"
     ],
-    "scholarship_amount": "Guangdong Government Outstanding International Student Scholarship / Chinese Government Scholarship (CSC)",
-    "scholarship_min": 18000,
+    "scholarship_amount": "Bourse du gouvernement de la province du Guangdong pour étudiants étrangers",
+    "scholarship_min": 16000,
     "scholarship_max": 34000,
-    "min_hsk_level": null,
-    "language_requirements": null,
-    "tuition_min": 18000,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 80",
+    "tuition_min": 16000,
     "tuition_max": 34000,
-    "application_deadline": "Mai-juin pour bourse gouvernementale; recrutement semestriel (printemps/automne)"
+    "application_deadline": "30 juin"
   }
 }

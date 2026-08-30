@@ -7,27 +7,25 @@
       "ZZU"
     ],
     "website": "https://www.zzu.edu.cn/",
-    "international_website": "https://international.zzu.edu.cn/",
-    "application_portal_url": "https://international.zzu.edu.cn/"
+    "international_website": "https://english.zzu.edu.cn/",
+    "application_portal_url": "http://international.zzu.edu.cn/en/course?cid=4&pid=4"
   },
   "general": {
-    "presentation": "ZZU propose des programmes couvrant 12 domaines d'études: sciences, ingénierie, médecine, littérature, histoire, philosophie, droit, économie, gestion, pédagogie, agriculture et arts. Campus moderne avec bibliothèque complète, hôpital affilié de classe mondiale, installations sportives, musée.",
-    "history": "Université historique du Henan, fondée en 2000 par la fusion de plusieurs institutions. Liée à l'histoire centenaire de l'enseignement supérieur de la région.",
-    "rankings": [
-      "2026 Soft Science World University Academic Ranking"
-    ],
+    "presentation": "Université publique majeure de Chine (projet Double First-Class). Programmes internationaux via le International College, bourses disponibles, tuition abordable et partenariats avec universités australiennes (Wollongong), néo-zélandaises (Victoria University of Wellington) et de Hong Kong (PolyU).",
+    "history": "Origines en 1956 (Mathematics, Chemistry, Physics). Collège International créé en 2004 (partenariat Wollongong), rebaptisé en 2013. En 2023, cofondation avec Victoria University of Wellington du Wellington Institute, première institution sino-étrangère non-indépendante de ZZU.",
+    "rankings": [],
     "strengths": [
-      "médecine (MBBS)",
-      "ingénierie",
-      "sciences",
-      "data science",
-      "Henan Academy of Big Data",
-      "recherche quantique",
-      "archéologie"
+      "Computer Science (top 1% ESI)",
+      "Materials Science (top 0.01837‰ ESI, 17e ShanghaiRanking)",
+      "Médecine",
+      "Chimie",
+      "Physique quantique",
+      "Mathématiques"
     ],
     "teaching_languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
     "location": {
       "city": "Zhengzhou",
@@ -35,106 +33,30 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Estimation Zhengzhou, ville de second rang."
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
-        "name": "Main Campus (Science Avenue)",
+        "name": "Main Campus",
         "city": "Zhengzhou",
-        "description": "Campus principal situé sur Science Avenue et Changchun Road, l'un des plus beaux campus de Chine."
-      },
-      {
-        "name": "North Campus",
-        "city": "Zhengzhou",
-        "description": "Campus nord."
-      },
-      {
-        "name": "East Campus",
-        "city": "Zhengzhou",
-        "description": "Campus est."
-      },
-      {
-        "name": "South Campus",
-        "city": "Zhengzhou",
-        "description": "Campus sud."
+        "description": "Campus principal de l'Université de Zhengzhou"
       }
     ]
   },
   "programs": [
     {
-      "level": "foundation",
-      "name": "International Medical Foundation Program",
-      "field": "medicine",
-      "language": "en",
-      "duration_years": 1,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme préparatoire à la médecine, en anglais."
-    },
-    {
-      "level": "foundation",
-      "name": "Foundation Program in Science & Engineering",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 1,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme préparatoire sciences et ingénierie, bourses disponibles."
-    },
-    {
-      "level": "foundation",
-      "name": "Business Foundation Program Instructed in English",
-      "field": "business",
-      "language": "en",
-      "duration_years": 1,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme préparatoire business en anglais."
-    },
-    {
-      "level": "language",
-      "name": "General Chinese Language Program",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": null,
-      "start_months": [
-        3,
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme de langue chinoise générale."
-    },
-    {
       "level": "bachelor",
-      "name": "MBBS (Clinical Medicine)",
-      "field": "medicine",
-      "language": "en",
-      "duration_years": 6,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Programme phare de médecine en anglais."
-    },
-    {
-      "level": "bachelor",
-      "name": "Civil Engineering",
-      "field": "engineering",
+      "name": "Computer Science and Technology",
+      "field": "computer_science",
       "language": "en",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Génie civil, dispensé en anglais."
+      "notes": "School of Computer Science and Artificial Intelligence"
     },
     {
       "level": "bachelor",
@@ -146,156 +68,199 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Génie logiciel, en anglais."
+      "notes": "School of Computer Science and Artificial Intelligence"
     },
     {
       "level": "bachelor",
-      "name": "Stomatology",
-      "field": "dentistry",
-      "language": "en",
-      "duration_years": 5,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Dentisterie, en anglais."
-    },
-    {
-      "level": "bachelor",
-      "name": "International Trade",
-      "field": "business",
+      "name": "Artificial Intelligence",
+      "field": "computer_science",
       "language": "en",
       "duration_years": 4,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Commerce international, en anglais."
+      "notes": "School of Computer Science and AI"
     },
     {
-      "level": "master",
-      "name": "Civil Engineering (Master)",
+      "level": "bachelor",
+      "name": "Materials Science and Engineering",
       "field": "engineering",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Master en génie civil en anglais."
-    },
-    {
-      "level": "master",
-      "name": "Anesthesiology (Master)",
-      "field": "medicine",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Master en anesthésiologie en anglais."
-    },
-    {
-      "level": "language",
-      "name": "Teaching Chinese as Foreign Language",
-      "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 4,
       "start_months": [
-        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme TCFL."
+      "notes": "Programme national Double First-Class"
+    },
+    {
+      "level": "bachelor",
+      "name": "Polymer Materials and Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Materials Chemistry",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Chemical Engineering and Technology",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme national de première classe"
+    },
+    {
+      "level": "bachelor",
+      "name": "Pharmaceutical Engineering",
+      "field": "pharmacy",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Metallurgical Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Civil Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "bachelor",
+      "name": "Sino-foreign Dual Degree Programs",
+      "field": "other",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes 4+0 avec Université de Wollongong (Australie)"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (high school), équivalent高二/高三 ou baccalauréat. Pour les programmes en chinois: HSK requis. Pour MBBS et autres programmes EMI: preuve de compétence en anglais.",
+      "academic": "Diplôme de fin d'études secondaires",
       "min_gpa": null,
-      "age_max": 25,
-      "age_min": 18,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Foundation Program (Science & Engineering, Business, Medical) disponible avant l'admission en bachelor.",
-      "other": [
-        "Examen CSCA (China Scholastic Competency Assessment) requis pour certains bachelors"
-      ]
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
     },
     "master": {
-      "academic": "Diplôme de bachelor (licence) dans un domaine connexe. Transcrits, lettre de motivation, lettres de recommandation, parfois publication.",
+      "academic": "Licence/Bachelor pertinent",
       "min_gpa": null,
-      "age_max": 40,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
-      "preparatory_if_insufficient": "Foundation program possible pour les étudiants ne remplissant pas les conditions linguistiques.",
-      "other": [
-        "Research proposal pour certains masters recherche",
-        "Possibilité de bourse complète Zhengzhou University President Scholarship"
-      ]
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
     },
     "phd": {
-      "academic": "Diplôme de master. Proposition de recherche, lettres de recommandation, publications.",
+      "academic": "Master pertinent",
       "min_gpa": null,
-      "age_max": 45,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": 3,
-      "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 60,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": [
-        "Entretien d'admission",
-        "Bourse complète (President Scholarship) pour PhD 2026 March Intake"
-      ]
+      "other": []
     },
     "language": {
-      "academic": "Aucune exigence académique particulière pour les programmes de langue chinoise.",
-      "age_max": 60,
-      "other": [
-        "Inscription possible tout au long de l'année (intake de mars et septembre)"
-      ]
+      "academic": "",
+      "age_max": null,
+      "other": []
     }
   },
   "contacts": {
-    "office_name": "School of International Education, Zhengzhou University",
-    "iso_email": "sie@zzu.edu.cn",
-    "admissions_email": "sie@zzu.edu.cn",
-    "wechat": "",
-    "phone": "+86 371 67780102",
-    "address": "100, Science Avenue, Zhengzhou, Henan Province, China 450001"
+    "office_name": "International College of Zhengzhou University",
+    "iso_email": "",
+    "admissions_email": "",
+    "wechat": "18595819573",
+    "phone": "0371-67760013",
+    "address": "Zhengzhou, Henan, Chine"
   },
   "matching": {
     "fields": [
-      "business",
-      "economics",
-      "finance",
       "computer_science",
       "engineering",
       "sciences",
       "medicine",
-      "dentistry",
       "pharmacy",
-      "chinese_language",
-      "arts",
       "design",
-      "music",
-      "law",
-      "education",
-      "agriculture"
+      "business",
+      "economics",
+      "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
       "language",
-      "foundation"
+      "foundation",
+      "exchange"
     ],
     "languages": [
       "zh",
@@ -304,132 +269,51 @@
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 5.5,
-    "min_toefl": 60,
-    "age_max_bachelor": 25,
-    "age_max_master": 40,
-    "age_max_phd": 45,
+    "min_hsk_level": null,
+    "min_ielts": null,
+    "min_toefl": null,
+    "age_max_bachelor": null,
+    "age_max_master": null,
+    "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": 18000,
-    "tuition_cny_max": 40000,
-    "housing_cny_year_min": 4000,
-    "deadline_typical": "Juin (rentrée septembre)",
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
     "intake_months": [
-      3,
       9
     ],
     "city": "Zhengzhou",
     "province": "Henan",
     "tags": [
+      "Double First-Class",
       "Project 211",
-      "Double First Class",
-      "MBBS",
-      "EMI programs",
-      "Henan Academy of Big Data",
-      "quantum research"
+      "Sino-foreign cooperation",
+      "International College",
+      "Wollongong partnership",
+      "Victoria University Wellington partnership"
     ]
   },
-  "confidence": 0.75,
+  "confidence": 0.5,
   "missing_fields": [
-    "tuition exacte par programme",
-    "âge minimum exact pour PhD",
-    "gpa minimum chiffré",
-    "scores HSK/ielts/toefl exacts par programme",
-    "frais de logement détaillés",
-    "deadlines précises 2026"
+    "GPA minimum requis",
+    "Scores HSK/IELTS/TOEFL précis",
+    "Limites d'âge",
+    "Frais de scolarité CNY",
+    "Frais de logement CNY",
+    "Dates limites d'inscription",
+    "Coût de la vie mensuel",
+    "Rankings détaillés",
+    "Email admissions direct"
   ],
-  "notes": "Université clé du Henan, membre des projets 211 et Double First Class. Offre étendue de programmes EMI (English-Medium Instruction) dont MBBS, Civil Engineering, Software Engineering. Bourses multiples: Chinese Government Scholarship, Henan Provincial Government Scholarship, Zhengzhou University President Scholarship (incluant full scholarship pour PhD 2026 March Intake et master). Contact principal: sie@zzu.edu.cn. Le portail d'admission en ligne est hébergé sur international.zzu.edu.cn.",
-  "documents": [
-    {
-      "type": "passport",
-      "required": true,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Passeport valide requis pour tous les candidats étrangers"
-    },
-    {
-      "type": "diplome",
-      "required": true,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Diplôme du niveau précédent (lycée pour bachelor, bachelor pour master, master pour doctorat)"
-    },
-    {
-      "type": "relevé_notes",
-      "required": true,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
-      ],
-      "notes": "Relevés de notes officiels traduits"
-    },
-    {
-      "type": "certificat_langue",
-      "required": false,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour programmes en anglais"
-    },
-    {
-      "type": "lettre_motivation",
-      "required": false,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "lettre_recommandation",
-      "required": false,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "formulaire_examen_physique",
-      "required": false,
-      "count": null,
-      "who": "Candidat",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Examen médical pour certains programmes"
-    }
-  ],
+  "notes": "Sources confirment existence de bourses (CSC, université, province du Henan) et programmes sino-étrangers en anglais (Wollongong 4+0). Détails spécifiques (HSK/IELTS scores, frais, deadlines) à vérifier sur http://international.zzu.edu.cn/en/. Site international : http://international.zzu.edu.cn/",
+  "documents": [],
   "application": {
-    "platform_name": "CUCAS",
-    "platform_url": "http://international.zzu.edu.cn/",
-    "steps": [
-      "Choisir le programme sur le site international de ZZU",
-      "Remplir le formulaire de candidature en ligne",
-      "Soumettre les documents requis",
-      "Attendre la notification d'admission",
-      "Payer les frais de scolarité"
-    ],
+    "platform_name": "",
+    "platform_url": "",
+    "steps": [],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
@@ -480,66 +364,7 @@
       "notes": ""
     }
   },
-  "scholarships": [
-    {
-      "name": "Chinese Government Scholarship (CSC)",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "insurance"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Excellence académique, candidature via ambassade ou université",
-      "apply_via": "ambassade ou université",
-      "deadline": "",
-      "renewal": "Renouvelable annuellement"
-    },
-    {
-      "name": "International Chinese Language Teacher Scholarship",
-      "type": "government",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Pour étudiants en langue chinoise ou futurs enseignants de chinois",
-      "apply_via": "université",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "Henan Government Scholarship",
-      "type": "provincial",
-      "coverage": "partial",
-      "covers": [
-        "tuition"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Étudiants étrangers dans la province du Henan",
-      "apply_via": "université",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "Zhengzhou University President Scholarship",
-      "type": "university",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "accommodation",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Excellence académique, programmes bachelor/master/PhD",
-      "apply_via": "université",
-      "deadline": "",
-      "renewal": "Renouvelable sous conditions"
-    }
-  ],
+  "scholarships": [],
   "language": {
     "hsk_bachelor": null,
     "hsk_master": null,
@@ -547,104 +372,111 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": true,
-      "duration": "1 an",
-      "leads_to_degree": false
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
     },
     "foundation": {
-      "available": true,
-      "description": "Programmes de fondation en Médecine, Sciences/Ingénierie et Business (en anglais)"
+      "available": null,
+      "description": ""
     }
   },
   "visa": {
-    "visa_types": [
-      "X1",
-      "X2"
-    ],
-    "documents_from_university": [
-      "Lettre d'admission",
-      "Formulaire JW202"
-    ],
-    "instructions": "Demander un visa étudiant X1 (long séjour) ou X2 (court séjour) avec la lettre d'admission et le formulaire JW202 délivrés par ZZU",
-    "arrival_and_residence_permit": "S'enregistrer au bureau de sécurité publique local dans les 30 jours suivant l'arrivée pour obtenir le permis de résidence"
+    "visa_types": [],
+    "documents_from_university": [],
+    "instructions": "",
+    "arrival_and_residence_permit": ""
   },
   "housing_and_services": {
-    "housing_types": [
-      "Chambre double sur campus"
-    ],
-    "rules": "Voir règlement d'hébergement sur le site international",
-    "international_office": "sie@zzu.edu.cn, Tel: (86) 371 67780102",
-    "orientation": "Programme d'orientation disponible pour nouveaux étudiants internationaux",
-    "english_support": true,
-    "clubs": "Associations étudiantes, activités culturelles, sportives et académiques (fête de mi-automne, Noël, Nouvel An, karaoké chinois, etc.)"
+    "housing_types": [],
+    "rules": "",
+    "international_office": "",
+    "orientation": "",
+    "english_support": null,
+    "clubs": ""
   },
-  "country_specific": [
-    {
-      "region_or_country": "",
-      "notes": ""
-    }
-  ],
+  "country_specific": [],
   "scan_status": "ok",
   "slug": "zhengzhou-university",
-  "scraped_at": "2026-08-23T14:51:36.664Z",
+  "scraped_at": "2026-08-30T11:04:21.831Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 15,
+  "pages_used": 15,
   "sources": [
-    {
-      "url": "http://international.zzu.edu.cn/",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 3513
-    },
     {
       "url": "https://english.zzu.edu.cn/",
       "title": "Zhengzhou University",
-      "chars": 3027
+      "chars": 8298
     },
     {
-      "url": "https://www.zzu.edu.cn/",
-      "title": "郑州大学",
-      "chars": 4199
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/admission/index?cid=17&pid=12&spid=4&degree_id=7",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 1610
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/admission/index?cid=17&pid=12&spid=4&degree_id=3",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 8865
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/admission/index?cid=17&pid=12&spid=4&degree_id=4",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 12000
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/admission/index?cid=17&pid=12&spid=4&degree_id=6",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 1800
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/admission/index?cid=17&pid=12&spid=4&degree_id=5",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 10237
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/scholarship/detail?cid=49&pid=5&detail=5",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 8309
-    },
-    {
-      "url": "http://international.zzu.edu.cn/en/article/detail?cid=64&amp;pid=64&amp;detail=22",
-      "title": "ZHENGZHOU UNIVERSITY",
-      "chars": 2037
+      "url": "https://english.zzu.edu.cn/science.html",
+      "title": "Science",
+      "chars": 4957
     },
     {
       "url": "https://english.zzu.edu.cn/admissions.html",
       "title": "Admissions",
-      "chars": 1301
+      "chars": 3405
+    },
+    {
+      "url": "https://english.zzu.edu.cn/2026-04/24/c_2407.htm",
+      "title": "Announcement on alumni information collection for the International College of ZZU",
+      "chars": 8057
+    },
+    {
+      "url": "https://english.zzu.edu.cn/2026-07/02/c_2443.htm",
+      "title": "ZZU and PolyU forge deeper ties through exchange program",
+      "chars": 5471
+    },
+    {
+      "url": "https://english.zzu.edu.cn/2025-07/23/c_2197.htm",
+      "title": "School of Computer Science and Artificial Intelligence",
+      "chars": 5424
+    },
+    {
+      "url": "https://english.zzu.edu.cn/2025-07/23/c_2196.htm",
+      "title": "School of Materials Science and Engineering",
+      "chars": 5801
+    },
+    {
+      "url": "https://english.zzu.edu.cn/science_2.html",
+      "title": "Science",
+      "chars": 5075
+    },
+    {
+      "url": "https://english.zzu.edu.cn/science_3.html",
+      "title": "Science",
+      "chars": 3459
+    },
+    {
+      "url": "https://english.zzu.edu.cn/index.html",
+      "title": "Zhengzhou University",
+      "chars": 8298
+    },
+    {
+      "url": "https://www.zzu.edu.cn/",
+      "title": "郑州大学",
+      "chars": 10854
+    },
+    {
+      "url": "https://ao.zzu.edu.cn/index.htm",
+      "title": "郑州大学招生网",
+      "chars": 4372
+    },
+    {
+      "url": "https://ao.zzu.edu.cn/xxgk/zsjz.htm",
+      "title": "招生简章-郑州大学招生网",
+      "chars": 3316
+    },
+    {
+      "url": "https://ao.zzu.edu.cn/info/1002/5220.htm",
+      "title": "李成伟调研2026年本科招生录取工作-郑州大学招生网",
+      "chars": 2623
+    },
+    {
+      "url": "https://www.zzu.edu.cn/zsjy.htm",
+      "title": "招生就业-郑州大学",
+      "chars": 4663
     }
   ],
   "db_row": {
@@ -655,44 +487,30 @@
     "city": "Zhengzhou",
     "province": "Henan",
     "country": "Chine",
-    "department": "School of International Education, Zhengzhou University",
-    "emails": [
-      "sie@zzu.edu.cn",
-      "sie@zzu.edu.cn"
-    ],
-    "phone": "+86 371 67780102",
-    "wechat": null,
-    "website": "https://international.zzu.edu.cn/",
+    "department": "International College of Zhengzhou University",
+    "emails": [],
+    "phone": "0371-67760013",
+    "wechat": "18595819573",
+    "website": "https://english.zzu.edu.cn/",
     "majors": [
-      "business",
-      "economics",
-      "finance",
       "computer_science",
       "engineering",
       "sciences",
       "medicine",
-      "dentistry",
       "pharmacy",
-      "chinese_language",
-      "arts",
       "design",
-      "music",
-      "law",
-      "education",
-      "agriculture"
+      "business",
+      "economics",
+      "other"
     ],
-    "required_documents": [
-      "passport",
-      "diplome",
-      "relevé_notes"
-    ],
-    "scholarship_amount": "Chinese Government Scholarship (CSC) / International Chinese Language Teacher Scholarship / Henan Government Scholarship / Zhengzhou University President Scholarship",
-    "scholarship_min": 18000,
-    "scholarship_max": 40000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 60",
-    "tuition_min": 18000,
-    "tuition_max": 40000,
-    "application_deadline": "Juin (rentrée septembre)"
+    "required_documents": [],
+    "scholarship_amount": null,
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
   }
 }

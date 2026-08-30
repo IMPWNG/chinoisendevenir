@@ -7,21 +7,19 @@
       "YSU"
     ],
     "website": "https://www.ysu.edu.cn/",
-    "international_website": "https://www.ysu.edu.cn/",
+    "international_website": "https://ies.ysu.edu.cn/",
     "application_portal_url": "https://admission.ysu.edu.cn/"
   },
   "general": {
-    "presentation": "Université située à Qinhuangdao (Hebei), reconnue pour son excellence en ingénierie mécanique et sciences de l'information. Co-construite par la province du Hebei, le MIIT et le Ministère de l'Éducation.",
-    "history": "Fondée en 1920 (origines à Harbin Institute of Technology). 1958: branche Fulaerji. 1960: indépendante sous le nom Northeast Heavy Machinery Institute. 1978: université clé nationale. 1997:迁 à Qinhuangdao et renommée Yanshan University. 2020: politique provinciale pour accélérer la construction 'double première classe'.",
-    "rankings": [
-      "Classée dans le Shanghai Ranking (ARWU) 2026, progression de 94 places"
-    ],
+    "presentation": "Université polytechnique située à Qinhuangdao (Hebei). Dispose d'un Institut d'éducation internationale et d'un Institut européen (campus en Pologne). Forme des étudiants en licence, master, doctorat et formation linguistique. Fait l'objet d'un soutien provincial pour la construction 'double première classe'.",
+    "history": "Origine en 1920 (Harbin Institute of Technology). Devient indépendante en 1960 sous le nom de Northeast Heavy Machinery Institute. Établie à Qinhuangdao en 1997, renommée Yanshan University. Co-construction par la province du Hebei, le MIIT et le Ministère de l'Éducation (2014).",
+    "rankings": [],
     "strengths": [
-      "Ingénierie mécanique",
-      "Sciences de l'information",
-      "Intelligence artificielle / logiciels",
-      "Matériaux avancés",
-      "Fabrication lourde"
+      "mécanique",
+      "science des matériaux",
+      "ingénierie",
+      "sciences de l'information",
+      "électrotechnique"
     ],
     "teaching_languages": [
       "zh",
@@ -33,22 +31,27 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 2500,
-      "notes": "Estimation pour Qinhuangdao, ville côtière de taille moyenne"
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
-        "name": "Campus principal (东校区/西校区)",
+        "name": "Yanshan University (Qinhuangdao)",
         "city": "Qinhuangdao",
-        "description": "Campus principal avec bâtiments mécaniques, bibliothèque, centres de recherche"
+        "description": "Campus principal à Hebei"
+      },
+      {
+        "name": "European Institute (Polish Campus)",
+        "city": "Pologne",
+        "description": "Campus en Pologne en collaboration (Institut européen / European Institute)"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Programmes de licence (diverses disciplines)",
+      "name": "Licence (programmes généraux, chinois)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -56,11 +59,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes principalement en chinois; quelques cours en anglais possibles"
+      "notes": "Programmes学士 via admissions internationales"
+    },
+    {
+      "level": "bachelor",
+      "name": "Licence (programmes en anglais)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes enseignés en anglais (Brand Courses)"
+    },
+    {
+      "level": "bachelor",
+      "name": "European Institute / Polish Campus (1+3)",
+      "field": "engineering",
+      "language": "bilingual",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme sino-européen avec campus en Pologne"
     },
     {
       "level": "master",
-      "name": "Programmes de master (recherche et professionnel)",
+      "name": "Master (programmes en chinois)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 3,
@@ -68,173 +95,331 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Master en ingénierie, sciences, gestion"
+      "notes": "Standard 3 ans, max 4 ans. Exige HSK 4 + HSKK intermédiaire."
+    },
+    {
+      "level": "master",
+      "name": "Master (programmes en anglais)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "IELTS 6.0 (min 5.5), TOEFL 85 (min 20), GRE 300+ ou Duolingo 95+"
+    },
+    {
+      "level": "master",
+      "name": "Master international en enseignement du chinois (汉语国际教育硕士)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Sortie: HSK 6 requis"
     },
     {
       "level": "phd",
-      "name": "Programmes de doctorat",
+      "name": "Doctorat (chinois/anglais)",
       "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
+      "language": "bilingual",
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Doctorat en ingénierie et sciences"
+      "notes": "Programme doctor留学生. Critères d'éligibilité non détaillés dans les sources fournies."
     },
     {
       "level": "language",
-      "name": "Programme de langue chinoise",
+      "name": "Programme de langue chinoise (Non-degree)",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Année préparatoire de chinois pour étudiants internationaux"
+      "notes": "Programme培训语言生"
+    },
+    {
+      "level": "exchange",
+      "name": "Summer School (camps d'été)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        7
+      ],
+      "academic_calendar": "summer",
+      "notes": "Programme '乐知山海' (ex. édition Russie)"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée)",
+      "academic": "Diplôme d'études secondaires complet (小学到高中阶段完整学习经历). Détails non publiés dans les sources fournies.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
+      "hsk_level": null,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "preparatory_if_insufficient": "Programme préparatoire linguistique (Non-degree) disponible",
       "other": [
-        "Dossier via admission.ysu.edu.cn"
+        "Passeport valide non-chinois",
+        "Examen médical",
+        "Relevés de notes traduits (chinois/anglais)",
+        "Lettre de motivation",
+        "Certificat de casier judiciaire",
+        "Relevé bancaire (5000 USD+)",
+        "Frais de dossier 800 CNY"
       ]
     },
     "master": {
-      "academic": "Licence (bachelor) dans un domaine pertinent",
+      "academic": "Baccalauréat (bachelor) ou équivalent certifié par le Ministère de l'Éducation du pays d'origine. Parcours complet小学到本科阶段.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 30,
       "age_min": null,
       "hsk_level": 4,
       "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "ielts_min": 6,
+      "toefl_min": 85,
+      "preparatory_if_insufficient": "Programme de langue chinoise (Non-degree) pour atteindre HSK 4",
       "other": [
-        "Dossier via admission.ysu.edu.cn"
+        "HSKK intermédiaire (pour chinois)",
+        "2 lettres de recommandation (professeurs)",
+        "Relevé bancaire 5000 USD+",
+        "Frais de dossier 800 CNY non remboursables",
+        "Test d'anglais à l'arrivée pour les programmes en anglais",
+        "Sortie: HSK 5 (HSK 6 pour汉语国际教育)"
       ]
     },
     "phd": {
-      "academic": "Master dans un domaine pertinent",
+      "academic": "Master ou équivalent. Détails non publiés dans les sources fournies.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": 4,
+      "hsk_level": null,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "preparatory_if_insufficient": null,
       "other": [
-        "Dossier via admission.ysu.edu.cn"
+        "Détails non précisés dans les sources"
       ]
     },
     "language": {
-      "academic": "Aucune exigence académique spécifique",
+      "academic": "Aucun prérequis académique spécifique",
       "age_max": null,
       "other": [
-        "Inscription via admission.ysu.edu.cn"
+        "Programme de formation linguistique (Non-degree)",
+        "Sessions d'été '乐知山海' disponibles"
       ]
     }
   },
   "contacts": {
-    "office_name": "Bureau des étudiants internationaux (留学生招生)",
-    "iso_email": "",
-    "admissions_email": "",
+    "office_name": "International Education School / European Institute (Yanshan University)",
+    "iso_email": "ies@ysu.edu.cn",
+    "admissions_email": "study@ysu.edu.cn",
     "wechat": "",
-    "phone": "+86-335-8057100",
-    "address": "438 Hebei Street West, Qinhuangdao, Hebei 066000, Chine"
+    "phone": "+86-335-8095518 (admissions), +86-335-8047570 (office)",
+    "address": "438 Hebei Street West, Qinhuangdao, Hebei 066004, China (河北省秦皇岛市河北大街438号, 邮编 066004)"
   },
   "matching": {
     "fields": [
       "engineering",
-      "computer_science",
       "sciences",
-      "chinese_language"
+      "computer_science",
+      "chinese_language",
+      "design",
+      "music",
+      "business",
+      "education"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language"
+      "language",
+      "exchange"
     ],
     "languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
-    "english_programs_available": null,
+    "english_programs_available": true,
     "chinese_language_program_available": true,
     "min_hsk_level": 4,
-    "min_ielts": null,
-    "min_toefl": null,
+    "min_ielts": 6,
+    "min_toefl": 85,
     "age_max_bachelor": null,
-    "age_max_master": null,
+    "age_max_master": 30,
     "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "",
+    "deadline_typical": "Variable selon les programmes; rentrée en septembre",
     "intake_months": [
       9
     ],
     "city": "Qinhuangdao",
     "province": "Hebei",
     "tags": [
-      "double-first-class candidate",
-      "heavy machinery",
-      "engineering focus",
-      "coastal city"
+      "double première classe (province)",
+      "co-construction MIIT/Hebei",
+      "campus Pologne (European Institute)",
+      "forte mécanique/matériaux",
+      "polyvalent"
     ]
   },
-  "confidence": 0.45,
+  "confidence": 0.65,
   "missing_fields": [
-    "tuition fees exact",
-    "housing costs",
-    "scholarship details (CSC, university, provincial)",
-    "specific HSK/IELTS/TOEFL minimum scores",
-    "age limits",
-    "application deadlines",
-    "specific English-taught programs list",
-    "international office email"
+    "tuition_cny",
+    "housing_cny",
+    "cost_of_living",
+    "bachelor_specific_requirements",
+    "phd_requirements",
+    "deadline_dates_2026",
+    "ielts_subscore_min_for_phd"
   ],
-  "notes": "Sources limitées: page d'accueil du portail d'admission (login) et site principal de l'université. Le guide d'admission 2026 est mentionné (2025-11-07) mais le contenu détaillé n'est pas accessible dans les sources fournies. La plupart des détails spécifiques d'admission sont marqués null par prudence.",
+  "notes": "Données détaillées pour le master. Bachelor, doctorat et frais non précisés dans les sources fournies (tableau des frais vide). Bourses confirmées: CSC, International Chinese Teacher, Hebei Provincial, YSU President Scholarship. Identité de citoyen non-chinois requise (passeport valide + visa de résidence ≥4 ans pour anciens citoyens chinois). Vérifier ies.ysu.edu.cn/info/1167/8510.htm pour le guide d'admission 2026.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": null,
-      "who": "",
+      "count": 1,
+      "who": "Étudiant international",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Page photo; passeport valide pendant toute la durée de la candidature jusqu'à l'entrée en Chine, non renouvelable"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": 1,
+      "who": "Étudiant international",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire Foreigner Physical Examination Form, daté de moins de 6 mois"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": 1,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Certificat de licence (master) ou master (doctorat) reconnu par le ministère de l'éducation du pays d'origine; traduction certifiée chinois/anglais si autre langue"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": 1,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes de l'enseignement secondaire à supérieur (master) ou cycle complet (doctorat); traduction certifiée"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Nouveau HSK 4+ et HSKK intermédiaire+ pour cursus chinois; IELTS 6.0 (min 5.5/section), TOEFL 85 (min 20/section), GRE 300+ ou Duolingo 95+ pour cursus anglais"
+    },
+    {
+      "type": "personal_statement",
+      "required": true,
+      "count": 1,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Description continue du parcours depuis le collège jusqu'au plus haut diplôme et expériences professionnelles"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Deux lettres de professeurs (titre de vice-senior ou supérieur)"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": 1,
+      "who": "Hors étudiants en cours",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Validité 6 mois sauf mention contraire; étudiants en cours fournir attestation de comportement"
+    },
+    {
+      "type": "bank_statement",
+      "required": true,
+      "count": 1,
+      "who": "Sans bourse",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Preuve de fonds ≥ 5000 USD; si garant parental, justificatif de lien de parenté; non requis pour boursiers"
+    },
+    {
+      "type": "application_fee_receipt",
+      "required": true,
+      "count": 1,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Justificatif bancaire du paiement des frais de dossier à téléverser"
     }
   ],
   "application": {
-    "platform_name": "燕山大学国际学生在线申请系统",
-    "platform_url": "https://admission.ysu.edu.cn",
-    "steps": [],
+    "platform_name": "Yanshan University International Students Online Application System",
+    "platform_url": "http://admission.ysu.edu.cn",
+    "steps": [
+      "Créer un compte sur http://admission.ysu.edu.cn (inscription avec mot de passe ≥ 8 caractères mélangeant majuscules, minuscules, chiffres et caractères spéciaux)",
+      "Remplir le formulaire en ligne avec photo et description continue du parcours depuis le collège",
+      "Téléverser les scans HD des documents requis (photos et copies non acceptées)",
+      "Payer les frais de dossier de 800 CNY et téléverser le justificatif bancaire",
+      "Attendre la vérification d'identité par le bureau de la sécurité publique de Qinhuangdao",
+      "Recevoir la décision d'admission",
+      "Effectuer l'enregistrement à l'automne (généralement septembre)"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
     "intake_months": [
       9
     ],
-    "application_fee_cny": null,
-    "application_fee_refundable": null,
-    "payment_methods": []
+    "application_fee_cny": 800,
+    "application_fee_refundable": false,
+    "payment_methods": [
+      "bank_transfer"
+    ]
   },
   "fees": {
     "tuition_cny_year": {
@@ -257,7 +442,13 @@
       "english_taught_premium": null
     },
     "insurance_cny_year": null,
-    "other_fees": [],
+    "other_fees": [
+      {
+        "item": "Frais de dossier (application fee)",
+        "amount_cny": 800,
+        "notes": "Non remboursable"
+      }
+    ],
     "housing": {
       "on_campus": [
         {
@@ -276,17 +467,77 @@
       "notes": ""
     }
   },
-  "scholarships": [],
+  "scholarships": [
+    {
+      "name": "Chinese Government Scholarship (中国政府奖学金)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via CSC ou ambassade de Chine; couvrir licence, master, doctorat, langue, échange",
+      "apply_via": "CSC",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "International Chinese Language Teachers Scholarship (国际中文教师奖学金)",
+      "type": "csc",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour étudiants en enseignement du chinois langue étrangère ou MTCSOL",
+      "apply_via": "CSC / Center for Language Education and Cooperation",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Hebei Provincial Government Scholarship (河北省政府奖学金)",
+      "type": "government",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Gouvernement provincial du Hebei; conditions gérées par l'université",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "YSU President Scholarship (燕山大学校长奖学金)",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition",
+        "accommodation",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Attribué par lots successifs (17 lots publiés pour 2026-2027); exempté de frais de dossier et preuve bancaire",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Annuel, sur demande"
+    }
+  ],
   "language": {
     "hsk_bachelor": null,
-    "hsk_master": null,
+    "hsk_master": 4,
     "hsk_phd": null,
-    "ielts_min": null,
-    "toefl_min": null,
+    "ielts_min": 6,
+    "toefl_min": 85,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 année (programme non-diplôme)",
+      "leads_to_degree": false
     },
     "foundation": {
       "available": null,
@@ -294,91 +545,119 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1 (long terme études)",
+      "X2 (court terme)"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission (Admission Notice)",
+      "Formulaire JW202 (Visa Application for Study in China)"
+    ],
+    "instructions": "Demander un visa X1/X2 à l'ambassade ou consulat de Chine avec l'admission letter et JW202; l'université fournit l'assistance via le chatbot 'Yanxiaoliu'",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours suivant l'arrivée au bureau de la sécurité publique de Qinhuangdao (河北大街438号)"
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "Chambre double sur campus (résidences étudiantes)"
+    ],
     "rules": "",
-    "international_office": "",
+    "international_office": "International Education School (IES) - ies@ysu.edu.cn, +86-335-804-7570; admissions: study@ysu.edu.cn, +86-335-8095518",
     "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "english_support": true,
+    "clubs": "Camp d'été international 'Lezhi Shanhai' (乐知山海), échanges culturels internationaux"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Anciens citoyens chinois naturalisés étrangers",
+      "notes": "Doivent détenir un passeport étranger valide depuis ≥ 4 ans et avoir résidé à l'étranger ≥ 2 ans (≥ 9 mois/an) durant les 4 dernières années avant le 30 avril de l'année d'admission; vérification par le bureau de la sécurité publique de Qinhuangdao"
     }
   ],
   "scan_status": "ok",
   "slug": "yanshan-university",
-  "scraped_at": "2026-08-24T14:41:56.518Z",
+  "scraped_at": "2026-08-30T11:14:12.704Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://admission.ysu.edu.cn/",
       "title": "国际学生在线申请系统 - 燕山大学",
-      "chars": 183
-    },
-    {
-      "url": "https://admission.ysu.edu.cn/css/login.min.css",
-      "title": null,
-      "chars": 3019
+      "chars": 509
     },
     {
       "url": "https://admission.ysu.edu.cn/password/reset",
-      "title": "燕山大学国际学生在线申请系统 | Verify",
-      "chars": 131
-    },
-    {
-      "url": "https://admission.ysu.edu.cn/register",
-      "title": "国际学生在线申请系统 - 燕山大学",
+      "title": "燕山大学国际学生在线申请系统 |     Verify",
       "chars": 263
     },
     {
       "url": "https://www.ysu.edu.cn/",
       "title": "燕山大学",
-      "chars": 4673
+      "chars": 13580
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/css-Poppins300400500600700.css",
-      "title": null,
-      "chars": 4507
+      "url": "https://admission.ysu.edu.cn/register",
+      "title": "国际学生在线申请系统 - 燕山大学",
+      "chars": 332
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/login-4-7.1.7.css",
-      "title": null,
-      "chars": 7474
+      "url": "http://ies.ysu.edu.cn/",
+      "title": "燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 8360
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/plugins.bundle-7.1.7.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://ies.ysu.edu.cn/index.jsp",
+      "title": "燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 8360
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/prismjs.bundle-7.1.7.css",
-      "title": null,
-      "chars": 1968
+      "url": "http://zsjyc.ysu.edu.cn/bkxwz/sy.htm",
+      "title": "首页-招生网",
+      "chars": 1631
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/style.bundle.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://ies.ysu.edu.cn/admissions/master.htm",
+      "title": "硕士留学生项目-燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 7133
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/light.rtl-7.1.7.css",
-      "title": null,
-      "chars": 3813
+      "url": "https://ies.ysu.edu.cn/European_Institute/enrollment_guide.htm",
+      "title": "招生简章-燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 4797
     },
     {
-      "url": "https://admission.ysu.edu.cn/static/css/light-7.1.7.css",
-      "title": null,
-      "chars": 12000
+      "url": "https://admission.ysu.edu.cn/login",
+      "title": "国际学生在线申请系统 - 燕山大学",
+      "chars": 509
+    },
+    {
+      "url": "https://ies.ysu.edu.cn/admissions/doctor.htm",
+      "title": "博士留学生项目-燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 6825
+    },
+    {
+      "url": "https://ies.ysu.edu.cn/admissions/bachelor.htm",
+      "title": "本科生项目-燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 6910
+    },
+    {
+      "url": "https://ies.ysu.edu.cn/admissions/Non_degree.htm",
+      "title": "语言生培训项目-燕山大学国际教育学院（燕山大学欧洲学院）",
+      "chars": 6544
+    },
+    {
+      "url": "http://english.ysu.edu.cn/",
+      "title": "Yanshan University",
+      "chars": 6291
+    },
+    {
+      "url": "http://jwc.ysu.edu.cn/",
+      "title": "燕山大学教务处",
+      "chars": 11042
+    },
+    {
+      "url": "http://zsjyc.ysu.edu.cn/yjsxwz/yzsy.htm",
+      "title": "网站首页-招生网",
+      "chars": 3252
     }
   ],
   "db_row": {
@@ -389,27 +668,43 @@
     "city": "Qinhuangdao",
     "province": "Hebei",
     "country": "Chine",
-    "department": "Bureau des étudiants internationaux (留学生招生)",
-    "emails": [],
-    "phone": "+86-335-8057100",
+    "department": "International Education School / European Institute (Yanshan University)",
+    "emails": [
+      "ies@ysu.edu.cn",
+      "study@ysu.edu.cn"
+    ],
+    "phone": "+86-335-8095518 (admissions), +86-335-8047570 (office)",
     "wechat": null,
-    "website": "https://www.ysu.edu.cn/",
+    "website": "https://ies.ysu.edu.cn/",
     "majors": [
       "engineering",
-      "computer_science",
       "sciences",
-      "chinese_language"
+      "computer_science",
+      "chinese_language",
+      "design",
+      "music",
+      "business",
+      "education"
     ],
     "required_documents": [
-      "passport"
+      "passport",
+      "physical_examination",
+      "diploma",
+      "transcripts",
+      "language_certificate",
+      "personal_statement",
+      "recommendation_letters",
+      "no_criminal_record",
+      "bank_statement",
+      "application_fee_receipt"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Chinese Government Scholarship (中国政府奖学金) / International Chinese Language Teachers Scholarship (国际中文教师奖学金) / Hebei Provincial Government Scholarship (河北省政府奖学金) / YSU President Scholarship (燕山大学校长奖学金)",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": 4,
-    "language_requirements": "HSK 4+",
+    "language_requirements": "HSK 4+ / IELTS 6 / TOEFL 85",
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Variable selon les programmes; rentrée en septembre"
   }
 }

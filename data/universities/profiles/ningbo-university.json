@@ -6,23 +6,20 @@
     "aliases": [
       "NBU"
     ],
-    "website": "https://www.nbu.edu.cn/",
-    "international_website": "https://iso.nbu.edu.cn/",
-    "application_portal_url": "https://iso.nbu.edu.cn/"
+    "website": "http://www.nbu.edu.cn/",
+    "international_website": "http://iso.nbu.edu.cn/",
+    "application_portal_url": ""
   },
   "general": {
-    "presentation": "Université publique fondée en 1986 grâce au don de Sir Yue-Kong Pao, magnat mondial du transport maritime. Université « Double First-Class » (双一流) du Zhejiang, issue de la fusion de trois établissements en 1996. Offre des programmes en chinois et en anglais aux étudiants internationaux.",
-    "history": "Fondée en 1986 par Sir Yue-Kong Pao. Fusion de trois universités en 1996. Célébration du 40e anniversaire en 2026.",
-    "rankings": [
-      "Double First-Class (双一流)"
-    ],
+    "presentation": "Université complète située à Ningbo, province du Zhejiang, offrant des programmes de licence, master et doctorat aux étudiants internationaux. Dispose d'un International College et de nombreuses facultés (commerce, droit, médecine, sciences, ingénierie, etc.).",
+    "history": "",
+    "rankings": [],
     "strengths": [
-      "Sciences marines",
-      "Ingénierie mécanique",
       "Commerce international",
+      "Sciences marines",
       "Médecine",
-      "Sciences des matériaux",
-      "Droit maritime"
+      "Ingénierie mécanique",
+      "Sciences de l'information"
     ],
     "teaching_languages": [
       "zh",
@@ -34,20 +31,20 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Estimation pour étudiant international (logement + nourriture + transport)"
+      "min": null,
+      "max": null,
+      "notes": ""
     },
     "campuses": [
       {
-        "name": "Campus principal (Zhu校区)",
+        "name": "Main Campus (Fenghua Road)",
         "city": "Ningbo",
-        "description": "818 Fenghua Road, Jiangbei District"
+        "description": "Campus principal, 818 Fenghua Road, Jiangbei District"
       },
       {
-        "name": "Campus Meishan",
+        "name": "Meishan Campus",
         "city": "Ningbo",
-        "description": "169 Qixing South Road, Beilun District"
+        "description": "Campus secondaire"
       }
     ]
   },
@@ -66,10 +63,10 @@
     },
     {
       "level": "bachelor",
-      "name": "Accounting (CGA Concentration)",
+      "name": "CGA Accounting Program",
       "field": "business",
       "language": "en",
-      "duration_years": 4,
+      "duration_years": null,
       "start_months": [
         9
       ],
@@ -78,106 +75,167 @@
     },
     {
       "level": "bachelor",
-      "name": "Chinese Language Program",
+      "name": "Clinical Medicine",
+      "field": "medicine",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Medical School"
+    },
+    {
+      "level": "bachelor",
+      "name": "Mechanical Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculty of Mechanical Engineering & Mechanics"
+    },
+    {
+      "level": "bachelor",
+      "name": "Computer Science / Information Science and Engineering",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculty of Information Science and Engineering"
+    },
+    {
+      "level": "bachelor",
+      "name": "Marine Science",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculty of Marine Science"
+    },
+    {
+      "level": "bachelor",
+      "name": "Law",
+      "field": "law",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Law School"
+    },
+    {
+      "level": "bachelor",
+      "name": "Business Administration",
+      "field": "business",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculty of Business"
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture / Environmental Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculty of Architectural Engineering and Environment"
+    },
+    {
+      "level": "bachelor",
+      "name": "Materials Science and Chemical Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Faculty of Materials Science and Chemical Engineering"
+    },
+    {
+      "level": "bachelor",
+      "name": "Chinese Language",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
+      "duration_years": null,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme non-diplôme / court terme"
-    },
-    {
-      "level": "master",
-      "name": "Programmes de master (divers)",
-      "field": "other",
-      "language": "bilingual",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Voir PDF 2020-Postgraduate Programs"
-    },
-    {
-      "level": "phd",
-      "name": "Programmes doctoraux (divers)",
-      "field": "other",
-      "language": "bilingual",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Voir PDF 2020-Postgraduate Programs"
+      "notes": "Cours de langue et culture chinoise proposés aux étudiants internationaux"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (high school) avec certificat et relevés de notes notariés",
+      "academic": "Diplôme de fin d'études secondaires (high school) ou équivalent. Détails dans la brochure 2020-Undergraduate Programs.pdf.",
       "min_gpa": null,
       "age_max": null,
-      "age_min": 18,
-      "hsk_level": 4,
+      "age_min": null,
+      "hsk_level": null,
       "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise proposé",
-      "other": [
-        "Passeport valide",
-        "Certificat de non-casier judiciaire",
-        "Relevé de paiement des frais de dossier",
-        "Exemption HSK possible si natif chinois ou lycée d'enseignement en chinois"
-      ]
-    },
-    "master": {
-      "academic": "Licence (Bachelor's degree) avec relevés de notes notariés",
-      "min_gpa": null,
-      "age_max": null,
-      "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 210,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise proposé",
-      "other": [
-        "Deux lettres de recommandation avec téléphone/email",
-        "Certificat de non-casier judiciaire",
-        "Exemption HSK si bachelor/master obtenu en chinois en Chine"
-      ]
-    },
-    "phd": {
-      "academic": "Master's degree avec relevés de notes notariés",
-      "min_gpa": null,
-      "age_max": null,
-      "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": 210,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Deux lettres de recommandation",
-        "Certificat de non-casier judiciaire"
+        "Voir Entry Requirements sur iso.nbu.edu.cn"
       ]
     },
-    "language": {
-      "academic": "Aucune condition académique spécifique",
-      "age_max": 45,
+    "master": {
+      "academic": "Diplôme de licence ou équivalent. Détails dans la brochure Postgraduate Programs.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
       "other": [
-        "Passeport valide",
-        "Certificat de non-casier judiciaire"
+        "Voir Entry Requirements sur iso.nbu.edu.cn"
       ]
+    },
+    "phd": {
+      "academic": "Diplôme de master ou équivalent.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": []
+    },
+    "language": {
+      "academic": "",
+      "age_max": null,
+      "other": []
     }
   },
   "contacts": {
-    "office_name": "International Students Office / Office des admissions internationales",
+    "office_name": "International College / Office of International Students Admissions",
     "iso_email": "admissions@nbu.edu.cn",
     "admissions_email": "admissions@nbu.edu.cn",
     "wechat": "",
-    "phone": "+86-574-87600335",
-    "address": "818 Fenghua Road, Jiangbei District, Ningbo City, Zhejiang Province, PRC"
+    "phone": "0086-574-87600335",
+    "address": "818 Fenghua Road, Jiangbei District, Ningbo City, Zhejiang Province, PRC, 315211"
   },
   "matching": {
     "fields": [
@@ -191,9 +249,8 @@
       "law",
       "education",
       "arts",
-      "design",
       "chinese_language",
-      "agriculture"
+      "design"
     ],
     "degrees": [
       "bachelor",
@@ -204,12 +261,11 @@
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
+    "min_hsk_level": null,
     "min_ielts": null,
     "min_toefl": null,
     "age_max_bachelor": null,
@@ -217,167 +273,142 @@
     "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": true,
-    "tuition_cny_min": 16000,
-    "tuition_cny_max": 30000,
-    "housing_cny_year_min": 4000,
-    "deadline_typical": "Juin",
+    "has_provincial_scholarship": null,
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "housing_cny_year_min": null,
+    "deadline_typical": "",
     "intake_months": [
       9
     ],
     "city": "Ningbo",
     "province": "Zhejiang",
     "tags": [
-      "Double First-Class",
-      "campus côtier",
-      "programmes en anglais",
-      "bourses CSC",
-      "bourse provinciale Zhejiang"
+      "CSC scholarship",
+      "Silk Road scholarship",
+      "NBU scholarship",
+      "English-taught programs",
+      "coastal city",
+      "Meishan campus"
     ]
   },
-  "confidence": 0.65,
+  "confidence": 0.45,
   "missing_fields": [
-    "Frais de scolarité exacts par programme",
-    "Scores IELTS/TOEFL minimum précis",
-    "Dates limites d'application précises",
-    "Liste complète des 7 programmes en anglais",
-    "Montants exacts des bourses"
+    "min_gpa",
+    "age_min",
+    "age_max",
+    "hsk_level",
+    "hsk_score_min",
+    "ielts_min",
+    "toefl_min",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "cost_of_living",
+    "application_deadline",
+    "scholarship_amounts",
+    "preparatory_program_details",
+    "history",
+    "rankings"
   ],
-  "notes": "Sources datées de 2019-2020 (site iso.nbu.edu.cn). Site principal nbu.edu.cn actif en 2026. Université « Double First-Class » confirmée. Programmes en anglais: 7 au total selon la page dédiée, mais seuls International Finance et CGA Accounting sont détaillés dans les sources. Contacts vérifiés: admissions@nbu.edu.cn, +86-574-87600335.",
+  "notes": "Sources limitées aux pages d'index du site ISO (iso.nbu.edu.cn) et du site principal (nbu.edu.cn/en). Les pages détaillées (Entry Requirements, How to apply, Scholarships, Tuition&Expenses) n'ont pas été scrapées. Programmes en anglais confirmés: International Finance (4 ans) et CGA Accounting. Bourses CSC (Graduate et Silk Road) confirmées. Contacts vérifiés: admissions@nbu.edu.cn, Zhao Qi, Jin Qianyu.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "Tous candidats",
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Photocopie du passeport ordinaire valide"
+      "notes": "Passeport valide requis pour candidature"
     },
     {
-      "type": "application_form",
+      "type": "diplome",
       "required": true,
-      "count": 1,
-      "who": "Tous candidats",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Formulaire de candidature avec photo"
-    },
-    {
-      "type": "high_school_diploma",
-      "required": true,
-      "count": 1,
-      "who": "Candidats licence",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": "Diplôme et relevés de notes du lycée (original ou copie notariée)"
-    },
-    {
-      "type": "bachelor_degree",
-      "required": true,
-      "count": 1,
-      "who": "Candidats master",
-      "applies_to": [
-        "master"
-      ],
-      "notes": "Diplôme de licence et relevés de notes (original ou copie notariée)"
-    },
-    {
-      "type": "master_degree",
-      "required": true,
-      "count": 1,
-      "who": "Candidats doctorat",
-      "applies_to": [
-        "phd"
-      ],
-      "notes": "Diplôme de master et relevés de notes (original ou copie notariée)"
-    },
-    {
-      "type": "hsk",
-      "required": true,
-      "count": 1,
-      "who": "Candidats programmes en chinois",
+      "count": null,
+      "who": "",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "HSK 4 minimum (210+) ou HSK 5 pour master; exemption possible si natif chinois ou lycée en chinois"
+      "notes": "Diplôme précédent (lycée pour bachelor, licence pour master)"
     },
     {
-      "type": "english_test",
+      "type": "releves_notes",
       "required": true,
-      "count": 1,
-      "who": "Candidats programmes en anglais",
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes officiels"
+    },
+    {
+      "type": "certificat_langue",
+      "required": false,
+      "count": null,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "TOEFL/IELTS ou autre test si langue maternelle non anglaise"
+      "notes": "HSK pour programmes en chinois, IELTS/TOEFL pour programmes en anglais"
     },
     {
-      "type": "recommendation_letters",
+      "type": "formulaire_demande",
       "required": true,
-      "count": 2,
-      "who": "Candidats master/doctorat",
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire de candidature NBU"
+    },
+    {
+      "type": "photos",
+      "required": true,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Photos d'identité"
+    },
+    {
+      "type": "lettre_motivation",
+      "required": false,
+      "count": null,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": ""
+    },
+    {
+      "type": "lettres_recommandation",
+      "required": false,
+      "count": null,
+      "who": "",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "Deux lettres avec téléphone ou email"
-    },
-    {
-      "type": "non_criminal_record",
-      "required": true,
-      "count": 1,
-      "who": "Tous candidats",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Casier judiciaire vierge"
-    },
-    {
-      "type": "application_fee_receipt",
-      "required": true,
-      "count": 1,
-      "who": "Tous candidats",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Reçu de virement des frais de candidature"
-    },
-    {
-      "type": "guarantee_statement",
-      "required": true,
-      "count": 1,
-      "who": "Candidats de moins de 18 ans",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": "Attestation de garantie requise"
-    },
-    {
-      "type": "citizenship_change_docs",
-      "required": true,
-      "count": 3,
-      "who": "Anciens citoyens chinois naturalisés",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Certificat de perte de citoyenneté chinoise, certificat de citoyenneté actuelle, relevés d'entrée/sortie du 30/04/2015 au 30/04/2019"
+      "notes": ""
     }
   ],
   "application": {
-    "platform_name": "Site international NBU (iso.nbu.edu.cn)",
-    "platform_url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/How_to_apply.htm",
+    "platform_name": "Site ISO NBU / email admissions@nbu.edu.cn",
+    "platform_url": "http://iso.nbu.edu.cn/",
     "steps": [
-      "Remplir le formulaire de candidature",
+      "Télécharger le formulaire de candidature",
+      "Remplir le formulaire de demande",
       "Préparer les documents requis",
-      "Envoyer le dossier par email à admissions@nbu.edu.cn ou via la plateforme",
-      "Payer les frais de candidature et joindre le reçu",
-      "Attendre la notification d'admission"
+      "Envoyer la candidature à admissions@nbu.edu.cn ou via le portail NBU",
+      "Attendre la notification d'admission",
+      "Postuler pour le visa X1/X2 avec lettre d'admission"
     ],
     "opens_at": "",
     "deadline": "",
@@ -387,12 +418,10 @@
     ],
     "application_fee_cny": null,
     "application_fee_refundable": null,
-    "payment_methods": [
-      "bank_remittance"
-    ]
+    "payment_methods": []
   },
   "fees": {
-    "tuition_cnn_year": {
+    "tuition_cny_year": {
       "bachelor": {
         "min": null,
         "max": null
@@ -418,17 +447,7 @@
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "TV, salle de bain, toilettes, climatisation (appartement international)"
-        },
-        {
-          "type": "single",
-          "price_cny_year": null,
-          "included": "TV, salle de bain, toilettes, climatisation (appartement international)"
-        },
-        {
-          "type": "quadruple",
-          "price_cny_year": null,
-          "included": "Salle de bain, eau chaude, toilettes, bureau (dortoir étudiants chinois)"
+          "included": ""
         }
       ],
       "deposit_cny": null,
@@ -438,22 +457,37 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Plus de 10 cantines sur le campus, nourriture musulmane et végétarienne disponible"
+      "notes": ""
     }
   },
   "scholarships": [
     {
-      "name": "Chinese Government Scholarship",
+      "name": "Chinese Government Scholarship (Graduate Students)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
+        "housing",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Postuler via CSC ou ambassade de Chine",
-      "apply_via": "csc",
+      "conditions": "Pour étudiants internationaux en master/doctorat",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Chinese Government Scholarship (Silk Road)",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Programme Route de la Soie",
+      "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
@@ -465,16 +499,16 @@
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Bourse interne NBU",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": 4,
-    "hsk_master": 4,
-    "hsk_phd": 4,
+    "hsk_bachelor": null,
+    "hsk_master": null,
+    "hsk_phd": null,
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
@@ -493,95 +527,114 @@
       "X2"
     ],
     "documents_from_university": [
-      "Lettre d'admission JW202",
-      "Formulaire de demande de visa JW201 (pour bourse CSC)"
+      "Lettre d'admission NBU",
+      "Formulaire JW202"
     ],
-    "instructions": "Les étudiants doivent obtenir un visa étudiant X1 ou X2 avant l'entrée en Chine avec la lettre d'admission et le formulaire JW202 fournis par l'université",
-    "arrival_and_residence_permit": "Les étudiants étrangers doivent se présenter au Bureau de la sécurité publique dans les 30 jours suivant l'arrivée pour obtenir un permis de résidence"
+    "instructions": "Demander visa X1 (long terme >180 jours) ou X2 (court terme) avec lettre d'admission et JW202",
+    "arrival_and_residence_permit": "Permis de résidence requis dans les 30 jours après arrivée pour X1"
   },
   "housing_and_services": {
     "housing_types": [
-      "Appartement international (chambre double ou simple, standard hôtelier)",
-      "Dortoir étudiants chinois (4 personnes par chambre)"
+      "Résidence universitaire sur campus"
     ],
     "rules": "",
-    "international_office": "Bureau des étudiants internationaux - admissions@nbu.edu.cn, Tel: 0086-574-87600335 (Ms. Zhao Qi, Ms. Jin Qianyu)",
+    "international_office": "International Students Office, admissions@nbu.edu.cn, Tel: 0086-574-87600335 (Ms. Zhao Qi, Ms. Jin Qianyu)",
     "orientation": "",
-    "english_support": true,
-    "clubs": "Kung-fu chinois, calligraphie, peinture, instruments traditionnels chinois"
+    "english_support": null,
+    "clubs": "Kungfu chinois, calligraphie, peinture, instruments traditionnels"
   },
   "country_specific": [
     {
-      "region_or_country": "Anciens citoyens chinois",
-      "notes": "Doivent satisfaire aux conditions du Document No. 83 (2009) du Ministère de l'Éducation de la RPC"
+      "region_or_country": "",
+      "notes": ""
     }
   ],
   "scan_status": "ok",
   "slug": "ningbo-university",
-  "scraped_at": "2026-08-23T14:48:56.336Z",
+  "scraped_at": "2026-08-30T11:03:07.326Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://iso.nbu.edu.cn/",
-      "title": "Ningbo University",
-      "chars": 4536
-    },
     {
       "url": "http://iso.nbu.edu.cn/",
       "title": "Ningbo University",
-      "chars": 4536
+      "chars": 8552
+    },
+    {
+      "url": "https://iso.nbu.edu.cn/",
+      "title": "Ningbo University",
+      "chars": 8552
     },
     {
       "url": "https://www.nbu.edu.cn/en/",
       "title": "Ningbo University",
-      "chars": 5333
+      "chars": 10087
     },
     {
-      "url": "https://www.nbu.edu.cn/",
-      "title": "首页 - 宁波大学",
-      "chars": 7568
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/Undergraduate_Programs.htm",
+      "title": "Undergraduate Programs-Ningbo University",
+      "chars": 5887
+    },
+    {
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/Postgraduate_Programs.htm",
+      "title": "Postgraduate Programs-Ningbo University",
+      "chars": 5697
     },
     {
       "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Undergraduate_Programs.htm",
       "title": "Undergraduate Programs-Ningbo University",
-      "chars": 2507
+      "chars": 5887
     },
     {
       "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Postgraduate_Programs.htm",
       "title": "Postgraduate Programs-Ningbo University",
-      "chars": 2504
+      "chars": 5697
+    },
+    {
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/Entry_Requirements.htm",
+      "title": "Entry Requirements-Ningbo University",
+      "chars": 8933
+    },
+    {
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/Programs_in_English.htm",
+      "title": "Programs in English-Ningbo University",
+      "chars": 5354
+    },
+    {
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/Short_term_Programs.htm",
+      "title": "Short-term Programs-Ningbo University",
+      "chars": 5691
+    },
+    {
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/How_to_apply.htm",
+      "title": "How to apply-Ningbo University",
+      "chars": 5820
+    },
+    {
+      "url": "http://iso.nbu.edu.cn/NingboUniversity/Admissions1/Scholarships.htm",
+      "title": "Scholarships-Ningbo University",
+      "chars": 5915
     },
     {
       "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Entry_Requirements.htm",
       "title": "Entry Requirements-Ningbo University",
-      "chars": 5565
+      "chars": 8933
     },
     {
       "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Programs_in_English.htm",
       "title": "Programs in English-Ningbo University",
-      "chars": 2228
+      "chars": 5354
     },
     {
       "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Short_term_Programs.htm",
       "title": "Short-term Programs-Ningbo University",
-      "chars": 2467
+      "chars": 5691
     },
     {
       "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/How_to_apply.htm",
       "title": "How to apply-Ningbo University",
-      "chars": 2463
-    },
-    {
-      "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Scholarships.htm",
-      "title": "Scholarships-Ningbo University",
-      "chars": 2483
-    },
-    {
-      "url": "https://iso.nbu.edu.cn/NingboUniversity/Admissions1/Why_NBU.htm",
-      "title": "Why NBU-Ningbo University",
-      "chars": 5743
+      "chars": 5820
     }
   ],
   "db_row": {
@@ -592,14 +645,14 @@
     "city": "Ningbo",
     "province": "Zhejiang",
     "country": "Chine",
-    "department": "International Students Office / Office des admissions internationales",
+    "department": "International College / Office of International Students Admissions",
     "emails": [
       "admissions@nbu.edu.cn",
       "admissions@nbu.edu.cn"
     ],
-    "phone": "+86-574-87600335",
+    "phone": "0086-574-87600335",
     "wechat": null,
-    "website": "https://iso.nbu.edu.cn/",
+    "website": "http://iso.nbu.edu.cn/",
     "majors": [
       "business",
       "economics",
@@ -611,31 +664,23 @@
       "law",
       "education",
       "arts",
-      "design",
       "chinese_language",
-      "agriculture"
+      "design"
     ],
     "required_documents": [
       "passport",
-      "application_form",
-      "high_school_diploma",
-      "bachelor_degree",
-      "master_degree",
-      "hsk",
-      "english_test",
-      "recommendation_letters",
-      "non_criminal_record",
-      "application_fee_receipt",
-      "guarantee_statement",
-      "citizenship_change_docs"
+      "diplome",
+      "releves_notes",
+      "formulaire_demande",
+      "photos"
     ],
-    "scholarship_amount": "Chinese Government Scholarship / NBU Scholarship",
-    "scholarship_min": 16000,
-    "scholarship_max": 30000,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+",
-    "tuition_min": 16000,
-    "tuition_max": 30000,
-    "application_deadline": "Juin"
+    "scholarship_amount": "Chinese Government Scholarship (Graduate Students) / Chinese Government Scholarship (Silk Road) / NBU Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": null
   }
 }

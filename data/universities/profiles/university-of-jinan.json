@@ -11,18 +11,18 @@
     "application_portal_url": "http://isao.ujn.edu.cn/"
   },
   "general": {
-    "presentation": "Université publique de la province du Shandong, située à Jinan. Elle accueille des étudiants internationaux via son Collège d'éducation internationale (国际教育交流学院).",
-    "history": "",
+    "presentation": "Université publique de la province du Shandong, offrant des programmes de licence, master, doctorat et cours de chinois pour étudiants internationaux via le Collège d'échange et d'éducation internationale (SIEE).",
+    "history": "Fondée en 1948, fusion de plusieurs institutions. Devient Université de Jinan en 1992.",
     "rankings": [],
     "strengths": [
-      "Materials Science",
-      "Chemistry",
-      "Chemical Engineering",
-      "Mechanical Engineering",
-      "Civil Engineering",
-      "Computer Science",
-      "Environmental Engineering",
-      "Chinese Language Teaching"
+      "Chimie",
+      "Science des matériaux",
+      "Génie mécanique",
+      "Génie civil",
+      "Informatique",
+      "Sciences de l'environnement",
+      "Économie appliquée",
+      "Éducation internationale en chinois"
     ],
     "teaching_languages": [
       "zh",
@@ -34,138 +34,79 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation pour Jinan, ville de taille moyenne."
     },
     "campuses": [
       {
-        "name": "Main Campus",
+        "name": "Campus principal",
         "city": "Jinan",
-        "description": "Campus principal au 336 Nanxinzhuang West Road"
+        "description": "Campus principal avec la majorité des facultés"
       },
       {
-        "name": "Shungeng Campus",
+        "name": "Campus Shungeng (舜耕校区)",
         "city": "Jinan",
-        "description": "舜耕校区, 13 Shungeng Road"
+        "description": "Campus historique"
       }
     ]
   },
   "programs": [
     {
-      "level": "bachelor",
-      "name": "Chinese Language and Literature",
+      "level": "language",
+      "name": "Programme de chinois long terme (汉语长期进修生)",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 4,
+      "duration_years": 1,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "Programme de langue chinoise pour étudiants internationaux"
     },
     {
-      "level": "bachelor",
-      "name": "Computer Science and Technology",
-      "field": "computer_science",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Mechanical Engineering",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Civil Engineering",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Chemical Engineering and Technology",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Applied Chemistry",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Environmental Engineering",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Musicology",
-      "field": "music",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Industrial Design",
-      "field": "design",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Teaching Chinese to Speakers of Other Languages",
+      "level": "language",
+      "name": "Programme de chinois court terme (汉语短期进修生)",
       "field": "chinese_language",
       "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        3,
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme court de chinois"
+    },
+    {
+      "level": "bachelor",
+      "name": "Programmes de licence (diverses disciplines)",
+      "field": "engineering",
+      "language": "zh",
       "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Licences en génie, sciences, économie, lettres, arts disponibles"
+    },
+    {
+      "level": "bachelor",
+      "name": "Cuisine et nutrition (烹饪与营养教育)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme distinctif"
+    },
+    {
+      "level": "master",
+      "name": "Master en sciences des matériaux (材料科学与工程)",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
       "start_months": [
         9
       ],
@@ -174,7 +115,7 @@
     },
     {
       "level": "master",
-      "name": "Applied Economics",
+      "name": "Master en économie appliquée (应用经济学)",
       "field": "economics",
       "language": "zh",
       "duration_years": 3,
@@ -186,7 +127,19 @@
     },
     {
       "level": "master",
-      "name": "Computer Science and Technology",
+      "name": "Master en éducation internationale en chinois (汉语国际教育)",
+      "field": "education",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": ""
+    },
+    {
+      "level": "master",
+      "name": "Master en informatique (计算机科学与技术)",
       "field": "computer_science",
       "language": "zh",
       "duration_years": 3,
@@ -198,7 +151,7 @@
     },
     {
       "level": "phd",
-      "name": "Materials Science and Engineering",
+      "name": "Doctorat en sciences des matériaux (材料科学与工程)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -211,68 +164,85 @@
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée)",
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent. Pour les programmes en chinois, HSK requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "other": [
+        "Passeport valide",
+        "Certificat de diplôme",
+        "Relevés de notes"
+      ]
     },
     "master": {
-      "academic": "Licence/Bachelor dans un domaine connexe",
+      "academic": "Licence (bachelor) ou équivalent dans un domaine connexe.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible",
+      "other": [
+        "Passeport valide",
+        "Diplôme de licence",
+        "Relevés de notes",
+        "Plan de recherche"
+      ]
     },
     "phd": {
-      "academic": "Master dans un domaine connexe",
+      "academic": "Master ou équivalent dans un domaine connexe.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
-      "other": []
+      "other": [
+        "Passeport valide",
+        "Diplôme de master",
+        "Plan de recherche",
+        "Lettre de recommandation"
+      ]
     },
     "language": {
-      "academic": "",
+      "academic": "Pas de prérequis académique spécifique",
       "age_max": null,
-      "other": []
+      "other": [
+        "Passeport valide"
+      ]
     }
   },
   "contacts": {
-    "office_name": "国际教育交流学院 (School of International Education and Exchange)",
+    "office_name": "Collège d'échange et d'éducation internationale (国际教育交流学院)",
     "iso_email": "siee@ujn.edu.cn",
     "admissions_email": "zsb@ujn.edu.cn",
     "wechat": "",
     "phone": "0531-82765900",
-    "address": "336 Nanxinzhuang West Road, Jinan, Shandong, China 250022"
+    "address": "336 Nanxinzhuang West Road, Jinan, Shandong, 250022, Chine"
   },
   "matching": {
     "fields": [
-      "business",
-      "economics",
-      "computer_science",
       "engineering",
       "sciences",
+      "computer_science",
+      "economics",
+      "business",
       "chinese_language",
       "arts",
       "design",
       "music",
+      "education",
       "law",
-      "education"
+      "medicine"
     ],
     "degrees": [
       "bachelor",
@@ -284,97 +254,116 @@
       "zh",
       "en"
     ],
-    "english_programs_available": null,
+    "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": null,
+    "min_hsk_level": 4,
     "min_ielts": null,
     "min_toefl": null,
     "age_max_bachelor": null,
     "age_max_master": null,
     "age_max_phd": null,
-    "has_csc": null,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
+    "has_csc": true,
+    "has_university_scholarship": true,
+    "has_provincial_scholarship": true,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
-    "deadline_typical": "",
+    "deadline_typical": "Juin (rentrée septembre)",
     "intake_months": [
       9
     ],
     "city": "Jinan",
     "province": "Shandong",
     "tags": [
-      "public university",
-      "Shandong province",
-      "international students welcome",
-      "Chinese language programs",
-      "engineering focus"
+      "université publique",
+      "programmes chinois",
+      "programmes anglais limités",
+      "CSC disponible",
+      "programme langue chinoise",
+      "collaboration internationale"
     ]
   },
   "confidence": 0.45,
   "missing_fields": [
-    "tuition fees",
-    "HSK requirements",
-    "IELTS/TOEFL requirements",
-    "age limits",
-    "scholarship details",
-    "cost of living",
-    "specific admission deadlines",
-    "English-taught programs details",
-    "GPA requirements"
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_ielts",
+    "min_toefl",
+    "age_max_bachelor",
+    "age_max_master",
+    "age_max_phd",
+    "frais de dossier",
+    "dates limites précises",
+    "HSK score minimum exact",
+    "liste complète des programmes en anglais"
   ],
-  "notes": "Les sources fournies contiennent principalement des informations sur les admissions nationales chinoises et des actualités générales. Le portail international (isao.ujn.edu.cn) est référencé mais les détails spécifiques (frais, scores HSK/IELTS, bourses) ne sont pas disponibles dans les sources. Le Collège d'éducation internationale (siee.ujn.edu.cn) confirme l'accueil d'étudiants internationaux dans des programmes de licence, master et doctorat en chinois.",
+  "notes": "Informations limitées sur les frais, scores HSK exacts et exigences spécifiques. Le site d'admission internationale (isao.ujn.edu.cn) contient les détails des frais et bourses (奖学金项目, 收费标准) qui n'ont pas été extraits. Visa X1 requis pour études >6 mois, X2 pour court terme. Référence au programme SQA (Sino-UK) et au Collège conjoint avec Glasgow Caledonian University.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": null,
-      "who": "all international students",
+      "count": 1,
+      "who": "Tous candidats internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": "Original passport required"
+      "notes": "Passeport original requis pour enregistrement dans les 24h après arrivée"
     },
     {
       "type": "visa",
       "required": true,
-      "count": null,
-      "who": "all international students",
+      "count": 1,
+      "who": "Tous",
       "applies_to": [
         "all"
       ],
-      "notes": "X1 visa for studies >6 months, X2 for short-term"
+      "notes": "X1 (études ≥6 mois) ou X2 (court séjour)"
     },
     {
       "type": "admission_notice",
       "required": true,
-      "count": null,
-      "who": "new students",
+      "count": 1,
+      "who": "Nouveaux inscrits",
       "applies_to": [
         "all"
       ],
-      "notes": "Per admission notice from university"
+      "notes": "Lettre d'admission de l'université"
     },
     {
-      "type": "residence_registration",
+      "type": "academic_transcripts",
       "required": true,
       "count": null,
-      "who": "all international students",
+      "who": "Candidats programmes diplômants",
       "applies_to": [
-        "all"
+        "bachelor",
+        "master",
+        "phd"
       ],
-      "notes": "Register at local police station within 24h with school certificate"
+      "notes": "Non détaillé dans les sources"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Candidats programmes diplômants",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme le plus élevé (non détaillé)"
     }
   ],
   "application": {
-    "platform_name": "University of Jinan International Student Admission",
+    "platform_name": "济南大学留学生招生网 (système en ligne)",
     "platform_url": "http://isao.ujn.edu.cn/",
     "steps": [
-      "Submit online application via isao.ujn.edu.cn",
-      "Receive admission notice",
-      "Apply for X1 or X2 visa",
-      "Register at International Education Exchange College"
+      "Compléter le formulaire en ligne sur isao.ujn.edu.cn (在线申请)",
+      "Téléverser les documents requis",
+      "Attendre la revue et l'émission de la lettre d'admission",
+      "Obtenir le visa X1/X2 auprès du consulat chinois",
+      "S'enregistrer au Collège d'éducation internationale (SIEE) à l'arrivée"
     ],
     "opens_at": "",
     "deadline": "",
@@ -428,14 +417,42 @@
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Bourse du gouvernement chinois (CSC)",
       "type": "csc",
       "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Postuler via CSC ou ambassade de Chine",
+      "apply_via": "csc",
+      "deadline": "",
+      "renewal": "Annuel selon performance"
+    },
+    {
+      "name": "Bourse du gouvernement de Shandong",
+      "type": "provincial",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Variable selon programme",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse de l'Université de Jinan",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -448,13 +465,13 @@
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 an (long terme) ou court terme",
+      "leads_to_degree": false
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "Programmes de langue chinoise court terme et long terme proposés par SIEE"
     }
   },
   "visa": {
@@ -463,79 +480,114 @@
       "X2"
     ],
     "documents_from_university": [
-      "admission_notice",
-      "visa_application_form"
+      "Lettre d'admission (JW202)",
+      "Formulaire de demande de visa"
     ],
-    "instructions": "X1 visa for studies >6 months, X2 for short-term study",
-    "arrival_and_residence_permit": "Register at International Education Exchange College within 24h, then complete residence registration at local police station with school-issued certificate"
+    "instructions": "Études ≥6 mois: visa X1. Court séjour: visa X2. Convertir X1 en permis de résidence dans les 30 jours.",
+    "arrival_and_residence_permit": "S'enregistrer au SIEE dans les 24h, puis au bureau de police local avec certificat de l'université pour résidence temporaire"
   },
   "housing_and_services": {
     "housing_types": [
-      "international_student_dormitory"
+      "Dortoir international sur campus (chambre double)"
     ],
-    "rules": "International students must register housing within 24 hours of arrival",
-    "international_office": "International Education Exchange College (siee@ujn.edu.cn), 济南大学国际教育交流学院",
-    "orientation": "",
+    "rules": "Vérification électrique anti-incendie; pas d'appareils interdits; contrôle de sécurité régulier; enregistrement 24h",
+    "international_office": "Collège d'éducation internationale (SIEE), siee@ujn.edu.cn",
+    "orientation": "Oui (programme de bienvenue, activités culturelles)",
     "english_support": null,
-    "clubs": ""
+    "clubs": "Activités culturelles traditionnelles (Festival des bateaux-dragons, etc.), excursions interculturelles"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Tous",
+      "notes": "Étudiants de nombreux pays (Pakistan, Vietnam, Congo, Russie, Corée, Ouzbékistan, Bahamas, Cuba, Jamaïque, etc.) accueillis à SIEE"
     }
   ],
   "scan_status": "ok",
   "slug": "university-of-jinan",
-  "scraped_at": "2026-08-23T14:44:59.222Z",
+  "scraped_at": "2026-08-30T11:01:39.345Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.ujn.edu.cn/",
       "title": "济南大学",
-      "chars": 12000
-    },
-    {
-      "url": "http://admission.ujn.edu.cn/",
-      "title": "济南大学本科招生网",
-      "chars": 1722
-    },
-    {
-      "url": "https://siee.ujn.edu.cn/",
-      "title": "济南大学国际教育交流学院",
-      "chars": 959
+      "chars": 16000
     },
     {
       "url": "http://isao.ujn.edu.cn/",
       "title": "济南大学留学生招生网",
-      "chars": 500
+      "chars": 1769
+    },
+    {
+      "url": "https://siee.ujn.edu.cn/",
+      "title": "济南大学国际教育交流学院",
+      "chars": 5301
+    },
+    {
+      "url": "https://siee.ujn.edu.cn/info/1094/4681.htm",
+      "title": "国际教育交流学院开展暑期前国际学生宿舍安全专项检查-济南大学国际教育交流学院",
+      "chars": 1641
     },
     {
       "url": "https://sce.ujn.edu.cn/pxxm/xmjs.htm",
       "title": "项目介绍-济南大学继续教育学院",
-      "chars": 370
+      "chars": 1674
     },
     {
-      "url": "https://jwc.ujn.edu.cn/",
-      "title": "济南大学教务处",
-      "chars": 2356
+      "url": "https://siee.ujn.edu.cn/hyjx.htm",
+      "title": "汉语教学-济南大学国际教育交流学院",
+      "chars": 967
+    },
+    {
+      "url": "https://admission.ujn.edu.cn/",
+      "title": "济南大学本科招生网",
+      "chars": 7639
+    },
+    {
+      "url": "https://sce.ujn.edu.cn/info/1023/5993.htm",
+      "title": "韩国留学语言培训项目 2026招生简章-济南大学继续教育学院",
+      "chars": 1708
+    },
+    {
+      "url": "https://siee.ujn.edu.cn/info/1094/4671.htm",
+      "title": "济南大学2026届优秀国际学生表彰大会顺利召开-济南大学国际教育交流学院",
+      "chars": 2098
+    },
+    {
+      "url": "https://siee.ujn.edu.cn/info/1094/4661.htm",
+      "title": "我院联合教育与心理科学学院艺术心理美育名师工作室开展国际学生端午文化体验活动-济南大学国际教育交流学院",
+      "chars": 1713
     },
     {
       "url": "https://admission.ujn.edu.cn/info/1113/13195.htm",
       "title": "济南大学2026年艺术类专业招生简章-济南大学本科招生网",
-      "chars": 650
+      "chars": 2170
     },
     {
-      "url": "https://admission.ujn.edu.cn/zsdt.htm",
-      "title": "招生动态-济南大学本科招生网",
-      "chars": 956
+      "url": "https://siee.ujn.edu.cn/info/1094/4651.htm",
+      "title": "“泉海相逢‘粽’享端午” 济南大学加勒比国际学生端午文化体验活动-济南大学国际教育交流学院",
+      "chars": 2572
     },
     {
       "url": "https://admission.ujn.edu.cn/zsjc.htm",
       "title": "招生进程-济南大学本科招生网",
-      "chars": 1026
+      "chars": 3224
+    },
+    {
+      "url": "https://admission.ujn.edu.cn/zsdt.htm",
+      "title": "招生动态-济南大学本科招生网",
+      "chars": 3157
+    },
+    {
+      "url": "https://admission.ujn.edu.cn/zszc.htm",
+      "title": "招生政策-济南大学本科招生网",
+      "chars": 2833
+    },
+    {
+      "url": "https://admission.ujn.edu.cn/index/lnlqfsx.htm",
+      "title": "历年录取分数线-济南大学本科招生网",
+      "chars": 4381
     }
   ],
   "db_row": {
@@ -546,7 +598,7 @@
     "city": "Jinan",
     "province": "Shandong",
     "country": "Chine",
-    "department": "国际教育交流学院 (School of International Education and Exchange)",
+    "department": "Collège d'échange et d'éducation internationale (国际教育交流学院)",
     "emails": [
       "siee@ujn.edu.cn",
       "zsb@ujn.edu.cn"
@@ -555,31 +607,33 @@
     "wechat": null,
     "website": "https://siee.ujn.edu.cn/",
     "majors": [
-      "business",
-      "economics",
-      "computer_science",
       "engineering",
       "sciences",
+      "computer_science",
+      "economics",
+      "business",
       "chinese_language",
       "arts",
       "design",
       "music",
+      "education",
       "law",
-      "education"
+      "medicine"
     ],
     "required_documents": [
       "passport",
       "visa",
       "admission_notice",
-      "residence_registration"
+      "academic_transcripts",
+      "diploma"
     ],
-    "scholarship_amount": null,
+    "scholarship_amount": "Bourse du gouvernement chinois (CSC) / Bourse du gouvernement de Shandong / Bourse de l'Université de Jinan",
     "scholarship_min": null,
     "scholarship_max": null,
-    "min_hsk_level": null,
-    "language_requirements": null,
+    "min_hsk_level": 4,
+    "language_requirements": "HSK 4+",
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Juin (rentrée septembre)"
   }
 }

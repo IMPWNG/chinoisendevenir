@@ -4,24 +4,26 @@
     "name_zh": "辽宁工业大学",
     "name_fr": "Université de technologie du Liaoning",
     "aliases": [
-      "LNUT",
-      "辽工大"
+      "LNUT"
     ],
     "website": "https://www.lnut.edu.cn/",
-    "international_website": "http://gjxy.lnut.edu.cn/",
-    "application_portal_url": ""
+    "international_website": "https://www.lnut.edu.cn/ENGLISHml/Home.htm",
+    "application_portal_url": "https://www.campuschina.org/"
   },
   "general": {
-    "presentation": "Université polytechnique située à Jinzhou, Liaoning, offrant des programmes de licence, master et doctorat ainsi que des formations en langue chinoise pour étudiants internationaux.",
-    "history": "Plus de 75 ans d'histoire académique (fondement mentionné en 2026), avec une orientation forte en ingénierie, sciences des matériaux, mécanique et disciplines appliquées.",
-    "rankings": [],
+    "presentation": "Université multi-disciplinaire à dominante ingénierie, couvrant sciences, ingénierie, économie, gestion, lettres, droit et arts. Fondée en 1951, anciennement Jinzhou Institute of Technology puis Liaoning Institute of Technology, renommée en 2007. 18 écoles/départements, plus de 17000 étudiants, 1373 personnels dont 574 de rang supérieur.",
+    "history": "Fondée en 1951 (Jinzhou Institute of Technology), devenue Liaoning Institute of Technology, renommée Liaoning University of Technology en mars 2007. Plus de 120000 diplômés. 2024: établissement autorisé à délivrer des doctorats.",
+    "rankings": [
+      "6 disciplines dans les projets provinciaux 'double first-class'/clés/spécialités",
+      "Computer Science & Engineering dans ESI top 1% depuis 10 ans consécutifs",
+      "Contrôle Sciences & Ingénierie et Informatique dans Shanghai Ranking 2024 (mondial et Chine)"
+    ],
     "strengths": [
-      "Génie mécanique",
-      "Science et ingénierie des matériaux",
-      "Génie automobile et transports",
-      "Génie électrique",
-      "Sciences de l'environnement",
-      "Sciences économiques et gestion"
+      "Ingénierie (mécanique, électrique, automobile, matériaux)",
+      "Informatique et logiciel",
+      "Économie et gestion",
+      "Formation appliquée et innovation entrepreneuriale",
+      "11 programmes nationaux de premier cycle de classe A"
     ],
     "teaching_languages": [
       "zh",
@@ -33,22 +35,22 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 1500,
+      "max": 3000,
+      "notes": "Estimation Jinzhou, nord-est de la Chine; bourse CSC fournit 3000 CNY/mois"
     },
     "campuses": [
       {
         "name": "Campus principal",
         "city": "Jinzhou",
-        "description": "No.169 Shiying Street, district de Guta, Jinzhou, Liaoning"
+        "description": "No.169 Shiying Street, Guta District, Jinzhou 121001"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Génie mécanique et automatisation",
+      "name": "Mechanical Design, Manufacture and Automation",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -56,11 +58,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "4 ans, School of Mechanical Engineering and Automation"
     },
     {
       "level": "bachelor",
-      "name": "Génie automobile et des transports",
+      "name": "Electrical Engineering and Automation",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -68,95 +70,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "School of Electrical Engineering"
     },
     {
       "level": "bachelor",
-      "name": "Science et ingénierie des matériaux",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Génie chimique et environnemental",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Génie électrique",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Génie électronique et de l'information",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Économie et gestion",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Génie civil et architecture",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Design médias culturels et artistiques",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Logiciel (Software)",
+      "name": "Computer Science and Technology",
       "field": "computer_science",
       "language": "zh",
       "duration_years": 4,
@@ -164,51 +82,121 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": ""
+      "notes": "School of Electronics and Information Engineering"
+    },
+    {
+      "level": "bachelor",
+      "name": "Software Engineering",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais: 12000 CNY/an pour joint program"
+    },
+    {
+      "level": "bachelor",
+      "name": "International Economics and Trade",
+      "field": "business",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Anglais uniquement; School of Economics and Management"
+    },
+    {
+      "level": "bachelor",
+      "name": "Finance",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "School of Economics and Management"
+    },
+    {
+      "level": "bachelor",
+      "name": "Accounting",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "School of Economics and Management"
+    },
+    {
+      "level": "bachelor",
+      "name": "Chemical Engineering and Technology",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme conjoint Sino-étranger avec University of Patras (Grèce)"
     },
     {
       "level": "master",
-      "name": "Programmes de master (diverses disciplines)",
+      "name": "CSC High-Level Postgraduate Master Programs",
       "field": "engineering",
-      "language": "zh",
+      "language": "en",
       "duration_years": 3,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes en ingénierie, sciences des matériaux, gestion, etc."
+      "notes": "Bourse du gouvernement chinois; anglais; 12 master disciplines niveau 1; 10 catégories professionnelles"
+    },
+    {
+      "level": "bachelor",
+      "name": "Communication",
+      "field": "arts",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Frais 4800 CNY/an"
+    },
+    {
+      "level": "bachelor",
+      "name": "Civil Engineering",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "School of Civil Engineering"
     },
     {
       "level": "language",
-      "name": "Programme de langue chinoise",
+      "name": "Chinese Language Programs",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
+      "duration_years": null,
       "start_months": [
         3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Centre de test HSK disponible sur le campus"
+      "notes": "Programmes chinois pour étudiants internationaux, voir International Education School"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme d'études secondaires (lycée) ou équivalent",
-      "min_gpa": null,
-      "age_max": null,
-      "age_min": null,
-      "hsk_level": 4,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de langue chinoise proposée",
-      "other": [
-        "Dossier de candidature via le bureau de l'éducation internationale"
-      ]
-    },
-    "master": {
-      "academic": "Licence (bac+4) ou équivalent dans un domaine pertinent",
+      "academic": "Diplôme de fin d'études secondaires ou équivalent; candidats non-chinois en bonne santé",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -216,13 +204,29 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
+      "preparatory_if_insufficient": "Programmes préparatoires de langue chinoise disponibles via International Education School",
+      "other": [
+        "Conditions spécifiques selon le programme",
+        "Pour International Economics and Trade: anglais uniquement"
+      ]
+    },
+    "master": {
+      "academic": "Licence (bachelor's degree) ou équivalent; excellent dossier académique",
+      "min_gpa": null,
+      "age_max": 35,
+      "age_min": 18,
+      "hsk_level": null,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Examen d'entrée ou entretien selon le programme"
+        "Programmes enseignés en anglais: TOEFL ou IELTS requis (sauf natifs/anglophones officiels)",
+        "Entretien/examen écrit en ligne possible"
       ]
     },
     "phd": {
-      "academic": "Master ou équivalent",
+      "academic": null,
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -234,163 +238,140 @@
       "other": []
     },
     "language": {
-      "academic": "Pas de prérequis académique spécifique",
+      "academic": "Pas de condition académique stricte; programme de langue chinoise",
       "age_max": null,
       "other": [
-        "Inscription ouverte aux étrangers"
+        "Inscription via International Education School",
+        "HSK exam disponible sur campus"
       ]
     }
   },
   "contacts": {
-    "office_name": "Bureau de la coopération et des échanges internationaux (École d'éducation internationale)",
-    "iso_email": "",
-    "admissions_email": "",
-    "wechat": "",
-    "phone": "+86-416-4199311",
-    "address": "No.169 Shiying Street, district de Guta, Jinzhou, Liaoning, 121001, Chine"
+    "office_name": "International Education School / Office of International Exchange and Cooperation",
+    "iso_email": "gjliuwenqi@lnut.edu.cn",
+    "admissions_email": "gjliuwenqi@lnut.edu.cn",
+    "wechat": "lgdzs10154",
+    "phone": "86-416-4199311",
+    "address": "No.169 Shiying Street, Guta District, Jinzhou City, Liaoning Province, China, 121001"
   },
   "matching": {
     "fields": [
-      "engineering",
-      "computer_science",
       "business",
       "economics",
+      "finance",
+      "computer_science",
+      "engineering",
       "sciences",
       "arts",
       "design",
-      "chinese_language"
+      "chinese_language",
+      "education"
     ],
     "degrees": [
       "bachelor",
       "master",
-      "phd",
-      "language",
-      "exchange"
+      "language"
     ],
     "languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
-    "min_hsk_level": 4,
+    "min_hsk_level": null,
     "min_ielts": null,
     "min_toefl": null,
     "age_max_bachelor": null,
-    "age_max_master": null,
+    "age_max_master": 35,
     "age_max_phd": null,
-    "has_csc": null,
+    "has_csc": true,
     "has_university_scholarship": null,
     "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
+    "tuition_cny_min": 4800,
+    "tuition_cny_max": 12000,
     "housing_cny_year_min": null,
-    "deadline_typical": "",
+    "deadline_typical": "2026-02-28",
     "intake_months": [
-      9,
-      3
+      9
     ],
     "city": "Jinzhou",
     "province": "Liaoning",
     "tags": [
-      "polytechnique",
-      "ingénierie",
-      "matériaux",
-      "mécanique",
-      "75+ ans",
-      "échange international",
-      "Brunel University London"
+      "CSC scholarship",
+      "joint-programs-greece-russia",
+      "applied-university",
+      "engineering-focused",
+      "ESI-top-1"
     ]
   },
-  "confidence": 0.55,
+  "confidence": 0.78,
   "missing_fields": [
-    "frais de scolarité exacts",
-    "scores HSK/IELTS/TOEFL minimaux précis",
-    "GPA minimum",
-    "limites d'âge",
-    "existence de bourses (CSC, université, province)",
-    "URL du portail de candidature",
-    "email international",
-    "délai d'inscription typique",
-    "coût de la vie"
+    "frais de dossier détaillés",
+    "exigences GPA précises",
+    "min HSK/HSK score pour programmes bachelor",
+    "logement coût annuel",
+    "bourse universitaire propre (autre que CSC)",
+    "exigences PhD"
   ],
-  "notes": "Informations limitées sur les conditions d'admission chiffrées. La page internationale (http://gjxy.lnut.edu.cn/) propose des programmes en anglais et chinois ainsi que des bourses (sans détails). HSK 4 estimé pour les programmes en chinois. Partenariat international confirmé avec Brunel University London. Centre HSK présent sur le campus.",
+  "notes": "Données extraites principalement du site EN de LNUT et de la brochure CSC High-Level Postgraduate 2026/2027. Frais de bachelor confirmés via le programme second-bachelor 2026 (5200 CNY/an standard, 4800 pour Communication, 6500 Electrical Engineering, 12000 Software Engineering). Bourse CSC: 3000 CNY/mois + logement + assurance. Agency code: 10154. Programmes conjoints: Chemical Engineering (Univ. Patras Grèce), Software Engineering (Pyatigorsk State Univ. Russie). PhD: université en cours d'approbation (2024).",
   "documents": [
     {
       "type": "passport",
-      "required": null,
+      "required": true,
       "count": null,
-      "who": "",
+      "who": "CSC applicants",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "passport name, number, nationality, date of birth, contact phone must be accurate"
     },
     {
-      "type": "diploma",
-      "required": null,
+      "type": "bachelor_degree_certificate",
+      "required": true,
       "count": null,
-      "who": "",
+      "who": "Master's applicants",
+      "applies_to": [
+        "master"
+      ],
+      "notes": "must provide original upon registration"
+    },
+    {
+      "type": "academic_transcripts",
+      "required": true,
+      "count": null,
+      "who": "All applicants",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "original required at registration"
     },
     {
-      "type": "transcript",
-      "required": null,
+      "type": "toefl_or_ielts_score",
+      "required": true,
       "count": null,
-      "who": "",
+      "who": "English-instructed program applicants",
       "applies_to": [
-        "all"
+        "master",
+        "phd"
       ],
-      "notes": ""
-    },
-    {
-      "type": "hsk_certificate",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "chinese_taught"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "ielts_toefl",
-      "required": null,
-      "count": null,
-      "who": "",
-      "applies_to": [
-        "english_taught"
-      ],
-      "notes": ""
+      "notes": "required unless native English speaker or from English-speaking country; other official English proof accepted if no TOEFL/IELTS"
     },
     {
       "type": "physical_examination",
-      "required": null,
+      "required": true,
       "count": null,
-      "who": "",
+      "who": "All applicants",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "good physical and mental health required"
     },
     {
       "type": "no_criminal_record",
-      "required": null,
+      "required": true,
       "count": null,
-      "who": "",
-      "applies_to": [
-        "all"
-      ],
-      "notes": ""
-    },
-    {
-      "type": "photo",
-      "required": null,
-      "count": null,
-      "who": "",
+      "who": "All applicants",
       "applies_to": [
         "all"
       ],
@@ -398,14 +379,20 @@
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "CSC Online Application System (campuschina.org)",
+    "platform_url": "https://www.campuschina.org/",
+    "steps": [
+      "Visit campuschina.org and complete registration",
+      "Select program category Type B",
+      "Enter agency code 10154 for Liaoning University of Technology",
+      "Submit application online",
+      "Wait for assessment (written exam or interview, conducted online)",
+      "Notification by email"
+    ],
     "opens_at": "",
-    "deadline": "",
+    "deadline": "2026-02-28",
     "results_at": "",
     "intake_months": [
-      3,
       9
     ],
     "application_fee_cny": null,
@@ -432,14 +419,14 @@
       },
       "english_taught_premium": null
     },
-    "insurance_cny_year": null,
+    "insurance_cny_year": 800,
     "other_fees": [],
     "housing": {
       "on_campus": [
         {
           "type": "double",
           "price_cny_year": null,
-          "included": ""
+          "included": "Free for CSC scholarship recipients"
         }
       ],
       "deposit_cny": null,
@@ -449,19 +436,24 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "CSC provides RMB 3000/month living allowance"
     }
   },
   "scholarships": [
     {
-      "name": "",
-      "type": "",
-      "coverage": "",
-      "covers": [],
-      "stipend_cny_month": null,
-      "conditions": "",
-      "apply_via": "",
-      "deadline": "",
+      "name": "Chinese Government Scholarship - High-Level Postgraduate Program",
+      "type": "csc",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": 3000,
+      "conditions": "Non-Chinese citizen, good physical and mental health, bachelor's degree for master's (18-35 years old), English proficiency for English-instructed programs",
+      "apply_via": "CSC online system (Type B, agency code 10154)",
+      "deadline": "2026-02-28",
       "renewal": ""
     }
   ],
@@ -482,76 +474,118 @@
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "Section 'Before & After Arrival' présente sur le site anglais mais contenu détaillé non accessible dans les sources.",
+    "visa_types": [
+      "X1"
+    ],
+    "documents_from_university": [
+      "Admission Notice",
+      "JW202 visa application form"
+    ],
+    "instructions": "Scholarship recipients must verify original documents at registration; those failing verification must purchase ticket to leave before visa expires",
     "arrival_and_residence_permit": ""
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "on-campus dormitory"
+    ],
     "rules": "",
-    "international_office": "Bureau international (国际交流合作处/国际教育学院), tél: 86-416-4199311, No.169 Shiying Street, Guta District, Jinzhou, 121001",
+    "international_office": "International Education School (国际教育学院), Tel: 86-416-4199311, Email: gjliuwenqi@lnut.edu.cn (Ms. Liu)",
     "orientation": "",
     "english_support": null,
-    "clubs": "Activités culturelles rapportées: célébration du Festival des bateaux-dragons, Journée internationale du chinois, Festival du Nouvel An (Laba)."
+    "clubs": ""
   },
   "country_specific": [
     {
       "region_or_country": "",
-      "notes": ""
+      "notes": "Non-Chinese citizens only; cannot receive other Chinese government scholarships simultaneously"
     }
   ],
   "scan_status": "ok",
   "slug": "lnut",
-  "scraped_at": "2026-08-23T14:55:01.658Z",
+  "scraped_at": "2026-08-30T11:05:19.662Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.lnut.edu.cn/",
       "title": "辽宁工业大学",
-      "chars": 1362
+      "chars": 4629
     },
     {
-      "url": "https://zjc.lnut.edu.cn/index/zsw/",
+      "url": "https://zjc.lnut.edu.cn/index/zsw/index.htm",
       "title": "首页-辽宁工业大学招生就业网",
-      "chars": 777
+      "chars": 2904
     },
     {
-      "url": "http://www.lnut.edu.cn/ENGLISHml/Home.htm",
+      "url": "https://zjc.lnut.edu.cn/info/14267/185344.htm",
+      "title": "辽宁工业大学2026年第二学士学位招生简章-辽宁工业大学招生就业网",
+      "chars": 2698
+    },
+    {
+      "url": "https://zjc.lnut.edu.cn/info/14267/185318.htm",
+      "title": "2026咨询会预告｜2026年本科招生咨询方式汇总-辽宁工业大学招生就业网",
+      "chars": 1152
+    },
+    {
+      "url": "https://zjc.lnut.edu.cn/info/14267/185304.htm",
+      "title": "辽宁工业大学2026年专升本招生简章-辽宁工业大学招生就业网",
+      "chars": 4050
+    },
+    {
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Home.htm",
       "title": "Home-辽宁工业大学",
-      "chars": 2033
+      "chars": 4091
     },
     {
-      "url": "http://jwc.lnut.edu.cn/",
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Admission/How_to_Apply.htm",
+      "title": "How to Apply-辽宁工业大学",
+      "chars": 2139
+    },
+    {
+      "url": "https://jwc.lnut.edu.cn/",
       "title": "辽宁工业大学教务处",
-      "chars": 1961
+      "chars": 5701
     },
     {
-      "url": "http://gjxy.lnut.edu.cn/",
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Admission/Scholarship.htm",
+      "title": "Scholarship-辽宁工业大学",
+      "chars": 8273
+    },
+    {
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Academics/Undergraduate_Programs.htm",
+      "title": "Undergraduate Programs-辽宁工业大学",
+      "chars": 4063
+    },
+    {
+      "url": "https://gjxy.lnut.edu.cn/",
       "title": "国际交流合作处(国际教育学院)",
-      "chars": 728
+      "chars": 2437
     },
     {
-      "url": "http://yjsxy.lnut.edu.cn/yjszsw/sy.htm",
-      "title": "首页-辽宁工业大学研究生处",
-      "chars": 479
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Academics/Postgraduate_Programs.htm",
+      "title": "Postgraduate Programs-辽宁工业大学",
+      "chars": 1939
     },
     {
-      "url": "https://www.lnut.edu.cn/info/1150/189790.htm",
-      "title": "2026年振动力学理论与应用国际学术会议暨第二十届辽宁省振动工程学会学术交流会议在我校召开-辽宁工业大学",
-      "chars": 1683
+      "url": "https://www.lnut.edu.cn/ENGLISHml/International/Joint_Education_Programs.htm",
+      "title": "Joint Education Programs-辽宁工业大学",
+      "chars": 2372
     },
     {
-      "url": "https://www.lnut.edu.cn/info/1150/189789.htm",
-      "title": "“智造强省 材料赋能”高质量发展研讨会暨新材料产学研对接会在我校举办-辽宁工业大学",
-      "chars": 1664
+      "url": "https://www.lnut.edu.cn/ENGLISHml/About/Contact_Us.htm",
+      "title": "Contact Us-辽宁工业大学",
+      "chars": 3840
     },
     {
-      "url": "https://www.lnut.edu.cn/info/14257/189791.htm",
-      "title": "我校在2026年中国大学生机械工程创新创意大赛第十二届材料热处理创新创业赛总决赛中喜获佳绩-辽宁工业大学",
-      "chars": 1012
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Home.htm#",
+      "title": "Home-辽宁工业大学",
+      "chars": 4091
+    },
+    {
+      "url": "https://www.lnut.edu.cn/ENGLISHml/Admission/Before___After_Arrival.htm",
+      "title": "Before & After Arrival-辽宁工业大学",
+      "chars": 6728
     }
   ],
   "db_row": {
@@ -562,29 +596,41 @@
     "city": "Jinzhou",
     "province": "Liaoning",
     "country": "Chine",
-    "department": "Bureau de la coopération et des échanges internationaux (École d'éducation internationale)",
-    "emails": [],
-    "phone": "+86-416-4199311",
-    "wechat": null,
-    "website": "http://gjxy.lnut.edu.cn/",
+    "department": "International Education School / Office of International Exchange and Cooperation",
+    "emails": [
+      "gjliuwenqi@lnut.edu.cn",
+      "gjliuwenqi@lnut.edu.cn"
+    ],
+    "phone": "86-416-4199311",
+    "wechat": "lgdzs10154",
+    "website": "https://www.lnut.edu.cn/ENGLISHml/Home.htm",
     "majors": [
-      "engineering",
-      "computer_science",
       "business",
       "economics",
+      "finance",
+      "computer_science",
+      "engineering",
       "sciences",
       "arts",
       "design",
-      "chinese_language"
+      "chinese_language",
+      "education"
     ],
-    "required_documents": [],
-    "scholarship_amount": null,
-    "scholarship_min": null,
-    "scholarship_max": null,
-    "min_hsk_level": 4,
-    "language_requirements": "HSK 4+",
-    "tuition_min": null,
-    "tuition_max": null,
-    "application_deadline": null
+    "required_documents": [
+      "passport",
+      "bachelor_degree_certificate",
+      "academic_transcripts",
+      "toefl_or_ielts_score",
+      "physical_examination",
+      "no_criminal_record"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship - High-Level Postgraduate Program",
+    "scholarship_min": 4800,
+    "scholarship_max": 12000,
+    "min_hsk_level": null,
+    "language_requirements": null,
+    "tuition_min": 4800,
+    "tuition_max": 12000,
+    "application_deadline": "2026-02-28"
   }
 }

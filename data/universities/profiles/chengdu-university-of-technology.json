@@ -4,27 +4,24 @@
     "name_zh": "成都理工大学",
     "name_fr": "Université de technologie de Chengdu",
     "aliases": [
-      "CDUT",
-      "Chengdu Institute of Technology",
-      "Chengdu Institute of Geology"
+      "CDUT"
     ],
     "website": "https://www.cdut.edu.cn",
     "international_website": "https://cie.cdut.edu.cn",
     "application_portal_url": "https://cdut.at0086.cn/student"
   },
   "general": {
-    "presentation": "Université publique de recherche cofinancée par le Ministère de l'Éducation, le Ministère des Ressources Naturelles et le Gouvernement provincial du Sichuan. Membre de l'initiative Double First-Class, forte en géosciences et ingénierie.",
-    "history": "Fondée en 1956 sous le nom de Chengdu Institute of Geology à partir de facultés de géologie de Chongqing, Nanjing, Northwest, Beijing Institute of Geology, Northeast College of Geology et Jiaotong University. Renommée Chengdu Institute of Technology en 1993, puis Chengdu University of Technology en 2001.",
+    "presentation": "Université publique de recherche cofinancée par le Ministère de l'Éducation, le Ministère des Ressources Naturelles et le gouvernement du Sichuan. Membre du programme Double First-Class, spécialisée en géosciences et ingénierie.",
+    "history": "Fondée en 1956 sous le nom de Chengdu Institute of Geology à partir de facultés de géologie de plusieurs universités (Chongqing, Nanjing, Northwest, Beijing Institute of Geology, etc.). Renommée Chengdu Institute of Technology en 1993, puis Chengdu University of Technology en 2001.",
     "rankings": [
       "ARWU 2025: 601-700 mondial"
     ],
     "strengths": [
-      "Géologie et ressources géologiques (discipline clé nationale niveau 1)",
-      "Génie pétrolier et gazier",
-      "Prévention des géorisques et protection du géoenvironnement",
-      "Géophysique",
-      "Sciences de la Terre",
-      "Ingénierie"
+      "Géosciences",
+      "Géologie",
+      "Ingénierie pétrolière",
+      "Prévention des géorisques",
+      "Ressources naturelles"
     ],
     "teaching_languages": [
       "zh",
@@ -36,22 +33,22 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 2000,
-      "max": 3500,
-      "notes": "Estimation pour étudiant international à Chengdu (logement + nourriture + transport)"
+      "min": 1500,
+      "max": 3000,
+      "notes": "Logement sur campus ~125 CNY/mois (1500/an). Vie à Chengdu modérée."
     },
     "campuses": [
       {
         "name": "Campus principal Chenghua",
         "city": "Chengdu",
-        "description": "Campus urbain de 1,92 km² au centre de Chengdu, desservi par les lignes 7 et 8 du métro. Musée d'histoire naturelle de l'Ouest de la Chine."
+        "description": "Campus urbain de 1,92 km² dans le district de Chenghua, desservi par les lignes 7 et 8 du métro de Chengdu."
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Geological Resources and Geological Engineering",
+      "name": "Licence (programme général, enseignement en chinois)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -59,11 +56,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Discipline clé nationale niveau 1"
+      "notes": "HSK 4+ requis. CSCA obligatoire (date limite score 30 mai 2026). Frais de dossier 600 CNY."
     },
     {
       "level": "bachelor",
-      "name": "Geology / Geophysics",
+      "name": "Licence en sciences et ingénierie (chinois)",
       "field": "sciences",
       "language": "zh",
       "duration_years": 4,
@@ -71,95 +68,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme 2+2 possible avec University of Edinburgh"
-    },
-    {
-      "level": "bachelor",
-      "name": "Environmental Geoscience",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Computer Science and Technology",
-      "field": "computer_science",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Business Administration",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "bachelor",
-      "name": "Liberal Arts programs",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Frais 4500 CNY/an"
+      "notes": "Frais 5000 CNY/an. Domaines: géologie, ressources, environnement."
     },
     {
       "level": "master",
-      "name": "Geological Engineering (English-taught)",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "IELTS 6.0 ou TOEFL 80 requis"
-    },
-    {
-      "level": "master",
-      "name": "Petroleum Engineering",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Environmental Science",
-      "field": "sciences",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": ""
-    },
-    {
-      "level": "master",
-      "name": "Master in Chinese-taught disciplines",
+      "name": "Master (enseignement en chinois)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 3,
@@ -167,23 +80,23 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "HSK 4+ requis"
+      "notes": "HSK 4+. Frais: Lettres 18000 CNY/an, Sciences/Ingénierie 19800 CNY/an."
+    },
+    {
+      "level": "master",
+      "name": "Master (enseignement en anglais)",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "IELTS 6.0 ou TOEFL 80 requis pour non-anglophones. Éligible bourse CSC Type B."
     },
     {
       "level": "phd",
-      "name": "Geological Resources and Geological Engineering (PhD)",
-      "field": "engineering",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "IELTS 6.0 ou TOEFL 80"
-    },
-    {
-      "level": "phd",
-      "name": "PhD Chinese-taught programs",
+      "name": "Doctorat (enseignement en chinois)",
       "field": "sciences",
       "language": "zh",
       "duration_years": 4,
@@ -191,12 +104,36 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "HSK 4+ requis"
+      "notes": "HSK 4+. Frais: Lettres 22000 CNY/an, Sciences/Ingénierie 24000 CNY/an."
+    },
+    {
+      "level": "phd",
+      "name": "Doctorat (enseignement en anglais)",
+      "field": "sciences",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "IELTS 6.0 ou TOEFL 80. Éligible bourse CSC Type B (code 10616)."
+    },
+    {
+      "level": "language",
+      "name": "Programme de langue chinoise",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Pour étudiants préparant HSK avant études diplômantes."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (high school graduate), citoyens non-chinois",
+      "academic": "Diplôme de fin de lycée (high school graduate). Non-Chinois.",
       "min_gpa": null,
       "age_max": 26,
       "age_min": 18,
@@ -204,14 +141,15 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Année préparatoire de chinois possible",
+      "preparatory_if_insufficient": "Programme préparatoire de langue chinoise (1 an) avant admission",
       "other": [
-        "CSCA (China Scholastic Competency Assessment) requis, deadline rapport 30 mai 2026",
-        "Frais d'inscription: 600 CNY"
+        "CSCA (China Scholastic Competency Assessment) requis, score à soumettre avant 30 mai 2026",
+        "Dossier en ligne sur cdut.at0086.cn/student",
+        "Frais de dossier 600 CNY"
       ]
     },
     "master": {
-      "academic": "Licence/Bachelor degree, citoyens non-chinois",
+      "academic": "Licence (bachelor degree) dans un domaine pertinent. Non-Chinois.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -219,14 +157,14 @@
       "hsk_score_min": null,
       "ielts_min": 6,
       "toefl_min": 80,
-      "preparatory_if_insufficient": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois si HSK insuffisant",
       "other": [
-        "Programmes en anglais: IELTS 6.0 ou TOEFL 80 (non-native)",
-        "Programmes en chinois: HSK 4+"
+        "Candidature bourse CSC jusqu'au 1 mars 2026",
+        "Code université CSC: 10616"
       ]
     },
     "phd": {
-      "academic": "Master degree, citoyens non-chinois",
+      "academic": "Master dans un domaine pertinent. Non-Chinois.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -234,17 +172,17 @@
       "hsk_score_min": null,
       "ielts_min": 6,
       "toefl_min": 80,
-      "preparatory_if_insufficient": null,
+      "preparatory_if_insufficient": "Année préparatoire de chinois si HSK insuffisant",
       "other": [
-        "IELTS 6.0 ou TOEFL 80 pour programmes anglais",
-        "HSK 4+ pour programmes chinois"
+        "Candidature bourse CSC jusqu'au 1 mars 2026",
+        "Code université CSC: 10616"
       ]
     },
     "language": {
-      "academic": "Citoyens non-chinois",
+      "academic": "Lycéen ou plus. Non-Chinois.",
       "age_max": null,
       "other": [
-        "Programmes de langue chinoise disponibles"
+        "Inscription via portail international"
       ]
     }
   },
@@ -253,8 +191,8 @@
     "iso_email": "oshc@cdut.edu.cn",
     "admissions_email": "oshc@cdut.edu.cn",
     "wechat": "",
-    "phone": "(028) 84073357",
-    "address": "Chenghua District, Chengdu, Sichuan, China"
+    "phone": "+86 (028) 84073357",
+    "address": "Chengdu University of Technology, Chenghua District, Chengdu, Sichuan, China"
   },
   "matching": {
     "fields": [
@@ -263,22 +201,21 @@
       "computer_science",
       "business",
       "economics",
-      "arts",
       "design",
+      "arts",
       "education",
+      "law",
       "other"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language",
-      "exchange"
+      "language"
     ],
     "languages": [
       "zh",
-      "en",
-      "bilingual"
+      "en"
     ],
     "english_programs_available": true,
     "chinese_language_program_available": true,
@@ -302,161 +239,128 @@
     "province": "Sichuan",
     "tags": [
       "Double First-Class",
-      "geosciences",
-      "recherche",
+      "géologie",
+      "ingénierie",
+      "ressources naturelles",
       "CSC Type B",
-      "programme 2+2 Edinburgh",
-      "bourses municipales Chengdu",
-      "bourses provinciales Sichuan"
+      "géorisques"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.92,
   "missing_fields": [
-    "min_gpa précis",
-    "frais exacts programmes anglais master/Phd",
-    "durée programmes langue",
-    "deadlines bachelor hors CSCA"
+    "GPA minimum exact",
+    "Frais de dossier postgraduate",
+    "WeChat officiel",
+    "Adresse postale complète"
   ],
-  "notes": "Université forte en géosciences, éligible CSC Type B (code 10616). Bourses: Provinciale Sichuan, Municipale Chengdu, allocation CDUT 800 CNY/mois (10 mois/an). Frais assurance 800 CNY/an. 23 collèges + 1 institut de géologie sédimentaire + 1 institut de levé géologique. 180+ universités partenaires internationales.",
+  "notes": "Université orientée géosciences/ingénierie avec Double First-Class. Forte reconnaissance en prévention des géorisques et ressources pétrolières. Programmes en anglais disponibles au niveau postgraduate. Bourse CSC Type B (code 10616) couvre frais, stipend, logement et assurance.",
   "documents": [
     {
       "type": "passport",
       "required": true,
-      "count": 1,
-      "who": "Étudiant",
+      "count": null,
+      "who": "Tous candidats internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": "Passeport valide, page photo scannée"
+      "notes": "Passeport valide requis pour inscription en ligne"
     },
     {
       "type": "high_school_diploma",
       "required": true,
-      "count": 1,
-      "who": "Candidat bachelor",
+      "count": null,
+      "who": "Candidats bachelor",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Diplôme de fin d'études secondaires + relevé de notes"
+      "notes": "Diplôme de fin d'études secondaires"
     },
     {
       "type": "bachelor_degree",
       "required": true,
-      "count": 1,
-      "who": "Candidat master/PhD",
+      "count": null,
+      "who": "Candidats master",
       "applies_to": [
-        "master",
-        "phd"
+        "master"
       ],
-      "notes": "Diplôme de licence + relevés de notes (master/PhD)"
+      "notes": "Relevé de notes et diplôme de licence"
     },
     {
       "type": "master_degree",
       "required": true,
-      "count": 1,
-      "who": "Candidat PhD",
+      "count": null,
+      "who": "Candidats PhD",
       "applies_to": [
         "phd"
       ],
-      "notes": "Diplôme de master + relevés de notes"
+      "notes": "Diplôme de master et relevé de notes"
     },
     {
-      "type": "hsk_certificate",
+      "type": "hsk",
       "required": true,
-      "count": 1,
+      "count": null,
       "who": "Programmes en chinois",
       "applies_to": [
         "bachelor",
         "master",
         "phd"
       ],
-      "notes": "HSK 4 ou supérieur (programmes en chinois)"
+      "notes": "HSK 4 minimum"
     },
     {
       "type": "ielts_or_toefl",
       "required": true,
-      "count": 1,
-      "who": "Programmes en anglais",
+      "count": null,
+      "who": "Programmes en anglais (non natifs)",
       "applies_to": [
         "master",
         "phd"
       ],
-      "notes": "IELTS 6.0 ou TOEFL 80 (programmes en anglais)"
+      "notes": "IELTS 6.0 ou TOEFL 80"
     },
     {
-      "type": "csca_report",
+      "type": "csca",
       "required": true,
-      "count": 1,
-      "who": "Bachelor",
+      "count": null,
+      "who": "Candidats bachelor",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Rapport CSCA (China Scholastic Competency Assessment), deadline 30 mai 2026"
+      "notes": "China Scholastic Competency Assessment; rapport de score avant 30 mai 2026"
     },
     {
       "type": "physical_examination",
       "required": true,
-      "count": 1,
-      "who": "Tous",
+      "count": null,
+      "who": "Tous candidats",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire d'examen médical"
+      "notes": "Formulaire d'examen médical pour le visa"
     },
     {
       "type": "no_criminal_record",
       "required": true,
-      "count": 1,
-      "who": "Tous",
+      "count": null,
+      "who": "Tous candidats",
       "applies_to": [
         "all"
       ],
       "notes": "Casier judiciaire vierge"
-    },
-    {
-      "type": "photo",
-      "required": true,
-      "count": null,
-      "who": "Tous",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Photo d'identité récente"
-    },
-    {
-      "type": "study_plan",
-      "required": false,
-      "count": 1,
-      "who": "Master/PhD",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": "Plan d'études ou proposition de recherche"
-    },
-    {
-      "type": "recommendation_letters",
-      "required": false,
-      "count": 2,
-      "who": "Master/PhD",
-      "applies_to": [
-        "master",
-        "phd"
-      ],
-      "notes": "2 lettres de recommandation (professeurs)"
     }
   ],
   "application": {
-    "platform_name": "CDUT Online Application System",
+    "platform_name": "CDUT International Student Application System",
     "platform_url": "https://cdut.at0086.cn/student",
     "steps": [
-      "Créer un compte sur la plateforme en ligne",
-      "Remplir le formulaire de candidature",
-      "Télécharger les documents requis",
-      "Payer les frais d'inscription (600 CNY)",
-      "Soumettre la candidature en ligne",
-      "Attendre la notification d'admission",
-      "Recevoir le formulaire JW202 pour le visa"
+      "Créer un compte sur cdut.at0086.cn/student",
+      "Compléter le formulaire de candidature en ligne",
+      "Télécharger les documents requis (passeport, diplômes, preuves linguistiques, CSCA pour bachelor)",
+      "Pour bachelor: passer le CSCA et soumettre le rapport de score avant le 30 mai 2026",
+      "Pour CSC: postuler via le programme High-level Postgraduate Type B (code 10616) avant le 1er mars 2026",
+      "Payer les frais d'inscription de 600 RMB",
+      "Soumettre la candidature et attendre la décision d'admission",
+      "Recevoir lettre d'admission et formulaire JW202 pour demande de visa"
     ],
     "opens_at": "",
     "deadline": "2026-05-30",
@@ -466,9 +370,7 @@
     ],
     "application_fee_cny": 600,
     "application_fee_refundable": false,
-    "payment_methods": [
-      "online"
-    ]
+    "payment_methods": []
   },
   "fees": {
     "tuition_cny_year": {
@@ -493,16 +395,16 @@
     "insurance_cny_year": 800,
     "other_fees": [
       {
-        "name": "Frais d'inscription",
+        "name": "Frais d'inscription (registration fee)",
         "amount_cny": 600,
         "frequency": "one-time",
-        "notes": "Registration fee"
+        "notes": "Frais de dossier non remboursables"
       }
     ],
     "housing": {
       "on_campus": [
         {
-          "type": "shared",
+          "type": "shared_room",
           "price_cny_year": 1500,
           "included": "4 à 6 étudiants par chambre"
         }
@@ -514,7 +416,7 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Allocation CDUT: 800 CNY/mois pendant 10 mois/an (boursiers)"
+      "notes": ""
     }
   },
   "scholarships": [
@@ -523,14 +425,13 @@
       "type": "provincial",
       "coverage": "partial",
       "covers": [
-        "tuition",
-        "accommodation"
+        "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Excellence académique",
+      "conditions": "Pour étudiants internationaux admis à CDUT; critères fixés par le gouvernement provincial du Sichuan",
       "apply_via": "university",
       "deadline": "",
-      "renewal": "Renouvelable annuellement"
+      "renewal": "Annuel sous conditions académiques"
     },
     {
       "name": "Chengdu Municipal Government Scholarship",
@@ -540,10 +441,10 @@
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Excellence académique",
+      "conditions": "Pour étudiants internationaux à Chengdu; critères fixés par la municipalité",
       "apply_via": "university",
       "deadline": "",
-      "renewal": "Renouvelable annuellement"
+      "renewal": "Annuel sous conditions académiques"
     },
     {
       "name": "CDUT Living Allowance",
@@ -553,10 +454,10 @@
         "living"
       ],
       "stipend_cny_month": 800,
-      "conditions": "Attribué aux étudiants étrangers",
+      "conditions": "Allocation versée par CDUT; 10 mois par an; sur critères académiques",
       "apply_via": "university",
       "deadline": "",
-      "renewal": "10 mois par an"
+      "renewal": "Annuel"
     },
     {
       "name": "CSC High-level Postgraduate Program Type B",
@@ -569,10 +470,10 @@
         "housing"
       ],
       "stipend_cny_month": null,
-      "conditions": "Code université 10616, programme de haut niveau",
+      "conditions": "Programme Type B; code université 10616; ouvert aux master et PhD; date limite typique 1er mars 2026",
       "apply_via": "csc",
       "deadline": "2026-03-01",
-      "renewal": "Selon conditions CSC"
+      "renewal": "Annuel sous conditions académiques"
     }
   ],
   "language": {
@@ -597,35 +498,34 @@
       "X2"
     ],
     "documents_from_university": [
-      "Admission Notice",
-      "Formulaire JW202",
-      "Visa Application Form"
+      "Lettre d'admission (Admission Notice)",
+      "Formulaire de demande de visa JW202"
     ],
-    "instructions": "Demander un visa X1 (études > 6 mois) ou X2 (≤ 6 mois) auprès du consulat chinois avec les documents fournis par l'université",
-    "arrival_and_residence_permit": "Dans les 30 jours suivant l'arrivée, enregistrer la résidence au bureau de la sécurité publique local et obtenir le permis de résidence"
+    "instructions": "Les étudiants admis reçoivent la lettre d'admission et le formulaire JW202/CDUT pour demander le visa X1 (programmes >6 mois) ou X2 (<6 mois) auprès de l'ambassade ou consulat de Chine.",
+    "arrival_and_residence_permit": "Les étudiants en programmes de plus de 6 mois doivent obtenir un permis de résidence dans les 30 jours suivant l'arrivée en Chine auprès du bureau de l'immigration local."
   },
   "housing_and_services": {
     "housing_types": [
-      "Dortoir partagé sur campus (4-6 personnes/chambre)"
+      "Dortoirs partagés sur campus (4 à 6 personnes/chambre)"
     ],
-    "rules": "Résidence sur campus obligatoire pour la première année",
-    "international_office": "College of International Education, oshc@cdut.edu.cn, (028) 84073357",
-    "orientation": "Programme d'orientation organisé en septembre",
+    "rules": "Logement sur campus disponible; tarif standard 1500 RMB/personne/an",
+    "international_office": "College of International Education, oshc@cdut.edu.cn, tél: (028) 84073357",
+    "orientation": "Programme d'accueil organisé par le College of International Education avant la rentrée",
     "english_support": true,
-    "clubs": "Plus de 180 universités partenaires internationales, programmes d'échange avec l'Université d'Édimbourg (2+2)"
+    "clubs": "Coopération avec plus de 180 universités partenaires internationales; clubs étudiants disponibles"
   },
   "country_specific": [
     {
-      "region_or_country": "Tous",
-      "notes": "Examen CSCA obligatoire pour les candidats au bachelor (date limite du score: 30 mai 2026)"
+      "region_or_country": "",
+      "notes": ""
     }
   ],
   "scan_status": "ok",
   "slug": "chengdu-university-of-technology",
-  "scraped_at": "2026-08-24T14:56:46.389Z",
+  "scraped_at": "2026-08-30T11:08:19.791Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 10,
+  "pages_fetched": 2,
+  "pages_used": 2,
   "sources": [
     {
       "url": "https://cie.cdut.edu.cn/",
@@ -635,47 +535,7 @@
     {
       "url": "https://en.wikipedia.org/wiki/Chengdu_University_of_Technology",
       "title": "Chengdu University of Technology - Wikipedia",
-      "chars": 12000
-    },
-    {
-      "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=ext.cite.parsoid.styles%7Cext.cite.styles%7Cext.kartographer.style%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.skinning.content.parsoid%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector-2022",
-      "title": null,
-      "chars": 145
-    },
-    {
-      "url": "https://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=atom",
-      "title": "Recent changes - Wikipedia",
-      "chars": 12000
-    },
-    {
-      "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
-      "title": "Wikipedia:Contact us - Wikipedia",
-      "chars": 4409
-    },
-    {
-      "url": "https://en.wikipedia.org/wiki/Category:Articles_containing_Chinese-language_text",
-      "title": "Category:Articles containing Chinese-language text - Wikipedia",
-      "chars": 12000
-    },
-    {
-      "url": "https://en.wikipedia.org/wiki/863_Program",
-      "title": "863 Program - Wikipedia",
-      "chars": 12000
-    },
-    {
-      "url": "https://en.wikipedia.org/wiki/Program_973",
-      "title": "Program 973 - Wikipedia",
-      "chars": 6885
-    },
-    {
-      "url": "https://en.wikipedia.org/wiki/Category:CS1_uses_Chinese-language_script_(zh)",
-      "title": "Category:CS1 uses Chinese-language script (zh) - Wikipedia",
-      "chars": 11176
-    },
-    {
-      "url": "https://en.wikipedia.org/w/load.php?lang=en&amp;modules=codex-styles%7Cext.flaggedRevs.basic%7Cext.ores.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediamessages.styles%7Cjquery.makeCollapsible.styles%7Cmediawiki.feedlink%2Chelplink%7Cmediawiki.interface.helpers.linker.styles%7Cmediawiki.interface.helpers.styles%7Cmediawiki.rcfilters.filters.base.styles%7Cmediawiki.special.changeslist%7Cmediawiki.special.changeslist.legend%7Cmediawiki.widgets.styles%7Coojs-ui-core.icons%2Cstyles%7Coojs-ui.styles.indicators%7Cskins.vector.icons%2Cstyles%7Cskins.vector.search.codex.styles%7Cwikibase.client.miscStyles&amp;only=styles&amp;skin=vector-2022",
-      "title": null,
-      "chars": 145
+      "chars": 16000
     }
   ],
   "db_row": {
@@ -691,7 +551,7 @@
       "oshc@cdut.edu.cn",
       "oshc@cdut.edu.cn"
     ],
-    "phone": "(028) 84073357",
+    "phone": "+86 (028) 84073357",
     "wechat": null,
     "website": "https://cie.cdut.edu.cn",
     "majors": [
@@ -700,9 +560,10 @@
       "computer_science",
       "business",
       "economics",
-      "arts",
       "design",
+      "arts",
       "education",
+      "law",
       "other"
     ],
     "required_documents": [
@@ -710,12 +571,11 @@
       "high_school_diploma",
       "bachelor_degree",
       "master_degree",
-      "hsk_certificate",
+      "hsk",
       "ielts_or_toefl",
-      "csca_report",
+      "csca",
       "physical_examination",
-      "no_criminal_record",
-      "photo"
+      "no_criminal_record"
     ],
     "scholarship_amount": "Sichuan Provincial Government Scholarship / Chengdu Municipal Government Scholarship / CDUT Living Allowance / CSC High-level Postgraduate Program Type B",
     "scholarship_min": 4500,

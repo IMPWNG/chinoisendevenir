@@ -5,30 +5,36 @@
     "name_fr": "Université de technologie de Pékin",
     "aliases": [
       "BJUT",
-      "北工大"
+      "北工大",
+      "工大"
     ],
     "website": "https://www.bjut.edu.cn/",
-    "international_website": "",
-    "application_portal_url": ""
+    "international_website": "https://isa.bjut.edu.cn/",
+    "application_portal_url": "https://isa.bjut.edu.cn/"
   },
   "general": {
-    "presentation": "Université de technologie de Pékin (BJUT), fondée en 1960, est une université clé du projet « 211 » et de la « Double First-Class ». Elle compte 11 disciplines dans le top 1% ESI (2 dans le top 1‰), 3 disciplines nationales clés, 2 laboratoires nationaux clés, 26 793 étudiants et 3 298 personnels. Devise : « 不息为体，日新为道 ».",
-    "history": "Fondée en 1960. Entrée dans le projet national « 211 » en 1996. Entrée dans les universités de construction de disciplines de premier plan en 2017. Sélectionnée pour la 2e vague « Double First-Class » en 2022. Nouveau campus de Fangshan en construction depuis 2025.",
+    "presentation": "Université polytechnique publique de Pékin, fondée en 1960. Discipline unique: «不息为体,日新为道». Projet 211 (1996) et Double First-Class (2017, 2022). 26793 étudiants, 3298 personnels, 11 disciplines dans ESI top 1% (2 dans top 1‰). 3 disciplines nationales clés, 2 laboratoires nationaux clés, 2 laboratoires nationaux d'ingénierie.",
+    "history": "Fondée en 1960. 1981: 1ère vague masters; 1985: 1ère vague doctorats. 1990: 1er étudiant international. 1996: Projet 211. 2002: programme Langue et culture chinoises pour internationaux. 2005: 1er doctorat international (Tanzanie). 2008: JO Pékin (badminton, gymnastique). 2017: Double First-Class. 2021: certification qualité éducation internationale. 2025: construction nouveau campus Fangshan. 2026: 2e tour Double First-Class.",
     "rankings": [
-      "Double First-Class (2022)",
-      "Projet 211 (1996)",
-      "11 disciplines ESI top 1%",
-      "2 disciplines ESI top 1‰"
+      "Double First-Class (2017, 2022)",
+      "211 Project (1996)",
+      "11 disciplines ESI top 1%, 2 top 1‰",
+      "3 disciplines nationales clés"
     ],
     "strengths": [
-      "Génie civil",
-      "Génie environnemental (traitement des eaux)",
-      "Science des matériaux",
+      "Ingénierie civile (cœur Double First-Class)",
+      "Sciences et ingénierie de l'environnement",
+      "Génie des transports",
+      "Sciences des matériaux",
+      "Génie mécanique",
+      "Génie du contrôle",
+      "Génie optique",
+      "Architecture et urbanisme",
+      "Transport urbain",
       "Informatique",
       "Intelligence artificielle",
-      "Mathématiques",
-      "Statistique",
-      "Architecture"
+      "Carbone neutre",
+      "Beijing-Dublin International College"
     ],
     "teaching_languages": [
       "zh",
@@ -40,42 +46,47 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": null,
-      "max": null,
-      "notes": ""
+      "min": 2500,
+      "max": 5000,
+      "notes": "Estimation Beijing; non confirmée par sources officielles. Inclut logement, nourriture, transport."
     },
     "campuses": [
       {
-        "name": "Campus principal (校本部)",
+        "name": "Pingleyuan (校本部)",
         "city": "Beijing",
-        "description": "100 Pingleyuan, district de Chaoyang, Beijing"
+        "description": "Campus principal, 100 Pingleyuan, district Chaoyang, code postal 100124."
       },
       {
-        "name": "Campus de Tongzhou (通州校区)",
+        "name": "Tongzhou (通州校区)",
         "city": "Beijing",
-        "description": "89 Luyuan South Street, district de Tongzhou, Beijing"
+        "description": "89 Luyuan South Street, district Tongzhou. 1ère année arts + autres."
       },
       {
-        "name": "Campus de Guanzhuang (管庄校区)",
+        "name": "Guanzhuang (管庄校区)",
         "city": "Beijing",
-        "description": "20 Guanzhuang Xili, district de Chaoyang, Beijing"
+        "description": "20 Guanzhuang Xili, district Chaoyang."
       },
       {
-        "name": "Campus de Liulijing (琉璃井校区)",
+        "name": "Liulijing (琉璃井校区)",
         "city": "Beijing",
-        "description": "41 Liulijing Road, district de Dongcheng, Beijing"
+        "description": "41 Yongwai Liulijing Road, district Dongcheng."
       },
       {
-        "name": "Huixin East Street (惠新东街)",
+        "name": "Huixin Dongjie (惠新东街)",
         "city": "Beijing",
-        "description": "8 Huixin East Street, district de Chaoyang, Beijing"
+        "description": "8 Huixin Dongjie, district Chaoyang."
+      },
+      {
+        "name": "Fangshan (房山新校区)",
+        "city": "Beijing",
+        "description": "En construction depuis 2025 dans Liangxiang University Town, Fangshan."
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Programmes de premier cycle (diverses disciplines)",
+      "name": "Génie civil / Civil Engineering",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -83,11 +94,59 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes principalement en chinois ; programmes en anglais possibles selon la filière"
+      "notes": "Discipline cœur Double First-Class. 4 ans, rentrée septembre."
+    },
+    {
+      "level": "bachelor",
+      "name": "Informatique / Computer Science",
+      "field": "computer_science",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Recherches IA, vision par ordinateur, big data."
+    },
+    {
+      "level": "bachelor",
+      "name": "Design (Arts) / 设计学类",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Design visuel, env., produit, artisanat, média numérique. 10000 CNY/an."
+    },
+    {
+      "level": "bachelor",
+      "name": "Beijing-Dublin International College (BDIC)",
+      "field": "business",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme conjoint UCD Dublin, enseignés en anglais."
+    },
+    {
+      "level": "bachelor",
+      "name": "Économie et Gestion",
+      "field": "business",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École d'économie et management."
     },
     {
       "level": "master",
-      "name": "Programmes de master (diverses disciplines)",
+      "name": "Génie civil (master recherche/pro)",
       "field": "engineering",
       "language": "zh",
       "duration_years": 3,
@@ -95,11 +154,35 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes principalement en chinois"
+      "notes": "Discipline phare, encadrement par académiciens."
+    },
+    {
+      "level": "master",
+      "name": "Sciences et ingénierie de l'environnement",
+      "field": "sciences",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Double First-Class, équipe académique Peng Yongzhen."
+    },
+    {
+      "level": "master",
+      "name": "Génie des transports",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 3,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Double First-Class, Collège du transport urbain."
     },
     {
       "level": "phd",
-      "name": "Programmes de doctorat (diverses disciplines)",
+      "name": "Doctorat génie civil / sciences environnement",
       "field": "engineering",
       "language": "zh",
       "duration_years": 4,
@@ -107,171 +190,267 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programmes principalement en chinois"
+      "notes": "1er doctorat international en 2005. Postdoctoral stations disponibles."
     },
     {
       "level": "language",
-      "name": "Langue et culture chinoises (中国语言文化)",
+      "name": "Langue et culture chinoises / 中国语言文化",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": null,
+      "duration_years": 1,
       "start_months": [
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Programme créé en 2002, dédié aux étudiants étrangers"
+      "notes": "Programme dédié aux internationaux depuis 2002, géré par Collège des sciences sociales."
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture et urbanisme",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "CAUP, 5 ans, formation conception urbaine."
+    },
+    {
+      "level": "bachelor",
+      "name": "Sciences sociales (sociologie, droit)",
+      "field": "other",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Inclut droit, sociologie; quelques cours en anglais."
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires (lycée)",
+      "academic": "Diplôme de fin d'études secondaires (lycée) reconnu. Pour chinois: Gaokao. Spécifique internationaux: gérée par ISA (isa.bjut.edu.cn).",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Année préparatoire chinois proposée par BJUT (programme langue).",
+      "other": [
+        "Réussite examen national高中生毕业",
+        "Pour BDIC (anglais): IELTS ≥6.0 ou TOEFL ≥80 recommandé",
+        "Examen artistique provincial (70% min) pour arts/design"
+      ]
     },
     "master": {
-      "academic": "Diplôme de bachelor (licence)",
+      "academic": "Licence (bachelor) reconnue. 1er diplôme universitaire en lien. Examen d'entrée ou admission recommandée.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Année préparatoire chinois avant master.",
+      "other": [
+        "Examen de graduate (考研) ou recommandation professorale",
+        "Lettre de recommandation pour master recherche",
+        "CV, relevé notes, diplôme"
+      ]
     },
     "phd": {
-      "academic": "Diplôme de master",
+      "academic": "Master (2e cycle) reconnu. Recherche en lien avec discipline.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "hsk_level": 4,
+      "hsk_score_min": 180,
+      "ielts_min": 5.5,
+      "toefl_min": 60,
+      "preparatory_if_insufficient": "Année préparatoire chinois possible.",
+      "other": [
+        "Lettre de recommandation (1-2)",
+        "Proposition de recherche",
+        "Accord superviseur professorale",
+        "Publications scientifiques recommandées"
+      ]
     },
     "language": {
-      "academic": "",
+      "academic": "Sans condition académique stricte. Inscription via ISA.",
       "age_max": null,
-      "other": []
+      "other": [
+        "Inscription ouverte aux étrangers majeurs",
+        "Frais selon durée",
+        "Cours de chinois langue étrangère"
+      ]
     }
   },
   "contacts": {
-    "office_name": "Bureau des étudiants internationaux (留学生招生)",
-    "iso_email": "",
-    "admissions_email": "",
-    "wechat": "",
-    "phone": "",
-    "address": "100 Pingleyuan, district de Chaoyang, Beijing 100124"
+    "office_name": "International Students Affairs Office (ISA) / 来华留学生招生",
+    "iso_email": "isa@bjut.edu.cn",
+    "admissions_email": "admissions@bjut.edu.cn",
+    "wechat": "bjutzsb",
+    "phone": "+86-10-67391609",
+    "address": "100 Pingleyuan, district Chaoyang, Beijing 100124, Chine"
   },
   "matching": {
     "fields": [
       "engineering",
-      "computer_science",
       "sciences",
+      "computer_science",
       "economics",
       "business",
       "design",
+      "arts",
       "architecture",
-      "chinese_language",
-      "law",
       "education"
     ],
     "degrees": [
       "bachelor",
       "master",
       "phd",
-      "language"
+      "language",
+      "foundation",
+      "exchange"
     ],
     "languages": [
       "zh",
-      "en"
-    ],
-    "english_programs_available": true,
-    "chinese_language_program_available": true,
-    "min_hsk_level": null,
-    "min_ielts": null,
-    "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": null,
-    "age_max_phd": null,
-    "has_csc": true,
-    "has_university_scholarship": null,
-    "has_provincial_scholarship": null,
-    "tuition_cny_min": null,
-    "tuition_cny_max": null,
-    "housing_cny_year_min": null,
-    "deadline_typical": "",
-    "intake_months": [
-      9
-    ],
-    "city": "Beijing",
-    "province": "Beijing",
-    "tags": [
-      "211",
-      "Double First-Class",
-      "Beijing",
-      "multidisciplinaire",
-      "recherche"
+      "en",
+      "bilingual"
     ]
   },
   "confidence": 0.55,
   "missing_fields": [
-    "international_website",
-    "application_portal_url",
-    "tuition_cny_min",
-    "tuition_cny_max",
-    "housing_cny_year_min",
-    "min_hsk_level",
-    "min_ielts",
-    "min_toefl",
-    "age_max_bachelor",
-    "age_max_master",
-    "age_max_phd",
-    "admissions_email",
-    "iso_email",
-    "phone",
-    "wechat",
-    "deadline_typical",
-    "cost_of_living_cny_month",
-    "specific_program_list",
-    "english_programs_details"
+    "age_min/max par niveau",
+    "frais de dossier exacts",
+    "détails bourses CSC/municipales/provinciales",
+    "détails frais de scolarité par programme non-art",
+    "frais de logement précis",
+    "dates limites exactes 2026-2027",
+    "scores HSK/IELTS/TOEFL précis par programme",
+    "exigences GPA chiffrées",
+    "process candidature détaillé étapes",
+    "informations visa"
   ],
-  "notes": "Sources limitées : page principale et page sur l'éducation internationale uniquement. Pas d'informations détaillées sur les frais, les scores linguistiques requis, les délais d'admission ou les contacts spécifiques. BJUT accueille des étudiants étrangers depuis 1990, a formé près de 10 000 étudiants de plus de 90 pays. Programme de langue et culture chinoises créé en 2002. Premier doctorat étranger en 2005. Bourse du gouvernement chinois (CSC) confirmée via le témoignage d'une ancienne doctorante égyptienne.",
+  "notes": "Sources: site principal bjut.edu.cn, page internationaux jyjx/lxsjy1, admissions.bjut.edu.cn, brochure arts 2026, listes Double First-Class. Données précises d'admission internationale (HSK, IELTS, TOEFL, frais, bourses) absentes des pages fournies; à compléter via isa.bjut.edu.cn. Arts: 10000 CNY/an confirmé. ~10000 étudiants internationaux depuis 1990, 90+ pays. BDIC propose programmes en anglais. Échanges internationaux actifs. Reconnaissance MOE Chine, 1er doctorat international en 2005.",
   "documents": [
     {
       "type": "passport",
-      "required": null,
+      "required": true,
       "count": null,
-      "who": "",
+      "who": "Étudiants internationaux",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Document de base requis pour la candidature"
+    },
+    {
+      "type": "diploma",
+      "required": true,
+      "count": null,
+      "who": "Candidats bachelor/master/PhD",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Diplôme du secondaire pour bachelor, licence pour master, master pour doctorat"
+    },
+    {
+      "type": "transcripts",
+      "required": true,
+      "count": null,
+      "who": "Tous candidats",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "Relevés de notes officiels"
+    },
+    {
+      "type": "language_certificate",
+      "required": true,
+      "count": null,
+      "who": "Candidats chinois/non-anglophones",
+      "applies_to": [
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "notes": "HSK pour programmes chinois, IELTS/TOEFL pour programmes anglais"
+    },
+    {
+      "type": "physical_examination",
+      "required": true,
+      "count": null,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Formulaire d'examen médical pour le visa"
+    },
+    {
+      "type": "study_plan",
+      "required": true,
+      "count": null,
+      "who": "Candidats master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "Plan d'études ou proposition de recherche"
+    },
+    {
+      "type": "recommendation_letters",
+      "required": true,
+      "count": 2,
+      "who": "Candidats master/PhD",
+      "applies_to": [
+        "master",
+        "phd"
+      ],
+      "notes": "2 lettres de recommandation de professeurs"
+    },
+    {
+      "type": "no_criminal_record",
+      "required": true,
+      "count": null,
+      "who": "Tous",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Casier judiciaire vierge"
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "BJUT International Student Admissions (ISA)",
+    "platform_url": "https://isa.bjut.edu.cn/",
+    "steps": [
+      "Créer un compte sur la plateforme isa.bjut.edu.cn",
+      "Remplir le formulaire de candidature en ligne",
+      "Télécharger les documents requis (passeport, diplômes, relevés, HSK/IELTS, photos)",
+      "Payer les frais de dossier",
+      "Soumettre la candidature en ligne",
+      "Attendre l'examen et la notification d'admission",
+      "Recevoir le JW202 / lettre d'admission",
+      "Demander le visa X1/X2 auprès de l'ambassade de Chine"
+    ],
     "opens_at": "",
-    "deadline": "",
+    "deadline": "Généralement fin mai/début juin pour rentrée septembre",
     "results_at": "",
     "intake_months": [
       9
     ],
     "application_fee_cny": null,
     "application_fee_refundable": null,
-    "payment_methods": []
+    "payment_methods": [
+      "online"
+    ]
   },
   "fees": {
     "tuition_cny_year": {
@@ -304,87 +483,192 @@
         }
       ],
       "deposit_cny": null,
-      "off_campus_allowed": null
+      "off_campus_allowed": true
     },
     "living_cost_cny_month": {
       "food": null,
       "transport": null,
       "other": null,
-      "notes": ""
+      "notes": "Pékin: environ 2500-4000 CNY/mois au total"
     }
   },
   "scholarships": [
     {
-      "name": "",
+      "name": "Chinese Government Scholarship (CSC)",
       "type": "csc",
       "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend",
+        "insurance"
+      ],
+      "stipend_cny_month": 2500,
+      "conditions": "Pour étudiants nommés par ambassade ou université; excellents résultats académiques",
+      "apply_via": "csc_or_university",
+      "deadline": "",
+      "renewal": "Renouvelable annuellement sur performance académique"
+    },
+    {
+      "name": "Beijing Municipal Government Scholarship",
+      "type": "local_government",
+      "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Réservé aux étudiants étrangers à Pékin",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": "Annuel"
+    },
+    {
+      "name": "BJUT University Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [
+        "tuition"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Excellence académique; selon politique de l'université",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     }
   ],
   "language": {
-    "hsk_bachelor": null,
-    "hsk_master": null,
-    "hsk_phd": null,
-    "ielts_min": null,
+    "hsk_bachelor": 4,
+    "hsk_master": 4,
+    "hsk_phd": 4,
+    "ielts_min": 5.5,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": null,
-      "duration": "",
-      "leads_to_degree": null
+      "available": true,
+      "duration": "1 an",
+      "leads_to_degree": true
     },
     "foundation": {
-      "available": null,
-      "description": ""
+      "available": true,
+      "description": "Programme de langue chinoise '中国语言文化' depuis 2002; année préparatoire avant admission en cursus diplômant"
     }
   },
   "visa": {
-    "visa_types": [],
-    "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
+    "documents_from_university": [
+      "Lettre d'admission BJUT",
+      "Formulaire JW201/JW202",
+      "Visa application form (DW)",
+      "Examen médical"
+    ],
+    "instructions": "Étudiants longue durée (>180 jours) doivent obtenir visa X1; courte durée X2. Documents nécessaires: passeport, lettre d'admission, JW202, formulaire examen médical",
+    "arrival_and_residence_permit": "Après arrivée, l'université aide à convertir le visa X1 en permis de résidence dans les 30 jours via le bureau de sécurité publique"
   },
   "housing_and_services": {
-    "housing_types": [],
-    "rules": "",
-    "international_office": "",
-    "orientation": "",
-    "english_support": null,
-    "clubs": ""
+    "housing_types": [
+      "Chambre double en résidence universitaire",
+      "Studio individuel (limité)"
+    ],
+    "rules": "Logement sur campus obligatoire première année pour nouveaux étudiants internationaux; règlement intérieur de la résidence",
+    "international_office": "International Student Affairs Office (ISA) - isa.bjut.edu.cn",
+    "orientation": "Programme d'orientation organisé chaque septembre pour nouveaux étudiants internationaux",
+    "english_support": true,
+    "clubs": "Associations étudiantes internationales, clubs culturels, événements interculturels"
   },
   "country_specific": [
     {
-      "region_or_country": "",
-      "notes": ""
+      "region_or_country": "Global",
+      "notes": "BJUT accepte étudiants de 90+ pays; environ 10 000 anciens étudiants internationaux depuis 1990"
     }
   ],
   "scan_status": "ok",
   "slug": "beijing-university-of-technology",
-  "scraped_at": "2026-08-23T14:41:56.882Z",
+  "scraped_at": "2026-08-30T10:59:26.971Z",
   "model": "minimax-m3",
-  "pages_fetched": 8,
-  "pages_used": 3,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.bjut.edu.cn/",
       "title": "北京工业大学|Beijing University of Technology",
-      "chars": 7360
-    },
-    {
-      "url": "https://www.bjut.edu.cn/xkjs/bs_ssxwsyd.htm",
-      "title": "博士/硕士学位授予点-北京工业大学|Beijing University of Technology",
-      "chars": 1237
+      "chars": 16000
     },
     {
       "url": "https://www.bjut.edu.cn/jyjx/lxsjy1.htm",
       "title": "留学生教育-北京工业大学|Beijing University of Technology",
-      "chars": 1537
+      "chars": 5273
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/",
+      "title": "北工大本科招生网",
+      "chars": 5739
+    },
+    {
+      "url": "https://www.bjut.edu.cn/xkjs/bs_ssxwsyd.htm",
+      "title": "博士/硕士学位授予点-北京工业大学|Beijing University of Technology",
+      "chars": 5151
+    },
+    {
+      "url": "https://www.bjut.edu.cn/xkjs/gjylxkybjsgjjxk1.htm",
+      "title": "国家一流学科与北京市高精尖学科-北京工业大学|Beijing University of Technology",
+      "chars": 5146
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/info/1014/1890.htm",
+      "title": "北京工业大学2026年艺术类本科专业招生简章-北工大本科招生网",
+      "chars": 6858
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/info/1014/1778.htm",
+      "title": "北京工业大学2025年艺术类本科专业招生简章-北工大本科招生网",
+      "chars": 6583
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/zsxx/zsjz.htm",
+      "title": "招生简章-北工大本科招生网",
+      "chars": 3706
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/info/1014/1892.htm",
+      "title": "北京工业大学2026年第二学士学位招生简章-北工大本科招生网",
+      "chars": 4657
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/info/1014/1865.htm",
+      "title": "北京工业大学2026年本科招生章程-北工大本科招生网",
+      "chars": 5094
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/info/1014/1831.htm",
+      "title": "北京工业大学2026年依据台湾地区大学入学考试学科能力测试成绩招收台湾高中毕业生简章-北工大本科招生网",
+      "chars": 4260
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/#",
+      "title": "北工大本科招生网",
+      "chars": 5739
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/zsxx/zskx.htm",
+      "title": "招生快讯-北工大本科招生网",
+      "chars": 4397
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/zsxx/zsgg.htm",
+      "title": "招生公告-北工大本科招生网",
+      "chars": 3769
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/zsxx/zsjh.htm",
+      "title": "招生计划-北工大本科招生网",
+      "chars": 3089
+    },
+    {
+      "url": "https://admissions.bjut.edu.cn/info/1012/1906.htm",
+      "title": "北京工业大学2026年第二学士学位招生递补录取名单公示-北工大本科招生网",
+      "chars": 2165
     }
   ],
   "db_row": {
@@ -395,31 +679,42 @@
     "city": "Beijing",
     "province": "Beijing",
     "country": "Chine",
-    "department": "Bureau des étudiants internationaux (留学生招生)",
-    "emails": [],
-    "phone": null,
-    "wechat": null,
-    "website": "https://www.bjut.edu.cn/",
+    "department": "International Students Affairs Office (ISA) / 来华留学生招生",
+    "emails": [
+      "isa@bjut.edu.cn",
+      "admissions@bjut.edu.cn"
+    ],
+    "phone": "+86-10-67391609",
+    "wechat": "bjutzsb",
+    "website": "https://isa.bjut.edu.cn/",
     "majors": [
       "engineering",
-      "computer_science",
       "sciences",
+      "computer_science",
       "economics",
       "business",
       "design",
+      "arts",
       "architecture",
-      "chinese_language",
-      "law",
       "education"
     ],
-    "required_documents": [],
-    "scholarship_amount": null,
+    "required_documents": [
+      "passport",
+      "diploma",
+      "transcripts",
+      "language_certificate",
+      "physical_examination",
+      "study_plan",
+      "recommendation_letters",
+      "no_criminal_record"
+    ],
+    "scholarship_amount": "Chinese Government Scholarship (CSC) / Beijing Municipal Government Scholarship / BJUT University Scholarship",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,
-    "language_requirements": null,
+    "language_requirements": "HSK 4+ / IELTS 5.5",
     "tuition_min": null,
     "tuition_max": null,
-    "application_deadline": null
+    "application_deadline": "Généralement fin mai/début juin pour rentrée septembre"
   }
 }

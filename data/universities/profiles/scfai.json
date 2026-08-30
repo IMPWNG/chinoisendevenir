@@ -5,28 +5,31 @@
     "name_fr": "Institut des beaux-arts du Sichuan",
     "aliases": [
       "SCFAI",
-      "SFAI",
-      "川美"
+      "SFAI"
     ],
     "website": "https://www.scfai.edu.cn/",
     "international_website": "https://www.scfai.edu.cn/gjjl/",
-    "application_portal_url": "study@scfai.edu.cn"
+    "application_portal_url": "mailto:study@scfai.edu.cn"
   },
   "general": {
-    "presentation": "Établissement public d'enseignement supérieur approuvé par le Ministère de l'Éducation, sous tutelle de la Commission municipale de l'éducation de Chongqing. Autorisé à délivrer les diplômes de licence, master et doctorat, avec stations de recherche postdoctorale. Devise : « Chercher la vérité, maîtriser l'art ». Spécialisé dans la formation de talents artistiques de haut niveau avec perspective internationale et compétences interculturelles.",
-    "history": "Fondée en 1940. Approuvée en 1981 parmi les premières institutions autorisées à délivrer des diplômes de master en Chine.",
-    "rankings": [],
+    "presentation": "Établissement public d'enseignement supérieur approuvé par le Ministère de l'Éducation, supervisé par la Commission municipale de l'éducation de Chongqing. Autorité de décerner les diplômes de licence, master et doctorat, avec stations de recherche postdoctorale. Devise: « Seek Truth, Master Artistry » (志于道、游于艺). L'une des 8 grandes écoles d'art de Chine.",
+    "history": "Fondée il y a 85 ans (vers 1940). Plus de 85 ans de formation artistique.",
+    "rankings": [
+      "L'une des 8 grandes académies d'art de Chine (中国八大美院之一)",
+      "Seule école supérieure d'art dans le sud-ouest de la Chine"
+    ],
     "strengths": [
-      "Beaux-arts",
-      "Arts du design",
       "Peinture",
       "Sculpture",
-      "Peinture chinoise",
-      "Calligraphie",
+      "Arts visuels",
+      "Design",
       "Animation",
+      "Art numérique",
+      "Architecture",
       "Art public",
-      "Design environnemental",
-      "Architecture"
+      "Art expérimental",
+      "Calligraphie",
+      "Histoire de l'art"
     ],
     "teaching_languages": [
       "zh"
@@ -37,15 +40,15 @@
       "country": "Chine"
     },
     "cost_of_living_cny_month": {
-      "min": 1500,
-      "max": 3000,
-      "notes": "Estimation pour Chongqing, hors logement universitaire"
+      "min": 2000,
+      "max": 3500,
+      "notes": "Estimation Chongqing, hors logement universitaire"
     },
     "campuses": [
       {
         "name": "Campus Huxi (虎溪校区)",
         "city": "Chongqing",
-        "description": "Campus principal, situé au No. 56 Huxi University Town South Road, district de Shapingba"
+        "description": "Campus principal, situé au No. 56 Huxi University Town South Road, Shapingba"
       },
       {
         "name": "Campus Huangjueping (黄桷坪校区)",
@@ -57,7 +60,7 @@
   "programs": [
     {
       "level": "bachelor",
-      "name": "Peinture (绘画)",
+      "name": "Peinture (Painting)",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -65,11 +68,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "École des arts figuratifs, campus Huxi"
+      "notes": "École des beaux-arts (造型艺术学院), campus Huxi"
     },
     {
       "level": "bachelor",
-      "name": "Sculpture (雕塑)",
+      "name": "Sculpture (Sculpture)",
       "field": "arts",
       "language": "zh",
       "duration_years": 5,
@@ -77,11 +80,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "École des arts figuratifs"
+      "notes": "École des beaux-arts, campus Huxi"
     },
     {
       "level": "bachelor",
-      "name": "Peinture chinoise (中国画)",
+      "name": "Peinture chinoise (Chinese Painting)",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -93,19 +96,7 @@
     },
     {
       "level": "bachelor",
-      "name": "Animation (动画)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École d'animation cinématographique"
-    },
-    {
-      "level": "bachelor",
-      "name": "Design environnemental (环境设计)",
+      "name": "Animation (Animation)",
       "field": "design",
       "language": "zh",
       "duration_years": 4,
@@ -113,11 +104,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "École d'architecture et d'art environnemental"
+      "notes": "École cinéma-vidéo-animation"
     },
     {
       "level": "bachelor",
-      "name": "Design de communication visuelle (视觉传达设计)",
+      "name": "Design de communication visuelle (Visual Communication Design)",
       "field": "design",
       "language": "zh",
       "duration_years": 4,
@@ -129,7 +120,55 @@
     },
     {
       "level": "bachelor",
-      "name": "Art public (公共艺术)",
+      "name": "Design environnemental (Environmental Design)",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École d'architecture et art environnemental"
+    },
+    {
+      "level": "bachelor",
+      "name": "Art médiatique numérique (Digital Media Art)",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Académie de design"
+    },
+    {
+      "level": "bachelor",
+      "name": "Design industriel (Industrial Design)",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Académie de design"
+    },
+    {
+      "level": "bachelor",
+      "name": "Architecture (Architectural Science)",
+      "field": "design",
+      "language": "zh",
+      "duration_years": 5,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "École d'architecture et art environnemental"
+    },
+    {
+      "level": "bachelor",
+      "name": "Art public (Public Art)",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -141,7 +180,7 @@
     },
     {
       "level": "bachelor",
-      "name": "Art expérimental (实验艺术)",
+      "name": "Art expérimental (Experimental Art)",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -153,31 +192,7 @@
     },
     {
       "level": "bachelor",
-      "name": "Architecture (建筑学)",
-      "field": "design",
-      "language": "zh",
-      "duration_years": 5,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École d'architecture et d'art environnemental"
-    },
-    {
-      "level": "bachelor",
-      "name": "Calligraphie (书法学)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "École de peinture chinoise et calligraphie"
-    },
-    {
-      "level": "bachelor",
-      "name": "Histoire et théorie de l'art (艺术史论)",
+      "name": "Histoire et théorie de l'art (Art History and Theory)",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -186,91 +201,91 @@
       ],
       "academic_calendar": "semester",
       "notes": "École des arts et humanités, pas de portfolio requis"
-    },
-    {
-      "level": "master",
-      "name": "Master en arts (学术学位/专业学位)",
-      "field": "arts",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Diplômes académiques et professionnels en études artistiques, design, beaux-arts et calligraphie, art dramatique et cinéma, architecture paysagère"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires complet (高中毕业证书)",
+      "academic": "Diplôme d'études secondaires complet (高中毕业证). Bonne santé.",
       "min_gpa": null,
-      "age_max": null,
+      "age_max": 25,
       "age_min": 18,
       "hsk_level": 4,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire international 1+3 disponible",
+      "preparatory_if_insufficient": null,
       "other": [
-        "Portfolio requis (sauf pour design artistique, histoire et théorie de l'art, beaux-arts)",
+        "Passeport étranger valide au-delà du 31/12/2026",
+        "Certificat HSK 4 valide (à présenter à l'inscription)",
+        "Portfolio requis (sauf Art Design, Histoire de l'art, Beaux-arts)",
         "2 lettres de recommandation de professeurs du lycée",
-        "Plan d'études ou de recherche en Chine",
+        "Plan d'études ou de recherche",
         "Examen médical pour étrangers",
         "Certificat de casier judiciaire vierge",
-        "Preuve financière ≥ 30 000 RMB",
-        "Frais de dossier : 400 RMB (non remboursables)",
-        "CV et preuves de récompenses personnelles"
+        "Justificatif financier ≥ 30000 RMB",
+        "CV et preuves de récompenses",
+        "Formulaire de candidature SCFAI"
       ]
     },
     "master": {
-      "academic": "Diplôme de licence ou qualification équivalente",
-      "min_gpa": null,
-      "age_max": 35,
-      "age_min": null,
-      "hsk_level": 5,
-      "hsk_score_min": null,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": "Programme préparatoire international de master disponible",
-      "other": [
-        "Portfolio requis pour diplômes professionnels, articles académiques pour diplômes académiques",
-        "2 lettres de recommandation de professeurs ou maîtres de conférences",
-        "Plan d'études ou de recherche en Chine",
-        "Examen médical pour étrangers",
-        "Certificat de casier judiciaire vierge",
-        "Preuve financière ≥ 30 000 RMB",
-        "Frais de dossier : 400 RMB (non remboursables)",
-        "CV et preuves de récompenses personnelles",
-        "Limite d'âge de 35 ans pour les bourses"
-      ]
-    },
-    "phd": {
-      "academic": "Diplôme de master ou qualification équivalente",
+      "academic": "Diplôme de licence (bachelor) ou équivalent. Bonne santé.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
-      "hsk_level": null,
+      "hsk_level": 4,
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Détails non disponibles dans les sources consultées"
+        "Passeport étranger valide",
+        "Portfolio artistique",
+        "Plan de recherche",
+        "2 lettres de recommandation",
+        "Certificat HSK 4",
+        "Examen médical",
+        "Casier judiciaire vierge",
+        "Justificatif financier",
+        "Frais de dossier 400 RMB"
+      ]
+    },
+    "phd": {
+      "academic": "Diplôme de master ou équivalent. Bonne santé.",
+      "min_gpa": null,
+      "age_max": null,
+      "age_min": null,
+      "hsk_level": 4,
+      "hsk_score_min": null,
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": null,
+      "other": [
+        "Passeport étranger valide",
+        "Portfolio artistique",
+        "Plan de recherche détaillé",
+        "Lettres de recommandation",
+        "Certificat HSK 4",
+        "Examen médical",
+        "Casier judiciaire vierge",
+        "Justificatif financier",
+        "Frais de dossier 400 RMB"
       ]
     },
     "language": {
-      "academic": "",
+      "academic": "Lycée complet ou équivalent",
       "age_max": null,
-      "other": []
+      "other": [
+        "HSK 4 requis pour les programmes de diplôme"
+      ]
     }
   },
   "contacts": {
     "office_name": "Bureau des échanges et de la coopération internationaux (国际交流与合作处)",
     "iso_email": "study@scfai.edu.cn",
     "admissions_email": "study@scfai.edu.cn",
-    "wechat": "",
+    "wechat": "川美国际 (QR code sur site officiel)",
     "phone": "+86-23-65920818",
-    "address": "Bureau des échanges et de la coopération internationaux, Institut des beaux-arts du Sichuan, No. 56, Huxi University Town South Road, district de Shapingba, Chongqing, Chine (code postal 401331)"
+    "address": "No. 56, Huxi University Town South Road, Shapingba District, Chongqing, China, 401331"
   },
   "matching": {
     "fields": [
@@ -287,18 +302,18 @@
       "zh"
     ],
     "english_programs_available": false,
-    "chinese_language_program_available": true,
+    "chinese_language_program_available": false,
     "min_hsk_level": 4,
     "min_ielts": null,
     "min_toefl": null,
-    "age_max_bachelor": null,
-    "age_max_master": 35,
+    "age_max_bachelor": 25,
+    "age_max_master": null,
     "age_max_phd": null,
     "has_csc": null,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
     "tuition_cny_min": 25000,
-    "tuition_cny_max": 30000,
+    "tuition_cny_max": 25000,
     "housing_cny_year_min": 10800,
     "deadline_typical": "31 mai",
     "intake_months": [
@@ -307,51 +322,56 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "tags": [
-      "école d'art",
-      "programme préparatoire 1+3",
-      "bourse du maire de Chongqing",
-      "bourse du président",
-      "deux campus",
-      "programmes en chinois uniquement",
-      "portfolio requis"
+      "art",
+      "design",
+      "peinture",
+      "sculpture",
+      "animation",
+      "architecture",
+      "8 grandes écoles d'art",
+      "HSK 4 requis",
+      "bourse municipale Chongqing",
+      "bourse présidentielle SCFAI",
+      "frais de dossier 400 RMB"
     ]
   },
   "confidence": 0.85,
   "missing_fields": [
-    "détails doctorat international",
-    "programmes spécifiques de master (annexe non consultée)",
-    "scores HSK minimums précis",
-    "scores IELTS/TOEFL (non requis)",
-    "bourse CSC explicite",
-    "coût de la vie précis"
+    "Détails précis des critères master et PhD (non fournis dans les sources)",
+    "Existence de programmes CSC (Chinese Scholarship Council) non confirmée",
+    "Score HSK minimum exact",
+    "Scores IELTS/TOEFL acceptés",
+    "Fourchette GPA",
+    "Âge max master/PhD",
+    "Coût de la vie précis"
   ],
-  "notes": "École d'art prestigieuse fondée en 1940. Tous les programmes pour étudiants étrangers sont enseignés en chinois (HSK 4 pour licence, HSK 5 pour master). Pas de programmes en anglais identifiés. Deux bourses disponibles : Bourse du maire de Chongqing (municipale) et Bourse du président de SCFAI (universitaire). Frais de dossier : 400 RMB. Logement : 900-1000 RMB/mois. Programmes préparatoires internationaux 1+3 (licence) et master disponibles.",
+  "notes": "École d'art publique de premier plan en Chine (8 grandes académies). Tous les programmes de diplôme pour étudiants internationaux sont en chinois (HSK 4 obligatoire). Frais de dossier: 400 RMB (non remboursables). Bourse municipale de Chongqing et bourse présidentielle SCFAI disponibles (non cumulables, <25 ans pour bachelor). Inscription par email à study@scfai.edu.cn. Programmes 1+3 prépa internationale (120000 RMB/an) destinés aux étudiants chinois partant à l'étranger, pas aux étudiants internationaux venant à SCFAI.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "international students",
       "applies_to": [
         "all"
       ],
-      "notes": "Validité au-delà du 31/12/2026; pièce d'identité du garant si applicable; permis de séjour/visa chinois si actuellement en Chine"
+      "notes": "Valid beyond 2026-12-31. Applicants currently in China must also provide residence permit/visa copy."
     },
     {
-      "type": "nationality_proof",
+      "type": "nationality proof",
       "required": true,
       "count": null,
-      "who": "applicant",
+      "who": "applicants born with Chinese parents or former Chinese citizens",
       "applies_to": [
-        "all"
+        "specific cases"
       ],
-      "notes": "Exigences spécifiques pour anciens citoyens chinois ou nés de parents chinois (MOE JWH [2020] No.12)"
+      "notes": "Per MOE JWH [2020] No.12: proof of foreign nationality at birth, parent's PR abroad, exit-entry records 2022-04-30 to 2026-04-30 (≥2 years abroad)."
     },
     {
-      "type": "birth_certificate",
+      "type": "birth certificate",
       "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
@@ -361,154 +381,157 @@
       "type": "photo",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Couleur 3,5cm x 4,9cm sans couvre-chef"
+      "notes": "3.5cm x 4.9cm color, no head cover"
     },
     {
-      "type": "high_school_diploma",
+      "type": "high school diploma",
       "required": true,
-      "count": null,
-      "who": "applicant",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": "Notarié; certificat de scolarité si étudiant en cours"
-    },
-    {
-      "type": "bachelor_degree",
-      "required": true,
-      "count": null,
-      "who": "applicant",
-      "applies_to": [
-        "master"
-      ],
-      "notes": "Notarié; certificat de scolarité si étudiant en cours"
-    },
-    {
-      "type": "transcripts",
-      "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Tous les cours du lycée ou du premier cycle"
+      "notes": "Original required at enrollment. Current students must add enrollment certificate."
     },
     {
-      "type": "study_plan",
+      "type": "high school transcripts",
       "required": true,
       "count": null,
-      "who": "applicant",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Plan d'études ou de recherche en Chine"
+      "notes": "All courses completed during high school"
     },
     {
-      "type": "recommendation_letters",
+      "type": "study plan",
+      "required": true,
+      "count": 1,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "In Chinese or English"
+    },
+    {
+      "type": "recommendation letter",
       "required": true,
       "count": 2,
-      "who": "teachers/professors",
+      "who": "two high school teachers",
       "applies_to": [
         "all"
       ],
-      "notes": "2 lettres: enseignants du lycée (bachelor) ou professeurs/maîtres de conférences (master)"
+      "notes": ""
     },
     {
       "type": "portfolio",
       "required": true,
       "count": null,
-      "who": "applicant",
+      "who": "",
+      "applies_to": [
+        "most programs"
+      ],
+      "notes": "Not required for Art Design, Art History & Theory, Fine Arts. Each work must show title, dimensions, etc."
+    },
+    {
+      "type": "physical examination form",
+      "required": true,
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Requis sauf Design Art, Histoire de l'Art, Beaux-Arts (bachelor); œuvres créatives (master pro) ou publications (master académique)"
+      "notes": "Foreigners Physical Examination Form; valid 6 months; must bear photo, physician & hospital seals"
     },
     {
-      "type": "physical_examination",
+      "type": "HSK certificate",
       "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire d'examen physique pour étrangers; validité 6 mois"
+      "notes": "HSK Level 4 minimum; original required at registration"
     },
     {
-      "type": "hsk_certificate",
+      "type": "application form",
       "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "HSK 4 pour bachelor, HSK 5 pour master; original requis à l'inscription"
+      "notes": "SCFAI Application Form for International Students"
     },
     {
-      "type": "application_form",
+      "type": "criminal record certificate",
       "required": true,
-      "count": null,
-      "who": "applicant",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Formulaire de demande SCFAI pour étudiants internationaux"
-    },
-    {
-      "type": "no_criminal_record",
-      "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
       "notes": ""
     },
     {
-      "type": "financial_proof",
+      "type": "financial proof",
       "required": true,
       "count": null,
-      "who": "applicant",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Dépôt en monnaie locale ≥ 30 000 RMB"
+      "notes": "Local currency deposits ≥30,000 RMB"
     },
     {
       "type": "resume",
       "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "",
       "applies_to": [
         "all"
       ],
       "notes": ""
     },
     {
-      "type": "awards",
+      "type": "awards documentation",
       "required": false,
       "count": null,
-      "who": "applicant",
+      "who": "",
       "applies_to": [
         "all"
       ],
-      "notes": "Documents de récompenses personnelles"
+      "notes": "Personal awards if any"
+    },
+    {
+      "type": "insurance proof",
+      "required": true,
+      "count": 1,
+      "who": "",
+      "applies_to": [
+        "all"
+      ],
+      "notes": "Coverage valid in China, at minimum accident + hospitalization. Required for registration."
     }
   ],
   "application": {
-    "platform_name": "Soumission par email",
+    "platform_name": "Email direct submission to International Office",
     "platform_url": "mailto:study@scfai.edu.cn",
     "steps": [
-      "Préparer tous les documents requis en chinois ou anglais (traductions notariées si autre langue)",
-      "Nommer le dossier: Pays+Nom+Programme",
-      "Envoyer par email à study@scfai.edu.cn",
-      "Scanner le QR code pour payer les frais de dossier de 400 RMB",
-      "Attendre l'examen préliminaire des documents",
-      "Passer un entretien avec un panel d'évaluation professionnelle",
-      "Recevoir la lettre d'admission et le formulaire JW202 mi-juillet 2026"
+      "Prepare all required documents (Chinese or English; other languages need notarized translation)",
+      "Name folder as 'Country+Name+Program'",
+      "Email all materials to study@scfai.edu.cn within application period",
+      "Scan QR code to pay 400 RMB non-refundable application fee (note applicant name and passport number)",
+      "Submit Mayor's and/or President's Scholarship application forms if applicable (in same email)",
+      "Wait for preliminary eligibility review",
+      "Attend professional interview (assesses academic level + HSK Chinese proficiency)",
+      "Receive Admission Notice and JW202 e-visa form in mid-July 2026",
+      "Apply for X1 visa at Chinese embassy/consulate",
+      "Arrive at SCFAI in September 2026 with original HS diploma + HSK certificate"
     ],
     "opens_at": "2026-04-30",
     "deadline": "2026-05-31",
@@ -519,7 +542,7 @@
     "application_fee_cny": 400,
     "application_fee_refundable": false,
     "payment_methods": [
-      "QR code"
+      "WeChat/Alipay QR code"
     ]
   },
   "fees": {
@@ -529,8 +552,8 @@
         "max": 25000
       },
       "master": {
-        "min": 30000,
-        "max": 30000
+        "min": null,
+        "max": null
       },
       "phd": {
         "min": null,
@@ -545,27 +568,21 @@
     "insurance_cny_year": null,
     "other_fees": [
       {
-        "name": "Frais de manuels",
-        "amount_cny": null,
-        "notes": "Selon les cours choisis"
-      },
-      {
-        "name": "Frais de dossier",
-        "amount_cny": 400,
-        "notes": "Non remboursable"
+        "item": "textbook fees",
+        "note": "Charged based on courses selected"
       }
     ],
     "housing": {
       "on_campus": [
         {
-          "type": "small_bed_room",
+          "type": "single small bed",
           "price_cny_year": 10800,
-          "included": "Paiement annuel intégral à l'inscription"
+          "included": "Full year paid in one installment at registration"
         },
         {
-          "type": "large_bed_room",
+          "type": "single large bed",
           "price_cny_year": 12000,
-          "included": "Paiement annuel intégral à l'inscription"
+          "included": "Full year paid in one installment at registration"
         }
       ],
       "deposit_cny": null,
@@ -575,55 +592,55 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Non spécifié dans les sources"
+      "notes": ""
     }
   },
   "scholarships": [
     {
-      "name": "Bourse du Maire de Chongqing pour étudiants internationaux",
-      "type": "municipal",
-      "coverage": "partial",
+      "name": "Chongqing Municipal Government Mayor's Scholarship for International Students",
+      "type": "government",
+      "coverage": "tuition+stipend",
       "covers": [
         "tuition",
         "accommodation",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Master: moins de 35 ans; sélection basée sur le classement de l'entretien",
+      "conditions": "For bachelor applicants under 25 years old; awarded by interview ranking; cannot be combined with President's Scholarship",
       "apply_via": "university",
       "deadline": "2026-05-31",
-      "renewal": "Non spécifié"
+      "renewal": "Subject to annual review per Chongqing rules"
     },
     {
-      "name": "Bourse du Président de SCFAI pour étudiants internationaux",
+      "name": "Sichuan Fine Arts Institute International Student President's Scholarship (New Student)",
       "type": "university",
-      "coverage": "partial",
+      "coverage": "tuition+stipend",
       "covers": [
         "tuition",
         "accommodation",
         "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "Master: moins de 35 ans; non cumulable avec la bourse du Maire; sélection par entretien",
+      "conditions": "For bachelor applicants under 25 years old; awarded by interview ranking; cannot be combined with Mayor's Scholarship",
       "apply_via": "university",
       "deadline": "2026-05-31",
-      "renewal": "Non spécifié"
+      "renewal": "See attachment 5 - new student scholarship rules"
     }
   ],
   "language": {
     "hsk_bachelor": 4,
-    "hsk_master": 5,
+    "hsk_master": null,
     "hsk_phd": null,
     "ielts_min": null,
     "toefl_min": null,
     "preparatory_chinese": {
-      "available": true,
-      "duration": "1 an (préparatoire bachelor 1+3 ou master préparatoire)",
-      "leads_to_degree": true
+      "available": null,
+      "duration": "",
+      "leads_to_degree": null
     },
     "foundation": {
       "available": true,
-      "description": "Programme préparatoire international bachelor 1+3 (7e éd. 2024) et master préparatoire (8e éd. 2024)"
+      "description": "SCFAI International Foundation (1+3 Bachelor / 1-year Master prep): Chinese students prepare for overseas art universities. Tuition 120,000 RMB/year (Chinese nationals preparing to study abroad, NOT international students at SCFAI)."
     }
   },
   "visa": {
@@ -631,95 +648,115 @@
       "X1"
     ],
     "documents_from_university": [
-      "Lettre d'admission officielle",
-      "Formulaire JW202 (e-form)"
+      "Admission Notice",
+      "JW202 e-visa form (Visa Application Form for Study in China)"
     ],
-    "instructions": "Les admis doivent se rendre à l'ambassade/consulat chinois avec passeport ordinaire, lettre d'admission et JW202 pour visa d'études X1",
-    "arrival_and_residence_permit": "Se présenter à SCFAI à la date indiquée; permis de résidence à obtenir après arrivée"
+    "instructions": "Admitted students must present regular passport + Admission Notice + JW202 at Chinese embassy/consulate abroad to apply for X1 study visa, then arrive at SCFAI per the dates in Admission Notice.",
+    "arrival_and_residence_permit": "Register at SCFAI upon arrival; X1 visa holders must apply for residence permit within prescribed timeframe at local Public Security Bureau."
   },
   "housing_and_services": {
     "housing_types": [
-      "small_bed_room",
-      "large_bed_room"
+      "on-campus small bed room (900 RMB/month)",
+      "on-campus large bed room (1000 RMB/month)"
     ],
-    "rules": "Choix par l'étudiant; paiement annuel intégral obligatoire à l'inscription",
-    "international_office": "Bureau de coopération et d'échanges internationaux, +86-23-65920818, study@scfai.edu.cn, lun-ven 9h-16h (hors jours fériés)",
-    "orientation": "Non spécifié dans les sources",
-    "english_support": null,
-    "clubs": "Non spécifié dans les sources"
+    "rules": "Full academic year housing fee paid in one installment at registration; student selects preferred room type",
+    "international_office": "International Exchange and Cooperation Office, SCFAI, No. 56 Huxi University Town South Road, Shapingba District, Chongqing. Tel: +86-23-65920818 (Mon-Fri 9:00-16:00). Email: study@scfai.edu.cn",
+    "orientation": "Held at enrollment in September 2026 (specific date in Admission Notice)",
+    "english_support": true,
+    "clubs": "Art workshops, exhibitions, international exchange programs via International Office (gjjl)"
   },
   "country_specific": [
     {
-      "region_or_country": "Anciens citoyens chinois ou personnes nées de parents chinois",
-      "notes": "Conformes au document MOE JWH [2020] No.12; fournir preuve de renonciation nationalité chinoise, annulation foyer chinois, acquisition nationalité étrangère, et records d'entrée/sortie entre 30/04/2022 et 30/04/2026 (≥2 ans résidence effective à l'étranger, 9 mois/an comptent comme 1 an)"
+      "region_or_country": "Applicants with Chinese-origin parents or former Chinese citizens",
+      "notes": "Must comply with MOE JWH [2020] No.12: parent (Chinese citizen) must hold foreign PR before applicant birth; applicant must have lived abroad ≥2 years between 2022-04-30 and 2026-04-30 (9 months/year counts as one year). Former PRC residents need renunciation certificate, cancelled hukou, foreign nationality proof."
     }
   ],
   "scan_status": "ok",
   "slug": "scfai",
-  "scraped_at": "2026-08-24T14:35:54.473Z",
+  "scraped_at": "2026-08-30T11:09:23.602Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 12,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://www.scfai.edu.cn/",
       "title": "四川美术学院",
-      "chars": 5965
+      "chars": 13668
     },
     {
       "url": "https://www.scfai.edu.cn/gjjl/",
       "title": "国际交流合作处",
-      "chars": 1652
+      "chars": 4282
     },
     {
       "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
       "title": "四川美术学院2026年国际学生本科生招生简章-国际交流合作处",
-      "chars": 12000
-    },
-    {
-      "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
-      "title": "四川美术学院2026年国际学生攻读硕士研究生招生简章-国际交流合作处",
-      "chars": 11035
-    },
-    {
-      "url": "https://www.scfai.edu.cn/jwc/",
-      "title": "四川美院教务处",
-      "chars": 4330
-    },
-    {
-      "url": "https://www.scfai.edu.cn/zsb/",
-      "title": "四川美术学院招生处",
-      "chars": 1391
-    },
-    {
-      "url": "http://www.scfai.edu.cn/gjjl",
-      "title": "国际交流合作处",
-      "chars": 1652
-    },
-    {
-      "url": "https://www.scfai.edu.cn/english/",
-      "title": "Sichuan Fine Arts Institute",
-      "chars": 223
-    },
-    {
-      "url": "https://www.scfai.edu.cn/xx24/",
-      "title": "深入学习贯彻党的二十届四中全会精神",
-      "chars": 459
-    },
-    {
-      "url": "https://www.scfai.edu.cn/museum/lzljxj/gyjxj.htm",
-      "title": "关于奖学金-四川美术学院美术馆",
-      "chars": 1158
-    },
-    {
-      "url": "http://www.scfai.edu.cn/zsb",
-      "title": "四川美术学院招生处",
-      "chars": 1391
+      "chars": 15327
     },
     {
       "url": "https://www.scfai.edu.cn/gjjl/info/1046/1257.htm",
       "title": "四川美术学院2024年国际本科1+3预科招生简章（第七届）-国际交流合作处",
-      "chars": 4066
+      "chars": 4989
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1046/1572.htm",
+      "title": "四川美术学院2024年国际硕士预科招生简章（第八届）-国际交流合作处",
+      "chars": 4924
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1046/1712.htm",
+      "title": "四川美术学院2023年国际本科预科招生简章（第六届）-国际交流合作处",
+      "chars": 4582
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1046/1571.htm",
+      "title": "四川美术学院2023年国际硕士预科招生简章（第七届）-国际交流合作处",
+      "chars": 4219
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1046/1532.htm",
+      "title": "四川美术学院2022年国际本科预科招生简章（第五届）-国际交流合作处",
+      "chars": 4344
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1047/1321.htm",
+      "title": "四川美术学院2021年中外联合培养国际硕士实验班招生简章-国际交流合作处",
+      "chars": 3411
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1047/1258.htm",
+      "title": "四川美术学院2020年中外联合培养国际硕士实验班招生简章-国际交流合作处",
+      "chars": 3462
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1047/1254.htm",
+      "title": "中英联合培养国际硕士实验班2019招生简章-国际交流合作处",
+      "chars": 4573
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1047/1255.htm",
+      "title": "中英联合培养国际硕士实验班招生简章-国际交流合作处",
+      "chars": 4803
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1013/1992.htm",
+      "title": "四川美术学院2025年国际学生攻读全日制博士学位研究生招生简章-国际交流合作处",
+      "chars": 13401
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1046/1531.htm",
+      "title": "四川美术学院2022年国际硕士预科招生简章（第六届）-国际交流合作处",
+      "chars": 4255
+    },
+    {
+      "url": "https://www.scfai.edu.cn/gjjl/info/1013/1982.htm",
+      "title": "四川美术学院2025年国际学生攻读硕士研究生招生简章-国际交流合作处",
+      "chars": 12938
+    },
+    {
+      "url": "https://www.scfai.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1280538321&wbfileid=41693E677878C96F702BD88129C2E390",
+      "title": null,
+      "chars": 11687
     }
   ],
   "db_row": {
@@ -736,7 +773,7 @@
       "study@scfai.edu.cn"
     ],
     "phone": "+86-23-65920818",
-    "wechat": null,
+    "wechat": "川美国际 (QR code sur site officiel)",
     "website": "https://www.scfai.edu.cn/gjjl/",
     "majors": [
       "arts",
@@ -744,29 +781,29 @@
     ],
     "required_documents": [
       "passport",
-      "nationality_proof",
-      "birth_certificate",
+      "nationality proof",
+      "birth certificate",
       "photo",
-      "high_school_diploma",
-      "bachelor_degree",
-      "transcripts",
-      "study_plan",
-      "recommendation_letters",
+      "high school diploma",
+      "high school transcripts",
+      "study plan",
+      "recommendation letter",
       "portfolio",
-      "physical_examination",
-      "hsk_certificate",
-      "application_form",
-      "no_criminal_record",
-      "financial_proof",
-      "resume"
+      "physical examination form",
+      "HSK certificate",
+      "application form",
+      "criminal record certificate",
+      "financial proof",
+      "resume",
+      "insurance proof"
     ],
-    "scholarship_amount": "Bourse du Maire de Chongqing pour étudiants internationaux / Bourse du Président de SCFAI pour étudiants internationaux",
+    "scholarship_amount": "Chongqing Municipal Government Mayor's Scholarship for International Students / Sichuan Fine Arts Institute International Student President's Scholarship (New Student)",
     "scholarship_min": 25000,
-    "scholarship_max": 30000,
+    "scholarship_max": 25000,
     "min_hsk_level": 4,
     "language_requirements": "HSK 4+",
     "tuition_min": 25000,
-    "tuition_max": 30000,
+    "tuition_max": 25000,
     "application_deadline": "31 mai"
   }
 }

@@ -1,449 +1,111 @@
 {
-  "identity": {
-    "name_en": "Chongqing Technology and Business University",
-    "name_zh": "重庆工商大学",
-    "name_fr": "Université de technologie et de commerce de Chongqing",
-    "aliases": [
-      "CTBU"
-    ],
-    "website": "https://www.ctbu.edu.cn",
-    "international_website": "https://interoffice2014.ctbu.edu.cn",
-    "application_portal_url": "https://ctbu.at0086.cn/StuApplication/Login.aspx"
-  },
-  "general": {
-    "presentation": "Université de technologie et de commerce de Chongqing (CTBU) recrute des étudiants étrangers via sa division de coopération internationale (留学生院). Propose des programmes en chinois et en anglais en commerce, économie, gestion, finance et Big Data.",
-    "history": "",
-    "rankings": [],
-    "strengths": [
-      "commerce",
-      "économie",
-      "gestion",
-      "finance",
-      "comptabilité",
-      "big data",
-      "économie numérique",
-      "management du tourisme"
-    ],
-    "teaching_languages": [
-      "zh",
-      "en"
-    ],
-    "location": {
-      "city": "Chongqing",
-      "province": "Chongqing",
-      "country": "Chine"
-    },
-    "cost_of_living_cny_month": {
-      "min": 2500,
-      "max": 3800,
-      "notes": "Allocation mensuelle via bourse MoE-CMPG: 2500 (licence), 2500-3000 (master), 3300-3800 (doctorat)."
-    },
-    "campuses": [
-      {
-        "name": "Campus Nan'an (南岸校区)",
-        "city": "Chongqing",
-        "description": "Siège de la division internationale, Hanzhi Building (涵智楼) Room 802."
-      }
-    ]
-  },
-  "programs": [
-    {
-      "level": "bachelor",
-      "name": "Business Chinese (商务汉语)",
-      "field": "chinese_language",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG 2026/2027."
-    },
-    {
-      "level": "bachelor",
-      "name": "International Economics and Trade (国际经济与贸易)",
-      "field": "economics",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG 2026/2027."
-    },
-    {
-      "level": "bachelor",
-      "name": "Finance (金融学)",
-      "field": "finance",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG 2026/2027."
-    },
-    {
-      "level": "master",
-      "name": "Business Administration (工商管理)",
-      "field": "business",
-      "language": "en",
-      "duration_years": 2,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG 2026/2027, anglais."
-    },
-    {
-      "level": "master",
-      "name": "Management Science and Engineering (管理科学与工程)",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG."
-    },
-    {
-      "level": "master",
-      "name": "Enterprise Management (企业管理)",
-      "field": "business",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG."
-    },
-    {
-      "level": "master",
-      "name": "Engineering Management (工程管理)",
-      "field": "engineering",
-      "language": "zh",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bourse MoE-CMPG."
-    },
-    {
-      "level": "phd",
-      "name": "Big Data Statistics and Intelligent Computing (大数据统计与智能计算)",
-      "field": "computer_science",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bilingue EN/ZH, bourse MoE-CMPG."
-    },
-    {
-      "level": "phd",
-      "name": "International Trade (国际贸易学)",
-      "field": "economics",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bilingue EN/ZH."
-    },
-    {
-      "level": "phd",
-      "name": "Industrial Economics (产业经济学)",
-      "field": "economics",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bilingue EN/ZH."
-    },
-    {
-      "level": "phd",
-      "name": "Digital Economy (数字经济)",
-      "field": "economics",
-      "language": "en",
-      "duration_years": 3,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bilingue EN/ZH."
-    },
-    {
-      "level": "phd",
-      "name": "Accounting (会计学)",
-      "field": "finance",
-      "language": "en",
-      "duration_years": 4,
-      "start_months": [
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Bilingue EN/ZH."
-    }
-  ],
-  "admission_requirements": {
-    "bachelor": {
-      "academic": "Diplôme de fin de lycée (高中及以上学历)",
-      "min_gpa": 3.5,
-      "age_max": 25,
-      "age_min": 18,
-      "hsk_level": 4,
-      "hsk_score_min": 180,
-      "ielts_min": null,
-      "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": [
-        "Test CSCA obligatoire (文科中文 + 数学)",
-        "Examen d'entrée après présélection"
-      ]
-    },
-    "master": {
-      "academic": "Licence/bachelor's degree",
-      "min_gpa": 3.5,
-      "age_max": 35,
-      "age_min": 21,
-      "hsk_level": 5,
-      "hsk_score_min": null,
-      "ielts_min": 6.5,
-      "toefl_min": 85,
-      "preparatory_if_insufficient": null,
-      "other": [
-        "HSK 5 pour programmes en chinois",
-        "TOEFL 85 ou IELTS 6.5 pour anglais (natifs anglais exemptés)"
-      ]
-    },
-    "phd": {
-      "academic": "Master's degree",
-      "min_gpa": 3.5,
-      "age_max": 40,
-      "age_min": null,
-      "hsk_level": 5,
-      "hsk_score_min": null,
-      "ielts_min": 6.5,
-      "toefl_min": 85,
-      "preparatory_if_insufficient": null,
-      "other": [
-        "HSK 5 pour chinois",
-        "TOEFL/IELTS pour anglais"
-      ]
-    },
-    "language": {
-      "academic": "",
-      "age_max": null,
-      "other": []
-    }
-  },
-  "contacts": {
-    "office_name": "International School / 留学生院 (Office of International Cooperation & Exchange)",
-    "iso_email": "wshch@ctbu.edu.cn",
-    "admissions_email": "ctbulxs@ctbu.edu.cn",
-    "wechat": "",
-    "phone": "86-23-62769399 (留学生管理科) / 86-23-62775067 (国际交流科)",
-    "address": "Hanzhi Building Room 802, No.19 Xuefu Ave., Nan'an District, Chongqing 400067, China"
-  },
-  "matching": {
-    "fields": [
-      "business",
-      "economics",
-      "finance",
-      "computer_science",
-      "engineering",
-      "chinese_language"
-    ],
-    "degrees": [
-      "bachelor",
-      "master",
-      "phd"
-    ],
-    "languages": [
-      "zh",
-      "en"
-    ],
-    "english_programs_available": true,
-    "chinese_language_program_available": true,
-    "min_hsk_level": 4,
-    "min_ielts": 6.5,
-    "min_toefl": 85,
-    "age_max_bachelor": 25,
-    "age_max_master": 35,
-    "age_max_phd": 40,
-    "has_csc": true,
-    "has_university_scholarship": true,
-    "has_provincial_scholarship": true,
-    "tuition_cny_min": 0,
-    "tuition_cny_max": 0,
-    "housing_cny_year_min": 0,
-    "deadline_typical": "1 mars (bourse MoE-CMPG 2026/2027)",
-    "intake_months": [
-      9
-    ],
-    "city": "Chongqing",
-    "province": "Chongqing",
-    "tags": [
-      "MoE-CMPG",
-      "CSC",
-      "bourse municipale Chongqing",
-      "One Belt One Road",
-      "english-taught",
-      "business",
-      "economics",
-      "finance",
-      "big data"
-    ]
-  },
-  "confidence": 0.78,
-  "missing_fields": [
-    "history",
-    "rankings",
-    "min_hsk_score master/phd exact",
-    "tuition standard hors bourse (self-funded)",
-    "coût de vie hors bourse"
-  ],
-  "notes": "Données extraites de l'annonce MoE-CMPG 2026/2027 et du portail 留学生院. Bourse couvre: tuition waiver, hébergement gratuit, allocation 2500-3800 CNY/mois, assurance. Contact: Mr. Du / Ms. Song. Site principal: www.ctbu.edu.cn.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Copie de la page d'accueil du passeport. Validité doit dépasser septembre 2026."
+      "notes": "Passeport valide au-delà de septembre 2026"
     },
     {
-      "type": "high_school_diploma",
+      "type": "diploma",
       "required": true,
       "count": 1,
-      "who": "bachelor_applicant",
+      "who": "all",
       "applies_to": [
-        "bachelor"
+        "all"
       ],
-      "notes": "Diplôme notarié le plus élevé. Étudiants en cours: preuve de statut scolaire."
-    },
-    {
-      "type": "bachelor_degree",
-      "required": true,
-      "count": 1,
-      "who": "master_applicant",
-      "applies_to": [
-        "master"
-      ],
-      "notes": "Diplôme de licence notarié."
-    },
-    {
-      "type": "master_degree",
-      "required": true,
-      "count": 1,
-      "who": "phd_applicant",
-      "applies_to": [
-        "phd"
-      ],
-      "notes": "Diplôme de master notarié."
+      "notes": "Diplôme le plus élevé notarié (HS pour bachelor, licence pour master, master pour doctorat)"
     },
     {
       "type": "transcripts",
       "required": true,
-      "count": null,
-      "who": "applicant",
+      "count": 1,
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Relevés de notes depuis le lycée jusqu'au dernier semestre, scellés par l'établissement. Traduction notarisée si non chinois/anglais."
+      "notes": "Relevés de notes depuis le lycée, notariés ZH/EN"
     },
     {
-      "type": "language_certificate",
+      "type": "language_proof",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "HSK 4 ≥180 (bachelor chinois), HSK 5 (master/PhD chinois), TOEFL 85 ou IELTS 6.5 (master/PhD anglais). Anglophones natifs exemptés."
+      "notes": "HSK 4 (≥180) bachelor ZH; HSK 5 master/PhD ZH; TOEFL 85 ou IELTS 6.5 master/PhD EN"
     },
     {
-      "type": "csca_score_report",
+      "type": "csca",
       "required": true,
       "count": 1,
-      "who": "bachelor_applicant",
+      "who": "bachelor applicants",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Test CSCA obligatoire. Matières: chinois文科 et mathématiques. Sessions: 21 déc. 2025 ou 25 jan. 2026."
+      "notes": "Test CSCA (Chine + Maths) requis, sessions 21 déc 2025 ou 25 jan 2026"
     },
     {
       "type": "study_plan",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "≥200 mots (bachelor), ≥1000 mots (master/PhD), en chinois ou anglais."
+      "notes": "≥200 mots bachelor, ≥1000 mots master/PhD, en ZH ou EN"
     },
     {
       "type": "recommendation_letter",
       "required": true,
       "count": 2,
-      "who": "professors",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Deux lettres de professeurs ou professeurs associés, en chinois ou anglais."
+      "notes": "Deux lettres de professeurs/maîtres de conférences"
     },
     {
-      "type": "physical_examination",
+      "type": "physical_exam",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Formulaire d'examen physique pour étrangers, rempli en anglais, validité 6 mois."
+      "notes": "Formulaire Foreigner Physical Examination, validité 6 mois"
     },
     {
       "type": "non_criminal_record",
       "required": true,
       "count": 1,
-      "who": "applicant",
+      "who": "all",
       "applies_to": [
         "all"
       ],
-      "notes": "Délivré par autorités locales, validité 6 mois avant soumission."
-    },
-    {
-      "type": "scholarship_application_form",
-      "required": true,
-      "count": 1,
-      "who": "scholarship_applicant",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Formulaire de bourse du gouvernement chinois (CGS), en chinois ou anglais."
+      "notes": "Délivré par autorités locales, ≤6 mois"
     }
   ],
   "application": {
-    "platform_name": "CTBU International Students Application System",
+    "platform_name": "CTBU StuApplication",
     "platform_url": "https://ctbu.at0086.cn/StuApplication/Login.aspx",
     "steps": [
-      "Candidature en ligne via le système CTBU ou CGSIS pour la bourse conjointe MoE-CMPG",
-      "Examen d'entrée après approbation du dossier (notification par email)",
-      "Vérification des documents originaux à l'inscription",
-      "Inscription à l'université selon le calendrier communiqué"
+      "Créer un compte sur https://ctbu.at0086.cn/StuApplication/Login.aspx",
+      "Remplir le formulaire de candidature en ligne",
+      "Télécharger les documents requis (passeport, diplômes, relevés, lettres, etc.)",
+      "Pour bachelor: s'inscrire au test CSCA (21 déc 2025 ou 25 jan 2026)",
+      "Soumettre la candidature avant la date limite du programme choisi",
+      "Attendre la notification d'examen d'entrée par email (留学生院)",
+      "Vérifier les résultats d'admission sur le système de bourse du gouvernement chinois",
+      "S'enregistrer à CTBU aux dates indiquées, présenter originaux des documents"
     ],
-    "opens_at": "",
-    "deadline": "2026-03-01",
+    "opens_at": "2025-12-04",
+    "deadline": "2026-06-08",
     "results_at": "",
     "intake_months": [
       9
@@ -479,7 +141,7 @@
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "Gratuit pour boursiers MoE-CMPG"
+          "included": "gratuit pour boursiers MoE-CMPG"
         }
       ],
       "deposit_cny": null,
@@ -489,25 +151,47 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Allocation mensuelle bourse MoE-CMPG: 2500 CNY (bachelor), 2500-3000 CNY (master), 3300-3800 CNY (PhD)."
+      "notes": "Allocation bourse MoE-CMPG: 2500 bachelor, 2500-3000 master, 3300-3800 PhD CNY/mois"
     }
   },
   "scholarships": [
     {
-      "name": "MoE-CMPG Joint Scholarship (Bourse conjointe Ministère de l'Éducation - Municipalité de Chongqing)",
+      "name": "MoE-CMPG Joint Scholarship",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
-        "accommodation",
-        "living_allowance",
+        "housing",
+        "living",
         "insurance"
       ],
       "stipend_cny_month": 2500,
-      "conditions": "Non-Chinois, GPA ≥3.5/5.0 ou ≥85/100. Bachelor: 18-25 ans, HSK 4 ≥180. Master: 21-35 ans, HSK 5 ou TOEFL 85/IELTS 6.5. PhD: <40 ans, HSK 5 ou TOEFL 85/IELTS 6.5. CSCA requis pour bachelor. Un seul type de bourse à la fois.",
+      "conditions": "Non-Chinois, GPA ≥3.5/5.0 ou ≥85/100; HSK ou TOEFL/IELTS selon langue; CSCA pour bachelor; limite d'âge: 25 bachelor, 35 master, 40 PhD",
       "apply_via": "university",
       "deadline": "2026-03-01",
-      "renewal": "Renouvelable selon réglementation; ne peut être convertie en une autre bourse pendant les études en Chine."
+      "renewal": "renouvelable annuellement selon résultats"
+    },
+    {
+      "name": "Chongqing Mayor Scholarship",
+      "type": "municipal",
+      "coverage": "partial",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Candidater via portail CTBU",
+      "apply_via": "university",
+      "deadline": "2026-06-08",
+      "renewal": ""
+    },
+    {
+      "name": "CTBU President Scholarship",
+      "type": "university",
+      "coverage": "partial",
+      "covers": [],
+      "stipend_cny_month": null,
+      "conditions": "Candidater via portail CTBU",
+      "apply_via": "university",
+      "deadline": "2026-06-08",
+      "renewal": ""
     }
   ],
   "language": {
@@ -532,94 +216,118 @@
       "X2"
     ],
     "documents_from_university": [
-      "Formulaire de demande de visa JW202/JW201",
-      "Lettre d'admission CTBU",
-      "Dossier d'examen physique"
+      "Admission Notice",
+      "JW202 visa application form",
+      "Foreign Student Visa Application Form"
     ],
-    "instructions": "Les étudiants doivent obtenir un visa X1 (long séjour >180 jours) ou X2 (court séjour) selon la durée du programme. Documents fournis par l'université après admission.",
-    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours suivant l'arrivée en Chine auprès du bureau de la sécurité publique local. Inscription à l'université selon les règlements et la politique d'immigration chinoise en vigueur."
+    "instructions": "Demander un visa étudiant X1 (études >6 mois) ou X2 (≤6 mois) avec Admission Notice, JW202 et passeport à l'ambassade de Chine. Contacter留学生院 pour documents.",
+    "arrival_and_residence_permit": "Demander le permis de résidence dans les 30 jours suivant l'arrivée auprès des autorités de sécurité publique de Chongqing"
   },
   "housing_and_services": {
     "housing_types": [
-      "Chambre double sur campus (gratuit pour boursiers)"
+      "chambre double sur campus (boursiers MoE-CMPG)"
     ],
-    "rules": "",
-    "international_office": "Bureau international (留学生院): ctbulxs@ctbu.edu.cn, tél. 86-023-62769399, Hanzhi Building Room 802, No.19 Xuefu Ave., Nan'an District, Chongqing 400067",
+    "rules": "Logement gratuit sur campus pour boursiers MoE-CMPG",
+    "international_office": "留学生院 / International School, Hanzhi Building Room 802, ctbulxs@ctbu.edu.cn, 86-023-62769399",
     "orientation": "",
     "english_support": true,
-    "clubs": "Cours en anglais disponibles: Comprendre la Chine contemporaine (discours en anglais), Microéconomie, Comportement humain et environnement social, Méthodes de recherche en gestion."
+    "clubs": ""
   },
   "country_specific": [
     {
-      "region_or_country": "Europe et États-Unis",
-      "notes": "Cibles prioritaires de la bourse MoE-CMPG."
-    },
-    {
-      "region_or_country": "Pays de l'initiative 'Une Ceinture, Une Route'",
-      "notes": "Cibles prioritaires de la bourse MoE-CMPG."
+      "region_or_country": "all",
+      "notes": "Réservé aux non-Chinois (Non-Chinese citizens). Programme vise étudiants d'Europe, USA et pays 'Belt and Road'."
     }
   ],
+  "notes": "partial: Unexpected non-whitespace character after JSON at position 337 (line 1 column 338)",
+  "missing_fields": [],
+  "confidence": 0.35,
   "scan_status": "ok",
   "slug": "ctbu",
-  "scraped_at": "2026-08-24T14:30:13.653Z",
+  "scraped_at": "2026-08-30T11:08:00.645Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
-    {
-      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd.htm",
-      "title": "留学工商大-国际合作与交流处",
-      "chars": 1170
-    },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/",
       "title": "国际合作与交流处",
-      "chars": 1365
+      "chars": 4070
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd.htm",
+      "title": "留学工商大-国际合作与交流处",
+      "chars": 3558
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/lhlxsq.htm",
       "title": "来华留学申请-国际合作与交流处",
-      "chars": 846
-    },
-    {
-      "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
-      "title": "2026-2027年重庆工商大学教育部重庆市人民政府来华留学联合奖学金-国际合作与交流处",
-      "chars": 12000
-    },
-    {
-      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/zsjz.htm",
-      "title": "招生简章-国际合作与交流处",
-      "chars": 1010
+      "chars": 2565
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/lxsy.htm",
       "title": "留学生院-国际合作与交流处",
-      "chars": 799
+      "chars": 2581
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/info/1062/4972.htm",
       "title": "关于公示认定2026年校级来华留学全英文授课一流本科课程名单的通知-国际合作与交流处",
-      "chars": 1297
+      "chars": 3010
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4881.htm",
+      "title": "2026年重庆工商大学秋季学期留学生招生通告CTBU International Students Admission Announcement  2026 Fall-国际合作与交流处",
+      "chars": 5005
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/info/1062/4779.htm",
-      "title": "关于公示认定2025年校级来华留学全英文授课 一流本科课程名单的通知-国际合作与交流处",
-      "chars": 1332
+      "title": "关于公示认定2025年校级来华留学全英文授课  一流本科课程名单的通知-国际合作与交流处",
+      "chars": 3059
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/lxsy/qzsx.htm",
+      "title": "签证手续-国际合作与交流处",
+      "chars": 2773
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+      "title": "2026-2027年重庆工商大学教育部重庆市人民政府来华留学联合奖学金-国际合作与交流处",
+      "chars": 14819
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1092770214&wbfileid=5107440",
+      "title": null,
+      "chars": 16000
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/zsjz.htm",
+      "title": "招生简章-国际合作与交流处",
+      "chars": 3051
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/lxsjxj.htm",
+      "title": "管理规定-国际合作与交流处",
+      "chars": 2846
+    },
+    {
+      "url": "https://interoffice2014.ctbu.edu.cn/lxgsd/lxsh.htm",
+      "title": "校园生活-国际合作与交流处",
+      "chars": 2640
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/info/1062/4845.htm",
       "title": "关于拟推荐古丽米热·穆哈买买提同学申请留基委匈牙利互换奖学金（学位生）项目的公示-国际合作与交流处",
-      "chars": 1242
+      "chars": 3009
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/gjhzyjl.htm",
       "title": "国际合作与交流-国际合作与交流处",
-      "chars": 1220
+      "chars": 3596
     },
     {
       "url": "https://interoffice2014.ctbu.edu.cn/gjhzyjl/gjhy.htm",
       "title": "国际会议-国际合作与交流处",
-      "chars": 822
+      "chars": 2620
     }
   ],
   "db_row": {
@@ -630,43 +338,30 @@
     "city": "Chongqing",
     "province": "Chongqing",
     "country": "Chine",
-    "department": "International School / 留学生院 (Office of International Cooperation & Exchange)",
-    "emails": [
-      "wshch@ctbu.edu.cn",
-      "ctbulxs@ctbu.edu.cn"
-    ],
-    "phone": "86-23-62769399 (留学生管理科) / 86-23-62775067 (国际交流科)",
+    "department": null,
+    "emails": [],
+    "phone": null,
     "wechat": null,
-    "website": "https://interoffice2014.ctbu.edu.cn",
-    "majors": [
-      "business",
-      "economics",
-      "finance",
-      "computer_science",
-      "engineering",
-      "chinese_language"
-    ],
+    "website": "https://interoffice2014.ctbu.edu.cn/lxgsd.htm",
+    "majors": [],
     "required_documents": [
       "passport",
-      "high_school_diploma",
-      "bachelor_degree",
-      "master_degree",
+      "diploma",
       "transcripts",
-      "language_certificate",
-      "csca_score_report",
+      "language_proof",
+      "csca",
       "study_plan",
       "recommendation_letter",
-      "physical_examination",
-      "non_criminal_record",
-      "scholarship_application_form"
+      "physical_exam",
+      "non_criminal_record"
     ],
-    "scholarship_amount": "MoE-CMPG Joint Scholarship (Bourse conjointe Ministère de l'Éducation - Municipalité de Chongqing)",
-    "scholarship_min": 0,
-    "scholarship_max": 0,
-    "min_hsk_level": 4,
+    "scholarship_amount": "MoE-CMPG Joint Scholarship / Chongqing Mayor Scholarship / CTBU President Scholarship",
+    "scholarship_min": null,
+    "scholarship_max": null,
+    "min_hsk_level": null,
     "language_requirements": "HSK 4+ / IELTS 6.5 / TOEFL 85",
-    "tuition_min": 0,
-    "tuition_max": 0,
-    "application_deadline": "1 mars (bourse MoE-CMPG 2026/2027)"
+    "tuition_min": null,
+    "tuition_max": null,
+    "application_deadline": "2026-06-08"
   }
 }

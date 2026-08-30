@@ -8,27 +8,28 @@
       "北语"
     ],
     "website": "https://www.blcu.edu.cn",
-    "international_website": "https://english.blcu.edu.cn",
+    "international_website": "http://admission.blcu.edu.cn/en/main.htm",
     "application_portal_url": "https://apply.blcu.edu.cn"
   },
   "general": {
-    "presentation": "BLCU est l'une des meilleures universités de langues et le plus grand centre mondial d'enseignement du chinois. Sa mission est la diffusion de la langue et de la culture chinoises dans le monde.",
-    "history": "Fondée il y a environ un demi-siècle, BLCU est devenue une université de référence pour les études linguistiques et sinologiques.",
+    "presentation": "Université de référence pour l'enseignement du chinois langue étrangère et des langues étrangères en Chine. Programmes en chinois (principalement) et en anglais pour étudiants internationaux à tous les niveaux.",
+    "history": "Fondée en 1962, longtemps surnommée « Petite ONU » en raison du grand nombre d'étudiants internationaux.",
     "rankings": [
-      "Top language university in China",
-      "Largest Chinese language education center in the world"
+      "Université de référence pour l'enseignement du chinois L2 en Chine"
     ],
     "strengths": [
-      "Enseignement du chinois pour étrangers",
-      "Études sinologiques",
-      "Traduction et interprétation",
-      "Éducation internationale en chinois",
-      "29 Instituts Confucius"
+      "Enseignement du chinois langue étrangère",
+      "Études chinoises et sinologie",
+      "Langues étrangères (plus de 30 langues)",
+      "Études internationales",
+      "Commerce, finance, économie, traduction, informatique"
     ],
     "teaching_languages": [
       "zh",
       "en",
-      "bilingual"
+      "ko",
+      "ja",
+      "ru"
     ],
     "location": {
       "city": "Beijing",
@@ -37,26 +38,21 @@
     },
     "cost_of_living_cny_month": {
       "min": 2500,
-      "max": 4000,
-      "notes": "Allocation mensuelle bourse Chinese+ : 2500 CNY. Coût réel Beijing plus élevé."
+      "max": 4500,
+      "notes": "Estimation pour Pékin, hors loyer"
     },
     "campuses": [
       {
-        "name": "Beijing Campus",
+        "name": "Campus Xueyuanlu",
         "city": "Beijing",
-        "description": "Campus principal, 15 Xueyuan Road, Haidian District"
-      },
-      {
-        "name": "Hainan International College",
-        "city": "Hainan",
-        "description": "Campus secondaire dans le cadre du programme 'One University, Two Campuses'"
+        "description": "Campus principal, 15 rue Xueyuan, district Haidian, Pékin 100083"
       }
     ]
   },
   "programs": [
     {
       "level": "bachelor",
-      "name": "Chinese Language (汉语言)",
+      "name": "汉语言 (Langue chinoise)",
       "field": "chinese_language",
       "language": "zh",
       "duration_years": 4,
@@ -65,11 +61,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "HSK4 ≥180. Inclut方向 sinologie, économie-commerce, bilingue chinois-anglais."
+      "notes": "Entrée HSK4 ≥180"
     },
     {
       "level": "bachelor",
-      "name": "Teaching Chinese to Speakers of Other Languages (汉语国际教育)",
+      "name": "汉语国际教育 (Enseignement du chinois L2)",
       "field": "education",
       "language": "zh",
       "duration_years": 4,
@@ -78,11 +74,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "HSK4 ≥180"
+      "notes": "Entrée HSK5 ≥200 + entretien"
     },
     {
       "level": "bachelor",
-      "name": "International Economics and Trade (国际经济与贸易)",
+      "name": "国际经济与贸易 / 金融学 / 财务管理 / 会计学 / 经济学",
       "field": "business",
       "language": "zh",
       "duration_years": 4,
@@ -91,24 +87,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Avec mineure en chinois. HSK4 ≥180"
+      "notes": "Mode 1+3; entrée HSK4 ≥200, accès HSK5+IELTS 5.5-6"
     },
     {
       "level": "bachelor",
-      "name": "Finance (金融学)",
-      "field": "finance",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        3,
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Avec mineure en chinois. HSK4 ≥180"
-    },
-    {
-      "level": "bachelor",
-      "name": "Translation English-Chinese / Korean-Chinese",
+      "name": "汉语言文学 / 翻译 (英汉、韩汉) / 传播学",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -117,11 +100,11 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "HSK4 ≥180. Bourse Chinese+ : 20000 CNY/an"
+      "notes": "HSK4 ≥180; quelques programmes en anglais disponibles"
     },
     {
       "level": "bachelor",
-      "name": "Computer Science and Technology (计算机科学与技术)",
+      "name": "计算机科学与技术 / 数字媒体技术 / 人工智能",
       "field": "computer_science",
       "language": "zh",
       "duration_years": 4,
@@ -130,37 +113,24 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Modèle 1+3. Entrée : HSK4 ≥200. Spécialisation : HSK5 ≥180 + examen"
+      "notes": "Mode 1+3; HSK4 ≥200 puis HSK5 ≥180 + test"
     },
     {
       "level": "bachelor",
-      "name": "English (英语)",
-      "field": "chinese_language",
-      "language": "zh",
+      "name": "英语 / 商务英语 / 翻译 (汉英法) / 日语 / 朝鲜语 / 阿拉伯语 / 葡萄牙语 / 德语 / 俄语 / 西班牙语 / 意大利语 / 法语",
+      "field": "arts",
+      "language": "bilingual",
       "duration_years": 4,
       "start_months": [
         3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Modèle 1+3. Entrée HSK4 ≥200, spécialisation HSK5 ≥180 + IELTS 6.5/TOEFL 90"
+      "notes": "Mode 1+3; HSK4 ≥200 puis HSK5 180-255 + IELTS/TOEFL"
     },
     {
       "level": "bachelor",
-      "name": "Psychology (心理学)",
-      "field": "sciences",
-      "language": "zh",
-      "duration_years": 4,
-      "start_months": [
-        3,
-        9
-      ],
-      "academic_calendar": "semester",
-      "notes": "Modèle 1+3. Entrée HSK4 ≥200, spécialisation HSK5 ≥180"
-    },
-    {
-      "level": "bachelor",
-      "name": "Painting (绘画)",
+      "name": "绘画 / 书法学 / 音乐学 (国际教育)",
       "field": "arts",
       "language": "zh",
       "duration_years": 4,
@@ -169,112 +139,148 @@
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Modèle 1+3. Entrée HSK4 ≥200, spécialisation HSK5 ≥180 + portfolio + entretien"
+      "notes": "HSK5 ≥180 + portfolio/audition vidéo + entretien"
     },
     {
       "level": "master",
-      "name": "Master's Degree Programs",
+      "name": "Programmes de master (硕士) en chinois et en anglais",
       "field": "other",
       "language": "zh",
-      "duration_years": 3,
+      "duration_years": 2,
       "start_months": [
-        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "12 programmes de niveau master. Programmes en anglais disponibles."
+      "notes": "Voir brochure 2026 sur admission.blcu.edu.cn/zsjz/list.htm"
     },
     {
       "level": "phd",
-      "name": "Doctoral Degree Programs",
+      "name": "Programmes de doctorat (博士) en chinois et en anglais",
       "field": "other",
       "language": "zh",
       "duration_years": 4,
       "start_months": [
-        3,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "4 programmes doctoraux + 1 professionnel (Éducation internationale en chinois)"
+      "notes": "Voir brochure 2026 sur admission.blcu.edu.cn/zsjz/list.htm"
     },
     {
       "level": "language",
-      "name": "Long-term Chinese Language Program",
+      "name": "Cours de chinois long terme (实用中文/汉语进修)",
       "field": "chinese_language",
       "language": "zh",
-      "duration_years": 1,
+      "duration_years": null,
       "start_months": [
-        3,
+        2,
+        7,
         9
       ],
       "academic_calendar": "semester",
-      "notes": "Cours de chinois tous niveaux, présentiel ou en ligne. Frais : 25800 CNY/an"
+      "notes": "En présentiel et en ligne; 1 semestre 13 000 CNY (4h/jour)"
+    },
+    {
+      "level": "language",
+      "name": "Cours de chinois court terme (实用中文速成)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "academic_calendar": "other",
+      "notes": "4 sem 4 000 CNY; 1 sem (2h/jour) 8 500 CNY"
     }
   ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "Diplôme de fin d'études secondaires ou équivalent",
+      "academic": "Diplôme de fin d'études secondaires (lycée) ou équivalent, non-Chinois titulaire d'un passeport étranger valide",
       "min_gpa": null,
       "age_max": 55,
       "age_min": 18,
       "hsk_level": 4,
       "hsk_score_min": 180,
-      "ielts_min": 5.5,
-      "toefl_min": 90,
-      "preparatory_if_insufficient": "Programme préparatoire 1 an (modèle 1+3) avec cours intensifs de chinois",
+      "ielts_min": null,
+      "toefl_min": null,
+      "preparatory_if_insufficient": "Année préparatoire « 1+3 » avec chinois intensif possible (1 an) avant d'intégrer la majeure; HSK4 ≥200 à l'entrée",
       "other": [
-        "Passeport étranger valide",
-        "Lettre de recommandation",
-        "Frais de dossier 800 CNY non remboursables",
-        "Garant avec pièce d'identité"
+        "Passeport valide (≥4 ans pour anciens citoyens chinois)",
+        "Lettre de recommandation en chinois/anglais",
+        "Relevés de notes lycée traduits et légalisés",
+        "Certificat HSK pour filière chinoise",
+        "Certificat IELTS/TOEFL pour anglais",
+        "Frais d'inscription 800 CNY non remboursables",
+        "Garant (pièce d'identité)",
+        "Documents spécifiques selon majeure (portfolio, audition, essai)"
       ]
     },
     "master": {
-      "academic": "Licence/Bachelor ou équivalent",
+      "academic": "Diplôme de licence (bac+3 ou équivalent), non-Chinois avec passeport étranger valide",
       "min_gpa": null,
-      "age_max": 35,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Exigences spécifiques selon le programme",
-        "Frais de dossier 800 CNY"
+        "Diplôme licence + relevés traduits",
+        "Plan d'études / proposition de recherche",
+        "2 lettres de recommandation (professeurs)",
+        "HSK5 ≥180 pour programmes en chinois",
+        "IELTS/TOEFL pour programmes en anglais",
+        "CV, lettre de motivation",
+        "Voir brochure officielle 2026"
       ]
     },
     "phd": {
-      "academic": "Master ou équivalent",
+      "academic": "Diplôme de master (bac+5 ou équivalent), non-Chinois avec passeport étranger valide",
       "min_gpa": null,
-      "age_max": 40,
+      "age_max": null,
       "age_min": null,
-      "hsk_level": null,
-      "hsk_score_min": null,
+      "hsk_level": 5,
+      "hsk_score_min": 180,
       "ielts_min": null,
       "toefl_min": null,
       "preparatory_if_insufficient": null,
       "other": [
-        "Exigences spécifiques selon le programme",
-        "Frais de dossier 800 CNY"
+        "Diplôme master + relevés traduits",
+        "Proposition de recherche détaillée",
+        "2 lettres de recommandation de professeurs",
+        "Accord d'un directeur de thèse BLCU",
+        "HSK5 ≥180 pour programmes en chinois",
+        "Publications éventuelles",
+        "CV, lettre de motivation"
       ]
     },
     "language": {
-      "academic": "Aucun diplôme spécifique requis",
+      "academic": "Ouvert aux étrangers titulaires d'un passeport valide; aucun diplôme spécifique requis",
       "age_max": null,
       "other": [
-        "Cours disponibles toute l'année",
-        "Frais d'inscription 300 CNY pour cours en ligne"
+        "Passeport valide",
+        "Frais d'inscription 300 CNY (non remboursables)",
+        "Paiement via portail admission.blcu.edu.cn ou virement bancaire"
       ]
     }
   },
   "contacts": {
-    "office_name": "Office of International Students Admissions and Affairs",
-    "iso_email": "scholarship@blcu.edu.cn",
-    "admissions_email": "zhaosh2@blcu.edu.cn",
-    "wechat": "",
-    "phone": "86-10-82303951",
-    "address": "Room 102, Comprehensive Building, 15 Xueyuan Road, Haidian District, Beijing 100083, P.R. China"
+    "office_name": "北京语言大学国际学生招生处 (Bureau des admissions des étudiants internationaux)",
+    "iso_email": "iso@blcu.edu.cn",
+    "admissions_email": "zhaosh1@blcu.edu.cn (licence) / zhaosh2@blcu.edu.cn (cours chinois ordinaires) / zhaosh5@blcu.edu.cn (cours annuel)",
+    "wechat": "Compte officiel accessible via QR code sur admission.blcu.edu.cn",
+    "phone": "86-10-82303951 / 82303088 / 82303086",
+    "address": "Salle B102, Nouveau Bâtiment intégré, 15 rue Xueyuan, district Haidian, Pékin 100083, Chine"
   },
   "matching": {
     "fields": [
@@ -282,14 +288,14 @@
       "business",
       "economics",
       "finance",
-      "computer_science",
-      "engineering",
-      "sciences",
       "arts",
       "design",
       "music",
-      "law",
+      "computer_science",
+      "engineering",
+      "sciences",
       "education",
+      "law",
       "other"
     ],
     "degrees": [
@@ -310,162 +316,136 @@
     "min_ielts": 5.5,
     "min_toefl": 90,
     "age_max_bachelor": 55,
-    "age_max_master": 35,
-    "age_max_phd": 40,
+    "age_max_master": null,
+    "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
     "has_provincial_scholarship": true,
-    "tuition_cny_min": 20000,
-    "tuition_cny_max": 25800,
-    "housing_cny_year_min": null,
-    "deadline_typical": "15 juillet (septembre) / 15 janvier (mars)",
+    "tuition_cny_min": 13000,
+    "tuition_cny_max": 30000,
+    "housing_cny_year_min": 8000,
+    "deadline_typical": "15 janvier (entrée mars) / 28 juillet (entrée septembre)",
     "intake_months": [
+      2,
       3,
+      7,
       9
     ],
     "city": "Beijing",
     "province": "Beijing",
     "tags": [
-      "langue chinoise",
-      "sinologie",
-      "traduction",
-      "Institut Confucius",
-      "programme préparatoire",
-      "bourse CSC",
-      "bourse Beijing",
-      "bourse BLCU",
-      "campus Hainan",
-      "programme 1+3"
+      "Petite ONU",
+      "#1 enseignement chinois L2",
+      "programmes 1+3",
+      "bourses CSC, provinciale, BLCU, ICCS, New Sinology",
+      "programmes présentiel et en ligne"
     ]
   },
-  "confidence": 0.85,
+  "confidence": 0.78,
   "missing_fields": [
-    "min_gpa précis",
-    "frais de logement détaillés",
-    "coût de la vie exact",
-    "frais de scolarité master/PhD",
-    "classements internationaux spécifiques"
+    "frais de scolarité détaillés pour bachelor/master/PhD en présentiel (fournis uniquement pour cours de langue)",
+    "frais de logement exacts à l'année",
+    "ranking QS/Shanghai précis",
+    "informations GPA"
   ],
-  "notes": "BLCU est la référence mondiale pour l'enseignement du chinois aux étrangers. Programmes bachelor principalement en chinois (HSK4 minimum). Programmes master/PhD et certains cours en anglais disponibles. Bourse Chinese+ : 2500 CNY/mois + logement + assurance. Bourse Beijing : couvre uniquement la 1ère année de tuition. Frais bachelor Chinese+ : 20000 CNY/an. Cours de chinois longue durée : 25800 CNY/an. Campus Hainan pour les 2 premières années (bourse).",
+  "notes": "Données extraites du site officiel admission.blcu.edu.cn (2023-2026). BLCU = référence mondiale pour l'enseignement du chinois L2. Frais d'inscription 800 CNY (programmes diplômants) / 300 CNY (cours de langue). Le programme 1+3 (1 an préparatoire + 3 ans de majeure) est la voie principale d'accès aux majeures enseignées avec les étudiants chinois. Bourses disponibles : Gouvernement chinois (CSC), ICCS (International Chinese Language Teachers), Bourse de Pékin, Bourse BLCU, New Sinology Plan. Contact principal pour licence : zhaosh1@blcu.edu.cn. Sources : brochure licence 2023 et listes de brochures master/doctorat 2024-2026.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "candidat",
       "applies_to": [
         "all"
       ],
-      "notes": "Copie de la page photo du passeport en cours de validité"
+      "notes": "Photocopie du passeport étranger ordinaire en cours de validité"
     },
     {
-      "type": "diplome",
+      "type": "high_school_diploma",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "candidat",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Diplôme de fin d'études secondaires (high school) ou preuve de graduation imminente; traduction notarisée en chinois ou anglais si nécessaire"
+      "notes": "Diplôme lycée + relevés de notes complets, traduction notarisée chinois/anglais si autre langue"
     },
     {
-      "type": "releve_notes",
+      "type": "hsk_certificate",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "candidat",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Relevés de notes complets de tous les semestres; traduction notarisée si non en chinois/anglais"
+      "notes": "Niveau HSK variable selon la filière (HSK4 180 ou 200, HSK5 180-200, HSK6 180)"
     },
     {
-      "type": "hsk",
+      "type": "recommendation_letter",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "candidat",
       "applies_to": [
-        "bachelor",
-        "master",
-        "phd"
+        "bachelor"
       ],
-      "notes": "Certificat HSK selon le programme visé (HSK4 180-210 ou HSK5/6 selon spécialité)"
+      "notes": "En chinois ou anglais, signée avec coordonnées du recommandeur"
     },
     {
-      "type": "lettre_recommandation",
+      "type": "application_fee_receipt",
       "required": true,
       "count": 1,
-      "who": "demandeur",
+      "who": "candidat",
       "applies_to": [
         "all"
       ],
-      "notes": "En chinois ou anglais, signée par le recommandeur avec coordonnées valides"
+      "notes": "800 CNY pour bachelor, non remboursable"
     },
     {
-      "type": "recu_frais_dossier",
-      "required": true,
-      "count": 1,
-      "who": "demandeur",
-      "applies_to": [
-        "all"
-      ],
-      "notes": "Reçu de paiement des frais de dossier de 800 CNY (non remboursables)"
-    },
-    {
-      "type": "garant_identité",
+      "type": "guarantor_id",
       "required": true,
       "count": 1,
       "who": "garant",
       "applies_to": [
-        "all"
+        "bachelor"
       ],
-      "notes": "Pièce d'identité valide du garant (passeport, carte d'identité, permis); si garant étranger en Chine, visa valide requis"
+      "notes": "Passeport/CNI/permis; si garant étranger en Chine, visa valide requis"
     },
     {
-      "type": "acte_notarie_tuteur",
+      "type": "pre_graduation_certificate",
       "required": false,
       "count": 1,
-      "who": "tuteur légal",
+      "who": "candidat",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "Requis si le demandeur a moins de 18 ans: certificat notarié de tutelle"
+      "notes": "Pour étudiants encore inscrits au lycée; doit être remplacé par diplôme avant rentrée"
     },
     {
-      "type": "portfolio",
+      "type": "artwork_or_video",
       "required": false,
-      "count": 2,
-      "who": "demandeur",
+      "count": null,
+      "who": "candidat",
       "applies_to": [
         "bachelor"
       ],
-      "notes": "1-2 œuvres pour les arts visuels (peinture, calligraphie); 1-2 vidéos pour musique"
-    },
-    {
-      "type": "hskk",
-      "required": false,
-      "count": 1,
-      "who": "demandeur",
-      "applies_to": [
-        "bachelor"
-      ],
-      "notes": "HSKK niveau intermédiaire 60+ pour la bourse International Chinese Language Teachers"
+      "notes": "1-2 œuvres pour peinture/calligraphie; 1-2 vidéos pour musique"
     }
   ],
   "application": {
-    "platform_name": "BLCU Application System",
+    "platform_name": "BLCU International Student Application System",
     "platform_url": "https://apply.blcu.edu.cn",
     "steps": [
       "Créer un compte sur apply.blcu.edu.cn",
       "Remplir le formulaire en ligne",
-      "Télécharger tous les documents requis",
-      "Payer les frais de dossier de 800 CNY en ligne ou par virement",
+      "Téléverser tous les documents requis",
+      "Payer les frais de dossier 800 CNY en ligne ou par virement",
       "Attendre la vérification par l'université",
-      "Recevoir la notification d'admission par email",
-      "Recevoir la lettre d'admission et le formulaire JW202"
+      "Recevoir notification par email et téléphone",
+      "Recevoir la lettre d'admission et le JW202 par courrier"
     ],
     "opens_at": "",
-    "deadline": "Septembre: 15 juillet; Mars: 12 janvier (pour bourses 2026-2027)",
-    "results_at": "Août (rentrée septembre) ou février (rentrée mars)",
+    "deadline": "2024-01-15 (rentrée mars 2024); 2023-07-28 (rentrée sept 2023)",
+    "results_at": "",
     "intake_months": [
       3,
       9
@@ -473,15 +453,15 @@
     "application_fee_cny": 800,
     "application_fee_refundable": false,
     "payment_methods": [
-      "online",
+      "online_payment",
       "bank_transfer"
     ]
   },
   "fees": {
     "tuition_cny_year": {
       "bachelor": {
-        "min": 20000,
-        "max": 20000
+        "min": null,
+        "max": null
       },
       "master": {
         "min": null,
@@ -492,32 +472,17 @@
         "max": null
       },
       "language": {
-        "min": 2400,
-        "max": 25800
+        "min": 4000,
+        "max": 13000
       },
       "english_taught_premium": null
     },
-    "insurance_cny_year": 800,
+    "insurance_cny_year": null,
     "other_fees": [
       {
-        "name": "Frais de dossier",
-        "amount_cny": 800,
-        "notes": "Non remboursables"
-      },
-      {
-        "name": "Cours de chinois en ligne (année)",
-        "amount_cny": 25800,
-        "notes": "20h/semaine"
-      },
-      {
-        "name": "Cours de chinois en ligne (semestre)",
-        "amount_cny": 13000,
-        "notes": "4h/jour"
-      },
-      {
-        "name": "Cours de chinois en ligne (4 semaines)",
-        "amount_cny": 4000,
-        "notes": ""
+        "name": "frais_dossier_cours_ligne",
+        "amount_cny": 300,
+        "notes": "Non remboursable, cours chinois en ligne"
       }
     ],
     "housing": {
@@ -525,17 +490,7 @@
         {
           "type": "double",
           "price_cny_year": null,
-          "included": "Pour boursiers: gratuit (campus Hainan années 1-2, Beijing années 3-4)"
-        },
-        {
-          "type": "quad",
-          "price_cny_year": null,
-          "included": "Pour boursiers undergraduates années 3-4 et scholars"
-        },
-        {
-          "type": "triple",
-          "price_cny_year": null,
-          "included": "Pour masters boursiers (seconde moitié)"
+          "included": ""
         }
       ],
       "deposit_cny": null,
@@ -545,130 +500,78 @@
       "food": null,
       "transport": null,
       "other": null,
-      "notes": "Allocation mensuelle pour boursiers: 2500 CNY/mois"
+      "notes": ""
     }
   },
   "scholarships": [
     {
-      "name": "CSC Scholarship (中国政府奖学金)",
+      "name": "Bourse du gouvernement chinois (CSC)",
       "type": "csc",
       "coverage": "full",
       "covers": [
         "tuition",
         "housing",
-        "insurance",
-        "stipend"
+        "stipend",
+        "insurance"
       ],
-      "stipend_cny_month": 2500,
-      "conditions": "Excellents résultats académiques, selon programme CSC",
-      "apply_via": "csc",
+      "stipend_cny_month": null,
+      "conditions": "Postuler via ambassade de Chine (bilatéral), programme de haut niveau, Route de la Soie, ChinaLink, école d'été internationale",
+      "apply_via": "embassy_or_university",
       "deadline": "",
-      "renewal": "Évaluation annuelle"
+      "renewal": "Annuelle selon résultats"
     },
     {
-      "name": "Beijing International Students Scholarship",
-      "type": "university",
+      "name": "Bourse internationale pour enseignants de chinois",
+      "type": "institutional",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour futurs enseignants de chinois; programme régulier et programme 'Chinois+' bachelor",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Plan Nouvelle Sinologie",
+      "type": "institutional",
+      "coverage": "full",
+      "covers": [
+        "tuition",
+        "housing",
+        "stipend"
+      ],
+      "stipend_cny_month": null,
+      "conditions": "Pour doctorants en sinologie",
+      "apply_via": "university",
+      "deadline": "",
+      "renewal": ""
+    },
+    {
+      "name": "Bourse de la municipalité de Pékin pour étudiants étrangers",
+      "type": "institutional",
       "coverage": "partial",
       "covers": [
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Non-Chinois, sans casier judiciaire, bonne santé; bachelor ≤30 ans, master ≤35 ans, doctorat ≤40 ans (au 1er sept. 2026). Couvre uniquement la 1ère année de tuition",
-      "apply_via": "university",
-      "deadline": "15 juillet 2026 (sept.) ou 12 janvier 2027 (mars)",
-      "renewal": "Non renouvelable automatiquement"
-    },
-    {
-      "name": "BLCU International Chinese Language Teachers Scholarship (Chinese+ Undergraduate)",
-      "type": "institutional",
-      "coverage": "full",
-      "covers": [
-        "housing",
-        "insurance",
-        "stipend"
-      ],
-      "stipend_cny_month": 2500,
-      "conditions": "HSK4 ≥210, HSKK intermédiaire ≥60, <25 ans au 1er sept. 2026. Tuition (20000 CNY/an) à charge de l'étudiant",
-      "apply_via": "cis.chinese.cn",
-      "deadline": "5 mai 2026",
-      "renewal": "Évaluation annuelle"
-    },
-    {
-      "name": "Bilateral Program",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "insurance",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Selon accord bilatéral entre la Chine et le pays d'origine",
-      "apply_via": "embassy",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "Silk Road Program",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "insurance",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Pour étudiants des pays de la Route de la Soie",
+      "conditions": "Étudiants étrangers à Pékin",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
     },
     {
-      "name": "High Level Postgraduate Program",
-      "type": "csc",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "insurance",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Pour masters et doctorants de haut niveau",
-      "apply_via": "university",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "CI Scholarship (国际中文教师奖学金)",
+      "name": "Bourse BLCU pour étudiants internationaux",
       "type": "institutional",
-      "coverage": "full",
+      "coverage": "partial",
       "covers": [
-        "tuition",
-        "housing",
-        "insurance",
-        "stipend"
+        "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "Pour futurs enseignants de chinois, via Instituts Confucius",
-      "apply_via": "cis.chinese.cn",
-      "deadline": "",
-      "renewal": ""
-    },
-    {
-      "name": "Neo-Sinology Program (新汉学计划)",
-      "type": "institutional",
-      "coverage": "full",
-      "covers": [
-        "tuition",
-        "housing",
-        "insurance",
-        "stipend"
-      ],
-      "stipend_cny_month": null,
-      "conditions": "Pour chercheurs en sinologie",
+      "conditions": "Attribuée par l'université",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -682,12 +585,12 @@
     "toefl_min": 90,
     "preparatory_chinese": {
       "available": true,
-      "duration": "1 an",
+      "duration": "1 an (préparatoire) puis 3 ans de spécialisation en mode 1+3",
       "leads_to_degree": true
     },
     "foundation": {
       "available": true,
-      "description": "Programme préparatoire 1+3: 1 an de chinois intensif puis 3 ans de spécialité. HSK4 200 requis à l'entrée, HSK5 180-255 selon spécialité pour entrer en专业课"
+      "description": "Programme 1+3: 1 an de chinois intensif + cours généraux, puis entrée en spécialisation (HSK5 180-200 selon filière)"
     }
   },
   "visa": {
@@ -697,92 +600,115 @@
       "F"
     ],
     "documents_from_university": [
-      "Admission Notice",
-      "Formulaire JW202",
-      "Visa Application Form"
+      "lettre_d_admission",
+      "formulaire_JW202",
+      "formulaire_JW201"
     ],
-    "instructions": "Visa X1 pour études >6 mois, X2 pour <6 mois. Le bureau des étudiants internationaux aide pour les démarches",
-    "arrival_and_residence_permit": "Permis de résidence requis pour séjour >6 mois, à obtenir dans les 30 jours après arrivée auprès du bureau de sécurité publique local"
+    "instructions": "L'université émet la lettre d'admission et les formulaires JW202/JW201 nécessaires au visa étudiant X1 (>180 jours) ou X2 (<180 jours). Cours en ligne: pas de visa.",
+    "arrival_and_residence_permit": "Permis de résidence à demander dans les 30 jours suivant l'arrivée au bureau de sécurité publique local"
   },
   "housing_and_services": {
     "housing_types": [
-      "Chambre double (twin)",
-      "Chambre triple",
-      "Chambre quadruple"
+      "chambre_double_campus"
     ],
-    "rules": "Campus Hainan pour les 2 premières années (boursiers undergraduates), puis Beijing. Voir règlement de logement sur admission.blcu.edu.cn",
-    "international_office": "Office of International Students Admissions and Affairs, Room 102, Comprehensive Building, 15 Xueyuan Road, Haidian District, Beijing. Tel: 86-10-82303951, Email: scholarship@blcu.edu.cn",
-    "orientation": "Programme d'orientation pour nouveaux étudiants internationaux",
+    "rules": "",
+    "international_office": "Bureau des étudiants internationaux, Bâtiment B102, 15 Xueyuan Road, Haidian, Beijing 100083; zhaosh1@blcu.edu.cn; +86-10-82303951/82303088/82303086",
+    "orientation": "",
     "english_support": true,
-    "clubs": "World Culture Festival, clubs étudiants internationaux"
+    "clubs": ""
   },
   "country_specific": [
     {
-      "region_or_country": "Tous",
-      "notes": "Les résidents de Chine continentale, Hong Kong, Macao ou Taïwan ayant immigré et acquis une nationalité étrangère doivent détenir un passeport étranger depuis ≥4 ans et avoir résidé à l'étranger ≥2 ans dans les 4 dernières années"
+      "region_or_country": "all",
+      "notes": "Les candidats dont un parent est citoyen chinois doivent détenir un passeport étranger valide depuis au moins 4 ans ET avoir résidé à l'étranger au moins 2 ans durant les 4 dernières années (jusqu'au 30 avril de l'année d'inscription)"
     }
   ],
   "scan_status": "ok",
   "slug": "blcu",
-  "scraped_at": "2026-08-24T14:27:28.462Z",
+  "scraped_at": "2026-08-30T11:06:19.108Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 11,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://admission.blcu.edu.cn/main.htm",
       "title": "北语留学网",
-      "chars": 1583
+      "chars": 4559
     },
     {
       "url": "https://admission.blcu.edu.cn/",
       "title": "北语留学网",
-      "chars": 1583
-    },
-    {
-      "url": "https://english.blcu.edu.cn/",
-      "title": "Beijing Language and Culture University",
-      "chars": 4061
-    },
-    {
-      "url": "https://admission.blcu.edu.cn/en/98/list.htm",
-      "title": "Beijing International Students Scholarship",
-      "chars": 5207
-    },
-    {
-      "url": "https://admission.blcu.edu.cn/en/8/list.htm",
-      "title": "UNDERGRADUATE",
-      "chars": 4370
-    },
-    {
-      "url": "https://admission.blcu.edu.cn/en/2025/1120/c1148a3023/page.htm",
-      "title": "2026 BLCU International Chinese Language Teachers Scholarship “Chinese +” Undergraduate Program Application Guide",
-      "chars": 9387
+      "chars": 4559
     },
     {
       "url": "https://admission.blcu.edu.cn/2023/0914/c1558a2581/page.htm",
       "title": "2023 Online Chinese Language Program",
-      "chars": 5248
-    },
-    {
-      "url": "https://admission.blcu.edu.cn/2023/0914/c1558a2582/page.htm",
-      "title": "本科招生简章",
-      "chars": 3883
+      "chars": 9392
     },
     {
       "url": "https://admission.blcu.edu.cn/2023/0914/c1558a2580/page.htm",
       "title": "学习签证全面放开，欢迎来北语学习！",
-      "chars": 869
+      "chars": 4133
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2023/0914/c1558a2582/page.htm",
+      "title": "本科招生简章",
+      "chars": 7414
     },
     {
       "url": "https://admission.blcu.edu.cn/2017/0829/c1558a2584/page.htm",
       "title": "北京语言大学国际学生招生宣传片",
-      "chars": 823
+      "chars": 3900
     },
     {
-      "url": "https://english.blcu.edu.cn/ad/Featured_Programs.htm",
-      "title": "Featured Programs-Beijing Language and Culture University",
-      "chars": 6092
+      "url": "https://admission.blcu.edu.cn/zsjz/list.htm",
+      "title": "招生简章",
+      "chars": 5172
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2017/0830/c1389a692/page.psp",
+      "title": "提示信息",
+      "chars": 114
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/96/list.htm",
+      "title": "国际中文教师奖学金",
+      "chars": 4663
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2026/0116/c1621a3041/page.htm",
+      "title": "北京语言大学2026年来华留学博士研究生招生简章",
+      "chars": 4185
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2025/1020/c1621a2996/page.htm",
+      "title": "北京语言大学2026年来华留学硕士研究生招生简章",
+      "chars": 4237
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2025/0127/c1621a2922/page.htm",
+      "title": "北京语言大学2025年来华留学博士研究生招生简章",
+      "chars": 12905
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2024/1028/c1621a2823/page.htm",
+      "title": "北京语言大学2025年来华留学硕士研究生招生简章",
+      "chars": 9827
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2024/0103/c1621a2705/page.htm",
+      "title": "北京语言大学2024年来华留学硕士研究生招生简章",
+      "chars": 9934
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2024/0103/c1621a2704/page.htm",
+      "title": "北京语言大学2024年来华留学博士研究生招生简章",
+      "chars": 8946
+    },
+    {
+      "url": "https://admission.blcu.edu.cn/2025/1120/c1325a3021/page.htm",
+      "title": "2026年北京语言大学国际中文教师奖学金 “中文＋”类本科项目招生简章",
+      "chars": 6799
     }
   ],
   "db_row": {
@@ -793,45 +719,44 @@
     "city": "Beijing",
     "province": "Beijing",
     "country": "Chine",
-    "department": "Office of International Students Admissions and Affairs",
+    "department": "北京语言大学国际学生招生处 (Bureau des admissions des étudiants internationaux)",
     "emails": [
-      "scholarship@blcu.edu.cn",
-      "zhaosh2@blcu.edu.cn"
+      "iso@blcu.edu.cn",
+      "zhaosh1@blcu.edu.cn (licence) / zhaosh2@blcu.edu.cn (cours chinois ordinaires) / zhaosh5@blcu.edu.cn (cours annuel)"
     ],
-    "phone": "86-10-82303951",
-    "wechat": null,
-    "website": "https://english.blcu.edu.cn",
+    "phone": "86-10-82303951 / 82303088 / 82303086",
+    "wechat": "Compte officiel accessible via QR code sur admission.blcu.edu.cn",
+    "website": "http://admission.blcu.edu.cn/en/main.htm",
     "majors": [
       "chinese_language",
       "business",
       "economics",
       "finance",
-      "computer_science",
-      "engineering",
-      "sciences",
       "arts",
       "design",
       "music",
-      "law",
+      "computer_science",
+      "engineering",
+      "sciences",
       "education",
+      "law",
       "other"
     ],
     "required_documents": [
       "passport",
-      "diplome",
-      "releve_notes",
-      "hsk",
-      "lettre_recommandation",
-      "recu_frais_dossier",
-      "garant_identité"
+      "high_school_diploma",
+      "hsk_certificate",
+      "recommendation_letter",
+      "application_fee_receipt",
+      "guarantor_id"
     ],
-    "scholarship_amount": "CSC Scholarship (中国政府奖学金) / Beijing International Students Scholarship / BLCU International Chinese Language Teachers Scholarship (Chinese+ Undergraduate) / Bilateral Program / Silk Road Program / High Level Postgraduate Program / CI Scholarship (国际中文教师奖学金) / Neo-Sinology Program (新汉学计划)",
-    "scholarship_min": 20000,
-    "scholarship_max": 25800,
+    "scholarship_amount": "Bourse du gouvernement chinois (CSC) / Bourse internationale pour enseignants de chinois / Plan Nouvelle Sinologie / Bourse de la municipalité de Pékin pour étudiants étrangers / Bourse BLCU pour étudiants internationaux",
+    "scholarship_min": 13000,
+    "scholarship_max": 30000,
     "min_hsk_level": 4,
     "language_requirements": "HSK 4+ / IELTS 5.5 / TOEFL 90",
-    "tuition_min": 20000,
-    "tuition_max": 25800,
-    "application_deadline": "15 juillet (septembre) / 15 janvier (mars)"
+    "tuition_min": 13000,
+    "tuition_max": 30000,
+    "application_deadline": "15 janvier (entrée mars) / 28 juillet (entrée septembre)"
   }
 }

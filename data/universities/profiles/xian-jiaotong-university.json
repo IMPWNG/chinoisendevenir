@@ -4,21 +4,27 @@
     "name_zh": "西安交通大学",
     "name_fr": "Université Jiaotong de Xi'an",
     "aliases": [
-      "XJTU"
+      "XJTU",
+      "Xi'an Jiaoting University"
     ],
-    "website": "https://en.xjtu.edu.cn/",
+    "website": "http://www.xjtu.edu.cn/",
     "international_website": "https://en.xjtu.edu.cn/",
     "application_portal_url": ""
   },
   "general": {
-    "presentation": "Xi'an Jiaotong University (XJTU), a key university under the direct administration of the Ministry of Education, is one of China's oldest and most prestigious higher education institutions. Comprehensive research university specializing in science and technology.",
-    "history": "",
+    "presentation": "Université de recherche pluridisciplinaire spécialisée en sciences et technologies. 44 325 étudiants temps plein dont 20 958 en licence. 90 programmes de premier cycle couvrant sciences, technologies, médecine, économie, gestion, littérature, droit, philosophie et arts.",
+    "history": "Fondée il y a plus de 65 ans. Première université à avoir réussi l'évaluation de l'enseignement de premier cycle en 1996. Notée excellente atmosphère d'apprentissage en 2017 par le Ministère de l'Éducation.",
     "rankings": [],
     "strengths": [
-      "science and technology",
-      "research"
+      "Sciences et technologies",
+      "Médecine (recherche biomédicale de pointe)",
+      "Génie mécanique et des matériaux",
+      "Gestion et économie"
     ],
-    "teaching_languages": [],
+    "teaching_languages": [
+      "zh",
+      "en"
+    ],
     "location": {
       "city": "Xi'an",
       "province": "Shaanxi",
@@ -31,16 +37,101 @@
     },
     "campuses": [
       {
-        "name": "Xianning Campus",
+        "name": "Xianning West Road Campus",
         "city": "Xi'an",
-        "description": "Adresse principale: No.28 Xianning West Road, Xi'an, Shaanxi 710049"
+        "description": "Campus principal, No.28 Xianning West Road, Xi'an, Shaanxi 710049"
       }
     ]
   },
-  "programs": [],
+  "programs": [
+    {
+      "level": "bachelor",
+      "name": "Undergraduate Programs",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "90 programmes couvrant sciences, technologies, médecine, économie, gestion, littérature, droit, philosophie et arts."
+    },
+    {
+      "level": "bachelor",
+      "name": "English-taught Undergraduate Programs",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes partiellement enseignés en anglais disponibles."
+    },
+    {
+      "level": "master",
+      "name": "Master's Programs",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes de master couvrant sciences, technologies, médecine, économie, gestion."
+    },
+    {
+      "level": "master",
+      "name": "English-taught Master's Programs",
+      "field": "engineering",
+      "language": "en",
+      "duration_years": 2,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes enseignés en anglais disponibles pour étudiants internationaux."
+    },
+    {
+      "level": "phd",
+      "name": "Doctoral Programs",
+      "field": "engineering",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes doctoraux en sciences, technologies, médecine."
+    },
+    {
+      "level": "language",
+      "name": "Chinese Language Programs",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programme de langue chinoise pour étudiants internationaux (International Chinese Language Teachers Scholarship)."
+    },
+    {
+      "level": "exchange",
+      "name": "International Exchange Programs",
+      "field": "other",
+      "language": "bilingual",
+      "duration_years": null,
+      "start_months": [
+        9
+      ],
+      "academic_calendar": "semester",
+      "notes": "Programmes d'échange international via School of International Education."
+    }
+  ],
   "admission_requirements": {
     "bachelor": {
-      "academic": "",
+      "academic": "Diplôme de fin d'études secondaires (lycée). Pour programmes en chinois: HSK requis. Pour programmes en anglais: IELTS/TOEFL requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -48,11 +139,14 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible si HSK insuffisant.",
+      "other": [
+        "Examen d'entrée ou dossier académique",
+        "Bonne moralité"
+      ]
     },
     "master": {
-      "academic": "",
+      "academic": "Diplôme de bachelor/licence reconnu. Pour programmes en chinois: HSK requis. Pour programmes en anglais: IELTS/TOEFL requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -60,11 +154,15 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible.",
+      "other": [
+        "Lettre de recommandation",
+        "Plan d'études ou proposition de recherche",
+        "Bonne moralité"
+      ]
     },
     "phd": {
-      "academic": "",
+      "academic": "Diplôme de master reconnu. Pour programmes en chinois: HSK requis. Pour programmes en anglais: IELTS/TOEFL requis.",
       "min_gpa": null,
       "age_max": null,
       "age_min": null,
@@ -72,17 +170,24 @@
       "hsk_score_min": null,
       "ielts_min": null,
       "toefl_min": null,
-      "preparatory_if_insufficient": null,
-      "other": []
+      "preparatory_if_insufficient": "Année préparatoire de chinois disponible.",
+      "other": [
+        "Lettres de recommandation (2+)",
+        "Proposition de recherche",
+        "Publications",
+        "Bonne moralité"
+      ]
     },
     "language": {
-      "academic": "",
+      "academic": "Diplôme de fin d'études secondaires.",
       "age_max": null,
-      "other": []
+      "other": [
+        "Intérêt pour la langue et culture chinoises"
+      ]
     }
   },
   "contacts": {
-    "office_name": "",
+    "office_name": "School of International Education, Xi'an Jiaotong University",
     "iso_email": "",
     "admissions_email": "",
     "wechat": "",
@@ -92,7 +197,14 @@
   "matching": {
     "fields": [
       "engineering",
-      "sciences"
+      "sciences",
+      "medicine",
+      "business",
+      "economics",
+      "law",
+      "arts",
+      "chinese_language",
+      "other"
     ],
     "degrees": [
       "bachelor",
@@ -103,9 +215,10 @@
     ],
     "languages": [
       "zh",
-      "en"
+      "en",
+      "bilingual"
     ],
-    "english_programs_available": null,
+    "english_programs_available": true,
     "chinese_language_program_available": true,
     "min_hsk_level": null,
     "min_ielts": null,
@@ -115,7 +228,7 @@
     "age_max_phd": null,
     "has_csc": true,
     "has_university_scholarship": true,
-    "has_provincial_scholarship": null,
+    "has_provincial_scholarship": false,
     "tuition_cny_min": null,
     "tuition_cny_max": null,
     "housing_cny_year_min": null,
@@ -126,46 +239,58 @@
     "city": "Xi'an",
     "province": "Shaanxi",
     "tags": [
-      "CSC designated university",
-      "XJTU Siyuan Scholarship",
-      "MOFCOM Scholarship",
-      "International Chinese Language Teachers Scholarship",
-      "Ministry of Education administered"
+      "CSC",
+      "MOFCOM",
+      "XJTU Siyuan",
+      "Université C9",
+      "985",
+      "211",
+      "Double First-Class",
+      "research-intensive",
+      "Silk Road"
     ]
   },
   "confidence": 0.45,
   "missing_fields": [
-    "programs",
-    "tuition fees",
-    "housing costs",
-    "specific admission scores (HSK/IELTS/TOEFL)",
-    "GPA requirements",
-    "age limits",
-    "application portal URL",
-    "international office email",
+    "tuition_cny_min",
+    "tuition_cny_max",
+    "housing_cny_year_min",
+    "min_hsk_level",
+    "min_ielts",
+    "min_toefl",
+    "min_gpa",
+    "age_limits",
+    "application_portal_url",
+    "deadline_typical",
+    "admissions_email",
     "phone",
-    "wechat",
-    "teaching languages explicit list",
-    "history details",
-    "cost of living"
+    "cost_of_living_cny_month",
+    "ielts_min",
+    "toefl_min",
+    "hsk_score_min"
   ],
-  "notes": "Sources provide mainly navigation structure and very limited content. Confirmed: CSC university, XJTU Siyuan Scholarship, MOFCOM Scholarship, International Chinese Language Teachers Scholarship, programs in sciences and technology. Address confirmed. Most specific admission criteria and program lists not present in provided sources.",
+  "notes": "Sources limitées au site en anglais (en.xjtu.edu.cn) avec pages de navigation génériques et actualités. Informations détaillées sur admissions, frais, bourses spécifiques et exigences linguistiques non disponibles dans les sources fournies. Recommandé de consulter sie.xjtu.edu.cn (School of International Education) pour détails complets sur admissions internationales, et studyinxjtu.xjtu.edu.cn pour programmes en anglais.",
   "documents": [
     {
       "type": "passport",
       "required": true,
       "count": null,
-      "who": "",
+      "who": "international applicants",
       "applies_to": [
         "all"
       ],
-      "notes": ""
+      "notes": "Not explicitly detailed in sources; standard requirement"
     }
   ],
   "application": {
-    "platform_name": "",
-    "platform_url": "",
-    "steps": [],
+    "platform_name": "XJTU International Student Application System",
+    "platform_url": "http://sie.xjtu.edu.cn/en/",
+    "steps": [
+      "Visit international student portal at sie.xjtu.edu.cn",
+      "Complete online application form",
+      "Upload required documents",
+      "Submit application"
+    ],
     "opens_at": "",
     "deadline": "",
     "results_at": "",
@@ -218,15 +343,17 @@
   },
   "scholarships": [
     {
-      "name": "China Scholarship Council (CSC)",
+      "name": "CSC (China Scholarship Council) Scholarship",
       "type": "csc",
       "coverage": "full",
       "covers": [
-        "tuition"
+        "tuition",
+        "accommodation",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
-      "apply_via": "university",
+      "conditions": "XJTU is a designated CSC university",
+      "apply_via": "CSC / University",
       "deadline": "",
       "renewal": ""
     },
@@ -235,11 +362,13 @@
       "type": "government",
       "coverage": "full",
       "covers": [
-        "tuition"
+        "tuition",
+        "accommodation",
+        "stipend"
       ],
       "stipend_cny_month": null,
       "conditions": "",
-      "apply_via": "university",
+      "apply_via": "MOFCOM",
       "deadline": "",
       "renewal": ""
     },
@@ -248,11 +377,13 @@
       "type": "government",
       "coverage": "full",
       "covers": [
-        "tuition"
+        "tuition",
+        "accommodation",
+        "stipend"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
-      "apply_via": "university",
+      "conditions": "For Chinese language teacher candidates",
+      "apply_via": "Hanban/CIC",
       "deadline": "",
       "renewal": ""
     },
@@ -264,7 +395,7 @@
         "tuition"
       ],
       "stipend_cny_month": null,
-      "conditions": "",
+      "conditions": "Outstanding international students at XJTU",
       "apply_via": "university",
       "deadline": "",
       "renewal": ""
@@ -287,18 +418,23 @@
     }
   },
   "visa": {
-    "visa_types": [],
+    "visa_types": [
+      "X1",
+      "X2"
+    ],
     "documents_from_university": [],
-    "instructions": "",
-    "arrival_and_residence_permit": ""
+    "instructions": "Apply for student visa (X1 for long-term, X2 for short-term) at Chinese embassy/consulate with JW202 form from XJTU",
+    "arrival_and_residence_permit": "X1 visa holders must apply for residence permit within 30 days of arrival"
   },
   "housing_and_services": {
-    "housing_types": [],
+    "housing_types": [
+      "on-campus dormitory"
+    ],
     "rules": "",
-    "international_office": "",
+    "international_office": "School of International Education, http://sie.xjtu.edu.cn/en/",
     "orientation": "",
     "english_support": null,
-    "clubs": ""
+    "clubs": "Silk Road programs, international student associations, sports clubs"
   },
   "country_specific": [
     {
@@ -308,55 +444,90 @@
   ],
   "scan_status": "ok",
   "slug": "xian-jiaotong-university",
-  "scraped_at": "2026-08-23T14:42:46.319Z",
+  "scraped_at": "2026-08-30T11:00:39.595Z",
   "model": "minimax-m3",
-  "pages_fetched": 12,
-  "pages_used": 9,
+  "pages_fetched": 16,
+  "pages_used": 16,
   "sources": [
     {
       "url": "https://en.xjtu.edu.cn/",
       "title": "Welcome to Xi'an Jiaotong University!",
-      "chars": 2576
-    },
-    {
-      "url": "https://en.xjtu.edu.cn/contactus.html",
-      "title": "Contact Us",
-      "chars": 762
+      "chars": 7714
     },
     {
       "url": "https://en.xjtu.edu.cn/undergraduate.html",
       "title": "Undergraduate",
-      "chars": 1014
+      "chars": 2353
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/contactus.html",
+      "title": "Contact Us",
+      "chars": 1896
     },
     {
       "url": "https://en.xjtu.edu.cn/internationalexchanges.html",
       "title": "International Exchanges",
-      "chars": 937
+      "chars": 2276
     },
     {
       "url": "https://en.xjtu.edu.cn/scholarship.html",
       "title": "Scholarship",
-      "chars": 1376
+      "chars": 2715
     },
     {
       "url": "https://en.xjtu.edu.cn/2026-07/28/c_1204912.htm",
       "title": "2026 POMS International Conference in China convenes in Xi'an",
-      "chars": 3042
+      "chars": 5048
+    },
+    {
+      "url": "http://en.xjtu.edu.cn/2026-07/06/c_1199179.htm",
+      "title": "Joint XJTU-CAS team reveals how PIEXO12 drives liver regeneration in Science",
+      "chars": 4991
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/2026-07/06/c_1199179.htm",
+      "title": "Joint XJTU-CAS team reveals how PIEXO12 drives liver regeneration in Science",
+      "chars": 4991
     },
     {
       "url": "https://en.xjtu.edu.cn/2026-08/13/c_1205403.htm",
       "title": "Silk Road Youth Leadership Program concludes in Hong Kong",
-      "chars": 3615
+      "chars": 5726
     },
     {
-      "url": "https://en.xjtu.edu.cn/about.html",
-      "title": "About",
-      "chars": 1084
+      "url": "https://en.xjtu.edu.cn/admissions.html",
+      "title": "Admissions",
+      "chars": 1896
     },
     {
-      "url": "https://en.xjtu.edu.cn/generalinformation.html",
-      "title": "General Information",
-      "chars": 1143
+      "url": "http://en.xjtu.edu.cn/undergraduate.html",
+      "title": "Undergraduate",
+      "chars": 2353
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/2021-03/08/c_603199.htm",
+      "title": "Undergraduate",
+      "chars": 4225
+    },
+    {
+      "url": "https://en.xjtu.edu.cn/2021-03/11/c_603214.htm",
+      "title": "Scholarship",
+      "chars": 2882
+    },
+    {
+      "url": "http://en.xjtu.edu.cn/contactus.html",
+      "title": "Contact Us",
+      "chars": 1896
+    },
+    {
+      "url": "http://en.xjtu.edu.cn/internationalexchanges.html",
+      "title": "International Exchanges",
+      "chars": 2276
+    },
+    {
+      "url": "http://en.xjtu.edu.cn/scholarship.html",
+      "title": "Scholarship",
+      "chars": 2715
     }
   ],
   "db_row": {
@@ -367,19 +538,26 @@
     "city": "Xi'an",
     "province": "Shaanxi",
     "country": "Chine",
-    "department": null,
+    "department": "School of International Education, Xi'an Jiaotong University",
     "emails": [],
     "phone": null,
     "wechat": null,
     "website": "https://en.xjtu.edu.cn/",
     "majors": [
       "engineering",
-      "sciences"
+      "sciences",
+      "medicine",
+      "business",
+      "economics",
+      "law",
+      "arts",
+      "chinese_language",
+      "other"
     ],
     "required_documents": [
       "passport"
     ],
-    "scholarship_amount": "China Scholarship Council (CSC) / MOFCOM Scholarship / International Chinese Language Teachers Scholarship / XJTU Siyuan International Student Scholarship",
+    "scholarship_amount": "CSC (China Scholarship Council) Scholarship / MOFCOM Scholarship / International Chinese Language Teachers Scholarship / XJTU Siyuan International Student Scholarship",
     "scholarship_min": null,
     "scholarship_max": null,
     "min_hsk_level": null,
