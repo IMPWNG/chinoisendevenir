@@ -1,4 +1,4 @@
-export const CALENDAR_TZ = "Europe/Paris";
+export const CALENDAR_TZ = "Asia/Shanghai";
 export const WORK_DAYS = [1, 2, 3, 4, 5];
 export const WORK_START_MINUTES = 9 * 60;
 export const WORK_END_MINUTES = 18 * 60;

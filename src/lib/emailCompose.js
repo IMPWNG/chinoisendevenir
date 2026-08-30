@@ -205,8 +205,8 @@ Règles :
 - Ne pas écrire « Bonjour » ni la signature : le template HTML les ajoute déjà.
 - Paragraphes courts, sans markdown, sans listes à puces markdown.
 - Le bandeau (title) est court. Le sous-titre est optionnel.
-- Fuseau horaire des rendez-vous : ${CALENDAR_TZ}. Écris toujours « heure de Paris » quand tu cites un créneau.
-- Si les notes parlent d'un RDV, appel, visio ou disponibilité : propose 2 à 4 créneaux pris UNIQUEMENT dans creneaux_libres. Cite-les en toutes lettres (ex. mardi 2 septembre de 14h00 à 14h30, heure de Paris). N'invente aucun horaire.
+- Fuseau horaire des rendez-vous : ${CALENDAR_TZ} (heure de Pékin). Écris toujours « heure de Pékin » quand tu cites un créneau.
+- Si les notes parlent d'un RDV, appel, visio ou disponibilité : propose 2 à 4 créneaux pris UNIQUEMENT dans creneaux_libres. Cite-les en toutes lettres (ex. mardi 2 septembre de 14h00 à 14h30, heure de Pékin). N'invente aucun horaire.
 - Si creneaux_libres est vide et qu'un RDV est demandé, dis que l'agenda est complet sur la période et propose de revenir vers l'étudiant.
 - Si les notes ne parlent pas de RDV, ignore le calendrier.
 - Ne réserve aucun créneau : tu proposes seulement.
@@ -219,7 +219,7 @@ offered_slots : uniquement des créneaux copiés depuis creneaux_libres (tableau
     user: `Profil étudiant (JSON) :
 ${JSON.stringify(compactContact(contact))}
 
-Maintenant (heure de Paris) : ${nowInCalendar().label}
+Maintenant (heure de Pékin) : ${nowInCalendar().label}
 
 Calendrier (JSON) :
 ${JSON.stringify(calendarBlock || { note: "calendrier indisponible" })}
@@ -270,7 +270,7 @@ Tu dois :
 4. Ne pas écrire « Bonjour » ni la signature.
 
 Règles :
-- Fuseau : ${CALENDAR_TZ}. Cite les horaires en toutes lettres + « heure de Paris ».
+- Fuseau : ${CALENDAR_TZ} (heure de Pékin). Cite les horaires en toutes lettres + « heure de Pékin ».
 - Si l'étudiant confirme le RDV déjà dans rdv_deja_pris_avec_cet_etudiant : kind = "confirmation", chosen_slot = ce RDV, slot_available = true. Confirme sans proposer d'autre horaire.
 - Si l'étudiant propose UN AUTRE créneau qui est dans creneaux_libres : kind = "move", chosen_slot = le nouveau créneau, slot_available = true. Le mail confirme le déplacement et rappelle l'ancien horaire annulé.
 - Si l'étudiant propose un autre créneau QUI N'EST PAS libre : kind = "reschedule", slot_available = false, chosen_slot = null. On garde l'éventuel RDV déjà posé. Propose 2 à 4 alternatives uniquement depuis creneaux_libres, et mentionne le RDV actuel s'il existe.
