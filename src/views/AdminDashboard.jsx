@@ -8,6 +8,7 @@ import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
+import AdminCalendar from "../components/AdminCalendar";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import {
   WHATSAPP_TEMPLATE_OPTIONS,
@@ -707,6 +708,17 @@ const stats = {
           </div>
         </div>
 
+        <AdminCalendar
+          contacts={contacts}
+          onOpenContact={(contact) => {
+            const full =
+              contacts.find((c) => String(c.id) === String(contact.id)) ||
+              contact;
+            setEditOnOpen(false);
+            setSelectedContact(full);
+          }}
+        />
+
         {/* Envoi groupé */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 sticky top-[88px] z-30">
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
@@ -1083,6 +1095,10 @@ function ContactModal({
   const [emailAiNotes, setEmailAiNotes] = useState("");
   const [composingEmail, setComposingEmail] = useState(false);
   const [emailAiError, setEmailAiError] = useState("");
+  const [offeredSlots, setOfferedSlots] = useState([]);
+  const [pendingDraft, setPendingDraft] = useState(null);
+  const [activeDraftId, setActiveDraftId] = useState("");
+  const [analyzingReply, setAnalyzingReply] = useState(false);
   const [whatsappTemplate, setWhatsappTemplate] = useState(
     "formules_presentation",
   );
@@ -1107,6 +1123,39 @@ function ContactModal({
     setCustomEmailMessage("");
     setEmailAiNotes("");
     setEmailAiError("");
+    setOfferedSlots([]);
+    setPendingDraft(null);
+    setActiveDraftId("");
+  }, [contact.id]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadDrafts() {
+      try {
+        const response = await authedFetch(
+          `/api/admin/email-drafts?contactId=${encodeURIComponent(contact.id)}`,
+        );
+        const data = await response.json();
+        if (cancelled || !data.success) return;
+        const draft = data.drafts?.[0] || null;
+        setPendingDraft(draft);
+        if (draft) {
+          setEmailTemplate("custom");
+          setCustomEmailSubject(draft.subject || "");
+          setCustomEmailTitle(draft.title || "");
+          setCustomEmailSubtitle(draft.subtitle || "");
+          setCustomEmailMessage(draft.body || "");
+          setActiveDraftId(draft.id);
+          setOfferedSlots(draft.analysis?.offeredSlots || []);
+        }
+      } catch {
+        if (!cancelled) setPendingDraft(null);
+      }
+    }
+    loadDrafts();
+    return () => {
+      cancelled = true;
+    };
   }, [contact.id]);
 
   const accessGranted = isStudentAccessGranted(contact);
@@ -1207,6 +1256,8 @@ function ContactModal({
       setCustomEmailTitle(data.title || "");
       setCustomEmailSubtitle(data.subtitle || "");
       setCustomEmailMessage(data.body || "");
+      setOfferedSlots(data.offeredSlots || []);
+      setEmailTemplate("custom");
     } catch (error) {
       setEmailAiError(
         t("dashboard.emailAiFail", {
@@ -1218,6 +1269,71 @@ function ContactModal({
       );
     } finally {
       setComposingEmail(false);
+    }
+  }
+
+  function applyDraft(draft) {
+    if (!draft) return;
+    setEmailTemplate("custom");
+    setCustomEmailSubject(draft.subject || "");
+    setCustomEmailTitle(draft.title || "");
+    setCustomEmailSubtitle(draft.subtitle || "");
+    setCustomEmailMessage(draft.body || "");
+    setActiveDraftId(draft.id);
+    setOfferedSlots(draft.analysis?.offeredSlots || []);
+  }
+
+  async function discardDraft(draft) {
+    if (!draft?.id) return;
+    try {
+      await authedFetch("/api/admin/email-drafts", {
+        method: "PATCH",
+        body: JSON.stringify({ id: draft.id, status: "discarded" }),
+      });
+    } catch {
+      /* keep UI responsive */
+    }
+    if (activeDraftId === draft.id) setActiveDraftId("");
+    setPendingDraft(null);
+  }
+
+  async function analyzeLatestReply() {
+    setAnalyzingReply(true);
+    setEmailAiError("");
+    try {
+      const response = await authedFetch("/api/admin/analyze-reply", {
+        method: "POST",
+        body: JSON.stringify({ contactId: String(contact.id) }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        setEmailAiError(
+          t("dashboard.emailAnalyzeFail", {
+            error: data.error || t("unknownError"),
+          }),
+        );
+        return;
+      }
+      if (data.draft) {
+        setPendingDraft(data.draft);
+        applyDraft(data.draft);
+        alert(t("dashboard.emailAnalyzeOk"));
+        fetchActions();
+        onContactUpdated?.();
+        return;
+      }
+      alert(t("dashboard.emailAnalyzeNone"));
+    } catch (error) {
+      setEmailAiError(
+        t("dashboard.emailAnalyzeFail", {
+          error:
+            error.message === "SESSION"
+              ? t("sessionExpired")
+              : error.message || t("unknownError"),
+        }),
+      );
+    } finally {
+      setAnalyzingReply(false);
     }
   }
 
@@ -1251,6 +1367,7 @@ function ContactModal({
               customTitle: customEmailTitle.trim(),
               customSubtitle: customEmailSubtitle.trim(),
               customMessage: customEmailMessage.trim(),
+              ...(activeDraftId ? { draftId: activeDraftId } : {}),
             }
           : {}),
       };
@@ -1265,6 +1382,9 @@ function ContactModal({
 
       if (data.success) {
         alert(`✅ ${t("dashboard.emailOk")}`);
+        setActiveDraftId("");
+        setPendingDraft(null);
+        setOfferedSlots([]);
         fetchActions();
         onContactUpdated?.();
         return data;
@@ -1410,6 +1530,50 @@ function ContactModal({
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
               📧 {t("dashboard.emailSection")}
             </label>
+            {pendingDraft ? (
+              <div className="mb-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4">
+                <p className="text-sm font-bold text-amber-100">
+                  ✉️ {t("dashboard.emailDraftTitle")}
+                </p>
+                <p className="text-xs text-slate-300 mt-1">
+                  {t("dashboard.emailDraftHint")}
+                </p>
+                {pendingDraft.analysis?.moved ? (
+                  <p className="text-xs text-cyan-300 mt-2">
+                    {t("dashboard.emailDraftMoved")}
+                  </p>
+                ) : pendingDraft.analysis?.booked ? (
+                  <p className="text-xs text-emerald-300 mt-2">
+                    {t("dashboard.emailDraftBooked")}
+                  </p>
+                ) : pendingDraft.kind === "reschedule" ? (
+                  <p className="text-xs text-amber-200 mt-2">
+                    {t("dashboard.emailDraftNeedSlot")}
+                  </p>
+                ) : null}
+                {pendingDraft.inbound_excerpt ? (
+                  <pre className="mt-3 whitespace-pre-wrap text-xs text-slate-300 bg-slate-900/50 border border-slate-700/50 rounded-xl p-3 max-h-28 overflow-y-auto">
+                    {pendingDraft.inbound_excerpt}
+                  </pre>
+                ) : null}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => applyDraft(pendingDraft)}
+                    className="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl text-sm font-bold"
+                  >
+                    {t("dashboard.emailDraftUse")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => discardDraft(pendingDraft)}
+                    className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-sm font-bold"
+                  >
+                    {t("dashboard.emailDraftDiscard")}
+                  </button>
+                </div>
+              </div>
+            ) : null}
             <div className="flex flex-col md:flex-row gap-3">
               <select
                 value={emailTemplate}
@@ -1428,12 +1592,26 @@ function ContactModal({
                 disabled={
                   sendingEmail ||
                   composingEmail ||
+                  analyzingReply ||
                   (emailTemplate === "custom" &&
                     (!customEmailSubject.trim() || !customEmailMessage.trim()))
                 }
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {sendingEmail ? `⏳ ${t("sending")}` : `📤 ${t("dashboard.sendEmail")}`}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmailTemplate("custom");
+                  analyzeLatestReply();
+                }}
+                disabled={sendingEmail || composingEmail || analyzingReply}
+                className="px-5 py-3 bg-slate-700/80 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {analyzingReply
+                  ? `⏳ ${t("dashboard.emailAnalyzeWorking")}`
+                  : t("dashboard.emailAnalyzeReply")}
               </button>
             </div>
             {emailTemplate === "custom" ? (
@@ -1456,7 +1634,7 @@ function ContactModal({
                     <button
                       type="button"
                       onClick={composeEmailWithAi}
-                      disabled={composingEmail}
+                      disabled={composingEmail || analyzingReply}
                       className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                     >
                       {composingEmail
@@ -1520,6 +1698,23 @@ function ContactModal({
                     className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y"
                   />
                 </div>
+                {offeredSlots.length > 0 ? (
+                  <div>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+                      {t("dashboard.emailOfferedSlots")}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {offeredSlots.map((slot) => (
+                        <span
+                          key={slot.starts_at}
+                          className="px-3 py-1.5 rounded-lg bg-cyan-500/15 border border-cyan-500/40 text-cyan-100 text-xs font-semibold"
+                        >
+                          {slot.label || slot.starts_at}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
                 <div>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
                     {t("dashboard.emailPreview")}

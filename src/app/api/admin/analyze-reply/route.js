@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
-import { composeEmailWithAi } from "@/lib/emailCompose";
-import { getCalendarContext } from "@/lib/appointments";
 import { rateLimit } from "@/lib/httpSecurity";
+import { processAppointmentReply } from "@/lib/appointmentReply";
 
 export async function POST(request) {
   try {
@@ -15,7 +14,7 @@ export async function POST(request) {
     }
 
     const limited = rateLimit({
-      key: `compose-email:${auth.user.id}`,
+      key: `analyze-reply:${auth.user.id}`,
       limit: 20,
       windowMs: 10 * 60 * 1000,
     });
@@ -28,30 +27,16 @@ export async function POST(request) {
 
     const body = await request.json().catch(() => ({}));
     const contactId = String(body.contactId || "").trim();
-    const notes = String(body.notes || "").trim();
-
     if (!contactId) {
       return NextResponse.json(
         { success: false, error: "contactId manquant" },
         { status: 400 },
       );
     }
-    if (notes.length < 8) {
-      return NextResponse.json(
-        { success: false, error: "Écrivez d'abord ce que vous voulez dire." },
-        { status: 400 },
-      );
-    }
-    if (notes.length > 4000) {
-      return NextResponse.json(
-        { success: false, error: "Le texte est trop long (4000 caractères max)." },
-        { status: 400 },
-      );
-    }
 
     const { data: contact, error } = await auth.admin
       .from("contacts")
-      .select("id, prenom, nom, domaine_etudes, formule, suivi_statut")
+      .select("id, prenom, nom, email, domaine_etudes, formule, suivi_statut")
       .eq("id", contactId)
       .maybeSingle();
 
@@ -63,32 +48,54 @@ export async function POST(request) {
       );
     }
 
-    const calendar = await getCalendarContext(auth.admin, { contactId });
-    const composed = await composeEmailWithAi({
-      notes,
-      contact,
-      calendar: calendar.missingTable ? null : calendar,
-    });
-    if (!composed.ok) {
+    let replyText = String(body.text || "").trim();
+    if (!replyText) {
+      const { data: actions } = await auth.admin
+        .from("suivi_actions")
+        .select("description, created_at")
+        .eq("contact_id", contactId)
+        .eq("action", "reponse_client")
+        .order("created_at", { ascending: false })
+        .limit(1);
+      replyText = String(actions?.[0]?.description || "").trim();
+    }
+
+    if (replyText.length < 8) {
       return NextResponse.json(
-        { success: false, error: composed.error },
-        { status: 502 },
+        {
+          success: false,
+          error: "Aucune réponse récente à analyser. Collez le message de l'étudiant.",
+        },
+        { status: 400 },
+      );
+    }
+
+    const result = await processAppointmentReply({
+      client: auth.admin,
+      contact,
+      replyText,
+      userAdmin: auth.user.email,
+    });
+
+    if (!result.ok) {
+      return NextResponse.json(
+        { success: false, error: result.error },
+        { status: result.missingTable ? 503 : 502 },
       );
     }
 
     return NextResponse.json({
       success: true,
-      subject: composed.subject,
-      title: composed.title,
-      subtitle: composed.subtitle,
-      body: composed.body,
-      offeredSlots: composed.offeredSlots || [],
-      calendarReady: !calendar.missingTable,
+      skipped: Boolean(result.skipped),
+      isAppointmentReply: Boolean(result.isAppointmentReply),
+      appointment: result.appointment || null,
+      draft: result.draft || null,
+      analysis: result.analysis || null,
     });
   } catch (error) {
-    console.error("compose-email:", error);
+    console.error("analyze-reply:", error);
     return NextResponse.json(
-      { success: false, error: "Rédaction impossible" },
+      { success: false, error: "Analyse impossible" },
       { status: 500 },
     );
   }
