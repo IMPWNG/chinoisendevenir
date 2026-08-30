@@ -1,5 +1,4 @@
 import Navigation from "../components/Navigation";
-import VacationAlert from "../components/VacationAlert";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import HomeSeoContent from "../components/HomeSeoContent";
@@ -16,7 +15,6 @@ function HomePage() {
     <div className="app app-page-fill">
       <JsonLd data={faqJsonLd(FAQS.home)} />
       <Navigation />
-      <VacationAlert t={t} />
       <Hero t={t} />
       <Stats t={t} />
       <HomeSeoContent />
