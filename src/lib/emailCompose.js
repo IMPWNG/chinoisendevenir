@@ -1,5 +1,6 @@
 import {
   CALENDAR_TZ,
+  DEFAULT_DURATION_MINUTES,
   addDaysYmd,
   compactSlot,
   filterSlotsByHints,
@@ -234,28 +235,28 @@ function notesAskToListSlots(notes) {
     .toLowerCase()
     .normalize("NFD")
     .replace(/\p{M}/gu, "");
-  const hasDayHourRange =
-    /entre(?:\s+le)?\s+(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)/.test(
+  const day = "lundi|mardi|mercredi|mecredi|jeudi|vendredi|samedi|dimanche";
+  const hasDaySpan =
+    new RegExp(`entre(?:\\s+le)?\\s+(${day})`).test(folded) ||
+    new RegExp(`(?:du|de)\\s+(?:le\\s+)?(${day})s?\\s+au\\s+`).test(folded);
+  const hasHourSpan =
+    /(?:entre|de)\s+\d{1,2}(?:[:h]\d{2})?\s*h?\s+(?:et|a|à)\s+\d{1,2}/.test(
       folded,
-    ) && /entre\s+\d{1,2}/.test(folded);
-  if (hasDayHourRange) return false;
-  if (/entre\s+\d{1,2}(?:[:h]\d{2})?\s*h?\s+(et|a|à)\s+\d{1,2}/.test(folded)) {
+    );
+  if (hasDaySpan || (hasHourSpan && /\b(dispo|disponib|rdv|rendez)/.test(folded))) {
     return false;
   }
-  return /\b(lundi|mardi|mercredi|jeudi|vendredi)\b[^.?]{0,40}\b\d{1,2}\s*h/i.test(
-    text,
-  );
-}
-
-function notesPreferNous(notes) {
-  return /\b(nous|on|notre|l['’]équipe)\b/i.test(String(notes || ""));
+  return new RegExp(
+    `\\b(${day})\\b[^.?]{0,40}\\b\\d{1,2}\\s*h`,
+    "i",
+  ).test(text);
 }
 
 function formatMinutesLabel(minutes) {
   if (minutes == null || !Number.isFinite(minutes)) return null;
   const hour = Math.floor(minutes / 60);
   const minute = minutes % 60;
-  return minute ? `${hour}h${String(minute).padStart(2, "0")}` : `${hour}h`;
+  return minute ? `${hour} h ${String(minute).padStart(2, "0")}` : `${hour} h`;
 }
 
 function formatYmdFr(ymd) {
@@ -319,11 +320,15 @@ Si les notes demandent « est-ce que tu es libre sur cette plage », garde la pl
 function composeModels() {
   const names = [
     process.env.MAMMOUTH_COMPOSE_MODEL,
-    "gpt-4.1-nano",
-    "openai/gpt-4.1-nano",
+    "gpt-4.1-mini",
+    "openai/gpt-4.1-mini",
     "gpt-4o-mini",
+    "gpt-4.1-nano",
   ].filter(Boolean);
-  return [...new Set(names)];
+  const unique = [...new Set(names)];
+  const writing = unique.filter((name) => !/nano/i.test(name));
+  const nano = unique.filter((name) => /nano/i.test(name));
+  return [...writing, ...nano];
 }
 
 async function mammouthChat({
@@ -438,8 +443,8 @@ function slotsMentionedInBody(slots, body) {
   });
 }
 
-function notesUseTutoiement(notes) {
-  return /\b(tu|toi|ton|ta|tes|t['’]es)\b/i.test(String(notes || ""));
+function notesAskTutoiement(notes) {
+  return /\b(tutoie|tutoiement|tutoyer)\b/i.test(String(notes || ""));
 }
 
 function bodyLooksLikeSlotList(body) {
@@ -449,7 +454,16 @@ function bodyLooksLikeSlotList(body) {
   return (matches || []).length >= 2;
 }
 
-function hintWindowPhrase(hints, tutoyer) {
+function bodyTooThinForAppointment(body) {
+  const text = String(body || "").trim();
+  if (text.length < 320) return true;
+  if (!/disponib|horaire|📅|mercredi|lundi|mardi|jeudi|vendredi/i.test(text)) {
+    return true;
+  }
+  return false;
+}
+
+function formatWindowLabels(hints) {
   const DAY_NAMES = [
     "dimanche",
     "lundi",
@@ -459,32 +473,38 @@ function hintWindowPhrase(hints, tutoyer) {
     "vendredi",
     "samedi",
   ];
-  let days = "cette semaine";
-  if (hints?.weekdays?.length) {
-    const names = hints.weekdays.map((index) => DAY_NAMES[index]);
-    days =
-      names.length === 1
-        ? names[0]
-        : `entre ${names[0]} et ${names[names.length - 1]}`;
+  let daysLine = "cette semaine";
+  if (hints?.weekdays?.length >= 2) {
+    const first = DAY_NAMES[hints.weekdays[0]];
+    const last = DAY_NAMES[hints.weekdays[hints.weekdays.length - 1]];
+    daysLine = `du ${first} au ${last}`;
+  } else if (hints?.weekdays?.length === 1) {
+    daysLine = DAY_NAMES[hints.weekdays[0]];
   }
   const fromHour = formatMinutesLabel(hints?.minMinutes);
   const toHour = formatMinutesLabel(hints?.maxMinutes);
-  const hours = fromHour && toHour ? `entre ${fromHour} et ${toHour}` : "";
-  const ask = tutoyer ? "Aurais-tu des disponibilités" : "Auriez-vous des disponibilités";
-  return hours
-    ? `${ask} ${days}, ${hours} (heure de Pékin) ?`
-    : `${ask} ${days} (heure de Pékin) ?`;
+  const hoursLine = fromHour && toHour ? `de ${fromHour} à ${toHour}` : "";
+  return { daysLine, hoursLine };
 }
 
-function windowFallbackBody({ notes, hints, tutoyer, useNous }) {
-  const who = useNous || !/\bje\b/i.test(notes) ? "nous aimerions" : "j'aimerais";
-  const toi = tutoyer ? "toi" : "vous";
-  const ton = tutoyer ? "ton" : "votre";
-  const ask = hintWindowPhrase(hints, tutoyer);
-  const projet = /projet/i.test(notes)
-    ? ` Cela nous permettrait de faire le point et de mieux comprendre ${ton} projet.`
-    : "";
-  return `Afin de faire le point sur ${ton} dossier, ${who} prendre un rendez-vous avec ${toi} cette semaine.\n\n${ask}${projet}`;
+function windowFallbackBody({ notes, hints }) {
+  const { daysLine, hoursLine } = formatWindowLabels(hints);
+  const duration = DEFAULT_DURATION_MINUTES;
+  const hoursBlock = hoursLine
+    ? `📅 Disponibilités : ${daysLine}\n🕘 Horaires : ${hoursLine} (heure de Pékin)`
+    : `📅 Disponibilités : ${daysLine} (heure de Pékin)`;
+  const projet = /chine|etud/i.test(notes)
+    ? "et d'échanger sur votre projet de venir étudier en Chine"
+    : "et d'échanger sur votre projet";
+  return `Nous vous proposons de prendre rendez-vous afin de faire le point sur votre dossier ${projet}.
+
+Le rendez-vous, d'une durée de ${duration} minutes, permettra de répondre à vos questions et de vous accompagner dans les différentes étapes de votre projet.
+
+${hoursBlock}
+
+Merci de nous indiquer le jour et l'heure qui vous conviendraient le mieux parmi ces créneaux.
+
+Nous restons à votre disposition pour toute question complémentaire.`;
 }
 
 function selectComposeSlots(freeSlots, notes, now) {
@@ -529,43 +549,56 @@ export async function composeEmailWithAi({
   const slotLines = slotsToOffer
     .map((slot, index) => `${index + 1}. ${slot.label}`)
     .join("\n");
-  const tutoyer = notesUseTutoiement(notes);
-  const useNous = notesPreferNous(notes);
+  const tutoyer = notesAskTutoiement(notes);
+  const windowLabels = formatWindowLabels(selected.hints);
+  const duration = DEFAULT_DURATION_MINUTES;
 
-  let calendarBlock = "Pas de rendez-vous : ignore le calendrier.";
+  let calendarBlock = "Pas de rendez-vous dans le brief : rédige un e-mail pro à partir des notes, sans inventer d'horaires.";
   if (wantRdv && listSlots) {
     calendarBlock = `${
       selected.exact
-        ? "Les notes demandent de proposer des horaires précis. Recopie 2 à 4 créneaux parmi ceux-ci, heure de Pékin :"
-        : "Aucun créneau n'était libre dans la fenêtre demandée. Dis-le brièvement et propose les plus proches ci-dessous :"
+        ? "Le brief demande des horaires précis. Dans le mail, liste 2 à 4 créneaux parmi ceux-ci (heure de Pékin), en toutes lettres :"
+        : "Aucun créneau n'était libre dans la fenêtre demandée. Dis-le et propose les plus proches :"
     }
 ${slotLines || "Aucun créneau libre."}
+Durée du rendez-vous : ${duration} minutes.
 RDV déjà posé avec cette personne : ${existingLabels.join(" ; ") || "aucun"}`;
   } else if (wantRdv) {
-    calendarBlock = `Les notes posent une question de disponibilité (une plage), pas une liste d'horaires. Reformule cette plage. Ne dresse pas de liste de créneaux de 30 minutes.
+    calendarBlock = `Le brief donne une PLAGE, pas une liste d'horaires. Présente-la exactement sous cette forme dans le body (deux lignes, un saut de ligne entre les deux) :
 
+📅 Disponibilités : ${windowLabels.daysLine}
+🕘 Horaires : ${windowLabels.hoursLine || "selon vos disponibilités"} (heure de Pékin)
+
+Ne dresse pas de liste « mercredi 2 septembre de 09h00 à 09h30 ».
+Durée du rendez-vous : ${duration} minutes.
 ${summarizeAvailability(selected.hints, selected.matched || selected.slots)}
 RDV déjà posé avec cette personne : ${existingLabels.join(" ; ") || "aucun"}`;
   }
 
   const result = await mammouthChat({
-    system: `Tu es rédacteur pour Chinois en Devenir. Tu reformules les notes de l'administrateur. Tu n'inventes pas un mail type.
+    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Règle principale : le body doit dire la même chose que les notes. Même intention, mêmes infos, mêmes raisons. Tu corriges l'orthographe et tu rends le texte fluide. Tu n'ajoutes rien.
+Les notes de l'admin sont un brief en vrac (fautes, phrases courtes, tutoiement). Tu en fais un e-mail professionnel, chaleureux et soigné — le niveau d'une conseillère qui écrit à un futur étudiant. Ce n'est pas une reformulation mot à mot, c'est une rédaction.
 
-Le template HTML ajoute déjà « Bonjour {prénom}, » et la signature.
-- N'écris jamais Bonjour, Madame, Monsieur, le prénom, le nom, ni la signature.
+Le template HTML ajoute déjà « Bonjour {prénom}, » et « Cordialement, L'équipe Chinois en Devenir ».
+- N'écris JAMAIS Bonjour, Madame, Monsieur, le prénom, le nom, ni Cordialement, ni la signature.
 
-Personne : ${useNous ? "les notes parlent en « nous » : écris « nous » / « on », jamais « je »." : tutoyer ? "" : "écris « nous » (l'agence), sauf si les notes disent clairement « je »."}
-Tutoiement : ${tutoyer ? "tutoie (tu / toi / ton)." : "vouvoie (vous / votre)."}
+${tutoyer ? "Le brief demande explicitement le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie toujours (vous / votre), même si le brief dit « ton dossier ». Écris « nous » pour l'agence, jamais « je »."}
 
-Interdit :
-- transformer une plage (« entre mercredi et vendredi entre 9h et 11h ») en 3 puces de 30 minutes
-- ajouter un CTA du type « Réponds à cet e-mail avec le créneau qui te convient » si ce n'est pas dans les notes
-- inventer filière, HSK, université, frais, « merci pour votre message »
-- recopier un modèle d'e-mail appris ; les notes sont la seule source
+Structure d'un e-mail de rendez-vous (4 à 6 paragraphes, sauts \\n\\n) :
+1. Proposition : prendre rendez-vous pour faire le point sur le dossier et échanger sur le projet d'études en Chine.
+2. Valeur + durée : le rendez-vous dure ${duration} minutes ; il sert à répondre aux questions et accompagner les étapes du projet. (N'invente pas de filière, HSK, université ou tarifs.)
+3. Disponibilités : si le brief donne une plage, utilise le bloc 📅 / 🕘 fourni. Si le brief demande des horaires précis, liste alors les créneaux donnés.
+4. CTA : demander le jour et l'heure qui conviennent le mieux.
+5. Phrase de clôture : « Nous restons à votre disposition pour toute question complémentaire. »
 
-Calendrier : heure de Pékin. Tu peux ajouter « (heure de Pékin) » une fois à côté des horaires. N'invente aucun horaire.
+Objet type : « Prise de rendez-vous pour votre projet d'études en Chine » (adapte si le brief n'est pas un RDV).
+title : même idée, court, pour le bandeau. subtitle : une ligne, ex. « Échange de 30 minutes ».
+
+Exemple de body (sans salutation ni signature) pour un brief « RDV point dossier, dispo mercredi-vendredi 9h-11h, 30 min » :
+"Nous vous proposons de prendre rendez-vous afin de faire le point sur votre dossier et d'échanger sur votre projet de venir étudier en Chine.\\n\\nLe rendez-vous, d'une durée de 30 minutes, permettra de répondre à vos questions et de vous accompagner dans les différentes étapes de votre projet.\\n\\n📅 Disponibilités : du mercredi au vendredi\\n🕘 Horaires : de 9 h à 11 h (heure de Pékin)\\n\\nMerci de nous indiquer le jour et l'heure qui vous conviendraient le mieux parmi ces créneaux.\\n\\nNous restons à votre disposition pour toute question complémentaire."
+
+Interdit : transformer une plage en 3 puces de 30 minutes ; inventer des faits hors brief.
 
 JSON uniquement, sans markdown :
 {"subject":"...","title":"...","subtitle":"...","body":"..."}`,
@@ -574,9 +607,9 @@ Maintenant : ${nowInCalendar().label}
 
 ${calendarBlock}
 
-Notes à reformuler (source unique du mail) :
+Brief admin (à transformer en e-mail pro) :
 ${notes}`,
-    temperature: 0.35,
+    temperature: 0.55,
     maxTokens: 4000,
     retries: 1,
   });
@@ -584,25 +617,28 @@ ${notes}`,
   if (!result.ok) return result;
 
   let composed = composeEmailFromParsed(result.json, result.text);
-  if (
+  const needsRewrite =
     composed.ok &&
     wantRdv &&
     !listSlots &&
-    bodyLooksLikeSlotList(composed.body)
-  ) {
+    (bodyLooksLikeSlotList(composed.body) ||
+      bodyTooThinForAppointment(composed.body));
+
+  if (needsRewrite) {
     const retry = await mammouthChat({
-      system: `Tu reformules les notes. Interdiction absolue de lister des créneaux (pas de puces « mercredi 2 septembre de 09h00 à 09h30 »).
-Garde la plage horaire telle qu'écrite dans les notes (ex. entre mercredi et vendredi, entre 9h et 11h).
-Si les notes disent « nous », écris « nous », jamais « je ».
-Corrige seulement l'orthographe. N'ajoute pas de CTA.
-Pas de Bonjour ni de signature.
-JSON uniquement : {"subject":"...","title":"...","subtitle":"...","body":"..."}`,
-      user: `Notes :
+      system: `Rédige un e-mail professionnel Chinois en Devenir, vouvoiement, « nous ».
+Le template ajoute déjà Bonjour et Cordialement : ne les écris pas.
+Le brief donne une PLAGE : utilise ce bloc, sans lister des créneaux de 30 min :
+📅 Disponibilités : ${windowLabels.daysLine}
+🕘 Horaires : ${windowLabels.hoursLine || "selon vos disponibilités"} (heure de Pékin)
+Inclus la durée (${duration} min), un CTA (jour et heure), et « Nous restons à votre disposition pour toute question complémentaire. »
+JSON : {"subject":"...","title":"...","subtitle":"...","body":"..."}`,
+      user: `Brief :
 ${notes}
 
-Ton jet précédent (à corriger, trop de créneaux listés) :
+Jet précédent (trop court ou trop de créneaux listés) :
 ${composed.body}`,
-      temperature: 0.2,
+      temperature: 0.4,
       maxTokens: 4000,
       retries: 0,
     });
@@ -616,16 +652,22 @@ ${composed.body}`,
     composed.ok &&
     wantRdv &&
     !listSlots &&
-    bodyLooksLikeSlotList(composed.body)
+    (bodyLooksLikeSlotList(composed.body) ||
+      bodyTooThinForAppointment(composed.body))
   ) {
     composed = {
       ...composed,
+      subject:
+        sanitizeComposeLine(
+          "Prise de rendez-vous pour votre projet d'études en Chine",
+          180,
+        ),
+      title: sanitizeComposeLine("Prise de rendez-vous", 120),
+      subtitle: sanitizeComposeLine(`Échange de ${duration} minutes`, 160),
       body: sanitizeComposeBody(
         windowFallbackBody({
           notes,
           hints: selected.hints,
-          tutoyer,
-          useNous,
         }),
       ),
     };

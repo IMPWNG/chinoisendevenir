@@ -208,12 +208,20 @@ export function pickSlotsForPrompt(slots, limit = 16) {
 
 const DAY_NAME_TO_INDEX = {
   dimanche: 0,
+  dimanch: 0,
   lundi: 1,
+  lund: 1,
   mardi: 2,
+  mard: 2,
   mercredi: 3,
+  mecredi: 3,
+  mercred: 3,
   jeudi: 4,
+  jeud: 4,
   vendredi: 5,
+  vendred: 5,
   samedi: 6,
+  samed: 6,
 };
 
 function foldFr(text) {
@@ -262,8 +270,18 @@ export function parseAvailabilityHints(notes, now = new Date()) {
       `entre(?:\\s+le)?\\s+(${dayNames.join("|")})s?\\s+et(?:\\s+le)?\\s+(${dayNames.join("|")})s?`,
     ),
   );
+  const duAu = text.match(
+    new RegExp(
+      `(?:du|de)\\s+(?:le\\s+)?(${dayNames.join("|")})s?\\s+au\\s+(?:le\\s+)?(${dayNames.join("|")})s?`,
+    ),
+  );
   let weekdays = foundDays;
-  if (range) {
+  if (duAu) {
+    weekdays = weekdayRange(
+      DAY_NAME_TO_INDEX[duAu[1]],
+      DAY_NAME_TO_INDEX[duAu[2]],
+    );
+  } else if (range) {
     weekdays = weekdayRange(
       DAY_NAME_TO_INDEX[range[1]],
       DAY_NAME_TO_INDEX[range[2]],
@@ -278,8 +296,16 @@ export function parseAvailabilityHints(notes, now = new Date()) {
 
   let fromYmd = today;
   let toYmd = addDaysYmd(monday, 13);
-  if (/\bcette semaine\b/.test(text)) {
+  const hasSpan = Boolean(duAu || range);
+  if (/\bcette semaine\b/.test(text) || (hasSpan && !/\bsemaine prochaine\b/.test(text))) {
     toYmd = addDaysYmd(monday, 6);
+    if (weekdays.length) {
+      const lastWanted = Math.max(...weekdays);
+      if (weekdayIndex(today) > lastWanted) {
+        fromYmd = addDaysYmd(monday, 7);
+        toYmd = addDaysYmd(monday, 13);
+      }
+    }
   } else if (/\bsemaine prochaine\b/.test(text)) {
     fromYmd = addDaysYmd(monday, 7);
     toYmd = addDaysYmd(monday, 13);
