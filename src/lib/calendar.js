@@ -308,7 +308,7 @@ export function filterSlotsByHints(slots, hints) {
     const [hour, minute] = String(slot.startHm || "00:00").split(":").map(Number);
     const startMin = hour * 60 + minute;
     if (hints.minMinutes != null && startMin < hints.minMinutes) return false;
-    if (hints.maxMinutes != null && startMin > hints.maxMinutes) return false;
+    if (hints.maxMinutes != null && startMin >= hints.maxMinutes) return false;
     return true;
   });
 }
@@ -324,6 +324,17 @@ export function pickSpreadSlots(slots, limit = 4) {
   const days = [...byDay.keys()].sort();
   const picked = [];
   const seen = new Set();
+
+  days.forEach((day, dayIndex) => {
+    if (picked.length >= limit) return;
+    const list = byDay.get(day);
+    const idx = Math.min(dayIndex * 2, list.length - 1);
+    const candidate = list[idx];
+    if (!candidate || seen.has(candidate.starts_at)) return;
+    seen.add(candidate.starts_at);
+    picked.push(candidate);
+  });
+
   let round = 0;
   while (picked.length < limit) {
     let added = false;

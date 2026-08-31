@@ -9,6 +9,7 @@ import {
   nowInCalendar,
   parseAvailabilityHints,
   pickSpreadSlots,
+  weekdayNameFr,
 } from "./calendar";
 
 const DEFAULT_SUBJECT = "Votre projet d'études en Chine";
@@ -220,6 +221,101 @@ function notesWantAppointment(notes) {
   );
 }
 
+function notesAskToListSlots(notes) {
+  const text = String(notes || "");
+  if (
+    /\b(propose|proposer|propose[sz]|voici les cr[eé]neaux|liste(?:r)?(?:\s+les)?\s+cr[eé]neaux)\b/i.test(
+      text,
+    )
+  ) {
+    return true;
+  }
+  const folded = text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "");
+  const hasDayHourRange =
+    /entre(?:\s+le)?\s+(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)/.test(
+      folded,
+    ) && /entre\s+\d{1,2}/.test(folded);
+  if (hasDayHourRange) return false;
+  if (/entre\s+\d{1,2}(?:[:h]\d{2})?\s*h?\s+(et|a|à)\s+\d{1,2}/.test(folded)) {
+    return false;
+  }
+  return /\b(lundi|mardi|mercredi|jeudi|vendredi)\b[^.?]{0,40}\b\d{1,2}\s*h/i.test(
+    text,
+  );
+}
+
+function notesPreferNous(notes) {
+  return /\b(nous|on|notre|l['’]équipe)\b/i.test(String(notes || ""));
+}
+
+function formatMinutesLabel(minutes) {
+  if (minutes == null || !Number.isFinite(minutes)) return null;
+  const hour = Math.floor(minutes / 60);
+  const minute = minutes % 60;
+  return minute ? `${hour}h${String(minute).padStart(2, "0")}` : `${hour}h`;
+}
+
+function formatYmdFr(ymd) {
+  const [year, month, day] = String(ymd).split("-").map(Number);
+  if (!year || !month || !day) return ymd;
+  const utc = new Date(Date.UTC(year, month - 1, day, 12));
+  return utc.toLocaleDateString("fr-FR", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "long",
+  });
+}
+
+function summarizeAvailability(hints, matched) {
+  if (!hints?.hasHints) {
+    return matched.length
+      ? `${matched.length} créneaux libres dans les semaines à venir (heure de Pékin).`
+      : "Aucun créneau libre.";
+  }
+
+  const DAY_NAMES = [
+    "dimanche",
+    "lundi",
+    "mardi",
+    "mercredi",
+    "jeudi",
+    "vendredi",
+    "samedi",
+  ];
+  const days = hints.weekdays?.length
+    ? hints.weekdays.map((index) => DAY_NAMES[index]).join(", ")
+    : "jours indiqués";
+  const fromHour = formatMinutesLabel(hints.minMinutes);
+  const toHour = formatMinutesLabel(hints.maxMinutes);
+  const hours =
+    fromHour && toHour ? `entre ${fromHour} et ${toHour}` : "horaires habituels";
+
+  const byDay = new Map();
+  for (const slot of matched || []) {
+    const list = byDay.get(slot.ymd) || [];
+    list.push(slot);
+    byDay.set(slot.ymd, list);
+  }
+  const dayLines = [...byDay.keys()].sort().map((ymd) => {
+    const slots = byDay.get(ymd);
+    const name = weekdayNameFr(ymd);
+    const first = slots[0].startHm?.replace(":", "h");
+    const last = slots[slots.length - 1].endHm?.replace(":", "h");
+    return `- ${name} ${formatYmdFr(ymd)} : libre de ${first} à ${last}`;
+  });
+
+  if (!dayLines.length) {
+    return `Fenêtre demandée (${days}, ${hours}, heure de Pékin) : aucun créneau libre. Ne propose aucun horaire inventé ; dis que vous reviendrez vers la personne.`;
+  }
+
+  return `Fenêtre demandée : ${days}, ${hours} (heure de Pékin). Cette fenêtre est libre :
+${dayLines.join("\n")}
+Si les notes demandent « est-ce que tu es libre sur cette plage », garde la plage dans le mail. Ne la transforme pas en liste de créneaux de 30 minutes.`;
+}
+
 function composeModels() {
   const names = [
     process.env.MAMMOUTH_COMPOSE_MODEL,
@@ -346,6 +442,51 @@ function notesUseTutoiement(notes) {
   return /\b(tu|toi|ton|ta|tes|t['’]es)\b/i.test(String(notes || ""));
 }
 
+function bodyLooksLikeSlotList(body) {
+  const matches = String(body || "").match(
+    /^\s*[-•*]\s+.+\d{1,2}\s*h\d{0,2}.+\d{1,2}\s*h/gim,
+  );
+  return (matches || []).length >= 2;
+}
+
+function hintWindowPhrase(hints, tutoyer) {
+  const DAY_NAMES = [
+    "dimanche",
+    "lundi",
+    "mardi",
+    "mercredi",
+    "jeudi",
+    "vendredi",
+    "samedi",
+  ];
+  let days = "cette semaine";
+  if (hints?.weekdays?.length) {
+    const names = hints.weekdays.map((index) => DAY_NAMES[index]);
+    days =
+      names.length === 1
+        ? names[0]
+        : `entre ${names[0]} et ${names[names.length - 1]}`;
+  }
+  const fromHour = formatMinutesLabel(hints?.minMinutes);
+  const toHour = formatMinutesLabel(hints?.maxMinutes);
+  const hours = fromHour && toHour ? `entre ${fromHour} et ${toHour}` : "";
+  const ask = tutoyer ? "Aurais-tu des disponibilités" : "Auriez-vous des disponibilités";
+  return hours
+    ? `${ask} ${days}, ${hours} (heure de Pékin) ?`
+    : `${ask} ${days} (heure de Pékin) ?`;
+}
+
+function windowFallbackBody({ notes, hints, tutoyer, useNous }) {
+  const who = useNous || !/\bje\b/i.test(notes) ? "nous aimerions" : "j'aimerais";
+  const toi = tutoyer ? "toi" : "vous";
+  const ton = tutoyer ? "ton" : "votre";
+  const ask = hintWindowPhrase(hints, tutoyer);
+  const projet = /projet/i.test(notes)
+    ? ` Cela nous permettrait de faire le point et de mieux comprendre ${ton} projet.`
+    : "";
+  return `Afin de faire le point sur ${ton} dossier, ${who} prendre un rendez-vous avec ${toi} cette semaine.\n\n${ask}${projet}`;
+}
+
 function selectComposeSlots(freeSlots, notes, now) {
   const hints = parseAvailabilityHints(notes, now);
   let matched = filterSlotsByHints(freeSlots, hints);
@@ -361,7 +502,12 @@ function selectComposeSlots(freeSlots, notes, now) {
     exact = false;
   }
   if (!matched.length) matched = freeSlots || [];
-  return { slots: pickSpreadSlots(matched, 4), exact, hints };
+  return {
+    slots: pickSpreadSlots(matched, 4),
+    matched,
+    exact,
+    hints,
+  };
 }
 
 export async function composeEmailWithAi({
@@ -370,11 +516,12 @@ export async function composeEmailWithAi({
   calendar = null,
 } = {}) {
   const wantRdv = notesWantAppointment(notes);
+  const listSlots = wantRdv && notesAskToListSlots(notes);
   const now = new Date();
   const selected = wantRdv
     ? selectComposeSlots(calendar?.freeSlots || calendar?.promptSlots || [], notes, now)
-    : { slots: [], exact: true, hints: null };
-  const slotsToOffer = selected.slots;
+    : { slots: [], matched: [], exact: true, hints: null };
+  const slotsToOffer = listSlots ? selected.slots : [];
   const existingLabels = (calendar?.contactAppointments || []).map((event) =>
     formatSlotLabel(event.starts_at, event.ends_at),
   );
@@ -383,58 +530,119 @@ export async function composeEmailWithAi({
     .map((slot, index) => `${index + 1}. ${slot.label}`)
     .join("\n");
   const tutoyer = notesUseTutoiement(notes);
+  const useNous = notesPreferNous(notes);
+
+  let calendarBlock = "Pas de rendez-vous : ignore le calendrier.";
+  if (wantRdv && listSlots) {
+    calendarBlock = `${
+      selected.exact
+        ? "Les notes demandent de proposer des horaires précis. Recopie 2 à 4 créneaux parmi ceux-ci, heure de Pékin :"
+        : "Aucun créneau n'était libre dans la fenêtre demandée. Dis-le brièvement et propose les plus proches ci-dessous :"
+    }
+${slotLines || "Aucun créneau libre."}
+RDV déjà posé avec cette personne : ${existingLabels.join(" ; ") || "aucun"}`;
+  } else if (wantRdv) {
+    calendarBlock = `Les notes posent une question de disponibilité (une plage), pas une liste d'horaires. Reformule cette plage. Ne dresse pas de liste de créneaux de 30 minutes.
+
+${summarizeAvailability(selected.hints, selected.matched || selected.slots)}
+RDV déjà posé avec cette personne : ${existingLabels.join(" ; ") || "aucun"}`;
+  }
 
   const result = await mammouthChat({
-    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
+    system: `Tu es rédacteur pour Chinois en Devenir. Tu reformules les notes de l'administrateur. Tu n'inventes pas un mail type.
 
-Ta seule tâche : reformuler les notes de l'administrateur en un e-mail naturel, clair et chaleureux. Ce n'est pas un mail marketing.
+Règle principale : le body doit dire la même chose que les notes. Même intention, mêmes infos, mêmes raisons. Tu corriges l'orthographe et tu rends le texte fluide. Tu n'ajoutes rien.
 
-Le template HTML ajoute déjà « Bonjour {prénom}, » et la signature. Donc :
-- n'écris JAMAIS Bonjour, Madame, Monsieur, le prénom ou le nom.
-- n'écris JAMAIS la signature.
+Le template HTML ajoute déjà « Bonjour {prénom}, » et la signature.
+- N'écris jamais Bonjour, Madame, Monsieur, le prénom, le nom, ni la signature.
 
-${tutoyer ? "Les notes tutoient : tutoie aussi (tu / toi / ton)." : "Vouvoie (vous / votre)."}
-Ton : humain, concret, polie, comme un conseiller qui écrit vite mais bien. 2 à 4 paragraphes courts.
+Personne : ${useNous ? "les notes parlent en « nous » : écris « nous » / « on », jamais « je »." : tutoyer ? "" : "écris « nous » (l'agence), sauf si les notes disent clairement « je »."}
+Tutoiement : ${tutoyer ? "tutoie (tu / toi / ton)." : "vouvoie (vous / votre)."}
 
-Rendez-vous :
-- Heure de Pékin uniquement.
-- Propose UNIQUEMENT les créneaux numérotés fournis. Recopie les dates en toutes lettres.
-- Si les notes demandent mercredi-vendredi 9h-11h, ne propose pas un mardi ni 13h.
-- S'il n'y a pas de créneau, dis que vous reviendrez vers la personne. N'invente aucun horaire.
+Interdit :
+- transformer une plage (« entre mercredi et vendredi entre 9h et 11h ») en 3 puces de 30 minutes
+- ajouter un CTA du type « Réponds à cet e-mail avec le créneau qui te convient » si ce n'est pas dans les notes
+- inventer filière, HSK, université, frais, « merci pour votre message »
+- recopier un modèle d'e-mail appris ; les notes sont la seule source
 
-N'invente rien (filière, HSK, frais, université, « merci pour votre message » si ce n'est pas dans les notes).
-
-Exemple de body (sans salutation) :
-"Afin de faire le point sur votre dossier et de mieux comprendre votre projet, nous aimerions convenir d'un rendez-vous cette semaine.\\n\\nAuriez-vous une disponibilité sur l'un de ces créneaux, heure de Pékin :\\n- mercredi 3 septembre de 9h00 à 9h30\\n- jeudi 4 septembre de 10h00 à 10h30\\n\\nRépondez à cet e-mail avec le créneau qui vous convient."
+Calendrier : heure de Pékin. Tu peux ajouter « (heure de Pékin) » une fois à côté des horaires. N'invente aucun horaire.
 
 JSON uniquement, sans markdown :
 {"subject":"...","title":"...","subtitle":"...","body":"..."}`,
     user: `Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
 Maintenant : ${nowInCalendar().label}
 
-${
-  wantRdv
-    ? `${selected.exact ? "Créneaux qui correspondent à la demande (propose 2 à 4 parmi ceux-ci) :" : "Aucun créneau n'était libre dans la fenêtre demandée. Propose les plus proches ci-dessous et dis-le brièvement :"}
-${slotLines || "Aucun créneau libre."}
-RDV déjà posé avec cette personne : ${existingLabels.join(" ; ") || "aucun"}`
-    : "Pas de rendez-vous : ignore le calendrier."
-}
+${calendarBlock}
 
-Notes à reformuler :
+Notes à reformuler (source unique du mail) :
 ${notes}`,
-    temperature: 0.7,
+    temperature: 0.35,
     maxTokens: 4000,
     retries: 1,
   });
 
   if (!result.ok) return result;
 
-  const composed = composeEmailFromParsed(result.json, result.text);
+  let composed = composeEmailFromParsed(result.json, result.text);
+  if (
+    composed.ok &&
+    wantRdv &&
+    !listSlots &&
+    bodyLooksLikeSlotList(composed.body)
+  ) {
+    const retry = await mammouthChat({
+      system: `Tu reformules les notes. Interdiction absolue de lister des créneaux (pas de puces « mercredi 2 septembre de 09h00 à 09h30 »).
+Garde la plage horaire telle qu'écrite dans les notes (ex. entre mercredi et vendredi, entre 9h et 11h).
+Si les notes disent « nous », écris « nous », jamais « je ».
+Corrige seulement l'orthographe. N'ajoute pas de CTA.
+Pas de Bonjour ni de signature.
+JSON uniquement : {"subject":"...","title":"...","subtitle":"...","body":"..."}`,
+      user: `Notes :
+${notes}
+
+Ton jet précédent (à corriger, trop de créneaux listés) :
+${composed.body}`,
+      temperature: 0.2,
+      maxTokens: 4000,
+      retries: 0,
+    });
+    if (retry.ok) {
+      const redone = composeEmailFromParsed(retry.json, retry.text);
+      if (redone.ok) composed = redone;
+    }
+  }
+
+  if (
+    composed.ok &&
+    wantRdv &&
+    !listSlots &&
+    bodyLooksLikeSlotList(composed.body)
+  ) {
+    composed = {
+      ...composed,
+      body: sanitizeComposeBody(
+        windowFallbackBody({
+          notes,
+          hints: selected.hints,
+          tutoyer,
+          useNous,
+        }),
+      ),
+    };
+  }
+
   if (!composed.ok) return composed;
 
-  const mentioned = slotsMentionedInBody(slotsToOffer, composed.body);
+  const mentioned = listSlots
+    ? slotsMentionedInBody(slotsToOffer, composed.body)
+    : [];
   const offeredSlots = wantRdv
-    ? (mentioned.length ? mentioned : slotsToOffer).map(compactSlot)
+    ? (mentioned.length
+        ? mentioned
+        : listSlots
+          ? slotsToOffer
+          : []
+      ).map(compactSlot)
     : normalizeOfferedSlots(
         result.json?.offered_slots,
         calendar?.freeSlots || calendar?.promptSlots || [],
