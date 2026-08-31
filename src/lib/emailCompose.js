@@ -1,10 +1,14 @@
 import {
   CALENDAR_TZ,
+  addDaysYmd,
   compactSlot,
+  filterSlotsByHints,
   findMatchingFreeSlot,
   formatSlotLabel,
+  formatYmd,
   nowInCalendar,
-  pickSlotsForPrompt,
+  parseAvailabilityHints,
+  pickSpreadSlots,
 } from "./calendar";
 
 const DEFAULT_SUBJECT = "Votre projet d'études en Chine";
@@ -145,6 +149,10 @@ function stripGreetingAndSignoff(body) {
     "",
   );
   text = text.replace(
+    /^(madame|monsieur|mademoiselle|mlle|m\.|mr\.?|cher[eès]*)\s+[^\n,]{1,50},?\s*/i,
+    "",
+  );
+  text = text.replace(
     /\n+(cordialement|bien à vous|belle journée|l['’]équipe chinois en devenir)[\s\S]*$/i,
     "",
   );
@@ -212,24 +220,24 @@ function notesWantAppointment(notes) {
   );
 }
 
-function calendarPromptBlock({ promptSlots = [], contactAppointments = [] } = {}) {
-  return {
-    timezone: CALENDAR_TZ,
-    maintenant: nowInCalendar().label,
-    creneaux_a_proposer: (promptSlots || []).map((slot) => slot.label).filter(Boolean),
-    rdv_deja_pris_avec_cet_etudiant: (contactAppointments || []).map((event) =>
-      formatSlotLabel(event.starts_at, event.ends_at),
-    ),
-  };
+function composeModels() {
+  const names = [
+    process.env.MAMMOUTH_COMPOSE_MODEL,
+    "gpt-4.1-nano",
+    "openai/gpt-4.1-nano",
+    "gpt-4o-mini",
+  ].filter(Boolean);
+  return [...new Set(names)];
 }
 
 async function mammouthChat({
   system,
   user,
-  temperature = 0.2,
-  maxTokens = 2200,
+  temperature = 0.7,
+  maxTokens = 4000,
   timeoutMs = 45000,
   retries = 1,
+  models = composeModels(),
 } = {}) {
   const apiKey = process.env.MAMMOUTH_API_KEY;
   if (!apiKey) {
@@ -238,68 +246,67 @@ async function mammouthChat({
 
   let lastError = "Réponse IA vide";
 
-  for (let attempt = 0; attempt <= retries; attempt += 1) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-    const compact = attempt > 0;
-    try {
-      const response = await fetch("https://api.mammouth.ai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: process.env.MAMMOUTH_MODEL || "minimax-m3",
-          temperature: compact ? 0 : temperature,
-          max_tokens: compact ? Math.max(maxTokens, 2800) : maxTokens,
-          messages: compact
-            ? [
-                { role: "system", content: system },
-                { role: "user", content: user },
-                {
-                  role: "user",
-                  content:
-                    "Réponds maintenant par un JSON compact valide uniquement. Pas de markdown, pas de ``` , pas de raisonnement. Toutes les chaînes sur une ligne, sauts de ligne écrits \\n.",
-                },
-              ]
-            : [
-                { role: "system", content: system },
-                { role: "user", content: user },
-              ],
-        }),
-        signal: controller.signal,
-      });
-
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        lastError =
-          data?.error?.message || data?.message || "Le service IA n'a pas répondu";
-        continue;
-      }
-
-      const text = extractMessageText(data);
-      if (!text) {
-        lastError = "Réponse IA vide";
-        console.warn("compose-email empty", {
-          finish: data?.choices?.[0]?.finish_reason,
-          keys: Object.keys(data?.choices?.[0]?.message || {}),
+  for (const model of models) {
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      const compact = attempt > 0;
+      try {
+        const response = await fetch("https://api.mammouth.ai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model,
+            temperature: compact ? 0.3 : temperature,
+            max_tokens: maxTokens,
+            messages: compact
+              ? [
+                  { role: "system", content: system },
+                  { role: "user", content: user },
+                  {
+                    role: "user",
+                    content:
+                      "Réponds maintenant par un JSON compact valide uniquement. Pas de markdown, pas de ``` . Sauts de ligne dans body écrits \\n\\n.",
+                  },
+                ]
+              : [
+                  { role: "system", content: system },
+                  { role: "user", content: user },
+                ],
+          }),
+          signal: controller.signal,
         });
-        continue;
-      }
 
-      const json = extractJsonObject(text);
-      if (json) return { ok: true, text, json };
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          lastError =
+            data?.error?.message || data?.message || "Le service IA n'a pas répondu";
+          const missingModel = /model|not found|unknown|invalid/i.test(String(lastError));
+          if (missingModel) break;
+          continue;
+        }
 
-      lastError = "Réponse IA inutilisable";
-    } catch (error) {
-      if (error?.name === "AbortError") {
-        lastError = "Délai dépassé. Réessayez.";
-      } else {
-        lastError = "Erreur IA";
+        const text = extractMessageText(data);
+        if (!text) {
+          lastError = "Réponse IA vide";
+          continue;
+        }
+
+        const json = extractJsonObject(text);
+        if (json) return { ok: true, text, json, model };
+        lastError = "Réponse IA inutilisable";
+      } catch (error) {
+        if (error?.name === "AbortError") {
+          lastError = "Délai dépassé. Réessayez.";
+        } else {
+          lastError = "Erreur IA";
+        }
+      } finally {
+        clearTimeout(timer);
       }
-    } finally {
-      clearTimeout(timer);
     }
   }
 
@@ -335,70 +342,88 @@ function slotsMentionedInBody(slots, body) {
   });
 }
 
+function notesUseTutoiement(notes) {
+  return /\b(tu|toi|ton|ta|tes|t['’]es)\b/i.test(String(notes || ""));
+}
+
+function selectComposeSlots(freeSlots, notes, now) {
+  const hints = parseAvailabilityHints(notes, now);
+  let matched = filterSlotsByHints(freeSlots, hints);
+  let exact = Boolean(hints.hasHints && matched.length);
+  if (hints.hasHints && matched.length === 0) {
+    const relaxed = {
+      ...hints,
+      fromYmd: formatYmd(now),
+      toYmd: addDaysYmd(formatYmd(now), 14),
+      hasHints: true,
+    };
+    matched = filterSlotsByHints(freeSlots, relaxed);
+    exact = false;
+  }
+  if (!matched.length) matched = freeSlots || [];
+  return { slots: pickSpreadSlots(matched, 4), exact, hints };
+}
+
 export async function composeEmailWithAi({
   notes,
   contact,
   calendar = null,
 } = {}) {
   const wantRdv = notesWantAppointment(notes);
-  const slotsToOffer = wantRdv
-    ? pickSlotsForPrompt(calendar?.freeSlots || calendar?.promptSlots || [], 4)
-    : [];
-  const calendarBlock = calendar
-    ? calendarPromptBlock({
-        promptSlots: slotsToOffer,
-        contactAppointments: calendar.contactAppointments || [],
-      })
-    : null;
+  const now = new Date();
+  const selected = wantRdv
+    ? selectComposeSlots(calendar?.freeSlots || calendar?.promptSlots || [], notes, now)
+    : { slots: [], exact: true, hints: null };
+  const slotsToOffer = selected.slots;
+  const existingLabels = (calendar?.contactAppointments || []).map((event) =>
+    formatSlotLabel(event.starts_at, event.ends_at),
+  );
 
   const slotLines = slotsToOffer
-    .map((slot, index) => `${index + 1}. ${slot.label} (heure de Pékin)`)
+    .map((slot, index) => `${index + 1}. ${slot.label}`)
     .join("\n");
+  const tutoyer = notesUseTutoiement(notes);
 
   const result = await mammouthChat({
-    system: `Tu rédiges des e-mails pour Chinois en Devenir, agence francophone d'accompagnement pour étudier en Chine.
+    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Tu reformules les notes de l'administrateur. Tu n'inventes pas un autre mail.
+Ta seule tâche : reformuler les notes de l'administrateur en un e-mail naturel, clair et chaleureux. Ce n'est pas un mail marketing.
 
-Style (comme nos modèles) :
-- Vouvoiement.
-- Ton calme, concret, professionnel. Pas commercial, pas familier.
-- Phrases courtes. 2 à 4 paragraphes.
-- Pas de Bonjour ni de signature : le template HTML les ajoute.
+Le template HTML ajoute déjà « Bonjour {prénom}, » et la signature. Donc :
+- n'écris JAMAIS Bonjour, Madame, Monsieur, le prénom ou le nom.
+- n'écris JAMAIS la signature.
 
-Interdit :
-- Les formules toutes faites (« merci pour votre message », « nous sommes ravis », « n'hésitez pas ») sauf si l'admin l'a demandé.
-- Inventer des faits, dates, filières, HSK, frais, universités.
-- Recopier le JSON, le markdown ou les notes brutes.
-- Tutoiement.
+${tutoyer ? "Les notes tutoient : tutoie aussi (tu / toi / ton)." : "Vouvoie (vous / votre)."}
+Ton : humain, concret, polie, comme un conseiller qui écrit vite mais bien. 2 à 4 paragraphes courts.
 
 Rendez-vous :
-- Fuseau ${CALENDAR_TZ}, toujours écrire « heure de Pékin ».
-- Si des créneaux sont listés ci-dessous, recopie-les tels quels, en toutes lettres.
-- N'invente aucun horaire.
-- S'il n'y a pas de créneau et qu'un RDV est demandé, dis simplement que vous reviendrez vers la personne.
+- Heure de Pékin uniquement.
+- Propose UNIQUEMENT les créneaux numérotés fournis. Recopie les dates en toutes lettres.
+- Si les notes demandent mercredi-vendredi 9h-11h, ne propose pas un mardi ni 13h.
+- S'il n'y a pas de créneau, dis que vous reviendrez vers la personne. N'invente aucun horaire.
 
-JSON compact uniquement, sans markdown :
-{"subject":"...","title":"...","subtitle":"...","body":"..."}
+N'invente rien (filière, HSK, frais, université, « merci pour votre message » si ce n'est pas dans les notes).
 
-body = paragraphes séparés par \\n\\n. subtitle peut être vide.`,
-    user: `Étudiant : ${contact?.prenom || ""} ${contact?.nom || ""}
-Statut : ${contact?.suivi_statut || "—"}
-Formule : ${contact?.formule || "—"}
+Exemple de body (sans salutation) :
+"Afin de faire le point sur votre dossier et de mieux comprendre votre projet, nous aimerions convenir d'un rendez-vous cette semaine.\\n\\nAuriez-vous une disponibilité sur l'un de ces créneaux, heure de Pékin :\\n- mercredi 3 septembre de 9h00 à 9h30\\n- jeudi 4 septembre de 10h00 à 10h30\\n\\nRépondez à cet e-mail avec le créneau qui vous convient."
+
+JSON uniquement, sans markdown :
+{"subject":"...","title":"...","subtitle":"...","body":"..."}`,
+    user: `Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
 Maintenant : ${nowInCalendar().label}
 
 ${
   wantRdv
-    ? `Créneaux à proposer (recopie exactement) :\n${slotLines || "Aucun créneau libre sur la période."}\nRDV déjà posé : ${
-        calendarBlock?.rdv_deja_pris_avec_cet_etudiant?.join(" ; ") || "aucun"
-      }`
-    : "Pas de rendez-vous demandé : ignore le calendrier."
+    ? `${selected.exact ? "Créneaux qui correspondent à la demande (propose 2 à 4 parmi ceux-ci) :" : "Aucun créneau n'était libre dans la fenêtre demandée. Propose les plus proches ci-dessous et dis-le brièvement :"}
+${slotLines || "Aucun créneau libre."}
+RDV déjà posé avec cette personne : ${existingLabels.join(" ; ") || "aucun"}`
+    : "Pas de rendez-vous : ignore le calendrier."
 }
 
-Notes de l'administrateur (source unique, à reformuler) :
+Notes à reformuler :
 ${notes}`,
-    temperature: 0.2,
-    maxTokens: 2200,
+    temperature: 0.7,
+    maxTokens: 4000,
     retries: 1,
   });
 
@@ -476,8 +501,8 @@ ${JSON.stringify((previousEmails || []).slice(0, 4))}
 
 Réponse de l'étudiant :
 ${clip(replyText, 4000)}`,
-    temperature: 0.1,
-    maxTokens: 2200,
+    temperature: 0.4,
+    maxTokens: 4000,
     retries: 1,
   });
 

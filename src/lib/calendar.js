@@ -206,6 +206,141 @@ export function pickSlotsForPrompt(slots, limit = 16) {
   return mixed.slice(0, limit);
 }
 
+const DAY_NAME_TO_INDEX = {
+  dimanche: 0,
+  lundi: 1,
+  mardi: 2,
+  mercredi: 3,
+  jeudi: 4,
+  vendredi: 5,
+  samedi: 6,
+};
+
+function foldFr(text) {
+  return String(text || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "");
+}
+
+function parseHourToMinutes(raw) {
+  const match = String(raw || "").match(/(\d{1,2})(?:[:h](\d{2}))?/);
+  if (!match) return null;
+  const hour = Number(match[1]);
+  const minute = Number(match[2] || 0);
+  if (!Number.isFinite(hour) || hour > 23) return null;
+  return hour * 60 + (Number.isFinite(minute) ? minute : 0);
+}
+
+function weekdayRange(from, to) {
+  const out = [];
+  let current = from;
+  for (let i = 0; i < 7; i += 1) {
+    out.push(current);
+    if (current === to) break;
+    current = (current + 1) % 7;
+  }
+  return out;
+}
+
+export function parseAvailabilityHints(notes, now = new Date()) {
+  const text = foldFr(notes);
+  const today = formatYmd(now);
+  const monday = startOfWeekYmd(today);
+
+  const dayNames = Object.keys(DAY_NAME_TO_INDEX);
+  const foundDays = [];
+  const dayRe = new RegExp(`\\b(${dayNames.join("|")})s?\\b`, "g");
+  let match;
+  while ((match = dayRe.exec(text))) {
+    const index = DAY_NAME_TO_INDEX[match[1]];
+    if (!foundDays.includes(index)) foundDays.push(index);
+  }
+
+  const range = text.match(
+    new RegExp(
+      `entre(?:\\s+le)?\\s+(${dayNames.join("|")})s?\\s+et(?:\\s+le)?\\s+(${dayNames.join("|")})s?`,
+    ),
+  );
+  let weekdays = foundDays;
+  if (range) {
+    weekdays = weekdayRange(
+      DAY_NAME_TO_INDEX[range[1]],
+      DAY_NAME_TO_INDEX[range[2]],
+    );
+  }
+
+  const hours = text.match(
+    /(?:entre|de)\s+(\d{1,2}(?:[:h]\d{2})?)\s*h?\s+(?:et|a|à)\s+(\d{1,2}(?:[:h]\d{2})?)\s*h?\b/,
+  );
+  const minMinutes = hours ? parseHourToMinutes(hours[1]) : null;
+  const maxMinutes = hours ? parseHourToMinutes(hours[2]) : null;
+
+  let fromYmd = today;
+  let toYmd = addDaysYmd(monday, 13);
+  if (/\bcette semaine\b/.test(text)) {
+    toYmd = addDaysYmd(monday, 6);
+  } else if (/\bsemaine prochaine\b/.test(text)) {
+    fromYmd = addDaysYmd(monday, 7);
+    toYmd = addDaysYmd(monday, 13);
+  }
+
+  return {
+    weekdays,
+    minMinutes,
+    maxMinutes,
+    fromYmd,
+    toYmd,
+    hasHints: Boolean(
+      weekdays.length || minMinutes != null || /\bcette semaine|semaine prochaine\b/.test(text),
+    ),
+  };
+}
+
+export function filterSlotsByHints(slots, hints) {
+  if (!hints?.hasHints) return slots || [];
+  return (slots || []).filter((slot) => {
+    if (hints.fromYmd && slot.ymd < hints.fromYmd) return false;
+    if (hints.toYmd && slot.ymd > hints.toYmd) return false;
+    if (hints.weekdays?.length && !hints.weekdays.includes(weekdayIndex(slot.ymd))) {
+      return false;
+    }
+    const [hour, minute] = String(slot.startHm || "00:00").split(":").map(Number);
+    const startMin = hour * 60 + minute;
+    if (hints.minMinutes != null && startMin < hints.minMinutes) return false;
+    if (hints.maxMinutes != null && startMin > hints.maxMinutes) return false;
+    return true;
+  });
+}
+
+export function pickSpreadSlots(slots, limit = 4) {
+  if (!Array.isArray(slots) || slots.length === 0) return [];
+  const byDay = new Map();
+  for (const slot of slots) {
+    const list = byDay.get(slot.ymd) || [];
+    list.push(slot);
+    byDay.set(slot.ymd, list);
+  }
+  const days = [...byDay.keys()].sort();
+  const picked = [];
+  const seen = new Set();
+  let round = 0;
+  while (picked.length < limit) {
+    let added = false;
+    for (const day of days) {
+      const candidate = byDay.get(day)[round];
+      if (!candidate || seen.has(candidate.starts_at)) continue;
+      seen.add(candidate.starts_at);
+      picked.push(candidate);
+      added = true;
+      if (picked.length >= limit) break;
+    }
+    if (!added) break;
+    round += 1;
+  }
+  return picked;
+}
+
 export function compactSlot(slot) {
   if (!slot?.starts_at) return null;
   return {
