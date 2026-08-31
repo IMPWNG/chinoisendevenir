@@ -4,28 +4,142 @@ import {
   findMatchingFreeSlot,
   formatSlotLabel,
   nowInCalendar,
+  pickSlotsForPrompt,
 } from "./calendar";
 
 const DEFAULT_SUBJECT = "Votre projet d'études en Chine";
 
-function extractJsonObject(text) {
+function clip(value, max) {
+  return String(value || "").trim().slice(0, max);
+}
+
+function extractMessageText(payload) {
+  const choice = payload?.choices?.[0] || {};
+  const message = choice.message || {};
+  const parts = [];
+
+  const push = (value) => {
+    if (typeof value === "string" && value.trim()) parts.push(value);
+  };
+
+  if (typeof message.content === "string") push(message.content);
+  else if (Array.isArray(message.content)) {
+    for (const part of message.content) {
+      if (typeof part === "string") push(part);
+      else push(part?.text || part?.content || part?.value);
+    }
+  }
+
+  push(message.reasoning_content);
+  push(message.reasoning);
+  push(message.text);
+  push(choice.text);
+
+  return parts.join("\n").trim();
+}
+
+function closeTruncatedJson(input) {
+  let inStr = false;
+  let escape = false;
+  const stack = [];
+  let out = "";
+  for (const ch of String(input || "")) {
+    out += ch;
+    if (inStr) {
+      if (escape) escape = false;
+      else if (ch === "\\") escape = true;
+      else if (ch === '"') inStr = false;
+      continue;
+    }
+    if (ch === '"') inStr = true;
+    else if (ch === "{") stack.push("}");
+    else if (ch === "[") stack.push("]");
+    else if (ch === "}" || ch === "]") stack.pop();
+  }
+  if (inStr) out += '"';
+  while (stack.length) out += stack.pop();
+  return out;
+}
+
+function unescapeJsonString(value) {
+  try {
+    return JSON.parse(`"${String(value)}"`);
+  } catch {
+    return String(value || "")
+      .replaceAll("\\n", "\n")
+      .replaceAll('\\"', '"')
+      .replaceAll("\\\\", "\\");
+  }
+}
+
+function grabJsonString(text, key) {
+  const source = String(text || "");
+  const complete = source.match(
+    new RegExp(`"${key}"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"`),
+  );
+  if (complete) return unescapeJsonString(complete[1]);
+
+  const partial = source.match(new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*)`));
+  if (!partial) return "";
+  let raw = partial[1];
+  raw = raw.replace(/"\s*,\s*"[a-z_]+"\s*:[\s\S]*$/i, "");
+  raw = raw.replace(/"\s*}\s*$/g, "");
+  raw = raw.replace(/```[\s\S]*$/g, "");
+  return unescapeJsonString(raw.replace(/"\s*$/, ""));
+}
+
+export function extractJsonObject(text) {
   const trimmed = String(text || "").trim();
+  if (!trimmed) return null;
   const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i);
   const raw = (fenced ? fenced[1] : trimmed).trim();
   const start = raw.indexOf("{");
+  if (start === -1) return null;
   const end = raw.lastIndexOf("}");
-  if (start === -1 || end === -1 || end <= start) return null;
-  try {
-    return JSON.parse(raw.slice(start, end + 1));
-  } catch {
-    return null;
+  const slice = end > start ? raw.slice(start, end + 1) : raw.slice(start);
+  const candidates = [
+    slice,
+    slice.replace(/,\s*([}\]])/g, "$1"),
+    closeTruncatedJson(slice.replace(/,\s*([}\]])/g, "$1")),
+  ];
+  for (const candidate of candidates) {
+    try {
+      const parsed = JSON.parse(candidate);
+      if (parsed && typeof parsed === "object") return parsed;
+    } catch {
+      /* try next */
+    }
   }
+
+  const subject = grabJsonString(raw, "subject");
+  const body = grabJsonString(raw, "body");
+  if (!subject && !body) return null;
+  return {
+    subject,
+    title: grabJsonString(raw, "title"),
+    subtitle: grabJsonString(raw, "subtitle"),
+    body,
+  };
+}
+
+function looksLikeJsonBlob(text) {
+  const value = String(text || "").trim();
+  return (
+    /^```/.test(value) ||
+    /^\{\s*"/.test(value) ||
+    /"subject"\s*:/.test(value)
+  );
 }
 
 function stripGreetingAndSignoff(body) {
   let text = String(body || "")
     .replace(/\r\n/g, "\n")
     .trim();
+  if (looksLikeJsonBlob(text)) {
+    const parsed = extractJsonObject(text);
+    if (parsed?.body) text = String(parsed.body).trim();
+  }
+  text = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/g, "");
   text = text.replace(
     /^(bonjour|bonsoir|hello|hi)(\s+[^,\n]+)?[,\s]*/i,
     "",
@@ -35,10 +149,6 @@ function stripGreetingAndSignoff(body) {
     "",
   );
   return text.trim();
-}
-
-function clip(value, max) {
-  return String(value || "").trim().slice(0, max);
 }
 
 function compactContact(contact) {
@@ -68,9 +178,9 @@ function sanitizeComposeBody(value) {
 }
 
 function composeEmailFromParsed(parsed, fallbackText) {
-  const body = stripGreetingAndSignoff(
-    parsed?.body || (!parsed ? fallbackText : ""),
-  );
+  const fromJson = parsed?.body ? parsed.body : "";
+  const fallback = looksLikeJsonBlob(fallbackText) ? "" : fallbackText;
+  const body = stripGreetingAndSignoff(fromJson || fallback);
   if (!body || body.length < 20) {
     return { ok: false, error: "Réponse IA inutilisable" };
   }
@@ -96,77 +206,104 @@ function eventToSlot(event) {
   };
 }
 
-function calendarPromptBlock({ promptSlots = [], booked = [], contactAppointments = [] } = {}) {
-  const clock = nowInCalendar();
-  const free = promptSlots.map(compactSlot).filter(Boolean);
-  const busy = (booked || []).slice(0, 24).map((event) => ({
-    starts_at: event.starts_at,
-    ends_at: event.ends_at,
-    label: formatSlotLabel(event.starts_at, event.ends_at),
-    title: clip(event.title, 80),
-  }));
-  const mine = (contactAppointments || []).map((event) => ({
-    starts_at: event.starts_at,
-    ends_at: event.ends_at,
-    label: formatSlotLabel(event.starts_at, event.ends_at),
-    title: clip(event.title, 80),
-  }));
+function notesWantAppointment(notes) {
+  return /\b(rdv|rendez[-\s]?vous|appel|visio|cr[eé]neau|dispo|disponib|t[eé]l[eé]phone|call)\b/i.test(
+    String(notes || ""),
+  );
+}
 
+function calendarPromptBlock({ promptSlots = [], contactAppointments = [] } = {}) {
   return {
     timezone: CALENDAR_TZ,
-    maintenant: clock.label,
-    creneaux_libres: free,
-    creneaux_occupes: busy,
-    rdv_deja_pris_avec_cet_etudiant: mine,
+    maintenant: nowInCalendar().label,
+    creneaux_a_proposer: (promptSlots || []).map((slot) => slot.label).filter(Boolean),
+    rdv_deja_pris_avec_cet_etudiant: (contactAppointments || []).map((event) =>
+      formatSlotLabel(event.starts_at, event.ends_at),
+    ),
   };
 }
 
-async function mammouthChat({ system, user, temperature = 0.3, maxTokens = 1800, timeoutMs = 30000 }) {
+async function mammouthChat({
+  system,
+  user,
+  temperature = 0.2,
+  maxTokens = 2200,
+  timeoutMs = 45000,
+  retries = 1,
+} = {}) {
   const apiKey = process.env.MAMMOUTH_API_KEY;
   if (!apiKey) {
     return { ok: false, error: "Clé MAMMOUTH_API_KEY manquante" };
   }
 
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  let lastError = "Réponse IA vide";
 
-  try {
-    const response = await fetch("https://api.mammouth.ai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: process.env.MAMMOUTH_MODEL || "minimax-m3",
-        temperature,
-        max_tokens: maxTokens,
-        messages: [
-          { role: "system", content: system },
-          { role: "user", content: user },
-        ],
-      }),
-      signal: controller.signal,
-    });
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const compact = attempt > 0;
+    try {
+      const response = await fetch("https://api.mammouth.ai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: process.env.MAMMOUTH_MODEL || "minimax-m3",
+          temperature: compact ? 0 : temperature,
+          max_tokens: compact ? Math.max(maxTokens, 2800) : maxTokens,
+          messages: compact
+            ? [
+                { role: "system", content: system },
+                { role: "user", content: user },
+                {
+                  role: "user",
+                  content:
+                    "Réponds maintenant par un JSON compact valide uniquement. Pas de markdown, pas de ``` , pas de raisonnement. Toutes les chaînes sur une ligne, sauts de ligne écrits \\n.",
+                },
+              ]
+            : [
+                { role: "system", content: system },
+                { role: "user", content: user },
+              ],
+        }),
+        signal: controller.signal,
+      });
 
-    if (!response.ok) {
-      return { ok: false, error: "Le service IA n'a pas répondu" };
-    }
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        lastError =
+          data?.error?.message || data?.message || "Le service IA n'a pas répondu";
+        continue;
+      }
 
-    const data = await response.json();
-    const text = data?.choices?.[0]?.message?.content?.trim();
-    if (!text) {
-      return { ok: false, error: "Réponse IA vide" };
+      const text = extractMessageText(data);
+      if (!text) {
+        lastError = "Réponse IA vide";
+        console.warn("compose-email empty", {
+          finish: data?.choices?.[0]?.finish_reason,
+          keys: Object.keys(data?.choices?.[0]?.message || {}),
+        });
+        continue;
+      }
+
+      const json = extractJsonObject(text);
+      if (json) return { ok: true, text, json };
+
+      lastError = "Réponse IA inutilisable";
+    } catch (error) {
+      if (error?.name === "AbortError") {
+        lastError = "Délai dépassé. Réessayez.";
+      } else {
+        lastError = "Erreur IA";
+      }
+    } finally {
+      clearTimeout(timer);
     }
-    return { ok: true, text, json: extractJsonObject(text) };
-  } catch (error) {
-    if (error?.name === "AbortError") {
-      return { ok: false, error: "Délai dépassé. Réessayez." };
-    }
-    return { ok: false, error: "Erreur IA" };
-  } finally {
-    clearTimeout(timer);
   }
+
+  return { ok: false, error: lastError };
 }
 
 function normalizeOfferedSlots(raw, freeSlots) {
@@ -185,49 +322,84 @@ function normalizeOfferedSlots(raw, freeSlots) {
   return matched.slice(0, 6);
 }
 
+function slotsMentionedInBody(slots, body) {
+  const text = String(body || "").toLowerCase();
+  return (slots || []).filter((slot) => {
+    const hm = String(slot.startHm || "").replace(/^0/, "");
+    const day = String(slot.label || "").split(" de ")[0]?.toLowerCase();
+    return (
+      (hm && text.includes(slot.startHm)) ||
+      (hm && text.includes(hm.replace(":", "h"))) ||
+      (day && text.includes(day))
+    );
+  });
+}
+
 export async function composeEmailWithAi({
   notes,
   contact,
   calendar = null,
 } = {}) {
-  const calendarBlock = calendar ? calendarPromptBlock(calendar) : null;
-  const hasSlots = Boolean(calendarBlock?.creneaux_libres?.length);
+  const wantRdv = notesWantAppointment(notes);
+  const slotsToOffer = wantRdv
+    ? pickSlotsForPrompt(calendar?.freeSlots || calendar?.promptSlots || [], 4)
+    : [];
+  const calendarBlock = calendar
+    ? calendarPromptBlock({
+        promptSlots: slotsToOffer,
+        contactAppointments: calendar.contactAppointments || [],
+      })
+    : null;
+
+  const slotLines = slotsToOffer
+    .map((slot, index) => `${index + 1}. ${slot.label} (heure de Pékin)`)
+    .join("\n");
 
   const result = await mammouthChat({
     system: `Tu rédiges des e-mails pour Chinois en Devenir, agence francophone d'accompagnement pour étudier en Chine.
 
-Transforme les notes de l'administrateur en un e-mail professionnel, clair, chaleureux et rassurant.
+Tu reformules les notes de l'administrateur. Tu n'inventes pas un autre mail.
 
-Règles :
-- Rédige dans la langue des notes (français par défaut).
-- Ne jamais garantir une admission, une bourse ou un visa.
-- Ne pas inventer de frais, dates, HSK, universités, programmes ou faits absents des notes, du profil ou du calendrier.
-- Ne pas écrire « Bonjour » ni la signature : le template HTML les ajoute déjà.
-- Paragraphes courts, sans markdown, sans listes à puces markdown.
-- Le bandeau (title) est court. Le sous-titre est optionnel.
-- Fuseau horaire des rendez-vous : ${CALENDAR_TZ} (heure de Pékin). Écris toujours « heure de Pékin » quand tu cites un créneau.
-- Si les notes parlent d'un RDV, appel, visio ou disponibilité : propose 2 à 4 créneaux pris UNIQUEMENT dans creneaux_libres. Cite-les en toutes lettres (ex. mardi 2 septembre de 14h00 à 14h30, heure de Pékin). N'invente aucun horaire.
-- Si creneaux_libres est vide et qu'un RDV est demandé, dis que l'agenda est complet sur la période et propose de revenir vers l'étudiant.
-- Si les notes ne parlent pas de RDV, ignore le calendrier.
-- Ne réserve aucun créneau : tu proposes seulement.
+Style (comme nos modèles) :
+- Vouvoiement.
+- Ton calme, concret, professionnel. Pas commercial, pas familier.
+- Phrases courtes. 2 à 4 paragraphes.
+- Pas de Bonjour ni de signature : le template HTML les ajoute.
 
-Réponds uniquement par un JSON valide :
-{"subject":"...","title":"...","subtitle":"...","body":"...","offered_slots":[{"starts_at":"...ISO...","ends_at":"...ISO..."}]}
+Interdit :
+- Les formules toutes faites (« merci pour votre message », « nous sommes ravis », « n'hésitez pas ») sauf si l'admin l'a demandé.
+- Inventer des faits, dates, filières, HSK, frais, universités.
+- Recopier le JSON, le markdown ou les notes brutes.
+- Tutoiement.
 
-body : paragraphes séparés par une ligne vide.
-offered_slots : uniquement des créneaux copiés depuis creneaux_libres (tableau vide sinon).`,
-    user: `Profil étudiant (JSON) :
-${JSON.stringify(compactContact(contact))}
+Rendez-vous :
+- Fuseau ${CALENDAR_TZ}, toujours écrire « heure de Pékin ».
+- Si des créneaux sont listés ci-dessous, recopie-les tels quels, en toutes lettres.
+- N'invente aucun horaire.
+- S'il n'y a pas de créneau et qu'un RDV est demandé, dis simplement que vous reviendrez vers la personne.
 
-Maintenant (heure de Pékin) : ${nowInCalendar().label}
+JSON compact uniquement, sans markdown :
+{"subject":"...","title":"...","subtitle":"...","body":"..."}
 
-Calendrier (JSON) :
-${JSON.stringify(calendarBlock || { note: "calendrier indisponible" })}
+body = paragraphes séparés par \\n\\n. subtitle peut être vide.`,
+    user: `Étudiant : ${contact?.prenom || ""} ${contact?.nom || ""}
+Statut : ${contact?.suivi_statut || "—"}
+Formule : ${contact?.formule || "—"}
+Maintenant : ${nowInCalendar().label}
 
-Notes de l'administrateur :
+${
+  wantRdv
+    ? `Créneaux à proposer (recopie exactement) :\n${slotLines || "Aucun créneau libre sur la période."}\nRDV déjà posé : ${
+        calendarBlock?.rdv_deja_pris_avec_cet_etudiant?.join(" ; ") || "aucun"
+      }`
+    : "Pas de rendez-vous demandé : ignore le calendrier."
+}
+
+Notes de l'administrateur (source unique, à reformuler) :
 ${notes}`,
-    temperature: 0.25,
-    maxTokens: 1800,
+    temperature: 0.2,
+    maxTokens: 2200,
+    retries: 1,
   });
 
   if (!result.ok) return result;
@@ -235,12 +407,13 @@ ${notes}`,
   const composed = composeEmailFromParsed(result.json, result.text);
   if (!composed.ok) return composed;
 
-  const offeredSlots = hasSlots
-    ? normalizeOfferedSlots(
+  const mentioned = slotsMentionedInBody(slotsToOffer, composed.body);
+  const offeredSlots = wantRdv
+    ? (mentioned.length ? mentioned : slotsToOffer).map(compactSlot)
+    : normalizeOfferedSlots(
         result.json?.offered_slots,
-        calendar.freeSlots || calendar.promptSlots || [],
-      )
-    : [];
+        calendar?.freeSlots || calendar?.promptSlots || [],
+      );
 
   return {
     ...composed,
@@ -254,7 +427,16 @@ export async function analyzeReplyWithAi({
   calendar = null,
   previousEmails = [],
 } = {}) {
-  const calendarBlock = calendar ? calendarPromptBlock(calendar) : null;
+  const calendarBlock = calendar
+    ? {
+        timezone: CALENDAR_TZ,
+        maintenant: nowInCalendar().label,
+        creneaux_libres: (calendar.promptSlots || []).map(compactSlot).filter(Boolean),
+        rdv_deja_pris_avec_cet_etudiant: (calendar.contactAppointments || []).map(
+          eventToSlot,
+        ),
+      }
+    : null;
   const freeSlots = calendar?.freeSlots || calendar?.promptSlots || [];
   const ownSlots = (calendar?.contactAppointments || [])
     .map(eventToSlot)
@@ -266,20 +448,20 @@ export async function analyzeReplyWithAi({
 Tu dois :
 1. Décider si le message choisit / propose / refuse un créneau d'appel ou de visio.
 2. Si l'étudiant choisit un horaire, le faire correspondre à un créneau de creneaux_libres (starts_at / ends_at identiques).
-3. Rédiger un e-mail de réponse (même style que les templates) pour que l'admin le relise et l'envoie. Ne jamais envoyer toi-même.
+3. Rédiger un e-mail de réponse, vouvoiement, même style que nos modèles. L'admin relit avant envoi.
 4. Ne pas écrire « Bonjour » ni la signature.
 
 Règles :
 - Fuseau : ${CALENDAR_TZ} (heure de Pékin). Cite les horaires en toutes lettres + « heure de Pékin ».
-- Si l'étudiant confirme le RDV déjà dans rdv_deja_pris_avec_cet_etudiant : kind = "confirmation", chosen_slot = ce RDV, slot_available = true. Confirme sans proposer d'autre horaire.
-- Si l'étudiant propose UN AUTRE créneau qui est dans creneaux_libres : kind = "move", chosen_slot = le nouveau créneau, slot_available = true. Le mail confirme le déplacement et rappelle l'ancien horaire annulé.
-- Si l'étudiant propose un autre créneau QUI N'EST PAS libre : kind = "reschedule", slot_available = false, chosen_slot = null. On garde l'éventuel RDV déjà posé. Propose 2 à 4 alternatives uniquement depuis creneaux_libres, et mentionne le RDV actuel s'il existe.
+- Si l'étudiant confirme le RDV déjà dans rdv_deja_pris_avec_cet_etudiant : kind = "confirmation", chosen_slot = ce RDV, slot_available = true.
+- Si l'étudiant propose UN AUTRE créneau qui est dans creneaux_libres : kind = "move", chosen_slot = le nouveau créneau, slot_available = true.
+- Si l'étudiant propose un autre créneau QUI N'EST PAS libre : kind = "reschedule", slot_available = false, chosen_slot = null. On garde le RDV déjà posé. Propose 2 à 4 alternatives depuis creneaux_libres.
 - Si le créneau demandé est dans creneaux_libres et qu'il n'y a pas encore de RDV : kind = "confirmation".
 - Si ce n'est pas un message de RDV : is_appointment_reply = false, body peut être vide.
-- Ne jamais inventer un horaire hors creneaux_libres (sauf confirmation d'un RDV déjà posé avec cet étudiant).
-- Ne jamais garantir admission / bourse / visa.
+- Ne jamais inventer un horaire hors creneaux_libres (sauf confirmation d'un RDV déjà posé).
+- Vouvoiement. Pas de formules commerciales.
 
-JSON uniquement :
+JSON compact uniquement, sans markdown :
 {"is_appointment_reply":true,"kind":"confirmation","student_preference":"...","chosen_slot":{"starts_at":"...","ends_at":"..."}|null,"slot_available":true,"confidence":0.0,"reason":"...","subject":"...","title":"...","subtitle":"...","body":"...","offered_slots":[]}`,
     user: `Profil étudiant (JSON) :
 ${JSON.stringify(compactContact(contact))}
@@ -294,8 +476,9 @@ ${JSON.stringify((previousEmails || []).slice(0, 4))}
 
 Réponse de l'étudiant :
 ${clip(replyText, 4000)}`,
-    temperature: 0.15,
-    maxTokens: 1800,
+    temperature: 0.1,
+    maxTokens: 2200,
+    retries: 1,
   });
 
   if (!result.ok) return result;
@@ -355,4 +538,4 @@ ${clip(replyText, 4000)}`,
   };
 }
 
-export { extractJsonObject, sanitizeComposeBody, sanitizeComposeLine };
+export { sanitizeComposeBody, sanitizeComposeLine };
