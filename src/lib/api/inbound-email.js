@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
-import { CONTACT_FROM, CONTACT_FROM_EMAIL, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
-import { escapeHtml, sanitizeEmailSubject } from "../emailLayout.js";
+import { CONTACT_FROM_EMAIL, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
 import {
   sendTemplatedEmail,
   updateContactStatus,
@@ -385,28 +384,6 @@ export async function saveChosenFormule(contact, formuleLabel) {
   return false;
 }
 
-async function notifyAdmin({ contact, subject, text, intent }) {
-  try {
-    const name = `${contact.prenom || ""} ${contact.nom || ""}`.trim();
-    await resend.emails.send({
-      from: CONTACT_FROM,
-      to: ADMIN_NOTIFY_EMAIL,
-      replyTo: contact.email,
-      subject: sanitizeEmailSubject(`Réponse de ${name} — ${intent}`),
-      html: `
-        <p><strong>${escapeHtml(name)}</strong> (${escapeHtml(contact.email)})</p>
-        <p><strong>Sujet :</strong> ${escapeHtml(subject || "—")}</p>
-        <p><strong>Intent détecté :</strong> ${escapeHtml(intent)}</p>
-        <p><strong>Statut actuel :</strong> ${escapeHtml(contact.suivi_statut || "—")}</p>
-        <hr>
-        <pre style="white-space:pre-wrap;font-family:inherit">${escapeHtml(truncate(text, 4000))}</pre>
-      `,
-    });
-  } catch (error) {
-    console.warn("⚠️ Notif admin inbound:", error.message);
-  }
-}
-
 export async function processInboundEmail(payload) {
   const data = payload?.data || {};
   const emailId = data.email_id || data.id;
@@ -509,13 +486,6 @@ export async function processInboundEmail(payload) {
     "reponse_client",
     `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
   );
-
-  await notifyAdmin({
-    contact,
-    subject,
-    text: replyText || rawText,
-    intent,
-  });
 
   if (formule) {
     const alreadySameFormule = existingFormule === formule.label;

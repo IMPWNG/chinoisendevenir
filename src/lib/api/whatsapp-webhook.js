@@ -1,9 +1,6 @@
 /* eslint-disable no-undef */
 import { createHmac, timingSafeEqual } from "crypto";
 import { createClient } from "@supabase/supabase-js";
-import { Resend } from "resend";
-import { CONTACT_FROM, ADMIN_NOTIFY_EMAIL } from "../emailConfig.js";
-import { escapeHtml, sanitizeEmailSubject } from "../emailLayout.js";
 import {
   logAction,
   updateContactStatus,
@@ -26,11 +23,8 @@ const supabaseUrl =
   process.env.NEXT_PUBLIC_SUPABASE_URL ||
   process.env.VITE_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const resendApiKey =
-  process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
-const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export function verifyWhatsAppSignature(rawBody, signatureHeader, appSecret) {
   if (!appSecret) return false;
@@ -103,31 +97,6 @@ async function findContactByWhatsAppId(waId) {
   ) || null;
 }
 
-async function notifyAdminWhatsApp({ contact, text, intent, from }) {
-  if (!resend) return;
-  try {
-    const name = `${contact.prenom || ""} ${contact.nom || ""}`.trim();
-    await resend.emails.send({
-      from: CONTACT_FROM,
-      to: ADMIN_NOTIFY_EMAIL,
-      replyTo: contact.email || undefined,
-      subject: sanitizeEmailSubject(
-        `WhatsApp de ${name} — ${intent}`,
-      ),
-      html: `
-        <p><strong>${escapeHtml(name)}</strong> (${escapeHtml(contact.email || "sans email")})</p>
-        <p><strong>WhatsApp :</strong> ${escapeHtml(from)}</p>
-        <p><strong>Intent détecté :</strong> ${escapeHtml(intent)}</p>
-        <p><strong>Statut actuel :</strong> ${escapeHtml(contact.suivi_statut || "—")}</p>
-        <hr>
-        <pre style="white-space:pre-wrap;font-family:inherit">${escapeHtml(truncate(text, 4000))}</pre>
-      `,
-    });
-  } catch (error) {
-    console.warn("⚠️ Notif admin WhatsApp:", error.message);
-  }
-}
-
 export async function processIncomingWhatsApp(body) {
   const incoming = collectIncomingMessages(body);
   if (incoming.length === 0) {
@@ -169,8 +138,6 @@ async function handleOneIncoming({ message, contacts }) {
     "reponse_whatsapp",
     `WhatsApp reçu [${intent}] : ${truncate(text || "(vide)")}`,
   );
-
-  await notifyAdminWhatsApp({ contact, text, intent, from });
 
   if (formule) {
     const alreadySameFormule = existingFormule === formule.label;
