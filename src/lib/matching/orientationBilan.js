@@ -68,8 +68,7 @@ export const BILAN_DISCLAIMER =
   "Aucune admission, bourse ou visa n’est garantie.";
 
 function packDefs(formule, keys, group) {
-  const titles =
-    formule.number === 1 ? formule.includes : formule.includes.slice(1);
+  const titles = formule.matchingIncludes || formule.includes;
   return titles.map((title, index) => ({
     key: keys[index] || `section_${group}_${index}`,
     title,
@@ -134,9 +133,7 @@ function topMatches(analyses, limit) {
 }
 
 function applicationLimit(formuleNumber) {
-  if (Number(formuleNumber) >= 3) return 5;
-  if (Number(formuleNumber) === 2) return 3;
-  return 5;
+  return getFormuleAccess(formuleNumber).applications || 5;
 }
 
 export function summarizeDocuments(documents = [], adminDocuments = []) {
@@ -426,7 +423,7 @@ function buildSectionMap(ctx) {
         n >= 3
           ? `La procédure va du dossier jusqu’au départ : candidatures, réponses, puis conseils visa et logement. Les démarches officielles restent à votre charge.`
           : n === 2
-            ? `La procédure va jusqu’aux réponses des universités : caler 3 candidatures, déposer, suivre.`
+            ? `La procédure va jusqu’aux réponses des universités : caler ${applyMax} candidatures, déposer, suivre.`
             : `On clarifie d’abord le projet, puis on rassemble les pièces, puis on candidate.`,
       items: [
         factItem("Clarifier le projet", "info"),
@@ -575,7 +572,7 @@ function buildSectionMap(ctx) {
         ? toApply.map((uni, index) =>
             factItem(`${index + 1}. ${uni.name}${uni.city ? ` (${uni.city})` : ""}`, "ok"),
           )
-        : [factItem("Pas assez d’éléments pour figer 5 candidatures.", "miss")],
+        : [factItem(`Pas assez d’éléments pour figer ${applyMax} candidatures.`, "miss")],
     },
     suivi_complet: {
       verdict: "Du dossier jusqu’au départ",
@@ -647,13 +644,14 @@ function buildSectionMap(ctx) {
 
 function introFor(formuleNumber) {
   const n = Number(formuleNumber) || 1;
+  const applyMax = applicationLimit(n);
   if (n >= 3) {
-    return "Voici le compte rendu pour viser jusqu’à 5 candidatures, puis le visa et le logement.";
+    return `Voici le compte rendu pour viser jusqu’à ${applyMax} candidatures, puis le visa et le logement.`;
   }
   if (n === 2) {
-    return "Voici le compte rendu pour préparer jusqu’à 3 candidatures.";
+    return `Voici le compte rendu pour préparer jusqu’à ${applyMax} candidatures.`;
   }
-  return "Voici le compte rendu de votre projet, et les universités à viser en priorité.";
+  return "Voici le compte rendu de votre projet, et les établissements à viser en priorité.";
 }
 
 function tightenBody(body) {

@@ -50,7 +50,7 @@ const TOPICS = [
   {
     icon: "🤝",
     title: "Comment se faire accompagner",
-    text: "Le processus d'admission va de l'orientation jusqu'à l'installation. Les formules couvrent un bilan (100 €), un accompagnement candidature (500 €) ou un suivi jusqu'au départ (1 000 €). Les frais d'université, de traduction certifiée, de visa et de voyage restent à la charge de l'étudiant.",
+    text: "Le processus va de l'orientation jusqu'à l'installation. Les formules couvrent l'école de langue (500 €), l'admission universitaire (1 000 €) ou un suivi jusqu'au départ (2 000 €). Les frais d'université, de traduction certifiée, de visa et de voyage restent à la charge de l'étudiant.",
     link: { href: "/processus", label: "Voir le processus d'admission" },
     extraLink: { href: "/tarifs", label: "Voir les formules" },
   },

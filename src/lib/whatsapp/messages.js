@@ -1,4 +1,4 @@
-import { FORMULES, EXTRA_FEES, displayFormuleLabel } from "../formules.js";
+import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel } from "../formules.js";
 import { SITE_URL } from "../emailLayout.js";
 
 const COUNTRY_CALLING_CODES = [
@@ -187,6 +187,8 @@ ${formule.intro}`;
 Merci pour votre projet d'études en Chine. Voici nos formules d'accompagnement :
 
 ${cards}
+
+_${PAYMENT_NOTE}_
 
 _Les frais universitaires, traductions officielles, visa, logement et billets restent à votre charge._
 ${extras}

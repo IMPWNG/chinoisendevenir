@@ -2,6 +2,7 @@
 
 import {
   FORMULES,
+  PAYMENT_NOTE,
   displayFormuleFootnote,
   getFormuleNumber,
 } from "../lib/formules";
@@ -20,18 +21,34 @@ export default function StudentFormules({ currentFormule = "" }) {
 
       <div className="student-formule-grid">
         {FORMULES.map((formule) => {
-          const featured = formule.number === 2;
+          const featured = formule.featured;
           const selected = selectedNumber === formule.number;
           return (
             <article
               key={formule.number}
               className={`student-formule-card ${featured ? "is-featured" : ""} ${selected ? "is-selected" : ""}`}
             >
-              <p className="student-formule-kicker">Formule {formule.number}</p>
+              <div className="student-formule-card-top">
+                <p className="student-formule-kicker">Formule {formule.number}</p>
+                {formule.badge ? (
+                  <span
+                    className={`student-formule-badge ${featured ? "is-featured" : ""}`}
+                  >
+                    {formule.badge}
+                  </span>
+                ) : null}
+              </div>
+              {formule.audience ? (
+                <p className="student-formule-audience">{formule.audience}</p>
+              ) : null}
               <h3 className="student-formule-title">{formule.title}</h3>
+              {formule.subtitle ? (
+                <p className="student-formule-intro">{formule.subtitle}</p>
+              ) : null}
               <p className="student-formule-price">{formule.price}</p>
+              <p className="student-formule-payment">{PAYMENT_NOTE}</p>
               <p className="student-formule-intro">{formule.intro}</p>
-              <p className="student-formule-label">Inclus</p>
+              <p className="student-formule-label">Ce qui est inclus</p>
               <ul className="student-formule-list">
                 {formule.includes.map((item) => (
                   <li key={item}>{item}</li>

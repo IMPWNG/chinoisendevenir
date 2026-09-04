@@ -1,4 +1,4 @@
-import { getFormuleByNumber } from "../formules";
+import { getFormuleAccess, getFormuleByNumber } from "../formules";
 import { CATEGORY_META } from "./constants";
 
 function money(cny) {
@@ -208,11 +208,15 @@ export function buildClientMessage(student, analyses, overallFormula, { gaps = [
     lines.push("• Trancher langue d'enseignement (chinois ou anglais)");
     lines.push("• Traiter les écarts listés ci-dessus avant de candidater");
   } else if (depth === "candidature") {
-    lines.push("• Choisir jusqu'à 3 universités parmi le mix");
+    lines.push(
+      `• Choisir jusqu'à ${getFormuleAccess(2).applications} universités parmi le mix`,
+    );
     lines.push("• Vérifier deadlines et pièces officielles");
     lines.push("• Préparer le dossier (lettres, traductions, formulaires)");
   } else {
-    lines.push("• Figer jusqu'à 5 candidatures");
+    lines.push(
+      `• Figer jusqu'à ${getFormuleAccess(3).applications} candidatures`,
+    );
     lines.push("• Caler un calendrier admission → JW201/JW202 → visa → logement");
     lines.push("• Anticiper les frais hors accompagnement (dossier, visa, vol)");
   }

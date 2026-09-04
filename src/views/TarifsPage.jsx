@@ -6,12 +6,26 @@ import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
 import { fr } from "../i18n/fr";
-import { EXTRA_FEES, FORMULES, PROCESS_STEPS, displayFormuleFootnote } from "../lib/formules";
+import {
+  EXTRA_FEES,
+  FORMULES,
+  PAYMENT_NOTE,
+  PROCESS_STEPS,
+  displayFormuleFootnote,
+} from "../lib/formules";
 import { breadcrumbJsonLd, FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
 
 const BREADCRUMBS = [
   { name: "Accueil", path: "/" },
   { name: "Tarifs", path: "/tarifs" },
+];
+
+const DISCLAIMERS = [
+  "Une admission dans une université",
+  "L'obtention d'une bourse",
+  "L'obtention d'un visa",
+  "L'acceptation dans une école de langue",
+  "La disponibilité d'un logement",
 ];
 
 function TarifsPage() {
@@ -32,41 +46,69 @@ function TarifsPage() {
         <div className="container">
           <PageBreadcrumbs items={BREADCRUMBS} />
           <h1 className="landing-section-title">
-            Nos formules d'accompagnement
+            Nos formules d'accompagnement pour étudier en Chine
           </h1>
           <p className="landing-section-subtitle mb-12">
-            Vous souhaitez étudier en Chine, mais vous ne savez pas par où
-            commencer ? Nous vous accompagnons selon votre niveau d'avancement :
-            orientation, candidature, bourse, visa et préparation du départ.
+            Vous souhaitez apprendre le chinois, intégrer une université ou
+            préparer votre départ en Chine, mais vous ne savez pas par où
+            commencer ? Nous vous accompagnons à chaque étape selon votre
+            objectif : école de langue, admission universitaire, bourse, visa
+            et préparation du départ.
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:items-stretch mb-16">
             {FORMULES.map((formule) => {
-              const featured = formule.number === 2;
+              const featured = formule.featured;
               return (
                 <article
                   key={formule.number}
-                  className={`flex flex-col rounded-2xl border bg-white p-6 shadow-lg h-full ${
+                  className={`relative flex flex-col rounded-2xl border bg-white p-6 shadow-lg h-full ${
                     featured
-                      ? "border-red-500 ring-2 ring-red-100"
+                      ? "border-red-500 ring-2 ring-red-100 lg:-translate-y-1"
                       : "border-slate-200"
                   }`}
                 >
-                  <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
-                    Formule {formule.number}
-                  </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
+                      Formule {formule.number}
+                    </p>
+                    {formule.badge ? (
+                      <span
+                        className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${
+                          featured
+                            ? "bg-red-600 text-white"
+                            : "bg-slate-800 text-white"
+                        }`}
+                      >
+                        {formule.badge}
+                      </span>
+                    ) : null}
+                  </div>
+                  {formule.audience ? (
+                    <p className="text-sm font-medium text-slate-500 mt-2">
+                      {formule.audience}
+                    </p>
+                  ) : null}
                   <h2 className="text-xl font-bold text-slate-900 mt-2">
                     {formule.title}
                   </h2>
+                  {formule.subtitle ? (
+                    <p className="text-sm font-medium text-slate-600 mt-1">
+                      {formule.subtitle}
+                    </p>
+                  ) : null}
                   <p className="text-3xl font-bold text-red-600 mt-3">
                     {formule.price}
+                  </p>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    {PAYMENT_NOTE}
                   </p>
                   <p className="text-slate-600 text-sm mt-3 leading-relaxed">
                     {formule.intro}
                   </p>
 
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
-                    Inclus
+                    Ce qui est inclus
                   </p>
                   <ul className="space-y-2 text-sm text-slate-700 flex-1">
                     {formule.includes.map((item) => (
@@ -77,7 +119,7 @@ function TarifsPage() {
                     ))}
                   </ul>
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
-                    Idéale si
+                    Cette formule est idéale si
                   </p>
                   <ul className="space-y-1.5 text-sm text-slate-600 mb-0">
                     {formule.idealIf.map((item) => (
@@ -111,26 +153,29 @@ function TarifsPage() {
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Traduction des documents
+                Traduction et préparation des documents
               </h2>
               <p className="text-slate-700 text-sm leading-relaxed mb-3">
-                Nous vous aidons à identifier les documents à traduire et à
-                préparer les versions en anglais ou en chinois, selon les
-                exigences des universités.
+                Nous vous aidons à identifier les documents qui doivent être
+                traduits et à préparer les versions nécessaires en anglais ou
+                en chinois, selon les exigences des universités ou des
+                autorités concernées.
               </p>
               <p className="text-slate-700 text-sm leading-relaxed">
-                Les traductions officielles, certifiées, les légalisations et
-                authentications peuvent être facturées à part. Ces frais vous
-                sont indiqués avant d'être engagés.
+                Les traductions officielles, certifiées, les légalisations,
+                authentifications et notarisation peuvent être facturées
+                séparément. Ces frais vous seront communiqués avant toute
+                commande.
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Frais annexes
+                Frais qui restent à votre charge
               </h2>
               <p className="text-slate-700 text-sm leading-relaxed mb-3">
-                Nos tarifs correspondent uniquement à l'accompagnement. Peuvent
-                rester à votre charge :
+                Nos tarifs couvrent uniquement les services d'accompagnement et
+                de conseil. Certains frais supplémentaires peuvent rester à
+                votre charge, notamment :
               </p>
               <ul className="grid grid-cols-1 gap-1.5 text-sm text-slate-700">
                 {EXTRA_FEES.map((item) => (
@@ -158,9 +203,9 @@ function TarifsPage() {
               ))}
             </ol>
             <p className="text-sm text-slate-600 mt-6">
-              Le paiement intervient après la première consultation téléphonique
-              et après validation de la formule. Aucune démarche ne commence
-              avant.
+              Le paiement intervient après la première consultation
+              téléphonique et après validation de la formule. Aucune démarche
+              ne commence avant la confirmation de l'accompagnement.
             </p>
           </div>
 
@@ -168,18 +213,27 @@ function TarifsPage() {
             <h2 className="text-lg font-bold text-amber-950 mb-2">
               Informations importantes
             </h2>
+            <p className="text-amber-900 text-sm leading-relaxed mb-3">
+              Nous vous aidons à construire un dossier sérieux, cohérent et
+              conforme aux exigences des établissements. Cependant, nous ne
+              pouvons pas garantir :
+            </p>
+            <ul className="space-y-1 text-sm text-amber-900 mb-3">
+              {DISCLAIMERS.map((item) => (
+                <li key={item}>• {item}</li>
+              ))}
+            </ul>
             <p className="text-amber-900 text-sm leading-relaxed">
-              Nous vous aidons à préparer un dossier sérieux et conforme. Nous
-              ne pouvons pas garantir une admission, une bourse, un visa ou un
-              logement. Ces décisions appartiennent aux universités, aux
-              organismes de bourses et aux autorités concernées.
+              Les décisions finales appartiennent aux universités, aux
+              organismes de bourses, aux écoles de langue et aux autorités
+              compétentes.
             </p>
           </div>
 
           <PageCta
-            title="Construisons ensemble votre projet d'études en Chine"
-            subtitle="Que vous soyez encore au stade de la réflexion ou déjà prêt à déposer vos candidatures, nous vous aidons à avancer avec une méthode claire."
-            cta="Prendre contact avec Chinois en Devenir"
+            title="Vous ne savez pas encore quelle formule choisir ?"
+            subtitle="La première consultation sert à confirmer l'offre adaptée à votre projet. Le paiement n'intervient qu'après cet échange."
+            cta="Demander un échange téléphonique"
           />
 
           <div className="mt-16 max-w-4xl mx-auto">

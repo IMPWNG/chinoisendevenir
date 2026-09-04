@@ -1,4 +1,4 @@
-import { getFormuleNumber } from "./formules";
+import { FORMULES, getFormuleNumber } from "./formules";
 
 export const DOMAINES_ETUDES = [
   "Informatique / IA / Data Science",
@@ -213,17 +213,12 @@ export function getVisibleStudentSteps(formuleNumber) {
   return STUDENT_PROCESS_STEPS;
 }
 
-export const FORMULE_OPTIONS = [
-  { value: "Bilan personnalisé (100€)", label: "1️⃣ Bilan personnalisé (100€)" },
-  {
-    value: "Accompagnement candidature (500€)",
-    label: "2️⃣ Accompagnement candidature (500€)",
-  },
-  {
-    value: "Accompagnement complet (1000€)",
-    label: "3️⃣ Accompagnement complet (1000€)",
-  },
-];
+const FORMULE_OPTION_PREFIX = ["", "1️⃣", "2️⃣", "3️⃣"];
+
+export const FORMULE_OPTIONS = FORMULES.map((formule) => ({
+  value: formule.value,
+  label: `${FORMULE_OPTION_PREFIX[formule.number]} ${formule.shortTitle} (${formule.price})`,
+}));
 
 export const REQUIRED_STUDENT_DOCUMENTS = [
   {

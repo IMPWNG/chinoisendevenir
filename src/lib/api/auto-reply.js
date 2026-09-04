@@ -10,7 +10,7 @@ import {
   generateCustomEmailHtml,
   sanitizeEmailSubject,
 } from "../emailLayout.js";
-import { FORMULES, EXTRA_FEES, displayFormuleLabel } from "../formules.js";
+import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel } from "../formules.js";
 import { applyCorsHeaders } from "../httpSecurity.js";
 
 const resendApiKey =
@@ -96,20 +96,27 @@ function generateRelance2Template(prenom) {
 }
 
 function generateFormulesPresentationTemplate(prenom) {
-  const cards = FORMULES.map((formule, index) => {
-    const featured = index === 1 ? " featured" : "";
+  const cards = FORMULES.map((formule) => {
+    const featured = formule.featured ? " featured" : "";
     const items = formule.includes
       .map((item) => `<li>${escapeHtml(item)}</li>`)
       .join("");
     const footnote = formule.footnote
       ? `<p class="formule-intro" style="margin-top:12px;">${escapeHtml(formule.footnote)}</p>`
       : "";
+    const badge = formule.badge
+      ? `<div class="formule-intro" style="font-weight:700;margin-bottom:6px;">${escapeHtml(formule.badge)}</div>`
+      : formule.audience
+        ? `<div class="formule-intro" style="font-weight:700;margin-bottom:6px;">${escapeHtml(formule.audience)}</div>`
+        : "";
     return `
             <div class="formule-card${featured}">
+              ${badge}
               <div class="formule-title">Formule ${formule.number} — ${escapeHtml(formule.title)}</div>
               <div class="formule-price">${escapeHtml(formule.priceLabel)}</div>
+              <p class="formule-intro">${escapeHtml(PAYMENT_NOTE)}</p>
               <p class="formule-intro">${escapeHtml(formule.intro)}</p>
-              <p class="formule-intro">Inclus :</p>
+              <p class="formule-intro">Ce qui est inclus :</p>
               <ul class="formule-list">${items}</ul>
               ${footnote}
             </div>`;
@@ -130,16 +137,16 @@ function generateFormulesPresentationTemplate(prenom) {
     bodyHtml: `
             <div class="section">
               <p>Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.</p>
-              <p>Chaque projet est différent. Ces formules nous aident à comprendre votre besoin, à préparer notre premier appel et à vous proposer un accompagnement adapté.</p>
+              <p>Vous souhaitez apprendre le chinois, intégrer une université ou préparer votre départ ? Ces formules nous aident à comprendre votre besoin, à préparer notre premier appel et à vous proposer un accompagnement adapté.</p>
               <p>Notre objectif : un projet cohérent et un dossier sérieux, complet, aligné avec les exigences des universités chinoises.</p>
             </div>
 
             ${cards}
 
             <div class="note">
-              <h4>Traduction des documents</h4>
-              <p>Selon la formule, nous vous aidons à identifier les documents à traduire, les langues acceptées, et à préparer les versions en anglais ou en chinois.</p>
-              <p>Les traductions officielles, certifiées ou réalisées par un prestataire externe peuvent être facturées en plus. Elles vous sont toujours indiquées avant d'être engagées.</p>
+              <h4>Traduction et préparation des documents</h4>
+              <p>Nous vous aidons à identifier les documents qui doivent être traduits et à préparer les versions nécessaires en anglais ou en chinois, selon les exigences des universités ou des autorités concernées.</p>
+              <p>Les traductions officielles, certifiées, les légalisations, authentifications et notarisation peuvent être facturées séparément. Ces frais vous seront communiqués avant toute commande.</p>
             </div>
 
             <div class="note">
@@ -157,7 +164,7 @@ function generateFormulesPresentationTemplate(prenom) {
 
             <div class="note">
               <h4>À retenir</h4>
-              <p>Nous ne pouvons pas garantir une admission, une bourse ou un visa. La décision finale appartient aux universités et aux organismes concernés. Notre rôle : vous conseiller et vous aider à constituer un dossier cohérent et complet.</p>
+              <p>Nous ne pouvons pas garantir une admission, une bourse, un visa, une acceptation en école de langue ou un logement. La décision finale appartient aux universités, aux écoles de langue, aux organismes de bourses et aux autorités concernées. Notre rôle : vous conseiller et vous aider à constituer un dossier cohérent et complet.</p>
             </div>
 
             <div class="cta">

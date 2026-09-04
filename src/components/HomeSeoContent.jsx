@@ -167,11 +167,12 @@ export default function HomeSeoContent() {
             ))}
           </ul>
           <p className="text-center text-slate-600 mt-8 max-w-2xl mx-auto">
-            Vous hésitez encore ? Le{" "}
+            Vous hésitez encore ? Les{" "}
             <Link href="/tarifs" className="seo-inline-link">
-              bilan personnalisé
+              formules d'accompagnement
             </Link>{" "}
-            sert à choisir une formation réaliste avant de déposer un dossier.
+            aident à choisir une école de langue ou une université avant de
+            déposer un dossier.
           </p>
         </div>
       </section>

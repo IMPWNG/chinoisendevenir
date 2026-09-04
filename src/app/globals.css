@@ -912,6 +912,41 @@ a.landing-btn-accent:hover {
   margin: 0;
 }
 
+.student-formule-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.student-formule-badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #1d3557;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.student-formule-badge.is-featured {
+  background: var(--primary);
+}
+
+.student-formule-audience,
+.student-formule-payment {
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin: 6px 0 0;
+}
+
+.student-formule-payment {
+  margin: 0 0 8px;
+}
+
 .student-formule-title {
   font-size: 1.05rem;
   margin: 8px 0 4px;

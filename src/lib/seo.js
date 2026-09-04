@@ -12,7 +12,7 @@ export const SITE = {
     "Chinois en Devenir accompagne les étudiants francophones qui veulent étudier en Chine : choix de formation, universités chinoises, dossier d'admission, bourses d'études et visa étudiant.",
   metaDescription:
     "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
-  contentUpdatedAt: "2026-08-24",
+  contentUpdatedAt: "2026-09-04",
   ogImage: "https://chinoisendevenir.com/opengraph-image",
   logo: "https://chinoisendevenir.com/apple-icon",
 };
@@ -134,12 +134,12 @@ export const FAQS = {
     {
       question: "Que comprennent les formules pour étudier en Chine ?",
       answer:
-        "Le bilan (100 €) clarifie le projet et les options. L'accompagnement candidature (500 €) couvre le dossier et le suivi auprès des universités. L'accompagnement complet (1 000 €) va jusqu'au visa et à la préparation du départ. Les frais universitaires, traductions certifiées, visa et vol restent à votre charge.",
+        "La formule 1 (500 €) accompagne l'inscription en école de langue. La formule 2 (1 000 €) couvre jusqu'à 5 candidatures universitaires, jusqu'aux réponses. La formule 3 (2 000 €) va jusqu'au visa et à la préparation du départ, avec jusqu'à 8 candidatures. Les frais universitaires, traductions certifiées, visa et vol restent à votre charge.",
     },
     {
       question: "Quand faut-il payer ?",
       answer:
-        "Le paiement intervient après la première consultation téléphonique et après validation de la formule. Aucune démarche d'accompagnement ne commence avant.",
+        "Le paiement intervient après la première consultation téléphonique et après validation de la formule. Aucune démarche d'accompagnement ne commence avant. Un paiement en plusieurs fois est possible selon les conditions convenues.",
     },
   ],
 };
