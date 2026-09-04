@@ -4,15 +4,22 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import {
+  APPOINTMENT_TIMEZONES,
   CALENDAR_TZ,
   DEFAULT_DURATION_MINUTES,
   WORK_END_MINUTES,
   WORK_START_MINUTES,
   addDaysYmd,
+  convertWallClock,
   formatHm,
+  formatHm12,
   formatYmd,
+  guessTimeZoneFromCountry,
   minutesOfDay,
+  normalizeHm,
+  pad2,
   startOfWeekYmd,
+  timezoneLabel,
   weekdayIndex,
   zonedLocalToUtc,
 } from "../lib/calendar";
@@ -33,9 +40,11 @@ async function authedFetch(path, options = {}) {
 }
 
 const HOUR_START = 8;
-const HOUR_END = 19;
+const HOUR_END = 22;
 const PX_PER_HOUR = 44;
 const GRID_HEIGHT = (HOUR_END - HOUR_START) * PX_PER_HOUR;
+const HOUR_OPTIONS = Array.from({ length: 24 }, (_, i) => pad2(i));
+const MINUTE_OPTIONS = ["00", "15", "30", "45"];
 
 const KIND_STYLES = {
   appel: "bg-cyan-500/90 border-cyan-300/40 text-white",
@@ -54,6 +63,42 @@ function contactLabel(contact) {
   return `${contact.prenom || ""} ${contact.nom || ""}`.trim() || contact.email || "";
 }
 
+function emptyDraft(ymd, startHm = "10:00", timeZone = CALENDAR_TZ, tzTouched = false) {
+  return {
+    ymd,
+    startHm: normalizeHm(startHm),
+    duration: DEFAULT_DURATION_MINUTES,
+    kind: "appel",
+    contactId: "",
+    query: "",
+    notes: "",
+    timeZone,
+    tzTouched,
+  };
+}
+
+function splitHm(hm) {
+  const [hour, minute] = normalizeHm(hm).split(":");
+  return { hour, minute };
+}
+
+function BeijingPreview({ conversion, t, dateShift }) {
+  return (
+    <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-3 py-2">
+      <p className="text-[10px] uppercase tracking-wide font-bold text-cyan-300">
+        {t("calendar.beijingPreview")}
+      </p>
+      <p className="text-sm text-white font-bold mt-0.5">{conversion.label}</p>
+      <p className="text-xs text-cyan-100/80">
+        {conversion.hm}–{conversion.endHm} · {formatHm12(conversion.hm)} · {t("calendar.paris")}
+      </p>
+      {dateShift ? (
+        <p className="text-xs text-amber-200 mt-1">{t("calendar.dateShift")}</p>
+      ) : null}
+    </div>
+  );
+}
+
 export default function AdminCalendar({ contacts = [], onOpenContact }) {
   const { t, lang } = useAdminI18n();
   const locale = localeFor(lang);
@@ -66,6 +111,12 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
   const [draft, setDraft] = useState(null);
   const [activeEvent, setActiveEvent] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [nowTick, setNowTick] = useState(() => new Date());
+  const [converter, setConverter] = useState(() => ({
+    ymd: todayYmd,
+    startHm: "19:00",
+    timeZone: "Europe/Paris",
+  }));
 
   const days = useMemo(
     () => Array.from({ length: 7 }, (_, i) => addDaysYmd(weekStart, i)),
@@ -114,6 +165,11 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
     load();
   }, [load]);
 
+  useEffect(() => {
+    const id = setInterval(() => setNowTick(new Date()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+
   const hours = useMemo(
     () => Array.from({ length: HOUR_END - HOUR_START }, (_, i) => HOUR_START + i),
     [],
@@ -121,33 +177,78 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
 
   const eventsByDay = useMemo(() => {
     const map = Object.fromEntries(days.map((day) => [day, []]));
+    const overflow = [];
     for (const event of events) {
       const ymd = formatYmd(new Date(event.starts_at));
-      if (map[ymd]) map[ymd].push(event);
+      const startMin = minutesOfDay(new Date(event.starts_at));
+      const inGrid =
+        startMin >= HOUR_START * 60 && startMin < HOUR_END * 60;
+      if (map[ymd] && inGrid) map[ymd].push(event);
+      else overflow.push(event);
     }
-    return map;
+    return { map, overflow };
   }, [days, events]);
 
-  function openCreate(ymd, hour, minute = 0) {
-    const hm = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  const converterResult = useMemo(
+    () =>
+      convertWallClock(
+        converter.ymd,
+        converter.startHm,
+        converter.timeZone,
+        CALENDAR_TZ,
+        DEFAULT_DURATION_MINUTES,
+        locale,
+      ),
+    [converter, locale],
+  );
+
+  const draftConversion = useMemo(() => {
+    if (!draft) return null;
+    return convertWallClock(
+      draft.ymd,
+      draft.startHm,
+      draft.timeZone,
+      CALENDAR_TZ,
+      Number(draft.duration) || DEFAULT_DURATION_MINUTES,
+      locale,
+    );
+  }, [draft, locale]);
+
+  const beijingNow = nowTick.toLocaleTimeString(locale, {
+    timeZone: CALENDAR_TZ,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  function openCreate(ymd, hour, minute = 0, timeZone = CALENDAR_TZ, tzTouched = false) {
+    const hm = `${pad2(hour)}:${pad2(minute)}`;
     setActiveEvent(null);
-    setDraft({
-      ymd,
-      startHm: hm,
-      duration: DEFAULT_DURATION_MINUTES,
-      kind: "appel",
-      contactId: "",
-      query: "",
-      notes: "",
-    });
+    setDraft(emptyDraft(ymd, hm, timeZone, tzTouched));
   }
 
   function positionFor(event) {
     const startMin = minutesOfDay(new Date(event.starts_at));
     const endMin = minutesOfDay(new Date(event.ends_at));
-    const top = ((startMin - HOUR_START * 60) / 60) * PX_PER_HOUR;
-    const height = Math.max(22, ((endMin - startMin) / 60) * PX_PER_HOUR);
+    const gridStart = HOUR_START * 60;
+    const gridEnd = HOUR_END * 60;
+    const visibleStart = Math.max(startMin, gridStart);
+    const visibleEnd = Math.min(endMin, gridEnd);
+    if (visibleEnd <= visibleStart) return null;
+    const top = ((visibleStart - gridStart) / 60) * PX_PER_HOUR;
+    const height = Math.max(22, ((visibleEnd - visibleStart) / 60) * PX_PER_HOUR);
     return { top, height };
+  }
+
+  function timeFromClick(y) {
+    const minutesFromStart = (y / PX_PER_HOUR) * 60;
+    const abs = HOUR_START * 60 + minutesFromStart;
+    const snapped = Math.round(abs / 30) * 30;
+    const clamped = Math.min(HOUR_END * 60 - 30, Math.max(HOUR_START * 60, snapped));
+    return {
+      hour: Math.floor(clamped / 60),
+      minute: clamped % 60,
+    };
   }
 
   async function saveDraft(event) {
@@ -158,15 +259,26 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
     }
     setSaving(true);
     try {
-      const startsAt = zonedLocalToUtc(draft.ymd, draft.startHm).toISOString();
+      const conversion = convertWallClock(
+        draft.ymd,
+        draft.startHm,
+        draft.timeZone,
+        CALENDAR_TZ,
+        Number(draft.duration) || DEFAULT_DURATION_MINUTES,
+      );
+      const sourceNote =
+        draft.timeZone !== CALENDAR_TZ
+          ? `${t("calendar.indicatedAs")} ${draft.ymd} ${normalizeHm(draft.startHm)} (${timezoneLabel(draft.timeZone, lang)})`
+          : "";
+      const notes = [draft.notes, sourceNote].filter(Boolean).join("\n");
       const response = await authedFetch("/api/admin/appointments", {
         method: "POST",
         body: JSON.stringify({
           contactId: draft.contactId,
-          startsAt,
+          startsAt: conversion.iso,
           durationMinutes: Number(draft.duration) || DEFAULT_DURATION_MINUTES,
           kind: draft.kind,
-          notes: draft.notes,
+          notes,
         }),
       });
       const data = await response.json();
@@ -175,7 +287,12 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
         return;
       }
       setDraft(null);
-      await load();
+      const nextWeek = startOfWeekYmd(conversion.ymd);
+      if (nextWeek === weekStart) {
+        await load();
+      } else {
+        setWeekStart(nextWeek);
+      }
     } catch (err) {
       alert(err.message === "SESSION" ? t("sessionExpired") : t("genericError"));
     } finally {
@@ -223,12 +340,25 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
     { timeZone: CALENDAR_TZ, day: "numeric", month: "long", year: "numeric" },
   );
 
+  const nowMin = minutesOfDay(nowTick);
+  const showNowLine =
+    days.includes(todayYmd) &&
+    nowMin >= HOUR_START * 60 &&
+    nowMin < HOUR_END * 60;
+  const nowTop = ((nowMin - HOUR_START * 60) / 60) * PX_PER_HOUR;
+
+  const draftHm = draft ? splitHm(draft.startHm) : splitHm("10:00");
+  const converterHm = splitHm(converter.startHm);
+
   return (
     <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50">
       <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-5">
         <div className="flex-1">
           <p className="text-white font-bold">📅 {t("calendar.title")}</p>
           <p className="text-xs text-slate-400 mt-1">{t("calendar.hint")}</p>
+          <p className="text-xs text-cyan-300 font-semibold mt-1">
+            {t("calendar.nowBeijing", { time: beijingNow })}
+          </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <button
@@ -264,6 +394,116 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
           </button>
         </div>
       </div>
+
+      <div className="mb-5 rounded-2xl border border-slate-600/50 bg-slate-900/60 p-4">
+        <p className="text-sm font-bold text-white">{t("calendar.convertTitle")}</p>
+        <p className="text-xs text-slate-400 mt-1 mb-3">{t("calendar.convertHint")}</p>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+          <input
+            type="date"
+            value={converter.ymd}
+            onChange={(e) =>
+              setConverter((prev) => ({ ...prev, ymd: e.target.value }))
+            }
+            className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+          />
+          <div className="flex gap-2">
+            <select
+              value={converterHm.hour}
+              onChange={(e) =>
+                setConverter((prev) => ({
+                  ...prev,
+                  startHm: `${e.target.value}:${converterHm.minute}`,
+                }))
+              }
+              className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+            >
+              {HOUR_OPTIONS.map((hour) => (
+                <option key={hour} value={hour}>
+                  {hour}h
+                </option>
+              ))}
+            </select>
+            <select
+              value={MINUTE_OPTIONS.includes(converterHm.minute) ? converterHm.minute : converterHm.minute}
+              onChange={(e) =>
+                setConverter((prev) => ({
+                  ...prev,
+                  startHm: `${converterHm.hour}:${e.target.value}`,
+                }))
+              }
+              className="w-[5.5rem] px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+            >
+              {[converterHm.minute, ...MINUTE_OPTIONS]
+                .filter((value, index, list) => list.indexOf(value) === index)
+                .map((minute) => (
+                  <option key={minute} value={minute}>
+                    {minute}
+                  </option>
+                ))}
+            </select>
+          </div>
+          <select
+            value={converter.timeZone}
+            onChange={(e) =>
+              setConverter((prev) => ({ ...prev, timeZone: e.target.value }))
+            }
+            className="md:col-span-2 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+          >
+            {APPOINTMENT_TIMEZONES.map((tz) => (
+              <option key={tz.id} value={tz.id}>
+                {timezoneLabel(tz.id, lang)}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() =>
+              openCreate(
+                converter.ymd,
+                Number(converterHm.hour),
+                Number(converterHm.minute),
+                converter.timeZone,
+                true,
+              )
+            }
+            className="px-3 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-sm font-bold"
+          >
+            {t("calendar.convertPlace")}
+          </button>
+        </div>
+        <div className="mt-3">
+          <BeijingPreview
+            conversion={converterResult}
+            t={t}
+            dateShift={converterResult.dateShift}
+          />
+        </div>
+      </div>
+
+      {eventsByDay.overflow.length > 0 ? (
+        <div className="mb-4 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2">
+          <p className="text-[10px] uppercase tracking-wide font-bold text-amber-200 mb-2">
+            {t("calendar.outsideHours")}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {eventsByDay.overflow.map((event) => (
+              <button
+                key={event.id}
+                type="button"
+                onClick={() => {
+                  setDraft(null);
+                  setActiveEvent(event);
+                }}
+                className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-xs text-white font-semibold"
+              >
+                {formatHm(new Date(event.starts_at))}{" "}
+                {contactLabel(event.contact) || t("calendar.unknown")}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       {missingTable ? (
         <p className="text-sm text-amber-200 bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
@@ -321,15 +561,8 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                   onClick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const y = e.clientY - rect.top;
-                    const minutesFromStart = (y / PX_PER_HOUR) * 60;
-                    const abs = HOUR_START * 60 + minutesFromStart;
-                    const snapped = Math.round(abs / 30) * 30;
-                    const hour = Math.min(
-                      18,
-                      Math.max(8, Math.floor(snapped / 60)),
-                    );
-                    const minute = snapped % 60 === 30 ? 30 : 0;
-                    openCreate(ymd, hour, minute);
+                    const { hour, minute } = timeFromClick(y);
+                    openCreate(ymd, hour, minute, CALENDAR_TZ, true);
                   }}
                 >
                   {hours.map((hour) => {
@@ -352,8 +585,15 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                       />
                     );
                   })}
-                  {(eventsByDay[ymd] || []).map((event) => {
+                  {showNowLine && ymd === todayYmd ? (
+                    <div
+                      className="absolute left-0 right-0 z-20 pointer-events-none border-t-2 border-rose-400"
+                      style={{ top: nowTop }}
+                    />
+                  ) : null}
+                  {(eventsByDay.map[ymd] || []).map((event) => {
                     const pos = positionFor(event);
+                    if (!pos) return null;
                     const name = contactLabel(event.contact) || t("calendar.unknown");
                     return (
                       <button
@@ -364,11 +604,11 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                           setDraft(null);
                           setActiveEvent(event);
                         }}
-                        className={`absolute left-1 right-1 rounded-md border px-1.5 py-0.5 text-left shadow-lg overflow-hidden ${
+                        className={`absolute left-1 right-1 rounded-md border px-1.5 py-0.5 text-left shadow-lg overflow-hidden z-10 ${
                           KIND_STYLES[event.kind] || KIND_STYLES.appel
                         }`}
                         style={{ top: pos.top, height: pos.height }}
-                        title={name}
+                        title={`${formatHm(new Date(event.starts_at))} ${name}`}
                       >
                         <p className="text-[10px] font-bold leading-tight truncate">
                           {formatHm(new Date(event.starts_at))} {name}
@@ -392,21 +632,79 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
           className="mt-5 rounded-2xl border border-cyan-500/30 bg-slate-900/70 p-4 space-y-3"
         >
           <p className="text-sm font-bold text-white">{t("calendar.newTitle")}</p>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-            <input
-              type="date"
-              value={draft.ymd}
-              onChange={(e) => setDraft((prev) => ({ ...prev, ymd: e.target.value }))}
-              className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-            />
-            <input
-              type="time"
-              value={draft.startHm}
-              onChange={(e) =>
-                setDraft((prev) => ({ ...prev, startHm: e.target.value }))
-              }
-              className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-            />
+          <p className="text-xs text-slate-400">{t("calendar.formHint")}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <label className="text-xs text-slate-400 font-semibold">
+              {t("calendar.date")}
+              <input
+                type="date"
+                value={draft.ymd}
+                onChange={(e) => setDraft((prev) => ({ ...prev, ymd: e.target.value }))}
+                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
+              />
+            </label>
+            <label className="text-xs text-slate-400 font-semibold">
+              {t("calendar.timeGiven")}
+              <span className="ml-2 font-normal text-slate-500">
+                {formatHm12(draft.startHm)}
+              </span>
+              <div className="mt-1 flex gap-2">
+                <select
+                  value={draftHm.hour}
+                  onChange={(e) =>
+                    setDraft((prev) => ({
+                      ...prev,
+                      startHm: `${e.target.value}:${draftHm.minute}`,
+                    }))
+                  }
+                  className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
+                >
+                  {HOUR_OPTIONS.map((hour) => (
+                    <option key={hour} value={hour}>
+                      {hour}h
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={draftHm.minute}
+                  onChange={(e) =>
+                    setDraft((prev) => ({
+                      ...prev,
+                      startHm: `${draftHm.hour}:${e.target.value}`,
+                    }))
+                  }
+                  className="w-[5.5rem] px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
+                >
+                  {[draftHm.minute, ...MINUTE_OPTIONS]
+                    .filter((value, index, list) => list.indexOf(value) === index)
+                    .map((minute) => (
+                      <option key={minute} value={minute}>
+                        {minute}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </label>
+            <label className="text-xs text-slate-400 font-semibold lg:col-span-2">
+              {t("calendar.sourceTz")}
+              <select
+                value={draft.timeZone}
+                onChange={(e) =>
+                  setDraft((prev) => ({
+                    ...prev,
+                    timeZone: e.target.value,
+                    tzTouched: true,
+                  }))
+                }
+                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
+              >
+                {APPOINTMENT_TIMEZONES.map((tz) => (
+                  <option key={tz.id} value={tz.id}>
+                    {timezoneLabel(tz.id, lang)}
+                  </option>
+                ))}
+              </select>
+            </label>
             <select
               value={draft.duration}
               onChange={(e) =>
@@ -428,6 +726,13 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               <option value="autre">{t("calendar.kindAutre")}</option>
             </select>
           </div>
+          {draftConversion ? (
+            <BeijingPreview
+              conversion={draftConversion}
+              t={t}
+              dateShift={draftConversion.dateShift}
+            />
+          ) : null}
           <input
             type="text"
             value={draft.query}
@@ -446,13 +751,15 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               <button
                 key={c.id}
                 type="button"
-                onClick={() =>
+                onClick={() => {
+                  const guessed = guessTimeZoneFromCountry(c.pays);
                   setDraft((prev) => ({
                     ...prev,
                     contactId: c.id,
                     query: contactLabel(c),
-                  }))
-                }
+                    timeZone: prev.tzTouched ? prev.timeZone : guessed,
+                  }));
+                }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${
                   String(draft.contactId) === String(c.id)
                     ? "bg-cyan-500/20 border-cyan-400 text-white"
@@ -460,9 +767,17 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                 }`}
               >
                 {contactLabel(c)}
+                {c.pays ? ` · ${c.pays}` : ""}
               </button>
             ))}
           </div>
+          <textarea
+            value={draft.notes}
+            onChange={(e) => setDraft((prev) => ({ ...prev, notes: e.target.value }))}
+            placeholder={t("calendar.notesPlaceholder")}
+            rows={2}
+            className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm placeholder-slate-500 resize-y"
+          />
           <div className="flex gap-3">
             <button
               type="submit"
@@ -496,6 +811,7 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                 month: "long",
                 hour: "2-digit",
                 minute: "2-digit",
+                hour12: false,
               })}{" "}
               → {formatHm(new Date(activeEvent.ends_at))} ({t("calendar.paris")})
             </p>
@@ -503,6 +819,11 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               {t(`calendar.kind${activeEvent.kind === "visio" ? "Visio" : activeEvent.kind === "autre" ? "Autre" : "Appel"}`)}
               {activeEvent.source === "ai_reply" ? ` · ${t("calendar.fromAi")}` : ""}
             </p>
+            {activeEvent.notes ? (
+              <p className="text-xs text-slate-400 mt-2 whitespace-pre-wrap">
+                {activeEvent.notes}
+              </p>
+            ) : null}
           </div>
           <div className="flex flex-wrap gap-2">
             {activeEvent.contact && onOpenContact ? (

@@ -36,12 +36,14 @@ export const adminTranslations = {
     },
     calendar: {
       title: "Calendrier des RDV",
-      hint: "Appels et visios avec les étudiants, heure de Pékin. Cliquez une case pour placer un créneau. L'IA s'en sert pour proposer des dispos.",
+      hint: "La grille est toujours en heure de Pékin. Cliquez une case pour placer un créneau, ou convertissez l'heure donnée par l'étudiant.",
       prev: "Prec.",
       next: "Suiv.",
       today: "Aujourd'hui",
       add: "Nouveau RDV",
       newTitle: "Nouveau rendez-vous",
+      formHint:
+        "Tapez l'heure telle que l'étudiant l'a dite, choisissez son fuseau : le rendez-vous est enregistré en heure de Pékin.",
       searchStudent: "Rechercher un étudiant (nom ou email)",
       needStudent: "Choisissez un étudiant.",
       save: "Enregistrer le RDV",
@@ -54,6 +56,19 @@ export const adminTranslations = {
       kindAutre: "Autre",
       missingTable:
         "Le calendrier n'est pas encore créé en base. Exécutez sql/appointments.sql dans l'éditeur SQL Supabase, puis actualisez.",
+      nowBeijing: "Heure actuelle à Pékin : {time}",
+      convertTitle: "Convertir une heure vers Pékin",
+      convertHint:
+        "L'étudiant dit « 19h à Paris » ? Choisissez la date, 19h00, fuseau Paris : vous voyez tout de suite l'équivalent à Pékin.",
+      convertPlace: "Créer ce RDV",
+      beijingPreview: "Équivalent enregistré à Pékin",
+      dateShift: "Attention : le jour change en heure de Pékin.",
+      outsideHours: "RDV hors de la plage 8h–22h (heure de Pékin)",
+      date: "Date dite",
+      timeGiven: "Heure dite (24h)",
+      sourceTz: "Fuseau de l'heure dite",
+      indicatedAs: "Indiqué par l'étudiant :",
+      notesPlaceholder: "Note interne (optionnel)",
     },
     dashboard: {
       title: "Dashboard Admin",
@@ -469,12 +484,14 @@ export const adminTranslations = {
     },
     calendar: {
       title: "Appointment calendar",
-      hint: "Calls and video meetings with students, Beijing time. Click a cell to book a slot. The AI uses this to offer free times.",
+      hint: "The grid is always Beijing time. Click a cell to book a slot, or convert the time the student gave you.",
       prev: "Prev.",
       next: "Next",
       today: "Today",
       add: "New meeting",
       newTitle: "New appointment",
+      formHint:
+        "Enter the time as the student said it, pick their time zone: the meeting is saved in Beijing time.",
       searchStudent: "Search a student (name or email)",
       needStudent: "Pick a student.",
       save: "Save appointment",
@@ -487,6 +504,19 @@ export const adminTranslations = {
       kindAutre: "Other",
       missingTable:
         "The calendar table is missing. Run sql/appointments.sql in the Supabase SQL editor, then refresh.",
+      nowBeijing: "Current time in Beijing: {time}",
+      convertTitle: "Convert a time to Beijing",
+      convertHint:
+        "Student said “7pm in Paris”? Pick the date, 19:00, Paris time zone — you instantly see the Beijing equivalent.",
+      convertPlace: "Create this meeting",
+      beijingPreview: "Saved as Beijing time",
+      dateShift: "Note: the calendar day changes in Beijing time.",
+      outsideHours: "Meetings outside 8:00–22:00 (Beijing time)",
+      date: "Date given",
+      timeGiven: "Time given (24h)",
+      sourceTz: "Time zone of the given time",
+      indicatedAs: "Student said:",
+      notesPlaceholder: "Internal note (optional)",
     },
     dashboard: {
       title: "Admin Dashboard",
@@ -899,12 +929,14 @@ export const adminTranslations = {
     },
     calendar: {
       title: "预约日历",
-      hint: "与学生的电话/视频（北京时间）。点击格子即可添加。AI 会据此只提供空闲时段。",
+      hint: "格子始终为北京时间。点击格子即可添加，或把学生给出的时区转换成北京时间。",
       prev: "上一周",
       next: "下一周",
       today: "今天",
       add: "新预约",
       newTitle: "新的预约",
+      formHint:
+        "按学生说的时间填写，并选择其时区：预约会保存为北京时间。",
       searchStudent: "搜索学生（姓名或邮箱）",
       needStudent: "请选择一名学生。",
       save: "保存预约",
@@ -917,6 +949,19 @@ export const adminTranslations = {
       kindAutre: "其他",
       missingTable:
         "日历数据表尚未创建。请在 Supabase SQL 编辑器中运行 sql/appointments.sql，然后刷新。",
+      nowBeijing: "当前北京时间：{time}",
+      convertTitle: "转换到北京时间",
+      convertHint:
+        "学生说「巴黎晚上 7 点」？选择日期、19:00、巴黎时区，即可看到北京时间。",
+      convertPlace: "创建此预约",
+      beijingPreview: "将保存为北京时间",
+      dateShift: "注意：换成北京时间后日期会变化。",
+      outsideHours: "不在 8:00–22:00（北京时间）范围内的预约",
+      date: "对方给出的日期",
+      timeGiven: "对方给出的时间（24小时）",
+      sourceTz: "该时间的时区",
+      indicatedAs: "学生所说：",
+      notesPlaceholder: "内部备注（可选）",
     },
     dashboard: {
       title: "管理后台",
