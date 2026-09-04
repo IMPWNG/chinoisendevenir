@@ -12,7 +12,6 @@ import {
   addDaysYmd,
   convertWallClock,
   formatHm,
-  formatHm12,
   formatYmd,
   guessTimeZoneFromCountry,
   minutesOfDay,
@@ -63,40 +62,9 @@ function contactLabel(contact) {
   return `${contact.prenom || ""} ${contact.nom || ""}`.trim() || contact.email || "";
 }
 
-function emptyDraft(ymd, startHm = "10:00", timeZone = CALENDAR_TZ, tzTouched = false) {
-  return {
-    ymd,
-    startHm: normalizeHm(startHm),
-    duration: DEFAULT_DURATION_MINUTES,
-    kind: "appel",
-    contactId: "",
-    query: "",
-    notes: "",
-    timeZone,
-    tzTouched,
-  };
-}
-
 function splitHm(hm) {
   const [hour, minute] = normalizeHm(hm).split(":");
   return { hour, minute };
-}
-
-function BeijingPreview({ conversion, t, dateShift }) {
-  return (
-    <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-3 py-2">
-      <p className="text-[10px] uppercase tracking-wide font-bold text-cyan-300">
-        {t("calendar.beijingPreview")}
-      </p>
-      <p className="text-sm text-white font-bold mt-0.5">{conversion.label}</p>
-      <p className="text-xs text-cyan-100/80">
-        {conversion.hm}–{conversion.endHm} · {formatHm12(conversion.hm)} · {t("calendar.paris")}
-      </p>
-      {dateShift ? (
-        <p className="text-xs text-amber-200 mt-1">{t("calendar.dateShift")}</p>
-      ) : null}
-    </div>
-  );
 }
 
 export default function AdminCalendar({ contacts = [], onOpenContact }) {
@@ -112,17 +80,11 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
   const [activeEvent, setActiveEvent] = useState(null);
   const [saving, setSaving] = useState(false);
   const [nowTick, setNowTick] = useState(() => new Date());
-  const [converter, setConverter] = useState(() => ({
-    ymd: todayYmd,
-    startHm: "19:00",
-    timeZone: "Europe/Paris",
-  }));
 
   const days = useMemo(
     () => Array.from({ length: 7 }, (_, i) => addDaysYmd(weekStart, i)),
     [weekStart],
   );
-
   const weekFrom = useMemo(
     () => zonedLocalToUtc(weekStart, "00:00").toISOString(),
     [weekStart],
@@ -153,9 +115,7 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
       }
       setEvents(data.events || []);
     } catch (err) {
-      setError(
-        err.message === "SESSION" ? t("sessionExpired") : t("genericError"),
-      );
+      setError(err.message === "SESSION" ? t("sessionExpired") : t("genericError"));
     } finally {
       setLoading(false);
     }
@@ -181,26 +141,12 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
     for (const event of events) {
       const ymd = formatYmd(new Date(event.starts_at));
       const startMin = minutesOfDay(new Date(event.starts_at));
-      const inGrid =
-        startMin >= HOUR_START * 60 && startMin < HOUR_END * 60;
+      const inGrid = startMin >= HOUR_START * 60 && startMin < HOUR_END * 60;
       if (map[ymd] && inGrid) map[ymd].push(event);
       else overflow.push(event);
     }
     return { map, overflow };
   }, [days, events]);
-
-  const converterResult = useMemo(
-    () =>
-      convertWallClock(
-        converter.ymd,
-        converter.startHm,
-        converter.timeZone,
-        CALENDAR_TZ,
-        DEFAULT_DURATION_MINUTES,
-        locale,
-      ),
-    [converter, locale],
-  );
 
   const draftConversion = useMemo(() => {
     if (!draft) return null;
@@ -221,10 +167,17 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
     hour12: false,
   });
 
-  function openCreate(ymd, hour, minute = 0, timeZone = CALENDAR_TZ, tzTouched = false) {
-    const hm = `${pad2(hour)}:${pad2(minute)}`;
+  function openCreate(ymd, hour, minute = 0) {
     setActiveEvent(null);
-    setDraft(emptyDraft(ymd, hm, timeZone, tzTouched));
+    setDraft({
+      ymd,
+      startHm: `${pad2(hour)}:${pad2(minute)}`,
+      duration: DEFAULT_DURATION_MINUTES,
+      kind: "appel",
+      contactId: "",
+      query: "",
+      timeZone: CALENDAR_TZ,
+    });
   }
 
   function positionFor(event) {
@@ -240,37 +193,21 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
     return { top, height };
   }
 
-  function timeFromClick(y) {
-    const minutesFromStart = (y / PX_PER_HOUR) * 60;
-    const abs = HOUR_START * 60 + minutesFromStart;
-    const snapped = Math.round(abs / 30) * 30;
-    const clamped = Math.min(HOUR_END * 60 - 30, Math.max(HOUR_START * 60, snapped));
-    return {
-      hour: Math.floor(clamped / 60),
-      minute: clamped % 60,
-    };
-  }
-
   async function saveDraft(event) {
     event?.preventDefault();
     if (!draft?.contactId) {
       alert(t("calendar.needStudent"));
       return;
     }
+    const conversion = convertWallClock(
+      draft.ymd,
+      draft.startHm,
+      draft.timeZone,
+      CALENDAR_TZ,
+      Number(draft.duration) || DEFAULT_DURATION_MINUTES,
+    );
     setSaving(true);
     try {
-      const conversion = convertWallClock(
-        draft.ymd,
-        draft.startHm,
-        draft.timeZone,
-        CALENDAR_TZ,
-        Number(draft.duration) || DEFAULT_DURATION_MINUTES,
-      );
-      const sourceNote =
-        draft.timeZone !== CALENDAR_TZ
-          ? `${t("calendar.indicatedAs")} ${draft.ymd} ${normalizeHm(draft.startHm)} (${timezoneLabel(draft.timeZone, lang)})`
-          : "";
-      const notes = [draft.notes, sourceNote].filter(Boolean).join("\n");
       const response = await authedFetch("/api/admin/appointments", {
         method: "POST",
         body: JSON.stringify({
@@ -278,7 +215,6 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
           startsAt: conversion.iso,
           durationMinutes: Number(draft.duration) || DEFAULT_DURATION_MINUTES,
           kind: draft.kind,
-          notes,
         }),
       });
       const data = await response.json();
@@ -288,11 +224,8 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
       }
       setDraft(null);
       const nextWeek = startOfWeekYmd(conversion.ymd);
-      if (nextWeek === weekStart) {
-        await load();
-      } else {
-        setWeekStart(nextWeek);
-      }
+      if (nextWeek === weekStart) await load();
+      else setWeekStart(nextWeek);
     } catch (err) {
       alert(err.message === "SESSION" ? t("sessionExpired") : t("genericError"));
     } finally {
@@ -342,13 +275,9 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
 
   const nowMin = minutesOfDay(nowTick);
   const showNowLine =
-    days.includes(todayYmd) &&
-    nowMin >= HOUR_START * 60 &&
-    nowMin < HOUR_END * 60;
+    days.includes(todayYmd) && nowMin >= HOUR_START * 60 && nowMin < HOUR_END * 60;
   const nowTop = ((nowMin - HOUR_START * 60) / 60) * PX_PER_HOUR;
-
   const draftHm = draft ? splitHm(draft.startHm) : splitHm("10:00");
-  const converterHm = splitHm(converter.startHm);
 
   return (
     <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50">
@@ -395,113 +324,22 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
         </div>
       </div>
 
-      <div className="mb-5 rounded-2xl border border-slate-600/50 bg-slate-900/60 p-4">
-        <p className="text-sm font-bold text-white">{t("calendar.convertTitle")}</p>
-        <p className="text-xs text-slate-400 mt-1 mb-3">{t("calendar.convertHint")}</p>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-          <input
-            type="date"
-            value={converter.ymd}
-            onChange={(e) =>
-              setConverter((prev) => ({ ...prev, ymd: e.target.value }))
-            }
-            className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-          />
-          <div className="flex gap-2">
-            <select
-              value={converterHm.hour}
-              onChange={(e) =>
-                setConverter((prev) => ({
-                  ...prev,
-                  startHm: `${e.target.value}:${converterHm.minute}`,
-                }))
-              }
-              className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-            >
-              {HOUR_OPTIONS.map((hour) => (
-                <option key={hour} value={hour}>
-                  {hour}h
-                </option>
-              ))}
-            </select>
-            <select
-              value={MINUTE_OPTIONS.includes(converterHm.minute) ? converterHm.minute : converterHm.minute}
-              onChange={(e) =>
-                setConverter((prev) => ({
-                  ...prev,
-                  startHm: `${converterHm.hour}:${e.target.value}`,
-                }))
-              }
-              className="w-[5.5rem] px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-            >
-              {[converterHm.minute, ...MINUTE_OPTIONS]
-                .filter((value, index, list) => list.indexOf(value) === index)
-                .map((minute) => (
-                  <option key={minute} value={minute}>
-                    {minute}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <select
-            value={converter.timeZone}
-            onChange={(e) =>
-              setConverter((prev) => ({ ...prev, timeZone: e.target.value }))
-            }
-            className="md:col-span-2 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-          >
-            {APPOINTMENT_TIMEZONES.map((tz) => (
-              <option key={tz.id} value={tz.id}>
-                {timezoneLabel(tz.id, lang)}
-              </option>
-            ))}
-          </select>
-          <button
-            type="button"
-            onClick={() =>
-              openCreate(
-                converter.ymd,
-                Number(converterHm.hour),
-                Number(converterHm.minute),
-                converter.timeZone,
-                true,
-              )
-            }
-            className="px-3 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-sm font-bold"
-          >
-            {t("calendar.convertPlace")}
-          </button>
-        </div>
-        <div className="mt-3">
-          <BeijingPreview
-            conversion={converterResult}
-            t={t}
-            dateShift={converterResult.dateShift}
-          />
-        </div>
-      </div>
-
       {eventsByDay.overflow.length > 0 ? (
-        <div className="mb-4 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2">
-          <p className="text-[10px] uppercase tracking-wide font-bold text-amber-200 mb-2">
-            {t("calendar.outsideHours")}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {eventsByDay.overflow.map((event) => (
-              <button
-                key={event.id}
-                type="button"
-                onClick={() => {
-                  setDraft(null);
-                  setActiveEvent(event);
-                }}
-                className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-xs text-white font-semibold"
-              >
-                {formatHm(new Date(event.starts_at))}{" "}
-                {contactLabel(event.contact) || t("calendar.unknown")}
-              </button>
-            ))}
-          </div>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {eventsByDay.overflow.map((event) => (
+            <button
+              key={event.id}
+              type="button"
+              onClick={() => {
+                setDraft(null);
+                setActiveEvent(event);
+              }}
+              className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-600 text-xs text-white font-semibold"
+            >
+              {formatHm(new Date(event.starts_at))}{" "}
+              {contactLabel(event.contact) || t("calendar.unknown")}
+            </button>
+          ))}
         </div>
       ) : null}
 
@@ -518,22 +356,17 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               <div />
               {days.map((ymd) => {
                 const isToday = ymd === todayYmd;
-                const label = zonedLocalToUtc(ymd, "12:00").toLocaleDateString(
-                  locale,
-                  {
-                    timeZone: CALENDAR_TZ,
-                    weekday: "short",
-                    day: "numeric",
-                    month: "short",
-                  },
-                );
+                const label = zonedLocalToUtc(ymd, "12:00").toLocaleDateString(locale, {
+                  timeZone: CALENDAR_TZ,
+                  weekday: "short",
+                  day: "numeric",
+                  month: "short",
+                });
                 return (
                   <div
                     key={ymd}
                     className={`text-center text-xs font-bold py-2 rounded-lg ${
-                      isToday
-                        ? "bg-cyan-500/20 text-cyan-200"
-                        : "text-slate-400"
+                      isToday ? "bg-cyan-500/20 text-cyan-200" : "text-slate-400"
                     }`}
                   >
                     {label}
@@ -561,8 +394,14 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                   onClick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const y = e.clientY - rect.top;
-                    const { hour, minute } = timeFromClick(y);
-                    openCreate(ymd, hour, minute, CALENDAR_TZ, true);
+                    const minutesFromStart = (y / PX_PER_HOUR) * 60;
+                    const abs = HOUR_START * 60 + minutesFromStart;
+                    const snapped = Math.round(abs / 30) * 30;
+                    const clamped = Math.min(
+                      HOUR_END * 60 - 30,
+                      Math.max(HOUR_START * 60, snapped),
+                    );
+                    openCreate(ymd, Math.floor(clamped / 60), clamped % 60);
                   }}
                 >
                   {hours.map((hour) => {
@@ -620,9 +459,7 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               ))}
             </div>
           </div>
-          {loading ? (
-            <p className="text-xs text-slate-500 mt-3">{t("loading")}</p>
-          ) : null}
+          {loading ? <p className="text-xs text-slate-500 mt-3">{t("loading")}</p> : null}
         </div>
       )}
 
@@ -632,106 +469,87 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
           className="mt-5 rounded-2xl border border-cyan-500/30 bg-slate-900/70 p-4 space-y-3"
         >
           <p className="text-sm font-bold text-white">{t("calendar.newTitle")}</p>
-          <p className="text-xs text-slate-400">{t("calendar.formHint")}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-            <label className="text-xs text-slate-400 font-semibold">
-              {t("calendar.date")}
-              <input
-                type="date"
-                value={draft.ymd}
-                onChange={(e) => setDraft((prev) => ({ ...prev, ymd: e.target.value }))}
-                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
-              />
-            </label>
-            <label className="text-xs text-slate-400 font-semibold">
-              {t("calendar.timeGiven")}
-              <span className="ml-2 font-normal text-slate-500">
-                {formatHm12(draft.startHm)}
-              </span>
-              <div className="mt-1 flex gap-2">
-                <select
-                  value={draftHm.hour}
-                  onChange={(e) =>
-                    setDraft((prev) => ({
-                      ...prev,
-                      startHm: `${e.target.value}:${draftHm.minute}`,
-                    }))
-                  }
-                  className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
-                >
-                  {HOUR_OPTIONS.map((hour) => (
-                    <option key={hour} value={hour}>
-                      {hour}h
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={draftHm.minute}
-                  onChange={(e) =>
-                    setDraft((prev) => ({
-                      ...prev,
-                      startHm: `${draftHm.hour}:${e.target.value}`,
-                    }))
-                  }
-                  className="w-[5.5rem] px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
-                >
-                  {[draftHm.minute, ...MINUTE_OPTIONS]
-                    .filter((value, index, list) => list.indexOf(value) === index)
-                    .map((minute) => (
-                      <option key={minute} value={minute}>
-                        {minute}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </label>
-            <label className="text-xs text-slate-400 font-semibold lg:col-span-2">
-              {t("calendar.sourceTz")}
+            <input
+              type="date"
+              value={draft.ymd}
+              onChange={(e) => setDraft((prev) => ({ ...prev, ymd: e.target.value }))}
+              className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+            />
+            <div className="flex gap-2">
               <select
-                value={draft.timeZone}
+                value={draftHm.hour}
                 onChange={(e) =>
                   setDraft((prev) => ({
                     ...prev,
-                    timeZone: e.target.value,
-                    tzTouched: true,
+                    startHm: `${e.target.value}:${draftHm.minute}`,
                   }))
                 }
-                className="mt-1 w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm font-normal"
+                className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
               >
-                {APPOINTMENT_TIMEZONES.map((tz) => (
-                  <option key={tz.id} value={tz.id}>
-                    {timezoneLabel(tz.id, lang)}
+                {HOUR_OPTIONS.map((hour) => (
+                  <option key={hour} value={hour}>
+                    {hour}h
                   </option>
                 ))}
               </select>
-            </label>
+              <select
+                value={draftHm.minute}
+                onChange={(e) =>
+                  setDraft((prev) => ({
+                    ...prev,
+                    startHm: `${draftHm.hour}:${e.target.value}`,
+                  }))
+                }
+                className="w-[5.5rem] px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+              >
+                {[draftHm.minute, ...MINUTE_OPTIONS]
+                  .filter((value, index, list) => list.indexOf(value) === index)
+                  .map((minute) => (
+                    <option key={minute} value={minute}>
+                      {minute}
+                    </option>
+                  ))}
+              </select>
+            </div>
             <select
-              value={draft.duration}
-              onChange={(e) =>
-                setDraft((prev) => ({ ...prev, duration: Number(e.target.value) }))
-              }
+              value={draft.timeZone}
+              onChange={(e) => setDraft((prev) => ({ ...prev, timeZone: e.target.value }))}
               className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
             >
-              <option value={30}>30 min</option>
-              <option value={45}>45 min</option>
-              <option value={60}>60 min</option>
+              {APPOINTMENT_TIMEZONES.map((tz) => (
+                <option key={tz.id} value={tz.id}>
+                  {timezoneLabel(tz.id, lang)}
+                </option>
+              ))}
             </select>
-            <select
-              value={draft.kind}
-              onChange={(e) => setDraft((prev) => ({ ...prev, kind: e.target.value }))}
-              className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
-            >
-              <option value="appel">{t("calendar.kindAppel")}</option>
-              <option value="visio">{t("calendar.kindVisio")}</option>
-              <option value="autre">{t("calendar.kindAutre")}</option>
-            </select>
+            <div className="flex gap-2">
+              <select
+                value={draft.duration}
+                onChange={(e) =>
+                  setDraft((prev) => ({ ...prev, duration: Number(e.target.value) }))
+                }
+                className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+              >
+                <option value={30}>30 min</option>
+                <option value={45}>45 min</option>
+                <option value={60}>60 min</option>
+              </select>
+              <select
+                value={draft.kind}
+                onChange={(e) => setDraft((prev) => ({ ...prev, kind: e.target.value }))}
+                className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm"
+              >
+                <option value="appel">{t("calendar.kindAppel")}</option>
+                <option value="visio">{t("calendar.kindVisio")}</option>
+                <option value="autre">{t("calendar.kindAutre")}</option>
+              </select>
+            </div>
           </div>
-          {draftConversion ? (
-            <BeijingPreview
-              conversion={draftConversion}
-              t={t}
-              dateShift={draftConversion.dateShift}
-            />
+          {draftConversion && draft.timeZone !== CALENDAR_TZ ? (
+            <p className="text-sm text-cyan-200 font-semibold">
+              → {draftConversion.label} ({t("calendar.paris")})
+            </p>
           ) : null}
           <input
             type="text"
@@ -751,15 +569,17 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               <button
                 key={c.id}
                 type="button"
-                onClick={() => {
-                  const guessed = guessTimeZoneFromCountry(c.pays);
+                onClick={() =>
                   setDraft((prev) => ({
                     ...prev,
                     contactId: c.id,
                     query: contactLabel(c),
-                    timeZone: prev.tzTouched ? prev.timeZone : guessed,
-                  }));
-                }}
+                    timeZone:
+                      prev.timeZone === CALENDAR_TZ
+                        ? guessTimeZoneFromCountry(c.pays)
+                        : prev.timeZone,
+                  }))
+                }
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${
                   String(draft.contactId) === String(c.id)
                     ? "bg-cyan-500/20 border-cyan-400 text-white"
@@ -767,17 +587,9 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
                 }`}
               >
                 {contactLabel(c)}
-                {c.pays ? ` · ${c.pays}` : ""}
               </button>
             ))}
           </div>
-          <textarea
-            value={draft.notes}
-            onChange={(e) => setDraft((prev) => ({ ...prev, notes: e.target.value }))}
-            placeholder={t("calendar.notesPlaceholder")}
-            rows={2}
-            className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-xl text-white text-sm placeholder-slate-500 resize-y"
-          />
           <div className="flex gap-3">
             <button
               type="submit"
@@ -816,14 +628,16 @@ export default function AdminCalendar({ contacts = [], onOpenContact }) {
               → {formatHm(new Date(activeEvent.ends_at))} ({t("calendar.paris")})
             </p>
             <p className="text-xs text-slate-500 mt-1">
-              {t(`calendar.kind${activeEvent.kind === "visio" ? "Visio" : activeEvent.kind === "autre" ? "Autre" : "Appel"}`)}
-              {activeEvent.source === "ai_reply" ? ` · ${t("calendar.fromAi")}` : ""}
+              {t(
+                `calendar.kind${
+                  activeEvent.kind === "visio"
+                    ? "Visio"
+                    : activeEvent.kind === "autre"
+                      ? "Autre"
+                      : "Appel"
+                }`,
+              )}
             </p>
-            {activeEvent.notes ? (
-              <p className="text-xs text-slate-400 mt-2 whitespace-pre-wrap">
-                {activeEvent.notes}
-              </p>
-            ) : null}
           </div>
           <div className="flex flex-wrap gap-2">
             {activeEvent.contact && onOpenContact ? (

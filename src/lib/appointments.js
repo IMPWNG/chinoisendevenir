@@ -1,10 +1,7 @@
 import {
   DEFAULT_DURATION_MINUTES,
-  LOOKAHEAD_DAYS,
-  listFreeSlots,
   overlaps,
   parseIso,
-  pickSlotsForPrompt,
 } from "./calendar";
 
 const APPOINTMENT_FIELDS =
@@ -51,12 +48,6 @@ export async function listAppointments(
     throw error;
   }
   return { ok: true, events: data || [] };
-}
-
-export async function listUpcomingAppointments(client, { days = LOOKAHEAD_DAYS } = {}) {
-  const from = new Date();
-  const to = new Date(from.getTime() + days * 24 * 60 * 60 * 1000);
-  return listAppointments(client, { from, to });
 }
 
 export async function findOverlappingAppointment(
@@ -297,117 +288,4 @@ export async function attachContacts(client, events) {
     ...event,
     contact: byId.get(String(event.contact_id)) || null,
   }));
-}
-
-export async function getCalendarContext(client, { contactId } = {}) {
-  const upcoming = await listUpcomingAppointments(client);
-  if (upcoming.missingTable) {
-    return {
-      missingTable: true,
-      booked: [],
-      freeSlots: [],
-      promptSlots: [],
-    };
-  }
-
-  const booked = upcoming.events || [];
-  const freeSlots = listFreeSlots({ booked });
-  const promptSlots = pickSlotsForPrompt(freeSlots);
-  const forContact = contactId
-    ? booked.filter((event) => String(event.contact_id) === String(contactId))
-    : [];
-
-  return {
-    missingTable: false,
-    booked,
-    freeSlots,
-    promptSlots,
-    contactAppointments: forContact,
-  };
-}
-
-export async function listEmailDrafts(client, { contactId, status = "pending" } = {}) {
-  let query = client
-    .from("email_drafts")
-    .select(
-      "id, contact_id, appointment_id, kind, subject, title, subtitle, body, inbound_excerpt, analysis, status, created_at",
-    )
-    .order("created_at", { ascending: false })
-    .limit(20);
-
-  if (contactId) query = query.eq("contact_id", String(contactId));
-  if (status) query = query.eq("status", status);
-
-  const { data, error } = await query;
-  if (error) {
-    if (isMissingTableError(error)) return { ok: false, missingTable: true, drafts: [] };
-    throw error;
-  }
-  return { ok: true, drafts: data || [] };
-}
-
-export async function saveEmailDraft(client, payload) {
-  const row = {
-    contact_id: String(payload.contactId || payload.contact_id || "").trim(),
-    appointment_id: payload.appointmentId || payload.appointment_id || null,
-    kind: payload.kind || "confirmation",
-    subject: String(payload.subject || "").trim(),
-    title: String(payload.title || "").trim(),
-    subtitle: String(payload.subtitle || "").trim(),
-    body: String(payload.body || "").trim(),
-    inbound_excerpt: payload.inboundExcerpt || payload.inbound_excerpt || null,
-    analysis: payload.analysis || {},
-    status: payload.status || "pending",
-    updated_at: new Date().toISOString(),
-  };
-  if (!row.contact_id) return { ok: false, error: "contactId manquant" };
-
-  const { data, error } = await client
-    .from("email_drafts")
-    .insert(row)
-    .select()
-    .single();
-
-  if (error) {
-    if (isMissingTableError(error)) {
-      return { ok: false, missingTable: true, error: "Table email_drafts absente" };
-    }
-    throw error;
-  }
-  return { ok: true, draft: data };
-}
-
-export async function updateEmailDraft(client, id, patch) {
-  const draftId = String(id || "").trim();
-  if (!draftId) return { ok: false, error: "id manquant", status: 400 };
-
-  const payload = { updated_at: new Date().toISOString() };
-  for (const key of [
-    "subject",
-    "title",
-    "subtitle",
-    "body",
-    "status",
-    "appointment_id",
-    "kind",
-  ]) {
-    if (patch[key] !== undefined) payload[key] = patch[key];
-  }
-  if (patch.appointmentId !== undefined) payload.appointment_id = patch.appointmentId;
-
-  const { data, error } = await client
-    .from("email_drafts")
-    .update(payload)
-    .eq("id", draftId)
-    .select()
-    .single();
-
-  if (error) {
-    if (isMissingTableError(error)) {
-      return { ok: false, missingTable: true, error: "Table email_drafts absente", status: 503 };
-    }
-    throw error;
-  }
-  if (!data) return { ok: false, error: "Brouillon introuvable", status: 404 };
-  return { ok: true, draft: data };
 }

@@ -502,7 +502,6 @@ export default async function handler(req, res) {
         customMessage: String(body.customMessage || "").trim(),
         formuleLabel: body.formuleLabel,
       };
-      const draftId = String(body.draftId || "").trim();
 
       if (!template) {
         return res.status(400).json({
@@ -597,21 +596,6 @@ export default async function handler(req, res) {
         template.action,
         actionDescription,
       );
-
-      if (draftId && emailTemplate === "custom") {
-        await supabase
-          .from("email_drafts")
-          .update({
-            status: "sent",
-            subject: extras.customSubject,
-            title: extras.customTitle,
-            subtitle: extras.customSubtitle,
-            body: extras.customMessage,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", draftId)
-          .eq("contact_id", contactId);
-      }
 
       console.log("\n" + "✅".repeat(40));
       console.log("SUCCÈS COMPLET - MANUEL");

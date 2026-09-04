@@ -14,7 +14,6 @@ import {
   FORMULE_2_VALUE,
   FORMULE_3_VALUE,
 } from "../formules.js";
-import { processAppointmentReply } from "../appointmentReply.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -382,7 +381,7 @@ export async function saveChosenFormule(contact, formuleLabel) {
   return false;
 }
 
-async function notifyAdmin({ contact, subject, text, intent, appointmentNote }) {
+async function notifyAdmin({ contact, subject, text, intent }) {
   try {
     const name = `${contact.prenom || ""} ${contact.nom || ""}`.trim();
     await resend.emails.send({
@@ -395,11 +394,6 @@ async function notifyAdmin({ contact, subject, text, intent, appointmentNote }) 
         <p><strong>Sujet :</strong> ${escapeHtml(subject || "—")}</p>
         <p><strong>Intent détecté :</strong> ${escapeHtml(intent)}</p>
         <p><strong>Statut actuel :</strong> ${escapeHtml(contact.suivi_statut || "—")}</p>
-        ${
-          appointmentNote
-            ? `<p><strong>RDV / IA :</strong> ${escapeHtml(appointmentNote)}</p>`
-            : ""
-        }
         <hr>
         <pre style="white-space:pre-wrap;font-family:inherit">${escapeHtml(truncate(text, 4000))}</pre>
       `,
@@ -512,36 +506,11 @@ export async function processInboundEmail(payload) {
     `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
   );
 
-  let appointmentNote = "";
-  try {
-    const appointmentResult = await processAppointmentReply({
-      client: supabase,
-      contact,
-      replyText: replyText || rawText,
-      userAdmin: "système_automatique",
-    });
-    if (appointmentResult?.missingTable) {
-      appointmentNote = "Calendrier non initialisé (sql/appointments.sql).";
-    } else if (appointmentResult?.isAppointmentReply) {
-      if (intent === "reponse_libre" || intent === "question") intent = "rdv";
-      if (appointmentResult.appointment) {
-        appointmentNote =
-          "Créneau placé dans le calendrier. Un brouillon de confirmation attend votre relecture dans le profil étudiant.";
-      } else {
-        appointmentNote =
-          "Réponse RDV analysée. Un brouillon d'email attend votre relecture dans le profil étudiant (aucun envoi automatique).";
-      }
-    }
-  } catch (error) {
-    console.warn("⚠️ Analyse RDV inbound:", error.message);
-  }
-
   await notifyAdmin({
     contact,
     subject,
     text: replyText || rawText,
     intent,
-    appointmentNote,
   });
 
   if (formule) {

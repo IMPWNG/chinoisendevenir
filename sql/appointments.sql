@@ -1,4 +1,4 @@
--- Appointments (admin calendar) + AI email drafts waiting for review.
+-- Appointments (admin calendar).
 -- Run in the Supabase SQL editor. Safe to re-run.
 --
 -- Admins read/write via the browser (RLS + is_admin()).

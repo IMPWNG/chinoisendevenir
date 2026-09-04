@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { composeEmailWithAi } from "@/lib/emailCompose";
-import { getCalendarContext } from "@/lib/appointments";
 import { rateLimit } from "@/lib/httpSecurity";
 
 export async function POST(request) {
@@ -63,12 +62,7 @@ export async function POST(request) {
       );
     }
 
-    const calendar = await getCalendarContext(auth.admin, { contactId });
-    const composed = await composeEmailWithAi({
-      notes,
-      contact,
-      calendar: calendar.missingTable ? null : calendar,
-    });
+    const composed = await composeEmailWithAi({ notes, contact });
     if (!composed.ok) {
       return NextResponse.json(
         { success: false, error: composed.error },
@@ -82,8 +76,6 @@ export async function POST(request) {
       title: composed.title,
       subtitle: composed.subtitle,
       body: composed.body,
-      offeredSlots: composed.offeredSlots || [],
-      calendarReady: !calendar.missingTable,
     });
   } catch (error) {
     console.error("compose-email:", error);
