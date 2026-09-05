@@ -5,7 +5,7 @@ import AdminUniversities from "@/views/AdminUniversities";
 
 export default function AdminUniversitiesPage() {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requireFull>
       <AdminUniversities />
     </ProtectedRoute>
   );

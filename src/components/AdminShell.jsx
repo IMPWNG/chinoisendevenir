@@ -3,17 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAdminI18n } from "../context/AdminI18nContext";
+import { useAdminAccess } from "../context/AdminAccessContext";
 import { ADMIN_LANGS } from "../i18n/admin";
 
 export default function AdminShell({ user, onLogout, children }) {
   const pathname = usePathname();
   const { lang, setLang, t } = useAdminI18n();
+  const access = useAdminAccess();
   const isUniversities = pathname?.startsWith("/admin/universites");
 
   const nav = [
     { href: "/admin/dashboard", label: t("nav.contacts"), icon: "👥" },
-    { href: "/admin/universites", label: t("nav.universities"), icon: "🏫" },
-  ];
+    access.universities
+      ? { href: "/admin/universites", label: t("nav.universities"), icon: "🏫" }
+      : null,
+  ].filter(Boolean);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
@@ -73,7 +77,9 @@ export default function AdminShell({ user, onLogout, children }) {
             </div>
             <div className="text-right hidden sm:block">
               <p className="text-sm text-white font-medium">{user?.email}</p>
-              <p className="text-xs text-slate-400">{t("connected")}</p>
+              <p className="text-xs text-slate-400">
+                {access.universities ? t("connected") : t("roleLimited")}
+              </p>
             </div>
             <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
               {user?.email?.[0]?.toUpperCase()}

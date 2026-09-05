@@ -18,6 +18,7 @@ import {
   buildWhatsAppLink,
 } from "../lib/whatsapp/messages";
 import { useAdminI18n } from "../context/AdminI18nContext";
+import { useAdminAccess } from "../context/AdminAccessContext";
 import { generateCustomEmailHtml } from "../lib/emailLayout";
 import {
   isStudentSpaceUnlocked,
@@ -195,6 +196,7 @@ const ACTIONS_TYPES = [
 
 export default function AdminDashboard() {
   const { t } = useAdminI18n();
+  const access = useAdminAccess();
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -245,6 +247,7 @@ export default function AdminDashboard() {
   };
 
   const sendBulkMessages = async () => {
+    if (!access.bulkSend) return;
     const selected = contacts.filter((c) => selectedIds.includes(c.id));
     const viaWhatsapp = bulkChannel === "whatsapp";
     const recipients = selected.filter((c) =>
@@ -532,6 +535,7 @@ export default function AdminDashboard() {
   };
 
   const deleteContact = async (id) => {
+    if (!access.deleteContacts) return;
     if (!confirm(t("dashboard.deleteConfirm"))) return;
     const { error } = await adminSupabase.from("contacts").delete().eq("id", id);
     if (!error) {
@@ -719,7 +723,7 @@ const stats = {
           }}
         />
 
-        {/* Envoi groupé */}
+        {access.bulkSend ? (
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 sticky top-[88px] z-30">
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
             <div className="flex-1">
@@ -834,6 +838,7 @@ const stats = {
             </div>
           </div>
         </div>
+        ) : null}
 
         {/* Table */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
@@ -856,6 +861,7 @@ const stats = {
               <table className="w-full">
                 <thead className="bg-slate-900/60 border-b border-slate-700/50">
                   <tr>
+                    {access.bulkSend ? (
                     <th className="px-4 py-4 w-12">
                       <input
                         type="checkbox"
@@ -884,6 +890,7 @@ const stats = {
                         className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
                       />
                     </th>
+                    ) : null}
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
                       👤 {t("dashboard.colName")}
                     </th>
@@ -915,6 +922,7 @@ const stats = {
                         selectedIds.includes(c.id) ? "bg-amber-500/10" : ""
                       }`}
                     >
+                      {access.bulkSend ? (
                       <td className="px-4 py-4">
                         <input
                           type="checkbox"
@@ -925,6 +933,7 @@ const stats = {
                           className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
                         />
                       </td>
+                      ) : null}
                       <td className="px-6 py-4">
                         <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                           {c.prenom} {c.nom}
@@ -993,12 +1002,14 @@ const stats = {
                           >
                             ✏️ {t("dashboard.editShort")}
                           </button>
+                          {access.deleteContacts ? (
                           <button
                             onClick={() => deleteContact(c.id)}
                             className="text-red-400 hover:text-red-300 hover:bg-red-500/20 px-3 py-1 rounded-lg text-sm font-semibold transition-all duration-200"
                           >
                             🗑️ {t("dashboard.deleteShort")}
                           </button>
+                          ) : null}
                         </div>
                       </td>
                     </tr>
@@ -1081,6 +1092,7 @@ function ContactModal({
   startEditing,
 }) {
   const { t, lang } = useAdminI18n();
+  const access = useAdminAccess();
   const [actions, setActions] = useState([]);
   const [newAction, setNewAction] = useState("");
   const [newDescription, setNewDescription] = useState("");
@@ -1304,6 +1316,7 @@ function ContactModal({
     : "";
 
   async function sendSelectedWhatsapp() {
+    if (!access.whatsapp) return;
     if (!whatsappReady) {
       alert(t("dashboard.noPhoneOnContact"));
       return;
@@ -1562,7 +1575,7 @@ function ContactModal({
             </p>
           </div>
 
-          {/* Envoi WhatsApp */}
+          {access.whatsapp ? (
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
               📱 {t("dashboard.whatsappSection")}
@@ -1630,6 +1643,7 @@ function ContactModal({
                       : t("dashboard.whatsappHintCustom")}
             </p>
           </div>
+          ) : null}
 
           {/* Formule + déblocage espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -1709,7 +1723,9 @@ function ContactModal({
             </p>
           </div>
 
-          <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
+          {access.matching ? (
+            <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
+          ) : null}
 
           {/* Avancement dossier */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -1797,7 +1813,10 @@ function ContactModal({
                 className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
               >
                 <option value="">{t("dashboard.chooseAction")}</option>
-                {ACTIONS_TYPES.map((a) => (
+                {(access.matching
+                  ? ACTIONS_TYPES
+                  : ACTIONS_TYPES.filter((a) => a.value !== "matching")
+                ).map((a) => (
                   <option key={a.value} value={a.value}>
                     {a.icon} {t(`action.${a.value}`)}
                   </option>

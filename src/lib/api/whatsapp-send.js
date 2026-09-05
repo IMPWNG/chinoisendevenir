@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { getAuthenticatedAdmin } from "../studentAuth.js";
+import { getAuthenticatedAdmin } from "@/lib/studentAuth";
+import { requireFullAdmin } from "@/lib/adminRoles";
 import {
   logAction,
   updateContactStatus,
@@ -127,6 +128,13 @@ export async function handleWhatsAppSend(request) {
     return NextResponse.json(
       { success: false, message: auth.error },
       { status: auth.status || 403 },
+    );
+  }
+  const forbidden = requireFullAdmin(auth);
+  if (forbidden) {
+    return NextResponse.json(
+      { success: false, message: forbidden.error },
+      { status: forbidden.status },
     );
   }
 

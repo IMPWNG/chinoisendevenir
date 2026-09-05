@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
+import { requireFullAdmin } from "@/lib/adminRoles";
 import { importScanCatalog } from "@/lib/universityScanImport";
 
 export async function POST(request) {
@@ -9,6 +10,13 @@ export async function POST(request) {
     const auth = await getAuthenticatedAdmin(request);
     if (auth.error) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+    const forbidden = requireFullAdmin(auth);
+    if (forbidden) {
+      return NextResponse.json(
+        { error: forbidden.error },
+        { status: forbidden.status },
+      );
     }
 
     const catalog = JSON.parse(

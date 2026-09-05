@@ -13,6 +13,11 @@ import {
   getGrantedFormuleNumber,
 } from "./studentProgress";
 
+import {
+  getAdminEmailAllowlist,
+  resolveAdminRole,
+} from "./adminRoles";
+
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
 export const STUDENT_DOCUMENT_FOLDER = "document-requis";
 
@@ -99,14 +104,7 @@ export async function getAuthenticatedUser(request) {
   return { user, admin };
 }
 
-export function getAdminEmailAllowlist() {
-  return new Set(
-    String(process.env.ADMIN_EMAILS || "")
-      .split(",")
-      .map((item) => item.trim().toLowerCase())
-      .filter(Boolean),
-  );
-}
+export { getAdminEmailAllowlist } from "./adminRoles";
 
 export function isAdminEmail(email) {
   const value = String(email || "").toLowerCase();
@@ -116,52 +114,75 @@ export function isAdminEmail(email) {
 
 function tableMissing(error) {
   const message = String(error?.message || "").toLowerCase();
+  if (!message.includes("admin_users")) return false;
+  if (message.includes("column")) return false;
   return (
-    message.includes("admin_users") &&
-    (message.includes("does not exist") ||
-      message.includes("schema cache") ||
-      message.includes("could not find"))
+    message.includes("does not exist") ||
+    message.includes("schema cache") ||
+    message.includes("could not find")
   );
 }
 
-export async function isApprovedAdmin(admin, user) {
+function roleColumnMissing(error) {
+  const message = String(error?.message || "").toLowerCase();
+  return message.includes("role") && message.includes("column");
+}
+
+export async function getAdminAccess(admin, user) {
   const email = String(user?.email || "").toLowerCase();
   const allowlist = getAdminEmailAllowlist();
 
   if (allowlist.size > 0 && !allowlist.has(email)) {
-    return false;
+    return { approved: false, role: null };
   }
 
-  const { data, error } = await admin
+  let { data, error } = await admin
     .from("admin_users")
-    .select("user_id")
+    .select("user_id, role")
     .eq("user_id", user.id)
     .maybeSingle();
 
+  if (error && roleColumnMissing(error)) {
+    const retry = await admin
+      .from("admin_users")
+      .select("user_id")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    data = retry.data;
+    error = retry.error;
+  }
+
   if (!error) {
-    return Boolean(data?.user_id);
+    if (!data?.user_id) return { approved: false, role: null };
+    return { approved: true, role: resolveAdminRole(email, data.role) };
   }
 
   // Table not created yet: allowlist-only fallback so you are not locked out
   // before running sql/admin-security.sql. With no allowlist, deny everyone.
   if (tableMissing(error)) {
-    return allowlist.has(email);
+    if (!allowlist.has(email)) return { approved: false, role: null };
+    return { approved: true, role: resolveAdminRole(email, null) };
   }
 
   console.error("admin_users check failed:", error.message);
-  return false;
+  return { approved: false, role: null };
+}
+
+export async function isApprovedAdmin(admin, user) {
+  const access = await getAdminAccess(admin, user);
+  return access.approved;
 }
 
 export async function getAuthenticatedAdmin(request) {
   const auth = await getAuthenticatedUser(request);
   if (auth.error) return auth;
 
-  const approved = await isApprovedAdmin(auth.admin, auth.user);
-  if (!approved) {
+  const access = await getAdminAccess(auth.admin, auth.user);
+  if (!access.approved) {
     return { error: "Accès admin requis", status: 403 };
   }
 
-  return auth;
+  return { ...auth, role: access.role };
 }
 
 export async function findContactByEmail(admin, email) {

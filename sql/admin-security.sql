@@ -152,6 +152,14 @@ end $$;
 --   ('PASTE-YOUR-UUID', 'you@email.com'),
 --   ('PASTE-ASSOCIATE-UUID', 'associate@email.com')
 -- on conflict (user_id) do update set email = excluded.email;
+--
+-- For a limited admin (students only, no universities / matching / WhatsApp / bulk):
+--   1) Run sql/admin-roles.sql
+--   2) insert into public.admin_users (user_id, email, role)
+--      values ('PASTE-UUID', 'associate@email.com', 'limited')
+--      on conflict (user_id) do update
+--        set email = excluded.email, role = excluded.role;
+--   3) Optionally set ADMIN_LIMITED_EMAILS=associate@email.com
 
 -- Optional extra lock on the Auth JWT (not required if admin_users is filled):
 -- update auth.users

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
+import { requireFullAdmin } from "@/lib/adminRoles";
 import {
   getRequiredDocumentsStatus,
   listAdminSentDocuments,
@@ -18,6 +19,13 @@ export async function GET(request) {
     const auth = await getAuthenticatedAdmin(request);
     if (auth.error) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+    const forbidden = requireFullAdmin(auth);
+    if (forbidden) {
+      return NextResponse.json(
+        { error: forbidden.error },
+        { status: forbidden.status },
+      );
     }
 
     const contactId = String(
@@ -47,6 +55,13 @@ export async function POST(request) {
     const auth = await getAuthenticatedAdmin(request);
     if (auth.error) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+    const forbidden = requireFullAdmin(auth);
+    if (forbidden) {
+      return NextResponse.json(
+        { error: forbidden.error },
+        { status: forbidden.status },
+      );
     }
 
     const body = await request.json().catch(() => ({}));
