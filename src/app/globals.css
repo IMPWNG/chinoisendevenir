@@ -2024,6 +2024,16 @@ a.formule-card-btn {
   color: var(--secondary);
 }
 
+.doc-school-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--secondary);
+}
+
 .doc-visa-intro,
 .doc-visa-note {
   margin: 0 0 12px;

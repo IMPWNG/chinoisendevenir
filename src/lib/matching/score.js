@@ -9,6 +9,7 @@ import {
 import { scoreMotivationIa } from "./enrich";
 import { domainPassesHardFilter, domainSimilarity } from "./semantic";
 import { MATCHING_WEIGHTS } from "./weights";
+import { studentHasDiplomaUpload } from "../studentProgress";
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -328,11 +329,34 @@ export function matchUniversity(student, university, { pedagogical = false } = {
   const meta = filter.pass ? categoryMetaFromScore(score) : CATEGORY_META.unready;
   const missingDocs = (university.documents || []).filter((doc) => {
     const key = normalizeText(doc);
+    const uploaded = student.documents || [];
     if (key.includes("passeport") || key.includes("passport")) {
-      return !student.documents.includes("passeport");
+      return !uploaded.includes("passeport");
     }
     if (key.includes("diplome") || key.includes("diploma") || key.includes("degree")) {
-      return !student.documents.includes("dernier_diplome");
+      return !studentHasDiplomaUpload(uploaded);
+    }
+    if (key.includes("hsk")) return !uploaded.includes("hsk");
+    if (key.includes("ielts") || key.includes("toefl")) {
+      return !uploaded.includes("ielts_or_toefl");
+    }
+    if (
+      key.includes("language") ||
+      key.includes("langue") ||
+      key.includes("certificat_langue")
+    ) {
+      return !uploaded.includes("hsk") && !uploaded.includes("ielts_or_toefl");
+    }
+    if (key.includes("csca")) return !uploaded.includes("csca");
+    if (
+      key.includes("medical") ||
+      key.includes("physical") ||
+      key.includes("examen_medical")
+    ) {
+      return !uploaded.includes("formulaire_medical");
+    }
+    if (key.includes("criminal") || key.includes("casier")) {
+      return !uploaded.includes("casier_judiciaire");
     }
     return true;
   });

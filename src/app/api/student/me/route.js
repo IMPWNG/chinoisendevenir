@@ -31,7 +31,7 @@ export async function GET(request) {
       if (profile.access?.documents) {
         await ensureStudentBucket(auth.admin);
         [requiredDocuments, adminDocuments] = await Promise.all([
-          getRequiredDocumentsStatus(auth.admin, auth.contact.id),
+          getRequiredDocumentsStatus(auth.admin, auth.contact.id, auth.contact),
           listAdminSentDocuments(auth.admin, auth.contact.id),
         ]);
       }

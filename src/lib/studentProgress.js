@@ -207,21 +207,128 @@ export const FORMULE_OPTIONS = FORMULES.map((formule) => ({
   label: `${FORMULE_OPTION_PREFIX[formule.number]} ${formule.shortTitle} — ${displayFormulePrice(formule)}`,
 }));
 
-export const REQUIRED_STUDENT_DOCUMENTS = [
+const FILE_HINT = "PDF, JPG ou PNG — 10 Mo max.";
+
+export const STUDENT_DOCUMENT_CATALOG = [
   {
     key: "passeport",
     label: "Passeport",
     icon: "🛂",
-    description: "Passeport en cours de validité (PDF, JPG ou PNG — 10 Mo max).",
+    description: `Passeport en cours de validité (${FILE_HINT}).`,
+    levels: "all",
   },
   {
-    key: "dernier_diplome",
-    label: "Dernier diplôme obtenu",
+    key: "high_school_diploma",
+    label: "Diplôme de fin d'études secondaires",
+    icon: "🏫",
+    description: `Baccalauréat ou équivalent, avec traduction si besoin (${FILE_HINT}).`,
+    levels: ["bac", "autre"],
+  },
+  {
+    key: "bachelor_degree",
+    label: "Diplôme de licence (bachelor)",
     icon: "🎓",
-    description:
-      "Copie de votre dernier diplôme obtenu (PDF, JPG ou PNG — 10 Mo max).",
+    description: `Diplôme de licence / bachelor, avec relevés de notes si possible (${FILE_HINT}).`,
+    levels: ["licence", "master", "doctorat", "autre"],
+  },
+  {
+    key: "master_degree",
+    label: "Diplôme de master",
+    icon: "📜",
+    description: `Diplôme de master, avec relevés de notes si possible (${FILE_HINT}).`,
+    levels: ["master", "doctorat"],
+  },
+  {
+    key: "hsk",
+    label: "Certificat HSK",
+    icon: "🈶",
+    description: `Pour un programme enseigné en chinois (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "ielts_or_toefl",
+    label: "IELTS ou TOEFL",
+    icon: "🔤",
+    description: `Pour un programme enseigné en anglais. Un des deux certificats suffit (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "csca",
+    label: "CSCA",
+    icon: "📝",
+    description: `China Scholastic Competency Assessment, souvent demandé pour une licence en Chine (${FILE_HINT}).`,
+    levels: ["bac"],
+  },
+  {
+    key: "formulaire_medical",
+    label: "Formulaire médical",
+    icon: "🩺",
+    description: `Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), daté et tamponné (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "casier_judiciaire",
+    label: "Extrait de casier judiciaire",
+    icon: "⚖️",
+    description: `Certificat de non-condamnation (No Criminal Record), récent (${FILE_HINT}).`,
+    levels: "all",
   },
 ];
+
+export const REQUIRED_STUDENT_DOCUMENTS = STUDENT_DOCUMENT_CATALOG;
+
+const DIPLOMA_DOC_KEYS = [
+  "dernier_diplome",
+  "high_school_diploma",
+  "bachelor_degree",
+  "master_degree",
+];
+
+export function diplomaLevelFromStudent(dernierDiplome) {
+  const value = String(dernierDiplome || "").toLowerCase();
+  if (value.includes("doctorat") || value.includes("phd")) return "doctorat";
+  if (value.includes("master")) return "master";
+  if (value.includes("licence") || value.includes("bachelor")) return "licence";
+  if (value.includes("bac")) return "bac";
+  return "autre";
+}
+
+export function getRequiredStudentDocuments(student = {}) {
+  const level = diplomaLevelFromStudent(student.dernier_diplome);
+  return STUDENT_DOCUMENT_CATALOG.filter(
+    (doc) => doc.levels === "all" || doc.levels.includes(level),
+  );
+}
+
+export function getSchoolDocumentsIntro(dernierDiplome) {
+  const level = diplomaLevelFromStudent(dernierDiplome);
+  if (level === "bac") {
+    return "Pour une licence en Chine, les universités demandent le plus souvent le passeport, le bac, le CSCA, un certificat de langue, le formulaire médical et un extrait de casier judiciaire.";
+  }
+  if (level === "licence") {
+    return "Pour un master, les universités demandent le plus souvent le passeport, le diplôme de licence, un certificat de langue, le formulaire médical et un extrait de casier judiciaire.";
+  }
+  if (level === "master" || level === "doctorat") {
+    return "Pour un doctorat, les universités demandent le plus souvent le passeport, les diplômes de licence et de master, un certificat de langue, le formulaire médical et un extrait de casier judiciaire.";
+  }
+  return "Les universités chinoises demandent le plus souvent le passeport, le diplôme du dernier niveau, un certificat de langue, le formulaire médical et un extrait de casier judiciaire.";
+}
+
+export function legacyDiplomaDocKey(dernierDiplome) {
+  const level = diplomaLevelFromStudent(dernierDiplome);
+  if (level === "licence") return "bachelor_degree";
+  if (level === "master" || level === "doctorat") return "master_degree";
+  return "high_school_diploma";
+}
+
+export function studentHasDiplomaUpload(documents = []) {
+  const keys = new Set(
+    (documents || []).map((doc) =>
+      typeof doc === "string" ? doc : doc.key,
+    ),
+  );
+  return DIPLOMA_DOC_KEYS.some((key) => keys.has(key));
+}
 
 export const VISA_DOCUMENT_GUIDE = {
   title: "Documents pour le visa",

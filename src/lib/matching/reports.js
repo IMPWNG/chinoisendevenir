@@ -1,5 +1,5 @@
 import { displayFormulePrice, getFormuleAccess, getFormuleByNumber } from "../formules";
-import { REQUIRED_STUDENT_DOCUMENTS } from "../studentProgress";
+import { getRequiredStudentDocuments } from "../studentProgress";
 import { CATEGORY_META } from "./constants";
 
 export const NO_GUARANTEE =
@@ -195,7 +195,7 @@ function sortByScore(matches) {
   );
 }
 
-function documentInventory(documents = [], extraFromUnis = []) {
+function documentInventory(documents = [], extraFromUnis = [], student = {}) {
   const required = (documents || []).map((doc) => ({
     key: doc.key,
     name: doc.label || doc.key,
@@ -204,7 +204,7 @@ function documentInventory(documents = [], extraFromUnis = []) {
     university: null,
   }));
   if (!required.length) {
-    REQUIRED_STUDENT_DOCUMENTS.forEach((doc) => {
+    getRequiredStudentDocuments(student).forEach((doc) => {
       required.push({
         key: doc.key,
         name: doc.label,
@@ -706,7 +706,7 @@ export function buildDualReports({
   const ranked = sortByScore(matches);
   const counts = mixCounts(ranked);
   const extraDocs = extraUniDocuments(ranked);
-  const docs = documentInventory(documents, extraDocs);
+  const docs = documentInventory(documents, extraDocs, student);
   const toVerify = toVerifyList(ranked);
   const best = ranked[0] || null;
   const mapped = ranked.map((item, index) =>

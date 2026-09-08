@@ -110,7 +110,7 @@ export async function POST(request) {
     let adminDocuments = [];
     try {
       [documents, adminDocuments] = await Promise.all([
-        getRequiredDocumentsStatus(auth.admin, contactId),
+        getRequiredDocumentsStatus(auth.admin, contactId, contact),
         listAdminSentDocuments(auth.admin, contactId),
       ]);
     } catch {

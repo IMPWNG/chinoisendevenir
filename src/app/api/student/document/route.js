@@ -99,7 +99,7 @@ export async function POST(request) {
     });
 
     const [requiredDocuments, adminDocuments] = await Promise.all([
-      getRequiredDocumentsStatus(auth.admin, auth.contact.id),
+      getRequiredDocumentsStatus(auth.admin, auth.contact.id, auth.contact),
       listAdminSentDocuments(auth.admin, auth.contact.id),
     ]);
 

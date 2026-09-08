@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import JsonLd from "@/components/JsonLd";
 import { organizationJsonLd, SITE, websiteJsonLd } from "@/lib/seo";
 import Providers from "./providers";
@@ -49,6 +50,7 @@ export default function RootLayout({ children }) {
       <body>
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <Providers>{children}</Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

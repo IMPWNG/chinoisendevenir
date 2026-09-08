@@ -235,6 +235,14 @@ export const adminTranslations = {
     docs: {
       passeport: "Passeport",
       dernier_diplome: "Dernier diplôme obtenu",
+      high_school_diploma: "Diplôme de fin d'études secondaires",
+      bachelor_degree: "Diplôme de licence (bachelor)",
+      master_degree: "Diplôme de master",
+      hsk: "Certificat HSK",
+      ielts_or_toefl: "IELTS ou TOEFL",
+      csca: "CSCA",
+      formulaire_medical: "Formulaire médical",
+      casier_judiciaire: "Extrait de casier judiciaire",
     },
     universities: {
       title: "Universités",
@@ -673,6 +681,14 @@ export const adminTranslations = {
     docs: {
       passeport: "Passport",
       dernier_diplome: "Highest diploma obtained",
+      high_school_diploma: "High school diploma",
+      bachelor_degree: "Bachelor degree",
+      master_degree: "Master degree",
+      hsk: "HSK certificate",
+      ielts_or_toefl: "IELTS or TOEFL",
+      csca: "CSCA",
+      formulaire_medical: "Medical form",
+      casier_judiciaire: "No criminal record",
     },
     universities: {
       title: "Universities",
@@ -1098,6 +1114,14 @@ export const adminTranslations = {
     docs: {
       passeport: "护照",
       dernier_diplome: "最高学历证书",
+      high_school_diploma: "高中毕业证",
+      bachelor_degree: "本科学位证",
+      master_degree: "硕士学位证",
+      hsk: "HSK证书",
+      ielts_or_toefl: "雅思或托福",
+      csca: "CSCA",
+      formulaire_medical: "体格检查表",
+      casier_judiciaire: "无犯罪记录证明",
     },
     universities: {
       title: "大学",

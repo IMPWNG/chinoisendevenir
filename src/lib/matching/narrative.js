@@ -1,4 +1,5 @@
 import { getFormuleAccess, getFormuleByNumber } from "../formules";
+import { studentHasDiplomaUpload } from "../studentProgress";
 import { CATEGORY_META } from "./constants";
 
 function money(cny) {
@@ -180,7 +181,7 @@ export function buildClientMessage(student, analyses, overallFormula, { gaps = [
   lines.push("Documents à préparer");
   if (
     student.documents.includes("passeport") &&
-    student.documents.includes("dernier_diplome") &&
+    studentHasDiplomaUpload(student.documents) &&
     !docs.length
   ) {
     lines.push(

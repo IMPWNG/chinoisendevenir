@@ -2,12 +2,22 @@ import {
   STUDENT_DOCUMENT_BUCKET,
   STUDENT_DOCUMENT_FOLDER,
 } from "./studentAuth";
-import { REQUIRED_STUDENT_DOCUMENTS } from "./studentProgress";
+import {
+  REQUIRED_STUDENT_DOCUMENTS,
+  getRequiredStudentDocuments,
+  legacyDiplomaDocKey,
+} from "./studentProgress";
 
 export { REQUIRED_STUDENT_DOCUMENTS };
 
 export const FOLDER_REQUIRED = "required";
 export const FOLDER_ADMIN = "from-admin";
+
+const LEGACY_DIPLOMA_KEY = "dernier_diplome";
+const ALL_DOCUMENT_KEYS = new Set([
+  ...REQUIRED_STUDENT_DOCUMENTS.map((item) => item.key),
+  LEGACY_DIPLOMA_KEY,
+]);
 
 export const ALLOWED_DOCUMENT_TYPES = [
   "application/pdf",
@@ -26,7 +36,7 @@ export function safeFileName(name) {
 }
 
 export function isRequiredDocKey(key) {
-  return REQUIRED_STUDENT_DOCUMENTS.some((item) => item.key === key);
+  return ALL_DOCUMENT_KEYS.has(String(key || ""));
 }
 
 export function requiredFolder(contactId, docKey) {
@@ -83,10 +93,21 @@ async function getLegacyRequiredFile(admin, contactId) {
   return toFileMeta(folder, files[0]);
 }
 
-export async function getRequiredDocumentsStatus(admin, contactId) {
+export async function getRequiredDocumentsStatus(admin, contactId, contact = null) {
+  let diplome = contact?.dernier_diplome;
+  if (!diplome && contactId) {
+    const { data } = await admin
+      .from("contacts")
+      .select("dernier_diplome")
+      .eq("id", contactId)
+      .maybeSingle();
+    diplome = data?.dernier_diplome || "";
+  }
+
+  const specs = getRequiredStudentDocuments({ dernier_diplome: diplome });
   const results = [];
 
-  for (const spec of REQUIRED_STUDENT_DOCUMENTS) {
+  for (const spec of specs) {
     const folder = requiredFolder(contactId, spec.key);
     const files = await listStorageFiles(admin, folder);
     results.push({
@@ -105,6 +126,18 @@ export async function getRequiredDocumentsStatus(admin, contactId) {
     if (legacy) {
       passeport.status = "received";
       passeport.file = legacy;
+    }
+  }
+
+  const diplomaKey = legacyDiplomaDocKey(diplome);
+  const diploma = results.find((item) => item.key === diplomaKey);
+  if (diploma && !diploma.file) {
+    const folder = requiredFolder(contactId, LEGACY_DIPLOMA_KEY);
+    const files = await listStorageFiles(admin, folder);
+    const legacyDiploma = toFileMeta(folder, files[0]);
+    if (legacyDiploma) {
+      diploma.status = "received";
+      diploma.file = legacyDiploma;
     }
   }
 

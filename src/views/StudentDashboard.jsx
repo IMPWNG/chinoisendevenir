@@ -14,8 +14,9 @@ import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import {
   DOMAINES_ETUDES,
-  REQUIRED_STUDENT_DOCUMENTS,
   getDisplayedStepIndex,
+  getRequiredStudentDocuments,
+  getSchoolDocumentsIntro,
   getVisibleStudentSteps,
   studentCanAccessVisaDocuments,
 } from "../lib/studentProgress";
@@ -74,7 +75,7 @@ export default function StudentDashboard() {
   const docsToShow =
     requiredDocuments.length > 0
       ? requiredDocuments
-      : REQUIRED_STUDENT_DOCUMENTS.map((doc) => ({
+      : getRequiredStudentDocuments(profile).map((doc) => ({
           ...doc,
           status: "missing",
           file: null,
@@ -121,6 +122,7 @@ export default function StudentDashboard() {
       });
       setProfile(data.profile);
       setMessage({ type: "success", text: "Vos informations ont été enregistrées." });
+      await loadProfile({ silent: true });
     } catch (err) {
       setMessage({ type: "error", text: err.message });
     } finally {
@@ -493,6 +495,13 @@ export default function StudentDashboard() {
                         <h2 className="card-title">Documents à fournir</h2>
                         {access.documents ? (
                           <>
+                            <h3 className="doc-school-title">
+                              <span>🏫</span>
+                              Documents pour l'école
+                            </h3>
+                            <p className="card-subtitle">
+                              {getSchoolDocumentsIntro(profile?.dernier_diplome)}
+                            </p>
                             <p className="card-subtitle">
                               {missingCount > 0
                                 ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
