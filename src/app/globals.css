@@ -960,6 +960,24 @@ a.landing-btn-accent:hover {
   margin: 0 0 8px;
 }
 
+.student-formule-compare {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  text-decoration: line-through;
+  margin: 8px 0 0;
+}
+
+.student-formule-savings {
+  display: inline-block;
+  margin: 0 0 8px;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #ecfdf5;
+  color: #065f46;
+}
+
 .student-formule-intro,
 .student-formule-note {
   color: var(--gray);

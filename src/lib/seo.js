@@ -12,7 +12,7 @@ export const SITE = {
     "Chinois en Devenir accompagne les étudiants francophones qui veulent étudier en Chine : choix de formation, universités chinoises, dossier d'admission, bourses d'études et visa étudiant.",
   metaDescription:
     "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
-  contentUpdatedAt: "2026-09-04",
+  contentUpdatedAt: "2026-09-08",
   ogImage: "https://chinoisendevenir.com/opengraph-image",
   logo: "https://chinoisendevenir.com/apple-icon",
 };
@@ -132,9 +132,19 @@ export const FAQS = {
   ],
   tarifs: [
     {
+      question: "Quelle formule choisir pour étudier en Chine ?",
+      answer:
+        "La formule 1 (800 €) convient si vous voulez d'abord une année de chinois en Chine, avec l'inscription en école de langue et l'aide au visa étudiant. La formule 2 (1 700 €) convient si votre projet universitaire est déjà défini et que votre niveau de langue suffit : jusqu'à 5 candidatures, jusqu'aux réponses. La formule 3 (2 000 €) combine les deux pour 500 € de moins que 2 500 €, avec jusqu'à 8 candidatures et un suivi jusqu'au départ.",
+    },
+    {
       question: "Que comprennent les formules pour étudier en Chine ?",
       answer:
-        "La formule 1 (500 €) accompagne l'inscription en école de langue. La formule 2 (1 000 €) couvre jusqu'à 5 candidatures universitaires, jusqu'aux réponses. La formule 3 (2 000 €) va jusqu'au visa et à la préparation du départ, avec jusqu'à 8 candidatures. Les frais universitaires, traductions certifiées, visa et vol restent à votre charge.",
+        "La formule 1 (800 €) accompagne l'inscription en école de langue et la préparation du visa étudiant. La formule 2 (1 700 €) couvre uniquement l'admission universitaire, jusqu'à 5 candidatures. La formule 3 (2 000 €) combine année de chinois et admission universitaire, jusqu'à 8 candidatures, puis le suivi jusqu'au départ. Les frais universitaires, traductions certifiées, visa et vol restent à votre charge.",
+    },
+    {
+      question: "Pourquoi la formule complète coûte-t-elle 2 000 € ?",
+      answer:
+        "Prises séparément, la formule 1 (800 €) et la formule 2 (1 700 €) totalisent 2 500 €. La formule 3 les combine pour 2 000 € : vous économisez 500 €, vous avez un interlocuteur unique, et vous déposez jusqu'à 8 candidatures universitaires au lieu de 5.",
     },
     {
       question: "Quand faut-il payer ?",
@@ -236,8 +246,8 @@ export function organizationJsonLd() {
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "EUR",
-      lowPrice: "100",
-      highPrice: "1000",
+      lowPrice: "800",
+      highPrice: "2000",
       offerCount: "3",
       url: absoluteUrl("/tarifs"),
     },

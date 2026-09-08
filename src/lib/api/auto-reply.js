@@ -10,7 +10,7 @@ import {
   generateCustomEmailHtml,
   sanitizeEmailSubject,
 } from "../emailLayout.js";
-import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel } from "../formules.js";
+import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups } from "../formules.js";
 import { applyCorsHeaders } from "../httpSecurity.js";
 
 const resendApiKey =
@@ -98,8 +98,18 @@ function generateRelance2Template(prenom) {
 function generateFormulesPresentationTemplate(prenom) {
   const cards = FORMULES.map((formule) => {
     const featured = formule.featured ? " featured" : "";
-    const items = formule.includes
-      .map((item) => `<li>${escapeHtml(item)}</li>`)
+    const groups = getFormuleIncludeGroups(formule);
+    const items = groups
+      .map((group) => {
+        const heading =
+          groups.length > 1
+            ? `<p class="formule-intro" style="font-weight:700;margin-top:8px;">${escapeHtml(group.title)}</p>`
+            : "";
+        const list = `<ul class="formule-list">${group.items
+          .map((item) => `<li>${escapeHtml(item)}</li>`)
+          .join("")}</ul>`;
+        return `${heading}${list}`;
+      })
       .join("");
     const footnote = formule.footnote
       ? `<p class="formule-intro" style="margin-top:12px;">${escapeHtml(formule.footnote)}</p>`
@@ -113,11 +123,24 @@ function generateFormulesPresentationTemplate(prenom) {
             <div class="formule-card${featured}">
               ${badge}
               <div class="formule-title">Formule ${formule.number} — ${escapeHtml(formule.title)}</div>
-              <div class="formule-price">${escapeHtml(formule.priceLabel)}</div>
+              <div class="formule-price">${
+                formule.comparePrice
+                  ? `${escapeHtml(formule.comparePrice)} → `
+                  : ""
+              }${escapeHtml(formule.priceLabel)}${
+                formule.savingsLabel
+                  ? ` — ${escapeHtml(formule.savingsLabel)}`
+                  : ""
+              }</div>
               <p class="formule-intro">${escapeHtml(PAYMENT_NOTE)}</p>
+              ${
+                formule.savingsText
+                  ? `<p class="formule-intro">${escapeHtml(formule.savingsText)}</p>`
+                  : ""
+              }
               <p class="formule-intro">${escapeHtml(formule.intro)}</p>
               <p class="formule-intro">Ce qui est inclus :</p>
-              <ul class="formule-list">${items}</ul>
+              ${items}
               ${footnote}
             </div>`;
   }).join("");

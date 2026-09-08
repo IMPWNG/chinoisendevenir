@@ -174,7 +174,8 @@ Chinois en Devenir`;
 
 function generateFormulesText(contact) {
   const cards = FORMULES.map((formule) => {
-    return `*Formule ${formule.number} — ${formule.shortTitle}* — ${formule.price}
+    const savings = formule.savingsLabel ? `\n${formule.savingsLabel}` : "";
+    return `*Formule ${formule.number} — ${formule.shortTitle}* — ${formule.price}${savings}
 ${formule.intro}`;
   }).join("\n\n");
 

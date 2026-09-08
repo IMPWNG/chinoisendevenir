@@ -12,6 +12,7 @@ import {
   PAYMENT_NOTE,
   PROCESS_STEPS,
   displayFormuleFootnote,
+  getFormuleIncludeGroups,
 } from "../lib/formules";
 import { breadcrumbJsonLd, FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
 
@@ -28,8 +29,168 @@ const DISCLAIMERS = [
   "La disponibilité d'un logement",
 ];
 
+const CHOOSER = [
+  {
+    number: 1,
+    question: "Je veux d'abord apprendre le chinois",
+    detail: "École de langue, visa étudiant et première installation en Chine.",
+  },
+  {
+    number: 2,
+    question: "Mon projet universitaire est déjà clair",
+    detail:
+      "Recherche d'universités, dossier et suivi jusqu'aux réponses des établissements.",
+  },
+  {
+    number: 3,
+    question: "Je prépare la langue, puis l'université",
+    detail:
+      "Les deux accompagnements, un seul interlocuteur, 500 € d'économie.",
+  },
+];
+
+function IncludeList({ items }) {
+  return (
+    <ul className="space-y-2 text-sm text-slate-700">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2">
+          <span className="text-emerald-600 mt-0.5">✓</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function FormuleCard({ formule, featured }) {
+  const groups = getFormuleIncludeGroups(formule);
+  const singleGroup = groups.length === 1;
+
+  return (
+    <article
+      id={`formule-${formule.number}`}
+      className={`relative flex flex-col rounded-2xl border bg-white p-6 shadow-lg h-full scroll-mt-28 ${
+        featured
+          ? "border-red-500 ring-2 ring-red-100"
+          : "border-slate-200"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
+          Formule {formule.number}
+        </p>
+        {formule.badge ? (
+          <span
+            className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${
+              featured ? "bg-red-600 text-white" : "bg-slate-800 text-white"
+            }`}
+          >
+            {formule.badge}
+          </span>
+        ) : null}
+      </div>
+      {formule.audience ? (
+        <p className="text-sm font-medium text-slate-500 mt-2">
+          {formule.audience}
+        </p>
+      ) : null}
+      <h2 className="text-xl font-bold text-slate-900 mt-2">{formule.title}</h2>
+      {formule.subtitle ? (
+        <p className="text-sm font-medium text-slate-600 mt-1">
+          {formule.subtitle}
+        </p>
+      ) : null}
+
+      <div className="mt-3">
+        {formule.comparePrice ? (
+          <p className="text-sm text-slate-400 line-through">
+            {formule.comparePrice}
+          </p>
+        ) : null}
+        <p className="text-3xl font-bold text-red-600">{formule.price}</p>
+        {formule.savingsLabel ? (
+          <p className="mt-1 inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800">
+            {formule.savingsLabel}
+          </p>
+        ) : null}
+      </div>
+      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+        {PAYMENT_NOTE}
+      </p>
+      {formule.savingsText ? (
+        <p className="text-sm text-slate-700 mt-3 leading-relaxed bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2">
+          {formule.savingsText}
+        </p>
+      ) : null}
+      <p className="text-slate-600 text-sm mt-3 leading-relaxed">
+        {formule.intro}
+      </p>
+
+      {singleGroup ? (
+        <>
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
+            Ce qui est inclus
+          </p>
+          <div className="flex-1">
+            <IncludeList items={groups[0].items} />
+          </div>
+        </>
+      ) : (
+        <div className="mt-6 flex-1">
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mb-3">
+            Ce qui est inclus
+          </p>
+          <div
+            className={
+              featured
+                ? "grid md:grid-cols-3 gap-6"
+                : "space-y-5"
+            }
+          >
+            {groups.map((group) => (
+              <div key={group.title}>
+                <p className="text-sm font-semibold text-slate-900 mb-2">
+                  {group.title}
+                </p>
+                <IncludeList items={group.items} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
+        Cette formule est idéale si
+      </p>
+      <ul className="space-y-1.5 text-sm text-slate-600 mb-0">
+        {formule.idealIf.map((item) => (
+          <li key={item}>• {item}</li>
+        ))}
+      </ul>
+
+      <div className="formule-card-cta">
+        <p className="formule-footnote" aria-hidden={!formule.footnote}>
+          {formule.footnote
+            ? displayFormuleFootnote(formule.footnote)
+            : "\u00a0"}
+        </p>
+        <Link
+          href="/#lead-form"
+          className={`landing-btn landing-btn-full formule-card-btn ${
+            featured ? "landing-btn-accent" : "landing-btn-primary"
+          }`}
+        >
+          {formule.cta}
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 function TarifsPage() {
   const t = fr;
+  const standaloneFormules = FORMULES.filter((formule) => !formule.featured);
+  const featuredFormule = FORMULES.find((formule) => formule.featured);
 
   return (
     <div className="app app-page-fill">
@@ -46,109 +207,125 @@ function TarifsPage() {
         <div className="container">
           <PageBreadcrumbs items={BREADCRUMBS} />
           <h1 className="landing-section-title">
-            Nos formules d'accompagnement pour étudier en Chine
+            Trois formules, selon là où vous en êtes
           </h1>
-          <p className="landing-section-subtitle mb-12">
-            Vous souhaitez apprendre le chinois, intégrer une université ou
-            préparer votre départ en Chine, mais vous ne savez pas par où
-            commencer ? Nous vous accompagnons à chaque étape selon votre
-            objectif : école de langue, admission universitaire, bourse, visa
-            et préparation du départ.
+          <p className="landing-section-subtitle mb-10">
+            Année de chinois, admission universitaire, ou les deux. Chaque
+            formule est un accompagnement complet pour son objectif. Si vous
+            combinez langue et université, vous économisez 500 €.
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:items-stretch mb-16">
-            {FORMULES.map((formule) => {
-              const featured = formule.featured;
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+            {CHOOSER.map((item) => {
+              const formule = FORMULES.find(
+                (entry) => entry.number === item.number,
+              );
               return (
-                <article
-                  key={formule.number}
-                  className={`relative flex flex-col rounded-2xl border bg-white p-6 shadow-lg h-full ${
-                    featured
-                      ? "border-red-500 ring-2 ring-red-100 lg:-translate-y-1"
-                      : "border-slate-200"
+                <a
+                  key={item.number}
+                  href={`#formule-${item.number}`}
+                  className={`rounded-2xl border p-5 transition-shadow hover:shadow-md ${
+                    formule?.featured
+                      ? "border-red-200 bg-red-50/70"
+                      : "border-slate-200 bg-white"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
-                      Formule {formule.number}
-                    </p>
-                    {formule.badge ? (
-                      <span
-                        className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${
-                          featured
-                            ? "bg-red-600 text-white"
-                            : "bg-slate-800 text-white"
-                        }`}
-                      >
-                        {formule.badge}
-                      </span>
-                    ) : null}
-                  </div>
-                  {formule.audience ? (
-                    <p className="text-sm font-medium text-slate-500 mt-2">
-                      {formule.audience}
-                    </p>
-                  ) : null}
-                  <h2 className="text-xl font-bold text-slate-900 mt-2">
-                    {formule.title}
-                  </h2>
-                  {formule.subtitle ? (
-                    <p className="text-sm font-medium text-slate-600 mt-1">
-                      {formule.subtitle}
-                    </p>
-                  ) : null}
-                  <p className="text-3xl font-bold text-red-600 mt-3">
-                    {formule.price}
+                  <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
+                    Formule {item.number}
+                    {formule?.featured ? " · recommandée" : ""}
                   </p>
-                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                    {PAYMENT_NOTE}
+                  <p className="text-base font-bold text-slate-900 mt-2">
+                    {item.question}
                   </p>
-                  <p className="text-slate-600 text-sm mt-3 leading-relaxed">
-                    {formule.intro}
+                  <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                    {item.detail}
                   </p>
-
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
-                    Ce qui est inclus
+                  <p className="text-sm font-semibold text-red-600 mt-3">
+                    {formule?.price}
+                    {formule?.savings
+                      ? ` · économisez ${formule.savings}`
+                      : ""}
                   </p>
-                  <ul className="space-y-2 text-sm text-slate-700 flex-1">
-                    {formule.includes.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="text-emerald-600 mt-0.5">✓</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
-                    Cette formule est idéale si
-                  </p>
-                  <ul className="space-y-1.5 text-sm text-slate-600 mb-0">
-                    {formule.idealIf.map((item) => (
-                      <li key={item}>• {item}</li>
-                    ))}
-                  </ul>
-
-                  <div className="formule-card-cta">
-                    <p
-                      className="formule-footnote"
-                      aria-hidden={!formule.footnote}
-                    >
-                      {formule.footnote
-                        ? displayFormuleFootnote(formule.footnote)
-                        : "\u00a0"}
-                    </p>
-                    <Link
-                      href="/#lead-form"
-                      className={`landing-btn landing-btn-full formule-card-btn ${
-                        featured ? "landing-btn-accent" : "landing-btn-primary"
-                      }`}
-                    >
-                      {formule.cta}
-                    </Link>
-                  </div>
-                </article>
+                </a>
               );
             })}
           </div>
+
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-5 mb-12">
+            <p className="text-sm font-bold uppercase tracking-wide text-emerald-800 mb-2">
+              L'économie de la formule complète
+            </p>
+            <p className="text-slate-800 text-sm md:text-base leading-relaxed">
+              Formule 1 + Formule 2 ={" "}
+              <span className="line-through text-slate-500">2 500 €</span>
+              {" · "}
+              Formule 3 ={" "}
+              <span className="font-bold text-emerald-800">2 000 €</span>
+              {" · "}
+              vous économisez <span className="font-bold">500 €</span>, avec
+              jusqu'à 8 candidatures universitaires au lieu de 5, et un suivi
+              jusqu'au départ.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:items-stretch mb-8">
+            {standaloneFormules.map((formule) => (
+              <FormuleCard
+                key={formule.number}
+                formule={formule}
+                featured={false}
+              />
+            ))}
+          </div>
+
+          {featuredFormule ? (
+            <div className="mb-16">
+              <FormuleCard formule={featuredFormule} featured />
+            </div>
+          ) : null}
+
+          {featuredFormule?.whyChoose ? (
+            <div className="grid md:grid-cols-2 gap-6 mb-16">
+              <div className="bg-white rounded-2xl border border-red-100 p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-slate-900 mb-3">
+                  {featuredFormule.whyChoose.title}
+                </h2>
+                <p className="text-slate-700 text-sm leading-relaxed mb-4">
+                  {featuredFormule.whyChoose.intro}
+                </p>
+                <ol className="space-y-2 text-sm text-slate-700">
+                  {featuredFormule.whyChoose.steps.map((step, index) => (
+                    <li key={step} className="flex gap-2">
+                      <span className="font-bold text-red-600">
+                        {index + 1}.
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-slate-900 mb-3">
+                  Les formules 1 et 2 restent le bon choix
+                </h2>
+                <p className="text-slate-700 text-sm leading-relaxed mb-3">
+                  La formule complète n'est pas obligatoire. Elle est la plus
+                  cohérente si votre projet va de l'année de chinois jusqu'à
+                  l'université.
+                </p>
+                <p className="text-slate-700 text-sm leading-relaxed mb-3">
+                  Si vous voulez seulement une année de langue, la Formule 1
+                  couvre l'école, l'inscription et l'aide au visa étudiant.
+                </p>
+                <p className="text-slate-700 text-sm leading-relaxed">
+                  Si votre projet universitaire est déjà défini et que votre
+                  niveau de langue suffit, la Formule 2 vous accompagne jusqu'aux
+                  réponses des universités, sans payer pour une année de chinois
+                  dont vous n'avez pas besoin.
+                </p>
+              </div>
+            </div>
+          ) : null}
 
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
@@ -191,7 +368,10 @@ function TarifsPage() {
             </h2>
             <ol className="grid md:grid-cols-5 gap-4">
               {PROCESS_STEPS.map((step, index) => (
-                <li key={step.title} className="bg-white rounded-xl p-4 border border-slate-200">
+                <li
+                  key={step.title}
+                  className="bg-white rounded-xl p-4 border border-slate-200"
+                >
                   <p className="text-red-600 font-bold mb-2">{index + 1}.</p>
                   <p className="font-semibold text-slate-900 text-sm mb-1">
                     {step.title}

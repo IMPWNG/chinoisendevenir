@@ -4,6 +4,7 @@ import {
   FORMULES,
   PAYMENT_NOTE,
   displayFormuleFootnote,
+  getFormuleIncludeGroups,
   getFormuleNumber,
 } from "../lib/formules";
 
@@ -45,15 +46,28 @@ export default function StudentFormules({ currentFormule = "" }) {
               {formule.subtitle ? (
                 <p className="student-formule-intro">{formule.subtitle}</p>
               ) : null}
+              {formule.comparePrice ? (
+                <p className="student-formule-compare">{formule.comparePrice}</p>
+              ) : null}
               <p className="student-formule-price">{formule.price}</p>
+              {formule.savingsLabel ? (
+                <p className="student-formule-savings">{formule.savingsLabel}</p>
+              ) : null}
               <p className="student-formule-payment">{PAYMENT_NOTE}</p>
+              {formule.savingsText ? (
+                <p className="student-formule-intro">{formule.savingsText}</p>
+              ) : null}
               <p className="student-formule-intro">{formule.intro}</p>
-              <p className="student-formule-label">Ce qui est inclus</p>
-              <ul className="student-formule-list">
-                {formule.includes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              {getFormuleIncludeGroups(formule).map((group) => (
+                <div key={group.title}>
+                  <p className="student-formule-label">{group.title}</p>
+                  <ul className="student-formule-list">
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
               {formule.footnote ? (
                 <p className="student-formule-note formule-footnote">
                   {displayFormuleFootnote(formule.footnote)}
