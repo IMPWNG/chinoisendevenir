@@ -223,6 +223,41 @@ export const REQUIRED_STUDENT_DOCUMENTS = [
   },
 ];
 
+export const VISA_DOCUMENT_GUIDE = {
+  title: "Documents pour le visa",
+  intro:
+    "Les étudiants qui souhaitent étudier en Chine doivent demander un visa. La démarche est simple. Commencez par identifier le type de visa adapté à votre séjour :",
+  types: [
+    {
+      name: "Visa X1",
+      description: "pour un séjour d'études de plus de 180 jours.",
+    },
+    {
+      name: "Visa X2",
+      description: "pour un séjour d'études de moins de 180 jours.",
+    },
+    {
+      name: "Visa L",
+      description: "pour un programme d'été ou d'hiver.",
+    },
+  ],
+  documentsTitle: "Documents à fournir",
+  documents: [
+    "Passeport original",
+    "Photo d'identité",
+    "Un formulaire de demande de visa dûment rempli",
+    "Preuve de séjour légal ou de résidence",
+    "Lettre d'admission : original et photocopie",
+    "Original et photocopie du formulaire « Visa Application for Study in China » (JW201 ou JW202). Uniquement requis pour le visa X1.",
+  ],
+  note: "En plus des documents ci-dessus, les agents consulaires peuvent exiger d'autres pièces, au cas par cas, pour décider de la délivrance du visa. La décision finale appartient aux autorités compétentes.",
+};
+
+export function studentCanAccessVisaDocuments(formuleNumber) {
+  const n = Number(formuleNumber);
+  return n === 1 || n >= 3;
+}
+
 export function getChosenFormule(contact) {
   if (!contact) return "";
   if (contact.formule) return String(contact.formule).trim();

@@ -7,6 +7,7 @@ import LeadForm from "../components/LeadForm";
 import StudentFormules from "../components/StudentFormules";
 import StudentMatching from "../components/StudentMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
+import StudentVisaDocuments from "../components/StudentVisaDocuments";
 import { fr } from "../i18n/fr";
 import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
@@ -15,6 +16,7 @@ import {
   REQUIRED_STUDENT_DOCUMENTS,
   getDisplayedStepIndex,
   getVisibleStudentSteps,
+  studentCanAccessVisaDocuments,
 } from "../lib/studentProgress";
 
 async function studentFetch(path, options = {}) {
@@ -61,6 +63,7 @@ export default function StudentDashboard() {
   const unlocked = Boolean(profile?.unlocked ?? profile?.paid);
   const formuleNumber = profile?.formuleNumber || null;
   const access = profile?.access || {};
+  const showVisaDocs = studentCanAccessVisaDocuments(formuleNumber);
   const visibleSteps = getVisibleStudentSteps(formuleNumber);
   const currentStep = Math.min(
     getDisplayedStepIndex(profile),
@@ -477,120 +480,134 @@ export default function StudentDashboard() {
                     formuleNumber={formuleNumber}
                   />
 
-                  {access.documents ? (
+                  {access.documents || showVisaDocs ? (
                     <>
                       <div className="student-card student-card-wide">
                         <h2 className="card-title">Documents à fournir</h2>
-                        <p className="card-subtitle">
-                          {missingCount > 0
-                            ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
-                            : "Tous les documents demandés ont été reçus."}
-                        </p>
+                        {access.documents ? (
+                          <>
+                            <p className="card-subtitle">
+                              {missingCount > 0
+                                ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
+                                : "Tous les documents demandés ont été reçus."}
+                            </p>
 
-                        <div className="doc-list">
-                          {docsToShow.map((doc) => {
-                            const missing = doc.status !== "received";
-                            return (
-                              <div
-                                key={doc.key}
-                                className={`doc-row ${missing ? "doc-missing" : "doc-received"}`}
-                              >
-                                <div className="doc-row-main">
-                                  <div className="doc-row-title">
-                                    <span>{doc.icon}</span>
-                                    {doc.label}
-                                    <span
-                                      className={
-                                        missing ? "doc-badge-missing" : "doc-badge-ok"
-                                      }
+                            <div className="doc-list">
+                              {docsToShow.map((doc) => {
+                                const missing = doc.status !== "received";
+                                return (
+                                  <div
+                                    key={doc.key}
+                                    className={`doc-row ${missing ? "doc-missing" : "doc-received"}`}
+                                  >
+                                    <div className="doc-row-main">
+                                      <div className="doc-row-title">
+                                        <span>{doc.icon}</span>
+                                        {doc.label}
+                                        <span
+                                          className={
+                                            missing ? "doc-badge-missing" : "doc-badge-ok"
+                                          }
+                                        >
+                                          {missing ? "Manquant" : "Reçu"}
+                                        </span>
+                                      </div>
+                                      <p className="doc-row-desc">{doc.description}</p>
+                                      {doc.file ? (
+                                        <p className="doc-row-file">
+                                          Fichier actuel : <strong>{doc.file.name}</strong>
+                                        </p>
+                                      ) : null}
+                                    </div>
+                                    <form
+                                      className="doc-row-actions"
+                                      onSubmit={(e) => handleUpload(e, doc.key)}
                                     >
-                                      {missing ? "Manquant" : "Reçu"}
-                                    </span>
+                                      <input
+                                        type="file"
+                                        accept=".pdf,.jpg,.jpeg,.png,.webp"
+                                        onChange={(e) =>
+                                          setSelectedFiles((prev) => ({
+                                            ...prev,
+                                            [doc.key]: e.target.files?.[0] || null,
+                                          }))
+                                        }
+                                      />
+                                      <div className="landing-hero-actions landing-actions-start">
+                                        <button
+                                          type="submit"
+                                          className="landing-btn landing-btn-primary"
+                                          disabled={
+                                            uploadingKey === doc.key || !selectedFiles[doc.key]
+                                          }
+                                        >
+                                          {uploadingKey === doc.key
+                                            ? "Envoi..."
+                                            : doc.file
+                                              ? "Remplacer"
+                                              : "Envoyer"}
+                                        </button>
+                                        {doc.file ? (
+                                          <button
+                                            type="button"
+                                            className="landing-btn landing-btn-secondary"
+                                            onClick={() => handleDownload(doc.file.path)}
+                                          >
+                                            Télécharger
+                                          </button>
+                                        ) : null}
+                                      </div>
+                                    </form>
                                   </div>
-                                  <p className="doc-row-desc">{doc.description}</p>
-                                  {doc.file ? (
-                                    <p className="doc-row-file">
-                                      Fichier actuel : <strong>{doc.file.name}</strong>
-                                    </p>
-                                  ) : null}
-                                </div>
-                                <form
-                                  className="doc-row-actions"
-                                  onSubmit={(e) => handleUpload(e, doc.key)}
-                                >
-                                  <input
-                                    type="file"
-                                    accept=".pdf,.jpg,.jpeg,.png,.webp"
-                                    onChange={(e) =>
-                                      setSelectedFiles((prev) => ({
-                                        ...prev,
-                                        [doc.key]: e.target.files?.[0] || null,
-                                      }))
-                                    }
-                                  />
-                                  <div className="landing-hero-actions landing-actions-start">
-                                    <button
-                                      type="submit"
-                                      className="landing-btn landing-btn-primary"
-                                      disabled={
-                                        uploadingKey === doc.key || !selectedFiles[doc.key]
-                                      }
-                                    >
-                                      {uploadingKey === doc.key
-                                        ? "Envoi..."
-                                        : doc.file
-                                          ? "Remplacer"
-                                          : "Envoyer"}
-                                    </button>
-                                    {doc.file ? (
-                                      <button
-                                        type="button"
-                                        className="landing-btn landing-btn-secondary"
-                                        onClick={() => handleDownload(doc.file.path)}
-                                      >
-                                        Télécharger
-                                      </button>
-                                    ) : null}
-                                  </div>
-                                </form>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      <div className="student-card student-card-wide">
-                        <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
-                        <p className="card-subtitle">
-                          Fichiers transmis par Chinois en Devenir pour votre dossier.
-                        </p>
-                        {adminDocuments.length === 0 ? (
-                          <div className="landing-alert landing-alert-warning">
-                            Aucun document n'a encore été envoyé par l'équipe.
-                          </div>
+                                );
+                              })}
+                            </div>
+                          </>
                         ) : (
-                          <div className="doc-list">
-                            {adminDocuments.map((doc) => (
-                              <div key={doc.path} className="doc-row doc-received">
-                                <div className="doc-row-main">
-                                  <div className="doc-row-title">
-                                    <span>📄</span>
-                                    {doc.name}
-                                    <span className="doc-badge-ok">Reçu</span>
-                                  </div>
-                                </div>
-                                <button
-                                  type="button"
-                                  className="landing-btn landing-btn-secondary"
-                                  onClick={() => handleDownload(doc.path)}
-                                >
-                                  Télécharger
-                                </button>
-                              </div>
-                            ))}
-                          </div>
+                          <p className="card-subtitle">
+                            Préparez les pièces nécessaires à votre demande de visa étudiant.
+                          </p>
                         )}
+
+                        {showVisaDocs ? (
+                          <StudentVisaDocuments standalone={!access.documents} />
+                        ) : null}
                       </div>
+
+                      {access.documents ? (
+                        <div className="student-card student-card-wide">
+                          <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
+                          <p className="card-subtitle">
+                            Fichiers transmis par Chinois en Devenir pour votre dossier.
+                          </p>
+                          {adminDocuments.length === 0 ? (
+                            <div className="landing-alert landing-alert-warning">
+                              Aucun document n'a encore été envoyé par l'équipe.
+                            </div>
+                          ) : (
+                            <div className="doc-list">
+                              {adminDocuments.map((doc) => (
+                                <div key={doc.path} className="doc-row doc-received">
+                                  <div className="doc-row-main">
+                                    <div className="doc-row-title">
+                                      <span>📄</span>
+                                      {doc.name}
+                                      <span className="doc-badge-ok">Reçu</span>
+                                    </div>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    className="landing-btn landing-btn-secondary"
+                                    onClick={() => handleDownload(doc.path)}
+                                  >
+                                    Télécharger
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ) : null}
                     </>
                   ) : null}
                 </>

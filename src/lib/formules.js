@@ -352,7 +352,7 @@ export function getFormuleAccess(number) {
       depth: "orientation",
       documents: false,
       progress: true,
-      visa: false,
+      visa: true,
       applications: 0,
     };
   }
