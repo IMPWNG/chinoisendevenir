@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import LeadForm from "../components/LeadForm";
 import StudentFormules from "../components/StudentFormules";
 import StudentMatching from "../components/StudentMatching";
+import StudentChineseMatching from "../components/StudentChineseMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
 import StudentVisaDocuments from "../components/StudentVisaDocuments";
 import { fr } from "../i18n/fr";
@@ -50,6 +51,7 @@ export default function StudentDashboard() {
   const { user, signOut } = useAuth();
   const [profile, setProfile] = useState(null);
   const [matching, setMatching] = useState(null);
+  const [chineseMatching, setChineseMatching] = useState(null);
   const [requiredDocuments, setRequiredDocuments] = useState([]);
   const [adminDocuments, setAdminDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -88,6 +90,7 @@ export default function StudentDashboard() {
       const data = await studentFetch("/api/student/me");
       setProfile(data.profile);
       setMatching(data.matching || null);
+      setChineseMatching(data.chineseMatching || null);
       setRequiredDocuments(data.requiredDocuments || []);
       setAdminDocuments(data.adminDocuments || []);
     } catch (err) {
@@ -477,6 +480,10 @@ export default function StudentDashboard() {
 
                   <StudentMatching
                     matching={matching}
+                    formuleNumber={formuleNumber}
+                  />
+                  <StudentChineseMatching
+                    chineseMatching={chineseMatching}
                     formuleNumber={formuleNumber}
                   />
 

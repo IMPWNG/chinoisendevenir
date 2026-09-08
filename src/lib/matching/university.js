@@ -102,9 +102,25 @@ export function normalizeUniversity(row) {
     teachingLanguages.some((l) => l.startsWith("en")) ||
     programs.some((p) => /^en/i.test(p.language || ""));
 
+  const languagePrograms = programs.filter((p) => {
+    const level = String(p.level || "").toLowerCase();
+    return level === "language" || level === "foundation";
+  });
+
   const chineseLanguageProgram =
     admission.chinese_language_program_available === true ||
-    degrees.includes("language");
+    degrees.includes("language") ||
+    languagePrograms.length > 0;
+
+  const languageTuitionMin = toNumber(tuition.language?.min);
+  const languageTuitionMax =
+    toNumber(tuition.language?.max) ?? languageTuitionMin;
+  const languageTuitionMean =
+    languageTuitionMin != null
+      ? Math.round(
+          (languageTuitionMin + (languageTuitionMax ?? languageTuitionMin)) / 2,
+        )
+      : null;
 
   const tuitionMin =
     toNumber(row.tuition_min) ??
@@ -217,6 +233,12 @@ export function normalizeUniversity(row) {
     teachingLanguages,
     englishAvailable,
     chineseLanguageProgram,
+    languagePrograms,
+    languageProgramName:
+      filled(languagePrograms[0]?.name) || "Programme de langue chinoise",
+    languageTuitionMin,
+    languageTuitionMax,
+    languageTuitionMean,
     hsk: hskBachelor,
     hskBachelor,
     hskMaster,

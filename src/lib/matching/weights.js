@@ -24,9 +24,19 @@ export const MIX_TARGETS = {
 
 export const MIX_SIZE = { min: 5, max: 8 };
 
+export const CHINESE_MATCHING_WEIGHTS = {
+  localisation: 0.45,
+  financier: 0.35,
+  intake: 0.2,
+};
+
+export const CHINESE_MATCH_SIZE = 6;
+
 export const USD_TO_CNY = 7.2;
 
 export const DEFAULT_LIVING_COST_CNY = 35000;
+
+export const DEFAULT_LANGUAGE_TUITION_CNY = 18000;
 
 export const DEFAULT_AGE_MIN = 17;
 

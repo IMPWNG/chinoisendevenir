@@ -1,4 +1,19 @@
 export const MATCHING_JSON_PREFIX = "[[MATCHING_JSON]]";
+export const CHINESE_MATCHING_JSON_PREFIX = "[[CHINESE_MATCHING_JSON]]";
+export const MATCHING_KIND_UNIVERSITY = "university";
+export const MATCHING_KIND_CHINESE = "chinese";
+
+function payloadKind(payload) {
+  return payload?.kind === MATCHING_KIND_CHINESE
+    ? MATCHING_KIND_CHINESE
+    : MATCHING_KIND_UNIVERSITY;
+}
+
+function prefixForKind(kind) {
+  return kind === MATCHING_KIND_CHINESE
+    ? CHINESE_MATCHING_JSON_PREFIX
+    : MATCHING_JSON_PREFIX;
+}
 
 export function compactMatchingResult(result, overrides = {}) {
   const student = result.student
@@ -6,6 +21,7 @@ export function compactMatchingResult(result, overrides = {}) {
     : result.student;
   return {
     version: 3,
+    kind: MATCHING_KIND_UNIVERSITY,
     mix: result.mix || null,
     gaps: result.gaps || [],
     generated_at: result.generated_at,
@@ -37,13 +53,27 @@ export function matchingSummary(payload) {
 }
 
 export function isMatchingPayloadAction(action) {
-  return String(action?.description || "").startsWith(MATCHING_JSON_PREFIX);
+  const raw = String(action?.description || "");
+  return (
+    raw.startsWith(MATCHING_JSON_PREFIX) ||
+    raw.startsWith(CHINESE_MATCHING_JSON_PREFIX)
+  );
 }
 
 function parseStoredPayload(description) {
   const raw = String(description || "");
-  if (!raw.startsWith(MATCHING_JSON_PREFIX)) return null;
-  return JSON.parse(raw.slice(MATCHING_JSON_PREFIX.length));
+  if (raw.startsWith(CHINESE_MATCHING_JSON_PREFIX)) {
+    return JSON.parse(raw.slice(CHINESE_MATCHING_JSON_PREFIX.length));
+  }
+  if (raw.startsWith(MATCHING_JSON_PREFIX)) {
+    return JSON.parse(raw.slice(MATCHING_JSON_PREFIX.length));
+  }
+  return null;
+}
+
+function matchesRequestedKind(payload, kind) {
+  if (!kind || kind === "all") return true;
+  return payloadKind(payload) === kind;
 }
 
 async function insertHistoryRow(admin, { contactId, createdBy, description }) {
@@ -62,14 +92,18 @@ async function insertHistoryRow(admin, { contactId, createdBy, description }) {
 }
 
 export async function saveMatchingRun(admin, { contactId, createdBy, payload }) {
+  const tagged = {
+    ...payload,
+    kind: payloadKind(payload),
+  };
   const row = {
     contact_id: String(contactId),
     created_by: createdBy || "admin",
-    recommended_formula: payload.recommended_formula || null,
-    top_university: payload.matches?.[0]?.university_name || null,
-    top_score: payload.matches?.[0]?.score ?? null,
-    client_message: payload.client_message || null,
-    payload,
+    recommended_formula: tagged.recommended_formula || null,
+    top_university: tagged.matches?.[0]?.university_name || null,
+    top_score: tagged.matches?.[0]?.score ?? null,
+    client_message: tagged.client_message || null,
+    payload: tagged,
   };
 
   try {
@@ -86,7 +120,7 @@ export async function saveMatchingRun(admin, { contactId, createdBy, payload }) 
     // Table matching_runs absente : on bascule sur le journal.
   }
 
-  const encoded = `${MATCHING_JSON_PREFIX}${JSON.stringify(payload)}`;
+  const encoded = `${prefixForKind(tagged.kind)}${JSON.stringify(tagged)}`;
   const action = await insertHistoryRow(admin, {
     contactId,
     createdBy,
@@ -100,50 +134,74 @@ export async function saveMatchingRun(admin, { contactId, createdBy, payload }) 
   };
 }
 
-export async function listMatchingRuns(admin, contactId) {
+function mapRunRow(row) {
+  return {
+    id: row.id,
+    created_at: row.created_at,
+    created_by: row.created_by,
+    recommended_formula: row.recommended_formula,
+    top_university: row.top_university,
+    top_score: row.top_score,
+    result: {
+      ...(row.payload || {}),
+      client_message: row.client_message || row.payload?.client_message,
+      recommended_formula:
+        row.recommended_formula || row.payload?.recommended_formula,
+    },
+  };
+}
+
+export async function listMatchingRuns(
+  admin,
+  contactId,
+  { kind = MATCHING_KIND_UNIVERSITY } = {},
+) {
   try {
     const { data: rows, error } = await admin
       .from("matching_runs")
       .select("id, created_at, created_by, recommended_formula, top_university, top_score, client_message, payload")
       .eq("contact_id", String(contactId))
       .order("created_at", { ascending: false })
-      .limit(20);
+      .limit(80);
 
     if (!error && rows?.length) {
-      return rows.map((row) => ({
-        id: row.id,
-        created_at: row.created_at,
-        created_by: row.created_by,
-        recommended_formula: row.recommended_formula,
-        top_university: row.top_university,
-        top_score: row.top_score,
-        result: {
-          ...(row.payload || {}),
-          client_message: row.client_message || row.payload?.client_message,
-          recommended_formula:
-            row.recommended_formula || row.payload?.recommended_formula,
-        },
-      }));
+      const filtered = rows
+        .filter((row) => matchesRequestedKind(row.payload, kind))
+        .map(mapRunRow)
+        .slice(0, 20);
+      if (filtered.length || kind === "all") return filtered;
     }
   } catch {
     // Table matching_runs absente : lecture via le journal.
   }
 
-  const { data: actions, error: actionsError } = await admin
-    .from("suivi_actions")
-    .select("id, created_at, user_admin, description")
-    .eq("contact_id", contactId)
-    .eq("action", "note_ajoutee")
-    .like("description", `${MATCHING_JSON_PREFIX}%`)
-    .order("created_at", { ascending: false })
-    .limit(20);
+  const prefixes =
+    kind === MATCHING_KIND_CHINESE
+      ? [CHINESE_MATCHING_JSON_PREFIX]
+      : kind === "all"
+        ? [MATCHING_JSON_PREFIX, CHINESE_MATCHING_JSON_PREFIX]
+        : [MATCHING_JSON_PREFIX];
 
-  if (actionsError) return [];
-  return (actions || [])
+  const batches = await Promise.all(
+    prefixes.map((prefix) =>
+      admin
+        .from("suivi_actions")
+        .select("id, created_at, user_admin, description")
+        .eq("contact_id", contactId)
+        .eq("action", "note_ajoutee")
+        .like("description", `${prefix}%`)
+        .order("created_at", { ascending: false })
+        .limit(20),
+    ),
+  );
+
+  return batches
+    .flatMap((batch) => batch.data || [])
     .map((action) => {
       try {
         const payload = parseStoredPayload(action.description);
         if (!payload?.matches) return null;
+        if (!matchesRequestedKind(payload, kind)) return null;
         return {
           id: action.id,
           created_at: action.created_at,
@@ -158,6 +216,7 @@ export async function listMatchingRuns(admin, contactId) {
       }
     })
     .filter(Boolean)
+    .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
     .slice(0, 20);
 }
 

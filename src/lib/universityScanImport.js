@@ -284,6 +284,7 @@ export function buildAdmissionSummary(profile) {
       field: p.field || "",
       language: p.language || "",
       duration_years: p.duration_years ?? null,
+      start_months: Array.isArray(p.start_months) ? p.start_months : [],
     })),
     age_max: {
       bachelor: matching.age_max_bachelor ?? profile.admission_requirements?.bachelor?.age_max ?? null,

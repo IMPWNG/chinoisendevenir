@@ -23,6 +23,7 @@ export function matchingForStudent(
 ) {
   const n = Number(formuleNumber) || 0;
   if (!result || n < 1) return null;
+  if (result.kind === "chinese") return null;
 
   const reports = reportsFromStored(result, { documents: documents || [] });
   const student = result.student || {};
@@ -43,5 +44,22 @@ export function matchingForStudent(
     gaps: result.gaps || [],
     orientation_bilan: reports.student_report,
     adminDocumentsCount: Array.isArray(adminDocuments) ? adminDocuments.length : 0,
+  };
+}
+
+export function chineseMatchingForStudent(result, formuleNumber) {
+  const n = Number(formuleNumber) || 0;
+  if (!result || result.kind !== "chinese") return null;
+  if (n < 1) return null;
+  const view = result.student_view;
+  if (!view && !result.matches?.length) return null;
+  return {
+    generated_at: result.generated_at || view?.generated_at || null,
+    student_view: view || {
+      profile_blurb: "",
+      criteria: {},
+      schools: [],
+      disclaimer: "Aucune inscription, bourse ou visa n’est garantie.",
+    },
   };
 }

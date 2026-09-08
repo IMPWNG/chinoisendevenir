@@ -7,6 +7,7 @@ import { useAdminAuth } from "../context/AdminAuthContext";
 import AdminShell from "../components/AdminShell";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
+import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminCalendar from "../components/AdminCalendar";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
@@ -1301,7 +1302,13 @@ function ContactModal({
           </div>
 
           {access.matching ? (
-            <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
+            <>
+              <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
+              <AdminChineseMatchingPanel
+                contact={contact}
+                onHistory={fetchActions}
+              />
+            </>
           ) : null}
 
           {/* Avancement dossier */}

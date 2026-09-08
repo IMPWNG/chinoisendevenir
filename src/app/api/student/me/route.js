@@ -8,8 +8,11 @@ import {
   getRequiredDocumentsStatus,
   listAdminSentDocuments,
 } from "@/lib/studentDocuments";
-import { listMatchingRuns } from "@/lib/matching/persist";
-import { matchingForStudent } from "@/lib/matching/studentView";
+import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
+import {
+  chineseMatchingForStudent,
+  matchingForStudent,
+} from "@/lib/matching/studentView";
 
 export async function GET(request) {
   try {
@@ -22,6 +25,7 @@ export async function GET(request) {
     let requiredDocuments = [];
     let adminDocuments = [];
     let matching = null;
+    let chineseMatching = null;
 
     if (profile.hasForm && profile.unlocked && auth.contact) {
       if (profile.access?.documents) {
@@ -33,12 +37,20 @@ export async function GET(request) {
       }
 
       try {
-        const runs = await listMatchingRuns(auth.admin, auth.contact.id);
-        const latest = runs[0]?.result || null;
-        matching = matchingForStudent(latest, profile.formuleNumber, {
+        const [runs, chineseRuns] = await Promise.all([
+          listMatchingRuns(auth.admin, auth.contact.id),
+          listMatchingRuns(auth.admin, auth.contact.id, {
+            kind: MATCHING_KIND_CHINESE,
+          }),
+        ]);
+        matching = matchingForStudent(runs[0]?.result || null, profile.formuleNumber, {
           documents: requiredDocuments,
           adminDocuments,
         });
+        chineseMatching = chineseMatchingForStudent(
+          chineseRuns[0]?.result || null,
+          profile.formuleNumber,
+        );
       } catch (error) {
         console.warn("student matching:", error.message);
       }
@@ -50,6 +62,7 @@ export async function GET(request) {
       requiredDocuments,
       adminDocuments,
       matching,
+      chineseMatching,
       hasForm: profile.hasForm,
       paid: profile.paid,
       unlocked: profile.unlocked,

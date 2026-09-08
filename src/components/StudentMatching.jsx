@@ -119,9 +119,6 @@ export default function StudentMatching({ matching, formuleNumber }) {
     return (
       <div className="student-card student-card-wide student-bilan-sheet">
         <header className="student-bilan-head">
-          <span className="student-bilan-chop" aria-hidden="true">
-            函
-          </span>
           <div className="student-bilan-head-copy">
             <p className="student-bilan-kicker">
               {Number(formuleNumber) >= 3
@@ -144,9 +141,6 @@ export default function StudentMatching({ matching, formuleNumber }) {
   return (
     <div className="student-card student-card-wide student-bilan-sheet student-report">
       <header className="student-bilan-head">
-        <span className="student-bilan-chop" aria-hidden="true">
-          函
-        </span>
         <div className="student-bilan-head-copy">
           <p className="student-bilan-kicker">
             {Number(formuleNumber) >= 3
