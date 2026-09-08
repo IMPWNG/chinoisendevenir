@@ -12,6 +12,7 @@ import {
   PAYMENT_NOTE,
   PROCESS_STEPS,
   displayFormuleFootnote,
+  displayFormulePrice,
   getFormuleIncludeGroups,
 } from "../lib/formules";
 import { breadcrumbJsonLd, FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
@@ -102,17 +103,9 @@ function FormuleCard({ formule, featured }) {
       ) : null}
 
       <div className="mt-3">
-        {formule.comparePrice ? (
-          <p className="text-sm text-slate-400 line-through">
-            {formule.comparePrice}
-          </p>
-        ) : null}
-        <p className="text-3xl font-bold text-red-600">{formule.price}</p>
-        {formule.savingsLabel ? (
-          <p className="mt-1 inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800">
-            {formule.savingsLabel}
-          </p>
-        ) : null}
+        <p className="text-3xl font-bold text-red-600">
+          {displayFormulePrice(formule)}
+        </p>
       </div>
       <p className="text-xs text-slate-500 mt-2 leading-relaxed">
         {PAYMENT_NOTE}
@@ -211,8 +204,8 @@ function TarifsPage() {
           </h1>
           <p className="landing-section-subtitle mb-10">
             Année de chinois, admission universitaire, ou les deux. Chaque
-            formule est un accompagnement complet pour son objectif. Si vous
-            combinez langue et université, vous économisez 500 €.
+            formule est un accompagnement complet pour son objectif. La formule
+            complète : 2 000 € (500 € d'économie).
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
@@ -241,10 +234,7 @@ function TarifsPage() {
                     {item.detail}
                   </p>
                   <p className="text-sm font-semibold text-red-600 mt-3">
-                    {formule?.price}
-                    {formule?.savings
-                      ? ` · économisez ${formule.savings}`
-                      : ""}
+                    {displayFormulePrice(formule)}
                   </p>
                 </a>
               );
@@ -256,15 +246,12 @@ function TarifsPage() {
               L'économie de la formule complète
             </p>
             <p className="text-slate-800 text-sm md:text-base leading-relaxed">
-              Formule 1 + Formule 2 ={" "}
-              <span className="line-through text-slate-500">2 500 €</span>
-              {" · "}
-              Formule 3 ={" "}
-              <span className="font-bold text-emerald-800">2 000 €</span>
-              {" · "}
-              vous économisez <span className="font-bold">500 €</span>, avec
-              jusqu'à 8 candidatures universitaires au lieu de 5, et un suivi
-              jusqu'au départ.
+              La formule 3 est à{" "}
+              <span className="font-bold text-emerald-800">
+                2 000 € (500 € d'économie)
+              </span>
+              , avec jusqu'à 8 candidatures universitaires au lieu de 5, et un
+              suivi jusqu'au départ.
             </p>
           </div>
 

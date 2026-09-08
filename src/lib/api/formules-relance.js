@@ -133,7 +133,7 @@ export async function processFormulesRelances({ now = Date.now() } = {}) {
       contact.id,
       contact.email,
       "relance_formules",
-      "Relance automatique envoyée — pas de réponse au choix des formules après 5 jours",
+      "Relance 3 automatique envoyée — pas de réponse au choix des formules après 5 jours",
     );
 
     results.sent += 1;

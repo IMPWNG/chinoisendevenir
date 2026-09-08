@@ -1,4 +1,4 @@
-import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel } from "../formules.js";
+import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, displayFormulePrice } from "../formules.js";
 import { SITE_URL } from "../emailLayout.js";
 
 const COUNTRY_CALLING_CODES = [
@@ -174,8 +174,7 @@ Chinois en Devenir`;
 
 function generateFormulesText(contact) {
   const cards = FORMULES.map((formule) => {
-    const savings = formule.savingsLabel ? `\n${formule.savingsLabel}` : "";
-    return `*Formule ${formule.number} — ${formule.shortTitle}* — ${formule.price}${savings}
+    return `*Formule ${formule.number} — ${formule.shortTitle}* — ${displayFormulePrice(formule)}
 ${formule.intro}`;
   }).join("\n\n");
 

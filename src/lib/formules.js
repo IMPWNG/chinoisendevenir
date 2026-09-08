@@ -189,11 +189,10 @@ export const FORMULES = [
     featured: true,
     price: "2 000 €",
     priceLabel: "2 000 euros",
-    comparePrice: "2 500 €",
     savings: "500 €",
-    savingsLabel: "Économisez 500 €",
+    savingsLabel: "500 € d'économie",
     savingsText:
-      "En choisissant cette formule combinée, vous bénéficiez de l'accompagnement de la Formule 1 et de la Formule 2 pour 2 000 € au lieu de 2 500 €. Vous économisez 500 €, avec un suivi cohérent et un interlocuteur unique.",
+      "En choisissant cette formule combinée, vous bénéficiez de l'accompagnement de la Formule 1 et de la Formule 2 pour 2 000 € (500 € d'économie), avec un suivi cohérent et un interlocuteur unique.",
     intro:
       "C'est notre accompagnement le plus complet. Vous commencez par une année de chinois en Chine, puis vous préparez votre admission universitaire. L'année de langue vous aide à vous adapter, à mieux communiquer au quotidien et à renforcer votre profil avant l'université.",
     includeGroups: FORMULE_3_GROUPS,
@@ -281,6 +280,14 @@ export function getFormuleIncludeGroups(formule) {
   return [];
 }
 
+export function displayFormulePrice(formule) {
+  if (!formule?.price) return "";
+  if (formule.savingsLabel) {
+    return `${formule.price} (${formule.savingsLabel})`;
+  }
+  return formule.price;
+}
+
 export function getFormuleNumber(formuleLabel) {
   if (!formuleLabel) return null;
   const value = String(formuleLabel).trim();
@@ -299,7 +306,7 @@ export function getFormuleNumber(formuleLabel) {
 export function displayFormuleLabel(formuleLabel) {
   const found = getFormuleByNumber(getFormuleNumber(formuleLabel));
   if (found) {
-    return `Formule ${found.number} — ${found.title} (${found.price})`;
+    return `Formule ${found.number} — ${found.title} — ${displayFormulePrice(found)}`;
   }
   return formuleLabel || "Formule sélectionnée";
 }

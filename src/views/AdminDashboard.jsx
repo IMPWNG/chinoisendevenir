@@ -27,6 +27,7 @@ import {
   FORMULES,
   canonicalFormuleValue,
   displayFormuleLabel,
+  displayFormulePrice,
   getFormuleNumber,
 } from "../lib/formules";
 import {
@@ -90,12 +91,20 @@ const BUDGETS = [
 
 const EMAIL_TEMPLATE_OPTIONS = [
   {
-    value: "formules_presentation",
-    label: "📋 Formules d'accompagnement",
+    value: "relance_1",
+    label: "🔔 Relance 1 — Formulaire à remplir",
+  },
+  {
+    value: "relance_2",
+    label: "🔔 Relance 2 — Toujours intéressé(e) ?",
   },
   {
     value: "relance_formules",
-    label: "🔔 Relance — choix des formules",
+    label: "🔔 Relance 3 — Choix des formules",
+  },
+  {
+    value: "formules_presentation",
+    label: "📋 Formules d'accompagnement",
   },
 ];
 
@@ -117,7 +126,9 @@ const ACTIONS_TYPES = [
   { value: "email_formules", label: "Email formules envoyé", icon: "📋" },
   { value: "reponse_client", label: "Réponse client (email)", icon: "📥" },
   { value: "formule_choisie", label: "Formule choisie", icon: "🎯" },
-  { value: "relance_formules", label: "Relance formules", icon: "🔔" },
+  { value: "relance_1", label: "Relance 1", icon: "🔔" },
+  { value: "relance_2", label: "Relance 2", icon: "🔔" },
+  { value: "relance_formules", label: "Relance 3", icon: "🔔" },
   { value: "relance", label: "Relance", icon: "🔔" },
   { value: "qualification", label: "Qualification", icon: "✓" },
   { value: "changement_statut", label: "Changement de statut", icon: "🔄" },
@@ -1199,10 +1210,14 @@ function ContactModal({
               </div>
             ) : null}
             <p className="text-xs text-slate-500 mt-3">
-              {emailTemplate === "formules_presentation" &&
-                t("dashboard.emailHintFormules")}
+              {emailTemplate === "relance_1" &&
+                t("dashboard.emailHintRelance1")}
+              {emailTemplate === "relance_2" &&
+                t("dashboard.emailHintRelance2")}
               {emailTemplate === "relance_formules" &&
                 t("dashboard.emailHintRelanceFormules")}
+              {emailTemplate === "formules_presentation" &&
+                t("dashboard.emailHintFormules")}
               {emailTemplate === "custom" && t("dashboard.emailHintCustom")}
             </p>
           </div>
@@ -1245,7 +1260,7 @@ function ContactModal({
                       Formule {formule.number}
                     </p>
                     <p className="font-bold mt-1">{formule.shortTitle}</p>
-                    <p className="text-sm mt-1">{formule.price}</p>
+                    <p className="text-sm mt-1">{displayFormulePrice(formule)}</p>
                     {active ? (
                       <p className="text-xs text-emerald-300 mt-2">
                         {t("dashboard.formuleActive")}

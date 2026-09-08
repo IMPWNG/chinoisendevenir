@@ -108,8 +108,12 @@ export const adminTranslations = {
       sendEmail: "Envoyer",
       emailHintFormules:
         "Action : Email formules • Statut : formules présentées (espace encore verrouillé)",
+      emailHintRelance1:
+        "Action : Relance 1 • Statut : relance en cours",
+      emailHintRelance2:
+        "Action : Relance 2 • Statut : relance en cours",
       emailHintRelanceFormules:
-        "Action : Relance formules • Statut : relance en cours. Envoyée aussi automatiquement après 5 jours sans réponse.",
+        "Action : Relance 3 • Statut : relance en cours. Envoyée aussi automatiquement après 5 jours sans réponse au choix des formules.",
       emailHintCustom:
         "Action : Email envoyé • Le statut n'est pas modifié. Bonjour et la signature sont ajoutés automatiquement. L'objet commence toujours par « Etude Chine ».",
       emailCustomSubject: "Objet",
@@ -340,7 +344,7 @@ export const adminTranslations = {
       reponse_client: "Réponse client (email)",
       reponse_whatsapp: "Réponse client (WhatsApp)",
       formule_choisie: "Formule choisie",
-      relance_formules: "Relance formules",
+      relance_formules: "Relance 3",
       relance_1: "Relance 1",
       relance_2: "Relance 2",
       relance: "Relance",
@@ -359,7 +363,7 @@ export const adminTranslations = {
     emailTemplate: {
       relance_1: "Relance 1 — Formulaire à remplir",
       relance_2: "Relance 2 — Toujours intéressé(e) ?",
-      relance_formules: "Relance — choix des formules",
+      relance_formules: "Relance 3 — Choix des formules",
       formules_presentation: "Formules d'accompagnement",
       custom: "Message libre",
     },
@@ -544,8 +548,10 @@ export const adminTranslations = {
       sendEmail: "Send",
       emailHintFormules:
         "Action: Packages email • Status: packages presented (student space still locked)",
+      emailHintRelance1: "Action: Follow-up 1 • Status: follow-up in progress",
+      emailHintRelance2: "Action: Follow-up 2 • Status: follow-up in progress",
       emailHintRelanceFormules:
-        "Action: Packages follow-up • Status: follow-up in progress. Also sent automatically after 5 days without a reply.",
+        "Action: Follow-up 3 • Status: follow-up in progress. Also sent automatically after 5 days without a reply to the packages email.",
       emailHintCustom:
         "Action: Email sent • Status is not changed. Greeting and signature are added automatically. The subject always starts with “Etude Chine”.",
       emailCustomSubject: "Subject",
@@ -776,7 +782,7 @@ export const adminTranslations = {
       reponse_client: "Client reply (email)",
       reponse_whatsapp: "Client reply (WhatsApp)",
       formule_choisie: "Package chosen",
-      relance_formules: "Packages follow-up",
+      relance_formules: "Follow-up 3",
       relance_1: "Follow-up 1",
       relance_2: "Follow-up 2",
       relance: "Follow-up",
@@ -795,7 +801,7 @@ export const adminTranslations = {
     emailTemplate: {
       relance_1: "Follow-up 1 — Form to complete",
       relance_2: "Follow-up 2 — Still interested?",
-      relance_formules: "Follow-up — package choice",
+      relance_formules: "Follow-up 3 — Package choice",
       formules_presentation: "Support packages",
       custom: "Free-text message",
     },
@@ -974,8 +980,10 @@ export const adminTranslations = {
       emailSection: "发送邮件",
       sendEmail: "发送",
       emailHintFormules: "操作：套餐邮件 • 状态：已发送套餐（学生空间仍锁定）",
+      emailHintRelance1: "操作：跟进 1 • 状态：跟进中",
+      emailHintRelance2: "操作：跟进 2 • 状态：跟进中",
       emailHintRelanceFormules:
-        "操作：套餐跟进 • 状态：跟进中。5 天无回复也会自动发送。",
+        "操作：跟进 3 • 状态：跟进中。套餐邮件 5 天无回复也会自动发送。",
       emailHintCustom:
         "操作：已发邮件 • 不更改状态。问候语和签名会自动加入。主题以「Etude Chine」开头。",
       emailCustomSubject: "主题",
@@ -1198,7 +1206,7 @@ export const adminTranslations = {
       reponse_client: "客户回复（邮件）",
       reponse_whatsapp: "客户回复（WhatsApp）",
       formule_choisie: "已选套餐",
-      relance_formules: "套餐跟进",
+      relance_formules: "跟进 3",
       relance_1: "跟进 1",
       relance_2: "跟进 2",
       relance: "跟进",
@@ -1217,7 +1225,7 @@ export const adminTranslations = {
     emailTemplate: {
       relance_1: "跟进 1 — 请填写表单",
       relance_2: "跟进 2 — 是否仍有意向？",
-      relance_formules: "跟进 — 选择套餐",
+      relance_formules: "跟进 3 — 选择套餐",
       formules_presentation: "辅导套餐介绍",
       custom: "自定义邮件",
     },

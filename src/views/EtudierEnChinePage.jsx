@@ -50,7 +50,7 @@ const TOPICS = [
   {
     icon: "🤝",
     title: "Comment se faire accompagner",
-    text: "Le processus va de l'orientation jusqu'à l'installation. Les formules couvrent l'année de chinois (800 €), l'admission universitaire (1 700 €) ou le parcours complet (2 000 €, soit 500 € d'économie). Les frais d'université, de traduction certifiée, de visa et de voyage restent à la charge de l'étudiant.",
+    text: "Le processus va de l'orientation jusqu'à l'installation. Les formules couvrent l'année de chinois (800 €), l'admission universitaire (1 700 €) ou le parcours complet (2 000 €, 500 € d'économie). Les frais d'université, de traduction certifiée, de visa et de voyage restent à la charge de l'étudiant.",
     link: { href: "/processus", label: "Voir le processus d'admission" },
     extraLink: { href: "/tarifs", label: "Voir les formules" },
   },

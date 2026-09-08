@@ -1,4 +1,4 @@
-import { FORMULES, getFormuleNumber } from "./formules";
+import { FORMULES, displayFormulePrice, getFormuleNumber } from "./formules";
 import {
   canonicalStatut,
   PAID_STATUSES,
@@ -204,7 +204,7 @@ const FORMULE_OPTION_PREFIX = ["", "1️⃣", "2️⃣", "3️⃣"];
 
 export const FORMULE_OPTIONS = FORMULES.map((formule) => ({
   value: formule.value,
-  label: `${FORMULE_OPTION_PREFIX[formule.number]} ${formule.shortTitle} (${formule.price})`,
+  label: `${FORMULE_OPTION_PREFIX[formule.number]} ${formule.shortTitle} — ${displayFormulePrice(formule)}`,
 }));
 
 export const REQUIRED_STUDENT_DOCUMENTS = [

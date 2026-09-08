@@ -11,7 +11,7 @@ import {
   sanitizeEmailSubject,
   withEtudeChineSubject,
 } from "../emailLayout.js";
-import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups } from "../formules.js";
+import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice } from "../formules.js";
 import { applyCorsHeaders } from "../httpSecurity.js";
 import { shouldAdvanceStatus } from "../suiviStatuts.js";
 
@@ -76,7 +76,7 @@ function generateRelance2Template(prenom) {
 function generateRelanceFormulesTemplate(prenom) {
   const choices = FORMULES.map(
     (formule) =>
-      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(formule.price)}`,
+      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(displayFormulePrice(formule))}`,
   ).join("<br>");
 
   return wrapEmailHtml({
@@ -127,15 +127,7 @@ function generateFormulesPresentationTemplate(prenom) {
             <div class="formule-card${featured}">
               ${badge}
               <div class="formule-title">Formule ${formule.number} — ${escapeHtml(formule.title)}</div>
-              <div class="formule-price">${
-                formule.comparePrice
-                  ? `${escapeHtml(formule.comparePrice)} → `
-                  : ""
-              }${escapeHtml(formule.priceLabel)}${
-                formule.savingsLabel
-                  ? ` — ${escapeHtml(formule.savingsLabel)}`
-                  : ""
-              }</div>
+              <div class="formule-price">${escapeHtml(displayFormulePrice(formule))}</div>
               <p class="formule-intro">${escapeHtml(PAYMENT_NOTE)}</p>
               ${
                 formule.savingsText
@@ -154,7 +146,7 @@ function generateFormulesPresentationTemplate(prenom) {
   );
   const choices = FORMULES.map(
     (formule) =>
-      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(formule.price)}`,
+      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(displayFormulePrice(formule))}`,
   ).join("<br>");
 
   return wrapEmailHtml({
@@ -254,7 +246,7 @@ const EMAIL_TEMPLATES = {
     generateHtml: (contact) =>
       generateRelanceFormulesTemplate(contact.prenom || ""),
     action: "relance_formules",
-    description: "Relance automatique — pas de réponse au choix des formules",
+    description: "Relance 3 envoyée — pas de réponse au choix des formules",
     status: "relance_en_cours",
   },
   relance_1: {

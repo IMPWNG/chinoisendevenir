@@ -1,4 +1,4 @@
-import { getFormuleAccess, getFormuleByNumber } from "../formules";
+import { displayFormulePrice, getFormuleAccess, getFormuleByNumber } from "../formules";
 import { REQUIRED_STUDENT_DOCUMENTS } from "../studentProgress";
 import { CATEGORY_META } from "./constants";
 
@@ -80,7 +80,7 @@ function formulaInfo(number) {
   if (!formule) return { number: n || null, label: "à préciser" };
   return {
     number: formule.number,
-    label: `Formule ${formule.number} — ${formule.shortTitle} (${formule.price})`,
+    label: `Formule ${formule.number} — ${formule.shortTitle} — ${displayFormulePrice(formule)}`,
     shortTitle: formule.shortTitle,
   };
 }

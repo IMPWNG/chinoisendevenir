@@ -4,6 +4,7 @@ import {
   FORMULES,
   PAYMENT_NOTE,
   displayFormuleFootnote,
+  displayFormulePrice,
   getFormuleIncludeGroups,
   getFormuleNumber,
 } from "../lib/formules";
@@ -46,13 +47,9 @@ export default function StudentFormules({ currentFormule = "" }) {
               {formule.subtitle ? (
                 <p className="student-formule-intro">{formule.subtitle}</p>
               ) : null}
-              {formule.comparePrice ? (
-                <p className="student-formule-compare">{formule.comparePrice}</p>
-              ) : null}
-              <p className="student-formule-price">{formule.price}</p>
-              {formule.savingsLabel ? (
-                <p className="student-formule-savings">{formule.savingsLabel}</p>
-              ) : null}
+              <p className="student-formule-price">
+                {displayFormulePrice(formule)}
+              </p>
               <p className="student-formule-payment">{PAYMENT_NOTE}</p>
               {formule.savingsText ? (
                 <p className="student-formule-intro">{formule.savingsText}</p>
@@ -80,7 +77,7 @@ export default function StudentFormules({ currentFormule = "" }) {
                 aria-disabled="true"
                 title="Le paiement en ligne sera bientôt disponible"
               >
-                Payer {formule.price}
+                Payer {displayFormulePrice(formule)}
               </button>
             </article>
           );

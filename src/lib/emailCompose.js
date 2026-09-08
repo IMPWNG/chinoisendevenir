@@ -304,7 +304,7 @@ Si le brief mentionne un horaire, recopie-le tel quel. N'invente aucun créneau,
 JSON uniquement, sans markdown :
 {"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
 
-L'objet (subject) doit toujours commencer par « Etude Chine — ».`
+L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
     user: `Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
 
 Brief admin (à transformer en e-mail pro) :

@@ -134,7 +134,7 @@ export const FAQS = {
     {
       question: "Quelle formule choisir pour étudier en Chine ?",
       answer:
-        "La formule 1 (800 €) convient si vous voulez d'abord une année de chinois en Chine, avec l'inscription en école de langue et l'aide au visa étudiant. La formule 2 (1 700 €) convient si votre projet universitaire est déjà défini et que votre niveau de langue suffit : jusqu'à 5 candidatures, jusqu'aux réponses. La formule 3 (2 000 €) combine les deux pour 500 € de moins que 2 500 €, avec jusqu'à 8 candidatures et un suivi jusqu'au départ.",
+        "La formule 1 (800 €) convient si vous voulez d'abord une année de chinois en Chine, avec l'inscription en école de langue et l'aide au visa étudiant. La formule 2 (1 700 €) convient si votre projet universitaire est déjà défini et que votre niveau de langue suffit : jusqu'à 5 candidatures, jusqu'aux réponses. La formule 3 (2 000 €, 500 € d'économie) combine les deux, avec jusqu'à 8 candidatures et un suivi jusqu'au départ.",
     },
     {
       question: "Que comprennent les formules pour étudier en Chine ?",
@@ -144,7 +144,7 @@ export const FAQS = {
     {
       question: "Pourquoi la formule complète coûte-t-elle 2 000 € ?",
       answer:
-        "Prises séparément, la formule 1 (800 €) et la formule 2 (1 700 €) totalisent 2 500 €. La formule 3 les combine pour 2 000 € : vous économisez 500 €, vous avez un interlocuteur unique, et vous déposez jusqu'à 8 candidatures universitaires au lieu de 5.",
+        "La formule 3 est à 2 000 € (500 € d'économie). Elle combine l'année de chinois et l'admission universitaire, avec un interlocuteur unique et jusqu'à 8 candidatures universitaires au lieu de 5.",
     },
     {
       question: "Quand faut-il payer ?",
