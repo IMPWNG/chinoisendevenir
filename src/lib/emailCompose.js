@@ -1,3 +1,5 @@
+import { withEtudeChineSubject } from "./emailLayout.js";
+
 const DEFAULT_SUBJECT = "Votre projet d'études en Chine";
 
 function clip(value, max) {
@@ -168,8 +170,12 @@ function composeEmailFromParsed(parsed, fallbackText) {
   if (!body || body.length < 20) {
     return { ok: false, error: "Réponse IA inutilisable" };
   }
-  const subject = sanitizeComposeLine(parsed?.subject, 180) || DEFAULT_SUBJECT;
-  const title = sanitizeComposeLine(parsed?.title, 120) || subject;
+  const subject = withEtudeChineSubject(
+    sanitizeComposeLine(parsed?.subject, 180) || DEFAULT_SUBJECT,
+  );
+  const title =
+    sanitizeComposeLine(parsed?.title, 120) ||
+    subject.replace(/^Etude Chine\s*[—–\-:]\s*/i, "").trim();
   const subtitle = sanitizeComposeLine(parsed?.subtitle, 160);
   return {
     ok: true,
@@ -296,7 +302,9 @@ ${tutoyer ? "Le brief demande explicitement le tutoiement : tutoie (tu / toi / t
 Si le brief mentionne un horaire, recopie-le tel quel. N'invente aucun créneau, aucune université, aucun tarif.
 
 JSON uniquement, sans markdown :
-{"subject":"...","title":"...","subtitle":"...","body":"..."}`,
+{"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
+
+L'objet (subject) doit toujours commencer par « Etude Chine — ».`
     user: `Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
 
 Brief admin (à transformer en e-mail pro) :

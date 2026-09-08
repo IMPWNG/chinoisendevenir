@@ -4,19 +4,19 @@ import { createClient } from "@supabase/supabase-js";
 import {
   logAction,
   updateContactStatus,
+  sendTemplatedEmail,
 } from "./auto-reply.js";
 import {
   detectFormule,
   detectInterest,
   looksLikeQuestion,
   saveChosenFormule,
-  FORMULE_ALREADY_CHOSEN,
   truncate,
 } from "./inbound-email.js";
 import { getChosenFormule } from "../studentProgress.js";
 import { phonesMatch } from "../whatsapp/messages.js";
 import { getWhatsAppConfig } from "../whatsapp/cloud.js";
-import { sendWhatsAppToContact } from "./whatsapp-send.js";
+import { isFormuleAlreadyChosen, isFormulesAwaitingReply } from "../suiviStatuts.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -141,8 +141,8 @@ async function handleOneIncoming({ message, contacts }) {
 
   if (formule) {
     const alreadySameFormule = existingFormule === formule.label;
-    if (!alreadySameFormule) {
-      const sent = await sendWhatsAppToContact(contact, "formule_confirmee", {
+    if (!alreadySameFormule && contact.email) {
+      const sent = await sendTemplatedEmail(contact, "formule_confirmee", {
         formuleLabel: formule.label,
       });
       if (!sent.success) {
@@ -150,7 +150,14 @@ async function handleOneIncoming({ message, contacts }) {
           contact.id,
           contact.email,
           "note_ajoutee",
-          `Échec confirmation WhatsApp (${formule.label}) : ${sent.error || "erreur"}`,
+          `Échec confirmation email (${formule.label}) : ${sent.error || "erreur"}`,
+        );
+      } else {
+        await logAction(
+          contact.id,
+          contact.email,
+          "email_envoye",
+          `Confirmation de la formule choisie envoyée par email : ${formule.label}`,
         );
       }
     }
@@ -174,17 +181,18 @@ async function handleOneIncoming({ message, contacts }) {
 
   if (
     interest &&
-    statut !== "choix_des_formules" &&
-    !FORMULE_ALREADY_CHOSEN.has(statut)
+    contact.email &&
+    !isFormulesAwaitingReply(statut) &&
+    !isFormuleAlreadyChosen(statut)
   ) {
-    const sent = await sendWhatsAppToContact(contact, "formules_presentation");
+    const sent = await sendTemplatedEmail(contact, "formules_presentation");
     if (sent.success) {
-      await updateContactStatus(contact.id, "choix_des_formules");
+      await updateContactStatus(contact.id, "formules_présentées");
       await logAction(
         contact.id,
         contact.email,
-        "whatsapp_formules",
-        "Formules envoyées automatiquement après réponse WhatsApp",
+        "email_formules",
+        "Formules envoyées par email après réponse WhatsApp",
       );
     }
     return { contact: contact.id, intent, auto: "formules" };

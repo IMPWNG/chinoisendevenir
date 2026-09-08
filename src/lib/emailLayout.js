@@ -17,18 +17,31 @@ export const EMAIL_STYLES = `
   .header {
     background: #1d3557;
     color: #ffffff;
-    padding: 28px 32px;
+    padding: 32px 28px;
     border-bottom: 3px solid #e63946;
+    text-align: center;
+  }
+  .header-brand {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 10px;
+    text-align: center;
   }
   .header h1 {
     font-size: 20px;
     font-weight: 650;
     letter-spacing: -0.02em;
-    margin-bottom: 6px;
+    margin: 0 auto 6px;
+    text-align: center;
   }
   .header p {
     font-size: 13px;
     color: rgba(255,255,255,0.78);
+    margin: 0 auto;
+    text-align: center;
   }
   .content {
     padding: 32px;
@@ -189,9 +202,10 @@ export function wrapEmailHtml({ title, subtitle, prenom, bodyHtml }) {
       </head>
       <body>
         <div class="container">
-          <div class="header">
-            <h1>${escapeHtml(title)}</h1>
-            ${subtitle ? `<p>${escapeHtml(subtitle)}</p>` : ""}
+          <div class="header" style="text-align:center;">
+            <p class="header-brand" style="text-align:center;margin:0 0 10px;">Chinois en Devenir</p>
+            <h1 style="text-align:center;margin:0 auto 6px;">${escapeHtml(title)}</h1>
+            ${subtitle ? `<p style="text-align:center;margin:0 auto;">${escapeHtml(subtitle)}</p>` : ""}
           </div>
           <div class="content">
             <div class="greeting"><p>${greeting}</p></div>
@@ -257,6 +271,24 @@ export function sanitizeEmailSubject(value, maxLen = 180) {
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, maxLen);
+}
+
+export const EMAIL_SUBJECT_PREFIX = "Etude Chine";
+
+function stripEtudeChineMarker(value) {
+  return String(value || "")
+    .replace(/^[_\-\s|:]*etude\s*chine\s*[_\-\s|:–—]*/i, "")
+    .replace(/\s*[_\-|]\s*etude\s*chine\s*$/i, "")
+    .replace(/\s*[_\-|]\s*étude\s*chine\s*$/i, "")
+    .trim();
+}
+
+export function withEtudeChineSubject(value, maxLen = 180) {
+  const prefix = EMAIL_SUBJECT_PREFIX;
+  const cleaned = stripEtudeChineMarker(sanitizeEmailSubject(value, maxLen));
+  const body = cleaned || "Votre projet d'études en Chine";
+  const composed = `${prefix} — ${body}`;
+  return sanitizeEmailSubject(composed, maxLen);
 }
 
 export { SITE_URL, escapeHtml };

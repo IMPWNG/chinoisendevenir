@@ -2,8 +2,9 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, INBOUND_REPLY_TO } from "../emailConfig.js";
-import { wrapEmailHtml, sanitizeEmailSubject } from "../emailLayout.js";
+import { wrapEmailHtml, withEtudeChineSubject } from "../emailLayout.js";
 import { applyCorsHeaders, getClientIp, rateLimit } from "../httpSecurity.js";
+import { canonicalStatut, EARLY_STATUSES } from "../suiviStatuts.js";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -28,27 +29,25 @@ const DOMAINES_VALIDES = [
 
 function generateEmailTemplate(prenom) {
   return wrapEmailHtml({
-    title: "Nous avons bien reçu votre demande",
-    subtitle: "Projet d'études en Chine",
+    title: "Bienvenue — votre projet est bien reçu",
+    subtitle: "Étudier en Chine, étape par étape",
     prenom,
     bodyHtml: `
             <div class="section">
-              <p>Merci d'avoir transmis votre demande concernant un projet d'études en Chine. Nous avons bien reçu vos informations.</p>
-              <p>Votre profil va maintenant être examiné afin d'identifier les options les plus adaptées à votre parcours : formations, universités, conditions d'admission et possibilités de financement.</p>
+              <p>Merci d'avoir transmis votre demande. Nous avons bien reçu vos informations et votre profil va être lu avec attention.</p>
+              <p>Cette première lecture nous permet d'identifier les pistes les plus réalistes pour vous : formations, universités, calendrier et, le cas échéant, pistes de financement.</p>
             </div>
             <div class="section">
-              <div class="section-title">Notre accompagnement</div>
+              <div class="section-title">Ce que nous faisons ensuite</div>
               <ul class="formule-list">
-                <li>Analyse de votre profil académique</li>
-                <li>Recherche de formations et d'universités adaptées</li>
-                <li>Orientation concernant les bourses disponibles</li>
-                <li>Préparation et vérification du dossier</li>
-                <li>Accompagnement pendant la procédure de candidature</li>
-                <li>Suivi des étapes administratives</li>
+                <li>Analyse de votre parcours et de vos objectifs</li>
+                <li>Repérage des formations et universités adaptées</li>
+                <li>Point sur les bourses éventuellement accessibles</li>
+                <li>Préparation des prochaines étapes de candidature</li>
               </ul>
             </div>
             <div class="section">
-              <p>Après cette première lecture, nous reviendrons vers vous pour vous présenter les possibilités correspondant à votre situation, ainsi que nos formules d'accompagnement.</p>
+              <p>Nous reviendrons vers vous pour vous présenter les options correspondant à votre situation, ainsi que nos formules d'accompagnement.</p>
             </div>
             <div class="note">
               <p>Aucune admission ni bourse ne peut être garantie. Les décisions finales appartiennent aux universités et aux organismes concernés.</p>
@@ -222,16 +221,13 @@ export default async function handler(req, res) {
       updated_at: new Date().toISOString(),
     };
 
-    const earlyStatuses = [
-      null,
-      "",
-      "nouveau_prospect",
-      "relance_1_envoyée",
-      "relance_2_envoyée",
-      "mail_bienvenue_envoyé",
-    ];
-    if (!existing || earlyStatuses.includes(existing.suivi_statut)) {
-      profilePayload.suivi_statut = "mail_bienvenue_envoyé";
+    const currentStatut = canonicalStatut(existing?.suivi_statut);
+    if (
+      !existing ||
+      !currentStatut ||
+      EARLY_STATUSES.has(currentStatut)
+    ) {
+      profilePayload.suivi_statut = "bienvenue_envoyé";
     }
 
     let contact = existing;
@@ -325,7 +321,7 @@ export default async function handler(req, res) {
         from: CONTACT_FROM,
         replyTo: INBOUND_REPLY_TO,
         to: normalizedEmail,
-        subject: sanitizeEmailSubject(
+        subject: withEtudeChineSubject(
           `Nous avons bien reçu votre demande, ${prenom}`,
         ),
         html: generateEmailTemplate(prenom),

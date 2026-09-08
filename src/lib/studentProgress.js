@@ -1,4 +1,9 @@
 import { FORMULES, getFormuleNumber } from "./formules";
+import {
+  canonicalStatut,
+  PAID_STATUSES,
+  STUDENT_UNLOCKED_STATUSES,
+} from "./suiviStatuts";
 
 export const DOMAINES_ETUDES = [
   "Informatique / IA / Data Science",
@@ -73,27 +78,30 @@ export const STUDENT_PROCESS_STEPS = [
 ];
 
 const STATUS_STEP_INDEX = {
-  mail_bienvenue_envoyé: 0,
-  relance_1_envoyée: 0,
-  relance_2_envoyée: 0,
   nouveau_prospect: 0,
-  nouveau: 0,
-  choix_des_formules: 1,
+  bienvenue_envoyé: 0,
+  prospect_perdu: 0,
+  a_qualifier: 1,
+  appel_réservé: 1,
+  formules_présentées: 1,
   formule_choisie: 1,
-  prospect_à_qualifier: 1,
   offre_envoyée: 1,
+  relance_en_cours: 1,
   attente_paiement: 1,
   client_payé: 2,
-  appel_réservé: 2,
   dossier_préparation: 3,
+  dossier_incomplet: 3,
   candidature_envoyée: 4,
   admission_reçue: 5,
+  visa_préparation: 6,
+  arrive_chine: 7,
   dossier_terminé: 7,
 };
 
 export function getStudentStepIndex(statut) {
   if (!statut) return 0;
-  return STATUS_STEP_INDEX[statut] ?? 0;
+  const key = canonicalStatut(statut) || statut;
+  return STATUS_STEP_INDEX[key] ?? 0;
 }
 
 export function clampDossierEtape(value) {
@@ -129,32 +137,11 @@ export function stripAvancementNote(notesAdmin) {
 }
 
 export function isStudentSpaceUnlocked(statut) {
-  const unlocked = new Set([
-    "formule_choisie",
-    "prospect_à_qualifier",
-    "offre_envoyée",
-    "attente_paiement",
-    "client_payé",
-    "appel_réservé",
-    "dossier_préparation",
-    "candidature_envoyée",
-    "admission_reçue",
-    "dossier_terminé",
-  ]);
-  return unlocked.has(statut);
+  return STUDENT_UNLOCKED_STATUSES.has(canonicalStatut(statut));
 }
 
-const PAID_STATUSES = new Set([
-  "client_payé",
-  "appel_réservé",
-  "dossier_préparation",
-  "candidature_envoyée",
-  "admission_reçue",
-  "dossier_terminé",
-]);
-
 export function isFormulePaid(contact) {
-  return PAID_STATUSES.has(contact?.suivi_statut);
+  return PAID_STATUSES.has(canonicalStatut(contact?.suivi_statut));
 }
 
 export function isStudentAccessGranted(contact) {

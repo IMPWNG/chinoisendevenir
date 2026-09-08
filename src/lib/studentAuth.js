@@ -251,7 +251,7 @@ export async function ensureStudentContact(admin, user, extras = {}) {
   const insertPayload = {
     email,
     source: "espace_etudiant",
-    suivi_statut: "mail_bienvenue_envoyé",
+    suivi_statut: "bienvenue_envoyé",
     created_at: new Date().toISOString(),
   };
   if (prenom) insertPayload.prenom = prenom;

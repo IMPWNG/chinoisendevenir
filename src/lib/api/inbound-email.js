@@ -13,6 +13,11 @@ import {
   FORMULE_2_VALUE,
   FORMULE_3_VALUE,
 } from "../formules.js";
+import {
+  FORMULE_ALREADY_CHOSEN,
+  isFormuleAlreadyChosen,
+  isFormulesAwaitingReply,
+} from "../suiviStatuts.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -101,17 +106,7 @@ const FORMULES = [
   },
 ];
 
-export const FORMULE_ALREADY_CHOSEN = new Set([
-  "formule_choisie",
-  "offre_envoyée",
-  "attente_paiement",
-  "client_payé",
-  "appel_réservé",
-  "dossier_préparation",
-  "candidature_envoyée",
-  "admission_reçue",
-  "dossier_terminé",
-]);
+export { FORMULE_ALREADY_CHOSEN };
 
 function isIgnoredSender(email) {
   const value = String(email || "").toLowerCase();
@@ -519,6 +514,12 @@ export async function processInboundEmail(payload) {
         "formule_choisie",
         `Formule choisie automatiquement : ${formule.label}`,
       );
+      await logAction(
+        contact.id,
+        contact.email,
+        "email_envoye",
+        `Email de confirmation envoyé — un appel téléphonique sera placé sous peu pour faire le point sur le dossier (${formule.label})`,
+      );
     }
 
     return {
@@ -535,8 +536,8 @@ export async function processInboundEmail(payload) {
 
   if (
     interest &&
-    statut !== "choix_des_formules" &&
-    !FORMULE_ALREADY_CHOSEN.has(statut)
+    !isFormulesAwaitingReply(statut) &&
+    !isFormuleAlreadyChosen(statut)
   ) {
     const sent = await sendTemplatedEmail(contact, "formules_presentation");
     if (!sent.success) {
@@ -547,7 +548,7 @@ export async function processInboundEmail(payload) {
       };
     }
 
-    await updateContactStatus(contact.id, "choix_des_formules");
+    await updateContactStatus(contact.id, "formules_présentées");
     await logAction(
       contact.id,
       contact.email,
@@ -559,7 +560,7 @@ export async function processInboundEmail(payload) {
       success: true,
       message: "Formules envoyées",
       contact: contact.id,
-      status: "choix_des_formules",
+      status: "formules_présentées",
       httpStatus: 200,
     };
   }

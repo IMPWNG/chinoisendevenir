@@ -9,9 +9,11 @@ import {
   escapeHtml,
   generateCustomEmailHtml,
   sanitizeEmailSubject,
+  withEtudeChineSubject,
 } from "../emailLayout.js";
 import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups } from "../formules.js";
 import { applyCorsHeaders } from "../httpSecurity.js";
+import { shouldAdvanceStatus } from "../suiviStatuts.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -24,31 +26,7 @@ const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 const resend = new Resend(resendApiKey);
 
-const STATUS_RANK = {
-  mail_bienvenue_envoyé: 0,
-  relance_1_envoyée: 1,
-  relance_2_envoyée: 2,
-  choix_des_formules: 3,
-  formule_choisie: 4,
-  prospect_à_qualifier: 5,
-  offre_envoyée: 6,
-  attente_paiement: 7,
-  client_payé: 8,
-  appel_réservé: 9,
-  dossier_préparation: 10,
-  candidature_envoyée: 11,
-  admission_reçue: 12,
-  dossier_terminé: 13,
-};
-
-export function shouldAdvanceStatus(currentStatus, nextStatus) {
-  if (!nextStatus) return false;
-  if (!currentStatus) return true;
-  const currentRank = STATUS_RANK[currentStatus];
-  const nextRank = STATUS_RANK[nextStatus];
-  if (currentRank === undefined || nextRank === undefined) return true;
-  return nextRank >= currentRank;
-}
+export { shouldAdvanceStatus };
 
 console.log("✅ Route /api/email/auto-reply démarrée");
 
@@ -90,6 +68,32 @@ function generateRelance2Template(prenom) {
             </div>
             <div class="section">
               <p>Nous reviendrons ensuite vers vous pour vous présenter les prochaines étapes. Si votre projet n'est plus d'actualité, vous pouvez également nous l'indiquer.</p>
+            </div>
+    `,
+  });
+}
+
+function generateRelanceFormulesTemplate(prenom) {
+  const choices = FORMULES.map(
+    (formule) =>
+      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(formule.price)}`,
+  ).join("<br>");
+
+  return wrapEmailHtml({
+    title: "Avez-vous choisi votre formule ?",
+    subtitle: "Nous relançons votre dossier",
+    prenom,
+    bodyHtml: `
+            <div class="section">
+              <p>Nous vous avions présenté nos formules d'accompagnement pour étudier en Chine, et nous n'avons pas encore reçu votre retour.</p>
+              <p>Si votre projet est toujours d'actualité, répondez simplement à cet e-mail en indiquant la formule qui vous correspond le mieux. Nous pourrons ensuite placer un appel téléphonique pour faire le point sur votre dossier.</p>
+            </div>
+            <div class="cta">
+              <p>Répondez avec le numéro de la formule choisie :</p>
+              <div class="cta-choice">${choices}</div>
+            </div>
+            <div class="section">
+              <p>Si vous avez des questions avant de choisir, répondez à cet e-mail : nous vous répondrons rapidement.</p>
             </div>
     `,
   });
@@ -206,35 +210,31 @@ function generateFormuleConfirmeeTemplate(contact, formuleLabel) {
   const prenom = contact.prenom || "";
   const displayed = displayFormuleLabel(formuleLabel);
   return wrapEmailHtml({
-    title: "Confirmation de votre choix",
-    subtitle: "Prochaine étape : un échange téléphonique",
+    title: "Votre formule est bien notée",
+    subtitle: "Un appel sera placé sous peu",
     prenom,
     bodyHtml: `
             <div class="section">
-              <p>Nous vous remercions pour votre retour. Nous avons bien pris en compte votre intérêt pour la formule suivante :</p>
+              <p>Merci pour votre retour. Nous avons bien enregistré votre choix :</p>
             </div>
             <div class="formule-card featured">
               <div class="formule-title">${escapeHtml(displayed)}</div>
             </div>
             <div class="section">
-              <p>Ce choix n'est pas encore un engagement définitif. Il nous permet de préparer une première consultation téléphonique, afin d'étudier votre projet et de confirmer ensemble le niveau d'accompagnement le plus adapté.</p>
-              <p>Lors de cet échange, nous pourrons notamment :</p>
+              <p>Un appel téléphonique sera placé sous peu afin de faire le point sur le dossier de l'étudiant : parcours, objectifs, pièces à prévoir et prochaine étape concrète.</p>
+              <p>Lors de cet échange, nous reviendrons notamment sur :</p>
               <ul class="formule-list">
-                <li>Revenir sur votre parcours et vos objectifs</li>
-                <li>Vérifier la cohérence de votre projet</li>
-                <li>Préciser les démarches nécessaires dans votre situation</li>
-                <li>Répondre à vos questions</li>
-                <li>Vous expliquer le déroulement de l'accompagnement</li>
+                <li>Votre situation actuelle et le calendrier visé</li>
+                <li>La cohérence de la formule avec votre projet</li>
+                <li>Les documents et démarches à anticiper</li>
+                <li>Les questions que vous souhaitez poser</li>
               </ul>
             </div>
-            <div class="section">
-              <p>À l'issue de cette consultation, si vous souhaitez poursuivre avec notre agence, nous vous présenterons les conditions de service ainsi que les prochaines étapes. Le règlement des frais d'accompagnement n'intervient qu'après cet échange et après validation de la formule.</p>
-            </div>
             <div class="note">
-              <p>L'admission dans une université ou l'obtention d'une bourse ne peut pas être garantie. La décision finale appartient aux universités et aux organismes concernés.</p>
+              <p>Cet appel n'est pas un engagement. Le règlement n'intervient qu'après cet échange, si vous validez l'accompagnement.</p>
             </div>
             <div class="section">
-              <p>Nous reviendrons vers vous rapidement afin de convenir d'un créneau. Merci de rester joignable sur le numéro indiqué dans votre formulaire.</p>
+              <p>Merci de rester joignable sur le numéro indiqué dans votre formulaire. Nous vous confirmerons le créneau dès qu'il sera fixé.</p>
             </div>
     `,
   });
@@ -247,28 +247,36 @@ const EMAIL_TEMPLATES = {
       generateFormulesPresentationTemplate(contact.prenom || ""),
     action: "email_formules",
     description: "Email formules d'accompagnement envoyé",
-    status: "choix_des_formules",
+    status: "formules_présentées",
+  },
+  relance_formules: {
+    subject: "Avez-vous choisi votre formule d'accompagnement ?",
+    generateHtml: (contact) =>
+      generateRelanceFormulesTemplate(contact.prenom || ""),
+    action: "relance_formules",
+    description: "Relance automatique — pas de réponse au choix des formules",
+    status: "relance_en_cours",
   },
   relance_1: {
     subject: "Votre projet d'études en Chine — formulaire à compléter",
     generateHtml: (contact) => generateRelance1Template(contact.prenom || ""),
     action: "relance_1",
     description: "Relance 1 envoyée — formulaire à remplir",
-    status: "relance_1_envoyée",
+    status: "relance_en_cours",
   },
   relance_2: {
     subject: "Votre projet d'études en Chine est-il toujours d'actualité ?",
     generateHtml: (contact) => generateRelance2Template(contact.prenom || ""),
     action: "relance_2",
     description: "Relance 2 envoyée — confirmation d'intérêt",
-    status: "relance_2_envoyée",
+    status: "relance_en_cours",
   },
   formule_confirmee: {
-    subject: "Nous confirmons votre choix de formule — prochaine étape",
+    subject: "Nous avons bien noté votre formule — un appel sera placé sous peu",
     generateHtml: (contact, extras = {}) =>
       generateFormuleConfirmeeTemplate(contact, extras.formuleLabel),
     action: "email_envoye",
-    description: "Confirmation de la formule choisie",
+    description: "Confirmation de la formule choisie — appel à placer",
     status: "formule_choisie",
   },
   custom: {
@@ -313,7 +321,7 @@ async function sendTemplatedEmail(
     }
   }
 
-  const subject = sanitizeEmailSubject(
+  const subject = withEtudeChineSubject(
     typeof template.subject === "function"
       ? template.subject(contact, extras)
       : template.subject,
@@ -402,6 +410,7 @@ async function logAction(
   const fallbacks = {
     relance_1: "relance",
     relance_2: "relance",
+    relance_formules: "relance",
     email_formules: "email_envoye",
     reponse_client: "note_ajoutee",
     formule_choisie: "changement_statut",

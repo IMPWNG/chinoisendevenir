@@ -37,8 +37,8 @@ export function adminCapabilities(role) {
     role: full ? ADMIN_ROLE_FULL : ADMIN_ROLE_LIMITED,
     universities: full,
     matching: full,
-    whatsapp: full,
-    bulkSend: full,
+    whatsapp: false,
+    bulkSend: false,
     deleteContacts: full,
   };
 }

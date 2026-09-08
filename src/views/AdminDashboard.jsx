@@ -10,13 +10,6 @@ import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminCalendar from "../components/AdminCalendar";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
-import {
-  WHATSAPP_TEMPLATE_OPTIONS,
-  generateWhatsAppText,
-  whatsappNumberFromContact,
-  isValidWhatsAppNumber,
-  buildWhatsAppLink,
-} from "../lib/whatsapp/messages";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { useAdminAccess } from "../context/AdminAccessContext";
 import { generateCustomEmailHtml } from "../lib/emailLayout";
@@ -36,6 +29,12 @@ import {
   displayFormuleLabel,
   getFormuleNumber,
 } from "../lib/formules";
+import {
+  SUIVI_STATUTS,
+  STATUT_COLORS,
+  STATUT_ICONS,
+  canonicalStatut,
+} from "../lib/suiviStatuts";
 
 async function authedFetch(path, options = {}) {
   const {
@@ -54,56 +53,7 @@ async function authedFetch(path, options = {}) {
   });
 }
 
-const STATUTS = [
-  "mail_bienvenue_envoyé",
-  "relance_1_envoyée",
-  "relance_2_envoyée",
-  "choix_des_formules",
-  "formule_choisie",
-  "prospect_à_qualifier",
-  "offre_envoyée",
-  "attente_paiement",
-  "client_payé",
-  "appel_réservé",
-  "dossier_préparation",
-  "candidature_envoyée",
-  "admission_reçue",
-  "dossier_terminé",
-];
-
-const STATUT_COLORS = {
-  mail_bienvenue_envoyé: "bg-slate-500/20 text-slate-300 border-slate-500/50",
-  relance_1_envoyée: "bg-amber-500/20 text-amber-300 border-amber-500/50",
-  relance_2_envoyée: "bg-orange-500/20 text-orange-200 border-orange-500/50",
-  choix_des_formules: "bg-blue-500/20 text-blue-300 border-blue-500/50",
-  formule_choisie: "bg-cyan-500/20 text-cyan-300 border-cyan-500/50",
-  prospect_à_qualifier: "bg-indigo-500/20 text-indigo-300 border-indigo-500/50",
-  offre_envoyée: "bg-yellow-500/20 text-yellow-300 border-yellow-500/50",
-  attente_paiement: "bg-orange-500/20 text-orange-300 border-orange-500/50",
-  client_payé: "bg-purple-500/20 text-purple-300 border-purple-500/50",
-  appel_réservé: "bg-violet-500/20 text-violet-300 border-violet-500/50",
-  dossier_préparation: "bg-pink-500/20 text-pink-300 border-pink-500/50",
-  candidature_envoyée: "bg-teal-500/20 text-teal-300 border-teal-500/50",
-  admission_reçue: "bg-green-500/20 text-green-300 border-green-500/50",
-  dossier_terminé: "bg-emerald-500/20 text-emerald-300 border-emerald-500/50",
-};
-
-const STATUT_ICONS = {
-  mail_bienvenue_envoyé: "📧",
-  relance_1_envoyée: "🔔",
-  relance_2_envoyée: "🔔",
-  choix_des_formules: "📋",
-  formule_choisie: "✔️",
-  prospect_à_qualifier: "🔍",
-  offre_envoyée: "💼",
-  attente_paiement: "⏳",
-  client_payé: "💰",
-  appel_réservé: "📞",
-  dossier_préparation: "📁",
-  candidature_envoyée: "🎯",
-  admission_reçue: "🎊",
-  dossier_terminé: "🏆",
-};
+const STATUTS = SUIVI_STATUTS;
 
 const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat", "autre"];
 
@@ -140,16 +90,12 @@ const BUDGETS = [
 
 const EMAIL_TEMPLATE_OPTIONS = [
   {
-    value: "relance_1",
-    label: "🔔 Relance 1 — Formulaire à remplir",
-  },
-  {
-    value: "relance_2",
-    label: "🔔 Relance 2 — Toujours intéressé(e) ?",
-  },
-  {
     value: "formules_presentation",
     label: "📋 Formules d'accompagnement",
+  },
+  {
+    value: "relance_formules",
+    label: "🔔 Relance — choix des formules",
   },
 ];
 
@@ -169,13 +115,9 @@ const ACTIONS_TYPES = [
   { value: "appel", label: "Appel effectué", icon: "📞" },
   { value: "email_envoye", label: "Email envoyé", icon: "📧" },
   { value: "email_formules", label: "Email formules envoyé", icon: "📋" },
-  { value: "whatsapp_envoye", label: "WhatsApp envoyé", icon: "📱" },
-  { value: "whatsapp_formules", label: "WhatsApp formules envoyé", icon: "📋" },
   { value: "reponse_client", label: "Réponse client (email)", icon: "📥" },
-  { value: "reponse_whatsapp", label: "Réponse client (WhatsApp)", icon: "💬" },
-  { value: "formule_choisie", label: "Formule choisie", icon: "✔️" },
-  { value: "relance_1", label: "Relance 1", icon: "🔔" },
-  { value: "relance_2", label: "Relance 2", icon: "🔔" },
+  { value: "formule_choisie", label: "Formule choisie", icon: "🎯" },
+  { value: "relance_formules", label: "Relance formules", icon: "🔔" },
   { value: "relance", label: "Relance", icon: "🔔" },
   { value: "qualification", label: "Qualification", icon: "✓" },
   { value: "changement_statut", label: "Changement de statut", icon: "🔄" },
@@ -207,11 +149,6 @@ export default function AdminDashboard() {
   const [filterDomaine, setFilterDomaine] = useState("tous");
   const [selectedContact, setSelectedContact] = useState(null);
   const [editOnOpen, setEditOnOpen] = useState(false);
-  const [selectedIds, setSelectedIds] = useState([]);
-  const [bulkTemplate, setBulkTemplate] = useState("relance_1");
-  const [bulkChannel, setBulkChannel] = useState("email");
-  const [bulkSending, setBulkSending] = useState(false);
-  const [bulkProgress, setBulkProgress] = useState(null);
   const [pays, setPays] = useState([]);
   const { signOut, user } = useAdminAuth();
   const router = useRouter();
@@ -238,111 +175,6 @@ export default function AdminDashboard() {
       setPays(paysUniques.sort());
     }
     setLoading(false);
-  };
-
-  const toggleSelected = (id) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-    );
-  };
-
-  const sendBulkMessages = async () => {
-    if (!access.bulkSend) return;
-    const selected = contacts.filter((c) => selectedIds.includes(c.id));
-    const viaWhatsapp = bulkChannel === "whatsapp";
-    const recipients = selected.filter((c) =>
-      viaWhatsapp
-        ? isValidWhatsAppNumber(whatsappNumberFromContact(c))
-        : Boolean(c.email),
-    );
-    if (recipients.length === 0) {
-      alert(viaWhatsapp ? t("dashboard.noPhone") : t("dashboard.noEmail"));
-      return;
-    }
-
-    const templateLabel = t(`emailTemplate.${bulkTemplate}`);
-    const confirmed = confirm(
-      t(viaWhatsapp ? "dashboard.bulkConfirmWhatsapp" : "dashboard.bulkConfirm", {
-        template: templateLabel,
-        count: recipients.length,
-      }),
-    );
-    if (!confirmed) return;
-
-    setBulkSending(true);
-    const sent = [];
-    const failed = [];
-
-    try {
-      for (let i = 0; i < recipients.length; i++) {
-        const contact = recipients[i];
-        setBulkProgress({
-          current: i + 1,
-          total: recipients.length,
-          name: `${contact.prenom || ""} ${contact.nom || ""}`.trim(),
-        });
-
-        try {
-          const response = await authedFetch(
-            viaWhatsapp ? "/api/whatsapp/send" : "/api/email/auto-reply",
-            {
-              method: "POST",
-              body: JSON.stringify(
-                viaWhatsapp
-                  ? {
-                      contactId: String(contact.id),
-                      whatsappTemplate: bulkTemplate,
-                    }
-                  : {
-                      contactId: String(contact.id),
-                      emailTemplate: bulkTemplate,
-                    },
-              ),
-            },
-          );
-          const data = await response.json();
-          if (data.success) {
-            sent.push(contact);
-            if (data.status) {
-              setContacts((prev) =>
-                prev.map((c) =>
-                  c.id === contact.id ? { ...c, suivi_statut: data.status } : c,
-                ),
-              );
-            }
-          } else {
-            failed.push({
-              contact,
-              error: data.message || data.error || t("unknownError"),
-            });
-          }
-        } catch (err) {
-          failed.push({ contact, error: err.message });
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, 250));
-      }
-    } finally {
-      setBulkSending(false);
-      setBulkProgress(null);
-      setSelectedIds([]);
-    }
-
-    await fetchContacts();
-
-    const failLines = failed
-      .map(
-        (item) =>
-          `• ${item.contact.prenom || ""} ${item.contact.nom || ""} — ${item.error}`,
-      )
-      .join("\n");
-    alert(
-      t("dashboard.bulkDone", {
-        sent: sent.length,
-        failed: failed.length,
-        details: failLines ? `\n\n${failLines}` : "",
-      }),
-    );
   };
 
   const updateStatut = async (id, newStatut) => {
@@ -556,7 +388,8 @@ export default function AdminDashboard() {
       c.email?.toLowerCase().includes(search.toLowerCase());
 
     const matchStatut =
-      filterStatut === "tous" || c.suivi_statut === filterStatut;
+      filterStatut === "tous" ||
+      canonicalStatut(c.suivi_statut) === filterStatut;
     const matchBudget = filterBudget === "tous" || c.budget === filterBudget;
     const matchPays = filterPays === "tous" || c.pays === filterPays;
     const matchNiveau =
@@ -576,18 +409,25 @@ export default function AdminDashboard() {
 
 const stats = {
   total: contacts.length,
-  a_qualifier: contacts.filter((c) => c.suivi_statut === "prospect_à_qualifier")
-    .length,
-  offre_envoyee: contacts.filter((c) => c.suivi_statut === "offre_envoyée")
-    .length,
+  a_qualifier: contacts.filter(
+    (c) => canonicalStatut(c.suivi_statut) === "a_qualifier",
+  ).length,
+  offre_envoyee: contacts.filter(
+    (c) => canonicalStatut(c.suivi_statut) === "offre_envoyée",
+  ).length,
   attente_paiement: contacts.filter(
-    (c) => c.suivi_statut === "attente_paiement",
+    (c) => canonicalStatut(c.suivi_statut) === "attente_paiement",
   ).length,
-  paye: contacts.filter((c) => c.suivi_statut === "client_payé").length,
+  paye: contacts.filter((c) => canonicalStatut(c.suivi_statut) === "client_payé")
+    .length,
   en_cours_dossier: contacts.filter((c) =>
-    ["dossier_préparation", "candidature_envoyée"].includes(c.suivi_statut),
+    ["dossier_préparation", "dossier_incomplet", "candidature_envoyée"].includes(
+      canonicalStatut(c.suivi_statut),
+    ),
   ).length,
-  termine: contacts.filter((c) => c.suivi_statut === "dossier_terminé").length,
+  termine: contacts.filter(
+    (c) => canonicalStatut(c.suivi_statut) === "dossier_terminé",
+  ).length,
 };
 
   return (
@@ -723,123 +563,6 @@ const stats = {
           }}
         />
 
-        {access.bulkSend ? (
-        <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 sticky top-[88px] z-30">
-          <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
-            <div className="flex-1">
-              <p className="text-white font-bold">
-                📬 {t("dashboard.bulkTitle")}
-                {selectedIds.length > 0
-                  ? ` — ${t("dashboard.bulkSelected", { count: selectedIds.length })}`
-                  : ""}
-              </p>
-              <p className="text-xs text-slate-400 mt-1">
-                {bulkSending && bulkProgress
-                  ? t("dashboard.bulkProgress", {
-                      current: bulkProgress.current,
-                      total: bulkProgress.total,
-                      name: bulkProgress.name,
-                    })
-                  : t("dashboard.bulkHint")}
-              </p>
-              {bulkSending && bulkProgress ? (
-                <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
-                  <div
-                    className={`h-full bg-gradient-to-r transition-all duration-300 ${
-                      bulkChannel === "whatsapp"
-                        ? "from-emerald-500 to-green-500"
-                        : "from-amber-500 to-orange-500"
-                    }`}
-                    style={{
-                      width: `${Math.round(
-                        (bulkProgress.current / bulkProgress.total) * 100,
-                      )}%`,
-                    }}
-                  />
-                </div>
-              ) : null}
-            </div>
-            <select
-              value={bulkChannel}
-              disabled={bulkSending}
-              onChange={(e) => setBulkChannel(e.target.value)}
-              className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-300 font-semibold cursor-pointer disabled:opacity-50"
-            >
-              <option value="email">📧 {t("dashboard.bulkChannelEmail")}</option>
-              <option value="whatsapp">
-                📱 {t("dashboard.bulkChannelWhatsapp")}
-              </option>
-            </select>
-            <select
-              value={bulkTemplate}
-              disabled={bulkSending}
-              onChange={(e) => setBulkTemplate(e.target.value)}
-              className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all duration-300 font-semibold cursor-pointer disabled:opacity-50"
-            >
-              {EMAIL_TEMPLATE_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {t(`emailTemplate.${option.value}`)}
-                </option>
-              ))}
-            </select>
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                disabled={bulkSending || filteredContacts.length === 0}
-                onClick={() => {
-                  const filteredIds = filteredContacts.map((c) => c.id);
-                  const allSelected =
-                    filteredIds.length > 0 &&
-                    filteredIds.every((id) => selectedIds.includes(id));
-                  if (allSelected) {
-                    setSelectedIds((prev) =>
-                      prev.filter((id) => !filteredIds.includes(id)),
-                    );
-                    return;
-                  }
-                  setSelectedIds((prev) => [
-                    ...new Set([...prev, ...filteredIds]),
-                  ]);
-                }}
-                className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
-              >
-                {filteredContacts.length > 0 &&
-                filteredContacts.every((c) => selectedIds.includes(c.id))
-                  ? t("dashboard.deselectAll")
-                  : t("dashboard.selectFiltered")}
-              </button>
-              {selectedIds.length > 0 ? (
-                <button
-                  type="button"
-                  disabled={bulkSending}
-                  onClick={() => setSelectedIds([])}
-                  className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
-                >
-                  {t("dashboard.clear")}
-                </button>
-              ) : null}
-              <button
-                type="button"
-                disabled={bulkSending || selectedIds.length === 0}
-                onClick={sendBulkMessages}
-                className={`px-6 py-3 bg-gradient-to-r text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap ${
-                  bulkChannel === "whatsapp"
-                    ? "from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500"
-                    : "from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500"
-                }`}
-              >
-                {bulkSending
-                  ? `⏳ ${t("dashboard.sendingCount", {
-                      current: bulkProgress?.current || 0,
-                      total: bulkProgress?.total || 0,
-                    })}`
-                  : `📤 ${t("dashboard.send", { count: selectedIds.length })}`}
-              </button>
-            </div>
-          </div>
-        </div>
-        ) : null}
-
         {/* Table */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
           {loading ? (
@@ -861,36 +584,6 @@ const stats = {
               <table className="w-full">
                 <thead className="bg-slate-900/60 border-b border-slate-700/50">
                   <tr>
-                    {access.bulkSend ? (
-                    <th className="px-4 py-4 w-12">
-                      <input
-                        type="checkbox"
-                        checked={
-                          filteredContacts.length > 0 &&
-                          filteredContacts.every((c) =>
-                            selectedIds.includes(c.id),
-                          )
-                        }
-                        disabled={bulkSending}
-                        onChange={() => {
-                          const filteredIds = filteredContacts.map((c) => c.id);
-                          const allSelected = filteredIds.every((id) =>
-                            selectedIds.includes(id),
-                          );
-                          if (allSelected) {
-                            setSelectedIds((prev) =>
-                              prev.filter((id) => !filteredIds.includes(id)),
-                            );
-                            return;
-                          }
-                          setSelectedIds((prev) => [
-                            ...new Set([...prev, ...filteredIds]),
-                          ]);
-                        }}
-                        className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
-                      />
-                    </th>
-                    ) : null}
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
                       👤 {t("dashboard.colName")}
                     </th>
@@ -918,22 +611,8 @@ const stats = {
                   {filteredContacts.map((c) => (
                     <tr
                       key={c.id}
-                      className={`hover:bg-slate-700/30 transition-all duration-200 group ${
-                        selectedIds.includes(c.id) ? "bg-amber-500/10" : ""
-                      }`}
+                      className="hover:bg-slate-700/30 transition-all duration-200 group"
                     >
-                      {access.bulkSend ? (
-                      <td className="px-4 py-4">
-                        <input
-                          type="checkbox"
-                          checked={selectedIds.includes(c.id)}
-                          disabled={bulkSending}
-                          onChange={() => toggleSelected(c.id)}
-                          onClick={(e) => e.stopPropagation()}
-                          className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
-                        />
-                      </td>
-                      ) : null}
                       <td className="px-6 py-4">
                         <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                           {c.prenom} {c.nom}
@@ -967,10 +646,10 @@ const stats = {
                       </td>
                       <td className="px-6 py-4">
                         <select
-                          value={c.suivi_statut || ""}
+                          value={canonicalStatut(c.suivi_statut) || ""}
                           onChange={(e) => updateStatut(c.id, e.target.value)}
                           className={`text-xs px-3 py-2 rounded-lg font-bold border ${
-                            STATUT_COLORS[c.suivi_statut] ||
+                            STATUT_COLORS[canonicalStatut(c.suivi_statut)] ||
                             "bg-slate-700/20 text-slate-400 border-slate-600/30"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 cursor-pointer`}
                         >
@@ -1107,11 +786,6 @@ function ContactModal({
   const [emailAiNotes, setEmailAiNotes] = useState("");
   const [composingEmail, setComposingEmail] = useState(false);
   const [emailAiError, setEmailAiError] = useState("");
-  const [whatsappTemplate, setWhatsappTemplate] = useState(
-    "formules_presentation",
-  );
-  const [customWhatsappMessage, setCustomWhatsappMessage] = useState("");
-  const [sendingWhatsapp, setSendingWhatsapp] = useState(false);
   const [selectedFormule, setSelectedFormule] = useState(
     canonicalFormuleValue(getChosenFormule(contact)),
   );
@@ -1306,81 +980,7 @@ function ContactModal({
     }
   }
 
-  const whatsappNumber = whatsappNumberFromContact(contact);
-  const whatsappReady = isValidWhatsAppNumber(whatsappNumber);
-  const whatsappPreview = generateWhatsAppText(whatsappTemplate, contact, {
-    customMessage: customWhatsappMessage,
-  });
-  const whatsappLink = whatsappReady
-    ? buildWhatsAppLink(whatsappNumber, whatsappPreview)
-    : "";
-
-  async function sendSelectedWhatsapp() {
-    if (!access.whatsapp) return;
-    if (!whatsappReady) {
-      alert(t("dashboard.noPhoneOnContact"));
-      return;
-    }
-    if (whatsappTemplate === "custom" && !customWhatsappMessage.trim()) {
-      alert(t("dashboard.whatsappEmpty"));
-      return;
-    }
-
-    const templateLabel =
-      whatsappTemplate === "custom"
-        ? t("whatsappTemplate.custom")
-        : t(`emailTemplate.${whatsappTemplate}`);
-    const confirmed = confirm(
-      t("dashboard.sendWhatsappConfirm", {
-        template: templateLabel,
-        name: contact.prenom,
-      }),
-    );
-    if (!confirmed) return;
-
-    setSendingWhatsapp(true);
-    try {
-      const response = await authedFetch("/api/whatsapp/send", {
-        method: "POST",
-        body: JSON.stringify({
-          contactId: String(contact.id),
-          whatsappTemplate,
-          customMessage: customWhatsappMessage,
-        }),
-      });
-      const data = await response.json();
-
-      if (data.success) {
-        alert(`✅ ${t("dashboard.whatsappOk")}`);
-        fetchActions();
-        onContactUpdated?.();
-        return data;
-      }
-
-      if (data.code === "NOT_CONFIGURED" && data.waLink) {
-        const openAnyway = confirm(
-          t("dashboard.whatsappOpenFallback", {
-            error: data.message || data.error,
-          }),
-        );
-        if (openAnyway) {
-          window.open(data.waLink, "_blank", "noopener,noreferrer");
-        }
-        return null;
-      }
-
-      alert(
-        "❌ " + t("dashboard.whatsappFail", { error: data.message || data.error }),
-      );
-      return null;
-    } catch (error) {
-      console.error("❌ Erreur WhatsApp:", error);
-      alert("❌ " + t("dashboard.networkError", { error: error.message }));
-      return null;
-    } finally {
-      setSendingWhatsapp(false);
-    }
-  }
+  const statutKey = canonicalStatut(contact.suivi_statut);
 
   return (
     <div
@@ -1422,6 +1022,26 @@ function ContactModal({
         </div>
 
         <div className="p-8">
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              ⭐ {t("dashboard.currentStatus")}
+            </label>
+            <select
+              value={statutKey || ""}
+              onChange={(e) => onUpdateStatut(contact.id, e.target.value)}
+              className={`w-full px-5 py-3 bg-slate-700/50 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold ${
+                STATUT_COLORS[statutKey] || "border-slate-600/50"
+              }`}
+            >
+              <option value="">{t("dashboard.selectStatus")}</option>
+              {STATUTS.map((s) => (
+                <option key={s} value={s}>
+                  {STATUT_ICONS[s]} {t(`statut.${s}`)}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <AdminContactInfo
             contact={contact}
             startEditing={startEditing}
@@ -1430,6 +1050,20 @@ function ContactModal({
               fetchActions();
             }}
           />
+
+          <div className="mb-8 pb-8 border-b border-slate-700/50">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              📝 {t("dashboard.internalNotes")}
+            </label>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              onBlur={saveNotes}
+              rows={4}
+              className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 resize-none"
+              placeholder={t("dashboard.notesPlaceholder")}
+            />
+          </div>
 
           {/* Envoi d'email */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -1567,83 +1201,11 @@ function ContactModal({
             <p className="text-xs text-slate-500 mt-3">
               {emailTemplate === "formules_presentation" &&
                 t("dashboard.emailHintFormules")}
-              {emailTemplate === "relance_1" &&
-                t("dashboard.emailHintRelance1")}
-              {emailTemplate === "relance_2" &&
-                t("dashboard.emailHintRelance2")}
+              {emailTemplate === "relance_formules" &&
+                t("dashboard.emailHintRelanceFormules")}
               {emailTemplate === "custom" && t("dashboard.emailHintCustom")}
             </p>
           </div>
-
-          {access.whatsapp ? (
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📱 {t("dashboard.whatsappSection")}
-            </label>
-            <div className="flex flex-col md:flex-row gap-3">
-              <select
-                value={whatsappTemplate}
-                onChange={(e) => setWhatsappTemplate(e.target.value)}
-                className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all duration-300 font-semibold cursor-pointer"
-              >
-                {WHATSAPP_TEMPLATE_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.value === "custom"
-                      ? t("whatsappTemplate.custom")
-                      : t(`emailTemplate.${option.value}`)}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="button"
-                onClick={sendSelectedWhatsapp}
-                disabled={sendingWhatsapp || !whatsappReady}
-                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-              >
-                {sendingWhatsapp
-                  ? `⏳ ${t("sending")}`
-                  : `📤 ${t("dashboard.sendWhatsapp")}`}
-              </button>
-              <button
-                type="button"
-                disabled={!whatsappReady || !whatsappPreview}
-                onClick={() => {
-                  if (whatsappLink) {
-                    window.open(whatsappLink, "_blank", "noopener,noreferrer");
-                  }
-                }}
-                className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-              >
-                💬 {t("dashboard.openWhatsapp")}
-              </button>
-            </div>
-            {whatsappTemplate === "custom" ? (
-              <textarea
-                value={customWhatsappMessage}
-                onChange={(e) => setCustomWhatsappMessage(e.target.value)}
-                placeholder={t("dashboard.whatsappCustomPlaceholder")}
-                rows={5}
-                className="mt-3 w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all duration-300 resize-none"
-              />
-            ) : null}
-            {whatsappPreview ? (
-              <pre className="mt-3 whitespace-pre-wrap text-xs text-slate-300 bg-slate-900/50 border border-slate-700/50 rounded-xl p-4 max-h-40 overflow-y-auto">
-                {whatsappPreview}
-              </pre>
-            ) : null}
-            <p className="text-xs text-slate-500 mt-3">
-              {!whatsappReady
-                ? t("dashboard.noPhoneOnContact")
-                : whatsappTemplate === "formules_presentation"
-                  ? t("dashboard.whatsappHintFormules")
-                  : whatsappTemplate === "relance_1"
-                    ? t("dashboard.whatsappHintRelance1")
-                    : whatsappTemplate === "relance_2"
-                      ? t("dashboard.whatsappHintRelance2")
-                      : t("dashboard.whatsappHintCustom")}
-            </p>
-          </div>
-          ) : null}
 
           {/* Formule + déblocage espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -1710,7 +1272,7 @@ function ContactModal({
                 <button
                   type="button"
                   onClick={() =>
-                    onUpdateStatut(contact.id, "choix_des_formules")
+                    onUpdateStatut(contact.id, "formules_présentées")
                   }
                   className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
                 >
@@ -1763,40 +1325,6 @@ function ContactModal({
           </div>
 
           <AdminStudentFiles contactId={contact.id} />
-
-          {/* Statut Selector */}
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              ⭐ {t("dashboard.currentStatus")}
-            </label>
-            <select
-              value={contact.suivi_statut || ""}
-              onChange={(e) => onUpdateStatut(contact.id, e.target.value)}
-              className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold"
-            >
-              <option value="">{t("dashboard.selectStatus")}</option>
-              {STATUTS.map((s) => (
-                <option key={s} value={s}>
-                  {STATUT_ICONS[s]} {t(`statut.${s}`)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Notes Admin */}
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📝 {t("dashboard.internalNotes")}
-            </label>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              onBlur={saveNotes}
-              rows={4}
-              className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 resize-none"
-              placeholder={t("dashboard.notesPlaceholder")}
-            />
-          </div>
 
           {/* Ajouter une action */}
           <form
@@ -1862,10 +1390,9 @@ function ContactModal({
                     >
                       <div className="flex justify-between items-start mb-2">
                         <span className="font-bold text-blue-300">
-                          {actionType?.icon}{" "}
-                          {actionType
-                            ? t(`action.${actionType.value}`)
-                            : action.action}
+                          {actionType?.icon || "•"}{" "}
+                          {translatedOrRaw(t, "action", action.action) ||
+                            action.action}
                         </span>
                         <span className="text-xs text-slate-500 font-medium">
                           {action.created_at

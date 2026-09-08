@@ -218,19 +218,19 @@ export const WHATSAPP_TEMPLATES = {
   formules_presentation: {
     action: "whatsapp_formules",
     description: "WhatsApp formules d'accompagnement envoyé",
-    status: "choix_des_formules",
+    status: "formules_présentées",
     generateText: (contact) => generateFormulesText(contact),
   },
   relance_1: {
     action: "relance_1",
     description: "Relance 1 WhatsApp envoyée — formulaire à remplir",
-    status: "relance_1_envoyée",
+    status: "relance_en_cours",
     generateText: (contact) => generateRelance1Text(contact),
   },
   relance_2: {
     action: "relance_2",
     description: "Relance 2 WhatsApp envoyée — confirmation d'intérêt",
-    status: "relance_2_envoyée",
+    status: "relance_en_cours",
     generateText: (contact) => generateRelance2Text(contact),
   },
   formule_confirmee: {
