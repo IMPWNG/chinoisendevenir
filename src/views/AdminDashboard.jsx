@@ -37,6 +37,7 @@ import {
   STATUT_COLORS,
   STATUT_ICONS,
   canonicalStatut,
+  toStoredStatut,
 } from "../lib/suiviStatuts";
 
 async function authedFetch(path, options = {}) {
@@ -202,7 +203,7 @@ export default function AdminDashboard() {
       const { error } = await adminSupabase
         .from("contacts")
         .update({
-          suivi_statut: newStatut,
+          suivi_statut: toStoredStatut(newStatut),
           updated_at: new Date().toISOString(),
         })
         .eq("id", id);

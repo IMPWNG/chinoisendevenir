@@ -17,6 +17,7 @@ import {
   getAdminEmailAllowlist,
   resolveAdminRole,
 } from "./adminRoles";
+import { toStoredStatut } from "./suiviStatuts";
 
 export const STUDENT_DOCUMENT_BUCKET = "student-documents";
 export const STUDENT_DOCUMENT_FOLDER = "document-requis";
@@ -251,7 +252,7 @@ export async function ensureStudentContact(admin, user, extras = {}) {
   const insertPayload = {
     email,
     source: "espace_etudiant",
-    suivi_statut: "bienvenue_envoyé",
+    suivi_statut: toStoredStatut("bienvenue_envoyé"),
     created_at: new Date().toISOString(),
   };
   if (prenom) insertPayload.prenom = prenom;

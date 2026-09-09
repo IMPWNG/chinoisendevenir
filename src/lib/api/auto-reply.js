@@ -13,7 +13,7 @@ import {
 } from "../emailLayout.js";
 import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice } from "../formules.js";
 import { applyCorsHeaders } from "../httpSecurity.js";
-import { shouldAdvanceStatus } from "../suiviStatuts.js";
+import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -354,13 +354,14 @@ async function updateContactStatus(contactId, newStatus) {
   console.log("\n🔄 === MISE À JOUR STATUT ===");
   console.log(`Contact ID: ${contactId}`);
   console.log(`Nouveau statut: ${newStatus}`);
+  const storedStatus = toStoredStatut(newStatus);
 
   const payloads = [
     {
-      suivi_statut: newStatus,
+      suivi_statut: storedStatus,
       updated_at: new Date().toISOString(),
     },
-    { suivi_statut: newStatus },
+    { suivi_statut: storedStatus },
   ];
 
   try {

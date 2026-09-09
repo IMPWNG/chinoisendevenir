@@ -69,6 +69,15 @@ export const LEGACY_STATUT_MAP = {
   prospect_à_qualifier: "a_qualifier",
 };
 
+// Postgres still checks the old vocabulary. Canonical names that are not in
+// that CHECK must be stored as their legacy equivalent.
+export const CANONICAL_TO_STORED_STATUT = {
+  bienvenue_envoyé: "mail_bienvenue_envoyé",
+  a_qualifier: "prospect_à_qualifier",
+  formules_présentées: "choix_des_formules",
+  relance_en_cours: "relance_1_envoyée",
+};
+
 export const STATUS_RANK = {
   nouveau_prospect: 0,
   bienvenue_envoyé: 1,
@@ -145,6 +154,12 @@ export function canonicalStatut(value) {
   if (LEGACY_STATUT_MAP[statut]) return LEGACY_STATUT_MAP[statut];
   if (SUIVI_STATUTS.includes(statut)) return statut;
   return statut;
+}
+
+export function toStoredStatut(value) {
+  const canonical = canonicalStatut(value);
+  if (!canonical) return canonical;
+  return CANONICAL_TO_STORED_STATUT[canonical] || canonical;
 }
 
 export function shouldAdvanceStatus(currentStatus, nextStatus) {

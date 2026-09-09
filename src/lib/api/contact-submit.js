@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { CONTACT_FROM, INBOUND_REPLY_TO } from "../emailConfig.js";
 import { wrapEmailHtml, withEtudeChineSubject } from "../emailLayout.js";
 import { applyCorsHeaders, getClientIp, rateLimit } from "../httpSecurity.js";
-import { canonicalStatut, EARLY_STATUSES } from "../suiviStatuts.js";
+import { canonicalStatut, EARLY_STATUSES, toStoredStatut } from "../suiviStatuts.js";
 import { isValidPhone } from "../contactForm.js";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
@@ -229,7 +229,7 @@ export default async function handler(req, res) {
       !currentStatut ||
       EARLY_STATUSES.has(currentStatut)
     ) {
-      profilePayload.suivi_statut = "bienvenue_envoyé";
+      profilePayload.suivi_statut = toStoredStatut("bienvenue_envoyé");
     }
 
     let contact = existing;
@@ -284,7 +284,9 @@ export default async function handler(req, res) {
             .status(409)
             .json({ error: "Cet email existe déjà", code: "duplicate" });
         }
-        return res.status(500).json({ error: "Erreur insertion contact" });
+        return res.status(500).json({
+          error: "Impossible d'enregistrer votre demande. Réessayez dans un instant.",
+        });
       }
 
       contact = created;
