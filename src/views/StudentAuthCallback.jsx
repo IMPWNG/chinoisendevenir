@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { studentSupabase } from "../lib/supabase";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
 export default function StudentAuthCallback() {
   const router = useRouter();
-  const [message, setMessage] = useState("Connexion en cours...");
+  const { t } = useSiteI18n();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const finishLogin = async () => {
@@ -36,17 +38,19 @@ export default function StudentAuthCallback() {
 
         router.replace("/espace-etudiant");
       } catch (error) {
-        setMessage(error.message || "Connexion impossible");
+        setMessage(error.message || t("student.callbackFail"));
       }
     };
 
     finishLogin();
-  }, [router]);
+  }, [router, t]);
 
   return (
     <div className="app app-page-fill is-centered">
       <div className="landing-form-section">
-        <p className="landing-section-subtitle">{message}</p>
+        <p className="landing-section-subtitle">
+          {message || t("student.callbackLoading")}
+        </p>
       </div>
     </div>
   );

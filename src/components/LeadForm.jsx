@@ -1,29 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
-
-// ✅ Liste standardisée des domaines d'études
-const DOMAINES_ETUDES = [
-  "Informatique / IA / Data Science",
-  "Ingénierie / Génie civil",
-  "Génie électrique / Énergie",
-  "Génie mécanique",
-  "Aérospatial",
-  "Architecture",
-  "Commerce / Business",
-  "Commerce international",
-  "Management / Gestion",
-  "Marketing digital",
-  "Banque / Finance / Assurance",
-  "Droit",
-  "Science politique",
-  "Sciences pharmaceutiques",
-  "Agriculture",
-  "Hydrologie",
-  "Langues",
-  "Autre",
-];
+import { useSiteI18n } from "../context/SiteI18nContext";
+import { STUDY_DOMAIN_VALUE_BY_INDEX } from "../i18n/site";
+import {
+  DIPLOMA_VALUES,
+  isValidAge,
+  isValidEmail,
+  isValidPhone,
+  normalizeEmail,
+  parseAge,
+  withCurrentOption,
+} from "../lib/contactForm";
 
 const EMPTY_FORM = {
   prenom: "",
@@ -40,13 +29,29 @@ const EMPTY_FORM = {
   notes_admin: "",
 };
 
+const OTHER_DOMAIN_VALUE = "Autre";
+
+const BUDGET_VALUES = [
+  ["<5000", "lt5000"],
+  ["5000-10000", "5000-10000"],
+  ["10000-20000", "10000-20000"],
+  [">20000", "gt20000"],
+];
+const INTAKE_VALUES = [
+  "septembre_2026",
+  "mars_2027",
+  "septembre_2027",
+  "flexible",
+];
+
 const LeadForm = ({
-  t,
   lockedEmail,
   initialValues,
   onSuccess,
   embedded = false,
 }) => {
+  const { t, dict } = useSiteI18n();
+  const domainLabels = dict.form.domains;
   const [formData, setFormData] = useState({
     ...EMPTY_FORM,
     ...initialValues,
@@ -55,46 +60,65 @@ const LeadForm = ({
 
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
+  const [serverError, setServerError] = useState("");
+  const formRef = useRef(null);
+
+  const diplomaOptions = withCurrentOption(
+    DIPLOMA_VALUES,
+    formData.dernier_diplome,
+  );
+  const budgetOptionValues = withCurrentOption(
+    BUDGET_VALUES.map(([value]) => value),
+    formData.budget,
+  );
+  const intakeOptions = withCurrentOption(INTAKE_VALUES, formData.date_rentree);
+
+  const scrollToFirstError = () => {
+    requestAnimationFrame(() => {
+      const field = formRef.current?.querySelector(".landing-error-msg");
+      field
+        ?.closest(".landing-form-group")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  };
 
   const validate = () => {
     const newErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[+]?[\d\s()-]{8,20}$/;
+    const prenom = String(formData.prenom || "").trim();
+    const nom = String(formData.nom || "").trim();
+    const pays = String(formData.pays || "").trim();
+    const email = String(formData.email || "").trim();
+    const phone = String(formData.phone || "").trim();
+    const precision = String(formData.domaine_etudes_precision || "").trim();
 
-    if (!formData.prenom.trim()) newErrors.prenom = t.form_error_required;
-    if (!formData.nom.trim()) newErrors.nom = t.form_error_required;
+    if (!prenom) newErrors.prenom = t("form.required");
+    if (!nom) newErrors.nom = t("form.required");
 
     if (!lockedEmail) {
-      if (!formData.email.trim()) {
-        newErrors.email = t.form_error_required;
-      } else if (!emailRegex.test(formData.email)) {
-        newErrors.email = t.form_error_email;
+      if (!email) {
+        newErrors.email = t("form.required");
+      } else if (!isValidEmail(email)) {
+        newErrors.email = t("form.errorEmail");
       }
     }
 
-    if (formData.phone && !phoneRegex.test(formData.phone)) {
-      newErrors.phone = t.form_error_phone;
+    if (phone && !isValidPhone(phone)) {
+      newErrors.phone = t("form.errorPhone");
     }
 
-    if (
-      formData.age &&
-      (isNaN(formData.age) || formData.age < 15 || formData.age > 60)
-    ) {
-      newErrors.age = t.form_error_age;
+    if (!isValidAge(formData.age)) {
+      newErrors.age = t("form.errorAge");
     }
 
-    if (!formData.pays.trim()) newErrors.pays = t.form_error_required;
+    if (!pays) newErrors.pays = t("form.required");
     if (!formData.dernier_diplome)
-      newErrors.dernier_diplome = t.form_error_required;
+      newErrors.dernier_diplome = t("form.required");
 
     if (!formData.domaine_etudes)
-      newErrors.domaine_etudes = t.form_error_required;
+      newErrors.domaine_etudes = t("form.required");
 
-    if (
-      formData.domaine_etudes === "Autre" &&
-      !formData.domaine_etudes_precision.trim()
-    ) {
-      newErrors.domaine_etudes_precision = t.form_error_required;
+    if (formData.domaine_etudes === OTHER_DOMAIN_VALUE && !precision) {
+      newErrors.domaine_etudes_precision = t("form.required");
     }
 
     setErrors(newErrors);
@@ -111,14 +135,17 @@ const LeadForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    setServerError("");
+    if (!validate()) {
+      scrollToFirstError();
+      return;
+    }
 
     setStatus("submitting");
 
-    // Si "Autre" est choisi, on envoie la précision comme valeur finale
     const domaineFinal =
-      formData.domaine_etudes === "Autre"
-        ? formData.domaine_etudes_precision.trim()
+      formData.domaine_etudes === OTHER_DOMAIN_VALUE
+        ? String(formData.domaine_etudes_precision || "").trim()
         : formData.domaine_etudes;
 
     try {
@@ -128,35 +155,39 @@ const LeadForm = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prenom: formData.prenom.trim(),
-          nom: formData.nom.trim(),
-          age: formData.age ? parseInt(formData.age, 10) : null,
-          email: lockedEmail || formData.email.trim().toLowerCase(),
-          phone: formData.phone.trim() || null,
-          pays: formData.pays.trim(),
+          prenom: String(formData.prenom || "").trim(),
+          nom: String(formData.nom || "").trim(),
+          age: parseAge(formData.age),
+          email: lockedEmail || normalizeEmail(formData.email),
+          phone: String(formData.phone || "").trim() || null,
+          pays: String(formData.pays || "").trim(),
           dernier_diplome: formData.dernier_diplome || null,
           domaine_etudes: domaineFinal,
           budget: formData.budget || null,
           date_rentree: formData.date_rentree || null,
-          notes_admin: formData.notes_admin.trim() || null,
+          notes_admin: String(formData.notes_admin || "").trim() || null,
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         if (data.code === "duplicate") {
           setStatus("duplicate");
           setTimeout(() => setStatus("idle"), 3000);
+        } else if (data.code === "rate_limit" || response.status === 429) {
+          setStatus("error");
+          setServerError(t("form.errorRateLimit"));
+          setTimeout(() => setStatus("idle"), 5000);
         } else {
           console.error("❌ Erreur:", data.error);
           setStatus("error");
-          setTimeout(() => setStatus("idle"), 3000);
+          setServerError(data.error || t("form.error"));
+          setTimeout(() => setStatus("idle"), 4000);
         }
         return;
       }
 
-      // ✅ Succès
       setStatus("success");
       setFormData({
         ...EMPTY_FORM,
@@ -169,7 +200,8 @@ const LeadForm = ({
     } catch (err) {
       console.error("❌ Erreur fetch:", err);
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      setServerError(t("form.error"));
+      setTimeout(() => setStatus("idle"), 4000);
     }
   };
 
@@ -177,30 +209,34 @@ const LeadForm = ({
     <>
         {status === "success" && (
           <div className="landing-alert landing-alert-success">
-            ✅ {t.form_success}{" "}
+            ✅ {t("form.success")}{" "}
             {!embedded ? (
               <Link href="/espace-etudiant/connexion">
-                Créer mon espace étudiant
+                {t("form.createSpace")}
               </Link>
             ) : null}
           </div>
         )}
         {status === "error" && (
           <div className="landing-alert landing-alert-error">
-            ❌ {t.form_error}
+            ❌ {serverError || t("form.error")}
           </div>
         )}
         {status === "duplicate" && (
           <div className="landing-alert landing-alert-warning">
-            ⚠️ {t.form_error_duplicate}
+            ⚠️ {t("form.duplicate")}
           </div>
         )}
 
-        <form className="landing-form" onSubmit={handleSubmit} noValidate>
-          {/* Prénom + Nom */}
+        <form
+          ref={formRef}
+          className="landing-form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <div className="landing-form-row">
             <div className="landing-form-group">
-              <label>{t.form_firstname} *</label>
+              <label>{t("form.firstname")} *</label>
               <input
                 type="text"
                 name="prenom"
@@ -215,7 +251,7 @@ const LeadForm = ({
             </div>
 
             <div className="landing-form-group">
-              <label>{t.form_lastname} *</label>
+              <label>{t("form.lastname")} *</label>
               <input
                 type="text"
                 name="nom"
@@ -230,10 +266,9 @@ const LeadForm = ({
             </div>
           </div>
 
-          {/* Email + Téléphone */}
           <div className="landing-form-row">
             <div className="landing-form-group">
-              <label>{t.form_email} *</label>
+              <label>{t("form.email")} *</label>
               <input
                 type="email"
                 name="email"
@@ -249,7 +284,7 @@ const LeadForm = ({
             </div>
 
             <div className="landing-form-group">
-              <label>{t.form_phone}</label>
+              <label>{t("form.phone")}</label>
               <input
                 type="tel"
                 name="phone"
@@ -264,10 +299,9 @@ const LeadForm = ({
             </div>
           </div>
 
-          {/* Âge + Pays */}
           <div className="landing-form-row">
             <div className="landing-form-group">
-              <label>{t.form_age}</label>
+              <label>{t("form.age")}</label>
               <input
                 type="number"
                 name="age"
@@ -284,7 +318,7 @@ const LeadForm = ({
             </div>
 
             <div className="landing-form-group">
-              <label>{t.form_country} *</label>
+              <label>{t("form.country")} *</label>
               <input
                 type="text"
                 name="pays"
@@ -299,22 +333,23 @@ const LeadForm = ({
             </div>
           </div>
 
-          {/* Diplôme + Domaine */}
           <div className="landing-form-row">
             <div className="landing-form-group">
-              <label>{t.form_level} *</label>
+              <label>{t("form.level")} *</label>
               <select
                 name="dernier_diplome"
                 value={formData.dernier_diplome}
                 onChange={handleChange}
                 className={errors.dernier_diplome ? "error" : ""}
               >
-                <option value="">-- Sélectionner --</option>
-                <option value="bac">Baccalauréat</option>
-                <option value="licence">Licence</option>
-                <option value="master">Master</option>
-                <option value="doctorat">Doctorat</option>
-                <option value="autre">Autre</option>
+                <option value="">{t("form.select")}</option>
+                {diplomaOptions.map((value) => (
+                  <option key={value} value={value}>
+                    {DIPLOMA_VALUES.includes(value)
+                      ? t(`form.diplomas.${value}`)
+                      : value}
+                  </option>
+                ))}
               </select>
               {errors.dernier_diplome && (
                 <span className="landing-error-msg">
@@ -324,17 +359,17 @@ const LeadForm = ({
             </div>
 
             <div className="landing-form-group">
-              <label>{t.form_field} *</label>
+              <label>{t("form.field")} *</label>
               <select
                 name="domaine_etudes"
                 value={formData.domaine_etudes}
                 onChange={handleChange}
                 className={errors.domaine_etudes ? "error" : ""}
               >
-                <option value="">-- Sélectionner --</option>
-                {DOMAINES_ETUDES.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
+                <option value="">{t("form.select")}</option>
+                {STUDY_DOMAIN_VALUE_BY_INDEX.map((value, index) => (
+                  <option key={value} value={value}>
+                    {domainLabels[index] || value}
                   </option>
                 ))}
               </select>
@@ -344,15 +379,14 @@ const LeadForm = ({
                 </span>
               )}
 
-              {/* Champ conditionnel si "Autre" est sélectionné */}
-              {formData.domaine_etudes === "Autre" && (
+              {formData.domaine_etudes === OTHER_DOMAIN_VALUE && (
                 <>
                   <input
                     type="text"
                     name="domaine_etudes_precision"
                     value={formData.domaine_etudes_precision}
                     onChange={handleChange}
-                    placeholder="Précisez votre domaine"
+                    placeholder={t("form.otherFieldPlaceholder")}
                     className={errors.domaine_etudes_precision ? "error" : ""}
                     style={{ marginTop: "8px" }}
                   />
@@ -366,61 +400,65 @@ const LeadForm = ({
             </div>
           </div>
 
-          {/* Budget + Date rentrée */}
           <div className="landing-form-row">
             <div className="landing-form-group">
-              <label>{t.form_budget}</label>
+              <label>{t("form.budget")}</label>
               <select
                 name="budget"
                 value={formData.budget}
                 onChange={handleChange}
               >
-                <option value="">-- Sélectionner --</option>
-                <option value="<5000">Moins de 5 000 $</option>
-                <option value="5000-10000">5 000 - 10 000 $</option>
-                <option value="10000-20000">10 000 - 20 000 $</option>
-                <option value=">20000">Plus de 20 000 $</option>
+                <option value="">{t("form.select")}</option>
+                {budgetOptionValues.map((value) => {
+                  const known = BUDGET_VALUES.find(([item]) => item === value);
+                  return (
+                    <option key={value} value={value}>
+                      {known ? t(`form.budgets.${known[1]}`) : value}
+                    </option>
+                  );
+                })}
               </select>
             </div>
 
             <div className="landing-form-group">
-              <label>{t.form_date_rentree}</label>
+              <label>{t("form.intake")}</label>
               <select
                 name="date_rentree"
                 value={formData.date_rentree}
                 onChange={handleChange}
               >
-                <option value="">-- Sélectionner --</option>
-                <option value="septembre_2026">Septembre 2026</option>
-                <option value="mars_2027">Mars 2027</option>
-                <option value="septembre_2027">Septembre 2027</option>
-                <option value="flexible">Flexible</option>
+                <option value="">{t("form.select")}</option>
+                {intakeOptions.map((value) => (
+                  <option key={value} value={value}>
+                    {INTAKE_VALUES.includes(value)
+                      ? t(`form.intakes.${value}`)
+                      : value}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
-          {/* Message */}
           <div className="landing-form-group">
-            <label>{t.form_message}</label>
+            <label>{t("form.message")}</label>
             <textarea
               name="notes_admin"
               rows="4"
               value={formData.notes_admin}
               onChange={handleChange}
-              placeholder="Parlez-nous de votre projet d'études..."
+              placeholder={t("form.messagePlaceholder")}
               className="resize-none"
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             className="landing-btn landing-btn-primary landing-btn-full"
             disabled={status === "submitting"}
           >
             {status === "submitting"
-              ? "⏳ " + t.form_submitting
-              : t.form_submit}
+              ? "⏳ " + t("form.submitting")
+              : t("form.submit")}
           </button>
         </form>
     </>
@@ -433,8 +471,8 @@ const LeadForm = ({
   return (
     <section id="lead-form" className="landing-form-section">
       <div className="container">
-        <h2 className="landing-section-title">{t.form_title}</h2>
-        <p className="landing-section-subtitle">{t.form_subtitle}</p>
+        <h2 className="landing-section-title">{t("form.title")}</h2>
+        <p className="landing-section-subtitle">{t("form.subtitle")}</p>
         {formBody}
       </div>
     </section>

@@ -9,14 +9,21 @@ import StudentMatching from "../components/StudentMatching";
 import StudentChineseMatching from "../components/StudentChineseMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
 import StudentVisaDocuments from "../components/StudentVisaDocuments";
-import { fr } from "../i18n/fr";
 import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
+import { useSiteI18n } from "../context/SiteI18nContext";
+import { STUDY_DOMAIN_VALUE_BY_INDEX } from "../i18n/site";
+import {
+  BUDGET_VALUES,
+  DIPLOMA_VALUES,
+  INTAKE_VALUES,
+  withCurrentOption,
+} from "../lib/contactForm";
 import {
   DOMAINES_ETUDES,
+  diplomaLevelFromStudent,
   getDisplayedStepIndex,
   getRequiredStudentDocuments,
-  getSchoolDocumentsIntro,
   getVisibleStudentSteps,
   studentCanAccessVisaDocuments,
 } from "../lib/studentProgress";
@@ -47,8 +54,23 @@ async function studentFetch(path, options = {}) {
   return data;
 }
 
+function translatedOption(t, prefix, value) {
+  const path = `${prefix}.${value}`;
+  const translated = t(path);
+  return translated === path ? value : translated;
+}
+
+const BUDGET_LABEL_KEYS = {
+  "<5000": "lt5000",
+  ">20000": "gt20000",
+};
+
+function budgetLabel(t, value) {
+  return translatedOption(t, "form.budgets", BUDGET_LABEL_KEYS[value] || value);
+}
+
 export default function StudentDashboard() {
-  const t = fr;
+  const { t, dict } = useSiteI18n();
   const { user, signOut } = useAuth();
   const [profile, setProfile] = useState(null);
   const [matching, setMatching] = useState(null);
@@ -83,6 +105,12 @@ export default function StudentDashboard() {
   const missingCount = docsToShow.filter(
     (doc) => doc.status === "missing",
   ).length;
+  const diplomaOptions = withCurrentOption(
+    DIPLOMA_VALUES,
+    profile?.dernier_diplome,
+  );
+  const budgetOptions = withCurrentOption(BUDGET_VALUES, profile?.budget);
+  const intakeOptions = withCurrentOption(INTAKE_VALUES, profile?.date_rentree);
 
   const loadProfile = async ({ silent = false } = {}) => {
     if (!silent) setLoading(true);
@@ -121,7 +149,7 @@ export default function StudentDashboard() {
         body: JSON.stringify(profile),
       });
       setProfile(data.profile);
-      setMessage({ type: "success", text: "Vos informations ont été enregistrées." });
+      setMessage({ type: "success", text: t("student.saved") });
       await loadProfile({ silent: true });
     } catch (err) {
       setMessage({ type: "error", text: err.message });
@@ -148,7 +176,7 @@ export default function StudentDashboard() {
       setRequiredDocuments(data.requiredDocuments || []);
       setAdminDocuments(data.adminDocuments || []);
       setSelectedFiles((prev) => ({ ...prev, [docKey]: null }));
-      setMessage({ type: "success", text: "Document envoyé avec succès." });
+      setMessage({ type: "success", text: t("student.docSent") });
     } catch (err) {
       setMessage({ type: "error", text: err.message });
     } finally {
@@ -178,10 +206,10 @@ export default function StudentDashboard() {
         <Navigation />
         <section className="landing-form-section">
           <div className="container">
-            <p className="landing-section-subtitle">Chargement de votre dossier...</p>
+            <p className="landing-section-subtitle">{t("student.loadingFile")}</p>
           </div>
         </section>
-        <Footer t={t} />
+        <Footer />
       </div>
     );
   }
@@ -198,20 +226,23 @@ export default function StudentDashboard() {
               className="landing-btn landing-btn-primary"
               onClick={handleLogout}
             >
-              Se déconnecter
+              {t("student.logout")}
             </button>
           </div>
         </section>
-        <Footer t={t} />
+        <Footer />
       </div>
     );
   }
 
+  const diplomaLevel = diplomaLevelFromStudent(profile?.dernier_diplome);
+  const docsIntroKey =
+    diplomaLevel === "doctorat" ? "master" : diplomaLevel || "autre";
   const subtitle = !hasForm
-    ? "Aucun dossier ne correspond à cet email. Complétez le formulaire pour continuer."
+    ? t("student.noFile")
     : unlocked
-      ? "Consultez vos informations, mettez à jour votre profil et suivez votre dossier."
-      : "Votre dossier est bien enregistré. Une formule sera débloquée par Chinois en Devenir.";
+      ? t("student.unlockedSubtitle")
+      : t("student.lockedSubtitle");
 
   return (
     <div className="app app-page-fill">
@@ -220,9 +251,9 @@ export default function StudentDashboard() {
         <div className="container">
           <div className="student-toolbar student-toolbar-wide">
             <div>
-              <span className="landing-hero-badge">Espace étudiant</span>
+              <span className="landing-hero-badge">{t("student.space")}</span>
               <h1 className="landing-section-title is-left">
-                Bonjour {profile?.prenom || ""}
+                {t("student.hello", { name: profile?.prenom || "" })}
               </h1>
               <p className="landing-section-subtitle is-left">{subtitle}</p>
             </div>
@@ -231,7 +262,7 @@ export default function StudentDashboard() {
               className="landing-btn landing-btn-secondary"
               onClick={handleLogout}
             >
-              Se déconnecter
+              {t("student.logout")}
             </button>
           </div>
 
@@ -244,14 +275,11 @@ export default function StudentDashboard() {
 
           {!hasForm ? (
             <div className="student-card student-card-wide">
-              <h2 className="card-title">Complétez votre projet</h2>
+              <h2 className="card-title">{t("student.completeTitle")}</h2>
               <p className="card-subtitle">
-                Connecté avec {user?.email}. Utilisez cet email : s'il a déjà
-                été renseigné dans le formulaire, votre dossier sera associé
-                automatiquement.
+                {t("student.completeText", { email: user?.email })}
               </p>
               <LeadForm
-                t={t}
                 embedded
                 lockedEmail={user?.email || ""}
                 initialValues={{
@@ -286,15 +314,14 @@ export default function StudentDashboard() {
                 />
               ) : null}
               <form className="student-card student-card-wide" onSubmit={handleSave}>
-                <h2 className="card-title">Mes informations</h2>
+                <h2 className="card-title">{t("student.infoTitle")}</h2>
                 <p className="card-subtitle">
-                  Connecté avec {user?.email}. L'adresse email ne peut pas être
-                  modifiée ici.
+                  {t("student.infoSubtitle", { email: user?.email })}
                 </p>
 
                 <div className="landing-form-row">
                   <div className="landing-form-group">
-                    <label htmlFor="student-prenom">Prénom *</label>
+                    <label htmlFor="student-prenom">{t("form.firstname")} *</label>
                     <input
                       id="student-prenom"
                       name="prenom"
@@ -304,7 +331,7 @@ export default function StudentDashboard() {
                     />
                   </div>
                   <div className="landing-form-group">
-                    <label htmlFor="student-nom">Nom *</label>
+                    <label htmlFor="student-nom">{t("form.lastname")} *</label>
                     <input
                       id="student-nom"
                       name="nom"
@@ -317,11 +344,11 @@ export default function StudentDashboard() {
 
                 <div className="landing-form-row">
                   <div className="landing-form-group">
-                    <label htmlFor="student-email">Email</label>
+                    <label htmlFor="student-email">{t("form.email")}</label>
                     <input id="student-email" value={profile.email} disabled />
                   </div>
                   <div className="landing-form-group">
-                    <label htmlFor="student-phone">Téléphone</label>
+                    <label htmlFor="student-phone">{t("form.phone")}</label>
                     <input
                       id="student-phone"
                       name="phone"
@@ -333,7 +360,7 @@ export default function StudentDashboard() {
 
                 <div className="landing-form-row">
                   <div className="landing-form-group">
-                    <label htmlFor="student-age">Âge</label>
+                    <label htmlFor="student-age">{t("form.age")}</label>
                     <input
                       id="student-age"
                       type="number"
@@ -345,7 +372,7 @@ export default function StudentDashboard() {
                     />
                   </div>
                   <div className="landing-form-group">
-                    <label htmlFor="student-pays">Pays *</label>
+                    <label htmlFor="student-pays">{t("form.country")} *</label>
                     <input
                       id="student-pays"
                       name="pays"
@@ -358,7 +385,7 @@ export default function StudentDashboard() {
 
                 <div className="landing-form-row">
                   <div className="landing-form-group">
-                    <label htmlFor="student-diplome">Dernier diplôme</label>
+                    <label htmlFor="student-diplome">{t("form.level")}</label>
                     <select
                       id="student-diplome"
                       name="dernier_diplome"
@@ -366,16 +393,18 @@ export default function StudentDashboard() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">-- Sélectionner --</option>
-                      <option value="bac">Baccalauréat</option>
-                      <option value="licence">Licence</option>
-                      <option value="master">Master</option>
-                      <option value="doctorat">Doctorat</option>
-                      <option value="autre">Autre</option>
+                      <option value="">{t("form.select")}</option>
+                      {diplomaOptions.map((value) => (
+                        <option key={value} value={value}>
+                          {DIPLOMA_VALUES.includes(value)
+                            ? t(`form.diplomas.${value}`)
+                            : value}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="landing-form-group">
-                    <label htmlFor="student-domaine">Domaine d'études</label>
+                    <label htmlFor="student-domaine">{t("form.field")}</label>
                     <select
                       id="student-domaine"
                       name="domaine_etudes"
@@ -383,16 +412,16 @@ export default function StudentDashboard() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">-- Sélectionner --</option>
+                      <option value="">{t("form.select")}</option>
                       {profile.domaine_etudes &&
                       !DOMAINES_ETUDES.includes(profile.domaine_etudes) ? (
                         <option value={profile.domaine_etudes}>
                           {profile.domaine_etudes}
                         </option>
                       ) : null}
-                      {DOMAINES_ETUDES.map((domaine) => (
+                      {STUDY_DOMAIN_VALUE_BY_INDEX.map((domaine, index) => (
                         <option key={domaine} value={domaine}>
-                          {domaine}
+                          {dict.form.domains[index] || domaine}
                         </option>
                       ))}
                     </select>
@@ -401,33 +430,35 @@ export default function StudentDashboard() {
 
                 <div className="landing-form-row">
                   <div className="landing-form-group">
-                    <label htmlFor="student-budget">Budget annuel estimé</label>
+                    <label htmlFor="student-budget">{t("form.budget")}</label>
                     <select
                       id="student-budget"
                       name="budget"
                       value={profile.budget}
                       onChange={handleChange}
                     >
-                      <option value="">-- Sélectionner --</option>
-                      <option value="<5000">Moins de 5 000 $</option>
-                      <option value="5000-10000">5 000 - 10 000 $</option>
-                      <option value="10000-20000">10 000 - 20 000 $</option>
-                      <option value=">20000">Plus de 20 000 $</option>
+                      <option value="">{t("form.select")}</option>
+                      {budgetOptions.map((value) => (
+                        <option key={value} value={value}>
+                          {budgetLabel(t, value)}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="landing-form-group">
-                    <label htmlFor="student-rentree">Rentrée souhaitée</label>
+                    <label htmlFor="student-rentree">{t("form.intake")}</label>
                     <select
                       id="student-rentree"
                       name="date_rentree"
                       value={profile.date_rentree}
                       onChange={handleChange}
                     >
-                      <option value="">-- Sélectionner --</option>
-                      <option value="septembre_2026">Septembre 2026</option>
-                      <option value="mars_2027">Mars 2027</option>
-                      <option value="septembre_2027">Septembre 2027</option>
-                      <option value="flexible">Flexible</option>
+                      <option value="">{t("form.select")}</option>
+                      {intakeOptions.map((value) => (
+                        <option key={value} value={value}>
+                          {translatedOption(t, "form.intakes", value)}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -437,18 +468,22 @@ export default function StudentDashboard() {
                   className="landing-btn landing-btn-primary"
                   disabled={saving}
                 >
-                  {saving ? "Enregistrement..." : "Enregistrer mes informations"}
+                  {saving ? t("student.saving") : t("student.saveInfo")}
                 </button>
               </form>
+
 
               {!unlocked ? (
                 <StudentFormules currentFormule={profile.formule || ""} />
               ) : (
                 <>
                   <div className="student-card student-card-wide">
-                    <h2 className="card-title">Avancement de votre dossier</h2>
+                    <h2 className="card-title">{t("student.progressTitle")}</h2>
                     <p className="card-subtitle">
-                      Étape {currentStep + 1} sur {visibleSteps.length}
+                      {t("student.progressSubtitle", {
+                        current: currentStep + 1,
+                        total: visibleSteps.length,
+                      })}
                     </p>
                     <div
                       className={`student-progress${
@@ -471,9 +506,13 @@ export default function StudentDashboard() {
                             <div className="student-step-icon">{step.icon}</div>
                             <div className="student-step-label">
                               {index < currentStep ? "✓ " : ""}
-                              {step.label}
+                              {formuleNumber <= 1 && step.key === "consultation"
+                                ? t("student.steps.consultation.short")
+                                : t(`student.steps.${step.key}.label`)}
                             </div>
-                            <div className="student-step-desc">{step.description}</div>
+                            <div className="student-step-desc">
+                              {t(`student.steps.${step.key}.description`)}
+                            </div>
                           </div>
                         );
                       })}
@@ -492,20 +531,25 @@ export default function StudentDashboard() {
                   {access.documents || showVisaDocs ? (
                     <>
                       <div className="student-card student-card-wide">
-                        <h2 className="card-title">Documents à fournir</h2>
+                        <h2 className="card-title">{t("student.docsTitle")}</h2>
                         {access.documents ? (
                           <>
                             <h3 className="doc-school-title">
                               <span>🏫</span>
-                              Documents pour l'école
+                              {t("student.schoolDocs")}
                             </h3>
                             <p className="card-subtitle">
-                              {getSchoolDocumentsIntro(profile?.dernier_diplome)}
+                              {t(`student.docsIntro.${docsIntroKey}`)}
                             </p>
                             <p className="card-subtitle">
                               {missingCount > 0
-                                ? `${missingCount} document${missingCount > 1 ? "s" : ""} manquant${missingCount > 1 ? "s" : ""}. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).`
-                                : "Tous les documents demandés ont été reçus."}
+                                ? t(
+                                    missingCount > 1
+                                      ? "student.missingCountPlural"
+                                      : "student.missingCount",
+                                    { count: missingCount },
+                                  )
+                                : t("student.allReceived")}
                             </p>
 
                             <div className="doc-list">
@@ -519,19 +563,22 @@ export default function StudentDashboard() {
                                     <div className="doc-row-main">
                                       <div className="doc-row-title">
                                         <span>{doc.icon}</span>
-                                        {doc.label}
+                                        {dict.student.docsCatalog[doc.key]?.label || doc.label}
                                         <span
                                           className={
                                             missing ? "doc-badge-missing" : "doc-badge-ok"
                                           }
                                         >
-                                          {missing ? "Manquant" : "Reçu"}
+                                          {missing ? t("student.missing") : t("student.received")}
                                         </span>
                                       </div>
-                                      <p className="doc-row-desc">{doc.description}</p>
+                                      <p className="doc-row-desc">
+                                        {dict.student.docsCatalog[doc.key]?.description ||
+                                          doc.description}
+                                      </p>
                                       {doc.file ? (
                                         <p className="doc-row-file">
-                                          Fichier actuel : <strong>{doc.file.name}</strong>
+                                          {t("student.currentFile")} <strong>{doc.file.name}</strong>
                                         </p>
                                       ) : null}
                                     </div>
@@ -558,10 +605,10 @@ export default function StudentDashboard() {
                                           }
                                         >
                                           {uploadingKey === doc.key
-                                            ? "Envoi..."
+                                            ? t("student.sending")
                                             : doc.file
-                                              ? "Remplacer"
-                                              : "Envoyer"}
+                                              ? t("student.replace")
+                                              : t("student.send")}
                                         </button>
                                         {doc.file ? (
                                           <button
@@ -569,7 +616,7 @@ export default function StudentDashboard() {
                                             className="landing-btn landing-btn-secondary"
                                             onClick={() => handleDownload(doc.file.path)}
                                           >
-                                            Télécharger
+                                            {t("student.download")}
                                           </button>
                                         ) : null}
                                       </div>
@@ -581,7 +628,7 @@ export default function StudentDashboard() {
                           </>
                         ) : (
                           <p className="card-subtitle">
-                            Préparez les pièces nécessaires à votre demande de visa étudiant.
+                            {t("student.visaPrep")}
                           </p>
                         )}
 
@@ -592,13 +639,13 @@ export default function StudentDashboard() {
 
                       {access.documents ? (
                         <div className="student-card student-card-wide">
-                          <h2 className="card-title">Documents fournis par Chinois en Devenir</h2>
+                          <h2 className="card-title">{t("student.adminDocsTitle")}</h2>
                           <p className="card-subtitle">
-                            Fichiers transmis par Chinois en Devenir pour votre dossier.
+                            {t("student.adminDocsSubtitle")}
                           </p>
                           {adminDocuments.length === 0 ? (
                             <div className="landing-alert landing-alert-warning">
-                              Aucun document n'a encore été envoyé par l'équipe.
+                              {t("student.noAdminDocs")}
                             </div>
                           ) : (
                             <div className="doc-list">
@@ -608,7 +655,7 @@ export default function StudentDashboard() {
                                     <div className="doc-row-title">
                                       <span>📄</span>
                                       {doc.name}
-                                      <span className="doc-badge-ok">Reçu</span>
+                                      <span className="doc-badge-ok">{t("student.received")}</span>
                                     </div>
                                   </div>
                                   <button
@@ -616,7 +663,7 @@ export default function StudentDashboard() {
                                     className="landing-btn landing-btn-secondary"
                                     onClick={() => handleDownload(doc.path)}
                                   >
-                                    Télécharger
+                                    {t("student.download")}
                                   </button>
                                 </div>
                               ))}
@@ -632,7 +679,7 @@ export default function StudentDashboard() {
           )}
         </div>
       </section>
-      <Footer t={t} />
+      <Footer />
     </div>
   );
 }

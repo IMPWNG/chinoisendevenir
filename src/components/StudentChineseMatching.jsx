@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
-function ScoreBar({ points, max }) {
+function ScoreBar({ points, max, emptyLabel }) {
   if (points == null || !max) {
-    return <span className="student-meter-empty">à préciser</span>;
+    return <span className="student-meter-empty">{emptyLabel}</span>;
   }
   const pct = Math.max(0, Math.min(100, Math.round((points / max) * 100)));
   return (
@@ -14,7 +15,7 @@ function ScoreBar({ points, max }) {
   );
 }
 
-function SchoolCard({ school, open, onToggle }) {
+function SchoolCard({ school, open, onToggle, t }) {
   return (
     <article
       className={`student-uni-full is-${school.categoryKey}${
@@ -28,7 +29,7 @@ function SchoolCard({ school, open, onToggle }) {
         </div>
         <div className="student-uni-full-aside">
           {school.best_match ? (
-            <span className="student-uni-best">Meilleur alignement</span>
+            <span className="student-uni-best">{t("student.matching.bestFit")}</span>
           ) : null}
           <span className={`student-uni-stamp is-${school.categoryKey}`}>
             {school.category}
@@ -41,7 +42,11 @@ function SchoolCard({ school, open, onToggle }) {
         {(school.breakdown || []).map((row) => (
           <div key={row.key} className="student-meter-row">
             <span>{row.label}</span>
-            <ScoreBar points={row.points} max={row.max} />
+            <ScoreBar
+              points={row.points}
+              max={row.max}
+              emptyLabel={t("student.matching.toSpecify")}
+            />
           </div>
         ))}
       </div>
@@ -50,7 +55,7 @@ function SchoolCard({ school, open, onToggle }) {
         <div className="student-uni-full-body">
           {school.why?.length ? (
             <div>
-              <p className="student-uni-kicker">Pourquoi cette école</p>
+              <p className="student-uni-kicker">{t("student.matching.whySchool")}</p>
               <ul>
                 {school.why.map((line) => (
                   <li key={line}>{line}</li>
@@ -60,7 +65,7 @@ function SchoolCard({ school, open, onToggle }) {
           ) : null}
           {school.vigilance?.length ? (
             <div>
-              <p className="student-uni-kicker">À confirmer</p>
+              <p className="student-uni-kicker">{t("student.matching.toConfirm")}</p>
               <ul>
                 {school.vigilance.map((line) => (
                   <li key={line}>{line}</li>
@@ -69,19 +74,21 @@ function SchoolCard({ school, open, onToggle }) {
             </div>
           ) : null}
           <p className="student-uni-facts">
-            Frais : {school.cost?.label || "à confirmer auprès de l’école"}
+            {t("student.matching.fees")}{" "}
+            {school.cost?.label || t("student.matching.schoolFeesFallback")}
             <br />
-            Rentrée : {school.intake}
+            {t("student.matching.intake")} {school.intake}
           </p>
         </div>
       ) : (
-        <p className="student-uni-more">Voir le détail</p>
+        <p className="student-uni-more">{t("student.matching.seeDetail")}</p>
       )}
     </article>
   );
 }
 
 export default function StudentChineseMatching({ chineseMatching, formuleNumber }) {
+  const { t } = useSiteI18n();
   const view = chineseMatching?.student_view;
   const schools = view?.schools || [];
   const [openId, setOpenId] = useState(null);
@@ -96,12 +103,10 @@ export default function StudentChineseMatching({ chineseMatching, formuleNumber 
       <div className="student-card student-card-wide student-bilan-sheet">
         <header className="student-bilan-head">
           <div className="student-bilan-head-copy">
-            <p className="student-bilan-kicker">Année de langue</p>
-            <h2 className="student-bilan-title">Étude du chinois en Chine</h2>
+            <p className="student-bilan-kicker">{t("student.matching.languageYear")}</p>
+            <h2 className="student-bilan-title">{t("student.matching.chineseStudy")}</h2>
             <p className="student-bilan-lede">
-              Les écoles de langue correspondant à votre ville, votre budget et
-              votre rentrée apparaîtront ici dès qu’elles auront été
-              sélectionnées.
+              {t("student.matching.chineseNotReady")}
             </p>
           </div>
         </header>
@@ -113,8 +118,8 @@ export default function StudentChineseMatching({ chineseMatching, formuleNumber 
     <div className="student-card student-card-wide student-bilan-sheet student-report">
       <header className="student-bilan-head">
         <div className="student-bilan-head-copy">
-          <p className="student-bilan-kicker">Année de langue</p>
-          <h2 className="student-bilan-title">Étude du chinois en Chine</h2>
+          <p className="student-bilan-kicker">{t("student.matching.languageYear")}</p>
+          <h2 className="student-bilan-title">{t("student.matching.chineseStudy")}</h2>
         </div>
       </header>
 
@@ -122,18 +127,18 @@ export default function StudentChineseMatching({ chineseMatching, formuleNumber 
         <p className="student-profile-blurb">{view.profile_blurb}</p>
         {view.criteria ? (
           <p className="student-profile-complete">
-            Ville : {view.criteria.city}
+            {t("student.matching.city")} {view.criteria.city}
             {" · "}
-            Budget : {view.criteria.budget}
+            {t("student.matching.budget")} {view.criteria.budget}
             {" · "}
-            Rentrée : {view.criteria.intake}
+            {t("student.matching.intake")} {view.criteria.intake}
           </p>
         ) : null}
       </section>
 
       {schools.length ? (
         <section className="student-report-block">
-          <h3 className="student-report-title">Écoles de langue retenues</h3>
+          <h3 className="student-report-title">{t("student.matching.schools")}</h3>
           <div className="student-uni-full-list">
             {schools.map((school) => {
               const key = school.id || school.name;
@@ -143,6 +148,7 @@ export default function StudentChineseMatching({ chineseMatching, formuleNumber 
                   school={school}
                   open={openId === key}
                   onToggle={() => setOpenId(openId === key ? null : key)}
+                  t={t}
                 />
               );
             })}
@@ -150,17 +156,13 @@ export default function StudentChineseMatching({ chineseMatching, formuleNumber 
         </section>
       ) : (
         <section className="student-report-block">
-          <h3 className="student-report-title">Écoles de langue retenues</h3>
-          <p className="student-report-copy">
-            Aucune école assez compatible n’a été retenue avec les données
-            actuelles. Précisez la ville, le budget ou la date de rentrée.
-          </p>
+          <h3 className="student-report-title">{t("student.matching.schools")}</h3>
+          <p className="student-report-copy">{t("student.matching.noSchools")}</p>
         </section>
       )}
 
       <p className="student-bilan-foot">
-        {view.disclaimer ||
-          "Aucune inscription, bourse ou visa n’est garantie."}
+        {view.disclaimer || t("student.matching.chineseDisclaimer")}
       </p>
     </div>
   );

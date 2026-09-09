@@ -1,10 +1,12 @@
+"use client";
+
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import { fr } from "../i18n/fr";
 import { SITE } from "../lib/seo";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
 function TermsOfServicePage() {
-  const t = fr;
+  const { t, dict } = useSiteI18n();
 
   return (
     <div className="app app-page-fill">
@@ -12,211 +14,129 @@ function TermsOfServicePage() {
 
       <section className="landing-programs">
         <div className="container max-w-4xl">
-          {/* Titre */}
           <div className="text-center mb-16">
-            <h1 className="landing-section-title">
-              Conditions d'Utilisation
-            </h1>
-            <p className="text-gray-600 text-sm">
-              Dernière mise à jour : Août 2026
-            </p>
+            <h1 className="landing-section-title">{t("terms.title")}</h1>
+            <p className="text-gray-600 text-sm">{t("legal.updated")}</p>
           </div>
 
-          {/* Contenu */}
           <div className="space-y-12">
-            {/* Section 1 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                1. Acceptation des Conditions
+                {t("terms.s1Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                En accédant et en utilisant le site web{" "}
-                <strong>chinoisendevenir.com</strong>, vous acceptez d'être lié
-                par ces conditions d'utilisation. Si vous n'acceptez pas ces
-                conditions, veuillez ne pas utiliser ce site.
-              </p>
+              <p className="text-gray-700 leading-relaxed">{t("terms.s1")}</p>
             </div>
 
-            {/* Section 2 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                2. Utilisation du Site
+                {t("terms.s2Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Vous acceptez d'utiliser ce site uniquement à des fins légales
-                et de ne pas l'utiliser d'une manière qui pourrait endommager,
-                désactiver, surcharger ou nuire au site.
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s2")}</p>
               <div className="space-y-3">
-                <h3 className="font-bold text-gray-900">Interdictions :</h3>
+                <h3 className="font-bold text-gray-900">{t("terms.s2Ban")}</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 ml-2">
-                  <li>Harcèlement ou intimidation d'autres utilisateurs</li>
-                  <li>Publication de contenu offensant ou illégal</li>
-                  <li>Tentative d'accès non autorisé au site</li>
-                  <li>Collecte de données sans autorisation</li>
-                  <li>Utilisation de robots ou d'outils d'automatisation</li>
+                  {dict.terms.s2Items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
 
-            {/* Section 3 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                3. Propriété Intellectuelle
+                {t("terms.s3Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Tout le contenu du site, y compris les textes, graphiques,
-                logos, images et logiciels, est la propriété de EtudierEnChine
-                ou de ses fournisseurs de contenu et est protégé par les lois
-                internationales sur les droits d'auteur.
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s3")}</p>
               <p className="text-gray-700 leading-relaxed">
-                <strong>Vous n'êtes pas autorisé à :</strong>
+                <strong>{t("terms.s3Ban")}</strong>
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 ml-2 mt-2">
-                <li>Reproduire ou modifier le contenu sans autorisation</li>
-                <li>Distribuer le contenu à des fins commerciales</li>
-                <li>Utiliser le contenu pour créer des œuvres dérivées</li>
+                {dict.terms.s3Items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </div>
 
-            {/* Section 4 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                4. Comptes Utilisateur
+                {t("terms.s4Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Si vous créez un compte sur notre site, vous êtes responsable de
-                :
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s4")}</p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 ml-2">
-                <li>Maintenir la confidentialité de vos identifiants</li>
-                <li>Vous déconnecter après chaque session</li>
-                <li>Notifier immédiatement tout accès non autorisé</li>
-                <li>Fournir des informations exactes et à jour</li>
+                {dict.terms.s4Items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </div>
 
-            {/* Section 5 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                5. Contenu Utilisateur
+                {t("terms.s5Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                En soumettant du contenu à notre site, vous accordez à
-                EtudierEnChine une licence non-exclusive, perpétuelle et
-                irrévocable pour utiliser, modifier, publier et distribuer ce
-                contenu.
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s5")}</p>
               <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
                 <p className="text-gray-700 text-sm">
-                  <strong>⚠️ Responsabilité :</strong> Vous garantissez que tout
-                  contenu que vous soumettez est original, ne viole pas les
-                  droits de tiers et n'est pas offensant.
+                  <strong>⚠️ {t("terms.s5Responsibility")}</strong> {t("terms.s5Note")}
                 </p>
               </div>
             </div>
 
-            {/* Section 6 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                6. Exclusion de Garantie
+                {t("terms.s6Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Ce site est fourni "tel quel" sans aucune garantie, explicite ou
-                implicite. Nous ne garantissons pas :
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s6")}</p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 ml-2">
-                <li>L'exactitude ou l'exhaustivité des informations</li>
-                <li>Le fonctionnement ininterrompu du site</li>
-                <li>L'absence d'erreurs ou de virus</li>
-                <li>Le respect de vos attentes spécifiques</li>
+                {dict.terms.s6Items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </div>
 
-            {/* Section 7 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                7. Limitation de Responsabilité
+                {t("terms.s7Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                En aucun cas, EtudierEnChine ne sera responsable des dommages
-                indirects, accidentels, spéciaux, consécutifs ou punitifs
-                découlant de votre utilisation ou de votre incapacité à utiliser
-                ce site, même si nous avons été informés de la possibilité de
-                tels dommages.
-              </p>
+              <p className="text-gray-700 leading-relaxed">{t("terms.s7")}</p>
             </div>
 
-            {/* Section 8 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                8. Liens Externes
+                {t("terms.s8Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Notre site peut contenir des liens vers des sites web externes.
-                Nous ne sommes pas responsables du contenu, de l'exactitude ou
-                des pratiques de ces sites externes.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                L'inclusion d'un lien n'implique pas notre approbation du site
-                lié.
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s8")}</p>
+              <p className="text-gray-700 leading-relaxed">{t("terms.s8b")}</p>
             </div>
 
-            {/* Section 9 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                9. Suspension de Service
+                {t("terms.s9Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Nous nous réservons le droit de suspendre ou de résilier l'accès
-                au site à tout moment, pour quelque raison que ce soit, y
-                compris la violation de ces conditions. Nous pouvons également
-                suspendre le service sans préavis en cas d'urgence ou de
-                problèmes techniques.
-              </p>
+              <p className="text-gray-700 leading-relaxed">{t("terms.s9")}</p>
             </div>
 
-            {/* Section 10 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                10. Modifications des Conditions
+                {t("terms.s10Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Nous pouvons modifier ces conditions à tout moment. Les
-                modifications entreront en vigueur immédiatement après leur
-                publication. Votre utilisation continue du site après la
-                publication des modifications constitue votre acceptation des
-                nouvelles conditions.
-              </p>
+              <p className="text-gray-700 leading-relaxed">{t("terms.s10")}</p>
             </div>
 
-            {/* Section 11 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                11. Droit Applicable
+                {t("terms.s11Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed">
-                Ces conditions d'utilisation sont régies par et construites
-                conformément aux lois applicables. Tout différend découlant de
-                ces conditions sera soumis à la juridiction exclusive des
-                tribunaux compétents.
-              </p>
+              <p className="text-gray-700 leading-relaxed">{t("terms.s11")}</p>
             </div>
 
-            {/* Section 12 */}
             <div className="bg-white p-8 rounded-xl shadow-md">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                12. Contact
+                {t("terms.s12Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Pour toute question concernant ces conditions d'utilisation,
-                veuillez nous contacter :
-              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">{t("terms.s12")}</p>
               <div className="bg-slate-50 p-6 rounded-lg space-y-2">
                 <p className="text-gray-900">
-                  <strong>Email :</strong>{" "}
+                  <strong>{t("legal.email")}</strong>{" "}
                   <a
                     href={`mailto:${SITE.email}`}
                     className="text-blue-600 hover:underline"
@@ -225,26 +145,22 @@ function TermsOfServicePage() {
                   </a>
                 </p>
                 <p className="text-gray-900">
-                  <strong>Site Web :</strong> chinoisendevenir.com
+                  <strong>{t("legal.website")}</strong> chinoisendevenir.com
                 </p>
               </div>
             </div>
           </div>
 
-          {/* CTA Acceptation */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-xl p-8 text-center text-white mt-16">
-            <p className="mb-4">
-              En utilisant notre site, vous acceptez ces conditions
-              d'utilisation
-            </p>
+            <p className="mb-4">{t("terms.accept")}</p>
             <a href="/" className="landing-btn landing-btn-accent">
-              ← Retour à l'accueil
+              {t("legal.back")}
             </a>
           </div>
         </div>
       </section>
 
-      <Footer t={t} />
+      <Footer />
     </div>
   );
 }

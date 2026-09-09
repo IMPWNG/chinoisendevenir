@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import { fr } from "../i18n/fr";
 import { useAuth } from "../context/AuthContext";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
 export default function StudentLogin() {
-  const t = fr;
+  const { t } = useSiteI18n();
   const router = useRouter();
   const { user, loading, signIn, signUp, resetPassword } = useAuth();
   const [mode, setMode] = useState("login");
@@ -47,14 +47,14 @@ export default function StudentLogin() {
       );
       if (error) {
         setStatus("error");
-        setMessage(error.message || "Email ou mot de passe incorrect.");
+        setMessage(error.message || t("student.errors.credentials"));
         return;
       }
 
       goToDashboard();
     } catch (err) {
       setStatus("error");
-      setMessage(err.message || "Une erreur est survenue.");
+      setMessage(err.message || t("student.errors.generic"));
     }
   };
 
@@ -65,13 +65,13 @@ export default function StudentLogin() {
 
     if (form.password.length < 8) {
       setStatus("error");
-      setMessage("Le mot de passe doit contenir au moins 8 caractères.");
+      setMessage(t("student.errors.passwordLength"));
       return;
     }
 
     if (form.password !== form.confirmPassword) {
       setStatus("error");
-      setMessage("Les mots de passe ne correspondent pas.");
+      setMessage(t("student.errors.passwordMatch"));
       return;
     }
 
@@ -85,8 +85,8 @@ export default function StudentLogin() {
         setStatus("error");
         setMessage(
           already
-            ? "Un compte existe déjà avec cet email. Connectez-vous."
-            : error.message || "Impossible de créer le compte.",
+            ? t("student.errors.exists")
+            : error.message || t("student.errors.createFail"),
         );
         if (already) setMode("login");
         return;
@@ -95,7 +95,7 @@ export default function StudentLogin() {
       goToDashboard();
     } catch (err) {
       setStatus("error");
-      setMessage(err.message || "Une erreur est survenue.");
+      setMessage(err.message || t("student.errors.generic"));
     }
   };
 
@@ -104,7 +104,7 @@ export default function StudentLogin() {
       <div className="app app-page-fill is-centered">
         <Navigation />
         <section className="landing-form-section">
-          <p className="landing-section-subtitle">Chargement de votre espace...</p>
+          <p className="landing-section-subtitle">{t("student.loading")}</p>
         </section>
       </div>
     );
@@ -115,14 +115,14 @@ export default function StudentLogin() {
       <Navigation />
       <section className="landing-form-section">
         <div className="container">
-          <span className="landing-hero-badge">Espace étudiant</span>
+          <span className="landing-hero-badge">{t("student.space")}</span>
           <h1 className="landing-section-title">
-            {mode === "login" ? "Connexion" : "Créer un compte"}
+            {mode === "login" ? t("student.login") : t("student.register")}
           </h1>
           <p className="landing-section-subtitle">
             {mode === "login"
-              ? "Connectez-vous avec l'email utilisé dans le formulaire."
-              : "Créez un compte avec votre email et un mot de passe. Utilisez la même adresse que sur le formulaire de projet."}
+              ? t("student.loginSubtitle")
+              : t("student.registerSubtitle")}
           </p>
 
           {status === "success" && (
@@ -142,7 +142,7 @@ export default function StudentLogin() {
                 setMessage("");
               }}
             >
-              Connexion
+              {t("student.login")}
             </button>
             <button
               type="button"
@@ -153,14 +153,14 @@ export default function StudentLogin() {
                 setMessage("");
               }}
             >
-              Créer un compte
+              {t("student.register")}
             </button>
           </div>
 
           {mode === "login" ? (
             <form className="landing-form landing-form-narrow" onSubmit={handleLogin}>
               <div className="landing-form-group">
-                <label htmlFor="login-email">Adresse e-mail *</label>
+                <label htmlFor="login-email">{t("form.email")} *</label>
                 <input
                   id="login-email"
                   type="email"
@@ -172,7 +172,7 @@ export default function StudentLogin() {
                 />
               </div>
               <div className="landing-form-group">
-                <label htmlFor="login-password">Mot de passe *</label>
+                <label htmlFor="login-password">{t("student.password")} *</label>
                 <input
                   id="login-password"
                   type="password"
@@ -187,7 +187,7 @@ export default function StudentLogin() {
                 className="landing-btn landing-btn-primary landing-btn-full"
                 disabled={status === "submitting"}
               >
-                {status === "submitting" ? "Connexion..." : "Se connecter"}
+                {status === "submitting" ? t("student.signingIn") : t("student.signIn")}
               </button>
               <button
                 type="button"
@@ -195,23 +195,21 @@ export default function StudentLogin() {
                 onClick={async () => {
                   if (!form.email) {
                     setStatus("error");
-                    setMessage("Entrez votre email pour réinitialiser le mot de passe.");
+                    setMessage(t("student.errors.resetEmail"));
                     return;
                   }
                   setStatus("submitting");
                   const { error } = await resetPassword(form.email.trim().toLowerCase());
                   if (error) {
                     setStatus("error");
-                    setMessage(error.message || "Impossible d'envoyer l'email.");
+                    setMessage(error.message || t("student.errors.resetFail"));
                     return;
                   }
                   setStatus("success");
-                  setMessage(
-                    "Un email de réinitialisation vous a été envoyé si un compte existe.",
-                  );
+                  setMessage(t("student.errors.resetSent"));
                 }}
               >
-                Mot de passe oublié ?
+                {t("student.forgot")}
               </button>
             </form>
           ) : (
@@ -220,7 +218,7 @@ export default function StudentLogin() {
               onSubmit={handleRegister}
             >
               <div className="landing-form-group">
-                <label htmlFor="register-email">Adresse e-mail *</label>
+                <label htmlFor="register-email">{t("form.email")} *</label>
                 <input
                   id="register-email"
                   type="email"
@@ -231,7 +229,7 @@ export default function StudentLogin() {
                 />
               </div>
               <div className="landing-form-group">
-                <label htmlFor="register-password">Mot de passe *</label>
+                <label htmlFor="register-password">{t("student.password")} *</label>
                 <input
                   id="register-password"
                   type="password"
@@ -243,7 +241,7 @@ export default function StudentLogin() {
                 />
               </div>
               <div className="landing-form-group">
-                <label htmlFor="register-confirm">Confirmer le mot de passe *</label>
+                <label htmlFor="register-confirm">{t("student.confirmPassword")} *</label>
                 <input
                   id="register-confirm"
                   type="password"
@@ -258,13 +256,15 @@ export default function StudentLogin() {
                 className="landing-btn landing-btn-primary landing-btn-full"
                 disabled={status === "submitting"}
               >
-                {status === "submitting" ? "Création..." : "Créer mon compte"}
+                {status === "submitting"
+                  ? t("student.creating")
+                  : t("student.createAccount")}
               </button>
             </form>
           )}
         </div>
       </section>
-      <Footer t={t} />
+      <Footer />
     </div>
   );
 }

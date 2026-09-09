@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
@@ -5,50 +7,14 @@ import FaqSection from "../components/FaqSection";
 import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
-import { fr } from "../i18n/fr";
+import { useSiteI18n } from "../context/SiteI18nContext";
 import {
-  EXTRA_FEES,
-  FORMULES,
-  PAYMENT_NOTE,
-  PROCESS_STEPS,
   displayFormuleFootnote,
   displayFormulePrice,
   getFormuleIncludeGroups,
+  localizeFormules,
 } from "../lib/formules";
 import { breadcrumbJsonLd, FAQS, faqJsonLd, serviceJsonLd } from "../lib/seo";
-
-const BREADCRUMBS = [
-  { name: "Accueil", path: "/" },
-  { name: "Tarifs", path: "/tarifs" },
-];
-
-const DISCLAIMERS = [
-  "Une admission dans une université",
-  "L'obtention d'une bourse",
-  "L'obtention d'un visa",
-  "L'acceptation dans une école de langue",
-  "La disponibilité d'un logement",
-];
-
-const CHOOSER = [
-  {
-    number: 1,
-    question: "Je veux d'abord apprendre le chinois",
-    detail: "École de langue, visa étudiant et première installation en Chine.",
-  },
-  {
-    number: 2,
-    question: "Mon projet universitaire est déjà clair",
-    detail:
-      "Recherche d'universités, dossier et suivi jusqu'aux réponses des établissements.",
-  },
-  {
-    number: 3,
-    question: "Je prépare la langue, puis l'université",
-    detail:
-      "Les deux accompagnements, un seul interlocuteur, 500 € d'économie.",
-  },
-];
 
 function IncludeList({ items }) {
   return (
@@ -63,7 +29,7 @@ function IncludeList({ items }) {
   );
 }
 
-function FormuleCard({ formule, featured }) {
+function FormuleCard({ formule, featured, t }) {
   const groups = getFormuleIncludeGroups(formule);
   const singleGroup = groups.length === 1;
 
@@ -71,14 +37,12 @@ function FormuleCard({ formule, featured }) {
     <article
       id={`formule-${formule.number}`}
       className={`relative flex flex-col rounded-2xl border bg-white p-6 shadow-lg h-full scroll-mt-28 ${
-        featured
-          ? "border-red-500 ring-2 ring-red-100"
-          : "border-slate-200"
+        featured ? "border-red-500 ring-2 ring-red-100" : "border-slate-200"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
-          Formule {formule.number}
+          {t("tarifs.planLabel", { n: formule.number })}
         </p>
         {formule.badge ? (
           <span
@@ -108,7 +72,7 @@ function FormuleCard({ formule, featured }) {
         </p>
       </div>
       <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-        {PAYMENT_NOTE}
+        {t("tarifs.paymentNote")}
       </p>
       {formule.savingsText ? (
         <p className="text-sm text-slate-700 mt-3 leading-relaxed bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2">
@@ -122,7 +86,7 @@ function FormuleCard({ formule, featured }) {
       {singleGroup ? (
         <>
           <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
-            Ce qui est inclus
+            {t("tarifs.included")}
           </p>
           <div className="flex-1">
             <IncludeList items={groups[0].items} />
@@ -131,15 +95,9 @@ function FormuleCard({ formule, featured }) {
       ) : (
         <div className="mt-6 flex-1">
           <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mb-3">
-            Ce qui est inclus
+            {t("tarifs.included")}
           </p>
-          <div
-            className={
-              featured
-                ? "grid md:grid-cols-3 gap-6"
-                : "space-y-5"
-            }
-          >
+          <div className={featured ? "grid md:grid-cols-3 gap-6" : "space-y-5"}>
             {groups.map((group) => (
               <div key={group.title}>
                 <p className="text-sm font-semibold text-slate-900 mb-2">
@@ -153,7 +111,7 @@ function FormuleCard({ formule, featured }) {
       )}
 
       <p className="text-xs font-bold uppercase tracking-wide text-slate-500 mt-6 mb-2">
-        Cette formule est idéale si
+        {t("tarifs.idealIf")}
       </p>
       <ul className="space-y-1.5 text-sm text-slate-600 mb-0">
         {formule.idealIf.map((item) => (
@@ -181,15 +139,20 @@ function FormuleCard({ formule, featured }) {
 }
 
 function TarifsPage() {
-  const t = fr;
-  const standaloneFormules = FORMULES.filter((formule) => !formule.featured);
-  const featuredFormule = FORMULES.find((formule) => formule.featured);
+  const { t, dict } = useSiteI18n();
+  const formules = localizeFormules(dict);
+  const standaloneFormules = formules.filter((formule) => !formule.featured);
+  const featuredFormule = formules.find((formule) => formule.featured);
+  const breadcrumbs = [
+    { name: t("breadcrumbs.home"), path: "/" },
+    { name: t("tarifs.crumb"), path: "/tarifs" },
+  ];
 
   return (
     <div className="app app-page-fill">
       <JsonLd
         data={[
-          breadcrumbJsonLd(BREADCRUMBS),
+          breadcrumbJsonLd(breadcrumbs),
           serviceJsonLd(),
           faqJsonLd(FAQS.tarifs),
         ]}
@@ -198,25 +161,19 @@ function TarifsPage() {
 
       <section className="landing-programs">
         <div className="container">
-          <PageBreadcrumbs items={BREADCRUMBS} />
-          <h1 className="landing-section-title">
-            Trois formules, selon là où vous en êtes
-          </h1>
-          <p className="landing-section-subtitle mb-10">
-            Année de chinois, admission universitaire, ou les deux. Chaque
-            formule est un accompagnement complet pour son objectif. La formule
-            complète : 2 000 € (500 € d'économie).
-          </p>
+          <PageBreadcrumbs items={breadcrumbs} />
+          <h1 className="landing-section-title">{t("tarifs.title")}</h1>
+          <p className="landing-section-subtitle mb-10">{t("tarifs.subtitle")}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            {CHOOSER.map((item) => {
-              const formule = FORMULES.find(
-                (entry) => entry.number === item.number,
+            {dict.tarifs.chooser.map((item, index) => {
+              const formule = formules.find(
+                (entry) => entry.number === index + 1,
               );
               return (
                 <a
-                  key={item.number}
-                  href={`#formule-${item.number}`}
+                  key={item.question}
+                  href={`#formule-${index + 1}`}
                   className={`rounded-2xl border p-5 transition-shadow hover:shadow-md ${
                     formule?.featured
                       ? "border-red-200 bg-red-50/70"
@@ -224,8 +181,8 @@ function TarifsPage() {
                   }`}
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
-                    Formule {item.number}
-                    {formule?.featured ? " · recommandée" : ""}
+                    {t("tarifs.planLabel", { n: index + 1 })}
+                    {formule?.featured ? ` · ${t("tarifs.recommended")}` : ""}
                   </p>
                   <p className="text-base font-bold text-slate-900 mt-2">
                     {item.question}
@@ -243,15 +200,14 @@ function TarifsPage() {
 
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-5 mb-12">
             <p className="text-sm font-bold uppercase tracking-wide text-emerald-800 mb-2">
-              L'économie de la formule complète
+              {t("tarifs.savingsTitle")}
             </p>
             <p className="text-slate-800 text-sm md:text-base leading-relaxed">
-              La formule 3 est à{" "}
+              {t("tarifs.savingsTextBefore")}{" "}
               <span className="font-bold text-emerald-800">
-                2 000 € (500 € d'économie)
+                {t("tarifs.savingsHighlight")}
               </span>
-              , avec jusqu'à 8 candidatures universitaires au lieu de 5, et un
-              suivi jusqu'au départ.
+              {t("tarifs.savingsTextAfter")}
             </p>
           </div>
 
@@ -261,13 +217,14 @@ function TarifsPage() {
                 key={formule.number}
                 formule={formule}
                 featured={false}
+                t={t}
               />
             ))}
           </div>
 
           {featuredFormule ? (
             <div className="mb-16">
-              <FormuleCard formule={featuredFormule} featured />
+              <FormuleCard formule={featuredFormule} featured t={t} />
             </div>
           ) : null}
 
@@ -293,23 +250,18 @@ function TarifsPage() {
               </div>
               <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-slate-900 mb-3">
-                  Les formules 1 et 2 restent le bon choix
+                  {t("tarifs.keep1and2Title")}
                 </h2>
-                <p className="text-slate-700 text-sm leading-relaxed mb-3">
-                  La formule complète n'est pas obligatoire. Elle est la plus
-                  cohérente si votre projet va de l'année de chinois jusqu'à
-                  l'université.
-                </p>
-                <p className="text-slate-700 text-sm leading-relaxed mb-3">
-                  Si vous voulez seulement une année de langue, la Formule 1
-                  couvre l'école, l'inscription et l'aide au visa étudiant.
-                </p>
-                <p className="text-slate-700 text-sm leading-relaxed">
-                  Si votre projet universitaire est déjà défini et que votre
-                  niveau de langue suffit, la Formule 2 vous accompagne jusqu'aux
-                  réponses des universités, sans payer pour une année de chinois
-                  dont vous n'avez pas besoin.
-                </p>
+                {dict.tarifs.keep1and2.map((paragraph, index) => (
+                  <p
+                    key={paragraph}
+                    className={`text-slate-700 text-sm leading-relaxed ${
+                      index < dict.tarifs.keep1and2.length - 1 ? "mb-3" : ""
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
           ) : null}
@@ -317,32 +269,24 @@ function TarifsPage() {
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Traduction et préparation des documents
+                {t("tarifs.translationTitle")}
               </h2>
               <p className="text-slate-700 text-sm leading-relaxed mb-3">
-                Nous vous aidons à identifier les documents qui doivent être
-                traduits et à préparer les versions nécessaires en anglais ou
-                en chinois, selon les exigences des universités ou des
-                autorités concernées.
+                {t("tarifs.translationP1")}
               </p>
               <p className="text-slate-700 text-sm leading-relaxed">
-                Les traductions officielles, certifiées, les légalisations,
-                authentifications et notarisation peuvent être facturées
-                séparément. Ces frais vous seront communiqués avant toute
-                commande.
+                {t("tarifs.translationP2")}
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Frais qui restent à votre charge
+                {t("tarifs.extraTitle")}
               </h2>
               <p className="text-slate-700 text-sm leading-relaxed mb-3">
-                Nos tarifs couvrent uniquement les services d'accompagnement et
-                de conseil. Certains frais supplémentaires peuvent rester à
-                votre charge, notamment :
+                {t("tarifs.extraIntro")}
               </p>
               <ul className="grid grid-cols-1 gap-1.5 text-sm text-slate-700">
-                {EXTRA_FEES.map((item) => (
+                {dict.tarifs.extraFees.map((item) => (
                   <li key={item}>• {item}</li>
                 ))}
               </ul>
@@ -351,10 +295,10 @@ function TarifsPage() {
 
           <div className="bg-slate-50 rounded-2xl border border-slate-200 p-8 mb-16">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">
-              Comment fonctionne l'accompagnement ?
+              {t("tarifs.howTitle")}
             </h2>
             <ol className="grid md:grid-cols-5 gap-4">
-              {PROCESS_STEPS.map((step, index) => (
+              {dict.tarifs.processSteps.map((step, index) => (
                 <li
                   key={step.title}
                   className="bg-white rounded-xl p-4 border border-slate-200"
@@ -369,50 +313,39 @@ function TarifsPage() {
                 </li>
               ))}
             </ol>
-            <p className="text-sm text-slate-600 mt-6">
-              Le paiement intervient après la première consultation
-              téléphonique et après validation de la formule. Aucune démarche
-              ne commence avant la confirmation de l'accompagnement.
-            </p>
+            <p className="text-sm text-slate-600 mt-6">{t("tarifs.howPay")}</p>
           </div>
 
           <div className="bg-amber-50 border-l-4 border-amber-500 rounded-xl p-6 mb-16">
             <h2 className="text-lg font-bold text-amber-950 mb-2">
-              Informations importantes
+              {t("tarifs.infoTitle")}
             </h2>
             <p className="text-amber-900 text-sm leading-relaxed mb-3">
-              Nous vous aidons à construire un dossier sérieux, cohérent et
-              conforme aux exigences des établissements. Cependant, nous ne
-              pouvons pas garantir :
+              {t("tarifs.infoIntro")}
             </p>
             <ul className="space-y-1 text-sm text-amber-900 mb-3">
-              {DISCLAIMERS.map((item) => (
+              {dict.tarifs.disclaimers.map((item) => (
                 <li key={item}>• {item}</li>
               ))}
             </ul>
             <p className="text-amber-900 text-sm leading-relaxed">
-              Les décisions finales appartiennent aux universités, aux
-              organismes de bourses, aux écoles de langue et aux autorités
-              compétentes.
+              {t("tarifs.infoOutro")}
             </p>
           </div>
 
           <PageCta
-            title="Vous ne savez pas encore quelle formule choisir ?"
-            subtitle="La première consultation sert à confirmer l'offre adaptée à votre projet. Le paiement n'intervient qu'après cet échange."
-            cta="Demander un échange téléphonique"
+            title={t("tarifs.ctaTitle")}
+            subtitle={t("tarifs.ctaSubtitle")}
+            cta={t("tarifs.cta")}
           />
 
           <div className="mt-16 max-w-4xl mx-auto">
-            <FaqSection
-              items={FAQS.tarifs}
-              title="Questions fréquentes sur l'accompagnement"
-            />
+            <FaqSection items={dict.faqs.tarifs} title={t("tarifs.faqTitle")} />
           </div>
         </div>
       </section>
 
-      <Footer t={t} />
+      <Footer />
     </div>
   );
 }

@@ -38,7 +38,7 @@ export function adminCapabilities(role) {
     universities: full,
     matching: full,
     whatsapp: false,
-    bulkSend: false,
+    bulkSend: full,
     deleteContacts: full,
   };
 }

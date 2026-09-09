@@ -1,6 +1,10 @@
 "use client";
 
-const Hero = ({ t }) => {
+import { useSiteI18n } from "../context/SiteI18nContext";
+
+const Hero = () => {
+  const { t } = useSiteI18n();
+
   const scrollToForm = () => {
     document
       .getElementById("lead-form")
@@ -10,18 +14,18 @@ const Hero = ({ t }) => {
   return (
     <section id="home" className="landing-hero">
       <div className="container">
-        <span className="landing-hero-badge">{t.hero_badge}</span>
-        <h1 className="landing-hero-title">{t.hero_title}</h1>
-        <p className="landing-hero-subtitle">{t.hero_subtitle}</p>
+        <span className="landing-hero-badge">{t("hero.badge")}</span>
+        <h1 className="landing-hero-title">{t("hero.title")}</h1>
+        <p className="landing-hero-subtitle">{t("hero.subtitle")}</p>
         <div className="landing-hero-actions">
           <button
             className="landing-btn landing-btn-primary"
             onClick={scrollToForm}
           >
-            {t.hero_cta_primary}
+            {t("hero.ctaPrimary")}
           </button>
           <a href="/tarifs" className="landing-btn landing-btn-secondary">
-            {t.hero_cta_secondary}
+            {t("hero.ctaSecondary")}
           </a>
         </div>
       </div>

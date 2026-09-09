@@ -1,95 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import FaqSection from "./FaqSection";
-import { FAQS } from "@/lib/seo";
-import { fr } from "@/i18n/fr";
-
-const WHY_CHINA = [
-  {
-    title: "Un système universitaire vaste",
-    text: "La Chine accueille des étudiants internationaux en licence, master, doctorat et année de langue, avec des formations en chinois ou en anglais.",
-  },
-  {
-    title: "Des bourses possibles, jamais automatiques",
-    text: "CSC, bourses d'université, de province ou de ville : un dossier solide peut réduire le coût des études, sans garantie de financement.",
-  },
-  {
-    title: "Un projet à préparer en amont",
-    text: "Admission, documents, langue, visa X1 ou X2 : venir faire ses études en Chine demande plusieurs mois de préparation.",
-  },
-];
-
-const HOW_STEPS = [
-  {
-    title: "Clarifier le projet",
-    text: "Domaine, niveau, langue d'enseignement et budget : on part de votre profil, pas d'une université au hasard.",
-    href: "/processus",
-  },
-  {
-    title: "Candidater",
-    text: "Dossier, traductions, lettres et suivi auprès des universités chinoises visées.",
-    href: "/etudier-en-chine",
-  },
-  {
-    title: "Financer si possible",
-    text: "On identifie les bourses réalistes, dont la CSC, sans promettre un résultat.",
-    href: "/bourses",
-  },
-  {
-    title: "Obtenir le visa étudiant",
-    text: "Après l'admission : JW201/JW202, visa X1 ou X2, puis installation en Chine.",
-    href: "/visa-etudiant-chine",
-  },
-];
-
-const SERVICES = [
-  {
-    title: fr.service_orientation_title,
-    description: fr.service_orientation_description,
-  },
-  {
-    title: fr.service_university_title,
-    description: fr.service_university_description,
-  },
-  {
-    title: fr.service_admission_title,
-    description: fr.service_admission_description,
-  },
-  {
-    title: fr.service_scholarship_title,
-    description: fr.service_scholarship_description,
-  },
-  {
-    title: fr.service_visa_title,
-    description: fr.service_visa_description,
-  },
-  {
-    title: fr.service_arrival_title,
-    description: fr.service_arrival_description,
-  },
-];
-
-const PROGRAMS = [
-  fr.programs_bachelor,
-  fr.programs_master,
-  fr.programs_phd,
-  fr.programs_language,
-  fr.programs_preparatory,
-  fr.programs_short_training,
-];
+import { useSiteI18n } from "@/context/SiteI18nContext";
 
 export default function HomeSeoContent() {
+  const { t, dict } = useSiteI18n();
+  const programs = dict.programs.list;
+  const [before, after] = t("programs.hesitate").split("{link}");
+
   return (
     <>
       <section className="landing-programs seo-home-block">
         <div className="container">
-          <h2 className="landing-section-title">Pourquoi étudier en Chine</h2>
-          <p className="landing-section-subtitle">
-            Étudier en Chine, ce n'est pas seulement « partir à l'étranger ».
-            C'est viser une université, une langue d'enseignement, un budget et
-            un visa, puis relier ces étapes dans le bon ordre.
-          </p>
+          <h2 className="landing-section-title">{t("home.whyTitle")}</h2>
+          <p className="landing-section-subtitle">{t("home.whySubtitle")}</p>
           <div className="grid md:grid-cols-3 gap-6">
-            {WHY_CHINA.map((item) => (
+            {dict.home.why.map((item) => (
               <article
                 key={item.title}
                 className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100"
@@ -108,19 +35,16 @@ export default function HomeSeoContent() {
 
       <section className="seo-home-alt">
         <div className="container">
-          <h2 className="landing-section-title">
-            Comment venir faire ses études en Chine
-          </h2>
+          <h2 className="landing-section-title">{t("home.howTitle")}</h2>
           <p className="landing-section-subtitle">
-            Le parcours type dure souvent 4 à 6 mois : orientation, admission,
-            bourse éventuelle, visa, puis départ.{" "}
+            {t("home.howSubtitle")}{" "}
             <Link href="/etudier-en-chine" className="seo-inline-link">
-              Lire le guide complet
+              {t("home.howLink")}
             </Link>
             .
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {HOW_STEPS.map((step, index) => (
+            {dict.home.how.map((step, index) => (
               <Link
                 key={step.title}
                 href={step.href}
@@ -137,10 +61,10 @@ export default function HomeSeoContent() {
 
       <section className="landing-programs seo-home-block">
         <div className="container">
-          <h2 className="landing-section-title">{fr.services_title}</h2>
-          <p className="landing-section-subtitle">{fr.services_subtitle}</p>
+          <h2 className="landing-section-title">{t("services.title")}</h2>
+          <p className="landing-section-subtitle">{t("services.subtitle")}</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((service) => (
+            {dict.services.items.map((service) => (
               <article
                 key={service.title}
                 className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100"
@@ -159,30 +83,29 @@ export default function HomeSeoContent() {
 
       <section className="seo-home-alt">
         <div className="container">
-          <h2 className="landing-section-title">{fr.programs_title}</h2>
-          <p className="landing-section-subtitle">{fr.programs_subtitle}</p>
+          <h2 className="landing-section-title">{t("programs.title")}</h2>
+          <p className="landing-section-subtitle">{t("programs.subtitle")}</p>
           <ul className="seo-program-pills">
-            {PROGRAMS.map((program) => (
+            {programs.map((program) => (
               <li key={program}>{program}</li>
             ))}
           </ul>
           <p className="text-center text-slate-600 mt-8 max-w-2xl mx-auto">
-            Vous hésitez encore ? Les{" "}
+            {before}
             <Link href="/tarifs" className="seo-inline-link">
-              formules d'accompagnement
+              {t("programs.formulasLink")}
             </Link>{" "}
-            aident à choisir une école de langue ou une université avant de
-            déposer un dossier.
+            {after}
           </p>
         </div>
       </section>
 
       <section className="landing-programs seo-home-block">
         <div className="container max-w-4xl">
-          <FaqSection items={FAQS.home} />
+          <FaqSection items={dict.faqs.home} title={t("home.faqTitle")} />
           <p className="text-center mt-8">
             <Link href="/faq" className="seo-inline-link">
-              Voir toutes les questions sur les études en Chine
+              {t("home.allFaqs")}
             </Link>
           </p>
         </div>

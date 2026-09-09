@@ -1,14 +1,20 @@
+"use client";
+
+import { useSiteI18n } from "../context/SiteI18nContext";
+
 export default function FaqSection({
   items,
-  title = "Questions fréquentes sur les études en Chine",
+  title,
   headingId = "faq-heading",
 }) {
+  const { t } = useSiteI18n();
+  const heading = title || t("home.faqTitle");
   if (!items?.length) return null;
 
   return (
     <section className="seo-faq" aria-labelledby={headingId}>
       <h2 id={headingId} className="seo-faq-title">
-        {title}
+        {heading}
       </h2>
       <div className="seo-faq-list">
         {items.map((faq) => (

@@ -1,4 +1,5 @@
 import { withEtudeChineSubject } from "./emailLayout.js";
+import { FORMULES, displayFormulePrice } from "./formules.js";
 
 const DEFAULT_SUBJECT = "Votre projet d'études en Chine";
 
@@ -287,6 +288,77 @@ function notesAskTutoiement(notes) {
   return /\b(tutoie|tutoiement|tutoyer)\b/i.test(String(notes || ""));
 }
 
+export const BULK_AI_TOPICS = {
+  langue_sans_diplome: {
+    title: "Formations de chinois sans diplôme / certificat de langue",
+    brief: `Sujet: proposer une formation pour apprendre le chinois en Chine (école de langue, année préparatoire) aux personnes qui n'ont pas de diplôme de langue ni de certificat (HSK, IELTS, TOEFL).
+
+Expliquer clairement:
+- Sans HSK, une licence ou un master enseigné en chinois est en général inaccessible.
+- Une année (ou un semestre) en école de langue en Chine est souvent le meilleur premier pas: immersion, visa étudiant, puis université ensuite.
+- Des programmes universitaires existent aussi en anglais, mais ils demandent en général IELTS ou TOEFL.
+- La formule 1 accompagne l'inscription en école de langue et le visa. La formule 3 combine année de chinois puis admission universitaire.
+
+Invitez à répondre pour préciser le niveau actuel et le calendrier. Ne promettez aucune admission.`,
+  },
+  annee_chinois: {
+    title: "Année de langue avant l'université",
+    brief: `Sujet: relancer les profils pour une année de chinois en Chine avant une candidature universitaire.
+
+Expliquer le parcours en deux temps (langue, puis université), l'intérêt pour le visa étudiant et le quotidien, et le lien avec la formule 1 ou 3. Pas de promesse d'admission.`,
+  },
+  bourses: {
+    title: "Bourses et financement",
+    brief: `Sujet: relancer au sujet des bourses pour étudier en Chine.
+
+Rappeler que les bourses ne sont pas automatiques, qu'un dossier sérieux et un projet cohérent aident, et que nous accompagnons la recherche d'options réalistes (formule 2 ou 3). Ne promettez aucun montant ni aucune attribution.`,
+  },
+  formules: {
+    title: "Présentation des formules",
+    brief: `Sujet: présenter les 3 formules d'accompagnement et demander laquelle correspond le mieux.
+
+Utilisez uniquement les tarifs et intitulés fournis dans les faits agence. Demandez une réponse par numéro de formule. Rappelez que le paiement n'intervient qu'après un premier échange.`,
+  },
+  custom: {
+    title: "Sujet libre",
+    brief: `Sujet libre: rédige à partir des notes admin et des profils sélectionnés. Reste factuel, utile, et dans le cadre des études en Chine.`,
+  },
+};
+
+export const BULK_AI_TOPIC_KEYS = Object.keys(BULK_AI_TOPICS);
+export const MAX_BULK_COMPOSE_CONTACTS = 40;
+
+function formuleFactsForPrompt() {
+  const lines = FORMULES.map((formule) => {
+    const price = displayFormulePrice(formule);
+    return `${formule.number}. ${formule.title} — ${price} — ${formule.audience || formule.subtitle || ""}`;
+  });
+  return `Faits agence (ne pas inventer d'autres tarifs ni d'autres formules):\n${lines.join("\n")}\nSite: https://chinoisendevenir.com/`;
+}
+
+function clipNotes(value, max = 180) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (!text) return "";
+  return text.length > max ? `${text.slice(0, max)}…` : text;
+}
+
+export function summarizeContactsForCompose(contacts = []) {
+  const list = Array.isArray(contacts) ? contacts.filter(Boolean) : [];
+  const shown = list.slice(0, 25);
+  const lines = shown.map((contact, index) => {
+    const name = [contact.prenom, contact.nom].filter(Boolean).join(" ") || "Sans nom";
+    const formule = String(contact.formule || "").trim() || "aucune formule";
+    const notes = clipNotes(contact.notes_admin);
+    return `${index + 1}. ${name} | diplôme: ${contact.dernier_diplome || "non renseigné"} | domaine: ${contact.domaine_etudes || "non renseigné"} | budget: ${contact.budget || "non renseigné"} | rentrée: ${contact.date_rentree || "non renseignée"} | statut: ${contact.suivi_statut || "—"} | formule: ${formule}${notes ? ` | notes: ${notes}` : ""}`;
+  });
+  const extra = list.length - shown.length;
+  if (extra > 0) lines.push(`… et ${extra} autre(s) profil(s) non détaillé(s).`);
+  return {
+    count: list.length,
+    text: lines.join("\n") || "Aucun profil.",
+  };
+}
+
 export async function composeEmailWithAi({ notes, contact } = {}) {
   const tutoyer = notesAskTutoiement(notes);
   const result = await mammouthChat({
@@ -310,6 +382,53 @@ L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
 Brief admin (à transformer en e-mail pro) :
 ${notes}`,
     temperature: 0.55,
+    maxTokens: 4000,
+    retries: 1,
+  });
+
+  if (!result.ok) return result;
+  return composeEmailFromParsed(result.json, result.text);
+}
+
+export async function composeBulkEmailWithAi({
+  notes = "",
+  topic = "custom",
+  contacts = [],
+} = {}) {
+  const topicKey = BULK_AI_TOPICS[topic] ? topic : "custom";
+  const topicDef = BULK_AI_TOPICS[topicKey];
+  const tutoyer = notesAskTutoiement(notes);
+  const summary = summarizeContactsForCompose(contacts);
+  const extraNotes = String(notes || "").trim();
+
+  const result = await mammouthChat({
+    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
+
+Tu rédiges UN seul e-mail de relance, envoyé tel quel à plusieurs étudiants. Ce n'est pas un mail personnalisé prénom par prénom.
+
+Le template HTML ajoute déjà « Bonjour {prénom}, » (prénom de chaque destinataire) et « Cordialement, L'équipe Chinois en Devenir ».
+- N'écris JAMAIS Bonjour, Madame, Monsieur, un prénom, un nom, ni Cordialement, ni la signature.
+- N'écris JAMAIS la liste des destinataires dans le mail.
+- Tutoiement: ${tutoyer ? "le brief demande le tutoiement : tutoie (tu / toi / ton)." : "vouvoie toujours (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
+
+Les profils ci-dessous servent à adapter le fond (diplôme, domaine, absence de certificat de langue, budget). Parle de façon générale (« si vous n'avez pas encore de HSK », « pour un projet de licence »), sans citer de personne.
+
+N'invente aucune université, aucun créneau, aucun tarif, aucune bourse chiffrée. Utilise uniquement les faits agence fournis.
+
+JSON uniquement, sans markdown :
+{"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
+
+L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
+    user: `${formuleFactsForPrompt()}
+
+${topicDef.brief}
+
+Notes admin (à intégrer si utiles) :
+${extraNotes || "(aucune note supplémentaire)"}
+
+Profils sélectionnés (${summary.count}) — ne pas les citer nommément dans l'e-mail :
+${summary.text}`,
+    temperature: 0.5,
     maxTokens: 4000,
     retries: 1,
   });

@@ -5,6 +5,7 @@ import { CONTACT_FROM, INBOUND_REPLY_TO } from "../emailConfig.js";
 import { wrapEmailHtml, withEtudeChineSubject } from "../emailLayout.js";
 import { applyCorsHeaders, getClientIp, rateLimit } from "../httpSecurity.js";
 import { canonicalStatut, EARLY_STATUSES } from "../suiviStatuts.js";
+import { isValidPhone } from "../contactForm.js";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -114,6 +115,7 @@ export default async function handler(req, res) {
     res.setHeader("Retry-After", String(limited.retryAfter));
     return res.status(429).json({
       error: "Trop de requêtes. Réessayez plus tard.",
+      code: "rate_limit",
     });
   }
 
@@ -158,7 +160,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Message trop long" });
     }
 
-    if (phone && String(phone).length > 30) {
+    if (phone && !isValidPhone(phone)) {
       return res.status(400).json({ error: "Téléphone invalide" });
     }
 

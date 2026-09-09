@@ -10,6 +10,7 @@ import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminCalendar from "../components/AdminCalendar";
+import AdminBulkEmail from "../components/AdminBulkEmail";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { useAdminAccess } from "../context/AdminAccessContext";
@@ -161,6 +162,7 @@ export default function AdminDashboard() {
   const [filterDomaine, setFilterDomaine] = useState("tous");
   const [selectedContact, setSelectedContact] = useState(null);
   const [editOnOpen, setEditOnOpen] = useState(false);
+  const [selectedIds, setSelectedIds] = useState([]);
   const [pays, setPays] = useState([]);
   const { signOut, user } = useAdminAuth();
   const router = useRouter();
@@ -187,6 +189,12 @@ export default function AdminDashboard() {
       setPays(paysUniques.sort());
     }
     setLoading(false);
+  };
+
+  const toggleSelected = (id) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
   };
 
   const updateStatut = async (id, newStatut) => {
@@ -575,6 +583,23 @@ const stats = {
           }}
         />
 
+        {access.bulkSend ? (
+          <AdminBulkEmail
+            contacts={contacts}
+            filteredContacts={filteredContacts}
+            selectedIds={selectedIds}
+            onSelectedIdsChange={setSelectedIds}
+            onContactStatus={(id, status) =>
+              setContacts((prev) =>
+                prev.map((c) =>
+                  c.id === id ? { ...c, suivi_statut: status } : c,
+                ),
+              )
+            }
+            onFinished={fetchContacts}
+          />
+        ) : null}
+
         {/* Table */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
           {loading ? (
@@ -596,6 +621,37 @@ const stats = {
               <table className="w-full">
                 <thead className="bg-slate-900/60 border-b border-slate-700/50">
                   <tr>
+                    {access.bulkSend ? (
+                      <th className="px-4 py-4 w-12">
+                        <input
+                          type="checkbox"
+                          checked={
+                            filteredContacts.length > 0 &&
+                            filteredContacts.every((c) =>
+                              selectedIds.includes(c.id),
+                            )
+                          }
+                          onChange={() => {
+                            const filteredIds = filteredContacts.map(
+                              (c) => c.id,
+                            );
+                            const allSelected = filteredIds.every((id) =>
+                              selectedIds.includes(id),
+                            );
+                            if (allSelected) {
+                              setSelectedIds((prev) =>
+                                prev.filter((id) => !filteredIds.includes(id)),
+                              );
+                              return;
+                            }
+                            setSelectedIds((prev) => [
+                              ...new Set([...prev, ...filteredIds]),
+                            ]);
+                          }}
+                          className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
+                        />
+                      </th>
+                    ) : null}
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
                       👤 {t("dashboard.colName")}
                     </th>
@@ -623,8 +679,21 @@ const stats = {
                   {filteredContacts.map((c) => (
                     <tr
                       key={c.id}
-                      className="hover:bg-slate-700/30 transition-all duration-200 group"
+                      className={`hover:bg-slate-700/30 transition-all duration-200 group ${
+                        selectedIds.includes(c.id) ? "bg-amber-500/10" : ""
+                      }`}
                     >
+                      {access.bulkSend ? (
+                        <td className="px-4 py-4">
+                          <input
+                            type="checkbox"
+                            checked={selectedIds.includes(c.id)}
+                            onChange={() => toggleSelected(c.id)}
+                            onClick={(e) => e.stopPropagation()}
+                            className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-500 focus:ring-amber-500/50 cursor-pointer"
+                          />
+                        </td>
+                      ) : null}
                       <td className="px-6 py-4">
                         <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                           {c.prenom} {c.nom}

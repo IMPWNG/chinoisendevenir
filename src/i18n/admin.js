@@ -87,7 +87,31 @@ export const adminTranslations = {
       bulkTitle: "Envoi groupé",
       bulkSelected: "{count} sélectionné(s)",
       bulkHint:
-        "Cochez des contacts, choisissez Email ou WhatsApp, puis envoyez une relance ou les formules.",
+        "Cochez des contacts. L'IA rédige une relance (chinois sans diplôme de langue, bourses, formules…). Vous relisez le brouillon, puis vous envoyez.",
+      bulkModeTemplate: "Modèle existant",
+      bulkModeAi: "Rédaction IA",
+      bulkAiTopicLabel: "Sujet de relance",
+      bulkAiTopic: {
+        langue_sans_diplome:
+          "Chinois — pas de diplôme / certificat de langue",
+        annee_chinois: "Année de langue avant l'université",
+        bourses: "Bourses et financement",
+        formules: "Présentation des formules",
+        custom: "Sujet libre (notes ci-dessous)",
+      },
+      bulkAiNotes: "Précisions (optionnel)",
+      bulkAiHint:
+        "Choisissez un sujet. L'IA s'appuie sur les profils cochés (diplôme, domaine, budget) pour rédiger un seul e-mail. Le prénom de chacun est ajouté automatiquement. Vous validez avant l'envoi.",
+      bulkAiPlaceholder:
+        "Ex. Insister sur l'école de langue si pas de HSK, proposer un appel cette semaine…",
+      bulkAiButton: "Rédiger le brouillon",
+      bulkValidateHint: "Brouillon prêt — relisez, corrigez si besoin, puis envoyez.",
+      bulkNeedDraft:
+        "Faites d'abord rédiger le brouillon par l'IA, puis validez-le avant d'envoyer.",
+      bulkTooMany: "40 destinataires maximum par envoi groupé.",
+      bulkConfirmAi:
+        "Envoyer ce brouillon validé à {count} personne(s) ?\n\nObjet : {template}\n\nLes emails partent un par un. Ne fermez pas la page.",
+      bulkPreviewName: "Prénom",
       bulkChannelEmail: "Email",
       bulkChannelWhatsapp: "WhatsApp",
       bulkProgress: "Envoi {current}/{total} — {name}",
@@ -535,7 +559,30 @@ export const adminTranslations = {
       bulkTitle: "Bulk send",
       bulkSelected: "{count} selected",
       bulkHint:
-        "Check contacts, choose Email or WhatsApp, then send a follow-up or the packages message.",
+        "Check contacts. AI drafts a follow-up (Chinese with no language certificate, scholarships, packages…). You review the draft, then send.",
+      bulkModeTemplate: "Existing template",
+      bulkModeAi: "AI draft",
+      bulkAiTopicLabel: "Follow-up topic",
+      bulkAiTopic: {
+        langue_sans_diplome: "Chinese — no language diploma / certificate",
+        annee_chinois: "Language year before university",
+        bourses: "Scholarships and funding",
+        formules: "Present the packages",
+        custom: "Free topic (notes below)",
+      },
+      bulkAiNotes: "Extra notes (optional)",
+      bulkAiHint:
+        "Pick a topic. AI uses the selected profiles (diploma, field, budget) to write one email. Each first name is added automatically. You approve it before sending.",
+      bulkAiPlaceholder:
+        "e.g. Stress language school if they have no HSK, offer a call this week…",
+      bulkAiButton: "Draft the email",
+      bulkValidateHint: "Draft ready — review, edit if needed, then send.",
+      bulkNeedDraft:
+        "Have AI draft the email first, then approve it before sending.",
+      bulkTooMany: "40 recipients maximum per bulk send.",
+      bulkConfirmAi:
+        "Send this approved draft to {count} people?\n\nSubject: {template}\n\nEmails are sent one by one. Do not close the page.",
+      bulkPreviewName: "First name",
       bulkChannelEmail: "Email",
       bulkChannelWhatsapp: "WhatsApp",
       bulkProgress: "Sending {current}/{total} — {name}",
@@ -977,7 +1024,29 @@ export const adminTranslations = {
       loadingContacts: "正在加载联系人...",
       bulkTitle: "群发",
       bulkSelected: "已选 {count} 人",
-      bulkHint: "勾选联系人后，选择邮件或 WhatsApp，发送跟进或套餐介绍。",
+      bulkHint:
+        "勾选联系人。AI 会起草跟进邮件（无语言证书学中文、奖学金、套餐等）。你核对草稿后再发送。",
+      bulkModeTemplate: "现有模板",
+      bulkModeAi: "AI 撰写",
+      bulkAiTopicLabel: "跟进主题",
+      bulkAiTopic: {
+        langue_sans_diplome: "中文 — 无语言学历 / 证书",
+        annee_chinois: "大学前的语言年",
+        bourses: "奖学金与资金",
+        formules: "介绍套餐",
+        custom: "自定义主题（下方备注）",
+      },
+      bulkAiNotes: "补充说明（可选）",
+      bulkAiHint:
+        "选择主题。AI 会根据勾选的档案（学历、专业、预算）写一封邮件。每人的名字会自动加入。发送前请先核对。",
+      bulkAiPlaceholder: "例如：没有 HSK 就强调语言学校，提议本周通话…",
+      bulkAiButton: "生成草稿",
+      bulkValidateHint: "草稿已就绪 — 请核对、按需修改，然后发送。",
+      bulkNeedDraft: "请先让 AI 生成草稿，核对后再发送。",
+      bulkTooMany: "每次群发最多 40 人。",
+      bulkConfirmAi:
+        "将这份已核对的草稿发送给 {count} 人？\n\n主题：{template}\n\n邮件将逐封发送，请勿关闭页面。",
+      bulkPreviewName: "名字",
       bulkChannelEmail: "邮件",
       bulkChannelWhatsapp: "WhatsApp",
       bulkProgress: "发送 {current}/{total} — {name}",

@@ -1,28 +1,26 @@
 "use client";
 
 import {
-  FORMULES,
-  PAYMENT_NOTE,
   displayFormuleFootnote,
   displayFormulePrice,
   getFormuleIncludeGroups,
   getFormuleNumber,
+  localizeFormules,
 } from "../lib/formules";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
 export default function StudentFormules({ currentFormule = "" }) {
+  const { t, dict } = useSiteI18n();
   const selectedNumber = getFormuleNumber(currentFormule);
+  const formules = localizeFormules(dict);
 
   return (
     <div className="student-card student-card-wide">
-      <h2 className="card-title">Nos formules</h2>
-      <p className="card-subtitle">
-        Une fois votre formule débloquée par Chinois en Devenir, vous
-        accéderez à l'orientation, au suivi et aux documents correspondant à
-        votre accompagnement.
-      </p>
+      <h2 className="card-title">{t("student.formulasTitle")}</h2>
+      <p className="card-subtitle">{t("student.formulasSubtitle")}</p>
 
       <div className="student-formule-grid">
-        {FORMULES.map((formule) => {
+        {formules.map((formule) => {
           const featured = formule.featured;
           const selected = selectedNumber === formule.number;
           return (
@@ -31,7 +29,9 @@ export default function StudentFormules({ currentFormule = "" }) {
               className={`student-formule-card ${featured ? "is-featured" : ""} ${selected ? "is-selected" : ""}`}
             >
               <div className="student-formule-card-top">
-                <p className="student-formule-kicker">Formule {formule.number}</p>
+                <p className="student-formule-kicker">
+                  {t("student.formulaN", { n: formule.number })}
+                </p>
                 {formule.badge ? (
                   <span
                     className={`student-formule-badge ${featured ? "is-featured" : ""}`}
@@ -50,7 +50,7 @@ export default function StudentFormules({ currentFormule = "" }) {
               <p className="student-formule-price">
                 {displayFormulePrice(formule)}
               </p>
-              <p className="student-formule-payment">{PAYMENT_NOTE}</p>
+              <p className="student-formule-payment">{t("tarifs.paymentNote")}</p>
               {formule.savingsText ? (
                 <p className="student-formule-intro">{formule.savingsText}</p>
               ) : null}
@@ -75,9 +75,9 @@ export default function StudentFormules({ currentFormule = "" }) {
                 className={`landing-btn landing-btn-full ${featured ? "landing-btn-accent" : "landing-btn-primary"}`}
                 disabled
                 aria-disabled="true"
-                title="Le paiement en ligne sera bientôt disponible"
+                title={t("student.paySoon")}
               >
-                Payer {displayFormulePrice(formule)}
+                {t("student.pay", { price: displayFormulePrice(formule) })}
               </button>
             </article>
           );

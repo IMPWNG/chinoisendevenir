@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import { fr } from "../i18n/fr";
 import { studentSupabase } from "../lib/supabase";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
 export default function StudentSetPassword() {
-  const t = fr;
+  const { t } = useSiteI18n();
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,12 +19,12 @@ export default function StudentSetPassword() {
     e.preventDefault();
     if (password.length < 8) {
       setStatus("error");
-      setMessage("Le mot de passe doit contenir au moins 8 caractères.");
+      setMessage(t("student.errors.passwordLength"));
       return;
     }
     if (password !== confirmPassword) {
       setStatus("error");
-      setMessage("Les mots de passe ne correspondent pas.");
+      setMessage(t("student.errors.passwordMatch"));
       return;
     }
 
@@ -32,7 +32,7 @@ export default function StudentSetPassword() {
     const { error } = await studentSupabase.auth.updateUser({ password });
     if (error) {
       setStatus("error");
-      setMessage(error.message || "Impossible de mettre à jour le mot de passe.");
+      setMessage(error.message || t("student.errors.passwordUpdate"));
       return;
     }
 
@@ -44,17 +44,17 @@ export default function StudentSetPassword() {
       <Navigation />
       <section className="landing-form-section">
         <div className="container">
-          <span className="landing-hero-badge">Espace étudiant</span>
-          <h1 className="landing-section-title">Nouveau mot de passe</h1>
+          <span className="landing-hero-badge">{t("student.space")}</span>
+          <h1 className="landing-section-title">{t("student.newPassword")}</h1>
           <p className="landing-section-subtitle">
-            Choisissez un mot de passe pour accéder à votre dossier.
+            {t("student.newPasswordSubtitle")}
           </p>
           {status === "error" && (
             <div className="landing-alert landing-alert-error">{message}</div>
           )}
           <form className="landing-form landing-form-narrow" onSubmit={handleSubmit}>
             <div className="landing-form-group">
-              <label htmlFor="new-password">Mot de passe *</label>
+              <label htmlFor="new-password">{t("student.password")} *</label>
               <input
                 id="new-password"
                 type="password"
@@ -65,7 +65,7 @@ export default function StudentSetPassword() {
               />
             </div>
             <div className="landing-form-group">
-              <label htmlFor="confirm-password">Confirmer le mot de passe *</label>
+              <label htmlFor="confirm-password">{t("student.confirmPassword")} *</label>
               <input
                 id="confirm-password"
                 type="password"
@@ -79,12 +79,12 @@ export default function StudentSetPassword() {
               className="landing-btn landing-btn-primary landing-btn-full"
               disabled={status === "submitting"}
             >
-              {status === "submitting" ? "Enregistrement..." : "Enregistrer"}
+              {status === "submitting" ? t("student.saving") : t("student.save")}
             </button>
           </form>
         </div>
       </section>
-      <Footer t={t} />
+      <Footer />
     </div>
   );
 }

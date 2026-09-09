@@ -1,33 +1,34 @@
+"use client";
+
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import JsonLd from "../components/JsonLd";
 import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
-import { fr } from "../i18n/fr";
+import { useSiteI18n } from "../context/SiteI18nContext";
 import { breadcrumbJsonLd, SITE } from "../lib/seo";
 
-const BREADCRUMBS = [
-  { name: "Accueil", path: "/" },
-  { name: "Contact", path: "/contact" },
-];
-
 function ContactPage() {
-  const t = fr;
+  const { t, dict } = useSiteI18n();
+  const breadcrumbs = [
+    { name: t("breadcrumbs.home"), path: "/" },
+    { name: t("contact.crumb"), path: "/contact" },
+  ];
 
   const contactMethods = [
     {
       icon: "📍",
-      title: "Présence en Chine",
+      title: t("contact.presence"),
       details: ["Chongqing", "Chengdu", "Shanghai", "Beijing"],
     },
     {
       icon: "📞",
-      title: "Téléphone",
-      details: [SITE.phone, "Lun-Ven : 9h-18h"],
+      title: t("contact.phone"),
+      details: [SITE.phone, t("contact.hours")],
     },
     {
       icon: "📧",
-      title: "Email",
+      title: t("contact.email"),
       details: [SITE.email],
       href: `mailto:${SITE.email}`,
     },
@@ -38,41 +39,16 @@ function ContactPage() {
     { icon: "📱", name: "WhatsApp", handle: SITE.whatsapp },
   ];
 
-  const faqs = [
-    {
-      q: "Quel est le temps de réponse ?",
-      a: "Nous répondons généralement sous 24 à 48 heures, selon le fuseau horaire et le volume de demandes.",
-    },
-    {
-      q: "Avez-vous un support en direct ?",
-      a: "Vous pouvez nous écrire par e-mail, WeChat ou WhatsApp pendant les heures de bureau (heure de Pékin).",
-    },
-    {
-      q: "Pouvez-vous m'aider avec mon visa ?",
-      a: "Oui : nous vous guidons pour constituer un dossier cohérent (X1 ou X2, JW201 ou JW202). L'octroi du visa reste une décision du consulat.",
-    },
-    {
-      q: "Quels sont vos horaires ?",
-      a: "Lun-Ven 9h-18h (heure de Pékin)",
-    },
-  ];
-
   return (
     <div className="app app-page-fill">
-      <JsonLd data={breadcrumbJsonLd(BREADCRUMBS)} />
+      <JsonLd data={breadcrumbJsonLd(breadcrumbs)} />
       <Navigation />
 
       <section className="landing-programs">
         <div className="container">
-          <PageBreadcrumbs items={BREADCRUMBS} />
-          <h1 className="landing-section-title">
-            Contact pour étudier en Chine
-          </h1>
-          <p className="landing-section-subtitle mb-8">
-            Une question sur l'admission, une bourse ou le visa étudiant ?
-            Écrivez-nous : nous vous aidons à y voir clair sur votre projet
-            d'études en Chine.
-          </p>
+          <PageBreadcrumbs items={breadcrumbs} />
+          <h1 className="landing-section-title">{t("contact.title")}</h1>
+          <p className="landing-section-subtitle mb-8">{t("contact.subtitle")}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {contactMethods.map((method) => {
@@ -117,7 +93,7 @@ function ContactPage() {
 
           <div className="mt-12 bg-blue-50 rounded-xl p-8 border-l-4 border-blue-600">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
-              🌐 Suivez-nous sur les réseaux
+              {t("contact.socialTitle")}
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {socialLinks.map((social) => (
@@ -136,17 +112,17 @@ function ContactPage() {
           </div>
 
           <PageCta
-            title="Une question sur votre projet d'études ?"
-            subtitle="Décrivez votre parcours : notre équipe vous recontacte pour une première orientation."
-            cta="Évaluer mon projet d'études en Chine"
+            title={t("contact.ctaTitle")}
+            subtitle={t("contact.ctaSubtitle")}
+            cta={t("contact.cta")}
           />
 
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
-              ❓ Questions fréquentes
+              {t("contact.faqsTitle")}
             </h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {faqs.map((faq) => (
+              {dict.contact.faqs.map((faq) => (
                 <div
                   key={faq.q}
                   className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500"
@@ -160,7 +136,7 @@ function ContactPage() {
         </div>
       </section>
 
-      <Footer t={t} />
+      <Footer />
     </div>
   );
 }

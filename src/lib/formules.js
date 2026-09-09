@@ -377,3 +377,40 @@ export function displayFormuleFootnote(footnote) {
   const text = String(footnote).trim();
   return text.startsWith("*") ? text : `* ${text}`;
 }
+
+export function localizeFormule(formule, dict) {
+  const loc = dict?.formules?.[formule.number];
+  if (!loc) return formule;
+
+  const next = {
+    ...formule,
+    title: loc.title,
+    subtitle: loc.subtitle,
+    shortTitle: loc.title,
+    audience: loc.audience,
+    intro: loc.intro,
+    footnote: loc.footnote,
+    cta: loc.cta,
+    includes: loc.includes || formule.includes,
+    idealIf: loc.idealIf || formule.idealIf,
+  };
+
+  if (loc.badge !== undefined) next.badge = loc.badge;
+  if (loc.savingsLabel) next.savingsLabel = loc.savingsLabel;
+  if (loc.savingsText) next.savingsText = loc.savingsText;
+  if (loc.whyChoose) next.whyChoose = loc.whyChoose;
+
+  if (loc.groups) {
+    next.includeGroups = loc.groups;
+  } else if (loc.includes) {
+    next.includeGroups = [
+      { title: dict.tarifs?.included || "Ce qui est inclus", items: loc.includes },
+    ];
+  }
+
+  return next;
+}
+
+export function localizeFormules(dict) {
+  return FORMULES.map((formule) => localizeFormule(formule, dict));
+}

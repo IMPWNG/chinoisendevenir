@@ -1,9 +1,10 @@
 "use client";
 
-import { VISA_DOCUMENT_GUIDE } from "../lib/studentProgress";
+import { useSiteI18n } from "../context/SiteI18nContext";
 
 export default function StudentVisaDocuments({ standalone = false }) {
-  const guide = VISA_DOCUMENT_GUIDE;
+  const { dict } = useSiteI18n();
+  const guide = dict.student.visaGuide;
 
   return (
     <div className={`doc-visa${standalone ? " is-standalone" : ""}`}>

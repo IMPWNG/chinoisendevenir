@@ -232,7 +232,7 @@ export function organizationJsonLd() {
       "Canada",
       "Afrique francophone",
     ],
-    availableLanguage: ["French", "Chinese"],
+    availableLanguage: ["French", "English", "Chinese"],
     serviceType: "Accompagnement aux études en Chine",
     knowsAbout: [
       "Étudier en Chine",
@@ -256,7 +256,7 @@ export function organizationJsonLd() {
       email: SITE.email,
       telephone: SITE.phone,
       contactType: "customer service",
-      availableLanguage: ["French"],
+      availableLanguage: ["French", "English"],
     },
   };
 }
