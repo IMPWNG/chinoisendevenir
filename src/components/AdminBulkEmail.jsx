@@ -58,6 +58,7 @@ export default function AdminBulkEmail({
   const [composeError, setComposeError] = useState("");
   const [sending, setSending] = useState(false);
   const [progress, setProgress] = useState(null);
+  const [collapsed, setCollapsed] = useState(true);
 
   const selected = useMemo(
     () => contacts.filter((contact) => selectedIds.includes(contact.id)),
@@ -239,7 +240,11 @@ export default function AdminBulkEmail({
   }
 
   return (
-    <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 sticky top-[88px] z-30">
+    <div
+      className={`bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 ${
+        collapsed ? "sticky top-[88px] z-30" : ""
+      }`}
+    >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col lg:flex-row gap-4 lg:items-start">
           <div className="flex-1 min-w-0">
@@ -256,7 +261,9 @@ export default function AdminBulkEmail({
                     total: progress.total,
                     name: progress.name,
                   })
-                : t("dashboard.bulkHint")}
+                : collapsed
+                  ? t("dashboard.bulkCollapsedHint")
+                  : t("dashboard.bulkHint")}
             </p>
             {sending && progress ? (
               <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
@@ -272,6 +279,16 @@ export default function AdminBulkEmail({
             ) : null}
           </div>
           <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => setCollapsed((value) => !value)}
+              aria-expanded={!collapsed}
+              className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
+            >
+              {collapsed
+                ? `▾ ${t("dashboard.bulkExpand")}`
+                : `▴ ${t("dashboard.bulkCollapse")}`}
+            </button>
             <button
               type="button"
               disabled={busy || filteredContacts.length === 0}
@@ -312,6 +329,8 @@ export default function AdminBulkEmail({
           </div>
         </div>
 
+        {collapsed ? null : (
+          <>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
@@ -485,6 +504,8 @@ export default function AdminBulkEmail({
               </div>
             ) : null}
           </div>
+        )}
+          </>
         )}
       </div>
     </div>
