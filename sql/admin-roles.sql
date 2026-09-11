@@ -71,8 +71,13 @@ create policy "full admins delete contacts"
   to authenticated
   using (public.is_full_admin());
 
--- Grant limited access:
+-- Grant limited access (no Vercel env needed once the app reads admin_users.role):
+-- 1) Authentication → Users → Add user (email + password, Auto Confirm User)
+-- 2) Then run this, replacing only the email:
+--
 -- insert into public.admin_users (user_id, email, role)
--- values ('PASTE-UUID', 'associate@email.com', 'limited')
+-- select id, email, 'limited'
+-- from auth.users
+-- where lower(email) = 'associate@email.com'
 -- on conflict (user_id) do update
 --   set email = excluded.email, role = excluded.role;

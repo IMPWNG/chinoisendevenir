@@ -136,10 +136,6 @@ export async function getAdminAccess(admin, user) {
   const email = String(user?.email || "").toLowerCase();
   const allowlist = getAdminEmailAllowlist();
 
-  if (allowlist.size > 0 && !allowlist.has(email)) {
-    return { approved: false, role: null };
-  }
-
   let { data, error } = await admin
     .from("admin_users")
     .select("user_id, role")
@@ -157,8 +153,13 @@ export async function getAdminAccess(admin, user) {
   }
 
   if (!error) {
-    if (!data?.user_id) return { approved: false, role: null };
-    return { approved: true, role: resolveAdminRole(email, data.role) };
+    if (data?.user_id) {
+      return { approved: true, role: resolveAdminRole(email, data.role) };
+    }
+    if (allowlist.has(email)) {
+      return { approved: true, role: resolveAdminRole(email, null) };
+    }
+    return { approved: false, role: null };
   }
 
   // Table not created yet: allowlist-only fallback so you are not locked out
