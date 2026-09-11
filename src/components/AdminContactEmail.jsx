@@ -42,7 +42,7 @@ function fieldClass(disabled) {
   }`;
 }
 
-export default function AdminContactEmail({ contact, onSent }) {
+export default function AdminContactEmail({ contact, onSent, allowTemplates = false }) {
   const { t } = useAdminI18n();
   const [mode, setMode] = useState("write");
   const [template, setTemplate] = useState("formules_presentation");
@@ -64,7 +64,7 @@ export default function AdminContactEmail({ contact, onSent }) {
     setMessage("");
     setAiNotes("");
     setAiError("");
-  }, [contact.id]);
+  }, [contact.id, allowTemplates]);
 
   const previewHtml = useMemo(
     () =>
@@ -197,6 +197,7 @@ export default function AdminContactEmail({ contact, onSent }) {
         📧 {t("dashboard.emailSection")}
       </label>
 
+      {allowTemplates ? (
       <div className="flex flex-wrap gap-2 mb-4">
         <button
           type="button"
@@ -223,8 +224,9 @@ export default function AdminContactEmail({ contact, onSent }) {
           📋 {t("dashboard.emailTemplateTab")}
         </button>
       </div>
+      ) : null}
 
-      {mode === "write" ? (
+      {!allowTemplates || mode !== "template" ? (
         <div className="space-y-4">
           <p className="text-xs text-slate-400">{t("dashboard.emailEditorHint")}</p>
 

@@ -389,24 +389,13 @@ export default function AdminDashboard() {
 
 const stats = {
   total: contacts.length,
-  a_qualifier: contacts.filter(
-    (c) => canonicalStatut(c.suivi_statut) === "a_qualifier",
-  ).length,
-  offre_envoyee: contacts.filter(
-    (c) => canonicalStatut(c.suivi_statut) === "offre_envoyée",
-  ).length,
   attente_paiement: contacts.filter(
     (c) => canonicalStatut(c.suivi_statut) === "attente_paiement",
   ).length,
   paye: contacts.filter((c) => canonicalStatut(c.suivi_statut) === "client_payé")
     .length,
-  en_cours_dossier: contacts.filter((c) =>
-    ["dossier_préparation", "dossier_incomplet", "candidature_envoyée"].includes(
-      canonicalStatut(c.suivi_statut),
-    ),
-  ).length,
-  termine: contacts.filter(
-    (c) => canonicalStatut(c.suivi_statut) === "dossier_terminé",
+  dossier_preparation: contacts.filter(
+    (c) => canonicalStatut(c.suivi_statut) === "dossier_préparation",
   ).length,
 };
 
@@ -421,12 +410,6 @@ const stats = {
             color="from-blue-600 to-cyan-500"
           />
           <StatCard
-            label={t("dashboard.toQualify")}
-            value={stats.a_qualifier}
-            icon="📞"
-            color="from-indigo-600 to-violet-500"
-          />
-          <StatCard
             label={t("dashboard.waitingPayment")}
             value={stats.attente_paiement}
             icon="💳"
@@ -437,6 +420,12 @@ const stats = {
             value={stats.paye}
             icon="✅"
             color="from-purple-600 to-pink-500"
+          />
+          <StatCard
+            label={t("dashboard.filesInPrep")}
+            value={stats.dossier_preparation}
+            icon="📁"
+            color="from-pink-600 to-rose-500"
           />
         </div>
 
@@ -985,6 +974,7 @@ function ContactModal({
 
           <AdminContactEmail
             contact={contact}
+            allowTemplates={access.role === "full"}
             onSent={() => {
               fetchActions();
               onContactUpdated?.();
