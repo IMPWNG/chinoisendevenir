@@ -132,6 +132,13 @@ export const adminTranslations = {
       bulkDone:
         "Envoi groupé terminé.\n✅ {sent} envoyé(s)\n❌ {failed} échec(s){details}",
       emailSection: "Envoyer un email",
+      emailWriteTab: "Écrire",
+      emailTemplateTab: "Modèle",
+      emailTo: "À",
+      emailFrom: "De",
+      emailEditorHint:
+        "Même mise en page que les autres emails (bandeau, Bonjour, signature). L'objet commence par « Etude Chine ».",
+      emailNoAddress: "Ce contact n'a pas d'email.",
       sendEmail: "Envoyer",
       emailHintFormules:
         "Action : Email formules • Statut : formules présentées (espace encore verrouillé)",
@@ -614,6 +621,13 @@ export const adminTranslations = {
       bulkDone:
         "Bulk send finished.\n✅ {sent} sent\n❌ {failed} failed{details}",
       emailSection: "Send an email",
+      emailWriteTab: "Write",
+      emailTemplateTab: "Template",
+      emailTo: "To",
+      emailFrom: "From",
+      emailEditorHint:
+        "Same layout as the other emails (banner, Hello, signature). The subject always starts with “Etude Chine”.",
+      emailNoAddress: "This contact has no email.",
       sendEmail: "Send",
       emailHintFormules:
         "Action: Packages email • Status: packages presented (student space still locked)",
@@ -1088,6 +1102,13 @@ export const adminTranslations = {
         "通过 WhatsApp 向 {count} 人发送「{template}」？\n\n消息将逐条发送，请勿关闭页面。",
       bulkDone: "群发完成。\n✅ 成功 {sent}\n❌ 失败 {failed}{details}",
       emailSection: "发送邮件",
+      emailWriteTab: "撰写",
+      emailTemplateTab: "模板",
+      emailTo: "收件人",
+      emailFrom: "发件人",
+      emailEditorHint:
+        "版式与其他邮件相同（页眉、称呼、签名）。主题始终以「Etude Chine」开头。",
+      emailNoAddress: "该联系人没有邮箱。",
       sendEmail: "发送",
       emailHintFormules: "操作：套餐邮件 • 状态：已发送套餐（学生空间仍锁定）",
       emailHintRelance1: "操作：跟进 1 • 状态：跟进中",

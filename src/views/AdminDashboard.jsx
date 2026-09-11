@@ -9,12 +9,12 @@ import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
+import AdminContactEmail from "../components/AdminContactEmail";
 import AdminCalendar from "../components/AdminCalendar";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { useAdminAccess } from "../context/AdminAccessContext";
-import { generateCustomEmailHtml } from "../lib/emailLayout";
 import {
   isStudentSpaceUnlocked,
   isStudentAccessGranted,
@@ -39,23 +39,6 @@ import {
   canonicalStatut,
   toStoredStatut,
 } from "../lib/suiviStatuts";
-
-async function authedFetch(path, options = {}) {
-  const {
-    data: { session },
-  } = await adminSupabase.auth.getSession();
-  if (!session?.access_token) {
-    throw new Error("SESSION");
-  }
-  return fetch(path, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-      Authorization: `Bearer ${session.access_token}`,
-    },
-  });
-}
 
 const STATUTS = SUIVI_STATUTS;
 
@@ -90,36 +73,6 @@ const BUDGETS = [
   "10000-20000",
   ">20000",
   "besoin-bourse",
-];
-
-const EMAIL_TEMPLATE_OPTIONS = [
-  {
-    value: "relance_1",
-    label: "🔔 Relance 1 — Formulaire à remplir",
-  },
-  {
-    value: "relance_2",
-    label: "🔔 Relance 2 — Toujours intéressé(e) ?",
-  },
-  {
-    value: "relance_formules",
-    label: "🔔 Relance 3 — Choix des formules",
-  },
-  {
-    value: "formules_presentation",
-    label: "📋 Formules d'accompagnement",
-  },
-];
-
-const CONTACT_EMAIL_TEMPLATE_OPTIONS = [
-  ...EMAIL_TEMPLATE_OPTIONS,
-  { value: "reponse_bourses", label: "💰 Réponse — Bourses" },
-  { value: "reponse_visa", label: "🛂 Réponse — Visa" },
-  { value: "reponse_langue", label: "🗣️ Réponse — École de langue" },
-  { value: "reponse_admission", label: "🎓 Réponse — Admission" },
-  { value: "reponse_processus", label: "📋 Réponse — Processus" },
-  { value: "reponse_general", label: "✉️ Réponse — Premier contact" },
-  { value: "custom", label: "✏️ Message libre" },
 ];
 
 function translatedOrRaw(t, prefix, value) {
@@ -865,15 +818,6 @@ function ContactModal({
   const [newDescription, setNewDescription] = useState("");
   const [notes, setNotes] = useState(contact.notes_admin || "");
   const [loadingActions, setLoadingActions] = useState(true);
-  const [emailTemplate, setEmailTemplate] = useState("formules_presentation");
-  const [sendingEmail, setSendingEmail] = useState(false);
-  const [customEmailSubject, setCustomEmailSubject] = useState("");
-  const [customEmailTitle, setCustomEmailTitle] = useState("");
-  const [customEmailSubtitle, setCustomEmailSubtitle] = useState("");
-  const [customEmailMessage, setCustomEmailMessage] = useState("");
-  const [emailAiNotes, setEmailAiNotes] = useState("");
-  const [composingEmail, setComposingEmail] = useState(false);
-  const [emailAiError, setEmailAiError] = useState("");
   const [selectedFormule, setSelectedFormule] = useState(
     canonicalFormuleValue(getChosenFormule(contact)),
   );
@@ -885,15 +829,6 @@ function ContactModal({
     setNotes(contact.notes_admin || "");
     setSelectedFormule(canonicalFormuleValue(getChosenFormule(contact)));
   }, [contact.id, contact.formule, contact.notes_admin]);
-
-  useEffect(() => {
-    setCustomEmailSubject("");
-    setCustomEmailTitle("");
-    setCustomEmailSubtitle("");
-    setCustomEmailMessage("");
-    setEmailAiNotes("");
-    setEmailAiError("");
-  }, [contact.id]);
 
   const accessGranted = isStudentAccessGranted(contact);
   const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
@@ -962,111 +897,6 @@ function ContactModal({
       .update({ notes_admin: notes })
       .eq("id", contact.id);
   };
-
-  async function composeEmailWithAi() {
-    const notes = emailAiNotes.trim();
-    if (notes.length < 8) {
-      setEmailAiError(t("dashboard.emailAiEmpty"));
-      return;
-    }
-
-    setComposingEmail(true);
-    setEmailAiError("");
-    try {
-      const response = await authedFetch("/api/admin/compose-email", {
-        method: "POST",
-        body: JSON.stringify({
-          contactId: String(contact.id),
-          notes,
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok || !data.success) {
-        setEmailAiError(
-          t("dashboard.emailAiFail", {
-            error: data.error || data.message || t("unknownError"),
-          }),
-        );
-        return;
-      }
-      setCustomEmailSubject(data.subject || "");
-      setCustomEmailTitle(data.title || "");
-      setCustomEmailSubtitle(data.subtitle || "");
-      setCustomEmailMessage(data.body || "");
-      setEmailTemplate("custom");
-    } catch (error) {
-      setEmailAiError(
-        t("dashboard.emailAiFail", {
-          error:
-            error.message === "SESSION"
-              ? t("sessionExpired")
-              : error.message || t("unknownError"),
-        }),
-      );
-    } finally {
-      setComposingEmail(false);
-    }
-  }
-
-  async function sendSelectedEmail() {
-    if (emailTemplate === "custom") {
-      if (!customEmailSubject.trim() || !customEmailMessage.trim()) {
-        alert(t("dashboard.emailCustomEmpty"));
-        return;
-      }
-    }
-
-    const confirmed = confirm(
-      t("dashboard.sendEmailConfirm", {
-        template:
-          emailTemplate === "custom" && customEmailSubject.trim()
-            ? customEmailSubject.trim()
-            : t(`emailTemplate.${emailTemplate}`),
-        name: contact.prenom,
-      }),
-    );
-    if (!confirmed) return;
-
-    setSendingEmail(true);
-    try {
-      const payload = {
-        contactId: String(contact.id),
-        emailTemplate,
-        ...(emailTemplate === "custom"
-          ? {
-              customSubject: customEmailSubject.trim(),
-              customTitle: customEmailTitle.trim(),
-              customSubtitle: customEmailSubtitle.trim(),
-              customMessage: customEmailMessage.trim(),
-            }
-          : {}),
-      };
-
-      const response = await authedFetch("/api/email/auto-reply", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-      console.log("✅ Réponse serveur:", data);
-
-      if (data.success) {
-        alert(`✅ ${t("dashboard.emailOk")}`);
-        fetchActions();
-        onContactUpdated?.();
-        return data;
-      }
-
-      alert("❌ " + t("dashboard.emailFail", { error: data.message || data.error }));
-      return null;
-    } catch (error) {
-      console.error("❌ Erreur fetch:", error);
-      alert("❌ " + t("dashboard.networkError", { error: error.message }));
-      return null;
-    } finally {
-      setSendingEmail(false);
-    }
-  }
 
   const statutKey = canonicalStatut(contact.suivi_statut);
 
@@ -1153,158 +983,13 @@ function ContactModal({
             />
           </div>
 
-          {/* Envoi d'email */}
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📧 {t("dashboard.emailSection")}
-            </label>
-            <div className="flex flex-col md:flex-row gap-3">
-              <select
-                value={emailTemplate}
-                onChange={(e) => setEmailTemplate(e.target.value)}
-                className="flex-1 px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-semibold cursor-pointer"
-              >
-                {CONTACT_EMAIL_TEMPLATE_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {t(`emailTemplate.${option.value}`)}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="button"
-                onClick={sendSelectedEmail}
-                disabled={
-                  sendingEmail ||
-                  composingEmail ||
-                  (emailTemplate === "custom" &&
-                    (!customEmailSubject.trim() || !customEmailMessage.trim()))
-                }
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-              >
-                {sendingEmail ? `⏳ ${t("sending")}` : `📤 ${t("dashboard.sendEmail")}`}
-              </button>
-            </div>
-            {emailTemplate === "custom" ? (
-              <div className="mt-4 space-y-4">
-                <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4">
-                  <p className="text-xs font-bold uppercase tracking-wide text-violet-200">
-                    ✨ {t("dashboard.emailAiSection")}
-                  </p>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {t("dashboard.emailAiHint")}
-                  </p>
-                  <textarea
-                    value={emailAiNotes}
-                    onChange={(e) => setEmailAiNotes(e.target.value)}
-                    placeholder={t("dashboard.emailAiPlaceholder")}
-                    rows={4}
-                    className="mt-3 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all duration-300 resize-none"
-                  />
-                  <div className="mt-3 flex flex-col sm:flex-row sm:items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={composeEmailWithAi}
-                      disabled={composingEmail}
-                      className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                    >
-                      {composingEmail
-                        ? `⏳ ${t("dashboard.emailAiWorking")}`
-                        : `✨ ${t("dashboard.emailAiButton")}`}
-                    </button>
-                    {emailAiError ? (
-                      <p className="text-sm text-rose-300">{emailAiError}</p>
-                    ) : null}
-                  </div>
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                    {t("dashboard.emailCustomSubject")}
-                  </label>
-                  <input
-                    type="text"
-                    value={customEmailSubject}
-                    onChange={(e) => setCustomEmailSubject(e.target.value)}
-                    placeholder={t("dashboard.emailCustomSubjectPlaceholder")}
-                    className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                      {t("dashboard.emailCustomTitle")}
-                    </label>
-                    <input
-                      type="text"
-                      value={customEmailTitle}
-                      onChange={(e) => setCustomEmailTitle(e.target.value)}
-                      placeholder={t("dashboard.emailCustomTitlePlaceholder")}
-                      className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                      {t("dashboard.emailCustomSubtitle")}
-                    </label>
-                    <input
-                      type="text"
-                      value={customEmailSubtitle}
-                      onChange={(e) => setCustomEmailSubtitle(e.target.value)}
-                      placeholder={t(
-                        "dashboard.emailCustomSubtitlePlaceholder",
-                      )}
-                      className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                    {t("dashboard.emailCustomBody")}
-                  </label>
-                  <textarea
-                    value={customEmailMessage}
-                    onChange={(e) => setCustomEmailMessage(e.target.value)}
-                    placeholder={t("dashboard.emailCustomPlaceholder")}
-                    rows={8}
-                    className="mt-2 w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y"
-                  />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
-                    {t("dashboard.emailPreview")}
-                  </p>
-                  <iframe
-                    title={t("dashboard.emailPreview")}
-                    sandbox=""
-                    className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
-                    srcDoc={generateCustomEmailHtml(contact, {
-                      customSubject: customEmailSubject,
-                      customTitle: customEmailTitle,
-                      customSubtitle: customEmailSubtitle,
-                      customMessage: customEmailMessage,
-                    })}
-                  />
-                </div>
-              </div>
-            ) : null}
-            <p className="text-xs text-slate-500 mt-3">
-              {emailTemplate === "relance_1" &&
-                t("dashboard.emailHintRelance1")}
-              {emailTemplate === "relance_2" &&
-                t("dashboard.emailHintRelance2")}
-              {emailTemplate === "relance_formules" &&
-                t("dashboard.emailHintRelanceFormules")}
-              {emailTemplate === "formules_presentation" &&
-                t("dashboard.emailHintFormules")}
-              {(emailTemplate === "reponse_bourses" ||
-                emailTemplate === "reponse_visa" ||
-                emailTemplate === "reponse_langue" ||
-                emailTemplate === "reponse_admission" ||
-                emailTemplate === "reponse_processus" ||
-                emailTemplate === "reponse_general") &&
-                t("dashboard.emailHintAutoReply")}
-              {emailTemplate === "custom" && t("dashboard.emailHintCustom")}
-            </p>
-          </div>
+          <AdminContactEmail
+            contact={contact}
+            onSent={() => {
+              fetchActions();
+              onContactUpdated?.();
+            }}
+          />
 
           {/* Formule + déblocage espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">
