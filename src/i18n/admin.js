@@ -143,6 +143,8 @@ export const adminTranslations = {
         "Action : Relance 3 • Statut : relance en cours. Envoyée aussi automatiquement après 5 jours sans réponse au choix des formules.",
       emailHintCustom:
         "Action : Email envoyé • Le statut n'est pas modifié. Bonjour et la signature sont ajoutés automatiquement. L'objet commence toujours par « Etude Chine ».",
+      emailHintAutoReply:
+        "Réponse type selon la demande (bourses, visa, langue, admission…). N'est pas renvoyée automatiquement si elle a déjà été envoyée à ce contact. Le statut n'avance que si le dossier est encore en tout début.",
       emailCustomSubject: "Objet",
       emailCustomSubjectPlaceholder: "Objet de l'email",
       emailCustomTitle: "Titre du bandeau",
@@ -400,6 +402,12 @@ export const adminTranslations = {
       relance_2: "Relance 2 — Toujours intéressé(e) ?",
       relance_formules: "Relance 3 — Choix des formules",
       formules_presentation: "Formules d'accompagnement",
+      reponse_bourses: "Réponse — Bourses d'études",
+      reponse_visa: "Réponse — Visa étudiant",
+      reponse_langue: "Réponse — École de langue",
+      reponse_admission: "Réponse — Admission universitaire",
+      reponse_processus: "Réponse — Processus et délais",
+      reponse_general: "Réponse — Premier contact",
       custom: "Message libre",
     },
     whatsappTemplate: {
@@ -615,6 +623,8 @@ export const adminTranslations = {
         "Action: Follow-up 3 • Status: follow-up in progress. Also sent automatically after 5 days without a reply to the packages email.",
       emailHintCustom:
         "Action: Email sent • Status is not changed. Greeting and signature are added automatically. The subject always starts with “Etude Chine”.",
+      emailHintAutoReply:
+        "Canned reply for the request type (scholarships, visa, language year, admission…). It is not sent again automatically if this contact already received it. Status only moves if the file is still at the very start.",
       emailCustomSubject: "Subject",
       emailCustomSubjectPlaceholder: "Email subject",
       emailCustomTitle: "Header title",
@@ -872,6 +882,12 @@ export const adminTranslations = {
       relance_2: "Follow-up 2 — Still interested?",
       relance_formules: "Follow-up 3 — Package choice",
       formules_presentation: "Support packages",
+      reponse_bourses: "Reply — Scholarships",
+      reponse_visa: "Reply — Student visa",
+      reponse_langue: "Reply — Language school",
+      reponse_admission: "Reply — University admission",
+      reponse_processus: "Reply — Process and timeline",
+      reponse_general: "Reply — First contact",
       custom: "Free-text message",
     },
     whatsappTemplate: {
@@ -1080,6 +1096,8 @@ export const adminTranslations = {
         "操作：跟进 3 • 状态：跟进中。套餐邮件 5 天无回复也会自动发送。",
       emailHintCustom:
         "操作：已发邮件 • 不更改状态。问候语和签名会自动加入。主题以「Etude Chine」开头。",
+      emailHintAutoReply:
+        "按来信类型发送标准回复（奖学金、签证、语言班、录取等）。若该联系人已收到同一回复，系统不会再自动重发。仅在档案仍处于最初阶段时才会推进状态。",
       emailCustomSubject: "主题",
       emailCustomSubjectPlaceholder: "邮件主题",
       emailCustomTitle: "页眉标题",
@@ -1329,6 +1347,12 @@ export const adminTranslations = {
       relance_2: "跟进 2 — 是否仍有意向？",
       relance_formules: "跟进 3 — 选择套餐",
       formules_presentation: "辅导套餐介绍",
+      reponse_bourses: "回复 — 奖学金",
+      reponse_visa: "回复 — 学生签证",
+      reponse_langue: "回复 — 语言班",
+      reponse_admission: "回复 — 大学录取",
+      reponse_processus: "回复 — 流程与时间",
+      reponse_general: "回复 — 首次咨询",
       custom: "自定义邮件",
     },
     whatsappTemplate: {

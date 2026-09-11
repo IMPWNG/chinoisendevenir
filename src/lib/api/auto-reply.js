@@ -14,6 +14,10 @@ import {
 import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice } from "../formules.js";
 import { applyCorsHeaders } from "../httpSecurity.js";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts.js";
+import {
+  INTENT_TEMPLATE_GENERATORS,
+  autoReplyMarker,
+} from "../emailIntents.js";
 
 const resendApiKey =
   process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
@@ -238,7 +242,7 @@ const EMAIL_TEMPLATES = {
     generateHtml: (contact) =>
       generateFormulesPresentationTemplate(contact.prenom || ""),
     action: "email_formules",
-    description: "Email formules d'accompagnement envoyé",
+    description: `Email formules d'accompagnement envoyé ${autoReplyMarker("tarifs")}`,
     status: "formules_présentées",
   },
   relance_formules: {
@@ -270,6 +274,54 @@ const EMAIL_TEMPLATES = {
     action: "email_envoye",
     description: "Confirmation de la formule choisie — appel à placer",
     status: "formule_choisie",
+  },
+  reponse_bourses: {
+    subject: "Bourses d'études en Chine — ce qu'il faut savoir",
+    generateHtml: (contact) =>
+      INTENT_TEMPLATE_GENERATORS.reponse_bourses(contact.prenom || ""),
+    action: "email_envoye",
+    description: `Réponse automatique — bourses d'études ${autoReplyMarker("bourses")}`,
+    status: "bienvenue_envoyé",
+  },
+  reponse_visa: {
+    subject: "Visa étudiant pour la Chine — les étapes à connaître",
+    generateHtml: (contact) =>
+      INTENT_TEMPLATE_GENERATORS.reponse_visa(contact.prenom || ""),
+    action: "email_envoye",
+    description: `Réponse automatique — visa étudiant ${autoReplyMarker("visa")}`,
+    status: "bienvenue_envoyé",
+  },
+  reponse_langue: {
+    subject: "Année de chinois en Chine — un premier pas réaliste",
+    generateHtml: (contact) =>
+      INTENT_TEMPLATE_GENERATORS.reponse_langue(contact.prenom || ""),
+    action: "email_envoye",
+    description: `Réponse automatique — école de langue ${autoReplyMarker("langue")}`,
+    status: "bienvenue_envoyé",
+  },
+  reponse_admission: {
+    subject: "Admission en université chinoise — dossier et délais",
+    generateHtml: (contact) =>
+      INTENT_TEMPLATE_GENERATORS.reponse_admission(contact.prenom || ""),
+    action: "email_envoye",
+    description: `Réponse automatique — admission ${autoReplyMarker("admission")}`,
+    status: "bienvenue_envoyé",
+  },
+  reponse_processus: {
+    subject: "Étudier en Chine — les étapes et le calendrier",
+    generateHtml: (contact) =>
+      INTENT_TEMPLATE_GENERATORS.reponse_processus(contact.prenom || ""),
+    action: "email_envoye",
+    description: `Réponse automatique — processus ${autoReplyMarker("processus")}`,
+    status: "bienvenue_envoyé",
+  },
+  reponse_general: {
+    subject: "Votre projet d'études en Chine — nous avons bien reçu votre message",
+    generateHtml: (contact) =>
+      INTENT_TEMPLATE_GENERATORS.reponse_general(contact.prenom || ""),
+    action: "email_envoye",
+    description: `Réponse automatique — premier contact ${autoReplyMarker("general")}`,
+    status: "bienvenue_envoyé",
   },
   custom: {
     subject: (_contact, extras = {}) =>

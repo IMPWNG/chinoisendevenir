@@ -113,6 +113,12 @@ const EMAIL_TEMPLATE_OPTIONS = [
 
 const CONTACT_EMAIL_TEMPLATE_OPTIONS = [
   ...EMAIL_TEMPLATE_OPTIONS,
+  { value: "reponse_bourses", label: "💰 Réponse — Bourses" },
+  { value: "reponse_visa", label: "🛂 Réponse — Visa" },
+  { value: "reponse_langue", label: "🗣️ Réponse — École de langue" },
+  { value: "reponse_admission", label: "🎓 Réponse — Admission" },
+  { value: "reponse_processus", label: "📋 Réponse — Processus" },
+  { value: "reponse_general", label: "✉️ Réponse — Premier contact" },
   { value: "custom", label: "✏️ Message libre" },
 ];
 
@@ -1289,6 +1295,13 @@ function ContactModal({
                 t("dashboard.emailHintRelanceFormules")}
               {emailTemplate === "formules_presentation" &&
                 t("dashboard.emailHintFormules")}
+              {(emailTemplate === "reponse_bourses" ||
+                emailTemplate === "reponse_visa" ||
+                emailTemplate === "reponse_langue" ||
+                emailTemplate === "reponse_admission" ||
+                emailTemplate === "reponse_processus" ||
+                emailTemplate === "reponse_general") &&
+                t("dashboard.emailHintAutoReply")}
               {emailTemplate === "custom" && t("dashboard.emailHintCustom")}
             </p>
           </div>

@@ -15,9 +15,19 @@ import {
 } from "../formules.js";
 import {
   FORMULE_ALREADY_CHOSEN,
+  canonicalStatut,
   isFormuleAlreadyChosen,
   isFormulesAwaitingReply,
+  shouldAdvanceStatus,
+  toStoredStatut,
 } from "../suiviStatuts.js";
+import {
+  alreadySentIntentReply,
+  detectEmailIntent,
+  extractPersonName,
+  shouldCreateContactFromInbound,
+  shouldSkipIntentAutoReply,
+} from "../emailIntents.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -200,7 +210,7 @@ function htmlToText(html) {
     .trim();
 }
 
-function extractLatestReply(text) {
+export function extractLatestReply(text) {
   if (!text) return "";
   let body = String(text).replace(/\r\n/g, "\n");
   const splitters = [
@@ -208,6 +218,7 @@ function extractLatestReply(text) {
     /\nOn .+ wrote:\s*\n?/i,
     /\s+Le .+? a écrit\s*:[\s\S]*$/i,
     /\nLe .+? a écrit\s*:/i,
+    /\nLe (lun|mar|mer|jeu|ven|sam|dim)\.?\s[\s\S]*$/i,
     /\n-----Original Message-----/i,
     /\n________________________________/,
     /\nDe\s*:/i,
@@ -339,6 +350,166 @@ async function findContactByEmail(email) {
   return rows?.[0] || null;
 }
 
+function filledName(value) {
+  return String(value || "").trim();
+}
+
+async function fetchRecentActions(contactId) {
+  const { data, error } = await supabase
+    .from("suivi_actions")
+    .select("id, action, description")
+    .eq("contact_id", contactId)
+    .order("created_at", { ascending: false })
+    .limit(80);
+
+  if (error) {
+    console.warn("⚠️ Lecture suivi_actions:", error.message);
+    return [];
+  }
+
+  return data || [];
+}
+
+async function createContactFromInbound({ email, prenom, nom, notes }) {
+  const payloads = [
+    {
+      email,
+      prenom: prenom || null,
+      nom: nom || null,
+      source: "email_inbound",
+      suivi_statut: toStoredStatut("nouveau_prospect"),
+      notes_admin: notes || null,
+      created_at: new Date().toISOString(),
+    },
+    {
+      email,
+      prenom: prenom || null,
+      nom: nom || null,
+      source: "email_inbound",
+      suivi_statut: toStoredStatut("nouveau_prospect"),
+      notes_admin: notes || null,
+      pays: "Non renseigné",
+      created_at: new Date().toISOString(),
+    },
+    {
+      email,
+      prenom: prenom || null,
+      nom: nom || null,
+      source: "email_inbound",
+      suivi_statut: toStoredStatut("nouveau_prospect"),
+      notes_admin: notes || null,
+    },
+  ];
+
+  for (const payload of payloads) {
+    const { data, error } = await supabase
+      .from("contacts")
+      .insert([payload])
+      .select()
+      .single();
+    if (!error && data) return data;
+    console.warn("⚠️ Création contact inbound:", error?.message);
+  }
+
+  return null;
+}
+
+async function fillMissingContactName(contact, prenom, nom) {
+  const patch = {};
+  if (!filledName(contact.prenom) && prenom) patch.prenom = prenom;
+  if (!filledName(contact.nom) && nom) patch.nom = nom;
+  if (!Object.keys(patch).length) return contact;
+
+  const { data, error } = await supabase
+    .from("contacts")
+    .update(patch)
+    .eq("id", contact.id)
+    .select()
+    .single();
+
+  if (error || !data) return { ...contact, ...patch };
+  return data;
+}
+
+function classifyInboundIntent({ formule, classified, interest, question }) {
+  if (formule) return "choix_formule";
+  if (classified) return classified.key;
+  if (interest) return "demande_formules";
+  if (question) return "question";
+  return "reponse_libre";
+}
+
+export async function maybeSendIntentAutoReply(contact, { subject = "", text = "" } = {}) {
+  const statut = contact.suivi_statut || "";
+  if (canonicalStatut(statut) === "prospect_perdu") {
+    return { sent: false, reason: "prospect_perdu" };
+  }
+
+  const classified = detectEmailIntent(text, subject);
+  if (!classified) {
+    return { sent: false, reason: "no_intent" };
+  }
+
+  if (shouldSkipIntentAutoReply(classified.key, text)) {
+    return { sent: false, reason: "skip_short_or_thanks", intent: classified.key };
+  }
+
+  if (classified.key === "general") {
+    const current = canonicalStatut(statut);
+    if (current && current !== "nouveau_prospect") {
+      return { sent: false, reason: "general_not_new", intent: classified.key };
+    }
+  }
+
+  if (
+    classified.key === "tarifs" &&
+    (isFormulesAwaitingReply(statut) || isFormuleAlreadyChosen(statut))
+  ) {
+    return { sent: false, reason: "formules_already", intent: classified.key };
+  }
+
+  const actions = await fetchRecentActions(contact.id);
+  if (alreadySentIntentReply(actions, classified.key)) {
+    return { sent: false, reason: "duplicate", intent: classified.key };
+  }
+
+  const sent = await sendTemplatedEmail(contact, classified.templateKey);
+  if (!sent.success) {
+    await logAction(
+      contact.id,
+      contact.email,
+      "note_ajoutee",
+      `Échec réponse automatique (${classified.key}) : ${sent.error || "erreur Resend"}`,
+    );
+    return {
+      sent: false,
+      reason: "send_failed",
+      intent: classified.key,
+      error: sent.error,
+    };
+  }
+
+  const nextStatus = sent.template?.status;
+  if (nextStatus && shouldAdvanceStatus(statut, nextStatus)) {
+    await updateContactStatus(contact.id, nextStatus);
+  }
+
+  await logAction(
+    contact.id,
+    contact.email,
+    sent.template?.action || "email_envoye",
+    sent.template?.description ||
+      `Réponse automatique envoyée (${classified.key})`,
+  );
+
+  return {
+    sent: true,
+    intent: classified.key,
+    template: classified.templateKey,
+    status: nextStatus || statut,
+  };
+}
+
 export async function saveChosenFormule(contact, formuleLabel) {
   const noteLine = `Formule choisie: ${formuleLabel}`;
   const notes = contact.notes_admin
@@ -449,33 +620,71 @@ export async function processInboundEmail(payload) {
     };
   }
 
-  const contact =
+  const extractedName = extractPersonName({
+    fromHeader: received.from,
+    text: replyText || rawText,
+  });
+
+  let contact =
     (await findContactByEmail(from)) ||
     (envelopeFrom && envelopeFrom !== from
       ? await findContactByEmail(envelopeFrom)
       : null);
 
   if (!contact) {
-    console.log("⚠️ Contact non trouvé:", from);
-    return {
-      success: true,
-      ignored: true,
-      message: "Contact non trouvé",
-      from,
-      httpStatus: 200,
-    };
+    if (!shouldCreateContactFromInbound(replyText || rawText, subject)) {
+      console.log("⚠️ Contact non trouvé:", from);
+      return {
+        success: true,
+        ignored: true,
+        message: "Contact non trouvé",
+        from,
+        httpStatus: 200,
+      };
+    }
+
+    contact = await createContactFromInbound({
+      email: from,
+      prenom: extractedName.prenom,
+      nom: extractedName.nom,
+      notes: truncate(replyText || rawText, 1500),
+    });
+
+    if (!contact) {
+      return {
+        success: false,
+        message: "Impossible de créer le contact inbound",
+        from,
+        httpStatus: 500,
+      };
+    }
+
+    await logAction(
+      contact.id,
+      contact.email,
+      "note_ajoutee",
+      `Contact créé depuis un email reçu (${from})`,
+    );
+  } else if (extractedName.prenom || extractedName.nom) {
+    contact = await fillMissingContactName(
+      contact,
+      extractedName.prenom,
+      extractedName.nom,
+    );
   }
 
   const formule = detectFormule(replyText);
   const interest = detectInterest(replyText);
   const question = looksLikeQuestion(replyText);
+  const classified = detectEmailIntent(replyText || rawText, subject);
   const statut = contact.suivi_statut || "";
   const existingFormule = getChosenFormule(contact);
-
-  let intent = "reponse_libre";
-  if (formule) intent = "choix_formule";
-  else if (interest) intent = "demande_formules";
-  else if (question) intent = "question";
+  const intent = classifyInboundIntent({
+    formule,
+    classified,
+    interest,
+    question,
+  });
 
   await logAction(
     contact.id,
@@ -534,8 +743,33 @@ export async function processInboundEmail(payload) {
     };
   }
 
+  const autoReply = await maybeSendIntentAutoReply(contact, {
+    subject,
+    text: replyText || rawText,
+  });
+  if (autoReply.sent) {
+    return {
+      success: true,
+      message: `Réponse automatique envoyée (${autoReply.intent})`,
+      contact: contact.id,
+      intent: autoReply.intent,
+      status: autoReply.status,
+      httpStatus: 200,
+    };
+  }
+  if (autoReply.reason === "send_failed") {
+    return {
+      success: false,
+      message: "Erreur envoi réponse automatique",
+      contact: contact.id,
+      intent: autoReply.intent,
+      httpStatus: 500,
+    };
+  }
+
   if (
     interest &&
+    !classified &&
     !isFormulesAwaitingReply(statut) &&
     !isFormuleAlreadyChosen(statut)
   ) {
@@ -553,7 +787,7 @@ export async function processInboundEmail(payload) {
       contact.id,
       contact.email,
       "email_formules",
-      "Email des formules envoyé automatiquement après réponse du prospect",
+      "Email des formules envoyé automatiquement après réponse du prospect [auto:tarifs]",
     );
 
     return {
@@ -567,11 +801,14 @@ export async function processInboundEmail(payload) {
 
   return {
     success: true,
-    message: question
-      ? "Réponse enregistrée (question détectée, pas d'email automatique)"
-      : "Réponse enregistrée sans email automatique",
+    message: autoReply.reason === "duplicate"
+      ? `Réponse enregistrée (déjà répondu pour ${autoReply.intent})`
+      : question
+        ? "Réponse enregistrée (question détectée, pas d'email automatique)"
+        : "Réponse enregistrée sans email automatique",
     contact: contact.id,
     intent,
+    skipped: autoReply.reason || null,
     httpStatus: 200,
   };
 }

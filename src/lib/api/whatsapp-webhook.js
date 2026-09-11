@@ -10,6 +10,7 @@ import {
   detectFormule,
   detectInterest,
   looksLikeQuestion,
+  maybeSendIntentAutoReply,
   saveChosenFormule,
   truncate,
 } from "./inbound-email.js";
@@ -17,6 +18,7 @@ import { getChosenFormule } from "../studentProgress.js";
 import { phonesMatch } from "../whatsapp/messages.js";
 import { getWhatsAppConfig } from "../whatsapp/cloud.js";
 import { isFormuleAlreadyChosen, isFormulesAwaitingReply } from "../suiviStatuts.js";
+import { detectEmailIntent } from "../emailIntents.js";
 
 const supabaseUrl =
   process.env.SUPABASE_URL ||
@@ -124,11 +126,13 @@ async function handleOneIncoming({ message, contacts }) {
   const formule = detectFormule(text);
   const interest = detectInterest(text);
   const question = looksLikeQuestion(text);
+  const classified = detectEmailIntent(text);
   const statut = contact.suivi_statut || "";
   const existingFormule = getChosenFormule(contact);
 
   let intent = "reponse_libre";
   if (formule) intent = "choix_formule";
+  else if (classified) intent = classified.key;
   else if (interest) intent = "demande_formules";
   else if (question) intent = "question";
 
@@ -179,8 +183,20 @@ async function handleOneIncoming({ message, contacts }) {
     };
   }
 
+  if (contact.email) {
+    const autoReply = await maybeSendIntentAutoReply(contact, { text });
+    if (autoReply.sent) {
+      return {
+        contact: contact.id,
+        intent: autoReply.intent,
+        auto: autoReply.intent,
+      };
+    }
+  }
+
   if (
     interest &&
+    !classified &&
     contact.email &&
     !isFormulesAwaitingReply(statut) &&
     !isFormuleAlreadyChosen(statut)
@@ -192,7 +208,7 @@ async function handleOneIncoming({ message, contacts }) {
         contact.id,
         contact.email,
         "email_formules",
-        "Formules envoyées par email après réponse WhatsApp",
+        "Formules envoyées par email après réponse WhatsApp [auto:tarifs]",
       );
     }
     return { contact: contact.id, intent, auto: "formules" };
