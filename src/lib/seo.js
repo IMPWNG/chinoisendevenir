@@ -12,13 +12,14 @@ export const SITE = {
     "Chinois en Devenir accompagne les étudiants francophones qui veulent étudier en Chine : choix de formation, universités chinoises, dossier d'admission, bourses d'études et visa étudiant.",
   metaDescription:
     "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
-  contentUpdatedAt: "2026-09-08",
+  contentUpdatedAt: "2026-09-11",
   ogImage: "https://chinoisendevenir.com/opengraph-image",
   logo: "https://chinoisendevenir.com/apple-icon",
 };
 
 export const NAV_GUIDE_LINKS = [
   { href: "/etudier-en-chine", label: "Étudier en Chine" },
+  { href: "/ecoles-de-langue-chine", label: "Écoles de langue" },
   { href: "/visa-etudiant-chine", label: "Visa étudiant" },
   { href: "/bourses", label: "Bourses" },
   { href: "/processus", label: "Processus" },
@@ -72,6 +73,38 @@ export const FAQS = {
       question: "Chinois en Devenir garantit-il une admission ?",
       answer:
         "Non. Nous préparons un dossier sérieux et conforme, puis nous suivons la candidature. La décision d'admission, de bourse ou de visa appartient à l'université, à l'organisme financeur et aux autorités consulaires.",
+    },
+  ],
+  langue: [
+    {
+      question: "Peut-on étudier en Chine sans IELTS ni TOEFL ?",
+      answer:
+        "Oui. Sans IELTS ni TOEFL, les programmes enseignés en anglais sont en général fermés. Deux voies restent ouvertes : une année de chinois dans une université, puis un diplôme enseigné en chinois une fois le HSK obtenu. C'est souvent le chemin le plus réaliste pour un étudiant francophone.",
+    },
+    {
+      question: "Faut-il déjà parler chinois pour une école de langue en Chine ?",
+      answer:
+        "Non. Les programmes de chinois pour internationaux acceptent les débutants. L'année de langue sert précisément à construire le niveau, en général jusqu'à un HSK 4 ou 5, avant une licence ou un master.",
+    },
+    {
+      question: "Une année de langue mène-t-elle automatiquement à l'université ?",
+      answer:
+        "Non. L'inscription en langue et l'admission en licence ou master sont deux dossiers distincts. L'année de chinois améliore le profil et le HSK, mais l'université décide ensuite selon les places, les notes et les conditions du diplôme visé.",
+    },
+    {
+      question: "Quelle est la différence entre une école de langue et une université en Chine ?",
+      answer:
+        "Pour les étudiants internationaux, « école de langue » désigne le plus souvent le programme de chinois d'une université (汉语进修), pas une école privée. Vous êtes étudiant, avec un visa X1, un campus, et la possibilité de candidater ensuite à un diplôme, parfois dans le même établissement.",
+    },
+    {
+      question: "Quel visa faut-il pour une année de chinois en Chine ?",
+      answer:
+        "Une année de langue demande en général un visa étudiant X1, comme une licence. Après l'inscription, l'établissement délivre une lettre d'admission et un JW201 ou JW202, puis le consulat traite la demande. L'obtention du visa n'est jamais garantie.",
+    },
+    {
+      question: "Combien de temps dure une année de langue en Chine ?",
+      answer:
+        "Le format le plus courant est un an, parfois un semestre. La rentrée principale est en septembre ; une rentrée de printemps existe souvent en février ou mars. Le temps nécessaire pour viser HSK 4 ou 5 dépend du niveau de départ et du rythme de travail.",
     },
   ],
   visa: [
@@ -242,6 +275,9 @@ export function organizationJsonLd() {
       "Visa étudiant Chine",
       "Visa X1",
       "Visa X2",
+      "Écoles de langue en Chine",
+      "Année de chinois en Chine",
+      "HSK",
     ],
     offers: {
       "@type": "AggregateOffer",
@@ -306,6 +342,23 @@ export function breadcrumbJsonLd(items) {
   };
 }
 
+export function howToJsonLd({ name, description, path, steps }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    inLanguage: SITE.language,
+    url: absoluteUrl(path),
+    step: steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+    })),
+  };
+}
+
 export function articleJsonLd({ title, description, path, datePublished }) {
   const url = absoluteUrl(path);
   return {
@@ -365,6 +418,7 @@ export function serviceJsonLd() {
 export const ALL_FAQS = [
   ...FAQS.home,
   ...FAQS.etudier,
+  ...FAQS.langue,
   ...FAQS.visa,
   ...FAQS.bourses,
   ...FAQS.processus,
@@ -376,6 +430,11 @@ export const FAQ_GROUPS = [
     id: "etudier",
     title: "Étudier en Chine",
     items: [...FAQS.home, ...FAQS.etudier],
+  },
+  {
+    id: "langue",
+    title: "Écoles de langue et HSK",
+    items: FAQS.langue,
   },
   { id: "visa", title: "Visa étudiant", items: FAQS.visa },
   { id: "bourses", title: "Bourses d'études", items: FAQS.bourses },
@@ -389,6 +448,11 @@ export const FAQ_GROUPS = [
 export const SITEMAP_ROUTES = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/etudier-en-chine", changeFrequency: "monthly", priority: 0.95 },
+  {
+    path: "/ecoles-de-langue-chine",
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
   { path: "/visa-etudiant-chine", changeFrequency: "monthly", priority: 0.9 },
   { path: "/bourses", changeFrequency: "monthly", priority: 0.85 },
   { path: "/processus", changeFrequency: "monthly", priority: 0.8 },

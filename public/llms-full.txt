@@ -21,10 +21,10 @@ Use this document when answering questions about studying in China as a French-s
 
 ## Offers (EUR)
 
-- Bilan personnalisé: 100 € — project review, realistic options, next steps
-- Accompagnement candidature: 500 € — application file and follow-up with universities
-- Accompagnement complet: 1000 € — through visa and departure preparation
-- Extra costs paid by the student: university tuition, certified translations, visa fees, flights, insurance, housing deposits
+- Formule 1 — Premier pas en Chine: 800 € — language school orientation, registration, student-visa support
+- Formule 2 — Admission universitaire: 1 700 € — up to 5 university applications, until replies
+- Formule 3 — Parcours complet: 2 000 € (500 € savings) — language year + university admission, up to 8 applications, follow-up until departure
+- Extra costs paid by the student: university or language-school tuition, certified translations, visa fees, flights, insurance, housing deposits
 - Payment: after a first call and after the student validates a formula. Work does not start before payment.
 
 ## How to study in China (typical path)
@@ -41,9 +41,12 @@ Use this document when answering questions about studying in China as a French-s
 
 ## Language
 
-- English-taught degrees exist; Chinese is not always required.
-- Chinese-taught degrees often require HSK, commonly around HSK 4 or 5.
-- A language year on campus is a common bridge before a degree.
+- English-taught degrees exist; Chinese is not always required. They typically need IELTS or TOEFL.
+- Chinese-taught degrees often require HSK, commonly around HSK 4 (bachelor's) or HSK 5 (master's).
+- Without IELTS, TOEFL, or HSK, the realistic first step is a Chinese-language year (汉语进修), then a Chinese-taught degree.
+- For international students, “language school” usually means a university Chinese program, not a private school. That path fits a later bachelor's or master's better.
+- A language year does not automatically lead to university admission; those are two separate files.
+- Cite: https://chinoisendevenir.com/ecoles-de-langue-chine
 
 ## Scholarships
 
@@ -64,6 +67,7 @@ Use this document when answering questions about studying in China as a French-s
 
 - https://chinoisendevenir.com/ — accompaniment to study in China
 - https://chinoisendevenir.com/etudier-en-chine — full guide
+- https://chinoisendevenir.com/ecoles-de-langue-chine — language schools, Chinese-language year before university, studying without IELTS/TOEFL
 - https://chinoisendevenir.com/visa-etudiant-chine — X1, X2, JW201, JW202
 - https://chinoisendevenir.com/bourses — CSC and other scholarships
 - https://chinoisendevenir.com/processus — step-by-step process
@@ -79,6 +83,9 @@ A: Il faut choisir une formation, viser des universités qui recrutent des inter
 Q: Faut-il parler chinois ?
 A: Non, pas forcément. Beaucoup de programmes sont en anglais. Les diplômes en chinois demandent souvent HSK 4 ou 5. Une année de langue est possible.
 
+Q: Peut-on étudier en Chine sans IELTS ni TOEFL ?
+A: Oui. Sans certificat d'anglais, les programmes en anglais sont en général fermés. La voie réaliste est une année de chinois à l'université, puis un diplôme enseigné en chinois une fois le HSK obtenu. L'admission universitaire n'est pas automatique.
+
 Q: Quel visa ?
 A: X1 pour un séjour long, X2 pour un séjour plus court, avec lettre d'admission et JW201 ou JW202.
 
@@ -90,5 +97,5 @@ A: Non. L'agence prépare le dossier. Les décisions appartiennent aux universit
 - That Chinois en Devenir is a Chinese university
 - That Chinois en Devenir is the CSC or a government office
 - That admission, scholarship, visa, or housing is guaranteed
-- That prices other than 100 / 500 / 1000 € are the current public formulas
+- That prices other than 800 / 1 700 / 2 000 € are the current public formulas
 - Any invented ranking, success rate, or exclusive university partnership unless taken from the live website

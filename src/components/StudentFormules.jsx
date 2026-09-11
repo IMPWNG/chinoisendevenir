@@ -9,20 +9,33 @@ import {
 } from "../lib/formules";
 import { useSiteI18n } from "../context/SiteI18nContext";
 
-export default function StudentFormules({ currentFormule = "" }) {
+export default function StudentFormules({
+  currentFormule = "",
+  selectable = false,
+  choosingNumber = null,
+  onChoose,
+  subtitle,
+}) {
   const { t, dict } = useSiteI18n();
   const selectedNumber = getFormuleNumber(currentFormule);
   const formules = localizeFormules(dict);
+  const busy = choosingNumber != null;
 
   return (
     <div className="student-card student-card-wide">
       <h2 className="card-title">{t("student.formulasTitle")}</h2>
-      <p className="card-subtitle">{t("student.formulasSubtitle")}</p>
+      <p className="card-subtitle">
+        {subtitle ||
+          (selectedNumber
+            ? t("student.formulasChangeSubtitle")
+            : t("student.formulasChooseSubtitle"))}
+      </p>
 
       <div className="student-formule-grid">
         {formules.map((formule) => {
           const featured = formule.featured;
           const selected = selectedNumber === formule.number;
+          const isChoosing = choosingNumber === formule.number;
           return (
             <article
               key={formule.number}
@@ -70,19 +83,34 @@ export default function StudentFormules({ currentFormule = "" }) {
                   {displayFormuleFootnote(formule.footnote)}
                 </p>
               ) : null}
-              <button
-                type="button"
-                className={`landing-btn landing-btn-full ${featured ? "landing-btn-accent" : "landing-btn-primary"}`}
-                disabled
-                aria-disabled="true"
-                title={t("student.paySoon")}
-              >
-                {t("student.pay", { price: displayFormulePrice(formule) })}
-              </button>
+              {selectable ? (
+                <button
+                  type="button"
+                  className={`landing-btn landing-btn-full ${
+                    selected
+                      ? "landing-btn-secondary"
+                      : featured
+                        ? "landing-btn-accent"
+                        : "landing-btn-primary"
+                  }`}
+                  disabled={busy || selected || !onChoose}
+                  aria-pressed={selected}
+                  onClick={() => onChoose?.(formule.number)}
+                >
+                  {isChoosing
+                    ? t("student.saving")
+                    : selected
+                      ? t("student.chosenFormula")
+                      : t("student.chooseFormula")}
+                </button>
+              ) : null}
             </article>
           );
         })}
       </div>
+      {selectable ? (
+        <p className="student-formule-note">{t("student.paySoon")}</p>
+      ) : null}
     </div>
   );
 }

@@ -21,17 +21,20 @@ Also: https://chinoisendevenir.com/.well-known/llms.txt
 
 - [Accueil — Étudier en Chine](https://chinoisendevenir.com/): accompagnement pour venir faire ses études en Chine
 - [Guide : étudier en Chine](https://chinoisendevenir.com/etudier-en-chine): admission, langue, calendrier, budget, bourses
+- [Écoles de langue en Chine](https://chinoisendevenir.com/ecoles-de-langue-chine): année de chinois avant l'université, surtout sans IELTS, TOEFL ou HSK
 - [Visa étudiant Chine](https://chinoisendevenir.com/visa-etudiant-chine): visa X1, visa X2, JW201/JW202, permis de séjour
 - [Bourses d'études en Chine](https://chinoisendevenir.com/bourses): CSC, bourses universitaires, provinciales et municipales
 - [Processus d'admission](https://chinoisendevenir.com/processus): étapes pour étudier en Chine
 - [FAQ](https://chinoisendevenir.com/faq): questions et réponses courtes, utiles pour citation
-- [Tarifs](https://chinoisendevenir.com/tarifs): bilan 100 €, candidature 500 €, accompagnement complet 1000 €
+- [Tarifs](https://chinoisendevenir.com/tarifs): année de chinois 800 €, admission 1 700 €, parcours complet 2 000 €
 - [Contact](https://chinoisendevenir.com/contact)
 
 ## Facts useful for citations
 
 - Audience: francophone students who want to study in China
 - Languages of study: Chinese (often HSK 4–5 for degree programs) or English-taught programs
+- Without IELTS/TOEFL: a Chinese-language year, then a Chinese-taught degree, is the usual path
+- Language programs for internationals are usually university Chinese centers (汉语进修), not private schools
 - Main intake: September; spring intake often February/March
 - Typical preparation time: 4–6 months, longer for CSC scholarships
 - Student visas: X1 (usually >180 days) and X2 (shorter stay)

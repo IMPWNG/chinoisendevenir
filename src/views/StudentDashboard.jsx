@@ -83,9 +83,14 @@ export default function StudentDashboard() {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState("");
   const [selectedFiles, setSelectedFiles] = useState({});
+  const [choosingFormule, setChoosingFormule] = useState(null);
 
   const hasForm = Boolean(profile?.hasForm);
   const unlocked = Boolean(profile?.unlocked ?? profile?.paid);
+  const hasChosenFormule = Boolean(profile?.formule);
+  const canChooseFormule = Boolean(
+    profile?.canChooseFormule ?? (hasForm && !unlocked),
+  );
   const formuleNumber = profile?.formuleNumber || null;
   const access = profile?.access || {};
   const showVisaDocs = studentCanAccessVisaDocuments(formuleNumber);
@@ -195,6 +200,26 @@ export default function StudentDashboard() {
     }
   };
 
+  const handleChooseFormule = async (number) => {
+    if (!canChooseFormule || choosingFormule) return;
+    setChoosingFormule(number);
+    setMessage(null);
+    setError("");
+    try {
+      const data = await studentFetch("/api/student/formule", {
+        method: "POST",
+        body: JSON.stringify({ number }),
+      });
+      setProfile(data.profile);
+      setMessage({ type: "success", text: t("student.formuleSaved") });
+      await loadProfile({ silent: true });
+    } catch (err) {
+      setMessage({ type: "error", text: err.message });
+    } finally {
+      setChoosingFormule(null);
+    }
+  };
+
   const handleLogout = async () => {
     await signOut();
     window.location.href = "/espace-etudiant/connexion";
@@ -242,7 +267,9 @@ export default function StudentDashboard() {
     ? t("student.noFile")
     : unlocked
       ? t("student.unlockedSubtitle")
-      : t("student.lockedSubtitle");
+      : hasChosenFormule
+        ? t("student.chosenPendingSubtitle")
+        : t("student.lockedSubtitle");
 
   return (
     <div className="app app-page-fill">
@@ -305,14 +332,19 @@ export default function StudentDashboard() {
                 onSuccess={() => loadProfile({ silent: true })}
               />
             </div>
+          ) : !hasChosenFormule ? (
+            <StudentFormules
+              currentFormule=""
+              selectable
+              choosingNumber={choosingFormule}
+              onChoose={handleChooseFormule}
+            />
           ) : (
             <>
-              {unlocked ? (
-                <StudentFormuleBanner
-                  formule={profile.formule || ""}
-                  formuleNumber={formuleNumber}
-                />
-              ) : null}
+              <StudentFormuleBanner
+                formule={profile.formule || ""}
+                formuleNumber={formuleNumber}
+              />
               <form className="student-card student-card-wide" onSubmit={handleSave}>
                 <h2 className="card-title">{t("student.infoTitle")}</h2>
                 <p className="card-subtitle">
@@ -473,8 +505,13 @@ export default function StudentDashboard() {
               </form>
 
 
-              {!unlocked ? (
-                <StudentFormules currentFormule={profile.formule || ""} />
+              {canChooseFormule ? (
+                <StudentFormules
+                  currentFormule={profile.formule || ""}
+                  selectable
+                  choosingNumber={choosingFormule}
+                  onChoose={handleChooseFormule}
+                />
               ) : (
                 <>
                   <div className="student-card student-card-wide">

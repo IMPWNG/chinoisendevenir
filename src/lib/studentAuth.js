@@ -7,6 +7,7 @@ import {
 import {
   isStudentSpaceUnlocked,
   isStudentAccessGranted,
+  canStudentChooseFormule,
   hasFilledLeadForm,
   getChosenFormule,
   getDisplayedStepIndex,
@@ -39,6 +40,7 @@ export function publicStudentProfile(contact, userEmail = "") {
       hasForm: false,
       paid: false,
       unlocked: false,
+      canChooseFormule: false,
       formule: "",
       formuleLabel: "",
       formuleNumber: null,
@@ -68,6 +70,7 @@ export function publicStudentProfile(contact, userEmail = "") {
     hasForm,
     paid: unlocked,
     unlocked,
+    canChooseFormule: canStudentChooseFormule(contact),
     formule,
     formuleLabel: formule ? displayFormuleLabel(formule) : "",
     formuleNumber: formuleNumber || null,

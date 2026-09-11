@@ -28,6 +28,7 @@ const fr = {
   nav: {
     home: "Accueil",
     study: "Étudier en Chine",
+    language: "Écoles de langue",
     scholarships: "Bourses",
     visa: "Visa",
     process: "Processus",
@@ -45,6 +46,7 @@ const fr = {
     rights: "Tous droits réservés",
     colStudy: "Étudier en Chine",
     guide: "Guide : étudier en Chine",
+    languageSchools: "Écoles de langue",
     studentVisa: "Visa étudiant",
     scholarships: "Bourses d'études",
     admissionProcess: "Processus d'admission",
@@ -54,6 +56,10 @@ const fr = {
     contact: "Contact",
     evaluate: "Évaluer mon projet",
     studentSpace: "Espace étudiant",
+    colContact: "Contact",
+    contactLead:
+      "Une question sur une année de chinois, une université ou un visa ? Écrivez-nous.",
+    contactPage: "Page contact",
     colInfo: "Informations",
     privacy: "Politique de confidentialité",
     terms: "Conditions d'utilisation",
@@ -124,6 +130,7 @@ const fr = {
     hesitate:
       "Vous hésitez encore ? Les {link} aident à choisir une école de langue ou une université avant de déposer un dossier.",
     formulasLink: "formules d'accompagnement",
+    languageCta: "Pas d'IELTS ni de TOEFL ? Voir les écoles de langue en Chine",
   },
   home: {
     whyTitle: "Pourquoi étudier en Chine",
@@ -275,6 +282,10 @@ const fr = {
         icon: "🗣️",
         title: "Faut-il parler chinois ?",
         text: "Pas forcément. Beaucoup de formations internationales se font en anglais. Les diplômes enseignés en chinois demandent en général un HSK, souvent autour du niveau 4 ou 5. Si le niveau n'est pas encore suffisant, une année de langue dans l'université vise à préparer l'entrée en licence ou en master. Le choix langue / anglais change la liste d'universités et parfois les bourses accessibles.",
+        link: {
+          href: "/ecoles-de-langue-chine",
+          label: "Écoles de langue et année de chinois",
+        },
       },
       {
         icon: "📅",
@@ -307,6 +318,184 @@ const fr = {
       "Décrivez votre parcours et votre projet : nous vous indiquons les options d'études en Chine les plus réalistes pour votre profil.",
     cta: "Évaluer mon projet d'études en Chine",
     faqTitle: "Questions fréquentes pour étudier en Chine",
+  },
+  langue: {
+    crumb: "Écoles de langue en Chine",
+    updated: "Mis à jour : septembre 2026",
+    title:
+      "Écoles de langue en Chine : commencer par le chinois avant l'université",
+    lead: "Une école de langue en Chine est un programme de chinois pour étudiants internationaux, le plus souvent hébergé par une université. Vous partez sans IELTS, sans TOEFL et souvent sans HSK, vous apprenez en immersion, puis vous visez une licence ou un master enseigné en chinois. Pour beaucoup de francophones, c'est le chemin le plus réaliste.",
+    disclaimer:
+      "Chinois en Devenir accompagne le choix d'une école de langue et le visa étudiant, sans garantir une inscription, un HSK ou une admission universitaire ensuite.",
+    hWhat: "Qu'est-ce qu'une école de langue en Chine ?",
+    pWhat:
+      "En pratique, « école de langue » désigne surtout les cours de chinois d'une université chinoise (汉语进修), pas une école privée type Alliance. Vous êtes étudiant international, avec un visa étudiant, un campus, un dortoir possible, et une rentrée en septembre ou au printemps. L'objectif n'est pas seulement quelques phrases de survie : c'est poser le niveau HSK qui ouvre ensuite un diplôme.",
+    hWhy: "Pourquoi venir d'abord étudier le chinois en Chine ?",
+    pWhy:
+      "Les licences et masters en anglais demandent en général un IELTS ou un TOEFL. Les diplômes en chinois demandent un HSK, souvent autour du niveau 4 ou 5. Sans l'un ni l'autre, candidater directement à l'université bloque. Une année de langue lève ce verrou : vous arrivez débutant, vous construisez le HSK sur place, puis vous postulez à un diplôme — souvent dans la même université.",
+    whyItems: [
+      {
+        title: "Pas besoin d'IELTS ni de TOEFL pour partir",
+        text: "L'année de chinois n'exige pas un certificat d'anglais. Vous partez avec un passeport, un diplôme de fin d'études secondaires ou plus, et un dossier d'inscription en langue.",
+      },
+      {
+        title: "Le HSK se construit en immersion",
+        text: "En classe, le chinois reste un cours. En Chine, c'est la langue du campus, du dortoir et de la ville. Le même volume d'heures avance plus vite.",
+      },
+      {
+        title: "Le diplôme ensuite se fait en chinois",
+        text: "Une fois le HSK obtenu, le choix de licences et de masters s'élargit nettement par rapport aux programmes en anglais, souvent plus rares et plus sélectifs sur la langue.",
+      },
+      {
+        title: "Vous testez la Chine avant de vous engager sur 3 ou 4 ans",
+        text: "Une année de langue permet de voir le rythme, la ville et le quotidien avant de signer pour une licence ou un master.",
+      },
+    ],
+    hNoEn: "Étudier en Chine sans diplôme d'anglais",
+    pNoEn:
+      "Sans IELTS ni TOEFL, les formations enseignées en anglais restent en général fermées. Deux portes restent ouvertes : l'année de langue, puis un diplôme enseigné en chinois. Beaucoup d'étudiants francophones choisissent donc le chinois comme langue d'études, plutôt que de passer un an à préparer un test d'anglais en Europe pour viser un programme international plus étroit.",
+    hCompare:
+      "Année de langue, programme en anglais ou diplôme en chinois",
+    compareLead:
+      "Le bon point de départ dépend de vos certificats, pas seulement de votre envie.",
+    compareCaption:
+      "Comparaison des trois voies pour un étudiant francophone qui veut étudier en Chine",
+    compareHeaders: [
+      "Critère",
+      "Diplôme en anglais",
+      "Diplôme en chinois tout de suite",
+      "Année de langue d'abord",
+    ],
+    compareRows: [
+      [
+        "IELTS ou TOEFL",
+        "Souvent exigé",
+        "Non",
+        "Non",
+      ],
+      [
+        "HSK à l'entrée",
+        "Non",
+        "Souvent HSK 4 ou 5",
+        "Aucun, ou niveau débutant",
+      ],
+      [
+        "Niveau de chinois au départ",
+        "Faible ou nul possible",
+        "Déjà suffisant",
+        "Débutant accepté",
+      ],
+      [
+        "Objectif de l'année 1",
+        "Cours du diplôme",
+        "Cours du diplôme",
+        "Chinois + HSK, puis candidature",
+      ],
+      [
+        "Visa",
+        "X1 (séjour long)",
+        "X1 (séjour long)",
+        "X1 pour une année de langue",
+      ],
+      [
+        "Pour qui",
+        "Profil avec certificat d'anglais",
+        "Profil déjà HSK 4 ou 5",
+        "Francophone sans certificat de langue",
+      ],
+    ],
+    compareNote:
+      "Sans certificat d'anglais, l'année de langue est le chemin le plus ouvert. Un diplôme en anglais reste possible plus tard, si vous passez un IELTS ou un TOEFL. Un diplôme en chinois devient accessible une fois le HSK obtenu. L'admission n'est jamais automatique.",
+    hHow: "Comment passer de l'école de langue à l'université",
+    pHow:
+      "Le parcours type dure souvent un an de chinois, parfois un semestre si le niveau avance vite, puis une candidature en licence ou master pour la rentrée suivante.",
+    how: [
+      {
+        title: "Clarifier le projet",
+        text: "Domaine visé, budget, ville, durée : l'année de langue n'empêche pas d'avoir déjà une idée de diplôme. Elle évite seulement de candidater trop tôt, sans le niveau de langue.",
+      },
+      {
+        title: "Choisir l'établissement",
+        text: "On privilégie un centre de langue universitaire si vous voulez enchaîner sur un diplôme, parfois dans le même campus. L'école privée convient davantage à un court séjour linguistique.",
+      },
+      {
+        title: "S'inscrire et demander le visa",
+        text: "Lettre d'admission, formulaire JW201 ou JW202, puis visa étudiant X1 pour une année. Les frais d'école, de visa et de voyage restent à votre charge.",
+      },
+      {
+        title: "Atteindre le HSK visé",
+        text: "HSK 4 ouvre beaucoup de licences enseignées en chinois. HSK 5 est fréquent en master, parfois avec un score minimum. Le niveau exact dépend de l'université et de la filière.",
+      },
+      {
+        title: "Candidater au diplôme",
+        text: "Pendant l'année de chinois, on prépare le dossier universitaire, une bourse éventuelle, puis un changement de programme ou de permis de séjour selon les règles de l'établissement.",
+      },
+    ],
+    howAfterBefore: "Le détail des étapes, du premier échange jusqu'au départ, est décrit dans le",
+    howAfterLink: "processus d'admission",
+    howAfterAfter:
+      ". L'année de langue et l'admission en licence ou master restent deux dossiers distincts.",
+    hUni: "Université ou école privée : que choisir ?",
+    pUni:
+      "Si l'objectif est un diplôme ensuite, un programme de chinois universitaire est en général plus cohérent. Le statut d'étudiant, le visa X1, le campus et la possibilité de postuler en interne simplifient la suite. Une école privée peut convenir pour un court séjour, moins pour un projet licence ou master.",
+    hHsk: "Quel HSK viser pendant l'année de langue ?",
+    pHsk:
+      "Le HSK (Hanyu Shuiping Kaoshi) est le test de chinois le plus souvent demandé par les universités. On ne vise pas « un HSK » en l'air : on vise le niveau exigé par le diplôme et l'établissement visés.",
+    hskCaption: "Niveaux HSK les plus utiles pour enchaîner sur un diplôme en Chine",
+    hskHeaders: ["Niveau", "À quoi il sert en général"],
+    hskRows: [
+      [
+        "HSK 1–2",
+        "Découverte. Insuffisant pour une licence enseignée en chinois.",
+      ],
+      [
+        "HSK 3",
+        "Seuil parfois accepté pour certains programmes préparatoires ou bourses de langue, rarement pour une licence complète.",
+      ],
+      [
+        "HSK 4",
+        "Niveau le plus souvent demandé pour une licence enseignée en chinois, parfois avec un score minimum.",
+      ],
+      [
+        "HSK 5",
+        "Niveau fréquent pour un master, parfois exigé avec un score (par exemple 180). Certaines filières demandent davantage.",
+      ],
+    ],
+    hskNote:
+      "Les exigences varient. Une université peut demander HSK 4, une autre HSK 5. Mieux vaut choisir l'établissement, puis le niveau, pas l'inverse.",
+    hWho: "Cette voie est-elle faite pour vous ?",
+    pWho:
+      "L'année de langue n'est pas un détour pour tout le monde. Elle est surtout utile si la langue, et non le diplôme déjà obtenu, est ce qui bloque l'université.",
+    whoYesTitle: "Oui, surtout si",
+    whoYes: [
+      "Vous n'avez pas d'IELTS, de TOEFL ni de HSK",
+      "Vous voulez un diplôme en Chine, pas seulement un séjour linguistique",
+      "Vous acceptez d'étudier ensuite en chinois plutôt qu'en anglais",
+      "Vous préférez tester la Chine pendant un an avant une licence ou un master",
+      "Vous êtes débutant ou presque débutant en chinois",
+    ],
+    whoNoTitle: "Moins adaptée si",
+    whoNo: [
+      "Vous avez déjà IELTS ou TOEFL et un projet de diplôme en anglais clair",
+      "Vous avez déjà HSK 4 ou 5 et pouvez candidater directement",
+      "Vous voulez seulement deux semaines de cours, sans visa étudiant",
+      "Vous attendez une admission universitaire automatique après l'année de langue",
+    ],
+    hCost: "Combien coûte une année de chinois en Chine ?",
+    pCostBefore:
+      "Les frais de scolarité d'un programme de langue universitaire varient selon la ville et l'établissement, en plus du logement, de l'assurance, du visa et de la vie quotidienne. Une bourse de langue existe parfois, mais elle n'est jamais automatique. L'accompagnement",
+    pCostLink: "Premier pas en Chine (800 €)",
+    pCostAfter:
+      "couvre l'orientation, le choix d'école, l'inscription et l'aide au visa ; les frais d'école et de voyage restent à votre charge.",
+    pVisaBefore: "Le visa d'une année de langue est le même type que pour un diplôme :",
+    pVisaLink: "visa étudiant X1, JW201 ou JW202",
+    pVisaAfter:
+      ". L'obtention n'est pas garantie. Nous préparons un dossier cohérent ; la décision appartient au consulat.",
+    ctaTitle: "Vous partez sans IELTS, TOEFL ou HSK ?",
+    ctaText:
+      "Décrivez votre parcours : nous vous indiquons si une année de chinois en Chine est le bon premier pas, et dans quel type d'établissement.",
+    cta: "Évaluer une année de chinois en Chine",
+    faqTitle: "Questions fréquentes sur les écoles de langue en Chine",
   },
   bourses: {
     crumb: "Bourses d'études en Chine",
@@ -805,6 +994,7 @@ const fr = {
     lead: "Réponses courtes pour venir faire ses études en Chine : admission, langue, bourses, visa étudiant et accompagnement. Chinois en Devenir prépare les dossiers ; les décisions restent celles des universités, des organismes de bourses et des consulats.",
     groups: {
       etudier: "Étudier en Chine",
+      langue: "Écoles de langue et HSK",
       visa: "Visa étudiant",
       bourses: "Bourses d'études",
       processus: "Processus et accompagnement",
@@ -856,6 +1046,7 @@ const fr = {
     links: [
       { href: "/", label: "Accueil" },
       { href: "/etudier-en-chine", label: "Guide étudier en Chine" },
+      { href: "/ecoles-de-langue-chine", label: "Écoles de langue" },
       { href: "/bourses", label: "Bourses" },
       { href: "/visa-etudiant-chine", label: "Visa étudiant" },
       { href: "/contact", label: "Contact" },
@@ -1029,7 +1220,9 @@ const fr = {
     unlockedSubtitle:
       "Consultez vos informations, mettez à jour votre profil et suivez votre dossier.",
     lockedSubtitle:
-      "Votre dossier est bien enregistré. Une formule sera débloquée par Chinois en Devenir.",
+      "Votre dossier est enregistré. Choisissez une formule pour continuer.",
+    chosenPendingSubtitle:
+      "Votre choix est enregistré. L'équipe vous recontactera pour valider et convenir du paiement avant le début de l'accompagnement.",
     completeTitle: "Complétez votre projet",
     completeText:
       "Connecté avec {email}. Utilisez cet email : s'il a déjà été renseigné dans le formulaire, votre dossier sera associé automatiquement.",
@@ -1061,11 +1254,19 @@ const fr = {
     adminDocsSubtitle:
       "Fichiers transmis par Chinois en Devenir pour votre dossier.",
     noAdminDocs: "Aucun document n'a encore été envoyé par l'équipe.",
-    formulasTitle: "Nos formules",
+    formulasTitle: "Choisissez votre formule",
     formulasSubtitle:
-      "Une fois votre formule débloquée par Chinois en Devenir, vous accéderez à l'orientation, au suivi et aux documents correspondant à votre accompagnement.",
+      "Sélectionnez l'accompagnement adapté à votre projet avant de continuer. L'orientation, le suivi et les documents s'ouvrent après validation et paiement.",
+    formulasChooseSubtitle:
+      "Sélectionnez l'accompagnement adapté à votre projet avant de continuer. L'orientation, le suivi et les documents s'ouvrent après validation et paiement.",
+    formulasChangeSubtitle:
+      "Vous pouvez encore changer de formule jusqu'à la validation de votre accompagnement.",
+    chooseFormula: "Choisir cette formule",
+    chosenFormula: "Formule choisie",
+    formuleSaved: "Votre formule a été enregistrée.",
     pay: "Payer {price}",
-    paySoon: "Le paiement en ligne sera bientôt disponible",
+    paySoon:
+      "Le paiement en ligne sera bientôt disponible. Pour l'instant, enregistrez votre choix : l'équipe vous recontactera.",
     yourSupport: "Votre accompagnement",
     formula: "Formule",
     formulaN: "Formule {n}",
@@ -1283,6 +1484,38 @@ const fr = {
           "Non. Nous préparons un dossier sérieux et conforme, puis nous suivons la candidature. La décision d'admission, de bourse ou de visa appartient à l'université, à l'organisme financeur et aux autorités consulaires.",
       },
     ],
+    langue: [
+      {
+        question: "Peut-on étudier en Chine sans IELTS ni TOEFL ?",
+        answer:
+          "Oui. Sans IELTS ni TOEFL, les programmes enseignés en anglais sont en général fermés. Deux voies restent ouvertes : une année de chinois dans une université, puis un diplôme enseigné en chinois une fois le HSK obtenu. C'est souvent le chemin le plus réaliste pour un étudiant francophone.",
+      },
+      {
+        question: "Faut-il déjà parler chinois pour une école de langue en Chine ?",
+        answer:
+          "Non. Les programmes de chinois pour internationaux acceptent les débutants. L'année de langue sert précisément à construire le niveau, en général jusqu'à un HSK 4 ou 5, avant une licence ou un master.",
+      },
+      {
+        question: "Une année de langue mène-t-elle automatiquement à l'université ?",
+        answer:
+          "Non. L'inscription en langue et l'admission en licence ou master sont deux dossiers distincts. L'année de chinois améliore le profil et le HSK, mais l'université décide ensuite selon les places, les notes et les conditions du diplôme visé.",
+      },
+      {
+        question: "Quelle est la différence entre une école de langue et une université en Chine ?",
+        answer:
+          "Pour les étudiants internationaux, « école de langue » désigne le plus souvent le programme de chinois d'une université (汉语进修), pas une école privée. Vous êtes étudiant, avec un visa X1, un campus, et la possibilité de candidater ensuite à un diplôme, parfois dans le même établissement.",
+      },
+      {
+        question: "Quel visa faut-il pour une année de chinois en Chine ?",
+        answer:
+          "Une année de langue demande en général un visa étudiant X1, comme une licence. Après l'inscription, l'établissement délivre une lettre d'admission et un JW201 ou JW202, puis le consulat traite la demande. L'obtention du visa n'est jamais garantie.",
+      },
+      {
+        question: "Combien de temps dure une année de langue en Chine ?",
+        answer:
+          "Le format le plus courant est un an, parfois un semestre. La rentrée principale est en septembre ; une rentrée de printemps existe souvent en février ou mars. Le temps nécessaire pour viser HSK 4 ou 5 dépend du niveau de départ et du rythme de travail.",
+      },
+    ],
     visa: [
       {
         question: "Quelle est la différence entre le visa X1 et le visa X2 ?",
@@ -1368,6 +1601,7 @@ const en = {
   nav: {
     home: "Home",
     study: "Study in China",
+    language: "Language schools",
     scholarships: "Scholarships",
     visa: "Visa",
     process: "Process",
@@ -1385,6 +1619,7 @@ const en = {
     rights: "All rights reserved",
     colStudy: "Study in China",
     guide: "Guide: studying in China",
+    languageSchools: "Language schools",
     studentVisa: "Student visa",
     scholarships: "Scholarships",
     admissionProcess: "Admission process",
@@ -1394,6 +1629,10 @@ const en = {
     contact: "Contact",
     evaluate: "Assess my project",
     studentSpace: "Student space",
+    colContact: "Contact",
+    contactLead:
+      "A question about a Chinese-language year, a university, or a visa? Write to us.",
+    contactPage: "Contact page",
     colInfo: "Information",
     privacy: "Privacy policy",
     terms: "Terms of use",
@@ -1464,6 +1703,7 @@ const en = {
     hesitate:
       "Still unsure? The {link} help you choose a language school or a university before you apply.",
     formulasLink: "support plans",
+    languageCta: "No IELTS or TOEFL? See language schools in China",
   },
   home: {
     whyTitle: "Why study in China",
@@ -1615,6 +1855,10 @@ const en = {
         icon: "🗣️",
         title: "Do you need to speak Chinese?",
         text: "Not necessarily. Many international programs are taught in English. Degrees taught in Chinese usually require HSK, often around level 4 or 5. If your level is not high enough yet, a language year at the university prepares entry into a bachelor's or master's. The Chinese / English choice changes the list of universities and sometimes the scholarships available.",
+        link: {
+          href: "/ecoles-de-langue-chine",
+          label: "Language schools and Chinese-language year",
+        },
       },
       {
         icon: "📅",
@@ -1647,6 +1891,181 @@ const en = {
       "Describe your background and your project: we will outline the most realistic study-in-China options for your profile.",
     cta: "Assess my China study project",
     faqTitle: "Frequently asked questions about studying in China",
+  },
+  langue: {
+    crumb: "Language schools in China",
+    updated: "Last updated: September 2026",
+    title:
+      "Language schools in China: start with Chinese before university",
+    lead: "A language school in China is a Chinese program for international students, most often hosted by a university. You leave without IELTS, TOEFL, and often without HSK, you learn through immersion, then you aim for a Chinese-taught bachelor's or master's. For many French speakers, that is the most realistic path.",
+    disclaimer:
+      "Chinois en Devenir helps you choose a language program and prepare the student visa, without guaranteeing enrollment, an HSK result, or later university admission.",
+    hWhat: "What is a language school in China?",
+    pWhat:
+      "In practice, “language school” usually means a Chinese university's Chinese-language program (汉语进修), not a private Alliance-style school. You are an international student, with a student visa, a campus, possible dorm housing, and an intake in September or in spring. The goal is not a few survival phrases: it is reaching the HSK level that then opens a degree.",
+    hWhy: "Why study Chinese in China first?",
+    pWhy:
+      "English-taught bachelor's and master's degrees usually require IELTS or TOEFL. Chinese-taught degrees require HSK, often around level 4 or 5. Without either, applying straight to university stalls. A language year removes that block: you arrive as a beginner, you build HSK on site, then you apply for a degree — often at the same university.",
+    whyItems: [
+      {
+        title: "No IELTS or TOEFL needed to leave",
+        text: "A Chinese-language year does not require an English certificate. You leave with a passport, a high-school diploma or higher, and a language-program file.",
+      },
+      {
+        title: "HSK is built through immersion",
+        text: "At home, Chinese stays a class. In China, it is the language of campus, the dorm, and the city. The same hours move faster.",
+      },
+      {
+        title: "The degree afterwards is in Chinese",
+        text: "Once you have HSK, the range of bachelor's and master's programs widens a lot compared with English-taught options, which are fewer and more selective on language.",
+      },
+      {
+        title: "You test China before a 3- or 4-year commitment",
+        text: "A language year lets you see the pace, the city, and daily life before you sign up for a bachelor's or master's.",
+      },
+    ],
+    hNoEn: "Studying in China without an English diploma",
+    pNoEn:
+      "Without IELTS or TOEFL, English-taught programs generally stay closed. Two doors remain open: a language year, then a Chinese-taught degree. Many French-speaking students therefore choose Chinese as their language of study, instead of spending a year in Europe preparing an English test for a narrower set of international programs.",
+    hCompare: "Language year, English-taught degree, or Chinese-taught degree",
+    compareLead:
+      "The right starting point depends on your certificates, not only on what you want.",
+    compareCaption:
+      "Comparison of three paths for a French-speaking student who wants to study in China",
+    compareHeaders: [
+      "Criterion",
+      "English-taught degree",
+      "Chinese-taught degree now",
+      "Language year first",
+    ],
+    compareRows: [
+      ["IELTS or TOEFL", "Often required", "No", "No"],
+      [
+        "HSK on entry",
+        "No",
+        "Often HSK 4 or 5",
+        "None, or beginner level",
+      ],
+      [
+        "Chinese level at the start",
+        "Low or none possible",
+        "Already enough",
+        "Beginners accepted",
+      ],
+      [
+        "Goal of year 1",
+        "Degree courses",
+        "Degree courses",
+        "Chinese + HSK, then apply",
+      ],
+      [
+        "Visa",
+        "X1 (long stay)",
+        "X1 (long stay)",
+        "X1 for a language year",
+      ],
+      [
+        "Best for",
+        "Profile with an English certificate",
+        "Profile already at HSK 4 or 5",
+        "French speaker with no language certificate",
+      ],
+    ],
+    compareNote:
+      "Without an English certificate, a language year is the most open path. An English-taught degree remains possible later if you take IELTS or TOEFL. A Chinese-taught degree becomes accessible once HSK is obtained. Admission is never automatic.",
+    hHow: "How to go from a language school to university",
+    pHow:
+      "The typical path is often one year of Chinese, sometimes a semester if the level moves fast, then a bachelor's or master's application for the next intake.",
+    how: [
+      {
+        title: "Clarify the project",
+        text: "Target field, budget, city, duration: a language year does not stop you from already having a degree in mind. It only avoids applying too early, without the language level.",
+      },
+      {
+        title: "Choose the school",
+        text: "A university language center is usually better if you want to continue to a degree, sometimes on the same campus. A private school fits a short language stay more than a bachelor's or master's project.",
+      },
+      {
+        title: "Register and apply for the visa",
+        text: "Admission letter, JW201 or JW202 form, then an X1 student visa for a year. School, visa, and travel costs remain yours.",
+      },
+      {
+        title: "Reach the target HSK",
+        text: "HSK 4 opens many Chinese-taught bachelor's programs. HSK 5 is common for a master's, sometimes with a minimum score. The exact level depends on the university and the major.",
+      },
+      {
+        title: "Apply for the degree",
+        text: "During the language year, you prepare the university file, a possible scholarship, then a program or residence-permit change according to the school's rules.",
+      },
+    ],
+    howAfterBefore:
+      "The full sequence, from the first call through departure, is described in the",
+    howAfterLink: "admission process",
+    howAfterAfter:
+      ". The language year and bachelor's or master's admission remain two separate files.",
+    hUni: "University or private school: which should you choose?",
+    pUni:
+      "If the goal is a degree afterwards, a university Chinese program is generally more coherent. Student status, an X1 visa, a campus, and the option to apply internally simplify the next step. A private school can fit a short stay, less so a bachelor's or master's project.",
+    hHsk: "Which HSK should you aim for during the language year?",
+    pHsk:
+      "HSK (Hanyu Shuiping Kaoshi) is the Chinese test universities ask for most often. You do not aim for “an HSK” in the abstract: you aim for the level required by the degree and the university you want.",
+    hskCaption:
+      "HSK levels most useful for moving on to a degree in China",
+    hskHeaders: ["Level", "What it is generally used for"],
+    hskRows: [
+      [
+        "HSK 1–2",
+        "Discovery. Not enough for a Chinese-taught bachelor's.",
+      ],
+      [
+        "HSK 3",
+        "A threshold sometimes accepted for some preparatory programs or language scholarships, rarely for a full bachelor's.",
+      ],
+      [
+        "HSK 4",
+        "The level most often required for a Chinese-taught bachelor's, sometimes with a minimum score.",
+      ],
+      [
+        "HSK 5",
+        "A common level for a master's, sometimes required with a score (for example 180). Some majors ask for more.",
+      ],
+    ],
+    hskNote:
+      "Requirements vary. One university may ask for HSK 4, another for HSK 5. Choose the school first, then the level — not the other way around.",
+    hWho: "Is this path for you?",
+    pWho:
+      "A language year is not a detour for everyone. It is most useful when language, not the diploma you already have, is what blocks university.",
+    whoYesTitle: "Yes, especially if",
+    whoYes: [
+      "You have no IELTS, TOEFL, or HSK",
+      "You want a degree in China, not only a language stay",
+      "You are willing to study in Chinese afterwards rather than in English",
+      "You prefer to test China for a year before a bachelor's or master's",
+      "You are a beginner or near-beginner in Chinese",
+    ],
+    whoNoTitle: "Less suitable if",
+    whoNo: [
+      "You already have IELTS or TOEFL and a clear English-taught degree plan",
+      "You already have HSK 4 or 5 and can apply directly",
+      "You only want two weeks of classes, with no student visa",
+      "You expect automatic university admission after the language year",
+    ],
+    hCost: "How much does a Chinese-language year in China cost?",
+    pCostBefore:
+      "Tuition for a university language program varies by city and school, on top of housing, insurance, visa, and daily life. A language scholarship sometimes exists, but it is never automatic. The",
+    pCostLink: "First steps in China plan (€800)",
+    pCostAfter:
+      "covers orientation, school choice, registration, and visa support; school and travel costs remain yours.",
+    pVisaBefore:
+      "The visa for a language year is the same type as for a degree:",
+    pVisaLink: "X1 student visa, JW201 or JW202",
+    pVisaAfter:
+      ". Obtaining it is not guaranteed. We prepare a coherent file; the decision belongs to the consulate.",
+    ctaTitle: "Leaving without IELTS, TOEFL, or HSK?",
+    ctaText:
+      "Describe your background: we will tell you whether a Chinese-language year in China is the right first step, and in what kind of school.",
+    cta: "Assess a Chinese-language year in China",
+    faqTitle: "Frequently asked questions about language schools in China",
   },
   bourses: {
     crumb: "Scholarships in China",
@@ -2135,6 +2554,7 @@ const en = {
     lead: "Short answers for coming to study in China: admission, language, scholarships, student visa, and support. Chinois en Devenir prepares the files; decisions remain those of universities, scholarship bodies, and consulates.",
     groups: {
       etudier: "Study in China",
+      langue: "Language schools and HSK",
       visa: "Student visa",
       bourses: "Scholarships",
       processus: "Process and support",
@@ -2186,6 +2606,7 @@ const en = {
     links: [
       { href: "/", label: "Home" },
       { href: "/etudier-en-chine", label: "Study-in-China guide" },
+      { href: "/ecoles-de-langue-chine", label: "Language schools" },
       { href: "/bourses", label: "Scholarships" },
       { href: "/visa-etudiant-chine", label: "Student visa" },
       { href: "/contact", label: "Contact" },
@@ -2357,7 +2778,9 @@ const en = {
     unlockedSubtitle:
       "View your information, update your profile, and follow your file.",
     lockedSubtitle:
-      "Your file is registered. A plan will be unlocked by Chinois en Devenir.",
+      "Your file is registered. Choose a plan to continue.",
+    chosenPendingSubtitle:
+      "Your choice is saved. The team will contact you to confirm it and agree on payment before support begins.",
     completeTitle: "Complete your project",
     completeText:
       "Signed in as {email}. Use this email: if it was already entered in the form, your file will be linked automatically.",
@@ -2388,11 +2811,19 @@ const en = {
     adminDocsSubtitle:
       "Files sent by Chinois en Devenir for your application.",
     noAdminDocs: "No document has been sent by the team yet.",
-    formulasTitle: "Our plans",
+    formulasTitle: "Choose your plan",
     formulasSubtitle:
-      "Once your plan is unlocked by Chinois en Devenir, you will access the orientation, follow-up, and documents that match your support.",
+      "Select the support that fits your project before continuing. Orientation, follow-up, and documents open after confirmation and payment.",
+    formulasChooseSubtitle:
+      "Select the support that fits your project before continuing. Orientation, follow-up, and documents open after confirmation and payment.",
+    formulasChangeSubtitle:
+      "You can still change your plan until your support is confirmed.",
+    chooseFormula: "Choose this plan",
+    chosenFormula: "Plan selected",
+    formuleSaved: "Your plan has been saved.",
     pay: "Pay {price}",
-    paySoon: "Online payment will be available soon",
+    paySoon:
+      "Online payment will be available soon. For now, save your choice: the team will contact you.",
     yourSupport: "Your support",
     formula: "Plan",
     formulaN: "Plan {n}",
@@ -2608,6 +3039,38 @@ const en = {
         question: "Does Chinois en Devenir guarantee admission?",
         answer:
           "No. We prepare a serious, compliant file and follow the application. Admission, scholarship, and visa decisions belong to the university, the funding body, and the consular authorities.",
+      },
+    ],
+    langue: [
+      {
+        question: "Can I study in China without IELTS or TOEFL?",
+        answer:
+          "Yes. Without IELTS or TOEFL, English-taught programs are generally closed. Two paths remain open: a Chinese-language year at a university, then a Chinese-taught degree once HSK is obtained. That is often the most realistic path for a French-speaking student.",
+      },
+      {
+        question: "Do I already need to speak Chinese for a language school in China?",
+        answer:
+          "No. Chinese programs for internationals accept beginners. The language year exists precisely to build the level, usually toward HSK 4 or 5, before a bachelor's or master's.",
+      },
+      {
+        question: "Does a language year automatically lead to university?",
+        answer:
+          "No. Language enrollment and bachelor's or master's admission are two separate files. The Chinese year improves the profile and HSK, but the university then decides based on places, grades, and the degree requirements.",
+      },
+      {
+        question: "What is the difference between a language school and a university in China?",
+        answer:
+          "For international students, “language school” most often means a university's Chinese program (汉语进修), not a private school. You are a student, with an X1 visa, a campus, and the option to apply later for a degree, sometimes at the same institution.",
+      },
+      {
+        question: "Which visa do I need for a Chinese-language year in China?",
+        answer:
+          "A language year generally requires an X1 student visa, like a bachelor's. After registration, the school issues an admission letter and a JW201 or JW202, then the consulate processes the application. A visa is never guaranteed.",
+      },
+      {
+        question: "How long does a language year in China last?",
+        answer:
+          "The most common format is one year, sometimes a semester. The main intake is in September; a spring intake often exists in February or March. Time needed to aim for HSK 4 or 5 depends on your starting level and work pace.",
       },
     ],
     visa: [

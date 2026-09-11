@@ -152,6 +152,11 @@ export function isStudentAccessGranted(contact) {
   );
 }
 
+export function canStudentChooseFormule(contact) {
+  if (!hasFilledLeadForm(contact)) return false;
+  return !isStudentAccessGranted(contact);
+}
+
 export function getGrantedFormuleNumber(contact) {
   if (!isStudentAccessGranted(contact)) return null;
   return getFormuleNumber(getChosenFormule(contact)) || 1;

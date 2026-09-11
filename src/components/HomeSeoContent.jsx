@@ -97,6 +97,11 @@ export default function HomeSeoContent() {
             </Link>{" "}
             {after}
           </p>
+          <p className="text-center mt-4">
+            <Link href="/ecoles-de-langue-chine" className="seo-inline-link">
+              {t("programs.languageCta")}
+            </Link>
+          </p>
         </div>
       </section>
 
