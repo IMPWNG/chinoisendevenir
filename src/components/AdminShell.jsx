@@ -75,20 +75,20 @@ export default function AdminShell({ user, onLogout, children }) {
                 </button>
               ))}
             </div>
-            <div className="text-right hidden sm:block">
-              <p className="text-sm text-white font-medium">{user?.email}</p>
-              <p className="text-xs text-slate-400">
+            <div className="hidden md:flex flex-col items-end min-w-0">
+              <p className="text-sm text-slate-200 truncate max-w-[220px]">
+                {user?.email}
+              </p>
+              <p className="text-xs text-slate-500">
                 {access.universities ? t("connected") : t("roleLimited")}
               </p>
             </div>
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              {user?.email?.[0]?.toUpperCase()}
-            </div>
             <button
+              type="button"
               onClick={onLogout}
-              className="text-sm bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-5 py-2 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-red-500/50"
+              className="text-sm text-slate-300 hover:text-white border border-slate-600 hover:border-slate-400 px-3.5 py-2 rounded-lg transition-colors"
             >
-              🚪 {t("logout")}
+              {t("logout")}
             </button>
           </div>
         </div>
