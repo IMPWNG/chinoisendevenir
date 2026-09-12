@@ -1,3 +1,11 @@
+# Agent context
+
+This repo is **Chinois en Devenir** (`chinoisendevenir.com`): a Next.js 16 app for a francophone agency that helps students study in China (orientation, university matching, applications, scholarships, visa).
+
+**Read first:** [`docs/for-agents.md`](docs/for-agents.md) — product, auth, matching, CRM statuses, API map, and gotchas.
+
+Ignore the root `README.md` (leftover Vite template). Do not delete the Next.js block below.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
