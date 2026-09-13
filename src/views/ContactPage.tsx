@@ -22,14 +22,9 @@ function ContactPage() {
       details: ["Chongqing", "Chengdu", "Shanghai", "Beijing"],
     },
     {
-      icon: "📞",
-      title: t("contact.phone"),
-      details: [SITE.phone, t("contact.hours")],
-    },
-    {
       icon: "📧",
       title: t("contact.email"),
-      details: [SITE.email],
+      details: [SITE.email, t("contact.hours")],
       href: `mailto:${SITE.email}`,
     },
   ];

@@ -4,7 +4,6 @@ export const SITE = {
   locale: "fr_FR",
   language: "fr",
   email: "contact@chinoisendevenir.com",
-  phone: "+86 136 4050 5272",
   tagline:
     "Accompagnement francophone pour étudier en Chine : orientation, admission, bourses et visa étudiant.",
   description:
@@ -260,7 +259,6 @@ export function organizationJsonLd() {
     name: SITE.name,
     url: SITE.url,
     email: SITE.email,
-    telephone: SITE.phone,
     logo: SITE.logo,
     image: SITE.ogImage,
     description: SITE.description,
@@ -297,7 +295,6 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       email: SITE.email,
-      telephone: SITE.phone,
       contactType: "customer service",
       availableLanguage: ["French", "English"],
     },
