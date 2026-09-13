@@ -5,8 +5,6 @@ import { SITE } from "@/lib/seo";
 import { useAuth } from "../context/AuthContext";
 import { useSiteI18n } from "../context/SiteI18nContext";
 
-const PHONE_HREF = `tel:${SITE.phone.replace(/\s/g, "")}`;
-
 const Footer = () => {
   const { t } = useSiteI18n();
   const { user } = useAuth();
@@ -42,7 +40,6 @@ const Footer = () => {
             <p className="landing-footer-heading">{t("footer.colContact")}</p>
             <p className="landing-footer-contact-text">{t("footer.contactLead")}</p>
             <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            <a href={PHONE_HREF}>{SITE.phone}</a>
             <Link href="/contact">{t("footer.contactPage")}</Link>
           </div>
         </div>
