@@ -2,6 +2,11 @@
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
+const MISSING_ENV_URL = "https://placeholder.supabase.co";
+// Valid-shaped JWT so createClient accepts it; auth calls fail soft when env is missing.
+const MISSING_ENV_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24ifQ.placeholder";
+
 function createScopedBrowserClient(
   storageKey: string,
   detectSessionInUrl: boolean,
@@ -14,9 +19,18 @@ function createScopedBrowserClient(
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
     if (!supabaseUrl || !supabaseAnonKey) {
-      throw new Error(
+      console.error(
         "Configuration Supabase manquante (NEXT_PUBLIC_SUPABASE_URL / ANON_KEY)",
       );
+      client = createClient(MISSING_ENV_URL, MISSING_ENV_KEY, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false,
+          storageKey,
+        },
+      });
+      return client;
     }
 
     client = createClient(supabaseUrl, supabaseAnonKey, {
@@ -30,7 +44,7 @@ function createScopedBrowserClient(
     return client;
   };
 
-  // Lazy: Next prerender imports this via Providers; env may be absent at build.
+  // Lazy: Next prerender imports this via Providers before env is always available.
   return new Proxy({} as SupabaseClient, {
     get(_target, prop) {
       const scoped = getClient();

@@ -57,29 +57,38 @@ export function createScopedAuth(
 
     useEffect(() => {
       let cancelled = false;
+      let subscription: { unsubscribe: () => void } | undefined;
 
-      client.auth
-        .getSession()
-        .then(({ data: { session } }) => {
+      try {
+        client.auth
+          .getSession()
+          .then(({ data: { session } }) => {
+            if (!cancelled) setUser(session?.user ?? null);
+          })
+          .catch((error: unknown) => {
+            console.error("session:", error);
+            if (!cancelled) setUser(null);
+          })
+          .finally(() => {
+            if (!cancelled) setLoading(false);
+          });
+
+        ({
+          data: { subscription },
+        } = client.auth.onAuthStateChange((_event, session) => {
           if (!cancelled) setUser(session?.user ?? null);
-        })
-        .catch((error: unknown) => {
-          console.error("session:", error);
-          if (!cancelled) setUser(null);
-        })
-        .finally(() => {
-          if (!cancelled) setLoading(false);
-        });
-
-      const {
-        data: { subscription },
-      } = client.auth.onAuthStateChange((_event, session) => {
-        if (!cancelled) setUser(session?.user ?? null);
-      });
+        }));
+      } catch (error: unknown) {
+        console.error("session:", error);
+        if (!cancelled) {
+          setUser(null);
+          setLoading(false);
+        }
+      }
 
       return () => {
         cancelled = true;
-        subscription.unsubscribe();
+        subscription?.unsubscribe();
       };
     }, []);
 
