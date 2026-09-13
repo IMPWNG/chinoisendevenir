@@ -153,7 +153,7 @@ end $$;
 --   ('PASTE-ASSOCIATE-UUID', 'associate@email.com')
 -- on conflict (user_id) do update set email = excluded.email;
 --
--- For a limited admin (students only, no universities / matching / WhatsApp / bulk):
+-- For a limited admin (students only, no universities / matching / bulk):
 --   1) Authentication → Users → Add user (email + password, Auto Confirm User)
 --   2) Run sql/admin-roles.sql once (adds the role column)
 --   3) insert into public.admin_users (user_id, email, role)
