@@ -132,7 +132,7 @@ Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans
 
 Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/appointments.sql`.
 
-Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` uniquement (plus de fallback `VITE_*`).
+Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel).
 
 ## Conventions
 

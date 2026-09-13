@@ -3,11 +3,21 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 export type AdminClient = SupabaseClient;
 
 export function getSupabaseUrl(): string {
-  return process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+  return (
+    process.env.SUPABASE_URL ||
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    process.env.VITE_SUPABASE_URL ||
+    ""
+  );
 }
 
 export function getSupabaseAnonKey(): string {
-  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  return (
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY ||
+    ""
+  );
 }
 
 export function getResendApiKey(): string {

@@ -60,6 +60,13 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("auth login:", error);
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Supabase")) {
+      return NextResponse.json(
+        { error: "Configuration serveur Supabase manquante." },
+        { status: 503 },
+      );
+    }
     return NextResponse.json(
       { error: "Connexion impossible pour le moment." },
       { status: 500 },
