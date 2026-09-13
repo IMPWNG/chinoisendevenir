@@ -18,27 +18,26 @@ Package npm : `etudier-en-chine`. Repo : App Router Next.js 16 + React 19, dépl
 | Espace étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Compte Supabase Auth. Accès gated par paiement / statut. |
 | Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites` | Allowlist `ADMIN_EMAILS` + table `admin_users`. Rôle `full` ou `limited`. |
 
-Les pages `src/app/**/page.jsx` sont minces : metadata SEO + import d’une vue dans `src/views/`. La logique vit dans `src/lib/`.
+Les pages `src/app/**/page.tsx` sont minces : metadata SEO + import d’une vue dans `src/views/`. La logique vit dans `src/lib/`.
 
 ## Stack
 
-- **Next.js 16** App Router, **JavaScript** (pas de TypeScript dans `src/`), alias `@/*` → `src/*`
+- **Next.js 16** App Router, **TypeScript** (`strict: true`, `tsc --noEmit` via `npm test`), alias `@/*` → `src/*`
 - **React 19** + **Tailwind 4**
-- **Supabase** : Auth + Postgres. Le navigateur n’écrit pas les tables métier. Les API routes utilisent la **service role** (`src/lib/supabaseAdmin.js`) et bypassent RLS.
+- **Supabase** : Auth + Postgres. Le navigateur n’écrit pas les tables métier. Les API routes utilisent la **service role** (`src/lib/supabaseAdmin.ts`) et bypassent RLS.
 - **Resend** : e-mails transactionnels + inbound (`contact@chinoisendevenir.com`)
-- **WhatsApp Cloud API** : webhook + envoi admin
 - **Mammouth** (`MAMMOUTH_API_KEY`) : LLM matching, bilans, rédaction d’e-mails admin
-- Node `>= 20`. Pas de suite de tests dans `package.json` (`npm test` n’existe pas). Qualité = `npm run lint` + `npm run build`.
+- Node `>= 20`. Qualité = `npm test` (`tsc --noEmit`) + `npm run lint` + `npm run build`.
 
 ## Modèle métier
 
 ### Contact = dossier
 
-Table centrale : `contacts`. Un étudiant Auth est relié à une ligne `contacts` via l’e-mail (`findContactByEmail` / `ensureStudentContact` dans `src/lib/studentAuth.js`).
+Table centrale : `contacts`. Un étudiant Auth est relié à une ligne `contacts` via l’e-mail (`findContactByEmail` / `ensureStudentContact` dans `src/lib/studentAuth.ts`).
 
 Profil public côté UI : `publicStudentProfile()`.
 
-### Formules (`src/lib/formules.js`)
+### Formules (`src/lib/formules.ts`)
 
 Source de vérité des offres, aliases historiques, et droits débloqués (`getFormuleAccess`) :
 
@@ -48,45 +47,44 @@ Source de vérité des offres, aliases historiques, et droits débloqués (`getF
 
 Les libellés stockés en base peuvent être d’anciens prix (`aliases`). Toujours passer par `getFormuleNumber()` / `displayFormuleLabel()`, ne pas parser le string à la main.
 
-### Suivi (`src/lib/suiviStatuts.js`)
+### Suivi (`src/lib/suiviStatuts.ts`)
 
 Machine à états du CRM. Noms **canoniques** en UI ≠ noms **stockés** en Postgres (CHECK legacy). Toujours `canonicalStatut()` / `toStoredStatut()`.
 
-Statuts payés / espace débloqué : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES`. Progression affichée : `src/lib/studentProgress.js`.
+Statuts payés / espace débloqué : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES`. Progression affichée : `src/lib/studentProgress.ts`.
 
 Ne jamais avancer un statut en arrière sans le dire ; `shouldAdvanceStatus()` existe pour ça.
 
 ### Matching universités
 
-Pipeline : `src/lib/matching/run.js` → `runMatching()`.
+Pipeline : `src/lib/matching/run.ts` → `runMatching()`.
 
 ```
 contact → normalizeStudent → enrichStudent (LLM)
-       → rankMatches(score.js, weights.js)
+       → rankMatches(score.ts, weights.ts)
        → selectMix (safety / match / reach)
        → generateDualReports (admin + étudiant)
-       → persist.js (table matching_runs, payload JSON)
+       → persist.ts (table matching_runs, payload JSON)
 ```
 
-Poids dans `src/lib/matching/weights.js` (pas dans `score.js`). Matching écoles de langue : `src/lib/matching/chinese.js`, préfixe `[[CHINESE_MATCHING_JSON]]`.
+Poids dans `src/lib/matching/weights.ts` (pas dans `score.ts`). Matching écoles de langue : `src/lib/matching/chinese.ts`, préfixe `[[CHINESE_MATCHING_JSON]]`.
 
-Limite du mix = formule (1/2/3). Vue étudiant filtrée : `matchingForStudent()` dans `studentView.js`.
+Limite du mix = formule (1/2/3). Vue étudiant filtrée : `matchingForStudent()` dans `studentView.ts`.
 
 ### Documents
 
-Bucket Storage `student-documents`. Logique : `src/lib/studentDocuments.js`. L’étudiant n’y accède que si `access.documents` (formule débloquée).
+Bucket Storage `student-documents`. Logique : `src/lib/studentDocuments.ts`. L’étudiant n’y accède que si `access.documents` (formule débloquée).
 
 ## Auth et rôles
 
-- Login/register admin : `/api/auth/*` → `src/lib/authUsers.js` + rate limit `httpSecurity.js`
-- Étudiant : `/api/student/auth/register` + routes `/api/student/*` via `getAuthenticatedContact()`
-- Admin API : **toujours** `getAuthenticatedAdmin(request)` puis, si besoin, `requireFullAdmin(auth)` (`src/lib/adminRoles.js`)
+- Login/register : `/api/auth/*` → `src/lib/authUsers.ts` + rate limit `httpSecurity.ts`
+- Étudiant : routes `/api/student/*` via `getAuthenticatedContact()`
+- Admin API : **toujours** `getAuthenticatedAdmin(request)` puis, si besoin, `requireFullAdmin(auth)` (`src/lib/adminRoles.ts`)
 
 Rôles :
 
 - `full` : universités, matching, bulk e-mail, suppression contacts
 - `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, pas matching ni universités
-- WhatsApp admin est **off** dans `adminCapabilities()` (`whatsapp: false`)
 
 Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching_runs`. Toute nouvelle table métier : RLS on, grants service_role, SQL dans `sql/`.
 
@@ -94,32 +92,31 @@ Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching
 
 | Besoin | Fichier |
 |---|---|
-| Copy / FAQ / metadata site | `src/lib/seo.js`, `src/i18n/fr.js`, `src/i18n/site.js` |
-| Copy admin | `src/i18n/admin.js` |
-| Formules, prix, inclus | `src/lib/formules.js` |
-| Statuts CRM | `src/lib/suiviStatuts.js` |
-| Auth admin + étudiant | `src/lib/studentAuth.js` |
-| Scoring univ. | `src/lib/matching/score.js` + `weights.js` |
-| Rapports matching | `src/lib/matching/reports.js`, `reportsLlm.js` |
-| E-mails auto / intents | `src/lib/api/auto-reply.js`, `src/lib/emailIntents.js` |
-| Inbound mail | `src/lib/api/inbound-email.js` |
-| WhatsApp | `src/lib/api/whatsapp-webhook.js`, `whatsapp-send.js`, `src/lib/whatsapp/` |
-| Relance quotidienne | `src/lib/api/formules-relance.js` (cron Vercel `0 2 * * *`) |
+| Copy / FAQ / metadata site | `src/lib/seo.ts`, `src/i18n/site.ts` |
+| Copy admin | `src/i18n/admin.ts` |
+| Formules, prix, inclus | `src/lib/formules.ts` |
+| Statuts CRM | `src/lib/suiviStatuts.ts` |
+| Auth admin + étudiant | `src/lib/studentAuth.ts` |
+| Scoring univ. | `src/lib/matching/score.ts` + `weights.ts` |
+| Rapports matching | `src/lib/matching/reports.ts`, `reportsLlm.ts` |
+| E-mails auto / intents | `src/lib/api/auto-reply.ts`, `src/lib/emailIntents.ts` |
+| Inbound mail | `src/lib/api/inbound-email.ts` |
+| Relance quotidienne | `src/lib/api/formules-relance.ts` (cron Vercel `0 2 * * *`) |
 | Scan univ. (offline) | `scripts/scan-universities.mjs` → `data/universities/` → `import:universities` |
 
-Anciennes routes Vercel style `(req, res)` : wrapper `adaptVercelHandler()` (`src/lib/adaptVercelHandler.js`). Préférer `NextResponse` sur le code nouveau.
+Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res)`).
 
 ## API (carte)
 
-**Public :** `POST /api/contact-submit`, webhooks ` /api/webhooks/resend`, `/api/webhooks/whatsapp`
+**Public :** `POST /api/contact-submit`, webhook `/api/webhooks/resend`
 
 **Auth :** `/api/auth/login`, `/api/auth/register`
 
-**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`, `ensure-profile`, `request-access`, `auth/register`
+**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
 **Admin :** `/api/admin/me`, `contacts`, `appointments`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `universities/import-scan`
 
-**Ops :** `POST /api/email/auto-reply`, `POST /api/whatsapp/send`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`)
+**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`)
 
 ## Données Postgres (SQL dans `sql/`)
 
@@ -135,14 +132,14 @@ Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans
 
 Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/appointments.sql`.
 
-Env : copier `.env.example`. Ne jamais committer `.env*`. Anciennes vars `VITE_*` encore lues en fallback dans `next.config.mjs`.
+Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` uniquement (plus de fallback `VITE_*`).
 
 ## Conventions
 
 - Langue UI et e-mails : **français**. Ton : agence sérieuse, pas de garantie d’admission/bourse/visa.
-- JS, pas TS. Pas de nouvelle dépendance si le stdlib / un package déjà là suffit.
-- Logique métier dans `src/lib/*`, pas dans les `page.jsx`.
-- Réutiliser `getSupabaseAdmin()`, `rateLimit()`, `publicStudentProfile()`, helpers formules/statuts.
+- TypeScript strict. Pas de nouvelle dépendance si le stdlib / un package déjà là suffit.
+- Logique métier dans `src/lib/*`, pas dans les `page.tsx`.
+- Réutiliser `getSupabaseAdmin()`, `rateLimit()`, `publicStudentProfile()`, helpers formules/statuts, `readJsonObject` / `asString` (`src/lib/request.ts`).
 - Après un changement de code : `graphify update .` (règle workspace).
 - Prod : git → GitHub → Vercel sur `main`. Chantier auth / RLS / nouvelle feature : branche `feature/` ou `fix/` + PR. Copy ou un fichier : commit sur `main`.
 - Ne pas committer `graphify-out/`, `.next/`, secrets.
@@ -176,6 +173,6 @@ npm run import:universities # scan → table universities
 3. Statuts : UI canonique vs CHECK Postgres legacy — `toStoredStatut()`.
 4. Formules : anciennes étiquettes en base, matcher via `aliases`.
 5. Matching persisté avec préfixes `[[MATCHING_JSON]]` / `[[CHINESE_MATCHING_JSON]]`.
-6. WhatsApp et Relance cron exigent leurs secrets ; webhooks sans secret = rejet.
+6. Relance cron exige `CRON_SECRET` ; webhooks Resend sans secret = rejet.
 7. CSP dans `next.config.mjs` : `connect-src` limité à `self` + `*.supabase.co`.
-8. `npm test` n’existe pas (le pipeline workspace mentionne `tsc --noEmit` : ce repo est du JS).
+8. Qualité : `npm test` (`tsc --noEmit`) + `npm run lint` + `npm run build`.

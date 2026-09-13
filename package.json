@@ -13,6 +13,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "tsc --noEmit",
     "scan:universities": "node scripts/scan-universities.mjs",
     "import:universities": "node scripts/import-scan-to-admin.mjs"
   },
@@ -27,10 +28,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.20.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.1.6",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
   }
 }
