@@ -959,6 +959,18 @@
     "ast_hash": "c5ab272e0d8a5946bd27efaebcd7a8b7",
     "semantic_hash": ""
   },
+  "src/app/api/webhooks/whatsapp/route.ts": {
+    "mtime": 1789225486.8833792,
+    "seen": 1789226041.238979,
+    "ast_hash": "3fe2fd2380df10b5433561af6e9acf11",
+    "semantic_hash": ""
+  },
+  "src/app/api/whatsapp/send/route.ts": {
+    "mtime": 1789225329.5351646,
+    "seen": 1789226041.23898,
+    "ast_hash": "2e450a6845ef3d40dc3bc0db50be07ac",
+    "semantic_hash": ""
+  },
   "src/app/apple-icon.tsx": {
     "mtime": 1787906899.6915085,
     "seen": 1789226041.238982,
@@ -1128,9 +1140,9 @@
     "semantic_hash": ""
   },
   "src/components/AdminContactInfo.tsx": {
-    "mtime": 1789262647.5402737,
-    "seen": 1789262700.289175,
-    "ast_hash": "bd281eed6ed2c506c17cbec2597bad06",
+    "mtime": 1789227148.447756,
+    "seen": 1789227588.817537,
+    "ast_hash": "cabef3a8e7a80a319702ab1934b4968e",
     "semantic_hash": ""
   },
   "src/components/AdminMatchingPanel.tsx": {
@@ -1164,9 +1176,9 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1789262632.6523788,
-    "seen": 1789262700.289333,
-    "ast_hash": "bdc8c987ac00e330f5ed8501cb2e173f",
+    "mtime": 1789104272.6739962,
+    "seen": 1789226041.239022,
+    "ast_hash": "fb544c1925a59f875210549a833b3e86",
     "semantic_hash": ""
   },
   "src/components/Hero.tsx": {
@@ -1302,15 +1314,15 @@
     "semantic_hash": ""
   },
   "src/i18n/admin.ts": {
-    "mtime": 1789262687.7115629,
-    "seen": 1789262700.29002,
-    "ast_hash": "a76e202a4ddfb2021e7bcd545c6fca78",
+    "mtime": 1789224784.690365,
+    "seen": 1789226041.2390451,
+    "ast_hash": "36402182483dff972d7232b5adc5b3f0",
     "semantic_hash": ""
   },
   "src/i18n/site.ts": {
-    "mtime": 1789262642.5784934,
-    "seen": 1789262700.2900212,
-    "ast_hash": "5701e82085b80738d228a0bc6756c9d8",
+    "mtime": 1789224783.5561705,
+    "seen": 1789226041.2390459,
+    "ast_hash": "10fdb14c1b625b4ec776b904d7b093dd",
     "semantic_hash": ""
   },
   "src/lib/adminRoles.ts": {
@@ -1347,6 +1359,18 @@
     "mtime": 1789226702.1717181,
     "seen": 1789227588.818512,
     "ast_hash": "5778286f9941e12f453dbe13c57fc988",
+    "semantic_hash": ""
+  },
+  "src/lib/api/whatsapp-send.ts": {
+    "mtime": 1789227918.0067513,
+    "seen": 1789228016.3800719,
+    "ast_hash": "c1d9ba2fc40d380056a1203f9010d086",
+    "semantic_hash": ""
+  },
+  "src/lib/api/whatsapp-webhook.ts": {
+    "mtime": 1789227922.4523067,
+    "seen": 1789228016.380073,
+    "ast_hash": "f60263ef88f784af66561727968125a0",
     "semantic_hash": ""
   },
   "src/lib/appointments.ts": {
@@ -1518,9 +1542,9 @@
     "semantic_hash": ""
   },
   "src/lib/seo.ts": {
-    "mtime": 1789262630.5214617,
-    "seen": 1789262700.2914538,
-    "ast_hash": "669e773a6d7f9caaccdc66b861523202",
+    "mtime": 1789226688.9994035,
+    "seen": 1789227588.819099,
+    "ast_hash": "d29430d95a0109885ec940e437f56227",
     "semantic_hash": ""
   },
   "src/lib/studentAuth.ts": {
@@ -1577,6 +1601,18 @@
     "ast_hash": "b129eded6645c8e7aa4720855cc321c5",
     "semantic_hash": ""
   },
+  "src/lib/whatsapp/cloud.ts": {
+    "mtime": 1789227910.3637474,
+    "seen": 1789228016.381223,
+    "ast_hash": "876ca3658af5ee398c9a47279b59c873",
+    "semantic_hash": ""
+  },
+  "src/lib/whatsapp/messages.ts": {
+    "mtime": 1789227476.424417,
+    "seen": 1789227588.81921,
+    "ast_hash": "7f34d70fab3057ddbe4fae8811f28cdb",
+    "semantic_hash": ""
+  },
   "src/views/AdminDashboard.tsx": {
     "mtime": 1789226074.5075648,
     "seen": 1789227588.819211,
@@ -1602,9 +1638,9 @@
     "semantic_hash": ""
   },
   "src/views/ContactPage.tsx": {
-    "mtime": 1789262633.0980017,
-    "seen": 1789262700.2918882,
-    "ast_hash": "824cfbae1dfe459688cb1ba10a56cb04",
+    "mtime": 1788941048.701679,
+    "seen": 1789226041.2390988,
+    "ast_hash": "77d868ddd01875bd6488ed92faeac92c",
     "semantic_hash": ""
   },
   "src/views/EcolesDeLangueChinePage.tsx": {
@@ -1692,9 +1728,9 @@
     "semantic_hash": ""
   },
   "docs/for-agents.md": {
-    "mtime": 1789262668.6248443,
-    "seen": 1789262700.293926,
-    "ast_hash": "3f7757ec66a64e704143f7c5e40ec9f3",
+    "mtime": 1789227977.5692585,
+    "seen": 1789228016.3835762,
+    "ast_hash": "2f7a105aaef69fe2b64ef63c5e5651b2",
     "semantic_hash": ""
   }
 }
