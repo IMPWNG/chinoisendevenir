@@ -26,6 +26,7 @@ const Footer = () => {
             <Link href="/visa-etudiant-chine">{t("footer.studentVisa")}</Link>
             <Link href="/bourses">{t("footer.scholarships")}</Link>
             <Link href="/processus">{t("footer.admissionProcess")}</Link>
+            <Link href="/blog">{t("footer.blog")}</Link>
             <Link href="/faq">{t("footer.faq")}</Link>
           </div>
           <div className="landing-footer-col">

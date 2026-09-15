@@ -10,13 +10,15 @@ const Navigation = () => {
   const pathname = usePathname();
   const { t, lang, setLang } = useSiteI18n();
 
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string) =>
+    path === "/blog" ? pathname === "/blog" || pathname.startsWith("/blog/") : pathname === path;
 
   const navLinks = [
     { path: "/", label: t("nav.home") },
     { path: "/etudier-en-chine", label: t("nav.study") },
     { path: "/ecoles-de-langue-chine", label: t("nav.language") },
     { path: "/bourses", label: t("nav.scholarships") },
+    { path: "/blog", label: t("nav.blog") },
     { path: "/tarifs", label: t("nav.pricing") },
   ];
 
