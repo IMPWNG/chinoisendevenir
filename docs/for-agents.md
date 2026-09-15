@@ -14,7 +14,7 @@ Package npm : `etudier-en-chine`. Repo : App Router Next.js 16 + React 19, dépl
 
 | Surface | Routes | Qui |
 |---|---|---|
-| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. |
+| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. Blog : 20 articles pré-rédigés, **1 publication/jour** via `publishedAt` (Europe/Paris) dans `src/lib/blog/`. |
 | Espace étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Compte Supabase Auth. Accès gated par paiement / statut. |
 | Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites` | Allowlist `ADMIN_EMAILS` + table `admin_users`. Rôle `full` ou `limited`. |
 

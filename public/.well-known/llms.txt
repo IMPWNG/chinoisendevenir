@@ -27,6 +27,7 @@ Also: https://chinoisendevenir.com/.well-known/llms.txt
 - [Processus d'admission](https://chinoisendevenir.com/processus): étapes pour étudier en Chine
 - [FAQ](https://chinoisendevenir.com/faq): questions et réponses courtes, utiles pour citation
 - [Tarifs](https://chinoisendevenir.com/tarifs): année de chinois 800 €, admission 1 700 €, parcours complet 2 000 €
+- [Blog — guides études en Chine](https://chinoisendevenir.com/blog): articles pratiques (admission, bourses, langue, visa, vie étudiante), publication régulière
 - [Contact](https://chinoisendevenir.com/contact)
 
 ## Facts useful for citations
