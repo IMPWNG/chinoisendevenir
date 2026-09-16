@@ -59,36 +59,12 @@ export default function BlogArticlePage({
             {formatDate(post.publishedAt, lang)}
           </p>
           <h1 className="landing-section-title text-left">{post.title}</h1>
-          <p className="landing-section-subtitle text-left mb-8">
+          <p className="landing-section-subtitle text-left mb-6">
             {post.description}
           </p>
-
-          <div className="space-y-4 mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <section>
-              <h2 className="text-base font-bold text-slate-900 mb-2">
-                {t("blog.problem")}
-              </h2>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {post.problem}
-              </p>
-            </section>
-            <section>
-              <h2 className="text-base font-bold text-slate-900 mb-2">
-                {t("blog.solution")}
-              </h2>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {post.solution}
-              </p>
-            </section>
-            <section>
-              <h2 className="text-base font-bold text-slate-900 mb-2">
-                {t("blog.promise")}
-              </h2>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {post.promise}
-              </p>
-            </section>
-          </div>
+          <p className="text-gray-700 text-base leading-relaxed mb-10">
+            {post.intro}
+          </p>
 
           <div className="prose-blog space-y-8">
             {post.sections.map((section) => (

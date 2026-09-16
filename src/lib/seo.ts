@@ -10,7 +10,7 @@ export const SITE = {
     "Chinois en Devenir accompagne les étudiants francophones qui veulent étudier en Chine : choix de formation, universités chinoises, dossier d'admission, bourses d'études et visa étudiant.",
   metaDescription:
     "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
-  contentUpdatedAt: "2026-09-15",
+  contentUpdatedAt: "2026-09-16",
   ogImage: "https://chinoisendevenir.com/opengraph-image",
   logo: "https://chinoisendevenir.com/apple-icon",
 };
