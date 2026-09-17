@@ -1349,6 +1349,7 @@ export const adminTranslations = {
       relance: "跟进",
       qualification: "筛选",
       changement_statut: "更改状态",
+      attribution: "客户分配",
       note_ajoutee: "添加备注",
       contact_appele: "已联系",
       document_envoye: "已发文件",
