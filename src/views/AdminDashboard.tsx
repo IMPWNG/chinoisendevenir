@@ -11,7 +11,6 @@ import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminContactEmail from "../components/AdminContactEmail";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
-import AdminCalendar from "../components/AdminCalendar";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
@@ -43,8 +42,9 @@ import {
   toStoredStatut,
 } from "../lib/suiviStatuts";
 import {
-  contactClosePatch,
-  contactTouchPatch,
+  contactAssignPatch,
+  contactUnassignPatch,
+  isAssignedTo,
   shortAdminLabel,
 } from "../lib/contactOwner";
 
@@ -224,16 +224,9 @@ export default function AdminDashboard() {
 
   const updateStatut = async (id: string, newStatut: string) => {
     try {
-      const current =
-        (selectedContact?.id === id ? selectedContact : null) ||
-        contacts.find((c) => c.id === id);
-      const touch = contactTouchPatch(user?.email);
-      const close = contactClosePatch(user?.email, current || {}, newStatut);
       const payload = {
         suivi_statut: toStoredStatut(newStatut),
         updated_at: new Date().toISOString(),
-        ...touch,
-        ...close,
       };
 
       let { error } = await adminSupabase
@@ -242,26 +235,11 @@ export default function AdminDashboard() {
         .eq("id", id);
 
       if (error) {
-        const {
-          updated_at: _u,
-          last_touched_by: _a,
-          last_touched_at: _b,
-          closed_by: _c,
-          closed_at: _d,
-          ...fallback
-        } = payload as Record<string, unknown>;
-        const retry = await adminSupabase
+        const bare = await adminSupabase
           .from("contacts")
-          .update(fallback)
+          .update({ suivi_statut: toStoredStatut(newStatut) })
           .eq("id", id);
-        error = retry.error;
-        if (error) {
-          const bare = await adminSupabase
-            .from("contacts")
-            .update({ suivi_statut: toStoredStatut(newStatut) })
-            .eq("id", id);
-          error = bare.error;
-        }
+        error = bare.error;
       }
 
       if (error) {
@@ -276,9 +254,9 @@ export default function AdminDashboard() {
         .insert({
           contact_id: id,
           action: "changement_statut",
-      description: t("dashboard.statusChangedNote", {
-        status: t(`statut.${newStatut}`),
-      }),
+          description: t("dashboard.statusChangedNote", {
+            status: t(`statut.${newStatut}`),
+          }),
           user_admin: user?.email,
           created_at: new Date().toISOString(),
         });
@@ -287,21 +265,19 @@ export default function AdminDashboard() {
         console.error("Erreur enregistrement action:", actionError);
       }
 
-      const ownerPatch = { ...touch, ...close };
-      // Mettre à jour l'état local
       setContacts((prev) =>
         prev.map((c) =>
-          c.id === id ? { ...c, suivi_statut: newStatut, ...ownerPatch } : c,
+          c.id === id ? { ...c, suivi_statut: newStatut } : c,
         ),
       );
       setSelectedContact((prev) =>
         prev && prev.id === id
-          ? { ...prev, suivi_statut: newStatut, ...ownerPatch }
+          ? { ...prev, suivi_statut: newStatut }
           : prev,
       );
     } catch (err) {
       console.error("Erreur:", err);
-        alert(t("genericError"));
+      alert(t("genericError"));
     }
   };
 
@@ -318,28 +294,19 @@ export default function AdminDashboard() {
       ? mergeFormuleNote(current.notes_admin, nextFormule)
       : stripFormuleNote(current.notes_admin) || null;
 
-    const touch = contactTouchPatch(user?.email);
     const payloadBase: {
       formule: string | null;
       notes_admin: string | null;
       suivi_statut?: string;
-      last_touched_by?: string;
-      last_touched_at?: string;
     } = {
       formule: nextFormule,
       notes_admin: notes,
-      ...touch,
     };
     if (shouldUnlock) payloadBase.suivi_statut = "formule_choisie";
 
     const payloads = [
       { ...payloadBase, updated_at: new Date().toISOString() },
       payloadBase,
-      {
-        notes_admin: notes,
-        ...touch,
-        ...(shouldUnlock ? { suivi_statut: "formule_choisie" } : {}),
-      },
       {
         notes_admin: notes,
         ...(shouldUnlock ? { suivi_statut: "formule_choisie" } : {}),
@@ -381,7 +348,6 @@ export default function AdminDashboard() {
         suivi_statut: shouldUnlock
           ? "formule_choisie"
           : current.suivi_statut,
-        ...touch,
       };
 
       setContacts((prev) =>
@@ -405,18 +371,15 @@ export default function AdminDashboard() {
     const step = STUDENT_PROCESS_STEPS[etapeIndex];
     if (!step) return;
 
-    const touch = contactTouchPatch(user?.email);
     const notes = mergeAvancementNote(current.notes_admin, etapeIndex);
     const payloads = [
       {
         dossier_etape: etapeIndex,
         notes_admin: notes,
         updated_at: new Date().toISOString(),
-        ...touch,
       },
-      { dossier_etape: etapeIndex, notes_admin: notes, ...touch },
-      { notes_admin: notes, updated_at: new Date().toISOString(), ...touch },
-      { notes_admin: notes, ...touch },
+      { dossier_etape: etapeIndex, notes_admin: notes },
+      { notes_admin: notes, updated_at: new Date().toISOString() },
       { notes_admin: notes },
     ];
 
@@ -452,7 +415,6 @@ export default function AdminDashboard() {
         ...current,
         dossier_etape: etapeIndex,
         notes_admin: notes,
-        ...touch,
       };
       setContacts((prev) =>
         prev.map((c) => (c.id === id ? { ...c, ...next } : c)),
@@ -476,6 +438,39 @@ export default function AdminDashboard() {
     }
   };
 
+  const toggleAssign = async (id: string, assign: boolean) => {
+    const patch = assign
+      ? contactAssignPatch(user?.email)
+      : contactUnassignPatch();
+    if (assign && Object.keys(patch).length === 0) return;
+
+    let { error } = await adminSupabase
+      .from("contacts")
+      .update({ ...patch, updated_at: new Date().toISOString() })
+      .eq("id", id);
+
+    if (error) {
+      const retry = await adminSupabase
+        .from("contacts")
+        .update(patch)
+        .eq("id", id);
+      error = retry.error;
+    }
+
+    if (error) {
+      console.error("Erreur assignation:", error);
+      alert(t("error") + " : " + error.message);
+      return;
+    }
+
+    setContacts((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...patch } : c)),
+    );
+    setSelectedContact((prev) =>
+      prev && prev.id === id ? { ...prev, ...patch } : prev,
+    );
+  };
+
   const handleLogout = async () => {
     await signOut();
     router.push("/admin/login");
@@ -496,13 +491,9 @@ export default function AdminDashboard() {
       filterNiveau === "tous" || c.dernier_diplome === filterNiveau;
     const matchDomaine =
       filterDomaine === "tous" || c.domaine_etudes === filterDomaine;
-    const me = (user?.email || "").trim().toLowerCase();
     const matchOwner =
       filterOwner === "tous" ||
-      (filterOwner === "moi" &&
-        (c.last_touched_by || "").trim().toLowerCase() === me) ||
-      (filterOwner === "signes_moi" &&
-        (c.closed_by || "").trim().toLowerCase() === me);
+      (filterOwner === "moi" && isAssignedTo(c, user?.email));
 
     return (
       matchSearch &&
@@ -526,22 +517,13 @@ export default function AdminDashboard() {
     dossier_preparation: contacts.filter(
       (c) => canonicalStatut(c.suivi_statut) === "dossier_préparation",
     ).length,
-    myTouches: contacts.filter(
-      (c) =>
-        (c.last_touched_by || "").trim().toLowerCase() ===
-        (user?.email || "").trim().toLowerCase(),
-    ).length,
-    myClosed: contacts.filter(
-      (c) =>
-        (c.closed_by || "").trim().toLowerCase() ===
-        (user?.email || "").trim().toLowerCase(),
-    ).length,
+    myAssigned: contacts.filter((c) => isAssignedTo(c, user?.email)).length,
   };
 
   return (
     <AdminShell user={user} onLogout={handleLogout}>
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-8">
           <StatCard
             label={t("dashboard.totalContacts")}
             value={stats.total}
@@ -568,15 +550,9 @@ export default function AdminDashboard() {
           />
           <StatCard
             label={t("dashboard.myTouchesStat")}
-            value={stats.myTouches}
+            value={stats.myAssigned}
             icon="🖐️"
             color="from-teal-600 to-emerald-500"
-          />
-          <StatCard
-            label={t("dashboard.myClosedStat")}
-            value={stats.myClosed}
-            icon="💰"
-            color="from-amber-600 to-yellow-500"
           />
         </div>
 
@@ -613,9 +589,6 @@ export default function AdminDashboard() {
               >
                 <option value="tous">👤 {t("dashboard.allOwners")}</option>
                 <option value="moi">{t("dashboard.filterOwnerMine")}</option>
-                <option value="signes_moi">
-                  {t("dashboard.filterOwnerClosedMine")}
-                </option>
               </select>
             </div>
 
@@ -683,17 +656,6 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <AdminCalendar
-          contacts={contacts as ComponentProps<typeof AdminCalendar>["contacts"]}
-          onOpenContact={(contact: { id?: string | null }) => {
-            const full =
-              contacts.find((c) => String(c.id) === String(contact.id)) ||
-              (contact as DashboardContact);
-            setEditOnOpen(false);
-            setSelectedContact(full);
-          }}
-        />
-
         {access.bulkSend ? (
           <AdminBulkEmail
             contacts={contacts as ComponentProps<typeof AdminBulkEmail>["contacts"]}
@@ -735,7 +697,7 @@ export default function AdminDashboard() {
                 <thead className="bg-slate-900/60 border-b border-slate-700/50">
                   <tr>
                     {access.bulkSend ? (
-                      <th className="px-4 py-4 w-12">
+                      <th className="px-3 py-4 w-12 whitespace-nowrap">
                         <input
                           type="checkbox"
                           checked={
@@ -765,28 +727,28 @@ export default function AdminDashboard() {
                         />
                       </th>
                     ) : null}
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       👤 {t("dashboard.colName")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       🌍 {t("dashboard.colCountry")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       🎓 {t("dashboard.colLevel")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       📚 {t("dashboard.colDomain")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       💰 {t("dashboard.colBudget")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       ⭐ {t("dashboard.colStatus")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       👤 {t("dashboard.colOwner")}
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       ⚙️ {t("dashboard.colActions")}
                     </th>
                   </tr>
@@ -795,12 +757,16 @@ export default function AdminDashboard() {
                   {filteredContacts.map((c) => (
                     <tr
                       key={c.id}
-                      className={`hover:bg-slate-700/30 transition-all duration-200 group ${
+                      onClick={() => {
+                        setEditOnOpen(false);
+                        setSelectedContact(c);
+                      }}
+                      className={`cursor-pointer hover:bg-slate-700/30 transition-all duration-200 group ${
                         selectedIds.includes(c.id) ? "bg-amber-500/10" : ""
                       }`}
                     >
                       {access.bulkSend ? (
-                        <td className="px-4 py-4">
+                        <td className="px-3 py-4">
                           <input
                             type="checkbox"
                             checked={selectedIds.includes(c.id)}
@@ -810,20 +776,11 @@ export default function AdminDashboard() {
                           />
                         </td>
                       ) : null}
-                      <td className="px-6 py-4">
-                        <span className="font-semibold text-white group-hover:text-blue-400 transition-colors">
-                          {c.prenom} {c.nom}
-                        </span>
-                        {getChosenFormule(c) ? (
-                          <p className="text-xs text-cyan-300 mt-1 font-semibold">
-                            📋 {translatedOrRaw(t, "formule", getChosenFormule(c))}
-                          </p>
-                        ) : null}
-                        <p className="text-xs text-slate-500 mt-1">{c.email}</p>
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        <span className="inline-flex items-center gap-2">
-                          <span>{c.pays || "—"}</span>
+                      <td className="px-4 py-4">
+                        <span className="inline-flex items-center gap-2 font-semibold text-white group-hover:text-blue-400 transition-colors">
+                          <span>
+                            {c.prenom} {c.nom}
+                          </span>
                           {(unreadByContact[c.id] || 0) > 0 ? (
                             <span
                               className="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-full bg-red-500 text-white text-[11px] font-bold leading-none"
@@ -837,28 +794,38 @@ export default function AdminDashboard() {
                             </span>
                           ) : null}
                         </span>
+                        {getChosenFormule(c) ? (
+                          <p className="text-xs text-cyan-300 mt-1 font-semibold">
+                            📋 {translatedOrRaw(t, "formule", getChosenFormule(c))}
+                          </p>
+                        ) : null}
+                        <p className="text-xs text-slate-500 mt-1">{c.email}</p>
                       </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
+                      <td className="px-4 py-4 text-slate-300 text-sm">
+                        {c.pays || "—"}
+                      </td>
+                      <td className="px-4 py-4 text-slate-300 text-sm">
                         {c.dernier_diplome
                           ? translatedOrRaw(t, "niveau", c.dernier_diplome)
                           : "—"}
                       </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
+                      <td className="px-4 py-4 text-slate-300 text-sm">
                         {c.domaine_etudes
                           ? translatedOrRaw(t, "domaine", c.domaine_etudes)
                           : "—"}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">
                         <span className="text-sm font-bold px-3 py-1 rounded-lg bg-slate-700/30 text-slate-300">
                           {c.budget
                             ? translatedOrRaw(t, "budget", c.budget)
                             : "—"}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">
                         <select
                           value={canonicalStatut(c.suivi_statut) || ""}
                           onChange={(e) => updateStatut(c.id, e.target.value)}
+                          onClick={(e) => e.stopPropagation()}
                           className={`text-xs px-3 py-2 rounded-lg font-bold border ${
                             STATUT_COLORS[canonicalStatut(c.suivi_statut) as StatutColorKey] ||
                             "bg-slate-700/20 text-slate-400 border-slate-600/30"
@@ -872,18 +839,16 @@ export default function AdminDashboard() {
                           ))}
                         </select>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">
                         <p className="text-sm font-semibold text-slate-200">
-                          {shortAdminLabel(c.last_touched_by)}
+                          {shortAdminLabel(c.assigned_to)}
                         </p>
-                        {c.closed_by ? (
-                          <p className="text-xs text-amber-300/90 mt-1">
-                            ✓ {shortAdminLabel(c.closed_by)}
-                          </p>
-                        ) : null}
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="flex gap-2">
+                      <td className="px-4 py-4">
+                        <div
+                          className="flex gap-2"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <button
                             onClick={() => {
                               setEditOnOpen(false);
@@ -941,6 +906,7 @@ export default function AdminDashboard() {
           onUpdateStatut={updateStatut}
           onUpdateFormule={updateFormule}
           onUpdateDossierEtape={updateDossierEtape}
+          onToggleAssign={toggleAssign}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
           emailThreadKey={emailThreadKey}
@@ -1006,6 +972,7 @@ function ContactModal({
   onUpdateStatut,
   onUpdateFormule,
   onUpdateDossierEtape,
+  onToggleAssign,
   userEmail,
   onContactUpdated,
   onContactPatched,
@@ -1019,6 +986,7 @@ function ContactModal({
   onUpdateStatut: (id: string, status: string) => Promise<void>;
   onUpdateFormule: (id: string, formuleLabel: string) => Promise<void>;
   onUpdateDossierEtape: (id: string, etapeIndex: number) => Promise<void>;
+  onToggleAssign: (id: string, assign: boolean) => Promise<void>;
   userEmail?: string | null;
   onContactUpdated: () => void;
   onContactPatched: (updated: DashboardContact) => void;
@@ -1101,16 +1069,6 @@ function ContactModal({
     });
 
     if (!error) {
-      const touch = contactTouchPatch(userEmail);
-      if (Object.keys(touch).length) {
-        const { error: touchErr } = await adminSupabase
-          .from("contacts")
-          .update(touch)
-          .eq("id", contact.id);
-        if (!touchErr) {
-          onContactPatched({ ...contact, ...touch });
-        }
-      }
       setNewAction("");
       setNewDescription("");
       fetchActions();
@@ -1118,25 +1076,21 @@ function ContactModal({
   };
 
   const saveNotes = async () => {
-    const touch = contactTouchPatch(userEmail);
-    const payload = { notes_admin: notes, ...touch };
     const { error } = await adminSupabase
       .from("contacts")
-      .update(payload)
+      .update({ notes_admin: notes })
       .eq("id", contact.id);
-    if (error && Object.keys(touch).length) {
-      await adminSupabase
-        .from("contacts")
-        .update({ notes_admin: notes })
-        .eq("id", contact.id);
-      return;
-    }
     if (!error) {
-      onContactPatched({ ...contact, notes_admin: notes, ...touch });
+      onContactPatched({ ...contact, notes_admin: notes });
     }
   };
 
   const statutKey = canonicalStatut(contact.suivi_statut);
+  const assignedToMe = isAssignedTo(contact, userEmail);
+  const assignedOtherLabel =
+    contact.assigned_to && !assignedToMe
+      ? shortAdminLabel(contact.assigned_to)
+      : null;
 
   return (
     <div
@@ -1165,25 +1119,24 @@ function ContactModal({
             <p className="text-blue-100 text-sm mt-2 font-medium">
               {contact.email}
             </p>
-            <div className="mt-3 flex flex-wrap gap-3 text-sm">
-              <span className="bg-white/15 text-white px-3 py-1.5 rounded-lg">
-                {t("dashboard.lastTouched")}:{" "}
-                <strong>{shortAdminLabel(contact.last_touched_by)}</strong>
-                {contact.last_touched_at
-                  ? ` · ${new Date(contact.last_touched_at).toLocaleString(lang === "zh" ? "zh-CN" : lang === "en" ? "en-GB" : "fr-FR")}`
-                  : ""}
-              </span>
-              <span className="bg-amber-500/25 text-amber-50 px-3 py-1.5 rounded-lg">
-                {t("dashboard.closedBy")}:{" "}
-                <strong>
-                  {contact.closed_by
-                    ? shortAdminLabel(contact.closed_by)
-                    : t("dashboard.ownerNone")}
-                </strong>
-                {contact.closed_at
-                  ? ` · ${new Date(contact.closed_at).toLocaleString(lang === "zh" ? "zh-CN" : lang === "en" ? "en-GB" : "fr-FR")}`
-                  : ""}
-              </span>
+            <div className="mt-3">
+              <label className="inline-flex items-center gap-2 bg-white/15 text-white px-3 py-1.5 rounded-lg cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={assignedToMe}
+                  onChange={(e) =>
+                    onToggleAssign(contact.id, e.target.checked)
+                  }
+                  className="h-4 w-4 rounded border-white/40 bg-white/20 text-amber-400 focus:ring-amber-400/50 cursor-pointer"
+                />
+                <span>
+                  {assignedOtherLabel
+                    ? t("dashboard.assignedToOther", {
+                        name: assignedOtherLabel,
+                      })
+                    : t("dashboard.assignToMe")}
+                </span>
+              </label>
             </div>
           </div>
 

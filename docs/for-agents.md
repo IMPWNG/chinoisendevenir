@@ -59,13 +59,12 @@ Ne jamais avancer un statut en arrière sans le dire ; `shouldAdvanceStatus()` e
 
 Fil envoyés/reçus pour l’admin (badge non-lus + chat dans la fiche). Rempli par Resend inbound + `sendTemplatedEmail` / bienvenue formulaire. Pas de sync Gmail complète — uniquement ce qui passe par Resend (`contact@`).
 
-### Attribution équipe / primes (`src/lib/contactOwner.ts`)
+### Attribution dossiers (`src/lib/contactOwner.ts`)
 
-Colonnes sur `contacts` (migration `sql/contacts-owner.sql`) :
-- `last_touched_by` / `last_touched_at` — dernière admin ayant modifié le dossier (statut, formule, notes, actions…)
-- `closed_by` / `closed_at` — figés au **premier** passage en `client_payé` (base pour le calcul de prime, ex. 40 %)
+Attribution **manuelle** (case à cocher dans la fiche admin). Migration `sql/contacts-assigned.sql` :
+- `assigned_to` / `assigned_at` — admin responsable du dossier (primes / suivi)
 
-Helpers : `contactTouchPatch()`, `contactClosePatch()`. Affichage admin : colonne + filtres « Mes dossiers » / « Signés par moi ».
+Helpers : `contactAssignPatch()`, `contactUnassignPatch()`, `isAssignedTo()`. Pas d’attribution automatique au toucher ni au paiement.
 
 ### Matching universités
 
@@ -126,7 +125,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
-**Admin :** `/api/admin/me`, `contacts`, `appointments`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `universities/import-scan`
+**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `universities/import-scan`
 
 **Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`)
 
@@ -139,10 +138,9 @@ Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans
 - `admin_users` — allowlist admin (personne ne s’auto-promouvoit)
 - `universities` — catalogue matching / partenaires
 - `matching_runs` — JSON des analyses
-- `appointments` — agenda admin
 - Storage : `student-documents`
 
-Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/appointments.sql`.
+Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`.
 
 Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel).
 
