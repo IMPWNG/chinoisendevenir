@@ -138,6 +138,7 @@ const ACTIONS_TYPES = [
     icon: "✅",
   },
   { value: "matching", label: "Matching universités", icon: "🎯" },
+  { value: "attribution", label: "Attribution dossier", icon: "👤" },
   { value: "contact_modifier", label: "Contact modifié", icon: "✏️" },
   { value: "dossier_complet", label: "Dossier complet", icon: "📂" },
 ];
@@ -461,6 +462,35 @@ export default function AdminDashboard() {
       console.error("Erreur assignation:", error);
       alert(t("error") + " : " + error.message);
       return;
+    }
+
+    const who =
+      ("assigned_to" in patch && patch.assigned_to) ||
+      user?.email ||
+      "";
+    const description = assign
+      ? t("dashboard.assignHistoryOn", {
+          name: shortAdminLabel(String(who)),
+        })
+      : t("dashboard.assignHistoryOff", {
+          name: shortAdminLabel(user?.email),
+        });
+
+    const actionPayload = {
+      contact_id: id,
+      action: "attribution",
+      description,
+      user_admin: user?.email,
+      created_at: new Date().toISOString(),
+    };
+    const { error: actionError } = await adminSupabase
+      .from("suivi_actions")
+      .insert(actionPayload);
+    if (actionError) {
+      await adminSupabase.from("suivi_actions").insert({
+        ...actionPayload,
+        action: "contact_modifier",
+      });
     }
 
     setContacts((prev) =>
@@ -1124,9 +1154,10 @@ function ContactModal({
                 <input
                   type="checkbox"
                   checked={assignedToMe}
-                  onChange={(e) =>
-                    onToggleAssign(contact.id, e.target.checked)
-                  }
+                  onChange={async (e) => {
+                    await onToggleAssign(contact.id, e.target.checked);
+                    fetchActions();
+                  }}
                   className="h-4 w-4 rounded border-white/40 bg-white/20 text-amber-400 focus:ring-amber-400/50 cursor-pointer"
                 />
                 <span>
