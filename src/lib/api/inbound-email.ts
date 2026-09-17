@@ -29,6 +29,7 @@ import {
   type EmailIntent,
 } from "../emailIntents";
 import { asString, errorMessage } from "../request";
+import { storeInboundContactEmail } from "../contactEmails";
 
 const supabase = getSupabaseAdmin();
 const resend = new Resend(getResendApiKey());
@@ -799,6 +800,14 @@ export async function processInboundEmail(raw: unknown) {
     "reponse_client",
     `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
   );
+
+  await storeInboundContactEmail({
+    contactId: contactId(contact),
+    fromEmail: from,
+    subject,
+    bodyText: replyText || rawText || "",
+    resendId: String(emailId),
+  });
 
   if (formule) {
     const alreadySameFormule = existingFormule === formule.label;

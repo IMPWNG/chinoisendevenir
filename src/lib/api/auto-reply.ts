@@ -19,6 +19,10 @@ import {
   autoReplyMarker,
 } from "../emailIntents";
 import { readJsonObject, asString, errorMessage } from "../request";
+import {
+  emailHtmlToText,
+  storeOutboundContactEmail,
+} from "../contactEmails";
 
 const supabase = getSupabaseAdmin();
 const resend = new Resend(getResendApiKey());
@@ -383,6 +387,7 @@ async function sendTemplatedEmail(
 
   try {
     console.log(`📤 Envoi via Resend...`);
+    const html = template.generateHtml(contact, extras);
     const payload: {
       from: string;
       to: string;
@@ -394,7 +399,7 @@ async function sendTemplatedEmail(
       from: CONTACT_FROM,
       to: asString(contact.email),
       subject,
-      html: template.generateHtml(contact, extras),
+      html,
       replyTo: INBOUND_REPLY_TO,
     };
     if (templateKey !== "custom") {
@@ -411,7 +416,23 @@ async function sendTemplatedEmail(
     }
 
     console.log(`✅ Email envoyé avec ID: ${response.data?.id}`);
-    return { success: true as const, template };
+
+    const contactId = asString(contact.id).trim();
+    if (contactId) {
+      const bodyText =
+        templateKey === "custom"
+          ? String(extras.customMessage || "").trim() || emailHtmlToText(html)
+          : emailHtmlToText(html);
+      await storeOutboundContactEmail({
+        contactId,
+        toEmail: contact.email,
+        subject,
+        bodyText,
+        resendId: response.data?.id || null,
+      });
+    }
+
+    return { success: true as const, template, subject, resendId: response.data?.id };
   } catch (error: unknown) {
     console.error("❌ Erreur envoi email:", errorMessage(error));
     return { success: false as const, error: errorMessage(error) };

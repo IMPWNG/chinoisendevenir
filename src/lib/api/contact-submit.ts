@@ -7,6 +7,10 @@ import { getClientIp, rateLimit } from "../httpSecurity";
 import { canonicalStatut, EARLY_STATUSES, toStoredStatut } from "../suiviStatuts";
 import { isValidPhone } from "../contactForm";
 import { readJsonObject, asString, errorMessage } from "../request";
+import {
+  emailHtmlToText,
+  storeOutboundContactEmail,
+} from "../contactEmails";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -331,20 +335,32 @@ export default async function handler(request: Request) {
     }
 
     try {
+      const welcomeHtml = generateEmailTemplate(asString(prenom));
+      const welcomeSubject = withEtudeChineSubject(
+        `Nous avons bien reçu votre demande, ${asString(prenom)}`,
+      );
       const emailResponse = await resend.emails.send({
         from: CONTACT_FROM,
         replyTo: INBOUND_REPLY_TO,
         to: normalizedEmail,
-        subject: withEtudeChineSubject(
-          `Nous avons bien reçu votre demande, ${asString(prenom)}`,
-        ),
-        html: generateEmailTemplate(asString(prenom)),
+        subject: welcomeSubject,
+        html: welcomeHtml,
       });
 
       if (emailResponse.error) {
         console.warn("⚠️ Erreur Resend:", emailResponse.error);
       } else {
         console.log("✅ Email envoyé:", emailResponse.data?.id);
+        const cid = asString(contact?.id).trim();
+        if (cid) {
+          await storeOutboundContactEmail({
+            contactId: cid,
+            toEmail: normalizedEmail,
+            subject: welcomeSubject,
+            bodyText: emailHtmlToText(welcomeHtml),
+            resendId: emailResponse.data?.id || null,
+          });
+        }
       }
     } catch (emailError: unknown) {
       console.warn("⚠️ Erreur Resend (non bloquant):", errorMessage(emailError));

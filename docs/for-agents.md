@@ -55,6 +55,10 @@ Statuts payés / espace débloqué : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES
 
 Ne jamais avancer un statut en arrière sans le dire ; `shouldAdvanceStatus()` existe pour ça.
 
+### Emails contact (`sql/contact-emails.sql`, `src/lib/contactEmails.ts`)
+
+Fil envoyés/reçus pour l’admin (badge non-lus + chat dans la fiche). Rempli par Resend inbound + `sendTemplatedEmail` / bienvenue formulaire. Pas de sync Gmail complète — uniquement ce qui passe par Resend (`contact@`).
+
 ### Attribution équipe / primes (`src/lib/contactOwner.ts`)
 
 Colonnes sur `contacts` (migration `sql/contacts-owner.sql`) :
