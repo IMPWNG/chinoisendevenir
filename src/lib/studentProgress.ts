@@ -19,6 +19,8 @@ export type ContactRow = {
   created_at?: string | null;
   updated_at?: string | null;
   source?: string | null;
+  assigned_to?: string | null;
+  assigned_at?: string | null;
   last_touched_by?: string | null;
   last_touched_at?: string | null;
   closed_by?: string | null;
