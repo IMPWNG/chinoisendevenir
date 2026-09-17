@@ -19,6 +19,10 @@ export type ContactRow = {
   created_at?: string | null;
   updated_at?: string | null;
   source?: string | null;
+  last_touched_by?: string | null;
+  last_touched_at?: string | null;
+  closed_by?: string | null;
+  closed_at?: string | null;
 };
 
 export type StudentDocRef = {

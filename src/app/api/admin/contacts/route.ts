@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { asString, readJsonObject } from "@/lib/request";
+import { contactTouchPatch } from "@/lib/contactOwner";
 
 const FIELD_LABELS = {
   prenom: "prénom",
@@ -73,6 +74,7 @@ export async function PATCH(request: Request) {
       budget: filled(body.budget),
       date_rentree: filled(body.date_rentree),
       updated_at: new Date().toISOString(),
+      ...contactTouchPatch(auth.user.email),
     };
 
     if (!payload.prenom || !payload.nom || !payload.pays || !payload.email) {
@@ -122,10 +124,15 @@ export async function PATCH(request: Request) {
       .single();
 
     if (error) {
-      const { updated_at: _ignored, ...withoutUpdatedAt } = payload;
+      const {
+        updated_at: _ignored,
+        last_touched_by: _tb,
+        last_touched_at: _ta,
+        ...withoutExtra
+      } = payload as Record<string, unknown>;
       const retry = await auth.admin
         .from("contacts")
-        .update(withoutUpdatedAt)
+        .update(withoutExtra)
         .eq("id", contactId)
         .select()
         .single();
