@@ -10,6 +10,7 @@ import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminContactEmail from "../components/AdminContactEmail";
+import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminCalendar from "../components/AdminCalendar";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
@@ -153,7 +154,11 @@ export default function AdminDashboard() {
   const [filterNiveau, setFilterNiveau] = useState("tous");
   const [filterDomaine, setFilterDomaine] = useState("tous");
   const [filterOwner, setFilterOwner] = useState("tous");
+  const [unreadByContact, setUnreadByContact] = useState<Record<string, number>>(
+    {},
+  );
   const [selectedContact, setSelectedContact] = useState<DashboardContact | null>(null);
+  const [emailThreadKey, setEmailThreadKey] = useState(0);
   const [editOnOpen, setEditOnOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [pays, setPays] = useState<string[]>([]);
@@ -178,7 +183,6 @@ export default function AdminDashboard() {
       setSelectedContact((prev) =>
         prev ? rows.find((c) => c.id === prev.id) || prev : prev,
       );
-      // Extraire les pays uniques
       const paysUniques = [
         ...new Set(
           rows
@@ -187,6 +191,27 @@ export default function AdminDashboard() {
         ),
       ];
       setPays(paysUniques.sort());
+
+      const ids = rows.map((c) => c.id).filter(Boolean);
+      if (ids.length) {
+        const { data: unreadRows } = await adminSupabase
+          .from("contact_emails")
+          .select("contact_id")
+          .in("contact_id", ids)
+          .eq("direction", "in")
+          .is("read_at", null);
+        const counts: Record<string, number> = {};
+        for (const row of unreadRows || []) {
+          const id = String(
+            (row as { contact_id?: string }).contact_id || "",
+          );
+          if (!id) continue;
+          counts[id] = (counts[id] || 0) + 1;
+        }
+        setUnreadByContact(counts);
+      } else {
+        setUnreadByContact({});
+      }
     }
     setLoading(false);
   };
@@ -797,7 +822,21 @@ export default function AdminDashboard() {
                         <p className="text-xs text-slate-500 mt-1">{c.email}</p>
                       </td>
                       <td className="px-6 py-4 text-slate-300 text-sm">
-                        {c.pays || "—"}
+                        <span className="inline-flex items-center gap-2">
+                          <span>{c.pays || "—"}</span>
+                          {(unreadByContact[c.id] || 0) > 0 ? (
+                            <span
+                              className="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-full bg-red-500 text-white text-[11px] font-bold leading-none"
+                              title={t("dashboard.emailUnreadBadge", {
+                                count: unreadByContact[c.id],
+                              })}
+                            >
+                              {(unreadByContact[c.id] || 0) > 9
+                                ? "9+"
+                                : unreadByContact[c.id]}
+                            </span>
+                          ) : null}
+                        </span>
                       </td>
                       <td className="px-6 py-4 text-slate-300 text-sm">
                         {c.dernier_diplome
@@ -904,6 +943,16 @@ export default function AdminDashboard() {
           onUpdateDossierEtape={updateDossierEtape}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
+          emailThreadKey={emailThreadKey}
+          onEmailThreadRefresh={() => setEmailThreadKey((k) => k + 1)}
+          onEmailsMarkedRead={() => {
+            setUnreadByContact((prev) => {
+              if (!prev[selectedContact.id]) return prev;
+              const next = { ...prev };
+              delete next[selectedContact.id];
+              return next;
+            });
+          }}
           onContactPatched={(updated: DashboardContact) => {
             setContacts((prev) =>
               prev.map((c) =>
@@ -961,6 +1010,9 @@ function ContactModal({
   onContactUpdated,
   onContactPatched,
   startEditing,
+  emailThreadKey = 0,
+  onEmailThreadRefresh,
+  onEmailsMarkedRead,
 }: {
   contact: DashboardContact;
   onClose: () => void;
@@ -971,6 +1023,9 @@ function ContactModal({
   onContactUpdated: () => void;
   onContactPatched: (updated: DashboardContact) => void;
   startEditing?: boolean;
+  emailThreadKey?: number;
+  onEmailThreadRefresh?: () => void;
+  onEmailsMarkedRead?: () => void;
 }) {
   const { t, lang } = useAdminI18n();
   const access = useAdminAccess();
@@ -1186,12 +1241,19 @@ function ContactModal({
             />
           </div>
 
+          <AdminContactEmailThread
+            contactId={contact.id}
+            refreshKey={emailThreadKey}
+            onMarkedRead={onEmailsMarkedRead}
+          />
+
           <AdminContactEmail
             contact={contact}
             allowTemplates={access.role === "full"}
             onSent={() => {
               fetchActions();
               onContactUpdated?.();
+              onEmailThreadRefresh?.();
             }}
           />
 
