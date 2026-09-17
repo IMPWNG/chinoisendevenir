@@ -41,6 +41,11 @@ import {
   canonicalStatut,
   toStoredStatut,
 } from "../lib/suiviStatuts";
+import {
+  contactClosePatch,
+  contactTouchPatch,
+  shortAdminLabel,
+} from "../lib/contactOwner";
 
 const STATUTS = SUIVI_STATUTS;
 
@@ -147,6 +152,7 @@ export default function AdminDashboard() {
   const [filterPays, setFilterPays] = useState("tous");
   const [filterNiveau, setFilterNiveau] = useState("tous");
   const [filterDomaine, setFilterDomaine] = useState("tous");
+  const [filterOwner, setFilterOwner] = useState("tous");
   const [selectedContact, setSelectedContact] = useState<DashboardContact | null>(null);
   const [editOnOpen, setEditOnOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -193,13 +199,45 @@ export default function AdminDashboard() {
 
   const updateStatut = async (id: string, newStatut: string) => {
     try {
-      const { error } = await adminSupabase
+      const current =
+        (selectedContact?.id === id ? selectedContact : null) ||
+        contacts.find((c) => c.id === id);
+      const touch = contactTouchPatch(user?.email);
+      const close = contactClosePatch(user?.email, current || {}, newStatut);
+      const payload = {
+        suivi_statut: toStoredStatut(newStatut),
+        updated_at: new Date().toISOString(),
+        ...touch,
+        ...close,
+      };
+
+      let { error } = await adminSupabase
         .from("contacts")
-        .update({
-          suivi_statut: toStoredStatut(newStatut),
-          updated_at: new Date().toISOString(),
-        })
+        .update(payload)
         .eq("id", id);
+
+      if (error) {
+        const {
+          updated_at: _u,
+          last_touched_by: _a,
+          last_touched_at: _b,
+          closed_by: _c,
+          closed_at: _d,
+          ...fallback
+        } = payload as Record<string, unknown>;
+        const retry = await adminSupabase
+          .from("contacts")
+          .update(fallback)
+          .eq("id", id);
+        error = retry.error;
+        if (error) {
+          const bare = await adminSupabase
+            .from("contacts")
+            .update({ suivi_statut: toStoredStatut(newStatut) })
+            .eq("id", id);
+          error = bare.error;
+        }
+      }
 
       if (error) {
         console.error("Erreur update statut:", error);
@@ -224,12 +262,17 @@ export default function AdminDashboard() {
         console.error("Erreur enregistrement action:", actionError);
       }
 
+      const ownerPatch = { ...touch, ...close };
       // Mettre à jour l'état local
       setContacts((prev) =>
-        prev.map((c) => (c.id === id ? { ...c, suivi_statut: newStatut } : c)),
+        prev.map((c) =>
+          c.id === id ? { ...c, suivi_statut: newStatut, ...ownerPatch } : c,
+        ),
       );
       setSelectedContact((prev) =>
-        prev && prev.id === id ? { ...prev, suivi_statut: newStatut } : prev,
+        prev && prev.id === id
+          ? { ...prev, suivi_statut: newStatut, ...ownerPatch }
+          : prev,
       );
     } catch (err) {
       console.error("Erreur:", err);
@@ -250,19 +293,28 @@ export default function AdminDashboard() {
       ? mergeFormuleNote(current.notes_admin, nextFormule)
       : stripFormuleNote(current.notes_admin) || null;
 
+    const touch = contactTouchPatch(user?.email);
     const payloadBase: {
       formule: string | null;
       notes_admin: string | null;
       suivi_statut?: string;
+      last_touched_by?: string;
+      last_touched_at?: string;
     } = {
       formule: nextFormule,
       notes_admin: notes,
+      ...touch,
     };
     if (shouldUnlock) payloadBase.suivi_statut = "formule_choisie";
 
     const payloads = [
       { ...payloadBase, updated_at: new Date().toISOString() },
       payloadBase,
+      {
+        notes_admin: notes,
+        ...touch,
+        ...(shouldUnlock ? { suivi_statut: "formule_choisie" } : {}),
+      },
       {
         notes_admin: notes,
         ...(shouldUnlock ? { suivi_statut: "formule_choisie" } : {}),
@@ -304,6 +356,7 @@ export default function AdminDashboard() {
         suivi_statut: shouldUnlock
           ? "formule_choisie"
           : current.suivi_statut,
+        ...touch,
       };
 
       setContacts((prev) =>
@@ -327,15 +380,18 @@ export default function AdminDashboard() {
     const step = STUDENT_PROCESS_STEPS[etapeIndex];
     if (!step) return;
 
+    const touch = contactTouchPatch(user?.email);
     const notes = mergeAvancementNote(current.notes_admin, etapeIndex);
     const payloads = [
       {
         dossier_etape: etapeIndex,
         notes_admin: notes,
         updated_at: new Date().toISOString(),
+        ...touch,
       },
-      { dossier_etape: etapeIndex, notes_admin: notes },
-      { notes_admin: notes, updated_at: new Date().toISOString() },
+      { dossier_etape: etapeIndex, notes_admin: notes, ...touch },
+      { notes_admin: notes, updated_at: new Date().toISOString(), ...touch },
+      { notes_admin: notes, ...touch },
       { notes_admin: notes },
     ];
 
@@ -371,6 +427,7 @@ export default function AdminDashboard() {
         ...current,
         dossier_etape: etapeIndex,
         notes_admin: notes,
+        ...touch,
       };
       setContacts((prev) =>
         prev.map((c) => (c.id === id ? { ...c, ...next } : c)),
@@ -414,6 +471,13 @@ export default function AdminDashboard() {
       filterNiveau === "tous" || c.dernier_diplome === filterNiveau;
     const matchDomaine =
       filterDomaine === "tous" || c.domaine_etudes === filterDomaine;
+    const me = (user?.email || "").trim().toLowerCase();
+    const matchOwner =
+      filterOwner === "tous" ||
+      (filterOwner === "moi" &&
+        (c.last_touched_by || "").trim().toLowerCase() === me) ||
+      (filterOwner === "signes_moi" &&
+        (c.closed_by || "").trim().toLowerCase() === me);
 
     return (
       matchSearch &&
@@ -421,26 +485,38 @@ export default function AdminDashboard() {
       matchBudget &&
       matchPays &&
       matchNiveau &&
-      matchDomaine
+      matchDomaine &&
+      matchOwner
     );
   });
 
-const stats = {
-  total: contacts.length,
-  attente_paiement: contacts.filter(
-    (c) => canonicalStatut(c.suivi_statut) === "attente_paiement",
-  ).length,
-  paye: contacts.filter((c) => canonicalStatut(c.suivi_statut) === "client_payé")
-    .length,
-  dossier_preparation: contacts.filter(
-    (c) => canonicalStatut(c.suivi_statut) === "dossier_préparation",
-  ).length,
-};
+  const stats = {
+    total: contacts.length,
+    attente_paiement: contacts.filter(
+      (c) => canonicalStatut(c.suivi_statut) === "attente_paiement",
+    ).length,
+    paye: contacts.filter(
+      (c) => canonicalStatut(c.suivi_statut) === "client_payé",
+    ).length,
+    dossier_preparation: contacts.filter(
+      (c) => canonicalStatut(c.suivi_statut) === "dossier_préparation",
+    ).length,
+    myTouches: contacts.filter(
+      (c) =>
+        (c.last_touched_by || "").trim().toLowerCase() ===
+        (user?.email || "").trim().toLowerCase(),
+    ).length,
+    myClosed: contacts.filter(
+      (c) =>
+        (c.closed_by || "").trim().toLowerCase() ===
+        (user?.email || "").trim().toLowerCase(),
+    ).length,
+  };
 
   return (
     <AdminShell user={user} onLogout={handleLogout}>
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 mb-8">
           <StatCard
             label={t("dashboard.totalContacts")}
             value={stats.total}
@@ -464,6 +540,18 @@ const stats = {
             value={stats.dossier_preparation}
             icon="📁"
             color="from-pink-600 to-rose-500"
+          />
+          <StatCard
+            label={t("dashboard.myTouchesStat")}
+            value={stats.myTouches}
+            icon="🖐️"
+            color="from-teal-600 to-emerald-500"
+          />
+          <StatCard
+            label={t("dashboard.myClosedStat")}
+            value={stats.myClosed}
+            icon="💰"
+            color="from-amber-600 to-yellow-500"
           />
         </div>
 
@@ -492,6 +580,17 @@ const stats = {
                     {STATUT_ICONS[s]} {t(`statut.${s}`)}
                   </option>
                 ))}
+              </select>
+              <select
+                value={filterOwner}
+                onChange={(e) => setFilterOwner(e.target.value)}
+                className="px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 font-medium cursor-pointer"
+              >
+                <option value="tous">👤 {t("dashboard.allOwners")}</option>
+                <option value="moi">{t("dashboard.filterOwnerMine")}</option>
+                <option value="signes_moi">
+                  {t("dashboard.filterOwnerClosedMine")}
+                </option>
               </select>
             </div>
 
@@ -660,6 +759,9 @@ const stats = {
                       ⭐ {t("dashboard.colStatus")}
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
+                      👤 {t("dashboard.colOwner")}
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest">
                       ⚙️ {t("dashboard.colActions")}
                     </th>
                   </tr>
@@ -730,6 +832,16 @@ const stats = {
                             </option>
                           ))}
                         </select>
+                      </td>
+                      <td className="px-6 py-4">
+                        <p className="text-sm font-semibold text-slate-200">
+                          {shortAdminLabel(c.last_touched_by)}
+                        </p>
+                        {c.closed_by ? (
+                          <p className="text-xs text-amber-300/90 mt-1">
+                            ✓ {shortAdminLabel(c.closed_by)}
+                          </p>
+                        ) : null}
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex gap-2">
@@ -934,6 +1046,16 @@ function ContactModal({
     });
 
     if (!error) {
+      const touch = contactTouchPatch(userEmail);
+      if (Object.keys(touch).length) {
+        const { error: touchErr } = await adminSupabase
+          .from("contacts")
+          .update(touch)
+          .eq("id", contact.id);
+        if (!touchErr) {
+          onContactPatched({ ...contact, ...touch });
+        }
+      }
       setNewAction("");
       setNewDescription("");
       fetchActions();
@@ -941,10 +1063,22 @@ function ContactModal({
   };
 
   const saveNotes = async () => {
-    await adminSupabase
+    const touch = contactTouchPatch(userEmail);
+    const payload = { notes_admin: notes, ...touch };
+    const { error } = await adminSupabase
       .from("contacts")
-      .update({ notes_admin: notes })
+      .update(payload)
       .eq("id", contact.id);
+    if (error && Object.keys(touch).length) {
+      await adminSupabase
+        .from("contacts")
+        .update({ notes_admin: notes })
+        .eq("id", contact.id);
+      return;
+    }
+    if (!error) {
+      onContactPatched({ ...contact, notes_admin: notes, ...touch });
+    }
   };
 
   const statutKey = canonicalStatut(contact.suivi_statut);
@@ -976,6 +1110,26 @@ function ContactModal({
             <p className="text-blue-100 text-sm mt-2 font-medium">
               {contact.email}
             </p>
+            <div className="mt-3 flex flex-wrap gap-3 text-sm">
+              <span className="bg-white/15 text-white px-3 py-1.5 rounded-lg">
+                {t("dashboard.lastTouched")}:{" "}
+                <strong>{shortAdminLabel(contact.last_touched_by)}</strong>
+                {contact.last_touched_at
+                  ? ` · ${new Date(contact.last_touched_at).toLocaleString(lang === "zh" ? "zh-CN" : lang === "en" ? "en-GB" : "fr-FR")}`
+                  : ""}
+              </span>
+              <span className="bg-amber-500/25 text-amber-50 px-3 py-1.5 rounded-lg">
+                {t("dashboard.closedBy")}:{" "}
+                <strong>
+                  {contact.closed_by
+                    ? shortAdminLabel(contact.closed_by)
+                    : t("dashboard.ownerNone")}
+                </strong>
+                {contact.closed_at
+                  ? ` · ${new Date(contact.closed_at).toLocaleString(lang === "zh" ? "zh-CN" : lang === "en" ? "en-GB" : "fr-FR")}`
+                  : ""}
+              </span>
+            </div>
           </div>
 
           <div className="flex gap-3">

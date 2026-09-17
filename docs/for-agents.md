@@ -55,6 +55,14 @@ Statuts payés / espace débloqué : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES
 
 Ne jamais avancer un statut en arrière sans le dire ; `shouldAdvanceStatus()` existe pour ça.
 
+### Attribution équipe / primes (`src/lib/contactOwner.ts`)
+
+Colonnes sur `contacts` (migration `sql/contacts-owner.sql`) :
+- `last_touched_by` / `last_touched_at` — dernière admin ayant modifié le dossier (statut, formule, notes, actions…)
+- `closed_by` / `closed_at` — figés au **premier** passage en `client_payé` (base pour le calcul de prime, ex. 40 %)
+
+Helpers : `contactTouchPatch()`, `contactClosePatch()`. Affichage admin : colonne + filtres « Mes dossiers » / « Signés par moi ».
+
 ### Matching universités
 
 Pipeline : `src/lib/matching/run.ts` → `runMatching()`.
