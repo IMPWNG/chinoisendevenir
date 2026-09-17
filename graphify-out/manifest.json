@@ -479,12 +479,6 @@
     "ast_hash": "",
     "semantic_hash": ""
   },
-  "sql/appointments.sql": {
-    "mtime": 1788503750.3810046,
-    "seen": 1789222909.464243,
-    "ast_hash": "",
-    "semantic_hash": ""
-  },
   "sql/contacts-suivi-statut.sql": {
     "mtime": 1788948394.3524902,
     "seen": 1789222909.464244,
@@ -851,12 +845,6 @@
     "ast_hash": "456045068884bd8e5b5569f67c78e0df",
     "semantic_hash": ""
   },
-  "src/app/api/admin/appointments/route.ts": {
-    "mtime": 1789264577.8175557,
-    "seen": 1789471052.7898738,
-    "ast_hash": "a54ba7cb975026b5ce87101f2ee1e8d3",
-    "semantic_hash": ""
-  },
   "src/app/api/admin/compose-email/route.ts": {
     "mtime": 1789264577.8179576,
     "seen": 1789471052.7898738,
@@ -864,9 +852,9 @@
     "semantic_hash": ""
   },
   "src/app/api/admin/contacts/route.ts": {
-    "mtime": 1789620648.5018854,
-    "seen": 1789627895.542757,
-    "ast_hash": "547950b28e5aba83774a57ac70014954",
+    "mtime": 1789649970.9848487,
+    "seen": 1789651555.7628741,
+    "ast_hash": "dd4545f52f2ca5a882e2c4c0e2684892",
     "semantic_hash": ""
   },
   "src/app/api/admin/matching/chinese/route.ts": {
@@ -1121,12 +1109,6 @@
     "ast_hash": "45129a628f01e6ff66c8efc24b726463",
     "semantic_hash": ""
   },
-  "src/components/AdminCalendar.tsx": {
-    "mtime": 1789264577.8278024,
-    "seen": 1789471052.789919,
-    "ast_hash": "f0875fdf9a256cb9843b6731ef19610a",
-    "semantic_hash": ""
-  },
   "src/components/AdminChineseMatchingPanel.tsx": {
     "mtime": 1789264577.8280656,
     "seen": 1789471052.78992,
@@ -1314,9 +1296,9 @@
     "semantic_hash": ""
   },
   "src/i18n/admin.ts": {
-    "mtime": 1789627837.8889825,
-    "seen": 1789627895.54531,
-    "ast_hash": "7f773acb82fec5b3ed543fc1dc1bdbe9",
+    "mtime": 1789649970.985734,
+    "seen": 1789651555.7652779,
+    "ast_hash": "523e789b985db8a61291cc48da105b66",
     "semantic_hash": ""
   },
   "src/i18n/site.ts": {
@@ -1332,14 +1314,14 @@
     "semantic_hash": ""
   },
   "src/lib/api/auto-reply.ts": {
-    "mtime": 1789627742.479867,
-    "seen": 1789627895.545374,
+    "mtime": 1789627971.758012,
+    "seen": 1789651555.765341,
     "ast_hash": "fbdedebd964b22366f16ee9fb0c46222",
     "semantic_hash": ""
   },
   "src/lib/api/contact-submit.ts": {
-    "mtime": 1789627788.095286,
-    "seen": 1789627895.5453749,
+    "mtime": 1789627971.7587788,
+    "seen": 1789651555.765342,
     "ast_hash": "de9264b723cb21c3c89fe157048fda8d",
     "semantic_hash": ""
   },
@@ -1350,8 +1332,8 @@
     "semantic_hash": ""
   },
   "src/lib/api/inbound-email.ts": {
-    "mtime": 1789627745.4031715,
-    "seen": 1789627895.545409,
+    "mtime": 1789627971.7593658,
+    "seen": 1789651555.765376,
     "ast_hash": "afdd3c56c4e01ec79853f3ed45e89e88",
     "semantic_hash": ""
   },
@@ -1359,12 +1341,6 @@
     "mtime": 1789264577.8381493,
     "seen": 1789471052.7899551,
     "ast_hash": "5778286f9941e12f453dbe13c57fc988",
-    "semantic_hash": ""
-  },
-  "src/lib/appointments.ts": {
-    "mtime": 1789264577.838378,
-    "seen": 1789471052.789956,
-    "ast_hash": "434789bee342c1679959fe34a41bea53",
     "semantic_hash": ""
   },
   "src/lib/authUsers.ts": {
@@ -1395,12 +1371,6 @@
     "mtime": 1789553050.7369094,
     "seen": 1789619740.141233,
     "ast_hash": "db6b40d5ba4f662028b3b634b5508cb0",
-    "semantic_hash": ""
-  },
-  "src/lib/calendar.ts": {
-    "mtime": 1789264577.8390913,
-    "seen": 1789471052.7899609,
-    "ast_hash": "9e43b32842493f97ea1b3eff790e068d",
     "semantic_hash": ""
   },
   "src/lib/contactForm.ts": {
@@ -1572,9 +1542,9 @@
     "semantic_hash": ""
   },
   "src/lib/studentProgress.ts": {
-    "mtime": 1789620648.5101554,
-    "seen": 1789627895.546551,
-    "ast_hash": "c6300639582a37d4442d09e11ec33ab0",
+    "mtime": 1789649970.9871743,
+    "seen": 1789651555.7664828,
+    "ast_hash": "a4ea39c22b9e6ec31d428ac1aad1428a",
     "semantic_hash": ""
   },
   "src/lib/suiviStatuts.ts": {
@@ -1614,9 +1584,9 @@
     "semantic_hash": ""
   },
   "src/views/AdminDashboard.tsx": {
-    "mtime": 1789627829.6480815,
-    "seen": 1789627895.546738,
-    "ast_hash": "226ad62a30e6e5af6f282db0be2b5667",
+    "mtime": 1789649970.9876823,
+    "seen": 1789651555.7666712,
+    "ast_hash": "990e4d9f8f59c7e176d4e879a1e8c78e",
     "semantic_hash": ""
   },
   "src/views/AdminLogin.tsx": {
@@ -1740,9 +1710,9 @@
     "semantic_hash": ""
   },
   "docs/for-agents.md": {
-    "mtime": 1789627847.5740304,
-    "seen": 1789627895.548977,
-    "ast_hash": "101cc2dd2e9450b2c2fdde8a0f06786a",
+    "mtime": 1789649970.9837635,
+    "seen": 1789651555.768887,
+    "ast_hash": "304d9c6c995fb063bfdb809798d1b573",
     "semantic_hash": ""
   },
   "scripts/generate-blog-posts.mjs": {
@@ -1752,32 +1722,32 @@
     "semantic_hash": ""
   },
   "src/lib/contactOwner.check.ts": {
-    "mtime": 1789620648.50601,
-    "seen": 1789627895.5456991,
-    "ast_hash": "ef945f5a0d2f410be8b7c80dbdd344a6",
+    "mtime": 1789649970.9861832,
+    "seen": 1789651555.7656069,
+    "ast_hash": "3e1437e4736cd2d7abf1902bbbcbc922",
     "semantic_hash": ""
   },
   "src/lib/contactOwner.ts": {
-    "mtime": 1789620648.508137,
-    "seen": 1789627895.5457,
-    "ast_hash": "a5bb5c71ef8f648bc962734d2db3f131",
+    "mtime": 1789649970.9866862,
+    "seen": 1789651555.7656078,
+    "ast_hash": "47d795f480cf17c050efc3d572683d2b",
     "semantic_hash": ""
   },
   "src/components/AdminContactEmailThread.tsx": {
-    "mtime": 1789627847.5727646,
-    "seen": 1789627895.544405,
+    "mtime": 1789627971.756875,
+    "seen": 1789651555.764396,
     "ast_hash": "20bb04f9c3899c7342a4340802f22606",
     "semantic_hash": ""
   },
   "src/lib/contactEmails.check.ts": {
-    "mtime": 1789627721.3436403,
-    "seen": 1789627895.545665,
+    "mtime": 1789627971.7598107,
+    "seen": 1789651555.765574,
     "ast_hash": "393775befb2823970768e6eb12b35fa6",
     "semantic_hash": ""
   },
   "src/lib/contactEmails.ts": {
-    "mtime": 1789627721.2323487,
-    "seen": 1789627895.5456672,
+    "mtime": 1789627971.7602568,
+    "seen": 1789651555.765575,
     "ast_hash": "e450594bda78bc9d4815e567965e13b3",
     "semantic_hash": ""
   }
