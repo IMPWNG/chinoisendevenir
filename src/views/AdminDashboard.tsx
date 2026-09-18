@@ -47,6 +47,7 @@ import {
   isAssignedTo,
   shortAdminLabel,
 } from "../lib/contactOwner";
+import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
 
 const STATUTS = SUIVI_STATUTS;
 
@@ -523,7 +524,11 @@ export default function AdminDashboard() {
       filterDomaine === "tous" || c.domaine_etudes === filterDomaine;
     const matchOwner =
       filterOwner === "tous" ||
-      (filterOwner === "moi" && isAssignedTo(c, user?.email));
+      (filterOwner === "moi" && isAssignedTo(c, user?.email)) ||
+      (filterOwner === "restreint" &&
+        access.role === "full" &&
+        Boolean((c.assigned_to || "").trim()) &&
+        !isAssignedTo(c, user?.email));
 
     return (
       matchSearch &&
@@ -549,11 +554,12 @@ export default function AdminDashboard() {
     ).length,
     myAssigned: contacts.filter((c) => isAssignedTo(c, user?.email)).length,
   };
+  const revenue = revenueForViewer(contacts, access.role, user?.email);
 
   return (
     <AdminShell user={user} onLogout={handleLogout}>
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 mb-8">
           <StatCard
             label={t("dashboard.totalContacts")}
             value={stats.total}
@@ -583,6 +589,24 @@ export default function AdminDashboard() {
             value={stats.myAssigned}
             icon="🖐️"
             color="from-teal-600 to-emerald-500"
+          />
+          <RevenueCard
+            title={t("dashboard.revenueTitle")}
+            hint={
+              access.role === "full"
+                ? t("dashboard.revenueShareFull")
+                : t("dashboard.revenueShareLimited")
+            }
+            hypoLabel={t("dashboard.revenueHypo")}
+            realLabel={t("dashboard.revenueReal")}
+            hypoHint={t("dashboard.revenueHypoHint", {
+              count: revenue.hypotheticCount,
+            })}
+            realHint={t("dashboard.revenueRealHint", {
+              count: revenue.realCount,
+            })}
+            hypothetic={formatEuros(revenue.hypothetic)}
+            real={formatEuros(revenue.real)}
           />
         </div>
 
@@ -619,6 +643,11 @@ export default function AdminDashboard() {
               >
                 <option value="tous">👤 {t("dashboard.allOwners")}</option>
                 <option value="moi">{t("dashboard.filterOwnerMine")}</option>
+                {access.role === "full" ? (
+                  <option value="restreint">
+                    {t("dashboard.filterOwnerLimited")}
+                  </option>
+                ) : null}
               </select>
             </div>
 
@@ -963,6 +992,47 @@ export default function AdminDashboard() {
         />
       )}
     </AdminShell>
+  );
+}
+
+function RevenueCard({
+  title,
+  hint,
+  hypoLabel,
+  realLabel,
+  hypoHint,
+  realHint,
+  hypothetic,
+  real,
+}: {
+  title: string;
+  hint: string;
+  hypoLabel: string;
+  realLabel: string;
+  hypoHint: string;
+  realHint: string;
+  hypothetic: string;
+  real: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4 text-white shadow-2xl">
+      <p className="text-xs font-bold uppercase tracking-wide text-slate-300">
+        {title}
+      </p>
+      <p className="mt-1 text-[11px] leading-snug text-slate-400">{hint}</p>
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        <div className="rounded-xl bg-amber-500/15 px-3 py-2">
+          <p className="text-[11px] font-semibold text-amber-200">{hypoLabel}</p>
+          <p className="text-lg font-bold text-white">{hypothetic}</p>
+          <p className="text-[11px] text-amber-100/70">{hypoHint}</p>
+        </div>
+        <div className="rounded-xl bg-emerald-500/15 px-3 py-2">
+          <p className="text-[11px] font-semibold text-emerald-200">{realLabel}</p>
+          <p className="text-lg font-bold text-white">{real}</p>
+          <p className="text-[11px] text-emerald-100/70">{realHint}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
