@@ -66,6 +66,8 @@ Attribution **manuelle** (case à cocher dans la fiche admin). Migration `sql/co
 
 Helpers : `contactAssignPatch()`, `contactUnassignPatch()`, `isAssignedTo()`. Pas d’attribution automatique au toucher ni au paiement.
 
+Primes : `src/lib/contactRevenue.ts`. Si le dossier est attribué à l’admin restreint, le global touche 60 % et le restreint 40 % du prix de la formule. Sinon le global touche 100 %. Carte admin : hypothétique (formule choisie, non payée) / réel (statut payé). Filtre « Dossiers admin restreint » visible pour le rôle `full`.
+
 ### Matching universités
 
 Pipeline : `src/lib/matching/run.ts` → `runMatching()`.
