@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { asString, readJsonObject } from "@/lib/request";
+import { canonicalCountry } from "@/lib/countries";
 
 const FIELD_LABELS = {
   prenom: "prénom",
@@ -61,13 +62,18 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: "INVALID_EMAIL" }, { status: 400 });
     }
 
+    const pays = canonicalCountry(body.pays);
+    if (!pays) {
+      return NextResponse.json({ error: "INVALID_COUNTRY" }, { status: 400 });
+    }
+
     const payload = {
       prenom: filled(body.prenom),
       nom: filled(body.nom),
       email,
       age,
       phone: filled(body.phone),
-      pays: filled(body.pays),
+      pays,
       dernier_diplome: filled(body.dernier_diplome),
       domaine_etudes: filled(body.domaine_etudes),
       budget: filled(body.budget),

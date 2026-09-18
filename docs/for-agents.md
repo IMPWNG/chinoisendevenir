@@ -135,7 +135,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans ce repo.
 
-- `contacts` — dossiers (colonnes suivi, formule, lead form…)
+- `contacts` — dossiers (colonnes suivi, formule, lead form…). Pays canoniques : `src/lib/countries.ts` (liste déroulante du formulaire).
 - `suivi_actions` — historique d’actions CRM
 - `admin_users` — allowlist admin (personne ne s’auto-promouvoit)
 - `universities` — catalogue matching / partenaires

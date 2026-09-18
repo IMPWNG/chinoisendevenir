@@ -4,6 +4,7 @@ import { useEffect, useState, type ChangeEvent, type FormEvent, type ReactNode }
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { DOMAINES_ETUDES } from "../lib/studentProgress";
+import { COUNTRIES } from "../lib/countries";
 import { errorMessage } from "../lib/request";
 
 const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat", "autre"];
@@ -305,14 +306,25 @@ export default function AdminContactInfo({
               />
             </Field>
             <Field id="admin-pays" label={`${t("dashboard.country")} *`}>
-              <input
+              <select
                 id="admin-pays"
                 name="pays"
                 value={form.pays}
                 onChange={handleChange}
                 required
                 className={inputClass}
-              />
+              >
+                <option value="">{t("dashboard.select")}</option>
+                {form.pays &&
+                !(COUNTRIES as readonly string[]).includes(form.pays) ? (
+                  <option value={form.pays}>{form.pays}</option>
+                ) : null}
+                {COUNTRIES.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
             </Field>
             <Field id="admin-diplome" label={t("dashboard.studyLevel")}>
               <select

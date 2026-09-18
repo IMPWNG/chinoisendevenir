@@ -6,6 +6,7 @@ import { wrapEmailHtml, withEtudeChineSubject } from "../emailLayout";
 import { getClientIp, rateLimit } from "../httpSecurity";
 import { canonicalStatut, EARLY_STATUSES, toStoredStatut } from "../suiviStatuts";
 import { isValidPhone } from "../contactForm";
+import { canonicalCountry } from "../countries";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
@@ -150,13 +151,13 @@ export default async function handler(request: Request) {
       return NextResponse.json({ error: "Email invalide" }, { status: 400 });
     }
 
+    const country = canonicalCountry(pays);
     if (
       !prenom ||
       !nom ||
-      !pays ||
+      !country ||
       String(prenom).length > 80 ||
-      String(nom).length > 80 ||
-      String(pays).length > 80
+      String(nom).length > 80
     ) {
       return NextResponse.json(
         { error: "Champs obligatoires manquants" },
@@ -220,7 +221,7 @@ export default async function handler(request: Request) {
       nom: pick(nom, existing?.nom),
       email: normalizedEmail,
       age: pick(age || null, existing?.age),
-      pays: pick(pays, existing?.pays),
+      pays: pick(country, existing?.pays),
       phone: pick(phone || null, existing?.phone),
       domaine_etudes: pick(domaineFinal, existing?.domaine_etudes),
       dernier_diplome: pick(dernier_diplome || null, existing?.dernier_diplome),

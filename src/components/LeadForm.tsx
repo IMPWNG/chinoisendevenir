@@ -13,6 +13,7 @@ import {
   parseAge,
   withCurrentOption,
 } from "../lib/contactForm";
+import { COUNTRIES } from "../lib/countries";
 
 const EMPTY_FORM = {
   prenom: "",
@@ -333,14 +334,19 @@ const LeadForm = ({
 
             <div className="landing-form-group">
               <label>{t("form.country")} *</label>
-              <input
-                type="text"
+              <select
                 name="pays"
                 value={formData.pays}
                 onChange={handleChange}
                 className={errors.pays ? "error" : ""}
-                placeholder="France"
-              />
+              >
+                <option value="">{t("form.select")}</option>
+                {COUNTRIES.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
               {errors.pays && (
                 <span className="landing-error-msg">{errors.pays}</span>
               )}
