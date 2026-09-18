@@ -110,7 +110,7 @@ Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching
 | Auth admin + étudiant | `src/lib/studentAuth.ts` |
 | Scoring univ. | `src/lib/matching/score.ts` + `weights.ts` |
 | Rapports matching | `src/lib/matching/reports.ts`, `reportsLlm.ts` |
-| E-mails auto / intents | `src/lib/api/auto-reply.ts`, `src/lib/emailIntents.ts` |
+| E-mails auto / intents | `src/lib/api/auto-reply.ts`, `src/lib/emailIntents.ts`. Inbound : pas de réponse auto aux questions. Seuls le mail de bienvenue et la confirmation de formule partent seuls. |
 | Inbound mail | `src/lib/api/inbound-email.ts` |
 | Relance quotidienne | `src/lib/api/formules-relance.ts` (cron Vercel `0 2 * * *`) |
 | Scan univ. (offline) | `scripts/scan-universities.mjs` → `data/universities/` → `import:universities` |

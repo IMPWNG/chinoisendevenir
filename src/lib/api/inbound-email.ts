@@ -17,15 +17,12 @@ import {
   canonicalStatut,
   isFormuleAlreadyChosen,
   isFormulesAwaitingReply,
-  shouldAdvanceStatus,
   toStoredStatut,
 } from "../suiviStatuts";
 import {
-  alreadySentIntentReply,
   detectEmailIntent,
   extractPersonName,
   shouldCreateContactFromInbound,
-  shouldSkipIntentAutoReply,
   type EmailIntent,
 } from "../emailIntents";
 import { asString, errorMessage } from "../request";
@@ -140,12 +137,6 @@ type InboundWebhookPayload = {
     from?: unknown;
     subject?: string;
   };
-};
-
-type SuiviActionRow = {
-  id?: string;
-  action?: string | null;
-  description?: string | null;
 };
 
 export { FORMULE_ALREADY_CHOSEN };
@@ -395,22 +386,6 @@ function filledName(value: unknown): string {
   return String(value || "").trim();
 }
 
-async function fetchRecentActions(contactId: string): Promise<SuiviActionRow[]> {
-  const { data, error } = await supabase
-    .from("suivi_actions")
-    .select("id, action, description")
-    .eq("contact_id", contactId)
-    .order("created_at", { ascending: false })
-    .limit(80);
-
-  if (error) {
-    console.warn("⚠️ Lecture suivi_actions:", errorMessage(error));
-    return [];
-  }
-
-  return (data as SuiviActionRow[] | null) || [];
-}
-
 async function createContactFromInbound({
   email,
   prenom,
@@ -516,96 +491,6 @@ function asEmailContact(contact: ContactRow) {
     prenom: contact.prenom == null ? null : String(contact.prenom),
     nom: contact.nom == null ? null : String(contact.nom),
     suivi_statut: contact.suivi_statut,
-  };
-}
-
-export async function maybeSendIntentAutoReply(
-  contact: ContactRow,
-  { subject = "", text = "" }: { subject?: string; text?: string } = {},
-) {
-  const statut = contact.suivi_statut || "";
-  if (canonicalStatut(statut) === "prospect_perdu") {
-    return { sent: false as const, reason: "prospect_perdu" };
-  }
-
-  const classified = detectEmailIntent(text, subject);
-  if (!classified) {
-    return { sent: false as const, reason: "no_intent" };
-  }
-
-  if (shouldSkipIntentAutoReply(classified.key, text)) {
-    return {
-      sent: false as const,
-      reason: "skip_short_or_thanks",
-      intent: classified.key,
-    };
-  }
-
-  if (classified.key === "general") {
-    const current = canonicalStatut(statut);
-    if (current && current !== "nouveau_prospect") {
-      return {
-        sent: false as const,
-        reason: "general_not_new",
-        intent: classified.key,
-      };
-    }
-  }
-
-  if (
-    classified.key === "tarifs" &&
-    (isFormulesAwaitingReply(statut) || isFormuleAlreadyChosen(statut))
-  ) {
-    return {
-      sent: false as const,
-      reason: "formules_already",
-      intent: classified.key,
-    };
-  }
-
-  const actions = await fetchRecentActions(contactId(contact));
-  if (alreadySentIntentReply(actions, classified.key)) {
-    return {
-      sent: false as const,
-      reason: "duplicate",
-      intent: classified.key,
-    };
-  }
-
-  const sent = await sendTemplatedEmail(asEmailContact(contact), classified.templateKey);
-  if (!sent.success) {
-    await logAction(
-      contactId(contact),
-      contact.email,
-      "note_ajoutee",
-      `Échec réponse automatique (${classified.key}) : ${errorMessage(sent.error, "erreur Resend")}`,
-    );
-    return {
-      sent: false as const,
-      reason: "send_failed",
-      intent: classified.key,
-      error: sent.error,
-    };
-  }
-
-  const nextStatus = sent.template?.status;
-  if (nextStatus && shouldAdvanceStatus(statut, nextStatus)) {
-    await updateContactStatus(contactId(contact), nextStatus);
-  }
-
-  await logAction(
-    contactId(contact),
-    contact.email,
-    sent.template?.action || "email_envoye",
-    sent.template?.description ||
-      `Réponse automatique envoyée (${classified.key})`,
-  );
-
-  return {
-    sent: true as const,
-    intent: classified.key,
-    template: classified.templateKey,
-    status: nextStatus || statut,
   };
 }
 
@@ -859,30 +744,6 @@ export async function processInboundEmail(raw: unknown) {
     };
   }
 
-  const autoReply = await maybeSendIntentAutoReply(contact, {
-    subject,
-    text: replyText || rawText,
-  });
-  if (autoReply.sent) {
-    return {
-      success: true,
-      message: `Réponse automatique envoyée (${autoReply.intent})`,
-      contact: contact.id,
-      intent: autoReply.intent,
-      status: autoReply.status,
-      httpStatus: 200,
-    };
-  }
-  if (autoReply.reason === "send_failed") {
-    return {
-      success: false,
-      message: "Erreur envoi réponse automatique",
-      contact: contact.id,
-      intent: autoReply.intent,
-      httpStatus: 500,
-    };
-  }
-
   if (
     interest &&
     !classified &&
@@ -917,14 +778,11 @@ export async function processInboundEmail(raw: unknown) {
 
   return {
     success: true,
-    message: autoReply.reason === "duplicate"
-      ? `Réponse enregistrée (déjà répondu pour ${autoReply.intent})`
-      : question
-        ? "Réponse enregistrée (question détectée, pas d'email automatique)"
-        : "Réponse enregistrée sans email automatique",
+    message: question
+      ? "Réponse enregistrée (question détectée, pas d'email automatique)"
+      : "Réponse enregistrée sans email automatique",
     contact: contact.id,
     intent,
-    skipped: autoReply.reason || null,
     httpStatus: 200,
   };
 }
