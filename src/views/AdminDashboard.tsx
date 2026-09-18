@@ -559,7 +559,7 @@ export default function AdminDashboard() {
   return (
     <AdminShell user={user} onLogout={handleLogout}>
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-5">
           <StatCard
             label={t("dashboard.totalContacts")}
             value={stats.total}
@@ -590,25 +590,25 @@ export default function AdminDashboard() {
             icon="🖐️"
             color="from-teal-600 to-emerald-500"
           />
-          <RevenueCard
-            title={t("dashboard.revenueTitle")}
-            hint={
-              access.role === "full"
-                ? t("dashboard.revenueShareFull")
-                : t("dashboard.revenueShareLimited")
-            }
-            hypoLabel={t("dashboard.revenueHypo")}
-            realLabel={t("dashboard.revenueReal")}
-            hypoHint={t("dashboard.revenueHypoHint", {
-              count: revenue.hypotheticCount,
-            })}
-            realHint={t("dashboard.revenueRealHint", {
-              count: revenue.realCount,
-            })}
-            hypothetic={formatEuros(revenue.hypothetic)}
-            real={formatEuros(revenue.real)}
-          />
         </div>
+        <RevenueCard
+          title={t("dashboard.revenueTitle")}
+          hint={
+            access.role === "full"
+              ? t("dashboard.revenueShareFull")
+              : t("dashboard.revenueShareLimited")
+          }
+          hypoLabel={t("dashboard.revenueHypo")}
+          realLabel={t("dashboard.revenueReal")}
+          hypoHint={t("dashboard.revenueHypoHint", {
+            count: revenue.hypotheticCount,
+          })}
+          realHint={t("dashboard.revenueRealHint", {
+            count: revenue.realCount,
+          })}
+          hypothetic={formatEuros(revenue.hypothetic)}
+          real={formatEuros(revenue.real)}
+        />
 
         {/* Filtres avancés */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-6 mb-8 border border-slate-700/50">
@@ -1015,21 +1015,27 @@ function RevenueCard({
   real: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4 text-white shadow-2xl">
-      <p className="text-xs font-bold uppercase tracking-wide text-slate-300">
-        {title}
-      </p>
-      <p className="mt-1 text-[11px] leading-snug text-slate-400">{hint}</p>
-      <div className="mt-3 grid grid-cols-2 gap-2">
-        <div className="rounded-xl bg-amber-500/15 px-3 py-2">
-          <p className="text-[11px] font-semibold text-amber-200">{hypoLabel}</p>
-          <p className="text-lg font-bold text-white">{hypothetic}</p>
-          <p className="text-[11px] text-amber-100/70">{hypoHint}</p>
+    <div className="mb-8 w-full rounded-2xl border border-white/10 bg-slate-900/70 px-6 py-5 text-white shadow-2xl">
+      <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+        <p className="text-sm font-bold uppercase tracking-wide text-slate-200">
+          {title}
+        </p>
+        <p className="text-xs text-slate-400">{hint}</p>
+      </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="rounded-xl bg-amber-500/15 px-5 py-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-amber-200">
+            {hypoLabel}
+          </p>
+          <p className="mt-1 text-3xl font-bold text-white">{hypothetic}</p>
+          <p className="mt-1 text-sm text-amber-100/70">{hypoHint}</p>
         </div>
-        <div className="rounded-xl bg-emerald-500/15 px-3 py-2">
-          <p className="text-[11px] font-semibold text-emerald-200">{realLabel}</p>
-          <p className="text-lg font-bold text-white">{real}</p>
-          <p className="text-[11px] text-emerald-100/70">{realHint}</p>
+        <div className="rounded-xl bg-emerald-500/15 px-5 py-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-200">
+            {realLabel}
+          </p>
+          <p className="mt-1 text-3xl font-bold text-white">{real}</p>
+          <p className="mt-1 text-sm text-emerald-100/70">{realHint}</p>
         </div>
       </div>
     </div>
