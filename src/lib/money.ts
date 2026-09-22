@@ -55,12 +55,12 @@ export function parseEuroAmount(raw: string): number | null {
 }
 
 function cfaBeside(euros: number): string {
-  return ` (${formatFcfa(eurosToFcfa(euros))})`;
+  return `, soit ${formatFcfa(eurosToFcfa(euros))}`;
 }
 
 function cfaBesideRange(from: number, to: number, sep: string): string {
   const fromFcfa = formatFcfa(eurosToFcfa(from)).replace(` ${FCFA_LABEL}`, "");
-  return ` (${fromFcfa}${sep}${formatFcfa(eurosToFcfa(to))})`;
+  return `, soit ${fromFcfa}${sep}${formatFcfa(eurosToFcfa(to))}`;
 }
 
 const NUMBER = String.raw`\d{1,3}(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?`;
@@ -68,10 +68,11 @@ const RANGE_SEP = String.raw`\s*(?:à|-|–|—|et)\s*`;
 const CURRENCY = String.raw`€|euros?|EUR`;
 
 const SUFFIX_RE = new RegExp(
-  `(${NUMBER})(?:(${RANGE_SEP})(${NUMBER}))?\\s*(${CURRENCY})(?!\\s*\\([^)]*F\\s*CFA\\))`,
+  `(${NUMBER})(?:(${RANGE_SEP})(${NUMBER}))?\\s*(${CURRENCY})(?!,?\\s*soit\\b)(?!\\s*\\([^)]*F\\s*CFA\\))`,
   "gi",
 );
-const PREFIX_RE = /€\s*(\d{1,3}(?:,\d{3})+|\d+(?:[.,]\d{1,2})?)(?!\s*\([^)]*F\s*CFA\))/g;
+const PREFIX_RE =
+  /€\s*(\d{1,3}(?:,\d{3})+|\d+(?:[.,]\d{1,2})?)(?!,?\s*soit\b)(?!\s*\([^)]*F\s*CFA\))/g;
 
 /**
  * Append F CFA next to every euro amount in a string.
