@@ -87,4 +87,12 @@ assert(
   "formule 3 savings CFA",
 );
 
+const twice = withCfaInText(withCfaInText("€2,000 (€500 savings)"));
+assert(
+  twice ===
+    "€2,000, soit 1 311 914 F CFA (€500, soit 327 979 F CFA savings)",
+  "english thousands idempotent",
+);
+assert(!twice.includes("F CFA0"), "no leftover digit after F CFA");
+
 console.log("money check ok");

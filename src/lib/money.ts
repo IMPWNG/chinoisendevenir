@@ -63,16 +63,21 @@ function cfaBesideRange(from: number, to: number, sep: string): string {
   return `, soit ${fromFcfa}${sep}${formatFcfa(eurosToFcfa(to))}`;
 }
 
-const NUMBER = String.raw`\d{1,3}(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?`;
+const NUMBER = String.raw`\d{1,3}(?:[\s\u00a0\u202f]\d{3})*(?:[.,]\d{1,2}(?!\d))?|\d+(?:[.,]\d{1,2}(?!\d))?`;
 const RANGE_SEP = String.raw`\s*(?:à|-|–|—|et)\s*`;
 const CURRENCY = String.raw`€|euros?|EUR`;
+const ALREADY = String.raw`(?!,?\s*soit\b)(?!\s*\([^)]*F\s*CFA\))(?!\d)`;
 
 const SUFFIX_RE = new RegExp(
-  `(${NUMBER})(?:(${RANGE_SEP})(${NUMBER}))?\\s*(${CURRENCY})(?!,?\\s*soit\\b)(?!\\s*\\([^)]*F\\s*CFA\\))`,
+  `(${NUMBER})(?:(${RANGE_SEP})(${NUMBER}))?\\s*(${CURRENCY})${ALREADY}`,
   "gi",
 );
-const PREFIX_RE =
-  /€\s*(\d{1,3}(?:,\d{3})+|\d+(?:[.,]\d{1,2})?)(?!,?\s*soit\b)(?!\s*\([^)]*F\s*CFA\))/g;
+/** English €1,700 / €2,000: comma = thousands, not decimals. */
+const PREFIX_ALREADY = String.raw`(?!,?\s*soit\b)(?!\s*\([^)]*F\s*CFA\))(?!\d)(?!,\d)`;
+const PREFIX_RE = new RegExp(
+  String.raw`€\s*(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d{1,2}))?${PREFIX_ALREADY}`,
+  "g",
+);
 
 /**
  * Append F CFA next to every euro amount in a string.
@@ -97,8 +102,9 @@ export function withCfaInText(text: unknown): string {
     },
   );
 
-  return withSuffix.replace(PREFIX_RE, (full, amount: string) => {
-    const euros = parseEuroAmount(amount);
+  return withSuffix.replace(PREFIX_RE, (full, amount: string, decimals?: string) => {
+    const token = decimals ? `${amount}.${decimals}` : amount;
+    const euros = parseEuroAmount(token);
     if (euros == null) return full;
     return `${full}${cfaBeside(euros)}`;
   });
