@@ -8,12 +8,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  SITE_LANGS,
-  siteTranslations,
-  type SiteCopy,
-  type SiteLang,
-} from "../i18n/site";
+import { SITE_LANGS, siteTranslations, type SiteCopy, type SiteLang } from "../i18n/site";
+import { withCfaDeep, withCfaInText } from "../lib/money";
 
 type TranslateVars = Record<string, string | number>;
 
@@ -72,12 +68,15 @@ export function SiteI18nProvider({ children }: { children: ReactNode }) {
   };
 
   const value = useMemo<SiteI18nValue>(() => {
-    const dict = siteTranslations[lang] || siteTranslations.fr;
+    const dict = withCfaDeep(siteTranslations[lang] || siteTranslations.fr);
+    const frDict = lang === "fr" ? dict : withCfaDeep(siteTranslations.fr);
     const t = (path: string, vars?: TranslateVars) => {
       const fromLang = lookup(dict, path);
-      const fromFr = lookup(siteTranslations.fr, path);
+      const fromFr = lookup(frDict, path);
       const text = fromLang ?? fromFr ?? path;
-      return interpolate(typeof text === "string" ? text : path, vars);
+      return withCfaInText(
+        interpolate(typeof text === "string" ? text : path, vars),
+      );
     };
     return { lang, setLang, t, dict };
   }, [lang]);

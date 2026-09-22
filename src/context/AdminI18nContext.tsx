@@ -8,7 +8,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { adminTranslations, type AdminCopy, type AdminLang } from "../i18n/admin";
+import { adminTranslations, type AdminLang } from "../i18n/admin";
+import { withCfaInText } from "../lib/money";
 
 type TranslateVars = Record<string, string | number>;
 
@@ -61,7 +62,9 @@ export function AdminI18nProvider({ children }: { children: ReactNode }) {
       const fromLang = lookup(adminTranslations[lang], path);
       const fromFr = lookup(adminTranslations.fr, path);
       const text = fromLang || fromFr || path;
-      return interpolate(typeof text === "string" ? text : path, vars);
+      return withCfaInText(
+        interpolate(typeof text === "string" ? text : path, vars),
+      );
     };
     return { lang, setLang, t };
   }, [lang]);

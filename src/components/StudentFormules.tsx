@@ -2,7 +2,7 @@
 
 import {
   displayFormuleFootnote,
-  displayFormulePrice,
+  formulePriceParts,
   getFormuleIncludeGroups,
   getFormuleNumber,
   localizeFormules,
@@ -48,6 +48,7 @@ export default function StudentFormules({
           const featured = formule.featured;
           const selected = selectedNumber === formule.number;
           const isChoosing = choosingNumber === formule.number;
+          const parts = formulePriceParts(formule);
           return (
             <article
               key={formule.number}
@@ -73,8 +74,12 @@ export default function StudentFormules({
                 <p className="student-formule-intro">{formule.subtitle}</p>
               ) : null}
               <p className="student-formule-price">
-                {displayFormulePrice(formule)}
+                {parts.euro}{" "}
+                <span className="student-formule-price-cfa">{parts.cfa}</span>
               </p>
+              {parts.savings ? (
+                <p className="student-formule-savings">{parts.savings}</p>
+              ) : null}
               <p className="student-formule-payment">{t("tarifs.paymentNote")}</p>
               {formule.savingsText ? (
                 <p className="student-formule-intro">{formule.savingsText}</p>

@@ -1,3 +1,5 @@
+import { withCfaInText } from "./money";
+
 export const SITE = {
   name: "Chinois en Devenir",
   url: "https://chinoisendevenir.com",
@@ -208,6 +210,7 @@ export function pageMetadata({
   index?: boolean;
   type?: string;
 }) {
+  const metaDescription = description ? withCfaInText(description) : description;
   const url = absoluteUrl(path);
   const fullTitle = absoluteTitle || `${title} | ${SITE.name}`;
   const images = [
@@ -221,14 +224,14 @@ export function pageMetadata({
 
   const metadata = {
     title: absoluteTitle ? { absolute: absoluteTitle } : title,
-    description,
+    description: metaDescription,
     authors: [{ name: SITE.name, url: SITE.url }],
     creator: SITE.name,
     publisher: SITE.name,
     alternates: { canonical: url },
     openGraph: {
       title: fullTitle,
-      description,
+      description: metaDescription,
       url,
       siteName: SITE.name,
       locale: SITE.locale,
@@ -238,7 +241,7 @@ export function pageMetadata({
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
-      description,
+      description: metaDescription,
       images: [SITE.ogImage],
     },
     robots: index
@@ -324,10 +327,10 @@ export function faqJsonLd(faqs: Array<{ question: string; answer: string }>) {
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
+      name: withCfaInText(faq.question),
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: withCfaInText(faq.answer),
       },
     })),
   };
@@ -361,14 +364,14 @@ export function howToJsonLd({
     "@context": "https://schema.org",
     "@type": "HowTo",
     name,
-    description,
+    description: withCfaInText(description),
     inLanguage: SITE.language,
     url: absoluteUrl(path),
     step: steps.map((step, index) => ({
       "@type": "HowToStep",
       position: index + 1,
-      name: step.name,
-      text: step.text,
+      name: withCfaInText(step.name),
+      text: withCfaInText(step.text),
     })),
   };
 }
@@ -391,7 +394,7 @@ export function articleJsonLd({
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
-    description,
+    description: withCfaInText(description),
     image: SITE.ogImage,
     inLanguage: SITE.language,
     mainEntityOfPage: url,

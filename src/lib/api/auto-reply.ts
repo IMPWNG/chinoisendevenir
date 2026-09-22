@@ -12,7 +12,7 @@ import {
   withEtudeChineSubject,
   type EmailExtras,
 } from "../emailLayout";
-import { FORMULES, EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice } from "../formules";
+import { EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice, localizeFormules } from "../formules";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
 import {
   INTENT_TEMPLATE_GENERATORS,
@@ -89,7 +89,7 @@ function generateRelance2Template(prenom: string) {
 }
 
 function generateRelanceFormulesTemplate(prenom: string) {
-  const choices = FORMULES.map(
+  const choices = localizeFormules().map(
     (formule) =>
       `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(displayFormulePrice(formule))}`,
   ).join("<br>");
@@ -115,7 +115,7 @@ function generateRelanceFormulesTemplate(prenom: string) {
 }
 
 function generateFormulesPresentationTemplate(prenom: string) {
-  const cards = FORMULES.map((formule) => {
+  const cards = localizeFormules().map((formule) => {
     const featured = formule.featured ? " featured" : "";
     const groups = getFormuleIncludeGroups(formule);
     const items = groups
@@ -159,7 +159,7 @@ function generateFormulesPresentationTemplate(prenom: string) {
   const extraFees = EXTRA_FEES.map((item) => `<li>${escapeHtml(item)}</li>`).join(
     "",
   );
-  const choices = FORMULES.map(
+  const choices = localizeFormules().map(
     (formule) =>
       `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(displayFormulePrice(formule))}`,
   ).join("<br>");

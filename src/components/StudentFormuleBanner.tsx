@@ -1,6 +1,10 @@
 "use client";
 
-import { displayFormuleLabel, getFormuleByNumber } from "../lib/formules";
+import {
+  displayFormuleLabel,
+  displayFormulePrice,
+  getFormuleByNumber,
+} from "../lib/formules";
 import { useSiteI18n } from "../context/SiteI18nContext";
 
 export default function StudentFormuleBanner({
@@ -21,7 +25,7 @@ export default function StudentFormuleBanner({
       ? dict.formules[formuleKey]
       : null;
   const title = localized?.title || details?.title || displayFormuleLabel(formule);
-  const price = details?.price || "";
+  const price = details ? displayFormulePrice(details) : "";
 
   return (
     <div className="student-formule-banner student-card-wide">

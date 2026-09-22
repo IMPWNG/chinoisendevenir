@@ -1,4 +1,5 @@
 import type { SiteCopy } from "@/i18n/site";
+import { eurosToFcfa, formatEurosOnly, formatEurosWithCfa, formatFcfa, withCfaInText } from "./money";
 
 export const FORMULE_1_VALUE = "Premier pas en Chine (800€)";
 export const FORMULE_2_VALUE = "Admission universitaire (1700€)";
@@ -62,8 +63,10 @@ export type Formule = {
   audience: string;
   badge: string | null;
   featured: boolean;
+  priceEuros: number;
   price: string;
   priceLabel: string;
+  savingsEuros?: number;
   intro: string;
   includes: string[];
   matchingIncludes: string[];
@@ -165,6 +168,7 @@ export const FORMULES: Formule[] = [
     audience: "Pour une première année de chinois",
     badge: null,
     featured: false,
+    priceEuros: 800,
     price: "800 €",
     priceLabel: "800 euros",
     intro:
@@ -208,6 +212,7 @@ export const FORMULES: Formule[] = [
     audience: "Pour un projet d'études déjà défini",
     badge: null,
     featured: false,
+    priceEuros: 1700,
     price: "1 700 €",
     priceLabel: "1 700 euros",
     intro:
@@ -248,8 +253,10 @@ export const FORMULES: Formule[] = [
     audience: "Votre projet d'études en Chine de A à Z",
     badge: "Recommandée",
     featured: true,
+    priceEuros: 2000,
     price: "2 000 €",
     priceLabel: "2 000 euros",
+    savingsEuros: 500,
     savings: "500 €",
     savingsLabel: "500 € d'économie",
     savingsText:
@@ -342,11 +349,26 @@ export function getFormuleIncludeGroups(formule: Formule | null | undefined) {
 }
 
 export function displayFormulePrice(formule: Formule | null | undefined) {
-  if (!formule?.price) return "";
-  if (formule.savingsLabel) {
-    return `${formule.price} (${formule.savingsLabel})`;
+  if (!formule || formule.priceEuros == null) {
+    return withCfaInText(formule?.price || "");
   }
-  return formule.price;
+  const price = formatEurosWithCfa(formule.priceEuros);
+  if (formule.savingsLabel) {
+    return `${price} — ${withCfaInText(formule.savingsLabel)}`;
+  }
+  return price;
+}
+
+export function formulePriceParts(formule: Formule | null | undefined) {
+  if (!formule || formule.priceEuros == null) {
+    return { euro: "", cfa: "", savings: "", full: "" };
+  }
+  return {
+    euro: formatEurosOnly(formule.priceEuros),
+    cfa: `(${formatFcfa(eurosToFcfa(formule.priceEuros))})`,
+    savings: formule.savingsLabel ? withCfaInText(formule.savingsLabel) : "",
+    full: displayFormulePrice(formule),
+  };
 }
 
 export function getFormuleNumber(formuleLabel: unknown): number | null {
@@ -439,11 +461,26 @@ export function displayFormuleFootnote(footnote: unknown) {
   return text.startsWith("*") ? text : `* ${text}`;
 }
 
+function withCfaFormuleCopy(formule: Formule): Formule {
+  return {
+    ...formule,
+    priceLabel: withCfaInText(formule.priceLabel),
+    savings: formule.savings ? withCfaInText(formule.savings) : formule.savings,
+    savingsLabel: formule.savingsLabel
+      ? withCfaInText(formule.savingsLabel)
+      : formule.savingsLabel,
+    savingsText: formule.savingsText
+      ? withCfaInText(formule.savingsText)
+      : formule.savingsText,
+    idealIf: formule.idealIf.map((item) => withCfaInText(item)),
+  };
+}
+
 export function localizeFormule(formule: Formule, dict?: SiteCopy | null): Formule {
   const loc = (dict?.formules as Record<number, FormuleLoc> | undefined)?.[
     formule.number
   ];
-  if (!loc) return formule;
+  if (!loc) return withCfaFormuleCopy(formule);
 
   const next: Formule = {
     ...formule,
@@ -471,7 +508,7 @@ export function localizeFormule(formule: Formule, dict?: SiteCopy | null): Formu
     ];
   }
 
-  return next;
+  return withCfaFormuleCopy(next);
 }
 
 export function localizeFormules(dict?: SiteCopy | null) {

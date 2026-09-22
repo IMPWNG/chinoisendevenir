@@ -1027,14 +1027,18 @@ function RevenueCard({
           <p className="text-xs font-semibold uppercase tracking-wide text-amber-200">
             {hypoLabel}
           </p>
-          <p className="mt-1 text-3xl font-bold text-white">{hypothetic}</p>
+          <p className="mt-1 text-2xl font-bold text-white leading-snug sm:text-3xl">
+            {hypothetic}
+          </p>
           <p className="mt-1 text-sm text-amber-100/70">{hypoHint}</p>
         </div>
         <div className="rounded-xl bg-emerald-500/15 px-5 py-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-emerald-200">
             {realLabel}
           </p>
-          <p className="mt-1 text-3xl font-bold text-white">{real}</p>
+          <p className="mt-1 text-2xl font-bold text-white leading-snug sm:text-3xl">
+            {real}
+          </p>
           <p className="mt-1 text-sm text-emerald-100/70">{realHint}</p>
         </div>
       </div>

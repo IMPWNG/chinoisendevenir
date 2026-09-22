@@ -8,6 +8,7 @@ import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
 import { useSiteI18n } from "../context/SiteI18nContext";
 import { blogPath, type BlogPost } from "../lib/blog";
+import { withCfaDeep } from "../lib/money";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "../lib/seo";
 
 function formatDate(isoDate: string, lang: string): string {
@@ -28,11 +29,12 @@ export default function BlogArticlePage({
   related: BlogPost[];
 }) {
   const { t, lang } = useSiteI18n();
-  const path = blogPath(post.slug);
+  const displayPost = withCfaDeep(post);
+  const path = blogPath(displayPost.slug);
   const breadcrumbs = [
     { name: t("breadcrumbs.home"), path: "/" },
     { name: t("blog.crumb"), path: "/blog" },
-    { name: post.title, path },
+    { name: displayPost.title, path },
   ];
 
   return (
@@ -41,13 +43,13 @@ export default function BlogArticlePage({
         data={[
           breadcrumbJsonLd(breadcrumbs),
           articleJsonLd({
-            title: post.title,
-            description: post.description,
+            title: displayPost.title,
+            description: displayPost.description,
             path,
-            datePublished: post.publishedAt,
-            dateModified: post.publishedAt,
+            datePublished: displayPost.publishedAt,
+            dateModified: displayPost.publishedAt,
           }),
-          faqJsonLd(post.faqs),
+          faqJsonLd(displayPost.faqs),
         ]}
       />
       <Navigation />
@@ -56,18 +58,18 @@ export default function BlogArticlePage({
         <div className="container max-w-3xl">
           <PageBreadcrumbs items={breadcrumbs} />
           <p className="text-sm text-gray-500 mb-3">
-            {formatDate(post.publishedAt, lang)}
+            {formatDate(displayPost.publishedAt, lang)}
           </p>
-          <h1 className="landing-section-title text-left">{post.title}</h1>
+          <h1 className="landing-section-title text-left">{displayPost.title}</h1>
           <p className="landing-section-subtitle text-left mb-6">
-            {post.description}
+            {displayPost.description}
           </p>
           <p className="text-gray-700 text-base leading-relaxed mb-10">
-            {post.intro}
+            {displayPost.intro}
           </p>
 
           <div className="prose-blog space-y-8">
-            {post.sections.map((section) => (
+            {displayPost.sections.map((section) => (
               <section key={section.heading}>
                 <h2 className="text-xl font-bold text-gray-900 mb-3">
                   {section.heading}
@@ -96,7 +98,7 @@ export default function BlogArticlePage({
               {t("blog.faqTitle")}
             </h2>
             <div className="space-y-4">
-              {post.faqs.map((faq) => (
+              {displayPost.faqs.map((faq) => (
                 <div
                   key={faq.question}
                   className="rounded-xl border border-slate-200 bg-white p-4"
@@ -117,7 +119,7 @@ export default function BlogArticlePage({
               {t("blog.relatedGuides")}
             </h2>
             <ul className="space-y-2">
-              {post.internalLinks.map((link) => (
+              {displayPost.internalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -150,7 +152,7 @@ export default function BlogArticlePage({
             </section>
           ) : null}
 
-          <PageCta title={post.ctaTitle} subtitle={post.ctaSubtitle} />
+          <PageCta title={displayPost.ctaTitle} subtitle={displayPost.ctaSubtitle} />
         </div>
       </article>
 

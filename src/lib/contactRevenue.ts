@@ -2,6 +2,7 @@ import type { AdminRole } from "./adminRoles";
 import { ADMIN_ROLE_LIMITED } from "./adminRoles";
 import { isAssignedTo, normalizeAdminEmail } from "./contactOwner";
 import { getFormuleByNumber, getFormuleNumber } from "./formules";
+import { formatEurosWithCfa } from "./money";
 import { getChosenFormule, type ContactRow } from "./studentProgress";
 import { PAID_STATUSES, canonicalStatut } from "./suiviStatuts";
 
@@ -21,10 +22,7 @@ export type RevenueSplit = {
 
 export function formuleAmountEuros(formuleLabel: unknown): number {
   const formule = getFormuleByNumber(getFormuleNumber(formuleLabel));
-  if (!formule?.price) return 0;
-  const digits = String(formule.price).replace(/[^\d]/g, "");
-  const amount = Number(digits);
-  return Number.isFinite(amount) ? amount : 0;
+  return formule?.priceEuros || 0;
 }
 
 /**
@@ -80,9 +78,5 @@ export function revenueForViewer(
 }
 
 export function formatEuros(amount: number): string {
-  return new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(amount);
+  return formatEurosWithCfa(amount);
 }
