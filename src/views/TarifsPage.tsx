@@ -10,7 +10,7 @@ import PageCta from "../components/PageCta";
 import { useSiteI18n } from "../context/SiteI18nContext";
 import {
   displayFormuleFootnote,
-  displayFormulePrice,
+  formulePriceParts,
   getFormuleIncludeGroups,
   localizeFormules,
   type Formule,
@@ -42,6 +42,7 @@ function FormuleCard({
 }) {
   const groups = getFormuleIncludeGroups(formule);
   const singleGroup = groups.length === 1;
+  const parts = formulePriceParts(formule);
 
   return (
     <article
@@ -77,9 +78,17 @@ function FormuleCard({
       ) : null}
 
       <div className="mt-3">
-        <p className="text-3xl font-bold text-red-600">
-          {displayFormulePrice(formule)}
+        <p className="text-3xl font-bold text-red-600 leading-snug">
+          {parts.euro}{" "}
+          <span className="text-lg font-semibold text-slate-600 whitespace-nowrap">
+            {parts.cfa}
+          </span>
         </p>
+        {parts.savings ? (
+          <p className="text-sm font-medium text-emerald-800 mt-1">
+            {parts.savings}
+          </p>
+        ) : null}
       </div>
       <p className="text-xs text-slate-500 mt-2 leading-relaxed">
         {t("tarifs.paymentNote")}
@@ -180,6 +189,7 @@ function TarifsPage() {
               const formule = formules.find(
                 (entry) => entry.number === index + 1,
               );
+              const parts = formulePriceParts(formule);
               return (
                 <a
                   key={item.question}
@@ -200,9 +210,14 @@ function TarifsPage() {
                   <p className="text-sm text-slate-600 mt-2 leading-relaxed">
                     {item.detail}
                   </p>
-                  <p className="text-sm font-semibold text-red-600 mt-3">
-                    {displayFormulePrice(formule)}
-                  </p>
+                  {parts.euro ? (
+                    <p className="text-sm font-semibold text-red-600 mt-3 leading-snug">
+                      {parts.euro}{" "}
+                      <span className="font-medium text-slate-600 whitespace-nowrap">
+                        {parts.cfa}
+                      </span>
+                    </p>
+                  ) : null}
                 </a>
               );
             })}

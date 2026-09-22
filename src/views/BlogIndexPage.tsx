@@ -8,6 +8,7 @@ import PageBreadcrumbs from "../components/PageBreadcrumbs";
 import PageCta from "../components/PageCta";
 import { useSiteI18n } from "../context/SiteI18nContext";
 import { blogPath, type BlogPost } from "../lib/blog";
+import { withCfaInText } from "../lib/money";
 import { breadcrumbJsonLd } from "../lib/seo";
 
 function formatDate(isoDate: string, lang: string): string {
@@ -54,7 +55,9 @@ export default function BlogIndexPage({ posts }: { posts: BlogPost[] }) {
                   <h2 className="font-bold text-lg text-gray-800 mb-2">
                     {post.title}
                   </h2>
-                  <p className="text-gray-600 text-sm">{post.description}</p>
+                  <p className="text-gray-600 text-sm">
+                    {withCfaInText(post.description)}
+                  </p>
                 </Link>
               ))}
             </div>
