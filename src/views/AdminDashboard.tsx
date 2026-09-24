@@ -11,6 +11,7 @@ import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminContactEmail from "../components/AdminContactEmail";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
+import AdminContactPayments from "../components/AdminContactPayments";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
@@ -1467,6 +1468,8 @@ function ContactModal({
               {t("dashboard.formuleHint")}
             </p>
           </div>
+
+          <AdminContactPayments contactId={contact.id} />
 
           {access.matching ? (
             <>

@@ -205,6 +205,18 @@ export const adminTranslations = {
       formuleHint:
         "Choisissez la formule 1, 2 ou 3, puis débloquez l'espace. L'étudiant voit alors son espace avec cette formule affichée en tête de profil.",
       studentSpace: "Espace étudiant",
+      paymentsTitle: "Paiements",
+      paymentsEmpty: "Aucun échange de paiement pour ce dossier.",
+      paymentsUnavailable:
+        "Les tables de paiement ne sont pas encore en place (sql/payments.sql).",
+      paymentsModeFull: "Paiement en une fois",
+      paymentsModeInstallments: "Paiement en plusieurs fois",
+      paymentsSequence: "Versement {n}",
+      paymentStatusPending: "À payer",
+      paymentStatusProcessing: "En cours",
+      paymentStatusSucceeded: "Payé",
+      paymentStatusFailed: "Échoué",
+      paymentStatusCancelled: "Annulé",
       unlocked:
         "Accès débloqué. Le suivi et les documents sont visibles pour cet étudiant.",
       unlockedWithFormule:
@@ -702,6 +714,17 @@ export const adminTranslations = {
       formuleHint:
         "Choose package 1, 2 or 3, then unlock. The student sees that package at the top of their profile.",
       studentSpace: "Student space",
+      paymentsTitle: "Payments",
+      paymentsEmpty: "No payment activity for this file.",
+      paymentsUnavailable: "Payment tables are not in place yet (sql/payments.sql).",
+      paymentsModeFull: "Paid in full",
+      paymentsModeInstallments: "Paid in installments",
+      paymentsSequence: "Installment {n}",
+      paymentStatusPending: "To pay",
+      paymentStatusProcessing: "In progress",
+      paymentStatusSucceeded: "Paid",
+      paymentStatusFailed: "Failed",
+      paymentStatusCancelled: "Cancelled",
       unlocked:
         "Access unlocked. Progress and documents are visible to this student.",
       unlockedWithFormule:
@@ -1189,6 +1212,17 @@ export const adminTranslations = {
       formuleHint:
         "选择套餐 1、2 或 3，然后解锁。学生会在个人资料顶部看到该套餐。",
       studentSpace: "学生空间",
+      paymentsTitle: "付款",
+      paymentsEmpty: "此档案还没有付款记录。",
+      paymentsUnavailable: "付款表尚未创建（sql/payments.sql）。",
+      paymentsModeFull: "一次付清",
+      paymentsModeInstallments: "分期付款",
+      paymentsSequence: "第 {n} 期",
+      paymentStatusPending: "待付",
+      paymentStatusProcessing: "处理中",
+      paymentStatusSucceeded: "已付",
+      paymentStatusFailed: "失败",
+      paymentStatusCancelled: "已取消",
       unlocked: "已解锁。该学生可以查看进度和文件。",
       unlockedWithFormule: "已按 {formule} 解锁。学生会在个人资料上看到该套餐。",
       lockSpace: "锁定空间",

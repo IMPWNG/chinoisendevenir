@@ -125,11 +125,11 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Auth :** `/api/auth/login`, `/api/auth/register`
 
-**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
+**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`, `payment`
 
-**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `universities/import-scan`
+**Admin :** `/api/admin/me`, `contacts`, `payments`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `universities/import-scan`
 
-**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`)
+**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`), `POST /api/webhooks/airwallex` (rejeté sans `AIRWALLEX_WEBHOOK_SECRET`)
 
 ## Données Postgres (SQL dans `sql/`)
 
@@ -140,11 +140,12 @@ Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans
 - `admin_users` — allowlist admin (personne ne s’auto-promouvoit)
 - `universities` — catalogue matching / partenaires
 - `matching_runs` — JSON des analyses
+- `payment_plans` / `payment_installments` / `payment_intents` / `payment_events` — Airwallex (`sql/payments.sql`, service role only). Déblocage = statut `client_payé` (porte existante) au premier versement ou au total. Pas de calendrier commercial figé : `INSTALLMENT_COUNT` dans `src/lib/payments.ts`.
 - Storage : `student-documents`
 
 Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`.
 
-Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel).
+Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel). Airwallex (vide tant qu'il n'y a pas de compte) : `AIRWALLEX_CLIENT_ID`, `AIRWALLEX_API_KEY`, `AIRWALLEX_WEBHOOK_SECRET`, `AIRWALLEX_ENV` (`demo` par défaut), `AIRWALLEX_API_BASE` optionnel.
 
 ## Conventions
 
