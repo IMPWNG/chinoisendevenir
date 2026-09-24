@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { SITE } from "../lib/seo";
@@ -153,9 +154,9 @@ function TermsOfServicePage() {
 
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-xl p-8 text-center text-white mt-16">
             <p className="mb-4">{t("terms.accept")}</p>
-            <a href="/" className="landing-btn landing-btn-accent">
+            <Link href="/" className="landing-btn landing-btn-accent">
               {t("legal.back")}
-            </a>
+            </Link>
           </div>
         </div>
       </section>
