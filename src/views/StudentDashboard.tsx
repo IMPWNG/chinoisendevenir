@@ -14,6 +14,7 @@ import StudentFormules from "../components/StudentFormules";
 import StudentMatching from "../components/StudentMatching";
 import StudentChineseMatching from "../components/StudentChineseMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
+import StudentPayment from "../components/StudentPayment";
 import StudentVisaDocuments from "../components/StudentVisaDocuments";
 import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
@@ -434,6 +435,7 @@ export default function StudentDashboard() {
                 formule={profile.formule || ""}
                 formuleNumber={formuleNumber}
               />
+              <StudentPayment onActivity={() => loadProfile({ silent: true })} />
               <form className="student-card student-card-wide" onSubmit={handleSave}>
                 <h2 className="card-title">{t("student.infoTitle")}</h2>
                 <p className="card-subtitle">

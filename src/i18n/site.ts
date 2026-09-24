@@ -1239,7 +1239,7 @@ const fr = {
     lockedSubtitle:
       "Votre dossier est enregistré. Choisissez une formule pour continuer.",
     chosenPendingSubtitle:
-      "Votre choix est enregistré. L'équipe vous recontactera pour valider et convenir du paiement avant le début de l'accompagnement.",
+      "Votre formule est enregistrée. Réglez le premier versement, ou la totalité, pour ouvrir l'accompagnement.",
     completeTitle: "Complétez votre projet",
     completeText:
       "Connecté avec {email}. Utilisez cet email : s'il a déjà été renseigné dans le formulaire, votre dossier sera associé automatiquement.",
@@ -1283,7 +1283,29 @@ const fr = {
     formuleSaved: "Votre formule a été enregistrée.",
     pay: "Payer {price}",
     paySoon:
-      "Le paiement en ligne sera bientôt disponible. Pour l'instant, enregistrez votre choix : l'équipe vous recontactera.",
+      "Après ce choix, réglez en une fois ou en plusieurs versements sur cette page. L'accompagnement s'ouvre au premier versement reçu.",
+    paymentTitle: "Régler votre accompagnement",
+    paymentIntro:
+      "Payez en une fois ou en plusieurs versements. L'espace s'ouvre quand le premier versement est confirmé, ou quand le total est payé. Le retour sur cette page ne vaut pas confirmation.",
+    paymentFull: "Payer en une fois",
+    paymentInstallments: "Payer en plusieurs fois",
+    paymentPayNext: "Payer {amount}",
+    paymentNotConfigured:
+      "Le paiement en ligne n'est pas encore configuré. Aucun montant ne sera débité.",
+    paymentNotReady:
+      "Le suivi des paiements n'est pas encore activé. Aucun montant ne sera débité.",
+    paymentReturn:
+      "Vous êtes de retour de la page de paiement. L'accès s'ouvre seulement après confirmation Airwallex.",
+    paymentHistory: "Échanges de paiement",
+    paymentEmpty: "Aucun paiement enregistré.",
+    paymentStatusPending: "À payer",
+    paymentStatusProcessing: "En cours",
+    paymentStatusSucceeded: "Payé",
+    paymentStatusFailed: "Échoué",
+    paymentStatusCancelled: "Annulé",
+    paymentInstallment: "Versement {n}",
+    paymentWorking: "Redirection vers le paiement…",
+    paymentAllPaid: "Tous les versements sont réglés.",
     yourSupport: "Votre accompagnement",
     formula: "Formule",
     formulaN: "Formule {n}",
@@ -2814,7 +2836,7 @@ const en = {
     lockedSubtitle:
       "Your file is registered. Choose a plan to continue.",
     chosenPendingSubtitle:
-      "Your choice is saved. The team will contact you to confirm it and agree on payment before support begins.",
+      "Your plan is saved. Pay the first installment, or the full amount, to open the support.",
     completeTitle: "Complete your project",
     completeText:
       "Signed in as {email}. Use this email: if it was already entered in the form, your file will be linked automatically.",
@@ -2857,7 +2879,29 @@ const en = {
     formuleSaved: "Your plan has been saved.",
     pay: "Pay {price}",
     paySoon:
-      "Online payment will be available soon. For now, save your choice: the team will contact you.",
+      "After this choice, pay in full or in installments on this page. Support opens when the first installment is received.",
+    paymentTitle: "Pay for your support",
+    paymentIntro:
+      "Pay in full or in several installments. The space opens when the first installment is confirmed, or when the total is paid. Coming back to this page is not a confirmation.",
+    paymentFull: "Pay in full",
+    paymentInstallments: "Pay in installments",
+    paymentPayNext: "Pay {amount}",
+    paymentNotConfigured:
+      "Online payment is not configured yet. Nothing will be charged.",
+    paymentNotReady:
+      "Payment tracking is not active yet. Nothing will be charged.",
+    paymentReturn:
+      "You are back from the payment page. Access opens only after Airwallex confirms the payment.",
+    paymentHistory: "Payment activity",
+    paymentEmpty: "No payment recorded.",
+    paymentStatusPending: "To pay",
+    paymentStatusProcessing: "In progress",
+    paymentStatusSucceeded: "Paid",
+    paymentStatusFailed: "Failed",
+    paymentStatusCancelled: "Cancelled",
+    paymentInstallment: "Installment {n}",
+    paymentWorking: "Redirecting to payment…",
+    paymentAllPaid: "Every installment is paid.",
     yourSupport: "Your support",
     formula: "Plan",
     formulaN: "Plan {n}",
