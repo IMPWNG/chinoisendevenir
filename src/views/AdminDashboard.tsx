@@ -47,6 +47,12 @@ import {
   isAssignedTo,
   shortAdminLabel,
 } from "../lib/contactOwner";
+import {
+  isMissingPriorityColumn,
+  isPrioritaire,
+  priorityPatch,
+  sortPriorityFirst,
+} from "../lib/contactPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
 
 const STATUTS = SUIVI_STATUTS;
@@ -502,12 +508,46 @@ export default function AdminDashboard() {
     );
   };
 
+  const togglePriority = async (id: string, on: boolean) => {
+    const patch = priorityPatch(on);
+    let { error } = await adminSupabase
+      .from("contacts")
+      .update({ ...patch, updated_at: new Date().toISOString() })
+      .eq("id", id);
+
+    if (error) {
+      const retry = await adminSupabase
+        .from("contacts")
+        .update(patch)
+        .eq("id", id);
+      error = retry.error;
+    }
+
+    if (error) {
+      console.error("Erreur suivi prioritaire:", error);
+      alert(
+        isMissingPriorityColumn(error.message)
+          ? t("dashboard.priorityMissingColumn")
+          : t("error") + " : " + error.message,
+      );
+      setContacts((prev) => [...prev]);
+      return;
+    }
+
+    setContacts((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...patch } : c)),
+    );
+    setSelectedContact((prev) =>
+      prev && prev.id === id ? { ...prev, ...patch } : prev,
+    );
+  };
+
   const handleLogout = async () => {
     await signOut();
     router.push("/admin/login");
   };
 
-  const filteredContacts = contacts.filter((c) => {
+  const filteredContacts = sortPriorityFirst(contacts.filter((c) => {
     const matchSearch =
       c.prenom?.toLowerCase().includes(search.toLowerCase()) ||
       c.nom?.toLowerCase().includes(search.toLowerCase()) ||
@@ -539,7 +579,7 @@ export default function AdminDashboard() {
       matchDomaine &&
       matchOwner
     );
-  });
+  }));
 
   const stats = {
     total: contacts.length,
@@ -787,6 +827,9 @@ export default function AdminDashboard() {
                       </th>
                     ) : null}
                     <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
+                      ⚑ {t("dashboard.priorityFollow")}
+                    </th>
+                    <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
                       👤 {t("dashboard.colName")}
                     </th>
                     <th className="px-4 py-4 text-left text-xs font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
@@ -821,7 +864,11 @@ export default function AdminDashboard() {
                         setSelectedContact(c);
                       }}
                       className={`cursor-pointer hover:bg-slate-700/30 transition-all duration-200 group ${
-                        selectedIds.includes(c.id) ? "bg-amber-500/10" : ""
+                        selectedIds.includes(c.id)
+                          ? "bg-amber-500/10"
+                          : isPrioritaire(c)
+                            ? "bg-amber-400/10"
+                            : ""
                       }`}
                     >
                       {access.bulkSend ? (
@@ -835,6 +882,16 @@ export default function AdminDashboard() {
                           />
                         </td>
                       ) : null}
+                      <td className="px-4 py-4">
+                        <input
+                          type="checkbox"
+                          checked={isPrioritaire(c)}
+                          aria-label={t("dashboard.priorityFollow")}
+                          onChange={(e) => togglePriority(c.id, e.target.checked)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="h-4 w-4 rounded border-slate-500 bg-slate-700 text-amber-400 focus:ring-amber-400/50 cursor-pointer"
+                        />
+                      </td>
                       <td className="px-4 py-4">
                         <span className="inline-flex items-center gap-2 font-semibold text-white group-hover:text-blue-400 transition-colors">
                           <span>
@@ -966,6 +1023,7 @@ export default function AdminDashboard() {
           onUpdateFormule={updateFormule}
           onUpdateDossierEtape={updateDossierEtape}
           onToggleAssign={toggleAssign}
+          onTogglePriority={togglePriority}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
           emailThreadKey={emailThreadKey}
@@ -1083,6 +1141,7 @@ function ContactModal({
   onUpdateFormule,
   onUpdateDossierEtape,
   onToggleAssign,
+  onTogglePriority,
   userEmail,
   onContactUpdated,
   onContactPatched,
@@ -1097,6 +1156,7 @@ function ContactModal({
   onUpdateFormule: (id: string, formuleLabel: string) => Promise<void>;
   onUpdateDossierEtape: (id: string, etapeIndex: number) => Promise<void>;
   onToggleAssign: (id: string, assign: boolean) => Promise<void>;
+  onTogglePriority: (id: string, on: boolean) => Promise<void>;
   userEmail?: string | null;
   onContactUpdated: () => void;
   onContactPatched: (updated: DashboardContact) => void;
@@ -1229,7 +1289,7 @@ function ContactModal({
             <p className="text-blue-100 text-sm mt-2 font-medium">
               {contact.email}
             </p>
-            <div className="mt-3">
+            <div className="mt-3 flex flex-wrap gap-2">
               <label className="inline-flex items-center gap-2 bg-white/15 text-white px-3 py-1.5 rounded-lg cursor-pointer select-none">
                 <input
                   type="checkbox"
@@ -1247,6 +1307,15 @@ function ContactModal({
                       })
                     : t("dashboard.assignToMe")}
                 </span>
+              </label>
+              <label className="inline-flex items-center gap-2 bg-amber-400/20 text-white px-3 py-1.5 rounded-lg cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={isPrioritaire(contact)}
+                  onChange={(e) => onTogglePriority(contact.id, e.target.checked)}
+                  className="h-4 w-4 rounded border-white/40 bg-white/20 text-amber-400 focus:ring-amber-400/50 cursor-pointer"
+                />
+                <span>{t("dashboard.priorityFollow")}</span>
               </label>
             </div>
           </div>
