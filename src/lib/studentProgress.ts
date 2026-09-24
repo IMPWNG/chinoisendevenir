@@ -21,6 +21,8 @@ export type ContactRow = {
   source?: string | null;
   assigned_to?: string | null;
   assigned_at?: string | null;
+  /** Admin flag « Suivi prioritaire ». Independent of suivi_statut. */
+  prioritaire?: boolean | null;
   last_touched_by?: string | null;
   last_touched_at?: string | null;
   closed_by?: string | null;

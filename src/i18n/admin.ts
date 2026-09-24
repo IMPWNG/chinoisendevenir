@@ -85,6 +85,9 @@ export const adminTranslations = {
       assignedToOther: "Attribué à {name} — cocher pour prendre",
       assignHistoryOn: "Dossier attribué à {name}",
       assignHistoryOff: "Attribution retirée par {name}",
+      priorityFollow: "Suivi prioritaire",
+      priorityMissingColumn:
+        "Colonne prioritaire absente. Exécutez sql/contacts-prioritaire.sql dans l’éditeur Supabase, puis actualisez.",
       emailThreadTitle: "Fil des emails",
       emailThreadLoading: "Chargement des emails…",
       emailThreadEmpty:
@@ -582,6 +585,9 @@ export const adminTranslations = {
       assignedToOther: "Assigned to {name} — check to take over",
       assignHistoryOn: "Dossier assigned to {name}",
       assignHistoryOff: "Assignment removed by {name}",
+      priorityFollow: "Priority follow-up",
+      priorityMissingColumn:
+        "Priority column missing. Run sql/contacts-prioritaire.sql in the Supabase editor, then refresh.",
       emailThreadTitle: "Email thread",
       emailThreadLoading: "Loading emails…",
       emailThreadEmpty:
@@ -1073,6 +1079,9 @@ export const adminTranslations = {
       assignedToOther: "已分配给 {name} — 勾选以接管",
       assignHistoryOn: "客户已分配给 {name}",
       assignHistoryOff: "{name} 取消了分配",
+      priorityFollow: "优先跟进",
+      priorityMissingColumn:
+        "缺少 prioritaire 列。请在 Supabase 运行 sql/contacts-prioritaire.sql 后刷新。",
       emailThreadTitle: "邮件往来",
       emailThreadLoading: "正在加载邮件…",
       emailThreadEmpty: "暂无邮件记录。之后发送与回复会显示在这里。",
