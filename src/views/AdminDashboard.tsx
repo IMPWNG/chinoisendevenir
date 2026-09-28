@@ -10,6 +10,7 @@ import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminContactEmail from "../components/AdminContactEmail";
+import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
@@ -1467,6 +1468,15 @@ function ContactModal({
               {t("dashboard.formuleHint")}
             </p>
           </div>
+
+          <AdminSendContract
+            contact={contact}
+            onSent={() => {
+              fetchActions();
+              onContactUpdated?.();
+              onEmailThreadRefresh?.();
+            }}
+          />
 
           {access.matching ? (
             <>
