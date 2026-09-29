@@ -48,6 +48,7 @@ export function adminCapabilities(role: unknown) {
     contactEmail: true,
     bulkSend: full,
     deleteContacts: full,
+    whatsapp: full,
   };
 }
 
