@@ -10,6 +10,7 @@ import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
 import AdminContactInfo from "../components/AdminContactInfo";
 import AdminContactEmail from "../components/AdminContactEmail";
+import AdminContactWhatsApp from "../components/AdminContactWhatsApp";
 import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminBulkEmail from "../components/AdminBulkEmail";
@@ -1390,6 +1391,13 @@ function ContactModal({
               onEmailThreadRefresh?.();
             }}
           />
+
+          {access.whatsapp ? (
+            <AdminContactWhatsApp
+              contact={contact}
+              onDone={fetchActions}
+            />
+          ) : null}
 
           {/* Formule + déblocage espace étudiant */}
           <div className="mb-8 pb-8 border-b border-slate-700/50">

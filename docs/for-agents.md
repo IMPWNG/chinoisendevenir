@@ -96,7 +96,7 @@ Bucket Storage `student-documents`. Logique : `src/lib/studentDocuments.ts`. L�
 
 Rôles :
 
-- `full` : universités, matching, bulk e-mail, suppression contacts
+- `full` : universités, matching, bulk e-mail, suppression contacts, WhatsApp (OpenWA)
 - `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, pas matching ni universités
 
 Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching_runs`. Toute nouvelle table métier : RLS on, grants service_role, SQL dans `sql/`.
@@ -127,7 +127,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
-**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `universities/import-scan`
+**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `universities/import-scan`
 
 **Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`)
 
