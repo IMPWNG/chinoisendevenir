@@ -192,6 +192,10 @@ export const adminTranslations = {
       contractFail: "Le contrat n'a pas pu être envoyé",
       emailWriteTab: "Écrire",
       emailTemplateTab: "Modèle",
+      emailTemplateHint:
+        "Choisissez un modèle, relisez-le, puis envoyez. Vous pouvez modifier le texte avant l'envoi.",
+      emailHintPrintemps:
+        "Action : Email formules • Statut : formules présentées. Aucun paiement demandé. Un appel suit le choix.",
       emailTo: "À",
       emailFrom: "De",
       emailEditorHint:
@@ -448,6 +452,7 @@ export const adminTranslations = {
       dossier_complet: "Dossier complet",
     },
     emailTemplate: {
+      ouverture_printemps: "Rentrée de printemps — candidatures",
       relance_1: "Relance 1 — Formulaire à remplir",
       relance_2: "Relance 2 — Toujours intéressé(e) ?",
       relance_formules: "Relance 3 — Choix des formules",
@@ -721,6 +726,10 @@ export const adminTranslations = {
       contractFail: "The contract could not be sent",
       emailWriteTab: "Write",
       emailTemplateTab: "Template",
+      emailTemplateHint:
+        "Pick a template, review it, then send. You can edit the text before sending.",
+      emailHintPrintemps:
+        "Action: package email • Status: packages presented. No payment at this step. A call follows the choice.",
       emailTo: "To",
       emailFrom: "From",
       emailEditorHint:
@@ -975,6 +984,7 @@ export const adminTranslations = {
       dossier_complet: "File complete",
     },
     emailTemplate: {
+      ouverture_printemps: "Spring intake — applications",
       relance_1: "Follow-up 1 — Form to complete",
       relance_2: "Follow-up 2 — Still interested?",
       relance_formules: "Follow-up 3 — Package choice",
@@ -1241,6 +1251,9 @@ export const adminTranslations = {
       contractFail: "合同未能发送",
       emailWriteTab: "撰写",
       emailTemplateTab: "模板",
+      emailTemplateHint: "选择模板，核对后发送。发送前可修改正文。",
+      emailHintPrintemps:
+        "操作：套餐邮件 • 状态：已发送套餐。此步骤无需付款。选择后安排电话。",
       emailTo: "收件人",
       emailFrom: "发件人",
       emailEditorHint:
@@ -1487,6 +1500,7 @@ export const adminTranslations = {
       dossier_complet: "材料齐全",
     },
     emailTemplate: {
+      ouverture_printemps: "春季入学 — 申请季",
       relance_1: "跟进 1 — 请填写表单",
       relance_2: "跟进 2 — 是否仍有意向？",
       relance_formules: "跟进 3 — 选择套餐",

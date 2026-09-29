@@ -5,13 +5,10 @@ import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { generateCustomEmailHtml } from "../lib/emailLayout";
 import { errorMessage } from "../lib/request";
-
-const TEMPLATE_OPTIONS = [
-  "relance_1",
-  "relance_2",
-  "relance_formules",
-  "formules_presentation",
-];
+import {
+  BULK_EMAIL_TEMPLATE_KEYS,
+  getEmailTemplateDraft,
+} from "../lib/emailTemplateDrafts";
 
 const AI_TOPICS = [
   "langue_sans_diplome",
@@ -66,7 +63,7 @@ export default function AdminBulkEmail({
 }: AdminBulkEmailProps) {
   const { t } = useAdminI18n();
   const [mode, setMode] = useState("ai");
-  const [template, setTemplate] = useState("relance_1");
+  const [template, setTemplate] = useState("ouverture_printemps");
   const [topic, setTopic] = useState("langue_sans_diplome");
   const [notes, setNotes] = useState("");
   const [subject, setSubject] = useState("");
@@ -164,6 +161,10 @@ export default function AdminBulkEmail({
       alert(t("dashboard.bulkTooMany"));
       return;
     }
+    if (mode === "template" && !hasDraft) {
+      alert(t("dashboard.emailCustomEmpty"));
+      return;
+    }
     if (mode === "ai" && !hasDraft) {
       alert(t("dashboard.bulkNeedDraft"));
       return;
@@ -194,20 +195,14 @@ export default function AdminBulkEmail({
           name: `${contact.prenom || ""} ${contact.nom || ""}`.trim(),
         });
         try {
-          const payload =
-            mode === "ai"
-              ? {
-                  contactId: String(contact.id),
-                  emailTemplate: "custom",
-                  customSubject: subject.trim(),
-                  customTitle: title.trim(),
-                  customSubtitle: subtitle.trim(),
-                  customMessage: message.trim(),
-                }
-              : {
-                  contactId: String(contact.id),
-                  emailTemplate: template,
-                };
+          const payload = {
+            contactId: String(contact.id),
+            emailTemplate: mode === "ai" ? "custom" : template,
+            customSubject: subject.trim(),
+            customTitle: title.trim(),
+            customSubtitle: subtitle.trim(),
+            customMessage: message.trim(),
+          };
           const response = await authedFetch("/api/email/auto-reply", {
             method: "POST",
             body: JSON.stringify(payload),
@@ -329,7 +324,7 @@ export default function AdminBulkEmail({
               disabled={
                 busy ||
                 selectedIds.length === 0 ||
-                (mode === "ai" && !hasDraft)
+                (mode === "ai" || mode === "template") && !hasDraft
               }
               onClick={sendBulk}
               className="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
@@ -362,7 +357,16 @@ export default function AdminBulkEmail({
           <button
             type="button"
             disabled={busy}
-            onClick={() => setMode("template")}
+            onClick={() => {
+              setMode("template");
+              const draft = getEmailTemplateDraft(template);
+              if (draft) {
+                setSubject(draft.subject);
+                setTitle(draft.title);
+                setSubtitle(draft.subtitle);
+                setMessage(draft.body);
+              }
+            }}
             className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
               mode === "template"
                 ? "bg-amber-600 text-white"
@@ -374,18 +378,78 @@ export default function AdminBulkEmail({
         </div>
 
         {mode === "template" ? (
-          <select
-            value={template}
-            disabled={busy}
-            onChange={(e) => setTemplate(e.target.value)}
-            className="max-w-xl px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 font-semibold cursor-pointer disabled:opacity-50"
-          >
-            {TEMPLATE_OPTIONS.map((value) => (
-              <option key={value} value={value}>
-                {t(`emailTemplate.${value}`)}
-              </option>
-            ))}
-          </select>
+          <div className="space-y-4">
+            <select
+              value={template}
+              disabled={busy}
+              onChange={(e) => {
+                const next = e.target.value;
+                setTemplate(next);
+                const draft = getEmailTemplateDraft(next);
+                if (draft) {
+                  setSubject(draft.subject);
+                  setTitle(draft.title);
+                  setSubtitle(draft.subtitle);
+                  setMessage(draft.body);
+                }
+              }}
+              className="max-w-xl px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 font-semibold cursor-pointer disabled:opacity-50"
+            >
+              {BULK_EMAIL_TEMPLATE_KEYS.map((value) => (
+                <option key={value} value={value}>
+                  {t(`emailTemplate.${value}`)}
+                </option>
+              ))}
+            </select>
+            {hasDraft ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                    {t("dashboard.emailCustomSubject")}
+                  </label>
+                  <input
+                    type="text"
+                    value={subject}
+                    disabled={busy}
+                    onChange={(e) => setSubject(e.target.value)}
+                    className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                    {t("dashboard.emailCustomBody")}
+                  </label>
+                  <textarea
+                    value={message}
+                    disabled={busy}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={10}
+                    className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-y"
+                  />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+                    {t("dashboard.emailPreview")}
+                  </p>
+                  <iframe
+                    title={t("dashboard.emailPreview")}
+                    sandbox=""
+                    className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
+                    srcDoc={generateCustomEmailHtml(previewContact, {
+                      customSubject: subject,
+                      customTitle: title,
+                      customSubtitle: subtitle,
+                      customMessage: message,
+                    })}
+                  />
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-slate-400">
+                {t("dashboard.emailTemplateHint")}
+              </p>
+            )}
+          </div>
         ) : (
           <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4 space-y-4">
             <div>

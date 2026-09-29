@@ -13,6 +13,10 @@ import {
   type EmailExtras,
 } from "../emailLayout";
 import { EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice, localizeFormules } from "../formules";
+import {
+  generateDraftEmailHtml,
+  getEmailTemplateDraft,
+} from "../emailTemplateDrafts";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
 import {
   INTENT_TEMPLATE_GENERATORS,
@@ -251,6 +255,18 @@ function generateFormuleConfirmeeTemplate(
 }
 
 const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
+  ouverture_printemps: {
+    subject: "Rentrée de printemps — candidatures d'octobre à décembre",
+    generateHtml: (contact) => {
+      const draft = getEmailTemplateDraft("ouverture_printemps");
+      return draft
+        ? generateDraftEmailHtml(contact, draft)
+        : generateCustomEmailHtml(contact, {});
+    },
+    action: "email_formules",
+    description: "Email rentrée de printemps — choix de formule",
+    status: "formules_présentées",
+  },
   formules_presentation: {
     subject: "Nos formules d'accompagnement pour étudier en Chine",
     generateHtml: (contact) =>
@@ -366,7 +382,8 @@ async function sendTemplatedEmail(
   console.log(`À: ${contact.email}`);
   console.log(`Prenom: ${contact.prenom}`);
 
-  if (templateKey === "custom") {
+  const hasCustomCopy = Boolean(String(extras.customMessage || "").trim());
+  if (templateKey === "custom" || hasCustomCopy) {
     extras.customSubject = sanitizeEmailSubject(extras.customSubject, 180);
     extras.customTitle = sanitizeEmailSubject(extras.customTitle, 120);
     extras.customSubtitle = sanitizeEmailSubject(extras.customSubtitle, 160);
@@ -379,15 +396,22 @@ async function sendTemplatedEmail(
     }
   }
 
+  const useEditedCopy = hasCustomCopy;
+
   const subject = withEtudeChineSubject(
-    typeof template.subject === "function"
-      ? template.subject(contact, extras)
-      : template.subject,
+    useEditedCopy || templateKey === "custom"
+      ? extras.customSubject
+      : typeof template.subject === "function"
+        ? template.subject(contact, extras)
+        : template.subject,
   );
 
   try {
     console.log(`📤 Envoi via Resend...`);
-    const html = template.generateHtml(contact, extras);
+    const html =
+      useEditedCopy || templateKey === "custom"
+        ? generateCustomEmailHtml(contact, extras)
+        : template.generateHtml(contact, extras);
     const payload: {
       from: string;
       to: string;
@@ -402,7 +426,7 @@ async function sendTemplatedEmail(
       html,
       replyTo: INBOUND_REPLY_TO,
     };
-    if (templateKey !== "custom") {
+    if (templateKey !== "custom" && !useEditedCopy) {
       payload.headers = {
         "Auto-Submitted": "auto-replied",
         "X-Auto-Response-Suppress": "All",
@@ -420,7 +444,7 @@ async function sendTemplatedEmail(
     const contactId = asString(contact.id).trim();
     if (contactId) {
       const bodyText =
-        templateKey === "custom"
+        templateKey === "custom" || useEditedCopy
           ? String(extras.customMessage || "").trim() || emailHtmlToText(html)
           : emailHtmlToText(html);
       await storeOutboundContactEmail({
@@ -626,7 +650,7 @@ export default async function handler(request: Request) {
         );
       }
 
-      if (emailTemplate === "custom") {
+      if (emailTemplate === "custom" || extras.customMessage) {
         if (!extras.customSubject) {
           return NextResponse.json(
             {

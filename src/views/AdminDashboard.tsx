@@ -1383,7 +1383,7 @@ function ContactModal({
 
           <AdminContactEmail
             contact={contact}
-            allowTemplates={access.role === "full"}
+            allowTemplates
             onSent={() => {
               fetchActions();
               onContactUpdated?.();
