@@ -6,19 +6,10 @@ import { useAdminI18n } from "../context/AdminI18nContext";
 import { generateCustomEmailHtml } from "../lib/emailLayout";
 import { CONTACT_FROM_EMAIL, CONTACT_FROM_NAME } from "../lib/emailConfig";
 import { errorMessage } from "../lib/request";
-
-const TEMPLATE_OPTIONS = [
-  { value: "relance_1" },
-  { value: "relance_2" },
-  { value: "relance_formules" },
-  { value: "formules_presentation" },
-  { value: "reponse_bourses" },
-  { value: "reponse_visa" },
-  { value: "reponse_langue" },
-  { value: "reponse_admission" },
-  { value: "reponse_processus" },
-  { value: "reponse_general" },
-];
+import {
+  CARD_EMAIL_TEMPLATE_KEYS,
+  getEmailTemplateDraft,
+} from "../lib/emailTemplateDrafts";
 
 type EmailContact = {
   id: string;
@@ -61,7 +52,7 @@ export default function AdminContactEmail({
 }) {
   const { t } = useAdminI18n();
   const [mode, setMode] = useState("write");
-  const [template, setTemplate] = useState("formules_presentation");
+  const [template, setTemplate] = useState("ouverture_printemps");
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -73,7 +64,7 @@ export default function AdminContactEmail({
 
   useEffect(() => {
     setMode("write");
-    setTemplate("formules_presentation");
+    setTemplate("ouverture_printemps");
     setSubject("");
     setTitle("");
     setSubtitle("");
@@ -81,6 +72,15 @@ export default function AdminContactEmail({
     setAiNotes("");
     setAiError("");
   }, [contact.id, allowTemplates]);
+
+  function applyDraft(key: string) {
+    const draft = getEmailTemplateDraft(key);
+    if (!draft) return;
+    setSubject(draft.subject);
+    setTitle(draft.title);
+    setSubtitle(draft.subtitle);
+    setMessage(draft.body);
+  }
 
   const previewHtml = useMemo(
     () =>
@@ -97,9 +97,9 @@ export default function AdminContactEmail({
   const hasEmail = Boolean(String(contact.email || "").trim());
   const canSendWrite = Boolean(subject.trim() && message.trim());
   const sendLabel =
-    mode === "write" && subject.trim()
-      ? subject.trim()
-      : t(`emailTemplate.${template}`);
+    mode === "template"
+      ? t(`emailTemplate.${template}`)
+      : subject.trim() || t("dashboard.sendEmail");
 
   async function composeWithAi() {
     const notes = aiNotes.trim();
@@ -149,7 +149,7 @@ export default function AdminContactEmail({
       alert(t("dashboard.emailNoAddress"));
       return;
     }
-    if (mode === "write" && !canSendWrite) {
+    if (!canSendWrite) {
       alert(t("dashboard.emailCustomEmpty"));
       return;
     }
@@ -164,20 +164,14 @@ export default function AdminContactEmail({
 
     setSending(true);
     try {
-      const payload =
-        mode === "write"
-          ? {
-              contactId: String(contact.id),
-              emailTemplate: "custom",
-              customSubject: subject.trim(),
-              customTitle: title.trim(),
-              customSubtitle: subtitle.trim(),
-              customMessage: message.trim(),
-            }
-          : {
-              contactId: String(contact.id),
-              emailTemplate: template,
-            };
+      const payload = {
+        contactId: String(contact.id),
+        emailTemplate: mode === "write" ? "custom" : template,
+        customSubject: subject.trim(),
+        customTitle: title.trim(),
+        customSubtitle: subtitle.trim(),
+        customMessage: message.trim(),
+      };
 
       const response = await authedFetch("/api/email/auto-reply", {
         method: "POST",
@@ -226,7 +220,10 @@ export default function AdminContactEmail({
         <button
           type="button"
           disabled={busy}
-          onClick={() => setMode("template")}
+          onClick={() => {
+            setMode("template");
+            applyDraft(template);
+          }}
           className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
             mode === "template"
               ? "bg-blue-600 text-white"
@@ -367,19 +364,26 @@ export default function AdminContactEmail({
         </div>
       ) : (
         <div className="space-y-4">
+          <p className="text-xs text-slate-400">{t("dashboard.emailTemplateHint")}</p>
           <select
             value={template}
             disabled={busy}
-            onChange={(e) => setTemplate(e.target.value)}
+            onChange={(e) => {
+              const next = e.target.value;
+              setTemplate(next);
+              applyDraft(next);
+            }}
             className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-semibold cursor-pointer disabled:opacity-50"
           >
-            {TEMPLATE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {t(`emailTemplate.${option.value}`)}
+            {CARD_EMAIL_TEMPLATE_KEYS.map((value) => (
+              <option key={value} value={value}>
+                {t(`emailTemplate.${value}`)}
               </option>
             ))}
           </select>
           <p className="text-xs text-slate-500">
+            {template === "ouverture_printemps" &&
+              t("dashboard.emailHintPrintemps")}
             {template === "relance_1" && t("dashboard.emailHintRelance1")}
             {template === "relance_2" && t("dashboard.emailHintRelance2")}
             {template === "relance_formules" &&
@@ -394,6 +398,68 @@ export default function AdminContactEmail({
               template === "reponse_general") &&
               t("dashboard.emailHintAutoReply")}
           </p>
+
+          <div>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+              {t("dashboard.emailCustomSubject")}
+            </label>
+            <input
+              type="text"
+              value={subject}
+              disabled={busy}
+              onChange={(e) => setSubject(e.target.value)}
+              className={fieldClass(busy)}
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                {t("dashboard.emailCustomTitle")}
+              </label>
+              <input
+                type="text"
+                value={title}
+                disabled={busy}
+                onChange={(e) => setTitle(e.target.value)}
+                className={fieldClass(busy)}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                {t("dashboard.emailCustomSubtitle")}
+              </label>
+              <input
+                type="text"
+                value={subtitle}
+                disabled={busy}
+                onChange={(e) => setSubtitle(e.target.value)}
+                className={fieldClass(busy)}
+              />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+              {t("dashboard.emailCustomBody")}
+            </label>
+            <textarea
+              value={message}
+              disabled={busy}
+              onChange={(e) => setMessage(e.target.value)}
+              rows={12}
+              className={`${fieldClass(busy)} resize-y min-h-[180px]`}
+            />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+              {t("dashboard.emailPreview")}
+            </p>
+            <iframe
+              title={t("dashboard.emailPreview")}
+              sandbox=""
+              className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
+              srcDoc={previewHtml}
+            />
+          </div>
         </div>
       )}
 
@@ -401,11 +467,7 @@ export default function AdminContactEmail({
         <button
           type="button"
           onClick={sendEmail}
-          disabled={
-            busy ||
-            !hasEmail ||
-            (mode === "write" && !canSendWrite)
-          }
+          disabled={busy || !hasEmail || !canSendWrite}
           className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
         >
           {sending ? `⏳ ${t("sending")}` : `📤 ${t("dashboard.sendEmail")}`}
