@@ -75,7 +75,7 @@
   ],
   "documents": [
     {
-      "type": "Passeport",
+      "type": "护照复印件；",
       "required": true,
       "notes": "护照复印件；",
       "applies_to": [
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "type": "Diplôme",
+      "type": "最高学历的学历证书及公证件复印件；",
       "required": true,
       "notes": "最高学历的学历证书及公证件复印件；",
       "applies_to": [
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "type": "Formulaire médical",
+      "type": "近期（六个月内）体检表复印件；",
       "required": true,
       "notes": "近期（六个月内）体检表复印件；",
       "applies_to": [
@@ -99,7 +99,7 @@
       ]
     },
     {
-      "type": "Casier judiciaire",
+      "type": "近期（六个月内）无犯罪记录证明复印件；",
       "required": true,
       "notes": "近期（六个月内）无犯罪记录证明复印件；",
       "applies_to": [
@@ -107,7 +107,7 @@
       ]
     },
     {
-      "type": "Photo d'identité",
+      "type": "近期（三个月内）正面免冠证件照电子照片1张（白底）；",
       "required": true,
       "notes": "近期（三个月内）正面免冠证件照电子照片1张（白底）；",
       "applies_to": [
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "type": "guardian",
+      "type": "如申请人年满16周岁但在18周岁以下，须提供在中国的监护人材料：经申请人、申请人父母、指定的在华监护人三方签字的监护人证明文件和在华监护人的身份证件复印件（监护人可为由申请人父母指定的在华中国人或在华具有长期居留许可的外籍人员）；",
       "required": true,
       "notes": "如申请人年满16周岁但在18周岁以下，须提供在中国的监护人材料：经申请人、申请人父母、指定的在华监护人三方签字的监护人证明文件和在华监护人的身份证件复印件（监护人可为由申请人父母指定的在华中国人或在华具有长期居留许可的外籍人员）；",
       "applies_to": [
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "type": "Study plan / lettre de motivation",
+      "type": "个人陈述：内容包括自我介绍、学习经历、来华学习目标和计划；",
       "required": true,
       "notes": "个人陈述：内容包括自我介绍、学习经历、来华学习目标和计划；",
       "applies_to": [
@@ -131,7 +131,7 @@
       ]
     },
     {
-      "type": "financial guarantee",
+      "type": "近期（两个月内）开具的经济担保证明：如申请一学期，银行存款应为15,000元人民币及以上；如申请一学年，银行存款应为25,000元人民币及以上；",
       "required": true,
       "notes": "近期（两个月内）开具的经济担保证明：如申请一学期，银行存款应为15,000元人民币及以上；如申请一学年，银行存款应为25,000元人民币及以上；",
       "applies_to": [
@@ -139,7 +139,7 @@
       ]
     },
     {
-      "type": "HSK",
+      "type": "HSK证书复印件（如有）；",
       "required": true,
       "notes": "HSK证书复印件（如有）；",
       "applies_to": [
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "type": "visa",
+      "type": "转学证明和现有签证或居留证件复印件（如果申请人申请时持有中国其他高校签发的签证需提供）；",
       "required": true,
       "notes": "转学证明和现有签证或居留证件复印件（如果申请人申请时持有中国其他高校签发的签证需提供）；",
       "applies_to": [
@@ -155,17 +155,9 @@
       ]
     },
     {
-      "type": "可能会追加其他必要材料。",
+      "type": "可能会追加其他必要材料。*以上材料均须为中文或英文，如不是以上语种，请同时上传原件和中文或英文翻译件。",
       "required": true,
-      "notes": "可能会追加其他必要材料。",
-      "applies_to": [
-        "language"
-      ]
-    },
-    {
-      "type": "*以上材料均须为中文或英文，如不是以上语种，请同时上传原件和中文或英文翻译件。",
-      "required": true,
-      "notes": "*以上材料均须为中文或英文，如不是以上语种，请同时上传原件和中文或英文翻译件。",
+      "notes": "可能会追加其他必要材料。*以上材料均须为中文或英文，如不是以上语种，请同时上传原件和中文或英文翻译件。",
       "applies_to": [
         "language"
       ]
@@ -190,7 +182,7 @@
       "city": "Chengdu",
       "province": "Sichuan"
     },
-    "presentation": "--> --> 成都大学 中文 ENGLISH Français REGISTER LOGIN Online Application 在线申请 USER MANUAL/使用指南 Accommodation Reservation 住宿预订 --> --> --> Airport Pickup --> 接机预订 --> --> --> Pick-up Service 接机服务 Tracking Progress 申请跟进 04-03 Notice of 2025 Ching Ming Festival Holiday Powered by CUCAS 成都大学海外教育学院 --> 设为首页 | 收藏本站 首页 学院概况 学院简介 机构设置 学院领导 专业介绍 新闻公告 学院新闻 通知公告 师资队伍 专家团队 英语教师 韩语教师 德语教师 国际中文教育教师 艺术专业教师 外籍教师 师德师风 教学科研 教务公告 专科教学 本科教学 研究生教学 留学生教学 教学管理制度 学生工作 学工管理制度 奖勤助贷 学生事务 活动掠影 团学概况 党群工作 工作制度 党建活动 学习资料 教工之家 招生就业 中外合作办学招生 留学生招生 就业工作 校园生活 入学指南 校园掠影 资料下载 资料下载 学院新闻 2026/09/24 多维赋能启新程 立德树人育新人——海外教育学院顺利开展2026级新生入学… 2026/09/23 海外教育学院组织开展2026秋季学期国际学生入学教育 2026/09/18 汉语桥熊猫团的成都五日：学中文，也学着认识一座城！ 2026/09/15 跨山海赴新程，融多元启华章 —",
+    "presentation": "Université de Chengdu — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]

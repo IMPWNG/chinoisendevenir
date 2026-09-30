@@ -135,39 +135,6 @@ function scoreCity(student: MatchingStudent, university: MatchingUniversity) {
   };
 }
 
-function scoreBudget(
-  student: MatchingStudent,
-  cost: { total_cny?: number | null },
-) {
-  const budget = student.budgetCny;
-  if (!budget) {
-    return {
-      points: 45,
-      max: 100,
-      note: "Budget annuel non renseigné.",
-    };
-  }
-  const ratio = budget / Math.max(cost.total_cny ?? 0, 1);
-  let points = 10;
-  if (ratio >= 1.2) points = 100;
-  else if (ratio >= 1) points = 82;
-  else if (ratio >= 0.8) points = 58;
-  else if (ratio >= 0.55) points = 32;
-  else points = 12;
-
-  if (points >= 82) {
-    return { points, max: 100, note: "Budget a priori suffisant pour une année de langue." };
-  }
-  if (points >= 58) {
-    return { points, max: 100, note: "Budget tendu : à recouper avec les frais réels." };
-  }
-  return {
-    points,
-    max: 100,
-    note: "Budget trop juste pour le coût estimé de cette ville / école.",
-  };
-}
-
 function scoreIntake(student: MatchingStudent, months: unknown[]) {
   if (student.intake?.flexible) {
     return {
@@ -177,7 +144,16 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
     };
   }
   const wanted = student.intake?.month;
-  if (!wanted) {
+  const wantedMonths = (
+    Array.isArray(student.intake?.months) && student.intake.months.length
+      ? student.intake.months
+      : wanted
+        ? [wanted]
+        : []
+  )
+    .map(Number)
+    .filter((month) => month >= 1 && month <= 12);
+  if (!wantedMonths.length) {
     return {
       points: 60,
       max: 100,
@@ -191,15 +167,18 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
       note: "Calendrier de rentrée à confirmer auprès de l’école.",
     };
   }
-  if (months.includes(wanted)) {
+  if (wantedMonths.some((month) => months.includes(month))) {
     return {
       points: 100,
       max: 100,
-      note: `Rentrée ${monthLabel(wanted)} proposée.`,
+      note: `Rentrée ${wantedMonths.map(monthLabel).join(" / ")} proposée.`,
     };
   }
   const closest = months.reduce((best: number, month) => {
-    return Math.min(best, Math.abs(Number(month) - wanted));
+    return Math.min(
+      best,
+      ...wantedMonths.map((wantedMonth) => Math.abs(Number(month) - wantedMonth)),
+    );
   }, 12);
   if (closest <= 2) {
     return {
@@ -211,7 +190,7 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
   return {
     points: 30,
     max: 100,
-    note: `Rentrée visée (${monthLabel(wanted)}) éloignée du calendrier connu (${intakeLabel(months)}).`,
+    note: `Rentrée visée éloignée du calendrier connu (${intakeLabel(months)}).`,
   };
 }
 
@@ -234,13 +213,11 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
   const months = languageIntakeMonths(university);
   const cost = languageCost(university);
   const localisation = scoreCity(student, university);
-  const financier = scoreBudget(student, cost);
   const intake = scoreIntake(student, months);
 
   const score = Math.round(
     clamp(
       localisation.points * CHINESE_MATCHING_WEIGHTS.localisation +
-        financier.points * CHINESE_MATCHING_WEIGHTS.financier +
         intake.points * CHINESE_MATCHING_WEIGHTS.intake,
       0,
       100,
@@ -253,9 +230,6 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
   if (localisation.points >= 90) why.push(localisation.note);
   else if (localisation.points <= 40) vigilance.push(localisation.note);
   else why.push(localisation.note);
-
-  if (financier.points >= 80) why.push(financier.note);
-  else vigilance.push(financier.note);
 
   if (intake.points >= 85) why.push(intake.note);
   else if (intake.points <= 45) vigilance.push(intake.note);
@@ -280,7 +254,7 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
     score,
     categoryKey: category.key,
     category: category.label,
-    breakdown: { localisation, financier, intake },
+    breakdown: { localisation, intake },
     cost,
     intake_months: months,
     intake_label: intakeLabel(months),
@@ -294,25 +268,23 @@ type ChineseMatch = ReturnType<typeof matchSchool>;
 
 function scorePhrase(item: { categoryKey?: string }) {
   if (item.categoryKey === "safety") {
-    return "Ville, budget et rentrée s’alignent bien avec votre demande.";
+    return "Ville et rentrée s’alignent bien avec votre demande.";
   }
   if (item.categoryKey === "match") {
-    return "Piste possible : un critère reste à confirmer (ville, budget ou date).";
+    return "Piste possible : la ville ou la date de rentrée reste à confirmer.";
   }
-  return "Écart sur la ville, le budget ou la rentrée visée.";
+  return "Écart sur la ville ou la rentrée visée.";
 }
 
 function profileBlurb(student: MatchingStudent) {
   const city = student.preferredCities?.[0];
-  const budget = student.budget?.label;
   const intake = student.intake?.label;
   const bits: string[] = [];
   if (city) bits.push(`ville visée : ${city}`);
-  if (budget) bits.push(`budget ${budget}`);
-  if (intake && intake !== "Flexible") bits.push(`rentrée ${intake}`);
+  if (student.intake?.months?.length && intake) bits.push(`rentrée ${intake}`);
   else if (student.intake?.flexible) bits.push("rentrée flexible");
   if (!bits.length) {
-    return "Voici des écoles de langue en Chine, classées selon les données disponibles. Précisez une ville, un budget et une rentrée pour affiner.";
+    return "Voici des écoles de langue en Chine, classées selon les données disponibles. Précisez une ville et une rentrée pour affiner.";
   }
   return `Sélection d’écoles de langue selon ${bits.join(", ")}. Les frais exacts et les dates restent à confirmer auprès de chaque établissement.`;
 }
@@ -339,12 +311,6 @@ function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
         max: 100,
       },
       {
-        key: "financier",
-        label: "Budget",
-        points: item.breakdown?.financier?.points,
-        max: 100,
-      },
-      {
         key: "intake",
         label: "Rentrée",
         points: item.breakdown?.intake?.points,
@@ -358,7 +324,6 @@ function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
     profile_blurb: profileBlurb(student),
     criteria: {
       city: student.preferredCities?.[0] || "aucune ville précisée",
-      budget: student.budget?.label || "à préciser",
       intake: student.intake?.label || "à préciser",
     },
     schools,
@@ -387,8 +352,8 @@ export function runChineseMatching({
 }) {
   const patched = {
     ...contact,
-    budget: filled(overrides.budgetKey) || contact.budget,
-    date_rentree: filled(overrides.dateRentree) || contact.date_rentree,
+    budget: null,
+    date_rentree: filled(overrides.dateRentree) || "non precisee",
   };
   const student = normalizeStudent(patched, {
     ...overrides,

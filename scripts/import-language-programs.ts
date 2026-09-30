@@ -17,6 +17,7 @@ import {
   dedupeLanguageRecords,
   languageRecordToScanProfile,
   mergeLanguageAdmission,
+  parseDocumentLines,
   parseEmails,
   parsePhones,
   parseWebsite,
@@ -180,28 +181,14 @@ UPDATE public.universities SET
     jsonb_set(
       jsonb_set(
         jsonb_set(
-          jsonb_set(
-            coalesce(extra, '{}'::jsonb),
-            '{admission,chinese_language_program_available}', 'true'::jsonb, true
-          ),
-          '{admission,fees,tuition,language}', ${sqlJson(fees?.tuition?.language || null)}, true
+          coalesce(extra, '{}'::jsonb),
+          '{admission,chinese_language_program_available}', 'true'::jsonb, true
         ),
-        '{admission,requirements,language}', ${sqlJson((admission.requirements as { language?: unknown })?.language || null)}, true
+        '{admission,fees,tuition,language}', ${sqlJson(fees?.tuition?.language || null)}, true
       ),
       '{admission,age_max,language}', ${age == null ? "'null'::jsonb" : `'${age}'::jsonb`}, true
     ),
-    '{admission,programs}',
-    (
-      SELECT coalesce(jsonb_agg(p), '[]'::jsonb)
-      FROM (
-        SELECT p
-        FROM jsonb_array_elements(coalesce(extra #> '{admission,programs}', '[]'::jsonb)) AS p
-        WHERE lower(coalesce(p->>'level', '')) NOT IN ('language', 'foundation', 'langue')
-        UNION ALL
-        SELECT p FROM jsonb_array_elements(${sqlJson(admission.programs)}) AS p
-      ) s(p)
-    ),
-    true
+    '{admission,language_session}', ${sqlJson(admission.language_session || null)}, true
   ),
   majors = CASE WHEN 'Langue chinoise' = ANY (majors) THEN majors ELSE array_append(majors, 'Langue chinoise') END,
   emails = (SELECT ARRAY(SELECT DISTINCT e FROM unnest(coalesce(emails, '{}'::text[]) || ${sqlTextArray(emails)}) AS e WHERE e <> '')),
@@ -235,7 +222,18 @@ ON CONFLICT (name_zh) DO UPDATE SET
   phone = COALESCE(NULLIF(public.universities.phone, ''), EXCLUDED.phone),
   website = COALESCE(NULLIF(public.universities.website, ''), EXCLUDED.website),
   majors = (SELECT ARRAY(SELECT DISTINCT m FROM unnest(coalesce(public.universities.majors, '{}'::text[]) || EXCLUDED.majors) AS m WHERE m <> '')),
-  extra = EXCLUDED.extra,
+  required_documents = EXCLUDED.required_documents,
+  extra = jsonb_set(
+    jsonb_set(
+      coalesce(public.universities.extra, '{}'::jsonb),
+      '{admission,language_session}',
+      EXCLUDED.extra #> '{admission,language_session}',
+      true
+    ),
+    '{admission,documents}',
+    EXCLUDED.extra #> '{admission,documents}',
+    true
+  ),
   notes = COALESCE(NULLIF(public.universities.notes, ''), EXCLUDED.notes),
   tuition_min = COALESCE(public.universities.tuition_min, EXCLUDED.tuition_min),
   tuition_max = COALESCE(public.universities.tuition_max, EXCLUDED.tuition_max),
@@ -245,6 +243,7 @@ ON CONFLICT (name_zh) DO UPDATE SET
 
 async function main() {
   const sqlOnly = process.argv.includes("--sql");
+  const noCrawl = process.argv.includes("--no-crawl");
   const env = sqlOnly ? {} : await loadEnv();
   const url = env.SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL;
   const key = env.SUPABASE_SERVICE_ROLE_KEY;
@@ -282,11 +281,13 @@ async function main() {
     try {
       const meta = LANGUAGE_UNI_META[row.name_zh];
       const match = existingRows.find((u) => u.name_zh === row.name_zh);
-      const presentation = await crawlPresentation(
-        [...meta.seed_urls, parseWebsite(row.contact, row.apply_website) || ""].filter(
-          Boolean,
-        ),
-      );
+      const presentation = noCrawl
+        ? null
+        : await crawlPresentation(
+            [...meta.seed_urls, parseWebsite(row.contact, row.apply_website) || ""].filter(
+              Boolean,
+            ),
+          );
       const admission = buildLanguageAdmission(row, { presentation });
 
       if (sqlOnly) {
@@ -302,6 +303,17 @@ async function main() {
             "utf8",
           );
           const incoming = profileToRow(profile);
+          incoming.required_documents = parseDocumentLines(row.documents);
+          incoming.extra = {
+            ...incoming.extra,
+            admission: {
+              ...(incoming.extra.admission as Record<string, unknown>),
+              ...admission,
+              presentation:
+                (incoming.extra.admission as { presentation?: string | null })
+                  ?.presentation || admission.presentation,
+            },
+          };
           incoming.notes =
             [row.pathway, row.note].filter(Boolean).join("\n") || incoming.notes;
           incoming.majors = [
@@ -359,6 +371,17 @@ async function main() {
         "utf8",
       );
       const incoming = profileToRow(profile);
+      incoming.required_documents = parseDocumentLines(row.documents);
+      incoming.extra = {
+        ...incoming.extra,
+        admission: {
+          ...(incoming.extra.admission as Record<string, unknown>),
+          ...admission,
+          presentation:
+            (incoming.extra.admission as { presentation?: string | null })
+              ?.presentation || admission.presentation,
+        },
+      };
       incoming.notes =
         [row.pathway, row.note].filter(Boolean).join("\n") || incoming.notes;
       incoming.majors = [...new Set([...(incoming.majors || []), "Langue chinoise"])];

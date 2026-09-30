@@ -25,9 +25,9 @@ export const MIX_TARGETS = {
 export const MIX_SIZE = { min: 5, max: 8 };
 
 export const CHINESE_MATCHING_WEIGHTS = {
-  localisation: 0.45,
-  financier: 0.35,
-  intake: 0.2,
+  localisation: 0.7,
+  financier: 0,
+  intake: 0.3,
 };
 
 export const CHINESE_MATCH_SIZE = 6;

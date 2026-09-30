@@ -339,6 +339,9 @@ export function normalizeUniversity(row: UniversityRow) {
       ...(Array.isArray(admission.documents) ? admission.documents : []).map(
         (d) => asRecord(d).type,
       ),
+      ...(Array.isArray(asRecord(admission.language_session).documents)
+        ? (asRecord(admission.language_session).documents as unknown[])
+        : []),
     ]),
     applicationUrl: filled(application.platform_url),
     contacts: asRecord(admission.contacts),

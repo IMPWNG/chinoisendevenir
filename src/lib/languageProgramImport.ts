@@ -1,4 +1,4 @@
-import { documentLabel, type ScanProfile } from "./universityScanImport";
+import { type ScanProfile } from "./universityScanImport";
 
 export type LanguageCsvRecord = {
   name_zh: string;
@@ -240,23 +240,6 @@ export const LANGUAGE_UNI_META: Record<string, LanguageUniMeta> = {
   },
 };
 
-const DOC_HINTS: Array<[RegExp, string]> = [
-  [/护照/, "passport"],
-  [/学历|毕业|学位/, "diplome"],
-  [/成绩单/, "transcript"],
-  [/无犯罪|犯罪记录/, "criminal"],
-  [/体检|体格检查/, "medical"],
-  [/照片|证件照/, "photo"],
-  [/推荐信/, "recommendation"],
-  [/申请表/, "application_form"],
-  [/学习计划|个人陈述|个人简历|动机/, "study_plan"],
-  [/经济|资金|存款|担保/, "financial_guarantee"],
-  [/\bHSK\b|汉语水平/, "hsk"],
-  [/简历/, "cv"],
-  [/监护/, "guardian"],
-  [/签证|居留/, "visa"],
-];
-
 export function parseTuitionCny(text: string) {
   if (!text || (!/\d/.test(text) && /[？?]/.test(text))) {
     return { min: null, max: null, semester: null, year: null };
@@ -390,23 +373,101 @@ export function parseHousing(text: string) {
   return uniqueBy(yearly, (h) => `${h.type}|${h.price_cny_year}`).slice(0, 6);
 }
 
-export function parseDocuments(text: string) {
-  const lines = String(text || "")
-    .split(/\n+/)
-    .map((line) => line.replace(/^\s*\d+[．.\s)）]+/, "").trim())
-    .filter((line) => line.length > 3);
-  const docs: Array<{ type: string; required: boolean; notes: string; applies_to: string[] }> = [];
-  for (const line of lines) {
-    const hint = DOC_HINTS.find(([re]) => re.test(line));
-    const type = hint ? documentLabel(hint[1]) : line.slice(0, 40);
-    docs.push({
-      type,
-      required: true,
-      notes: line.slice(0, 180),
-      applies_to: ["language"],
+const CN_NUM: Record<string, number> = {
+  一: 1,
+  二: 2,
+  三: 3,
+  四: 4,
+  五: 5,
+  六: 6,
+  七: 7,
+  八: 8,
+  九: 9,
+  十: 10,
+};
+
+function chineseListNumber(text: string) {
+  if (text === "十") return 10;
+  if (text.startsWith("十")) return 10 + (CN_NUM[text.slice(1)] || 0);
+  if (text.endsWith("十") && text.length === 2) return (CN_NUM[text[0]] || 0) * 10;
+  return CN_NUM[text] || 0;
+}
+
+export function parseDocumentLines(text: string) {
+  const raw = String(text || "").replace(/\r/g, "").trim();
+  if (!raw || /^[？?]+$/.test(raw)) return [];
+  const numbered = raw
+    .replace(/[①②③④⑤⑥⑦⑧⑨⑩⑪⑫]/g, (ch) => {
+      const n = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫".indexOf(ch) + 1;
+      return `\n${n}. `;
+    })
+    .replace(/[（(]\s*(\d+)\s*[）)]/g, "\n$1. ")
+    .replace(/[（(]\s*([一二三四五六七八九十]+)\s*[）)]/g, (_, cn) => {
+      const n = chineseListNumber(cn);
+      return n ? `\n${n}. ` : _;
     });
+  const headerOnly =
+    /^(?:\d+\s*)?(招生信息|申请须知|申请流程|注意|备注)[：:.。]?$/;
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const chunk of numbered.split(/\n+/)) {
+    const trimmed = chunk.trim();
+    if (!trimmed) continue;
+    const isItem = /^\d+[．.、)）]/.test(trimmed) || /^\d+\.\s/.test(trimmed);
+    const line = isItem
+      ? trimmed.replace(/^\s*\d+[．.\s、)）]+/, "").trim()
+      : trimmed;
+    if (headerOnly.test(line) || headerOnly.test(trimmed)) break;
+    if (line.length < 2 || /^[？?]+$/.test(line)) continue;
+    if (isItem) {
+      const key = line.replace(/\s+/g, "");
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(line);
+      continue;
+    }
+    if (out.length) {
+      out[out.length - 1] = `${out[out.length - 1]}${line}`;
+      continue;
+    }
+    out.push(line);
   }
-  return uniqueBy(docs, (d) => d.type).slice(0, 16);
+  return out;
+}
+
+export function parseDocuments(text: string) {
+  return parseDocumentLines(text).map((line) => ({
+    type: line,
+    required: true,
+    notes: line,
+    applies_to: ["language"],
+  }));
+}
+
+export function buildLanguageSession(row: LanguageCsvRecord) {
+  const tuition = parseTuitionCny(row.tuition);
+  const age = parseAgeRange(row.age);
+  return {
+    source: "csv-2027",
+    project: compactText(row.project),
+    tuition_text: compactText(row.tuition),
+    tuition,
+    age_text: compactText(row.age),
+    age_min: age.min,
+    age_max: age.max,
+    foundation: compactText(row.foundation),
+    dormitory: compactText(row.dormitory),
+    housing: parseHousing(row.dormitory),
+    deadline: compactText(row.deadline),
+    apply_website: filled(row.apply_website),
+    contact: compactText(row.contact),
+    pathway: compactText(row.pathway),
+    documents: parseDocumentLines(row.documents),
+    note: compactText(row.note),
+    scholarship: compactText(row.scholarship),
+    intake_months: parseIntakeMonths(row.deadline, row.project),
+    application_fee_cny: parseApplicationFee(`${row.tuition} ${row.note}`),
+  };
 }
 
 export function dedupeLanguageRecords(rows: LanguageCsvRecord[]) {
@@ -507,6 +568,7 @@ export function buildLanguageAdmission(
       foundation: compactText(row.foundation),
     },
     has_university_scholarship: parseScholarshipFlag(row.scholarship),
+    language_session: buildLanguageSession(row),
   };
 }
 
@@ -580,6 +642,8 @@ export function mergeLanguageAdmission(
           asRecord(languageAdmission.application).platform_name ||
           null,
       },
+      language_session:
+        languageAdmission.language_session || existing.language_session || null,
     },
   };
 }
