@@ -177,10 +177,7 @@ export default function AdminContactWhatsApp({
   const messages = card?.messages || [];
 
   return (
-    <div className="mb-8 pb-8 border-b border-slate-700/50">
-      <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-        💬 {t("dashboard.whatsappSection")}
-      </label>
+    <div>
       <p className="text-xs text-slate-400 mb-4">{t("dashboard.whatsappHint")}</p>
       <div className="mb-4">
         <label

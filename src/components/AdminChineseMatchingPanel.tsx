@@ -49,29 +49,6 @@ const RENTREE_OPTIONS = [
   "flexible",
 ];
 
-const COMMON_CITIES = [
-  "Beijing",
-  "Shanghai",
-  "Guangzhou",
-  "Shenzhen",
-  "Chengdu",
-  "Chongqing",
-  "Hangzhou",
-  "Nanjing",
-  "Wuhan",
-  "Xi'an",
-  "Xiamen",
-  "Kunming",
-  "Qingdao",
-  "Tianjin",
-  "Suzhou",
-  "Changsha",
-  "Dalian",
-  "Harbin",
-  "Jinan",
-  "Zhengzhou",
-];
-
 const RENTREE_LABELS: Record<string, string> = {
   septembre_2026: "Septembre 2026",
   mars_2027: "Mars 2027",
@@ -263,18 +240,21 @@ export default function AdminChineseMatchingPanel({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
         <label className="text-xs text-slate-400">
           Ville souhaitée
-          <input
-            list="chinese-matching-cities"
+          <select
             value={preferredCity}
             onChange={(e) => setPreferredCity(e.target.value)}
-            placeholder="Ex. Shanghai, Chengdu…"
             className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
-          />
-          <datalist id="chinese-matching-cities">
-            {[...new Set([...COMMON_CITIES, ...cities])].map((city: string) => (
-              <option key={city} value={city} />
+          >
+            <option value="">Toutes les villes du catalogue</option>
+            {preferredCity && !cities.includes(preferredCity) ? (
+              <option value={preferredCity}>{preferredCity}</option>
+            ) : null}
+            {cities.map((city: string) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
             ))}
-          </datalist>
+          </select>
         </label>
         <label className="text-xs text-slate-400">
           Budget
@@ -364,7 +344,7 @@ export default function AdminChineseMatchingPanel({
             Écoles de langue retenues
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-            <div className="lg:col-span-2 space-y-2">
+            <div className="lg:col-span-2 max-h-96 space-y-2 overflow-y-auto pr-1">
               {result.matches.map((item: ChineseMatch) => (
                 <button
                   key={item.university_id}
@@ -402,7 +382,7 @@ export default function AdminChineseMatchingPanel({
             </div>
 
             {selected ? (
-              <div className="lg:col-span-3 bg-slate-900/40 border border-slate-700/50 rounded-2xl p-4 space-y-4">
+              <div className="lg:col-span-3 max-h-96 overflow-y-auto bg-slate-900/40 border border-slate-700/50 rounded-2xl p-4 space-y-4">
                 <div>
                   <h3 className="text-lg font-bold text-white">
                     {selected.university_name}
