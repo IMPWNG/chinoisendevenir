@@ -199,7 +199,7 @@ export default function AdminContactWhatsApp({
         />
       </div>
 
-      {card ? (
+      {card?.onWhatsapp ? (
         <div className="mb-4 flex flex-wrap gap-2">
           <span
             className={`px-3 py-1 rounded-full text-xs font-bold ${

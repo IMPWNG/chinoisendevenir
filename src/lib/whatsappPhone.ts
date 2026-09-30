@@ -18,6 +18,19 @@ export function whatsappMsisdn(raw: unknown, country?: string | null): string | 
   return digits;
 }
 
+/** Chat id for sends, contacts and labels.
+ *  ponytail: a privacy id (@lid) is mapped back to the phone JID. WhatsApp
+ *  still answers history, labels and isMyContact on `{msisdn}@c.us`.
+ */
+export function whatsappChatId(number: string, whatsappId: unknown): string | null {
+  const id = String(whatsappId || "");
+  if (/^\d+@c\.us$/.test(id)) return id;
+  if (/^\d+@lid$/.test(id) && /^[1-9]\d{7,14}$/.test(number)) {
+    return `${number}@c.us`;
+  }
+  return null;
+}
+
 /** WhatsApp Business label « Étude Chine », emoji and accents ignored. */
 export function isEtudeChineLabel(name: unknown): boolean {
   const folded = String(name ?? "")

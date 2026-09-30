@@ -1,4 +1,4 @@
-import { isEtudeChineLabel, whatsappMsisdn } from "./whatsappPhone";
+import { isEtudeChineLabel, whatsappChatId, whatsappMsisdn } from "./whatsappPhone";
 
 const TEXT_MAX = 4096;
 
@@ -112,8 +112,8 @@ async function resolveChat(phone: unknown, country?: string | null) {
     exists?: boolean;
     whatsappId?: string | null;
   };
-  const chatId = String(checked?.whatsappId || "");
-  if (!checked?.exists || !/^\d+@c\.us$/.test(chatId)) {
+  const chatId = whatsappChatId(number, checked?.whatsappId);
+  if (!checked?.exists || !chatId) {
     throw new OpenwaError(
       "Ce numéro n'est pas inscrit sur WhatsApp.",
       400,
