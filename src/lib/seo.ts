@@ -12,7 +12,7 @@ export const SITE = {
     "Chinois en Devenir accompagne les étudiants francophones qui veulent étudier en Chine : choix de formation, universités chinoises, dossier d'admission, bourses d'études et visa étudiant.",
   metaDescription:
     "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
-  contentUpdatedAt: "2026-09-16",
+  contentUpdatedAt: "2026-09-30",
   ogImage: "https://chinoisendevenir.com/opengraph-image",
   logo: "https://chinoisendevenir.com/apple-icon",
 };
@@ -475,23 +475,35 @@ export const FAQ_GROUPS = [
 ];
 
 export const SITEMAP_ROUTES = [
-  { path: "/", changeFrequency: "weekly", priority: 1 },
-  { path: "/etudier-en-chine", changeFrequency: "monthly", priority: 0.95 },
+  { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  {
+    path: "/etudier-en-chine",
+    changeFrequency: "monthly" as const,
+    priority: 0.95,
+  },
   {
     path: "/ecoles-de-langue-chine",
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const,
     priority: 0.9,
   },
-  { path: "/visa-etudiant-chine", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/bourses", changeFrequency: "monthly", priority: 0.85 },
-  { path: "/processus", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/tarifs", changeFrequency: "monthly", priority: 0.75 },
-  { path: "/faq", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/contact", changeFrequency: "yearly", priority: 0.6 },
+  {
+    path: "/visa-etudiant-chine",
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  },
+  { path: "/bourses", changeFrequency: "monthly" as const, priority: 0.85 },
+  { path: "/processus", changeFrequency: "monthly" as const, priority: 0.8 },
+  { path: "/tarifs", changeFrequency: "monthly" as const, priority: 0.75 },
+  { path: "/faq", changeFrequency: "monthly" as const, priority: 0.8 },
+  { path: "/contact", changeFrequency: "yearly" as const, priority: 0.6 },
   {
     path: "/politique-confidentialite",
-    changeFrequency: "yearly",
+    changeFrequency: "yearly" as const,
     priority: 0.2,
   },
-  { path: "/conditions-utilisation", changeFrequency: "yearly", priority: 0.2 },
+  {
+    path: "/conditions-utilisation",
+    changeFrequency: "yearly" as const,
+    priority: 0.2,
+  },
 ];

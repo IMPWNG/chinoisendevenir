@@ -1,28 +1,9 @@
-import { listPublishedPosts } from "@/lib/blog";
-import { SITE, SITEMAP_ROUTES } from "@/lib/seo";
+import type { MetadataRoute } from "next";
+import { buildSitemapEntries } from "@/lib/sitemap";
 
-export default function sitemap() {
-  const lastModified = SITE.contentUpdatedAt;
-  const staticEntries = SITEMAP_ROUTES.map((route) => ({
-    url: route.path === "/" ? SITE.url : `${SITE.url}${route.path}`,
-    lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
+/** Request-time so today's blog post is listed without waiting for a deploy. */
+export const dynamic = "force-dynamic";
 
-  const blogIndex = {
-    url: `${SITE.url}/blog`,
-    lastModified,
-    changeFrequency: "daily" as const,
-    priority: 0.85,
-  };
-
-  const articles = listPublishedPosts().map((post) => ({
-    url: `${SITE.url}/blog/${post.slug}`,
-    lastModified: post.publishedAt,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  return [...staticEntries, blogIndex, ...articles];
+export default function sitemap(): MetadataRoute.Sitemap {
+  return buildSitemapEntries();
 }
