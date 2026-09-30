@@ -1,24 +1,24 @@
 # Graph Report - chinoisendevenir  (2026-09-30)
 
 ## Corpus Check
-- 330 files · ~411,517 words
+- 333 files · ~414,648 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1653 nodes · 4169 edges · 78 communities (67 shown, 9 thin omitted)
+- 1688 nodes · 4279 edges · 94 communities (80 shown, 12 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 79 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f829b9a6`
+- Built from commit: `0ac4c043`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - useSiteI18n
-- chinese.ts
+- studentDocuments.ts
 - emailCompose.ts
-- formules-relance.ts
+- errorMessage
 - emailTemplateDrafts.ts
 - reports.ts
 - package.json
@@ -26,11 +26,11 @@
 - index.ts
 - universityScanImport.ts
 - inbound-email.ts
-- studentProgress.ts
+- suiviStatuts.ts
 - generate-blog-posts.mjs
 - Row Level Security
 - reportsLlm.ts
-- emailIntents.ts
+- asString
 - weights.ts
 - AdminMatchingReport.tsx
 - enrich.ts
@@ -38,23 +38,23 @@
 - run.ts
 - AdminUniversities.tsx
 - Chinois en Devenir — brief pour agent IA
-- buildSaleContract
+- seo.ts
 - contactRevenue.ts
 - languageProgramImport.ts
+- LeadForm.tsx
 - StudentDashboard.tsx
-- StudentChineseMatching.tsx
-- studentAuth.ts
+- adminRoles.ts
 - student.ts
 - score.ts
 - Postgres Reference Writing Guidelines
 - Choose the Right Index Type
 - AdminI18nContext.tsx
 - Use Connection Pooling for All Applications
-- site.ts
+- SiteI18nContext.tsx
 - scrapling-crawl-universities.py
 - Chinois en Devenir Agency
 - SVG Icon Sprite Sheet
-- supabase.ts
+- AdminLogin.tsx
 - AdminMatchingPanel.tsx
 - Supabase Postgres Best Practices
 - Concurrency and Locking
@@ -64,18 +64,19 @@
 - AdminChineseMatchingPanel.tsx
 - Iridescent Blurred Ellipse Overlay
 - formules.ts
-- money.ts
-- asString
+- chinese.ts
+- supabaseAdmin.ts
 - AdminDashboard.tsx
 - Monitoring and Diagnostics
 - vercel.json
-- LeadForm.tsx
+- studentProgress.ts
 - next.config.mjs
 - apple-icon.tsx
 - icon.tsx
 - about/page.tsx
-- espace-etudiant/page.tsx
+- react
 - Find Skills
+- buildDualReports
 - Lowercase snake_case Identifiers
 - Dependabot npm Weekly Updates
 - saleContract.ts
@@ -83,14 +84,29 @@
 - contact-submit.ts
 - resend/route.ts
 - openwa.ts
-- react
-- createScopedAuth.tsx
+- devDependencies
+- ProtectedRoute.tsx
+- recover/route.ts
 - next-env.d.ts
-- auto-reply.ts
-- suiviStatuts.ts
+- semantic.ts
+- scripts
+- dependencies
+- adminSupabase
 - useAdminI18n
+- eslint.config.mjs
+- next
+- allowScripts
+- auto-reply.ts
+- TarifsPage.tsx
 - AdminContactWhatsApp.tsx
-- displayFormulePrice
+- Navigation.tsx
+- countries.ts
+- getSupabaseAdmin
+- request.ts
+- AdminContactEmail.tsx
+- mapUniversity
+- HomePage.tsx
+- engines
 
 ## God Nodes (most connected - your core abstractions)
 1. `useSiteI18n()` - 63 edges
@@ -111,10 +127,10 @@
   scripts/import-language-programs.ts → src/lib/universityScanImport.ts
 - `main()` --calls--> `canonicalCountry()`  [EXTRACTED]
   scripts/normalize-contact-countries.ts → src/lib/countries.ts
+- `load()` --indirect_call--> `contactId()`  [INFERRED]
+  src/components/AdminContactEmailThread.tsx → src/lib/api/inbound-email.ts
 - `pgvector` --semantically_similar_to--> `Use tsvector for Full-Text Search`  [INFERRED] [semantically similar]
   .agents/skills/supabase-postgres-best-practices/SKILL.md → .agents/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md
-- `Next.js Sitemap Self-Reference Caveat` --conceptually_related_to--> `Next.js Agent Rules`  [INFERRED]
-  .agents/skills/seo-audit/references/international-seo.md → AGENTS.md
 
 ## Import Cycles
 - None detected.
@@ -131,35 +147,35 @@
 - **Filled Social Brand Logos** — public_icons_bluesky_icon, public_icons_discord_icon, public_icons_github_icon, public_icons_x_icon, public_icons_dark_brand_fill [INFERRED 0.85]
 - **Purple Stroke UI Glyphs** — public_icons_documentation_icon, public_icons_social_icon, public_icons_purple_accent_stroke, public_icons_ui_chrome_glyphs [INFERRED 0.85]
 
-## Communities (78 total, 9 thin omitted)
+## Communities (94 total, 12 thin omitted)
 
 ### Community 0 - "useSiteI18n"
-Cohesion: 0.05
-Nodes (85): metadata, metadata, metadata, metadata, metadata, metadata, metadata, RootLayout() (+77 more)
+Cohesion: 0.13
+Nodes (30): metadata, metadata, metadata, metadata, metadata, metadata, metadata, FaqItem (+22 more)
 
-### Community 1 - "chinese.ts"
-Cohesion: 0.06
-Nodes (83): GET(), POST(), GET(), POST(), DELETE(), GET(), loadFiles(), POST() (+75 more)
+### Community 1 - "studentDocuments.ts"
+Cohesion: 0.07
+Nodes (74): GET(), POST(), POST(), DELETE(), GET(), loadFiles(), POST(), GET() (+66 more)
 
 ### Community 2 - "emailCompose.ts"
 Cohesion: 0.09
-Nodes (36): BulkTopic, ComposeContact, ComposeResult, isBulkTopic(), POST(), uniqueIds(), BULK_AI_TOPIC_KEYS, BULK_AI_TOPICS (+28 more)
+Nodes (35): BulkTopic, ComposeContact, ComposeResult, isBulkTopic(), POST(), uniqueIds(), BULK_AI_TOPIC_KEYS, BULK_AI_TOPICS (+27 more)
 
-### Community 3 - "formules-relance.ts"
-Cohesion: 0.22
-Nodes (14): GET(), isAuthorizedCron(), maxDuration, POST(), runCron(), logAction(), actionTime(), getSupabase() (+6 more)
+### Community 3 - "errorMessage"
+Cohesion: 0.19
+Nodes (19): GET(), isAuthorizedCron(), maxDuration, POST(), runCron(), handler(), logAction(), sendTemplatedEmail() (+11 more)
 
 ### Community 4 - "emailTemplateDrafts.ts"
-Cohesion: 0.08
-Nodes (33): AdminBulkEmail(), composeDraft(), sendBulk(), AdminBulkEmailProps, AI_TOPICS, authedFetch(), BulkContact, BulkProgress (+25 more)
+Cohesion: 0.12
+Nodes (20): AdminBulkEmail(), composeDraft(), sendBulk(), AdminBulkEmailProps, AI_TOPICS, authedFetch(), BulkContact, BulkProgress (+12 more)
 
 ### Community 5 - "reports.ts"
-Cohesion: 0.10
-Nodes (41): adminGuideline(), applicationCap(), applicationMixAdvice(), blankOr(), blockingFields(), BREAKDOWN_ORDER, breakdownBars(), buildDualReports() (+33 more)
+Cohesion: 0.11
+Nodes (24): isCanonicalDocReceived(), analysisNote(), BREAKDOWN_ORDER, DEGREE_LABELS, degreeLabel(), degreePhrase(), DIPLOMA_LABELS, diplomaLabel() (+16 more)
 
 ### Community 6 - "package.json"
-Cohesion: 0.04
-Nodes (46): compat, eslintConfig, allowScripts, unrs-resolver, dependencies, next, react, react-dom (+38 more)
+Cohesion: 0.13
+Nodes (14): name, private, version, eslint, eslint-config-next, react-dom, resend, tailwindcss (+6 more)
 
 ### Community 7 - "scan-universities.mjs"
 Cohesion: 0.09
@@ -170,16 +186,16 @@ Cohesion: 0.11
 Nodes (24): BlogPage(), metadata, revalidate, BlogSlugPage(), generateMetadata(), generateStaticParams(), Params, revalidate (+16 more)
 
 ### Community 9 - "universityScanImport.ts"
-Cohesion: 0.09
-Nodes (37): admin, catalog, ROOT, POST(), asScanCatalog(), buildAdmissionSummary(), canonicalUniversityKey(), compactRequirement() (+29 more)
+Cohesion: 0.08
+Nodes (40): admin, catalog, ROOT, GET(), POST(), requireFullAdmin(), asScanCatalog(), buildAdmissionSummary() (+32 more)
 
 ### Community 10 - "inbound-email.ts"
 Cohesion: 0.10
-Nodes (39): load(), handler(), updateContactStatus(), asEmailContact(), asInboundPayload(), classifyInboundIntent(), contactId(), createContactFromInbound() (+31 more)
+Nodes (37): asEmailContact(), asInboundPayload(), classifyInboundIntent(), contactId(), createContactFromInbound(), detectFormule(), detectInterest(), EmailAddressLike (+29 more)
 
-### Community 11 - "studentProgress.ts"
-Cohesion: 0.15
-Nodes (27): POST(), FORMULES, publicStudentProfile(), canStudentChooseFormule(), clampDossierEtape(), ContactRow, DIPLOMA_DOC_KEYS, FORMULE_OPTION_PREFIX (+19 more)
+### Community 11 - "suiviStatuts.ts"
+Cohesion: 0.17
+Nodes (11): CANONICAL_TO_STORED_STATUT, EARLY_STATUSES, FORMULE_ALREADY_CHOSEN, FORMULES_AWAITING_REPLY, LEGACY_STATUT_MAP, PAID_STATUSES, STATUS_RANK, STATUT_COLORS (+3 more)
 
 ### Community 12 - "generate-blog-posts.mjs"
 Cohesion: 0.24
@@ -190,24 +206,24 @@ Cohesion: 0.18
 Nodes (12): Sequential Scan, Indexes on WHERE and JOIN Columns, Partial Indexes, Idempotent Constraint Creation, pg_constraint Catalog, Index Foreign Key Columns, Principle of Least Privilege, auth.uid() RLS Policy (+4 more)
 
 ### Community 14 - "reportsLlm.ts"
-Cohesion: 0.24
-Nodes (10): extractJsonObject(), matchingLlm(), MatchingLlmInput, MatchingLlmResult, DualReportsInput, mergePolishedReports(), NO_GUARANTEE, stripGuarantees() (+2 more)
+Cohesion: 0.38
+Nodes (6): DualReportsInput, mergePolishedReports(), NO_GUARANTEE, stripGuarantees(), generateDualReports(), sourcePayload()
 
-### Community 15 - "emailIntents.ts"
-Cohesion: 0.12
-Nodes (31): generateRelance1Template(), generateRelance2Template(), alreadySentIntentReply(), AUTO_REPLY_MARKER(), autoReplyMarker(), descriptionHasAutoMarker(), displayNameFromFrom(), EMAIL_INTENTS (+23 more)
+### Community 15 - "asString"
+Cohesion: 0.16
+Nodes (28): alreadySentIntentReply(), AUTO_REPLY_MARKER(), autoReplyMarker(), descriptionHasAutoMarker(), displayNameFromFrom(), EMAIL_INTENTS, EmailIntentKey, extractPersonName() (+20 more)
 
 ### Community 16 - "weights.ts"
-Cohesion: 0.14
-Nodes (21): selectMix(), takeFrom(), asRecord(), filled(), normalizeUniversity(), reqFor(), toNumber(), unique() (+13 more)
+Cohesion: 0.18
+Nodes (16): asRecord(), filled(), normalizeUniversity(), reqFor(), toNumber(), unique(), yearlyLivingCost(), CATEGORY_THRESHOLDS (+8 more)
 
 ### Community 17 - "AdminMatchingReport.tsx"
-Cohesion: 0.20
-Nodes (8): AdminMatchingReport(), AdminReport, FACTOR_LABELS, FieldNote, GuidelineRow, STATUS_CLASS, STATUS_LABELS, UniversityRisk
+Cohesion: 0.14
+Nodes (14): AdminMatchingReport(), AdminReport, CheckGroup, CheckGroups(), dedupedRisks(), FACTOR_LABELS, FieldNote, followKey() (+6 more)
 
 ### Community 18 - "enrich.ts"
-Cohesion: 0.22
-Nodes (18): asRecord(), CHINESE_LEVEL_TO_HSK, clamp(), computeQualityScore(), emptyIa(), englishFromIa(), enrichStudent(), extractMotivationSignals() (+10 more)
+Cohesion: 0.16
+Nodes (22): asRecord(), CHINESE_LEVEL_TO_HSK, clamp(), computeQualityScore(), emptyIa(), englishFromIa(), enrichStudent(), extractMotivationSignals() (+14 more)
 
 ### Community 19 - "compilerOptions"
 Cohesion: 0.11
@@ -215,7 +231,7 @@ Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 
 ### Community 20 - "run.ts"
 Cohesion: 0.12
-Nodes (28): getFormuleAccess(), CATEGORY_META, categoryFromScore(), categoryKeyFromScore(), identifyGaps(), MatchingGap, monthsForHskGap(), groupMix() (+20 more)
+Nodes (30): getFormuleAccess(), CATEGORY_META, categoryFromScore(), categoryKeyFromScore(), CanonDoc, identifyGaps(), MatchingGap, monthsForHskGap() (+22 more)
 
 ### Community 21 - "AdminUniversities.tsx"
 Cohesion: 0.10
@@ -225,37 +241,37 @@ Nodes (22): toUniversityInsert(), UNIVERSITY_SEED, UniversitySeedRow, AdminUnive
 Cohesion: 0.06
 Nodes (38): AI Writing Detection, Em Dashes as AI Tell, Canonical Overrides Hreflang, Google Localized Versions Docs, Helpful Content System, International SEO Evidence, Next.js Sitemap Self-Reference Caveat, hreflang x-default (+30 more)
 
-### Community 23 - "buildSaleContract"
-Cohesion: 0.36
-Nodes (9): generateFormuleConfirmeeTemplate(), escapeHtml(), formatEurosOnly(), fractionDigits(), buildSaleContract(), bullets(), field(), scheduleTable() (+1 more)
+### Community 23 - "seo.ts"
+Cohesion: 0.12
+Nodes (18): metadata, metadata, RootLayout(), alt, contentType, size, metadata, AI_BOTS (+10 more)
 
 ### Community 24 - "contactRevenue.ts"
-Cohesion: 0.13
-Nodes (20): ADMIN_ROLE_LIMITED, assign, clear, contactAssignPatch(), ContactOwnerFields, contactUnassignPatch(), isAssignedTo(), normalizeAdminEmail() (+12 more)
+Cohesion: 0.11
+Nodes (23): ADMIN_ROLE_LIMITED, assign, clear, contactAssignPatch(), ContactOwnerFields, contactUnassignPatch(), isAssignedTo(), normalizeAdminEmail() (+15 more)
 
 ### Community 25 - "languageProgramImport.ts"
 Cohesion: 0.09
-Nodes (54): crawlPresentation(), existingPatchSql(), fetchPage(), insertSql(), loadEnv(), main(), parseCsv(), ROOT (+46 more)
+Nodes (53): crawlPresentation(), existingPatchSql(), fetchPage(), insertSql(), loadEnv(), main(), parseCsv(), ROOT (+45 more)
 
-### Community 26 - "StudentDashboard.tsx"
-Cohesion: 0.17
-Nodes (16): withCurrentOption(), getVisibleStudentSteps(), studentCanAccessVisaDocuments(), AdminDoc, BUDGET_LABEL_KEYS, budgetLabel(), catalogDoc(), ChineseMatchingData (+8 more)
+### Community 26 - "LeadForm.tsx"
+Cohesion: 0.19
+Nodes (17): BUDGET_VALUES, EMPTY_FORM, INTAKE_VALUES, LeadForm(), LeadFormErrors, LeadFormProps, LeadFormStatus, LeadFormValues (+9 more)
 
-### Community 27 - "StudentChineseMatching.tsx"
-Cohesion: 0.25
-Nodes (5): BreakdownRow, ChineseView, School, StudentChineseMatching(), TranslateFn
+### Community 27 - "StudentDashboard.tsx"
+Cohesion: 0.09
+Nodes (25): BreakdownRow, ChineseView, School, StudentChineseMatching(), TranslateFn, StudentVisaDocuments(), en, fr (+17 more)
 
-### Community 28 - "studentAuth.ts"
+### Community 28 - "adminRoles.ts"
 Cohesion: 0.23
-Nodes (14): AdminAuthResult, AdminRole, getAdminEmailAllowlist(), getFullAdminEmails(), getLimitedAdminEmails(), parseEmailSet(), resolveAdminRole(), getUnlockedStudentAccess() (+6 more)
+Nodes (12): GET(), AdminAuthResult, adminCapabilities(), AdminRole, getAdminEmailAllowlist(), getFullAdminEmails(), getLimitedAdminEmails(), parseEmailSet() (+4 more)
 
 ### Community 29 - "student.ts"
-Cohesion: 0.17
-Nodes (22): diplomaToTargetDegree(), DOMAIN_FAMILIES, DOMAIN_KEYS, englishToIelts(), englishToToefl(), EUR_TO_CNY, intakeFromRentree(), languageIntakeKey() (+14 more)
+Cohesion: 0.19
+Nodes (17): BUDGET_BANDS, autumn, empty, spring, diplomaToTargetDegree(), englishToIelts(), englishToToefl(), EUR_TO_CNY (+9 more)
 
 ### Community 30 - "score.ts"
 Cohesion: 0.19
-Nodes (19): categoryMetaFromScore(), infoStatus(), priorityFromScore(), clamp(), diplomaFitsTarget(), hardFilter(), intakeTooFar(), matchUniversity() (+11 more)
+Nodes (19): categoryMetaFromScore(), priorityFromScore(), scoreMotivationIa(), clamp(), diplomaFitsTarget(), hardFilter(), intakeTooFar(), matchUniversity() (+11 more)
 
 ### Community 31 - "Postgres Reference Writing Guidelines"
 Cohesion: 0.17
@@ -266,16 +282,16 @@ Cohesion: 0.13
 Nodes (15): BRIN Index, B-tree Index, Choose the Right Index Type, GIN Index, GiST Index, Hash Index, PostgreSQL Index Types Documentation, Appropriate PostgreSQL Data Types (+7 more)
 
 ### Community 33 - "AdminI18nContext.tsx"
-Cohesion: 0.13
-Nodes (14): next, metadata, metadata, AdminI18nContext, AdminI18nProvider(), AdminI18nValue, interpolate(), isAdminLang() (+6 more)
+Cohesion: 0.16
+Nodes (13): metadata, NavItem, AdminI18nContext, AdminI18nProvider(), AdminI18nValue, interpolate(), isAdminLang(), lookup() (+5 more)
 
 ### Community 34 - "Use Connection Pooling for All Applications"
 Cohesion: 0.20
 Nodes (14): Connection Management, Configure Idle Connection Timeouts, idle_session_timeout, Set Appropriate Connection Limits, max_connections, work_mem, Use Connection Pooling for All Applications, PgBouncer (+6 more)
 
-### Community 35 - "site.ts"
-Cohesion: 0.25
-Nodes (7): en, fr, SiteCopy, SiteLang, siteTranslations, STUDY_DOMAIN_VALUE_BY_INDEX, STUDY_DOMAIN_VALUES
+### Community 35 - "SiteI18nContext.tsx"
+Cohesion: 0.22
+Nodes (15): interpolate(), isSiteLang(), lookup(), SiteI18nContext, SiteI18nProvider(), TranslateVars, SiteLang, siteTranslations (+7 more)
 
 ### Community 36 - "scrapling-crawl-universities.py"
 Cohesion: 0.28
@@ -289,13 +305,9 @@ Nodes (13): Chinois en Devenir, No Guarantee Policy, Chinois en Devenir, CSC Sch
 Cohesion: 0.38
 Nodes (13): Bluesky Clip Path, Bluesky Icon, Dark Brand Fill #08060d, Discord Icon, Documentation Icon, GitHub Icon, Purple Accent Stroke #aa3bff, Social Brand Marks (+5 more)
 
-### Community 39 - "supabase.ts"
-Cohesion: 0.39
-Nodes (4): { AuthProvider, useScopedAuth }, useAdminAuth, adminSupabase, AdminLogin()
-
 ### Community 40 - "AdminMatchingPanel.tsx"
-Cohesion: 0.17
-Nodes (10): AdminMatchingPanel(), authedFetch(), BREAKDOWN_LABELS, CATEGORY_STYLES, KindTone, MatchingContact, MatchingResult, MatchingRun (+2 more)
+Cohesion: 0.15
+Nodes (13): AdminMatchingPanel(), authedFetch(), BREAKDOWN_LABELS, CATEGORY_STYLES, KindTone, MatchingContact, MatchingResult, MatchingRun (+5 more)
 
 ### Community 41 - "Supabase Postgres Best Practices"
 Cohesion: 0.26
@@ -318,28 +330,28 @@ Cohesion: 0.22
 Nodes (10): Data Access Patterns, Batch INSERT Statements for Bulk Data, COPY Bulk Load, ANY Array Batching, Eliminate N+1 Queries with Batch Loading, Use Cursor-Based Pagination Instead of OFFSET, OFFSET Pagination, INSERT ON CONFLICT (+2 more)
 
 ### Community 46 - "AdminChineseMatchingPanel.tsx"
-Cohesion: 0.14
-Nodes (13): AdminChineseMatchingPanel(), authedFetch(), BREAKDOWN_LABELS, BUDGET_OPTIONS, CATEGORY_STYLES, ChineseContact, ChineseMatch, ChineseResult (+5 more)
+Cohesion: 0.18
+Nodes (10): AdminChineseMatchingPanel(), authedFetch(), BREAKDOWN_LABELS, CATEGORY_STYLES, ChineseContact, ChineseMatch, ChineseResult, ChineseRun (+2 more)
 
 ### Community 47 - "Iridescent Blurred Ellipse Overlay"
 Cohesion: 0.36
 Nodes (8): Alpha Mask Silhouette Clip, Brand Purple #863bff, Cyan Accent Highlight, Display-P3 Wide Gamut Fills, Folded Ribbon Glyph, Iridescent Blurred Ellipse Overlay, Lavender Specular Highlight, Site Favicon Brand Mark
 
 ### Community 48 - "formules.ts"
-Cohesion: 0.13
-Nodes (23): IncludeGroup, StudentFormules(), StudentFormulesProps, generateFormulesPresentationTemplate(), generateRelanceFormulesTemplate(), displayFormuleFootnote(), Formule, FORMULE_1_INCLUDES (+15 more)
+Cohesion: 0.11
+Nodes (26): StudentFormuleBanner(), useAdminAccess(), generateRelanceFormulesTemplate(), formuleFactsForPrompt(), canonicalFormuleValue(), displayFormuleLabel(), displayFormulePrice(), EXTRA_FEES (+18 more)
 
-### Community 49 - "money.ts"
-Cohesion: 0.15
-Nodes (19): ALREADY, cfaBeside(), cfaBesideRange(), converted, twice, CURRENCY, EUR_TO_FCFA, eurosToFcfa() (+11 more)
+### Community 49 - "chinese.ts"
+Cohesion: 0.17
+Nodes (22): CATEGORIES, categoryFromScore(), chineseCitiesFromCatalog(), ChineseMatch, clamp(), costLabel(), filled(), intakeLabel() (+14 more)
 
-### Community 50 - "asString"
-Cohesion: 0.12
-Nodes (37): @supabase/supabase-js, POST(), POST(), missingAuthUser(), POST(), POST(), filled(), PATCH() (+29 more)
+### Community 50 - "supabaseAdmin.ts"
+Cohesion: 0.22
+Nodes (14): @supabase/supabase-js, POST(), AuthErrorLike, emailNotConfirmed(), findAuthUserByEmail(), getSupabaseAnonServer(), publicAuthError(), signInAuthUser() (+6 more)
 
 ### Community 51 - "AdminDashboard.tsx"
 Cohesion: 0.11
-Nodes (25): AdminShell(), NavItem, useAdminAccess(), onlyOne, rows, isMissingPriorityColumn(), isPrioritaire(), PriorityContact (+17 more)
+Nodes (22): onlyOne, rows, isMissingPriorityColumn(), isPrioritaire(), PriorityContact, priorityPatch(), sortPriorityFirst(), isInboxPending() (+14 more)
 
 ### Community 52 - "Monitoring and Diagnostics"
 Cohesion: 0.60
@@ -349,81 +361,137 @@ Nodes (5): Monitoring and Diagnostics, Use EXPLAIN ANALYZE to Diagnose Slow Quer
 Cohesion: 0.40
 Nodes (4): buildCommand, crons, framework, $schema
 
-### Community 54 - "LeadForm.tsx"
-Cohesion: 0.20
-Nodes (16): BUDGET_VALUES, EMPTY_FORM, INTAKE_VALUES, LeadForm(), LeadFormErrors, LeadFormProps, LeadFormStatus, LeadFormValues (+8 more)
+### Community 54 - "studentProgress.ts"
+Cohesion: 0.18
+Nodes (26): POST(), getUnlockedStudentAccess(), AuthErrorResult, ensureStudentContact(), filled(), publicStudentProfile(), canStudentChooseFormule(), clampDossierEtape() (+18 more)
+
+### Community 59 - "react"
+Cohesion: 0.12
+Nodes (16): react, Providers(), AdminAuthProvider, { AuthProvider, useScopedAuth }, { AuthProvider, useScopedAuth }, StudentAuthProvider, useStudentAuth, AuthResult (+8 more)
+
+### Community 61 - "buildDualReports"
+Cohesion: 0.18
+Nodes (16): adminGuideline(), applicationCap(), applicationMixAdvice(), blockingFields(), buildDualReports(), closingText(), detectLimitingFactor(), documentInventory() (+8 more)
 
 ### Community 66 - "saleContract.ts"
-Cohesion: 0.12
-Nodes (27): AdminSendContract(), send(), updatePrestataire(), authedFetch(), ContractContact, fieldClass(), Annex, ANNEXES (+19 more)
+Cohesion: 0.07
+Nodes (56): POST(), AdminSendContract(), send(), updatePrestataire(), authedFetch(), ContractContact, fieldClass(), emailHtmlToText() (+48 more)
 
 ### Community 67 - "StudentMatching.tsx"
-Cohesion: 0.15
-Nodes (10): BreakdownRow, GrantGroup, Matching, MatchingDoc, ROAD_STATUS_MARK, RoadmapRow, StudentMatching(), StudentReport (+2 more)
+Cohesion: 0.18
+Nodes (9): DocGroup, GrantGroup, Matching, MatchingDoc, Reading, StudentMatching(), StudentReport, TranslateFn (+1 more)
 
 ### Community 68 - "contact-submit.ts"
-Cohesion: 0.13
-Nodes (22): OPTIONS, POST, DOMAINES_VALIDES, generateEmailTemplate(), handler(), isFilled(), mergeNotes(), pick() (+14 more)
+Cohesion: 0.23
+Nodes (12): OPTIONS, POST, DOMAINES_VALIDES, generateEmailTemplate(), handler(), isFilled(), mergeNotes(), pick() (+4 more)
 
 ### Community 69 - "resend/route.ts"
 Cohesion: 0.36
 Nodes (7): maxDuration, POST(), decodeWebhookSecret(), HeaderSource, headerValue(), signaturesMatch(), verifyResendWebhook()
 
 ### Community 70 - "openwa.ts"
-Cohesion: 0.07
-Nodes (49): main(), supabase, FIELD_LABELS, FieldKey, filled(), PATCH(), sameValue(), GET() (+41 more)
+Cohesion: 0.11
+Nodes (36): GET(), GET(), guard(), POST(), ChatLike, ids, phones, sorted (+28 more)
 
-### Community 72 - "react"
-Cohesion: 0.16
-Nodes (11): react, GET(), AdminCapabilities, ProtectedRoute(), verify(), AdminAccessContext, AdminAccessProvider(), AdminCapabilities (+3 more)
-
-### Community 73 - "createScopedAuth.tsx"
-Cohesion: 0.33
-Nodes (6): AuthResult, createScopedAuth(), applySession(), AuthProvider(), emptyAuth, ScopedAuth
-
-### Community 75 - "auto-reply.ts"
-Cohesion: 0.16
-Nodes (15): OPTIONS, POST, EMAIL_TEMPLATES, EmailContact, EmailTemplate, resend, sendTemplatedEmail(), supabase (+7 more)
-
-### Community 77 - "suiviStatuts.ts"
-Cohesion: 0.15
-Nodes (12): CANONICAL_TO_STORED_STATUT, EARLY_STATUSES, FORMULE_ALREADY_CHOSEN, FORMULES_AWAITING_REPLY, isFormuleAlreadyChosen(), LEGACY_STATUT_MAP, PAID_STATUSES, STATUS_RANK (+4 more)
-
-### Community 78 - "useAdminI18n"
+### Community 71 - "devDependencies"
 Cohesion: 0.20
-Nodes (12): AdminContactEmailThread(), formatWhen(), localeFor(), AdminDoc, adminFetch(), AdminStudentFiles(), FilesPayload, RequiredDoc (+4 more)
+Nodes (10): devDependencies, eslint, eslint-config-next, @eslint/eslintrc, tailwindcss, @tailwindcss/postcss, @types/node, @types/react (+2 more)
+
+### Community 72 - "ProtectedRoute.tsx"
+Cohesion: 0.21
+Nodes (8): AdminCapabilities, ProtectedRoute(), verify(), AdminAccessContext, AdminAccessProvider(), AdminCapabilities, FULL_ACCESS, ADMIN_ROLE_FULL
+
+### Community 73 - "recover/route.ts"
+Cohesion: 0.17
+Nodes (19): missingAuthUser(), POST(), POST(), alreadyRegistered(), createConfirmedAuthUser(), ADMIN_NOTIFY_EMAIL, CONTACT_FROM, CONTACT_FROM_NAME (+11 more)
+
+### Community 75 - "semantic.ts"
+Cohesion: 0.29
+Nodes (10): DOMAIN_FAMILIES, DOMAIN_KEYS, DomainSimilarity, familyOf(), jaccard(), studentTokens(), tokenize(), universityTokens() (+2 more)
+
+### Community 76 - "scripts"
+Cohesion: 0.25
+Nodes (8): scripts, build, dev, import:universities, lint, scan:universities, start, test
+
+### Community 77 - "dependencies"
+Cohesion: 0.29
+Nodes (7): dependencies, next, react, react-dom, resend, @supabase/supabase-js, @vercel/speed-insights
+
+### Community 78 - "adminSupabase"
+Cohesion: 0.29
+Nodes (7): AdminDoc, adminFetch(), AdminStudentFiles(), FilesPayload, RequiredDoc, RequiredFile, adminSupabase
+
+### Community 79 - "useAdminI18n"
+Cohesion: 0.31
+Nodes (8): AdminContactEmailThread(), load(), formatWhen(), localeFor(), AdminShell(), useAdminI18n(), ContactEmailRow, LanguageSessionPanel()
+
+### Community 80 - "eslint.config.mjs"
+Cohesion: 0.50
+Nodes (3): compat, eslintConfig, @eslint/eslintrc
+
+### Community 83 - "auto-reply.ts"
+Cohesion: 0.11
+Nodes (20): OPTIONS, POST, EMAIL_TEMPLATES, EmailContact, EmailTemplate, generateFormuleConfirmeeTemplate(), generateRelance1Template(), generateRelance2Template() (+12 more)
+
+### Community 84 - "TarifsPage.tsx"
+Cohesion: 0.22
+Nodes (14): metadata, IncludeGroup, StudentFormules(), StudentFormulesProps, SiteI18nValue, generateFormulesPresentationTemplate(), displayFormuleFootnote(), Formule (+6 more)
 
 ### Community 85 - "AdminContactWhatsApp.tsx"
 Cohesion: 0.33
 Nodes (8): AdminContactWhatsApp(), loadCard(), run(), authedFetch(), localeFor(), ThreadMessage, WhatsappCard, WhatsappContact
 
-### Community 87 - "displayFormulePrice"
-Cohesion: 0.44
-Nodes (9): StudentFormuleBanner(), formuleAmountEuros(), canonicalFormuleValue(), displayFormuleLabel(), displayFormulePrice(), getFormuleByNumber(), getFormuleNumber(), FormulaInfo (+1 more)
+### Community 86 - "Navigation.tsx"
+Cohesion: 0.20
+Nodes (7): metadata, Navigation(), NotFoundContent(), StudentProtectedRoute(), useAuth, SITE_LANGS, StudentLogin()
+
+### Community 87 - "countries.ts"
+Cohesion: 0.24
+Nodes (8): main(), supabase, ALIASES, BY_FOLD, canonicalCountry(), COUNTRIES, fold(), isKnownCountry()
+
+### Community 88 - "getSupabaseAdmin"
+Cohesion: 0.27
+Nodes (11): ContactEmailDirection, ContactEmailInput, listContactEmails(), markContactEmailsRead(), normalizeEmail(), storeContactEmail(), storeInboundContactEmail(), truncateBody() (+3 more)
+
+### Community 89 - "request.ts"
+Cohesion: 0.31
+Nodes (8): FIELD_LABELS, FieldKey, filled(), PATCH(), sameValue(), filled(), PATCH(), readJsonObject()
+
+### Community 90 - "AdminContactEmail.tsx"
+Cohesion: 0.27
+Nodes (9): AdminContactEmail(), applyDraft(), composeWithAi(), sendEmail(), authedFetch(), EmailContact, fieldClass(), CONTACT_FROM_EMAIL (+1 more)
+
+### Community 91 - "mapUniversity"
+Cohesion: 0.27
+Nodes (10): blankOr(), breakdownBars(), categoryOf(), costOf(), deadlineOf(), factLines(), mapUniversity(), scorePhrase() (+2 more)
+
+### Community 92 - "HomePage.tsx"
+Cohesion: 0.31
+Nodes (5): metadata, Hero(), Stats(), FAQS, HomePage()
 
 ## Ambiguous Edges - Review These
 - `Next.js Agent Rules` → `React Vite Template README`  [AMBIGUOUS]
   README.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **461 isolated node(s):** `compat`, `eslintConfig`, `securityHeaders`, `nextConfig`, `name` (+456 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 530 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **468 isolated node(s):** `compat`, `eslintConfig`, `securityHeaders`, `nextConfig`, `name` (+463 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 537 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Next.js Agent Rules` and `React Vite Template README`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `react` connect `react` to `useSiteI18n`, `emailTemplateDrafts.ts`, `package.json`, `AdminMatchingReport.tsx`, `AdminUniversities.tsx`, `StudentDashboard.tsx`, `StudentChineseMatching.tsx`, `AdminI18nContext.tsx`, `supabase.ts`, `AdminMatchingPanel.tsx`, `AdminContactInfo.tsx`, `AdminChineseMatchingPanel.tsx`, `AdminDashboard.tsx`, `LeadForm.tsx`, `espace-etudiant/page.tsx`, `saleContract.ts`, `StudentMatching.tsx`, `createScopedAuth.tsx`, `useAdminI18n`, `AdminContactWhatsApp.tsx`?**
-  _High betweenness centrality (0.064) - this node is a cross-community bridge._
-- **Why does `@supabase/supabase-js` connect `asString` to `openwa.ts`, `package.json`, `supabase.ts`, `universityScanImport.ts`, `createScopedAuth.tsx`, `AdminDashboard.tsx`, `languageProgramImport.ts`, `studentAuth.ts`?**
-  _High betweenness centrality (0.056) - this node is a cross-community bridge._
-- **Why does `errorMessage()` connect `inbound-email.ts` to `useSiteI18n`, `chinese.ts`, `saleContract.ts`, `formules-relance.ts`, `emailTemplateDrafts.ts`, `contact-submit.ts`, `AdminMatchingPanel.tsx`, `auto-reply.ts`, `AdminContactInfo.tsx`, `AdminChineseMatchingPanel.tsx`, `useAdminI18n`, `asString`, `AdminContactWhatsApp.tsx`, `AdminUniversities.tsx`, `StudentDashboard.tsx`?**
-  _High betweenness centrality (0.052) - this node is a cross-community bridge._
+- **Why does `react` connect `react` to `emailTemplateDrafts.ts`, `package.json`, `AdminMatchingReport.tsx`, `AdminUniversities.tsx`, `seo.ts`, `LeadForm.tsx`, `StudentDashboard.tsx`, `AdminI18nContext.tsx`, `SiteI18nContext.tsx`, `AdminLogin.tsx`, `AdminMatchingPanel.tsx`, `AdminContactInfo.tsx`, `AdminChineseMatchingPanel.tsx`, `AdminDashboard.tsx`, `saleContract.ts`, `StudentMatching.tsx`, `ProtectedRoute.tsx`, `adminSupabase`, `useAdminI18n`, `next`, `AdminContactWhatsApp.tsx`, `Navigation.tsx`, `AdminContactEmail.tsx`?**
+  _High betweenness centrality (0.067) - this node is a cross-community bridge._
+- **Why does `@supabase/supabase-js` connect `supabaseAdmin.ts` to `AdminI18nContext.tsx`, `package.json`, `universityScanImport.ts`, `studentProgress.ts`, `countries.ts`, `languageProgramImport.ts`, `react`?**
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+- **Why does `errorMessage()` connect `errorMessage` to `studentDocuments.ts`, `saleContract.ts`, `emailTemplateDrafts.ts`, `contact-submit.ts`, `AdminMatchingPanel.tsx`, `StudentDashboard.tsx`, `inbound-email.ts`, `AdminContactInfo.tsx`, `AdminChineseMatchingPanel.tsx`, `adminSupabase`, `supabaseAdmin.ts`, `auto-reply.ts`, `AdminContactWhatsApp.tsx`, `AdminUniversities.tsx`, `Navigation.tsx`, `request.ts`, `AdminContactEmail.tsx`, `react`?**
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
 - **What connects `compat`, `eslintConfig`, `securityHeaders` to the rest of the system?**
-  _461 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _468 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `useSiteI18n` be split into smaller, more focused modules?**
-  _Cohesion score 0.052132207277656134 - nodes in this community are weakly interconnected._
-- **Should `chinese.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05661729574773053 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1284013605442177 - nodes in this community are weakly interconnected._
+- **Should `studentDocuments.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.06540447504302926 - nodes in this community are weakly interconnected._
