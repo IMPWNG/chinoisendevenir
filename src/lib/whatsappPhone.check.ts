@@ -2,7 +2,7 @@
  * Self-check for WhatsApp number normalization.
  * Run: npx tsx src/lib/whatsappPhone.check.ts
  */
-import { isEtudeChineLabel, whatsappMsisdn } from "./whatsappPhone";
+import { isEtudeChineLabel, whatsappChatId, whatsappMsisdn } from "./whatsappPhone";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -18,5 +18,14 @@ assert(whatsappMsisdn("123") === null, "too short");
 assert(isEtudeChineLabel("Étude Chine 🇨🇳"), "label emoji");
 assert(isEtudeChineLabel("etude chine"), "label plain");
 assert(!isEtudeChineLabel("Chongqing Guide"), "other label");
+assert(
+  whatsappChatId("237677135084", "19813070032933@lid") === "237677135084@c.us",
+  "lid maps to phone",
+);
+assert(
+  whatsappChatId("33612345678", "33612345678@c.us") === "33612345678@c.us",
+  "phone jid kept",
+);
+assert(whatsappChatId("33612345678", null) === null, "missing jid");
 
 console.log("whatsappPhone check ok");
