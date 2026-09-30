@@ -204,7 +204,7 @@ export function diplomaToTargetDegree(diplome: unknown) {
 
 export function intakeFromRentree(dateRentree: unknown) {
   const value = normalizeText(dateRentree);
-  if (!value || value.includes("flexible")) {
+  if (!value) {
     return {
       month: null as number | null,
       year: null as number | null,
@@ -242,6 +242,15 @@ export function intakeFromRentree(dateRentree: unknown) {
       label: year ? `Automne ${year}` : "Automne",
     };
   }
+  if (value.includes("libre") || value.includes("flexible")) {
+    return {
+      month: null as number | null,
+      year,
+      months: [] as number[],
+      flexible: true,
+      label: value.includes("libre") ? "Rentrée libre" : "Flexible",
+    };
+  }
   return {
     month: null as number | null,
     year,
@@ -251,7 +260,7 @@ export function intakeFromRentree(dateRentree: unknown) {
   };
 }
 
-/** Map a stored rentrée onto the two language-school intakes. */
+/** Map a stored rentrée onto the language-school intakes. */
 export function languageIntakeKey(value: unknown) {
   const text = normalizeText(value);
   if (!text) return "";
@@ -261,6 +270,7 @@ export function languageIntakeKey(value: unknown) {
   if (text.includes("automne") || text.includes("sept") || text.includes("aout")) {
     return "automne_2027";
   }
+  if (text.includes("libre") || text.includes("flexible")) return "rentree_libre";
   return "";
 }
 

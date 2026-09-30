@@ -140,7 +140,7 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
     return {
       points: 90,
       max: 100,
-      note: "Rentrée flexible : le calendrier de l’école n’est pas bloquant.",
+      note: "Rentrée libre : le calendrier de l’école n’est pas bloquant.",
     };
   }
   const wanted = student.intake?.month;
@@ -282,7 +282,7 @@ function profileBlurb(student: MatchingStudent) {
   const bits: string[] = [];
   if (city) bits.push(`ville visée : ${city}`);
   if (student.intake?.months?.length && intake) bits.push(`rentrée ${intake}`);
-  else if (student.intake?.flexible) bits.push("rentrée flexible");
+  else if (student.intake?.flexible) bits.push("rentrée libre");
   if (!bits.length) {
     return "Voici des écoles de langue en Chine, classées selon les données disponibles. Précisez une ville et une rentrée pour affiner.";
   }

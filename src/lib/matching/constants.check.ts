@@ -23,6 +23,11 @@ assert(languageIntakeKey("août 2027") === "automne_2027", "aout maps");
 const empty = intakeFromRentree("non precisee");
 assert(empty.flexible === false && empty.months.length === 0, "unspecified");
 assert(languageIntakeKey("") === "", "blank key");
-assert(languageIntakeKey("flexible") === "", "flexible dropped");
+
+const libre = intakeFromRentree("rentree_libre");
+assert(libre.flexible === true && libre.months.length === 0, "libre flexible");
+assert(libre.label === "Rentrée libre", "libre label");
+assert(languageIntakeKey("flexible") === "rentree_libre", "flexible maps");
+assert(intakeFromRentree("flexible").label === "Flexible", "old flexible label");
 
 console.log("language intake ok");

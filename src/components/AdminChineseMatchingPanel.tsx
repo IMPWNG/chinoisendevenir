@@ -45,6 +45,12 @@ const RENTREE_OPTIONS = [
     courses: "Août–septembre 2027",
     apply: "Les candidatures peuvent ouvrir dès fin 2026 ou début 2027",
   },
+  {
+    key: "rentree_libre",
+    label: "Rentrée libre",
+    courses: "Selon le calendrier de l’école",
+    apply: "Dès qu’une session est ouverte",
+  },
 ] as const;
 
 type ScoreParts = { points?: number | string; max?: number | string };
