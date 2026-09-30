@@ -29,10 +29,13 @@ export default function StudentAuthCallback() {
             setMessage(error.message);
             return;
           }
+        } else {
+          await studentSupabase.auth.getSession();
         }
 
+        const hashType = new URLSearchParams(url.hash.replace(/^#/, "")).get("type");
         const next = url.searchParams.get("next");
-        if (next === "password") {
+        if (next === "password" || hashType === "recovery") {
           router.replace("/espace-etudiant/mot-de-passe");
           return;
         }

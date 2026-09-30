@@ -149,11 +149,18 @@ export function createScopedAuth(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      const payload = (await response.json().catch(() => ({}))) as { error?: string };
+      const payload = (await response.json().catch(() => ({}))) as {
+        error?: string;
+        code?: string;
+      };
       if (!response.ok && response.status !== 409) {
+        const error = new Error(payload.error || "Impossible de créer le compte.") as Error & {
+          code?: string;
+        };
+        error.code = payload.code;
         return {
           data: { user: null, session: null },
-          error: new Error(payload.error || "Impossible de créer le compte."),
+          error,
         };
       }
 
@@ -174,15 +181,20 @@ export function createScopedAuth(
       setUser(null);
     };
 
-    const resetPassword = (email: string) => {
+    const resetPassword = async (email: string) => {
       if (!resetPath) {
-        return Promise.resolve({
-          error: new Error("Réinitialisation indisponible."),
-        });
+        return { error: new Error("Réinitialisation indisponible.") };
       }
-      return client.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}${resetPath}`,
+      const response = await fetch("/api/auth/recover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
+      const payload = (await response.json().catch(() => ({}))) as { error?: string };
+      if (!response.ok) {
+        return { error: new Error(payload.error || "Impossible d'envoyer l'email.") };
+      }
+      return { error: null };
     };
 
     return (
