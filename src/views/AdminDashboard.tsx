@@ -55,6 +55,7 @@ import {
   priorityPatch,
   sortPriorityFirst,
 } from "../lib/contactPriority";
+import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
 
 const STATUTS = SUIVI_STATUTS;
@@ -167,6 +168,11 @@ export default function AdminDashboard() {
   const [unreadByContact, setUnreadByContact] = useState<Record<string, number>>(
     {},
   );
+  const [whatsappPending, setWhatsappPending] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [priorityOnly, setPriorityOnly] = useState(false);
+  const [inboxTick, setInboxTick] = useState(0);
   const [selectedContact, setSelectedContact] = useState<DashboardContact | null>(null);
   const [emailThreadKey, setEmailThreadKey] = useState(0);
   const [editOnOpen, setEditOnOpen] = useState(false);
@@ -179,6 +185,34 @@ export default function AdminDashboard() {
     // eslint-disable-next-line react-hooks/immutability
     fetchContacts();
   }, []);
+
+  useEffect(() => {
+    if (!access.whatsapp) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const {
+          data: { session },
+        } = await adminSupabase.auth.getSession();
+        if (!session?.access_token || cancelled) return;
+        const response = await fetch("/api/admin/inbox-priority", {
+          headers: { Authorization: `Bearer ${session.access_token}` },
+          cache: "no-store",
+        });
+        const data = await response.json().catch(() => ({}));
+        if (cancelled || !response.ok) return;
+        const ids = Array.isArray(data.contactIds)
+          ? data.contactIds.map((id: unknown) => String(id))
+          : [];
+        setWhatsappPending(new Set(ids));
+      } catch {
+        if (!cancelled) setWhatsappPending(new Set());
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [access.whatsapp, inboxTick]);
 
   const fetchContacts = async () => {
     setLoading(true);
@@ -224,6 +258,7 @@ export default function AdminDashboard() {
       }
     }
     setLoading(false);
+    setInboxTick((n) => n + 1);
   };
 
   const toggleSelected = (id: string) => {
@@ -549,7 +584,10 @@ export default function AdminDashboard() {
     router.push("/admin/login");
   };
 
-  const filteredContacts = sortPriorityFirst(contacts.filter((c) => {
+  const pending = (row: { id: string }) =>
+    isInboxPending(row.id, unreadByContact, whatsappPending);
+  const filteredContacts = sortInboxFirst(
+    sortPriorityFirst(contacts.filter((c) => {
     const matchSearch =
       c.prenom?.toLowerCase().includes(search.toLowerCase()) ||
       c.nom?.toLowerCase().includes(search.toLowerCase()) ||
@@ -581,7 +619,12 @@ export default function AdminDashboard() {
       matchDomaine &&
       matchOwner
     );
-  }));
+  })),
+    pending,
+  );
+  const listedContacts = priorityOnly
+    ? filteredContacts.filter(pending)
+    : filteredContacts;
 
   const stats = {
     total: contacts.length,
@@ -776,6 +819,25 @@ export default function AdminDashboard() {
           />
         ) : null}
 
+        <div className="mb-4">
+          <button
+            type="button"
+            onClick={() => setPriorityOnly((on) => !on)}
+            className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${
+              priorityOnly
+                ? "bg-amber-400 text-slate-900 border-amber-300"
+                : "bg-slate-800/60 text-amber-200 border-amber-500/40 hover:bg-slate-700"
+            }`}
+          >
+            {priorityOnly
+              ? t("dashboard.priorityInboxAll")
+              : t("dashboard.priorityInbox")}
+            {filteredContacts.filter(pending).length > 0
+              ? ` · ${filteredContacts.filter(pending).length}`
+              : ""}
+          </button>
+        </div>
+
         {/* Table */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
           {loading ? (
@@ -785,12 +847,17 @@ export default function AdminDashboard() {
                 {t("dashboard.loadingContacts")}
               </p>
             </div>
-          ) : filteredContacts.length === 0 ? (
+          ) : listedContacts.length === 0 ? (
             <div className="p-16 text-center">
               <p className="text-slate-300 text-xl font-semibold mb-2">
-                😔 {t("dashboard.noContacts")}
+                😔{" "}
+                {priorityOnly
+                  ? t("dashboard.priorityInboxEmpty")
+                  : t("dashboard.noContacts")}
               </p>
-              <p className="text-slate-500">{t("dashboard.adjustFilters")}</p>
+              {priorityOnly ? null : (
+                <p className="text-slate-500">{t("dashboard.adjustFilters")}</p>
+              )}
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -802,13 +869,13 @@ export default function AdminDashboard() {
                         <input
                           type="checkbox"
                           checked={
-                            filteredContacts.length > 0 &&
-                            filteredContacts.every((c) =>
+                            listedContacts.length > 0 &&
+                            listedContacts.every((c) =>
                               selectedIds.includes(c.id),
                             )
                           }
                           onChange={() => {
-                            const filteredIds = filteredContacts.map(
+                            const filteredIds = listedContacts.map(
                               (c) => c.id,
                             );
                             const allSelected = filteredIds.every((id) =>
@@ -858,7 +925,7 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-700/50">
-                  {filteredContacts.map((c) => (
+                  {listedContacts.map((c) => (
                     <tr
                       key={c.id}
                       onClick={() => {
@@ -909,6 +976,14 @@ export default function AdminDashboard() {
                               {(unreadByContact[c.id] || 0) > 9
                                 ? "9+"
                                 : unreadByContact[c.id]}
+                            </span>
+                          ) : null}
+                          {whatsappPending.has(c.id) ? (
+                            <span
+                              className="inline-flex items-center h-5 px-1.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold leading-none"
+                              title={t("dashboard.priorityWhatsapp")}
+                            >
+                              WA
                             </span>
                           ) : null}
                         </span>
@@ -1006,7 +1081,7 @@ export default function AdminDashboard() {
           <div className="bg-slate-900/40 px-6 py-4 border-t border-slate-700/50 text-center">
             <p className="text-slate-400 text-sm font-medium">
               📊 {t("dashboard.shown", {
-                filtered: filteredContacts.length,
+                filtered: listedContacts.length,
                 total: contacts.length,
               })}
             </p>
@@ -1035,6 +1110,14 @@ export default function AdminDashboard() {
               if (!prev[selectedContact.id]) return prev;
               const next = { ...prev };
               delete next[selectedContact.id];
+              return next;
+            });
+          }}
+          onWhatsappTreated={() => {
+            setWhatsappPending((prev) => {
+              if (!prev.has(selectedContact.id)) return prev;
+              const next = new Set(prev);
+              next.delete(selectedContact.id);
               return next;
             });
           }}
@@ -1179,6 +1262,7 @@ function ContactModal({
   emailThreadKey = 0,
   onEmailThreadRefresh,
   onEmailsMarkedRead,
+  onWhatsappTreated,
 }: {
   contact: DashboardContact;
   onClose: () => void;
@@ -1194,6 +1278,7 @@ function ContactModal({
   emailThreadKey?: number;
   onEmailThreadRefresh?: () => void;
   onEmailsMarkedRead?: () => void;
+  onWhatsappTreated?: () => void;
 }) {
   const { t, lang } = useAdminI18n();
   const access = useAdminAccess();
@@ -1426,6 +1511,7 @@ function ContactModal({
               <AdminContactWhatsApp
                 contact={contact}
                 onDone={fetchActions}
+                onTreated={onWhatsappTreated}
               />
             </FilePanel>
           ) : null}
