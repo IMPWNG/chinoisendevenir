@@ -142,10 +142,7 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
   ).length;
 
   return (
-    <div className="mb-8 pb-8 border-b border-slate-700/50">
-      <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-        📂 {t("files.title")}
-      </label>
+    <div>
 
       {loading ? (
         <p className="text-sm text-slate-400">{t("files.loading")}</p>

@@ -1055,6 +1055,34 @@ export default function AdminDashboard() {
   );
 }
 
+function FilePanel({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="mb-4 rounded-2xl border border-slate-700/50 bg-slate-900/30">
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
+      >
+        <span className="text-sm font-bold uppercase tracking-wide text-slate-200">
+          {title}
+        </span>
+        <span className="text-slate-400" aria-hidden="true">
+          {open ? "▾" : "▸"}
+        </span>
+      </button>
+      {open ? <div className="px-5 pb-5">{children}</div> : null}
+    </div>
+  );
+}
+
 function RevenueCard({
   title,
   hint,
@@ -1376,27 +1404,30 @@ function ContactModal({
             />
           </div>
 
-          <AdminContactEmailThread
-            contactId={contact.id}
-            refreshKey={emailThreadKey}
-            onMarkedRead={onEmailsMarkedRead}
-          />
-
-          <AdminContactEmail
-            contact={contact}
-            allowTemplates
-            onSent={() => {
-              fetchActions();
-              onContactUpdated?.();
-              onEmailThreadRefresh?.();
-            }}
-          />
+          <FilePanel title={`📧 ${t("dashboard.emailSection")}`}>
+            <AdminContactEmailThread
+              contactId={contact.id}
+              refreshKey={emailThreadKey}
+              onMarkedRead={onEmailsMarkedRead}
+            />
+            <AdminContactEmail
+              contact={contact}
+              allowTemplates
+              onSent={() => {
+                fetchActions();
+                onContactUpdated?.();
+                onEmailThreadRefresh?.();
+              }}
+            />
+          </FilePanel>
 
           {access.whatsapp ? (
-            <AdminContactWhatsApp
-              contact={contact}
-              onDone={fetchActions}
-            />
+            <FilePanel title={`💬 ${t("dashboard.whatsappSection")}`}>
+              <AdminContactWhatsApp
+                contact={contact}
+                onDone={fetchActions}
+              />
+            </FilePanel>
           ) : null}
 
           {/* Formule + déblocage espace étudiant */}
@@ -1477,14 +1508,16 @@ function ContactModal({
             </p>
           </div>
 
-          <AdminSendContract
-            contact={contact}
-            onSent={() => {
-              fetchActions();
-              onContactUpdated?.();
-              onEmailThreadRefresh?.();
-            }}
-          />
+          <FilePanel title={`📄 ${t("dashboard.contractSection")}`}>
+            <AdminSendContract
+              contact={contact}
+              onSent={() => {
+                fetchActions();
+                onContactUpdated?.();
+                onEmailThreadRefresh?.();
+              }}
+            />
+          </FilePanel>
 
           {access.matching ? (
             <>
@@ -1531,7 +1564,9 @@ function ContactModal({
             </div>
           </div>
 
-          <AdminStudentFiles contactId={contact.id} />
+          <FilePanel title={`📂 ${t("files.title")}`}>
+            <AdminStudentFiles contactId={contact.id} />
+          </FilePanel>
 
           {/* Ajouter une action */}
           <form

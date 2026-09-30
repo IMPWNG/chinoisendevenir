@@ -198,10 +198,7 @@ export default function AdminContactEmail({
   }
 
   return (
-    <div className="mb-8 pb-8 border-b border-slate-700/50">
-      <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-        📧 {t("dashboard.emailSection")}
-      </label>
+    <div>
 
       {allowTemplates ? (
       <div className="flex flex-wrap gap-2 mb-4">

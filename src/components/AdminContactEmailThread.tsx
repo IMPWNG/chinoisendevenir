@@ -94,7 +94,7 @@ export default function AdminContactEmailThread({
   }, [emails.length]);
 
   return (
-    <div className="mb-8 pb-8 border-b border-slate-700/50">
+    <div className="mb-6">
       <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
         💬 {t("dashboard.emailThreadTitle")}
       </label>
