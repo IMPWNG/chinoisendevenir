@@ -29,7 +29,7 @@ type School = {
 
 type ChineseView = {
   profile_blurb?: string;
-  criteria?: { city?: string; budget?: string; intake?: string };
+  criteria?: { city?: string; intake?: string };
   schools?: School[];
   disclaimer?: string;
 };
@@ -181,8 +181,6 @@ export default function StudentChineseMatching({
         {view.criteria ? (
           <p className="student-profile-complete">
             {t("student.matching.city")} {view.criteria.city}
-            {" · "}
-            {t("student.matching.budget")} {view.criteria.budget}
             {" · "}
             {t("student.matching.intake")} {view.criteria.intake}
           </p>

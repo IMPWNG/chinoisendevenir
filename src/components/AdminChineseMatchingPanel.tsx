@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { adminSupabase } from "../lib/supabase";
-import { BUDGET_BANDS } from "../lib/matching/constants";
+import { languageIntakeKey } from "../lib/matching/constants";
 import { errorMessage } from "../lib/request";
 
 async function authedFetch(path: string, options: RequestInit = {}) {
@@ -32,29 +32,20 @@ const BREAKDOWN_LABELS: Record<string, string> = {
   intake: "Rentrée",
 };
 
-const BUDGET_OPTIONS = [
-  "<5000",
-  "moins-3000",
-  "3000-6000",
-  "5000-10000",
-  "10000-20000",
-  ">20000",
-  "besoin-bourse",
-];
-
 const RENTREE_OPTIONS = [
-  "septembre_2026",
-  "mars_2027",
-  "septembre_2027",
-  "flexible",
-];
-
-const RENTREE_LABELS: Record<string, string> = {
-  septembre_2026: "Septembre 2026",
-  mars_2027: "Mars 2027",
-  septembre_2027: "Septembre 2027",
-  flexible: "Flexible",
-};
+  {
+    key: "printemps_2027",
+    label: "Printemps 2027",
+    courses: "Février–mars 2027",
+    apply: "Souvent entre septembre et décembre 2026",
+  },
+  {
+    key: "automne_2027",
+    label: "Automne 2027",
+    courses: "Août–septembre 2027",
+    apply: "Les candidatures peuvent ouvrir dès fin 2026 ou début 2027",
+  },
+] as const;
 
 type ScoreParts = { points?: number | string; max?: number | string };
 
@@ -120,8 +111,9 @@ export default function AdminChineseMatchingPanel({
   onHistory?: () => void;
 }) {
   const [preferredCity, setPreferredCity] = useState("");
-  const [budgetKey, setBudgetKey] = useState(contact.budget || "");
-  const [dateRentree, setDateRentree] = useState(contact.date_rentree || "");
+  const [dateRentree, setDateRentree] = useState(
+    languageIntakeKey(contact.date_rentree),
+  );
   const [cities, setCities] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -146,8 +138,7 @@ export default function AdminChineseMatchingPanel({
     setSelectedId(payload.matches?.[0]?.university_id || null);
     const ov = payload.overrides || {};
     if (ov.preferredCity) setPreferredCity(ov.preferredCity);
-    if (ov.budgetKey) setBudgetKey(ov.budgetKey);
-    if (ov.dateRentree) setDateRentree(ov.dateRentree);
+    if (ov.dateRentree) setDateRentree(languageIntakeKey(ov.dateRentree));
     if (meta?.created_at) {
       setSavedInfo(
         `Sauvegardé le ${new Date(meta.created_at).toLocaleString("fr-FR")}`,
@@ -178,8 +169,7 @@ export default function AdminChineseMatchingPanel({
     setSavedInfo("");
     setError("");
     setPreferredCity("");
-    setBudgetKey(contact.budget || "");
-    setDateRentree(contact.date_rentree || "");
+    setDateRentree(languageIntakeKey(contact.date_rentree));
     loadRuns({ restore: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contact.id]);
@@ -194,7 +184,6 @@ export default function AdminChineseMatchingPanel({
           contactId: contact.id,
           overrides: {
             preferredCity: preferredCity || null,
-            budgetKey: budgetKey || null,
             dateRentree: dateRentree || null,
           },
         }),
@@ -231,13 +220,14 @@ export default function AdminChineseMatchingPanel({
           Matching chinois — écoles de langue
         </p>
         <p className="text-xs text-slate-500 mt-1">
-          Matching simple pour une année de chinois : ville, budget annuel et
-          date de rentrée. Le résultat s’affiche dans l’espace étudiant, section
-          « Étude du chinois en Chine ».
+          Matching pour une année de chinois : ville et rentrée. Les frais des
+          écoles de langue sont proches, ils ne servent pas à classer. Le
+          résultat s’affiche dans l’espace étudiant, section « Étude du chinois
+          en Chine ».
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
         <label className="text-xs text-slate-400">
           Ville souhaitée
           <select
@@ -257,35 +247,50 @@ export default function AdminChineseMatchingPanel({
           </select>
         </label>
         <label className="text-xs text-slate-400">
-          Budget
-          <select
-            value={budgetKey}
-            onChange={(e) => setBudgetKey(e.target.value)}
-            className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
-          >
-            <option value="">Fiche étudiant</option>
-            {BUDGET_OPTIONS.map((key) => (
-              <option key={key} value={key}>
-                {(BUDGET_BANDS as Record<string, { label?: string }>)[key]?.label || key}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="text-xs text-slate-400">
           Rentrée souhaitée
           <select
             value={dateRentree}
             onChange={(e) => setDateRentree(e.target.value)}
             className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
           >
-            <option value="">Fiche étudiant</option>
-            {RENTREE_OPTIONS.map((key) => (
-              <option key={key} value={key}>
-                {RENTREE_LABELS[key] || key}
+            <option value="">Non précisée</option>
+            {RENTREE_OPTIONS.map((option) => (
+              <option key={option.key} value={option.key}>
+                {option.label}
               </option>
             ))}
           </select>
         </label>
+      </div>
+
+      <div className="mb-3 overflow-x-auto rounded-xl border border-slate-600/50">
+        <table className="w-full text-left text-xs text-slate-300">
+          <thead className="bg-slate-800/80 text-slate-400">
+            <tr>
+              <th className="px-3 py-2 font-semibold">Rentrée visée</th>
+              <th className="px-3 py-2 font-semibold">Début habituel des cours</th>
+              <th className="px-3 py-2 font-semibold">
+                Période indicative pour candidater
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {RENTREE_OPTIONS.map((option) => (
+              <tr
+                key={option.key}
+                className={
+                  dateRentree === option.key
+                    ? "bg-amber-500/15 text-white"
+                    : "border-t border-slate-700/60"
+                }
+              >
+                <td className="px-3 py-2 font-semibold">{option.label}</td>
+                <td className="px-3 py-2">{option.courses}</td>
+                <td className="px-3 py-2">{option.apply}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <button

@@ -35,15 +35,19 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "contactId manquant" }, { status: 400 });
     }
 
-    const runs = await listMatchingRuns(auth.admin, contactId, {
-      kind: MATCHING_KIND_CHINESE,
-    });
+    const [runs, { data: universities, error: uniError }] = await Promise.all([
+      listMatchingRuns(auth.admin, contactId, {
+        kind: MATCHING_KIND_CHINESE,
+      }),
+      auth.admin.from("universities").select("*"),
+    ]);
+    if (uniError) throw uniError;
 
     return NextResponse.json({
       success: true,
       runs,
       latest: runs[0] || null,
-      cities: [],
+      cities: chineseCitiesFromCatalog(universities || []),
     });
   } catch (error) {
     console.error("chinese matching GET:", error);

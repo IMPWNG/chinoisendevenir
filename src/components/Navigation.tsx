@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import { SITE_LANGS, useSiteI18n } from "../context/SiteI18nContext";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const { t, lang, setLang } = useSiteI18n();
+  const { user } = useAuth();
 
   const isActive = (path: string) =>
     path === "/blog" ? pathname === "/blog" || pathname.startsWith("/blog/") : pathname === path;
@@ -49,11 +51,11 @@ const Navigation = () => {
             </Link>
           ))}
           <Link
-            href="/#lead-form"
+            href={user ? "/espace-etudiant" : "/#lead-form"}
             className="landing-nav-cta"
             onClick={() => setMenuOpen(false)}
           >
-            {t("nav.signup")}
+            {user ? t("nav.student") : t("nav.signup")}
           </Link>
           <div className="landing-lang-switch" role="group" aria-label="Language">
             {SITE_LANGS.map((item) => (

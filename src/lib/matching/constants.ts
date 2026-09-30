@@ -205,17 +205,63 @@ export function diplomaToTargetDegree(diplome: unknown) {
 export function intakeFromRentree(dateRentree: unknown) {
   const value = normalizeText(dateRentree);
   if (!value || value.includes("flexible")) {
-    return { month: null, year: null, flexible: true, label: "Flexible" };
+    return {
+      month: null as number | null,
+      year: null as number | null,
+      months: [] as number[],
+      flexible: true,
+      label: "Flexible",
+    };
   }
   const yearMatch = value.match(/(20\d{2})/);
   const year = yearMatch ? Number(yearMatch[1]) : null;
+  if (value.includes("non precise")) {
+    return {
+      month: null as number | null,
+      year,
+      months: [] as number[],
+      flexible: false,
+      label: "Non précisée",
+    };
+  }
   if (value.includes("mars") || value.includes("fevrier") || value.includes("printemps")) {
-    return { month: 3, year, flexible: false, label: dateRentree };
+    return {
+      month: 3,
+      year,
+      months: [2, 3],
+      flexible: false,
+      label: year ? `Printemps ${year}` : "Printemps",
+    };
   }
-  if (value.includes("sept") || value.includes("automne")) {
-    return { month: 9, year, flexible: false, label: dateRentree };
+  if (value.includes("sept") || value.includes("automne") || value.includes("aout")) {
+    return {
+      month: 9,
+      year,
+      months: [8, 9],
+      flexible: false,
+      label: year ? `Automne ${year}` : "Automne",
+    };
   }
-  return { month: null, year, flexible: false, label: dateRentree };
+  return {
+    month: null as number | null,
+    year,
+    months: [] as number[],
+    flexible: false,
+    label: String(dateRentree),
+  };
+}
+
+/** Map a stored rentrée onto the two language-school intakes. */
+export function languageIntakeKey(value: unknown) {
+  const text = normalizeText(value);
+  if (!text) return "";
+  if (text.includes("printemps") || text.includes("mars") || text.includes("fevrier")) {
+    return "printemps_2027";
+  }
+  if (text.includes("automne") || text.includes("sept") || text.includes("aout")) {
+    return "automne_2027";
+  }
+  return "";
 }
 
 export function categoryKeyFromScore(score: unknown) {
