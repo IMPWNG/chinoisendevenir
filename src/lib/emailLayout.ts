@@ -312,4 +312,22 @@ export function withEtudeChineSubject(value: unknown, maxLen = 180) {
   return sanitizeEmailSubject(composed, maxLen);
 }
 
+export function studentRecoveryEmailHtml(prenom: string, link: string) {
+  const href = escapeHtml(link);
+  return wrapEmailHtml({
+    title: "Nouveau mot de passe",
+    subtitle: "Espace étudiant",
+    prenom,
+    bodyHtml: `
+      <div class="section">
+        <p>Vous avez demandé à choisir un nouveau mot de passe pour votre espace étudiant.</p>
+        <p>
+          <a href="${href}" style="display:inline-block;background:#1d3557;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:8px;">Choisir un nouveau mot de passe</a>
+        </p>
+        <p>Ce lien expire au bout d'une heure et ne peut servir qu'une fois. Si vous n'êtes pas à l'origine de cette demande, ignorez cet email : votre mot de passe actuel reste inchangé.</p>
+      </div>
+    `,
+  });
+}
+
 export { SITE_URL };

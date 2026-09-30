@@ -123,7 +123,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Public :** `POST /api/contact-submit`, webhook `/api/webhooks/resend`
 
-**Auth :** `/api/auth/login`, `/api/auth/register` (seulement si l’email existe déjà dans `contacts`), `/api/auth/recover` (Supabase Auth, même condition, réponse identique si le dossier est absent)
+**Auth :** `/api/auth/login`, `/api/auth/register` (seulement si l’email existe déjà dans `contacts`), `/api/auth/recover` (lien Supabase Auth envoyé par Resend, même condition, réponse identique si le dossier ou le compte est absent). Pas de mail de confirmation à l’inscription : le compte est activé tout de suite.
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
