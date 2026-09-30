@@ -299,7 +299,7 @@ function scoreBourse(
       points: Math.min(60 + types.length * 10, 100),
       max: 100,
       status: "confirmed",
-      note: "Bourses documentées pour ce besoin de financement.",
+      note: "Des bourses sont listées pour ce besoin de financement.",
     };
   }
   if (!university.scholarshipText) {

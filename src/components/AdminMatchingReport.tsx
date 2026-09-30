@@ -76,18 +76,23 @@ function CheckGroups({
   if (!groups.length) {
     return <p className="text-sm text-slate-400">Aucune ligne pour l’instant.</p>;
   }
+  const emptyLabel = section === "documents" ? "Pièce à noter" : "Critère à noter";
   return (
     <div className="space-y-2">
-      {groups.map((group) => (
+      {groups.map((group) => {
+        const rows = group.items.length
+          ? group.items
+          : [{ key: "note", label: emptyLabel }];
+        return (
         <details key={group.id} className="rounded-lg border border-slate-700/70 bg-slate-950/40">
           <summary className="cursor-pointer px-3 py-2 text-sm font-semibold text-white">
             {group.name}
             <span className="ml-2 text-xs font-normal text-slate-400">
-              {group.items.length} ligne{group.items.length > 1 ? "s" : ""}
+              {rows.length} ligne{rows.length > 1 ? "s" : ""}
             </span>
           </summary>
           <div className="space-y-2 px-3 pb-3">
-            {(group.items.length ? group.items : [{ key: "note", label: "Information à compléter" }]).map(
+            {rows.map(
               (item) => {
                 const key = followKey(section, group.id, item.key);
                 const saved = followUp[key] || {};
@@ -118,7 +123,8 @@ function CheckGroups({
             )}
           </div>
         </details>
-      ))}
+        );
+      })}
     </div>
   );
 }

@@ -81,7 +81,7 @@ export const SCORE_WEIGHTS_LINE =
   "Score sur 100, moyenne pondérée : langue 25 %, parcours 25 %, budget 20 %, bourse 15 %, âge 5 %, ville 5 %, projet 5 %. Chaque note mesure l'écart avec les critères connus. Ce n'est pas une probabilité d'admission.";
 
 const GENERIC_SCORE_NOTE =
-  /compatibilité linguistique|gpa, diplôme et correspondance|ratio budget|bourses documentées|pas de contrainte bourse|marge d'âge|pas de préférence de ville|ville demandée|région proche|hors des villes|clarté du projet|pas assez de texte|niveau de langue comparé/i;
+  /compatibilité linguistique|gpa, diplôme et correspondance|ratio budget|pas de contrainte bourse|marge d'âge|pas de préférence de ville|ville demandée|région proche|hors des villes|clarté du projet|pas assez de texte|niveau de langue comparé/i;
 
 const SCHOLARSHIP_COPY = {
   csc: {
@@ -256,7 +256,7 @@ export function explainScore(
     return "Le budget indiqué ne couvre pas les frais estimés sans bourse.";
   }
   if (key === "bourse") {
-    if (points >= 90) return "Pas de besoin de bourse indiqué, ou plusieurs bourses sont listées.";
+    if (points >= 100) return "Pas de besoin de bourse indiqué.";
     if (points >= 60) return "Des bourses sont listées. Leur obtention n'est pas automatique.";
     return "Peu de bourses sont documentées pour ce besoin de financement.";
   }
@@ -585,14 +585,14 @@ function studentStrengths(item: UniversityMatch, student: ReportStudent) {
     lines.push("Des programmes enseignés en anglais sont identifiés.");
   }
   const city = String(item.city || "").trim();
-  if (city && !/^à vérifier/i.test(city)) {
-    const province = String(item.province || "").trim();
-    lines.push(
-      province
-        ? `L'établissement est à ${city}, dans le ${province}.`
-        : `L'établissement est à ${city}.`,
-    );
-  }
+    if (city && !/^à vérifier/i.test(city)) {
+      const province = String(item.province || "").trim();
+      lines.push(
+        province && province.toLowerCase() !== city.toLowerCase()
+          ? `L'établissement est à ${city} (${province}).`
+          : `L'établissement est à ${city}.`,
+      );
+    }
   if ((item.breakdown?.academique?.points || 0) >= 70) {
     lines.push("Le parcours correspond au niveau et au domaine visés.");
   }
