@@ -1,0 +1,221 @@
+{
+  "slug": "gzu",
+  "name_zh": "贵州大学",
+  "name_en": "Guizhou University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明\n官网显示不全，\n需要电话联系招生处确认信息。",
+  "identity": {
+    "name_zh": "贵州大学",
+    "name_en": "Guizhou University",
+    "name_fr": "Université du Guizhou",
+    "website": "http://cie.gzu.edu.cn",
+    "international_website": "http://cie.gzu.edu.cn",
+    "application_portal_url": "https://gzu.at0086.cn/StuApplication/Login.aspx"
+  },
+  "matching": {
+    "city": "Guiyang",
+    "province": "Guizhou",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 6000,
+    "tuition_cny_max": 11000,
+    "deadline_typical": "秋季学期截止于2026 年 6 月 20 日\n（联系招生办确认春季学期报名）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": false
+  },
+  "contacts": {
+    "admissions_email": "cie@gzu.edu.cn",
+    "phone": "83627738"
+  },
+  "application": {
+    "platform_url": "https://gzu.at0086.cn/StuApplication/Login.aspx",
+    "platform_name": "Study in China (at0086)",
+    "deadline": "秋季学期截止于2026 年 6 月 20 日\n（联系招生办确认春季学期报名）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 500
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 6000,
+        "max": 11000
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "250元/月/床",
+          "price_cny_year": 6000
+        },
+        {
+          "type": "350元/月/床",
+          "price_cny_year": 4800
+        },
+        {
+          "type": "mensuel",
+          "price_cny_year": 4800
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修\n(1学期/年)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "Passeport",
+      "required": true,
+      "notes": "（一）护照首页（护照有效期应覆盖学习期限）。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Diplôme",
+      "required": true,
+      "notes": "（二）经公证的最高学历证明。如申请人为在校学生，",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "研究生院或有关学生管理部门开具并盖章。可提供中/英文成",
+      "required": true,
+      "notes": "研究生院或有关学生管理部门开具并盖章。可提供中/英文成",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "绩单，如为英语以外的语种，需另提供英文翻译件并公证。",
+      "required": true,
+      "notes": "绩单，如为英语以外的语种，需另提供英文翻译件并公证。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Formulaire médical",
+      "required": true,
+      "notes": "（四）《外国人体格检查表》。申请人应严格按照《外",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Photo d'identité",
+      "required": true,
+      "notes": "人照片或照片上未盖骑缝章、无医师和医院签字盖章的《外",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "financial guarantee",
+      "required": true,
+      "notes": "（五）资金资助证明（银行资金证明，提供至少人民币",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Casier judiciaire",
+      "required": true,
+      "notes": "（六）无犯罪记录证明。申请人须提交由所在地公安机",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "日前 6 个月以内的证明文件。",
+      "required": true,
+      "notes": "日前 6 个月以内的证明文件。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "HSK",
+      "required": true,
+      "notes": "（七）语言能力证明。若已有 HSK 成绩，必须将 HSK",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "成绩报告上传到申请系统中，以便后续进行分班。",
+      "required": true,
+      "notes": "成绩报告上传到申请系统中，以便后续进行分班。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "（八）年龄不满 18 周岁的申请人，须提交在华法定监",
+      "required": true,
+      "notes": "（八）年龄不满 18 周岁的申请人，须提交在华法定监",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护人的相关法律文件。",
+      "required": true,
+      "notes": "护人的相关法律文件。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "非中国籍；\n高中及以上学历\n具英文交流基础",
+      "age_min": 16,
+      "age_max": 35,
+      "hsk_level": null,
+      "other": [
+        "非中国籍；\n高中及以上学历\n具英文交流基础",
+        "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+        "Deadline langue : 秋季学期截止于2026 年 6 月 20 日\n（联系招生办确认春季学期报名）",
+        "官网显示不全，\n需要电话联系招生处确认信息。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Guiyang",
+      "province": "Guizhou"
+    },
+    "presentation": "国际教育学院 贵大主页 English 学院首页 学院概况 学院简介 部门设置 现任领导 图片中心 联系我们 队伍建设 思想建设 师资建设 “双带头人”教师党支... 招生专栏 招生简章 留学项目 奖学金 资料下载 学院邮箱 教学科研 教学动态 特色课程 科学研究 汉语水平考试 人才培养 留学掠影 下载专区 网上申请 招生简章 贵州大学 联系我们 学院信箱 留学贵大 STUDY ABROAD 查看更多 2026-09-28 国际教育学院开展中秋文化体验活动 2026-06-23 粽香伴诗韵，中外共端午——贵州大学留学生体验端午民俗 2026-05-19 联五洲风华 聚贵大同心——2026年贵州大学国际文化节留学生之夜圆满落幕 2026-05-02 我校留学生喜获2026“汉语桥”全球外国人汉语大会西南赛区复赛直... 2026-04-30 国际教育学院联合校医院开展来华留学生健康科普讲座 2025-10-13 国际教育学院举办“月圆人圆，华诞中秋”游园活动 2025-09-16 国际教育学院开展2025级来华留学生新生日常管理与法律法规专题讲... 学院新闻 NEWS 查看更多 2026-09-09 贵州大学2026级来华留学生开学典礼暨 “来... 2026-07-13 贵州大学2026年来华留学生毕业（结业）典礼... 2026-05-29 我校留学生在第二届“黔山之声”外语讲故事... 2026-05-28 国际教育学院顺利召开在校留学生国别座谈会 2026-04-23 国际教育学院开展2026年春季学期关工委暨分工会活动 2026-03-03 国际教育学院召开2026年",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": null,
+    "foundation": "非中国籍；\n高中及以上学历\n具英文交流基础"
+  }
+}

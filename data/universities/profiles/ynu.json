@@ -1,0 +1,159 @@
+{
+  "slug": "ynu",
+  "name_zh": "云南大学",
+  "name_en": "Yunnan University",
+  "notes": "？\n官网显示不全，\n需要电话联系招生处确认信息。",
+  "identity": {
+    "name_zh": "云南大学",
+    "name_en": "Yunnan University",
+    "name_fr": "Université du Yunnan",
+    "website": "http://english.ynu.edu.cn/nondegreeprograms.html",
+    "international_website": "http://english.ynu.edu.cn/nondegreeprograms.html",
+    "application_portal_url": "https://ynu.at0086.cn/StuApplication/Login.aspx"
+  },
+  "matching": {
+    "city": "Kunming",
+    "province": "Yunnan",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 5800,
+    "tuition_cny_max": 11600,
+    "deadline_typical": "2026年9月（秋季学期）：2026年6月30日0:00\n（联系招生办确认春季学期报名）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": null
+  },
+  "contacts": {
+    "admissions_email": "sieynu@ynu.edu.cn",
+    "phone": "0871-65033166"
+  },
+  "application": {
+    "platform_url": "https://ynu.at0086.cn/StuApplication/Login.aspx",
+    "platform_name": "Study in China (at0086)",
+    "deadline": "2026年9月（秋季学期）：2026年6月30日0:00\n（联系招生办确认春季学期报名）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": null
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 5800,
+        "max": 11600
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修\n(1学期/年)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "Passeport",
+      "required": true,
+      "notes": "护照个人信息页扫描件*",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Formulaire médical",
+      "required": true,
+      "notes": "外国人体格检查表.pdf（体检日期应距提交申请之日6个月内。申请人需严格按照表中所列项目进行检查，缺项、未贴有本人照片或照片上未盖骑缝章，无医师和医院签字盖章的无效。）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Diplôme",
+      "required": true,
+      "notes": "最高学历毕业证和学位证原件*（若非中英文本，需提交经公证的中.文英文翻译件）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Relevés de notes",
+      "required": true,
+      "notes": "学业成绩单原件*（若非中英文本，需提交经公证的中.文英文翻译件）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Casier judiciaire",
+      "required": true,
+      "notes": "无犯罪记录证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "financial guarantee",
+      "required": true,
+      "notes": "经济保证证明*（申请人可提交本人近6个月内的银行余额证明。申请人可下载填写国际学生经济担保书.pdf，所填信息应真实准确，由经济担保人手写签名，同时附上经济担保人的身份证件和银行余额证明。）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "云南大学国际学生申请诚信承诺书.pdf*",
+      "required": true,
+      "notes": "云南大学国际学生申请诚信承诺书.pdf*",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 50,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "Deadline langue : 2026年9月（秋季学期）：2026年6月30日0:00\n（联系招生办确认春季学期报名）",
+        "官网显示不全，\n需要电话联系招生处确认信息。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Kunming",
+      "province": "Yunnan"
+    },
+    "presentation": "Non—degree Programs 中文 CONTACT US S&SE ASIAN UN About Overview History Administration Departments University & Enterprises Cooperation News & Events YNU Highlights YNU News Academics Schools Research Institutes & Innovation Centers Research Admissions 本科生 Undergraduate 研究生 Graduate 非学历项目 Non-degree Programs 奖学金 Scholarships 招生专业 Majors 在线申请 Online Application 招生简介 Introduction of Admission & Scholarship S&SE Asian Un About S &amp; SE Asian Un Activities Alumni My University Campus Life Campus Activities Chinese Promotion Jobs Specials & Infographics 21967 https://subsites.chinadaily.com.cn/yunnanuniversity/img/attachement/jpg/site48/20241010/17285418720981.jpg Home > Admissions > Non—degree ",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}

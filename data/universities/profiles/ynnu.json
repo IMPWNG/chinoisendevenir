@@ -1,0 +1,184 @@
+{
+  "slug": "ynnu",
+  "name_zh": "云南师范大学",
+  "name_en": "Yunnan Normal University",
+  "notes": "汉语言达HSK4后，可申请学历生\n预科生1年学习后汉语言达标可直接衔接学历：\nhttps://lx.ynnu.edu.cn/info/1271/1026.htm",
+  "identity": {
+    "name_zh": "云南师范大学",
+    "name_en": "Yunnan Normal University",
+    "name_fr": "Université normale du Yunnan",
+    "website": "http://lx.ynnu.edu.cn",
+    "international_website": "http://lx.ynnu.edu.cn",
+    "application_portal_url": "http://ynnu.at0086.cn/student"
+  },
+  "matching": {
+    "city": "Kunming",
+    "province": "Yunnan",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 6250,
+    "tuition_cny_max": 12500,
+    "deadline_typical": "每年3月、9月入学\n春季学期截止日2026年9月1日至11月15日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "ynhuawen@163.com",
+    "phone": "65941260"
+  },
+  "application": {
+    "platform_url": "http://ynnu.at0086.cn/student",
+    "platform_name": "Study in China (at0086)",
+    "deadline": "每年3月、9月入学\n春季学期截止日2026年9月1日至11月15日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 250
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 6250,
+        "max": 12500
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "三人间",
+          "price_cny_year": 1600
+        },
+        {
+          "type": "两人间",
+          "price_cny_year": 2400
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修\n(1学期/年)\n语言预科班\n（1年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "Passeport",
+      "required": true,
+      "notes": "护照照片页扫描件（护照为有效期至少在一年以上的普通护照）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Diplôme",
+      "required": true,
+      "notes": "最高学历证书和成绩单原件扫描件（非中文或英文材料还需提供经公证的中文或英文翻译件）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Study plan / lettre de motivation",
+      "required": true,
+      "notes": "个人简历和学习计划；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Formulaire médical",
+      "required": true,
+      "notes": "《外国人体格检查表》（有效期六个月）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "financial guarantee",
+      "required": true,
+      "notes": "自费生须提供经济担保证明（银行开具的存款证明或其经济担保人的工作   收入证明）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "guardian",
+      "required": true,
+      "notes": "年龄未满18周岁者，须提交在华法定监护人署名的委托证明文件；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "在华学习或工作者，还需提供以下补充材料：",
+      "required": true,
+      "notes": "在华学习或工作者，还需提供以下补充材料：",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Relevés de notes",
+      "required": true,
+      "notes": "(2) 在华学习者，应提供所在学校加盖公章的转学同意函、成绩单或结业证；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "(3) 在华工作者，报名时应提供受聘单位的预计解除工作合同函。",
+      "required": true,
+      "notes": "(3) 在华工作者，报名时应提供受聘单位的预计解除工作合同函。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "非中国籍；\n高中及以上学历",
+      "age_min": 18,
+      "age_max": 55,
+      "hsk_level": null,
+      "other": [
+        "非中国籍；\n高中及以上学历",
+        "汉语言达HSK4后，可申请学历生\n预科生1年学习后汉语言达标可直接衔接学历：\nhttps://lx.ynnu.edu.cn/info/1271/1026.htm",
+        "Deadline langue : 每年3月、9月入学\n春季学期截止日2026年9月1日至11月15日"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Kunming",
+      "province": "Yunnan"
+    },
+    "presentation": "云南师范大学留学云师 联系我们 EN 测试 联系我们 EN 学院（学部） 招生简章 奖学金 在线报名 费用和银行账户 通知公告 中文水平考试 常见问题 视频云师大 《守望》 Read More 新闻动态 more 学校接受来华留学生高等教育质量再认证现场审查 2026-09-24 查看详情 汉语桥连接泰滇，文教相融共致远——2026年“汉语桥”泰国教育工作者访华团圆满结营 2026-09-24 查看详情 2026年“汉语桥”泰国教育工作者访华团开营 2026-09-22 查看详情 以花牵情促互鉴 中外青年聚同心 —— 云南师范大学组织留学生参加第七届 “山海花语” 呈贡分场交流活动 2026-09-18 查看详情 聚力校友联动 深化国际交流——我校孟加拉国校友返校座谈交流 2026-09-11 查看详情 我校师生在第六届“用英语讲中国故事大会”中斩获多项荣誉 2026-09-11 查看详情 我校召开来华留学质量认证（再认证）迎检动员培训会 2026-09-08 查看详情 云南师范大学与东川区共建“思政大课堂”暨中外青年研学活动顺利举行 2026-07-22 查看详情 云南师范大学与泰国佛统皇家大学举行线上续签仪式 2026-07-18 查看详情 人民日报海外版头条关注“中文培优”项目走进云南师范大学 2026-07-18 查看详情 学校接受来华留学生高等教育质量再认证现场审查 2026-09-24 汉语桥连接泰滇，文教相融共致远——2026年“汉语桥”泰国教育工作者访华团圆满结营 2026-09-24 2026年“汉语桥”泰国教育工作者访华团开营 2026-09-22 以花牵情",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": null,
+    "foundation": "非中国籍；\n高中及以上学历"
+  }
+}

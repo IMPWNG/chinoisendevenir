@@ -1,0 +1,160 @@
+{
+  "slug": "cap",
+  "name_zh": "成都航空职业技术大学",
+  "name_en": "Chengdu Aeronautic Polytechnic",
+  "notes": "汉语言达HSK4后，可申请学历生\n官网显示不全，\n需要电话联系招生处确认信息。",
+  "identity": {
+    "name_zh": "成都航空职业技术大学",
+    "name_en": "Chengdu Aeronautic Polytechnic",
+    "name_fr": "Université professionnelle aéronautique de Chengdu",
+    "website": "https://www.cap.edu.cn/gjjyxy/lxsgz/gych.htm",
+    "international_website": "https://www.cap.edu.cn/gjjyxy/lxsgz/gych.htm",
+    "application_portal_url": "https://www.cap.edu.cn/gjjyxy/info/1311/2611.htm?utm_source"
+  },
+  "matching": {
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": null,
+    "tuition_cny_max": null,
+    "deadline_typical": "春季生，报名截止于11月10日\n秋季生，报名截止于6月1日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "gjjyxy@cap.edu.cn",
+    "phone": "028-88459068"
+  },
+  "application": {
+    "platform_url": "https://www.cap.edu.cn/gjjyxy/info/1311/2611.htm?utm_source",
+    "platform_name": "Portail de candidature",
+    "deadline": "春季生，报名截止于11月10日\n秋季生，报名截止于6月1日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": null
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": null,
+        "max": null
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修\n（1年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "Formulaire de demande",
+      "required": true,
+      "notes": "(1) 国际学生入学申请表（中文或英文）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Diplôme",
+      "required": true,
+      "notes": "(2) 最高学历证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Lettres de recommandation",
+      "required": true,
+      "notes": "(4) 推荐信",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Passeport",
+      "required": true,
+      "notes": "(5) 护照复印件（个人信息页）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "(6) 健康证明",
+      "required": true,
+      "notes": "(6) 健康证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Casier judiciaire",
+      "required": true,
+      "notes": "(7) 无犯罪记录证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Photo d'identité",
+      "required": true,
+      "notes": "(8) 白底电子证件照",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "非中国籍；\n高中及以上学历\n具英文交流基础",
+      "age_min": 18,
+      "age_max": 45,
+      "hsk_level": null,
+      "other": [
+        "非中国籍；\n高中及以上学历\n具英文交流基础",
+        "汉语言达HSK4后，可申请学历生",
+        "Deadline langue : 春季生，报名截止于11月10日\n秋季生，报名截止于6月1日",
+        "官网显示不全，\n需要电话联系招生处确认信息。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Chengdu",
+      "province": "Sichuan"
+    },
+    "presentation": "成都航空职业技术大学 信息门户 学生 教职工 校友 家长 English 学校概况 学校简介 历史沿革 现任领导 组织机构 学校章程 云游校园 二级学院 航空装备制造产业学院 电子工程学院 建筑工程学院 供应链管理学院 汽车工程学院 无人机产业学院 航空维修产业学院 民航运输学院 机器人学院 新材料学院 人工智能学院 国防教育学院（武装部） 招生就业 招生动态 招生计划 历年录取 专业介绍 就业网 企业寄语 教育教学 教务管理 第二课堂 学生服务 教师发展 科学研究 科研信息 科研平台 科研动态 科研管理系统 国际交流 出国出境 留学生工作 外专外教 中外合作办学 校际合作交流 境外／来华培训 校园文化 文化品牌 标识系统 宣传资源 师生故事 校友故事 人文风光 科普基地 人才招聘 信息门户 信息门户 学生 | 教职工 | 校友 | 家长 English 学校概况 始于三线建设 聚焦国家战略 服务航空国防 服务区域经济 学校简介 历史沿革 现任领导 组织机构 学校章程 云游校园 二级学院 明德 笃行 求实 创新 航空装备制造产业学院 电子工程学院 建筑工程学院 供应链管理学院 汽车工程学院 无人机产业学院 航空维修产业学院 民航运输学院 机器人学院 新材料学院 人工智能学院 国防教育学院（武装部） 招生就业 从这里起航 到祖国最需要的 地方建功立业 招生动态 招生计划 历年录取 专业介绍 就业网 企业寄语 教育教学 立德树人 严谨治学 润物无声 教务管理 第二课堂 学生服务 教师发展 科学研究 聚合资源 科教融汇 服务产业 科研信息 科研平台 科研动态 科研管理系统 国际交流 ",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": null,
+    "foundation": "非中国籍；\n高中及以上学历\n具英文交流基础"
+  }
+}

@@ -171,6 +171,7 @@ export type ScanProfile = {
     tuition_cny_year?: {
       bachelor?: TuitionBand;
       master?: TuitionBand;
+      language?: TuitionBand;
     };
     insurance_cny_year?: unknown;
     housing?: { on_campus?: ScanHousing[] };

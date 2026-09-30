@@ -1122,5 +1122,135 @@
       "https://iczu.zju.edu.cn/admissionsen/",
       "https://iczu.zju.edu.cn/iczuen/"
     ]
+  },
+  {
+    "slug": "cqrec",
+    "name_en": "Chongqing Architecture Science and Technology Vocational College",
+    "name_zh": "重庆建筑科技职业学院",
+    "name_fr": "Institut professionnel de science et technologie du bâtiment de Chongqing",
+    "aliases": ["CQREC"],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://www.cqrec.edu.cn/",
+      "https://cqrec.at0086.cn/StuApplication/Login.aspx"
+    ]
+  },
+  {
+    "slug": "cap",
+    "name_en": "Chengdu Aeronautic Polytechnic",
+    "name_zh": "成都航空职业技术大学",
+    "name_fr": "Université professionnelle aéronautique de Chengdu",
+    "aliases": ["CAP"],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://www.cap.edu.cn/",
+      "https://www.cap.edu.cn/gjjyxy/lxsgz/gych.htm",
+      "https://www.cap.edu.cn/gjjyxy/info/1311/2611.htm"
+    ]
+  },
+  {
+    "slug": "svtcc",
+    "name_en": "Sichuan Vocational and Technical College of Communications",
+    "name_zh": "四川交通职业大学",
+    "name_fr": "Université professionnelle des transports du Sichuan",
+    "aliases": ["SVTCC"],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": ["http://gjxy.svtcc.edu.cn/"]
+  },
+  {
+    "slug": "cqwu",
+    "name_en": "Chongqing University of Arts and Sciences",
+    "name_zh": "重庆文理学院",
+    "name_fr": "Université des arts et des sciences de Chongqing",
+    "aliases": ["CQWU"],
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "seed_urls": [
+      "https://iss.cqwu.edu.cn/",
+      "https://iss.cqwu.edu.cn/article_362983.html"
+    ]
+  },
+  {
+    "slug": "cuit",
+    "name_en": "Chengdu University of Information Technology",
+    "name_zh": "成都信息工程大学",
+    "name_fr": "Université d'information et d'ingénierie de Chengdu",
+    "aliases": ["CUIT"],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://gjjl.cuit.edu.cn/",
+      "https://gjjl.cuit.edu.cn/info/1042/2638.htm"
+    ]
+  },
+  {
+    "slug": "chengdu-university",
+    "name_en": "Chengdu University",
+    "name_zh": "成都大学",
+    "name_fr": "Université de Chengdu",
+    "aliases": ["CDU"],
+    "city": "Chengdu",
+    "province": "Sichuan",
+    "seed_urls": [
+      "https://admissions.cdu.edu.cn/",
+      "https://coe.cdu.edu.cn/",
+      "https://en.cdu.edu.cn/"
+    ]
+  },
+  {
+    "slug": "gzu",
+    "name_en": "Guizhou University",
+    "name_zh": "贵州大学",
+    "name_fr": "Université du Guizhou",
+    "aliases": ["GZU"],
+    "city": "Guiyang",
+    "province": "Guizhou",
+    "seed_urls": [
+      "http://cie.gzu.edu.cn/",
+      "https://gzu.at0086.cn/StuApplication/Login.aspx"
+    ]
+  },
+  {
+    "slug": "ynnu",
+    "name_en": "Yunnan Normal University",
+    "name_zh": "云南师范大学",
+    "name_fr": "Université normale du Yunnan",
+    "aliases": ["YNNU"],
+    "city": "Kunming",
+    "province": "Yunnan",
+    "seed_urls": [
+      "http://lx.ynnu.edu.cn/",
+      "http://ynnu.at0086.cn/student",
+      "https://lx.ynnu.edu.cn/info/1271/1026.htm"
+    ]
+  },
+  {
+    "slug": "ynu",
+    "name_en": "Yunnan University",
+    "name_zh": "云南大学",
+    "name_fr": "Université du Yunnan",
+    "aliases": ["YNU"],
+    "city": "Kunming",
+    "province": "Yunnan",
+    "seed_urls": [
+      "http://english.ynu.edu.cn/nondegreeprograms.html",
+      "https://ynu.at0086.cn/StuApplication/Login.aspx"
+    ]
+  },
+  {
+    "slug": "ynufe",
+    "name_en": "Yunnan University of Finance and Economics",
+    "name_zh": "云南财经大学",
+    "name_fr": "Université de finance et d'économie du Yunnan",
+    "aliases": ["YNUFE"],
+    "city": "Kunming",
+    "province": "Yunnan",
+    "seed_urls": [
+      "https://www.ynufe.edu.cn/hwxy/index.htm",
+      "https://ynufe.at0086.cn/StuApplication/Login.aspx"
+    ]
   }
 ]

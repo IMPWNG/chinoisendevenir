@@ -1,0 +1,205 @@
+{
+  "slug": "ynufe",
+  "name_zh": "云南财经大学",
+  "name_en": "Yunnan University of Finance and Economics",
+  "notes": "汉语言达HSk3后，可申请本科学历生\n官网显示不全，\n需要电话联系招生处确认信息。",
+  "identity": {
+    "name_zh": "云南财经大学",
+    "name_en": "Yunnan University of Finance and Economics",
+    "name_fr": "Université de finance et d'économie du Yunnan",
+    "website": "https://www.ynufe.edu.cn/hwxy/index.htm",
+    "international_website": "https://www.ynufe.edu.cn/hwxy/index.htm",
+    "application_portal_url": "https://ynufe.at0086.cn/StuApplication/Login.aspx"
+  },
+  "matching": {
+    "city": "Kunming",
+    "province": "Yunnan",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 11620,
+    "tuition_cny_max": 11620,
+    "deadline_typical": "春季学期，每年 11 月—12 月；\n秋季学期，每年 5 月—6 月",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "yufeeducation@163.com",
+    "phone": "65110303"
+  },
+  "application": {
+    "platform_url": "https://ynufe.at0086.cn/StuApplication/Login.aspx",
+    "platform_name": "Study in China (at0086)",
+    "deadline": "春季学期，每年 11 月—12 月；\n秋季学期，每年 5 月—6 月",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 400
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 11620,
+        "max": 11620
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "0 元/人/年",
+          "price_cny_year": 4800
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修\n(1学期/年)",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "Formulaire de demande",
+      "required": true,
+      "notes": "《云南财经大学国际学生来华学习申请表》；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Passeport",
+      "required": true,
+      "notes": "护照照片页扫描件。护照为有效期至少在一年以上的普通护",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Diplôme",
+      "required": true,
+      "notes": "经过公证的中文或英文最高学历学位证明。应届生须提交本人",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Relevés de notes",
+      "required": true,
+      "notes": "学习成绩单。中英文以外文本须附经公证的中文或英文的译文；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "汉语和英语语言水平证书或证明。",
+      "required": true,
+      "notes": "汉语和英语语言水平证书或证明。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "在华学习或研究计划书，（不少于 1000 字，中文或英文书写）；",
+      "required": true,
+      "notes": "在华学习或研究计划书，（不少于 1000 字，中文或英文书写）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Lettres de recommandation",
+      "required": true,
+      "notes": "副教授或以上职称者用中文或英文书写的推荐信。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Formulaire médical",
+      "required": true,
+      "notes": "《外国人体格检查表》（有效期六个月）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "Casier judiciaire",
+      "required": true,
+      "notes": "无犯罪记录证明或个人承诺书；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "financial guarantee",
+      "required": true,
+      "notes": "经济状况证明。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "注意：以上资料如非中、英文文本，均需提供公证过的中文或英",
+      "required": true,
+      "notes": "注意：以上资料如非中、英文文本，均需提供公证过的中文或英",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "文翻译件。",
+      "required": true,
+      "notes": "文翻译件。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 55,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "汉语言达HSk3后，可申请本科学历生",
+        "Deadline langue : 春季学期，每年 11 月—12 月；\n秋季学期，每年 5 月—6 月",
+        "官网显示不全，\n需要电话联系招生处确认信息。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Kunming",
+      "province": "Yunnan"
+    },
+    "presentation": "云南财经海外学院 中文 English 首页 学院概况About 学院简介Introduction 学院领导Leaders 教师介绍Faculties 博士导师PHD_Advisors 硕士导师Master_Advisors 发展中国家教育项目Programs_of_Developing_Countries 商务部学历学位教育项目 商务部短期培训教育项目 商务部国际商务官员研修(云南)基地 发展中国家教育项目相关下载 境外办学Overseas_Education 基本情况 合作院校 境外招生 境外教学 学生管理 境外办学相关下载 党务工作Party_Affairs 党风廉政Party&amp;Government 人才培养Talents_Education 科研合作Academic_Cooperation 社会服务Social_Service 招生信息Admission_Information 学校概况About_YUFE 云南财经大学国际学生招生简章Enrollment_Guide_For_International_Students_of_YUFE 中华人民共和国商务部发展中国家学历学位教育项目Academic_Education_Programs_for_Developing_Countries_Sponsored_by_Ministry_of_Commerce_PRC 云南财经大学2024年云南省政府奖学金国际学生招生简章Yunnan_University_of_Finance_and_Economics_Enrollment_Guide_for_Internation",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}

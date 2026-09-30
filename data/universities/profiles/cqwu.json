@@ -1,0 +1,102 @@
+{
+  "slug": "cqwu",
+  "name_zh": "重庆文理学院",
+  "name_en": "Chongqing University of Arts and Sciences",
+  "notes": "可0基础申请国际商务汉语专业（本科学历）\n官网显示不全，\n需要电话联系招生处确认信息。",
+  "identity": {
+    "name_zh": "重庆文理学院",
+    "name_en": "Chongqing University of Arts and Sciences",
+    "name_fr": "Université des arts et des sciences de Chongqing",
+    "website": "https://iss.cqwu.edu.cn/article_362983.html",
+    "international_website": "https://iss.cqwu.edu.cn/article_362983.html",
+    "application_portal_url": null
+  },
+  "matching": {
+    "city": "Chongqing",
+    "province": "Chongqing",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 15000,
+    "tuition_cny_max": 15000,
+    "deadline_typical": null,
+    "intake_months": [],
+    "has_university_scholarship": null
+  },
+  "contacts": {
+    "admissions_email": null,
+    "phone": "49802211"
+  },
+  "application": {
+    "platform_url": null,
+    "platform_name": "Portail de candidature",
+    "deadline": null,
+    "intake_months": [],
+    "application_fee_cny": null
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 15000,
+        "max": 15000
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "4人间",
+          "price_cny_year": 300
+        },
+        {
+          "type": "2人间",
+          "price_cny_year": 600
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言文学专业（国际商务汉语方向）\n4年制和2+2项目",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 4,
+      "start_months": []
+    }
+  ],
+  "documents": [],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础（仅国际商务汉语专业）\n有HSK三级以上证书者优先\n高中及以上学历",
+      "age_min": 18,
+      "age_max": 30,
+      "hsk_level": 0,
+      "other": [
+        "可0基础（仅国际商务汉语专业）\n有HSK三级以上证书者优先\n高中及以上学历",
+        "可0基础申请国际商务汉语专业（本科学历）",
+        "官网显示不全，\n需要电话联系招生处确认信息。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Chongqing",
+      "province": "Chongqing"
+    },
+    "presentation": "国际教育学院 × 温馨提醒：你的浏览器太古董了，赶紧换一个吧！ 速速点击换一个 学校首页 学院首页 GO 切换导航 国际教育学院 学校主页 学院概况 来华留学 出国留学 招生信息 党建工作 教学教研 学生工作 English 联系我们 学院概况 学院简介 现任领导 师资介绍 来华留学 政策法规 报名程序 奖学金申请 出国留学 项目介绍 办理程序 政策法规 党群工作 组织机构 党群活动 党建资料 教学教研 教学活动 教务考务 资料下载 HSK考试 学生工作 学生活动 规章制度 校友之家 校友风采 校友录 组织机构 联系我们 在线咨询 部门电话 English 学院新闻 更多>> 我校来华留学生参加“感知重庆”永川专场活动 情满中秋，团圆文理——重庆文理学院留学生中秋茶话会... 砺行逐梦迎新季，风帆再起展新程 ——国际教育学院喜... 主题教育引领专业建设—— 我院教师参加来华留学教育... 30 11月 国际中文教研室举行商务汉语专业建设与发展研讨会 28 11月 我院教师赴成都、厦门、北京等多地参会学习并发言 我院教师赴成都、厦门、北京等多地参会学习并发言 28 11月 我校来华留学生在“全国高校商业精英挑战赛国际贸易竞... 我校来华留学生在“全国高校商业精英挑战赛国际贸易竞赛”中获佳绩 28 11月 国际中文教研室举行《初级综合汉语》公开课观摩活动 通知公告 更多>> 22 12月 关于开展学生评教工作的通知 01 06月 关于国际教育学院2023届毕业生毕业资格与学位授予... 关于国际教育学院2023届毕业生 毕业资格与学位授予资格审核结果的公示 27 04月 关于2",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础（仅国际商务汉语专业）\n有HSK三级以上证书者优先\n高中及以上学历"
+  }
+}

@@ -83,11 +83,13 @@ type AdmissionExtra = {
   age_max?: {
     bachelor?: number | string | null;
     master?: number | string | null;
+    language?: number | string | null;
   };
   fees?: {
     tuition?: {
       bachelor?: { min?: number | string; max?: number | string };
       master?: { min?: number | string; max?: number | string };
+      language?: { min?: number | string; max?: number | string };
     };
     housing?: Array<{ type?: string; price_cny_year?: number | string }>;
   };
@@ -678,6 +680,9 @@ function AdmissionChips({ university }: { university: UniversityRow }) {
   if (admission?.english_programs_available) {
     chips.push({ label: "EN", tone: "violet" });
   }
+  if (admission?.chinese_language_program_available) {
+    chips.push({ label: "Langue", tone: "cyan" });
+  }
   if (admission?.has_csc) chips.push({ label: "CSC", tone: "amber" });
   if (university.tuition_min || university.tuition_max) {
     const min = university.tuition_min ? `${university.tuition_min}` : "";
@@ -776,9 +781,12 @@ function AdmissionPanel({ extra }: { extra?: UniversityRow["extra"] }) {
           {admission.age_max?.master ? (
             <p>Âge max master : {admission.age_max.master} ans</p>
           ) : null}
+          {admission.age_max?.language ? (
+            <p>Âge max langue : {admission.age_max.language} ans</p>
+          ) : null}
         </InfoBlock>
         <InfoBlock title="Conditions d'admission">
-          {["bachelor", "master", "phd"].map((level) => {
+          {["bachelor", "master", "phd", "language"].map((level) => {
             const req = reqs[level];
             if (!req?.academic && !req?.hsk_level) return null;
             return (
@@ -810,6 +818,15 @@ function AdmissionPanel({ extra }: { extra?: UniversityRow["extra"] }) {
                 ? `–${admission.fees.tuition.master.max}`
                 : ""}{" "}
               RMB / an
+            </p>
+          ) : null}
+          {admission.fees?.tuition?.language?.min ? (
+            <p>
+              Langue : {admission.fees.tuition.language.min}
+              {admission.fees.tuition.language.max
+                ? `–${admission.fees.tuition.language.max}`
+                : ""}{" "}
+              RMB
             </p>
           ) : null}
           {(admission.fees?.housing || []).map((h) => (
