@@ -7,6 +7,8 @@ import { getFormuleByNumber } from "./formules";
 export const CONTRACT_STAMP_SRC = "";
 export const CONTRACT_PLACE = "Chongqing";
 export const CONTRACT_SITE = "https://chinoisendevenir.com";
+/** Legal name. Not editable from the admin form or the send API. */
+export const CONTRACT_COMPANY = "重庆迈程桥国际贸易有限公司";
 
 export type PrestataireInfo = {
   denomination: string;
@@ -27,7 +29,7 @@ export type ContractClient = {
 };
 
 const EMPTY_PRESTATAIRE: PrestataireInfo = {
-  denomination: "",
+  denomination: CONTRACT_COMPANY,
   forme: "",
   adresse: "",
   immatriculation: "",
@@ -145,7 +147,7 @@ export function emptyPrestataire(): PrestataireInfo {
 export function readPrestataire(value: unknown): PrestataireInfo {
   const raw = (value || {}) as Partial<PrestataireInfo>;
   return {
-    denomination: clip(raw.denomination, 160),
+    denomination: CONTRACT_COMPANY,
     forme: clip(raw.forme, 80),
     adresse: clip(raw.adresse, 240),
     immatriculation: clip(raw.immatriculation, 80),

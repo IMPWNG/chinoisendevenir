@@ -3,6 +3,7 @@
  * Run: npx tsx src/lib/saleContract.check.ts
  */
 import {
+  CONTRACT_COMPANY,
   CONTRACT_PLACE,
   buildSaleContract,
   contractClientFromContact,
@@ -59,7 +60,7 @@ const built = buildSaleContract({
   client,
   prestataire: readPrestataire({
     denomination: "Société <test>",
-    forme: "SASU",
+    forme: "SASU <x>",
     adresse: "Chongqing",
     immatriculation: "123",
     representant: "Matisse",
@@ -70,7 +71,13 @@ const built = buildSaleContract({
 assert(built, "contrat formule 2");
 assert(built.html.includes("Awa Diallo"), "nom dans le contrat");
 assert(!built.html.includes("Pirate"), "le nom saisi à la main est ignoré");
-assert(built.html.includes("Société &lt;test&gt;"), "échappement HTML");
+assert(built.html.includes(CONTRACT_COMPANY), "raison sociale fixe");
+assert(!built.html.includes("Société"), "raison sociale non modifiable");
+assert(built.html.includes("SASU &lt;x&gt;"), "échappement HTML");
+assert(
+  readPrestataire({ denomination: "autre" }).denomination === CONTRACT_COMPANY,
+  "la lecture ignore une autre dénomination",
+);
 assert(built.html.includes(CONTRACT_PLACE), "lieu Chongqing");
 assert(built.html.includes("28 septembre 2026"), "date d'envoi");
 assert(built.html.includes("cinq (5)"), "annexe formule 2");
