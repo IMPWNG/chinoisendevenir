@@ -4,6 +4,7 @@ import {
   OpenwaError,
   addStudentToEtudeChine,
   saveStudentWhatsappContact,
+  markStudentWhatsappRead,
   sendStudentWhatsapp,
   studentWhatsappCard,
 } from "@/lib/openwa";
@@ -63,6 +64,12 @@ export async function GET(request: Request) {
       phone: contact.phone,
       country: contact.pays,
     });
+    if (card.onWhatsapp) {
+      void markStudentWhatsappRead({
+        phone: contact.phone,
+        country: contact.pays,
+      }).catch(() => {});
+    }
     return NextResponse.json(card);
   } catch (error) {
     if (error instanceof OpenwaError) {

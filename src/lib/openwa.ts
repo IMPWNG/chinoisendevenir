@@ -1,3 +1,4 @@
+import { unreadChatPhones } from "./inboxPriority";
 import { isEtudeChineLabel, whatsappChatId, whatsappMsisdn } from "./whatsappPhone";
 
 const TEXT_MAX = 4096;
@@ -121,6 +122,23 @@ async function resolveChat(phone: unknown, country?: string | null) {
     );
   }
   return chatId;
+}
+
+/** Newest chats only. A down OpenWA throws; the caller treats that as no WhatsApp queue. */
+export async function unreadWhatsappPhones(): Promise<string[]> {
+  const body = await openwa("/chats?limit=200", undefined, { timeoutMs: 20_000 });
+  return unreadChatPhones(body);
+}
+
+export async function markStudentWhatsappRead(input: {
+  phone: unknown;
+  country?: string | null;
+}) {
+  const chatId = await resolveChat(input.phone, input.country);
+  await openwa("/chats/read", {
+    method: "POST",
+    body: JSON.stringify({ chatId }),
+  });
 }
 
 export async function sendStudentWhatsapp(input: {

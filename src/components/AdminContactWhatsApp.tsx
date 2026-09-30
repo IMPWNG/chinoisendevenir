@@ -51,9 +51,11 @@ function localeFor(lang: string) {
 export default function AdminContactWhatsApp({
   contact,
   onDone,
+  onTreated,
 }: {
   contact: WhatsappContact;
   onDone?: () => void;
+  onTreated?: () => void;
 }) {
   const { t, lang } = useAdminI18n();
   const [text, setText] = useState("");
@@ -115,6 +117,11 @@ export default function AdminContactWhatsApp({
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ block: "nearest" });
   }, [card?.messages.length]);
+
+  useEffect(() => {
+    if (!card?.onWhatsapp) return;
+    onTreated?.();
+  }, [card?.onWhatsapp, contact.id, onTreated]);
 
   async function run(action: "send" | "save" | "label") {
     if (!phone) {
