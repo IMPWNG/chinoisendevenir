@@ -76,97 +76,57 @@
   ],
   "documents": [
     {
-      "type": "Passeport",
+      "type": "护照PDF扫描件。",
       "required": true,
-      "notes": "① 护照PDF扫描件。",
+      "notes": "护照PDF扫描件。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Diplôme",
+      "type": "最高学历证书、成绩单PDF扫描件。",
       "required": true,
-      "notes": "② 最高学历证书、成绩单PDF扫描件。",
+      "notes": "最高学历证书、成绩单PDF扫描件。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Casier judiciaire",
+      "type": "无犯罪记录证明PDF扫描件。",
       "required": true,
-      "notes": "③ 无犯罪记录证明PDF扫描件。",
+      "notes": "无犯罪记录证明PDF扫描件。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Formulaire médical",
+      "type": "《外国人体格检查记录表》PDF扫描件，需盖公立医院的公章。体检报告应附有 X 光透视胸片及霍乱、黄热、鼠疫、麻风、性病、开放性肺结核、艾滋病、肝功能、澳抗和精神病的化验室检查报告。",
       "required": true,
-      "notes": "④ 《外国人体格检查记录表》PDF扫描件，需盖公立医院的公章。体检报告应附有 X 光透视胸片及霍乱、",
+      "notes": "《外国人体格检查记录表》PDF扫描件，需盖公立医院的公章。体检报告应附有 X 光透视胸片及霍乱、黄热、鼠疫、麻风、性病、开放性肺结核、艾滋病、肝功能、澳抗和精神病的化验室检查报告。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "黄热、鼠疫、麻风、性病、开放性肺结核、艾滋病、肝功能、澳抗和精神病的化验室检查报",
+      "type": "申请人近期免冠白底两寸照片。",
       "required": true,
-      "notes": "黄热、鼠疫、麻风、性病、开放性肺结核、艾滋病、肝功能、澳抗和精神病的化验室检查报告。",
+      "notes": "申请人近期免冠白底两寸照片。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Photo d'identité",
+      "type": "《重庆建筑科技职业学院来华留学申请表》Word文档。",
       "required": true,
-      "notes": "⑤ 申请人近期免冠白底两寸照片。",
+      "notes": "《重庆建筑科技职业学院来华留学申请表》Word文档。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Formulaire de demande",
+      "type": "经济担保证明（不少于3万元人民币）PDF扫描件。",
       "required": true,
-      "notes": "⑥ 《重庆建筑科技职业学院来华留学申请表》Word文档。",
-      "applies_to": [
-        "language"
-      ]
-    },
-    {
-      "type": "financial guarantee",
-      "required": true,
-      "notes": "⑦ 经济担保证明（不少于3万元人民币）PDF扫描件。",
-      "applies_to": [
-        "language"
-      ]
-    },
-    {
-      "type": "招生信息",
-      "required": true,
-      "notes": "招生信息",
-      "applies_to": [
-        "language"
-      ]
-    },
-    {
-      "type": "（三）申请须知",
-      "required": true,
-      "notes": "（三）申请须知",
-      "applies_to": [
-        "language"
-      ]
-    },
-    {
-      "type": "申请流程",
-      "required": true,
-      "notes": "申请流程",
-      "applies_to": [
-        "language"
-      ]
-    },
-    {
-      "type": "① 联系工作人员获取正确招生信息。",
-      "required": true,
-      "notes": "① 联系工作人员获取正确招生信息。",
+      "notes": "经济担保证明（不少于3万元人民币）PDF扫描件。",
       "applies_to": [
         "language"
       ]
@@ -191,7 +151,7 @@
       "city": "Chongqing",
       "province": "Chongqing"
     },
-    "presentation": "重庆建筑科技职业学院 English 网站首页 学校概况 学校章程 学校简介 现任领导 历任领导 部门通讯录 学校标识 名师队伍 魅力学校 地理位置 新闻资讯 校园新闻 通知公告 招标公告 媒体关注 实训动态 主题教育 专题报道 形象宣传 机构设置 管理机构 教学机构 招生就业 招生信息网 就业信息网 专业建设 教学管理 学籍管理 继续教育 科学研究 科研概况 科研平台 科研规定 党建专栏 党建新闻 三“晒”专栏 理论学习 组织建设 制度建设 他山之石 团学活动 学生工作 共青团工作 社会实践 人才招聘 招聘信息 人才政策 人才管理 合作交流 信息公开 快速导航 EDU邮箱 智慧办公 内网访问 智慧教务 知物云课堂 数字图书 招标采购 公开招聘 校长信箱 科研系统 焦点新闻 FOCUS NEWS 更多 02 2026-09 乘“十五五”职教东风 筑人人成才星光大道——我校... 云天收夏色，金秋启新章。9月2日，学校在足球场举行2026级新生开学典礼。校长张进、党委书记何光明等校领导，各职能处室负责人，各二级学院院长、书记以及全体2026级新生参加典礼。... 10 2026-03 学校召开树立和践行正确政绩观学习教育启动部署会 为深入学习贯彻习近平总书记关于树立和践行正确政绩观的重要论述，全面落实党中央决策部署及市委工作要求，3月10日上午，学校在立德楼六楼会议室召开树立和践行正确政绩观学习教育启... 27 2025-12 中国共产党重庆建筑科技职业学院党员大会隆重召开 12月27日，中国共产党重庆建筑科技职业学院党员大会在学术报告厅隆重开幕。本次大会是在全国上下深入学习贯",
+    "presentation": "Institut professionnel de science et technologie du bâtiment de Chongqing — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]

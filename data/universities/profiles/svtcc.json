@@ -78,7 +78,7 @@
   ],
   "documents": [
     {
-      "type": "Formulaire de demande",
+      "type": "四川交通职业技术学院国际学生入学申请表；",
       "required": true,
       "notes": "四川交通职业技术学院国际学生入学申请表；",
       "applies_to": [
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "type": "Passeport",
+      "type": "护照首页。须为普通护照，护照有效期应在一年以上。已在中国大陆境内的申请者需提供当前有效签证或居留许可页面；",
       "required": true,
       "notes": "护照首页。须为普通护照，护照有效期应在一年以上。已在中国大陆境内的申请者需提供当前有效签证或居留许可页面；",
       "applies_to": [
@@ -94,7 +94,7 @@
       ]
     },
     {
-      "type": "Diplôme",
+      "type": "最高学历证明或预毕业证明（中文或英文）。",
       "required": true,
       "notes": "最高学历证明或预毕业证明（中文或英文）。",
       "applies_to": [
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "type": "Study plan / lettre de motivation",
+      "type": "本人学习计划，以中文或英文撰写，500-1000字；",
       "required": true,
       "notes": "本人学习计划，以中文或英文撰写，500-1000字；",
       "applies_to": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "type": "financial guarantee",
+      "type": "申请者需要提供经济来源证明。经济能力证明可提供以下文件中的一项，包括家庭存款证明、家长/监护人收入证明，建议金额在5000美元及以上；",
       "required": true,
       "notes": "申请者需要提供经济来源证明。经济能力证明可提供以下文件中的一项，包括家庭存款证明、家长/监护人收入证明，建议金额在5000美元及以上；",
       "applies_to": [
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "type": "Formulaire médical",
+      "type": "外国人体格检查表（体检结果日期应距提交申请时6个月内）；",
       "required": true,
       "notes": "外国人体格检查表（体检结果日期应距提交申请时6个月内）；",
       "applies_to": [
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "type": "Casier judiciaire",
+      "type": "无犯罪记录证明。申请人须提交由所在地公安机关出具的有效期内的无犯罪记录证明，通常应为提交申请之日前6个月以内的证明文件；",
       "required": true,
       "notes": "无犯罪记录证明。申请人须提交由所在地公安机关出具的有效期内的无犯罪记录证明，通常应为提交申请之日前6个月以内的证明文件；",
       "applies_to": [
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "type": "Photo d'identité",
+      "type": "电子证件照（规格要求：彩色标准证件照，大小不超200kb，支持*.jpg、*.jpeg、*.png为后缀的图片，像素大于295*413）；",
       "required": true,
       "notes": "电子证件照（规格要求：彩色标准证件照，大小不超200kb，支持*.jpg、*.jpeg、*.png为后缀的图片，像素大于295*413）；",
       "applies_to": [
@@ -176,7 +176,7 @@
       "city": "Chengdu",
       "province": "Sichuan"
     },
-    "presentation": "四川交通职业技术大学国际学院 首页 HOME 学院概况 OVERVIEW 学院动态 NEWS 新闻动态 NEWS 通知公告 ANNOUNCEMENTS 交流合作 EXCHANGE &amp; COOPERATION 留学川交 STUDY AT SVTCC 留学申请 ADMISSIONS 迎新事宜 ORIENTATION 在校学习 ACADEMIC LIFE 校园生活 CAMPUS LIFE 常见问题 FAQ 关于我们 CONTACT US 党建工作 PARTY BUILDING 首页 HOME 学院概况 OVERVIEW 学院动态 NEWS 新闻动态 NEWS 通知公告 ANNOUNCEMENTS 交流合作 EXCHANGE &amp; COOPERATION 留学川交 STUDY AT SVTCC 留学申请 ADMISSIONS 迎新事宜 ORIENTATION 在校学习 ACADEMIC LIFE 校园生活 CAMPUS LIFE 常见问题 FAQ 关于我们 CONTACT US 党建工作 PARTY BUILDING --> 招生信息 ADMISSIONS INFORMATION 在线申请 ONLINE APPLICATION 奖学金 SCHOLARSHIPS 签证手续 VISA SERVICES 常用下载 DOWNLOADS 新闻动态 NEWS 更多 MORE 四川交通职业技术大学与俄罗斯布拉戈维申斯克市教育代表团举行座谈交流 08 Jul. 查看更多 --> 四川交通职业技术学院2026届留学生（语言进修生）结业典礼圆满举行 30 Jun. 查看更多 --> 校际警务",
+    "presentation": "Université professionnelle des transports du Sichuan — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]

@@ -73,15 +73,23 @@
   ],
   "documents": [
     {
-      "type": "Passeport",
+      "type": "护照个人信息页扫描件*（ 护照应在提交申请之日起6个月内有效。如有来华签证或在华居留许可，也请随护照上传。）",
       "required": true,
-      "notes": "护照个人信息页扫描件*",
+      "notes": "护照个人信息页扫描件*（ 护照应在提交申请之日起6个月内有效。如有来华签证或在华居留许可，也请随护照上传。）",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Formulaire médical",
+      "type": "本人证件照（以护照号命名）",
+      "required": true,
+      "notes": "本人证件照（以护照号命名）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "外国人体格检查表.pdf（体检日期应距提交申请之日6个月内。申请人需严格按照表中所列项目进行检查，缺项、未贴有本人照片或照片上未盖骑缝章，无医师和医院签字盖章的无效。）",
       "required": true,
       "notes": "外国人体格检查表.pdf（体检日期应距提交申请之日6个月内。申请人需严格按照表中所列项目进行检查，缺项、未贴有本人照片或照片上未盖骑缝章，无医师和医院签字盖章的无效。）",
       "applies_to": [
@@ -89,7 +97,7 @@
       ]
     },
     {
-      "type": "Diplôme",
+      "type": "最高学历毕业证和学位证原件*（若非中英文本，需提交经公证的中.文英文翻译件）",
       "required": true,
       "notes": "最高学历毕业证和学位证原件*（若非中英文本，需提交经公证的中.文英文翻译件）",
       "applies_to": [
@@ -97,7 +105,7 @@
       ]
     },
     {
-      "type": "Relevés de notes",
+      "type": "学业成绩单原件*（若非中英文本，需提交经公证的中.文英文翻译件）",
       "required": true,
       "notes": "学业成绩单原件*（若非中英文本，需提交经公证的中.文英文翻译件）",
       "applies_to": [
@@ -105,7 +113,7 @@
       ]
     },
     {
-      "type": "Casier judiciaire",
+      "type": "无犯罪记录证明",
       "required": true,
       "notes": "无犯罪记录证明",
       "applies_to": [
@@ -113,7 +121,7 @@
       ]
     },
     {
-      "type": "financial guarantee",
+      "type": "经济保证证明*（申请人可提交本人近6个月内的银行余额证明。申请人可下载填写国际学生经济担保书.pdf，所填信息应真实准确，由经济担保人手写签名，同时附上经济担保人的身份证件和银行余额证明。）",
       "required": true,
       "notes": "经济保证证明*（申请人可提交本人近6个月内的银行余额证明。申请人可下载填写国际学生经济担保书.pdf，所填信息应真实准确，由经济担保人手写签名，同时附上经济担保人的身份证件和银行余额证明。）",
       "applies_to": [
@@ -147,7 +155,7 @@
       "city": "Kunming",
       "province": "Yunnan"
     },
-    "presentation": "Non—degree Programs 中文 CONTACT US S&SE ASIAN UN About Overview History Administration Departments University & Enterprises Cooperation News & Events YNU Highlights YNU News Academics Schools Research Institutes & Innovation Centers Research Admissions 本科生 Undergraduate 研究生 Graduate 非学历项目 Non-degree Programs 奖学金 Scholarships 招生专业 Majors 在线申请 Online Application 招生简介 Introduction of Admission & Scholarship S&SE Asian Un About S &amp; SE Asian Un Activities Alumni My University Campus Life Campus Activities Chinese Promotion Jobs Specials & Infographics 21967 https://subsites.chinadaily.com.cn/yunnanuniversity/img/attachement/jpg/site48/20241010/17285418720981.jpg Home > Admissions > Non—degree ",
+    "presentation": "Université du Yunnan — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]

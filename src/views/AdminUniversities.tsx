@@ -51,6 +51,24 @@ const REPLY_STYLES = {
 type ReplyStatus = keyof typeof REPLY_STYLES;
 type UniversityForm = typeof EMPTY_FORM;
 type ChipTone = "slate" | "cyan" | "emerald" | "amber" | "violet";
+type LanguageSession = {
+  project?: string | null;
+  tuition_text?: string | null;
+  tuition?: { min?: number | null; max?: number | null };
+  age_text?: string | null;
+  age_min?: number | null;
+  age_max?: number | null;
+  foundation?: string | null;
+  dormitory?: string | null;
+  deadline?: string | null;
+  apply_website?: string | null;
+  contact?: string | null;
+  pathway?: string | null;
+  documents?: string[];
+  note?: string | null;
+  scholarship?: string | null;
+  application_fee_cny?: number | null;
+};
 type AdmissionRequirement = {
   academic?: string | null;
   hsk_level?: number | string | null;
@@ -67,7 +85,8 @@ type AdmissionExtra = {
     coverage?: string;
     stipend_cny_month?: number | string;
   }>;
-  documents?: Array<{ type?: string }>;
+  documents?: Array<{ type?: string; notes?: string }>;
+  language_session?: LanguageSession;
   application?: {
     platform_name?: string;
     platform_url?: string;
@@ -181,7 +200,10 @@ function formToPayload(form: UniversityForm) {
     is_partner: Boolean(form.is_partner),
     is_active: Boolean(form.is_active),
     majors: splitList(form.majors_text),
-    required_documents: splitList(form.required_documents_text),
+    required_documents: String(form.required_documents_text || "")
+      .split("\n")
+      .map((item) => item.trim())
+      .filter(Boolean),
     scholarship_amount: form.scholarship_amount.trim() || null,
     scholarship_min: numberOrNull(form.scholarship_min),
     scholarship_max: numberOrNull(form.scholarship_max),
@@ -716,6 +738,99 @@ function InfoBlock({ title, children }: { title: string; children: ReactNode }) 
   );
 }
 
+function LanguageSessionPanel({ extra }: { extra?: UniversityRow["extra"] }) {
+  const { t } = useAdminI18n();
+  const session = extra?.admission?.language_session;
+  if (!session) return null;
+  const docs = session.documents || [];
+  return (
+    <div className="mb-6 rounded-2xl border border-cyan-500/40 bg-cyan-950/30 p-4 space-y-3">
+      <div>
+        <p className="text-xs font-bold text-cyan-300 uppercase tracking-wide">
+          {t("universities.languageSession")}
+        </p>
+        <p className="text-xs text-slate-400 mt-1">
+          {t("universities.languageSessionHint")}
+        </p>
+      </div>
+      {session.project ? (
+        <p className="text-sm text-white font-semibold whitespace-pre-line">
+          {session.project}
+        </p>
+      ) : null}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {session.tuition_text || session.application_fee_cny ? (
+          <InfoBlock title={t("universities.languageTuition")}>
+            {session.tuition_text ? (
+              <p className="whitespace-pre-line">{session.tuition_text}</p>
+            ) : null}
+            {session.application_fee_cny ? (
+              <p>Frais de dossier : {session.application_fee_cny} RMB</p>
+            ) : null}
+          </InfoBlock>
+        ) : null}
+        {session.age_text || session.foundation ? (
+          <InfoBlock title={t("universities.languageFoundation")}>
+            {session.age_text ? <p>Âge : {session.age_text}</p> : null}
+            {session.foundation ? (
+              <p className="whitespace-pre-line">{session.foundation}</p>
+            ) : null}
+          </InfoBlock>
+        ) : null}
+        {session.dormitory ? (
+          <InfoBlock title={t("universities.languageDorm")}>
+            <p className="whitespace-pre-line">{session.dormitory}</p>
+          </InfoBlock>
+        ) : null}
+        {session.deadline || session.apply_website ? (
+          <InfoBlock title={t("universities.deadline")}>
+            {session.deadline ? (
+              <p className="whitespace-pre-line">{session.deadline}</p>
+            ) : null}
+            {session.apply_website ? (
+              <a
+                href={session.apply_website}
+                target="_blank"
+                rel="noreferrer"
+                className="text-cyan-300 hover:underline break-all"
+              >
+                {session.apply_website}
+              </a>
+            ) : null}
+          </InfoBlock>
+        ) : null}
+      </div>
+      {session.contact ? (
+        <InfoBlock title={t("universities.languageContact")}>
+          <p className="whitespace-pre-line">{session.contact}</p>
+        </InfoBlock>
+      ) : null}
+      {session.pathway ? (
+        <InfoBlock title={t("universities.languagePathway")}>
+          <p className="whitespace-pre-line">{session.pathway}</p>
+        </InfoBlock>
+      ) : null}
+      {docs.length ? (
+        <InfoBlock title={t("universities.languageDocs")}>
+          <ol className="list-decimal pl-5 space-y-1">
+            {docs.map((doc) => (
+              <li key={doc}>{doc}</li>
+            ))}
+          </ol>
+        </InfoBlock>
+      ) : null}
+      {session.note || session.scholarship ? (
+        <InfoBlock title={t("universities.languageNote")}>
+          {session.note ? (
+            <p className="whitespace-pre-line">{session.note}</p>
+          ) : null}
+          {session.scholarship ? <p>Bourse : {session.scholarship}</p> : null}
+        </InfoBlock>
+      ) : null}
+    </div>
+  );
+}
+
 function AdmissionPanel({ extra }: { extra?: UniversityRow["extra"] }) {
   const admission = extra?.admission;
   if (!admission) return null;
@@ -847,7 +962,7 @@ function AdmissionPanel({ extra }: { extra?: UniversityRow["extra"] }) {
           ))}
         </InfoBlock>
       ) : null}
-      {docs.length ? (
+      {docs.length && !extra?.admission?.language_session?.documents?.length ? (
         <InfoBlock title="Documents requis">
           <p>{docs.map((d) => d.type).filter(Boolean).join(" · ")}</p>
         </InfoBlock>
@@ -1080,6 +1195,7 @@ function UniversityModal({
             <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wide mb-4">
               {t("universities.matching")}
             </h3>
+            <LanguageSessionPanel extra={form.extra} />
             <AdmissionPanel extra={form.extra} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Field label={t("universities.majors")}>
@@ -1093,7 +1209,7 @@ function UniversityModal({
               </Field>
               <Field label={t("universities.requiredDocs")}>
                 <textarea
-                  rows={3}
+                  rows={10}
                   className={inputClass()}
                   value={form.required_documents_text}
                   onChange={(e) =>

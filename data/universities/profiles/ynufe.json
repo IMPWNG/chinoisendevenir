@@ -78,7 +78,7 @@
   ],
   "documents": [
     {
-      "type": "Formulaire de demande",
+      "type": "《云南财经大学国际学生来华学习申请表》；",
       "required": true,
       "notes": "《云南财经大学国际学生来华学习申请表》；",
       "applies_to": [
@@ -86,23 +86,23 @@
       ]
     },
     {
-      "type": "Passeport",
+      "type": "护照照片页扫描件。护照为有效期至少在一年以上的普通护照；",
       "required": true,
-      "notes": "护照照片页扫描件。护照为有效期至少在一年以上的普通护",
+      "notes": "护照照片页扫描件。护照为有效期至少在一年以上的普通护照；",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Diplôme",
+      "type": "经过公证的中文或英文最高学历学位证明。应届生须提交本人就读学校出具的预计毕业证明或在学证明原件，学历学位证明的名字需与护照名一致；",
       "required": true,
-      "notes": "经过公证的中文或英文最高学历学位证明。应届生须提交本人",
+      "notes": "经过公证的中文或英文最高学历学位证明。应届生须提交本人就读学校出具的预计毕业证明或在学证明原件，学历学位证明的名字需与护照名一致；",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Relevés de notes",
+      "type": "学习成绩单。中英文以外文本须附经公证的中文或英文的译文；",
       "required": true,
       "notes": "学习成绩单。中英文以外文本须附经公证的中文或英文的译文；",
       "applies_to": [
@@ -118,6 +118,14 @@
       ]
     },
     {
+      "type": "申请学士学位的，须提交来华留学本科入学学业水平测试（CSCA）成绩单（中文、数学）；",
+      "required": true,
+      "notes": "申请学士学位的，须提交来华留学本科入学学业水平测试（CSCA）成绩单（中文、数学）；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
       "type": "在华学习或研究计划书，（不少于 1000 字，中文或英文书写）；",
       "required": true,
       "notes": "在华学习或研究计划书，（不少于 1000 字，中文或英文书写）；",
@@ -126,15 +134,15 @@
       ]
     },
     {
-      "type": "Lettres de recommandation",
+      "type": "推荐信。申请攻读硕士、博士学位的，还须提交 2 名相关领域副教授或以上职称者用中文或英文书写的推荐信。",
       "required": true,
-      "notes": "副教授或以上职称者用中文或英文书写的推荐信。",
+      "notes": "推荐信。申请攻读硕士、博士学位的，还须提交 2 名相关领域副教授或以上职称者用中文或英文书写的推荐信。",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Formulaire médical",
+      "type": "《外国人体格检查表》（有效期六个月）；",
       "required": true,
       "notes": "《外国人体格检查表》（有效期六个月）；",
       "applies_to": [
@@ -142,7 +150,7 @@
       ]
     },
     {
-      "type": "Casier judiciaire",
+      "type": "无犯罪记录证明或个人承诺书；",
       "required": true,
       "notes": "无犯罪记录证明或个人承诺书；",
       "applies_to": [
@@ -150,7 +158,15 @@
       ]
     },
     {
-      "type": "financial guarantee",
+      "type": "本人证件照 2 寸免冠白底正面照片电子版，以护照号码命名；",
+      "required": true,
+      "notes": "本人证件照 2 寸免冠白底正面照片电子版，以护照号码命名；",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "经济状况证明。",
       "required": true,
       "notes": "经济状况证明。",
       "applies_to": [
@@ -158,17 +174,17 @@
       ]
     },
     {
-      "type": "注意：以上资料如非中、英文文本，均需提供公证过的中文或英",
+      "type": "《中国政府奖学金申请表》(只针对中国政府奖学金生)",
       "required": true,
-      "notes": "注意：以上资料如非中、英文文本，均需提供公证过的中文或英",
+      "notes": "《中国政府奖学金申请表》(只针对中国政府奖学金生)",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "文翻译件。",
+      "type": "《云南省政府奖学金申请表》(只针对云南省政府奖学金生)注意：以上资料如非中、英文文本，均需提供公证过的中文或英文翻译件。",
       "required": true,
-      "notes": "文翻译件。",
+      "notes": "《云南省政府奖学金申请表》(只针对云南省政府奖学金生)注意：以上资料如非中、英文文本，均需提供公证过的中文或英文翻译件。",
       "applies_to": [
         "language"
       ]
@@ -193,7 +209,7 @@
       "city": "Kunming",
       "province": "Yunnan"
     },
-    "presentation": "云南财经海外学院 中文 English 首页 学院概况About 学院简介Introduction 学院领导Leaders 教师介绍Faculties 博士导师PHD_Advisors 硕士导师Master_Advisors 发展中国家教育项目Programs_of_Developing_Countries 商务部学历学位教育项目 商务部短期培训教育项目 商务部国际商务官员研修(云南)基地 发展中国家教育项目相关下载 境外办学Overseas_Education 基本情况 合作院校 境外招生 境外教学 学生管理 境外办学相关下载 党务工作Party_Affairs 党风廉政Party&amp;Government 人才培养Talents_Education 科研合作Academic_Cooperation 社会服务Social_Service 招生信息Admission_Information 学校概况About_YUFE 云南财经大学国际学生招生简章Enrollment_Guide_For_International_Students_of_YUFE 中华人民共和国商务部发展中国家学历学位教育项目Academic_Education_Programs_for_Developing_Countries_Sponsored_by_Ministry_of_Commerce_PRC 云南财经大学2024年云南省政府奖学金国际学生招生简章Yunnan_University_of_Finance_and_Economics_Enrollment_Guide_for_Internation",
+    "presentation": "Université de finance et d'économie du Yunnan — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]

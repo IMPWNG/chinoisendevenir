@@ -73,57 +73,73 @@
   ],
   "documents": [
     {
-      "type": "Formulaire de demande",
+      "type": "国际学生入学申请表（中文或英文）",
       "required": true,
-      "notes": "(1) 国际学生入学申请表（中文或英文）",
+      "notes": "国际学生入学申请表（中文或英文）",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Diplôme",
+      "type": "最高学历证明",
       "required": true,
-      "notes": "(2) 最高学历证明",
+      "notes": "最高学历证明",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Lettres de recommandation",
+      "type": "最高学历阶段的正式成绩单",
       "required": true,
-      "notes": "(4) 推荐信",
+      "notes": "最高学历阶段的正式成绩单",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Passeport",
+      "type": "推荐信",
       "required": true,
-      "notes": "(5) 护照复印件（个人信息页）",
+      "notes": "推荐信",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "(6) 健康证明",
+      "type": "护照复印件（个人信息页）",
       "required": true,
-      "notes": "(6) 健康证明",
+      "notes": "护照复印件（个人信息页）",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Casier judiciaire",
+      "type": "健康证明",
       "required": true,
-      "notes": "(7) 无犯罪记录证明",
+      "notes": "健康证明",
       "applies_to": [
         "language"
       ]
     },
     {
-      "type": "Photo d'identité",
+      "type": "无犯罪记录证明",
       "required": true,
-      "notes": "(8) 白底电子证件照",
+      "notes": "无犯罪记录证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "白底电子证件照",
+      "required": true,
+      "notes": "白底电子证件照",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "HSK 4级证书（学历教育项目要求）",
+      "required": true,
+      "notes": "HSK 4级证书（学历教育项目要求）",
       "applies_to": [
         "language"
       ]
@@ -148,7 +164,7 @@
       "city": "Chengdu",
       "province": "Sichuan"
     },
-    "presentation": "成都航空职业技术大学 信息门户 学生 教职工 校友 家长 English 学校概况 学校简介 历史沿革 现任领导 组织机构 学校章程 云游校园 二级学院 航空装备制造产业学院 电子工程学院 建筑工程学院 供应链管理学院 汽车工程学院 无人机产业学院 航空维修产业学院 民航运输学院 机器人学院 新材料学院 人工智能学院 国防教育学院（武装部） 招生就业 招生动态 招生计划 历年录取 专业介绍 就业网 企业寄语 教育教学 教务管理 第二课堂 学生服务 教师发展 科学研究 科研信息 科研平台 科研动态 科研管理系统 国际交流 出国出境 留学生工作 外专外教 中外合作办学 校际合作交流 境外／来华培训 校园文化 文化品牌 标识系统 宣传资源 师生故事 校友故事 人文风光 科普基地 人才招聘 信息门户 信息门户 学生 | 教职工 | 校友 | 家长 English 学校概况 始于三线建设 聚焦国家战略 服务航空国防 服务区域经济 学校简介 历史沿革 现任领导 组织机构 学校章程 云游校园 二级学院 明德 笃行 求实 创新 航空装备制造产业学院 电子工程学院 建筑工程学院 供应链管理学院 汽车工程学院 无人机产业学院 航空维修产业学院 民航运输学院 机器人学院 新材料学院 人工智能学院 国防教育学院（武装部） 招生就业 从这里起航 到祖国最需要的 地方建功立业 招生动态 招生计划 历年录取 专业介绍 就业网 企业寄语 教育教学 立德树人 严谨治学 润物无声 教务管理 第二课堂 学生服务 教师发展 科学研究 聚合资源 科教融汇 服务产业 科研信息 科研平台 科研动态 科研管理系统 国际交流 ",
+    "presentation": "Université professionnelle aéronautique de Chengdu — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]

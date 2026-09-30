@@ -73,7 +73,7 @@
   ],
   "documents": [
     {
-      "type": "Diplôme",
+      "type": "学历证书：本人最后学历证书的复印件或大学在校学习证明。",
       "required": true,
       "notes": "学历证书：本人最后学历证书的复印件或大学在校学习证明。",
       "applies_to": [
@@ -81,7 +81,15 @@
       ]
     },
     {
-      "type": "Lettres de recommandation",
+      "type": "成绩单：本人最后学历成绩单的原始件（复印件无效）。",
+      "required": true,
+      "notes": "成绩单：本人最后学历成绩单的原始件（复印件无效）。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "两封推荐信：两名教师（大学或高中）或单位两名同事均可为其写推荐信。推荐信的内容主要是推荐人对被推荐人的评价。",
       "required": true,
       "notes": "两封推荐信：两名教师（大学或高中）或单位两名同事均可为其写推荐信。推荐信的内容主要是推荐人对被推荐人的评价。",
       "applies_to": [
@@ -89,7 +97,7 @@
       ]
     },
     {
-      "type": "Passeport",
+      "type": "护照复印件。",
       "required": true,
       "notes": "护照复印件。",
       "applies_to": [
@@ -97,7 +105,7 @@
       ]
     },
     {
-      "type": "Photo d'identité",
+      "type": "学生个人照片要求为：彩色标准证件照，大小不超200kb，像素大于295*413，支持*.jpg,*.jpeg,*.png三类格式的图片",
       "required": true,
       "notes": "学生个人照片要求为：彩色标准证件照，大小不超200kb，像素大于295*413，支持*.jpg,*.jpeg,*.png三类格式的图片",
       "applies_to": [
@@ -124,7 +132,7 @@
       "city": "Chengdu",
       "province": "Sichuan"
     },
-    "presentation": "国际交流与合作处(国际教育学院) 首页 海外交流 外专外教 国际教育 港澳台事务 西语中心 关于我们 English 学生交流 Student Exchange 通知 Announcements 规章制度及申请流程 Regulations and Application 项目一览 Programs 教师交流 Teacher Exchange 通告 Announcements 规章制度及申请流程 Regulations and Application 出国项目 programs 外籍专家 Foreign Experts 引智项目 Foreign Experts 工作管理 Management 外籍教师 Foreign Teachers 工作管理 Management 外教招聘 Join Us 外教风采 Foreign Teachers 外教寄语 Teachers'Messages 留学成信 Study in CUIT 学历教育 Degree Education 汉语进修班 Chinese Study 入学须知 Admission Notice 相关材料 Downloads 中外合作办学 Sino-foreign Cooperative Education 因公赴台证照办理 Working Process(TW) 因公赴港澳证照办理 Working Process(HK&amp;MO) 规章制度 Regulations 交流项目 Exchange Projects 中心简介 西语项目 新闻公告 部门介绍 About Us 部门职责 Our Work 人员构成 Staff Membe",
+    "presentation": "Université d'information et d'ingénierie de Chengdu — programme de langue chinoise pour étudiants internationaux.",
     "teaching_languages": [
       "zh"
     ]
