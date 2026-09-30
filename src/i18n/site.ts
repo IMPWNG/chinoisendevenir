@@ -1225,12 +1225,16 @@ const fr = {
       passwordMatch: "Les mots de passe ne correspondent pas.",
       exists: "Un compte existe déjà avec cet email. Connectez-vous.",
       createFail: "Impossible de créer le compte.",
+      unknownDossier:
+        "Aucun dossier avec cet email. Utilisez l'adresse indiquée dans le formulaire de contact.",
       resetEmail: "Entrez votre email pour réinitialiser le mot de passe.",
       resetFail: "Impossible d'envoyer l'email.",
       resetSent:
         "Un email de réinitialisation vous a été envoyé si un compte existe.",
       session: "Session expirée. Veuillez vous reconnecter.",
       passwordUpdate: "Impossible de mettre à jour le mot de passe.",
+      passwordSession:
+        "Ce lien a expiré. Redemandez un email depuis « Mot de passe oublié ».",
     },
     noFile:
       "Aucun dossier ne correspond à cet email. Complétez le formulaire pour continuer.",
@@ -2800,12 +2804,15 @@ const en = {
       passwordMatch: "Passwords do not match.",
       exists: "An account already exists with this email. Please sign in.",
       createFail: "Unable to create the account.",
+      unknownDossier:
+        "No file matches this email. Use the address from the contact form.",
       resetEmail: "Enter your email to reset the password.",
       resetFail: "Unable to send the email.",
       resetSent:
         "A reset email has been sent if an account exists.",
       session: "Session expired. Please sign in again.",
       passwordUpdate: "Unable to update the password.",
+      passwordSession: "This link has expired. Request a new email from “Forgot password”.",
     },
     noFile:
       "No file matches this email. Complete the form to continue.",

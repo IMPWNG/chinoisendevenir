@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
@@ -15,8 +15,28 @@ export default function StudentSetPassword() {
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
 
+  const [ready, setReady] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    studentSupabase.auth.getSession().then(({ data }) => {
+      if (cancelled) return;
+      if (!data.session) {
+        setBlocked(true);
+        setStatus("error");
+        setMessage(t("student.errors.passwordSession"));
+      }
+      setReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [t]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (blocked) return;
     if (password.length < 8) {
       setStatus("error");
       setMessage(t("student.errors.passwordLength"));
@@ -77,7 +97,7 @@ export default function StudentSetPassword() {
             <button
               type="submit"
               className="landing-btn landing-btn-primary landing-btn-full"
-              disabled={status === "submitting"}
+              disabled={status === "submitting" || !ready || blocked}
             >
               {status === "submitting" ? t("student.saving") : t("student.save")}
             </button>

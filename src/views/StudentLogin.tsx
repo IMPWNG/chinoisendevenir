@@ -81,13 +81,16 @@ export default function StudentLogin() {
       const { error } = await signUp(email, form.password);
 
       if (error) {
+        const code = (error as Error & { code?: string }).code;
         const already =
           error.message?.includes("déjà") || error.message?.includes("already");
         setStatus("error");
         setMessage(
-          already
-            ? t("student.errors.exists")
-            : error.message || t("student.errors.createFail"),
+          code === "unknown_dossier"
+            ? t("student.errors.unknownDossier")
+            : already
+              ? t("student.errors.exists")
+              : error.message || t("student.errors.createFail"),
         );
         if (already) setMode("login");
         return;

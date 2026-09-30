@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getClientIp, rateLimit } from "@/lib/httpSecurity";
 import { createConfirmedAuthUser } from "@/lib/authUsers";
+import { findContactByEmail } from "@/lib/studentAuth";
+import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 import { isValidAuthPassword, normalizeAuthEmail } from "@/lib/supabaseAuth";
 import { isValidEmail } from "@/lib/contactForm";
 import { readJsonObject, asString } from "@/lib/request";
@@ -33,6 +35,17 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Le mot de passe doit contenir entre 8 et 72 caractères." },
         { status: 400 },
+      );
+    }
+
+    const contact = await findContactByEmail(getSupabaseAdmin(), email);
+    if (!contact) {
+      return NextResponse.json(
+        {
+          error: "Aucun dossier avec cet email.",
+          code: "unknown_dossier",
+        },
+        { status: 403 },
       );
     }
 

@@ -123,7 +123,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Public :** `POST /api/contact-submit`, webhook `/api/webhooks/resend`
 
-**Auth :** `/api/auth/login`, `/api/auth/register`
+**Auth :** `/api/auth/login`, `/api/auth/register` (seulement si l’email existe déjà dans `contacts`), `/api/auth/recover` (Supabase Auth, même condition, réponse identique si le dossier est absent)
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
