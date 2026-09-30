@@ -10,6 +10,7 @@ import {
 } from "@/lib/studentDocuments";
 import type { StudentDocRef } from "@/lib/studentProgress";
 import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
+import { uploadKeysFromMatches } from "@/lib/matching/documents";
 import {
   chineseMatchingForStudent,
   matchingForStudent,
@@ -30,10 +31,32 @@ export async function GET(request: Request) {
     let chineseMatching = null;
 
     if (profile.hasForm && profile.unlocked && auth.contact) {
+      let universityRun: { result?: { kind?: string; matches?: unknown } } | undefined;
+      let chineseRun: { result?: { kind?: string } } | undefined;
+      try {
+        const runs = (await listMatchingRuns(auth.admin, auth.contact.id, {
+          kind: "all",
+        })) as Array<{ result?: { kind?: string; matches?: unknown } }>;
+        universityRun = runs.find(
+          (run) => run.result?.kind !== MATCHING_KIND_CHINESE,
+        );
+        chineseRun = runs.find(
+          (run) => run.result?.kind === MATCHING_KIND_CHINESE,
+        );
+      } catch (error) {
+        console.warn("student matching:", errorMessage(error));
+      }
+
       if (profile.access?.documents) {
         await ensureStudentBucket(auth.admin);
+        const extraKeys = uploadKeysFromMatches(universityRun?.result?.matches);
         const [required, adminDocs] = await Promise.all([
-          getRequiredDocumentsStatus(auth.admin, auth.contact.id, auth.contact),
+          getRequiredDocumentsStatus(
+            auth.admin,
+            auth.contact.id,
+            auth.contact,
+            extraKeys,
+          ),
           listAdminSentDocuments(auth.admin, auth.contact.id),
         ]);
         requiredDocuments = required as StudentDocRef[];
@@ -41,16 +64,10 @@ export async function GET(request: Request) {
       }
 
       try {
-        const runs = (await listMatchingRuns(auth.admin, auth.contact.id, {
-          kind: "all",
-        })) as Array<{ result?: { kind?: string } }>;
-        const universityRun = runs.find(
-          (run) => run.result?.kind !== MATCHING_KIND_CHINESE,
-        );
-        const chineseRun = runs.find(
-          (run) => run.result?.kind === MATCHING_KIND_CHINESE,
-        );
-        matching = matchingForStudent(universityRun?.result || null, profile.formuleNumber, {
+        matching = matchingForStudent(
+          (universityRun?.result || null) as Parameters<typeof matchingForStudent>[0],
+          profile.formuleNumber,
+          {
           documents: requiredDocuments,
           adminDocuments,
         });

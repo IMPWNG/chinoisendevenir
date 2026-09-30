@@ -4,6 +4,7 @@ import {
   type StudentDocRef,
 } from "../studentProgress";
 import { CATEGORY_META } from "./constants";
+import { canonicalDocuments, isCanonicalDocReceived } from "./documents";
 import type { MatchingGap } from "./gaps";
 import type { UniversityMatch } from "./narrative";
 import type { MatchingStudent } from "./student";
@@ -75,6 +76,12 @@ const BREAKDOWN_ORDER: [string, string][] = [
   ["localisation", "Ville"],
   ["motivation", "Projet"],
 ];
+
+export const SCORE_WEIGHTS_LINE =
+  "Score sur 100, moyenne pondérée : langue 25 %, parcours 25 %, budget 20 %, bourse 15 %, âge 5 %, ville 5 %, projet 5 %. Chaque note mesure l'écart avec les critères connus. Ce n'est pas une probabilité d'admission.";
+
+const GENERIC_SCORE_NOTE =
+  /compatibilité linguistique|gpa, diplôme et correspondance|ratio budget|bourses documentées|pas de contrainte bourse|marge d'âge|pas de préférence de ville|ville demandée|région proche|hors des villes|clarté du projet|pas assez de texte|niveau de langue comparé/i;
 
 const SCHOLARSHIP_COPY = {
   csc: {
@@ -222,6 +229,55 @@ function breakdownBars(item: UniversityMatch) {
   });
 }
 
+export function explainScore(
+  key: string,
+  row?: { points?: number | null; note?: string | null },
+) {
+  const note = String(row?.note || "").trim();
+  if (note && !GENERIC_SCORE_NOTE.test(note)) {
+    return /[.!?]$/.test(note) ? note : `${note}.`;
+  }
+  const points = row?.points;
+  if (points == null) return "Ce critère ne peut pas être lu : l'information manque.";
+  if (key === "langue") {
+    if (points >= 70) return "Le niveau de langue atteint le seuil connu du programme.";
+    if (points >= 40) return "Le niveau de langue est partiel : un renforcement est utile avant de candidater.";
+    return "Le niveau de langue est en dessous du seuil du programme.";
+  }
+  if (key === "academique") {
+    if (points >= 70) return "Le diplôme et le domaine correspondent à ce cursus.";
+    if (points >= 40) return "Le parcours est proche, avec un diplôme ou une moyenne encore fragiles.";
+    return "Le diplôme actuel est peu aligné avec le niveau visé.";
+  }
+  if (key === "financier") {
+    if (points >= 80) return "Le budget indiqué couvre les frais connus.";
+    if (points >= 50) return "Le budget est juste par rapport aux frais connus.";
+    if (points >= 40) return "Le budget ou les frais ne sont pas assez renseignés pour trancher.";
+    return "Le budget indiqué ne couvre pas les frais estimés sans bourse.";
+  }
+  if (key === "bourse") {
+    if (points >= 90) return "Pas de besoin de bourse indiqué, ou plusieurs bourses sont listées.";
+    if (points >= 60) return "Des bourses sont listées. Leur obtention n'est pas automatique.";
+    return "Peu de bourses sont documentées pour ce besoin de financement.";
+  }
+  if (key === "age") {
+    if (points >= 80) return "L'âge est dans la limite connue, avec de la marge.";
+    if (points >= 60) return "L'âge est proche de la limite, ou la limite n'est pas publiée.";
+    return "L'âge dépasse la limite publiée.";
+  }
+  if (key === "localisation") {
+    if (points >= 100) return "La ville fait partie de celles que vous avez indiquées.";
+    if (points >= 80) return "Aucune ville préférée n'est indiquée. La note reste neutre : elle ne veut pas dire que la ville convient.";
+    if (points >= 70) return "La région est proche d'une ville que vous avez indiquée.";
+    return "La ville est éloignée de celles que vous avez indiquées.";
+  }
+  if (key === "motivation") {
+    if (points >= 70) return "Le projet écrit est assez clair pour être lu par une université.";
+    return "Le texte de projet est trop court : le préciser rend le dossier plus lisible.";
+  }
+  return note || "Critère non détaillé.";
+}
+
 function scorePhrase(item: UniversityMatch) {
   const cat = categoryOf(item);
   if (item.score == null) return "Score de compatibilité : à préciser";
@@ -288,14 +344,49 @@ function documentInventory(
   return required;
 }
 
-function extraUniDocuments(matches: UniversityMatch[] | null | undefined) {
-  const rows: { name: unknown; university: string | null | undefined }[] = [];
-  (matches || []).forEach((item) => {
-    (item.missing_documents || []).forEach((name) => {
-      rows.push({ name, university: item.university_name });
+function receivedUploadKeys(documents: StudentDocRef[] = []) {
+  return documents
+    .filter((doc) => doc.status === "received" || doc.status === "fourni")
+    .map((doc) => String(doc.key || ""));
+}
+
+function groupStudentDocuments(
+  matches: UniversityMatch[],
+  documents: StudentDocRef[] = [],
+) {
+  const uploaded = receivedUploadKeys(documents);
+  const seen = new Set<string>();
+  const flat: InventoryDoc[] = [];
+  const groups: { name: string; documents: InventoryDoc[] }[] = [];
+  matches.forEach((item) => {
+    const source = item.required_documents?.length
+      ? item.required_documents
+      : item.missing_documents;
+    const fresh: InventoryDoc[] = [];
+    canonicalDocuments(source).forEach((doc) => {
+      const status = isCanonicalDocReceived(doc.key, uploaded) ? "fourni" : "manquant";
+      const row: InventoryDoc = {
+        key: doc.key,
+        name: doc.label,
+        status,
+        note: null,
+        university: item.university_name || null,
+      };
+      const existing = flat.find((entry) => entry.key === doc.key);
+      if (existing) existing.status = status;
+      else flat.push(row);
+      if (seen.has(doc.key)) return;
+      seen.add(doc.key);
+      fresh.push(row);
     });
+    if (fresh.length) {
+      groups.push({
+        name: item.university_name || "Université",
+        documents: fresh,
+      });
+    }
   });
-  return rows;
+  return { flat, groups };
 }
 
 function toVerifyList(matches: UniversityMatch[] | null | undefined) {
@@ -422,73 +513,163 @@ function universityRisks(
   const rows: { university: string | null | undefined; risk: string }[] = [];
   (matches || []).forEach((item) => {
     const hskReq = item.hsk_required;
-    if (
+    const hskGap =
       isHskKnown(student) &&
       hskReq != null &&
       student.hsk != null &&
-      student.hsk < hskReq
-    ) {
+      student.hsk < hskReq;
+    if (hskGap) {
       rows.push({
         university: item.university_name,
         risk: `HSK ${student.hsk} pour un seuil connu HSK ${hskReq}.`,
       });
     }
-    (item.warnings || []).slice(0, 1).forEach((line) => {
-      rows.push({ university: item.university_name, risk: line });
+    (item.warnings || []).forEach((line) => {
+      if (hskGap && /hsk/i.test(String(line))) return;
+      rows.push({ university: item.university_name, risk: String(line) });
     });
   });
   const seen = new Set<string>();
-  return rows.filter((row) => {
-    const key = `${row.university}:${row.risk}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  }).slice(0, 8);
+  return rows
+    .filter((row) => {
+      const key = `${row.university}:${row.risk}`.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 8);
 }
 
 function applicationCap(formuleNumber: unknown) {
   return getFormuleAccess(formuleNumber).applications || 0;
 }
 
-function applicationMixAdvice(formuleNumber: unknown, counts: MixCounts) {
+function applicationMixAdvice(
+  formuleNumber: unknown,
+  counts: MixCounts,
+  matches: MappedUniversity[] = [],
+) {
   const cap = applicationCap(formuleNumber);
+  const names = matches.slice(0, cap || matches.length).map((item) => item.name);
+  const order = names.length ? ` Ordre proposé : ${names.join(", ")}.` : "";
   if (!cap) {
-    return "Cette formule ne comprend pas le dépôt de candidatures. Les établissements ci-dessous servent à cadrer le projet.";
+    return `Cet accompagnement cadre le projet. Il ne comprend pas le dépôt des candidatures.${order}`;
   }
   if (counts.safety === 0) {
-    return `Jusqu’à ${cap} candidature${cap > 1 ? "s" : ""} : aucune piste classée « sûre » pour l’instant. On vise d’abord les réalistes, et on renforce le dossier avant d’ajouter une ambitieuse.`;
+    return `Jusqu’à ${cap} candidature${cap > 1 ? "s" : ""}. Aucune piste n’est encore confortable : commencez par les plus réalistes, et renforcez le dossier avant une université plus exigeante.${order}`;
   }
-  if (cap >= 5) {
-    return `Avec jusqu’à ${cap} candidatures, une répartition utile est 1 sûre, 3 réalistes et 1 ambitieuse — à ajuster selon les places réellement ouvertes.`;
-  }
-  return `Avec jusqu’à ${cap} candidatures, visez 1 sûre et ${Math.max(cap - 1, 1)} réaliste${cap - 1 > 1 ? "s" : ""}, plus une ambitieuse seulement si le dossier le permet.`;
+  return `Jusqu’à ${cap} candidature${cap > 1 ? "s" : ""}. Déposez d’abord l’établissement le mieux aligné, puis les options réalistes. Gardez une université plus exigeante seulement si le chinois et le diplôme suivent.${order}`;
 }
 
-function constructiveVigilance(item: UniversityMatch, student: ReportStudent) {
+function sentence(text: string) {
+  const clean = String(text || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  const cased = clean.charAt(0).toUpperCase() + clean.slice(1);
+  return /[.!?]$/.test(cased) ? cased : `${cased}.`;
+}
+
+function studentStrengths(item: UniversityMatch, student: ReportStudent) {
   const lines: string[] = [];
   const hskReq = item.hsk_required;
   if (
     isHskKnown(student) &&
     hskReq != null &&
     student.hsk != null &&
-    student.hsk < hskReq
+    student.hsk >= hskReq
   ) {
     lines.push(
-      `Un renforcement du chinois est recommandé avant candidature (HSK ${hskReq} visé, HSK ${student.hsk} actuel).`,
+      `Le HSK ${student.hsk} atteint le seuil connu de ce programme, qui est HSK ${hskReq}.`,
+    );
+  }
+  if (/anglais/i.test(String(item.teaching_language || "")) || item.university?.englishAvailable) {
+    lines.push("Des programmes enseignés en anglais sont identifiés.");
+  }
+  const city = String(item.city || "").trim();
+  if (city && !/^à vérifier/i.test(city)) {
+    const province = String(item.province || "").trim();
+    lines.push(
+      province
+        ? `L'établissement est à ${city}, dans le ${province}.`
+        : `L'établissement est à ${city}.`,
+    );
+  }
+  if ((item.breakdown?.academique?.points || 0) >= 70) {
+    lines.push("Le parcours correspond au niveau et au domaine visés.");
+  }
+  if ((item.breakdown?.financier?.points || 0) >= 80) {
+    lines.push("Le budget indiqué couvre les frais connus.");
+  }
+  if (!lines.length) {
+    lines.push("Peu d'éléments publiés confirment un alignement fort. Le détail est à vérifier avec nous.");
+  }
+  return lines.slice(0, 4);
+}
+
+function studentPrepare(item: UniversityMatch, student: ReportStudent) {
+  const lines: string[] = [];
+  const hskReq = item.hsk_required;
+  const hskGap =
+    isHskKnown(student) &&
+    hskReq != null &&
+    student.hsk != null &&
+    student.hsk < hskReq;
+  if (hskGap) {
+    lines.push(
+      `Avant de candidater, le chinois doit atteindre le HSK ${hskReq}. Le niveau actuel est HSK ${student.hsk}.`,
     );
   }
   (item.warnings || []).forEach((line) => {
     const text = String(line);
-    const hskMatch = text.match(/HSK\s*(\d).*HSK\s*(\d)/i);
-    if (hskMatch) {
-      lines.push(
-        `Un renforcement du niveau de chinois est recommandé avant candidature (HSK ${hskMatch[2]} visé, HSK ${hskMatch[1]} actuel).`,
-      );
+    if (/hsk/i.test(text)) return;
+    if (/dipl[oô]me actuel peu align/i.test(text)) {
+      lines.push("Le diplôme actuel est en dessous du niveau demandé pour ce cursus.");
       return;
     }
-    lines.push(text.replace(/insuffisant/gi, "à renforcer").replace(/bloque/gi, "peut retarder"));
+    if (/linguistique|peut bloquer|langue insuffisante/i.test(text)) {
+      if (!lines.some((row) => /langue|chinois|hsk/i.test(row))) {
+        lines.push("Le niveau de langue peut retarder une admission directe.");
+      }
+      return;
+    }
+    if (/budget insuffisant/i.test(text)) {
+      lines.push("Sans bourse, le budget indiqué ne couvre pas les frais estimés.");
+      return;
+    }
+    if (/âge proche|age proche/i.test(text)) {
+      lines.push("L'âge est proche de la limite publiée par l'établissement.");
+      return;
+    }
+    if (/gpa|moyenne/i.test(text)) {
+      lines.push(sentence(text));
+    }
   });
+  if (
+    (item.breakdown?.langue?.points || 100) <= 40 &&
+    !lines.some((row) => /langue|chinois|hsk/i.test(row))
+  ) {
+    lines.push("Le niveau de langue peut retarder une admission directe.");
+  }
   return [...new Set(lines)].slice(0, 4);
+}
+
+function factLines(item: UniversityMatch, cost: ReturnType<typeof costOf>) {
+  const deadline = deadlineOf(item);
+  const language = uniMissing(item.teaching_language);
+  const grants = (item.scholarships_possible || []).map((name) => String(name));
+  return [
+    cost.tuition_cny == null && cost.tuition_cny_max == null
+      ? "Frais connus : à vérifier auprès de l'université."
+      : `Frais connus : ${cost.label}.`,
+    /^à vérifier/i.test(deadline)
+      ? "Date limite : à vérifier auprès de l'université."
+      : `Date limite : ${deadline}.`,
+    /^à vérifier/i.test(language)
+      ? "Langue d'enseignement : à vérifier auprès de l'université."
+      : `Langue d'enseignement : ${language}.`,
+    grants.length
+      ? `Bourses mentionnées : ${grants.join(", ")}. L'obtention n'est pas automatique.`
+      : "Bourses mentionnées : aucune piste listée pour cet établissement.",
+  ];
 }
 
 function mapUniversity(
@@ -513,12 +694,18 @@ function mapUniversity(
     scholarships: item.scholarships_possible?.length
       ? item.scholarships_possible
       : [],
-    strengths: (item.strengths || []).slice(0, 4),
-    vigilance: constructiveVigilance(item, student),
-    documents: item.missing_documents || [],
+    strengths: studentStrengths(item, student),
+    vigilance: studentPrepare(item, student),
+    documents: [] as string[],
+    fact_lines: factLines(item, cost),
     to_verify: item.to_verify || [],
     confirmed: item.confirmed_information || [],
     breakdown: breakdownBars(item),
+    readings: breakdownBars(item).map((row) => ({
+      key: row.key,
+      label: row.label,
+      text: explainScore(row.key, row),
+    })),
     qualitative: item.qualitative || cat.subtitle,
   };
 }
@@ -578,18 +765,14 @@ function adminGuideline({
       step: "Vérification des critères",
       status: toVerify.length ? "a_faire" : "en_cours",
       action: toVerify.length
-        ? `${toVerify.length} point${toVerify.length > 1 ? "s" : ""} à confirmer auprès de l’université : ${toVerify.slice(0, 4).join(" · ")}`
-        : "Aucun critère « à vérifier » listé dans le catalogue — recouper quand même les pages admission.",
+        ? `${toVerify.length} point${toVerify.length > 1 ? "s" : ""} à confirmer, université par université.`
+        : "Aucun critère automatique. Recoupez quand même chaque page d'admission.",
     },
     {
       step: "Documents",
       status: missing.length ? "a_faire" : received ? "fait" : "a_faire",
       action: total
-        ? `${received} document${received > 1 ? "s" : ""} sur ${total} reçu${received > 1 ? "s" : ""}${
-            missing.length
-              ? ` — manquent : ${missing.map((doc) => doc.name).join(", ")}`
-              : ""
-          }.`
+        ? `${received} document${received > 1 ? "s" : ""} sur ${total} reçu${received > 1 ? "s" : ""}. Le détail est par université.`
         : "Liste de pièces encore à établir.",
     },
   ];
@@ -731,43 +914,99 @@ function studentRoadmap({
   return steps;
 }
 
+function fieldPhrase(field: string) {
+  if (field === "à préciser") return "un domaine encore à préciser";
+  if (field.length <= 5 && field === field.toUpperCase()) return field;
+  return field.charAt(0).toLowerCase() + field.slice(1);
+}
+
+function degreePhrase(degree: string) {
+  if (degree === "à préciser") return "un niveau encore à préciser";
+  const lower = degree.toLowerCase();
+  const article = /licence|année/.test(lower) ? "une" : "un";
+  return `${article} ${lower}`;
+}
+
+function intakePhrase(value: string) {
+  if (value === "à préciser") return "la rentrée souhaitée reste à préciser";
+  const text = value.replace(/_/g, " ").replace(/\bseptembre\b/i, "automne");
+  if (/^automne\b/i.test(text)) {
+    return `la rentrée d'automne ${text.replace(/^automne\s*/i, "")}`.trim();
+  }
+  if (/^printemps\b/i.test(text)) {
+    return `la rentrée de printemps ${text.replace(/^printemps\s*/i, "")}`.trim();
+  }
+  if (/^flexible$/i.test(text)) return "une rentrée flexible";
+  return `la rentrée ${text}`;
+}
+
 function profileBlurb(facts: ProfileFacts) {
-  const field = facts.field === "à préciser" ? "un domaine encore à préciser" : facts.field;
-  const degree = facts.degree === "à préciser" ? "un niveau encore à préciser" : `un ${facts.degree}`;
   const hsk =
     facts.hsk === "à préciser"
-      ? "le niveau de chinois reste à préciser"
-      : `un niveau de chinois ${facts.hsk}`;
+      ? "un niveau de chinois encore à préciser"
+      : `un chinois ${facts.hsk}`;
   const english =
     facts.english === "à préciser"
-      ? "l’anglais n’est pas encore renseigné"
+      ? "un anglais encore à préciser"
       : `un anglais ${facts.english}`;
-  const intake =
-    facts.intake === "à préciser"
-      ? "la rentrée souhaitée reste à préciser"
-      : `pour une rentrée ${facts.intake}`;
-  return `Vous visez ${degree} en ${field}, avec ${hsk} et ${english} — ${intake}.`;
+  return `Vous visez ${degreePhrase(facts.degree)} en ${fieldPhrase(facts.field)}, avec ${hsk} et ${english}, pour ${intakePhrase(facts.intake)}.`;
 }
 
-function completenessNote(facts: ProfileFacts, docs: InventoryDoc[]) {
-  const pct = facts.completeness;
-  const missing = docs.filter((doc) => doc.status === "manquant");
-  if (pct == null) {
-    return missing.length
-      ? `Il reste ${missing.length} pièce${missing.length > 1 ? "s" : ""} à rassembler : ${missing.map((doc) => doc.name).join(", ")}.`
-      : "Précisez les champs encore vides pour affiner les recommandations.";
-  }
-  if (missing.length) {
-    return `Votre dossier est complété à ${pct} % — il reste à rassembler : ${missing.map((doc) => doc.name).join(", ")}.`;
-  }
-  return `Votre dossier est complété à ${pct} %.`;
+function joinFr(items: string[]) {
+  if (items.length <= 1) return items[0] || "";
+  return `${items.slice(0, -1).join(", ")} et ${items[items.length - 1]}`;
 }
 
-function whyTop(top: MappedUniversity | null | undefined) {
+function analysisNote(
+  facts: ProfileFacts,
+  docs: InventoryDoc[],
+  matches: MappedUniversity[],
+) {
+  const parts: string[] = [];
+  if (facts.completeness != null) {
+    parts.push(`Le dossier est renseigné à ${facts.completeness} %.`);
+  }
+  const top = matches[0];
   if (!top) {
-    return "Aucune université assez compatible n’a été retenue avec les données actuelles. Précisez le domaine, la langue ou le budget pour relancer la sélection.";
+    parts.push(
+      "Aucune université n'est assez alignée pour être proposée. Il faut préciser le domaine, la langue ou le budget.",
+    );
+  } else {
+    const weak = (top.readings || [])
+      .filter((row) => {
+        const source = top.breakdown?.find((item) => item.key === row.key);
+        return source?.points != null && source.points < 45;
+      })
+      .map((row) => row.label.toLowerCase());
+    parts.push(
+      `${top.name} est la piste la plus proche de votre projet (${top.category.toLowerCase()}).`,
+    );
+    parts.push(
+      weak.length
+        ? `Le frein principal porte sur ${joinFr(weak)}.`
+        : "Aucun critère majeur ne bloque cette piste.",
+    );
   }
-  return `${top.name} ressort en tête (${top.score_phrase}). ${top.strengths[0] || top.category_subtitle}`;
+  const missing = docs.filter((doc) => doc.status === "manquant").length;
+  if (missing > 1) {
+    parts.push(`Il reste ${missing} pièces à déposer. La liste, sans doublon, est plus bas.`);
+  } else if (missing === 1) {
+    parts.push("Il reste une pièce à déposer. Elle est indiquée plus bas.");
+  } else if (docs.length) {
+    parts.push("Les pièces demandées par ces universités sont déjà déposées.");
+  }
+  return parts.join(" ");
+}
+
+function whyTop(matches: MappedUniversity[]) {
+  const top = matches[0];
+  if (!top) {
+    return "Aucune université n'est assez alignée pour être proposée. Précisez le domaine, la langue ou le budget, puis relancez la sélection.";
+  }
+  const reason = (top.strengths?.[0] || top.category_subtitle || "").replace(/\.$/, "");
+  const next = matches[1];
+  const second = next ? ` ${next.name} vient ensuite, comme option ${next.category.toLowerCase()}.` : "";
+  return `${top.name} est la piste à regarder en premier. ${sentence(reason)}${second} Ce classement compare votre profil aux critères publiés. Il ne promet pas une admission.`;
 }
 
 function closingText(student: ReportStudent, formule: FormulaInfo) {
@@ -831,8 +1070,10 @@ export function buildDualReports({
   const facts = profileFacts(student);
   const ranked = sortByScore(matches);
   const counts = mixCounts(ranked);
-  const extraDocs = extraUniDocuments(ranked);
-  const docs = documentInventory(documents, extraDocs, student);
+  const groupedDocs = groupStudentDocuments(ranked, documents);
+  const docs = groupedDocs.flat.length
+    ? groupedDocs.flat
+    : documentInventory(documents, [], student);
   const toVerify = toVerifyList(ranked);
   const best = ranked[0] || null;
   const mapped = ranked.map((item, index) =>
@@ -840,10 +1081,10 @@ export function buildDualReports({
   );
   const limiting = detectLimitingFactor(student, gaps, docs);
   const inconsistencies = blockingFields(student);
-  const mixAdvice = applicationMixAdvice(student.formuleNumber, counts);
+  const mixAdvice = applicationMixAdvice(student.formuleNumber, counts, mapped);
   const noSafety =
     counts.safety === 0
-      ? "Aucune université n’est classée « sûre » pour l’instant. On peut élargir la zone géographique, confirmer un cursus en anglais, ou renforcer le dossier avant de candidater."
+      ? "Aucune piste n'est encore confortable. Élargir la zone, confirmer un cursus en anglais, ou renforcer le chinois et le diplôme avant de candidater."
       : null;
 
   const header = {
@@ -907,13 +1148,13 @@ export function buildDualReports({
     profile_blurb: profileBlurb(facts),
     completeness: {
       pct: facts.completeness,
-      remaining_note: completenessNote(facts, docs),
+      remaining_note: analysisNote(facts, docs, mapped),
     },
     facts,
     formule: purchased,
     universities: mapped,
     options_synthesis: {
-      why_top: whyTop(mapped[0]),
+      why_top: whyTop(mapped),
       application_mix: mixAdvice,
       no_safety_note: noSafety,
     },
@@ -925,6 +1166,7 @@ export function buildDualReports({
       matches: ranked,
     }),
     documents: docs,
+    documents_by_university: groupedDocs.groups,
     scholarships: {
       groups: groupScholarships(ranked),
       disclaimer:
@@ -1029,13 +1271,7 @@ export function reportsFromStored(
     | undefined,
   { documents = [] }: { documents?: StudentDocRef[] } = {},
 ) {
-  if (result?.admin_report && result?.student_report) {
-    return {
-      admin_report: result.admin_report as DualReports["admin_report"],
-      student_report: result.student_report as DualReports["student_report"],
-    };
-  }
-  return buildDualReports({
+  const built = buildDualReports({
     student: result?.student || {},
     matches: (result?.matches || []) as UniversityMatch[],
     excluded: (result?.excluded || []) as UniversityMatch[],
@@ -1043,4 +1279,20 @@ export function reportsFromStored(
     documents,
     recommendedFormula: result?.recommended_formula,
   });
+  if (result?.admin_report && result?.student_report) {
+    const storedAdmin = result.admin_report as DualReports["admin_report"];
+    return {
+      admin_report: {
+        ...storedAdmin,
+        alerts: built.admin_report.alerts,
+        guideline: built.admin_report.guideline,
+      },
+      student_report: {
+        ...built.student_report,
+        disclaimer: built.student_report.disclaimer,
+        roadmap: [],
+      },
+    };
+  }
+  return built;
 }

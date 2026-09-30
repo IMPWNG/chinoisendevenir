@@ -4,8 +4,11 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { getFormuleNumber } from "../lib/formules";
 import { getChosenFormule } from "../lib/studentProgress";
-import AdminMatchingReport from "./AdminMatchingReport";
-import { reportsFromStored } from "../lib/matching/reports";
+import AdminMatchingReport, {
+  type FollowUpMap,
+} from "./AdminMatchingReport";
+import { canonicalDocuments } from "../lib/matching/documents";
+import { explainScore, reportsFromStored, SCORE_WEIGHTS_LINE } from "../lib/matching/reports";
 import { errorMessage } from "../lib/request";
 
 async function authedFetch(path: string, options: RequestInit = {}) {
@@ -52,7 +55,7 @@ const BREAKDOWN_LABELS: Record<string, string> = {
   formule: "Formule",
 };
 
-type ScoreParts = { points?: number | string; max?: number | string };
+type ScoreParts = { points?: number | string; max?: number | string; note?: string | null };
 type KindTone = "confirmed" | "estimated" | "missing" | "verify";
 
 type MatchItem = {
@@ -71,6 +74,7 @@ type MatchItem = {
   to_verify?: string[];
   missing_information?: string[];
   missing_documents?: string[];
+  required_documents?: unknown;
   recommended_actions?: string[];
   teaching_language?: string;
   cost_estimate?: { tuition_cny?: number | string; status?: string };
@@ -84,6 +88,7 @@ type MatchingResult = {
   client_message?: string;
   client_message_ai?: boolean;
   admin_report?: object | null;
+  follow_up?: FollowUpMap;
   overrides?: {
     hsk?: number | null;
     english?: string;
@@ -159,10 +164,11 @@ export default function AdminMatchingPanel({
   const [error, setError] = useState("");
   const [result, setResult] = useState<MatchingResult | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [copied, setCopied] = useState("");
   const [savedInfo, setSavedInfo] = useState("");
   const [runs, setRuns] = useState<MatchingRun[]>([]);
-  const [savingNotes, setSavingNotes] = useState(false);
+  const [runId, setRunId] = useState("");
+  const [followUp, setFollowUp] = useState<FollowUpMap>({});
+  const [savingFollowUp, setSavingFollowUp] = useState(false);
 
   const selected = useMemo(
     () =>
@@ -176,6 +182,12 @@ export default function AdminMatchingPanel({
     const info = meta || {};
     setResult(payload);
     setSelectedId(payload.matches?.[0]?.university_id || null);
+    setFollowUp(payload.follow_up && typeof payload.follow_up === "object" ? payload.follow_up : {});
+    setRunId(
+      info && typeof info === "object" && "id" in info && info.id
+        ? String(info.id)
+        : "",
+    );
     const ov = payload.overrides || {};
     if (ov.hsk === 0 || ov.hsk) setHsk(String(ov.hsk));
     if (ov.english) setEnglish(ov.english);
@@ -218,7 +230,6 @@ export default function AdminMatchingPanel({
   const run = async ({ forceBilan = false } = {}) => {
     setLoading(true);
     setError("");
-    setCopied("");
     try {
       const response = await authedFetch("/api/admin/matching", {
         method: "POST",
@@ -258,34 +269,42 @@ export default function AdminMatchingPanel({
     }
   };
 
-  const copy = async (text: string, key: string) => {
-    await navigator.clipboard.writeText(text);
-    setCopied(key);
-  };
-
-  const saveNotes = async () => {
-    if (!result?.client_message) return;
-    setSavingNotes(true);
+  const saveFollowUp = async () => {
+    if (!runId) {
+      setError("Enregistrez d'abord le matching pour pouvoir suivre les cases.");
+      return;
+    }
+    setSavingFollowUp(true);
     setError("");
     try {
       const response = await authedFetch("/api/admin/matching", {
         method: "POST",
         body: JSON.stringify({
           contactId: contact.id,
-          saveNotes: true,
-          client_message: result.client_message,
+          saveFollowUp: true,
+          runId,
+          follow_up: followUp,
         }),
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Enregistrement impossible");
-      setCopied("notes");
-      onHistory?.();
+      setResult((prev) => (prev ? { ...prev, follow_up: payload.follow_up || followUp } : prev));
+      setSavedInfo("Suivi enregistré.");
     } catch (err: unknown) {
       setError(errorMessage(err));
     } finally {
-      setSavingNotes(false);
+      setSavingFollowUp(false);
     }
   };
+
+  const slug = (value: string) =>
+    value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, 80) || "item";
 
   const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
   const adminReport = result
@@ -464,11 +483,35 @@ export default function AdminMatchingPanel({
 
       {result ? (
         <div className="mt-6 space-y-5">
-          <AdminMatchingReport report={adminReport} />
+          <AdminMatchingReport
+            report={adminReport}
+            criteria={(result.matches || []).map((item: MatchItem) => ({
+              id: item.university_id,
+              name: item.university_name,
+              items: (item.to_verify || []).map((line) => ({
+                key: slug(line),
+                label: line,
+              })),
+            }))}
+            documents={(result.matches || []).map((item: MatchItem) => ({
+              id: item.university_id,
+              name: item.university_name,
+              items: canonicalDocuments(
+                item.required_documents || item.missing_documents,
+              ).map((doc) => ({ key: doc.key, label: doc.label })),
+            }))}
+            followUp={followUp}
+            onFollowUp={(key, patch) =>
+              setFollowUp((prev) => ({ ...prev, [key]: { ...prev[key], ...patch } }))
+            }
+            onSaveFollowUp={saveFollowUp}
+            savingFollowUp={savingFollowUp}
+          />
 
           <p className="text-sm font-bold text-slate-300 uppercase tracking-wide">
             Tableau des universités
           </p>
+          <p className="text-xs text-slate-400 -mt-3">{SCORE_WEIGHTS_LINE}</p>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
             <div className="lg:col-span-2 space-y-2">
               {(result.matches || []).map((item: MatchItem) => (
@@ -515,6 +558,15 @@ export default function AdminMatchingPanel({
                       <p className="text-white font-bold">
                         {value.points}/{value.max}
                       </p>
+                      <p className="text-[11px] text-slate-400 mt-1 normal-case tracking-normal">
+                        {explainScore(key, {
+                          points:
+                            value.points == null || value.points === ""
+                              ? null
+                              : Number(value.points),
+                          note: value.note,
+                        })}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -523,8 +575,18 @@ export default function AdminMatchingPanel({
                 <KindList title="Points forts" items={selected.strengths} tone="confirmed" />
                 <KindList title="Points de vigilance" items={selected.warnings} tone="estimated" />
                 <KindList title="À vérifier auprès de l'université" items={selected.to_verify} tone="verify" />
-                <KindList title="Informations manquantes" items={selected.missing_information} tone="missing" />
-                <KindList title="Documents manquants" items={selected.missing_documents} tone="missing" />
+                <KindList
+                  title="Informations manquantes"
+                  items={(selected.missing_information || []).filter(
+                    (item) => !/^document\s*:/i.test(item),
+                  )}
+                  tone="missing"
+                />
+                <KindList
+                  title="Documents manquants"
+                  items={canonicalDocuments(selected.missing_documents).map((doc) => doc.label)}
+                  tone="missing"
+                />
                 <KindList title="Prochaines actions" items={selected.recommended_actions} tone="verify" />
                 <div className="text-sm text-slate-300 space-y-1">
                   <p>
@@ -549,52 +611,6 @@ export default function AdminMatchingPanel({
                 </div>
               </div>
             ) : null}
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-2 gap-3">
-              <p className="text-sm font-bold text-slate-300 uppercase tracking-wide">
-                Brouillon de réponse client
-              </p>
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={saveNotes}
-                  disabled={savingNotes}
-                  className="text-xs font-bold text-emerald-300 hover:text-emerald-200 disabled:opacity-50"
-                >
-                  {copied === "notes"
-                    ? "Enregistré dans les notes"
-                    : savingNotes
-                      ? "Enregistrement..."
-                      : "Sauvegarder dans les notes"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => copy(result.client_message || "", "message")}
-                  className="text-xs font-bold text-cyan-300 hover:text-cyan-200"
-                >
-                  {copied === "message" ? "Copié" : "Copier"}
-                </button>
-              </div>
-            </div>
-            <p className="text-xs text-amber-200 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2 mb-2">
-              ⚠️ Relire avant envoi — générée automatiquement
-              {(adminReport as { inconsistency_flag?: boolean } | null)?.inconsistency_flag
-                ? " · incohérence bloquante détectée, appeler d’abord"
-                : ""}
-              {result.client_message_ai ? " · relue par l’IA" : ""}.
-            </p>
-            <textarea
-              value={result.client_message}
-              onChange={(e) =>
-                setResult((prev) =>
-                  prev ? { ...prev, client_message: e.target.value } : prev,
-                )
-              }
-              rows={16}
-              className="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-slate-100 text-sm leading-relaxed"
-            />
           </div>
 
           {result.excluded?.length ? (

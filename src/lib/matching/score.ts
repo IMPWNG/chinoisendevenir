@@ -9,7 +9,7 @@ import {
 import { scoreMotivationIa } from "./enrich";
 import { domainPassesHardFilter, domainSimilarity } from "./semantic";
 import { MATCHING_WEIGHTS } from "./weights";
-import { studentHasDiplomaUpload } from "../studentProgress";
+import { canonicalDocuments, isCanonicalDocReceived } from "./documents";
 import type { MatchingStudent } from "./student";
 import type { MatchingUniversity } from "./university";
 import type { DomainSimilarity } from "./semantic";
@@ -107,13 +107,23 @@ function scoreLangue(
 
   if (studentHsk == null && studentIelts == null && !university.englishAvailable) {
     flags.estimated.push("Langue : niveau débutant retenu par défaut");
-    return { points: 20, max: 100, status: "missing", note: "Aucun score de langue : plancher débutant." };
+    return {
+      points: 20,
+      max: 100,
+      status: "missing",
+      note: "Aucun score de langue : le calcul part du niveau débutant.",
+    };
   }
 
   if (studentHsk == null && studentIelts == null) {
     flags.estimated.push("Langue non documentée — score plancher");
     const points = university.englishAvailable ? 35 : 20;
-    return { points, max: 100, status: "missing", note: "Score plancher, débutant total." };
+    return {
+      points,
+      max: 100,
+      status: "missing",
+      note: "Aucun score de langue : le calcul part du niveau débutant.",
+    };
   }
 
   let score = 50;
@@ -141,11 +151,21 @@ function scoreLangue(
     else score += Math.max(ecartIelts * 8, -25);
   }
 
+  let note = "Niveau de langue comparé au seuil publié du programme.";
+  if (studentHsk != null && hskRequired != null) {
+    note =
+      studentHsk >= hskRequired
+        ? `HSK ${studentHsk} : le seuil connu est HSK ${hskRequired}, il est atteint.`
+        : `HSK ${studentHsk} : le seuil connu est HSK ${hskRequired}, il est en dessous.`;
+  } else if (university.englishAvailable && studentHsk == null) {
+    note = "Des cours en anglais sont identifiés : le HSK pèse moins.";
+  }
+
   return {
     points: clamp(Math.round(score), 0, 100),
     max: 100,
     status: studentHsk == null ? "estimated" : "confirmed",
-    note: "Compatibilité linguistique (HSK / IELTS / anglais).",
+    note,
     required: hskRequired,
   };
 }
@@ -187,11 +207,18 @@ function scoreAcademique(
     flags.confirmed.push(`Niveau ${student.targetDegree} proposé`);
   }
 
+  const note =
+    fit === false
+      ? "Le diplôme actuel ne correspond pas au niveau visé."
+      : fit === true
+        ? "Le diplôme correspond au niveau visé."
+        : "La correspondance entre le diplôme et le niveau visé reste à confirmer.";
+
   return {
     points: clamp(Math.round(score), 0, 100),
     max: 100,
     status: student.gpa ? "confirmed" : "estimated",
-    note: "GPA, diplôme et correspondance de domaine.",
+    note,
     required: gpaMin,
   };
 }
@@ -209,11 +236,23 @@ function scoreFinancier(
   const budget = student.budgetCny;
   if (!budget) {
     flags.missing.push("Budget annuel de l'étudiant");
-    return { points: 40, max: 100, status: "missing", note: "Budget non renseigné.", cost: cout };
+    return {
+      points: 40,
+      max: 100,
+      status: "missing",
+      note: "Budget non renseigné : la note reste neutre, ce n'est pas un refus.",
+      cost: cout,
+    };
   }
   if (!university.tuitionMean && university.tuitionMin == null) {
     flags.toVerify.push("Frais de scolarité exacts à demander à l'université");
-    return { points: 45, max: 100, status: "missing", note: "Frais universitaires inconnus.", cost: cout };
+    return {
+      points: 45,
+      max: 100,
+      status: "missing",
+      note: "Frais de l'université inconnus : la note reste neutre.",
+      cost: cout,
+    };
   }
   const ratio = budget / Math.max(cout, 1);
   let points = 10;
@@ -227,11 +266,18 @@ function scoreFinancier(
   else if (points >= 50) flags.estimated.push("Budget tendu : bourse partielle probablement nécessaire");
   else flags.warnings.push("Budget insuffisant sans bourse complète");
 
+  const note =
+    ratio >= 1
+      ? "Le budget couvre les frais estimés."
+      : ratio >= 0.8
+        ? "Le budget est juste par rapport aux frais estimés."
+        : "Le budget ne couvre pas les frais estimés sans bourse.";
+
   return {
     points,
     max: 100,
     status: points >= 80 ? "confirmed" : "estimated",
-    note: `Ratio budget / coût estimé : ${ratio.toFixed(2)}.`,
+    note,
     cost: cout,
   };
 }
@@ -291,7 +337,12 @@ function scoreAge(
 function scoreLocalisation(student: MatchingStudent, university: MatchingUniversity) {
   const cities = (student.preferredCities || []).map(normalizeText).filter(Boolean);
   if (!cities.length) {
-    return { points: 80, max: 100, status: "confirmed", note: "Pas de préférence de ville." };
+    return {
+      points: 80,
+      max: 100,
+      status: "confirmed",
+      note: "Aucune ville préférée : note neutre, pas un avis sur la ville.",
+    };
   }
   const city = normalizeText(university.city);
   const province = normalizeText(university.province);
@@ -376,44 +427,10 @@ export function matchUniversity(
   };
   const score = weighted(breakdown);
   const meta = filter.pass ? categoryMetaFromScore(score) : CATEGORY_META.unready;
-  const missingDocs = (university.documents || []).filter((doc) => {
-    const key = normalizeText(doc);
-    const uploaded = student.documents || [];
-    if (key.includes("passeport") || key.includes("passport")) {
-      return !uploaded.includes("passeport");
-    }
-    if (key.includes("diplome") || key.includes("diploma") || key.includes("degree")) {
-      return !studentHasDiplomaUpload(
-        uploaded.filter((key): key is string => Boolean(key)),
-      );
-    }
-    if (key.includes("hsk")) return !uploaded.includes("hsk");
-    if (key.includes("ielts") || key.includes("toefl")) {
-      return !uploaded.includes("ielts_or_toefl");
-    }
-    if (
-      key.includes("language") ||
-      key.includes("langue") ||
-      key.includes("certificat_langue")
-    ) {
-      return !uploaded.includes("hsk") && !uploaded.includes("ielts_or_toefl");
-    }
-    if (key.includes("csca")) return !uploaded.includes("csca");
-    if (
-      key.includes("medical") ||
-      key.includes("physical") ||
-      key.includes("examen_medical")
-    ) {
-      return !uploaded.includes("formulaire_medical");
-    }
-    if (key.includes("criminal") || key.includes("casier")) {
-      return !uploaded.includes("casier_judiciaire");
-    }
-    return true;
-  });
-  if (missingDocs.length) {
-    flags.missing.push(...missingDocs.slice(0, 6).map((d) => `Document : ${d}`));
-  }
+  const uploaded = (student.documents || []).filter((key): key is string => Boolean(key));
+  const missingDocs = canonicalDocuments(university.documents || [])
+    .filter((doc) => !isCanonicalDocReceived(doc.key, uploaded))
+    .map((doc) => doc.label);
 
   return {
     excluded: false,

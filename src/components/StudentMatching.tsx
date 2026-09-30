@@ -5,18 +5,10 @@ import { useSiteI18n } from "../context/SiteI18nContext";
 
 type TranslateFn = (path: string, vars?: Record<string, string | number>) => string;
 
-const ROAD_STATUS_MARK: Record<string, string> = {
-  fait: "fait",
-  en_cours: "cours",
-  a_venir: "venir",
-  bloquant: "bloc",
-};
-
-type BreakdownRow = {
+type Reading = {
   key: string;
   label: string;
-  points?: number | null;
-  max?: number;
+  text: string;
 };
 
 type Uni = {
@@ -27,22 +19,10 @@ type Uni = {
   category?: string;
   best_match?: boolean;
   score_phrase?: string;
-  breakdown?: BreakdownRow[];
+  readings?: Reading[];
   strengths?: string[];
   vigilance?: string[];
-  cost?: { label?: string };
-  deadline?: string;
-  language?: string;
-  scholarships?: string[];
-  documents?: string[];
-};
-
-type RoadmapRow = {
-  n: number | string;
-  step: string;
-  status?: string;
-  you?: string;
-  we?: string;
+  fact_lines?: string[];
 };
 
 type MatchingDoc = {
@@ -50,6 +30,11 @@ type MatchingDoc = {
   name: string;
   status?: string;
   note?: string;
+};
+
+type DocGroup = {
+  name: string;
+  documents: MatchingDoc[];
 };
 
 type GrantGroup = {
@@ -63,12 +48,12 @@ type StudentReport = {
   profile_blurb?: string;
   universities?: Uni[];
   completeness?: { remaining_note?: string };
+  documents_by_university?: DocGroup[];
   options_synthesis?: {
     why_top?: string;
     application_mix?: string;
     no_safety_note?: string;
   };
-  roadmap?: RoadmapRow[];
   documents?: MatchingDoc[];
   scholarships?: { groups?: GrantGroup[]; disclaimer?: string };
   closing?: string;
@@ -79,26 +64,6 @@ type Matching = {
   student_report?: StudentReport;
   orientation_bilan?: StudentReport;
 };
-
-function ScoreBar({
-  points,
-  max,
-  emptyLabel,
-}: {
-  points?: number | null;
-  max?: number;
-  emptyLabel: string;
-}) {
-  if (points == null || !max) {
-    return <span className="student-meter-empty">{emptyLabel}</span>;
-  }
-  const pct = Math.max(0, Math.min(100, Math.round((points / max) * 100)));
-  return (
-    <span className="student-meter" title={`${points}/${max}`}>
-      <span className="student-meter-fill" style={{ width: `${pct}%` }} />
-    </span>
-  );
-}
 
 function UniCard({
   uni,
@@ -133,18 +98,15 @@ function UniCard({
       </button>
 
       <p className="student-uni-score">{uni.score_phrase}</p>
-      <div className="student-meters">
-        {(uni.breakdown || []).map((row: BreakdownRow) => (
-          <div key={row.key} className="student-meter-row">
-            <span>{row.label}</span>
-            <ScoreBar
-              points={row.points}
-              max={row.max}
-              emptyLabel={t("student.matching.toSpecify")}
-            />
-          </div>
-        ))}
-      </div>
+      {uni.readings?.length ? (
+        <ul className="student-readings">
+          {uni.readings.map((row) => (
+            <li key={row.key}>
+              <strong>{row.label}.</strong> {row.text}
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       {open ? (
         <div className="student-uni-full-body">
@@ -168,28 +130,12 @@ function UniCard({
               </ul>
             </div>
           ) : null}
-          <p className="student-uni-facts">
-            {t("student.matching.fees")} {uni.cost?.label || t("student.matching.feesFallback")}
-            <br />
-            {t("student.matching.deadline")} {uni.deadline}
-            <br />
-            {t("student.matching.language")} {uni.language}
-            {uni.scholarships?.length ? (
-              <>
-                <br />
-                {t("student.matching.listedScholarships")} {uni.scholarships.join(", ")}
-              </>
-            ) : (
-              <>
-                <br />
-                {t("student.matching.scholarshipsFallback")}
-              </>
-            )}
-          </p>
-          {uni.documents?.length ? (
-            <p className="student-uni-facts">
-              {t("student.matching.extraDocs")} {uni.documents.join(", ")}
-            </p>
+          {uni.fact_lines?.length ? (
+            <div className="student-uni-facts">
+              {uni.fact_lines.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
           ) : null}
         </div>
       ) : (
@@ -292,58 +238,33 @@ export default function StudentMatching({
         </section>
       ) : null}
 
-      {report.roadmap?.length ? (
-        <section className="student-report-block">
-          <h3 className="student-report-title">{t("student.matching.nextSteps")}</h3>
-          <ol className="student-roadmap">
-            {report.roadmap.map((row: RoadmapRow) => {
-              const mark = ROAD_STATUS_MARK[row.status || "a_venir"] || "venir";
-              const statusKey = row.status && t(`student.matching.status.${row.status}`) !== `student.matching.status.${row.status}`
-                ? row.status
-                : "a_venir";
-              return (
-                <li key={row.n} className={`is-${mark}`}>
-                  <div className="student-roadmap-top">
-                    <span className="student-roadmap-n">{row.n}</span>
-                    <p className="student-roadmap-step">{row.step}</p>
-                    <span className={`student-roadmap-status is-${mark}`}>
-                      {t(`student.matching.status.${statusKey}`)}
-                    </span>
-                  </div>
-                  <p>
-                    <strong>{t("student.matching.you")}</strong> {row.you}
-                  </p>
-                  <p>
-                    <strong>{t("student.matching.we")}</strong> {row.we}
-                  </p>
-                </li>
-              );
-            })}
-          </ol>
-        </section>
-      ) : null}
-
-      {report.documents?.length ? (
+      {report.documents_by_university?.length ? (
         <section className="student-report-block">
           <h3 className="student-report-title">{t("student.matching.docsToPrep")}</h3>
-          <ul className="student-doc-check">
-            {report.documents.map((doc: MatchingDoc) => (
-              <li
-                key={doc.key || doc.name}
-                className={doc.status === "fourni" ? "is-ok" : "is-miss"}
-              >
-                <span>
-                  {doc.status === "fourni"
-                    ? t("student.matching.provided")
-                    : t("student.matching.toProvide")}
-                </span>
-                <p>
-                  {doc.name}
-                  {doc.note ? ` — ${doc.note}` : ""}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <p className="student-report-copy">
+            Une pièce déjà listée pour une université vaut pour les suivantes.
+            Dès qu’elle est déposée, son statut se met à jour partout.
+          </p>
+          {report.documents_by_university.map((group) => (
+            <div key={group.name} className="student-doc-group">
+              <p className="student-uni-kicker">{group.name}</p>
+              <ul className="student-doc-check">
+                {group.documents.map((doc) => (
+                  <li
+                    key={`${group.name}-${doc.key || doc.name}`}
+                    className={doc.status === "fourni" ? "is-ok" : "is-miss"}
+                  >
+                    <span>
+                      {doc.status === "fourni"
+                        ? t("student.matching.provided")
+                        : t("student.matching.toProvide")}
+                    </span>
+                    <p>{doc.name}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
       ) : null}
 

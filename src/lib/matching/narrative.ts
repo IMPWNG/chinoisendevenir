@@ -1,5 +1,6 @@
 import { getFormuleAccess, getFormuleByNumber, displayFormulePrice } from "../formules";
 import { studentHasDiplomaUpload } from "../studentProgress";
+import { canonicalDocuments, type CanonDoc } from "./documents";
 import { CATEGORY_META } from "./constants";
 import type { MatchingStudent } from "./student";
 import type { MatchingGap } from "./gaps";
@@ -10,7 +11,13 @@ type ScoreBreakdown = Record<
 >;
 
 export type UniversityMatch = {
-  university?: { englishAvailable?: boolean; city?: string | null; province?: string | null; website?: string | null };
+  university?: {
+    englishAvailable?: boolean;
+    city?: string | null;
+    province?: string | null;
+    website?: string | null;
+    documents?: unknown[];
+  };
   university_id?: string | null;
   university_name?: string | null;
   name?: string | null;
@@ -30,6 +37,7 @@ export type UniversityMatch = {
   missing_information?: unknown;
   to_verify?: string[];
   missing_documents?: (string | { key?: string; status?: string; label?: string } | undefined)[];
+  required_documents?: CanonDoc[];
   scholarships_possible?: unknown[];
   cost_estimate?: {
     total_cny?: number | null;
@@ -135,9 +143,17 @@ export function buildUniversityAnalysis(match: UniversityMatch, student: Matchin
     estimated_information: match.estimated_information,
     strengths: strengths.slice(0, 6),
     warnings: [...new Set(vigilance)].slice(0, 6),
-    missing_information: match.missing_information,
+    missing_information: (Array.isArray(match.missing_information)
+      ? match.missing_information
+      : []
+    ).filter((line) => !/^document\s*:/i.test(String(line))),
     to_verify: match.to_verify,
-    missing_documents: match.missing_documents,
+    missing_documents: canonicalDocuments(match.missing_documents).map((doc) => doc.label),
+    required_documents: canonicalDocuments(
+      match.required_documents?.length
+        ? match.required_documents
+        : match.university?.documents,
+    ),
     risks: [...new Set(vigilance)].slice(0, 5),
     scholarships_possible: match.scholarships_possible,
     cost_estimate: match.cost_estimate,

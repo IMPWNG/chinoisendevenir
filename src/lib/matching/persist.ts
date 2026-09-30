@@ -276,6 +276,51 @@ export async function listMatchingRuns(
     .slice(0, 20);
 }
 
+export function sanitizeFollowUp(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  const out: Record<string, { done: boolean; note: string }> = {};
+  Object.entries(value as Record<string, unknown>).slice(0, 400).forEach(([key, row]) => {
+    if (!row || typeof row !== "object" || Array.isArray(row)) return;
+    const item = row as { done?: unknown; note?: unknown };
+    const safeKey = String(key).slice(0, 180);
+    if (!safeKey) return;
+    out[safeKey] = {
+      done: Boolean(item.done),
+      note: String(item.note || "").slice(0, 500),
+    };
+  });
+  return out;
+}
+
+export async function saveMatchingFollowUp(
+  admin: AdminClient,
+  contactId: unknown,
+  runId: unknown,
+  followUp: unknown,
+) {
+  const id = String(runId || "");
+  if (!id) throw new Error("Matching introuvable");
+  const { data, error } = await admin
+    .from("matching_runs")
+    .select("payload")
+    .eq("id", id)
+    .eq("contact_id", String(contactId))
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) throw new Error("Matching introuvable");
+  const payload = {
+    ...asRecord(data.payload),
+    follow_up: sanitizeFollowUp(followUp),
+  };
+  const { error: updateError } = await admin
+    .from("matching_runs")
+    .update({ payload })
+    .eq("id", id)
+    .eq("contact_id", String(contactId));
+  if (updateError) throw updateError;
+  return payload.follow_up;
+}
+
 export async function appendMessageToNotes(
   admin: AdminClient,
   contactId: unknown,

@@ -30,7 +30,6 @@ import {
 } from "../lib/contactForm";
 import {
   DOMAINES_ETUDES,
-  diplomaLevelFromStudent,
   getDisplayedStepIndex,
   getRequiredStudentDocuments,
   getVisibleStudentSteps,
@@ -182,8 +181,23 @@ export default function StudentDashboard() {
     getDisplayedStepIndex(profile),
     Math.max(visibleSteps.length - 1, 0),
   );
-  const docsToShow =
-    requiredDocuments.length > 0
+  const reportDocs = matching?.student_report?.documents || [];
+  const docsToShow = reportDocs.length
+    ? reportDocs
+        .filter((doc) => doc.key && !doc.key.startsWith("other:"))
+        .map((doc) => {
+          const live = requiredDocuments.find((item) => item.key === doc.key);
+          const received = live?.status === "received" || doc.status === "fourni";
+          return {
+            key: String(doc.key),
+            label: doc.name,
+            description: live?.description || "",
+            icon: live?.icon || "",
+            status: received ? "received" : "missing",
+            file: live?.file || null,
+          };
+        })
+    : requiredDocuments.length > 0
       ? requiredDocuments
       : getRequiredStudentDocuments(profile || {}).map((doc) => ({
           ...doc,
@@ -270,6 +284,7 @@ export default function StudentDashboard() {
       setAdminDocuments(data.adminDocuments || []);
       setSelectedFiles((prev) => ({ ...prev, [docKey]: null }));
       setMessage({ type: "success", text: t("student.docSent") });
+      await loadProfile({ silent: true });
     } catch (err) {
       setMessage({ type: "error", text: errorMessage(err) });
     } finally {
@@ -348,9 +363,6 @@ export default function StudentDashboard() {
     );
   }
 
-  const diplomaLevel = diplomaLevelFromStudent(profile?.dernier_diplome);
-  const docsIntroKey =
-    diplomaLevel === "doctorat" ? "master" : diplomaLevel || "autre";
   const subtitle = !hasForm
     ? t("student.noFile")
     : unlocked
@@ -662,13 +674,6 @@ export default function StudentDashboard() {
                         <h2 className="card-title">{t("student.docsTitle")}</h2>
                         {access.documents ? (
                           <>
-                            <h3 className="doc-school-title">
-                              <span>🏫</span>
-                              {t("student.schoolDocs")}
-                            </h3>
-                            <p className="card-subtitle">
-                              {t(`student.docsIntro.${docsIntroKey}`)}
-                            </p>
                             <p className="card-subtitle">
                               {missingCount > 0
                                 ? t(

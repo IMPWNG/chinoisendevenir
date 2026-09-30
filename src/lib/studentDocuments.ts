@@ -5,6 +5,7 @@ import {
 import {
   REQUIRED_STUDENT_DOCUMENTS,
   getRequiredStudentDocuments,
+  getStudentDocumentSpec,
   legacyDiplomaDocKey,
   type ContactRow,
 } from "./studentProgress";
@@ -109,6 +110,7 @@ export async function getRequiredDocumentsStatus(
   admin: AdminClient,
   contactId: unknown,
   contact: ContactRow | null = null,
+  extraKeys: string[] = [],
 ) {
   let diplome = contact?.dernier_diplome;
   if (!diplome && contactId) {
@@ -121,6 +123,11 @@ export async function getRequiredDocumentsStatus(
   }
 
   const specs = getRequiredStudentDocuments({ dernier_diplome: diplome });
+  extraKeys.forEach((key) => {
+    if (specs.some((spec) => spec.key === key)) return;
+    const extra = getStudentDocumentSpec(key);
+    if (extra) specs.push(extra);
+  });
   const results = await Promise.all(
     specs.map(async (spec) => {
       const folder = requiredFolder(contactId, spec.key);

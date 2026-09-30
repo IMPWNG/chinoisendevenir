@@ -313,6 +313,69 @@ export const STUDENT_DOCUMENT_CATALOG = [
     description: `Certificat de non-condamnation (No Criminal Record), récent (${FILE_HINT}).`,
     levels: "all",
   },
+  {
+    key: "photo",
+    label: "Photo d'identité",
+    icon: "",
+    description: `Photo d'identité récente (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "transcripts",
+    label: "Relevés de notes",
+    icon: "",
+    description: `Relevés de notes, avec traduction si besoin (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "motivation",
+    label: "Lettre de motivation",
+    icon: "",
+    description: `Lettre de motivation, study plan ou personal statement (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "recommendation",
+    label: "Lettres de recommandation",
+    icon: "",
+    description: `Lettres de recommandation demandées par l'université (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "video",
+    label: "Vidéo de présentation",
+    icon: "",
+    description: `Vidéo de présentation demandée par l'université (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "financial_proof",
+    label: "Preuve de financement",
+    icon: "",
+    description: `Attestation de fonds ou garantie financière (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "application_form",
+    label: "Formulaire de candidature",
+    icon: "",
+    description: `Formulaire de demande de l'université (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "resume",
+    label: "CV",
+    icon: "",
+    description: `Curriculum vitae (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "diplome",
+    label: "Diplôme",
+    icon: "",
+    description: `Dernier diplôme obtenu, avec traduction si besoin (${FILE_HINT}).`,
+    levels: [],
+  },
 ];
 
 export const REQUIRED_STUDENT_DOCUMENTS = STUDENT_DOCUMENT_CATALOG;
@@ -340,6 +403,10 @@ export function getRequiredStudentDocuments(
   return STUDENT_DOCUMENT_CATALOG.filter(
     (doc) => doc.levels === "all" || doc.levels.includes(level),
   );
+}
+
+export function getStudentDocumentSpec(key: unknown) {
+  return STUDENT_DOCUMENT_CATALOG.find((doc) => doc.key === String(key || "")) || null;
 }
 
 export function getSchoolDocumentsIntro(dernierDiplome: unknown) {

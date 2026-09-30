@@ -14,6 +14,8 @@ import {
   requiredFolder,
   validateDocumentFile,
 } from "@/lib/studentDocuments";
+import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
+import { uploadKeysFromMatches } from "@/lib/matching/documents";
 
 export async function GET(request: Request) {
   try {
@@ -101,8 +103,24 @@ export async function POST(request: Request) {
       user_admin: auth.user.email,
     });
 
+    let extraKeys: string[] = [];
+    try {
+      const runs = (await listMatchingRuns(auth.admin, auth.contact.id)) as Array<{
+        result?: { kind?: string; matches?: unknown };
+      }>;
+      const universityRun = runs.find((run) => run.result?.kind !== MATCHING_KIND_CHINESE);
+      extraKeys = uploadKeysFromMatches(universityRun?.result?.matches);
+    } catch (error) {
+      console.warn("document matching keys:", error);
+    }
+
     const [requiredDocuments, adminDocuments] = await Promise.all([
-      getRequiredDocumentsStatus(auth.admin, auth.contact.id, auth.contact),
+      getRequiredDocumentsStatus(
+        auth.admin,
+        auth.contact.id,
+        auth.contact,
+        extraKeys,
+      ),
       listAdminSentDocuments(auth.admin, auth.contact.id),
     ]);
 

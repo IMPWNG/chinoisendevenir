@@ -1696,6 +1696,37 @@ a.formule-card-btn {
   color: #334155;
 }
 
+.student-readings {
+  list-style: none;
+  margin: 10px 14px 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.student-readings li {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.student-readings strong {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.student-doc-group {
+  margin-top: 14px;
+}
+
+.student-uni-facts p {
+  margin: 0;
+}
+
+.student-uni-facts p + p {
+  margin-top: 6px;
+}
+
 .student-meters {
   display: grid;
   gap: 6px;

@@ -12,6 +12,7 @@ import {
   compactMatchingResult,
   listMatchingRuns,
   matchingSummary,
+  saveMatchingFollowUp,
   saveMatchingRun,
 } from "@/lib/matching/persist";
 import { asString, errorMessage, readJsonObject } from "@/lib/request";
@@ -73,6 +74,16 @@ export async function POST(request: Request) {
     const contactId = asString(body.contactId).trim();
     if (!contactId) {
       return NextResponse.json({ error: "contactId manquant" }, { status: 400 });
+    }
+
+    if (body.saveFollowUp) {
+      const followUp = await saveMatchingFollowUp(
+        auth.admin,
+        contactId,
+        asString(body.runId),
+        body.follow_up,
+      );
+      return NextResponse.json({ success: true, follow_up: followUp });
     }
 
     if (body.saveNotes) {

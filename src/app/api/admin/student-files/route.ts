@@ -16,10 +16,22 @@ import {
 } from "@/lib/studentDocuments";
 import { asString, readJsonObject } from "@/lib/request";
 import type { AdminClient } from "@/lib/supabaseAdmin";
+import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
+import { uploadKeysFromMatches } from "@/lib/matching/documents";
 
 async function loadFiles(admin: AdminClient, contactId: string) {
+  let extraKeys: string[] = [];
+  try {
+    const runs = (await listMatchingRuns(admin, contactId)) as Array<{
+      result?: { kind?: string; matches?: unknown };
+    }>;
+    const universityRun = runs.find((run) => run.result?.kind !== MATCHING_KIND_CHINESE);
+    extraKeys = uploadKeysFromMatches(universityRun?.result?.matches);
+  } catch (error) {
+    console.warn("student-files matching keys:", error);
+  }
   const [requiredDocuments, adminDocuments] = await Promise.all([
-    getRequiredDocumentsStatus(admin, contactId),
+    getRequiredDocumentsStatus(admin, contactId, null, extraKeys),
     listAdminSentDocuments(admin, contactId),
   ]);
   return { requiredDocuments, adminDocuments };
