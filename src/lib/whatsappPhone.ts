@@ -17,3 +17,16 @@ export function whatsappMsisdn(raw: unknown, country?: string | null): string | 
   if (!/^[1-9]\d{7,14}$/.test(digits)) return null;
   return digits;
 }
+
+/** WhatsApp Business label « Étude Chine », emoji and accents ignored. */
+export function isEtudeChineLabel(name: unknown): boolean {
+  const folded = String(name ?? "")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/\p{Extended_Pictographic}|\p{Regional_Indicator}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return folded === "etude chine" || folded.startsWith("etude chine ");
+}

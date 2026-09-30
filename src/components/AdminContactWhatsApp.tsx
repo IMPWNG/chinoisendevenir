@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { adminSupabase } from "../lib/supabase";
 import { errorMessage } from "../lib/request";
@@ -10,6 +10,21 @@ type WhatsappContact = {
   phone?: string | null;
   prenom?: string | null;
   nom?: string | null;
+};
+
+type ThreadMessage = {
+  id: string;
+  body: string;
+  fromMe: boolean;
+  at: number;
+};
+
+type WhatsappCard = {
+  onWhatsapp: boolean;
+  saved: boolean;
+  onList: boolean;
+  listFound: boolean;
+  messages: ThreadMessage[];
 };
 
 async function authedFetch(path: string, options: RequestInit = {}) {
@@ -27,6 +42,12 @@ async function authedFetch(path: string, options: RequestInit = {}) {
   });
 }
 
+function localeFor(lang: string) {
+  if (lang === "zh") return "zh-CN";
+  if (lang === "en") return "en-GB";
+  return "fr-FR";
+}
+
 export default function AdminContactWhatsApp({
   contact,
   onDone,
@@ -34,20 +55,68 @@ export default function AdminContactWhatsApp({
   contact: WhatsappContact;
   onDone?: () => void;
 }) {
-  const { t } = useAdminI18n();
+  const { t, lang } = useAdminI18n();
   const [text, setText] = useState("");
-  const [busy, setBusy] = useState<"send" | "save" | null>(null);
+  const [busy, setBusy] = useState<"send" | "save" | "label" | null>(null);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [card, setCard] = useState<WhatsappCard | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const requestRef = useRef(0);
   const phone = String(contact.phone || "").trim();
+
+  async function loadCard() {
+    if (!phone) {
+      setCard(null);
+      return;
+    }
+    const requestId = ++requestRef.current;
+    setLoading(true);
+    try {
+      const response = await authedFetch(
+        `/api/admin/whatsapp?contactId=${encodeURIComponent(contact.id)}`,
+      );
+      const data = await response.json().catch(() => ({}));
+      if (requestRef.current !== requestId) return;
+      if (!response.ok) {
+        setCard(null);
+        setError(
+          t("dashboard.whatsappFail", {
+            error: data.error || t("unknownError"),
+          }),
+        );
+        return;
+      }
+      setCard(data as WhatsappCard);
+    } catch (caught) {
+      if (requestRef.current !== requestId) return;
+      const message = errorMessage(caught);
+      setError(
+        t("dashboard.whatsappFail", {
+          error: message === "SESSION" ? t("sessionExpired") : message || t("unknownError"),
+        }),
+      );
+    } finally {
+      if (requestRef.current === requestId) setLoading(false);
+    }
+  }
 
   useEffect(() => {
     setText("");
     setNotice("");
     setError("");
+    setCard(null);
+    void loadCard();
+    // reload when the open file changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contact.id]);
 
-  async function run(action: "send" | "save") {
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ block: "nearest" });
+  }, [card?.messages.length]);
+
+  async function run(action: "send" | "save" | "label") {
     if (!phone) {
       setError(t("dashboard.whatsappNoPhone"));
       return;
@@ -84,9 +153,14 @@ export default function AdminContactWhatsApp({
       }
       if (action === "send") setText("");
       setNotice(
-        action === "send" ? t("dashboard.whatsappSent") : t("dashboard.whatsappSaved"),
+        action === "send"
+          ? t("dashboard.whatsappSent")
+          : action === "label"
+            ? t("dashboard.whatsappListSaved")
+            : t("dashboard.whatsappSaved"),
       );
       onDone?.();
+      await loadCard();
     } catch (caught) {
       const message = errorMessage(caught);
       setError(
@@ -98,6 +172,9 @@ export default function AdminContactWhatsApp({
       setBusy(null);
     }
   }
+
+  const onWhatsapp = card?.onWhatsapp === true;
+  const messages = card?.messages || [];
 
   return (
     <div className="mb-8 pb-8 border-b border-slate-700/50">
@@ -121,6 +198,80 @@ export default function AdminContactWhatsApp({
           className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-slate-300"
         />
       </div>
+
+      {card ? (
+        <div className="mb-4 flex flex-wrap gap-2">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-bold ${
+              card.saved
+                ? "bg-emerald-500/20 text-emerald-200"
+                : "bg-slate-700 text-slate-300"
+            }`}
+          >
+            {card.saved ? t("dashboard.whatsappInContacts") : t("dashboard.whatsappNotInContacts")}
+          </span>
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-bold ${
+              card.onList
+                ? "bg-emerald-500/20 text-emerald-200"
+                : "bg-slate-700 text-slate-300"
+            }`}
+          >
+            {card.onList ? t("dashboard.whatsappOnList") : t("dashboard.whatsappNotOnList")}
+          </span>
+        </div>
+      ) : null}
+
+      <div className="mb-4">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+          {t("dashboard.whatsappHistory")}
+        </p>
+        {loading && !card ? (
+          <p className="text-sm text-slate-400">{t("dashboard.whatsappHistoryLoading")}</p>
+        ) : card && !onWhatsapp ? (
+          <p className="text-sm text-slate-400">{t("dashboard.whatsappNotOnWhatsapp")}</p>
+        ) : messages.length === 0 ? (
+          <p className="text-sm text-slate-400">{t("dashboard.whatsappHistoryEmpty")}</p>
+        ) : (
+          <div className="max-h-80 overflow-y-auto space-y-3 pr-1 rounded-xl bg-slate-900/40 border border-slate-700/40 p-4">
+            {messages.map((message, index) => (
+              <div
+                key={`${message.id}-${index}`}
+                className={`flex ${message.fromMe ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
+                    message.fromMe
+                      ? "bg-emerald-600/90 text-white rounded-br-md"
+                      : "bg-slate-700/80 text-slate-100 rounded-bl-md"
+                  }`}
+                >
+                  <p
+                    className={`text-[11px] font-semibold mb-1 ${
+                      message.fromMe ? "text-emerald-100" : "text-slate-300"
+                    }`}
+                  >
+                    {message.fromMe
+                      ? t("dashboard.whatsappHistoryYou")
+                      : t("dashboard.whatsappHistoryThem")}
+                    {message.at
+                      ? ` · ${new Date(message.at).toLocaleString(localeFor(lang), {
+                          day: "2-digit",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}`
+                      : ""}
+                  </p>
+                  <p className="whitespace-pre-wrap leading-relaxed">{message.body}</p>
+                </div>
+              </div>
+            ))}
+            <div ref={bottomRef} />
+          </div>
+        )}
+      </div>
+
       <div className="mb-4">
         <label
           htmlFor="admin-whatsapp-text"
@@ -131,7 +282,7 @@ export default function AdminContactWhatsApp({
         <textarea
           id="admin-whatsapp-text"
           value={text}
-          disabled={busy !== null}
+          disabled={busy !== null || !onWhatsapp}
           onChange={(e) => setText(e.target.value)}
           rows={4}
           maxLength={4096}
@@ -139,24 +290,39 @@ export default function AdminContactWhatsApp({
           className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none disabled:opacity-50"
         />
       </div>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3">
         <button
           type="button"
-          disabled={busy !== null || !phone}
+          disabled={busy !== null || !phone || !onWhatsapp}
           onClick={() => run("send")}
           className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {busy === "send" ? t("sending") : t("dashboard.whatsappSend")}
         </button>
-        <button
-          type="button"
-          disabled={busy !== null || !phone}
-          onClick={() => run("save")}
-          className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {busy === "save" ? t("saving") : t("dashboard.whatsappSave")}
-        </button>
+        {onWhatsapp && card && !card.saved ? (
+          <button
+            type="button"
+            disabled={busy !== null}
+            onClick={() => run("save")}
+            className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {busy === "save" ? t("saving") : t("dashboard.whatsappSave")}
+          </button>
+        ) : null}
+        {onWhatsapp && card?.listFound && !card.onList ? (
+          <button
+            type="button"
+            disabled={busy !== null}
+            onClick={() => run("label")}
+            className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {busy === "label" ? t("saving") : t("dashboard.whatsappAddList")}
+          </button>
+        ) : null}
       </div>
+      {onWhatsapp && card && !card.listFound ? (
+        <p className="mt-3 text-sm text-amber-200">{t("dashboard.whatsappListMissing")}</p>
+      ) : null}
       {notice ? (
         <p className="mt-3 text-sm text-emerald-300" role="status">
           {notice}
