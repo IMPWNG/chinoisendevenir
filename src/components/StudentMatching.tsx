@@ -37,13 +37,6 @@ type DocGroup = {
   documents: MatchingDoc[];
 };
 
-type GrantGroup = {
-  type: string;
-  title: string;
-  explanation?: string;
-  names?: string[];
-};
-
 type StudentReport = {
   profile_blurb?: string;
   universities?: Uni[];
@@ -55,8 +48,6 @@ type StudentReport = {
     no_safety_note?: string;
   };
   documents?: MatchingDoc[];
-  scholarships?: { groups?: GrantGroup[]; disclaimer?: string };
-  closing?: string;
   disclaimer?: string;
 };
 
@@ -156,9 +147,7 @@ export default function StudentMatching({
   const report = matching?.student_report || matching?.orientation_bilan;
   const unis = report?.universities || [];
   const [openId, setOpenId] = useState<string | null>(null);
-  const [openGrant, setOpenGrant] = useState<string | null>(null);
 
-  const grants = report?.scholarships?.groups || [];
   const kicker =
     Number(formuleNumber) >= 3
       ? t("student.matching.untilDeparture")
@@ -241,10 +230,6 @@ export default function StudentMatching({
       {report.documents_by_university?.length ? (
         <section className="student-report-block">
           <h3 className="student-report-title">{t("student.matching.docsToPrep")}</h3>
-          <p className="student-report-copy">
-            Une pièce déjà listée pour une université vaut pour les suivantes.
-            Dès qu’elle est déposée, son statut se met à jour partout.
-          </p>
           {report.documents_by_university.map((group) => (
             <div key={group.name} className="student-doc-group">
               <p className="student-uni-kicker">{group.name}</p>
@@ -268,44 +253,6 @@ export default function StudentMatching({
         </section>
       ) : null}
 
-      {grants.length ? (
-        <section className="student-report-block">
-          <h3 className="student-report-title">
-            {t("student.matching.possibleScholarships")}
-          </h3>
-          <div className="student-grant-list">
-            {grants.map((group: GrantGroup) => (
-              <div key={group.type} className="student-grant">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenGrant(openGrant === group.type ? null : group.type)
-                  }
-                >
-                  {group.title}
-                </button>
-                {openGrant === group.type ? (
-                  <div>
-                    <p>{group.explanation}</p>
-                    {group.names?.length ? (
-                      <p>{group.names.join(", ")}</p>
-                    ) : (
-                      <p>{t("student.matching.noGrant")}</p>
-                    )}
-                  </div>
-                ) : null}
-              </div>
-            ))}
-          </div>
-          <p className="student-report-copy is-note">
-            {report.scholarships?.disclaimer}
-          </p>
-        </section>
-      ) : null}
-
-      {report.closing ? (
-        <p className="student-report-close">{report.closing}</p>
-      ) : null}
       <p className="student-bilan-foot">
         {report.disclaimer || t("student.matching.disclaimer")}
       </p>

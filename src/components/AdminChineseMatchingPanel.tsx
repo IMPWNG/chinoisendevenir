@@ -33,24 +33,9 @@ const BREAKDOWN_LABELS: Record<string, string> = {
 };
 
 const RENTREE_OPTIONS = [
-  {
-    key: "printemps_2027",
-    label: "Printemps 2027",
-    courses: "Février–mars 2027",
-    apply: "Souvent entre septembre et décembre 2026",
-  },
-  {
-    key: "automne_2027",
-    label: "Automne 2027",
-    courses: "Août–septembre 2027",
-    apply: "Les candidatures peuvent ouvrir dès fin 2026 ou début 2027",
-  },
-  {
-    key: "rentree_libre",
-    label: "Rentrée libre",
-    courses: "Selon le calendrier de l’école",
-    apply: "Dès qu’une session est ouverte",
-  },
+  { key: "printemps_2027", label: "Printemps 2027" },
+  { key: "automne_2027", label: "Automne 2027" },
+  { key: "rentree_libre", label: "Rentrée libre" },
 ] as const;
 
 type ScoreParts = { points?: number | string; max?: number | string };
@@ -58,13 +43,17 @@ type ScoreParts = { points?: number | string; max?: number | string };
 type ChineseMatch = {
   university_id: string;
   university_name: string;
+  program_name?: string;
   score?: number;
   category?: string;
   city?: string;
   province?: string;
+  website?: string;
   breakdown?: Record<string, ScoreParts>;
-  cost?: { label?: string };
+  cost?: { label?: string; lines?: string[] };
   intake_label?: string;
+  facts?: string[];
+  deadline_raw?: string | null;
   why?: string[];
   vigilance?: string[];
 };
@@ -269,36 +258,6 @@ export default function AdminChineseMatchingPanel({
         </label>
       </div>
 
-      <div className="mb-3 overflow-x-auto rounded-xl border border-slate-600/50">
-        <table className="w-full text-left text-xs text-slate-300">
-          <thead className="bg-slate-800/80 text-slate-400">
-            <tr>
-              <th className="px-3 py-2 font-semibold">Rentrée visée</th>
-              <th className="px-3 py-2 font-semibold">Début habituel des cours</th>
-              <th className="px-3 py-2 font-semibold">
-                Période indicative pour candidater
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {RENTREE_OPTIONS.map((option) => (
-              <tr
-                key={option.key}
-                className={
-                  dateRentree === option.key
-                    ? "bg-amber-500/15 text-white"
-                    : "border-t border-slate-700/60"
-                }
-              >
-                <td className="px-3 py-2 font-semibold">{option.label}</td>
-                <td className="px-3 py-2">{option.courses}</td>
-                <td className="px-3 py-2">{option.apply}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
       <button
         type="button"
         onClick={run}
@@ -415,10 +374,27 @@ export default function AdminChineseMatchingPanel({
                     </div>
                   ))}
                 </div>
-                <p className="text-sm text-slate-300">{selected.cost?.label}</p>
+                {(selected.cost?.lines?.length
+                  ? selected.cost.lines
+                  : selected.cost?.label
+                    ? [selected.cost.label]
+                    : []
+                ).map((line) => (
+                  <p key={line} className="text-sm text-slate-200">
+                    {line}
+                  </p>
+                ))}
                 <p className="text-sm text-slate-300">
-                  Rentrée : {selected.intake_label}
+                  Rentrée connue : {selected.intake_label}
                 </p>
+                {selected.facts?.map((line) => (
+                  <p key={line} className="text-sm text-slate-300">
+                    {line}
+                  </p>
+                ))}
+                {selected.deadline_raw && /[\u4e00-\u9fff]/.test(selected.deadline_raw) ? (
+                  <p className="text-sm text-slate-400">{selected.deadline_raw}</p>
+                ) : null}
                 {selected.why?.length ? (
                   <ul className="text-sm text-emerald-200 space-y-1">
                     {selected.why.map((line: string) => (

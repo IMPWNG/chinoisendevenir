@@ -1,3 +1,4 @@
+import { parseTuitionCny } from "../languageProgramImport";
 import { DEFAULT_AGE_MIN, DEFAULT_LIVING_COST_CNY } from "./weights";
 
 export type UniversityRow = {
@@ -40,6 +41,56 @@ function toNumber(value: unknown) {
   if (value === "" || value === null || value === undefined) return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+export function resolveLanguageTuition({
+  min,
+  max,
+  semester,
+  year,
+  text,
+}: {
+  min?: number | null;
+  max?: number | null;
+  semester?: number | null;
+  year?: number | null;
+  text?: string | null;
+}) {
+  const parsed = text
+    ? parseTuitionCny(text)
+    : { min: null, max: null, semester: null, year: null };
+  const semesterValue = semester ?? parsed.semester;
+  const yearValue = year ?? parsed.year;
+  if (semesterValue != null && yearValue != null && yearValue !== semesterValue) {
+    return { semester: semesterValue, year: yearValue, amount: null, period: "both" as const };
+  }
+  if (semesterValue != null) {
+    return {
+      semester: semesterValue,
+      year: yearValue != null && yearValue !== semesterValue ? yearValue : semesterValue * 2,
+      amount: null,
+      period: "semester" as const,
+    };
+  }
+  if (yearValue != null) {
+    return { semester: null, year: yearValue, amount: null, period: "year" as const };
+  }
+  if (min != null && max != null && max >= Math.round(min * 1.5)) {
+    return { semester: min, year: max, amount: null, period: "both" as const };
+  }
+  const source = String(text || "");
+  const saysSemester = /学期|semester|16周/i.test(source);
+  const saysYear = /学年|(?:\/|／)年|\byear\b/i.test(source);
+  if (min != null && saysSemester && !saysYear) {
+    return { semester: min, year: min * 2, amount: null, period: "semester" as const };
+  }
+  if (min != null && saysYear && !saysSemester) {
+    return { semester: null, year: max ?? min, amount: null, period: "year" as const };
+  }
+  if (min != null) {
+    return { semester: null, year: null, amount: min, period: "unknown" as const };
+  }
+  return { semester: null, year: null, amount: null, period: "unknown" as const };
 }
 
 function unique(list: unknown) {
@@ -123,9 +174,15 @@ export function normalizeUniversity(row: UniversityRow) {
   const tuitionLanguage = asRecord(tuition.language);
   const tuitionBachelor = asRecord(tuition.bachelor);
   const tuitionMaster = asRecord(tuition.master);
-  const housing = Array.isArray(fees.housing)
+  const session = asRecord(admission.language_session);
+  const sessionTuition = asRecord(session.tuition);
+  const listedHousing = Array.isArray(fees.housing)
     ? (fees.housing as Record<string, unknown>[])
     : [];
+  const sessionHousing = Array.isArray(session.housing)
+    ? (session.housing as Record<string, unknown>[])
+    : [];
+  const housing = listedHousing.length ? listedHousing : sessionHousing;
   const programs = Array.isArray(admission.programs)
     ? (admission.programs as Record<string, unknown>[])
     : [];
@@ -165,15 +222,18 @@ export function normalizeUniversity(row: UniversityRow) {
     degrees.includes("language") ||
     languagePrograms.length > 0;
 
-  const languageTuitionMin = toNumber(tuitionLanguage.min);
-  const languageTuitionMax =
-    toNumber(tuitionLanguage.max) ?? languageTuitionMin;
-  const languageTuitionMean =
-    languageTuitionMin != null
-      ? Math.round(
-          (languageTuitionMin + (languageTuitionMax ?? languageTuitionMin)) / 2,
-        )
-      : null;
+  const languageFees = resolveLanguageTuition({
+    min: toNumber(tuitionLanguage.min),
+    max: toNumber(tuitionLanguage.max),
+    semester: toNumber(sessionTuition.semester),
+    year: toNumber(sessionTuition.year),
+    text: filled(session.tuition_text),
+  });
+  const languageTuitionSemester = languageFees.semester;
+  const languageTuitionYear = languageFees.year;
+  const languageTuitionMin = languageTuitionSemester ?? languageTuitionYear ?? languageFees.amount;
+  const languageTuitionMax = languageTuitionYear ?? languageTuitionSemester ?? languageFees.amount;
+  const languageTuitionMean = languageTuitionYear;
 
   const tuitionMin =
     toNumber(row.tuition_min) ??
@@ -296,6 +356,31 @@ export function normalizeUniversity(row: UniversityRow) {
     languageTuitionMin,
     languageTuitionMax,
     languageTuitionMean,
+    languageProfile: {
+      tuitionText: filled(session.tuition_text),
+      semester: languageTuitionSemester,
+      year: languageTuitionYear,
+      amount: languageFees.amount,
+      period: languageFees.period,
+      ageMin: toNumber(session.age_min),
+      ageMax: toNumber(session.age_max),
+      beginner: /0\s*基础|零基础|零起点|débutant|beginner/i.test(
+        `${session.foundation || ""} ${session.project || ""}`,
+      ),
+      deadline: filled(session.deadline),
+      scholarship: /❌/.test(String(session.scholarship || ""))
+        ? false
+        : /✅/.test(String(session.scholarship || ""))
+          ? true
+          : null,
+      documents: Array.isArray(session.documents)
+        ? session.documents.map((item) => String(item))
+        : [],
+      applicationFee: toNumber(session.application_fee_cny),
+      applyWebsite: filled(session.apply_website),
+      pathway: /本科|硕士|升学|衔接|bachelor|master/i.test(String(session.pathway || "")),
+      project: filled(session.project),
+    },
     hsk: hskBachelor,
     hskBachelor,
     hskMaster,
@@ -327,13 +412,16 @@ export function normalizeUniversity(row: UniversityRow) {
     hasUniScholarship,
     hasProvincial,
     scholarshipText: filled(row.scholarship_amount),
-    intakeMonths: (Array.isArray(application.intake_months)
-      ? application.intake_months
-      : []
-    )
+    intakeMonths: unique([
+      ...(Array.isArray(application.intake_months) ? application.intake_months : []),
+      ...(Array.isArray(session.intake_months) ? session.intake_months : []),
+    ])
       .map(Number)
       .filter(Boolean),
-    deadline: filled(row.application_deadline) || filled(application.deadline),
+    deadline:
+      filled(row.application_deadline) ||
+      filled(application.deadline) ||
+      filled(session.deadline),
     documents: unique([
       ...(Array.isArray(row.required_documents) ? row.required_documents : []),
       ...(Array.isArray(admission.documents) ? admission.documents : []).map(

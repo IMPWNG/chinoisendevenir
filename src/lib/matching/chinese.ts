@@ -1,10 +1,10 @@
 import { normalizeStudent, type StudentOverrides, type MatchingStudent } from "./student";
 import { normalizeUniversity, type MatchingUniversity, type UniversityRow } from "./university";
 import { normalizeText } from "./constants";
+import { canonicalDocuments } from "./documents";
 import {
   CHINESE_MATCHING_WEIGHTS,
   CHINESE_MATCH_SIZE,
-  DEFAULT_LANGUAGE_TUITION_CNY,
   DEFAULT_LIVING_COST_CNY,
 } from "./weights";
 import type { ContactRow } from "../studentProgress";
@@ -53,17 +53,56 @@ function intakeLabel(months: unknown[] | null | undefined) {
   return labels.join(" / ");
 }
 
-function costLabel(cost: {
-  total_cny?: number | null;
-  tuition_cny?: number | null;
-  status?: string;
-} | null | undefined) {
-  if (!cost?.total_cny) return "frais à confirmer auprès de l’école";
-  const tuition = cost.tuition_cny
-    ? `${Math.round(cost.tuition_cny).toLocaleString("fr-FR")} RMB de scolarité`
-    : "scolarité à confirmer";
-  const prefix = cost.status === "estimated" ? "environ " : "";
-  return `${prefix}${tuition} · total estimé ${Math.round(cost.total_cny).toLocaleString("fr-FR")} RMB / an`;
+function money(value: number) {
+  return Math.round(value).toLocaleString("fr-FR");
+}
+
+export function languageFeeLines(input: {
+  semester?: number | null;
+  year?: number | null;
+  amount?: number | null;
+  period?: string | null;
+  housing?: number | null;
+  living?: number | null;
+  livingDefault?: boolean;
+}) {
+  const lines: string[] = [];
+  const semester = input.semester ?? null;
+  const year = input.year ?? null;
+  if (input.period === "unknown" && input.amount != null) {
+    lines.push(
+      `Scolarité indiquée : ${money(input.amount)} RMB. Le fichier ne précise pas s'il s'agit d'un semestre ou d'une année, donc ce montant n'est pas additionné à une année de vie courante.`,
+    );
+  } else if (semester != null && year != null && year !== semester) {
+    lines.push(
+      `Scolarité : ${money(semester)} RMB par semestre, soit ${money(year)} RMB par an.`,
+    );
+  } else if (semester != null) {
+    const annual = year ?? semester * 2;
+    lines.push(
+      `Scolarité : ${money(semester)} RMB par semestre, soit environ ${money(annual)} RMB pour deux semestres.`,
+    );
+  } else if (year != null) {
+    lines.push(`Scolarité : ${money(year)} RMB par an.`);
+  } else {
+    lines.push("Scolarité : à confirmer auprès de l'école.");
+  }
+  if (input.housing) {
+    lines.push(`Logement sur le campus : environ ${money(input.housing)} RMB par an.`);
+  }
+  if (input.living) {
+    lines.push(
+      input.livingDefault
+        ? `Vie courante : estimation de ${money(input.living)} RMB par an, hors frais de l'école.`
+        : `Vie courante estimée : ${money(input.living)} RMB par an.`,
+    );
+  }
+  const annualTuition = input.period === "unknown" ? null : year;
+  if (annualTuition != null) {
+    const total = annualTuition + (input.housing || 0) + (input.living || 0);
+    lines.push(`Total indicatif : environ ${money(total)} RMB par an.`);
+  }
+  return lines;
 }
 
 function languageIntakeMonths(university: MatchingUniversity) {
@@ -80,25 +119,68 @@ function languageIntakeMonths(university: MatchingUniversity) {
 }
 
 function languageCost(university: MatchingUniversity) {
-  const tuitionKnown = university.languageTuitionMean != null;
-  const tuition = tuitionKnown
-    ? university.languageTuitionMean
-    : DEFAULT_LANGUAGE_TUITION_CNY;
+  const profile = university.languageProfile;
   const housing = university.housingMean ?? university.housingMin ?? 0;
   const living = university.livingCostYearly || DEFAULT_LIVING_COST_CNY;
-  const total = (tuition ?? 0) + housing + living;
+  const livingDefault =
+    university.livingCostStatus === "default" || !university.livingCostYearly;
+  const period = profile?.period || "unknown";
+  const year = period === "unknown" ? null : profile?.year ?? university.languageTuitionMean;
+  const lines = languageFeeLines({
+    semester: profile?.semester,
+    year,
+    amount: profile?.amount ?? (period === "unknown" ? university.languageTuitionMin : null),
+    period,
+    housing: housing || null,
+    living,
+    livingDefault,
+  });
   return {
-    tuition_cny: tuition,
+    tuition_cny: year,
+    semester_cny: profile?.semester ?? null,
     housing_cny: housing || null,
     living_cny: living,
-    total_cny: total,
-    status: tuitionKnown ? "estimated" : "default",
-    label: costLabel({
-      tuition_cny: tuition,
-      total_cny: total,
-      status: tuitionKnown ? "estimated" : "default",
-    }),
+    total_cny: year != null ? year + housing + living : null,
+    status: year != null ? "estimated" : "default",
+    label: lines[0],
+    lines,
   };
+}
+
+function schoolFacts(university: MatchingUniversity) {
+  const profile = university.languageProfile;
+  const lines: string[] = [];
+  const program = profile?.project || university.languageProgramName;
+  if (program) lines.push(`Programme : ${program}.`);
+  if (profile?.ageMin && profile?.ageMax) {
+    lines.push(`Âge accepté : ${profile.ageMin} à ${profile.ageMax} ans.`);
+  } else if (profile?.ageMin) {
+    lines.push(`Âge minimum indiqué : ${profile.ageMin} ans.`);
+  } else if (profile?.ageMax) {
+    lines.push(`Âge maximum indiqué : ${profile.ageMax} ans.`);
+  }
+  if (profile?.beginner) lines.push("Un niveau débutant en chinois est accepté.");
+  if (profile?.applicationFee) {
+    lines.push(`Frais de dossier : ${money(profile.applicationFee)} RMB.`);
+  }
+  if (profile?.scholarship === true) {
+    lines.push("Une bourse de langue est mentionnée. Son attribution n'est pas automatique.");
+  }
+  if (profile?.pathway) {
+    lines.push("Un passage vers un diplôme après l'année de langue est mentionné.");
+  }
+  const docs = canonicalDocuments(profile?.documents || []).map((doc) => doc.label);
+  if (docs.length) lines.push(`Pièces demandées : ${docs.slice(0, 8).join(", ")}.`);
+  const deadline = profile?.deadline;
+  if (deadline && !/[\u4e00-\u9fff]/.test(deadline)) {
+    lines.push(`Date limite : ${deadline}.`);
+  } else if (deadline) {
+    lines.push("L'école publie une date limite de candidature. Le détail est à confirmer sur son site.");
+  }
+  if (profile?.applyWebsite || university.website) {
+    lines.push(`Site : ${profile?.applyWebsite || university.website}.`);
+  }
+  return lines;
 }
 
 function scoreCity(student: MatchingStudent, university: MatchingUniversity) {
@@ -107,13 +189,13 @@ function scoreCity(student: MatchingStudent, university: MatchingUniversity) {
     return {
       points: 70,
       max: 100,
-      note: "Aucune ville précisée : toutes les villes restent comparables.",
+      note: "Aucune ville de préférence n'est indiquée dans votre dossier.",
     };
   }
   const city = normalizeText(university.city);
   const province = normalizeText(university.province);
   if (cities.some((item) => city && (city.includes(item) || item.includes(city)))) {
-    return { points: 100, max: 100, note: `Ville demandée : ${university.city}.` };
+    return { points: 100, max: 100, note: `${university.city} correspond à la ville indiquée dans votre dossier.` };
   }
   if (
     cities.some(
@@ -123,15 +205,15 @@ function scoreCity(student: MatchingStudent, university: MatchingUniversity) {
     return {
       points: 72,
       max: 100,
-      note: `Même région (${university.province}), pas la ville exacte.`,
+      note: `La région (${university.province}) est proche, pas la ville exacte.`,
     };
   }
   return {
     points: 28,
     max: 100,
     note: university.city
-      ? `${university.city} n’est pas la ville demandée.`
-      : "Ville de l’école non renseignée.",
+      ? `${university.city} n'est pas la ville indiquée dans votre dossier.`
+      : "La ville de l'école n'est pas renseignée.",
   };
 }
 
@@ -140,7 +222,7 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
     return {
       points: 90,
       max: 100,
-      note: "Rentrée libre : le calendrier de l’école n’est pas bloquant.",
+      note: "Votre rentrée est flexible : le calendrier de l'école convient.",
     };
   }
   const wanted = student.intake?.month;
@@ -157,21 +239,21 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
     return {
       points: 60,
       max: 100,
-      note: "Date de rentrée non précisée.",
+      note: "La date de rentrée n'est pas indiquée dans votre dossier.",
     };
   }
   if (!months.length) {
     return {
       points: 55,
       max: 100,
-      note: "Calendrier de rentrée à confirmer auprès de l’école.",
+      note: "Le calendrier de rentrée est à confirmer auprès de l'école.",
     };
   }
   if (wantedMonths.some((month) => months.includes(month))) {
     return {
       points: 100,
       max: 100,
-      note: `Rentrée ${wantedMonths.map(monthLabel).join(" / ")} proposée.`,
+      note: `La rentrée de ${wantedMonths.map(monthLabel).join(" / ")} est proposée.`,
     };
   }
   const closest = months.reduce((best: number, month) => {
@@ -184,13 +266,13 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
     return {
       points: 70,
       max: 100,
-      note: `Rentrée proche (${intakeLabel(months)}), pas le mois exact.`,
+      note: `Une rentrée proche est proposée (${intakeLabel(months)}), pas le mois exact.`,
     };
   }
   return {
     points: 30,
     max: 100,
-    note: `Rentrée visée éloignée du calendrier connu (${intakeLabel(months)}).`,
+    note: `La rentrée demandée est éloignée du calendrier connu (${intakeLabel(months)}).`,
   };
 }
 
@@ -236,10 +318,10 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
   else why.push(intake.note);
 
   if (cost.status === "default") {
-    vigilance.push("Frais de scolarité langue non chiffrés : montant type retenu.");
+    vigilance.push("Les frais de scolarité ne sont pas assez précis pour calculer un total annuel.");
   }
   if (!months.length) {
-    vigilance.push("Dates de rentrée à confirmer auprès de l’école.");
+    vigilance.push("Les dates de rentrée sont à confirmer auprès de l'école.");
   }
 
   return {
@@ -251,6 +333,8 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
     province: university.province,
     website: university.website,
     program_name: university.languageProgramName,
+    facts: schoolFacts(university),
+    deadline_raw: university.languageProfile?.deadline || null,
     score,
     categoryKey: category.key,
     category: category.label,
@@ -279,14 +363,11 @@ function scorePhrase(item: { categoryKey?: string }) {
 function profileBlurb(student: MatchingStudent) {
   const city = student.preferredCities?.[0];
   const intake = student.intake?.label;
-  const bits: string[] = [];
-  if (city) bits.push(`ville visée : ${city}`);
-  if (student.intake?.months?.length && intake) bits.push(`rentrée ${intake}`);
-  else if (student.intake?.flexible) bits.push("rentrée libre");
-  if (!bits.length) {
-    return "Voici des écoles de langue en Chine, classées selon les données disponibles. Précisez une ville et une rentrée pour affiner.";
-  }
-  return `Sélection d’écoles de langue selon ${bits.join(", ")}. Les frais exacts et les dates restent à confirmer auprès de chaque établissement.`;
+  const bits: string[] = ["Vous visez une année de langue chinoise"];
+  if (city) bits.push(`à ${city}`);
+  if (student.intake?.months?.length && intake) bits.push(`pour la rentrée ${intake}`);
+  else if (student.intake?.flexible) bits.push("avec une rentrée flexible");
+  return `${bits.join(" ")}. Les écoles ci-dessous sont classées à partir des frais, des dates et des conditions publiés. Aucune inscription n'est garantie.`;
 }
 
 function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
@@ -299,8 +380,9 @@ function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
     best_match: index === 0,
     categoryKey: item.categoryKey,
     category: item.category,
-    cost: { label: item.cost?.label },
+    cost: { label: item.cost?.label, lines: item.cost?.lines || [] },
     intake: item.intake_label,
+    facts: item.facts,
     why: item.why,
     vigilance: item.vigilance,
     breakdown: [
@@ -323,8 +405,12 @@ function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
     generated_at: new Date().toISOString(),
     profile_blurb: profileBlurb(student),
     criteria: {
-      city: student.preferredCities?.[0] || "aucune ville précisée",
-      intake: student.intake?.label || "à préciser",
+      city: student.preferredCities?.[0]
+        ? `Ville indiquée dans votre dossier : ${student.preferredCities[0]}.`
+        : "Aucune ville de préférence n'est indiquée dans votre dossier.",
+      intake: student.intake?.label
+        ? `Rentrée indiquée : ${student.intake.label}.`
+        : "La date de rentrée n'est pas indiquée dans votre dossier.",
     },
     schools,
     disclaimer:

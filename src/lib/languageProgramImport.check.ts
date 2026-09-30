@@ -2,6 +2,8 @@
  * Self-check for language-program CSV merge.
  * Run: npx tsx src/lib/languageProgramImport.check.ts
  */
+import { languageFeeLines } from "./matching/chinese";
+import { resolveLanguageTuition } from "./matching/university";
 import {
   buildLanguageAdmission,
   mergeLanguageAdmission,
@@ -120,5 +122,33 @@ const degreeDocs = (
   merged.admission as unknown as { documents: Array<{ type: string }> }
 ).documents;
 assert(degreeDocs?.[0]?.type === "Passeport diplôme", "do not overwrite degree documents");
+
+const split = resolveLanguageTuition({ text: "10500元/学期\n21000元/学年" });
+assert(split.semester === 10500 && split.year === 21000 && split.period === "both", "keep semester and year");
+const annual = languageFeeLines({
+  semester: split.semester,
+  year: split.year,
+  period: split.period,
+  living: 35000,
+  livingDefault: true,
+});
+assert(annual[0].includes("semestre") && annual[0].includes("21"), "year tuition is the annual figure");
+assert(!annual.some((line) => line.includes("45")), "semester price is not added to a full year of living");
+
+const stored = resolveLanguageTuition({ min: 5800, max: 10000 });
+assert(stored.semester === 5800 && stored.year === 10000, "min/max pair is semester then year");
+
+const unknown = resolveLanguageTuition({ min: 10500, max: 10500 });
+assert(unknown.period === "unknown" && unknown.year == null, "lone figure is not a year");
+const unknownLines = languageFeeLines({
+  amount: 10500,
+  period: "unknown",
+  living: 35000,
+  livingDefault: true,
+});
+assert(
+  !unknownLines.some((line) => /total indicatif/i.test(line)),
+  "unknown period does not invent an annual total",
+);
 
 console.log("languageProgramImport check ok");

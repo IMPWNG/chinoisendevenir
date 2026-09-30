@@ -18,6 +18,36 @@ function limitForFormula(formuleNumber: unknown) {
   return getFormuleAccess(formuleNumber).matchLimit || MIX_SIZE.max;
 }
 
+function offersLanguageThenDegree(item: Mixable, targetDegree: unknown) {
+  const uni = item.university;
+  if (!uni?.chineseLanguageProgram) return false;
+  const target = String(targetDegree || "");
+  if (!target || target === "language") return true;
+  return (uni.degrees || []).includes(target);
+}
+
+function mixForStudent(
+  ranked: Mixable[],
+  student: { formuleNumber?: unknown; targetDegree?: unknown },
+  limit: number,
+) {
+  if (Number(student.formuleNumber) !== 3) {
+    return selectMix(ranked, { min: MIX_SIZE.min, max: limit });
+  }
+  const pathway = ranked.filter((item) =>
+    offersLanguageThenDegree(item, student.targetDegree),
+  );
+  if (!pathway.length) return selectMix(ranked, { min: MIX_SIZE.min, max: limit });
+  const primary = selectMix(pathway, { min: 0, max: limit });
+  if (primary.length >= limit) return primary.slice(0, limit);
+  const used = new Set(primary.map((item) => item.university_id));
+  const extra = selectMix(
+    ranked.filter((item) => !used.has(item.university_id)),
+    { min: 0, max: limit - primary.length },
+  );
+  return [...primary, ...extra].slice(0, limit);
+}
+
 export async function runMatching({
   contact,
   universities,
@@ -38,7 +68,7 @@ export async function runMatching({
   const catalog = universities.map(normalizeUniversity);
   const { ranked, excluded } = rankMatches(student, catalog);
   const limit = Math.min(Math.max(limitForFormula(student.formuleNumber), MIX_SIZE.min), MIX_SIZE.max);
-  const mixed = selectMix(ranked as Mixable[], { min: MIX_SIZE.min, max: limit });
+  const mixed = mixForStudent(ranked as Mixable[], student, limit);
   const analyses = mixed.map((match) =>
     buildUniversityAnalysis(match as UniversityMatch, student),
   );

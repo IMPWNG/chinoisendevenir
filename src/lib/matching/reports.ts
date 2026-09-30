@@ -83,27 +83,6 @@ export const SCORE_WEIGHTS_LINE =
 const GENERIC_SCORE_NOTE =
   /compatibilité linguistique|gpa, diplôme et correspondance|ratio budget|pas de contrainte bourse|marge d'âge|pas de préférence de ville|ville demandée|région proche|hors des villes|clarté du projet|pas assez de texte|niveau de langue comparé/i;
 
-const SCHOLARSHIP_COPY = {
-  csc: {
-    type: "csc",
-    title: "Bourses gouvernementales (CSC)",
-    explanation:
-      "Bourse nationale chinoise, très compétitive, dossier à soigner.",
-  },
-  provincial: {
-    type: "provincial",
-    title: "Bourses provinciales ou municipales",
-    explanation:
-      "Souvent plus accessibles, propres à la région de l’université.",
-  },
-  university: {
-    type: "university",
-    title: "Bourses universitaires",
-    explanation:
-      "Décidées par l’établissement lui-même, critères variables.",
-  },
-};
-
 export function blankOr(value: unknown, fallback = "à préciser") {
   if (value == null) return fallback;
   const text = String(value).trim();
@@ -267,7 +246,7 @@ export function explainScore(
   }
   if (key === "localisation") {
     if (points >= 100) return "La ville fait partie de celles que vous avez indiquées.";
-    if (points >= 80) return "Aucune ville préférée n'est indiquée. La note reste neutre : elle ne veut pas dire que la ville convient.";
+    if (points >= 80) return "Aucune ville de préférence n'est indiquée dans votre dossier.";
     if (points >= 70) return "La région est proche d'une ville que vous avez indiquée.";
     return "La ville est éloignée de celles que vous avez indiquées.";
   }
@@ -570,6 +549,15 @@ function sentence(text: string) {
 
 function studentStrengths(item: UniversityMatch, student: ReportStudent) {
   const lines: string[] = [];
+  if (
+    Number(student.formuleNumber) === 3 &&
+    item.university?.chineseLanguageProgram &&
+    (item.university.degrees || []).includes(String(student.targetDegree || ""))
+  ) {
+    lines.push(
+      "Cette université propose une année de langue, puis le cursus indiqué dans votre dossier.",
+    );
+  }
   const hskReq = item.hsk_required;
   if (
     isHskKnown(student) &&
@@ -708,28 +696,6 @@ function mapUniversity(
     })),
     qualitative: item.qualitative || cat.subtitle,
   };
-}
-
-function groupScholarships(matches: UniversityMatch[] | null | undefined) {
-  const names = [
-    ...new Set(
-      (matches || []).flatMap((item) =>
-        (item.scholarships_possible || []).map((name) => String(name)),
-      ),
-    ),
-  ];
-  const groups = {
-    csc: { ...SCHOLARSHIP_COPY.csc, names: [] as string[] },
-    provincial: { ...SCHOLARSHIP_COPY.provincial, names: [] as string[] },
-    university: { ...SCHOLARSHIP_COPY.university, names: [] as string[] },
-  };
-  names.forEach((name) => {
-    const key = String(name).toLowerCase();
-    if (/csc|gouvernement|china scholarship/i.test(key)) groups.csc.names.push(name);
-    else if (/provinc|municip|ville|city|local/i.test(key)) groups.provincial.names.push(name);
-    else groups.university.names.push(name);
-  });
-  return Object.values(groups);
 }
 
 function adminGuideline({
@@ -961,10 +927,11 @@ function analysisNote(
   facts: ProfileFacts,
   docs: InventoryDoc[],
   matches: MappedUniversity[],
+  student: ReportStudent,
 ) {
   const parts: string[] = [];
   if (facts.completeness != null) {
-    parts.push(`Le dossier est renseigné à ${facts.completeness} %.`);
+    parts.push(`Votre dossier est renseigné à ${facts.completeness} %.`);
   }
   const top = matches[0];
   if (!top) {
@@ -989,11 +956,16 @@ function analysisNote(
   }
   const missing = docs.filter((doc) => doc.status === "manquant").length;
   if (missing > 1) {
-    parts.push(`Il reste ${missing} pièces à déposer. La liste, sans doublon, est plus bas.`);
+    parts.push(`Il reste ${missing} pièces à déposer.`);
   } else if (missing === 1) {
-    parts.push("Il reste une pièce à déposer. Elle est indiquée plus bas.");
+    parts.push("Il reste une pièce à déposer.");
   } else if (docs.length) {
     parts.push("Les pièces demandées par ces universités sont déjà déposées.");
+  }
+  if (Number(student.formuleNumber) === 3) {
+    parts.push(
+      "Votre accompagnement commence par une année de langue, puis le cursus. Les établissements qui proposent les deux sont placés en premier.",
+    );
   }
   return parts.join(" ");
 }
@@ -1009,23 +981,15 @@ function whyTop(matches: MappedUniversity[]) {
   return `${top.name} est la piste à regarder en premier. ${sentence(reason)}${second} Ce classement compare votre profil aux critères publiés. Il ne promet pas une admission.`;
 }
 
-function closingText(student: ReportStudent, formule: FormulaInfo) {
-  const name = student.prenom ? `${student.prenom}, ` : "";
-  const title = formule.shortTitle || formule.label || "votre accompagnement";
-  return `${name}nous restons disponibles pour relire ce compte rendu ensemble. Vous avez souscrit ${title}. Écrivez-nous ou prenons un appel pour caler les prochaines étapes.`;
-}
-
 function draftClientResponse({
   student,
   facts,
   matches,
-  formule,
   mixAdvice,
 }: {
   student: ReportStudent;
   facts: ProfileFacts;
   matches: MappedUniversity[];
-  formule: FormulaInfo;
   mixAdvice: string;
 }) {
   const name = student.prenom || "Bonjour";
@@ -1042,8 +1006,6 @@ function draftClientResponse({
     mixAdvice,
     "",
     NO_GUARANTEE,
-    "",
-    closingText(student, formule),
   ];
   return lines.join("\n");
 }
@@ -1134,7 +1096,6 @@ export function buildDualReports({
       student,
       facts,
       matches: mapped,
-      formule: purchased,
       mixAdvice,
     }),
     inconsistency_flag: inconsistencies.some((row) => row.blocking),
@@ -1148,7 +1109,7 @@ export function buildDualReports({
     profile_blurb: profileBlurb(facts),
     completeness: {
       pct: facts.completeness,
-      remaining_note: analysisNote(facts, docs, mapped),
+      remaining_note: analysisNote(facts, docs, mapped, student),
     },
     facts,
     formule: purchased,
@@ -1167,12 +1128,8 @@ export function buildDualReports({
     }),
     documents: docs,
     documents_by_university: groupedDocs.groups,
-    scholarships: {
-      groups: groupScholarships(ranked),
-      disclaimer:
-        "Aucune de ces bourses n’est automatique — elles seront visées lors de la constitution du dossier.",
-    },
-    closing: closingText(student, purchased),
+    scholarships: { groups: [], disclaimer: "" },
+    closing: "",
   };
 
   return { admin_report: admin, student_report: studentReport };

@@ -240,7 +240,7 @@ function scoreFinancier(
       points: 40,
       max: 100,
       status: "missing",
-      note: "Budget non renseigné : la note reste neutre, ce n'est pas un refus.",
+      note: "Aucun budget n'est indiqué dans votre dossier.",
       cost: cout,
     };
   }
@@ -250,7 +250,7 @@ function scoreFinancier(
       points: 45,
       max: 100,
       status: "missing",
-      note: "Frais de l'université inconnus : la note reste neutre.",
+      note: "Les frais de cette université ne sont pas publiés.",
       cost: cout,
     };
   }
@@ -299,15 +299,15 @@ function scoreBourse(
       points: Math.min(60 + types.length * 10, 100),
       max: 100,
       status: "confirmed",
-      note: "Des bourses sont listées pour ce besoin de financement.",
+      note: "Des bourses existent pour ce cursus. Leur attribution n'est pas automatique.",
     };
   }
   if (!university.scholarshipText) {
     flags.toVerify.push("Bourses à confirmer auprès de l'université");
-    return { points: 25, max: 100, status: "missing", note: "Bourses non documentées." };
+    return { points: 25, max: 100, status: "missing", note: "Peu de bourses sont documentées pour ce besoin de financement." };
   }
   flags.warnings.push("Objectif bourse, mais peu de pistes listées");
-  return { points: 10, max: 100, status: "estimated", note: "Gros risque si le dossier dépend d'une bourse." };
+  return { points: 10, max: 100, status: "estimated", note: "Le financement dépend surtout d'une bourse, qui n'est pas garantie." };
 }
 
 function scoreAge(
@@ -317,21 +317,21 @@ function scoreAge(
 ) {
   if (!student.age) {
     flags.toVerify.push("Âge de l'étudiant à confirmer");
-    return { points: 60, max: 100, status: "missing", note: "Âge non renseigné." };
+    return { points: 60, max: 100, status: "missing", note: "L'âge n'est pas indiqué dans votre dossier." };
   }
   const ageMax = university.ageMaxForDegree?.(student.targetDegree);
   if (!ageMax) {
     flags.toVerify.push("Âge maximum à vérifier selon le programme");
-    return { points: 70, max: 100, status: "missing", note: "Limite d'âge inconnue." };
+    return { points: 70, max: 100, status: "missing", note: "La limite d'âge de ce programme n'est pas publiée." };
   }
   const marge = ageMax - student.age;
-  if (marge >= 5) return { points: 100, max: 100, status: "confirmed", note: "Marge d'âge confortable." };
-  if (marge >= 2) return { points: 80, max: 100, status: "confirmed", note: "Marge d'âge correcte." };
+  if (marge >= 5) return { points: 100, max: 100, status: "confirmed", note: "Votre âge laisse de la marge par rapport à la limite connue." };
+  if (marge >= 2) return { points: 80, max: 100, status: "confirmed", note: "Votre âge reste dans la limite connue." };
   if (marge >= 0) {
     flags.warnings.push("Âge proche de la limite connue");
-    return { points: 60, max: 100, status: "estimated", note: "Âge proche du plafond." };
+    return { points: 60, max: 100, status: "estimated", note: "Votre âge est proche de la limite publiée." };
   }
-  return { points: 0, max: 100, status: "confirmed", note: "Au-dessus de la limite d'âge." };
+  return { points: 0, max: 100, status: "confirmed", note: "Votre âge dépasse la limite publiée pour ce niveau." };
 }
 
 function scoreLocalisation(student: MatchingStudent, university: MatchingUniversity) {
@@ -341,18 +341,18 @@ function scoreLocalisation(student: MatchingStudent, university: MatchingUnivers
       points: 80,
       max: 100,
       status: "confirmed",
-      note: "Aucune ville préférée : note neutre, pas un avis sur la ville.",
+      note: "Aucune ville de préférence n'est indiquée dans votre dossier.",
     };
   }
   const city = normalizeText(university.city);
   const province = normalizeText(university.province);
   if (cities.some((item) => item && (city.includes(item) || item.includes(city)))) {
-    return { points: 100, max: 100, status: "confirmed", note: "Ville demandée." };
+    return { points: 100, max: 100, status: "confirmed", note: "Cette ville figure parmi celles indiquées dans votre dossier." };
   }
   if (cities.some((item) => item && (province.includes(item) || item.includes(province)))) {
-    return { points: 75, max: 100, status: "estimated", note: "Région proche de la préférence." };
+    return { points: 75, max: 100, status: "estimated", note: "La région est proche d'une ville indiquée dans votre dossier." };
   }
-  return { points: 35, max: 100, status: "confirmed", note: "Hors des villes préférées." };
+  return { points: 35, max: 100, status: "confirmed", note: "Cette ville est éloignée de celles indiquées dans votre dossier." };
 }
 
 function weighted(parts: Record<string, ScorePart | undefined>) {

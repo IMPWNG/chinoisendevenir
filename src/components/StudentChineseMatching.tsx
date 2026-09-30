@@ -5,13 +5,6 @@ import { useSiteI18n } from "../context/SiteI18nContext";
 
 type TranslateFn = (path: string, vars?: Record<string, string | number>) => string;
 
-type BreakdownRow = {
-  key: string;
-  label: string;
-  points?: number | null;
-  max?: number;
-};
-
 type School = {
   id?: string;
   name: string;
@@ -20,10 +13,10 @@ type School = {
   category?: string;
   best_match?: boolean;
   score_phrase?: string;
-  breakdown?: BreakdownRow[];
   why?: string[];
   vigilance?: string[];
-  cost?: { label?: string };
+  facts?: string[];
+  cost?: { label?: string; lines?: string[] };
   intake?: string;
 };
 
@@ -33,26 +26,6 @@ type ChineseView = {
   schools?: School[];
   disclaimer?: string;
 };
-
-function ScoreBar({
-  points,
-  max,
-  emptyLabel,
-}: {
-  points?: number | null;
-  max?: number;
-  emptyLabel: string;
-}) {
-  if (points == null || !max) {
-    return <span className="student-meter-empty">{emptyLabel}</span>;
-  }
-  const pct = Math.max(0, Math.min(100, Math.round((points / max) * 100)));
-  return (
-    <span className="student-meter" title={`${points}/${max}`}>
-      <span className="student-meter-fill" style={{ width: `${pct}%` }} />
-    </span>
-  );
-}
 
 function SchoolCard({
   school,
@@ -87,18 +60,9 @@ function SchoolCard({
       </button>
 
       <p className="student-uni-score">{school.score_phrase}</p>
-      <div className="student-meters">
-        {(school.breakdown || []).map((row: BreakdownRow) => (
-          <div key={row.key} className="student-meter-row">
-            <span>{row.label}</span>
-            <ScoreBar
-              points={row.points}
-              max={row.max}
-              emptyLabel={t("student.matching.toSpecify")}
-            />
-          </div>
-        ))}
-      </div>
+      {school.cost?.lines?.[0] ? (
+        <p className="student-uni-facts">{school.cost.lines[0]}</p>
+      ) : null}
 
       {open ? (
         <div className="student-uni-full-body">
@@ -122,12 +86,17 @@ function SchoolCard({
               </ul>
             </div>
           ) : null}
-          <p className="student-uni-facts">
-            {t("student.matching.fees")}{" "}
-            {school.cost?.label || t("student.matching.schoolFeesFallback")}
-            <br />
-            {t("student.matching.intake")} {school.intake}
-          </p>
+          <div className="student-uni-facts">
+            {(school.cost?.lines || []).slice(1).map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+            <p>
+              {t("student.matching.intake")} {school.intake}
+            </p>
+            {(school.facts || []).map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
         </div>
       ) : (
         <p className="student-uni-more">{t("student.matching.seeDetail")}</p>
@@ -178,11 +147,9 @@ export default function StudentChineseMatching({
 
       <section className="student-profile-card">
         <p className="student-profile-blurb">{view.profile_blurb}</p>
-        {view.criteria ? (
+        {view.criteria?.city || view.criteria?.intake ? (
           <p className="student-profile-complete">
-            {t("student.matching.city")} {view.criteria.city}
-            {" · "}
-            {t("student.matching.intake")} {view.criteria.intake}
+            {[view.criteria.city, view.criteria.intake].filter(Boolean).join(" ")}
           </p>
         ) : null}
       </section>

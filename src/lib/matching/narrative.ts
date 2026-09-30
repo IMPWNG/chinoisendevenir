@@ -13,6 +13,8 @@ type ScoreBreakdown = Record<
 export type UniversityMatch = {
   university?: {
     englishAvailable?: boolean;
+    chineseLanguageProgram?: boolean;
+    degrees?: string[];
     city?: string | null;
     province?: string | null;
     website?: string | null;
