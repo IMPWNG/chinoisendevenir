@@ -126,14 +126,16 @@ function SchoolCard({
               ) : null}
             </dl>
           </section>
-          {school.facts?.length ? (
+          {(school.facts || []).some((line) => !/^site\s*:/i.test(line)) ? (
             <section>
               <p className="student-uni-kicker">Conditions publiées</p>
               <p className="student-block-intro">
-                Âge, niveau, pièces et dates tels que l'école les indique. Le détail chinois, quand il existe, est à confirmer sur son site.
+                Âge, niveau, pièces et dates tels que l'école les indique. Le détail chinois, quand il existe, est à confirmer auprès de l'école.
               </p>
               <dl className="student-spec">
-                {school.facts.map((line) => {
+                {(school.facts || [])
+                  .filter((line) => !/^site\s*:/i.test(line))
+                  .map((line) => {
                   const row = splitLabeled(line);
                   return (
                     <div key={line}>
