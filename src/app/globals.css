@@ -1609,13 +1609,15 @@ a.formule-card-btn {
 
 .student-uni-full-list {
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 .student-uni-full {
   border: 1px solid var(--bilan-rule);
+  border-radius: 18px;
   background: #fff;
   text-align: left;
+  overflow: hidden;
 }
 
 .student-uni-full.is-best {
@@ -1629,7 +1631,7 @@ a.formule-card-btn {
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
-  padding: 14px 14px 0;
+  padding: 16px 18px 0;
   background: none;
   border: 0;
   cursor: pointer;
@@ -1691,32 +1693,115 @@ a.formule-card-btn {
 }
 
 .student-uni-score {
-  margin: 10px 14px 0;
-  font-size: 0.88rem;
+  margin: 8px 18px 16px;
+  max-width: 40rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: #334155;
+}
+
+.student-block-intro {
+  margin: 0 0 10px;
+  max-width: 40rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #64748b;
 }
 
 .student-readings {
-  list-style: none;
-  margin: 10px 14px 0;
-  padding: 0;
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
-.student-readings li {
-  font-size: 0.92rem;
-  line-height: 1.45;
-  color: #334155;
+.student-readings > div {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bilan-paper);
 }
 
-.student-readings strong {
-  font-weight: 700;
+.student-reading-label {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bilan-ink);
+}
+
+.student-readings p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
   color: #1e293b;
 }
 
-.student-doc-group {
+.student-reading-help {
+  margin-top: 6px !important;
+  font-size: 0.86rem !important;
+  line-height: 1.45;
+  color: #64748b !important;
+}
+
+.student-spec {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.student-spec > div {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--bilan-rule);
+}
+
+.student-spec dt {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bilan-ink);
+}
+
+.student-spec dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+.student-doc-card {
   margin-top: 14px;
+  border: 1px solid var(--bilan-rule);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.student-doc-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  padding: 14px 16px;
+  background: var(--bilan-paper);
+}
+
+.student-doc-card h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--bilan-ink);
+}
+
+.student-doc-card header p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
 }
 
 .student-uni-facts p {
@@ -1774,9 +1859,14 @@ a.formule-card-btn {
 }
 
 .student-uni-full-body {
-  padding: 4px 14px 14px;
+  padding: 0 18px 18px;
   display: grid;
-  gap: 12px;
+  gap: 18px;
+}
+
+.student-uni-full-body section {
+  padding-top: 14px;
+  border-top: 1px solid var(--bilan-rule);
 }
 
 .student-uni-kicker {
@@ -1876,16 +1966,34 @@ a.formule-card-btn {
 .student-doc-check {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 8px;
   display: grid;
   gap: 8px;
 }
 
 .student-doc-check li {
   display: grid;
-  grid-template-columns: 6.2rem minmax(0, 1fr);
-  gap: 10px;
-  font-size: 0.92rem;
+  grid-template-columns: 6.4rem minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+}
+
+.student-doc-check li.is-ok {
+  background: #f3faf7;
+}
+
+.student-doc-check li.is-miss {
+  background: #fff8f6;
+}
+
+.student-doc-help {
+  margin: 4px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #64748b;
 }
 
 .student-doc-check span {
@@ -1949,7 +2057,12 @@ a.formule-card-btn {
 
   .student-doc-check li {
     grid-template-columns: 1fr;
-    gap: 2px;
+    gap: 4px;
+  }
+
+  .student-doc-card header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

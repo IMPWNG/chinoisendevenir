@@ -133,10 +133,12 @@ export default function AdminContactInfo({
   contact,
   onSaved,
   startEditing = false,
+  embedded = false,
 }: {
   contact: ContactInfo;
   onSaved?: (contact: ContactInfo) => void;
   startEditing?: boolean;
+  embedded?: boolean;
 }) {
   const { t } = useAdminI18n();
   const [editing, setEditing] = useState(() => Boolean(startEditing));
@@ -225,11 +227,15 @@ export default function AdminContactInfo({
   }
 
   return (
-    <div className="mb-8 pb-8 border-b border-slate-700/50">
+    <div className={embedded ? "" : "mb-8 pb-8 border-b border-slate-700/50"}>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-        <label className="text-sm font-bold text-slate-300 uppercase tracking-wide">
-          👤 {t("dashboard.studentInfo")}
-        </label>
+        {embedded ? (
+          <span />
+        ) : (
+          <label className="text-sm font-bold text-slate-300 uppercase tracking-wide">
+            👤 {t("dashboard.studentInfo")}
+          </label>
+        )}
         {!editing ? (
           <button
             type="button"

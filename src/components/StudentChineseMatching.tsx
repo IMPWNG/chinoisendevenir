@@ -27,6 +27,15 @@ type ChineseView = {
   disclaimer?: string;
 };
 
+function splitLabeled(line: string) {
+  const index = line.indexOf(":");
+  if (index <= 0 || index > 48) return { label: "", text: line };
+  return {
+    label: line.slice(0, index).trim(),
+    text: line.slice(index + 1).trim(),
+  };
+}
+
 function SchoolCard({
   school,
   open,
@@ -60,43 +69,82 @@ function SchoolCard({
       </button>
 
       <p className="student-uni-score">{school.score_phrase}</p>
-      {school.cost?.lines?.[0] ? (
-        <p className="student-uni-facts">{school.cost.lines[0]}</p>
-      ) : null}
 
       {open ? (
         <div className="student-uni-full-body">
           {school.why?.length ? (
-            <div>
+            <section>
               <p className="student-uni-kicker">{t("student.matching.whySchool")}</p>
+              <p className="student-block-intro">
+                Ce qui rapproche cette école de la ville et de la rentrée indiquées dans votre dossier.
+              </p>
               <ul>
                 {school.why.map((line: string) => (
                   <li key={line}>{line}</li>
                 ))}
               </ul>
-            </div>
+            </section>
           ) : null}
           {school.vigilance?.length ? (
-            <div>
+            <section>
               <p className="student-uni-kicker">{t("student.matching.toConfirm")}</p>
+              <p className="student-block-intro">
+                À vérifier avant de retenir cette école. Un point ouvert ne veut pas dire que la candidature est fermée.
+              </p>
               <ul>
                 {school.vigilance.map((line: string) => (
                   <li key={line}>{line}</li>
                 ))}
               </ul>
-            </div>
+            </section>
           ) : null}
-          <div className="student-uni-facts">
-            {(school.cost?.lines || []).slice(1).map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-            <p>
-              {t("student.matching.intake")} {school.intake}
+          <section>
+            <p className="student-uni-kicker">{t("student.matching.fees").replace(/:\s*$/, "")}</p>
+            <p className="student-block-intro">
+              Le prix au semestre et le prix à l'année sont séparés. Le total annuel n'inclut la scolarité que lorsque sa période est connue.
             </p>
-            {(school.facts || []).map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
+            <dl className="student-spec">
+              {(school.cost?.lines?.length
+                ? school.cost.lines
+                : school.cost?.label
+                  ? [school.cost.label]
+                  : []
+              ).map((line) => {
+                const row = splitLabeled(line);
+                return (
+                  <div key={line}>
+                    {row.label ? <dt>{row.label}</dt> : null}
+                    <dd>{row.text}</dd>
+                  </div>
+                );
+              })}
+              {school.intake ? (
+                <div>
+                  <dt>{t("student.matching.intake").replace(/:\s*$/, "")}</dt>
+                  <dd>{school.intake}</dd>
+                </div>
+              ) : null}
+            </dl>
+          </section>
+          {school.facts?.length ? (
+            <section>
+              <p className="student-uni-kicker">Conditions publiées</p>
+              <p className="student-block-intro">
+                Âge, niveau, pièces et dates tels que l'école les indique. Le détail chinois, quand il existe, est à confirmer sur son site.
+              </p>
+              <dl className="student-spec">
+                {school.facts.map((line) => {
+                  const row = splitLabeled(line);
+                  return (
+                    <div key={line}>
+                      {row.label ? <dt>{row.label}</dt> : null}
+                      <dd>{row.text}</dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </section>
+          ) : null}
         </div>
       ) : (
         <p className="student-uni-more">{t("student.matching.seeDetail")}</p>
@@ -115,7 +163,9 @@ export default function StudentChineseMatching({
   const { t } = useSiteI18n();
   const view = chineseMatching?.student_view;
   const schools = view?.schools || [];
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(
+    () => schools[0]?.id || schools[0]?.name || null,
+  );
   const showForFormule =
     Number(formuleNumber) === 1 || Number(formuleNumber) === 3;
 
@@ -157,6 +207,9 @@ export default function StudentChineseMatching({
       {schools.length ? (
         <section className="student-report-block">
           <h3 className="student-report-title">{t("student.matching.schools")}</h3>
+          <p className="student-report-copy">
+            Ces écoles proposent une année de chinois. Ouvrez une fiche pour lire les frais selon la période, les conditions d'âge et de niveau, et ce qui correspond à votre demande.
+          </p>
           <div className="student-uni-full-list">
             {schools.map((school: School) => {
               const key = school.id || school.name;

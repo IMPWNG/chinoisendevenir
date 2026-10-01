@@ -1141,11 +1141,14 @@ export default function AdminDashboard() {
 function FilePanel({
   title,
   children,
+  persist = false,
 }: {
   title: string;
   children: ReactNode;
+  persist?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const shown = open || persist;
   return (
     <div className="mb-4 rounded-2xl border border-slate-700/50 bg-slate-900/30">
       <button
@@ -1161,7 +1164,9 @@ function FilePanel({
           {open ? "▾" : "▸"}
         </span>
       </button>
-      {open ? <div className="px-5 pb-5">{children}</div> : null}
+      {shown ? (
+        <div className={open ? "px-5 pb-5" : "hidden"}>{children}</div>
+      ) : null}
     </div>
   );
 }
@@ -1466,19 +1471,19 @@ function ContactModal({
             </select>
           </div>
 
-          <AdminContactInfo
-            contact={contact}
-            startEditing={startEditing}
-            onSaved={(updated: DashboardContact) => {
-              onContactPatched?.(updated);
-              fetchActions();
-            }}
-          />
+          <FilePanel title={`👤 ${t("dashboard.studentInfo")}`} persist>
+            <AdminContactInfo
+              embedded
+              contact={contact}
+              startEditing={startEditing}
+              onSaved={(updated: DashboardContact) => {
+                onContactPatched?.(updated);
+                fetchActions();
+              }}
+            />
+          </FilePanel>
 
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📝 {t("dashboard.internalNotes")}
-            </label>
+          <FilePanel title={`📝 ${t("dashboard.internalNotes")}`} persist>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -1487,7 +1492,7 @@ function ContactModal({
               className="w-full px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300 resize-none"
               placeholder={t("dashboard.notesPlaceholder")}
             />
-          </div>
+          </FilePanel>
 
           <FilePanel title={`📧 ${t("dashboard.emailSection")}`}>
             <AdminContactEmailThread
@@ -1516,11 +1521,7 @@ function ContactModal({
             </FilePanel>
           ) : null}
 
-          {/* Formule + déblocage espace étudiant */}
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              🎓 {t("dashboard.studentSpace")}
-            </label>
+          <FilePanel title={`🎓 ${t("dashboard.studentSpace")}`} persist>
             {accessGranted ? (
               <p className="text-sm text-emerald-300 mb-4">
                 {t("dashboard.unlockedWithFormule", {
@@ -1592,7 +1593,7 @@ function ContactModal({
             <p className="text-xs text-slate-500 mt-3">
               {t("dashboard.formuleHint")}
             </p>
-          </div>
+          </FilePanel>
 
           <FilePanel title={`📄 ${t("dashboard.contractSection")}`}>
             <AdminSendContract
@@ -1606,20 +1607,16 @@ function ContactModal({
           </FilePanel>
 
           {access.matching ? (
-            <>
+            <FilePanel title="🎯 Matching" persist>
               <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
               <AdminChineseMatchingPanel
                 contact={contact}
                 onHistory={fetchActions}
               />
-            </>
+            </FilePanel>
           ) : null}
 
-          {/* Avancement dossier */}
-          <div className="mb-8 pb-8 border-b border-slate-700/50">
-            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-              📈 {t("dashboard.progressSection")}
-            </label>
+          <FilePanel title={`📈 ${t("dashboard.progressSection")}`}>
             <p className="text-xs text-slate-400 mb-4">
               {t("dashboard.progressVisible")}{" "}
               <span className="text-white font-semibold">
@@ -1648,20 +1645,14 @@ function ContactModal({
                 );
               })}
             </div>
-          </div>
+          </FilePanel>
 
           <FilePanel title={`📂 ${t("files.title")}`}>
             <AdminStudentFiles contactId={contact.id} />
           </FilePanel>
 
-          {/* Ajouter une action */}
-          <form
-            onSubmit={addAction}
-            className="mb-8 pb-8 border-b border-slate-700/50"
-          >
-            <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wide">
-              ➕ {t("dashboard.logAction")}
-            </h3>
+          <FilePanel title={`➕ ${t("dashboard.logAction")}`} persist>
+          <form onSubmit={addAction}>
             <div className="flex flex-col gap-4">
               <select
                 value={newAction}
@@ -1693,13 +1684,10 @@ function ContactModal({
               </button>
             </div>
           </form>
+          </FilePanel>
 
-          {/* Historique */}
-          <div>
-            <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wide">
-              📜 {t("dashboard.history")} ({actions.length})
-            </h3>
-            <div className="space-y-3 max-h-64 overflow-y-auto">
+          <FilePanel title={`📜 ${t("dashboard.history")} (${actions.length})`}>
+            <div className="space-y-3 max-h-96 overflow-y-auto">
               {loadingActions ? (
                 <p className="text-slate-400 text-center py-4">{t("loading")}</p>
               ) : actions.length === 0 ? (
@@ -1749,7 +1737,7 @@ function ContactModal({
                 })
               )}
             </div>
-          </div>
+          </FilePanel>
         </div>
       </div>
     </div>

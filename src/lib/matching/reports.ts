@@ -259,8 +259,11 @@ export function explainScore(
 
 function scorePhrase(item: UniversityMatch) {
   const cat = categoryOf(item);
-  if (item.score == null) return "Score de compatibilité : à préciser";
-  return `${item.score}/100 — ${cat.subtitle}`;
+  if (item.score == null) {
+    return "L'alignement avec cette université reste à préciser : il manque des critères publiés pour le dire clairement.";
+  }
+  const detail = cat.subtitle.charAt(0).toLowerCase() + cat.subtitle.slice(1);
+  return `${cat.label} : ${detail}. Cette lecture compare votre dossier aux critères publiés par l'établissement. Elle ne promet pas une admission.`;
 }
 
 function mixCounts(matches: UniversityMatch[] | null | undefined): MixCounts {
