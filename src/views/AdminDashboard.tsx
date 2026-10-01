@@ -821,6 +821,9 @@ export default function AdminDashboard() {
           />
           <AdminBulkWhatsapp
             contacts={contacts as ComponentProps<typeof AdminBulkWhatsapp>["contacts"]}
+            filteredContacts={
+              filteredContacts as ComponentProps<typeof AdminBulkWhatsapp>["filteredContacts"]
+            }
             selectedIds={selectedIds}
             onSelectedIdsChange={setSelectedIds}
             onFinished={fetchContacts}

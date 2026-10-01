@@ -513,4 +513,64 @@ ${summary.text}`,
   return composeEmailFromParsed(result.json, result.text);
 }
 
+function whatsappBodyFromParsed(json: ComposeFields | null, raw: string) {
+  const fromJson = String(json?.body || "").trim();
+  const body = (fromJson || raw).replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+  if (!body || body.length > 1500) return null;
+  return body.includes("{prenom}") ? body : `Bonjour {prenom},\n\n${body}`;
+}
+
+export async function composeBulkWhatsappWithAi({
+  notes = "",
+  topic = "custom",
+  contacts = [],
+}: {
+  notes?: unknown;
+  topic?: string;
+  contacts?: unknown[];
+} = {}): Promise<ComposeOk | ComposeErr> {
+  const topicKey: BulkAiTopicKey =
+    topic in BULK_AI_TOPICS ? (topic as BulkAiTopicKey) : "custom";
+  const topicDef = BULK_AI_TOPICS[topicKey];
+  const tutoyer = notesAskTutoiement(notes);
+  const summary = summarizeContactsForCompose(contacts);
+  const extraNotes = String(notes || "").trim();
+
+  const result = await mammouthChat({
+    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
+
+Tu rédiges UN seul message WhatsApp, court, envoyé tel quel à plusieurs étudiants. Ce n'est pas un e-mail.
+
+Format:
+- Texte brut, 2 à 4 paragraphes courts, séparés par une ligne vide.
+- 400 à 900 caractères.
+- La première ligne est exactement « Bonjour {prenom}, » avec les accolades, pour que le prénom soit ajouté à l'envoi.
+- Pas d'objet, pas de titre, pas de HTML, pas de liste de destinataires.
+- Dernière ligne : « L'équipe Chinois en Devenir ».
+- Tutoiement: ${tutoyer ? "le brief demande le tutoiement : tutoie (tu / toi / ton)." : "vouvoie (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
+
+Les profils servent à adapter le fond, sans citer de personne. N'invente aucune université, aucun créneau, aucun tarif, aucune bourse chiffrée.
+
+JSON uniquement, sans markdown :
+{"body":"Bonjour {prenom},\\n\\n..."}`,
+    user: `${formuleFactsForPrompt()}
+
+${topicDef.brief}
+
+Notes admin (à intégrer si utiles) :
+${extraNotes || "(aucune note supplémentaire)"}
+
+Profils sélectionnés (${summary.count}) — ne pas les citer nommément :
+${summary.text}`,
+    temperature: 0.5,
+    maxTokens: 900,
+    retries: 1,
+  });
+
+  if (!result.ok) return result;
+  const body = whatsappBodyFromParsed(result.json, result.text);
+  if (!body) return { ok: false, error: "Réponse IA inutilisable" };
+  return { ok: true, body, subject: "", title: "", subtitle: "" };
+}
+
 export { sanitizeComposeBody, sanitizeComposeLine };

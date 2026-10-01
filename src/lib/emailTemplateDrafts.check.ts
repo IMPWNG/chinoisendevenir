@@ -6,6 +6,7 @@ import {
   formuleChoiceLines,
   generateDraftEmailHtml,
   getEmailTemplateDraft,
+  getWhatsappTemplateDraft,
 } from "./emailTemplateDrafts";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -32,5 +33,10 @@ assert(!html.includes("<script"), "pas de script");
 
 assert(getEmailTemplateDraft("relance_1")?.body.includes("formulaire"), "relance 1");
 assert(getEmailTemplateDraft("inconnu") === null, "clé inconnue");
+
+const wa = getWhatsappTemplateDraft("ouverture_printemps");
+assert(Boolean(wa?.startsWith("Bonjour {prenom},")), "whatsapp garde le prénom");
+assert(Boolean(wa && wa.includes("octobre") && wa.length < 1200), "whatsapp court");
+assert(getWhatsappTemplateDraft("reponse_visa") === null, "pas de modèle long hors envoi groupé");
 
 console.log("emailTemplateDrafts.check ok");

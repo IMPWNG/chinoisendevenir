@@ -6,6 +6,7 @@ import {
   BULK_AI_TOPIC_KEYS,
   MAX_BULK_COMPOSE_CONTACTS,
   composeBulkEmailWithAi,
+  composeBulkWhatsappWithAi,
   composeEmailWithAi,
 } from "@/lib/emailCompose";
 import { rateLimit } from "@/lib/httpSecurity";
@@ -140,11 +141,11 @@ export async function POST(request: Request) {
         );
       }
 
-      const composed = (await composeBulkEmailWithAi({
-        notes,
-        topic,
-        contacts: found,
-      })) as ComposeResult;
+      const composed = (
+        asString(body.channel) === "whatsapp"
+          ? await composeBulkWhatsappWithAi({ notes, topic, contacts: found })
+          : await composeBulkEmailWithAi({ notes, topic, contacts: found })
+      ) as ComposeResult;
       if (!composed.ok) {
         return NextResponse.json(
           { success: false, error: composed.error },

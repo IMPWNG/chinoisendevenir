@@ -120,7 +120,7 @@ export const adminTranslations = {
       noContacts: "Aucun contact trouvé",
       adjustFilters: "Ajustez vos filtres",
       loadingContacts: "Chargement des contacts...",
-      bulkTitle: "Envoi groupé",
+      bulkTitle: "Envoi groupé par mail",
       bulkSelected: "{count} sélectionné(s)",
       bulkHint:
         "Cochez des contacts. L'IA rédige une relance (chinois sans diplôme de langue, bourses, formules…). Vous relisez le brouillon, puis vous envoyez.",
@@ -163,9 +163,9 @@ export const adminTranslations = {
         "Envoyer « {template} » à {count} personne(s) ?\n\nLes emails partent un par un. Ne fermez pas la page.",
       bulkDone:
         "Envoi groupé terminé.\n✅ {sent} envoyé(s)\n❌ {failed} échec(s){details}",
-      waBulkTitle: "Envoi WhatsApp",
+      waBulkTitle: "Envoi groupé WhatsApp",
       waBulkHint:
-        "Même sélection que l'e-mail. Les messages partent un par un depuis le numéro OpenWA du VPS, avec une pause de quelques secondes. {prenom} et {nom} sont remplacés pour chaque personne.",
+        "Même sélection que le mail. Modèle ou brouillon IA, au format d'un message court. {prenom} est remplacé pour chaque personne. Les envois partent un par un, avec une pause.",
       waBulkPlaceholder:
         "Bonjour {prenom}, je reviens vers vous au sujet de votre projet d'études en Chine…",
       waBulkEmpty: "Écrivez un message, ou cochez le carnet ou la liste Étude Chine.",
@@ -710,7 +710,7 @@ export const adminTranslations = {
       noContacts: "No contacts found",
       adjustFilters: "Adjust your filters",
       loadingContacts: "Loading contacts...",
-      bulkTitle: "Bulk send",
+      bulkTitle: "Bulk email",
       bulkSelected: "{count} selected",
       bulkHint:
         "Check contacts. AI drafts a follow-up (Chinese with no language certificate, scholarships, packages…). You review the draft, then send.",
@@ -752,9 +752,9 @@ export const adminTranslations = {
         "Send “{template}” to {count} people?\n\nEmails are sent one by one. Do not close the page.",
       bulkDone:
         "Bulk send finished.\n✅ {sent} sent\n❌ {failed} failed{details}",
-      waBulkTitle: "WhatsApp send",
+      waBulkTitle: "Bulk WhatsApp",
       waBulkHint:
-        "Uses the same selection as email. Messages leave one by one from the VPS OpenWA number, with a short pause. {prenom} and {nom} are replaced for each person.",
+        "Same selection as email. A template or an AI draft, written as a short message. {prenom} is replaced for each person. Messages go out one by one, with a pause.",
       waBulkPlaceholder: "Hello {prenom}, following up on your plan to study in China…",
       waBulkEmpty: "Write a message, or tick the address book or the Étude Chine list.",
       waBulkNoPhone: "No phone number in the selection.",
@@ -1292,7 +1292,7 @@ export const adminTranslations = {
       noContacts: "未找到联系人",
       adjustFilters: "请调整筛选条件",
       loadingContacts: "正在加载联系人...",
-      bulkTitle: "群发",
+      bulkTitle: "邮件群发",
       bulkSelected: "已选 {count} 人",
       bulkHint:
         "勾选联系人。AI 会起草跟进邮件（无语言证书学中文、奖学金、套餐等）。你核对草稿后再发送。",
@@ -1333,7 +1333,7 @@ export const adminTranslations = {
       bulkDone: "群发完成。\n✅ 成功 {sent}\n❌ 失败 {failed}{details}",
       waBulkTitle: "WhatsApp 群发",
       waBulkHint:
-        "与邮件使用同一批勾选。消息从 VPS 上的 OpenWA 号码逐条发出，每条之间有短暂停顿。{prenom} 和 {nom} 会替换成每人的姓名。",
+        "与邮件同一批勾选。可用模板或 AI 草稿，写成一条短消息。{prenom} 会换成每人的名字。逐条发送，中间有短暂停顿。",
       waBulkPlaceholder: "{prenom} 你好，我想跟进你的中国留学计划…",
       waBulkEmpty: "请写一条消息，或勾选通讯录 / Étude Chine 列表。",
       waBulkNoPhone: "所选联系人里没有电话号码。",
