@@ -55,8 +55,6 @@ export default function AdminBulkWhatsapp({
   const { t } = useAdminI18n();
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("");
-  const [saveContact, setSaveContact] = useState(false);
-  const [addList, setAddList] = useState(false);
   const [composing, setComposing] = useState(false);
   const [composeError, setComposeError] = useState("");
   const [sending, setSending] = useState(false);
@@ -151,19 +149,39 @@ export default function AdminBulkWhatsapp({
     }
 
     const confirmed = confirm(
-      t("dashboard.waBulkConfirm", {
-        count: recipients.length,
-        extra: [
-          hasDraft ? t("dashboard.waBulkTitle") : "",
-          saveContact ? t("dashboard.waBulkSave") : "",
-          addList ? t("dashboard.waBulkList") : "",
-        ]
-          .filter(Boolean)
-          .join("\n"),
-      }),
+      t("dashboard.waBulkConfirm", { count: recipients.length }),
     );
     if (!confirmed) return;
+    await runOnRecipients({
+      text: message.trim(),
+      save: false,
+      label: false,
+      pauseMs: SEND_PAUSE_MS,
+    });
+  }
 
+  async function addToBook() {
+    if (recipients.length === 0) {
+      alert(t("dashboard.waBulkNoPhone"));
+      return;
+    }
+    if (recipients.length > 40) {
+      alert(t("dashboard.bulkTooMany"));
+      return;
+    }
+    const confirmed = confirm(
+      t("dashboard.waBulkBookConfirm", { count: recipients.length }),
+    );
+    if (!confirmed) return;
+    await runOnRecipients({ text: "", save: true, label: true, pauseMs: 800 });
+  }
+
+  async function runOnRecipients(input: {
+    text: string;
+    save: boolean;
+    label: boolean;
+    pauseMs: number;
+  }) {
     setSending(true);
     const sent: BulkContact[] = [];
     const failed: { contact: BulkContact; error: string }[] = [];
@@ -181,9 +199,9 @@ export default function AdminBulkWhatsapp({
             body: JSON.stringify({
               contactId: contact.id,
               action: "bundle",
-              text: message.trim(),
-              save: saveContact,
-              label: addList,
+              text: input.text,
+              save: input.save,
+              label: input.label,
             }),
           });
           const data = await response.json();
@@ -196,7 +214,7 @@ export default function AdminBulkWhatsapp({
             error: reason === "SESSION" ? t("sessionExpired") : reason || t("unknownError"),
           });
         }
-        if (i < recipients.length - 1) await wait(message.trim() ? SEND_PAUSE_MS : 800);
+        if (i < recipients.length - 1) await wait(input.pauseMs);
       }
     } finally {
       setSending(false);
@@ -355,27 +373,18 @@ export default function AdminBulkWhatsapp({
                 ) : null}
               </div>
 
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <p className="text-sm text-slate-200 flex-1">{t("dashboard.waBulkSave")}</p>
+              <button
+                type="button"
+                onClick={addToBook}
+                disabled={busy || selectedIds.length === 0}
+                className="px-5 py-2.5 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {t("dashboard.waBulkBookButton")}
+              </button>
+            </div>
             <div className="flex flex-col gap-3">
-              <label className="flex items-start gap-3 text-sm text-slate-200">
-                <input
-                  type="checkbox"
-                  checked={saveContact}
-                  disabled={busy}
-                  onChange={(event) => setSaveContact(event.target.checked)}
-                  className="mt-1"
-                />
-                <span>{t("dashboard.waBulkSave")}</span>
-              </label>
-              <label className="flex items-start gap-3 text-sm text-slate-200">
-                <input
-                  type="checkbox"
-                  checked={addList}
-                  disabled={busy}
-                  onChange={(event) => setAddList(event.target.checked)}
-                  className="mt-1"
-                />
-                <span>{t("dashboard.waBulkList")}</span>
-              </label>
               {missingPhone > 0 ? (
                 <p className="text-xs text-amber-300">
                   {t("dashboard.waBulkMissingPhone", { count: missingPhone })}

@@ -171,10 +171,13 @@ export const adminTranslations = {
       waBulkEmpty: "Écrivez un message, ou cochez le carnet ou la liste Étude Chine.",
       waBulkNoPhone: "Aucun numéro de téléphone dans la sélection.",
       waBulkMissingPhone: "{count} personne(s) sans numéro seront ignorées.",
-      waBulkSave: "Ajouter aussi ces personnes à mes contacts WhatsApp.",
-      waBulkList: "Ajouter aussi ces personnes à la liste Étude Chine.",
+      waBulkSave:
+        "Ajouter ces personnes aux contacts WhatsApp et à la liste Étude Chine.",
+      waBulkBookButton: "Valider",
+      waBulkBookConfirm:
+        "Ajouter {count} personne(s) aux contacts WhatsApp et à la liste Étude Chine ?\n\nAucun message n'est envoyé.",
       waBulkConfirm:
-        "Continuer pour {count} personne(s) ?\n\n{extra}\nLes envois partent un par un. Ne fermez pas la page.",
+        "Envoyer le message à {count} personne(s) ?\n\nLes envois partent un par un. Ne fermez pas la page.",
       emailSection: "Envoyer un email",
       whatsappSection: "WhatsApp",
       whatsappHint:
@@ -759,10 +762,13 @@ export const adminTranslations = {
       waBulkEmpty: "Write a message, or tick the address book or the Étude Chine list.",
       waBulkNoPhone: "No phone number in the selection.",
       waBulkMissingPhone: "{count} people without a phone number will be skipped.",
-      waBulkSave: "Also add these people to my WhatsApp contacts.",
-      waBulkList: "Also add these people to the Étude Chine list.",
+      waBulkSave:
+        "Add these people to WhatsApp contacts and to the Étude Chine list.",
+      waBulkBookButton: "Confirm",
+      waBulkBookConfirm:
+        "Add {count} people to WhatsApp contacts and the Étude Chine list?\n\nNo message is sent.",
       waBulkConfirm:
-        "Continue for {count} people?\n\n{extra}\nMessages go out one by one. Do not close the page.",
+        "Send the message to {count} people?\n\nMessages go out one by one. Do not close the page.",
       emailSection: "Send an email",
       whatsappSection: "WhatsApp",
       whatsappHint:
@@ -1338,9 +1344,11 @@ export const adminTranslations = {
       waBulkEmpty: "请写一条消息，或勾选通讯录 / Étude Chine 列表。",
       waBulkNoPhone: "所选联系人里没有电话号码。",
       waBulkMissingPhone: "{count} 人没有电话，将被跳过。",
-      waBulkSave: "同时把这些人加入我的 WhatsApp 通讯录。",
-      waBulkList: "同时把这些人加入 Étude Chine 列表。",
-      waBulkConfirm: "继续向 {count} 人发送？\n\n{extra}\n将逐条发送，请勿关闭页面。",
+      waBulkSave: "把这些人加入 WhatsApp 通讯录和 Étude Chine 列表。",
+      waBulkBookButton: "确认",
+      waBulkBookConfirm:
+        "把 {count} 人加入 WhatsApp 通讯录和 Étude Chine 列表？\n\n不会发送消息。",
+      waBulkConfirm: "向 {count} 人发送这条消息？\n\n将逐条发送，请勿关闭页面。",
       emailSection: "发送邮件",
       whatsappSection: "WhatsApp",
       whatsappHint:
