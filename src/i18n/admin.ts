@@ -163,6 +163,18 @@ export const adminTranslations = {
         "Envoyer « {template} » à {count} personne(s) ?\n\nLes emails partent un par un. Ne fermez pas la page.",
       bulkDone:
         "Envoi groupé terminé.\n✅ {sent} envoyé(s)\n❌ {failed} échec(s){details}",
+      waBulkTitle: "Envoi WhatsApp",
+      waBulkHint:
+        "Même sélection que l'e-mail. Les messages partent un par un depuis le numéro OpenWA du VPS, avec une pause de quelques secondes. {prenom} et {nom} sont remplacés pour chaque personne.",
+      waBulkPlaceholder:
+        "Bonjour {prenom}, je reviens vers vous au sujet de votre projet d'études en Chine…",
+      waBulkEmpty: "Écrivez un message, ou cochez le carnet ou la liste Étude Chine.",
+      waBulkNoPhone: "Aucun numéro de téléphone dans la sélection.",
+      waBulkMissingPhone: "{count} personne(s) sans numéro seront ignorées.",
+      waBulkSave: "Ajouter aussi ces personnes à mes contacts WhatsApp.",
+      waBulkList: "Ajouter aussi ces personnes à la liste Étude Chine.",
+      waBulkConfirm:
+        "Continuer pour {count} personne(s) ?\n\n{extra}\nLes envois partent un par un. Ne fermez pas la page.",
       emailSection: "Envoyer un email",
       whatsappSection: "WhatsApp",
       whatsappHint:
@@ -740,6 +752,17 @@ export const adminTranslations = {
         "Send “{template}” to {count} people?\n\nEmails are sent one by one. Do not close the page.",
       bulkDone:
         "Bulk send finished.\n✅ {sent} sent\n❌ {failed} failed{details}",
+      waBulkTitle: "WhatsApp send",
+      waBulkHint:
+        "Uses the same selection as email. Messages leave one by one from the VPS OpenWA number, with a short pause. {prenom} and {nom} are replaced for each person.",
+      waBulkPlaceholder: "Hello {prenom}, following up on your plan to study in China…",
+      waBulkEmpty: "Write a message, or tick the address book or the Étude Chine list.",
+      waBulkNoPhone: "No phone number in the selection.",
+      waBulkMissingPhone: "{count} people without a phone number will be skipped.",
+      waBulkSave: "Also add these people to my WhatsApp contacts.",
+      waBulkList: "Also add these people to the Étude Chine list.",
+      waBulkConfirm:
+        "Continue for {count} people?\n\n{extra}\nMessages go out one by one. Do not close the page.",
       emailSection: "Send an email",
       whatsappSection: "WhatsApp",
       whatsappHint:
@@ -1308,6 +1331,16 @@ export const adminTranslations = {
       bulkConfirm:
         "向 {count} 人发送「{template}」？\n\n邮件将逐封发送，请勿关闭页面。",
       bulkDone: "群发完成。\n✅ 成功 {sent}\n❌ 失败 {failed}{details}",
+      waBulkTitle: "WhatsApp 群发",
+      waBulkHint:
+        "与邮件使用同一批勾选。消息从 VPS 上的 OpenWA 号码逐条发出，每条之间有短暂停顿。{prenom} 和 {nom} 会替换成每人的姓名。",
+      waBulkPlaceholder: "{prenom} 你好，我想跟进你的中国留学计划…",
+      waBulkEmpty: "请写一条消息，或勾选通讯录 / Étude Chine 列表。",
+      waBulkNoPhone: "所选联系人里没有电话号码。",
+      waBulkMissingPhone: "{count} 人没有电话，将被跳过。",
+      waBulkSave: "同时把这些人加入我的 WhatsApp 通讯录。",
+      waBulkList: "同时把这些人加入 Étude Chine 列表。",
+      waBulkConfirm: "继续向 {count} 人发送？\n\n{extra}\n将逐条发送，请勿关闭页面。",
       emailSection: "发送邮件",
       whatsappSection: "WhatsApp",
       whatsappHint:

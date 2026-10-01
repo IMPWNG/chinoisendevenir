@@ -14,6 +14,7 @@ import AdminContactWhatsApp from "../components/AdminContactWhatsApp";
 import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminBulkEmail from "../components/AdminBulkEmail";
+import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import type { AdminI18nValue } from "../context/AdminI18nContext";
@@ -801,6 +802,7 @@ export default function AdminDashboard() {
         </div>
 
         {access.bulkSend ? (
+          <>
           <AdminBulkEmail
             contacts={contacts as ComponentProps<typeof AdminBulkEmail>["contacts"]}
             filteredContacts={
@@ -817,6 +819,13 @@ export default function AdminDashboard() {
             }
             onFinished={fetchContacts}
           />
+          <AdminBulkWhatsapp
+            contacts={contacts as ComponentProps<typeof AdminBulkWhatsapp>["contacts"]}
+            selectedIds={selectedIds}
+            onSelectedIdsChange={setSelectedIds}
+            onFinished={fetchContacts}
+          />
+          </>
         ) : null}
 
         <div className="mb-4">

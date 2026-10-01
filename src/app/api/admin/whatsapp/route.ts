@@ -3,6 +3,7 @@ import { requireFullAdmin } from "@/lib/adminRoles";
 import {
   OpenwaError,
   addStudentToEtudeChine,
+  applyStudentWhatsapp,
   saveStudentWhatsappContact,
   markStudentWhatsappRead,
   sendStudentWhatsapp,
@@ -30,7 +31,7 @@ async function guard(request: Request) {
   }
   const limited = rateLimit({
     key: `whatsapp:${auth.user.id}`,
-    limit: 30,
+    limit: 50,
     windowMs: 10 * 60 * 1000,
   });
   if (!limited.ok) {
@@ -93,7 +94,10 @@ export async function POST(request: Request) {
     const contactId = asString(body.contactId).trim();
     const action = asString(body.action).trim();
     const text = asString(body.text);
-    if (!contactId || (action !== "send" && action !== "save" && action !== "label")) {
+    if (
+      !contactId ||
+      (action !== "send" && action !== "save" && action !== "label" && action !== "bundle")
+    ) {
       return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
     }
     if (action === "send" && text.trim().length > TEXT_MAX) {
@@ -114,7 +118,26 @@ export async function POST(request: Request) {
 
     const prenom = String(contact.prenom || "").trim();
     const nom = String(contact.nom || "").trim();
-    if (action === "save") {
+    let bundleNote = "";
+    if (action === "bundle") {
+      const result = await applyStudentWhatsapp({
+        phone: contact.phone,
+        country: contact.pays,
+        firstName: prenom || nom,
+        lastName: prenom ? nom : "",
+        prenom,
+        nom,
+        text,
+        save: body.save === true,
+        label: body.label === true,
+      });
+      const bits = [
+        result.sent ? "Message envoyé" : "",
+        result.saved ? "ajouté au carnet" : "",
+        result.labeled ? "ajouté à Étude Chine" : "",
+      ].filter(Boolean);
+      bundleNote = bits.join(", ");
+    } else if (action === "save") {
       await saveStudentWhatsappContact({
         phone: contact.phone,
         country: contact.pays,
@@ -135,7 +158,12 @@ export async function POST(request: Request) {
     }
 
     const logged =
-      action === "send"
+      action === "bundle"
+        ? {
+            action: text.trim() ? "whatsapp_envoye" : "whatsapp_contact",
+            description: [bundleNote, text.trim().slice(0, 160)].filter(Boolean).join(" — ").slice(0, 240),
+          }
+        : action === "send"
         ? { action: "whatsapp_envoye", description: text.trim().slice(0, 240) }
         : action === "label"
           ? { action: "whatsapp_liste", description: "Ajouté à la liste Étude Chine" }

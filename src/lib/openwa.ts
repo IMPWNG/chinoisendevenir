@@ -297,6 +297,76 @@ export async function studentWhatsappCard(input: {
   };
 }
 
+export function fillWhatsappText(text: string, prenom: string, nom: string) {
+  return text.replaceAll("{prenom}", prenom.trim()).replaceAll("{nom}", nom.trim()).trim();
+}
+
+export async function applyStudentWhatsapp(input: {
+  phone: unknown;
+  country?: string | null;
+  firstName: string;
+  lastName?: string;
+  prenom?: string;
+  nom?: string;
+  text?: string;
+  save?: boolean;
+  label?: boolean;
+}) {
+  const text = fillWhatsappText(
+    input.text || "",
+    input.prenom ?? input.firstName,
+    input.nom ?? input.lastName ?? "",
+  );
+  if (!input.save && !input.label && !text) {
+    throw new OpenwaError(
+      "Écrivez un message, ou cochez le carnet ou la liste Étude Chine.",
+      400,
+      "EMPTY",
+    );
+  }
+  if (text.length > TEXT_MAX) {
+    throw new OpenwaError(`Message trop long (${TEXT_MAX} caractères max).`, 400, "BAD_TEXT");
+  }
+  const chatId = await resolveChat(input.phone, input.country);
+  if (input.save) {
+    const firstName = input.firstName.trim().slice(0, 100) || "Étudiant";
+    const lastName = input.lastName?.trim().slice(0, 100) || "";
+    const body: { firstName: string; lastName?: string } = { firstName };
+    if (lastName) body.lastName = lastName;
+    await openwa(`/contacts/${encodeURIComponent(chatId)}`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+  }
+  if (input.label) {
+    const labelId = await etudeChineLabelId();
+    if (!labelId) {
+      throw new OpenwaError(
+        "La liste Étude Chine est introuvable sur ce WhatsApp.",
+        404,
+        "NO_LIST",
+      );
+    }
+    const encoded = encodeURIComponent(chatId);
+    const current = await openwa(`/labels/chat/${encoded}`, undefined, {
+      allowNotFound: true,
+    });
+    if (!chatHasLabel(current, labelId)) {
+      await openwa(`/labels/chat/${encoded}`, {
+        method: "POST",
+        body: JSON.stringify({ labelId }),
+      });
+    }
+  }
+  if (text) {
+    await openwa("/messages/send-text", {
+      method: "POST",
+      body: JSON.stringify({ chatId, text }),
+    });
+  }
+  return { chatId, sent: Boolean(text), saved: Boolean(input.save), labeled: Boolean(input.label) };
+}
+
 export async function addStudentToEtudeChine(input: {
   phone: unknown;
   country?: string | null;
