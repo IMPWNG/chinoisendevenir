@@ -178,55 +178,6 @@ export function isCardEmailTemplateKey(value: string): value is CardEmailTemplat
   return (CARD_EMAIL_TEMPLATE_KEYS as readonly string[]).includes(value);
 }
 
-const WHATSAPP_DRAFTS: Partial<Record<CardEmailTemplateKey, () => string>> = {
-  ouverture_printemps: () =>
-    [
-      "Bonjour {prenom},",
-      "Les candidatures pour la rentrée de printemps s'ouvrent d'octobre à décembre. Si vous voulez étudier en Chine, à l'université ou en école de langue, c'est le moment d'ouvrir le dossier.",
-      "Nous avons trois formules. Ce choix n'engage à rien, et aucun paiement n'est demandé.",
-      formuleChoiceLines(),
-      "Répondez avec le numéro de la formule. Nous vous appelons ensuite.",
-      "L'équipe Chinois en Devenir",
-    ].join("\n\n"),
-  formules_presentation: () =>
-    [
-      "Bonjour {prenom},",
-      "Voici nos formules pour étudier en Chine. Votre choix n'est pas un engagement, et aucun paiement n'est demandé à cette étape.",
-      formuleChoiceLines(),
-      "Répondez avec le numéro de la formule. Nous vous appelons ensuite.",
-      "L'équipe Chinois en Devenir",
-    ].join("\n\n"),
-  relance_formules: () =>
-    [
-      "Bonjour {prenom},",
-      "Nous vous avions présenté nos formules, et nous n'avons pas encore votre retour.",
-      "Si le projet est toujours d'actualité, répondez avec le numéro de la formule. Nous pourrons ensuite vous appeler.",
-      formuleChoiceLines(),
-      "L'équipe Chinois en Devenir",
-    ].join("\n\n"),
-  relance_1: () =>
-    [
-      "Bonjour {prenom},",
-      "Vous nous avez contactés pour un projet d'études en Chine.",
-      `Pour qu'on puisse regarder votre profil, complétez le formulaire : ${SITE_URL}`,
-      "Si c'est déjà fait, répondez simplement à ce message.",
-      "L'équipe Chinois en Devenir",
-    ].join("\n\n"),
-  relance_2: () =>
-    [
-      "Bonjour {prenom},",
-      "Vous nous aviez écrit au sujet d'études en Chine. Ce projet est-il toujours d'actualité ?",
-      "Si oui, répondez « Oui ». Nous revenons vers vous pour la suite.",
-      "L'équipe Chinois en Devenir",
-    ].join("\n\n"),
-};
-
-export function getWhatsappTemplateDraft(key: string): string | null {
-  if (!isCardEmailTemplateKey(key)) return null;
-  const draft = WHATSAPP_DRAFTS[key];
-  return draft ? draft() : null;
-}
-
 export function getEmailTemplateDraft(key: string): EmailTemplateDraft | null {
   if (!isCardEmailTemplateKey(key)) return null;
   const draft = DRAFTS[key];

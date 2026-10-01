@@ -4,18 +4,6 @@ import { useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { errorMessage } from "../lib/request";
-import {
-  BULK_EMAIL_TEMPLATE_KEYS,
-  getWhatsappTemplateDraft,
-} from "../lib/emailTemplateDrafts";
-
-const AI_TOPICS = [
-  "langue_sans_diplome",
-  "annee_chinois",
-  "bourses",
-  "formules",
-  "custom",
-];
 
 const SEND_PAUSE_MS = 4000;
 
@@ -65,9 +53,6 @@ export default function AdminBulkWhatsapp({
   onFinished?: () => void | Promise<void>;
 }) {
   const { t } = useAdminI18n();
-  const [mode, setMode] = useState("ai");
-  const [template, setTemplate] = useState("ouverture_printemps");
-  const [topic, setTopic] = useState("langue_sans_diplome");
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("");
   const [saveContact, setSaveContact] = useState(false);
@@ -103,11 +88,6 @@ export default function AdminBulkWhatsapp({
     onSelectedIdsChange((prev) => [...new Set([...prev, ...filteredIds])]);
   };
 
-  function loadTemplate(key: string) {
-    const draft = getWhatsappTemplateDraft(key);
-    if (draft) setMessage(draft);
-  }
-
   async function composeDraft() {
     if (recipients.length === 0) {
       setComposeError(t("dashboard.waBulkNoPhone"));
@@ -117,7 +97,7 @@ export default function AdminBulkWhatsapp({
       setComposeError(t("dashboard.bulkTooMany"));
       return;
     }
-    if (topic === "custom" && notes.trim().length < 8) {
+    if (notes.trim().length < 8) {
       setComposeError(t("dashboard.emailAiEmpty"));
       return;
     }
@@ -130,7 +110,7 @@ export default function AdminBulkWhatsapp({
         body: JSON.stringify({
           channel: "whatsapp",
           contactIds: recipients.map((contact) => String(contact.id)),
-          topic,
+          topic: "custom",
           notes: notes.trim(),
         }),
       });
@@ -165,11 +145,7 @@ export default function AdminBulkWhatsapp({
       alert(t("dashboard.bulkTooMany"));
       return;
     }
-    if (!hasDraft && !saveContact && !addList) {
-      alert(t("dashboard.waBulkEmpty"));
-      return;
-    }
-    if ((mode === "ai" || mode === "template") && !hasDraft && !saveContact && !addList) {
+    if (!hasDraft) {
       alert(t("dashboard.bulkNeedDraft"));
       return;
     }
@@ -330,106 +306,25 @@ export default function AdminBulkWhatsapp({
 
         {collapsed ? null : (
           <>
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                disabled={busy}
-                onClick={() => setMode("ai")}
-                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-                  mode === "ai"
-                    ? "bg-violet-600 text-white"
-                    : "bg-slate-700/70 text-slate-300 hover:bg-slate-600"
-                }`}
-              >
-                ✨ {t("dashboard.bulkModeAi")}
-              </button>
-              <button
-                type="button"
-                disabled={busy}
-                onClick={() => {
-                  setMode("template");
-                  loadTemplate(template);
-                }}
-                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-                  mode === "template"
-                    ? "bg-emerald-600 text-white"
-                    : "bg-slate-700/70 text-slate-300 hover:bg-slate-600"
-                }`}
-              >
-                📋 {t("dashboard.bulkModeTemplate")}
-              </button>
-            </div>
-
-            {mode === "template" ? (
-              <div className="space-y-4">
-                <select
-                  value={template}
-                  disabled={busy}
-                  onChange={(event) => {
-                    const next = event.target.value;
-                    setTemplate(next);
-                    loadTemplate(next);
-                  }}
-                  className="max-w-xl px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-semibold cursor-pointer disabled:opacity-50"
-                >
-                  {BULK_EMAIL_TEMPLATE_KEYS.map((value) => (
-                    <option key={value} value={value}>
-                      {t(`emailTemplate.${value}`)}
-                    </option>
-                  ))}
-                </select>
-                {hasDraft ? (
-                  <MessageDraft
-                    message={message}
-                    busy={busy}
-                    accent="emerald"
-                    previewName={String(previewContact.prenom || "")}
-                    onChange={setMessage}
-                    t={t}
-                  />
-                ) : (
-                  <p className="text-sm text-slate-400">{t("dashboard.emailTemplateHint")}</p>
-                )}
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4 space-y-4">
+            <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4 space-y-4">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wide text-violet-200">
                     ✨ {t("dashboard.emailAiSection")}
                   </p>
                   <p className="text-xs text-slate-400 mt-1">{t("dashboard.waBulkHint")}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                      {t("dashboard.bulkAiTopicLabel")}
-                    </label>
-                    <select
-                      value={topic}
-                      disabled={busy}
-                      onChange={(event) => setTopic(event.target.value)}
-                      className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 font-semibold cursor-pointer disabled:opacity-50"
-                    >
-                      {AI_TOPICS.map((key) => (
-                        <option key={key} value={key}>
-                          {t(`dashboard.bulkAiTopic.${key}`)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                      {t("dashboard.bulkAiNotes")}
-                    </label>
-                    <textarea
-                      value={notes}
-                      disabled={busy}
-                      onChange={(event) => setNotes(event.target.value)}
-                      placeholder={t("dashboard.bulkAiPlaceholder")}
-                      rows={3}
-                      className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-none disabled:opacity-50"
-                    />
-                  </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                    {t("dashboard.bulkAiTopicLabel")}
+                  </label>
+                  <textarea
+                    value={notes}
+                    disabled={busy}
+                    onChange={(event) => setNotes(event.target.value)}
+                    placeholder={t("dashboard.bulkAiPlaceholder")}
+                    rows={3}
+                    className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y disabled:opacity-50"
+                  />
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <button
@@ -459,7 +354,6 @@ export default function AdminBulkWhatsapp({
                   />
                 ) : null}
               </div>
-            )}
 
             <div className="flex flex-col gap-3">
               <label className="flex items-start gap-3 text-sm text-slate-200">

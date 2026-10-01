@@ -5,18 +5,6 @@ import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { generateCustomEmailHtml } from "../lib/emailLayout";
 import { errorMessage } from "../lib/request";
-import {
-  BULK_EMAIL_TEMPLATE_KEYS,
-  getEmailTemplateDraft,
-} from "../lib/emailTemplateDrafts";
-
-const AI_TOPICS = [
-  "langue_sans_diplome",
-  "annee_chinois",
-  "bourses",
-  "formules",
-  "custom",
-];
 
 type BulkContact = {
   id: string;
@@ -62,9 +50,6 @@ export default function AdminBulkEmail({
   onFinished,
 }: AdminBulkEmailProps) {
   const { t } = useAdminI18n();
-  const [mode, setMode] = useState("ai");
-  const [template, setTemplate] = useState("ouverture_printemps");
-  const [topic, setTopic] = useState("langue_sans_diplome");
   const [notes, setNotes] = useState("");
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
@@ -111,7 +96,7 @@ export default function AdminBulkEmail({
       setComposeError(t("dashboard.bulkTooMany"));
       return;
     }
-    if (topic === "custom" && notes.trim().length < 8) {
+    if (notes.trim().length < 8) {
       setComposeError(t("dashboard.emailAiEmpty"));
       return;
     }
@@ -123,7 +108,7 @@ export default function AdminBulkEmail({
         method: "POST",
         body: JSON.stringify({
           contactIds: recipients.map((contact: BulkContact) => String(contact.id)),
-          topic,
+          topic: "custom",
           notes: notes.trim(),
         }),
       });
@@ -161,22 +146,14 @@ export default function AdminBulkEmail({
       alert(t("dashboard.bulkTooMany"));
       return;
     }
-    if (mode === "template" && !hasDraft) {
-      alert(t("dashboard.emailCustomEmpty"));
-      return;
-    }
-    if (mode === "ai" && !hasDraft) {
+    if (!hasDraft) {
       alert(t("dashboard.bulkNeedDraft"));
       return;
     }
 
-    const templateLabel =
-      mode === "ai"
-        ? subject.trim() || t(`dashboard.bulkAiTopic.${topic}`)
-        : t(`emailTemplate.${template}`);
     const confirmed = confirm(
-      t(mode === "ai" ? "dashboard.bulkConfirmAi" : "dashboard.bulkConfirm", {
-        template: templateLabel,
+      t("dashboard.bulkConfirmAi", {
+        template: subject.trim(),
         count: recipients.length,
       }),
     );
@@ -197,7 +174,7 @@ export default function AdminBulkEmail({
         try {
           const payload = {
             contactId: String(contact.id),
-            emailTemplate: mode === "ai" ? "custom" : template,
+            emailTemplate: "custom",
             customSubject: subject.trim(),
             customTitle: title.trim(),
             customSubtitle: subtitle.trim(),
@@ -324,7 +301,7 @@ export default function AdminBulkEmail({
               disabled={
                 busy ||
                 selectedIds.length === 0 ||
-                (mode === "ai" || mode === "template") && !hasDraft
+                !hasDraft
               }
               onClick={sendBulk}
               className="px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
@@ -341,116 +318,6 @@ export default function AdminBulkEmail({
 
         {collapsed ? null : (
           <>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            disabled={busy}
-            onClick={() => setMode("ai")}
-            className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-              mode === "ai"
-                ? "bg-violet-600 text-white"
-                : "bg-slate-700/70 text-slate-300 hover:bg-slate-600"
-            }`}
-          >
-            ✨ {t("dashboard.bulkModeAi")}
-          </button>
-          <button
-            type="button"
-            disabled={busy}
-            onClick={() => {
-              setMode("template");
-              const draft = getEmailTemplateDraft(template);
-              if (draft) {
-                setSubject(draft.subject);
-                setTitle(draft.title);
-                setSubtitle(draft.subtitle);
-                setMessage(draft.body);
-              }
-            }}
-            className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-              mode === "template"
-                ? "bg-amber-600 text-white"
-                : "bg-slate-700/70 text-slate-300 hover:bg-slate-600"
-            }`}
-          >
-            📋 {t("dashboard.bulkModeTemplate")}
-          </button>
-        </div>
-
-        {mode === "template" ? (
-          <div className="space-y-4">
-            <select
-              value={template}
-              disabled={busy}
-              onChange={(e) => {
-                const next = e.target.value;
-                setTemplate(next);
-                const draft = getEmailTemplateDraft(next);
-                if (draft) {
-                  setSubject(draft.subject);
-                  setTitle(draft.title);
-                  setSubtitle(draft.subtitle);
-                  setMessage(draft.body);
-                }
-              }}
-              className="max-w-xl px-5 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 font-semibold cursor-pointer disabled:opacity-50"
-            >
-              {BULK_EMAIL_TEMPLATE_KEYS.map((value) => (
-                <option key={value} value={value}>
-                  {t(`emailTemplate.${value}`)}
-                </option>
-              ))}
-            </select>
-            {hasDraft ? (
-              <div className="space-y-4">
-                <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                    {t("dashboard.emailCustomSubject")}
-                  </label>
-                  <input
-                    type="text"
-                    value={subject}
-                    disabled={busy}
-                    onChange={(e) => setSubject(e.target.value)}
-                    className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                    {t("dashboard.emailCustomBody")}
-                  </label>
-                  <textarea
-                    value={message}
-                    disabled={busy}
-                    onChange={(e) => setMessage(e.target.value)}
-                    rows={10}
-                    className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-y"
-                  />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
-                    {t("dashboard.emailPreview")}
-                  </p>
-                  <iframe
-                    title={t("dashboard.emailPreview")}
-                    sandbox=""
-                    className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
-                    srcDoc={generateCustomEmailHtml(previewContact, {
-                      customSubject: subject,
-                      customTitle: title,
-                      customSubtitle: subtitle,
-                      customMessage: message,
-                    })}
-                  />
-                </div>
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">
-                {t("dashboard.emailTemplateHint")}
-              </p>
-            )}
-          </div>
-        ) : (
           <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4 space-y-4">
             <div>
               <p className="text-xs font-bold uppercase tracking-wide text-violet-200">
@@ -460,37 +327,18 @@ export default function AdminBulkEmail({
                 {t("dashboard.bulkAiHint")}
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                  {t("dashboard.bulkAiTopicLabel")}
-                </label>
-                <select
-                  value={topic}
-                  disabled={busy}
-                  onChange={(e) => setTopic(e.target.value)}
-                  className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 font-semibold cursor-pointer disabled:opacity-50"
-                >
-                  {AI_TOPICS.map((key) => (
-                    <option key={key} value={key}>
-                      {t(`dashboard.bulkAiTopic.${key}`)}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
-                  {t("dashboard.bulkAiNotes")}
-                </label>
-                <textarea
-                  value={notes}
-                  disabled={busy}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder={t("dashboard.bulkAiPlaceholder")}
-                  rows={3}
-                  className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-none disabled:opacity-50"
-                />
-              </div>
+            <div>
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+                {t("dashboard.bulkAiTopicLabel")}
+              </label>
+              <textarea
+                value={notes}
+                disabled={busy}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder={t("dashboard.bulkAiPlaceholder")}
+                rows={3}
+                className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y disabled:opacity-50"
+              />
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <button
@@ -583,7 +431,6 @@ export default function AdminBulkEmail({
               </div>
             ) : null}
           </div>
-        )}
           </>
         )}
       </div>

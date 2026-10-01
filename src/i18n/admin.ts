@@ -123,7 +123,7 @@ export const adminTranslations = {
       bulkTitle: "Envoi groupé par mail",
       bulkSelected: "{count} sélectionné(s)",
       bulkHint:
-        "Cochez des contacts. L'IA rédige une relance (chinois sans diplôme de langue, bourses, formules…). Vous relisez le brouillon, puis vous envoyez.",
+        "Cochez des contacts. Écrivez le sujet de relance, l'IA rédige un seul e-mail. Vous relisez le brouillon, puis vous envoyez.",
       bulkModeTemplate: "Modèle existant",
       bulkModeAi: "Rédaction IA",
       bulkAiTopicLabel: "Sujet de relance",
@@ -137,7 +137,7 @@ export const adminTranslations = {
       },
       bulkAiNotes: "Précisions (optionnel)",
       bulkAiHint:
-        "Choisissez un sujet. L'IA s'appuie sur les profils cochés (diplôme, domaine, budget) pour rédiger un seul e-mail. Le prénom de chacun est ajouté automatiquement. Vous validez avant l'envoi.",
+        "Le sujet est libre. L'IA s'appuie dessus et sur les profils cochés. Le prénom de chacun est ajouté automatiquement. Vous validez avant l'envoi.",
       bulkAiPlaceholder:
         "Ex. Insister sur l'école de langue si pas de HSK, proposer un appel cette semaine…",
       bulkAiButton: "Rédiger le brouillon",
@@ -165,7 +165,7 @@ export const adminTranslations = {
         "Envoi groupé terminé.\n✅ {sent} envoyé(s)\n❌ {failed} échec(s){details}",
       waBulkTitle: "Envoi groupé WhatsApp",
       waBulkHint:
-        "Même sélection que le mail. Modèle ou brouillon IA, au format d'un message court. {prenom} est remplacé pour chaque personne. Les envois partent un par un, avec une pause.",
+        "Même sélection que le mail. Écrivez le sujet de relance, l'IA rédige un message court. {prenom} est remplacé pour chaque personne. Les envois partent un par un, avec une pause.",
       waBulkPlaceholder:
         "Bonjour {prenom}, je reviens vers vous au sujet de votre projet d'études en Chine…",
       waBulkEmpty: "Écrivez un message, ou cochez le carnet ou la liste Étude Chine.",
@@ -713,7 +713,7 @@ export const adminTranslations = {
       bulkTitle: "Bulk email",
       bulkSelected: "{count} selected",
       bulkHint:
-        "Check contacts. AI drafts a follow-up (Chinese with no language certificate, scholarships, packages…). You review the draft, then send.",
+        "Check contacts. Write the follow-up topic, and AI drafts one email. You review the draft, then send.",
       bulkModeTemplate: "Existing template",
       bulkModeAi: "AI draft",
       bulkAiTopicLabel: "Follow-up topic",
@@ -726,7 +726,7 @@ export const adminTranslations = {
       },
       bulkAiNotes: "Extra notes (optional)",
       bulkAiHint:
-        "Pick a topic. AI uses the selected profiles (diploma, field, budget) to write one email. Each first name is added automatically. You approve it before sending.",
+        "The topic is free text. AI uses it and the selected profiles. Each first name is added automatically. You approve it before sending.",
       bulkAiPlaceholder:
         "e.g. Stress language school if they have no HSK, offer a call this week…",
       bulkAiButton: "Draft the email",
@@ -754,7 +754,7 @@ export const adminTranslations = {
         "Bulk send finished.\n✅ {sent} sent\n❌ {failed} failed{details}",
       waBulkTitle: "Bulk WhatsApp",
       waBulkHint:
-        "Same selection as email. A template or an AI draft, written as a short message. {prenom} is replaced for each person. Messages go out one by one, with a pause.",
+        "Same selection as email. Write the follow-up topic, and AI drafts a short message. {prenom} is replaced for each person. Messages go out one by one, with a pause.",
       waBulkPlaceholder: "Hello {prenom}, following up on your plan to study in China…",
       waBulkEmpty: "Write a message, or tick the address book or the Étude Chine list.",
       waBulkNoPhone: "No phone number in the selection.",
@@ -1295,7 +1295,7 @@ export const adminTranslations = {
       bulkTitle: "邮件群发",
       bulkSelected: "已选 {count} 人",
       bulkHint:
-        "勾选联系人。AI 会起草跟进邮件（无语言证书学中文、奖学金、套餐等）。你核对草稿后再发送。",
+        "勾选联系人。写下跟进主题，AI 起草一封邮件。你核对草稿后再发送。",
       bulkModeTemplate: "现有模板",
       bulkModeAi: "AI 撰写",
       bulkAiTopicLabel: "跟进主题",
@@ -1308,7 +1308,7 @@ export const adminTranslations = {
       },
       bulkAiNotes: "补充说明（可选）",
       bulkAiHint:
-        "选择主题。AI 会根据勾选的档案（学历、专业、预算）写一封邮件。每人的名字会自动加入。发送前请先核对。",
+        "主题可自由填写。AI 会结合主题和勾选的档案写一封邮件。每人的名字会自动加入。发送前请先核对。",
       bulkAiPlaceholder: "例如：没有 HSK 就强调语言学校，提议本周通话…",
       bulkAiButton: "生成草稿",
       bulkValidateHint: "草稿已就绪 — 请核对、按需修改，然后发送。",
@@ -1333,7 +1333,7 @@ export const adminTranslations = {
       bulkDone: "群发完成。\n✅ 成功 {sent}\n❌ 失败 {failed}{details}",
       waBulkTitle: "WhatsApp 群发",
       waBulkHint:
-        "与邮件同一批勾选。可用模板或 AI 草稿，写成一条短消息。{prenom} 会换成每人的名字。逐条发送，中间有短暂停顿。",
+        "与邮件同一批勾选。写下跟进主题，AI 写成一条短消息。{prenom} 会换成每人的名字。逐条发送，中间有短暂停顿。",
       waBulkPlaceholder: "{prenom} 你好，我想跟进你的中国留学计划…",
       waBulkEmpty: "请写一条消息，或勾选通讯录 / Étude Chine 列表。",
       waBulkNoPhone: "所选联系人里没有电话号码。",
