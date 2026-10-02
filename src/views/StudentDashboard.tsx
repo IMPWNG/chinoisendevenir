@@ -7,6 +7,7 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
+import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import LeadForm from "../components/LeadForm";
@@ -15,6 +16,8 @@ import StudentMatching from "../components/StudentMatching";
 import StudentChineseMatching from "../components/StudentChineseMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
 import StudentVisaDocuments from "../components/StudentVisaDocuments";
+import StudentPaymentStatus from "../components/StudentPaymentStatus";
+import StudentArrivalGuide from "../components/StudentArrivalGuide";
 import { studentSupabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import { useSiteI18n } from "../context/SiteI18nContext";
@@ -384,13 +387,18 @@ export default function StudentDashboard() {
               </h1>
               <p className="landing-section-subtitle is-left">{subtitle}</p>
             </div>
-            <button
-              type="button"
-              className="landing-btn landing-btn-secondary"
-              onClick={handleLogout}
-            >
-              {t("student.logout")}
-            </button>
+            <div className="landing-hero-actions">
+              <Link href="/espace-etudiant/guide" className="landing-btn landing-btn-secondary">
+                {t("student.guideCta")}
+              </Link>
+              <button
+                type="button"
+                className="landing-btn landing-btn-secondary"
+                onClick={handleLogout}
+              >
+                {t("student.logout")}
+              </button>
+            </div>
           </div>
 
           {message?.type === "success" && (
@@ -446,6 +454,12 @@ export default function StudentDashboard() {
                 formule={profile.formule || ""}
                 formuleNumber={formuleNumber}
               />
+              {canChooseFormule ? null : (
+                <StudentPaymentStatus
+                  formule={profile.formule}
+                  paiements={profile.paiements}
+                />
+              )}
               <form className="student-card student-card-wide" onSubmit={handleSave}>
                 <h2 className="card-title">{t("student.infoTitle")}</h2>
                 <p className="card-subtitle">
@@ -607,13 +621,19 @@ export default function StudentDashboard() {
 
 
               {canChooseFormule ? (
-                <StudentFormules
-                  currentFormule={profile?.formule || ""}
-                  selectable
-                  choosingNumber={choosingFormule}
-                  onChoose={handleChooseFormule}
-                  subtitle={undefined}
-                />
+                <>
+                  <StudentFormules
+                    currentFormule={profile?.formule || ""}
+                    selectable
+                    choosingNumber={choosingFormule}
+                    onChoose={handleChooseFormule}
+                    subtitle={undefined}
+                  />
+                  <StudentPaymentStatus
+                    formule={profile.formule}
+                    paiements={profile.paiements}
+                  />
+                </>
               ) : (
                 <>
                   <div className="student-card student-card-wide">
@@ -806,6 +826,8 @@ export default function StudentDashboard() {
                       ) : null}
                     </>
                   ) : null}
+
+                  <StudentArrivalGuide />
                 </>
               )}
             </>

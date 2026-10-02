@@ -31,6 +31,11 @@ assert(html.includes("printemps"), "printemps dans le html");
 assert(!html.includes("<script"), "pas de script");
 
 assert(getEmailTemplateDraft("relance_1")?.body.includes("formulaire"), "relance 1");
+const espace = getEmailTemplateDraft("espace_etudiant");
+assert(espace?.body.includes("Créer un compte"), "espace : création");
+assert(espace?.body.includes("espace-etudiant/guide"), "espace : guide");
+assert(espace?.body.includes("espace-etudiant/connexion"), "espace : connexion");
+assert(espace?.body.includes("déjà payé"), "espace : paiements");
 assert(getEmailTemplateDraft("inconnu") === null, "clé inconnue");
 
 console.log("emailTemplateDrafts.check ok");

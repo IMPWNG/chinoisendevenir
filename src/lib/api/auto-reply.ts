@@ -275,6 +275,18 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     description: `Email formules d'accompagnement envoyé ${autoReplyMarker("tarifs")}`,
     status: "formules_présentées",
   },
+  espace_etudiant: {
+    subject: "Votre espace étudiant — créer votre compte et suivre le dossier",
+    generateHtml: (contact) => {
+      const draft = getEmailTemplateDraft("espace_etudiant");
+      return draft
+        ? generateDraftEmailHtml(contact, draft)
+        : generateCustomEmailHtml(contact, {});
+    },
+    action: "email_envoye",
+    description: "Guide espace étudiant envoyé — compte et mode d'emploi",
+    status: null,
+  },
   relance_formules: {
     subject: "Avez-vous choisi votre formule d'accompagnement ?",
     generateHtml: (contact) =>

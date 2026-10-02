@@ -387,6 +387,7 @@ export default function AdminContactEmail({
               t("dashboard.emailHintRelanceFormules")}
             {template === "formules_presentation" &&
               t("dashboard.emailHintFormules")}
+            {template === "espace_etudiant" && t("dashboard.emailHintEspace")}
             {(template === "reponse_bourses" ||
               template === "reponse_visa" ||
               template === "reponse_langue" ||
