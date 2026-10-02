@@ -27,6 +27,14 @@ function isSiteLang(value: string): value is SiteLang {
   return value in siteTranslations;
 }
 
+/**
+ * Public pages stay French unless the visitor clicked EN.
+ * Browser locale never wins — Googlebot is often en-US and was indexing English.
+ */
+export function resolvePublicLang(saved: string | null | undefined): SiteLang {
+  return saved === "en" ? "en" : "fr";
+}
+
 function lookup(dict: unknown, path: string): unknown {
   return path.split(".").reduce<unknown>((acc, key) => {
     if (acc && typeof acc === "object" && key in acc) {
@@ -48,13 +56,7 @@ export function SiteI18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<SiteLang>("fr");
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved && isSiteLang(saved)) {
-      setLangState(saved);
-      return;
-    }
-    const browser = window.navigator.language?.slice(0, 2);
-    if (browser && isSiteLang(browser)) setLangState(browser);
+    setLangState(resolvePublicLang(window.localStorage.getItem(STORAGE_KEY)));
   }, []);
 
   useEffect(() => {
