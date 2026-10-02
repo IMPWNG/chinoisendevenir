@@ -38,7 +38,7 @@ export const adminTranslations = {
     },
     blog: {
       title: "Blog",
-      subtitle: "2 articles IA publiés automatiquement chaque jour",
+      subtitle: "1 article IA par jour, seulement si le sujet n'existe pas déjà",
     },
     calendar: {
       title: "Calendrier des RDV",
@@ -677,7 +677,7 @@ export const adminTranslations = {
     },
     blog: {
       title: "Blog",
-      subtitle: "2 AI articles published automatically every day",
+      subtitle: "1 AI article a day, only if the topic is new",
     },
     calendar: {
       title: "Appointment calendar",
@@ -1308,7 +1308,7 @@ export const adminTranslations = {
     },
     blog: {
       title: "博客",
-      subtitle: "每天自动发布 2 篇 AI 文章",
+      subtitle: "每天最多 1 篇 AI 文章，且仅在主题尚未写过时发布",
     },
     calendar: {
       title: "预约日历",
