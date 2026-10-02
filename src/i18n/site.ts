@@ -516,9 +516,9 @@ const fr = {
   },
   bourses: {
     crumb: "Bourses d'études en Chine",
-    title: "Bourses d'études en Chine",
+    title: "Bourse d'études en Chine : CSC et autres aides",
     subtitle:
-      "Financer ses études en Chine est possible via la bourse CSC, une bourse d'université, de province ou de ville. L'obtention dépend du dossier : rien n'est automatique.",
+      "Financer ses études en Chine est possible via la bourse CSC, une bourse d'université, de province ou de ville. L'obtention dépend du dossier : rien n'est automatique, même pour une bourse dite « gratuite ».",
     introBefore: "Nous vous aidons à identifier les options réalistes pour",
     introLink: "étudier en Chine",
     introAfter:
@@ -592,7 +592,7 @@ const fr = {
   },
   visa: {
     crumb: "Visa étudiant Chine",
-    title: "Visa étudiant pour étudier en Chine",
+    title: "Visa X1 ou X2 pour étudier en Chine",
     lead: "Pour venir faire ses études en Chine, l'admission ne suffit pas : il faut ensuite un visa étudiant. Les types les plus courants sont le X1 (séjour long) et le X2 (séjour plus court). Le dossier consulaire s'appuie sur la lettre d'admission et le formulaire JW201 ou JW202 délivré après acceptation par l'université. Chinois en Devenir vous guide sur ces démarches ; la décision appartient au consulat.",
     hX: "Visa X1 ou visa X2",
     pX: "Le visa X1 concerne en principe un séjour d'études de plus de 180 jours, typiquement une licence, un master, un doctorat ou une année de langue. Le visa X2 concerne un séjour plus court, souvent moins de 180 jours : semestre, formation brève, ou certains programmes d'été. Le type exact dépend de la durée indiquée par l'université, pas seulement du diplôme visé.",
@@ -2122,9 +2122,9 @@ const en = {
   },
   bourses: {
     crumb: "Scholarships in China",
-    title: "Scholarships to study in China",
+    title: "Scholarships in China: CSC and other funding",
     subtitle:
-      "Funding studies in China is possible through the CSC scholarship, a university award, or a provincial or city scholarship. The outcome depends on your file: nothing is automatic.",
+      "Funding studies in China is possible through the CSC scholarship, a university award, or a provincial or city scholarship. The outcome depends on your file: nothing is automatic, even for a so-called “free” scholarship.",
     introBefore: "We help you identify realistic options to",
     introLink: "study in China",
     introAfter:
@@ -2197,7 +2197,7 @@ const en = {
   },
   visa: {
     crumb: "China student visa",
-    title: "Student visa to study in China",
+    title: "X1 or X2 visa to study in China",
     lead: "Admission is not enough to come and study in China: you then need a student visa. The most common types are X1 (long stay) and X2 (shorter stay). The consular file relies on the admission letter and the JW201 or JW202 form issued after the university accepts you. Chinois en Devenir guides you through these steps; the decision belongs to the consulate.",
     hX: "X1 visa or X2 visa",
     pX: "The X1 visa is generally for a study stay of more than 180 days — typically a bachelor's, master's, PhD, or language year. The X2 visa is for a shorter stay, often under 180 days: a semester, a short program, or some summer programs. The exact type depends on the duration stated by the university, not only on the degree you aim for.",

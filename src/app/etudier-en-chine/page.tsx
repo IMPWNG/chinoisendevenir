@@ -2,11 +2,18 @@ import EtudierEnChinePage from "@/views/EtudierEnChinePage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Étudier en Chine : admission, HSK et calendrier",
+  title: "Étudier en Chine : guide admission, bourse et visa",
   description:
-    "Guide pour étudier en Chine : conditions d'admission, HSK, programmes en anglais, bourses, calendrier, budget et visa étudiant. Accompagnement francophone de A à Z.",
+    "Comment venir étudier en Chine depuis la France ou l'Afrique francophone : admission, HSK ou année de chinois, bourses CSC, calendrier et visa étudiant. Sans promesse d'admission.",
   path: "/etudier-en-chine",
   type: "article",
+  keywords: [
+    "étudier en Chine",
+    "admission université Chine",
+    "venir étudier en Chine",
+    "bourse études Chine",
+    "visa étudiant Chine",
+  ],
 });
 
 export default EtudierEnChinePage;

@@ -44,13 +44,13 @@ const nextConfig = {
         source: "/",
         has: [{ type: "host", value: "www.chinoisendevenir.com" }],
         destination: "https://chinoisendevenir.com/",
-        permanent: true,
+        statusCode: 308,
       },
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.chinoisendevenir.com" }],
         destination: "https://chinoisendevenir.com/:path*",
-        permanent: true,
+        statusCode: 308,
       },
     ];
   },

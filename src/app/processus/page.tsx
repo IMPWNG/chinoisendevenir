@@ -2,10 +2,16 @@ import ProcessusPage from "@/views/ProcessusPage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Processus d'admission pour étudier en Chine",
+  title: "Admission en Chine : processus étape par étape",
   description:
-    "Comment venir faire ses études en Chine étape par étape : orientation, choix d'université, dossier d'admission, bourse, visa étudiant et installation.",
+    "Processus d'admission pour étudier en Chine : orientation, choix d'université, dossier, bourse éventuelle, visa étudiant et installation. Calendrier réaliste pour francophones.",
   path: "/processus",
+  keywords: [
+    "admission Chine",
+    "processus admission université Chine",
+    "candidature université chinoise",
+    "étudier en Chine",
+  ],
 });
 
 export default ProcessusPage;

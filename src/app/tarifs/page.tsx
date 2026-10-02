@@ -2,10 +2,15 @@ import TarifsPage from "@/views/TarifsPage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Tarifs : accompagnement pour étudier en Chine",
+  title: "Tarifs agence étudier en Chine : 800 € à 2 000 €",
   description:
-    "Formules pour étudier en Chine : premier pas 800 €, admission universitaire 1 700 €, parcours complet 2 000 € (500 € d'économie). Chinois, université, visa et départ.",
+    "Accompagnement francophone pour étudier en Chine : 800 € (année de chinois + visa), 1 700 € (admission), 2 000 € (parcours complet). Transparent, sans frais cachés.",
   path: "/tarifs",
+  keywords: [
+    "agence étudier en Chine",
+    "tarif accompagnement études Chine",
+    "prix admission université Chine",
+  ],
 });
 
 export default TarifsPage;

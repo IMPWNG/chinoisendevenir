@@ -2,9 +2,9 @@ import FaqPage from "@/views/FaqPage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "FAQ pour étudier en Chine : admission, bourse, visa",
+  title: "FAQ étudier en Chine : HSK, bourse CSC, visa X1",
   description:
-    "Questions fréquentes pour étudier en Chine : admission, HSK, bourses CSC, visa X1/X2, JW201/JW202, délais et accompagnement Chinois en Devenir.",
+    "Réponses courtes pour étudier en Chine : faut-il le HSK, comment marche la bourse CSC, différence visa X1/X2 et JW201/JW202, délais et accompagnement francophone.",
   path: "/faq",
 });
 

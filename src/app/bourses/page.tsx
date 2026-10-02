@@ -2,18 +2,17 @@ import BoursesPage from "@/views/BoursesPage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Bourses d'études en Chine : CSC et universités",
+  title: "Bourse d'études en Chine : CSC, gratuité et réalités",
   description:
-    "Bourses pour étudier en Chine : CSC, bourses universitaires, provinciales et municipales. Comment candidater, ce qui est financé, et comment préparer un dossier réaliste.",
+    "Bourse CSC, bourses d'université, provinciales et municipales pour étudier en Chine : ce qui peut être financé, comment candidater, et ce qui n'est jamais garanti.",
   path: "/bourses",
   keywords: [
     "bourse études Chine",
+    "bourse d'etude en chine gratuit",
     "bourse CSC",
     "China Scholarship Council",
-    "bourse universitaire Chine",
     "étudier en Chine gratuitement",
     "financer ses études en Chine",
-    "venir faire ses études en Chine",
   ],
 });
 
