@@ -1,0 +1,151 @@
+{
+  "slug": "dlmu",
+  "name_zh": "大连海事大学",
+  "name_en": "Dalian Maritime University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+  "identity": {
+    "name_zh": "大连海事大学",
+    "name_en": "Dalian Maritime University",
+    "name_fr": "Université maritime de Dalian",
+    "website": "https://iec.dlmu.edu.cn/",
+    "international_website": "https://iec.dlmu.edu.cn/",
+    "application_portal_url": "https://dlmu.17gz.org"
+  },
+  "matching": {
+    "city": "Dalian",
+    "province": "Liaoning",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 8500,
+    "tuition_cny_max": 16000,
+    "deadline_typical": "汉语培训项目：\n秋季入学：7月10日；\n春季入学：12月30日\n\n本科预科项目：\n每年7月10日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": false
+  },
+  "contacts": {
+    "admissions_email": "study@dlmu.edu.cn",
+    "phone": "+86-0411-84727317"
+  },
+  "application": {
+    "platform_url": "https://dlmu.17gz.org",
+    "platform_name": "Easy Apply (17gz)",
+    "deadline": "汉语培训项目：\n秋季入学：7月10日；\n春季入学：12月30日\n\n本科预科项目：\n每年7月10日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 500
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 8500,
+        "max": 16000
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语培训项目（一年）\n预科项目（一年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "汉语培训项目：",
+      "required": true,
+      "notes": "汉语培训项目：",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "《大连海事大学外国留学生入学申请表》 （需在线填写并提交）",
+      "required": true,
+      "notes": "《大连海事大学外国留学生入学申请表》 （需在线填写并提交）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护照首页、空白页(如该生来过中国，需提供带入境章和出境章的签证页并注意连续性)",
+      "required": true,
+      "notes": "护照首页、空白页(如该生来过中国，需提供带入境章和出境章的签证页并注意连续性)",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "最高学历证明及成绩单（如为非中英文版本，需另提供中文或英文翻译件）本科预科项目：",
+      "required": true,
+      "notes": "最高学历证明及成绩单（如为非中英文版本，需另提供中文或英文翻译件）本科预科项目：",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "经公证的高中毕业证书",
+      "required": true,
+      "notes": "经公证的高中毕业证书",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "高中阶段全部成绩单",
+      "required": true,
+      "notes": "高中阶段全部成绩单",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 16,
+      "age_max": 60,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+        "Deadline langue : 汉语培训项目：\n秋季入学：7月10日；\n春季入学：12月30日\n\n本科预科项目：\n每年7月10日"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Dalian",
+      "province": "Liaoning"
+    },
+    "presentation": "Université maritime de Dalian — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

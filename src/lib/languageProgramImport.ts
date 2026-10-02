@@ -238,6 +238,180 @@ export const LANGUAGE_UNI_META: Record<string, LanguageUniMeta> = {
     existing: true,
     seed_urls: ["https://scu.17gz.org/member/login.do"],
   },
+  华东师范大学: {
+    slug: "ecnu",
+    name_en: "East China Normal University",
+    name_fr: "Université normale de l'Est de la Chine",
+    city: "Shanghai",
+    province: "Shanghai",
+    existing: false,
+    seed_urls: [
+      "http://lxsapply.ecnu.edu.cn/",
+      "https://lxs.ecnu.edu.cn/cn/home/",
+    ],
+  },
+  上海交通大学: {
+    slug: "sjtu",
+    name_en: "Shanghai Jiao Tong University",
+    name_fr: "Université Jiao Tong de Shanghai",
+    city: "Shanghai",
+    province: "Shanghai",
+    existing: false,
+    seed_urls: ["https://applychinese.sjtu.edu.cn/"],
+  },
+  同济大学: {
+    slug: "tongji-university",
+    name_en: "Tongji University",
+    name_fr: "Université Tongji",
+    city: "Shanghai",
+    province: "Shanghai",
+    existing: false,
+    seed_urls: [
+      "http://study-info.tongji.edu.cn/",
+      "https://study.tongji.edu.cn/",
+    ],
+  },
+  上海外国语大学: {
+    slug: "shisu",
+    name_en: "Shanghai International Studies University",
+    name_fr: "Université des études internationales de Shanghai",
+    city: "Shanghai",
+    province: "Shanghai",
+    existing: false,
+    seed_urls: ["https://apply.shisu.edu.cn/c.asp?action=student_sign"],
+  },
+  深圳大学: {
+    slug: "shenzhen-university",
+    name_en: "Shenzhen University",
+    name_fr: "Université de Shenzhen",
+    city: "Shenzhen",
+    province: "Guangdong",
+    existing: true,
+    seed_urls: ["http://lxs.szu.edu.cn/"],
+  },
+  华南师范大学: {
+    slug: "scnu",
+    name_en: "South China Normal University",
+    name_fr: "Université normale de Chine du Sud",
+    city: "Guangzhou",
+    province: "Guangdong",
+    existing: false,
+    seed_urls: ["https://iso.scnu.edu.cn/"],
+  },
+  西北工业大学: {
+    slug: "npu",
+    name_en: "Northwestern Polytechnical University",
+    name_fr: "Université polytechnique du Nord-Ouest",
+    city: "Xi'an",
+    province: "Shaanxi",
+    existing: true,
+    seed_urls: ["https://admission.nwpu.edu.cn/"],
+  },
+  长安大学: {
+    slug: "changan-university",
+    name_en: "Chang'an University",
+    name_fr: "Université Chang'an",
+    city: "Xi'an",
+    province: "Shaanxi",
+    existing: true,
+    seed_urls: ["https://is.chd.edu.cn/"],
+  },
+  湖南师范大学: {
+    slug: "hunnu",
+    name_en: "Hunan Normal University",
+    name_fr: "Université normale du Hunan",
+    city: "Changsha",
+    province: "Hunan",
+    existing: false,
+    seed_urls: [
+      "https://hunnu.at0086.cn/student",
+      "https://oiec.hunnu.edu.cn/",
+    ],
+  },
+  中南大学: {
+    slug: "central-south-university",
+    name_en: "Central South University",
+    name_fr: "Université du Centre-Sud",
+    city: "Changsha",
+    province: "Hunan",
+    existing: true,
+    seed_urls: ["https://intl.csu.edu.cn/zwb.htm"],
+  },
+  长沙学院: {
+    slug: "changsha-university",
+    name_en: "Changsha University",
+    name_fr: "Université de Changsha",
+    city: "Changsha",
+    province: "Hunan",
+    existing: false,
+    seed_urls: ["https://ccsu.at0086.cn/student"],
+  },
+  东北大学: {
+    slug: "neu",
+    name_en: "Northeastern University",
+    name_fr: "Université du Nord-Est",
+    city: "Shenyang",
+    province: "Liaoning",
+    existing: false,
+    seed_urls: [
+      "http://studyinneu.neu.edu.cn/",
+      "http://neu.17gz.org/",
+    ],
+  },
+  吉林大学: {
+    slug: "jilin-university",
+    name_en: "Jilin University",
+    name_fr: "Université de Jilin",
+    city: "Changchun",
+    province: "Jilin",
+    existing: true,
+    seed_urls: ["http://apply.jlu.edu.cn/"],
+  },
+  大连海事大学: {
+    slug: "dlmu",
+    name_en: "Dalian Maritime University",
+    name_fr: "Université maritime de Dalian",
+    city: "Dalian",
+    province: "Liaoning",
+    existing: false,
+    seed_urls: ["https://dlmu.17gz.org/"],
+  },
+  哈尔滨工业大学: {
+    slug: "hit-harbin",
+    name_en: "Harbin Institute of Technology",
+    name_fr: "Institut de technologie de Harbin",
+    city: "Harbin",
+    province: "Heilongjiang",
+    existing: false,
+    seed_urls: ["https://apply.hit.edu.cn/"],
+  },
+  暨南大学华文学院: {
+    slug: "jnu-chinese",
+    name_en: "College of Chinese Language and Culture, Jinan University",
+    name_fr: "Collège de langue chinoise de l'université Jinan",
+    city: "Guangzhou",
+    province: "Guangdong",
+    existing: false,
+    seed_urls: ["https://jinshuju.net/f/T8jlCi"],
+  },
+  青岛大学: {
+    slug: "qingdao-university",
+    name_en: "Qingdao University",
+    name_fr: "Université de Qingdao",
+    city: "Qingdao",
+    province: "Shandong",
+    existing: false,
+    seed_urls: ["https://admission.qdu.edu.cn/"],
+  },
+  厦门大学: {
+    slug: "xiamen-university",
+    name_en: "Xiamen University",
+    name_fr: "Université de Xiamen",
+    city: "Xiamen",
+    province: "Fujian",
+    existing: true,
+    seed_urls: ["http://oec.xmu.edu.cn/"],
+  },
 };
 
 export function parseTuitionCny(text: string) {
@@ -322,9 +496,17 @@ export function parsePhones(text: string) {
 }
 
 export function parseWebsite(contact: string, apply: string) {
+  const applyFixed = String(apply || "")
+    .trim()
+    .replace(/^ttps:/i, "https:")
+    .replace(/^[？?]+$/, "");
+  const applyUrl =
+    applyFixed && !/^https?:\/\//i.test(applyFixed)
+      ? `https://${applyFixed.replace(/^\/+/, "")}`
+      : applyFixed;
   const urls = [
     ...String(contact || "").matchAll(/https?:\/\/[^\s)）]+/gi),
-    ...String(apply || "").matchAll(/https?:\/\/[^\s)）]+/gi),
+    ...String(applyUrl || "").matchAll(/https?:\/\/[^\s)）]+/gi),
   ].map((m) => m[0].replace(/[.,;。，]+$/, ""));
   const site = urls.find((u) => !/at0086|17gz\.org|Login\.aspx/i.test(u));
   return site || urls[0] || null;
@@ -413,9 +595,12 @@ export function parseDocumentLines(text: string) {
   for (const chunk of numbered.split(/\n+/)) {
     const trimmed = chunk.trim();
     if (!trimmed) continue;
-    const isItem = /^\d+[．.、)）]/.test(trimmed) || /^\d+\.\s/.test(trimmed);
+    const isItem =
+      /^\d+[．.、)）]/.test(trimmed) ||
+      /^\d+\.\s/.test(trimmed) ||
+      /^[◆●▪]/.test(trimmed);
     const line = isItem
-      ? trimmed.replace(/^\s*\d+[．.\s、)）]+/, "").trim()
+      ? trimmed.replace(/^\s*(?:\d+[．.\s、)）]+|[◆●▪]\s*)/, "").trim()
       : trimmed;
     if (headerOnly.test(line) || headerOnly.test(trimmed)) break;
     if (line.length < 2 || /^[？?]+$/.test(line)) continue;
@@ -459,7 +644,7 @@ export function buildLanguageSession(row: LanguageCsvRecord) {
     dormitory: compactText(row.dormitory),
     housing: parseHousing(row.dormitory),
     deadline: compactText(row.deadline),
-    apply_website: filled(row.apply_website),
+    apply_website: parseWebsite("", row.apply_website),
     contact: compactText(row.contact),
     pathway: compactText(row.pathway),
     documents: parseDocumentLines(row.documents),
@@ -549,8 +734,8 @@ export function buildLanguageAdmission(
     age_max: { language: age.max },
     documents: parseDocuments(row.documents),
     application: {
-      platform_name: platformName(row.apply_website),
-      platform_url: filled(row.apply_website),
+      platform_name: platformName(parseWebsite("", row.apply_website) || row.apply_website),
+      platform_url: parseWebsite("", row.apply_website),
       deadline: compactText(row.deadline),
       intake_months: intake,
       application_fee_cny: fee,
@@ -670,7 +855,7 @@ export function languageRecordToScanProfile(
       name_fr: meta.name_fr,
       website,
       international_website: website,
-      application_portal_url: filled(row.apply_website),
+      application_portal_url: parseWebsite("", row.apply_website),
     },
     matching: {
       city: meta.city,
@@ -690,8 +875,8 @@ export function languageRecordToScanProfile(
       phone: phones[0] || null,
     },
     application: {
-      platform_url: filled(row.apply_website),
-      platform_name: platformName(row.apply_website),
+      platform_url: parseWebsite("", row.apply_website),
+      platform_name: platformName(parseWebsite("", row.apply_website) || row.apply_website),
       deadline: compactText(row.deadline),
       intake_months: admission.application.intake_months,
       application_fee_cny: admission.application.application_fee_cny,

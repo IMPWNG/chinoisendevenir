@@ -1,0 +1,133 @@
+{
+  "slug": "hit-harbin",
+  "name_zh": "哈尔滨工业大学",
+  "name_en": "Harbin Institute of Technology",
+  "notes": "汉语言达HSK3后，可申请学历生预科；\n或可选择英授专业预科，需提供托福/雅思证明\n在哈工大顺利完成预科课程的国际学生如申请本校的学历课程，可优先录取。",
+  "identity": {
+    "name_zh": "哈尔滨工业大学",
+    "name_en": "Harbin Institute of Technology",
+    "name_fr": "Institut de technologie de Harbin",
+    "website": "https://cie.hit.edu.cn/main.htm",
+    "international_website": "https://cie.hit.edu.cn/main.htm",
+    "application_portal_url": "https://apply.hit.edu.cn/"
+  },
+  "matching": {
+    "city": "Harbin",
+    "province": "Heilongjiang",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 7300,
+    "tuition_cny_max": 14600,
+    "deadline_typical": "春季学期：1月15日\n秋季学期：7月15日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": false
+  },
+  "contacts": {
+    "admissions_email": "StudyatHIT@hit.edu.cn",
+    "phone": "86418461"
+  },
+  "application": {
+    "platform_url": "https://apply.hit.edu.cn/",
+    "platform_name": "Portail de candidature",
+    "deadline": "春季学期：1月15日\n秋季学期：7月15日",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 400
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 7300,
+        "max": 14600
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "/床",
+          "price_cny_year": 800
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "长期汉语培训项目（1学期/学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "护照首页",
+      "required": true,
+      "notes": "护照首页",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "最高学历证明或在读证明。",
+      "required": true,
+      "notes": "最高学历证明或在读证明。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "监护人承诺书（未成年人）",
+      "required": true,
+      "notes": "监护人承诺书（未成年人）",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": null,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "汉语言达HSK3后，可申请学历生预科；\n或可选择英授专业预科，需提供托福/雅思证明",
+        "Deadline langue : 春季学期：1月15日\n秋季学期：7月15日",
+        "在哈工大顺利完成预科课程的国际学生如申请本校的学历课程，可优先录取。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Harbin",
+      "province": "Heilongjiang"
+    },
+    "presentation": "Institut de technologie de Harbin — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}

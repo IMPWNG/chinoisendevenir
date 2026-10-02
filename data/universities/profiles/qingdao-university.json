@@ -1,0 +1,134 @@
+{
+  "slug": "qingdao-university",
+  "name_zh": "青岛大学",
+  "name_en": "Qingdao University",
+  "notes": "汉语言达HSK3后，可申请学历生预科；\n或可选择英授专业预科，需提供托福/雅思证明",
+  "identity": {
+    "name_zh": "青岛大学",
+    "name_en": "Qingdao University",
+    "name_fr": "Université de Qingdao",
+    "website": "https://istudy.qdu.edu.cn/cn/article?cid=55&detail=439",
+    "international_website": "https://istudy.qdu.edu.cn/cn/article?cid=55&detail=439",
+    "application_portal_url": "https://admission.qdu.edu.cn/"
+  },
+  "matching": {
+    "city": "Qingdao",
+    "province": "Shandong",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 7000,
+    "tuition_cny_max": 14000,
+    "deadline_typical": "2026 年 12 月 11 日之前",
+    "intake_months": [],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "oip@qdu.edu.cn",
+    "phone": "85953863"
+  },
+  "application": {
+    "platform_url": "https://admission.qdu.edu.cn/",
+    "platform_name": "Portail de candidature",
+    "deadline": "2026 年 12 月 11 日之前",
+    "intake_months": [],
+    "application_fee_cny": 400
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 7000,
+        "max": 14000
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言研修",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": []
+    }
+  ],
+  "documents": [
+    {
+      "type": "申请表、经济担保证明（在线填写）",
+      "required": true,
+      "notes": "申请表、经济担保证明（在线填写）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护照复印件（扫描上传）",
+      "required": true,
+      "notes": "护照复印件（扫描上传）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "最高学历毕业证及成绩单（扫描上传）",
+      "required": true,
+      "notes": "最高学历毕业证及成绩单（扫描上传）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "体检证明",
+      "required": true,
+      "notes": "体检证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "无犯罪证明",
+      "required": true,
+      "notes": "无犯罪证明",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 50,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "汉语言达HSK3后，可申请学历生预科；\n或可选择英授专业预科，需提供托福/雅思证明",
+        "Deadline langue : 2026 年 12 月 11 日之前"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Qingdao",
+      "province": "Shandong"
+    },
+    "presentation": "Université de Qingdao — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}
