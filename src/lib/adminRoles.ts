@@ -45,6 +45,7 @@ export function adminCapabilities(role: unknown) {
     role: full ? ADMIN_ROLE_FULL : ADMIN_ROLE_LIMITED,
     universities: full,
     matching: full,
+    blog: full,
     contactEmail: true,
     bulkSend: full,
     deleteContacts: full,

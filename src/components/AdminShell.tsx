@@ -36,7 +36,7 @@ export default function AdminShell({
       access.universities
         ? { href: "/admin/universites", label: t("nav.universities"), icon: "🏫" }
         : null,
-      access.universities
+      access.blog
         ? { href: "/admin/blog", label: t("nav.blog"), icon: "✍️" }
         : null,
     ] as Array<NavItem | null>
@@ -70,7 +70,10 @@ export default function AdminShell({
 
           <nav className="flex flex-wrap items-center gap-2">
             {nav.map((item) => {
-              const active = pathname === item.href;
+              const active =
+                pathname === item.href ||
+                (item.href !== "/admin/dashboard" &&
+                  Boolean(pathname?.startsWith(item.href)));
               return (
                 <Link
                   key={item.href}
