@@ -171,6 +171,7 @@ export default function AdminMatchingPanel({
   const [runId, setRunId] = useState("");
   const [followUp, setFollowUp] = useState<FollowUpMap>({});
   const [savingFollowUp, setSavingFollowUp] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const selected = useMemo(
     () =>
@@ -268,6 +269,59 @@ export default function AdminMatchingPanel({
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const applyRemaining = (payload: {
+    runs?: MatchingRun[];
+    latest?: MatchingRun | null;
+  }) => {
+    const remaining = payload.runs || [];
+    setRuns(remaining);
+    if (payload.latest?.result) {
+      applyResult(payload.latest.result, payload.latest);
+      setSavedInfo("Matching supprimé. Affichage du plus récent restant.");
+      return;
+    }
+    setResult(null);
+    setSelectedId(null);
+    setRunId("");
+    setFollowUp({});
+    setSavedInfo("Matching supprimé.");
+  };
+
+  const removeRuns = async ({ all = false } = {}) => {
+    const targetId = runId || runs[0]?.id;
+    if (!all && !targetId) return;
+    const ok = confirm(
+      all
+        ? `Supprimer les ${runs.length} matchings universités sauvegardés ? L'espace étudiant n'affichera plus ces analyses.`
+        : "Supprimer ce matching ? L'espace étudiant n'affichera plus cette analyse.",
+    );
+    if (!ok) return;
+    setDeleting(true);
+    setError("");
+    try {
+      const response = await authedFetch("/api/admin/matching", {
+        method: "DELETE",
+        body: JSON.stringify({
+          contactId: contact.id,
+          runId: all ? undefined : targetId,
+          all: all || undefined,
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Suppression impossible");
+      applyRemaining(payload);
+      onHistory?.();
+    } catch (err: unknown) {
+      setError(
+        errorMessage(err) === "SESSION"
+          ? "Session expirée. Reconnectez-vous."
+          : errorMessage(err),
+      );
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -461,28 +515,52 @@ export default function AdminMatchingPanel({
         </p>
       ) : null}
       {runs.length ? (
-        <label className="block text-xs text-slate-400 mt-3">
-          Matchings sauvegardés
-          <select
-            defaultValue={runs[0]?.id || ""}
-            onChange={(e) => {
-              const run = runs.find((item: MatchingRun) => String(item.id) === e.target.value);
-              if (run?.result) applyResult(run.result, run);
-            }}
-            className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
-          >
-            {runs.map((run: MatchingRun) => (
-              <option key={run.id} value={run.id}>
-                {run.created_at
-                  ? new Date(run.created_at).toLocaleString("fr-FR")
-                  : "Matching"}
-                {run.top_university
-                  ? ` — ${run.top_university} (${run.top_score}/100)`
-                  : ""}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-end gap-2">
+          <label className="block text-xs text-slate-400 flex-1">
+            Matchings sauvegardés
+            <select
+              value={runId || runs[0]?.id || ""}
+              onChange={(e) => {
+                const run = runs.find((item: MatchingRun) => String(item.id) === e.target.value);
+                if (run?.result) applyResult(run.result, run);
+              }}
+              className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
+            >
+              {runs.map((run: MatchingRun) => (
+                <option key={run.id} value={run.id}>
+                  {run.created_at
+                    ? new Date(run.created_at).toLocaleString("fr-FR")
+                    : "Matching"}
+                  {run.top_university
+                    ? ` — ${run.top_university} (${run.top_score}/100)`
+                    : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+          {readOnly ? null : (
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => removeRuns()}
+                disabled={deleting || loading}
+                className="px-4 py-2 rounded-xl border border-rose-500/40 bg-rose-500/10 text-rose-200 text-sm font-semibold disabled:opacity-50"
+              >
+                {deleting ? "Suppression..." : "Supprimer"}
+              </button>
+              {runs.length > 1 ? (
+                <button
+                  type="button"
+                  onClick={() => removeRuns({ all: true })}
+                  disabled={deleting || loading}
+                  className="px-4 py-2 rounded-xl border border-slate-600 text-slate-300 text-sm font-semibold disabled:opacity-50"
+                >
+                  Tout supprimer
+                </button>
+              ) : null}
+            </div>
+          )}
+        </div>
       ) : null}
 
       {error ? <p className="text-rose-300 text-sm mt-3">{error}</p> : null}
