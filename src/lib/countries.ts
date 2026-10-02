@@ -99,3 +99,57 @@ export function canonicalCountry(value: unknown): string | null {
 export function isKnownCountry(value: unknown): boolean {
   return canonicalCountry(value) !== null;
 }
+
+/** International dial codes, without the + sign. */
+const DIAL_CODES: Record<string, string> = {
+  "Afrique du Sud": "27",
+  Algérie: "213",
+  Angola: "244",
+  Bénin: "229",
+  "Burkina Faso": "226",
+  Burundi: "257",
+  Cameroun: "237",
+  "Cap-Vert": "238",
+  Chine: "86",
+  Comores: "269",
+  "Côte d'Ivoire": "225",
+  Djibouti: "253",
+  Égypte: "20",
+  Éthiopie: "251",
+  France: "33",
+  Gabon: "241",
+  Gambie: "220",
+  Ghana: "233",
+  Guinée: "224",
+  "Guinée équatoriale": "240",
+  "Guinée-Bissau": "245",
+  Haïti: "509",
+  Kenya: "254",
+  Liberia: "231",
+  Libye: "218",
+  Madagascar: "261",
+  Mali: "223",
+  Maroc: "212",
+  Maurice: "230",
+  Mauritanie: "222",
+  Mozambique: "258",
+  Niger: "227",
+  Nigeria: "234",
+  Ouganda: "256",
+  "République centrafricaine": "236",
+  "République démocratique du Congo": "243",
+  "République du Congo": "242",
+  Rwanda: "250",
+  Sénégal: "221",
+  "Sierra Leone": "232",
+  Tchad: "235",
+  Tanzanie: "255",
+  Togo: "228",
+  Tunisie: "216",
+};
+
+export function countryDialCode(value: unknown): string | null {
+  const country = canonicalCountry(value);
+  if (!country) return null;
+  return DIAL_CODES[country] || null;
+}

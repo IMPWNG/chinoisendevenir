@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { DOMAINES_ETUDES } from "../lib/studentProgress";
 import { COUNTRIES } from "../lib/countries";
+import { phoneWithIndicatif } from "../lib/whatsappPhone";
 import { errorMessage } from "../lib/request";
+import { useAdminAccess } from "../context/AdminAccessContext";
 
 const NIVEAUX_ETUDES = ["bac", "licence", "master", "doctorat", "autre"];
 
@@ -141,23 +143,53 @@ export default function AdminContactInfo({
   embedded?: boolean;
 }) {
   const { t } = useAdminI18n();
+  const access = useAdminAccess();
   const [editing, setEditing] = useState(() => Boolean(startEditing));
   const [form, setForm] = useState(() => contactToForm(contact));
   const [saving, setSaving] = useState(false);
+  const [addingWa, setAddingWa] = useState(false);
+  const [waNote, setWaNote] = useState<{ ok: boolean; text: string } | null>(null);
   const [error, setError] = useState("");
+  const onSavedRef = useRef(onSaved);
+  onSavedRef.current = onSaved;
+  const shownPhone = phoneWithIndicatif(contact.phone, contact.pays) || contact.phone || "";
 
   useEffect(() => {
     setForm(contactToForm(contact));
     setEditing(Boolean(startEditing));
     setError("");
+    setWaNote(null);
   }, [contact.id, startEditing]);
+
+  useEffect(() => {
+    const formatted = phoneWithIndicatif(contact.phone, contact.pays);
+    if (!formatted || formatted === String(contact.phone || "").trim()) return;
+    let cancel = false;
+    adminFetch("/api/admin/contacts", {
+      method: "PATCH",
+      body: JSON.stringify({ contactId: contact.id, phone: formatted }),
+    })
+      .then((data) => {
+        if (!cancel) onSavedRef.current?.(data.contact);
+      })
+      .catch(() => {});
+    return () => {
+      cancel = true;
+    };
+  }, [contact.id, contact.phone, contact.pays]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     const field = name as keyof ContactForm;
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [field]: value };
+      if (field === "pays") {
+        next.phone = phoneWithIndicatif(prev.phone, value) || prev.phone;
+      }
+      return next;
+    });
   };
 
   const cancelEdit = () => {
@@ -182,7 +214,7 @@ export default function AdminContactInfo({
           prenom: form.prenom,
           nom: form.nom,
           email: form.email,
-          phone: form.phone,
+          phone: phoneWithIndicatif(form.phone, form.pays) || form.phone.trim(),
           age: form.age,
           pays: form.pays,
           dernier_diplome: form.dernier_diplome,
@@ -207,6 +239,69 @@ export default function AdminContactInfo({
       setSaving(false);
     }
   };
+
+  const addToWhatsapp = async () => {
+    setAddingWa(true);
+    setWaNote(null);
+    setError("");
+    try {
+      const sourcePhone = editing ? form.phone : contact.phone;
+      const sourcePays = editing ? form.pays : contact.pays;
+      const formatted = phoneWithIndicatif(sourcePhone, sourcePays);
+      if (!formatted) throw new Error("PHONE");
+      if (formatted !== String(contact.phone || "").trim()) {
+        const data = await adminFetch("/api/admin/contacts", {
+          method: "PATCH",
+          body: JSON.stringify({ contactId: contact.id, phone: formatted }),
+        });
+        if (editing) setForm((prev) => ({ ...prev, phone: formatted }));
+        onSavedRef.current?.(data.contact);
+      }
+      await adminFetch("/api/admin/whatsapp", {
+        method: "POST",
+        body: JSON.stringify({
+          contactId: contact.id,
+          action: "bundle",
+          text: "",
+          save: true,
+          label: true,
+        }),
+      });
+      setWaNote({ ok: true, text: t("dashboard.waBookDone") });
+    } catch (err: unknown) {
+      const code = errorMessage(err);
+      if (code === "SESSION") {
+        setError(t("sessionExpired"));
+      } else if (code === "PHONE") {
+        setWaNote({ ok: false, text: t("dashboard.waBookNeedPhone") });
+      } else {
+        setWaNote({
+          ok: false,
+          text: t("dashboard.waBookFail", { error: code || t("genericError") }),
+        });
+      }
+    } finally {
+      setAddingWa(false);
+    }
+  };
+
+  const bookButton =
+    access.whatsapp && (editing ? form.phone.trim() : shownPhone) ? (
+      <button
+        type="button"
+        disabled={addingWa}
+        onClick={addToWhatsapp}
+        className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold disabled:opacity-50 shrink-0"
+      >
+        {addingWa ? "…" : t("dashboard.waBookButton")}
+      </button>
+    ) : null;
+
+  const waNoteNode = waNote ? (
+    <p className={`text-xs mt-1 ${waNote.ok ? "text-emerald-300" : "text-rose-300"}`}>
+      {waNote.text}
+    </p>
+  ) : null;
 
   const diplomeOptions = [...NIVEAUX_ETUDES];
   if (
@@ -289,15 +384,25 @@ export default function AdminContactInfo({
               />
             </Field>
             <Field id="admin-phone" label={t("dashboard.phone")}>
-              <input
-                id="admin-phone"
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                placeholder="+225 07 00 00 00 00"
-                className={inputClass}
-              />
+              <div className="flex items-center gap-2">
+                <input
+                  id="admin-phone"
+                  type="tel"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  onBlur={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      phone: phoneWithIndicatif(prev.phone, prev.pays) || prev.phone,
+                    }))
+                  }
+                  placeholder="+225 07 00 00 00 00"
+                  className={inputClass}
+                />
+                {bookButton}
+              </div>
+              {waNoteNode}
             </Field>
             <Field id="admin-age" label={t("dashboard.age")}>
               <input
@@ -433,7 +538,11 @@ export default function AdminContactInfo({
                 {contact.email || "—"}
               </InfoRow>
               <InfoRow label={`📱 ${t("dashboard.phone")}`}>
-                {contact.phone || "—"}
+                <span className="inline-flex flex-wrap items-center gap-2">
+                  <span>{shownPhone || "—"}</span>
+                  {bookButton}
+                </span>
+                {waNoteNode}
               </InfoRow>
               <InfoRow label={`🎂 ${t("dashboard.age")}`}>
                 {contact.age || "—"}
