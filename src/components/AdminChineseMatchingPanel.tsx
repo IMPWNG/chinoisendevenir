@@ -118,6 +118,8 @@ export default function AdminChineseMatchingPanel({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [savedInfo, setSavedInfo] = useState("");
   const [runs, setRuns] = useState<ChineseRun[]>([]);
+  const [runId, setRunId] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   const selected = useMemo(
     () =>
@@ -128,11 +130,12 @@ export default function AdminChineseMatchingPanel({
 
   const applyResult = (
     payload: ChineseResult | null | undefined,
-    meta?: ChineseRun | { created_at?: string },
+    meta?: ChineseRun | { id?: string; created_at?: string },
   ) => {
     if (!payload) return;
     setResult(payload);
     setSelectedId(payload.matches?.[0]?.university_id || null);
+    setRunId(meta && "id" in meta && meta.id ? String(meta.id) : "");
     const ov = payload.overrides || {};
     if (ov.preferredCity) setPreferredCity(ov.preferredCity);
     if (ov.dateRentree) setDateRentree(languageIntakeKey(ov.dateRentree));
@@ -166,6 +169,7 @@ export default function AdminChineseMatchingPanel({
     setSavedInfo("");
     setError("");
     setPreferredCity("");
+    setRunId("");
     setDateRentree(languageIntakeKey(contact.date_rentree));
     loadRuns({ restore: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -207,6 +211,60 @@ export default function AdminChineseMatchingPanel({
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const applyRemaining = (payload: {
+    runs?: ChineseRun[];
+    latest?: ChineseRun | null;
+    cities?: string[];
+  }) => {
+    const remaining = payload.runs || [];
+    setRuns(remaining);
+    if (payload.cities) setCities(payload.cities);
+    if (payload.latest?.result) {
+      applyResult(payload.latest.result, payload.latest);
+      setSavedInfo("Matching supprimé. Affichage du plus récent restant.");
+      return;
+    }
+    setResult(null);
+    setSelectedId(null);
+    setRunId("");
+    setSavedInfo("Matching supprimé.");
+  };
+
+  const removeRuns = async ({ all = false } = {}) => {
+    const targetId = runId || runs[0]?.id;
+    if (!all && !targetId) return;
+    const ok = confirm(
+      all
+        ? `Supprimer les ${runs.length} matchings chinois sauvegardés ? L'espace étudiant n'affichera plus ces analyses.`
+        : "Supprimer ce matching chinois ? L'espace étudiant n'affichera plus cette analyse.",
+    );
+    if (!ok) return;
+    setDeleting(true);
+    setError("");
+    try {
+      const response = await authedFetch("/api/admin/matching/chinese", {
+        method: "DELETE",
+        body: JSON.stringify({
+          contactId: contact.id,
+          runId: all ? undefined : targetId,
+          all: all || undefined,
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Suppression impossible");
+      applyRemaining(payload);
+      onHistory?.();
+    } catch (err: unknown) {
+      setError(
+        errorMessage(err) === "SESSION"
+          ? "Session expirée. Reconnectez-vous."
+          : errorMessage(err),
+      );
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -288,28 +346,52 @@ export default function AdminChineseMatchingPanel({
       ) : null}
 
       {runs.length ? (
-        <label className="block text-xs text-slate-400 mt-3">
-          Matchings chinois sauvegardés
-          <select
-            defaultValue={runs[0]?.id || ""}
-            onChange={(e) => {
-              const run = runs.find((item: ChineseRun) => String(item.id) === e.target.value);
-              if (run?.result) applyResult(run.result, run);
-            }}
-            className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
-          >
-            {runs.map((item: ChineseRun) => (
-              <option key={item.id} value={item.id}>
-                {item.created_at
-                  ? new Date(item.created_at).toLocaleString("fr-FR")
-                  : "Matching chinois"}
-                {item.top_university
-                  ? ` — ${item.top_university} (${item.top_score}/100)`
-                  : ""}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-end gap-2">
+          <label className="block text-xs text-slate-400 flex-1">
+            Matchings chinois sauvegardés
+            <select
+              value={runId || runs[0]?.id || ""}
+              onChange={(e) => {
+                const run = runs.find((item: ChineseRun) => String(item.id) === e.target.value);
+                if (run?.result) applyResult(run.result, run);
+              }}
+              className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
+            >
+              {runs.map((item: ChineseRun) => (
+                <option key={item.id} value={item.id}>
+                  {item.created_at
+                    ? new Date(item.created_at).toLocaleString("fr-FR")
+                    : "Matching chinois"}
+                  {item.top_university
+                    ? ` — ${item.top_university} (${item.top_score}/100)`
+                    : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+          {readOnly ? null : (
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => removeRuns()}
+                disabled={deleting || loading}
+                className="px-4 py-2 rounded-xl border border-rose-500/40 bg-rose-500/10 text-rose-200 text-sm font-semibold disabled:opacity-50"
+              >
+                {deleting ? "Suppression..." : "Supprimer"}
+              </button>
+              {runs.length > 1 ? (
+                <button
+                  type="button"
+                  onClick={() => removeRuns({ all: true })}
+                  disabled={deleting || loading}
+                  className="px-4 py-2 rounded-xl border border-slate-600 text-slate-300 text-sm font-semibold disabled:opacity-50"
+                >
+                  Tout supprimer
+                </button>
+              ) : null}
+            </div>
+          )}
+        </div>
       ) : null}
 
       {error ? <p className="text-rose-300 text-sm mt-3">{error}</p> : null}
