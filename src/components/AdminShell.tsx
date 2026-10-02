@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
@@ -21,7 +22,12 @@ export default function AdminShell({
   const pathname = usePathname();
   const { lang, setLang, t } = useAdminI18n();
   const access = useAdminAccess();
+  const limited = access.role !== "full";
   const isUniversities = pathname?.startsWith("/admin/universites");
+
+  useEffect(() => {
+    if (limited && lang !== "fr") setLang("fr");
+  }, [limited, lang, setLang]);
 
   const nav = (
     [
@@ -72,29 +78,31 @@ export default function AdminShell({
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="flex rounded-xl overflow-hidden border border-slate-600/60">
-              {ADMIN_LANGS.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setLang(item.id)}
-                  className={`px-3 py-1.5 text-xs font-bold ${
-                    lang === item.id
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+            {limited ? null : (
+              <div className="flex rounded-xl overflow-hidden border border-slate-600/60">
+                {ADMIN_LANGS.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setLang(item.id)}
+                    className={`px-3 py-1.5 text-xs font-bold ${
+                      lang === item.id
+                        ? "bg-blue-600 text-white"
+                        : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
             <div className="hidden md:flex flex-col items-end min-w-0">
               <p className="text-sm text-slate-200 truncate max-w-[220px]">
                 {user?.email}
               </p>
-              <p className="text-xs text-slate-500">
-                {access.universities ? t("connected") : t("roleLimited")}
-              </p>
+              {limited ? null : (
+                <p className="text-xs text-slate-500">{t("connected")}</p>
+              )}
             </div>
             <button
               type="button"

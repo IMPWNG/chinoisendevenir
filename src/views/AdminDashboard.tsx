@@ -678,24 +678,22 @@ export default function AdminDashboard() {
             color="from-teal-600 to-emerald-500"
           />
         </div>
-        <RevenueCard
-          title={t("dashboard.revenueTitle")}
-          hint={
-            access.role === "full"
-              ? t("dashboard.revenueShareFull")
-              : t("dashboard.revenueShareLimited")
-          }
-          hypoLabel={t("dashboard.revenueHypo")}
-          realLabel={t("dashboard.revenueReal")}
-          hypoHint={t("dashboard.revenueHypoHint", {
-            count: revenue.hypotheticCount,
-          })}
-          realHint={t("dashboard.revenueRealHint", {
-            count: revenue.realCount,
-          })}
-          hypothetic={formatEuros(revenue.hypothetic)}
-          real={formatEuros(revenue.real)}
-        />
+        {access.role === "full" ? (
+          <RevenueCard
+            title={t("dashboard.revenueTitle")}
+            hint={t("dashboard.revenueShareFull")}
+            hypoLabel={t("dashboard.revenueHypo")}
+            realLabel={t("dashboard.revenueReal")}
+            hypoHint={t("dashboard.revenueHypoHint", {
+              count: revenue.hypotheticCount,
+            })}
+            realHint={t("dashboard.revenueRealHint", {
+              count: revenue.realCount,
+            })}
+            hypothetic={formatEuros(revenue.hypothetic)}
+            real={formatEuros(revenue.real)}
+          />
+        ) : null}
 
         {/* Filtres avancés */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-6 mb-8 border border-slate-700/50">
