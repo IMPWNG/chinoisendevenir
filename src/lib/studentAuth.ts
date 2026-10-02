@@ -81,6 +81,7 @@ export function publicStudentProfile(contact: ContactRow | null | undefined, use
     suivi_statut: contact.suivi_statut || "",
     dossier_etape: getDisplayedStepIndex(contact),
     adminUnlocked: isStudentSpaceUnlocked(contact.suivi_statut),
+    paiements: contact.paiements ?? null,
   };
 }
 

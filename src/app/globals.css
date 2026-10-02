@@ -2612,3 +2612,219 @@ a.formule-card-btn {
   color: var(--secondary);
   font-size: 0.95rem;
 }
+
+.student-pay-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+
+.student-pay-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--light);
+}
+
+.student-pay-box span {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.student-pay-box strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 1.15rem;
+}
+
+.student-pay-box.is-paid {
+  border-color: #c8e6c9;
+  background: #f1f8f4;
+}
+
+.student-pay-box.is-left {
+  border-color: #f0c9c9;
+  background: #fff7f7;
+}
+
+.student-pay-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.student-pay-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.student-pay-due {
+  display: block;
+  color: var(--gray);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.arrival-steps {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.arrival-steps li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.arrival-step-index {
+  flex: 0 0 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrival-steps h3 {
+  margin: 4px 0 6px;
+  color: var(--secondary);
+  font-size: 1.05rem;
+}
+
+.arrival-steps p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.guide-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 28px;
+}
+
+.guide-toc a {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: white;
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.guide-block {
+  margin: 0 auto 36px;
+  max-width: 1100px;
+}
+
+.guide-block h2 {
+  margin: 0 0 10px;
+  color: var(--secondary);
+}
+
+.guide-block p {
+  margin: 0 0 12px;
+  line-height: 1.65;
+}
+
+.guide-login-link {
+  margin: 16px 0;
+}
+
+.guide-screen {
+  margin: 18px 0 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f4f6f8;
+  box-shadow: var(--shadow);
+}
+
+.guide-screen-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #e8edf2;
+}
+
+.guide-screen-chrome span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c5ced6;
+}
+
+.guide-screen-chrome em {
+  margin-left: 8px;
+  font-style: normal;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.guide-screen-body {
+  padding: 16px;
+}
+
+.guide-screen .student-card,
+.guide-screen .student-formule-banner {
+  margin-bottom: 12px;
+}
+
+.guide-screen .student-card:last-child {
+  margin-bottom: 0;
+}
+
+.guide-screen figcaption {
+  display: block;
+  margin: 0;
+  padding: 10px 14px 14px;
+  color: var(--gray);
+  font-size: 0.85rem;
+  background: white;
+}
+
+.guide-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--secondary);
+}
+
+.guide-fake-input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  padding: 12px 14px;
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .student-pay-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-pay-list li {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

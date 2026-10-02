@@ -11,6 +11,7 @@ export type EmailTemplateDraft = {
 export const CARD_EMAIL_TEMPLATE_KEYS = [
   "ouverture_printemps",
   "formules_presentation",
+  "espace_etudiant",
   "relance_formules",
   "relance_1",
   "relance_2",
@@ -52,6 +53,29 @@ function printempsBody() {
   ].join("\n\n");
 }
 
+function espaceEtudiantBody() {
+  const guide = `${SITE_URL}espace-etudiant/guide`;
+  const login = `${SITE_URL}espace-etudiant/connexion`;
+  return [
+    "Vous avez choisi une formule d'accompagnement. Le suivi du dossier se fait dans l'espace étudiant.",
+    "Créer le compte :",
+    `1. Ouvrez ${login}`,
+    "2. Choisissez l'onglet « Créer un compte ».",
+    "3. Utilisez la même adresse email que sur le formulaire de projet.",
+    "4. Choisissez un mot de passe d'au moins 8 caractères, puis confirmez-le.",
+    "Le compte est actif tout de suite. S'il existe déjà, connectez-vous. Mot de passe oublié : le lien sur la même page. La création est refusée si cette adresse n'est pas déjà dans un dossier : répondez à cet email dans ce cas.",
+    "Une fois connecté :",
+    "— Vos informations se corrigent dans l'espace. L'email du compte ne se change pas ici.",
+    "— La formule choisie s'affiche en haut. Le suivi est juste en dessous : déjà payé, reste à payer, et les trois échéances (40 %, 30 %, puis le solde). L'équipe met à jour ce suivi après chaque règlement.",
+    "— L'avancement du dossier et l'orientation apparaissent quand l'accompagnement est validé.",
+    "— Les documents se déposent au format PDF, JPG ou PNG (10 Mo maximum). Un second bloc permet de télécharger les fichiers envoyés par l'équipe.",
+    "— Le bloc visa liste les pièces selon la durée du séjour (X1, X2 ou L).",
+    "— Après le visa : préparer l'arrivée en Chine (WeChat, Alipay, et un VPN à installer avant le départ pour Gmail, WhatsApp et les autres services internationaux).",
+    `Le guide illustré, écran par écran : ${guide}`,
+    "Nous ne garantissons pas une admission, une bourse, un visa, un logement, ni l'ouverture d'un compte WeChat, Alipay ou bancaire. Les décisions appartiennent aux établissements, aux autorités et aux plateformes concernées.",
+  ].join("\n\n");
+}
+
 function formulesBody() {
   return [
     "Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.",
@@ -74,6 +98,12 @@ const DRAFTS: Record<CardEmailTemplateKey, Omit<EmailTemplateDraft, "body"> & { 
     title: "Nos formules d'accompagnement",
     subtitle: "Pour étudier en Chine",
     body: formulesBody,
+  },
+  espace_etudiant: {
+    subject: "Votre espace étudiant — créer votre compte et suivre le dossier",
+    title: "Votre espace étudiant",
+    subtitle: "Compte, paiements, documents et départ",
+    body: espaceEtudiantBody,
   },
   relance_formules: {
     subject: "Avez-vous choisi votre formule d'accompagnement ?",
