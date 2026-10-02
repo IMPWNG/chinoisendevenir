@@ -276,6 +276,46 @@ export async function listMatchingRuns(
     .slice(0, 20);
 }
 
+export async function deleteMatchingRuns(
+  admin: AdminClient,
+  contactId: unknown,
+  {
+    runId,
+    kind = MATCHING_KIND_UNIVERSITY,
+  }: { runId?: unknown; kind?: string } = {},
+) {
+  const cid = String(contactId || "").trim();
+  const id = String(runId || "").trim();
+  if (!cid) throw new Error("contactId manquant");
+
+  const runs = await listMatchingRuns(admin, cid, { kind });
+  const targets = id ? runs.filter((run) => String(run.id) === id) : runs;
+  if (id && !targets.length) throw new Error("Matching introuvable");
+  const ids = targets.map((run) => String(run.id || "")).filter(Boolean);
+  if (!ids.length) return { deleted: 0, ids: [] as string[] };
+
+  try {
+    const { error } = await admin
+      .from("matching_runs")
+      .delete()
+      .eq("contact_id", cid)
+      .in("id", ids);
+    if (error) throw error;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (!/does not exist|schema cache/i.test(message)) throw error;
+  }
+
+  const { error: actionError } = await admin
+    .from("suivi_actions")
+    .delete()
+    .eq("contact_id", cid)
+    .in("id", ids);
+  if (actionError) throw actionError;
+
+  return { deleted: ids.length, ids };
+}
+
 export function sanitizeFollowUp(value: unknown) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   const out: Record<string, { done: boolean; note: string }> = {};
