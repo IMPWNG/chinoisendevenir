@@ -150,9 +150,11 @@ function KindList({
 export default function AdminMatchingPanel({
   contact,
   onHistory,
+  readOnly = false,
 }: {
   contact: MatchingContact;
   onHistory?: () => void;
+  readOnly?: boolean;
 }) {
   const [hsk, setHsk] = useState("");
   const [english, setEnglish] = useState("");
@@ -336,6 +338,8 @@ export default function AdminMatchingPanel({
         </div>
       </div>
 
+      {readOnly ? null : (
+      <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-3">
         <label className="text-xs text-slate-400">
           Niveau visé
@@ -443,6 +447,8 @@ export default function AdminMatchingPanel({
           {bilanHint[chosenFormuleNumber]}
         </p>
       ) : null}
+      </>
+      )}
       {savedInfo ? (
         <p
           className={`text-sm mt-3 ${
@@ -501,10 +507,16 @@ export default function AdminMatchingPanel({
               ).map((doc) => ({ key: doc.key, label: doc.label })),
             }))}
             followUp={followUp}
-            onFollowUp={(key, patch) =>
-              setFollowUp((prev) => ({ ...prev, [key]: { ...prev[key], ...patch } }))
+            onFollowUp={
+              readOnly
+                ? undefined
+                : (key, patch) =>
+                    setFollowUp((prev) => ({
+                      ...prev,
+                      [key]: { ...prev[key], ...patch },
+                    }))
             }
-            onSaveFollowUp={saveFollowUp}
+            onSaveFollowUp={readOnly ? undefined : saveFollowUp}
             savingFollowUp={savingFollowUp}
           />
 

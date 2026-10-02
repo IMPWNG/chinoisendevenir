@@ -97,7 +97,7 @@ Bucket Storage `student-documents`. Logique : `src/lib/studentDocuments.ts`. L�
 Rôles :
 
 - `full` : universités, matching, bulk e-mail, suppression contacts, WhatsApp (OpenWA)
-- `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, pas matching ni universités
+- `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, lecture des matchings université et école de langue (pas de lancement), pas les universités
 
 Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching_runs`. Toute nouvelle table métier : RLS on, grants service_role, SQL dans `sql/`.
 

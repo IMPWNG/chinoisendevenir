@@ -1625,15 +1625,18 @@ function ContactModal({
             />
           </FilePanel>
 
-          {access.matching ? (
-            <FilePanel title="🎯 Matching" persist>
-              <AdminMatchingPanel contact={contact} onHistory={fetchActions} />
-              <AdminChineseMatchingPanel
-                contact={contact}
-                onHistory={fetchActions}
-              />
-            </FilePanel>
-          ) : null}
+          <FilePanel title="🎯 Matching" persist>
+            <AdminMatchingPanel
+              contact={contact}
+              onHistory={fetchActions}
+              readOnly={!access.matching}
+            />
+            <AdminChineseMatchingPanel
+              contact={contact}
+              onHistory={fetchActions}
+              readOnly={!access.matching}
+            />
+          </FilePanel>
 
           <FilePanel title={`📈 ${t("dashboard.progressSection")}`}>
             <p className="text-xs text-slate-400 mb-4">

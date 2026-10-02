@@ -101,9 +101,11 @@ function Badge({
 export default function AdminChineseMatchingPanel({
   contact,
   onHistory,
+  readOnly = false,
 }: {
   contact: ChineseContact;
   onHistory?: () => void;
+  readOnly?: boolean;
 }) {
   const [preferredCity, setPreferredCity] = useState("");
   const [dateRentree, setDateRentree] = useState(
@@ -222,6 +224,8 @@ export default function AdminChineseMatchingPanel({
         </p>
       </div>
 
+      {readOnly ? null : (
+      <>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
         <label className="text-xs text-slate-400">
           Ville souhaitée
@@ -266,6 +270,8 @@ export default function AdminChineseMatchingPanel({
       >
         {loading ? "Analyse en cours..." : "Lancer le matching chinois"}
       </button>
+      </>
+      )}
 
       {savedInfo ? (
         <p

@@ -103,6 +103,7 @@ function CheckGroups({
                         type="checkbox"
                         className="mt-1"
                         checked={Boolean(saved.done)}
+                        disabled={!onFollowUp}
                         onChange={(event) =>
                           onFollowUp?.(key, { done: event.target.checked, note: saved.note || "" })
                         }
@@ -111,6 +112,7 @@ function CheckGroups({
                     </label>
                     <input
                       value={saved.note || ""}
+                      disabled={!onFollowUp}
                       onChange={(event) =>
                         onFollowUp?.(key, { done: Boolean(saved.done), note: event.target.value })
                       }

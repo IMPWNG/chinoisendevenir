@@ -23,14 +23,6 @@ export async function GET(request: Request) {
     if ("error" in auth) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
-    const forbidden = requireFullAdmin(auth);
-    if (forbidden) {
-      return NextResponse.json(
-        { error: forbidden.error },
-        { status: forbidden.status },
-      );
-    }
-
     const contactId = String(
       new URL(request.url).searchParams.get("contactId") || "",
     ).trim();
