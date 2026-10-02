@@ -6,6 +6,10 @@
     {
       "path": "/api/cron/formules-relance",
       "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/outbound-drip",
+      "schedule": "*/12 * * * *"
     }
   ]
 }

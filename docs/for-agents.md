@@ -127,15 +127,17 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
-**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`
+**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`
 
-**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance` (Bearer `CRON_SECRET`)
+**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min)
 
 ## Données Postgres (SQL dans `sql/`)
 
 Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans ce repo.
 
 - `contacts` — dossiers (colonnes suivi, formule, lead form…). Pays canoniques : `src/lib/countries.ts` (liste déroulante du formulaire).
+- `contact_emails` — fil envoyés/reçus (Resend)
+- `outbound_drip` — file d'envoi auto email/WhatsApp, 5/h (`sql/outbound-drip.sql`)
 - `suivi_actions` — historique d’actions CRM
 - `admin_users` — allowlist admin (personne ne s’auto-promouvoit)
 - `universities` — catalogue matching / partenaires

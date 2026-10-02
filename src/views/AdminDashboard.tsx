@@ -15,6 +15,7 @@ import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
+import AdminDripSend from "../components/AdminDripSend";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import type { AdminI18nValue } from "../context/AdminI18nContext";
@@ -827,6 +828,14 @@ export default function AdminDashboard() {
             selectedIds={selectedIds}
             onSelectedIdsChange={setSelectedIds}
             onFinished={fetchContacts}
+          />
+          <AdminDripSend
+            contacts={contacts as ComponentProps<typeof AdminDripSend>["contacts"]}
+            filteredContacts={
+              filteredContacts as ComponentProps<typeof AdminDripSend>["filteredContacts"]
+            }
+            selectedIds={selectedIds}
+            onSelectedIdsChange={setSelectedIds}
           />
           </>
         ) : null}
