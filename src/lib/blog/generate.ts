@@ -40,12 +40,17 @@ export type BlogTopic = {
   cta: (typeof BLOG_CONVERSION_HREFS)[number];
 };
 
+/**
+ * File de sujets IA : angles précis, utiles, variés.
+ * Les exemples CSC / visa pays / HSK / villes donnent le niveau attendu ;
+ * la liste doit rester large pour éviter la cannibalisation des 20 guides piliers.
+ */
 export const BLOG_TOPICS: BlogTopic[] = [
   {
     slug: "calendrier-csc-2027",
     title: "Calendrier CSC 2027 : dates, voies et pièces à anticiper",
     context:
-      "Calendrier type 2026–2027 de la bourse du gouvernement chinois (CSC) : fenêtres de dépôt, voies université / ambassade, pièces qui bloquent. Aucune date n'est garantie : renvoyer vers les sources officielles. Pas de promesse d'obtention.",
+      "Calendrier type 2026–2027 de la bourse CSC : fenêtres de dépôt, voies université / ambassade, pièces qui bloquent. Aucune date garantie. Pas de promesse d'obtention.",
     pillars: ["/bourses", "/etudier-en-chine"],
     cta: "/tarifs",
   },
@@ -53,7 +58,7 @@ export const BLOG_TOPICS: BlogTopic[] = [
     slug: "visa-x1-senegal-etudes-chine",
     title: "Visa X1 depuis le Sénégal : consulat, pièces et délais",
     context:
-      "Demande de visa X1 au Sénégal : où déposer, JW201/JW202, photo, passeport, délais typiques. La délivrance appartient au consulat. Relier au guide visa et au processus.",
+      "Demande de visa X1 au Sénégal : dépôt, JW201/JW202, photo, passeport, délais. Décision consulaire.",
     pillars: ["/visa-etudiant-chine", "/processus"],
     cta: "/#lead-form",
   },
@@ -61,7 +66,7 @@ export const BLOG_TOPICS: BlogTopic[] = [
     slug: "visa-x1-cote-ivoire-etudes-chine",
     title: "Visa X1 depuis la Côte d'Ivoire : consulat, pièces et délais",
     context:
-      "Demande de visa X1 en Côte d'Ivoire : dépôt, documents, délais. Pas de garantie d'obtention. Relier au guide visa et au processus.",
+      "Demande de visa X1 en Côte d'Ivoire : dépôt, documents, délais. Pas de garantie d'obtention.",
     pillars: ["/visa-etudiant-chine", "/processus"],
     cta: "/#lead-form",
   },
@@ -69,7 +74,7 @@ export const BLOG_TOPICS: BlogTopic[] = [
     slug: "visa-x1-france-etudes-chine",
     title: "Visa X1 depuis la France : centre des visas, pièces et délais",
     context:
-      "Demande de visa X1 en France : centre des visas, JW201/JW202, photo, passeport, délais. Décision consulaire. Relier au guide visa et au processus.",
+      "Demande de visa X1 en France : centre des visas, JW201/JW202, délais. Décision consulaire.",
     pillars: ["/visa-etudiant-chine", "/processus"],
     cta: "/tarifs",
   },
@@ -77,7 +82,55 @@ export const BLOG_TOPICS: BlogTopic[] = [
     slug: "visa-x1-maroc-etudes-chine",
     title: "Visa X1 depuis le Maroc : consulat, pièces et délais",
     context:
-      "Demande de visa X1 au Maroc : dépôt, documents, délais. Pas de garantie d'obtention. Relier au guide visa et au processus.",
+      "Demande de visa X1 au Maroc : dépôt, documents, délais. Pas de garantie d'obtention.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-cameroun-etudes-chine",
+    title: "Visa X1 depuis le Cameroun : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 au Cameroun : où déposer, pièces fréquentes, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-congo-rdc-etudes-chine",
+    title: "Visa X1 depuis la RDC : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 depuis la RDC : dépôt, documents, délais typiques. Pas de garantie.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-tunisie-etudes-chine",
+    title: "Visa X1 depuis la Tunisie : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 en Tunisie : centre de dépôt, JW201/JW202, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-algerie-etudes-chine",
+    title: "Visa X1 depuis l'Algérie : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 en Algérie : dépôt, documents, délais. Pas de garantie d'obtention.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-belgique-etudes-chine",
+    title: "Visa X1 depuis la Belgique : centre des visas, pièces et délais",
+    context:
+      "Demande de visa X1 en Belgique : centre des visas, pièces, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-canada-etudes-chine",
+    title: "Visa X1 depuis le Canada : centre des visas, pièces et délais",
+    context:
+      "Demande de visa X1 au Canada : dépôt, JW201/JW202, délais. Pas de garantie.",
     pillars: ["/visa-etudiant-chine", "/processus"],
     cta: "/#lead-form",
   },
@@ -85,16 +138,232 @@ export const BLOG_TOPICS: BlogTopic[] = [
     slug: "hsk-4-avant-licence-en-chine",
     title: "HSK 4 avant une licence en Chine : quand c'est utile, quand ça ne l'est pas",
     context:
-      "Le HSK 4 n'est pas un seuil unique. Distinguer licence en chinois, licence en anglais, et année de langue. Sans inventer d'exigence officielle unique. Relier aux écoles de langue et au guide étudier en Chine.",
+      "Distinguer licence en chinois, licence en anglais, année de langue. Pas de seuil officiel unique inventé.",
     pillars: ["/ecoles-de-langue-chine", "/etudier-en-chine"],
     cta: "/tarifs",
+  },
+  {
+    slug: "hsk-5-master-en-chinois",
+    title: "HSK 5 pour un master enseigné en chinois : à quoi s'attendre",
+    context:
+      "Niveau souvent demandé pour un master en chinois, écart avec le cours réel, alternatives. Sans inventer de seuil unique.",
+    pillars: ["/ecoles-de-langue-chine", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "hsk-3-annee-de-langue",
+    title: "HSK 3 avant une année de langue en Chine : utile ou superflu ?",
+    context:
+      "Ce que le HSK 3 change (ou non) pour une école de langue, placement, rythme. Ton factuel.",
+    pillars: ["/ecoles-de-langue-chine", "/processus"],
+    cta: "/#lead-form",
   },
   {
     slug: "cout-reel-etudiant-shanghai-vs-wuhan",
     title: "Coût réel étudiant : Shanghai vs Wuhan",
     context:
-      "Comparer logement, repas, transport et premier mois à Shanghai et à Wuhan, avec fourchettes prudentes. Ni palmarès ni garantie de budget. Relier au guide étudier en Chine et au processus.",
+      "Comparer logement, repas, transport et premier mois, fourchettes prudentes. Ni palmarès ni garantie.",
     pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "cout-reel-etudiant-pekin-vs-chengdu",
+    title: "Coût réel étudiant : Pékin vs Chengdu",
+    context:
+      "Comparer budget mensuel, logement, transport. Fourchettes prudentes, pas de classement absolu.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "cout-reel-etudiant-guangzhou-vs-nanjing",
+    title: "Coût réel étudiant : Canton vs Nanjing",
+    context:
+      "Comparer coût de la vie, climat urbain, transport. Fourchettes prudentes.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "rentree-printemps-2027-chine",
+    title: "Rentrée de printemps 2027 en Chine : pour qui, avec quels délais",
+    context:
+      "Fenêtre candidature automne 2026, écoles de langue vs université, visa. Pas de date figée inventée.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "rentree-automne-2027-chine",
+    title: "Rentrée d'automne 2027 en Chine : calendrier type et pièces qui bloquent",
+    context:
+      "Calendrier type candidature, délais JW/visa, pièces. Sans garantir une admission.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "jw202-jw201-difference-pratique",
+    title: "JW201 et JW202 : à quoi ça sert concrètement pour le visa",
+    context:
+      "Différence pratique, qui délivre le formulaire, lien avec X1. Décision visa = autorités.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "permis-sejour-etudiant-30-jours",
+    title: "Les 30 jours après l'arrivée : convertir le X1 en permis de séjour",
+    context:
+      "Délai, pièces fréquentes, rôle de l'université. Pas de garantie de délai local.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "master-en-anglais-chine-ielts-toefl",
+    title: "Master en anglais en Chine : IELTS, TOEFL et place du chinois au quotidien",
+    context:
+      "Scores souvent demandés, vie hors cours en chinois, sans inventer de seuil unique.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "bourse-universitaire-vs-csc-2027",
+    title: "Bourse universitaire chinoise ou CSC en 2027 : comment choisir",
+    context:
+      "Comparer couverture, calendrier, sélectivité. Sans classer « la meilleure » ni promettre.",
+    pillars: ["/bourses", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "traduction-legalisation-dossier-chine-afrique",
+    title: "Traductions et légalisations depuis l'Afrique pour un dossier Chine",
+    context:
+      "Ordre typique traduction / légalisation / apostille selon pays, délais. Procédure non unique.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "casier-judiciaire-validite-dossier-chine",
+    title: "Casier judiciaire pour la Chine : validité et pièges de timing",
+    context:
+      "Durée de validité typique, quand le demander, refus si trop vieux. Pas de modèle unique.",
+    pillars: ["/processus", "/visa-etudiant-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "examen-medical-foreigner-chine",
+    title: "Examen médical pour étudier en Chine : quand le faire, quoi vérifier",
+    context:
+      "Formulaire souvent demandé, validité, labo. Sans vendre de service médical.",
+    pillars: ["/processus", "/visa-etudiant-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "logement-campus-vs-appart-premiere-annee",
+    title: "Première année en Chine : campus ou appartement ?",
+    context:
+      "Avantages résidence, dépôt location, budget. Fourchettes prudentes, pas de promesse de place.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "wechat-alipay-avant-depart-chine",
+    title: "WeChat et Alipay avant le départ : ce qu'il faut installer chez soi",
+    context:
+      "Installer avant l'avion, validation compte, carte étrangère. Pas de garantie d'ouverture.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "vpn-etudiant-chine-gmail-whatsapp",
+    title: "VPN pour un étudiant en Chine : Gmail, WhatsApp et portails étrangers",
+    context:
+      "Pourquoi installer avant l'arrivée, limites, pas de marque garantie. L'agence ne vend pas de VPN.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "assurance-sante-etudiant-arrivee-chine",
+    title: "Assurance santé à l'arrivée en Chine : ce que l'université demande souvent",
+    context:
+      "Couverture campus vs internationale, timing. Sans vendre d'assurance ni garantir l'acceptation.",
+    pillars: ["/processus", "/visa-etudiant-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "lettre-recommandation-master-chine",
+    title: "Lettre de recommandation pour un master en Chine : qui, quoi, erreurs",
+    context:
+      "Qui la signe, contenu utile, erreurs fréquentes. Sans modèle miracle.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "entretien-admission-universite-chinoise",
+    title: "Entretien d'admission pour une université chinoise : questions fréquentes",
+    context:
+      "Langue de l'entretien, motivation, projet. Pas de script qui « marchera ».",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "annee-langue-puis-licence-chine",
+    title: "Année de chinois puis licence : le parcours en deux temps",
+    context:
+      "Pourquoi beaucoup passent par une école de langue, calendrier, HSK. Sans promesse d'admission ensuite.",
+    pillars: ["/ecoles-de-langue-chine", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-ingenierie-en-anglais-chine",
+    title: "Ingénierie en anglais en Chine : points de vigilance",
+    context:
+      "Langue d'enseignement, labos, stages. Factuel, sans inventer d'établissements.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-business-mandarin-chine",
+    title: "Business et commerce en Chine : anglais, mandarin ou les deux ?",
+    context:
+      "Programmes, utilité du chinois au quotidien, débouchés possibles sans garantie d'emploi.",
+    pillars: ["/etudier-en-chine", "/ecoles-de-langue-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "parents-budget-envoyer-enfant-chine",
+    title: "Parents : budget réaliste pour envoyer un enfant étudier en Chine",
+    context:
+      "Scolarité, logement, premier mois, imprévus. Fourchettes prudentes, ton honnête.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "refuser-dossier-pieces-incompletes",
+    title: "Pourquoi un dossier Chine est refusé pour pièces incomplètes",
+    context:
+      "Traduction, dates, casier, photo. Pas de liste exhaustive inventée.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "sim-chinoise-premiere-semaine",
+    title: "Carte SIM chinoise la première semaine : passeport, forfait, SMS",
+    context:
+      "Achat avec passeport, utilité pour WeChat/Alipay. Procédure locale variable.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "hiver-nord-chine-etudiant",
+    title: "Étudier dans le nord de la Chine en hiver : froid, chauffage, quotidien",
+    context:
+      "Pékin, Harbin, Shenyang : adaptation concrète, sans caricature.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "choisir-ecole-langue-hsk-ville",
+    title: "Choisir une école de langue : ville, HSK et calendrier de rentrée",
+    context:
+      "Critères concrets taille, logement, sessions. Sans classer « la meilleure ».",
+    pillars: ["/ecoles-de-langue-chine", "/processus"],
     cta: "/tarifs",
   },
 ];

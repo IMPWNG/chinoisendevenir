@@ -21,15 +21,19 @@ function assert(cond: unknown, msg: string): asserts cond {
 
 assert(slugifyBlogTitle("Visa X1 étudiant") === "visa-x1-etudiant", "slugify accents");
 assert(BLOG_DAILY_LIMIT === 1, "one AI article per day");
-assert(BLOG_TOPICS.length >= 7, "focused topic pool");
+assert(BLOG_TOPICS.length >= 30, "varied topic pool");
 assert(
   BLOG_TOPICS.every((topic) => topic.pillars.length === 2 && topic.cta),
   "each topic has 2 pillars and a conversion link",
 );
+assert(
+  new Set(BLOG_TOPICS.map((topic) => topic.slug)).size === BLOG_TOPICS.length,
+  "unique topic slugs",
+);
 
 const fileSlugs = BLOG_POSTS.map((post) => post.slug);
 const first = pickTopic(fileSlugs, BLOG_TOPICS, BLOG_POSTS.map((post) => post.title));
-assert(first && first.slug === "calendrier-csc-2027", "first unused is CSC 2027");
+assert(first && first.slug === BLOG_TOPICS[0].slug, "pick first unused");
 assert(
   pickTopic(BLOG_TOPICS.map((topic) => topic.slug)) === null,
   "pool exhausted",
