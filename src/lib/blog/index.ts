@@ -21,6 +21,15 @@ export function isPublished(
   return post.publishedAt <= today;
 }
 
+/** On the public /blog: date gate plus optional admin live flag. */
+export function isPubliclyVisible(
+  post: BlogPost,
+  live: boolean = true,
+  today: string = parisDateString(),
+): boolean {
+  return live && isPublished(post, today);
+}
+
 export function listAllPosts(): BlogPost[] {
   return [...BLOG_POSTS].sort((a, b) =>
     a.publishedAt === b.publishedAt

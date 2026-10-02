@@ -4,6 +4,7 @@
  */
 import {
   BLOG_POSTS,
+  isPubliclyVisible,
   listAllPosts,
   listPublishedPosts,
   parisDateString,
@@ -39,6 +40,22 @@ for (const post of listAllPosts()) {
 const today = parisDateString();
 const published = listPublishedPosts(today);
 assert(published.length >= 1, "at least one post should be published by schedule start");
+assert(
+  !isPubliclyVisible(
+    { publishedAt: "2099-01-01" } as (typeof BLOG_POSTS)[number],
+    true,
+    today,
+  ),
+  "future publishedAt must not look live",
+);
+assert(
+  isPubliclyVisible(published[0], true, today),
+  "live + date-due post is on site",
+);
+assert(
+  !isPubliclyVisible(published[0], false, today),
+  "hidden live flag is off site even if date is due",
+);
 
 console.log(
   `blog check ok: ${BLOG_POSTS.length} posts, ${published.length} published as of ${today} (Paris)`,

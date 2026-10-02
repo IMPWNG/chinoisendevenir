@@ -7,7 +7,12 @@ import { useAdminAuth } from "../context/AdminAuthContext";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import AdminShell from "../components/AdminShell";
 import { adminSupabase } from "../lib/supabase";
-import { blogPath, type BlogPost } from "../lib/blog";
+import {
+  blogPath,
+  isPubliclyVisible,
+  parisDateString,
+  type BlogPost,
+} from "../lib/blog";
 import { errorMessage } from "../lib/request";
 
 type CatalogRow = {
@@ -154,9 +159,10 @@ export default function AdminBlog() {
     }
   };
 
+  const day = today || parisDateString();
   const aiCount = posts.filter((row) => row.source === "ai").length;
-  const liveCount = posts.filter(
-    (row) => row.source === "static" || row.live,
+  const liveCount = posts.filter((row) =>
+    isPubliclyVisible(row.post, row.live, day),
   ).length;
 
   return (
@@ -234,10 +240,12 @@ export default function AdminBlog() {
                     {row.source === "ai" ? "IA" : "Fichier"}
                   </td>
                   <td className="px-4 py-3">
-                    {row.source === "static" || row.live ? (
+                    {!row.live ? (
+                      <span className="text-amber-300">Masqué</span>
+                    ) : isPubliclyVisible(row.post, true, day) ? (
                       <span className="text-emerald-300">En ligne</span>
                     ) : (
-                      <span className="text-amber-300">Masqué</span>
+                      <span className="text-sky-300">Programmé</span>
                     )}
                   </td>
                   <td className="px-4 py-3 text-right whitespace-nowrap">
