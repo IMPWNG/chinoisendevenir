@@ -135,7 +135,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans ce repo.
 
-- `contacts` — dossiers (colonnes suivi, formule, lead form…). Pays canoniques : `src/lib/countries.ts` (liste déroulante du formulaire).
+- `contacts` — dossiers (colonnes suivi, formule, lead form, `paiements` pour les 3 échéances). Pays canoniques : `src/lib/countries.ts` (liste déroulante du formulaire).
 - `contact_emails` — fil envoyés/reçus (Resend)
 - `outbound_drip` — file d'envoi auto email/WhatsApp, 5/h (`sql/outbound-drip.sql`)
 - `suivi_actions` — historique d’actions CRM

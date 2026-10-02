@@ -21,6 +21,8 @@ export type ContactRow = {
   source?: string | null;
   assigned_to?: string | null;
   assigned_at?: string | null;
+  /** Suivi manuel des 3 échéances : { e1, e2, e3 }. */
+  paiements?: unknown;
   /** Admin flag « Suivi prioritaire ». Independent of suivi_statut. */
   prioritaire?: boolean | null;
   last_touched_by?: string | null;
