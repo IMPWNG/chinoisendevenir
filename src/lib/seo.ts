@@ -14,7 +14,7 @@ export const SITE = {
     "Chinois en Devenir accompagne les étudiants francophones pour étudier en Chine : orientation, admission, bourses et visa. De l'idée du projet jusqu'au départ.",
   contentUpdatedAt: "2026-10-02",
   ogImage: "https://chinoisendevenir.com/opengraph-image",
-  logo: "https://chinoisendevenir.com/apple-icon",
+  logo: "https://chinoisendevenir.com/apple-touch-icon.png",
   sameAs: [
     "https://www.tiktok.com/@chinoisendevenir",
   ],
