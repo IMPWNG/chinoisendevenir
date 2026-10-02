@@ -520,6 +520,39 @@ function whatsappBodyFromParsed(json: ComposeFields | null, raw: string) {
   return body.includes("{prenom}") ? body : `Bonjour {prenom},\n\n${body}`;
 }
 
+/** One student-file WhatsApp message: a few lines, never an email. */
+export const STUDENT_WHATSAPP_MAX = 500;
+
+export function studentWhatsappDraft(
+  json: { body?: unknown } | null | undefined,
+  raw: unknown,
+  prenom?: unknown,
+): string | null {
+  let body = String(json?.body || "").trim();
+  if (!body) {
+    const text = String(raw || "").trim();
+    if (!text || looksLikeJsonBlob(text)) return null;
+    body = text;
+  }
+  body = body
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/g, "")
+    .replace(/<[^>]+>/g, "")
+    .trim();
+  if (body.length < 12) return null;
+  if (body.length > STUDENT_WHATSAPP_MAX) {
+    const cut = body.slice(0, STUDENT_WHATSAPP_MAX);
+    const stop = Math.max(cut.lastIndexOf("\n\n"), cut.lastIndexOf(". "), cut.lastIndexOf(".\n"));
+    body = (stop > 80 ? cut.slice(0, stop + (cut[stop] === "." ? 1 : 0)) : cut).trim();
+  }
+  const name = String(prenom || "").trim();
+  if (name && !/^bonjour\b/i.test(body)) {
+    const greeted = `Bonjour ${name},\n\n${body}`;
+    if (greeted.length <= STUDENT_WHATSAPP_MAX) body = greeted;
+  }
+  return body.length >= 12 && body.length <= STUDENT_WHATSAPP_MAX ? body : null;
+}
+
 export async function composeBulkWhatsappWithAi({
   notes = "",
   topic = "custom",
@@ -569,6 +602,49 @@ ${summary.text}`,
 
   if (!result.ok) return result;
   const body = whatsappBodyFromParsed(result.json, result.text);
+  if (!body) return { ok: false, error: "Réponse IA inutilisable" };
+  return { ok: true, body, subject: "", title: "", subtitle: "" };
+}
+
+export async function composeStudentWhatsappWithAi({
+  notes,
+  contact,
+}: {
+  notes?: unknown;
+  contact?: { prenom?: unknown; domaine_etudes?: unknown; formule?: unknown; suivi_statut?: unknown } | null;
+} = {}): Promise<ComposeOk | ComposeErr> {
+  const tutoyer = notesAskTutoiement(notes);
+  const prenom = String(contact?.prenom || "").trim();
+  const result = await mammouthChat({
+    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
+
+Tu rédiges UN message WhatsApp à un seul étudiant. Ce n'est pas un e-mail : beaucoup plus court.
+
+Contraintes :
+- 2 paragraphes courts, ou 4 à 6 lignes. Une seule idée, celle du brief.
+- Entre 150 et 420 caractères. Jamais plus de 500. Pas de catalogue, pas de puces, pas de tarifs inventés.
+- Commence par « Bonjour ${prenom || ""} ».
+- Pas d'objet, pas de titre, pas de HTML.
+- Dernière ligne : « L'équipe Chinois en Devenir ».
+- ${tutoyer ? "Le brief demande le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
+- N'invente aucun créneau, aucune université, aucun tarif. Si le brief donne un horaire, recopie-le tel quel.
+
+JSON uniquement, sans markdown :
+{"body":"Bonjour ${prenom || ""},\\n\\n..."}`,
+    user: `Étudiant : ${prenom || "prénom inconnu"}
+Domaine : ${contact?.domaine_etudes || "non renseigné"}
+Formule : ${contact?.formule || "aucune"}
+Statut : ${contact?.suivi_statut || "—"}
+
+Brief admin (à transformer en message WhatsApp court) :
+${notes}`,
+    temperature: 0.4,
+    maxTokens: 350,
+    retries: 1,
+  });
+
+  if (!result.ok) return result;
+  const body = studentWhatsappDraft(result.json, result.text, prenom);
   if (!body) return { ok: false, error: "Réponse IA inutilisable" };
   return { ok: true, body, subject: "", title: "", subtitle: "" };
 }

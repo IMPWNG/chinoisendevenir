@@ -1,21 +1,24 @@
-import { canonicalCountry } from "./countries";
+import { countryDialCode } from "./countries";
 
-/** Digits for OpenWA: international MSISDN, no plus, no leading zero.
- *  ponytail: a national 0-prefix is rewritten to +33 only when the country is France.
- *  Other countries must already be stored in international form.
- */
+/** Digits for OpenWA: international MSISDN, no plus, no leading zero. */
 export function whatsappMsisdn(raw: unknown, country?: string | null): string | null {
-  let digits = String(raw ?? "").replace(/\D/g, "");
+  const text = String(raw ?? "").trim();
+  const alreadyInternational = text.startsWith("+") || /^00/.test(text.replace(/[\s().-]/g, ""));
+  let digits = text.replace(/\D/g, "");
   if (digits.startsWith("00")) digits = digits.slice(2);
-  if (
-    digits.length === 10 &&
-    digits.startsWith("0") &&
-    canonicalCountry(country) === "France"
-  ) {
-    digits = `33${digits.slice(1)}`;
+  const code = countryDialCode(country);
+  if (code && digits && !alreadyInternational) {
+    if (digits.startsWith("0")) digits = digits.slice(1);
+    if (digits && !digits.startsWith(code)) digits = `${code}${digits}`;
   }
   if (!/^[1-9]\d{7,14}$/.test(digits)) return null;
   return digits;
+}
+
+/** Stored and displayed form: +indicatif followed by the national number. */
+export function phoneWithIndicatif(raw: unknown, country?: string | null): string | null {
+  const number = whatsappMsisdn(raw, country);
+  return number ? `+${number}` : null;
 }
 
 /** Chat id for sends, contacts and labels.

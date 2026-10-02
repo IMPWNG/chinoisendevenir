@@ -59,6 +59,9 @@ export default function AdminContactWhatsApp({
 }) {
   const { t, lang } = useAdminI18n();
   const [text, setText] = useState("");
+  const [aiNotes, setAiNotes] = useState("");
+  const [composing, setComposing] = useState(false);
+  const [aiError, setAiError] = useState("");
   const [busy, setBusy] = useState<"send" | "save" | "label" | null>(null);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
@@ -106,6 +109,8 @@ export default function AdminContactWhatsApp({
 
   useEffect(() => {
     setText("");
+    setAiNotes("");
+    setAiError("");
     setNotice("");
     setError("");
     setCard(null);
@@ -122,6 +127,45 @@ export default function AdminContactWhatsApp({
     if (!card?.onWhatsapp) return;
     onTreated?.();
   }, [card?.onWhatsapp, contact.id, onTreated]);
+
+  async function composeWithAi() {
+    const notes = aiNotes.trim();
+    if (notes.length < 8) {
+      setAiError(t("dashboard.emailAiEmpty"));
+      return;
+    }
+    setComposing(true);
+    setAiError("");
+    try {
+      const response = await authedFetch("/api/admin/compose-email", {
+        method: "POST",
+        body: JSON.stringify({
+          channel: "whatsapp",
+          contactId: contact.id,
+          notes,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.success) {
+        setAiError(
+          t("dashboard.whatsappAiFail", {
+            error: data.error || t("unknownError"),
+          }),
+        );
+        return;
+      }
+      setText(String(data.body || "").slice(0, 500));
+    } catch (caught) {
+      const message = errorMessage(caught);
+      setAiError(
+        t("dashboard.whatsappAiFail", {
+          error: message === "SESSION" ? t("sessionExpired") : message || t("unknownError"),
+        }),
+      );
+    } finally {
+      setComposing(false);
+    }
+  }
 
   async function run(action: "send" | "save" | "label") {
     if (!phone) {
@@ -276,6 +320,34 @@ export default function AdminContactWhatsApp({
         )}
       </div>
 
+      <div className="mb-4 rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4">
+        <p className="text-xs font-bold uppercase tracking-wide text-violet-200">
+          ✨ {t("dashboard.emailAiSection")}
+        </p>
+        <p className="text-xs text-slate-400 mt-1">{t("dashboard.whatsappAiHint")}</p>
+        <textarea
+          value={aiNotes}
+          disabled={busy !== null || composing}
+          onChange={(e) => setAiNotes(e.target.value)}
+          placeholder={t("dashboard.whatsappAiPlaceholder")}
+          rows={2}
+          className="mt-3 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-none disabled:opacity-50"
+        />
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-center gap-3">
+          <button
+            type="button"
+            onClick={composeWithAi}
+            disabled={busy !== null || composing}
+            className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          >
+            {composing
+              ? `⏳ ${t("dashboard.emailAiWorking")}`
+              : `✨ ${t("dashboard.whatsappAiButton")}`}
+          </button>
+          {aiError ? <p className="text-sm text-rose-300">{aiError}</p> : null}
+        </div>
+      </div>
+
       <div className="mb-4">
         <label
           htmlFor="admin-whatsapp-text"
@@ -286,7 +358,7 @@ export default function AdminContactWhatsApp({
         <textarea
           id="admin-whatsapp-text"
           value={text}
-          disabled={busy !== null || !onWhatsapp}
+          disabled={busy !== null || composing || !onWhatsapp}
           onChange={(e) => setText(e.target.value)}
           rows={4}
           maxLength={4096}

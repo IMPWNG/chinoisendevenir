@@ -8,6 +8,7 @@ import {
   composeBulkEmailWithAi,
   composeBulkWhatsappWithAi,
   composeEmailWithAi,
+  composeStudentWhatsappWithAi,
 } from "@/lib/emailCompose";
 import { rateLimit } from "@/lib/httpSecurity";
 import { asString, readJsonObject } from "@/lib/request";
@@ -193,7 +194,22 @@ export async function POST(request: Request) {
       );
     }
 
-    const composed = (await composeEmailWithAi({ notes, contact })) as ComposeResult;
+    const whatsapp = asString(body.channel) === "whatsapp";
+    if (whatsapp) {
+      const forbidden = requireFullAdmin(auth);
+      if (forbidden) {
+        return NextResponse.json(
+          { success: false, error: forbidden.error },
+          { status: forbidden.status || 403 },
+        );
+      }
+    }
+
+    const composed = (
+      whatsapp
+        ? await composeStudentWhatsappWithAi({ notes, contact })
+        : await composeEmailWithAi({ notes, contact })
+    ) as ComposeResult;
     if (!composed.ok) {
       return NextResponse.json(
         { success: false, error: composed.error },
