@@ -14,9 +14,9 @@ Package npm : `etudier-en-chine`. Repo : App Router Next.js 16 + React 19, dépl
 
 | Surface | Routes | Qui |
 |---|---|---|
-| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. Blog : 20 articles pré-rédigés, **1 publication/jour** via `publishedAt` (Europe/Paris) dans `src/lib/blog/`. |
+| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. Blog : 20 guides dans `src/lib/blog/` + articles IA dans `blog_posts` (**2/jour**, cron). |
 | Espace étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Compte Supabase Auth. Accès gated par paiement / statut. |
-| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites` | Allowlist `ADMIN_EMAILS` + table `admin_users`. Rôle `full` ou `limited`. |
+| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog` | Allowlist `ADMIN_EMAILS` + table `admin_users`. Rôle `full` ou `limited`. |
 
 Les pages `src/app/**/page.tsx` sont minces : metadata SEO + import d’une vue dans `src/views/`. La logique vit dans `src/lib/`.
 
@@ -26,7 +26,7 @@ Les pages `src/app/**/page.tsx` sont minces : metadata SEO + import d’une vue 
 - **React 19** + **Tailwind 4**
 - **Supabase** : Auth + Postgres. Le navigateur n’écrit pas les tables métier. Les API routes utilisent la **service role** (`src/lib/supabaseAdmin.ts`) et bypassent RLS.
 - **Resend** : e-mails transactionnels + inbound (`contact@chinoisendevenir.com`)
-- **Mammouth** (`MAMMOUTH_API_KEY`) : LLM matching, bilans, rédaction d’e-mails admin
+- **Mammouth** (`MAMMOUTH_API_KEY`) : LLM matching, bilans, e-mails admin, articles de blog
 - Node `>= 20`. Qualité = `npm test` (`tsc --noEmit`) + `npm run lint` + `npm run build`.
 
 ## Modèle métier
@@ -112,6 +112,7 @@ Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching
 | Auth admin + étudiant | `src/lib/studentAuth.ts` |
 | Scoring univ. | `src/lib/matching/score.ts` + `weights.ts` |
 | Rapports matching | `src/lib/matching/reports.ts`, `reportsLlm.ts` |
+| Blog IA | `src/lib/blog/generate.ts`, `store.ts`, cron `blog-generate`, admin `/admin/blog` |
 | E-mails auto / intents | `src/lib/api/auto-reply.ts`, `src/lib/emailIntents.ts`. Inbound : pas de réponse auto aux questions. Seuls le mail de bienvenue et la confirmation de formule partent seuls. |
 | Inbound mail | `src/lib/api/inbound-email.ts` |
 | Relance quotidienne | `src/lib/api/formules-relance.ts` (cron Vercel `0 2 * * *`) |
@@ -127,9 +128,9 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
-**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`
+**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
 
-**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min)
+**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (2×/jour, 1 article IA à chaque run, plafond 2/jour)
 
 ## Données Postgres (SQL dans `sql/`)
 
@@ -142,9 +143,10 @@ Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans
 - `admin_users` — allowlist admin (personne ne s’auto-promouvoit)
 - `universities` — catalogue matching / partenaires
 - `matching_runs` — JSON des analyses
+- `blog_posts` — articles IA (payload JSON, `live`, `published_at`)
 - Storage : `student-documents`
 
-Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`.
+Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/blog-posts.sql`.
 
 Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel).
 

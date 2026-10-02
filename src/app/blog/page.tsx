@@ -1,5 +1,6 @@
 import BlogIndexPage from "@/views/BlogIndexPage";
-import { listPublishedPosts } from "@/lib/blog";
+import { listLiveDbPosts } from "@/lib/blog/store";
+import { listPublishedMerged } from "@/lib/blog";
 import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
@@ -17,7 +18,8 @@ export const metadata = pageMetadata({
   ],
 });
 
-export default function BlogPage() {
-  const posts = listPublishedPosts().slice().reverse();
+export default async function BlogPage() {
+  const extra = await listLiveDbPosts();
+  const posts = listPublishedMerged(extra).slice().reverse();
   return <BlogIndexPage posts={posts} />;
 }

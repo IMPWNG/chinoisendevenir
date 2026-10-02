@@ -24,6 +24,7 @@ export default function AdminShell({
   const access = useAdminAccess();
   const limited = access.role !== "full";
   const isUniversities = pathname?.startsWith("/admin/universites");
+  const isBlog = pathname?.startsWith("/admin/blog");
 
   useEffect(() => {
     if (limited && lang !== "fr") setLang("fr");
@@ -34,6 +35,9 @@ export default function AdminShell({
       { href: "/admin/dashboard", label: t("nav.contacts"), icon: "👥" },
       access.universities
         ? { href: "/admin/universites", label: t("nav.universities"), icon: "🏫" }
+        : null,
+      access.universities
+        ? { href: "/admin/blog", label: t("nav.blog"), icon: "✍️" }
         : null,
     ] as Array<NavItem | null>
   ).filter((item): item is NavItem => item != null);
@@ -48,12 +52,18 @@ export default function AdminShell({
             </div>
             <div>
               <h1 className="text-2xl font-bold text-white">
-                {isUniversities ? t("universities.title") : t("dashboard.title")}
+                {isBlog
+                  ? t("blog.title")
+                  : isUniversities
+                    ? t("universities.title")
+                    : t("dashboard.title")}
               </h1>
               <p className="text-xs text-slate-400">
-                {isUniversities
-                  ? t("universities.subtitle")
-                  : t("dashboard.subtitle")}
+                {isBlog
+                  ? t("blog.subtitle")
+                  : isUniversities
+                    ? t("universities.subtitle")
+                    : t("dashboard.subtitle")}
               </p>
             </div>
           </div>

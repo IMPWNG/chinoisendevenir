@@ -34,6 +34,11 @@ export const adminTranslations = {
     nav: {
       contacts: "Contacts",
       universities: "Universités",
+      blog: "Blog",
+    },
+    blog: {
+      title: "Blog",
+      subtitle: "2 articles IA publiés automatiquement chaque jour",
     },
     calendar: {
       title: "Calendrier des RDV",
@@ -668,6 +673,11 @@ export const adminTranslations = {
     nav: {
       contacts: "Contacts",
       universities: "Universities",
+      blog: "Blog",
+    },
+    blog: {
+      title: "Blog",
+      subtitle: "2 AI articles published automatically every day",
     },
     calendar: {
       title: "Appointment calendar",
@@ -1294,6 +1304,11 @@ export const adminTranslations = {
     nav: {
       contacts: "联系人",
       universities: "大学",
+      blog: "博客",
+    },
+    blog: {
+      title: "博客",
+      subtitle: "每天自动发布 2 篇 AI 文章",
     },
     calendar: {
       title: "预约日历",
