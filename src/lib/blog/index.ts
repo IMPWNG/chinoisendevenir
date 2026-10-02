@@ -53,3 +53,32 @@ export function getPublishedPostBySlug(
 export function blogPath(slug: string): string {
   return `/blog/${slug}`;
 }
+
+export function mergeBlogPosts(base: BlogPost[], extra: BlogPost[]): BlogPost[] {
+  const seen = new Set(base.map((post) => post.slug));
+  const added = extra.filter((post) => post.slug && !seen.has(post.slug));
+  return [...base, ...added].sort((a, b) =>
+    a.publishedAt === b.publishedAt
+      ? a.slug.localeCompare(b.slug)
+      : a.publishedAt < b.publishedAt
+        ? -1
+        : 1,
+  );
+}
+
+export function listPublishedMerged(
+  extra: BlogPost[],
+  today: string = parisDateString(),
+): BlogPost[] {
+  return mergeBlogPosts(listAllPosts(), extra).filter((post) =>
+    isPublished(post, today),
+  );
+}
+
+export function getPublishedMergedBySlug(
+  slug: string,
+  extra: BlogPost[],
+  today: string = parisDateString(),
+): BlogPost | undefined {
+  return listPublishedMerged(extra, today).find((post) => post.slug === slug);
+}

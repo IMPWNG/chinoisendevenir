@@ -1,4 +1,8 @@
-import { listPublishedPosts, parisDateString } from "./blog";
+import {
+  listPublishedMerged,
+  parisDateString,
+  type BlogPost,
+} from "./blog";
 import { SITE, SITEMAP_ROUTES } from "./seo";
 
 export type SitemapEntry = {
@@ -26,8 +30,9 @@ export function sitemapDate(isoDay: string): Date {
 
 export function buildSitemapEntries(
   today: string = parisDateString(),
+  extraPosts: BlogPost[] = [],
 ): SitemapEntry[] {
-  const posts = listPublishedPosts(today);
+  const posts = listPublishedMerged(extraPosts, today);
   const latestPostDay = posts.reduce(
     (latest, post) => (post.publishedAt > latest ? post.publishedAt : latest),
     SITE.contentUpdatedAt,

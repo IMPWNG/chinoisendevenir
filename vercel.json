@@ -10,6 +10,14 @@
     {
       "path": "/api/cron/outbound-drip",
       "schedule": "*/12 * * * *"
+    },
+    {
+      "path": "/api/cron/blog-generate",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/blog-generate",
+      "schedule": "0 15 * * *"
     }
   ]
 }

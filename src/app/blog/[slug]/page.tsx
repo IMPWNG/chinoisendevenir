@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import BlogArticlePage from "@/views/BlogArticlePage";
 import {
-  getPublishedPostBySlug,
+  getPublishedMergedBySlug,
+  listPublishedMerged,
   listPublishedPosts,
 } from "@/lib/blog";
+import { listLiveDbPosts } from "@/lib/blog/store";
 import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
@@ -20,7 +22,8 @@ export async function generateMetadata({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = getPublishedPostBySlug(slug);
+  const extra = await listLiveDbPosts();
+  const post = getPublishedMergedBySlug(slug, extra);
   if (!post) {
     return pageMetadata({
       title: "Article introuvable",
@@ -45,10 +48,11 @@ export default async function BlogSlugPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = getPublishedPostBySlug(slug);
+  const extra = await listLiveDbPosts();
+  const post = getPublishedMergedBySlug(slug, extra);
   if (!post) notFound();
 
-  const related = listPublishedPosts()
+  const related = listPublishedMerged(extra)
     .filter((item) => item.slug !== post.slug)
     .slice()
     .reverse()
