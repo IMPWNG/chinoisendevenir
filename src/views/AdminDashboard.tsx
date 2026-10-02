@@ -16,6 +16,7 @@ import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
 import AdminDripSend from "../components/AdminDripSend";
+import AdminPaymentSchedule from "../components/AdminPaymentSchedule";
 import { isMatchingPayloadAction } from "../lib/matching/persist";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import type { AdminI18nValue } from "../context/AdminI18nContext";
@@ -59,6 +60,8 @@ import {
 } from "../lib/contactPriority";
 import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
+import { formatEurosOnly } from "../lib/money";
+import { paymentPlan } from "../lib/paymentPlan";
 
 const STATUTS = SUIVI_STATUTS;
 
@@ -1011,6 +1014,20 @@ export default function AdminDashboard() {
                             📋 {translatedOrRaw(t, "formule", getChosenFormule(c))}
                           </p>
                         ) : null}
+                        {(() => {
+                          const plan = paymentPlan(c);
+                          if (!plan) return null;
+                          return (
+                            <p className="text-xs text-amber-200 mt-1 font-semibold">
+                              {plan.remaining === 0
+                                ? t("dashboard.paySettled")
+                                : t("dashboard.payRemaining", {
+                                    amount: formatEurosOnly(plan.remaining),
+                                    count: plan.paidCount,
+                                  })}
+                            </p>
+                          );
+                        })()}
                         <p className="text-xs text-slate-500 mt-1">{c.email}</p>
                       </td>
                       <td className="px-4 py-4 text-slate-300 text-sm">
@@ -1499,6 +1516,15 @@ function ContactModal({
                 onContactPatched?.(updated);
                 fetchActions();
               }}
+            />
+          </FilePanel>
+
+          <FilePanel title={`💳 ${t("dashboard.payTitle")}`} persist>
+            <AdminPaymentSchedule
+              contact={contact}
+              onPatched={(paiements) =>
+                onContactPatched({ ...contact, paiements })
+              }
             />
           </FilePanel>
 
