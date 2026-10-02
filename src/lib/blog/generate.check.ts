@@ -2,13 +2,17 @@
  * Self-check for AI blog generation helpers.
  * Run: npx tsx src/lib/blog/generate.check.ts
  */
-import { mergeBlogPosts } from "./index";
+import { BLOG_POSTS, mergeBlogPosts } from "./index";
 import {
-  extractJsonObject,
-  pickTopic,
-  slugifyBlogTitle,
-  validateGeneratedPost,
+  BLOG_DAILY_LIMIT,
   BLOG_TOPICS,
+  extractJsonObject,
+  mergeInternalLinks,
+  pickTopic,
+  requiredInternalLinks,
+  slugifyBlogTitle,
+  topicAlreadyCovered,
+  validateGeneratedPost,
 } from "./generate";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -16,15 +20,35 @@ function assert(cond: unknown, msg: string): asserts cond {
 }
 
 assert(slugifyBlogTitle("Visa X1 étudiant") === "visa-x1-etudiant", "slugify accents");
-assert(BLOG_TOPICS.length >= 20, "enough topics");
+assert(BLOG_DAILY_LIMIT === 1, "one AI article per day");
+assert(BLOG_TOPICS.length >= 7, "focused topic pool");
+assert(
+  BLOG_TOPICS.every((topic) => topic.pillars.length === 2 && topic.cta),
+  "each topic has 2 pillars and a conversion link",
+);
 
-const first = pickTopic([]);
-assert(first && first.slug === BLOG_TOPICS[0].slug, "pick first unused");
-assert(pickTopic(BLOG_TOPICS.map((topic) => topic.slug)) === null, "pool exhausted");
+const fileSlugs = BLOG_POSTS.map((post) => post.slug);
+const first = pickTopic(fileSlugs, BLOG_TOPICS, BLOG_POSTS.map((post) => post.title));
+assert(first && first.slug === "calendrier-csc-2027", "first unused is CSC 2027");
+assert(
+  pickTopic(BLOG_TOPICS.map((topic) => topic.slug)) === null,
+  "pool exhausted",
+);
+assert(
+  topicAlreadyCovered(BLOG_TOPICS[0], [BLOG_TOPICS[0].slug]),
+  "same slug is covered",
+);
 
 const parsed = extractJsonObject('prefix {"intro":"ok","n":1} trailing');
 assert(parsed.intro === "ok", "extract json object");
 
+const brief = {
+  slug: "visa-test",
+  title: "Visa test",
+  context: "ctx",
+  pillars: ["/visa-etudiant-chine", "/processus"] as [string, string],
+  cta: "/tarifs" as const,
+};
 const post = validateGeneratedPost(
   {
     description: "Meta",
@@ -41,13 +65,26 @@ const post = validateGeneratedPost(
       { question: "Q2", answer: "A2" },
       { question: "Q3", answer: "A3" },
     ],
-    internalLinks: [{ href: "/visa-etudiant-chine", label: "Visa" }],
+    internalLinks: [{ href: "/faq", label: "FAQ" }],
   },
-  { slug: "visa-test", title: "Visa test", context: "ctx" },
+  brief,
   "2026-10-02",
 );
 assert(post.slug === "visa-test", "validated slug");
-assert(post.sections.length === 4, "sections kept");
+assert(
+  post.internalLinks.some((link) => link.href === "/visa-etudiant-chine") &&
+    post.internalLinks.some((link) => link.href === "/processus") &&
+    post.internalLinks.some((link) => link.href === "/tarifs"),
+  "required cluster links injected",
+);
+
+const required = requiredInternalLinks(BLOG_TOPICS[0]);
+assert(required.length === 3, "2 pillars + conversion");
+const merged = mergeInternalLinks(
+  [{ href: "/blog/etudier-en-chine-2026-guide", label: "Guide 2026" }],
+  required,
+);
+assert(merged[0].href === required[0].href, "required links first");
 
 try {
   validateGeneratedPost(
@@ -66,7 +103,7 @@ try {
       ],
       internalLinks: [{ href: "/faq", label: "FAQ" }],
     },
-    { slug: "x", title: "X", context: "c" },
+    brief,
     "2026-10-02",
   );
   throw new Error("expected labeled intro to fail");
@@ -77,13 +114,13 @@ try {
   );
 }
 
-const merged = mergeBlogPosts(
+const catalog = mergeBlogPosts(
   [{ slug: "a", title: "A", description: "", publishedAt: "2026-01-01", keywords: [], intro: "", sections: [], faqs: [], internalLinks: [], ctaTitle: "", ctaSubtitle: "" }],
   [
     { slug: "a", title: "dup", description: "", publishedAt: "2026-01-02", keywords: [], intro: "", sections: [], faqs: [], internalLinks: [], ctaTitle: "", ctaSubtitle: "" },
     { slug: "b", title: "B", description: "", publishedAt: "2026-01-03", keywords: [], intro: "", sections: [], faqs: [], internalLinks: [], ctaTitle: "", ctaSubtitle: "" },
   ],
 );
-assert(merged.map((item) => item.slug).join(",") === "a,b", "merge skips duplicate slug");
+assert(catalog.map((item) => item.slug).join(",") === "a,b", "merge skips duplicate slug");
 
 console.log("blog generate check ok");

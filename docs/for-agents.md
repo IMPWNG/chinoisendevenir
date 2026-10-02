@@ -14,7 +14,7 @@ Package npm : `etudier-en-chine`. Repo : App Router Next.js 16 + React 19, dépl
 
 | Surface | Routes | Qui |
 |---|---|---|
-| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. Blog : 20 guides dans `src/lib/blog/` + articles IA dans `blog_posts` (**2/jour**, cron). |
+| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. Blog : 20 guides dans `src/lib/blog/` + articles IA dans `blog_posts` (**1/jour** si le sujet n’existe pas déjà, cron). |
 | Espace étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Compte Supabase Auth. Accès gated par paiement / statut. |
 | Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog` | Allowlist `ADMIN_EMAILS` + table `admin_users`. Rôle `full` ou `limited`. |
 
@@ -130,7 +130,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
 
-**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (2×/jour, 1 article IA à chaque run, plafond 2/jour)
+**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (1×/jour, 1 article IA si le sujet n’existe pas déjà)
 
 ## Données Postgres (SQL dans `sql/`)
 

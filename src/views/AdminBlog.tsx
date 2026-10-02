@@ -46,7 +46,7 @@ export default function AdminBlog() {
   const [posts, setPosts] = useState<CatalogRow[]>([]);
   const [today, setToday] = useState("");
   const [generatedToday, setGeneratedToday] = useState(0);
-  const [dailyLimit, setDailyLimit] = useState(2);
+  const [dailyLimit, setDailyLimit] = useState(1);
   const [loading, setLoading] = useState(true);
   const [working, setWorking] = useState("");
   const [error, setError] = useState("");
@@ -108,11 +108,21 @@ export default function AdminBlog() {
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Génération impossible");
       applyCatalog(payload);
-      setInfo(
-        payload.post?.title
-          ? `Publié : ${payload.post.title}`
-          : "Article généré et publié.",
-      );
+      if (payload.skipped === true) {
+        setInfo(
+          payload.reason === "no-new-topic"
+            ? "Aucun sujet inédit : rien n’a été publié."
+            : payload.reason === "quota"
+              ? "Quota du jour déjà atteint."
+              : "Génération ignorée.",
+        );
+      } else {
+        setInfo(
+          payload.post?.title
+            ? `Publié : ${payload.post.title}`
+            : "Article généré et publié.",
+        );
+      }
     } catch (err: unknown) {
       setError(
         errorMessage(err) === "SESSION" ? t("sessionExpired") : errorMessage(err),
@@ -170,9 +180,10 @@ export default function AdminBlog() {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
         <div>
           <p className="text-sm text-slate-400 max-w-xl">
-            Deux articles IA sont générés et publiés chaque jour (matin et
-            après-midi, heure de Paris). Vous pouvez aussi en lancer un ici.
-            Les 20 premiers guides restent dans le code.
+            Un article IA par jour (6h, heure de Paris), seulement si le sujet
+            n’est pas déjà couvert par un guide ou un article publié. Chaque
+            texte doit renvoyer vers 2 pages piliers et vers les tarifs ou le
+            formulaire. Les 20 premiers guides restent dans le code.
           </p>
           {today ? (
             <p className="text-xs text-slate-500 mt-2">

@@ -6,55 +6,97 @@ import {
   listStoredPosts,
 } from "./store";
 
-export const BLOG_DAILY_LIMIT = 2;
+export const BLOG_DAILY_LIMIT = 1;
+
+export const BLOG_PILLARS = [
+  "/etudier-en-chine",
+  "/ecoles-de-langue-chine",
+  "/bourses",
+  "/visa-etudiant-chine",
+  "/processus",
+] as const;
+
+export const BLOG_CONVERSION_HREFS = ["/tarifs", "/contact", "/#lead-form"] as const;
+
+const PILLAR_LABEL: Record<string, string> = {
+  "/etudier-en-chine": "Guide : étudier en Chine",
+  "/ecoles-de-langue-chine": "Écoles de langue en Chine",
+  "/bourses": "Bourses d'études en Chine",
+  "/visa-etudiant-chine": "Visa étudiant pour la Chine",
+  "/processus": "Processus d'admission",
+};
+
+const CONVERSION_LABEL: Record<string, string> = {
+  "/tarifs": "Formules d'accompagnement",
+  "/contact": "Nous écrire",
+  "/#lead-form": "Évaluer mon projet",
+};
 
 export type BlogTopic = {
   slug: string;
   title: string;
   context: string;
+  pillars: [string, string];
+  cta: (typeof BLOG_CONVERSION_HREFS)[number];
 };
 
 export const BLOG_TOPICS: BlogTopic[] = [
-  { slug: "visa-x1-etudiant-chine-demarches", title: "Visa X1 étudiant en Chine : les démarches concrètes", context: "Expliquer le visa X1, les documents JW202/JW201, les délais et ce qui se passe à l’arrivée, sans garantir l’obtention." },
-  { slug: "hsk-quel-niveau-pour-etudier-en-chine", title: "Quel niveau HSK faut-il pour étudier en Chine ?", context: "Rappeler les niveaux HSK utiles selon licence, master et année de langue, sans inventer de seuils officiels uniques." },
-  { slug: "logement-etudiant-campus-chine", title: "Logement étudiant en Chine : campus, appartement et budget", context: "Comparer résidence universitaire et location, avec fourchettes prudentes." },
-  { slug: "csc-bourse-gouvernement-chinois", title: "Bourse CSC : comment ça fonctionne vraiment ?", context: "Présenter la bourse du gouvernement chinois, les voies d’attribution et les limites, sans promettre de résultat." },
-  { slug: "master-en-anglais-en-chine", title: "Faire un master en anglais en Chine : pour qui, à quelles conditions ?", context: "Programmes taught in English, IELTS/TOEFL, et place du chinois au quotidien." },
-  { slug: "calendrier-rentree-automne-printemps-chine", title: "Rentrée d’automne ou de printemps en Chine : comment choisir ?", context: "Comparer les deux rentrées, les délais de dossier et ce que ça change pour le visa." },
-  { slug: "assurance-sante-etudiant-etranger-chine", title: "Assurance santé pour un étudiant étranger en Chine", context: "Expliquer pourquoi une couverture est demandée et ce qu’il faut vérifier, sans vendre d’assurance." },
-  { slug: "ou-apprendre-chinois-pekin-shanghai-province", title: "Où apprendre le chinois en Chine : grande ville ou province ?", context: "Comparer coût, immersion, rythme et vie quotidienne." },
-  { slug: "dossier-admission-traduction-legalisation", title: "Traductions et légalisations pour un dossier d’admission en Chine", context: "Expliquer pourquoi les documents doivent être traduits et authentifiés, sans figer une procédure unique." },
-  { slug: "travailler-pendant-etudes-chine", title: "Peut-on travailler pendant ses études en Chine ?", context: "Rappeler le cadre du visa étudiant et les limites, sans conseiller de contourner la loi." },
-  { slug: "climat-adaptation-vie-etudiante-chine", title: "S’adapter à la vie étudiante en Chine : climat, nourriture, rythme", context: "Parler d’adaptation concrète, sans caricature." },
-  { slug: "choisir-ville-etudiante-budget-chine", title: "Choisir sa ville étudiante en Chine selon son budget", context: "Comparer des villes types (Pékin, Shanghai, Chengdu, Wuhan, Qingdao) avec fourchettes prudentes." },
-  { slug: "lettre-recommandation-universite-chinoise", title: "Lettre de recommandation pour une université chinoise", context: "Qui la demande, quoi y mettre, erreurs fréquentes." },
-  { slug: "casier-judiciaire-dossier-chine", title: "Casier judiciaire et certificat de non-condamnation pour étudier en Chine", context: "Expliquer le document souvent demandé, sa durée de validité typique, sans figer un modèle unique." },
-  { slug: "examen-medical-etudiant-chine", title: "Examen médical pour partir étudier en Chine", context: "À quoi sert le certificat, quand le faire, ce qui est souvent demandé." },
-  { slug: "renouveler-visa-residence-etudiant-chine", title: "Après l’arrivée : titre de séjour étudiant en Chine", context: "Le passage du visa X1 au permis de résidence, délais et pièges courants." },
-  { slug: "apprendre-chinois-zero-en-chine", title: "Arriver en Chine à zéro en chinois : comment s’y prendre ?", context: "Année de langue, HSK, vie quotidienne, sans vendre un miracle." },
-  { slug: "cout-annee-langue-chinoise", title: "Combien coûte une année de langue chinoise en Chine ?", context: "Frais de scolarité, logement, vie quotidienne — fourchettes prudentes." },
-  { slug: "difference-licence-chinoise-europeenne", title: "Licence en Chine vs licence en Europe : ce qui change vraiment", context: "Durée, examens, encadrement, sans hiérarchie caricaturale." },
-  { slug: "preparer-entretien-admission-chine", title: "Comment préparer un entretien d’admission pour la Chine", context: "Questions fréquentes, langue de l’entretien, ce que le jury cherche." },
-  { slug: "etudier-ingenierie-en-chine", title: "Étudier l’ingénierie en Chine : points de vigilance", context: "Langue d’enseignement, labos, stages — rester factuel." },
-  { slug: "etudier-medecine-en-chine", title: "Étudier la médecine en Chine : ce qu’il faut savoir avant", context: "Durée, langue, reconnaissance du diplôme selon les pays — sans promettre l’exercice." },
-  { slug: "etudier-business-en-chine", title: "Étudier le business et le commerce en Chine", context: "Programmes, mandarin, débouchés possibles sans garantie d’emploi." },
-  { slug: "application-universite-chinoise-delais", title: "Les délais d’une candidature universitaire en Chine", context: "Calendrier type de 6 à 12 mois, pièces qui bloquent le plus souvent." },
-  { slug: "bourse-universitaire-vs-csc", title: "Bourse universitaire chinoise ou bourse CSC ?", context: "Comparer couverture, sélectivité et calendrier, sans classer “la meilleure”." },
-  { slug: "parents-envoyer-enfant-etudier-chine", title: "Envoyer son enfant étudier en Chine : le point de vue des parents", context: "Sécurité, suivi, communication, coûts — ton rassurant et honnête." },
-  { slug: "telephone-banque-arrivee-chine", title: "Téléphone, banque et paiement à l’arrivée en Chine", context: "SIM, WeChat Pay, compte bancaire : les premiers jours pratiques." },
-  { slug: "hiver-etudiant-nord-chine", title: "Étudier dans le nord de la Chine : l’hiver, le chauffage, le quotidien", context: "Pékin, Harbin, Shenyang, Changchun — adaptation concrète." },
-  { slug: "canton-shanghai-contrastes-etudiants", title: "Shanghai, Canton, Shenzhen : quelle métropole pour un étudiant ?", context: "Coût, rythme, mandarin vs cantonais, débouchés." },
-  { slug: "annee-sabbatique-chinois-en-chine", title: "Une année sabbatique pour apprendre le chinois en Chine", context: "Pour qui c’est utile, comment la financer, ce que ça change ensuite." },
-  { slug: "double-diplome-chine-france", title: "Double diplôme France–Chine : à quoi s’attendre", context: "Principe, charge de travail, sans lister des partenariats inventés." },
-  { slug: "refuser-admission-universite-chinoise", title: "Pourquoi une université chinoise refuse un dossier", context: "Pièces incomplètes, délais, niveau de langue, projet flou." },
-  { slug: "suivre-cours-en-chinois-a-luniversite", title: "Suivre des cours en chinois à l’université : le choc réel", context: "Rythme, caractères, prise de notes, comment s’y préparer." },
-  { slug: "wechat-vie-etudiante-chine", title: "WeChat, campus et vie étudiante en Chine", context: "Groupes de classe, paiements, administrations — usage concret." },
-  { slug: "budget-mensuel-etudiant-chine-2027", title: "Budget mensuel d’un étudiant en Chine en 2027", context: "Fourchettes prudentes nourriture, transport, téléphone, sorties." },
-  { slug: "choisir-ecole-langue-chinoise", title: "Comment choisir son école de langue en Chine", context: "Ville, taille, HSK, logement, calendrier de rentrée." },
-  { slug: "apres-annee-de-chinois-que-faire", title: "Après une année de chinois en Chine, quelles suites ?", context: "Licence, master, travail, retour — options réalistes." },
-  { slug: "pieces-identite-parents-dossier-mineur-chine", title: "Dossier d’un étudiant mineur en Chine : documents des parents", context: "Autorisations, passeports des parents, tutelle — rester général." },
-  { slug: "orientation-domaine-etudes-chine", title: "Quel domaine d’études viser en Chine selon son profil", context: "Aider à relier bac / licence actuelle et formations, sans promettre un métier." },
-  { slug: "erreurs-budget-etudier-chine", title: "Les erreurs de budget quand on part étudier en Chine", context: "Oublis classiques : dépôt, billet, assurance, premier mois." },
+  {
+    slug: "calendrier-csc-2027",
+    title: "Calendrier CSC 2027 : dates, voies et pièces à anticiper",
+    context:
+      "Calendrier type 2026–2027 de la bourse du gouvernement chinois (CSC) : fenêtres de dépôt, voies université / ambassade, pièces qui bloquent. Aucune date n'est garantie : renvoyer vers les sources officielles. Pas de promesse d'obtention.",
+    pillars: ["/bourses", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-senegal-etudes-chine",
+    title: "Visa X1 depuis le Sénégal : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 au Sénégal : où déposer, JW201/JW202, photo, passeport, délais typiques. La délivrance appartient au consulat. Relier au guide visa et au processus.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-cote-ivoire-etudes-chine",
+    title: "Visa X1 depuis la Côte d'Ivoire : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 en Côte d'Ivoire : dépôt, documents, délais. Pas de garantie d'obtention. Relier au guide visa et au processus.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-france-etudes-chine",
+    title: "Visa X1 depuis la France : centre des visas, pièces et délais",
+    context:
+      "Demande de visa X1 en France : centre des visas, JW201/JW202, photo, passeport, délais. Décision consulaire. Relier au guide visa et au processus.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-maroc-etudes-chine",
+    title: "Visa X1 depuis le Maroc : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 au Maroc : dépôt, documents, délais. Pas de garantie d'obtention. Relier au guide visa et au processus.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "hsk-4-avant-licence-en-chine",
+    title: "HSK 4 avant une licence en Chine : quand c'est utile, quand ça ne l'est pas",
+    context:
+      "Le HSK 4 n'est pas un seuil unique. Distinguer licence en chinois, licence en anglais, et année de langue. Sans inventer d'exigence officielle unique. Relier aux écoles de langue et au guide étudier en Chine.",
+    pillars: ["/ecoles-de-langue-chine", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "cout-reel-etudiant-shanghai-vs-wuhan",
+    title: "Coût réel étudiant : Shanghai vs Wuhan",
+    context:
+      "Comparer logement, repas, transport et premier mois à Shanghai et à Wuhan, avec fourchettes prudentes. Ni palmarès ni garantie de budget. Relier au guide étudier en Chine et au processus.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
 ];
 
 const SYSTEM = `Tu es un rédacteur SEO francophone senior pour Chinois en Devenir (https://chinoisendevenir.com), agence d'accompagnement pour étudier en Chine.
@@ -63,7 +105,7 @@ Règles absolues:
 - Français clair, concret, utile. Pas de jargon marketing vide. Pas de stats inventées (fourchettes prudentes OK).
 - Structure narrative INTERNE: d'abord le problème du lecteur, puis la solution concrète, puis une promesse réaliste — SANS jamais écrire les mots "Problème", "Solution" ou "Promesse" comme titres ou labels.
 - Article COMPLET: intro 80–120 mots, puis 5 à 7 sections H2 riches (2–4 paragraphes chacune, listes si utile), 4–5 FAQ utiles.
-- Liens internes: choisis 3–5 parmi /etudier-en-chine, /ecoles-de-langue-chine, /bourses, /visa-etudiant-chine, /processus, /faq, /tarifs, /contact, /#lead-form, et /blog/<autres-slugs-pertinents>.
+- Liens internes OBLIGATOIRES dans internalLinks: les 2 pages piliers indiquées dans le brief, PLUS un lien /tarifs ou /#lead-form (ou /contact). Tu peux ajouter 1–2 liens /blog/<slug> utiles. Pas d'article orphelin.
 - Réponds UNIQUEMENT par un objet JSON valide (pas de markdown, pas de fences).`;
 
 export function slugifyBlogTitle(value: string) {
@@ -76,9 +118,57 @@ export function slugifyBlogTitle(value: string) {
     .slice(0, 80);
 }
 
-export function pickTopic(usedSlugs: Iterable<string>, topics: BlogTopic[] = BLOG_TOPICS) {
-  const used = new Set([...usedSlugs].map(String));
-  return topics.find((topic) => !used.has(topic.slug)) || null;
+export function topicAlreadyCovered(
+  topic: BlogTopic,
+  usedSlugs: Iterable<string>,
+  usedTitles: Iterable<string> = [],
+) {
+  const slugs = new Set([...usedSlugs].map(String));
+  if (slugs.has(topic.slug)) return true;
+  const titleSlug = slugifyBlogTitle(topic.title);
+  if (titleSlug && slugs.has(titleSlug)) return true;
+  for (const title of usedTitles) {
+    const other = slugifyBlogTitle(title);
+    if (other && (other === topic.slug || other === titleSlug)) return true;
+  }
+  return false;
+}
+
+export function pickTopic(
+  usedSlugs: Iterable<string>,
+  topics: BlogTopic[] = BLOG_TOPICS,
+  usedTitles: Iterable<string> = [],
+) {
+  return (
+    topics.find((topic) => !topicAlreadyCovered(topic, usedSlugs, usedTitles)) ||
+    null
+  );
+}
+
+export function requiredInternalLinks(topic: BlogTopic): BlogLink[] {
+  return [
+    { href: topic.pillars[0], label: PILLAR_LABEL[topic.pillars[0]] || topic.pillars[0] },
+    { href: topic.pillars[1], label: PILLAR_LABEL[topic.pillars[1]] || topic.pillars[1] },
+    { href: topic.cta, label: CONVERSION_LABEL[topic.cta] || topic.cta },
+  ];
+}
+
+export function mergeInternalLinks(generated: BlogLink[], required: BlogLink[]) {
+  const seen = new Set<string>();
+  const out: BlogLink[] = [];
+  for (const link of [...required, ...generated]) {
+    if (!link.href.startsWith("/") || !link.label || seen.has(link.href)) continue;
+    seen.add(link.href);
+    out.push(link);
+  }
+  return out.slice(0, 6);
+}
+
+function hasClusterLinks(links: BlogLink[], topic: BlogTopic) {
+  const hrefs = new Set(links.map((link) => link.href));
+  const pillarsOk = topic.pillars.every((href) => hrefs.has(href));
+  const conversionOk = BLOG_CONVERSION_HREFS.some((href) => hrefs.has(href));
+  return pillarsOk && conversionOk;
 }
 
 export function extractJsonObject(text: string): Record<string, unknown> {
@@ -136,6 +226,10 @@ export function validateGeneratedPost(
     })
     .filter((item) => item.href.startsWith("/") && item.label);
   if (internalLinks.length < 1) throw new Error("besoin de liens internes");
+  const clustered = mergeInternalLinks(internalLinks, requiredInternalLinks(brief));
+  if (!hasClusterLinks(clustered, brief)) {
+    throw new Error("liens piliers ou conversion manquants");
+  }
   const banned = /^(problème|solution|promesse)\b/i;
   if (banned.test(intro)) throw new Error("intro labelée");
   for (const section of normalizedSections) {
@@ -152,7 +246,7 @@ export function validateGeneratedPost(
     intro,
     sections: normalizedSections,
     faqs: faqs.slice(0, 6),
-    internalLinks: internalLinks.slice(0, 6),
+    internalLinks: clustered,
     ctaTitle: String(raw.ctaTitle || "Besoin d’y voir clair sur votre projet Chine ?"),
     ctaSubtitle:
       String(raw.ctaSubtitle || "").trim() ||
@@ -227,27 +321,8 @@ async function mammouth(system: string, user: string) {
   throw new Error(last);
 }
 
-async function inventTopic(usedSlugs: string[], usedTitles: string[]): Promise<BlogTopic> {
-  const content = await mammouth(
-    "Tu proposes un sujet de blog unique pour Chinois en Devenir. JSON uniquement.",
-    `Propose UN sujet inédit (slug kebab-case FR sans accents, titre, contexte 1 phrase).
-Slugs déjà utilisés: ${usedSlugs.slice(0, 80).join(", ")}
-Titres déjà utilisés: ${usedTitles.slice(0, 40).join(" | ")}
-Format: {"slug":"...","title":"...","context":"..."}`,
-  );
-  const parsed = extractJsonObject(content);
-  const title = String(parsed.title || "").trim();
-  const slug = slugifyBlogTitle(String(parsed.slug || title));
-  if (!title || !slug) throw new Error("sujet IA invalide");
-  if (usedSlugs.includes(slug)) throw new Error("sujet déjà utilisé");
-  return {
-    slug,
-    title,
-    context: String(parsed.context || title),
-  };
-}
-
 async function generateOne(brief: BlogTopic, allSlugs: string[], publishedAt: string) {
+  const required = requiredInternalLinks(brief);
   const user = `Rédige un article de blog COMPLET (équivalent ~1000–1600 mots) pour:
 
 Titre imposé: ${brief.title}
@@ -255,7 +330,10 @@ Slug: ${brief.slug}
 Contexte: ${brief.context}
 Date de publication: ${publishedAt}
 
-Autres slugs blog pour liens internes: ${allSlugs.filter((item) => item !== brief.slug).slice(0, 40).join(", ")}
+Liens internes OBLIGATOIRES (reprends-les dans internalLinks, labels naturels OK):
+${required.map((link) => `- ${link.href} (${link.label})`).join("\n")}
+
+Autres slugs blog pour 0–2 liens /blog/... : ${allSlugs.filter((item) => item !== brief.slug).slice(0, 40).join(", ")}
 
 Format JSON exact:
 {
@@ -264,7 +342,7 @@ Format JSON exact:
   "intro": "paragraphe d'accroche 80-120 mots sans labels",
   "sections": [{"heading":"Titre H2 naturel","paragraphs":["...","..."],"bullets":["optionnel"]}],
   "faqs": [{"question":"...","answer":"..."}],
-  "internalLinks": [{"href":"/etudier-en-chine","label":"..."}],
+  "internalLinks": [{"href":"${required[0].href}","label":"${required[0].label}"}],
   "ctaTitle": "...",
   "ctaSubtitle": "..."
 }`;
@@ -280,11 +358,9 @@ export async function generateDailyBlogPost({
   createdBy?: string;
 } = {}) {
   const today = parisDateString();
-  if (!force) {
-    const already = await countAiPostsOn(today);
-    if (already >= BLOG_DAILY_LIMIT) {
-      return { skipped: true as const, reason: "quota", already, today };
-    }
+  const already = await countAiPostsOn(today);
+  if (!force && already >= BLOG_DAILY_LIMIT) {
+    return { skipped: true as const, reason: "quota", already, today };
   }
 
   const stored = await listStoredPosts();
@@ -296,7 +372,10 @@ export async function generateDailyBlogPost({
     ...BLOG_POSTS.map((post) => post.title),
     ...stored.map((row) => row.post.title),
   ];
-  const topic = pickTopic(usedSlugs) || (await inventTopic(usedSlugs, usedTitles));
+  const topic = pickTopic(usedSlugs, BLOG_TOPICS, usedTitles);
+  if (!topic) {
+    return { skipped: true as const, reason: "no-new-topic", already, today };
+  }
   let post: BlogPost | null = null;
   let lastError = "génération impossible";
   for (let attempt = 1; attempt <= 2; attempt += 1) {
@@ -308,8 +387,8 @@ export async function generateDailyBlogPost({
     }
   }
   if (!post) throw new Error(lastError);
-  if (usedSlugs.includes(post.slug)) {
-    post = { ...post, slug: `${post.slug}-${Date.now().toString(36).slice(-4)}` };
+  if (usedSlugs.includes(post.slug) || topicAlreadyCovered(topic, usedSlugs, usedTitles)) {
+    return { skipped: true as const, reason: "no-new-topic", already, today };
   }
   const saved = await insertStoredPost({ post, createdBy });
   return { skipped: false as const, post: saved.post, id: saved.id, today };
