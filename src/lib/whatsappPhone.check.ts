@@ -3,7 +3,13 @@
  * Run: npx tsx src/lib/whatsappPhone.check.ts
  */
 import { COUNTRIES, countryDialCode } from "./countries";
-import { isEtudeChineLabel, phoneWithIndicatif, whatsappChatId, whatsappMsisdn } from "./whatsappPhone";
+import {
+  isEtudeChineLabel,
+  phoneWithIndicatif,
+  whatsappAddressBookId,
+  whatsappChatId,
+  whatsappMsisdn,
+} from "./whatsappPhone";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -26,9 +32,10 @@ assert(isEtudeChineLabel("Étude Chine 🇨🇳"), "label emoji");
 assert(isEtudeChineLabel("etude chine"), "label plain");
 assert(!isEtudeChineLabel("Chongqing Guide"), "other label");
 assert(
-  whatsappChatId("237677135084", "19813070032933@lid") === "237677135084@c.us",
-  "lid maps to phone",
+  whatsappChatId("237677135084", "19813070032933@lid") === "19813070032933@lid",
+  "lid kept",
 );
+assert(whatsappAddressBookId("237677135084") === "237677135084@c.us", "address book phone");
 assert(
   whatsappChatId("33612345678", "33612345678@c.us") === "33612345678@c.us",
   "phone jid kept",

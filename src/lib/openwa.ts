@@ -1,5 +1,10 @@
 import { unreadChatPhones } from "./inboxPriority";
-import { isEtudeChineLabel, whatsappChatId, whatsappMsisdn } from "./whatsappPhone";
+import {
+  isEtudeChineLabel,
+  whatsappAddressBookId,
+  whatsappChatId,
+  whatsappMsisdn,
+} from "./whatsappPhone";
 
 const TEXT_MAX = 4096;
 
@@ -100,7 +105,14 @@ async function openwa(
   return body;
 }
 
-async function resolveChat(phone: unknown, country?: string | null) {
+type ResolvedChat = {
+  /** Chat WhatsApp actually uses. Often a privacy id (@lid), not the phone. */
+  chatId: string;
+  /** Phone key for the address book. */
+  addressBookId: string;
+};
+
+async function resolveChat(phone: unknown, country?: string | null): Promise<ResolvedChat> {
   const number = whatsappMsisdn(phone, country);
   if (!number) {
     throw new OpenwaError(
@@ -114,14 +126,19 @@ async function resolveChat(phone: unknown, country?: string | null) {
     whatsappId?: string | null;
   };
   const chatId = whatsappChatId(number, checked?.whatsappId);
-  if (!checked?.exists || !chatId) {
+  const addressBookId = whatsappAddressBookId(number);
+  if (!checked?.exists || !chatId || !addressBookId) {
     throw new OpenwaError(
       "Ce numéro n'est pas inscrit sur WhatsApp.",
       400,
       "NOT_ON_WHATSAPP",
     );
   }
-  return chatId;
+  return { chatId, addressBookId };
+}
+
+function uniqueIds(ids: string[]) {
+  return [...new Set(ids.filter(Boolean))];
 }
 
 /** Newest chats only. A down OpenWA throws; the caller treats that as no WhatsApp queue. */
@@ -134,10 +151,10 @@ export async function markStudentWhatsappRead(input: {
   phone: unknown;
   country?: string | null;
 }) {
-  const chatId = await resolveChat(input.phone, input.country);
+  const { addressBookId } = await resolveChat(input.phone, input.country);
   await openwa("/chats/read", {
     method: "POST",
-    body: JSON.stringify({ chatId }),
+    body: JSON.stringify({ chatId: addressBookId }),
   });
 }
 
@@ -154,10 +171,16 @@ export async function sendStudentWhatsapp(input: {
       "BAD_TEXT",
     );
   }
-  const chatId = await resolveChat(input.phone, input.country);
+  const { chatId, addressBookId } = await resolveChat(input.phone, input.country);
   const sent = (await openwa("/messages/send-text", {
     method: "POST",
     body: JSON.stringify({ chatId, text }),
+  }).catch(async (error) => {
+    if (chatId === addressBookId) throw error;
+    return openwa("/messages/send-text", {
+      method: "POST",
+      body: JSON.stringify({ chatId: addressBookId, text }),
+    });
   })) as { messageId?: string };
   return { chatId, messageId: sent?.messageId || null };
 }
@@ -168,16 +191,9 @@ export async function saveStudentWhatsappContact(input: {
   firstName: string;
   lastName?: string;
 }) {
-  const chatId = await resolveChat(input.phone, input.country);
-  const firstName = input.firstName.trim().slice(0, 100) || "Étudiant";
-  const lastName = input.lastName?.trim().slice(0, 100) || "";
-  const body: { firstName: string; lastName?: string } = { firstName };
-  if (lastName) body.lastName = lastName;
-  await openwa(`/contacts/${encodeURIComponent(chatId)}`, {
-    method: "PUT",
-    body: JSON.stringify(body),
-  });
-  return { chatId };
+  const resolved = await resolveChat(input.phone, input.country);
+  await saveNamedContact(resolved, input.firstName, input.lastName || "");
+  return { chatId: resolved.chatId };
 }
 
 export type WhatsappThreadMessage = {
@@ -201,12 +217,22 @@ function asRecord(value: unknown): Record<string, unknown> | null {
 }
 
 function labelRows(body: unknown): { id: string; name: string }[] {
-  if (!Array.isArray(body)) return [];
-  return body.flatMap((item) => {
+  const record = asRecord(body);
+  const list = Array.isArray(body)
+    ? body
+    : Array.isArray(record?.data)
+      ? record.data
+      : Array.isArray(record?.labels)
+        ? record.labels
+        : [];
+  return list.flatMap((item) => {
     if (typeof item === "string") return [{ id: item, name: item }];
     const row = asRecord(item);
     if (!row) return [];
-    return [{ id: String(row.id || ""), name: String(row.name || "") }];
+    return [{
+      id: String(row.id || row.labelId || ""),
+      name: String(row.name || row.title || ""),
+    }];
   });
 }
 
@@ -237,6 +263,69 @@ function chatHasLabel(body: unknown, labelId: string | null): boolean {
   );
 }
 
+function namePayload(firstName: string, lastName: string) {
+  const first = firstName.trim().slice(0, 100) || "Étudiant";
+  const last = lastName.trim().slice(0, 100);
+  const body: { firstName: string; lastName?: string } = { firstName: first };
+  // An empty lastName makes WhatsApp save the number and drop both names.
+  if (last) body.lastName = last;
+  return body;
+}
+
+async function saveNamedContact(resolved: ResolvedChat, firstName: string, lastName: string) {
+  const body = JSON.stringify(namePayload(firstName, lastName));
+  const ids = uniqueIds(
+    resolved.chatId.endsWith("@lid")
+      ? [resolved.chatId, resolved.addressBookId]
+      : [resolved.addressBookId],
+  );
+  let saved = false;
+  let lastError: unknown;
+  for (const id of ids) {
+    try {
+      await openwa(`/contacts/${encodeURIComponent(id)}`, {
+        method: "PUT",
+        body,
+      });
+      saved = true;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  if (!saved) throw lastError;
+}
+
+async function labelIds(ids: string[]) {
+  const labelId = await etudeChineLabelId();
+  if (!labelId) {
+    throw new OpenwaError(
+      "La liste Étude Chine est introuvable sur ce WhatsApp.",
+      404,
+      "NO_LIST",
+    );
+  }
+  let lastError: unknown = null;
+  for (const id of uniqueIds(ids)) {
+    const encoded = encodeURIComponent(id);
+    try {
+      const current = await openwa(`/labels/chat/${encoded}`, undefined, {
+        allowNotFound: true,
+      });
+      if (chatHasLabel(current, labelId)) return;
+      await openwa(`/labels/chat/${encoded}`, {
+        method: "POST",
+        body: JSON.stringify({ labelId }),
+      });
+      return;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError instanceof Error
+    ? lastError
+    : new OpenwaError("La liste Étude Chine n'a pas été appliquée à ce contact.", 502, "LABEL");
+}
+
 export async function studentWhatsappCard(input: {
   phone: unknown;
   country?: string | null;
@@ -248,29 +337,42 @@ export async function studentWhatsappCard(input: {
     listFound: false,
     messages: [],
   };
-  let chatId: string;
+  let resolved: ResolvedChat;
   try {
-    chatId = await resolveChat(input.phone, input.country);
+    resolved = await resolveChat(input.phone, input.country);
   } catch (error) {
     if (error instanceof OpenwaError && error.code === "NOT_ON_WHATSAPP") return empty;
     if (error instanceof OpenwaError && error.code === "BAD_PHONE") return empty;
     throw error;
   }
 
-  const encoded = encodeURIComponent(chatId);
-  const [contact, labelId, history] = await Promise.all([
-    openwa(`/contacts/${encoded}`, undefined, { allowNotFound: true }),
+  const ids = uniqueIds([resolved.chatId, resolved.addressBookId]);
+  const encoded = encodeURIComponent(resolved.chatId);
+  const [contacts, labelId, history] = await Promise.all([
+    Promise.all(
+      ids.map((id) =>
+        openwa(`/contacts/${encodeURIComponent(id)}`, undefined, { allowNotFound: true }).catch(
+          () => null,
+        ),
+      ),
+    ),
     etudeChineLabelId().catch(() => null),
     openwa(`/messages/${encoded}/history?limit=40`, undefined, { timeoutMs: 20_000 }).catch(
       () => [],
     ),
   ]);
   const chatLabels = labelId
-    ? await openwa(`/labels/chat/${encoded}`, undefined, { allowNotFound: true }).catch(
-        () => [],
-      )
+    ? (
+        await Promise.all(
+          ids.map((id) =>
+            openwa(`/labels/chat/${encodeURIComponent(id)}`, undefined, {
+              allowNotFound: true,
+            }).catch(() => []),
+          ),
+        )
+      ).flat()
     : [];
-  const contactRow = asRecord(contact);
+  const contactRow = contacts.map(asRecord).find((row) => row?.isMyContact === true) || null;
   const messages = (Array.isArray(history) ? history : [])
     .flatMap((item) => {
       const row = asRecord(item);
@@ -327,67 +429,38 @@ export async function applyStudentWhatsapp(input: {
   if (text.length > TEXT_MAX) {
     throw new OpenwaError(`Message trop long (${TEXT_MAX} caractères max).`, 400, "BAD_TEXT");
   }
-  const chatId = await resolveChat(input.phone, input.country);
+  const resolved = await resolveChat(input.phone, input.country);
   if (input.save) {
-    const firstName = input.firstName.trim().slice(0, 100) || "Étudiant";
-    const lastName = input.lastName?.trim().slice(0, 100) || "";
-    const body: { firstName: string; lastName?: string } = { firstName };
-    if (lastName) body.lastName = lastName;
-    await openwa(`/contacts/${encodeURIComponent(chatId)}`, {
-      method: "PUT",
-      body: JSON.stringify(body),
-    });
+    await saveNamedContact(resolved, input.firstName, input.lastName || "");
   }
   if (input.label) {
-    const labelId = await etudeChineLabelId();
-    if (!labelId) {
-      throw new OpenwaError(
-        "La liste Étude Chine est introuvable sur ce WhatsApp.",
-        404,
-        "NO_LIST",
-      );
-    }
-    const encoded = encodeURIComponent(chatId);
-    const current = await openwa(`/labels/chat/${encoded}`, undefined, {
-      allowNotFound: true,
-    });
-    if (!chatHasLabel(current, labelId)) {
-      await openwa(`/labels/chat/${encoded}`, {
-        method: "POST",
-        body: JSON.stringify({ labelId }),
-      });
-    }
+    await labelIds([resolved.chatId, resolved.addressBookId]);
   }
   if (text) {
     await openwa("/messages/send-text", {
       method: "POST",
-      body: JSON.stringify({ chatId, text }),
+      body: JSON.stringify({ chatId: resolved.chatId, text }),
+    }).catch(async (error) => {
+      if (resolved.chatId === resolved.addressBookId) throw error;
+      await openwa("/messages/send-text", {
+        method: "POST",
+        body: JSON.stringify({ chatId: resolved.addressBookId, text }),
+      });
     });
   }
-  return { chatId, sent: Boolean(text), saved: Boolean(input.save), labeled: Boolean(input.label) };
+  return {
+    chatId: resolved.chatId,
+    sent: Boolean(text),
+    saved: Boolean(input.save),
+    labeled: Boolean(input.label),
+  };
 }
 
 export async function addStudentToEtudeChine(input: {
   phone: unknown;
   country?: string | null;
 }) {
-  const chatId = await resolveChat(input.phone, input.country);
-  const labelId = await etudeChineLabelId();
-  if (!labelId) {
-    throw new OpenwaError(
-      "La liste Étude Chine est introuvable sur ce WhatsApp.",
-      404,
-      "NO_LIST",
-    );
-  }
-  const encoded = encodeURIComponent(chatId);
-  const current = await openwa(`/labels/chat/${encoded}`, undefined, {
-    allowNotFound: true,
-  });
-  if (chatHasLabel(current, labelId)) return { chatId };
-  await openwa(`/labels/chat/${encoded}`, {
-    method: "POST",
-    body: JSON.stringify({ labelId }),
-  });
-  return { chatId };
+  const resolved = await resolveChat(input.phone, input.country);
+  await labelIds([resolved.chatId, resolved.addressBookId]);
+  return { chatId: resolved.chatId };
 }

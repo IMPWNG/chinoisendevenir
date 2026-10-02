@@ -21,17 +21,19 @@ export function phoneWithIndicatif(raw: unknown, country?: string | null): strin
   return number ? `+${number}` : null;
 }
 
-/** Chat id for sends, contacts and labels.
- *  ponytail: a privacy id (@lid) is mapped back to the phone JID. WhatsApp
- *  still answers history, labels and isMyContact on `{msisdn}@c.us`.
+/** Canonical chat id from the number check. A privacy id (@lid) must be kept:
+ *  labels and the saved name are ignored when they are sent to `{phone}@c.us` instead.
  */
-export function whatsappChatId(number: string, whatsappId: unknown): string | null {
+export function whatsappChatId(_number: string, whatsappId: unknown): string | null {
   const id = String(whatsappId || "");
-  if (/^\d+@c\.us$/.test(id)) return id;
-  if (/^\d+@lid$/.test(id) && /^[1-9]\d{7,14}$/.test(number)) {
-    return `${number}@c.us`;
-  }
+  if (/^\d+@(c\.us|lid)$/.test(id)) return id;
   return null;
+}
+
+/** Address book key. OpenWA refuses to store a name under an @lid. */
+export function whatsappAddressBookId(number: string): string | null {
+  if (!/^[1-9]\d{7,14}$/.test(number)) return null;
+  return `${number}@c.us`;
 }
 
 /** WhatsApp Business label « Étude Chine », emoji and accents ignored. */
