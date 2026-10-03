@@ -1,0 +1,157 @@
+{
+  "slug": "changsha-university",
+  "name_zh": "长沙学院",
+  "name_en": "Changsha University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n官网信息显示不全，需电话联系招生办确认报名时间及具体文件。",
+  "identity": {
+    "name_zh": "长沙学院",
+    "name_en": "Changsha University",
+    "name_fr": "Université de Changsha",
+    "website": "https://gjc.ccsu.cn/index.htm",
+    "international_website": "https://gjc.ccsu.cn/index.htm",
+    "application_portal_url": "https://ccsu.at0086.cn/student"
+  },
+  "matching": {
+    "city": "Changsha",
+    "province": "Hunan",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 2000,
+    "tuition_cny_max": 2000,
+    "deadline_typical": "秋季：3- 6月\n春季：9 - 12月\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "gjc@ccsu.edu.cn",
+    "phone": "84261578"
+  },
+  "application": {
+    "platform_url": "https://ccsu.at0086.cn/student",
+    "platform_name": "Study in China (at0086)",
+    "deadline": "秋季：3- 6月\n春季：9 - 12月\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 240
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 2000,
+        "max": 2000
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "0元/人/年",
+          "price_cny_year": 5500
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "个人简历（中英文）。",
+      "required": true,
+      "notes": "个人简历（中英文）。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "申请人国籍国或常居地警察、外事等部门出具的无犯罪证明（扫描件）。鉴于无犯罪记录有效期为6个月，请申请人提供2026年2月以后的无犯罪记录。",
+      "required": true,
+      "notes": "申请人国籍国或常居地警察、外事等部门出具的无犯罪证明（扫描件）。鉴于无犯罪记录有效期为6个月，请申请人提供2026年2月以后的无犯罪记录。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "提供经过公证的中文/英文最高学历证明和中文/英文成绩单。",
+      "required": true,
+      "notes": "提供经过公证的中文/英文最高学历证明和中文/英文成绩单。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "《外国人体格检查表》复印件（见附件。原件自行保存）。用英文填写。申请人应严格按照《外国人体格检查表》中要求的项目进行检查。缺项、未贴有本人照片或照片上未盖骑缝章、无医师和医院签字盖章的《外国人体格检查表》无效。鉴于检查结果有效期为6个月，请申请人提供2026年2月以后的体检报告。",
+      "required": true,
+      "notes": "《外国人体格检查表》复印件（见附件。原件自行保存）。用英文填写。申请人应严格按照《外国人体格检查表》中要求的项目进行检查。缺项、未贴有本人照片或照片上未盖骑缝章、无医师和医院签字盖章的《外国人体格检查表》无效。鉴于检查结果有效期为6个月，请申请人提供2026年2月以后的体检报告。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护照照片页复印件。",
+      "required": true,
+      "notes": "护照照片页复印件。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "个人证件照。",
+      "required": true,
+      "notes": "个人证件照。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 50,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；",
+        "Deadline langue : 秋季：3- 6月\n春季：9 - 12月\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+        "官网信息显示不全，需电话联系招生办确认报名时间及具体文件。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Changsha",
+      "province": "Hunan"
+    },
+    "presentation": "Université de Changsha — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

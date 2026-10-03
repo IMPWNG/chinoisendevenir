@@ -1,0 +1,143 @@
+{
+  "slug": "hunnu",
+  "name_zh": "湖南师范大学",
+  "name_en": "Hunan Normal University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n年满18岁且目前未到湖南境内学习；\n优先录取有一定汉语基础的申请人",
+  "identity": {
+    "name_zh": "湖南师范大学",
+    "name_en": "Hunan Normal University",
+    "name_fr": "Université normale du Hunan",
+    "website": "https://english.hunnu.edu.cn/",
+    "international_website": "https://english.hunnu.edu.cn/",
+    "application_portal_url": "https://hunnu.at0086.cn/student"
+  },
+  "matching": {
+    "city": "Changsha",
+    "province": "Hunan",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 8500,
+    "tuition_cny_max": 17000,
+    "deadline_typical": "报名截止于2026年6月8日\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+    "intake_months": [],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "study@hunnu.edu.cn",
+    "phone": "88872992"
+  },
+  "application": {
+    "platform_url": "https://hunnu.at0086.cn/student",
+    "platform_name": "Study in China (at0086)",
+    "deadline": "报名截止于2026年6月8日\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+    "intake_months": [],
+    "application_fee_cny": null
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 8500,
+        "max": 17000
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": []
+    }
+  ],
+  "documents": [
+    {
+      "type": "普通护照的首页扫描件。个人护照有效期需超过2027年3月1日。",
+      "required": true,
+      "notes": "普通护照的首页扫描件。个人护照有效期需超过2027年3月1日。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "《外国人体格检查记录》。申请人应严格按照《外国人体格检查表》中要求的项目进行检查。缺项、未贴有本人照片或照片上未盖骑缝章、无医师和医院签字盖章的表格无效，检查结果有效期为6个月。《外国人体格检查表》和体检表注意事项可在网站https://oiec.hunnu.edu.cn/info/1070/1637.htm下载。",
+      "required": true,
+      "notes": "《外国人体格检查记录》。申请人应严格按照《外国人体格检查表》中要求的项目进行检查。缺项、未贴有本人照片或照片上未盖骑缝章、无医师和医院签字盖章的表格无效，检查结果有效期为6个月。《外国人体格检查表》和体检表注意事项可在网站https://oiec.hunnu.edu.cn/info/1070/1637.htm下载。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "本人最高学历证明及成绩单。",
+      "required": true,
+      "notes": "本人最高学历证明及成绩单。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "无犯罪记录证明。申请人须提交由所在地公安机关出具的有效期内的无犯罪记录证明，通常应为提交申请之日前6个月以内的证明文件。",
+      "required": true,
+      "notes": "无犯罪记录证明。申请人须提交由所在地公安机关出具的有效期内的无犯罪记录证明，通常应为提交申请之日前6个月以内的证明文件。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "湖南省“一带一路”沿线国家语言生奖学金申请表。",
+      "required": true,
+      "notes": "湖南省“一带一路”沿线国家语言生奖学金申请表。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "HSK等级证书（如有）。",
+      "required": true,
+      "notes": "HSK等级证书（如有）。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": null,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；",
+        "Deadline langue : 报名截止于2026年6月8日\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+        "年满18岁且目前未到湖南境内学习；\n优先录取有一定汉语基础的申请人"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Changsha",
+      "province": "Hunan"
+    },
+    "presentation": "Université normale du Hunan — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}

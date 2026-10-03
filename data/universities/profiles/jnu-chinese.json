@@ -1,0 +1,117 @@
+{
+  "slug": "jnu-chinese",
+  "name_zh": "暨南大学华文学院",
+  "name_en": "College of Chinese Language and Culture, Jinan University",
+  "notes": "中文学习 → CSCA准备 → 本科申请\n或可选择英授专业，需提供托福/雅思证明\n官网信息显示不全，需电话联系招生办确认报名时间及具体文件。",
+  "identity": {
+    "name_zh": "暨南大学华文学院",
+    "name_en": "College of Chinese Language and Culture, Jinan University",
+    "name_fr": "Collège de langue chinoise de l'université Jinan",
+    "website": "https://hwy.jnu.edu.cn/2026/0428/c13405a854426/page.htm?utm_source=chatgpt.com",
+    "international_website": "https://hwy.jnu.edu.cn/2026/0428/c13405a854426/page.htm?utm_source=chatgpt.com",
+    "application_portal_url": "https://jinshuju.net/f/T8jlCi"
+  },
+  "matching": {
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 8850,
+    "tuition_cny_max": 17700,
+    "deadline_typical": "报名申请2027年3月入学，请在2026年9月20日本轮新生入学后，邮件或电话咨询",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": false
+  },
+  "contacts": {
+    "admissions_email": "ohwy@jnu.edu.cn",
+    "phone": "87205925"
+  },
+  "application": {
+    "platform_url": "https://jinshuju.net/f/T8jlCi",
+    "platform_name": "Portail de candidature",
+    "deadline": "报名申请2027年3月入学，请在2026年9月20日本轮新生入学后，邮件或电话咨询",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 500
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 8850,
+        "max": 17700
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "on_campus",
+          "price_cny_year": 6000
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "非学历留学生线下中文课程班/CSCA长期课程班",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "根据相关法律法规，学院接到申请材料后，即进行入学初审，并申请《外国留学人员来华签证申请表》（简称JW202表），完成全部申请流程大概需要2个月。请学生在报名时，填写本人经常使用的电子邮箱，务必仔细检查确保电子邮箱填写正确，否则将无法收到报名结果和相关重要文件材料。学生务必本人通过电子邮件内链接自行下载和打印《外国留学人员来华签证申请表》（简称JW202表）。学院将通过电子邮件发送电子版录取通知书，学生持录取通知书和JW202表到当地中国使领馆申请学生签证，按照报到时间来校注册报到。如果您曾在中国的任何一所大学学习过，还需要提交成绩单，考勤证明(80%以上)和转学证明，具体要求将通过邮件通知。",
+      "required": true,
+      "notes": "根据相关法律法规，学院接到申请材料后，即进行入学初审，并申请《外国留学人员来华签证申请表》（简称JW202表），完成全部申请流程大概需要2个月。请学生在报名时，填写本人经常使用的电子邮箱，务必仔细检查确保电子邮箱填写正确，否则将无法收到报名结果和相关重要文件材料。学生务必本人通过电子邮件内链接自行下载和打印《外国留学人员来华签证申请表》（简称JW202表）。学院将通过电子邮件发送电子版录取通知书，学生持录取通知书和JW202表到当地中国使领馆申请学生签证，按照报到时间来校注册报到。如果您曾在中国的任何一所大学学习过，还需要提交成绩单，考勤证明(80%以上)和转学证明，具体要求将通过邮件通知。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 40,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "中文学习 → CSCA准备 → 本科申请\n或可选择英授专业，需提供托福/雅思证明",
+        "Deadline langue : 报名申请2027年3月入学，请在2026年9月20日本轮新生入学后，邮件或电话咨询",
+        "官网信息显示不全，需电话联系招生办确认报名时间及具体文件。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Guangzhou",
+      "province": "Guangdong"
+    },
+    "presentation": "Collège de langue chinoise de l'université Jinan — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}

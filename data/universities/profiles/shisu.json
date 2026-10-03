@@ -1,0 +1,119 @@
+{
+  "slug": "shisu",
+  "name_zh": "上海外国语大学",
+  "name_en": "Shanghai International Studies University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明\n短期生需提前进行成绩测试。",
+  "identity": {
+    "name_zh": "上海外国语大学",
+    "name_en": "Shanghai International Studies University",
+    "name_fr": "Université des études internationales de Shanghai",
+    "website": "https://www.oisa.shisu.edu.cn/index.php/index/index.html",
+    "international_website": "https://www.oisa.shisu.edu.cn/index.php/index/index.html",
+    "application_portal_url": "https://apply.shisu.edu.cn/c.asp?action=student_sign"
+  },
+  "matching": {
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 4500,
+    "tuition_cny_max": 20000,
+    "deadline_typical": "春学期2025年12月31日截止；秋学期2026年6月30日截止\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+    "intake_months": [],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "wangjunjie@shisu.edu.cn",
+    "phone": "35375612"
+  },
+  "application": {
+    "platform_url": "https://apply.shisu.edu.cn/c.asp?action=student_sign",
+    "platform_name": "Portail de candidature",
+    "deadline": "春学期2025年12月31日截止；秋学期2026年6月30日截止\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+    "intake_months": [],
+    "application_fee_cny": 500
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 4500,
+        "max": 20000
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修\n（长期生/短期1-3个月插班生）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 1,
+      "start_months": []
+    }
+  ],
+  "documents": [
+    {
+      "type": "毕业证书复印件",
+      "required": true,
+      "notes": "毕业证书复印件",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护照复印件。",
+      "required": true,
+      "notes": "护照复印件。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "在线支付报名费500元（或境外汇款75美元，上传付款凭证）。★ 必要时，我校会要求申请人提交指定的补充材料。★ 以上材料及费用，提交或支付后，一律不予退还。",
+      "required": true,
+      "notes": "在线支付报名费500元（或境外汇款75美元，上传付款凭证）。★ 必要时，我校会要求申请人提交指定的补充材料。★ 以上材料及费用，提交或支付后，一律不予退还。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n无任何在华违法违纪记录；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 50,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n无任何在华违法违纪记录；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+        "Deadline langue : 春学期2025年12月31日截止；秋学期2026年6月30日截止\n（根据过往报名信息，需提前电联学校获取最新报名信息）",
+        "短期生需提前进行成绩测试。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Shanghai",
+      "province": "Shanghai"
+    },
+    "presentation": "Université des études internationales de Shanghai — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n无任何在华违法违纪记录；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

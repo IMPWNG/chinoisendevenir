@@ -1,0 +1,103 @@
+{
+  "slug": "tongji-university",
+  "name_zh": "同济大学",
+  "name_en": "Tongji University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明\n官网信息显示不全，需电话联系招生办确认报名时间及具体文件。",
+  "identity": {
+    "name_zh": "同济大学",
+    "name_en": "Tongji University",
+    "name_fr": "Université Tongji",
+    "website": "https://study.tongji.edu.cn/",
+    "international_website": "https://study.tongji.edu.cn/",
+    "application_portal_url": "http://study-info.tongji.edu.cn"
+  },
+  "matching": {
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 8200,
+    "tuition_cny_max": 16400,
+    "deadline_typical": "春季每年2月中、下旬或3月初入学，报名时间为9月10日-12月20日；\n秋季每年9月初入学，报名时间为3月10日-6月20日。",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "istj@tongji.edu.cn",
+    "phone": "65981978"
+  },
+  "application": {
+    "platform_url": "http://study-info.tongji.edu.cn",
+    "platform_name": "Portail de candidature",
+    "deadline": "春季每年2月中、下旬或3月初入学，报名时间为9月10日-12月20日；\n秋季每年9月初入学，报名时间为3月10日-6月20日。",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 600
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 8200,
+        "max": 16400
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学期-2学年）\n语言预科",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 55,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+        "Deadline langue : 春季每年2月中、下旬或3月初入学，报名时间为9月10日-12月20日；\n秋季每年9月初入学，报名时间为3月10日-6月20日。",
+        "官网信息显示不全，需电话联系招生办确认报名时间及具体文件。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Shanghai",
+      "province": "Shanghai"
+    },
+    "presentation": "Université Tongji — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

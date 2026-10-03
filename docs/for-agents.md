@@ -116,7 +116,7 @@ Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching
 | E-mails auto / intents | `src/lib/api/auto-reply.ts`, `src/lib/emailIntents.ts`. Inbound : pas de réponse auto aux questions. Seuls le mail de bienvenue et la confirmation de formule partent seuls. |
 | Inbound mail | `src/lib/api/inbound-email.ts` |
 | Relance quotidienne | `src/lib/api/formules-relance.ts` (cron Vercel `0 2 * * *`) |
-| Scan univ. (offline) | `scripts/scan-universities.mjs` → `data/universities/` → `import:universities`. Langue 2027 : `npx tsx scripts/import-language-programs.ts` (CSV → `extra.admission.language_session`, docs complets). Univ. déjà au catalogue diplôme : ne pas écraser `required_documents`. |
+| Scan univ. (offline) | `scripts/scan-universities.mjs` → `data/universities/` → `import:universities`. Langue 2027 : `npx tsx scripts/import-language-programs.ts [xlsx\|csv]` (→ `extra.admission.language_session`, docs complets). Univ. déjà au catalogue diplôme : ne pas écraser `required_documents`. |
 
 Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res)`).
 

@@ -1,0 +1,148 @@
+{
+  "slug": "ecnu",
+  "name_zh": "华东师范大学",
+  "name_en": "East China Normal University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明\n2027年3月1日（含当日，学期开始前）：如因个人原因放弃入学，且按期完成签证注销全部手续，学费予以全额退还。学期开始之日起两周内：如提出放弃入学或退学申请，并完成退学及签证注销手续，可退还学费的70%。开学超过两周后办理退学手续，学费不予退还。",
+  "identity": {
+    "name_zh": "华东师范大学",
+    "name_en": "East China Normal University",
+    "name_fr": "Université normale de l'Est de la Chine",
+    "website": "https://lxs.ecnu.edu.cn/cn/home/",
+    "international_website": "https://lxs.ecnu.edu.cn/cn/home/",
+    "application_portal_url": "http://lxsapply.ecnu.edu.cn"
+  },
+  "matching": {
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 12000,
+    "tuition_cny_max": 24000,
+    "deadline_typical": "报名截止日期2026年12月25日 20:00（北京时间）\n\n学费缴纳截止日期：2027年1月14日 20:00（北京时间）",
+    "intake_months": [],
+    "has_university_scholarship": true
+  },
+  "contacts": {
+    "admissions_email": "ymhe@gec.ecnu.edu.cn",
+    "phone": "62231997"
+  },
+  "application": {
+    "platform_url": "http://lxsapply.ecnu.edu.cn",
+    "platform_name": "Portail de candidature",
+    "deadline": "报名截止日期2026年12月25日 20:00（北京时间）\n\n学费缴纳截止日期：2027年1月14日 20:00（北京时间）",
+    "intake_months": [],
+    "application_fee_cny": 800
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 12000,
+        "max": 24000
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "学生需提前完成学费缴纳，",
+          "price_cny_year": 2026
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学期/学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": []
+    }
+  ],
+  "documents": [
+    {
+      "type": "护照复印件★提交申请时，请确保护照有效期覆盖所申请项目的学习期限；原则上入学报到前不受理护照信息更新。",
+      "required": true,
+      "notes": "护照复印件★提交申请时，请确保护照有效期覆盖所申请项目的学习期限；原则上入学报到前不受理护照信息更新。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "电子版免冠证件照★照片标准参照护照相片要求，该照片将用于制作校园卡。",
+      "required": true,
+      "notes": "电子版免冠证件照★照片标准参照护照相片要求，该照片将用于制作校园卡。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "在读证明/高中（预）毕业及以上学历证明（中、英文版本）★申请中文项目须具备高中或同等及以上学历。所有申请材料须为中文或英文；如原件为其他语种，需提交经公证的翻译文件。",
+      "required": true,
+      "notes": "在读证明/高中（预）毕业及以上学历证明（中、英文版本）★申请中文项目须具备高中或同等及以上学历。所有申请材料须为中文或英文；如原件为其他语种，需提交经公证的翻译文件。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "中国境内在读证明或成绩单★如你目前正在中国境内学习，请提交当前就读学校开具的在读证明（结业后须补交结业证明）或成绩单。",
+      "required": true,
+      "notes": "中国境内在读证明或成绩单★如你目前正在中国境内学习，请提交当前就读学校开具的在读证明（结业后须补交结业证明）或成绩单。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "中国签证页复印件（如有）",
+      "required": true,
+      "notes": "中国签证页复印件（如有）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "监护人保证书★入学时年满16周岁、未满18周岁的申请者必须提交；监护人须为居住在中国境内的中国公民或外籍人士。",
+      "required": true,
+      "notes": "监护人保证书★入学时年满16周岁、未满18周岁的申请者必须提交；监护人须为居住在中国境内的中国公民或外籍人士。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 55,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+        "Deadline langue : 报名截止日期2026年12月25日 20:00（北京时间）\n\n学费缴纳截止日期：2027年1月14日 20:00（北京时间）",
+        "2027年3月1日（含当日，学期开始前）：如因个人原因放弃入学，且按期完成签证注销全部手续，学费予以全额退还。学期开始之日起两周内：如提出放弃入学或退学申请，并完成退学及签证注销手续，可退还学费的70%。开学超过两周后办理退学手续，学费不予退还。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Shanghai",
+      "province": "Shanghai"
+    },
+    "presentation": "Université normale de l'Est de la Chine — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

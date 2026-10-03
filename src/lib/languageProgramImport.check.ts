@@ -10,6 +10,7 @@ import {
   parseAgeRange,
   parseDocumentLines,
   parseTuitionCny,
+  parseWebsite,
   dedupeLanguageRecords,
 } from "./languageProgramImport";
 
@@ -25,6 +26,11 @@ const swu = parseTuitionCny("8000 CNY/semester\n15000 CNY/year");
 assert(swu.min === 8000 && swu.max === 15000, "cny semester/year");
 
 assert(parseAgeRange("18-30").min === 18 && parseAgeRange("18-30").max === 30, "age range");
+assert(parseWebsite("", "ttps://is.chd.edu.cn") === "https://is.chd.edu.cn", "ttps typo");
+assert(
+  parseWebsite("", "applychinese.sjtu.edu.cn") === "https://applychinese.sjtu.edu.cn",
+  "host only website",
+);
 assert(parseAgeRange(">16").min === 16 && parseAgeRange(">16").max === null, "age gt");
 
 const capDocs = parseDocumentLines(`(1) 国际学生入学申请表（中文或英文）
@@ -40,6 +46,22 @@ assert(capDocs.length === 9, `cap docs ${capDocs.length}`);
 assert(capDocs[0].includes("入学申请表"), "keep application form");
 assert(capDocs[2].includes("成绩单"), "keep transcript distinct from diploma");
 assert(capDocs[8].includes("HSK"), "keep HSK line");
+
+const ecnuDocs = parseDocumentLines(`①护照复印件
+★提交申请时，请确保护照有效期覆盖所申请项目的学习期限
+②电子版免冠证件照
+③在读证明/高中（预）毕业及以上学历证明`);
+assert(ecnuDocs.length === 3, `ecnu docs ${ecnuDocs.length}`);
+assert(ecnuDocs[0].includes("护照"), "ecnu passport");
+assert(ecnuDocs[0].includes("有效期"), "join star note into passport item");
+
+const diamond = parseDocumentLines(`汉语培训项目：
+◆护照首页、空白页
+◆最高学历证明及成绩单
+本科预科项目：
+1. 入学申请表`);
+assert(diamond.some((d) => d.includes("护照首页")), "diamond passport");
+assert(diamond.some((d) => d.includes("入学申请表")), "numbered after diamond");
 
 const wrapped = parseDocumentLines(`④ 《外国人体格检查记录表》PDF扫描件，需盖公立医院的公章。体检报告应附有 X 光透视胸片及霍乱、
 黄热、鼠疫、麻风。

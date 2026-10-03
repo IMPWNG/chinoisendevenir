@@ -1,0 +1,108 @@
+{
+  "slug": "scnu",
+  "name_zh": "华南师范大学",
+  "name_en": "South China Normal University",
+  "notes": "强化班成绩达标后可分流至学专业学员学习（1+3）\n官网信息显示不全，需电话联系招生办确认报名时间及具体文件。",
+  "identity": {
+    "name_zh": "华南师范大学",
+    "name_en": "South China Normal University",
+    "name_fr": "Université normale de Chine du Sud",
+    "website": "https://io.scnu.edu.cn/",
+    "international_website": "https://io.scnu.edu.cn/",
+    "application_portal_url": null
+  },
+  "matching": {
+    "city": "Guangzhou",
+    "province": "Guangdong",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 8900,
+    "tuition_cny_max": 17000,
+    "deadline_typical": "春季学期2月份开学，秋季学期9月开学\n（此班常年接受插班生）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": null
+  },
+  "contacts": {
+    "admissions_email": "hscic7@scnu.edu.cn",
+    "phone": "85215350"
+  },
+  "application": {
+    "platform_url": null,
+    "platform_name": "Portail de candidature",
+    "deadline": "春季学期2月份开学，秋季学期9月开学\n（此班常年接受插班生）",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": null
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 8900,
+        "max": 17000
+      }
+    },
+    "housing": {
+      "on_campus": [
+        {
+          "type": "外住宿学生须在入住后24",
+          "price_cny_year": 2000
+        }
+      ]
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学期/学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 60,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n持有效护照即可",
+        "强化班成绩达标后可分流至学专业学员学习（1+3）",
+        "Deadline langue : 春季学期2月份开学，秋季学期9月开学\n（此班常年接受插班生）",
+        "官网信息显示不全，需电话联系招生办确认报名时间及具体文件。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Guangzhou",
+      "province": "Guangdong"
+    },
+    "presentation": "Université normale de Chine du Sud — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n持有效护照即可"
+  }
+}

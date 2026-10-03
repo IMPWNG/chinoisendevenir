@@ -1,0 +1,199 @@
+{
+  "slug": "sjtu",
+  "name_zh": "上海交通大学",
+  "name_en": "Shanghai Jiao Tong University",
+  "notes": "提供申请国内高校本科指导；\n汉语言达HSK4后可申请学历生；",
+  "identity": {
+    "name_zh": "上海交通大学",
+    "name_en": "Shanghai Jiao Tong University",
+    "name_fr": "Université Jiao Tong de Shanghai",
+    "website": "https://applychinese.sjtu.edu.cn",
+    "international_website": "https://applychinese.sjtu.edu.cn",
+    "application_portal_url": "https://applychinese.sjtu.edu.cn"
+  },
+  "matching": {
+    "city": "Shanghai",
+    "province": "Shanghai",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 56000,
+    "tuition_cny_max": 56000,
+    "deadline_typical": "春季：9月15日—12月15日报名\n秋季：3月15日—6月30日报名",
+    "intake_months": [
+      3,
+      9
+    ],
+    "has_university_scholarship": null
+  },
+  "contacts": {
+    "admissions_email": "iso@sjtu.edu.cn",
+    "phone": "62932277"
+  },
+  "application": {
+    "platform_url": "https://applychinese.sjtu.edu.cn",
+    "platform_name": "Portail de candidature",
+    "deadline": "春季：9月15日—12月15日报名\n秋季：3月15日—6月30日报名",
+    "intake_months": [
+      3,
+      9
+    ],
+    "application_fee_cny": 450
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 56000,
+        "max": 56000
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学期/学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3,
+        9
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "护照（带照片的个人信息页）复印件，有效期大于一年；已在中国境内者需提供本次入境的有效签证或居留许可的复印件。（小于3MB的JPG文件）",
+      "required": true,
+      "notes": "护照（带照片的个人信息页）复印件，有效期大于一年；已在中国境内者需提供本次入境的有效签证或居留许可的复印件。（小于3MB的JPG文件）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "近期证件照片（正面免冠，彩色证件照，jpg.jpeg格式，像素大于295x413，大小不超过200kb 左右）",
+      "required": true,
+      "notes": "近期证件照片（正面免冠，彩色证件照，jpg.jpeg格式，像素大于295x413，大小不超过200kb 左右）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "高中毕业或同等学历证明。应届毕业生须提供由学校开具的预毕业证明，并于入学前取得高中毕业证书",
+      "required": true,
+      "notes": "高中毕业或同等学历证明。应届毕业生须提供由学校开具的预毕业证明，并于入学前取得高中毕业证书",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "高中简介，内容包含学校整体情况、入学要求、录取情况、课程体系、高中成绩评分制度、升学情况等",
+      "required": true,
+      "notes": "高中简介，内容包含学校整体情况、入学要求、录取情况、课程体系、高中成绩评分制度、升学情况等",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "由所在高中出具的成绩单（含高中阶段所有课程）。应届毕业生须提供截至申请时已获得的高中阶段所有课程成绩单。除原件扫描件以外须提供中文或者英文翻译件",
+      "required": true,
+      "notes": "由所在高中出具的成绩单（含高中阶段所有课程）。应届毕业生须提供截至申请时已获得的高中阶段所有课程成绩单。除原件扫描件以外须提供中文或者英文翻译件",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "自述信，须本人签字，内容包括但不限于个人背景、爱好特长、申请原因与学习规划，600-1000字",
+      "required": true,
+      "notes": "自述信，须本人签字，内容包括但不限于个人背景、爱好特长、申请原因与学习规划，600-1000字",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "推荐信一封，推荐人须签字并提供邮箱和电话等联系方式",
+      "required": true,
+      "notes": "推荐信一封，推荐人须签字并提供邮箱和电话等联系方式",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "父母双方国籍或户籍证明，如护照/身份证/户口本等",
+      "required": true,
+      "notes": "父母双方国籍或户籍证明，如护照/身份证/户口本等",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "父母双方或一方为中国公民，且申请人出生即获得外国国籍的，须提供申请人截至申请年份4月30日已退出中国国籍满4年的证明",
+      "required": true,
+      "notes": "父母双方或一方为中国公民，且申请人出生即获得外国国籍的，须提供申请人截至申请年份4月30日已退出中国国籍满4年的证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "上传无犯罪记录证明；汉语水平证明（零基础免提供）注：",
+      "required": true,
+      "notes": "上传无犯罪记录证明；汉语水平证明（零基础免提供）注：",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "以上所有申请材料若非中文或英文，须提供经公证后的中文或英文翻译件。",
+      "required": true,
+      "notes": "以上所有申请材料若非中文或英文，须提供经公证后的中文或英文翻译件。",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "申请阶段无需邮寄纸质申请材料。",
+      "required": true,
+      "notes": "申请阶段无需邮寄纸质申请材料。",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 18,
+      "age_max": 22,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "提供申请国内高校本科指导；\n汉语言达HSK4后可申请学历生；",
+        "Deadline langue : 春季：9月15日—12月15日报名\n秋季：3月15日—6月30日报名"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Shanghai",
+      "province": "Shanghai"
+    },
+    "presentation": "Université Jiao Tong de Shanghai — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

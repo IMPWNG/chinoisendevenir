@@ -1,0 +1,173 @@
+{
+  "slug": "neu",
+  "name_zh": "东北大学",
+  "name_en": "Northeastern University",
+  "notes": "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明\n“教育及工作背景”要从高中开始填写，一直填写到申请之日前为止，中间不能中断。如果你有一段时间既没有读书，也没有工作，请写一个情况说明，上传到其他附件中。",
+  "identity": {
+    "name_zh": "东北大学",
+    "name_en": "Northeastern University",
+    "name_fr": "Université du Nord-Est",
+    "website": "http://www.neu.edu.cn/",
+    "international_website": "http://www.neu.edu.cn/",
+    "application_portal_url": "http://studyinneu.neu.edu.cn/"
+  },
+  "matching": {
+    "city": "Shenyang",
+    "province": "Liaoning",
+    "fields": [
+      "chinese_language"
+    ],
+    "chinese_language_program_available": true,
+    "degrees": [
+      "language"
+    ],
+    "languages": [
+      "zh"
+    ],
+    "tuition_cny_min": 7000,
+    "tuition_cny_max": 14000,
+    "deadline_typical": "2027年3月春季学期入学：网上申请截至2026年12月30日",
+    "intake_months": [
+      3
+    ],
+    "has_university_scholarship": null
+  },
+  "contacts": {
+    "admissions_email": "lxsh@mail.neu.edu.cn",
+    "phone": "23892157"
+  },
+  "application": {
+    "platform_url": "http://studyinneu.neu.edu.cn/",
+    "platform_name": "Portail de candidature",
+    "deadline": "2027年3月春季学期入学：网上申请截至2026年12月30日",
+    "intake_months": [
+      3
+    ],
+    "application_fee_cny": 500
+  },
+  "fees": {
+    "tuition_cny_year": {
+      "language": {
+        "min": 7000,
+        "max": 14000
+      }
+    },
+    "housing": {
+      "on_campus": []
+    }
+  },
+  "programs": [
+    {
+      "level": "language",
+      "name": "汉语言进修（1学期/学年）",
+      "field": "chinese_language",
+      "language": "zh",
+      "duration_years": 0.5,
+      "start_months": [
+        3
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "type": "最高学历毕业证书和中文翻译件",
+      "required": true,
+      "notes": "最高学历毕业证书和中文翻译件",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "最高学历成绩单和中文翻译件",
+      "required": true,
+      "notes": "最高学历成绩单和中文翻译件",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "学习计划（不少于800字，用中文或英文书写。学习计划应体现学习目的，需阐述在我校完成汉语进修后续拟学习的专业。）",
+      "required": true,
+      "notes": "学习计划（不少于800字，用中文或英文书写。学习计划应体现学习目的，需阐述在我校完成汉语进修后续拟学习的专业。）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护照首页",
+      "required": true,
+      "notes": "护照首页",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "护照空白页",
+      "required": true,
+      "notes": "护照空白页",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "外国人体格检查表",
+      "required": true,
+      "notes": "外国人体格检查表",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "无犯罪记录证明",
+      "required": true,
+      "notes": "无犯罪记录证明",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "来华留学生监护人保证书（仅未满18周岁申请人需要提交）",
+      "required": true,
+      "notes": "来华留学生监护人保证书（仅未满18周岁申请人需要提交）",
+      "applies_to": [
+        "language"
+      ]
+    },
+    {
+      "type": "如果你在中国境内，还需要提交：护照签证页及入境章页（请注意签证时间的连续性）、境外人员临时住宿登记表",
+      "required": true,
+      "notes": "如果你在中国境内，还需要提交：护照签证页及入境章页（请注意签证时间的连续性）、境外人员临时住宿登记表",
+      "applies_to": [
+        "language"
+      ]
+    }
+  ],
+  "admission_requirements": {
+    "language": {
+      "academic": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+      "age_min": 17,
+      "age_max": 60,
+      "hsk_level": 0,
+      "other": [
+        "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可",
+        "汉语言达HSK4后，可申请学历生；\n或可申请英授专业，需提供托福/雅思证明",
+        "Deadline langue : 2027年3月春季学期入学：网上申请截至2026年12月30日",
+        "“教育及工作背景”要从高中开始填写，一直填写到申请之日前为止，中间不能中断。如果你有一段时间既没有读书，也没有工作，请写一个情况说明，上传到其他附件中。"
+      ]
+    }
+  },
+  "general": {
+    "location": {
+      "city": "Shenyang",
+      "province": "Liaoning"
+    },
+    "presentation": "Université du Nord-Est — programme de langue chinoise pour étudiants internationaux.",
+    "teaching_languages": [
+      "zh"
+    ]
+  },
+  "language": {
+    "preparatory": "0基础 accepté",
+    "foundation": "可0基础 ；\n非中国籍;\n高中及以上学历；\n持有效护照即可"
+  }
+}

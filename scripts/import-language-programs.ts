@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Import 2027 Chinese-language programs from the agency CSV.
+ * Import 2027 Chinese-language programs from the agency spreadsheet.
  * Existing universities: merge language program only.
- * New universities: create the full admin fiche from CSV + crawled pages.
+ * New universities: create the full admin fiche from the sheet + crawled pages.
  *
- * Usage: npx tsx scripts/import-language-programs.ts
+ * Usage: npx tsx scripts/import-language-programs.ts [--sql] [--no-crawl] [file.xlsx|file.csv]
  */
 import { execFileSync } from "node:child_process";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
@@ -26,7 +26,9 @@ import {
 import { profileToRow } from "../src/lib/universityScanImport.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const CSV_PATH = "/Users/matissepro/Desktop/语言班资讯2027.csv";
+const SOURCE_PATH =
+  process.argv.find((arg) => /\.(csv|xlsx)$/i.test(arg)) ||
+  "/Users/matissepro/Desktop/2️⃣语言班资讯2027.xlsx";
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
@@ -42,40 +44,75 @@ async function loadEnv() {
   return env;
 }
 
-function parseCsv(): LanguageCsvRecord[] {
-  const raw = execFileSync(
-    "python3",
-    [
-      "-c",
-      `
-import csv, json
+const PY_PARSE_SOURCE = `
+import csv, json, sys, zipfile, xml.etree.ElementTree as ET
 from pathlib import Path
-p = Path(${JSON.stringify(CSV_PATH)})
-with p.open(encoding="utf-8-sig", newline="") as f:
-    rows = list(csv.DictReader(f))
-out = []
-for r in rows:
-    out.append({
-        "name_zh": (r.get("University ") or r.get("University") or "").strip(),
-        "city_raw": (r.get("City") or "").strip(),
-        "project": r.get("project") or "",
-        "tuition": r.get("Tuition") or "",
-        "age": r.get("Age") or "",
-        "foundation": r.get("Foundation") or "",
-        "dormitory": r.get("Dormitory") or "",
-        "deadline": r.get("Deadline") or "",
-        "apply_website": (r.get("apply website") or "").strip(),
-        "contact": r.get("Contact Information") or "",
-        "pathway": r.get("link educational qualifications?") or "",
-        "documents": r.get("Documents") or "",
-        "note": r.get("Note") or "",
-        "scholarship": r.get("scholarship") or "",
-    })
+p = Path(sys.argv[1])
+
+def row_from_map(m):
+    return {
+        "name_zh": (m.get("University ") or m.get("University") or "").strip(),
+        "city_raw": (m.get("City") or "").strip(),
+        "project": m.get("project") or "",
+        "tuition": m.get("Tuition") or "",
+        "age": m.get("Age") or "",
+        "foundation": m.get("Foundation") or "",
+        "dormitory": m.get("Dormitory") or "",
+        "deadline": m.get("Deadline") or "",
+        "apply_website": (m.get("apply website") or "").strip(),
+        "contact": m.get("Contact Information") or "",
+        "pathway": m.get("link educational qualifications?") or "",
+        "documents": m.get("Documents") or "",
+        "note": m.get("Note") or "",
+        "scholarship": m.get("scholarship") or "",
+    }
+
+if p.suffix.lower() == ".csv":
+    with p.open(encoding="utf-8-sig", newline="") as f:
+        out = [row_from_map(r) for r in csv.DictReader(f)]
+else:
+    ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+    with zipfile.ZipFile(p) as z:
+        shared = []
+        root = ET.fromstring(z.read("xl/sharedStrings.xml"))
+        for si in root.findall("m:si", ns):
+            shared.append("".join((t.text or "") for t in si.findall(".//m:t", ns)))
+        sheet = ET.fromstring(z.read("xl/worksheets/sheet1.xml"))
+        grid = []
+        for row in sheet.findall("m:sheetData/m:row", ns):
+            cells = {}
+            for c in row.findall("m:c", ns):
+                ref = c.attrib.get("r", "")
+                col = "".join(ch for ch in ref if ch.isalpha())
+                t = c.attrib.get("t")
+                v = c.find("m:v", ns)
+                is_el = c.find("m:is", ns)
+                if t == "s" and v is not None:
+                    val = shared[int(v.text)]
+                elif t == "inlineStr" and is_el is not None:
+                    val = "".join((t.text or "") for t in is_el.findall(".//m:t", ns))
+                elif v is not None:
+                    val = v.text or ""
+                else:
+                    val = ""
+                cells[col] = val
+            grid.append(cells)
+    cols = "ABCDEFGHIJKLMN"
+    header = grid[0]
+    names = {c: (header.get(c) or "").strip() for c in cols}
+    out = []
+    for r in grid[1:]:
+        m = {names[c]: r.get(c) or "" for c in cols if names.get(c)}
+        rec = row_from_map(m)
+        if rec["name_zh"]:
+            out.append(rec)
 print(json.dumps(out, ensure_ascii=False))
-`,
-    ],
-    { encoding: "utf8" },
-  );
+`;
+
+function parseSource(): LanguageCsvRecord[] {
+  const raw = execFileSync("python3", ["-c", PY_PARSE_SOURCE, SOURCE_PATH], {
+    encoding: "utf8",
+  });
   return JSON.parse(raw);
 }
 
@@ -249,7 +286,8 @@ async function main() {
   const key = env.SUPABASE_SERVICE_ROLE_KEY;
   if (!sqlOnly && (!url || !key)) throw new Error("Variables Supabase manquantes");
 
-  const records = dedupeLanguageRecords(parseCsv().filter((r) => r.name_zh));
+  const records = dedupeLanguageRecords(parseSource().filter((r) => r.name_zh));
+  console.log(`source ${SOURCE_PATH} (${records.length} univ.)`);
   const unknown = records.filter((r) => !LANGUAGE_UNI_META[r.name_zh]);
   if (unknown.length) {
     throw new Error(`Universités non mappées : ${unknown.map((r) => r.name_zh).join(", ")}`);
