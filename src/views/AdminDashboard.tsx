@@ -13,6 +13,7 @@ import AdminContactEmail from "../components/AdminContactEmail";
 import AdminContactWhatsApp from "../components/AdminContactWhatsApp";
 import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
+import AdminContactPayments from "../components/AdminContactPayments";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
 import AdminDripSend from "../components/AdminDripSend";
@@ -1650,6 +1651,8 @@ function ContactModal({
               }}
             />
           </FilePanel>
+
+          <AdminContactPayments contactId={contact.id} />
 
           <FilePanel title="🎯 Matching" persist>
             <AdminMatchingPanel
