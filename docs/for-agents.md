@@ -30,7 +30,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 2. Admission univ. — 1 700 € (≤ 5 candidatures)
 3. Complet — 2 000 € (langue puis univ., ≤ 8)
 
-**Suivi** (`suiviStatuts.ts`) : UI canonique ≠ CHECK Postgres. Toujours `canonicalStatut()` / `toStoredStatut()`. Déblocage : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES`. Progression : `studentProgress.ts`. Ne pas reculer un statut sans le dire (`shouldAdvanceStatus()`). Paiement en ligne : suivi manuel (`StudentPaymentStatus` / échéances admin), pas Airwallex.
+**Suivi** (`suiviStatuts.ts`) : UI canonique ≠ CHECK Postgres. Toujours `canonicalStatut()` / `toStoredStatut()`. Espace étudiant **verrouillé par défaut** ; déblocage = `STUDENT_UNLOCKED_STATUSES` (= `PAID_STATUSES`, dès `client_payé`) uniquement via admin après paiement manuel. Progression : `studentProgress.ts`. Ne pas reculer un statut sans le dire (`shouldAdvanceStatus()`). Pas de paiement en ligne auto.
 
 **Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule.
 

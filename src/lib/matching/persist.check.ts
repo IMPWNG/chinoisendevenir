@@ -140,6 +140,62 @@ async function main() {
     );
   }
 
+  {
+    // PostgREST-style missing table (not an Error instance) must not 500.
+    const store = { matching: [uni], actions: [] as ReturnType<typeof row>[] };
+    const admin = {
+      from(table: string) {
+        let mode = "select";
+        let ids: string[] = [];
+        const q: Record<string, unknown> = {
+          select: () => q,
+          eq: () => q,
+          order: () => q,
+          like: () => q,
+          limit: () => q,
+          delete: () => {
+            mode = "delete";
+            return q;
+          },
+          in: (_key: string, next: string[]) => {
+            ids = next;
+            return q;
+          },
+          then: (
+            resolve: (value: unknown) => unknown,
+            reject?: (error: unknown) => unknown,
+          ) => {
+            if (mode === "delete" && table === "matching_runs") {
+              return Promise.resolve({
+                data: null,
+                error: {
+                  message:
+                    'Could not find the table \'public.matching_runs\' in the schema cache',
+                },
+              }).then(resolve, reject);
+            }
+            if (mode === "delete" && table === "suivi_actions") {
+              store.matching = store.matching.filter((item) => !ids.includes(item.id));
+              return Promise.resolve({ data: null, error: null }).then(
+                resolve,
+                reject,
+              );
+            }
+            return Promise.resolve({
+              data: table === "matching_runs" ? store.matching : [],
+              error: null,
+            }).then(resolve, reject);
+          },
+        };
+        return q;
+      },
+    };
+    const removed = await deleteMatchingRuns(admin as unknown as AdminClient, "c1", {
+      runId: "u1",
+    });
+    assert(removed.deleted === 1, "missing matching_runs table still deletes via journal path");
+  }
+
   console.log("persist matching delete check ok");
 }
 

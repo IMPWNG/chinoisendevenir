@@ -113,20 +113,7 @@ export const FORMULE_ALREADY_CHOSEN = new Set([
   "dossier_terminé",
 ]);
 
-export const STUDENT_UNLOCKED_STATUSES = new Set([
-  "formule_choisie",
-  "offre_envoyée",
-  "attente_paiement",
-  "client_payé",
-  "dossier_préparation",
-  "dossier_incomplet",
-  "candidature_envoyée",
-  "admission_reçue",
-  "visa_préparation",
-  "arrive_chine",
-  "dossier_terminé",
-]);
-
+/** Unlock = paid only. Admin sets client_payé (or later) after manual payment. */
 export const PAID_STATUSES = new Set([
   "client_payé",
   "dossier_préparation",
@@ -137,6 +124,8 @@ export const PAID_STATUSES = new Set([
   "arrive_chine",
   "dossier_terminé",
 ]);
+
+export const STUDENT_UNLOCKED_STATUSES = PAID_STATUSES;
 
 export const EARLY_STATUSES = new Set([
   "nouveau_prospect",

@@ -340,6 +340,7 @@ export default function AdminDashboard() {
     const nextFormule = formuleLabel || null;
     const shouldUnlock =
       Boolean(nextFormule) && !isStudentSpaceUnlocked(current.suivi_statut);
+    const unlockStatut = toStoredStatut("client_payé");
     const notes = nextFormule
       ? mergeFormuleNote(current.notes_admin, nextFormule)
       : stripFormuleNote(current.notes_admin) || null;
@@ -352,14 +353,14 @@ export default function AdminDashboard() {
       formule: nextFormule,
       notes_admin: notes,
     };
-    if (shouldUnlock) payloadBase.suivi_statut = "formule_choisie";
+    if (shouldUnlock) payloadBase.suivi_statut = unlockStatut;
 
     const payloads = [
       { ...payloadBase, updated_at: new Date().toISOString() },
       payloadBase,
       {
         notes_admin: notes,
-        ...(shouldUnlock ? { suivi_statut: "formule_choisie" } : {}),
+        ...(shouldUnlock ? { suivi_statut: unlockStatut } : {}),
       },
     ];
 
@@ -384,10 +385,16 @@ export default function AdminDashboard() {
 
       await adminSupabase.from("suivi_actions").insert({
         contact_id: id,
-        action: nextFormule ? "formule_choisie" : "contact_modifier",
-        description: nextFormule
-          ? t("dashboard.formuleSavedNote", { formule: nextFormule })
-          : t("dashboard.formuleRemovedNote"),
+        action: shouldUnlock
+          ? "changement_statut"
+          : nextFormule
+            ? "formule_choisie"
+            : "contact_modifier",
+        description: shouldUnlock
+          ? t("dashboard.formuleUnlockedNote", { formule: nextFormule || "" })
+          : nextFormule
+            ? t("dashboard.formuleSavedNote", { formule: nextFormule })
+            : t("dashboard.formuleRemovedNote"),
         user_admin: user?.email,
       });
 
@@ -395,9 +402,7 @@ export default function AdminDashboard() {
         ...current,
         formule: nextFormule,
         notes_admin: notes,
-        suivi_statut: shouldUnlock
-          ? "formule_choisie"
-          : current.suivi_statut,
+        suivi_statut: shouldUnlock ? "client_payé" : current.suivi_statut,
       };
 
       setContacts((prev) =>

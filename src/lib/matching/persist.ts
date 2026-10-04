@@ -276,6 +276,16 @@ export async function listMatchingRuns(
     .slice(0, 20);
 }
 
+function isMissingRelationError(error: unknown) {
+  const message =
+    error instanceof Error
+      ? error.message
+      : error && typeof error === "object" && "message" in error
+        ? String((error as { message?: unknown }).message || "")
+        : String(error || "");
+  return /does not exist|schema cache|Could not find the table/i.test(message);
+}
+
 export async function deleteMatchingRuns(
   admin: AdminClient,
   contactId: unknown,
@@ -294,24 +304,39 @@ export async function deleteMatchingRuns(
   const ids = targets.map((run) => String(run.id || "")).filter(Boolean);
   if (!ids.length) return { deleted: 0, ids: [] as string[] };
 
-  try {
+  let deletedFromRuns = false;
+  {
     const { error } = await admin
       .from("matching_runs")
       .delete()
       .eq("contact_id", cid)
       .in("id", ids);
-    if (error) throw error;
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (!/does not exist|schema cache/i.test(message)) throw error;
+    if (error) {
+      if (!isMissingRelationError(error)) {
+        throw new Error(
+          typeof error.message === "string" && error.message
+            ? error.message
+            : "Suppression matching_runs impossible",
+        );
+      }
+    } else {
+      deletedFromRuns = true;
+    }
   }
 
+  // Legacy journal rows (same ids only when runs were stored in suivi_actions).
   const { error: actionError } = await admin
     .from("suivi_actions")
     .delete()
     .eq("contact_id", cid)
     .in("id", ids);
-  if (actionError) throw actionError;
+  if (actionError && !deletedFromRuns && !isMissingRelationError(actionError)) {
+    throw new Error(
+      typeof actionError.message === "string" && actionError.message
+        ? actionError.message
+        : "Suppression historique matching impossible",
+    );
+  }
 
   return { deleted: ids.length, ids };
 }

@@ -315,7 +315,7 @@ export const adminTranslations = {
       formuleSection: "Formule d'accompagnement",
       noFormule: "-- Aucune formule --",
       formuleHint:
-        "Choisissez la formule 1, 2 ou 3, puis débloquez l'espace. L'étudiant voit alors son espace avec cette formule affichée en tête de profil.",
+        "Espace verrouillé par défaut. Après paiement manuel, choisissez la formule puis débloquez. L'étudiant voit alors son espace avec cette formule.",
       studentSpace: "Espace étudiant",
       unlocked:
         "Accès débloqué. Le suivi et les documents sont visibles pour cet étudiant.",
@@ -323,8 +323,8 @@ export const adminTranslations = {
         "Espace débloqué pour la {formule}. L'étudiant voit cette formule sur son profil.",
       lockSpace: "Verrouiller l'espace",
       locked:
-        "Choisissez une formule ci-dessous, puis débloquez l'espace étudiant.",
-      unlockSpace: "Débloquer l'espace avec cette formule",
+        "Verrouillé jusqu'au paiement. Choisissez la formule, puis débloquez après paiement manuel.",
+      unlockSpace: "Débloquer après paiement",
       applyFormule: "Appliquer cette formule",
       unlockNeedFormule: "Choisissez d'abord une formule (1, 2 ou 3).",
       formuleActive: "Formule active",
@@ -389,6 +389,8 @@ export const adminTranslations = {
       progressSaveFail: "Impossible d'enregistrer l'avancement.",
       select: "-- Sélectionner --",
       formuleSavedNote: "Formule enregistrée manuellement : {formule}",
+      formuleUnlockedNote:
+        "Espace débloqué après paiement manuel — formule : {formule}",
       formuleRemovedNote: "Formule retirée manuellement",
       progressActionNote: "Avancement dossier : {step}",
       statusChangedNote: "Statut changé vers « {status} »",
@@ -949,7 +951,7 @@ export const adminTranslations = {
       formuleSection: "Support package",
       noFormule: "-- No package --",
       formuleHint:
-        "Choose package 1, 2 or 3, then unlock. The student sees that package at the top of their profile.",
+        "Locked by default. After manual payment, choose the package then unlock. The student then sees that package on their profile.",
       studentSpace: "Student space",
       unlocked:
         "Access unlocked. Progress and documents are visible to this student.",
@@ -957,8 +959,8 @@ export const adminTranslations = {
         "Space unlocked for {formule}. The student sees this package on their profile.",
       lockSpace: "Lock the space",
       locked:
-        "Choose a package below, then unlock the student space.",
-      unlockSpace: "Unlock the space with this package",
+        "Locked until payment. Choose the package, then unlock after manual payment.",
+      unlockSpace: "Unlock after payment",
       applyFormule: "Apply this package",
       unlockNeedFormule: "Choose a package (1, 2 or 3) first.",
       formuleActive: "Active package",
@@ -1023,6 +1025,8 @@ export const adminTranslations = {
       progressSaveFail: "Could not save progress.",
       select: "-- Select --",
       formuleSavedNote: "Package saved manually: {formule}",
+      formuleUnlockedNote:
+        "Space unlocked after manual payment — package: {formule}",
       formuleRemovedNote: "Package removed manually",
       progressActionNote: "Application progress: {step}",
       statusChangedNote: "Status changed to “{status}”",
@@ -1568,13 +1572,13 @@ export const adminTranslations = {
       formuleSection: "辅导套餐",
       noFormule: "-- 暂无套餐 --",
       formuleHint:
-        "选择套餐 1、2 或 3，然后解锁。学生会在个人资料顶部看到该套餐。",
+        "默认锁定。人工确认付款后，选择套餐再解锁。学生即可在个人资料看到该套餐。",
       studentSpace: "学生空间",
       unlocked: "已解锁。该学生可以查看进度和文件。",
       unlockedWithFormule: "已按 {formule} 解锁。学生会在个人资料上看到该套餐。",
       lockSpace: "锁定空间",
-      locked: "请先选择下方套餐，再解锁学生空间。",
-      unlockSpace: "按此套餐解锁空间",
+      locked: "付款前锁定。选择套餐后，人工确认付款再解锁。",
+      unlockSpace: "付款后解锁",
       applyFormule: "应用此套餐",
       unlockNeedFormule: "请先选择套餐（1、2 或 3）。",
       formuleActive: "当前套餐",
@@ -1638,6 +1642,7 @@ export const adminTranslations = {
       progressSaveFail: "无法保存进度。",
       select: "-- 请选择 --",
       formuleSavedNote: "已手动保存套餐：{formule}",
+      formuleUnlockedNote: "人工确认付款后已解锁 — 套餐：{formule}",
       formuleRemovedNote: "已手动移除套餐",
       progressActionNote: "申请进度：{step}",
       statusChangedNote: "状态已改为「{status}」",
