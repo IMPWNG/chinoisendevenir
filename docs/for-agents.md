@@ -97,7 +97,7 @@ Bucket Storage `student-documents`. Logique : `src/lib/studentDocuments.ts`. L�
 Rôles :
 
 - `full` : universités, matching, bulk e-mail, suppression contacts, WhatsApp (OpenWA)
-- `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, lecture des matchings université et école de langue (pas de lancement), pas les universités
+- `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, lecture des matchings université et école de langue (pas de lancement ni suppression), pas les universités
 
 Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching_runs`. Toute nouvelle table métier : RLS on, grants service_role, SQL dans `sql/`.
 
@@ -128,7 +128,7 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
-**Admin :** `/api/admin/me`, `contacts`, `matching`, `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
+**Admin :** `/api/admin/me`, `contacts`, `matching` (GET/POST/DELETE, full pour lancer ou supprimer), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
 
 **Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (1×/jour, 1 article IA si le sujet n’existe pas déjà)
 

@@ -8,6 +8,7 @@ import {
   runChineseMatching,
 } from "@/lib/matching/chinese";
 import {
+  deleteMatchingRuns,
   listMatchingRuns,
   MATCHING_KIND_CHINESE,
   saveMatchingRun,
@@ -149,6 +150,60 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "Matching chinois impossible" },
       { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const auth = await getAuthenticatedAdmin(request);
+    if ("error" in auth) {
+      return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+    const forbidden = requireFullAdmin(auth);
+    if (forbidden) {
+      return NextResponse.json(
+        { error: forbidden.error },
+        { status: forbidden.status },
+      );
+    }
+
+    const body = await readJsonObject(request);
+    if (!body) {
+      return NextResponse.json({ error: "JSON invalide" }, { status: 400 });
+    }
+    const contactId = asString(body.contactId).trim();
+    if (!contactId) {
+      return NextResponse.json({ error: "contactId manquant" }, { status: 400 });
+    }
+    const runId = asString(body.runId).trim();
+    if (!runId && !body.all) {
+      return NextResponse.json({ error: "Matching introuvable" }, { status: 400 });
+    }
+
+    const removed = await deleteMatchingRuns(auth.admin, contactId, {
+      runId: body.all ? "" : runId,
+      kind: MATCHING_KIND_CHINESE,
+    });
+    const [runs, { data: universities, error: uniError }] = await Promise.all([
+      listMatchingRuns(auth.admin, contactId, { kind: MATCHING_KIND_CHINESE }),
+      auth.admin.from("universities").select("*"),
+    ]);
+    if (uniError) throw uniError;
+
+    return NextResponse.json({
+      success: true,
+      deleted: removed.deleted,
+      runs,
+      latest: runs[0] || null,
+      cities: chineseCitiesFromCatalog(universities || []),
+    });
+  } catch (error) {
+    const message = errorMessage(error);
+    console.error("chinese matching DELETE:", error);
+    return NextResponse.json(
+      { error: message === "Matching introuvable" ? message : "Suppression impossible" },
+      { status: message === "Matching introuvable" ? 404 : 500 },
     );
   }
 }
