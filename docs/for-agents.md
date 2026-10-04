@@ -1,194 +1,92 @@
-# Chinois en Devenir — brief pour agent IA
+# Chinois en Devenir — brief agent
 
-Lis ce fichier avant de modifier le code. Le `README.md` racine est un reliquat Vite : **ignore-le**.
+Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat Vite).
 
-## Produit
+**Produit :** agence francophone (`https://chinoisendevenir.com`) — orientation, matching univ. / école de langue, admission, bourses, visa. Pas une univ., pas le CSC, pas de garantie d’admission/bourse/visa. Copy et e-mails factuels.
 
-**Chinois en Devenir** (`https://chinoisendevenir.com`) est l’app d’une agence francophone qui accompagne des étudiants pour **étudier en Chine** : orientation, matching universités / écoles de langue, dossier d’admission, bourses, visa.
+**Stack :** Next.js 16 App Router, React 19, Tailwind 4, TS strict (`npm test` = `tsc --noEmit`), `@/*` → `src/*`. Node ≥ 20. Vercel depuis `main`. Package npm : `etudier-en-chine`.
 
-Ce n’est **pas** une université, **pas** le CSC, **pas** un garant d’admission / bourse / visa. Toute copy publique et tout e-mail doivent rester factuels là-dessus.
+**Git :** uniquement `main`. Jamais de branche. Après un changement : `npm test` → commit → `git push origin main`. Pas de `graphify-out/`, `.env*`, `.next/`, secrets. Après code : `graphify update .` (local, ne pas committer).
 
-Package npm : `etudier-en-chine`. Repo : App Router Next.js 16 + React 19, déployé Vercel depuis `main`.
-
-## Trois surfaces
+## Surfaces
 
 | Surface | Routes | Qui |
 |---|---|---|
-| Site public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. Copy FR, JSON-LD, `public/llms.txt`. Blog : 20 guides dans `src/lib/blog/` + articles IA dans `blog_posts` (**1/jour** si le sujet n’existe pas déjà, cron). |
-| Espace étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Compte Supabase Auth. Accès gated par paiement / statut. |
-| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog` | Allowlist `ADMIN_EMAILS` + table `admin_users`. Rôle `full` ou `limited`. |
+| Public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. FR, JSON-LD, `public/llms.txt`. Blog : guides `src/lib/blog/` + IA `blog_posts` (1/jour si sujet inédit, cron). |
+| Étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Supabase Auth. Accès gated paiement / statut. |
+| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog` | `ADMIN_EMAILS` + `admin_users`. Rôle `full` ou `limited`. |
 
-Les pages `src/app/**/page.tsx` sont minces : metadata SEO + import d’une vue dans `src/views/`. La logique vit dans `src/lib/`.
+`src/app/**/page.tsx` = metadata + vue `src/views/`. Métier dans `src/lib/`.
 
-## Stack
+**Infra :** Auth + Postgres Supabase — le navigateur n’écrit pas les tables métier. APIs = service role (`src/lib/supabaseAdmin.ts`, bypass RLS). Resend = mails + inbound `contact@`. Mammouth = matching, bilans, e-mails admin, blog.
 
-- **Next.js 16** App Router, **TypeScript** (`strict: true`, `tsc --noEmit` via `npm test`), alias `@/*` → `src/*`
-- **React 19** + **Tailwind 4**
-- **Supabase** : Auth + Postgres. Le navigateur n’écrit pas les tables métier. Les API routes utilisent la **service role** (`src/lib/supabaseAdmin.ts`) et bypassent RLS.
-- **Resend** : e-mails transactionnels + inbound (`contact@chinoisendevenir.com`)
-- **Mammouth** (`MAMMOUTH_API_KEY`) : LLM matching, bilans, e-mails admin, articles de blog
-- Node `>= 20`. Qualité = `npm test` (`tsc --noEmit`) + `npm run lint` + `npm run build`.
+## Métier
 
-## Modèle métier
+**Contact = dossier** (`contacts`). Lien Auth via e-mail : `findContactByEmail` / `ensureStudentContact` (`studentAuth.ts`). UI publique : `publicStudentProfile()`.
 
-### Contact = dossier
+**Formules** (`formules.ts`) — toujours `getFormuleNumber()` / `displayFormuleLabel()` / `getFormuleAccess()` (aliases historiques en base) :
 
-Table centrale : `contacts`. Un étudiant Auth est relié à une ligne `contacts` via l’e-mail (`findContactByEmail` / `ensureStudentContact` dans `src/lib/studentAuth.ts`).
+1. Premier pas — 800 € (langue + visa)
+2. Admission univ. — 1 700 € (≤ 5 candidatures)
+3. Complet — 2 000 € (langue puis univ., ≤ 8)
 
-Profil public côté UI : `publicStudentProfile()`.
+**Suivi** (`suiviStatuts.ts`) : UI canonique ≠ CHECK Postgres. Toujours `canonicalStatut()` / `toStoredStatut()`. Déblocage : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES`. Progression : `studentProgress.ts`. Ne pas reculer un statut sans le dire (`shouldAdvanceStatus()`). Paiement en ligne : suivi manuel (`StudentPaymentStatus` / échéances admin), pas Airwallex.
 
-### Formules (`src/lib/formules.ts`)
+**Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule.
 
-Source de vérité des offres, aliases historiques, et droits débloqués (`getFormuleAccess`) :
+**Attribution** (`contactOwner.ts`) : manuelle (`assigned_to` / `assigned_at`). Helpers `contactAssignPatch()` / `contactUnassignPatch()`. Primes (`contactRevenue.ts`) : dossier attribué au restreint → global 60 % / restreint 40 %, sinon global 100 %.
 
-1. **Premier pas en Chine — 800 €** : école de langue + visa
-2. **Admission universitaire — 1 700 €** : jusqu’à 5 candidatures
-3. **Accompagnement complet — 2 000 €** : langue puis univ., jusqu’à 8 candidatures
+**Matching** (`matching/run.ts` → `runMatching()`) : normalize → enrich LLM → `rankMatches` (`weights.ts`, pas `score.ts`) → mix safety/match/reach → rapports dual → `persist.ts` (`matching_runs`). Langue : `chinese.ts`, préfixe `[[CHINESE_MATCHING_JSON]]`. Univ. : `[[MATCHING_JSON]]`. Mix limité par formule. Vue étudiant : `matchingForStudent()`.
 
-Les libellés stockés en base peuvent être d’anciens prix (`aliases`). Toujours passer par `getFormuleNumber()` / `displayFormuleLabel()`, ne pas parser le string à la main.
+**Docs :** bucket `student-documents` (`studentDocuments.ts`) si `access.documents`.
 
-### Suivi (`src/lib/suiviStatuts.ts`)
+## Auth
 
-Machine à états du CRM. Noms **canoniques** en UI ≠ noms **stockés** en Postgres (CHECK legacy). Toujours `canonicalStatut()` / `toStoredStatut()`.
+- `/api/auth/*` → `authUsers.ts` + `rateLimit()` (`httpSecurity.ts`)
+- Étudiant : `/api/student/*` via `getAuthenticatedContact()`
+- Admin : toujours `getAuthenticatedAdmin(request)` puis `requireFullAdmin` si besoin (`adminRoles.ts`)
+- `full` : univ., matching (lancer/supprimer), bulk mail, suppression contacts, WhatsApp (OpenWA)
+- `limited` : étudiants / agenda / mail contact, lecture matching seulement, pas univ.
+- Anon ne lit pas `contacts` / `universities` / `matching_runs`. Nouvelle table : RLS on, grants `service_role`, SQL dans `sql/` (éditeur Supabase, pas de migration auto).
 
-Statuts payés / espace débloqué : `PAID_STATUSES`, `STUDENT_UNLOCKED_STATUSES`. Progression affichée : `src/lib/studentProgress.ts`.
-
-Ne jamais avancer un statut en arrière sans le dire ; `shouldAdvanceStatus()` existe pour ça.
-
-### Emails contact (`sql/contact-emails.sql`, `src/lib/contactEmails.ts`)
-
-Fil envoyés/reçus pour l’admin (badge non-lus + chat dans la fiche). Rempli par Resend inbound + `sendTemplatedEmail` / bienvenue formulaire. Pas de sync Gmail complète — uniquement ce qui passe par Resend (`contact@`).
-
-### Attribution dossiers (`src/lib/contactOwner.ts`)
-
-Attribution **manuelle** (case à cocher dans la fiche admin). Migration `sql/contacts-assigned.sql` :
-- `assigned_to` / `assigned_at` — admin responsable du dossier (primes / suivi)
-
-Helpers : `contactAssignPatch()`, `contactUnassignPatch()`, `isAssignedTo()`. Pas d’attribution automatique au toucher ni au paiement.
-
-Primes : `src/lib/contactRevenue.ts`. Si le dossier est attribué à l’admin restreint, le global touche 60 % et le restreint 40 % du prix de la formule. Sinon le global touche 100 %. Carte admin : hypothétique (formule choisie, non payée) / réel (statut payé). Filtre « Dossiers admin restreint » visible pour le rôle `full`.
-
-### Matching universités
-
-Pipeline : `src/lib/matching/run.ts` → `runMatching()`.
-
-```
-contact → normalizeStudent → enrichStudent (LLM)
-       → rankMatches(score.ts, weights.ts)
-       → selectMix (safety / match / reach)
-       → generateDualReports (admin + étudiant)
-       → persist.ts (table matching_runs, payload JSON)
-```
-
-Poids dans `src/lib/matching/weights.ts` (pas dans `score.ts`). Matching écoles de langue : `src/lib/matching/chinese.ts`, préfixe `[[CHINESE_MATCHING_JSON]]`.
-
-Limite du mix = formule (1/2/3). Vue étudiant filtrée : `matchingForStudent()` dans `studentView.ts`.
-
-### Documents
-
-Bucket Storage `student-documents`. Logique : `src/lib/studentDocuments.ts`. L’étudiant n’y accède que si `access.documents` (formule débloquée).
-
-## Auth et rôles
-
-- Login/register : `/api/auth/*` → `src/lib/authUsers.ts` + rate limit `httpSecurity.ts`
-- Étudiant : routes `/api/student/*` via `getAuthenticatedContact()`
-- Admin API : **toujours** `getAuthenticatedAdmin(request)` puis, si besoin, `requireFullAdmin(auth)` (`src/lib/adminRoles.ts`)
-
-Rôles :
-
-- `full` : universités, matching, bulk e-mail, suppression contacts, WhatsApp (OpenWA)
-- `limited` (`ADMIN_LIMITED_EMAILS`) : étudiants / agenda / e-mail contact, lecture des matchings université et école de langue (pas de lancement ni suppression), pas les universités
-
-Le client anon Supabase ne doit pas lire `contacts` / `universities` / `matching_runs`. Toute nouvelle table métier : RLS on, grants service_role, SQL dans `sql/`.
+Register / recover : uniquement si l’e-mail existe déjà dans `contacts`. Compte activé tout de suite (pas de mail de confirmation).
 
 ## Où poser le code
 
 | Besoin | Fichier |
 |---|---|
-| Copy / FAQ / metadata site | `src/lib/seo.ts`, `src/i18n/site.ts` |
-| Copy admin | `src/i18n/admin.ts` |
-| Formules, prix, inclus | `src/lib/formules.ts` |
-| Statuts CRM | `src/lib/suiviStatuts.ts` |
-| Auth admin + étudiant | `src/lib/studentAuth.ts` |
-| Scoring univ. | `src/lib/matching/score.ts` + `weights.ts` |
-| Rapports matching | `src/lib/matching/reports.ts`, `reportsLlm.ts` |
-| Blog IA | `src/lib/blog/generate.ts`, `store.ts`, cron `blog-generate`, admin `/admin/blog` |
-| E-mails auto / intents | `src/lib/api/auto-reply.ts`, `src/lib/emailIntents.ts`. Inbound : pas de réponse auto aux questions. Seuls le mail de bienvenue et la confirmation de formule partent seuls. |
-| Inbound mail | `src/lib/api/inbound-email.ts` |
-| Relance quotidienne | `src/lib/api/formules-relance.ts` (cron Vercel `0 2 * * *`) |
-| Scan univ. (offline) | `scripts/scan-universities.mjs` → `data/universities/` → `import:universities`. Langue 2027 : `npx tsx scripts/import-language-programs.ts [xlsx\|csv]` (→ `extra.admission.language_session`, docs complets). Univ. déjà au catalogue diplôme : ne pas écraser `required_documents`. |
+| Copy SEO / site | `seo.ts`, `i18n/site.ts` |
+| Copy admin | `i18n/admin.ts` |
+| Formules | `formules.ts` |
+| Statuts | `suiviStatuts.ts` |
+| Auth | `studentAuth.ts` |
+| Scoring / rapports | `matching/score.ts`, `weights.ts`, `reports.ts`, `reportsLlm.ts` |
+| Blog IA | `blog/generate.ts`, `store.ts`, cron `blog-generate`, `/admin/blog` |
+| Auto-reply / intents | `api/auto-reply.ts`, `emailIntents.ts` |
+| Inbound | `api/inbound-email.ts` |
+| Relance formules | `api/formules-relance.ts` (cron `0 2 * * *`) |
+| Scan univ. | `scripts/scan-universities.mjs` → `data/universities/` → `import:universities`. Langue 2027 : `npx tsx scripts/import-language-programs.ts [xlsx\|csv]`. Ne pas écraser `required_documents` d’une univ. diplôme. |
 
-Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res)`).
+APIs : `NextResponse` dans `route.ts`. Réutiliser `getSupabaseAdmin()`, `rateLimit()`, `publicStudentProfile()`, `readJsonObject` / `asString` (`request.ts`).
 
-## API (carte)
+## API
 
-**Public :** `POST /api/contact-submit`, webhook `/api/webhooks/resend`
+**Public :** `POST /api/contact-submit`, `POST /api/webhooks/resend`  
+**Auth :** `login`, `register`, `recover`  
+**Étudiant :** `me`, `profile`, `formule`, `document`  
+**Admin :** `me`, `contacts`, `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `drip` (full, 5/h), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  
+**Ops :** `POST /api/email/auto-reply`, crons `formules-relance`, `outbound-drip` (12 min), `blog-generate` (1/jour). Bearer `CRON_SECRET`. Webhook Resend sans secret = rejet.
 
-**Auth :** `/api/auth/login`, `/api/auth/register` (seulement si l’email existe déjà dans `contacts`), `/api/auth/recover` (lien Supabase Auth envoyé par Resend, même condition, réponse identique si le dossier ou le compte est absent). Pas de mail de confirmation à l’inscription : le compte est activé tout de suite.
+**Tables :** `contacts` (suivi, formule, `paiements` 3 échéances, pays via `countries.ts`), `contact_emails`, `outbound_drip`, `suivi_actions`, `admin_users`, `universities`, `matching_runs`, `blog_posts`. SQL : `sql/admin-security.sql`, `universities.sql`, `matching_runs.sql`, `blog-posts.sql`. Env : `.env.example`. Public : `NEXT_PUBLIC_SUPABASE_*` (fallback `VITE_SUPABASE_*`).
 
-**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
+## Explorer
 
-**Admin :** `/api/admin/me`, `contacts`, `matching` (GET/POST/DELETE, full pour lancer ou supprimer), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
+Avant grep large : `graphify query`, `path`, `explain`. Hubs : `getAuthenticatedAdmin()`, `runMatching()`, `buildDualReports()`, `publicStudentProfile()`, `processInboundEmail()`.
 
-**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (1×/jour, 1 article IA si le sujet n’existe pas déjà)
+`npm run dev` / `lint` / `build`. Scan : `npm run scan:universities` puis `import:universities`.
 
-## Données Postgres (SQL dans `sql/`)
+## Pièges
 
-Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans ce repo.
-
-- `contacts` — dossiers (colonnes suivi, formule, lead form, `paiements` pour les 3 échéances). Pays canoniques : `src/lib/countries.ts` (liste déroulante du formulaire).
-- `contact_emails` — fil envoyés/reçus (Resend)
-- `outbound_drip` — file d'envoi auto email/WhatsApp, 5/h (`sql/outbound-drip.sql`)
-- `suivi_actions` — historique d’actions CRM
-- `admin_users` — allowlist admin (personne ne s’auto-promouvoit)
-- `universities` — catalogue matching / partenaires
-- `matching_runs` — JSON des analyses
-- `blog_posts` — articles IA (payload JSON, `live`, `published_at`)
-- Storage : `student-documents`
-
-Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/blog-posts.sql`.
-
-Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel).
-
-## Conventions
-
-- Langue UI et e-mails : **français**. Ton : agence sérieuse, pas de garantie d’admission/bourse/visa.
-- TypeScript strict. Pas de nouvelle dépendance si le stdlib / un package déjà là suffit.
-- Logique métier dans `src/lib/*`, pas dans les `page.tsx`.
-- Réutiliser `getSupabaseAdmin()`, `rateLimit()`, `publicStudentProfile()`, helpers formules/statuts, `readJsonObject` / `asString` (`src/lib/request.ts`).
-- Après un changement de code : `graphify update .` (règle workspace).
-- Prod : git → GitHub → Vercel sur `main`. Chantier auth / RLS / nouvelle feature : branche `feature/` ou `fix/` + PR. Copy ou un fichier : commit sur `main`.
-- Ne pas committer `graphify-out/`, `.next/`, secrets.
-
-## Explorer le code
-
-Graphe du repo : `graphify-out/`. Avant un grep large :
-
-```
-graphify query "<question>"
-graphify path "<A>" "<B>"
-graphify explain "<symbole>"
-```
-
-Hubs utiles : `getAuthenticatedAdmin()`, `runMatching()`, `buildDualReports()`, `publicStudentProfile()`, `processInboundEmail()`.
-
-## Commandes
-
-```
-npm run dev                 # localhost
-npm run lint
-npm run build
-npm run scan:universities   # crawl + LLM → data/universities/
-npm run import:universities # scan → table universities
-```
-
-## Pièges connus
-
-1. **README.md** décrit Vite. L’app est Next.
-2. `AGENTS.md` contient un bloc auto Next.js (`BEGIN:nextjs-agent-rules`) : ne pas le supprimer.
-3. Statuts : UI canonique vs CHECK Postgres legacy — `toStoredStatut()`.
-4. Formules : anciennes étiquettes en base, matcher via `aliases`.
-5. Matching persisté avec préfixes `[[MATCHING_JSON]]` / `[[CHINESE_MATCHING_JSON]]`.
-6. Relance cron exige `CRON_SECRET` ; webhooks Resend sans secret = rejet.
-7. CSP dans `next.config.mjs` : `connect-src` limité à `self` + `*.supabase.co`.
-8. Qualité : `npm test` (`tsc --noEmit`) + `npm run lint` + `npm run build`.
+1. Bloc auto Next dans `AGENTS.md` (`BEGIN:nextjs-agent-rules`) : ne pas le supprimer.
+2. CSP `next.config.mjs` : `connect-src` = `self` + `*.supabase.co`.
+3. UI FR ; ton sérieux, zéro garantie.

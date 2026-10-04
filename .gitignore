@@ -31,3 +31,4 @@ out
 
 data/universities/raw/
 .venv-scrapling/
+graphify-out/

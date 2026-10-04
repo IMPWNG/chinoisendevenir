@@ -1,0 +1,12 @@
+---
+description: Ship finished work on main only. No feature branches.
+alwaysApply: true
+---
+
+# Prod pipeline
+
+Toujours travailler sur `main`. Jamais de branche `feature/` / `fix/` / PR.
+
+Après un changement fini : `npm test` → commit (sans `graphify-out/`) → `git push origin main`.
+
+Jamais force-push `main`. Jamais commit `.env*` / `.next/` / secrets / `graphify-out/`.
