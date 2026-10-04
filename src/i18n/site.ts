@@ -1287,7 +1287,7 @@ const fr = {
     formuleSaved: "Votre formule a été enregistrée.",
     pay: "Payer {price}",
     paySoon:
-      "Après ce choix, réglez en une fois ou en plusieurs versements sur cette page. L'accompagnement s'ouvre au premier versement reçu.",
+      "Le paiement en ligne sera bientôt disponible. Pour l'instant, enregistrez votre choix : l'équipe vous recontactera.",
     payTitle: "Suivi des paiements",
     paySubtitle:
       "Formule à {total}. Trois échéances : 40 % à l'ouverture, 30 % au dépôt de la candidature, puis le solde. L'équipe met à jour ce suivi après chaque règlement.",
@@ -1303,28 +1303,6 @@ const fr = {
     payHint:
       "Ce suivi est tenu par l'équipe. Le paiement en ligne n'est pas disponible ici.",
     guideCta: "Guide de l'espace",
-    paymentTitle: "Régler votre accompagnement",
-    paymentIntro:
-      "Payez en une fois ou en plusieurs versements. L'espace s'ouvre quand le premier versement est confirmé, ou quand le total est payé. Le retour sur cette page ne vaut pas confirmation.",
-    paymentFull: "Payer en une fois",
-    paymentInstallments: "Payer en plusieurs fois",
-    paymentPayNext: "Payer {amount}",
-    paymentNotConfigured:
-      "Le paiement en ligne n'est pas encore configuré. Aucun montant ne sera débité.",
-    paymentNotReady:
-      "Le suivi des paiements n'est pas encore activé. Aucun montant ne sera débité.",
-    paymentReturn:
-      "Vous êtes de retour de la page de paiement. L'accès s'ouvre seulement après confirmation Airwallex.",
-    paymentHistory: "Échanges de paiement",
-    paymentEmpty: "Aucun paiement enregistré.",
-    paymentStatusPending: "À payer",
-    paymentStatusProcessing: "En cours",
-    paymentStatusSucceeded: "Payé",
-    paymentStatusFailed: "Échoué",
-    paymentStatusCancelled: "Annulé",
-    paymentInstallment: "Versement {n}",
-    paymentWorking: "Redirection vers le paiement…",
-    paymentAllPaid: "Tous les versements sont réglés.",
     yourSupport: "Votre accompagnement",
     formula: "Formule",
     formulaN: "Formule {n}",
@@ -2901,7 +2879,7 @@ const en = {
     formuleSaved: "Your plan has been saved.",
     pay: "Pay {price}",
     paySoon:
-      "After this choice, pay in full or in installments on this page. Support opens when the first installment is received.",
+      "Online payment will be available soon. For now, save your choice: the team will contact you.",
     payTitle: "Payment tracking",
     paySubtitle:
       "Plan total {total}. Three installments: 40% when the file opens, 30% when the application is submitted, then the balance. The team updates this after each payment.",
@@ -2916,28 +2894,6 @@ const en = {
     paySettled: "All three installments are paid.",
     payHint: "The team keeps this tracking. Online payment is not available here.",
     guideCta: "Space guide",
-    paymentTitle: "Pay for your support",
-    paymentIntro:
-      "Pay in full or in several installments. The space opens when the first installment is confirmed, or when the total is paid. Coming back to this page is not a confirmation.",
-    paymentFull: "Pay in full",
-    paymentInstallments: "Pay in installments",
-    paymentPayNext: "Pay {amount}",
-    paymentNotConfigured:
-      "Online payment is not configured yet. Nothing will be charged.",
-    paymentNotReady:
-      "Payment tracking is not active yet. Nothing will be charged.",
-    paymentReturn:
-      "You are back from the payment page. Access opens only after Airwallex confirms the payment.",
-    paymentHistory: "Payment activity",
-    paymentEmpty: "No payment recorded.",
-    paymentStatusPending: "To pay",
-    paymentStatusProcessing: "In progress",
-    paymentStatusSucceeded: "Paid",
-    paymentStatusFailed: "Failed",
-    paymentStatusCancelled: "Cancelled",
-    paymentInstallment: "Installment {n}",
-    paymentWorking: "Redirecting to payment…",
-    paymentAllPaid: "Every installment is paid.",
     yourSupport: "Your support",
     formula: "Plan",
     formulaN: "Plan {n}",

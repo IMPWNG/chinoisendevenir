@@ -126,11 +126,11 @@ Handlers API : `NextResponse` dans `route.ts` (plus de wrapper Vercel `(req, res
 
 **Auth :** `/api/auth/login`, `/api/auth/register` (seulement si l’email existe déjà dans `contacts`), `/api/auth/recover` (lien Supabase Auth envoyé par Resend, même condition, réponse identique si le dossier ou le compte est absent). Pas de mail de confirmation à l’inscription : le compte est activé tout de suite.
 
-**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`, `payment`
+**Étudiant :** `/api/student/me`, `profile`, `formule`, `document`
 
-**Admin :** `/api/admin/me`, `contacts`, `payments`, `matching` (GET/POST/DELETE, full pour lancer ou supprimer), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
+**Admin :** `/api/admin/me`, `contacts`, `matching` (GET/POST/DELETE, full pour lancer ou supprimer), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full, OpenWA), `drip` (full, file d'envoi auto email/WhatsApp, 5/h), `inbox-priority` (full, chats WhatsApp non lus), `universities/import-scan`, `blog` (full)
 
-**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (1×/jour, 1 article IA si le sujet n’existe pas déjà), `POST /api/webhooks/airwallex` (rejeté sans `AIRWALLEX_WEBHOOK_SECRET`)
+**Ops :** `POST /api/email/auto-reply`, `GET /api/cron/formules-relance`, `GET /api/cron/outbound-drip` (Bearer `CRON_SECRET`, toutes les 12 min), `GET /api/cron/blog-generate` (1×/jour, 1 article IA si le sujet n’existe pas déjà)
 
 ## Données Postgres (SQL dans `sql/`)
 
@@ -144,12 +144,11 @@ Appliquer les `.sql` dans l’éditeur Supabase, pas via une migration auto dans
 - `universities` — catalogue matching / partenaires
 - `matching_runs` — JSON des analyses
 - `blog_posts` — articles IA (payload JSON, `live`, `published_at`)
-- `payment_plans` / `payment_installments` / `payment_intents` / `payment_events` — Airwallex (`sql/payments.sql`, service role only). Déblocage = statut `client_payé` (porte existante) au premier versement ou au total. Pas de calendrier commercial figé : `INSTALLMENT_COUNT` dans `src/lib/payments.ts`.
 - Storage : `student-documents`
 
-Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/blog-posts.sql`, `sql/payments.sql`.
+Schéma de référence : `sql/admin-security.sql`, `sql/universities.sql`, `sql/matching_runs.sql`, `sql/blog-posts.sql`.
 
-Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel). Airwallex (vide tant qu'il n'y a pas de compte) : `AIRWALLEX_CLIENT_ID`, `AIRWALLEX_API_KEY`, `AIRWALLEX_WEBHOOK_SECRET`, `AIRWALLEX_ENV` (`demo` par défaut), `AIRWALLEX_API_BASE` optionnel.
+Env : copier `.env.example`. Ne jamais committer `.env*`. Vars publiques : `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (fallback build : `VITE_SUPABASE_*` si encore présentes sur Vercel).
 
 ## Conventions
 
