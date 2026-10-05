@@ -350,6 +350,48 @@ function notesAskTutoiement(notes: unknown): boolean {
   return /\b(tutoie|tutoiement|tutoyer)\b/i.test(String(notes || ""));
 }
 
+function adminBriefParts(notes: unknown) {
+  const raw = String(notes || "").trim();
+  const directives = [...raw.matchAll(/\(([^)]{2,240})\)/g)]
+    .map((match) => match[1].replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const urls = [...raw.matchAll(/https?:\/\/[^\s<>"')]+/gi)]
+    .map((match) => match[0].replace(/[),.;:!?]+$/g, ""))
+    .filter(Boolean);
+  return {
+    raw,
+    directives,
+    wantsFormules: /formule/i.test(raw),
+    urls: [...new Set(urls)],
+  };
+}
+
+export function adminOrderBlock(notes: unknown) {
+  const brief = adminBriefParts(notes);
+  const lines = [
+    "Les parenthèses ( ) et les phrases du type « indique les formules », « ton convaincant » sont des ORDRES. Applique-les dans le mail. Ne les ignore pas. Ne les recopie pas mot pour mot (n'écris pas « (indiquer les formules) » dans le corps).",
+  ];
+  if (brief.directives.length) {
+    lines.push(
+      "Consignes détectées :",
+      ...brief.directives.map((item) => `- ${item}`),
+    );
+  }
+  if (brief.wantsFormules) {
+    lines.push(
+      "La consigne demande les formules : liste les 3 formules (numéro, intitulé, tarif officiel des faits agence), en quelques lignes claires.",
+    );
+  }
+  if (brief.urls.length) {
+    lines.push("Recopie ces URLs telles quelles dans le body :", ...brief.urls);
+  } else {
+    lines.push(
+      "Si le brief contient une URL, recopie-la telle quelle dans le body.",
+    );
+  }
+  return lines.join("\n");
+}
+
 export const BULK_AI_TOPICS = {
   langue_sans_diplome: {
     title: "Formations de chinois sans diplôme / certificat de langue",
@@ -435,24 +477,28 @@ export async function composeEmailWithAi({
   const result = await mammouthChat({
     system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Les notes de l'admin sont un brief en vrac (fautes, phrases courtes, tutoiement). Tu en fais un e-mail professionnel, chaleureux et soigné. Ce n'est pas une reformulation mot à mot, c'est une rédaction.
+Les notes de l'admin sont un brief en vrac (fautes, phrases courtes). Tu en fais un e-mail professionnel. Ce n'est pas une reformulation mot à mot.
+
+${adminOrderBlock(notes)}
 
 Le template HTML ajoute déjà « Bonjour {prénom}, » et « Cordialement, L'équipe Chinois en Devenir ».
 - N'écris JAMAIS Bonjour, Madame, Monsieur, le prénom, le nom, ni Cordialement, ni la signature.
 
 ${tutoyer ? "Le brief demande explicitement le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie toujours (vous / votre), même si le brief dit « ton dossier ». Écris « nous » pour l'agence, jamais « je »."}
 
-Si le brief mentionne un horaire, recopie-le tel quel. N'invente aucun créneau, aucune université, aucun tarif.
+Si le brief mentionne un horaire, recopie-le tel quel. N'invente aucun créneau, aucune université, aucun tarif hors faits agence. Pas de garantie d'admission, de bourse ou de visa.
 
 JSON uniquement, sans markdown :
 {"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
 
 L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
-    user: `Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
+    user: `${formuleFactsForPrompt()}
+
+Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
 
 Brief admin (à transformer en e-mail pro) :
 ${notes}`,
-    temperature: 0.55,
+    temperature: adminBriefParts(notes).directives.length ? 0.35 : 0.55,
     maxTokens: 4000,
     retries: 1,
   });
@@ -487,9 +533,11 @@ Le template HTML ajoute déjà « Bonjour {prénom}, » (prénom de chaque desti
 - N'écris JAMAIS la liste des destinataires dans le mail.
 - Tutoiement: ${tutoyer ? "le brief demande le tutoiement : tutoie (tu / toi / ton)." : "vouvoie toujours (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
 
+${adminOrderBlock(notes)}
+
 Les profils ci-dessous servent à adapter le fond (diplôme, domaine, absence de certificat de langue, budget). Parle de façon générale (« si vous n'avez pas encore de HSK », « pour un projet de licence »), sans citer de personne.
 
-N'invente aucune université, aucun créneau, aucun tarif, aucune bourse chiffrée. Utilise uniquement les faits agence fournis.
+N'invente aucune université, aucun créneau, aucun tarif, aucune bourse chiffrée. Utilise uniquement les faits agence fournis. Les notes admin priment sur le sujet type si elles demandent autre chose.
 
 JSON uniquement, sans markdown :
 {"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
@@ -499,7 +547,7 @@ L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
 
 ${topicDef.brief}
 
-Notes admin (à intégrer si utiles) :
+Notes et consignes admin (obligatoires, pas optionnelles) :
 ${extraNotes || "(aucune note supplémentaire)"}
 
 Profils sélectionnés (${summary.count}) — ne pas les citer nommément dans l'e-mail :
@@ -582,7 +630,9 @@ Format:
 - Dernière ligne : « L'équipe Chinois en Devenir ».
 - Tutoiement: ${tutoyer ? "le brief demande le tutoiement : tutoie (tu / toi / ton)." : "vouvoie (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
 
-Les profils servent à adapter le fond, sans citer de personne. N'invente aucune université, aucun créneau, aucun tarif, aucune bourse chiffrée.
+${adminOrderBlock(notes)}
+
+Les profils servent à adapter le fond, sans citer de personne. N'invente aucune université, aucun créneau, aucun tarif, aucune bourse chiffrée. Les notes admin priment sur le sujet type.
 
 JSON uniquement, sans markdown :
 {"body":"Bonjour {prenom},\\n\\n..."}`,
@@ -590,7 +640,7 @@ JSON uniquement, sans markdown :
 
 ${topicDef.brief}
 
-Notes admin (à intégrer si utiles) :
+Notes et consignes admin (obligatoires, pas optionnelles) :
 ${extraNotes || "(aucune note supplémentaire)"}
 
 Profils sélectionnés (${summary.count}) — ne pas les citer nommément :
@@ -627,6 +677,7 @@ Contraintes :
 - Pas d'objet, pas de titre, pas de HTML.
 - Dernière ligne : « L'équipe Chinois en Devenir ».
 - ${tutoyer ? "Le brief demande le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
+- Applique les consignes entre parenthèses du brief (ton, formules, etc.).
 - N'invente aucun créneau, aucune université, aucun tarif. Si le brief donne un horaire, recopie-le tel quel.
 
 JSON uniquement, sans markdown :

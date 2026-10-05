@@ -304,7 +304,7 @@ export const adminTranslations = {
       emailCustomEmpty: "Indiquez un objet et un message.",
       emailAiSection: "Rédiger avec l'IA",
       emailAiHint:
-        "Écrivez ce que vous voulez dire, même en vrac. L'IA reformule dans le style des emails déjà envoyés. Vous relisez avant d'envoyer.",
+        "Écrivez ce que vous voulez dire, même en vrac. Les consignes entre parenthèses (indiquer les formules, ton convaincant…) sont appliquées. Une URL devient un lien cliquable. Vous relisez avant d'envoyer.",
       emailAiPlaceholder:
         "Ex. Bonjour, je te propose un RDV téléphone entre tel et tel jour, as-tu de la dispo ?",
       emailAiButton: "Transformer en email pro",
@@ -940,7 +940,7 @@ export const adminTranslations = {
       emailCustomEmpty: "Please add a subject and a message.",
       emailAiSection: "Write with AI",
       emailAiHint:
-        "Write what you want to say, even roughly. The AI rewrites it in the same style as our templates. You review before sending.",
+        "Write what you want to say, even roughly. Instructions in parentheses (list the packages, convincing tone…) are applied. URLs become clickable links. You review before sending.",
       emailAiPlaceholder:
         "e.g. Hi, I can offer a phone call between these days — are you free?",
       emailAiButton: "Turn into a professional email",
@@ -1562,7 +1562,7 @@ export const adminTranslations = {
       emailCustomEmpty: "请填写主题和正文。",
       emailAiSection: "用 AI 撰写",
       emailAiHint:
-        "写下你想说的内容，哪怕很随意。AI 会按现有邮件风格改写。发送前请再核对。",
+        "写下你想说的内容，哪怕很随意。括号里的要求（列出套餐、有说服力的语气等）会被执行。网址会变成可点击链接。发送前请再核对。",
       emailAiPlaceholder: "例如：你好，我提议这几天通电话，你有空吗？",
       emailAiButton: "转换成专业邮件",
       emailAiWorking: "撰写中...",

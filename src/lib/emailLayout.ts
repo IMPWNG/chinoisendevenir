@@ -164,6 +164,12 @@ export const EMAIL_STYLES = `
     text-decoration: none;
     border-bottom: 1px solid #1d3557;
   }
+  .body-link {
+    color: #1d3557;
+    font-weight: 650;
+    text-decoration: underline;
+    word-break: break-word;
+  }
   .footer {
     padding: 24px 32px 28px;
     border-top: 1px solid #e6e9ee;
@@ -242,6 +248,60 @@ export function wrapEmailHtml({
   `;
 }
 
+function trimUrlPunct(url: string) {
+  return url.replace(/[),.;:!?]+$/g, "");
+}
+
+function isSafeHttpUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function linkTag(href: string, label: string) {
+  return `<a href="${escapeHtml(href)}" class="body-link">${escapeHtml(label)}</a>`;
+}
+
+/** Escape plain text then turn URLs / [label](url) into clickable links. */
+export function textToLinkedHtml(text: unknown) {
+  const tokens: string[] = [];
+  const stash = (html: string) => {
+    const key = `\u0000${tokens.length}\u0000`;
+    tokens.push(html);
+    return key;
+  };
+
+  let work = String(text || "");
+  work = work.replace(
+    /\[([^\]]{1,160})\]\((https?:\/\/[^)\s]+)\)/gi,
+    (full, label: string, href: string) => {
+      const url = trimUrlPunct(href);
+      return isSafeHttpUrl(url) ? stash(linkTag(url, label)) : full;
+    },
+  );
+  work = work.replace(/(https?:\/\/[^\s<>"']+)/gi, (raw) => {
+    const url = trimUrlPunct(raw);
+    if (!isSafeHttpUrl(url)) return raw;
+    return stash(linkTag(url, url)) + raw.slice(url.length);
+  });
+  work = work.replace(
+    /(^|[\s(])(www\.[^\s<>"']+)/gi,
+    (_full, prefix: string, host: string) => {
+      const url = `https://${trimUrlPunct(host)}`;
+      return isSafeHttpUrl(url)
+        ? `${prefix}${stash(linkTag(url, host))}`
+        : `${prefix}${host}`;
+    },
+  );
+
+  return escapeHtml(work)
+    .replace(/\u0000(\d+)\u0000/g, (_m, index: string) => tokens[Number(index)] || "")
+    .replaceAll("\n", "<br>");
+}
+
 export function plainTextToEmailBodyHtml(text: unknown) {
   const blocks = String(text || "")
     .replace(/\r\n/g, "\n")
@@ -255,10 +315,7 @@ export function plainTextToEmailBodyHtml(text: unknown) {
   }
 
   return blocks
-    .map((block) => {
-      const html = escapeHtml(block).replaceAll("\n", "<br>");
-      return `<div class="section"><p>${html}</p></div>`;
-    })
+    .map((block) => `<div class="section"><p>${textToLinkedHtml(block)}</p></div>`)
     .join("\n");
 }
 
