@@ -533,9 +533,6 @@ async function logAction(
     email_formules: "email_envoye",
     reponse_client: "note_ajoutee",
     formule_choisie: "changement_statut",
-    whatsapp_envoye: "email_envoye",
-    whatsapp_formules: "email_formules",
-    reponse_whatsapp: "reponse_client",
   };
 
   const actionCandidates = [actionType, fallbacks[actionType]].filter(

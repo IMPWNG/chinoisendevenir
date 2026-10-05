@@ -168,12 +168,15 @@ export async function POST(request: Request) {
         : action === "label"
           ? { action: "whatsapp_liste", description: "Ajouté à la liste Étude Chine" }
           : { action: "whatsapp_contact", description: "Ajouté au carnet WhatsApp" };
-    await auth.admin.from("suivi_actions").insert({
+    const { error: historyError } = await auth.admin.from("suivi_actions").insert({
       contact_id: contactId,
       action: logged.action,
       description: logged.description,
       user_admin: auth.user.email,
     });
+    if (historyError) {
+      console.warn("whatsapp history:", historyError.message);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
