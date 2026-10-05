@@ -1,5 +1,5 @@
 -- Allow both legacy and canonical suivi_statut values.
--- The public form was writing "bienvenue_envoyé", which the old CHECK rejected.
+-- Old CHECK had 'perdu' / 'nouveau' / etc. and rejected 'prospect_perdu'.
 
 alter table public.contacts drop constraint if exists contacts_suivi_statut_check;
 
@@ -12,6 +12,10 @@ alter table public.contacts
       'nouveau_prospect',
       'mail_bienvenue_envoyé',
       'bienvenue_envoyé',
+      'contact_pris',
+      'en_cours',
+      'serieux',
+      'qualifie',
       'prospect_à_qualifier',
       'a_qualifier',
       'appel_réservé',
@@ -31,6 +35,8 @@ alter table public.contacts
       'visa_préparation',
       'arrive_chine',
       'dossier_terminé',
+      'inscrit',
+      'perdu',
       'prospect_perdu'
     )
   );

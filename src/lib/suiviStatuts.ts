@@ -67,10 +67,12 @@ export const LEGACY_STATUT_MAP: Record<string, string> = {
   relance_2_envoyée: "relance_en_cours",
   choix_des_formules: "formules_présentées",
   prospect_à_qualifier: "a_qualifier",
+  perdu: "prospect_perdu",
+  nouveau: "nouveau_prospect",
 };
 
-// Postgres still checks the old vocabulary. Canonical names that are not in
-// that CHECK must be stored as their legacy equivalent.
+// Older CHECK rows still use the first vocabulary. Canonical names listed
+// here are stored as the legacy equivalent so a stale constraint still accepts them.
 export const CANONICAL_TO_STORED_STATUT: Record<string, string> = {
   bienvenue_envoyé: "mail_bienvenue_envoyé",
   a_qualifier: "prospect_à_qualifier",

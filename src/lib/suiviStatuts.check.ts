@@ -26,5 +26,7 @@ assert(
   canonicalStatut("client_payé") === "client_payé",
   "canonical client_payé",
 );
+assert(canonicalStatut("perdu") === "prospect_perdu", "legacy perdu maps");
+assert(canonicalStatut("prospect_perdu") === "prospect_perdu", "prospect_perdu stays");
 
 console.log("suiviStatuts unlock check ok");
