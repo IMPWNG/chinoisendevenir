@@ -564,12 +564,15 @@ ${summary.text}`,
 function whatsappBodyFromParsed(json: ComposeFields | null, raw: string) {
   const fromJson = String(json?.body || "").trim();
   const body = (fromJson || raw).replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
-  if (!body || body.length > 1500) return null;
-  return body.includes("{prenom}") ? body : `Bonjour {prenom},\n\n${body}`;
+  if (!body || body.length < 12) return null;
+  const capped =
+    body.length > WHATSAPP_TEXT_MAX ? body.slice(0, WHATSAPP_TEXT_MAX).trim() : body;
+  return capped.includes("{prenom}") ? capped : `Bonjour {prenom},\n\n${capped}`;
 }
 
-/** One student-file WhatsApp message: a few lines, never an email. */
-export const STUDENT_WHATSAPP_MAX = 500;
+/** WhatsApp hard cap. No extra “keep it short” clip for AI drafts. */
+export const WHATSAPP_TEXT_MAX = 4096;
+export const STUDENT_WHATSAPP_MAX = WHATSAPP_TEXT_MAX;
 
 export function studentWhatsappDraft(
   json: { body?: unknown } | null | undefined,
@@ -588,17 +591,14 @@ export function studentWhatsappDraft(
     .replace(/<[^>]+>/g, "")
     .trim();
   if (body.length < 12) return null;
-  if (body.length > STUDENT_WHATSAPP_MAX) {
-    const cut = body.slice(0, STUDENT_WHATSAPP_MAX);
-    const stop = Math.max(cut.lastIndexOf("\n\n"), cut.lastIndexOf(". "), cut.lastIndexOf(".\n"));
-    body = (stop > 80 ? cut.slice(0, stop + (cut[stop] === "." ? 1 : 0)) : cut).trim();
-  }
   const name = String(prenom || "").trim();
   if (name && !/^bonjour\b/i.test(body)) {
-    const greeted = `Bonjour ${name},\n\n${body}`;
-    if (greeted.length <= STUDENT_WHATSAPP_MAX) body = greeted;
+    body = `Bonjour ${name},\n\n${body}`;
   }
-  return body.length >= 12 && body.length <= STUDENT_WHATSAPP_MAX ? body : null;
+  if (body.length > WHATSAPP_TEXT_MAX) {
+    body = body.slice(0, WHATSAPP_TEXT_MAX).trim();
+  }
+  return body.length >= 12 ? body : null;
 }
 
 export async function composeBulkWhatsappWithAi({
@@ -620,11 +620,11 @@ export async function composeBulkWhatsappWithAi({
   const result = await mammouthChat({
     system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Tu rédiges UN seul message WhatsApp, court, envoyé tel quel à plusieurs étudiants. Ce n'est pas un e-mail.
+Tu rédiges UN seul message WhatsApp, envoyé tel quel à plusieurs étudiants. Même niveau de détail qu'un e-mail, en texte brut.
 
 Format:
-- Texte brut, 2 à 4 paragraphes courts, séparés par une ligne vide.
-- 400 à 900 caractères.
+- Texte brut, autant de paragraphes que nécessaire, séparés par une ligne vide.
+- Développe le brief : formules, ton, liens, tout ce que l'admin demande. Pas de plafond artificiel de longueur (maximum ${WHATSAPP_TEXT_MAX} caractères, limite WhatsApp).
 - La première ligne est exactement « Bonjour {prenom}, » avec les accolades, pour que le prénom soit ajouté à l'envoi.
 - Pas d'objet, pas de titre, pas de HTML, pas de liste de destinataires.
 - Dernière ligne : « L'équipe Chinois en Devenir ».
@@ -646,7 +646,7 @@ ${extraNotes || "(aucune note supplémentaire)"}
 Profils sélectionnés (${summary.count}) — ne pas les citer nommément :
 ${summary.text}`,
     temperature: 0.5,
-    maxTokens: 900,
+    maxTokens: 4000,
     retries: 1,
   });
 
@@ -668,11 +668,10 @@ export async function composeStudentWhatsappWithAi({
   const result = await mammouthChat({
     system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Tu rédiges UN message WhatsApp à un seul étudiant. Ce n'est pas un e-mail : beaucoup plus court.
+Tu rédiges UN message WhatsApp à un seul étudiant. Texte brut, aussi développé qu'un e-mail si le brief le demande.
 
 Contraintes :
-- 2 paragraphes courts, ou 4 à 6 lignes. Une seule idée, celle du brief.
-- Entre 150 et 420 caractères. Jamais plus de 500. Pas de catalogue, pas de puces, pas de tarifs inventés.
+- Autant de paragraphes que nécessaire. Développe les consignes (formules, ton, liens). Maximum ${WHATSAPP_TEXT_MAX} caractères (limite WhatsApp), pas de coupe artificielle.
 - Commence par « Bonjour ${prenom || ""} ».
 - Pas d'objet, pas de titre, pas de HTML.
 - Dernière ligne : « L'équipe Chinois en Devenir ».
@@ -682,15 +681,17 @@ Contraintes :
 
 JSON uniquement, sans markdown :
 {"body":"Bonjour ${prenom || ""},\\n\\n..."}`,
-    user: `Étudiant : ${prenom || "prénom inconnu"}
+    user: `${formuleFactsForPrompt()}
+
+Étudiant : ${prenom || "prénom inconnu"}
 Domaine : ${contact?.domaine_etudes || "non renseigné"}
 Formule : ${contact?.formule || "aucune"}
 Statut : ${contact?.suivi_statut || "—"}
 
-Brief admin (à transformer en message WhatsApp court) :
+Brief admin (à transformer en message WhatsApp) :
 ${notes}`,
     temperature: 0.4,
-    maxTokens: 350,
+    maxTokens: 4000,
     retries: 1,
   });
 

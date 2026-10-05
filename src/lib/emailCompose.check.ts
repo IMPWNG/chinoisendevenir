@@ -12,7 +12,6 @@ function assert(cond: unknown, msg: string): asserts cond {
 const short = "Votre dossier est prêt. On peut en parler demain à 15h ?\n\nL'équipe Chinois en Devenir";
 const drafted = studentWhatsappDraft({ body: short }, "", "Awa");
 assert(drafted?.startsWith("Bonjour Awa,"), "adds first name");
-assert((drafted || "").length <= STUDENT_WHATSAPP_MAX, "stays short");
 
 const already = studentWhatsappDraft(
   { body: "Bonjour Awa,\n\nOn se rappelle demain." },
@@ -22,10 +21,16 @@ const already = studentWhatsappDraft(
 assert(already === "Bonjour Awa,\n\nOn se rappelle demain.", "keeps greeting");
 
 const long = `${"Phrase assez longue pour remplir le message. ".repeat(40)}Fin.`;
-const clipped = studentWhatsappDraft({ body: long }, "", "");
-assert(clipped !== null && clipped.length <= STUDENT_WHATSAPP_MAX, "clips email length");
+const kept = studentWhatsappDraft({ body: long }, "", "");
+assert(kept !== null && kept.includes("Fin."), "keeps long drafts");
+assert((kept || "").length > 500, "no 500-char clip");
 assert(studentWhatsappDraft({ body: "trop court" }, "", "") === null, "rejects tiny");
 assert(studentWhatsappDraft(null, '{"body":"secret"}', "") === null, "rejects json blob");
+assert(
+  (studentWhatsappDraft({ body: "A".repeat(5000) }, "", "") || "").length <=
+    STUDENT_WHATSAPP_MAX,
+  "whatsapp platform cap only",
+);
 
 const orders = adminOrderBlock(
   "RDV jeudi (indiquer les formules) (ton convaincant) https://chinoisendevenir.com/tarifs",
