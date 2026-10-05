@@ -154,7 +154,7 @@ export default function AdminContactWhatsApp({
         );
         return;
       }
-      setText(String(data.body || "").slice(0, 500));
+      setText(String(data.body || "").slice(0, 4096));
     } catch (caught) {
       const message = errorMessage(caught);
       setAiError(

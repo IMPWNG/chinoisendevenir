@@ -474,10 +474,13 @@ export async function composeEmailWithAi({
   contact?: { prenom?: unknown } | null;
 } = {}): Promise<ComposeOk | ComposeErr> {
   const tutoyer = notesAskTutoiement(notes);
+  const brief = adminBriefParts(notes);
   const result = await mammouthChat({
     system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Les notes de l'admin sont un brief en vrac (fautes, phrases courtes). Tu en fais un e-mail professionnel. Ce n'est pas une reformulation mot à mot.
+Le BRIEF ADMIN est le seul contenu du mail. Tu le reformules (orthographe, vouvoiement, phrases claires). Tu n'inventes pas un autre sujet.
+
+Interdit, sauf si le brief le dit clairement : confirmer une formule, parler d'universités, de rentrée, de dossier, de commerce, d'un appel passé. Un brief du type « dites-leur de nous écrire » reste un mail d'invitation à écrire, rien d'autre.
 
 ${adminOrderBlock(notes)}
 
@@ -492,13 +495,11 @@ JSON uniquement, sans markdown :
 {"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
 
 L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
-    user: `${formuleFactsForPrompt()}
+    user: `${brief.wantsFormules ? `${formuleFactsForPrompt()}\n\n` : ""}Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
 
-Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
-
-Brief admin (à transformer en e-mail pro) :
+Brief admin (contenu unique du mail) :
 ${notes}`,
-    temperature: adminBriefParts(notes).directives.length ? 0.35 : 0.55,
+    temperature: brief.directives.length ? 0.35 : 0.4,
     maxTokens: 4000,
     retries: 1,
   });
@@ -665,32 +666,30 @@ export async function composeStudentWhatsappWithAi({
 } = {}): Promise<ComposeOk | ComposeErr> {
   const tutoyer = notesAskTutoiement(notes);
   const prenom = String(contact?.prenom || "").trim();
+  const brief = adminBriefParts(notes);
   const result = await mammouthChat({
     system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
 
-Tu rédiges UN message WhatsApp à un seul étudiant. Texte brut, aussi développé qu'un e-mail si le brief le demande.
+Tu reformules le BRIEF ADMIN en message WhatsApp. Le brief EST le message. Tu corriges l'orthographe et le vouvoiement. Tu n'inventes pas un autre sujet.
+
+Interdit, sauf si le brief le dit clairement : confirmer une formule, parler d'universités, de rentrée, d'un dossier, d'un domaine d'études, d'une conversation précédente. Un brief du type « dites-leur de nous écrire sur WhatsApp ou par mail » reste uniquement cette invitation.
 
 Contraintes :
-- Autant de paragraphes que nécessaire. Développe les consignes (formules, ton, liens). Maximum ${WHATSAPP_TEXT_MAX} caractères (limite WhatsApp), pas de coupe artificielle.
+- Texte brut. Reste proche du brief : si le brief est court, le message reste court.
 - Commence par « Bonjour ${prenom || ""} ».
 - Pas d'objet, pas de titre, pas de HTML.
 - Dernière ligne : « L'équipe Chinois en Devenir ».
 - ${tutoyer ? "Le brief demande le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie (vous / votre). Écris « nous » pour l'agence, jamais « je »."}
-- Applique les consignes entre parenthèses du brief (ton, formules, etc.).
+- ${adminOrderBlock(notes).replaceAll("\n", " ")}
 - N'invente aucun créneau, aucune université, aucun tarif. Si le brief donne un horaire, recopie-le tel quel.
 
 JSON uniquement, sans markdown :
 {"body":"Bonjour ${prenom || ""},\\n\\n..."}`,
-    user: `${formuleFactsForPrompt()}
+    user: `${brief.wantsFormules ? `${formuleFactsForPrompt()}\n\n` : ""}Prénom (salutation seulement) : ${prenom || "prénom inconnu"}
 
-Étudiant : ${prenom || "prénom inconnu"}
-Domaine : ${contact?.domaine_etudes || "non renseigné"}
-Formule : ${contact?.formule || "aucune"}
-Statut : ${contact?.suivi_statut || "—"}
-
-Brief admin (à transformer en message WhatsApp) :
+Brief admin (contenu unique du message) :
 ${notes}`,
-    temperature: 0.4,
+    temperature: 0.25,
     maxTokens: 4000,
     retries: 1,
   });
