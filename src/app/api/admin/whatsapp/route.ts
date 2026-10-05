@@ -172,7 +172,7 @@ export async function POST(request: Request) {
       contact_id: contactId,
       action: logged.action,
       description: logged.description,
-      user_admin: auth.user.email,
+      user_admin: auth.user.email || "admin",
     });
     if (historyError) {
       console.warn("whatsapp history:", historyError.message);

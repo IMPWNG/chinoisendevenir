@@ -758,6 +758,7 @@ export default async function handler(request: Request) {
         contact.email,
         template.action,
         actionDescription,
+        auth.user.email || "admin",
       );
 
       console.log("\n" + "✅".repeat(40));
