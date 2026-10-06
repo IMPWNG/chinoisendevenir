@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
-import { threadEmailParts, type ContactEmailRow } from "../lib/contactEmails";
+import type { ContactEmailRow } from "../lib/contactEmails";
 
 function localeFor(lang: string) {
   if (lang === "zh") return "zh-CN";
@@ -121,7 +121,6 @@ export default function AdminContactEmailThread({
         >
           {emails.map((email) => {
             const inbound = email.direction === "in";
-            const parts = threadEmailParts(email);
             const party = inbound ? email.from_email : email.to_email;
             const labelClass = inbound ? "text-slate-400" : "text-blue-100/80";
             const field = (label: string, value: string, strong = false) =>
@@ -169,13 +168,14 @@ export default function AdminContactEmailThread({
                     {formatWhen(email.sent_at, lang)}
                     {party ? ` · ${party}` : ""}
                   </div>
-                  {field(t("dashboard.emailThreadSubject"), parts.subject, true)}
-                  {field(t("dashboard.emailThreadHeading"), parts.title, true)}
-                  {field(t("dashboard.emailThreadSubtitle"), parts.subtitle)}
+                  {field(
+                    t("dashboard.emailThreadSubject"),
+                    email.subject || "",
+                    true,
+                  )}
                   {field(
                     t("dashboard.emailThreadBody"),
-                    [parts.greeting, parts.content].filter(Boolean).join("\n\n") ||
-                      "—",
+                    email.body_text?.trim() || "—",
                   )}
                 </div>
               </div>

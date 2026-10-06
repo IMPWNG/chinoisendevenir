@@ -32,7 +32,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 
 **Suivi** (`suiviStatuts.ts`) : UI canonique ≠ CHECK Postgres. Toujours `canonicalStatut()` / `toStoredStatut()`. Espace étudiant **accessible dès qu'un compte est lié à un dossier** (formule pas obligatoire pour se connecter). L'étudiant choisit sa formule dans l'espace (`POST /api/student/formule`) s'il n'en a pas encore ; ensuite plus de changement côté étudiant. Déblocage orientation / documents = flag `espace_debloque` (bouton admin, **sans** passer le statut en `client_payé`). SQL : `sql/contacts-espace-debloque.sql`. Progression : `studentProgress.ts`. Ne pas reculer un statut sans le dire (`shouldAdvanceStatus()`). Pas de paiement en ligne auto.
 
-**Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule. Fil admin (`AdminContactEmailThread`) : bulles conversation, blocs Objet / Titre / Contenu (`threadEmailParts`). Visible en haut du dossier (full + limited) et dans le file Emails (full).
+**Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule. Fil admin (`AdminContactEmailThread`) : bulles conversation, **Objet + Contenu** (signature incluse). Visible en haut du dossier (full + limited) et dans le file Emails (full).
 
 **Attribution** (`contactOwner.ts`) : manuelle (`assigned_to` / `assigned_at`). Helpers `contactAssignPatch()` / `contactUnassignPatch()`. Primes (`contactRevenue.ts`) : dossier attribué au restreint → global 60 % / restreint 40 %, sinon global 100 %.
 
