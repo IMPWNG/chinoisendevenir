@@ -35,13 +35,13 @@ export default function AdminShell({
     [
       { href: "/admin/dashboard", label: t("nav.contacts"), icon: "👥" },
       access.universities
-        ? { href: "/admin/rapport", label: t("nav.report"), icon: "📈" }
-        : null,
-      access.universities
         ? { href: "/admin/universites", label: t("nav.universities"), icon: "🏫" }
         : null,
       access.blog
         ? { href: "/admin/blog", label: t("nav.blog"), icon: "✍️" }
+        : null,
+      access.blog
+        ? { href: "/admin/rapport", label: t("nav.report"), icon: "📈" }
         : null,
     ] as Array<NavItem | null>
   ).filter((item): item is NavItem => item != null);
