@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
-import type { ContactEmailRow } from "../lib/contactEmails";
+import { threadEmailParts, type ContactEmailRow } from "../lib/contactEmails";
 
 function localeFor(lang: string) {
   if (lang === "zh") return "zh-CN";
@@ -121,6 +121,28 @@ export default function AdminContactEmailThread({
         >
           {emails.map((email) => {
             const inbound = email.direction === "in";
+            const parts = threadEmailParts(email);
+            const party = inbound ? email.from_email : email.to_email;
+            const labelClass = inbound ? "text-slate-400" : "text-blue-100/80";
+            const field = (label: string, value: string, strong = false) =>
+              value ? (
+                <div className="pt-2 first:pt-0">
+                  <div
+                    className={`uppercase tracking-wide font-bold mb-0.5 ${
+                      prominent ? "text-xs" : "text-[10px]"
+                    } ${labelClass}`}
+                  >
+                    {label}
+                  </div>
+                  <p
+                    className={`whitespace-pre-wrap leading-relaxed ${
+                      strong ? "font-semibold" : "opacity-95"
+                    }`}
+                  >
+                    {value}
+                  </p>
+                </div>
+              ) : null;
             return (
               <div
                 key={email.id}
@@ -136,7 +158,7 @@ export default function AdminContactEmailThread({
                   }`}
                 >
                   <div
-                    className={`font-semibold mb-1 ${
+                    className={`font-semibold mb-2 ${
                       prominent ? "text-sm" : "text-[11px]"
                     } ${inbound ? "text-slate-300" : "text-blue-100"}`}
                   >
@@ -145,13 +167,16 @@ export default function AdminContactEmailThread({
                       : t("dashboard.emailThreadOutbound")}
                     {" · "}
                     {formatWhen(email.sent_at, lang)}
+                    {party ? ` · ${party}` : ""}
                   </div>
-                  {email.subject ? (
-                    <p className="font-bold mb-1.5 leading-snug">{email.subject}</p>
-                  ) : null}
-                  <p className="whitespace-pre-wrap leading-relaxed opacity-95">
-                    {email.body_text || "—"}
-                  </p>
+                  {field(t("dashboard.emailThreadSubject"), parts.subject, true)}
+                  {field(t("dashboard.emailThreadHeading"), parts.title, true)}
+                  {field(t("dashboard.emailThreadSubtitle"), parts.subtitle)}
+                  {field(
+                    t("dashboard.emailThreadBody"),
+                    [parts.greeting, parts.content].filter(Boolean).join("\n\n") ||
+                      "—",
+                  )}
                 </div>
               </div>
             );

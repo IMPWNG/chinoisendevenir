@@ -1532,16 +1532,14 @@ function ContactModal({
         </div>
 
         <div className="p-8">
-          {limited ? (
-            <div className="mb-8 pb-8 border-b border-cyan-500/30">
-              <AdminContactEmailThread
-                contactId={contact.id}
-                refreshKey={emailThreadKey}
-                onMarkedRead={onEmailsMarkedRead}
-                prominent
-              />
-            </div>
-          ) : null}
+          <div className="mb-8 pb-8 border-b border-cyan-500/30">
+            <AdminContactEmailThread
+              contactId={contact.id}
+              refreshKey={emailThreadKey}
+              onMarkedRead={onEmailsMarkedRead}
+              prominent
+            />
+          </div>
 
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
@@ -1601,6 +1599,7 @@ function ContactModal({
                 contactId={contact.id}
                 refreshKey={emailThreadKey}
                 onMarkedRead={onEmailsMarkedRead}
+                prominent
               />
             )}
             <AdminContactEmail
