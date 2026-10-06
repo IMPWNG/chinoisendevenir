@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
@@ -9,6 +9,8 @@ import { useAdminAccess } from "../context/AdminAccessContext";
 import { ADMIN_LANGS } from "../i18n/admin";
 
 type NavItem = { href: string; label: string; icon: string };
+
+const LARGE_TYPE_KEY = "ced-admin-large-type";
 
 export default function AdminShell({
   user,
@@ -23,6 +25,7 @@ export default function AdminShell({
   const { lang, setLang, t } = useAdminI18n();
   const access = useAdminAccess();
   const limited = access.role !== "full";
+  const [largeType, setLargeType] = useState(false);
   const isUniversities = pathname?.startsWith("/admin/universites");
   const isBlog = pathname?.startsWith("/admin/blog");
   const isReport = pathname?.startsWith("/admin/rapport");
@@ -30,6 +33,11 @@ export default function AdminShell({
   useEffect(() => {
     if (limited && lang !== "fr") setLang("fr");
   }, [limited, lang, setLang]);
+
+  useEffect(() => {
+    if (!limited) return;
+    setLargeType(window.localStorage.getItem(LARGE_TYPE_KEY) === "1");
+  }, [limited]);
 
   const nav = (
     [
@@ -47,7 +55,11 @@ export default function AdminShell({
   ).filter((item): item is NavItem => item != null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div
+      className={`min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950${
+        limited && largeType ? " admin-large-type" : ""
+      }`}
+    >
       <header className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4">
           <div className="flex items-center gap-3">
@@ -125,6 +137,24 @@ export default function AdminShell({
                 <p className="text-xs text-slate-500">{t("connected")}</p>
               )}
             </div>
+            {limited ? (
+              <button
+                type="button"
+                aria-pressed={largeType}
+                onClick={() => {
+                  const next = !largeType;
+                  setLargeType(next);
+                  window.localStorage.setItem(LARGE_TYPE_KEY, next ? "1" : "0");
+                }}
+                className={`text-sm font-bold px-3.5 py-2 rounded-lg border transition-colors ${
+                  largeType
+                    ? "bg-blue-600 text-white border-blue-500"
+                    : "text-slate-300 border-slate-600 hover:border-slate-400 hover:text-white"
+                }`}
+              >
+                {largeType ? `A− ${t("a11yNormalType")}` : `A+ ${t("a11yLargeType")}`}
+              </button>
+            ) : null}
             <button
               type="button"
               onClick={onLogout}

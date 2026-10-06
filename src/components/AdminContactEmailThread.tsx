@@ -29,10 +29,12 @@ export default function AdminContactEmailThread({
   contactId,
   refreshKey = 0,
   onMarkedRead,
+  prominent = false,
 }: {
   contactId: string;
   refreshKey?: number;
   onMarkedRead?: () => void;
+  prominent?: boolean;
 }) {
   const { t, lang } = useAdminI18n();
   const [emails, setEmails] = useState<ContactEmailRow[]>([]);
@@ -94,8 +96,12 @@ export default function AdminContactEmailThread({
   }, [emails.length]);
 
   return (
-    <div className="mb-6">
-      <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+    <div className={prominent ? "mb-0" : "mb-6"}>
+      <label
+        className={`font-bold text-slate-300 block mb-3 uppercase tracking-wide ${
+          prominent ? "text-base" : "text-sm"
+        }`}
+      >
         💬 {t("dashboard.emailThreadTitle")}
       </label>
 
@@ -108,7 +114,11 @@ export default function AdminContactEmailThread({
       ) : emails.length === 0 ? (
         <p className="text-sm text-slate-400">{t("dashboard.emailThreadEmpty")}</p>
       ) : (
-        <div className="max-h-80 overflow-y-auto space-y-3 pr-1 rounded-xl bg-slate-900/40 border border-slate-700/40 p-4">
+        <div
+          className={`overflow-y-auto space-y-3 pr-1 rounded-xl bg-slate-900/40 border border-slate-700/40 p-4 ${
+            prominent ? "max-h-[28rem]" : "max-h-80"
+          }`}
+        >
           {emails.map((email) => {
             const inbound = email.direction === "in";
             return (
@@ -117,16 +127,18 @@ export default function AdminContactEmailThread({
                 className={`flex ${inbound ? "justify-start" : "justify-end"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
+                  className={`max-w-[90%] rounded-2xl px-4 py-3 shadow-sm ${
+                    prominent ? "text-base" : "text-sm"
+                  } ${
                     inbound
                       ? "bg-slate-700/80 text-slate-100 rounded-bl-md"
                       : "bg-blue-600/90 text-white rounded-br-md"
                   }`}
                 >
                   <div
-                    className={`text-[11px] font-semibold mb-1 ${
-                      inbound ? "text-slate-300" : "text-blue-100"
-                    }`}
+                    className={`font-semibold mb-1 ${
+                      prominent ? "text-sm" : "text-[11px]"
+                    } ${inbound ? "text-slate-300" : "text-blue-100"}`}
                   >
                     {inbound
                       ? t("dashboard.emailThreadInbound")

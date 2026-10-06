@@ -1385,6 +1385,7 @@ function ContactModal({
   }, [contact.id, contact.formule, contact.notes_admin]);
 
   const accessGranted = isStudentAccessGranted(contact);
+  const limited = access.role !== "full";
   const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
   const selectedFormuleNumber = getFormuleNumber(selectedFormule);
   const sameActiveFormule =
@@ -1531,6 +1532,17 @@ function ContactModal({
         </div>
 
         <div className="p-8">
+          {limited ? (
+            <div className="mb-8 pb-8 border-b border-cyan-500/30">
+              <AdminContactEmailThread
+                contactId={contact.id}
+                refreshKey={emailThreadKey}
+                onMarkedRead={onEmailsMarkedRead}
+                prominent
+              />
+            </div>
+          ) : null}
+
           <div className="mb-8 pb-8 border-b border-slate-700/50">
             <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
               ⭐ {t("dashboard.currentStatus")}
@@ -1584,11 +1596,13 @@ function ContactModal({
           </FilePanel>
 
           <FilePanel title={`📧 ${t("dashboard.emailSection")}`}>
-            <AdminContactEmailThread
-              contactId={contact.id}
-              refreshKey={emailThreadKey}
-              onMarkedRead={onEmailsMarkedRead}
-            />
+            {limited ? null : (
+              <AdminContactEmailThread
+                contactId={contact.id}
+                refreshKey={emailThreadKey}
+                onMarkedRead={onEmailsMarkedRead}
+              />
+            )}
             <AdminContactEmail
               contact={contact}
               allowTemplates

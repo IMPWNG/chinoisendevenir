@@ -2847,3 +2847,26 @@ a.formule-card-btn {
     flex-direction: column;
   }
 }
+
+.admin-large-type {
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.admin-large-type .text-xs,
+.admin-large-type .text-\[11px\] {
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.admin-large-type .text-sm {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.admin-large-type button,
+.admin-large-type input,
+.admin-large-type select,
+.admin-large-type textarea {
+  font-size: 1.05rem;
+}
