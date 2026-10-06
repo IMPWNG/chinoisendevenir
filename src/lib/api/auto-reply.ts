@@ -17,7 +17,6 @@ import {
   getEmailTemplateDraft,
 } from "../emailTemplateDrafts";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
-import { autoReplyMarker } from "../emailIntents";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
@@ -213,7 +212,7 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     generateHtml: (contact) =>
       generateFormulesPresentationTemplate(contact.prenom || ""),
     action: "email_formules",
-    description: `Email formules d'accompagnement envoyé ${autoReplyMarker("tarifs")}`,
+    description: "Email formules d'accompagnement envoyé",
     status: "formules_présentées",
   },
   espace_etudiant: {

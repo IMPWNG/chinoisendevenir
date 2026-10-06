@@ -27,6 +27,11 @@ import {
 } from "../emailIntents";
 import { asString, errorMessage } from "../request";
 import { storeInboundContactEmail } from "../contactEmails";
+import {
+  AUTO_MAIL_ACTOR,
+  STUDENT_HISTORY_ACTOR,
+  inboundIntentPhrase,
+} from "../suiviHistory";
 
 const supabase = getSupabaseAdmin();
 const resend = new Resend(getResendApiKey());
@@ -656,7 +661,8 @@ export async function processInboundEmail(raw: unknown) {
       contactId(contact),
       contact.email,
       "note_ajoutee",
-      `Contact créé depuis un email reçu (${from})`,
+      `Dossier créé à partir d'un email reçu de l'étudiant (${from})`,
+      STUDENT_HISTORY_ACTOR,
     );
   } else if (extractedName.prenom || extractedName.nom) {
     contact = await fillMissingContactName(
@@ -683,7 +689,8 @@ export async function processInboundEmail(raw: unknown) {
     contactId(contact),
     contact.email,
     "reponse_client",
-    `Email reçu (${subject || "sans sujet"}) [${intent}] : ${truncate(replyText || rawText || "(vide)")}`,
+    `Email reçu de l'étudiant — ${inboundIntentPhrase(intent)}. Objet : ${subject || "sans objet"}. ${truncate(replyText || rawText || "(vide)")}`,
+    STUDENT_HISTORY_ACTOR,
   );
 
   await storeInboundContactEmail({
@@ -707,6 +714,7 @@ export async function processInboundEmail(raw: unknown) {
           contact.email,
           "note_ajoutee",
           `Échec envoi confirmation formule (${formule.label}) : ${errorMessage(sent.error, "erreur Resend")}`,
+          AUTO_MAIL_ACTOR,
         );
         return {
           success: false,
@@ -722,13 +730,15 @@ export async function processInboundEmail(raw: unknown) {
         contactId(contact),
         contact.email,
         "formule_choisie",
-        `Formule choisie automatiquement : ${formule.label}`,
+        `L'étudiant a choisi la formule : ${formule.label}`,
+        STUDENT_HISTORY_ACTOR,
       );
       await logAction(
         contactId(contact),
         contact.email,
         "email_envoye",
-        `Email de confirmation envoyé — un appel téléphonique sera placé sous peu pour faire le point sur le dossier (${formule.label})`,
+        `Envoi automatique : confirmation de formule et appel à placer (${formule.label})`,
+        AUTO_MAIL_ACTOR,
       );
     }
 
@@ -764,7 +774,8 @@ export async function processInboundEmail(raw: unknown) {
       contactId(contact),
       contact.email,
       "email_formules",
-      "Email des formules envoyé automatiquement après réponse du prospect [auto:tarifs]",
+      "Envoi automatique : mail des formules d'accompagnement, après une demande de l'étudiant",
+      AUTO_MAIL_ACTOR,
     );
 
     return {

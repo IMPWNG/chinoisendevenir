@@ -64,6 +64,10 @@ import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
 import { formatEurosOnly } from "../lib/money";
 import { paymentPlan } from "../lib/paymentPlan";
+import {
+  formatHistoryDescription,
+  historyActorKind,
+} from "../lib/suiviHistory";
 
 const STATUTS = SUIVI_STATUTS;
 
@@ -1827,14 +1831,36 @@ function ContactModal({
                       </div>
                       {action.description && (
                         <p className="text-slate-300 text-sm mb-2">
-                          {action.description}
+                          {formatHistoryDescription(action.description, t)}
                         </p>
                       )}
-                      {action.user_admin && (
-                        <p className="text-xs text-slate-600">
-                          👤 {action.user_admin}
-                        </p>
-                      )}
+                      {(() => {
+                        const kind = historyActorKind(
+                          action.action,
+                          action.user_admin,
+                          action.description,
+                        );
+                        if (!kind) return null;
+                        if (kind === "student") {
+                          return (
+                            <p className="text-xs text-emerald-400/90">
+                              🎓 {t("dashboard.historyActorStudent")}
+                            </p>
+                          );
+                        }
+                        if (kind === "auto") {
+                          return (
+                            <p className="text-xs text-slate-500">
+                              👤 {t("dashboard.historyActorAuto")}
+                            </p>
+                          );
+                        }
+                        return (
+                          <p className="text-xs text-slate-600">
+                            👤 {action.user_admin}
+                          </p>
+                        );
+                      })()}
                     </div>
                   );
                 })

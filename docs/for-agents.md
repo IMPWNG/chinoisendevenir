@@ -34,7 +34,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 
 **Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule. Fil admin (`AdminContactEmailThread`) : bulles conversation, **Objet + Contenu** (signature incluse). Visible en haut du dossier (full + limited) et dans le file Emails (full).
 
-**Attribution** (`contactOwner.ts`) : manuelle (`assigned_to` / `assigned_at`). Helpers `contactAssignPatch()` / `contactUnassignPatch()`. Primes (`contactRevenue.ts`) : dossier attribué au restreint → global 60 % / restreint 40 %, sinon global 100 %.
+**Attribution** (`contactOwner.ts`) : manuelle (`assigned_to` / `assigned_at`). Helpers `contactAssignPatch()` / `contactUnassignPatch()`. Primes (`contactRevenue.ts`) : dossier attribué au restreint → global 60 % / restreint 40 %, sinon global 100 %. Historique : emails reçus = acteur `étudiant` (🎓) ; `système_automatique` = envoi mail auto seulement. Tags inbound `[demande_formules]` / `[auto:tarifs]` réécrits en clair (`suiviHistory.ts`).
 
 **Matching** (`matching/run.ts` → `runMatching()`) : normalize → enrich LLM → `rankMatches` (`weights.ts`, pas `score.ts`) → mix safety/match/reach → rapports dual → `persist.ts` (`matching_runs`). Langue : `chinese.ts`, préfixe `[[CHINESE_MATCHING_JSON]]`. Univ. : `[[MATCHING_JSON]]`. Mix limité par formule. Vue étudiant : `matchingForStudent()`.
 
