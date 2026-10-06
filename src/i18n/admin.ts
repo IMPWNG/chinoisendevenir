@@ -313,6 +313,8 @@ export const adminTranslations = {
       sendEmail: "Envoyer",
       emailHintFormules:
         "Action : Email formules • Statut : formules présentées (espace encore verrouillé)",
+      emailHintBienvenue:
+        "Action : Email envoyé • Statut : bienvenue envoyé, si le dossier est encore au tout début.",
       emailHintEspace:
         "N'avance pas le statut. À envoyer aux étudiants qui ont choisi une formule : création de compte et mode d'emploi.",
       emailHintRelance1:
@@ -348,7 +350,7 @@ export const adminTranslations = {
       formuleSection: "Formule d'accompagnement",
       noFormule: "-- Aucune formule --",
       formuleHint:
-        "Espace verrouillé par défaut. Après paiement manuel, choisissez la formule puis débloquez. L'étudiant voit alors son espace avec cette formule.",
+        "Choisissez la formule, puis débloquez l'espace. Le statut CRM (client payé, etc.) ne change pas.",
       studentSpace: "Espace étudiant",
       unlocked:
         "Accès débloqué. Le suivi et les documents sont visibles pour cet étudiant.",
@@ -356,10 +358,12 @@ export const adminTranslations = {
         "Espace débloqué pour la {formule}. L'étudiant voit cette formule sur son profil.",
       lockSpace: "Verrouiller l'espace",
       locked:
-        "Verrouillé jusqu'au paiement. Choisissez la formule, puis débloquez après paiement manuel.",
-      unlockSpace: "Débloquer après paiement",
+        "Verrouillé. Choisissez la formule, puis débloquez l'espace étudiant.",
+      unlockSpace: "Débloquer l'espace étudiant",
       applyFormule: "Appliquer cette formule",
       unlockNeedFormule: "Choisissez d'abord une formule (1, 2 ou 3).",
+      espaceDebloqueMissingColumn:
+        "Colonne espace_debloque absente. Exécutez sql/contacts-espace-debloque.sql dans l’éditeur Supabase, puis actualisez.",
       formuleActive: "Formule active",
       progressSection: "Avancement du dossier",
       progressVisible: "Étape visible dans l'espace étudiant :",
@@ -423,7 +427,7 @@ export const adminTranslations = {
       select: "-- Sélectionner --",
       formuleSavedNote: "Formule enregistrée manuellement : {formule}",
       formuleUnlockedNote:
-        "Espace débloqué après paiement manuel — formule : {formule}",
+        "Espace étudiant débloqué — formule : {formule}",
       formuleRemovedNote: "Formule retirée manuellement",
       progressActionNote: "Avancement dossier : {step}",
       statusChangedNote: "Statut changé vers « {status} »",
@@ -601,7 +605,7 @@ export const adminTranslations = {
       reponse_langue: "Réponse — École de langue",
       reponse_admission: "Réponse — Admission universitaire",
       reponse_processus: "Réponse — Processus et délais",
-      reponse_general: "Réponse — Premier contact",
+      reponse_general: "Bienvenue — premier contact",
       custom: "Message libre",
     },
     niveau: {
@@ -984,6 +988,8 @@ export const adminTranslations = {
       sendEmail: "Send",
       emailHintFormules:
         "Action: Packages email • Status: packages presented (student space still locked)",
+      emailHintBienvenue:
+        "Action: Email sent • Status: welcome sent, if the file is still at the very start.",
       emailHintEspace:
         "Does not change the status. Send to students who chose a plan: account setup and how to use the space.",
       emailHintRelance1: "Action: Follow-up 1 • Status: follow-up in progress",
@@ -1017,18 +1023,19 @@ export const adminTranslations = {
       formuleSection: "Support package",
       noFormule: "-- No package --",
       formuleHint:
-        "Locked by default. After manual payment, choose the package then unlock. The student then sees that package on their profile.",
+        "Choose the package, then unlock the space. The CRM status (client paid, etc.) does not change.",
       studentSpace: "Student space",
       unlocked:
         "Access unlocked. Progress and documents are visible to this student.",
       unlockedWithFormule:
         "Space unlocked for {formule}. The student sees this package on their profile.",
       lockSpace: "Lock the space",
-      locked:
-        "Locked until payment. Choose the package, then unlock after manual payment.",
-      unlockSpace: "Unlock after payment",
+      locked: "Locked. Choose the package, then unlock the student space.",
+      unlockSpace: "Unlock the student space",
       applyFormule: "Apply this package",
       unlockNeedFormule: "Choose a package (1, 2 or 3) first.",
+      espaceDebloqueMissingColumn:
+        "espace_debloque column missing. Run sql/contacts-espace-debloque.sql in the Supabase editor, then refresh.",
       formuleActive: "Active package",
       progressSection: "Application progress",
       progressVisible: "Step shown in the student space:",
@@ -1092,7 +1099,7 @@ export const adminTranslations = {
       select: "-- Select --",
       formuleSavedNote: "Package saved manually: {formule}",
       formuleUnlockedNote:
-        "Space unlocked after manual payment — package: {formule}",
+        "Student space unlocked — package: {formule}",
       formuleRemovedNote: "Package removed manually",
       progressActionNote: "Application progress: {step}",
       statusChangedNote: "Status changed to “{status}”",
@@ -1270,7 +1277,7 @@ export const adminTranslations = {
       reponse_langue: "Reply — Language school",
       reponse_admission: "Reply — University admission",
       reponse_processus: "Reply — Process and timeline",
-      reponse_general: "Reply — First contact",
+      reponse_general: "Welcome — first contact",
       custom: "Free-text message",
     },
     niveau: {
@@ -1641,6 +1648,7 @@ export const adminTranslations = {
       emailNoAddress: "该联系人没有邮箱。",
       sendEmail: "发送",
       emailHintFormules: "操作：套餐邮件 • 状态：已发送套餐（学生空间仍锁定）",
+      emailHintBienvenue: "操作：已发邮件 • 状态：已发欢迎邮件（仅当档案仍处于最初阶段）。",
       emailHintEspace: "不改变状态。发给已选套餐的学生：注册账号和使用说明。",
       emailHintRelance1: "操作：跟进 1 • 状态：跟进中",
       emailHintRelance2: "操作：跟进 2 • 状态：跟进中",
@@ -1671,15 +1679,17 @@ export const adminTranslations = {
       formuleSection: "辅导套餐",
       noFormule: "-- 暂无套餐 --",
       formuleHint:
-        "默认锁定。人工确认付款后，选择套餐再解锁。学生即可在个人资料看到该套餐。",
+        "选择套餐后解锁学生空间。CRM 状态（已付款等）不会改变。",
       studentSpace: "学生空间",
       unlocked: "已解锁。该学生可以查看进度和文件。",
       unlockedWithFormule: "已按 {formule} 解锁。学生会在个人资料上看到该套餐。",
       lockSpace: "锁定空间",
-      locked: "付款前锁定。选择套餐后，人工确认付款再解锁。",
-      unlockSpace: "付款后解锁",
+      locked: "已锁定。选择套餐后解锁学生空间。",
+      unlockSpace: "解锁学生空间",
       applyFormule: "应用此套餐",
       unlockNeedFormule: "请先选择套餐（1、2 或 3）。",
+      espaceDebloqueMissingColumn:
+        "缺少 espace_debloque 列。请在 Supabase 运行 sql/contacts-espace-debloque.sql 后刷新。",
       formuleActive: "当前套餐",
       progressSection: "申请进度",
       progressVisible: "学生空间显示的步骤：",
@@ -1741,7 +1751,7 @@ export const adminTranslations = {
       progressSaveFail: "无法保存进度。",
       select: "-- 请选择 --",
       formuleSavedNote: "已手动保存套餐：{formule}",
-      formuleUnlockedNote: "人工确认付款后已解锁 — 套餐：{formule}",
+      formuleUnlockedNote: "已解锁学生空间 — 套餐：{formule}",
       formuleRemovedNote: "已手动移除套餐",
       progressActionNote: "申请进度：{step}",
       statusChangedNote: "状态已改为「{status}」",
@@ -1917,7 +1927,7 @@ export const adminTranslations = {
       reponse_langue: "回复 — 语言班",
       reponse_admission: "回复 — 大学录取",
       reponse_processus: "回复 — 流程与时间",
-      reponse_general: "回复 — 首次咨询",
+      reponse_general: "欢迎 — 首次咨询",
       custom: "自定义邮件",
     },
     niveau: {

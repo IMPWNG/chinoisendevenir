@@ -13,6 +13,7 @@ import {
   getChosenFormule,
   getDisplayedStepIndex,
   getGrantedFormuleNumber,
+  isFormulePaid,
   type ContactRow,
 } from "./studentProgress";
 
@@ -55,6 +56,7 @@ export function publicStudentProfile(contact: ContactRow | null | undefined, use
 
   const formule = getChosenFormule(contact);
   const unlocked = isStudentAccessGranted(contact);
+  const paid = isFormulePaid(contact);
   const formuleNumber = getGrantedFormuleNumber(contact) || getFormuleNumber(formule);
   const hasForm = hasFilledLeadForm(contact);
 
@@ -71,7 +73,7 @@ export function publicStudentProfile(contact: ContactRow | null | undefined, use
     budget: contact.budget || "",
     date_rentree: contact.date_rentree || "",
     hasForm,
-    paid: unlocked,
+    paid,
     unlocked,
     canChooseFormule: canStudentChooseFormule(contact),
     formule,
@@ -80,7 +82,7 @@ export function publicStudentProfile(contact: ContactRow | null | undefined, use
     access: getUnlockedStudentAccess(unlocked ? formuleNumber || 1 : 0),
     suivi_statut: contact.suivi_statut || "",
     dossier_etape: getDisplayedStepIndex(contact),
-    adminUnlocked: isStudentSpaceUnlocked(contact.suivi_statut),
+    adminUnlocked: isStudentSpaceUnlocked(contact),
     paiements: contact.paiements ?? null,
   };
 }

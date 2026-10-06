@@ -228,6 +228,18 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     description: "Guide espace étudiant envoyé — compte et mode d'emploi",
     status: null,
   },
+  reponse_general: {
+    subject: "Votre projet d'études en Chine — nous avons bien reçu votre message",
+    generateHtml: (contact) => {
+      const draft = getEmailTemplateDraft("reponse_general");
+      return draft
+        ? generateDraftEmailHtml(contact, draft)
+        : generateCustomEmailHtml(contact, {});
+    },
+    action: "email_envoye",
+    description: "Email de bienvenue — premier contact",
+    status: "bienvenue_envoyé",
+  },
   relance_formules: {
     subject: "Avez-vous choisi votre formule d'accompagnement ?",
     generateHtml: (contact) =>
@@ -256,7 +268,12 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
   },
 };
 
-const ADMIN_SENDABLE_TEMPLATES = new Set(["custom", "espace_etudiant"]);
+const ADMIN_SENDABLE_TEMPLATES = new Set([
+  "custom",
+  "reponse_general",
+  "formules_presentation",
+  "espace_etudiant",
+]);
 
 // ✉️ Envoyer un email selon le template choisi
 async function sendTemplatedEmail(

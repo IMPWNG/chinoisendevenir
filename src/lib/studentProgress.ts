@@ -25,6 +25,8 @@ export type ContactRow = {
   paiements?: unknown;
   /** Admin flag « Suivi prioritaire ». Independent of suivi_statut. */
   prioritaire?: boolean | null;
+  /** Admin flag: student space progress/docs, independent of client_payé. */
+  espace_debloque?: boolean | null;
   last_touched_by?: string | null;
   last_touched_at?: string | null;
   closed_by?: string | null;
@@ -39,7 +41,6 @@ export type StudentDocRef = {
 import {
   canonicalStatut,
   PAID_STATUSES,
-  STUDENT_UNLOCKED_STATUSES,
 } from "./suiviStatuts";
 
 export const DOMAINES_ETUDES = [
@@ -173,8 +174,11 @@ export function stripAvancementNote(notesAdmin: unknown) {
     .trim();
 }
 
-export function isStudentSpaceUnlocked(statut: unknown) {
-  return STUDENT_UNLOCKED_STATUSES.has(canonicalStatut(statut));
+export function isStudentSpaceUnlocked(contact: ContactRow | null | undefined) {
+  if (!contact) return false;
+  if (contact.espace_debloque === true) return true;
+  if (contact.espace_debloque === false) return false;
+  return isFormulePaid(contact);
 }
 
 export function isFormulePaid(contact: ContactRow | null | undefined) {
@@ -184,8 +188,18 @@ export function isFormulePaid(contact: ContactRow | null | undefined) {
 export function isStudentAccessGranted(contact: ContactRow | null | undefined) {
   if (!contact) return false;
   if (!getChosenFormule(contact)) return false;
+  return isStudentSpaceUnlocked(contact);
+}
+
+export function espaceDebloquePatch(on: boolean): { espace_debloque: boolean } {
+  return { espace_debloque: on === true };
+}
+
+export function isMissingEspaceDebloqueColumn(message: string | null | undefined) {
+  const text = String(message || "");
   return (
-    isStudentSpaceUnlocked(contact.suivi_statut) || isFormulePaid(contact)
+    /espace_debloque/i.test(text) &&
+    /(column|schema cache|does not exist|n'existe pas)/i.test(text)
   );
 }
 

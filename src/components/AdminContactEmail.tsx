@@ -378,7 +378,12 @@ export default function AdminContactEmail({
               </option>
             ))}
           </select>
-          <p className="text-xs text-slate-500">{t("dashboard.emailHintEspace")}</p>
+          <p className="text-xs text-slate-500">
+            {template === "reponse_general" && t("dashboard.emailHintBienvenue")}
+            {template === "formules_presentation" &&
+              t("dashboard.emailHintFormules")}
+            {template === "espace_etudiant" && t("dashboard.emailHintEspace")}
+          </p>
 
           <div>
             <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">

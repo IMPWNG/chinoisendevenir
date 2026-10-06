@@ -30,6 +30,8 @@ import {
   mergeFormuleNote,
   stripFormuleNote,
   mergeAvancementNote,
+  espaceDebloquePatch,
+  isMissingEspaceDebloqueColumn,
   type ContactRow,
 } from "../lib/studentProgress";
 import {
@@ -344,8 +346,7 @@ export default function AdminDashboard() {
 
     const nextFormule = formuleLabel || null;
     const shouldUnlock =
-      Boolean(nextFormule) && !isStudentSpaceUnlocked(current.suivi_statut);
-    const unlockStatut = toStoredStatut("client_payé");
+      Boolean(nextFormule) && !isStudentSpaceUnlocked(current);
     const notes = nextFormule
       ? mergeFormuleNote(current.notes_admin, nextFormule)
       : stripFormuleNote(current.notes_admin) || null;
@@ -353,19 +354,19 @@ export default function AdminDashboard() {
     const payloadBase: {
       formule: string | null;
       notes_admin: string | null;
-      suivi_statut?: string;
+      espace_debloque?: boolean;
     } = {
       formule: nextFormule,
       notes_admin: notes,
     };
-    if (shouldUnlock) payloadBase.suivi_statut = unlockStatut;
+    if (shouldUnlock) Object.assign(payloadBase, espaceDebloquePatch(true));
 
     const payloads = [
       { ...payloadBase, updated_at: new Date().toISOString() },
       payloadBase,
       {
         notes_admin: notes,
-        ...(shouldUnlock ? { suivi_statut: unlockStatut } : {}),
+        ...(shouldUnlock ? espaceDebloquePatch(true) : {}),
       },
     ];
 
@@ -381,6 +382,10 @@ export default function AdminDashboard() {
           break;
         }
         console.warn("Erreur update formule:", error.message);
+        if (isMissingEspaceDebloqueColumn(error.message)) {
+          alert(t("dashboard.espaceDebloqueMissingColumn"));
+          return;
+        }
       }
 
       if (!saved) {
@@ -390,11 +395,7 @@ export default function AdminDashboard() {
 
       await adminSupabase.from("suivi_actions").insert({
         contact_id: id,
-        action: shouldUnlock
-          ? "changement_statut"
-          : nextFormule
-            ? "formule_choisie"
-            : "contact_modifier",
+        action: nextFormule ? "formule_choisie" : "contact_modifier",
         description: shouldUnlock
           ? t("dashboard.formuleUnlockedNote", { formule: nextFormule || "" })
           : nextFormule
@@ -407,7 +408,7 @@ export default function AdminDashboard() {
         ...current,
         formule: nextFormule,
         notes_admin: notes,
-        suivi_statut: shouldUnlock ? "client_payé" : current.suivi_statut,
+        ...(shouldUnlock ? espaceDebloquePatch(true) : {}),
       };
 
       setContacts((prev) =>
@@ -420,6 +421,36 @@ export default function AdminDashboard() {
       console.error("Erreur update formule:", err);
         alert(t("genericError"));
     }
+  };
+
+  const lockStudentSpace = async (id: string) => {
+    const current =
+      (selectedContact?.id === id ? selectedContact : null) ||
+      contacts.find((c) => c.id === id);
+    if (!current) return;
+    const patch = espaceDebloquePatch(false);
+    let { error } = await adminSupabase
+      .from("contacts")
+      .update({ ...patch, updated_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) {
+      const retry = await adminSupabase.from("contacts").update(patch).eq("id", id);
+      error = retry.error;
+    }
+    if (error) {
+      alert(
+        isMissingEspaceDebloqueColumn(error.message)
+          ? t("dashboard.espaceDebloqueMissingColumn")
+          : t("error") + " : " + error.message,
+      );
+      return;
+    }
+    setContacts((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...patch } : c)),
+    );
+    setSelectedContact((prev) =>
+      prev && prev.id === id ? { ...prev, ...patch } : prev,
+    );
   };
 
   const updateDossierEtape = async (id: string, etapeIndex: number) => {
@@ -1144,6 +1175,7 @@ export default function AdminDashboard() {
           }}
           onUpdateStatut={updateStatut}
           onUpdateFormule={updateFormule}
+          onLockStudentSpace={lockStudentSpace}
           onUpdateDossierEtape={updateDossierEtape}
           onToggleAssign={toggleAssign}
           onTogglePriority={togglePriority}
@@ -1303,6 +1335,7 @@ function ContactModal({
   onClose,
   onUpdateStatut,
   onUpdateFormule,
+  onLockStudentSpace,
   onUpdateDossierEtape,
   onToggleAssign,
   onTogglePriority,
@@ -1319,6 +1352,7 @@ function ContactModal({
   onClose: () => void;
   onUpdateStatut: (id: string, status: string) => Promise<void>;
   onUpdateFormule: (id: string, formuleLabel: string) => Promise<void>;
+  onLockStudentSpace: (id: string) => Promise<void>;
   onUpdateDossierEtape: (id: string, etapeIndex: number) => Promise<void>;
   onToggleAssign: (id: string, assign: boolean) => Promise<void>;
   onTogglePriority: (id: string, on: boolean) => Promise<void>;
@@ -1633,12 +1667,10 @@ function ContactModal({
                     ? t("dashboard.applyFormule")
                     : t("dashboard.unlockSpace")}
               </button>
-              {isStudentSpaceUnlocked(contact.suivi_statut) ? (
+              {isStudentSpaceUnlocked(contact) ? (
                 <button
                   type="button"
-                  onClick={() =>
-                    onUpdateStatut(contact.id, "formules_présentées")
-                  }
+                  onClick={() => onLockStudentSpace(contact.id)}
                   className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
                 >
                   {t("dashboard.lockSpace")}

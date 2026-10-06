@@ -1,27 +1,50 @@
 /**
- * Self-check: student space unlock = paid statuses only.
+ * Self-check: student space unlock is the admin flag, not client_payé.
  * Run: npx tsx src/lib/suiviStatuts.check.ts
  */
+import { PAID_STATUSES, canonicalStatut } from "./suiviStatuts";
 import {
-  PAID_STATUSES,
-  STUDENT_UNLOCKED_STATUSES,
-  canonicalStatut,
-} from "./suiviStatuts";
-import { isStudentSpaceUnlocked, canStudentChooseFormule } from "./studentProgress";
+  canStudentChooseFormule,
+  isStudentAccessGranted,
+  isStudentSpaceUnlocked,
+} from "./studentProgress";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
 }
 
+assert(PAID_STATUSES.has("client_payé"), "paid includes client_payé");
 assert(
-  STUDENT_UNLOCKED_STATUSES === PAID_STATUSES,
-  "unlock set must be the paid set",
+  isStudentSpaceUnlocked({ espace_debloque: true, suivi_statut: "formule_choisie" }),
+  "flag unlocks without paid status",
 );
-assert(!isStudentSpaceUnlocked("formule_choisie"), "formule_choisie stays locked");
-assert(!isStudentSpaceUnlocked("attente_paiement"), "attente_paiement stays locked");
-assert(!isStudentSpaceUnlocked("offre_envoyée"), "offre_envoyée stays locked");
-assert(isStudentSpaceUnlocked("client_payé"), "client_payé unlocks");
-assert(isStudentSpaceUnlocked("dossier_préparation"), "later paid statuses unlock");
+assert(
+  !isStudentSpaceUnlocked({ espace_debloque: false, suivi_statut: "client_payé" }),
+  "flag off stays locked even if paid",
+);
+assert(
+  !isStudentAccessGranted({
+    espace_debloque: true,
+    prenom: "A",
+    nom: "B",
+    pays: "FR",
+    dernier_diplome: "Bac",
+    domaine_etudes: "Droit",
+  }),
+  "unlock without formule is not full access",
+);
+assert(
+  isStudentAccessGranted({
+    espace_debloque: true,
+    formule: "Admission universitaire",
+    prenom: "A",
+    nom: "B",
+    pays: "FR",
+    dernier_diplome: "Bac",
+    domaine_etudes: "Droit",
+  }),
+  "flag + formule grants access",
+);
 assert(
   canStudentChooseFormule({
     prenom: "A",
@@ -43,10 +66,7 @@ assert(
   }),
   "already chosen → no picker",
 );
-assert(
-  canonicalStatut("client_payé") === "client_payé",
-  "canonical client_payé",
-);
+assert(canonicalStatut("client_payé") === "client_payé", "canonical client_payé");
 assert(canonicalStatut("perdu") === "prospect_perdu", "legacy perdu maps");
 assert(canonicalStatut("prospect_perdu") === "prospect_perdu", "prospect_perdu stays");
 

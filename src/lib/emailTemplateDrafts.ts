@@ -1,4 +1,5 @@
 import { generateCustomEmailHtml, SITE_URL } from "./emailLayout";
+import { displayFormulePrice, localizeFormules } from "./formules";
 
 export type EmailTemplateDraft = {
   subject: string;
@@ -7,9 +8,40 @@ export type EmailTemplateDraft = {
   body: string;
 };
 
-export const CARD_EMAIL_TEMPLATE_KEYS = ["espace_etudiant"] as const;
+export const CARD_EMAIL_TEMPLATE_KEYS = [
+  "reponse_general",
+  "formules_presentation",
+  "espace_etudiant",
+] as const;
 
 export type CardEmailTemplateKey = (typeof CARD_EMAIL_TEMPLATE_KEYS)[number];
+
+export function formuleChoiceLines() {
+  return localizeFormules()
+    .map(
+      (formule) =>
+        `${formule.number} — ${formule.title} : ${displayFormulePrice(formule)}`,
+    )
+    .join("\n");
+}
+
+function bienvenueBody() {
+  return [
+    "Merci pour votre message. Nous avons bien reçu votre demande concernant un projet d'études en Chine.",
+    `Pour étudier votre profil, complétez le formulaire : ${SITE_URL}`,
+    "Nous reviendrons vers vous ensuite pour les prochaines étapes.",
+  ].join("\n\n");
+}
+
+function formulesBody() {
+  return [
+    "Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.",
+    "Ces formules nous aident à comprendre votre besoin. Votre choix n'est pas un engagement, et aucun paiement n'est demandé à cette étape.",
+    formuleChoiceLines(),
+    "Répondez à cet e-mail avec le numéro de la formule. Nous reviendrons ensuite vers vous pour un appel.",
+    "Nous ne pouvons pas garantir une admission, une bourse, un visa ou un logement. Les décisions finales appartiennent aux établissements et aux autorités concernées.",
+  ].join("\n\n");
+}
 
 function espaceEtudiantBody() {
   const guide = `${SITE_URL}espace-etudiant/guide`;
@@ -30,7 +62,7 @@ function espaceEtudiantBody() {
     "— Le bloc visa liste les pièces selon la durée du séjour (X1, X2 ou L).",
     "— Après le visa : préparer l'arrivée en Chine (WeChat, Alipay, et un VPN à installer avant le départ pour Gmail, WhatsApp et les autres services internationaux).",
     `Le guide illustré, écran par écran : ${guide}`,
-    "Nous ne garantissons pas une admission, une bourse, un visa, un logement, ni l'ouverture d'un compte WeChat, Alipay ou bancaire. Les décisions appartiennent aux établissements, aux autorités et aux plateformes concernées.",
+    "Nous ne garantissons pas une admission, une bourse, un visa ou un logement. Les décisions appartiennent aux établissements, aux autorités et aux plateformes concernées.",
   ].join("\n\n");
 }
 
@@ -38,6 +70,18 @@ const DRAFTS: Record<
   CardEmailTemplateKey,
   Omit<EmailTemplateDraft, "body"> & { body: () => string }
 > = {
+  reponse_general: {
+    subject: "Votre projet d'études en Chine — nous avons bien reçu votre message",
+    title: "Votre projet d'études en Chine",
+    subtitle: "Nous avons bien reçu votre message",
+    body: bienvenueBody,
+  },
+  formules_presentation: {
+    subject: "Nos formules d'accompagnement pour étudier en Chine",
+    title: "Nos formules d'accompagnement",
+    subtitle: "Pour étudier en Chine",
+    body: formulesBody,
+  },
   espace_etudiant: {
     subject: "Votre espace étudiant — créer votre compte et suivre le dossier",
     title: "Votre espace étudiant",
