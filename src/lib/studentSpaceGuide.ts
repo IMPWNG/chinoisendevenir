@@ -82,9 +82,9 @@ const fr: StudentSpaceGuideCopy = {
       id: "formule",
       title: "Formule et suivi des paiements",
       paragraphs: [
-        "Sans formule choisie, l'espace s'arrête sur les trois accompagnements. Le choix n'est pas un paiement : l'équipe vous recontacte pour valider, puis le règlement se fait selon le contrat.",
-        "Dès qu'une formule est enregistrée, le bandeau « Votre accompagnement » s'affiche. Le suivi des paiements est placé juste sous les formules tant que vous pouvez encore en changer, et juste sous ce bandeau une fois l'accompagnement validé. Trois échéances : 40 % à l'ouverture du dossier, 30 % au dépôt de la candidature, puis le solde à la confirmation (ou 10 jours après le dépôt). L'équipe coche chaque échéance après réception. Vous voyez le montant déjà payé, le reste à payer, et l'état de chaque échéance. Vous ne pouvez pas modifier ces cases.",
-        "Le paiement en ligne n'est pas encore disponible sur le site. Tant que l'accompagnement n'est pas validé, vous pouvez encore changer de formule.",
+        "La formule est assignée par l'équipe avant l'ouverture de l'espace. Le bandeau « Votre accompagnement » l'affiche en haut : vous ne la choisissez pas ici, et vous ne pouvez pas en changer.",
+        "Le suivi des paiements est juste sous ce bandeau. Trois échéances : 40 % à l'ouverture du dossier, 30 % au dépôt de la candidature, puis le solde à la confirmation (ou 10 jours après le dépôt). L'équipe coche chaque échéance après réception. Vous voyez le montant déjà payé, le reste à payer, et l'état de chaque échéance. Vous ne pouvez pas modifier ces cases.",
+        "Le paiement en ligne n'est pas encore disponible sur le site.",
       ],
       caption:
         "Exemple pour une formule à 1 700 €, première échéance déjà reçue. Votre montant dépend de la formule choisie.",
@@ -187,9 +187,9 @@ const en: StudentSpaceGuideCopy = {
       id: "formule",
       title: "Plan and payment tracking",
       paragraphs: [
-        "Without a chosen plan, the space stops on the three packages. Choosing is not a payment: the team contacts you to confirm, then payment follows the contract.",
-        "As soon as a plan is saved, the “Your support” banner appears. Payment tracking sits just under the plans while you can still change, and just under that banner once support is confirmed. Three installments: 40% when the file opens, 30% when the application is submitted, then the balance on confirmation (or 10 days after submission). The team marks each installment after it is received. You see the amount already paid, the amount left, and the status of each installment. You cannot edit those boxes.",
-        "Online payment is not available on the site yet. Until support is confirmed, you can still change plan.",
+        "The plan is assigned by the team before the space opens. The “Your support” banner shows it at the top: you do not choose it here, and you cannot change it.",
+        "Payment tracking sits just under that banner. Three installments: 40% when the file opens, 30% when the application is submitted, then the balance on confirmation (or 10 days after submission). The team marks each installment after it is received. You see the amount already paid, the amount left, and the status of each installment. You cannot edit those boxes.",
+        "Online payment is not available on the site yet.",
       ],
       caption:
         "Example for a €1,700 plan, first installment already received. Your amount depends on the plan you chose.",

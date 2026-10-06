@@ -5,7 +5,6 @@ import { CONTACT_FROM, CONTACT_FROM_EMAIL, INBOUND_REPLY_TO } from "../emailConf
 import { getAuthenticatedAdmin } from "../studentAuth";
 import {
   wrapEmailHtml,
-  SITE_URL,
   escapeHtml,
   generateCustomEmailHtml,
   sanitizeEmailSubject,
@@ -18,10 +17,7 @@ import {
   getEmailTemplateDraft,
 } from "../emailTemplateDrafts";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
-import {
-  INTENT_TEMPLATE_GENERATORS,
-  autoReplyMarker,
-} from "../emailIntents";
+import { autoReplyMarker } from "../emailIntents";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
@@ -48,49 +44,6 @@ type EmailTemplate = {
   description: string;
   status: string | null;
 };
-
-function generateRelance1Template(prenom: string) {
-  return wrapEmailHtml({
-    title: "Votre projet d'études en Chine",
-    subtitle: "Compléter votre dossier",
-    prenom,
-    bodyHtml: `
-            <div class="section">
-              <p>Vous nous avez récemment contactés au sujet de votre projet d'études en Chine.</p>
-              <p>Afin d'étudier votre profil avec précision, nous vous invitons à renseigner le formulaire disponible sur notre site. Ces informations nous permettront d'identifier les formations, universités et possibilités de financement les plus adaptées à votre situation.</p>
-            </div>
-            <div class="cta">
-              <p>Formulaire à compléter :</p>
-              <a href="${SITE_URL}" class="cta-link">${SITE_URL}</a>
-            </div>
-            <div class="section">
-              <p>Si vous avez déjà transmis ces informations, il vous suffit de répondre à cet e-mail pour nous le confirmer.</p>
-              <p>Nous restons à votre disposition pour toute question.</p>
-            </div>
-    `,
-  });
-}
-
-function generateRelance2Template(prenom: string) {
-  return wrapEmailHtml({
-    title: "Votre projet d'études en Chine",
-    subtitle: "Confirmation d'intérêt",
-    prenom,
-    bodyHtml: `
-            <div class="section">
-              <p>Vous nous avez contactés il y a quelque temps concernant un projet d'études en Chine.</p>
-              <p>Nous souhaitons simplement savoir si cette démarche est toujours d'actualité, notamment pour l'orientation, la candidature ou la recherche de bourse.</p>
-            </div>
-            <div class="cta">
-              <p>Si votre projet est toujours d'actualité, répondez à cet e-mail par :</p>
-              <div class="cta-choice">Oui</div>
-            </div>
-            <div class="section">
-              <p>Nous reviendrons ensuite vers vous pour vous présenter les prochaines étapes. Si votre projet n'est plus d'actualité, vous pouvez également nous l'indiquer.</p>
-            </div>
-    `,
-  });
-}
 
 function generateRelanceFormulesTemplate(prenom: string) {
   const choices = localizeFormules().map(
@@ -255,18 +208,6 @@ function generateFormuleConfirmeeTemplate(
 }
 
 const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
-  ouverture_printemps: {
-    subject: "Rentrée de printemps — candidatures d'octobre à décembre",
-    generateHtml: (contact) => {
-      const draft = getEmailTemplateDraft("ouverture_printemps");
-      return draft
-        ? generateDraftEmailHtml(contact, draft)
-        : generateCustomEmailHtml(contact, {});
-    },
-    action: "email_formules",
-    description: "Email rentrée de printemps — choix de formule",
-    status: "formules_présentées",
-  },
   formules_presentation: {
     subject: "Nos formules d'accompagnement pour étudier en Chine",
     generateHtml: (contact) =>
@@ -295,20 +236,6 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     description: "Relance 3 envoyée — pas de réponse au choix des formules",
     status: "relance_en_cours",
   },
-  relance_1: {
-    subject: "Votre projet d'études en Chine — formulaire à compléter",
-    generateHtml: (contact) => generateRelance1Template(contact.prenom || ""),
-    action: "relance_1",
-    description: "Relance 1 envoyée — formulaire à remplir",
-    status: "relance_en_cours",
-  },
-  relance_2: {
-    subject: "Votre projet d'études en Chine est-il toujours d'actualité ?",
-    generateHtml: (contact) => generateRelance2Template(contact.prenom || ""),
-    action: "relance_2",
-    description: "Relance 2 envoyée — confirmation d'intérêt",
-    status: "relance_en_cours",
-  },
   formule_confirmee: {
     subject: "Nous avons bien noté votre formule — un appel sera placé sous peu",
     generateHtml: (contact, extras = {}) =>
@@ -316,54 +243,6 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     action: "email_envoye",
     description: "Confirmation de la formule choisie — appel à placer",
     status: "formule_choisie",
-  },
-  reponse_bourses: {
-    subject: "Bourses d'études en Chine — ce qu'il faut savoir",
-    generateHtml: (contact) =>
-      INTENT_TEMPLATE_GENERATORS.reponse_bourses(contact.prenom || ""),
-    action: "email_envoye",
-    description: `Réponse automatique — bourses d'études ${autoReplyMarker("bourses")}`,
-    status: "bienvenue_envoyé",
-  },
-  reponse_visa: {
-    subject: "Visa étudiant pour la Chine — les étapes à connaître",
-    generateHtml: (contact) =>
-      INTENT_TEMPLATE_GENERATORS.reponse_visa(contact.prenom || ""),
-    action: "email_envoye",
-    description: `Réponse automatique — visa étudiant ${autoReplyMarker("visa")}`,
-    status: "bienvenue_envoyé",
-  },
-  reponse_langue: {
-    subject: "Année de chinois en Chine — un premier pas réaliste",
-    generateHtml: (contact) =>
-      INTENT_TEMPLATE_GENERATORS.reponse_langue(contact.prenom || ""),
-    action: "email_envoye",
-    description: `Réponse automatique — école de langue ${autoReplyMarker("langue")}`,
-    status: "bienvenue_envoyé",
-  },
-  reponse_admission: {
-    subject: "Admission en université chinoise — dossier et délais",
-    generateHtml: (contact) =>
-      INTENT_TEMPLATE_GENERATORS.reponse_admission(contact.prenom || ""),
-    action: "email_envoye",
-    description: `Réponse automatique — admission ${autoReplyMarker("admission")}`,
-    status: "bienvenue_envoyé",
-  },
-  reponse_processus: {
-    subject: "Étudier en Chine — les étapes et le calendrier",
-    generateHtml: (contact) =>
-      INTENT_TEMPLATE_GENERATORS.reponse_processus(contact.prenom || ""),
-    action: "email_envoye",
-    description: `Réponse automatique — processus ${autoReplyMarker("processus")}`,
-    status: "bienvenue_envoyé",
-  },
-  reponse_general: {
-    subject: "Votre projet d'études en Chine — nous avons bien reçu votre message",
-    generateHtml: (contact) =>
-      INTENT_TEMPLATE_GENERATORS.reponse_general(contact.prenom || ""),
-    action: "email_envoye",
-    description: `Réponse automatique — premier contact ${autoReplyMarker("general")}`,
-    status: "bienvenue_envoyé",
   },
   custom: {
     subject: (_contact, extras = {}) =>
@@ -376,6 +255,8 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     status: null,
   },
 };
+
+const ADMIN_SENDABLE_TEMPLATES = new Set(["custom", "espace_etudiant"]);
 
 // ✉️ Envoyer un email selon le template choisi
 async function sendTemplatedEmail(
@@ -638,7 +519,16 @@ export default async function handler(request: Request) {
       console.log(`status: ${body.status}`);
 
       const contactId = asString(body.contactId);
-      const emailTemplate = asString(body.emailTemplate, "formules_presentation");
+      const emailTemplate = asString(body.emailTemplate, "custom");
+      if (!ADMIN_SENDABLE_TEMPLATES.has(emailTemplate)) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Template email inconnu",
+          },
+          { status: 400 },
+        );
+      }
       const template = EMAIL_TEMPLATES[emailTemplate];
       const extras: EmailExtras = {
         customSubject: String(body.customSubject || "").trim(),

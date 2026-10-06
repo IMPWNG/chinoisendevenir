@@ -52,7 +52,7 @@ export default function AdminContactEmail({
 }) {
   const { t } = useAdminI18n();
   const [mode, setMode] = useState("write");
-  const [template, setTemplate] = useState("ouverture_printemps");
+  const [template, setTemplate] = useState("espace_etudiant");
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -64,7 +64,7 @@ export default function AdminContactEmail({
 
   useEffect(() => {
     setMode("write");
-    setTemplate("ouverture_printemps");
+    setTemplate("espace_etudiant");
     setSubject("");
     setTitle("");
     setSubtitle("");
@@ -378,24 +378,7 @@ export default function AdminContactEmail({
               </option>
             ))}
           </select>
-          <p className="text-xs text-slate-500">
-            {template === "ouverture_printemps" &&
-              t("dashboard.emailHintPrintemps")}
-            {template === "relance_1" && t("dashboard.emailHintRelance1")}
-            {template === "relance_2" && t("dashboard.emailHintRelance2")}
-            {template === "relance_formules" &&
-              t("dashboard.emailHintRelanceFormules")}
-            {template === "formules_presentation" &&
-              t("dashboard.emailHintFormules")}
-            {template === "espace_etudiant" && t("dashboard.emailHintEspace")}
-            {(template === "reponse_bourses" ||
-              template === "reponse_visa" ||
-              template === "reponse_langue" ||
-              template === "reponse_admission" ||
-              template === "reponse_processus" ||
-              template === "reponse_general") &&
-              t("dashboard.emailHintAutoReply")}
-          </p>
+          <p className="text-xs text-slate-500">{t("dashboard.emailHintEspace")}</p>
 
           <div>
             <label className="text-xs font-bold text-slate-400 uppercase tracking-wide">

@@ -11,7 +11,6 @@ import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import LeadForm from "../components/LeadForm";
-import StudentFormules from "../components/StudentFormules";
 import StudentMatching from "../components/StudentMatching";
 import StudentChineseMatching from "../components/StudentChineseMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
@@ -74,7 +73,6 @@ type StudentProfile = Omit<
   hasForm?: boolean;
   unlocked?: boolean;
   paid?: boolean;
-  canChooseFormule?: boolean;
   formuleNumber?: number | null;
   access?: {
     documents?: boolean;
@@ -168,14 +166,10 @@ export default function StudentDashboard() {
   const [message, setMessage] = useState<FlashMessage | null>(null);
   const [error, setError] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<Record<string, File | null>>({});
-  const [choosingFormule, setChoosingFormule] = useState<number | null>(null);
 
   const hasForm = Boolean(profile?.hasForm);
   const unlocked = Boolean(profile?.unlocked ?? profile?.paid);
   const hasChosenFormule = Boolean(profile?.formule);
-  const canChooseFormule = Boolean(
-    profile?.canChooseFormule ?? (hasForm && !unlocked),
-  );
   const formuleNumber = profile?.formuleNumber || null;
   const access = profile?.access || {};
   const showVisaDocs = studentCanAccessVisaDocuments(formuleNumber);
@@ -306,26 +300,6 @@ export default function StudentDashboard() {
     }
   };
 
-  const handleChooseFormule = async (number: number) => {
-    if (!canChooseFormule || choosingFormule) return;
-    setChoosingFormule(number);
-    setMessage(null);
-    setError("");
-    try {
-      const data = await studentFetch<{ profile: StudentProfile }>("/api/student/formule", {
-        method: "POST",
-        body: JSON.stringify({ number }),
-      });
-      setProfile(data.profile);
-      setMessage({ type: "success", text: t("student.formuleSaved") });
-      await loadProfile({ silent: true });
-    } catch (err) {
-      setMessage({ type: "error", text: errorMessage(err) });
-    } finally {
-      setChoosingFormule(null);
-    }
-  };
-
   const handleLogout = async () => {
     await signOut();
     window.location.href = "/espace-etudiant/connexion";
@@ -440,26 +414,21 @@ export default function StudentDashboard() {
                 onSuccess={() => loadProfile({ silent: true })}
               />
             </div>
-          ) : !hasChosenFormule ? (
-            <StudentFormules
-              currentFormule=""
-              selectable
-              choosingNumber={choosingFormule}
-              onChoose={handleChooseFormule}
-              subtitle={undefined}
-            />
-          ) : !profile ? null : (
+          ) : !profile ? null : !hasChosenFormule ? (
+            <div className="student-card student-card-wide">
+              <h2 className="card-title">{t("student.awaitingFormuleTitle")}</h2>
+              <p className="card-subtitle">{t("student.awaitingFormuleText")}</p>
+            </div>
+          ) : (
             <>
               <StudentFormuleBanner
                 formule={profile.formule || ""}
                 formuleNumber={formuleNumber}
               />
-              {canChooseFormule ? null : (
-                <StudentPaymentStatus
-                  formule={profile.formule}
-                  paiements={profile.paiements}
-                />
-              )}
+              <StudentPaymentStatus
+                formule={profile.formule}
+                paiements={profile.paiements}
+              />
               <form className="student-card student-card-wide" onSubmit={handleSave}>
                 <h2 className="card-title">{t("student.infoTitle")}</h2>
                 <p className="card-subtitle">
@@ -619,22 +588,7 @@ export default function StudentDashboard() {
                 </button>
               </form>
 
-
-              {canChooseFormule ? (
-                <>
-                  <StudentFormules
-                    currentFormule={profile?.formule || ""}
-                    selectable
-                    choosingNumber={choosingFormule}
-                    onChoose={handleChooseFormule}
-                    subtitle={undefined}
-                  />
-                  <StudentPaymentStatus
-                    formule={profile.formule}
-                    paiements={profile.paiements}
-                  />
-                </>
-              ) : (
+              {unlocked ? (
                 <>
                   <div className="student-card student-card-wide">
                     <h2 className="card-title">{t("student.progressTitle")}</h2>
@@ -829,7 +783,7 @@ export default function StudentDashboard() {
 
                   <StudentArrivalGuide />
                 </>
-              )}
+              ) : null}
             </>
           )}
         </div>
