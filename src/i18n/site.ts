@@ -1241,10 +1241,7 @@ const fr = {
     unlockedSubtitle:
       "Consultez vos informations, mettez à jour votre profil et suivez votre dossier.",
     lockedSubtitle:
-      "Votre dossier est enregistré. La formule est assignée par l'équipe : elle s'affichera ici ensuite.",
-    awaitingFormuleTitle: "Formule d'accompagnement",
-    awaitingFormuleText:
-      "Votre formule sera indiquée ici une fois assignée par l'équipe. L'espace étudiant s'ouvre avec cette formule, sans nouveau choix de votre côté.",
+      "Votre dossier est enregistré. Choisissez une formule pour continuer.",
     chosenPendingSubtitle:
       "Votre formule est enregistrée. Réglez le premier versement, ou la totalité, pour ouvrir l'accompagnement.",
     completeTitle: "Complétez votre projet",
@@ -2837,10 +2834,7 @@ const en = {
     unlockedSubtitle:
       "View your information, update your profile, and follow your file.",
     lockedSubtitle:
-      "Your file is registered. The plan is assigned by the team: it will appear here afterwards.",
-    awaitingFormuleTitle: "Support plan",
-    awaitingFormuleText:
-      "Your plan will appear here once the team has assigned it. The student space opens with that plan; you do not choose it here.",
+      "Your file is registered. Choose a plan to continue.",
     chosenPendingSubtitle:
       "Your plan is saved. Pay the first installment, or the full amount, to open the support.",
     completeTitle: "Complete your project",

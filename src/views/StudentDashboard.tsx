@@ -11,6 +11,7 @@ import Link from "next/link";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import LeadForm from "../components/LeadForm";
+import StudentFormules from "../components/StudentFormules";
 import StudentMatching from "../components/StudentMatching";
 import StudentChineseMatching from "../components/StudentChineseMatching";
 import StudentFormuleBanner from "../components/StudentFormuleBanner";
@@ -73,6 +74,7 @@ type StudentProfile = Omit<
   hasForm?: boolean;
   unlocked?: boolean;
   paid?: boolean;
+  canChooseFormule?: boolean;
   formuleNumber?: number | null;
   access?: {
     documents?: boolean;
@@ -166,10 +168,14 @@ export default function StudentDashboard() {
   const [message, setMessage] = useState<FlashMessage | null>(null);
   const [error, setError] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<Record<string, File | null>>({});
+  const [choosingFormule, setChoosingFormule] = useState<number | null>(null);
 
   const hasForm = Boolean(profile?.hasForm);
   const unlocked = Boolean(profile?.unlocked ?? profile?.paid);
   const hasChosenFormule = Boolean(profile?.formule);
+  const canChooseFormule = Boolean(
+    profile?.canChooseFormule ?? (hasForm && !hasChosenFormule),
+  );
   const formuleNumber = profile?.formuleNumber || null;
   const access = profile?.access || {};
   const showVisaDocs = studentCanAccessVisaDocuments(formuleNumber);
@@ -300,6 +306,26 @@ export default function StudentDashboard() {
     }
   };
 
+  const handleChooseFormule = async (number: number) => {
+    if (!canChooseFormule || choosingFormule) return;
+    setChoosingFormule(number);
+    setMessage(null);
+    setError("");
+    try {
+      const data = await studentFetch<{ profile: StudentProfile }>("/api/student/formule", {
+        method: "POST",
+        body: JSON.stringify({ number }),
+      });
+      setProfile(data.profile);
+      setMessage({ type: "success", text: t("student.formuleSaved") });
+      await loadProfile({ silent: true });
+    } catch (err) {
+      setMessage({ type: "error", text: errorMessage(err) });
+    } finally {
+      setChoosingFormule(null);
+    }
+  };
+
   const handleLogout = async () => {
     await signOut();
     window.location.href = "/espace-etudiant/connexion";
@@ -415,10 +441,12 @@ export default function StudentDashboard() {
               />
             </div>
           ) : !profile ? null : !hasChosenFormule ? (
-            <div className="student-card student-card-wide">
-              <h2 className="card-title">{t("student.awaitingFormuleTitle")}</h2>
-              <p className="card-subtitle">{t("student.awaitingFormuleText")}</p>
-            </div>
+            <StudentFormules
+              currentFormule=""
+              selectable
+              choosingNumber={choosingFormule}
+              onChoose={handleChooseFormule}
+            />
           ) : (
             <>
               <StudentFormuleBanner

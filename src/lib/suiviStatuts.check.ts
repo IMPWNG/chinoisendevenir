@@ -7,7 +7,7 @@ import {
   STUDENT_UNLOCKED_STATUSES,
   canonicalStatut,
 } from "./suiviStatuts";
-import { isStudentSpaceUnlocked } from "./studentProgress";
+import { isStudentSpaceUnlocked, canStudentChooseFormule } from "./studentProgress";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -22,6 +22,27 @@ assert(!isStudentSpaceUnlocked("attente_paiement"), "attente_paiement stays lock
 assert(!isStudentSpaceUnlocked("offre_envoyée"), "offre_envoyée stays locked");
 assert(isStudentSpaceUnlocked("client_payé"), "client_payé unlocks");
 assert(isStudentSpaceUnlocked("dossier_préparation"), "later paid statuses unlock");
+assert(
+  canStudentChooseFormule({
+    prenom: "A",
+    nom: "B",
+    pays: "FR",
+    dernier_diplome: "Bac",
+    domaine_etudes: "Droit",
+  }),
+  "no formule yet → student can choose",
+);
+assert(
+  !canStudentChooseFormule({
+    prenom: "A",
+    nom: "B",
+    pays: "FR",
+    dernier_diplome: "Bac",
+    domaine_etudes: "Droit",
+    formule: "Admission universitaire",
+  }),
+  "already chosen → no picker",
+);
 assert(
   canonicalStatut("client_payé") === "client_payé",
   "canonical client_payé",
