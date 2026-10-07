@@ -38,6 +38,7 @@ import {
   FORMULES,
   canonicalFormuleValue,
   displayFormuleLabel,
+  displayFormulePrice,
   getFormuleNumber,
 } from "../lib/formules";
 import {
@@ -1403,9 +1404,12 @@ function ContactModal({
   const chosenFormuleNumber = getFormuleNumber(getChosenFormule(contact));
   const selectedFormuleNumber = getFormuleNumber(selectedFormule);
   const sameActiveFormule =
+    accessGranted &&
     selectedFormuleNumber != null &&
-    selectedFormuleNumber === chosenFormuleNumber &&
-    (!access.unlockStudentSpace || accessGranted);
+    selectedFormuleNumber === chosenFormuleNumber;
+  const sameChosenFormule =
+    selectedFormuleNumber != null &&
+    selectedFormuleNumber === chosenFormuleNumber;
 
   const saveChosenFormule = async () => {
     const value = canonicalFormuleValue(selectedFormule);
@@ -1536,50 +1540,50 @@ function ContactModal({
           </div>
 
           <div className="flex items-start gap-3 shrink-0">
-            <div className="bg-white/15 rounded-xl px-3 py-2.5 border border-white/20 min-w-[11rem]">
-              <p className="text-[11px] font-bold uppercase tracking-wide text-white/80 mb-2">
-                📋 {t("dashboard.formuleSection")}
-              </p>
-              <div className="flex flex-col gap-1.5">
-                {FORMULES.map((formule) => {
-                  const active = chosenFormuleNumber === formule.number;
-                  const selected = selectedFormuleNumber === formule.number;
-                  return (
-                    <label
-                      key={formule.number}
-                      className={`inline-flex items-center gap-2 text-sm text-white px-2 py-1 rounded-lg cursor-pointer select-none ${
-                        selected ? "bg-white/25" : "hover:bg-white/10"
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selected}
-                        onChange={() =>
-                          setSelectedFormule(selected ? "" : formule.value)
-                        }
-                        className="h-4 w-4 rounded border-white/40 bg-white/20 text-amber-400 focus:ring-amber-400/50 cursor-pointer"
-                      />
-                      <span>
-                        {formule.number}. {formule.shortTitle}
-                        {active ? " ✓" : ""}
-                      </span>
-                    </label>
-                  );
-                })}
+            {!access.unlockStudentSpace ? (
+              <div className="bg-white/15 rounded-xl px-3 py-2.5 border border-white/20 min-w-[11rem]">
+                <p className="text-[11px] font-bold uppercase tracking-wide text-white/80 mb-2">
+                  📋 {t("dashboard.formuleSection")}
+                </p>
+                <div className="flex flex-col gap-1.5">
+                  {FORMULES.map((formule) => {
+                    const active = chosenFormuleNumber === formule.number;
+                    const selected = selectedFormuleNumber === formule.number;
+                    return (
+                      <label
+                        key={formule.number}
+                        className={`inline-flex items-center gap-2 text-sm text-white px-2 py-1 rounded-lg cursor-pointer select-none ${
+                          selected ? "bg-white/25" : "hover:bg-white/10"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selected}
+                          onChange={() =>
+                            setSelectedFormule(selected ? "" : formule.value)
+                          }
+                          className="h-4 w-4 rounded border-white/40 bg-white/20 text-amber-400 focus:ring-amber-400/50 cursor-pointer"
+                        />
+                        <span>
+                          {formule.number}. {formule.shortTitle}
+                          {active ? " ✓" : ""}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+                <button
+                  type="button"
+                  disabled={
+                    savingFormule || !selectedFormule || sameChosenFormule
+                  }
+                  onClick={saveChosenFormule}
+                  className="mt-2 w-full px-3 py-1.5 rounded-lg bg-white/90 text-slate-900 text-xs font-bold hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {savingFormule ? t("saving") : t("dashboard.applyFormule")}
+                </button>
               </div>
-              <button
-                type="button"
-                disabled={savingFormule || !selectedFormule || sameActiveFormule}
-                onClick={saveChosenFormule}
-                className="mt-2 w-full px-3 py-1.5 rounded-lg bg-white/90 text-slate-900 text-xs font-bold hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {savingFormule
-                  ? t("saving")
-                  : access.unlockStudentSpace && !accessGranted
-                    ? t("dashboard.unlockSpace")
-                    : t("dashboard.applyFormule")}
-              </button>
-            </div>
+            ) : null}
             <button
               onClick={onClose}
               className="text-white hover:bg-white/20 rounded-xl p-2 transition-all duration-200 hover:scale-110 active:scale-95"
@@ -1624,51 +1628,6 @@ function ContactModal({
               ))}
             </select>
           </div>
-
-          {access.unlockStudentSpace ? (
-            <div className="mb-8 pb-8 border-b border-cyan-500/30">
-              <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
-                🎓 {t("dashboard.studentSpace")}
-              </label>
-              {accessGranted ? (
-                <p className="text-sm text-emerald-300 mb-4">
-                  {t("dashboard.unlockedWithFormule", {
-                    formule: displayFormuleLabel(getChosenFormule(contact)),
-                  })}
-                </p>
-              ) : (
-                <p className="text-sm text-slate-400 mb-4">
-                  {t("dashboard.locked")}
-                </p>
-              )}
-              <div className="flex flex-wrap gap-3">
-                {!accessGranted ? (
-                  <button
-                    type="button"
-                    disabled={savingFormule || !selectedFormule}
-                    onClick={saveChosenFormule}
-                    className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {savingFormule
-                      ? `⏳ ${t("saving")}`
-                      : t("dashboard.unlockSpace")}
-                  </button>
-                ) : null}
-                {isStudentSpaceUnlocked(contact) ? (
-                  <button
-                    type="button"
-                    onClick={() => onLockStudentSpace(contact.id)}
-                    className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
-                  >
-                    {t("dashboard.lockSpace")}
-                  </button>
-                ) : null}
-              </div>
-              <p className="text-xs text-slate-500 mt-3">
-                {t("dashboard.formuleHint")}
-              </p>
-            </div>
-          ) : null}
 
           <FilePanel title={`👤 ${t("dashboard.studentInfo")}`} persist>
             <AdminContactInfo
@@ -1722,6 +1681,84 @@ function ContactModal({
                 onTreated={onWhatsappTreated}
               />
             </FilePanel>
+          ) : null}
+
+          {access.unlockStudentSpace ? (
+            <div className="mb-8 pb-8 border-b border-cyan-500/30">
+              <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+                📋 {t("dashboard.formuleSection")}
+              </label>
+              {accessGranted ? (
+                <p className="text-sm text-emerald-300 mb-4">
+                  {t("dashboard.unlockedWithFormule", {
+                    formule: displayFormuleLabel(getChosenFormule(contact)),
+                  })}
+                </p>
+              ) : (
+                <p className="text-sm text-slate-400 mb-4">
+                  {t("dashboard.locked")}
+                </p>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {FORMULES.map((formule) => {
+                  const active = chosenFormuleNumber === formule.number;
+                  const selected = selectedFormuleNumber === formule.number;
+                  return (
+                    <button
+                      key={formule.number}
+                      type="button"
+                      onClick={() => setSelectedFormule(formule.value)}
+                      className={`text-left px-4 py-4 rounded-xl border transition-all duration-200 ${
+                        active && selected
+                          ? "bg-emerald-500/20 border-emerald-400 text-white"
+                          : selected
+                            ? "bg-cyan-500/20 border-cyan-400 text-white"
+                            : active
+                              ? "bg-emerald-500/10 border-emerald-500/50 text-white"
+                              : "bg-slate-700/40 border-slate-600/50 text-slate-300 hover:bg-slate-700"
+                      }`}
+                    >
+                      <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                        Formule {formule.number}
+                      </p>
+                      <p className="font-bold mt-1">{formule.shortTitle}</p>
+                      <p className="text-sm mt-1">{displayFormulePrice(formule)}</p>
+                      {active ? (
+                        <p className="text-xs text-emerald-300 mt-2">
+                          {t("dashboard.formuleActive")}
+                        </p>
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  disabled={savingFormule || !selectedFormule || sameActiveFormule}
+                  onClick={saveChosenFormule}
+                  className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {savingFormule
+                    ? `⏳ ${t("saving")}`
+                    : accessGranted
+                      ? t("dashboard.applyFormule")
+                      : t("dashboard.unlockSpace")}
+                </button>
+                {isStudentSpaceUnlocked(contact) ? (
+                  <button
+                    type="button"
+                    onClick={() => onLockStudentSpace(contact.id)}
+                    className="px-6 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
+                  >
+                    {t("dashboard.lockSpace")}
+                  </button>
+                ) : null}
+              </div>
+              <p className="text-xs text-slate-500 mt-3">
+                {t("dashboard.formuleHint")}
+              </p>
+            </div>
           ) : null}
 
           <FilePanel title={`📄 ${t("dashboard.contractSection")}`}>

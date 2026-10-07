@@ -46,7 +46,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 - Étudiant : `/api/student/*` via `getAuthenticatedContact()`
 - Admin : toujours `getAuthenticatedAdmin(request)` puis `requireFullAdmin` si besoin (`adminRoles.ts`)
 - `full` : univ., matching (lancer/supprimer), bulk mail, suppression contacts, WhatsApp (OpenWA)
-- `limited` : étudiants / agenda / mail contact, assigner une formule (cases à cocher dans la fiche, sans débloquer l'espace), lecture matching seulement, pas univ. / WhatsApp.
+- `limited` : étudiants / agenda / mail contact, assigner une formule (cases à cocher dans le bandeau de la fiche, sans débloquer l'espace), lecture matching seulement, pas univ. / WhatsApp.
 - Anon ne lit pas `contacts` / `universities` / `matching_runs`. Nouvelle table : RLS on, grants `service_role`, SQL dans `sql/` (éditeur Supabase, pas de migration auto).
 
 Register / recover : uniquement si l’e-mail existe déjà dans `contacts`. Compte activé tout de suite (pas de mail de confirmation).
