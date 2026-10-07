@@ -74,10 +74,10 @@ APIs : `NextResponse` dans `route.ts`. Réutiliser `getSupabaseAdmin()`, `rateLi
 **Public :** `POST /api/contact-submit`, `POST /api/webhooks/resend`  
 **Auth :** `login`, `register`, `recover`  
 **Étudiant :** `me`, `profile`, `formule`, `document`  
-**Admin :** `me`, `contacts`, `emails-week` (GET full+limited), `daily-report` (GET full), `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `drip` (full, 5/h), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  
-**Ops :** `POST /api/email/auto-reply`, crons `formules-relance`, `outbound-drip` (12 min), `blog-generate` (1/jour), `daily-report` (20h Pékin = `0 12 * * *` UTC → mail aux `ADMIN_EMAILS` + page `/admin/rapport`). Bearer `CRON_SECRET`. Webhook Resend sans secret = rejet.
+**Admin :** `me`, `contacts`, `emails-week` (GET full+limited), `daily-report` (GET full), `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  
+**Ops :** `POST /api/email/auto-reply`, crons `formules-relance`, `blog-generate` (1/jour), `daily-report` (20h Pékin = `0 12 * * *` UTC → mail aux `ADMIN_EMAILS` + page `/admin/rapport`). Bearer `CRON_SECRET`. Webhook Resend sans secret = rejet.
 
-**Tables :** `contacts` (suivi, formule, `paiements` 3 échéances, `espace_debloque`, `prioritaire`, pays via `countries.ts`), `contact_emails`, `outbound_drip`, `suivi_actions`, `admin_users`, `universities`, `matching_runs`, `blog_posts`. SQL : `sql/admin-security.sql`, `universities.sql`, `matching_runs.sql`, `blog-posts.sql`, `sql/contacts-espace-debloque.sql`. Env : `.env.example`. Public : `NEXT_PUBLIC_SUPABASE_*` (fallback `VITE_SUPABASE_*`).
+**Tables :** `contacts` (suivi, formule, `paiements` 3 échéances, `espace_debloque`, `prioritaire`, pays via `countries.ts`), `contact_emails`, `suivi_actions`, `admin_users`, `universities`, `matching_runs`, `blog_posts`. SQL : `sql/admin-security.sql`, `universities.sql`, `matching_runs.sql`, `blog-posts.sql`, `sql/contacts-espace-debloque.sql`. Env : `.env.example`. Public : `NEXT_PUBLIC_SUPABASE_*` (fallback `VITE_SUPABASE_*`).
 
 ## Explorer
 

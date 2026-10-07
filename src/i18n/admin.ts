@@ -240,26 +240,6 @@ export const adminTranslations = {
         "Ajouter {count} personne(s) aux contacts WhatsApp et à la liste Étude Chine ?\n\nAucun message n'est envoyé.",
       waBulkConfirm:
         "Envoyer le message à {count} personne(s) ?\n\nLes envois partent un par un. Ne fermez pas la page.",
-      dripTitle: "Envoi automatique",
-      dripHint:
-        "Même sélection. L'IA rédige le message, vous choisissez e-mail ou WhatsApp. Une fois lancée, la séquence envoie 5 messages par heure, même si la page est fermée.",
-      dripChannel: "Canal",
-      dripEmail: "E-mail",
-      dripWhatsapp: "WhatsApp",
-      dripLaunch: "Lancer la séquence ({count})",
-      dripLaunching: "Mise en file…",
-      dripConfirm:
-        "Lancer l'envoi automatique à {count} personne(s) par {channel} ?\n\n5 messages par heure. Vous pouvez fermer la page.",
-      dripQueued:
-        "Séquence lancée.\n{queued} en file.\nPremier envoi : {when}\n{skipped}",
-      dripSkipped: "{count} ignoré(s) (déjà en file, ou sans e-mail / numéro).",
-      dripStatus: "{pending} en attente · {sent}/5 cette heure{next}",
-      dripNext: " · prochain {when}",
-      dripFailed: "{count} échec(s) sur la dernière heure",
-      dripStop: "Arrêter la séquence",
-      dripStopConfirm: "Annuler les messages encore en attente ?",
-      dripStopped: "Séquence arrêtée. Les messages déjà partis restent partis.",
-      dripMissingEmail: "{count} personne(s) sans e-mail seront ignorées.",
       emailSection: "Envoyer un email",
       whatsappSection: "WhatsApp",
       whatsappHint:
@@ -964,25 +944,6 @@ export const adminTranslations = {
         "Add {count} people to WhatsApp contacts and the Étude Chine list?\n\nNo message is sent.",
       waBulkConfirm:
         "Send the message to {count} people?\n\nMessages go out one by one. Do not close the page.",
-      dripTitle: "Automatic sending",
-      dripHint:
-        "Same selection. AI drafts the message, and you choose email or WhatsApp. Once started, the sequence sends 5 messages per hour, even if this page is closed.",
-      dripChannel: "Channel",
-      dripEmail: "Email",
-      dripWhatsapp: "WhatsApp",
-      dripLaunch: "Start sequence ({count})",
-      dripLaunching: "Queuing…",
-      dripConfirm:
-        "Start automatic sending to {count} people by {channel}?\n\n5 messages per hour. You can close the page.",
-      dripQueued: "Sequence started.\n{queued} queued.\nFirst send: {when}\n{skipped}",
-      dripSkipped: "{count} skipped (already queued, or missing an email / number).",
-      dripStatus: "{pending} waiting · {sent}/5 this hour{next}",
-      dripNext: " · next {when}",
-      dripFailed: "{count} failure(s) in the last hour",
-      dripStop: "Stop sequence",
-      dripStopConfirm: "Cancel messages still waiting?",
-      dripStopped: "Sequence stopped. Messages already sent stay sent.",
-      dripMissingEmail: "{count} people without an email will be skipped.",
       emailSection: "Send an email",
       whatsappSection: "WhatsApp",
       whatsappHint:
@@ -1672,25 +1633,6 @@ export const adminTranslations = {
       waBulkBookConfirm:
         "把 {count} 人加入 WhatsApp 通讯录和 Étude Chine 列表？\n\n不会发送消息。",
       waBulkConfirm: "向 {count} 人发送这条消息？\n\n将逐条发送，请勿关闭页面。",
-      dripTitle: "自动发送",
-      dripHint:
-        "同一批勾选。AI 撰写内容，你选择邮件或 WhatsApp。启动后每小时发送 5 条，关闭页面也会继续。",
-      dripChannel: "渠道",
-      dripEmail: "邮件",
-      dripWhatsapp: "WhatsApp",
-      dripLaunch: "启动序列（{count}）",
-      dripLaunching: "加入队列…",
-      dripConfirm:
-        "向 {count} 人通过{channel}自动发送？\n\n每小时 5 条。可以关闭页面。",
-      dripQueued: "序列已启动。\n已排队 {queued}。\n首次发送：{when}\n{skipped}",
-      dripSkipped: "{count} 人已跳过（已在队列中，或缺少邮箱 / 号码）。",
-      dripStatus: "{pending} 等待中 · 本小时 {sent}/5{next}",
-      dripNext: " · 下一次 {when}",
-      dripFailed: "最近一小时 {count} 次失败",
-      dripStop: "停止序列",
-      dripStopConfirm: "取消仍在等待的消息？",
-      dripStopped: "序列已停止。已经发出的消息不会撤回。",
-      dripMissingEmail: "{count} 人没有邮箱，将被跳过。",
       emailSection: "发送邮件",
       whatsappSection: "WhatsApp",
       whatsappHint:
