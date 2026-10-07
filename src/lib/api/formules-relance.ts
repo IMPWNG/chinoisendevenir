@@ -1,9 +1,5 @@
 import { getSupabaseAdmin } from "../supabaseAdmin";
-import {
-  sendTemplatedEmail,
-  updateContactStatus,
-  logAction,
-} from "./auto-reply";
+import { sendTemplatedEmail, logAction } from "./auto-reply";
 import { getChosenFormule } from "../studentProgress";
 import { isFormulesAwaitingReply } from "../suiviStatuts";
 import { errorMessage } from "../request";
@@ -145,7 +141,6 @@ export async function processFormulesRelances({ now = Date.now() } = {}) {
       continue;
     }
 
-    await updateContactStatus(contact.id, "relance_en_cours");
     await logAction(
       contact.id,
       contact.email,
@@ -157,7 +152,7 @@ export async function processFormulesRelances({ now = Date.now() } = {}) {
     results.details.push({
       contactId: contact.id,
       email: contact.email,
-      status: "relance_en_cours",
+      status: String(contact.suivi_statut || "formules_présentées"),
     });
   }
 

@@ -453,9 +453,7 @@ const EARLY_NO_TOUCH = new Set([
 
 async function buildPipeline(admin: AdminClient): Promise<Record<string, number>> {
   const keys = [
-    "nouveau_prospect",
     "bienvenue_envoyé",
-    "a_qualifier",
     "formules_présentées",
     "formule_choisie",
     "attente_paiement",

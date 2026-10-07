@@ -2,7 +2,7 @@
  * Self-check: student space unlock is the admin flag, not client_payé.
  * Run: npx tsx src/lib/suiviStatuts.check.ts
  */
-import { PAID_STATUSES, canonicalStatut } from "./suiviStatuts";
+import { PAID_STATUSES, SUIVI_STATUTS, canonicalStatut } from "./suiviStatuts";
 import {
   canStudentChooseFormule,
   isStudentAccessGranted,
@@ -69,5 +69,13 @@ assert(
 assert(canonicalStatut("client_payé") === "client_payé", "canonical client_payé");
 assert(canonicalStatut("perdu") === "prospect_perdu", "legacy perdu maps");
 assert(canonicalStatut("prospect_perdu") === "prospect_perdu", "prospect_perdu stays");
+assert(!SUIVI_STATUTS.includes("nouveau_prospect"), "nouveau_prospect retired");
+assert(!SUIVI_STATUTS.includes("a_qualifier"), "a_qualifier retired");
+assert(!SUIVI_STATUTS.includes("appel_réservé"), "appel_réservé retired");
+assert(!SUIVI_STATUTS.includes("relance_en_cours"), "relance_en_cours retired");
+assert(
+  canonicalStatut("nouveau_prospect") === "nouveau_prospect",
+  "retired still canonical for old rows",
+);
 
 console.log("suiviStatuts unlock check ok");

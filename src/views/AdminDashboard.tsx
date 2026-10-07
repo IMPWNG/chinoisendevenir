@@ -1575,6 +1575,12 @@ function ContactModal({
               }`}
             >
               <option value="">{t("dashboard.selectStatus")}</option>
+              {statutKey && !STATUTS.includes(statutKey) ? (
+                <option value={statutKey}>
+                  {STATUT_ICONS[statutKey] || "•"}{" "}
+                  {translatedOrRaw(t, "statut", statutKey) || statutKey}
+                </option>
+              ) : null}
               {STATUTS.map((s) => (
                 <option key={s} value={s}>
                   {STATUT_ICONS[s]} {t(`statut.${s}`)}

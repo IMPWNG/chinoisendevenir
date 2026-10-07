@@ -245,7 +245,7 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
       generateRelanceFormulesTemplate(contact.prenom || ""),
     action: "relance_formules",
     description: "Relance 3 envoyée — pas de réponse au choix des formules",
-    status: "relance_en_cours",
+    status: null,
   },
   formule_confirmee: {
     subject: "Nous avons bien noté votre formule — un appel sera placé sous peu",

@@ -1,12 +1,9 @@
+/** Selectable CRM statuses (admin dropdown). Legacy values still map via LEGACY_STATUT_MAP. */
 export const SUIVI_STATUTS = [
-  "nouveau_prospect",
   "bienvenue_envoyé",
-  "a_qualifier",
-  "appel_réservé",
   "formules_présentées",
   "formule_choisie",
   "offre_envoyée",
-  "relance_en_cours",
   "attente_paiement",
   "client_payé",
   "dossier_préparation",
@@ -18,6 +15,14 @@ export const SUIVI_STATUTS = [
   "dossier_terminé",
   "prospect_perdu",
 ];
+
+/** Removed from UI but still recognized on old dossiers. */
+export const RETIRED_STATUTS = [
+  "nouveau_prospect",
+  "a_qualifier",
+  "appel_réservé",
+  "relance_en_cours",
+] as const;
 
 export const STATUT_ICONS: Record<string, string> = {
   nouveau_prospect: "🆕",
@@ -141,7 +146,12 @@ export function canonicalStatut(value: unknown) {
   const statut = String(value || "").trim();
   if (!statut) return "";
   if (LEGACY_STATUT_MAP[statut]) return LEGACY_STATUT_MAP[statut];
-  if (SUIVI_STATUTS.includes(statut)) return statut;
+  if (
+    SUIVI_STATUTS.includes(statut) ||
+    (RETIRED_STATUTS as readonly string[]).includes(statut)
+  ) {
+    return statut;
+  }
   return statut;
 }
 
