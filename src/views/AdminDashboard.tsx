@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ComponentProps, type FormEvent, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminAuth } from "../context/AdminAuthContext";
 import AdminShell from "../components/AdminShell";
@@ -196,11 +196,21 @@ export default function AdminDashboard() {
   const [pays, setPays] = useState<string[]>([]);
   const { signOut, user } = useAdminAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const openContactId = String(searchParams.get("contact") || "").trim();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability
     fetchContacts();
   }, []);
+
+  useEffect(() => {
+    if (!openContactId || loading || !contacts.length) return;
+    const found = contacts.find((c) => c.id === openContactId);
+    if (!found) return;
+    setSelectedContact(found);
+    router.replace("/admin/dashboard", { scroll: false });
+  }, [openContactId, contacts, loading, router]);
 
   useEffect(() => {
     if (!access.whatsapp) return;

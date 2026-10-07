@@ -14,7 +14,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 |---|---|---|
 | Public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. FR, JSON-LD, `public/llms.txt`. Blog : guides `src/lib/blog/` + IA `blog_posts` (1/jour si sujet inédit, cron). |
 | Étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Supabase Auth. Orientation / documents après déblocage admin (`espace_debloque`). |
-| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog` | `ADMIN_EMAILS` + `admin_users`. Rôle `full` ou `limited`. |
+| Admin | `/admin/login`, `/admin/dashboard`, `/admin/emails`, `/admin/universites`, `/admin/blog`, `/admin/rapport` | `ADMIN_EMAILS` + `admin_users`. Rôle `full` ou `limited`. |
 
 `src/app/**/page.tsx` = metadata + vue `src/views/`. Métier dans `src/lib/`.
 
@@ -32,7 +32,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 
 **Suivi** (`suiviStatuts.ts`) : UI canonique ≠ CHECK Postgres. Toujours `canonicalStatut()` / `toStoredStatut()`. Espace étudiant **accessible dès qu'un compte est lié à un dossier** (formule pas obligatoire pour se connecter). L'étudiant choisit sa formule dans l'espace (`POST /api/student/formule`) s'il n'en a pas encore ; ensuite plus de changement côté étudiant. Déblocage orientation / documents = flag `espace_debloque` (bouton admin, **sans** passer le statut en `client_payé`). SQL : `sql/contacts-espace-debloque.sql`. Progression : `studentProgress.ts`. Ne pas reculer un statut sans le dire (`shouldAdvanceStatus()`). Pas de paiement en ligne auto.
 
-**Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule. Fil admin (`AdminContactEmailThread`) : bulles conversation, **Objet + Contenu** (signature incluse), en haut du dossier (full + limited). Le file Emails = compose seulement.
+**Mails** (`contactEmails.ts`) : fil Resend inbound + `sendTemplatedEmail`. Pas de sync Gmail. Inbound : **pas** de réponse auto aux questions — seulement bienvenue et confirmation de formule. Fil admin (`AdminContactEmailThread`) : bulles conversation, **Objet + Contenu** (signature incluse), en haut du dossier (full + limited). Le file Emails = compose seulement. Vue semaine (full + limited) : `/admin/emails` + `GET /api/admin/emails-week` — reçus / envoyés (lundi–dimanche Pékin) + sans réponse (dernier message = inbound). Clic → modal mail ; bouton → fiche (`/admin/dashboard?contact=`).
 
 **Attribution** (`contactOwner.ts`) : manuelle (`assigned_to` / `assigned_at`). Helpers `contactAssignPatch()` / `contactUnassignPatch()`. Primes (`contactRevenue.ts`) : dossier attribué au restreint → global 60 % / restreint 40 %, sinon global 100 %. Historique : emails reçus = acteur `étudiant` (🎓) ; `système_automatique` = envoi mail auto seulement. Tags inbound `[demande_formules]` / `[auto:tarifs]` réécrits en clair (`suiviHistory.ts`).
 
@@ -74,7 +74,7 @@ APIs : `NextResponse` dans `route.ts`. Réutiliser `getSupabaseAdmin()`, `rateLi
 **Public :** `POST /api/contact-submit`, `POST /api/webhooks/resend`  
 **Auth :** `login`, `register`, `recover`  
 **Étudiant :** `me`, `profile`, `formule`, `document`  
-**Admin :** `me`, `contacts`, `daily-report` (GET full), `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `drip` (full, 5/h), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  
+**Admin :** `me`, `contacts`, `emails-week` (GET full+limited), `daily-report` (GET full), `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `drip` (full, 5/h), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  
 **Ops :** `POST /api/email/auto-reply`, crons `formules-relance`, `outbound-drip` (12 min), `blog-generate` (1/jour), `daily-report` (20h Pékin = `0 12 * * *` UTC → mail aux `ADMIN_EMAILS` + page `/admin/rapport`). Bearer `CRON_SECRET`. Webhook Resend sans secret = rejet.
 
 **Tables :** `contacts` (suivi, formule, `paiements` 3 échéances, `espace_debloque`, `prioritaire`, pays via `countries.ts`), `contact_emails`, `outbound_drip`, `suivi_actions`, `admin_users`, `universities`, `matching_runs`, `blog_posts`. SQL : `sql/admin-security.sql`, `universities.sql`, `matching_runs.sql`, `blog-posts.sql`, `sql/contacts-espace-debloque.sql`. Env : `.env.example`. Public : `NEXT_PUBLIC_SUPABASE_*` (fallback `VITE_SUPABASE_*`).
