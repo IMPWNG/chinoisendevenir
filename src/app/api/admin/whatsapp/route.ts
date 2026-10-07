@@ -161,13 +161,25 @@ export async function POST(request: Request) {
       action === "bundle"
         ? {
             action: text.trim() ? "whatsapp_envoye" : "whatsapp_contact",
-            description: [bundleNote, text.trim().slice(0, 160)].filter(Boolean).join(" — ").slice(0, 240),
+            description: [bundleNote, text.trim().slice(0, 160)]
+              .filter(Boolean)
+              .join(" — ")
+              .slice(0, 240),
           }
         : action === "send"
-        ? { action: "whatsapp_envoye", description: text.trim().slice(0, 240) }
-        : action === "label"
-          ? { action: "whatsapp_liste", description: "Ajouté à la liste Étude Chine" }
-          : { action: "whatsapp_contact", description: "Ajouté au carnet WhatsApp" };
+          ? {
+              action: "whatsapp_envoye",
+              description: text.trim().slice(0, 240),
+            }
+          : action === "label"
+            ? {
+                action: "whatsapp_liste",
+                description: "Ajouté à la liste Étude Chine",
+              }
+            : {
+                action: "whatsapp_contact",
+                description: "Ajouté au carnet WhatsApp",
+              };
     const { error: historyError } = await auth.admin.from("suivi_actions").insert({
       contact_id: contactId,
       action: logged.action,
@@ -178,7 +190,12 @@ export async function POST(request: Request) {
       console.warn("whatsapp history:", historyError.message);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      historyLogged: !historyError,
+      historyAction: logged.action,
+      historyDescription: logged.description,
+    });
   } catch (error) {
     if (error instanceof OpenwaError) {
       return NextResponse.json({ error: error.message }, { status: error.status });

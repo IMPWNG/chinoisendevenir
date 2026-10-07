@@ -355,6 +355,8 @@ export const adminTranslations = {
       noFormule: "-- Aucune formule --",
       formuleHint:
         "Sélectionnez une formule puis validez pour l'assigner à l'étudiant. Si l'espace est verrouillé, cela le débloque aussi. Le statut CRM ne change pas.",
+      formuleHintLimited:
+        "Cochez une formule puis validez pour l'assigner. Vous ne pouvez pas débloquer l'espace étudiant.",
       studentSpace: "Espace étudiant",
       unlocked:
         "Accès débloqué. Le suivi et les documents sont visibles pour cet étudiant.",
@@ -1057,6 +1059,8 @@ export const adminTranslations = {
       noFormule: "-- No package --",
       formuleHint:
         "Select a package and confirm to assign it to the student. If the space is locked, this also unlocks it. CRM status does not change.",
+      formuleHintLimited:
+        "Check a package then confirm to assign it. You cannot unlock the student space.",
       studentSpace: "Student space",
       unlocked:
         "Access unlocked. Progress and documents are visible to this student.",
@@ -1739,6 +1743,7 @@ export const adminTranslations = {
       noFormule: "-- 暂无套餐 --",
       formuleHint:
         "选择套餐并确认即可分配给学生；若空间已锁定，同时解锁。CRM 状态不变。",
+      formuleHintLimited: "勾选套餐后确认即可分配。你无法解锁学生空间。",
       studentSpace: "学生空间",
       unlocked: "已解锁。该学生可以查看进度和文件。",
       unlockedWithFormule: "已按 {formule} 解锁。学生会在个人资料上看到该套餐。",

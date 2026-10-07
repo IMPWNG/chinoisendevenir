@@ -203,6 +203,17 @@ export default function AdminContactWhatsApp({
         return;
       }
       if (action === "send") setText("");
+      if (data.historyLogged === false && data.historyAction) {
+        const {
+          data: { session },
+        } = await adminSupabase.auth.getSession();
+        await adminSupabase.from("suivi_actions").insert({
+          contact_id: contact.id,
+          action: data.historyAction,
+          description: data.historyDescription || "",
+          user_admin: session?.user?.email || "admin",
+        });
+      }
       setNotice(
         action === "send"
           ? t("dashboard.whatsappSent")

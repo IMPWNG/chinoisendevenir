@@ -50,6 +50,7 @@ export function adminCapabilities(role: unknown) {
     bulkSend: full,
     deleteContacts: full,
     whatsapp: full,
+    unlockStudentSpace: full,
   };
 }
 
