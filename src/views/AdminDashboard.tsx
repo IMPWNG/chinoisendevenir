@@ -754,16 +754,8 @@ export default function AdminDashboard() {
           />
         ) : null}
 
-        <AdminUnansweredEmails
-          refreshKey={emailThreadKey}
-          onOpenContact={(contactId) => {
-            const found = contacts.find((c) => c.id === contactId);
-            if (found) setSelectedContact(found);
-          }}
-        />
-
         {/* Filtres avancés */}
-        <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-6 mb-8 border border-slate-700/50">
+        <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-6 mb-6 border border-slate-700/50">
           <div className="flex flex-col gap-4">
             {/* Ligne 1: Recherche et Statut */}
             <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
@@ -866,6 +858,14 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
+
+        <AdminUnansweredEmails
+          refreshKey={emailThreadKey}
+          onOpenContact={(contactId) => {
+            const found = contacts.find((c) => c.id === contactId);
+            if (found) setSelectedContact(found);
+          }}
+        />
 
         {access.bulkSend ? (
           <>
