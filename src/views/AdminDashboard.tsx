@@ -1643,7 +1643,10 @@ function ContactModal({
             </FilePanel>
           ) : null}
 
-          <FilePanel title={`🎓 ${t("dashboard.studentSpace")}`} persist>
+          <div className="mb-8 pb-8 border-b border-cyan-500/30">
+            <label className="text-sm font-bold text-slate-300 block mb-3 uppercase tracking-wide">
+              📋 {t("dashboard.formuleSection")}
+            </label>
             {accessGranted ? (
               <p className="text-sm text-emerald-300 mb-4">
                 {t("dashboard.unlockedWithFormule", {
@@ -1657,8 +1660,7 @@ function ContactModal({
             )}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
               {FORMULES.map((formule) => {
-                const active =
-                  accessGranted && chosenFormuleNumber === formule.number;
+                const active = chosenFormuleNumber === formule.number;
                 const selected = selectedFormuleNumber === formule.number;
                 return (
                   <button
@@ -1666,11 +1668,13 @@ function ContactModal({
                     type="button"
                     onClick={() => setSelectedFormule(formule.value)}
                     className={`text-left px-4 py-4 rounded-xl border transition-all duration-200 ${
-                      active
+                      active && selected
                         ? "bg-emerald-500/20 border-emerald-400 text-white"
                         : selected
                           ? "bg-cyan-500/20 border-cyan-400 text-white"
-                          : "bg-slate-700/40 border-slate-600/50 text-slate-300 hover:bg-slate-700"
+                          : active
+                            ? "bg-emerald-500/10 border-emerald-500/50 text-white"
+                            : "bg-slate-700/40 border-slate-600/50 text-slate-300 hover:bg-slate-700"
                     }`}
                   >
                     <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
@@ -1713,7 +1717,7 @@ function ContactModal({
             <p className="text-xs text-slate-500 mt-3">
               {t("dashboard.formuleHint")}
             </p>
-          </FilePanel>
+          </div>
 
           <FilePanel title={`📄 ${t("dashboard.contractSection")}`}>
             <AdminSendContract
