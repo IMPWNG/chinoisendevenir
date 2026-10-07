@@ -1,5 +1,7 @@
 /**
- * Weekly email inbox for admin (full + limited): received, sent, awaiting reply.
+ * Unanswered email threads for the admin home (full + limited).
+ * - needOurReply: last message is inbound (student wrote, we must answer)
+ * - needStudentReply: last message is outbound (we wrote, student silent)
  */
 import type { AdminClient } from "./supabaseAdmin";
 import { displayFormuleLabel } from "./formules";
@@ -9,7 +11,6 @@ import {
   addShanghaiDays,
   shanghaiDayBounds,
   shanghaiDayString,
-  isValidDayString,
 } from "./dailyReportShared";
 
 export type EmailWeekItem = {
@@ -29,14 +30,20 @@ export type EmailWeekItem = {
   awaitingDays?: number;
 };
 
-export type EmailWeekReport = {
+export type UnansweredEmailsReport = {
   timezone: string;
-  weekStart: string;
-  weekEnd: string;
   generatedAt: string;
-  received: EmailWeekItem[];
-  sent: EmailWeekItem[];
-  awaiting: EmailWeekItem[];
+  needOurReply: EmailWeekItem[];
+  needStudentReply: EmailWeekItem[];
+};
+
+/** @deprecated alias — keep API consumers compiling during rename */
+export type EmailWeekReport = UnansweredEmailsReport & {
+  weekStart?: string;
+  weekEnd?: string;
+  received?: EmailWeekItem[];
+  sent?: EmailWeekItem[];
+  awaiting?: EmailWeekItem[];
 };
 
 type EmailRow = {
@@ -60,52 +67,9 @@ type ContactLite = {
   formule?: string | null;
 };
 
-const WEEK_LIST_CAP = 150;
-const AWAITING_LOOKBACK_DAYS = 45;
-const AWAITING_CAP = 80;
-const PREVIEW_LEN = 180;
-
-const WEEKDAY_MON0: Record<string, number> = {
-  Mon: 0,
-  Tue: 1,
-  Wed: 2,
-  Thu: 3,
-  Fri: 4,
-  Sat: 5,
-  Sun: 6,
-};
-
-export function shanghaiWeekdayMon0(day: string): number {
-  if (!isValidDayString(day)) return 0;
-  const label = new Intl.DateTimeFormat("en-US", {
-    timeZone: REPORT_TZ,
-    weekday: "short",
-  }).format(new Date(`${day}T12:00:00+08:00`));
-  return WEEKDAY_MON0[label] ?? 0;
-}
-
-/** Monday 00:00 Asia/Shanghai → next Monday 00:00 (exclusive end). */
-export function shanghaiWeekBounds(day = shanghaiDayString()): {
-  weekStart: string;
-  weekEnd: string;
-  startIso: string;
-  endIso: string;
-} {
-  const base = isValidDayString(day) ? day : shanghaiDayString();
-  const monday = addShanghaiDays(base, -shanghaiWeekdayMon0(base));
-  const nextMonday = addShanghaiDays(monday, 7);
-  return {
-    weekStart: monday,
-    weekEnd: addShanghaiDays(nextMonday, -1),
-    startIso: shanghaiDayBounds(monday).startIso,
-    endIso: shanghaiDayBounds(nextMonday).startIso,
-  };
-}
-
-function contactName(c: ContactLite | undefined, fallbackEmail: string) {
-  const name = [c?.prenom, c?.nom].filter(Boolean).join(" ").trim();
-  return name || fallbackEmail || "Sans nom";
-}
+const LOOKBACK_DAYS = 45;
+const LIST_CAP = 40;
+const PREVIEW_LEN = 160;
 
 export function previewText(body: string | null | undefined) {
   const text = String(body || "")
@@ -113,6 +77,11 @@ export function previewText(body: string | null | undefined) {
     .trim();
   if (text.length <= PREVIEW_LEN) return text;
   return `${text.slice(0, PREVIEW_LEN)}…`;
+}
+
+function contactName(c: ContactLite | undefined, fallbackEmail: string) {
+  const name = [c?.prenom, c?.nom].filter(Boolean).join(" ").trim();
+  return name || fallbackEmail || "Sans nom";
 }
 
 function toItem(
@@ -143,8 +112,8 @@ function toItem(
   };
 }
 
-/** Latest email per contact; keep those whose last message is inbound. */
-export function pickAwaitingReply(rows: EmailRow[]): EmailRow[] {
+/** Latest email per contact. */
+export function latestEmailByContact(rows: EmailRow[]): EmailRow[] {
   const latest = new Map<string, EmailRow>();
   for (const row of rows) {
     const id = String(row.contact_id || "");
@@ -154,9 +123,14 @@ export function pickAwaitingReply(rows: EmailRow[]): EmailRow[] {
       latest.set(id, row);
     }
   }
-  return [...latest.values()]
-    .filter((row) => row.direction === "in")
-    .sort((a, b) => String(b.sent_at).localeCompare(String(a.sent_at)));
+  return [...latest.values()].sort((a, b) =>
+    String(b.sent_at).localeCompare(String(a.sent_at)),
+  );
+}
+
+/** @deprecated use latestEmailByContact + filter direction */
+export function pickAwaitingReply(rows: EmailRow[]): EmailRow[] {
+  return latestEmailByContact(rows).filter((row) => row.direction === "in");
 }
 
 async function mapContacts(
@@ -179,43 +153,28 @@ async function mapContacts(
   return map;
 }
 
-export async function buildEmailWeekReport(
+function ageDays(sentAt: string, nowMs: number) {
+  return Math.max(
+    0,
+    Math.floor((nowMs - new Date(sentAt).getTime()) / 86400000),
+  );
+}
+
+export async function buildUnansweredEmailsReport(
   admin: AdminClient,
-  { day = shanghaiDayString() }: { day?: string } = {},
-): Promise<EmailWeekReport> {
-  const week = shanghaiWeekBounds(day);
+): Promise<UnansweredEmailsReport> {
   const lookbackStart = shanghaiDayBounds(
-    addShanghaiDays(week.weekStart, -AWAITING_LOOKBACK_DAYS),
+    addShanghaiDays(shanghaiDayString(), -LOOKBACK_DAYS),
   ).startIso;
 
-  const empty = (): EmailWeekReport => ({
+  const empty = (): UnansweredEmailsReport => ({
     timezone: REPORT_TZ,
-    weekStart: week.weekStart,
-    weekEnd: week.weekEnd,
     generatedAt: new Date().toISOString(),
-    received: [],
-    sent: [],
-    awaiting: [],
+    needOurReply: [],
+    needStudentReply: [],
   });
 
-  const { data: weekRows, error: weekError } = await admin
-    .from("contact_emails")
-    .select(
-      "id, contact_id, direction, subject, body_text, from_email, to_email, sent_at, read_at",
-    )
-    .gte("sent_at", week.startIso)
-    .lt("sent_at", week.endIso)
-    .order("sent_at", { ascending: false })
-    .limit(800);
-
-  if (weekError) {
-    if (/relation|does not exist|schema cache/i.test(weekError.message)) {
-      return empty();
-    }
-    throw weekError;
-  }
-
-  const { data: lookbackRows, error: lookError } = await admin
+  const { data, error } = await admin
     .from("contact_emails")
     .select(
       "id, contact_id, direction, subject, body_text, from_email, to_email, sent_at, read_at",
@@ -224,55 +183,54 @@ export async function buildEmailWeekReport(
     .order("sent_at", { ascending: false })
     .limit(3000);
 
-  if (
-    lookError &&
-    !/relation|does not exist|schema cache/i.test(lookError.message)
-  ) {
-    throw lookError;
+  if (error) {
+    if (/relation|does not exist|schema cache/i.test(error.message)) {
+      return empty();
+    }
+    throw error;
   }
 
-  const weekEmails = (weekRows || []) as EmailRow[];
-  const lookback = (lookbackRows || []) as EmailRow[];
-  const awaitingRaw = pickAwaitingReply(lookback).slice(0, AWAITING_CAP);
+  const latest = latestEmailByContact((data || []) as EmailRow[]);
+  const needOur = latest
+    .filter((r) => r.direction === "in")
+    .slice(0, LIST_CAP);
+  const needStudent = latest
+    .filter((r) => r.direction !== "in")
+    .slice(0, LIST_CAP);
 
   const contacts = await mapContacts(admin, [
-    ...weekEmails.map((r) => String(r.contact_id)),
-    ...awaitingRaw.map((r) => String(r.contact_id)),
+    ...needOur.map((r) => String(r.contact_id)),
+    ...needStudent.map((r) => String(r.contact_id)),
   ]);
 
   const now = Date.now();
-  const received = weekEmails
-    .filter((r) => r.direction === "in")
-    .slice(0, WEEK_LIST_CAP)
-    .map((r) => toItem(r, contacts.get(String(r.contact_id))));
-
-  const sent = weekEmails
-    .filter((r) => r.direction !== "in")
-    .slice(0, WEEK_LIST_CAP)
-    .map((r) => toItem(r, contacts.get(String(r.contact_id))));
-
-  const awaiting = awaitingRaw.map((r) => {
-    const age = Math.max(
-      0,
-      Math.floor((now - new Date(r.sent_at).getTime()) / 86400000),
-    );
-    return toItem(r, contacts.get(String(r.contact_id)), age);
-  });
-
   return {
     timezone: REPORT_TZ,
-    weekStart: week.weekStart,
-    weekEnd: week.weekEnd,
     generatedAt: new Date().toISOString(),
-    received,
-    sent,
-    awaiting,
+    needOurReply: needOur.map((r) =>
+      toItem(r, contacts.get(String(r.contact_id)), ageDays(r.sent_at, now)),
+    ),
+    needStudentReply: needStudent.map((r) =>
+      toItem(r, contacts.get(String(r.contact_id)), ageDays(r.sent_at, now)),
+    ),
+  };
+}
+
+/** Kept for the existing route name. */
+export async function buildEmailWeekReport(
+  admin: AdminClient,
+): Promise<EmailWeekReport> {
+  const report = await buildUnansweredEmailsReport(admin);
+  return {
+    ...report,
+    awaiting: report.needOurReply,
+    received: [],
+    sent: [],
   };
 }
 
 export const __test = {
-  shanghaiWeekdayMon0,
-  shanghaiWeekBounds,
+  latestEmailByContact,
   pickAwaitingReply,
   previewText,
 };

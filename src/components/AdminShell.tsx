@@ -29,7 +29,6 @@ export default function AdminShell({
   const isUniversities = pathname?.startsWith("/admin/universites");
   const isBlog = pathname?.startsWith("/admin/blog");
   const isReport = pathname?.startsWith("/admin/rapport");
-  const isEmails = pathname?.startsWith("/admin/emails");
 
   useEffect(() => {
     if (limited && lang !== "fr") setLang("fr");
@@ -43,7 +42,6 @@ export default function AdminShell({
   const nav = (
     [
       { href: "/admin/dashboard", label: t("nav.contacts"), icon: "👥" },
-      { href: "/admin/emails", label: t("nav.emails"), icon: "📧" },
       access.universities
         ? { href: "/admin/universites", label: t("nav.universities"), icon: "🏫" }
         : null,
@@ -70,26 +68,22 @@ export default function AdminShell({
             </div>
             <div>
               <h1 className="text-2xl font-bold text-white">
-                {isEmails
-                  ? t("emailsWeek.title")
-                  : isReport
-                    ? t("report.title")
-                    : isBlog
-                      ? t("blog.title")
-                      : isUniversities
-                        ? t("universities.title")
-                        : t("dashboard.title")}
+                {isReport
+                  ? t("report.title")
+                  : isBlog
+                    ? t("blog.title")
+                    : isUniversities
+                      ? t("universities.title")
+                      : t("dashboard.title")}
               </h1>
               <p className="text-xs text-slate-400">
-                {isEmails
-                  ? t("emailsWeek.subtitle")
-                  : isReport
-                    ? t("report.subtitle")
-                    : isBlog
-                      ? t("blog.subtitle")
-                      : isUniversities
-                        ? t("universities.subtitle")
-                        : t("dashboard.subtitle")}
+                {isReport
+                  ? t("report.subtitle")
+                  : isBlog
+                    ? t("blog.subtitle")
+                    : isUniversities
+                      ? t("universities.subtitle")
+                      : t("dashboard.subtitle")}
               </p>
             </div>
           </div>

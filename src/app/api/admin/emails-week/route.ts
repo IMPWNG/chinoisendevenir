@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { buildEmailWeekReport } from "@/lib/adminEmailWeek";
-import { isValidDayString, shanghaiDayString } from "@/lib/dailyReportShared";
+import { buildUnansweredEmailsReport } from "@/lib/adminEmailWeek";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 
 export const maxDuration = 60;
@@ -12,10 +11,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    const url = new URL(request.url);
-    const dayParam = String(url.searchParams.get("day") || "").trim();
-    const day = isValidDayString(dayParam) ? dayParam : shanghaiDayString();
-    const report = await buildEmailWeekReport(auth.admin, { day });
+    const report = await buildUnansweredEmailsReport(auth.admin);
     return NextResponse.json({ success: true, report });
   } catch (error) {
     console.error("emails-week GET:", error);

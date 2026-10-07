@@ -7,13 +7,7 @@ function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
 }
 
-// 2026-10-07 is a Wednesday in Shanghai → Monday is 2026-10-05
-assert(__test.shanghaiWeekdayMon0("2026-10-07") === 2, "Wed = 2");
-const week = __test.shanghaiWeekBounds("2026-10-07");
-assert(week.weekStart === "2026-10-05", "week monday");
-assert(week.weekEnd === "2026-10-11", "week sunday");
-
-const awaiting = __test.pickAwaitingReply([
+const latest = __test.latestEmailByContact([
   {
     id: "1",
     contact_id: "a",
@@ -39,7 +33,16 @@ const awaiting = __test.pickAwaitingReply([
     sent_at: "2026-10-04T10:00:00.000Z",
   },
 ]);
-assert(awaiting.length === 1 && awaiting[0].contact_id === "b", "only b awaits");
+
+assert(latest.length === 3, "one per contact");
+const our = latest.filter((r) => r.direction === "in");
+const theirs = latest.filter((r) => r.direction !== "in");
+assert(our.length === 1 && our[0].contact_id === "b", "we must reply to b");
+assert(
+  theirs.some((r) => r.contact_id === "a") &&
+    theirs.some((r) => r.contact_id === "c"),
+  "student must reply a+c",
+);
 assert(__test.previewText("hello   world").includes("hello world"), "preview");
 
 console.log("adminEmailWeek check ok");

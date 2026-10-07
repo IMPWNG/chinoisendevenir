@@ -13,6 +13,7 @@ import AdminContactEmail from "../components/AdminContactEmail";
 import AdminContactWhatsApp from "../components/AdminContactWhatsApp";
 import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
+import AdminUnansweredEmails from "../components/AdminUnansweredEmails";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
 import AdminDripSend from "../components/AdminDripSend";
@@ -752,6 +753,14 @@ export default function AdminDashboard() {
             real={formatEuros(revenue.real)}
           />
         ) : null}
+
+        <AdminUnansweredEmails
+          refreshKey={emailThreadKey}
+          onOpenContact={(contactId) => {
+            const found = contacts.find((c) => c.id === contactId);
+            if (found) setSelectedContact(found);
+          }}
+        />
 
         {/* Filtres avancés */}
         <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-6 mb-8 border border-slate-700/50">
