@@ -1426,6 +1426,19 @@ function ContactModal({
     }
   };
 
+  const clearChosenFormule = async () => {
+    if (!getChosenFormule(contact)) return;
+    if (!confirm(t("dashboard.removeFormuleConfirm"))) return;
+    setSavingFormule(true);
+    try {
+      await onUpdateFormule(contact.id, "");
+      setSelectedFormule("");
+      fetchActions();
+    } finally {
+      setSavingFormule(false);
+    }
+  };
+
   const fetchActions = async () => {
     setLoadingActions(true);
     const { data, error } = await adminSupabase
@@ -1745,6 +1758,16 @@ function ContactModal({
                       ? t("dashboard.applyFormule")
                       : t("dashboard.unlockSpace")}
                 </button>
+                {getChosenFormule(contact) ? (
+                  <button
+                    type="button"
+                    disabled={savingFormule}
+                    onClick={clearChosenFormule}
+                    className="px-6 py-3 bg-rose-700/80 hover:bg-rose-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {t("dashboard.removeFormule")}
+                  </button>
+                ) : null}
                 {isStudentSpaceUnlocked(contact) ? (
                   <button
                     type="button"

@@ -367,6 +367,9 @@ export const adminTranslations = {
         "Verrouillé. Choisissez la formule, puis débloquez l'espace étudiant.",
       unlockSpace: "Débloquer l'espace étudiant",
       applyFormule: "Appliquer cette formule",
+      removeFormule: "Retirer la formule",
+      removeFormuleConfirm:
+        "Retirer la formule de ce dossier ? L'espace étudiant n'est pas verrouillé automatiquement.",
       unlockNeedFormule: "Choisissez d'abord une formule (1, 2 ou 3).",
       espaceDebloqueMissingColumn:
         "Colonne espace_debloque absente. Exécutez sql/contacts-espace-debloque.sql dans l’éditeur Supabase, puis actualisez.",
@@ -1070,6 +1073,9 @@ export const adminTranslations = {
       locked: "Locked. Choose the package, then unlock the student space.",
       unlockSpace: "Unlock the student space",
       applyFormule: "Apply this package",
+      removeFormule: "Remove package",
+      removeFormuleConfirm:
+        "Remove the package from this file? The student space is not locked automatically.",
       unlockNeedFormule: "Choose a package (1, 2 or 3) first.",
       espaceDebloqueMissingColumn:
         "espace_debloque column missing. Run sql/contacts-espace-debloque.sql in the Supabase editor, then refresh.",
@@ -1751,6 +1757,8 @@ export const adminTranslations = {
       locked: "已锁定。选择套餐后解锁学生空间。",
       unlockSpace: "解锁学生空间",
       applyFormule: "应用此套餐",
+      removeFormule: "移除套餐",
+      removeFormuleConfirm: "从该档案移除套餐？学生空间不会自动锁定。",
       unlockNeedFormule: "请先选择套餐（1、2 或 3）。",
       espaceDebloqueMissingColumn:
         "缺少 espace_debloque 列。请在 Supabase 运行 sql/contacts-espace-debloque.sql 后刷新。",
