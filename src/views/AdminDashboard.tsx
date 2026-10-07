@@ -38,7 +38,6 @@ import {
   FORMULES,
   canonicalFormuleValue,
   displayFormuleLabel,
-  displayFormulePrice,
   getFormuleNumber,
 } from "../lib/formules";
 import {
