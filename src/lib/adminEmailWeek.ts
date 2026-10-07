@@ -12,6 +12,7 @@ import {
   shanghaiDayBounds,
   shanghaiDayString,
 } from "./dailyReportShared";
+import { attachEmailTags } from "./emailTagSummary";
 
 export type EmailWeekItem = {
   id: string;
@@ -28,6 +29,8 @@ export type EmailWeekItem = {
   statut: string;
   formule: string;
   awaitingDays?: number;
+  /** Short CRM label shown next to the student name. */
+  tag?: string;
 };
 
 export type UnansweredEmailsReport = {
@@ -204,15 +207,29 @@ export async function buildUnansweredEmailsReport(
   ]);
 
   const now = Date.now();
+  const needOurReply = needOur.map((r) =>
+    toItem(r, contacts.get(String(r.contact_id)), ageDays(r.sent_at, now)),
+  );
+  const needStudentReply = needStudent.map((r) =>
+    toItem(r, contacts.get(String(r.contact_id)), ageDays(r.sent_at, now)),
+  );
+
+  const tagged = await attachEmailTags([...needOurReply, ...needStudentReply], {
+    useAi: true,
+  });
+  const byId = new Map(tagged.map((item) => [item.id, item.tag]));
+
   return {
     timezone: REPORT_TZ,
     generatedAt: new Date().toISOString(),
-    needOurReply: needOur.map((r) =>
-      toItem(r, contacts.get(String(r.contact_id)), ageDays(r.sent_at, now)),
-    ),
-    needStudentReply: needStudent.map((r) =>
-      toItem(r, contacts.get(String(r.contact_id)), ageDays(r.sent_at, now)),
-    ),
+    needOurReply: needOurReply.map((item) => ({
+      ...item,
+      tag: byId.get(item.id) || item.tag,
+    })),
+    needStudentReply: needStudentReply.map((item) => ({
+      ...item,
+      tag: byId.get(item.id) || item.tag,
+    })),
   };
 }
 

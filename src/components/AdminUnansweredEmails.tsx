@@ -146,7 +146,18 @@ function UnansweredColumn({
               key={item.id}
               className="rounded-xl border border-slate-600/60 bg-slate-800/70 p-3"
             >
-              <p className="text-white font-semibold text-sm">{item.name}</p>
+              <p className="text-white font-semibold text-sm flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span>{item.name}</span>
+                {item.tag ? (
+                  <span
+                    className={`text-xs font-bold ${
+                      accent === "amber" ? "text-amber-300" : "text-sky-300"
+                    }`}
+                  >
+                    — {item.tag}
+                  </span>
+                ) : null}
+              </p>
               <p className="text-slate-200 text-sm mt-0.5 font-medium line-clamp-1">
                 {item.subject}
               </p>
