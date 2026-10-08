@@ -146,10 +146,9 @@ export default function AdminDayTasks({
                       {row.task}
                     </td>
                     <td className="py-2.5 text-slate-400 whitespace-nowrap">
-                      {row.created_by ||
-                        (row.source === "grokbot"
-                          ? t("dayTasks.sourceGrokbot")
-                          : "—")}
+                      {row.source === "grokbot"
+                        ? t("dayTasks.sourceGrokbot")
+                        : row.created_by || "—"}
                     </td>
                   </tr>
                 );
