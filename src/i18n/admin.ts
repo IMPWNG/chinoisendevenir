@@ -78,6 +78,7 @@ export const adminTranslations = {
       delete: "Supprimer",
       deleteConfirm: "Supprimer cette tâche du jour ?",
       deleteFail: "La tâche n'a pas pu être supprimée.",
+      doneBy: "Fait par {email}",
     },
     report: {
       title: "Rapport quotidien",
@@ -810,6 +811,7 @@ export const adminTranslations = {
       delete: "Delete",
       deleteConfirm: "Delete this task for today?",
       deleteFail: "The task could not be deleted.",
+      doneBy: "Done by {email}",
     },
     report: {
       title: "Daily report",
@@ -1531,6 +1533,7 @@ export const adminTranslations = {
       delete: "删除",
       deleteConfirm: "删除这条今日任务？",
       deleteFail: "任务未能删除。",
+      doneBy: "完成者 {email}",
     },
     report: {
       title: "每日报告",

@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { adminSupabase } from "../lib/supabase";
 import { shanghaiDayString } from "../lib/dailyReportShared";
-import { isMissingDayTasksTable, type DayTaskSource } from "../lib/dayTasks";
+import {
+  cleanAuthorEmail,
+  isMissingDayTasksTable,
+  type DayTaskSource,
+} from "../lib/dayTasks";
 
 type TaskRow = {
   id: string;
@@ -13,6 +17,7 @@ type TaskRow = {
   source: DayTaskSource;
   done: boolean;
   created_by?: string | null;
+  done_by?: string | null;
 };
 
 type NameRow = { id: string; prenom?: string | null; nom?: string | null };
@@ -21,11 +26,13 @@ export default function AdminDayTasks({
   contacts,
   refreshKey = 0,
   canDelete = false,
+  actorEmail,
   onOpenContact,
 }: {
   contacts: NameRow[];
   refreshKey?: number;
   canDelete?: boolean;
+  actorEmail?: string | null;
   onOpenContact: (contactId: string) => void;
 }) {
   const { t } = useAdminI18n();
@@ -40,7 +47,7 @@ export default function AdminDayTasks({
       setError("");
       const { data, error: queryError } = await adminSupabase
         .from("day_tasks")
-        .select("id, contact_id, task, source, done, created_by")
+        .select("id, contact_id, task, source, done, created_by, done_by")
         .eq("day", shanghaiDayString())
         .order("created_at", { ascending: true });
       if (cancelled) return;
@@ -72,17 +79,22 @@ export default function AdminDayTasks({
 
   const toggleDone = async (row: TaskRow) => {
     const next = !row.done;
+    const doneBy = next ? cleanAuthorEmail(actorEmail) || null : null;
     setRows((prev) =>
-      prev.map((item) => (item.id === row.id ? { ...item, done: next } : item)),
+      prev.map((item) =>
+        item.id === row.id ? { ...item, done: next, done_by: doneBy } : item,
+      ),
     );
     const { error: updateError } = await adminSupabase
       .from("day_tasks")
-      .update({ done: next })
+      .update({ done: next, done_by: doneBy })
       .eq("id", row.id);
     if (updateError) {
       setRows((prev) =>
         prev.map((item) =>
-          item.id === row.id ? { ...item, done: row.done } : item,
+          item.id === row.id
+            ? { ...item, done: row.done, done_by: row.done_by }
+            : item,
         ),
       );
     }
@@ -166,9 +178,11 @@ export default function AdminDayTasks({
                       {row.task}
                     </td>
                     <td className="py-2.5 pr-3 text-slate-400 whitespace-nowrap">
-                      {row.source === "grokbot"
-                        ? t("dayTasks.sourceGrokbot")
-                        : row.created_by || "—"}
+                      {row.done && row.done_by
+                        ? t("dayTasks.doneBy", { email: row.done_by })
+                        : row.source === "grokbot"
+                          ? t("dayTasks.sourceGrokbot")
+                          : row.created_by || "—"}
                     </td>
                     {canDelete ? (
                       <td className="py-2.5 text-right">

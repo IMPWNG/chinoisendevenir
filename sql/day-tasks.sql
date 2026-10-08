@@ -97,7 +97,12 @@ revoke all on public.day_tasks from anon;
 alter table public.day_tasks
   add column if not exists created_by text;
 
+alter table public.day_tasks
+  add column if not exists done_by text;
+
 comment on table public.day_tasks is
   'Tâche du jour liée à un dossier. source admin = fiche, grokbot = compte rendu.';
 comment on column public.day_tasks.created_by is
   'Email de la personne qui a créé la tâche.';
+comment on column public.day_tasks.done_by is
+  'Email de la personne qui a coché la tâche comme faite.';
