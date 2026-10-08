@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {
-  AGENT_CONTACT_CAP,
   AGENT_RECENT_CAP,
+  agentContactWindow,
   clipAgentText,
   groupRecent,
 } from "@/lib/agentContacts";
@@ -48,14 +48,13 @@ export async function GET(request: Request) {
   }
 
   try {
+    const { offset, limit } = agentContactWindow(new URL(request.url).search);
     const admin = getSupabaseAdmin();
-    const { data, error } = await admin
+    const { data, error, count } = await admin
       .from("contacts")
-      .select("id, prenom, nom, email, suivi_statut, formule")
-      .not("suivi_statut", "eq", "prospect_perdu")
-      .not("suivi_statut", "eq", "perdu")
+      .select("id, prenom, nom, email, suivi_statut, formule", { count: "exact" })
       .order("created_at", { ascending: false })
-      .limit(AGENT_CONTACT_CAP);
+      .range(offset, offset + limit - 1);
     if (error) {
       return NextResponse.json({ error: "Lecture impossible" }, { status: 500 });
     }
@@ -100,6 +99,9 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       success: true,
+      total: count ?? contacts.length,
+      offset,
+      limit,
       contacts: contacts.map((row) => {
         const id = String(row.id);
         return {
