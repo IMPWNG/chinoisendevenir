@@ -69,6 +69,10 @@ function InfoScreen() {
         <FakeField label={t("form.email")} value="amina@email.com" />
         <FakeField label={t("form.phone")} value="+221 77 000 00 00" />
       </div>
+      <div className="landing-form-row">
+        <FakeField label={t("form.level")} value={t("form.diplomas.licence")} />
+        <FakeField label={t("form.field")} value="Commerce / Business" />
+      </div>
       <span className="landing-btn landing-btn-primary">{t("student.saveInfo")}</span>
     </div>
   );

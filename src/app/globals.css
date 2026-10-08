@@ -582,6 +582,16 @@ a.landing-btn-accent:hover {
   color: var(--gray);
 }
 
+.landing-alert p + p {
+  margin-top: 8px;
+}
+
+.landing-alert a {
+  color: inherit;
+  font-weight: 650;
+  text-decoration: underline;
+}
+
 .landing-alert-success {
   background: #d4edda;
   color: #155724;

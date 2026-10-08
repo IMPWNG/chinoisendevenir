@@ -218,6 +218,8 @@ const fr = {
     submitting: "Analyse de votre demande...",
     success:
       "Merci pour votre demande ! Notre équipe va étudier votre profil et vous contactera prochainement.",
+    successEdit:
+      "Pour modifier ces informations, ne remplissez pas ce formulaire une seconde fois : faites-le dans l'espace étudiant.",
     createSpace: "Créer mon espace étudiant",
     error: "L'envoi n'a pas abouti. Réessayez dans un instant.",
     errorRateLimit:
@@ -1241,7 +1243,7 @@ const fr = {
     unlockedSubtitle:
       "Consultez vos informations, mettez à jour votre profil et suivez votre dossier.",
     lockedSubtitle:
-      "Votre dossier est enregistré. Choisissez une formule pour continuer.",
+      "Votre dossier est enregistré. Corrigez vos informations plus bas si besoin, puis choisissez une formule pour continuer.",
     chosenPendingSubtitle:
       "Votre formule est enregistrée. Réglez le premier versement, ou la totalité, pour ouvrir l'accompagnement.",
     completeTitle: "Complétez votre projet",
@@ -1827,6 +1829,8 @@ const en = {
     submitting: "Reviewing your request...",
     success:
       "Thank you for your request! Our team will review your profile and contact you shortly.",
+    successEdit:
+      "To change these details, do not submit this form again: do it in the student space.",
     createSpace: "Create my student space",
     error: "The request could not be sent. Please try again in a moment.",
     errorRateLimit:
@@ -2834,7 +2838,7 @@ const en = {
     unlockedSubtitle:
       "View your information, update your profile, and follow your file.",
     lockedSubtitle:
-      "Your file is registered. Choose a plan to continue.",
+      "Your file is registered. Correct your information below if needed, then choose a plan to continue.",
     chosenPendingSubtitle:
       "Your plan is saved. Pay the first installment, or the full amount, to open the support.",
     completeTitle: "Complete your project",

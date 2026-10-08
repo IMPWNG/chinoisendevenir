@@ -440,23 +440,27 @@ export default function StudentDashboard() {
                 onSuccess={() => loadProfile({ silent: true })}
               />
             </div>
-          ) : !profile ? null : !hasChosenFormule ? (
-            <StudentFormules
-              currentFormule=""
-              selectable
-              choosingNumber={choosingFormule}
-              onChoose={handleChooseFormule}
-            />
-          ) : (
+          ) : profile ? (
             <>
-              <StudentFormuleBanner
-                formule={profile.formule || ""}
-                formuleNumber={formuleNumber}
-              />
-              <StudentPaymentStatus
-                formule={profile.formule}
-                paiements={profile.paiements}
-              />
+              {!hasChosenFormule ? (
+                <StudentFormules
+                  currentFormule=""
+                  selectable
+                  choosingNumber={choosingFormule}
+                  onChoose={handleChooseFormule}
+                />
+              ) : (
+                <>
+                  <StudentFormuleBanner
+                    formule={profile.formule || ""}
+                    formuleNumber={formuleNumber}
+                  />
+                  <StudentPaymentStatus
+                    formule={profile.formule}
+                    paiements={profile.paiements}
+                  />
+                </>
+              )}
               <form className="student-card student-card-wide" onSubmit={handleSave}>
                 <h2 className="card-title">{t("student.infoTitle")}</h2>
                 <p className="card-subtitle">
@@ -616,7 +620,7 @@ export default function StudentDashboard() {
                 </button>
               </form>
 
-              {unlocked ? (
+              {hasChosenFormule && unlocked ? (
                 <>
                   <div className="student-card student-card-wide">
                     <h2 className="card-title">{t("student.progressTitle")}</h2>
@@ -813,7 +817,7 @@ export default function StudentDashboard() {
                 </>
               ) : null}
             </>
-          )}
+          ) : null}
         </div>
       </section>
       <Footer />

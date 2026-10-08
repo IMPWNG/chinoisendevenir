@@ -82,7 +82,7 @@ const fr: StudentSpaceGuideCopy = {
       id: "formule",
       title: "Formule et suivi des paiements",
       paragraphs: [
-        "Vous pouvez vous connecter dès qu'un dossier existe avec votre email, même sans formule encore choisie. L'espace s'arrête alors sur les trois accompagnements. Le choix n'est pas un paiement : l'équipe vous recontacte pour valider, puis le règlement se fait selon le contrat.",
+        "Vous pouvez vous connecter dès qu'un dossier existe avec votre email, même sans formule encore choisie. Le bloc « Mes informations », sous les trois accompagnements, sert à corriger le dossier : ne renvoyez pas le formulaire du site. Le choix n'est pas un paiement : l'équipe vous recontacte pour valider, puis le règlement se fait selon le contrat.",
         "Dès qu'une formule est enregistrée, le bandeau « Votre accompagnement » s'affiche. Vous ne pouvez plus en changer ici. Le suivi des paiements est juste sous ce bandeau. Trois échéances : 40 % à l'ouverture du dossier, 30 % au dépôt de la candidature, puis le solde à la confirmation (ou 10 jours après le dépôt). L'équipe coche chaque échéance après réception. Vous voyez le montant déjà payé, le reste à payer, et l'état de chaque échéance. Vous ne pouvez pas modifier ces cases.",
         "Le paiement en ligne n'est pas encore disponible sur le site.",
       ],
@@ -187,7 +187,7 @@ const en: StudentSpaceGuideCopy = {
       id: "formule",
       title: "Plan and payment tracking",
       paragraphs: [
-        "You can sign in as soon as a file exists with your email, even without a plan yet. The space then stops on the three packages. Choosing is not a payment: the team contacts you to confirm, then payment follows the contract.",
+        "You can sign in as soon as a file exists with your email, even without a plan yet. “My information”, under the three packages, is where you correct the file: do not submit the site form again. Choosing is not a payment: the team contacts you to confirm, then payment follows the contract.",
         "As soon as a plan is saved, the “Your support” banner appears. You cannot change it here. Payment tracking sits just under that banner. Three installments: 40% when the file opens, 30% when the application is submitted, then the balance on confirmation (or 10 days after submission). The team marks each installment after it is received. You see the amount already paid, the amount left, and the status of each installment. You cannot edit those boxes.",
         "Online payment is not available on the site yet.",
       ],

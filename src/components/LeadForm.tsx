@@ -209,9 +209,6 @@ const LeadForm = ({
         email: lockedEmail || "",
       });
       onSuccess?.();
-      if (!embedded) {
-        setTimeout(() => setStatus("idle"), 3000);
-      }
     } catch (err) {
       console.error("❌ Erreur fetch:", err);
       setStatus("error");
@@ -224,11 +221,14 @@ const LeadForm = ({
     <>
         {status === "success" && (
           <div className="landing-alert landing-alert-success">
-            ✅ {t("form.success")}{" "}
+            <p>✅ {t("form.success")}</p>
             {!embedded ? (
-              <Link href="/espace-etudiant/connexion">
-                {t("form.createSpace")}
-              </Link>
+              <p>
+                {t("form.successEdit")}{" "}
+                <Link href="/espace-etudiant/connexion">
+                  {t("form.createSpace")}
+                </Link>
+              </p>
             ) : null}
           </div>
         )}

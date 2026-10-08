@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getResendApiKey, getSupabaseAdmin } from "../supabaseAdmin";
 import { CONTACT_FROM, INBOUND_REPLY_TO } from "../emailConfig";
-import { wrapEmailHtml, withEtudeChineSubject } from "../emailLayout";
+import { SITE_URL, wrapEmailHtml, withEtudeChineSubject } from "../emailLayout";
 import { getClientIp, rateLimit } from "../httpSecurity";
 import { canonicalStatut, EARLY_STATUSES, toStoredStatut } from "../suiviStatuts";
 import { isValidPhone } from "../contactForm";
@@ -34,7 +34,13 @@ const DOMAINES_VALIDES = [
   "Langues",
 ];
 
+function emailShot(file: string, alt: string) {
+  return `<img src="${SITE_URL}email/${file}" alt="${alt}" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:1px solid #e6e9ee;margin:12px 0 6px;" />`;
+}
+
 function generateEmailTemplate(prenom: string) {
+  const login = `${SITE_URL}espace-etudiant/connexion`;
+  const guide = `${SITE_URL}espace-etudiant/guide`;
   return wrapEmailHtml({
     title: "Bienvenue — votre projet est bien reçu",
     subtitle: "Étudier en Chine, étape par étape",
@@ -43,6 +49,20 @@ function generateEmailTemplate(prenom: string) {
             <div class="section">
               <p>Merci d'avoir transmis votre demande. Nous avons bien reçu vos informations et votre profil va être lu avec attention.</p>
               <p>Cette première lecture nous permet d'identifier les pistes les plus réalistes pour vous : formations, universités, calendrier et, le cas échéant, pistes de financement.</p>
+            </div>
+            <div class="section">
+              <div class="section-title">Modifier vos informations</div>
+              <p>Pour corriger une information, ne remplissez pas le formulaire du site une seconde fois. Faites-le dans l'espace étudiant.</p>
+              <ul class="formule-list">
+                <li>Ouvrez la <a class="body-link" href="${login}">page de connexion</a>. Première visite : onglet « Créer un compte », avec la même adresse email que ce formulaire. Le compte est actif tout de suite. S'il existe déjà, onglet « Connexion ».</li>
+                <li>Dans l'espace, sous les trois accompagnements, ouvrez le bloc « Mes informations ». Corrigez les champs, puis cliquez sur « Enregistrer mes informations ».</li>
+                <li>L'adresse email ne se change pas dans ce bloc. Pour la modifier, répondez à cet e-mail.</li>
+              </ul>
+              ${emailShot("espace-compte.png", "Page de connexion : onglet Créer un compte, même adresse email que le formulaire.")}
+              <p>1. Créer le compte avec la même adresse email, ou se connecter.</p>
+              ${emailShot("espace-informations.png", "Bloc Mes informations : corriger les champs, puis Enregistrer mes informations.")}
+              <p>2. Le bloc « Mes informations » — l'exemple ci-dessus n'est pas votre dossier. Corrigez vos champs, puis enregistrez.</p>
+              <p><a class="cta-link" href="${guide}">Guide illustré, écran par écran</a></p>
             </div>
             <div class="section">
               <div class="section-title">Ce que nous faisons ensuite</div>
