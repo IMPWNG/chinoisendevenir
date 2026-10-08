@@ -54,6 +54,21 @@ export default function AdminShell({
     ] as Array<NavItem | null>
   ).filter((item): item is NavItem => item != null);
 
+  const title = isReport
+    ? t("report.title")
+    : isBlog
+      ? t("blog.title")
+      : isUniversities
+        ? t("universities.title")
+        : t("dashboard.title");
+  const subtitle = isReport
+    ? t("report.subtitle")
+    : isBlog
+      ? t("blog.subtitle")
+      : isUniversities
+        ? t("universities.subtitle")
+        : t("dashboard.subtitle");
+
   return (
     <div
       className={`min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950${
@@ -61,42 +76,26 @@ export default function AdminShell({
       }`}
     >
       <header className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-6 pt-5 flex flex-wrap justify-between items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-xl">📊</span>
+        <div className="max-w-7xl mx-auto flex flex-col gap-3 px-4 pt-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pt-5">
+          <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg sm:h-12 sm:w-12">
+              <span className="text-base sm:text-xl">📊</span>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-white">
-                {isReport
-                  ? t("report.title")
-                  : isBlog
-                    ? t("blog.title")
-                    : isUniversities
-                      ? t("universities.title")
-                      : t("dashboard.title")}
-              </h1>
-              <p className="text-xs text-slate-400">
-                {isReport
-                  ? t("report.subtitle")
-                  : isBlog
-                    ? t("blog.subtitle")
-                    : isUniversities
-                      ? t("universities.subtitle")
-                      : t("dashboard.subtitle")}
-              </p>
+            <div className="min-w-0">
+              <h1 className="truncate text-lg font-bold text-white sm:text-2xl">{title}</h1>
+              <p className="hidden truncate text-xs text-slate-400 sm:block">{subtitle}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-end gap-2 sm:gap-3">
             {limited ? null : (
-              <div className="flex rounded-xl overflow-hidden border border-slate-600/60">
+              <div className="flex overflow-hidden rounded-lg border border-slate-600/60 sm:rounded-xl">
                 {ADMIN_LANGS.map((item) => (
                   <button
                     key={item.id}
                     type="button"
                     onClick={() => setLang(item.id)}
-                    className={`px-3 py-1.5 text-xs font-bold ${
+                    className={`px-2.5 py-2 text-xs font-bold sm:px-3 sm:py-1.5 ${
                       lang === item.id
                         ? "bg-blue-600 text-white"
                         : "bg-slate-800 text-slate-300 hover:bg-slate-700"
@@ -107,8 +106,8 @@ export default function AdminShell({
                 ))}
               </div>
             )}
-            <div className="hidden md:flex flex-col items-end min-w-0">
-              <p className="text-sm text-slate-200 truncate max-w-[220px]">
+            <div className="hidden min-w-0 flex-col items-end md:flex">
+              <p className="max-w-[220px] truncate text-sm text-slate-200">
                 {user?.email}
               </p>
               {limited ? null : (
@@ -119,53 +118,62 @@ export default function AdminShell({
               <button
                 type="button"
                 aria-pressed={largeType}
+                aria-label={largeType ? t("a11yNormalType") : t("a11yLargeType")}
                 onClick={() => {
                   const next = !largeType;
                   setLargeType(next);
                   window.localStorage.setItem(LARGE_TYPE_KEY, next ? "1" : "0");
                 }}
-                className={`text-sm font-bold px-3.5 py-2 rounded-lg border transition-colors ${
+                className={`whitespace-nowrap rounded-lg border px-2.5 py-2 text-xs font-bold transition-colors sm:px-3.5 sm:text-sm ${
                   largeType
-                    ? "bg-blue-600 text-white border-blue-500"
-                    : "text-slate-300 border-slate-600 hover:border-slate-400 hover:text-white"
+                    ? "border-blue-500 bg-blue-600 text-white"
+                    : "border-slate-600 text-slate-300 hover:border-slate-400 hover:text-white"
                 }`}
               >
-                {largeType ? `A− ${t("a11yNormalType")}` : `A+ ${t("a11yLargeType")}`}
+                <span className="sm:hidden">{largeType ? "A−" : "A+"}</span>
+                <span className="hidden sm:inline">
+                  {largeType ? `A− ${t("a11yNormalType")}` : `A+ ${t("a11yLargeType")}`}
+                </span>
               </button>
             ) : null}
             <button
               type="button"
               onClick={onLogout}
-              className="text-sm text-slate-300 hover:text-white border border-slate-600 hover:border-slate-400 px-3.5 py-2 rounded-lg transition-colors"
+              className="whitespace-nowrap rounded-lg border border-slate-600 px-2.5 py-2 text-xs text-slate-300 transition-colors hover:border-slate-400 hover:text-white sm:px-3.5 sm:text-sm"
             >
               {t("logout")}
             </button>
           </div>
         </div>
 
-        <nav className="flex w-full flex-wrap items-center justify-center gap-2 px-6 pb-5">
-            {nav.map((item) => {
-              const active =
-                pathname === item.href ||
-                (item.href !== "/admin/dashboard" &&
-                  Boolean(pathname?.startsWith(item.href)));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-                    active
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                  }`}
-                >
-                  {item.icon} {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+        <nav
+          className={`mx-auto grid max-w-7xl gap-2 px-4 pb-3 pt-3 sm:flex sm:flex-wrap sm:justify-center sm:px-6 sm:pb-5 ${
+            nav.length > 1 ? "grid-cols-2" : "grid-cols-1"
+          }`}
+        >
+          {nav.map((item) => {
+            const active =
+              pathname === item.href ||
+              (item.href !== "/admin/dashboard" &&
+                Boolean(pathname?.startsWith(item.href)));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-colors sm:w-auto sm:min-h-0 sm:px-4 ${
+                  active
+                    ? "bg-blue-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                }`}
+              >
+                <span aria-hidden>{item.icon}</span>
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
       </header>
-      <div className="max-w-7xl mx-auto px-6 py-8">{children}</div>
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">{children}</div>
     </div>
   );
 }
