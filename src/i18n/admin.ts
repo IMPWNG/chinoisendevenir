@@ -57,6 +57,13 @@ export const adminTranslations = {
       awaitingSince: "il y a {days} j",
       loadFail: "Impossible de charger les emails reçus.",
     },
+    whatsappInbox: {
+      homeTitle: "WhatsApp reçu",
+      homeHint:
+        "Même lecture que les emails : dernier message de l'étudiant, ou message envoyé en attente de réponse.",
+      openMessage: "Lire le message",
+      loadFail: "Impossible de charger les WhatsApp reçus.",
+    },
     dayTasks: {
       title: "Tâches du jour",
       hint: "Priorités du jour.",
@@ -791,6 +798,13 @@ export const adminTranslations = {
       awaitingSince: "{days} d ago",
       loadFail: "Could not load received emails.",
     },
+    whatsappInbox: {
+      homeTitle: "WhatsApp received",
+      homeHint:
+        "Same as emails: the student's last message, or a message we sent that is still waiting.",
+      openMessage: "Read message",
+      loadFail: "Could not load received WhatsApp messages.",
+    },
     dayTasks: {
       title: "Today's tasks",
       hint: "Today's priorities.",
@@ -1512,6 +1526,12 @@ export const adminTranslations = {
       openMail: "阅读邮件",
       awaitingSince: "{days} 天前",
       loadFail: "无法加载收到的邮件。",
+    },
+    whatsappInbox: {
+      homeTitle: "收到的 WhatsApp",
+      homeHint: "与邮件相同：学生的最后一条消息，或我们已发送、仍在等待回复的消息。",
+      openMessage: "阅读消息",
+      loadFail: "无法加载收到的 WhatsApp。",
     },
     dayTasks: {
       title: "今日任务",

@@ -190,6 +190,7 @@ async function mapPool<T>(
  */
 export async function recentWhatsappHistories(
   contacts: readonly { id: string; phone?: unknown; pays?: string | null }[],
+  opts?: { maxMatches?: number; budgetMs?: number; historyLimit?: number },
 ): Promise<Map<string, unknown[]>> {
   const byPhone = new Map<string, string>();
   for (const contact of contacts) {
@@ -205,12 +206,15 @@ export async function recentWhatsappHistories(
   } catch {
     return out;
   }
-  const deadline = Date.now() + WA_FEED_MS;
+  const deadline = Date.now() + (opts?.budgetMs ?? WA_FEED_MS);
+  const cap = opts?.maxMatches && opts.maxMatches > 0 ? opts.maxMatches : Number.POSITIVE_INFINITY;
+  const historyLimit = Math.min(40, Math.max(1, opts?.historyLimit ?? 20));
 
   const jobs: { contactId: string; chatId: string }[] = [];
   const lids: string[] = [];
   const claimed = new Set<string>();
   function claim(phone: string, chatId: string) {
+    if (claimed.size >= cap) return;
     const contactId = byPhone.get(phone);
     if (!contactId || claimed.has(contactId)) return;
     claimed.add(contactId);
@@ -218,17 +222,18 @@ export async function recentWhatsappHistories(
   }
 
   for (const row of chatList(chats)) {
+    if (claimed.size >= cap) break;
     const id = String(row.id || "");
     if (!id || !isPrivateChat(row, id)) continue;
     const phone = msisdnFromChatId(id);
     if (phone) claim(phone, id);
-    else if (id.endsWith("@lid")) lids.push(id);
+    else if (id.endsWith("@lid") && lids.length + claimed.size < cap) lids.push(id);
   }
 
   async function loadHistory(job: { contactId: string; chatId: string }) {
     try {
       const history = await openwa(
-        `/messages/${encodeURIComponent(job.chatId)}/history?limit=20`,
+        `/messages/${encodeURIComponent(job.chatId)}/history?limit=${historyLimit}`,
         undefined,
         { timeoutMs: 8_000 },
       );
