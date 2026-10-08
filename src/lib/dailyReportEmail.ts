@@ -9,7 +9,8 @@ import {
   type DailyReport,
 } from "./dailyReport";
 import { SITE_URL } from "./emailLayout";
-import { getResendApiKey, getSupabaseAdmin } from "./supabaseAdmin";
+import { grokbotDayTasks, isMissingDayTasksTable } from "./dayTasks";
+import { getResendApiKey, getSupabaseAdmin, type AdminClient } from "./supabaseAdmin";
 
 function reportUrl(day: string) {
   const base = String(SITE_URL || "https://chinoisendevenir.com").replace(/\/$/, "");
@@ -76,6 +77,7 @@ export async function sendDailyReportEmail(day = shanghaiDayString()) {
 
   const admin = getSupabaseAdmin();
   const report = await buildDailyReport(admin, { day, historyDays: 14 });
+  await syncGrokbotDayTasks(admin, report);
   const resend = new Resend(getResendApiKey());
   const subject = `Etude Chine — Rapport ${report.day}`;
   const text = `${reportSummaryLines(report).join("\n")}\n\n${reportUrl(report.day)}`;
@@ -101,4 +103,38 @@ export async function sendDailyReportEmail(day = shanghaiDayString()) {
     recipients,
     url: reportUrl(report.day),
   };
+}
+
+async function syncGrokbotDayTasks(admin: AdminClient, report: DailyReport) {
+  const wanted = grokbotDayTasks(report.priorities);
+  if (!wanted.length) return;
+
+  const { data, error } = await admin
+    .from("day_tasks")
+    .select("contact_id")
+    .eq("day", report.day)
+    .eq("source", "grokbot");
+  if (error) {
+    if (!isMissingDayTasksTable(error.message)) {
+      console.warn("day tasks read:", error.message);
+    }
+    return;
+  }
+
+  const have = new Set((data || []).map((row) => String(row.contact_id)));
+  const fresh = wanted.filter((task) => !have.has(task.contactId));
+  if (!fresh.length) return;
+
+  const { error: insertError } = await admin.from("day_tasks").insert(
+    fresh.map((task) => ({
+      contact_id: task.contactId,
+      day: report.day,
+      task: task.task,
+      source: "grokbot",
+      done: false,
+    })),
+  );
+  if (insertError && !isMissingDayTasksTable(insertError.message)) {
+    console.warn("day tasks insert:", insertError.message);
+  }
 }

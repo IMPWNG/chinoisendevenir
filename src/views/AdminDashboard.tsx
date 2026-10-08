@@ -14,6 +14,7 @@ import AdminContactWhatsApp from "../components/AdminContactWhatsApp";
 import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminUnansweredEmails from "../components/AdminUnansweredEmails";
+import AdminDayTasks from "../components/AdminDayTasks";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
 import AdminPaymentSchedule from "../components/AdminPaymentSchedule";
@@ -60,6 +61,8 @@ import {
   priorityPatch,
   sortPriorityFirst,
 } from "../lib/contactPriority";
+import { cleanDayTask, isMissingDayTasksTable } from "../lib/dayTasks";
+import { shanghaiDayString } from "../lib/dailyReportShared";
 import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
 import { formatEurosOnly } from "../lib/money";
@@ -191,6 +194,7 @@ export default function AdminDashboard() {
   const [inboxTick, setInboxTick] = useState(0);
   const [selectedContact, setSelectedContact] = useState<DashboardContact | null>(null);
   const [emailThreadKey, setEmailThreadKey] = useState(0);
+  const [dayTaskKey, setDayTaskKey] = useState(0);
   const [editOnOpen, setEditOnOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [pays, setPays] = useState<string[]>([]);
@@ -868,6 +872,15 @@ export default function AdminDashboard() {
           }}
         />
 
+        <AdminDayTasks
+          contacts={contacts}
+          refreshKey={dayTaskKey}
+          onOpenContact={(contactId) => {
+            const found = contacts.find((c) => c.id === contactId);
+            if (found) setSelectedContact(found);
+          }}
+        />
+
         {access.bulkSend ? (
           <>
           <AdminBulkEmail
@@ -1195,6 +1208,7 @@ export default function AdminDashboard() {
           onUpdateDossierEtape={updateDossierEtape}
           onToggleAssign={toggleAssign}
           onTogglePriority={togglePriority}
+          onDayTaskSaved={() => setDayTaskKey((k) => k + 1)}
           userEmail={user?.email}
           onContactUpdated={fetchContacts}
           emailThreadKey={emailThreadKey}
@@ -1355,6 +1369,7 @@ function ContactModal({
   onUpdateDossierEtape,
   onToggleAssign,
   onTogglePriority,
+  onDayTaskSaved,
   userEmail,
   onContactUpdated,
   onContactPatched,
@@ -1372,6 +1387,7 @@ function ContactModal({
   onUpdateDossierEtape: (id: string, etapeIndex: number) => Promise<void>;
   onToggleAssign: (id: string, assign: boolean) => Promise<void>;
   onTogglePriority: (id: string, on: boolean) => Promise<void>;
+  onDayTaskSaved: () => void;
   userEmail?: string | null;
   onContactUpdated: () => void;
   onContactPatched: (updated: DashboardContact) => void;
@@ -1392,6 +1408,50 @@ function ContactModal({
     canonicalFormuleValue(getChosenFormule(contact)),
   );
   const [savingFormule, setSavingFormule] = useState(false);
+  const [taskOpen, setTaskOpen] = useState(false);
+  const [taskText, setTaskText] = useState("");
+  const [savingTask, setSavingTask] = useState(false);
+
+  const openDayTask = async () => {
+    setTaskOpen(true);
+    setTaskText("");
+    const { data } = await adminSupabase
+      .from("day_tasks")
+      .select("task")
+      .eq("contact_id", contact.id)
+      .eq("day", shanghaiDayString())
+      .eq("source", "admin")
+      .maybeSingle();
+    if (data?.task) setTaskText(String(data.task));
+  };
+
+  const saveDayTask = async () => {
+    const task = cleanDayTask(taskText);
+    if (!task) return;
+    setSavingTask(true);
+    const { error } = await adminSupabase.from("day_tasks").upsert(
+      {
+        contact_id: contact.id,
+        day: shanghaiDayString(),
+        task,
+        source: "admin",
+        done: false,
+      },
+      { onConflict: "contact_id,day,source" },
+    );
+    setSavingTask(false);
+    if (error) {
+      alert(
+        isMissingDayTasksTable(error.message)
+          ? t("dayTasks.missing")
+          : t("error") + " : " + error.message,
+      );
+      return;
+    }
+    if (!isPrioritaire(contact)) await onTogglePriority(contact.id, true);
+    setTaskOpen(false);
+    onDayTaskSaved();
+  };
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability
@@ -1549,6 +1609,13 @@ function ContactModal({
                 />
                 <span>{t("dashboard.priorityFollow")}</span>
               </label>
+              <button
+                type="button"
+                onClick={openDayTask}
+                className="inline-flex items-center bg-white/90 text-slate-900 px-3 py-1.5 rounded-lg text-sm font-bold hover:bg-white"
+              >
+                {t("dayTasks.add")}
+              </button>
             </div>
           </div>
 
@@ -1954,6 +2021,47 @@ function ContactModal({
           </FilePanel>
         </div>
       </div>
+      {taskOpen ? (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/70"
+          onClick={(e) => {
+            e.stopPropagation();
+            setTaskOpen(false);
+          }}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border border-slate-600 bg-slate-900 p-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-lg font-bold text-white">{t("dayTasks.popupTitle")}</h3>
+            <p className="text-sm text-slate-400 mt-1">{t("dayTasks.popupHint")}</p>
+            <textarea
+              value={taskText}
+              onChange={(e) => setTaskText(e.target.value)}
+              rows={4}
+              placeholder={t("dayTasks.placeholder")}
+              className="mt-4 w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400/50 resize-none"
+            />
+            <div className="mt-4 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setTaskOpen(false)}
+                className="px-4 py-2 rounded-lg text-sm text-slate-300 border border-slate-600 hover:text-white"
+              >
+                {t("close")}
+              </button>
+              <button
+                type="button"
+                disabled={savingTask || !cleanDayTask(taskText)}
+                onClick={saveDayTask}
+                className="px-4 py-2 rounded-lg text-sm font-bold bg-amber-400 text-slate-900 disabled:opacity-50"
+              >
+                {savingTask ? t("saving") : t("dayTasks.save")}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
