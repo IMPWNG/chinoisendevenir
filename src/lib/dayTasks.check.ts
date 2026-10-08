@@ -1,35 +1,63 @@
 /**
- * Self-check for the daily task picker.
+ * Self-check for agent day-task parsing.
  * Run: npx tsx src/lib/dayTasks.check.ts
  */
-import { cleanDayTask, grokbotDayTasks, isMissingDayTasksTable } from "./dayTasks";
+import {
+  cleanDayTask,
+  isMissingDayTasksTable,
+  parseAgentDayTasks,
+} from "./dayTasks";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
 }
 
-const person = (id: string) => ({
-  id,
-  name: id,
-  email: "",
-  statut: "",
-  formule: "",
-  assigned_to: "",
-});
-
 assert(cleanDayTask("  rappeler   demain ") === "rappeler demain", "collapse space");
 assert(cleanDayTask("x".repeat(600)).length === 500, "cap 500");
 assert(cleanDayTask("   ") === "", "blank");
 
-const tasks = grokbotDayTasks({
-  unreadInbox: [person("a"), person("b")],
-  attentePaiement: [person("a"), person("c")],
-  noFirstTouch: [person("d")],
-});
-assert(tasks.map((t) => t.contactId).join(",") === "a,b,c,d", "dedupe, inbox first");
-assert(tasks[0].task === "Répondre à l'email reçu", "inbox wording");
-assert(tasks[2].source === "grokbot", "source");
-assert(grokbotDayTasks({ unreadInbox: [person("a"), person("b")] }, 1).length === 1, "cap");
+const parsed = parseAgentDayTasks(
+  {
+    tasks: [
+      { contactId: "a", task: "Répondre au mail" },
+      { contactId: "a", task: "doublon" },
+      { contact_id: "b", task: "  Relancer   le paiement " },
+      { contactId: "", task: "vide" },
+      { contactId: "c", task: "   " },
+    ],
+  },
+  "2026-10-08",
+);
+assert(!("error" in parsed), "parse ok");
+if (!("error" in parsed)) {
+  assert(parsed.day === "2026-10-08", "default day");
+  assert(
+    parsed.tasks.map((t) => `${t.contactId}:${t.task}`).join("|") ===
+      "a:Répondre au mail|b:Relancer le paiement",
+    "dedupe and trim",
+  );
+}
+
+assert(
+  "error" in parseAgentDayTasks({ tasks: [] }, "pas-une-date") ||
+    "error" in parseAgentDayTasks({ day: "lundi", tasks: [] }, "2026-10-08"),
+  "bad day",
+);
+assert("error" in parseAgentDayTasks({}, "2026-10-08"), "tasks required");
+assert(
+  parseAgentDayTasks(
+    { tasks: Array.from({ length: 25 }, (_, i) => ({ contactId: String(i), task: "x" })) },
+    "2026-10-08",
+  ),
+  "cap input",
+);
+{
+  const capped = parseAgentDayTasks(
+    { tasks: Array.from({ length: 25 }, (_, i) => ({ contactId: String(i), task: "x" })) },
+    "2026-10-08",
+  );
+  assert(!("error" in capped) && capped.tasks.length === 20, "cap 20");
+}
 
 assert(
   isMissingDayTasksTable(

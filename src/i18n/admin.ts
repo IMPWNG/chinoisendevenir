@@ -59,7 +59,7 @@ export const adminTranslations = {
     },
     dayTasks: {
       title: "Tâches du jour",
-      hint: "Priorités du jour, posées depuis une fiche ou par GrokBot au compte rendu.",
+      hint: "Priorités du jour, posées depuis une fiche ou ajoutées par GrokBot.",
       empty: "Aucune tâche pour aujourd'hui.",
       colDone: "Fait",
       colStudent: "Étudiant",
@@ -789,7 +789,7 @@ export const adminTranslations = {
     },
     dayTasks: {
       title: "Today's tasks",
-      hint: "Today's priorities, set from a file or by GrokBot with the daily report.",
+      hint: "Today's priorities, set from a file or added by GrokBot.",
       empty: "No task for today.",
       colDone: "Done",
       colStudent: "Student",
@@ -1507,7 +1507,7 @@ export const adminTranslations = {
     },
     dayTasks: {
       title: "今日任务",
-      hint: "今日优先事项，可在档案中添加，或由 GrokBot 在日报中分配。",
+      hint: "今日优先事项，可在档案中添加，或由 GrokBot 添加。",
       empty: "今天没有任务。",
       colDone: "完成",
       colStudent: "学生",

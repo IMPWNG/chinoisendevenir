@@ -1,26 +1,14 @@
-import type { ReportPerson } from "./dailyReportShared";
+import { isValidDayString } from "./dailyReportShared";
 
 export const DAY_TASK_MAX = 500;
+const AGENT_TASK_CAP = 20;
 
 export type DayTaskSource = "admin" | "grokbot";
 
-export type DayTaskDraft = {
+export type AgentDayTask = {
   contactId: string;
   task: string;
-  source: DayTaskSource;
 };
-
-type PriorityLists = {
-  unreadInbox?: ReportPerson[];
-  attentePaiement?: ReportPerson[];
-  noFirstTouch?: ReportPerson[];
-};
-
-const GROK_BUCKETS: Array<[keyof PriorityLists, string]> = [
-  ["unreadInbox", "Répondre à l'email reçu"],
-  ["attentePaiement", "Relancer le paiement"],
-  ["noFirstTouch", "Faire le premier contact"],
-];
 
 export function cleanDayTask(value: unknown): string {
   return String(value || "")
@@ -30,27 +18,36 @@ export function cleanDayTask(value: unknown): string {
 }
 
 /**
- * Compte rendu → tâches du jour.
- * ponytail: 8 tâches max, un dossier une fois, ces 3 files seulement.
- * Un agent peut insérer d'autres lignes source=grokbot.
+ * Body sent by GrokBot. ponytail: 20 tâches, un dossier une fois.
  */
-export function grokbotDayTasks(
-  priorities: PriorityLists,
-  limit = 8,
-): DayTaskDraft[] {
-  const seen = new Set<string>();
-  const out: DayTaskDraft[] = [];
-  const cap = Math.max(0, limit);
-  for (const [key, task] of GROK_BUCKETS) {
-    for (const person of priorities[key] || []) {
-      const contactId = String(person?.id || "").trim();
-      if (!contactId || seen.has(contactId)) continue;
-      seen.add(contactId);
-      out.push({ contactId, task, source: "grokbot" });
-      if (out.length >= cap) return out;
-    }
+export function parseAgentDayTasks(
+  body: unknown,
+  today: string,
+): { day: string; tasks: AgentDayTask[] } | { error: string } {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return { error: "Format invalide" };
   }
-  return out;
+  const raw = body as Record<string, unknown>;
+  const day =
+    raw.day == null || String(raw.day).trim() === ""
+      ? today
+      : String(raw.day).trim();
+  if (!isValidDayString(day)) return { error: "Jour invalide" };
+  if (!Array.isArray(raw.tasks)) return { error: "tasks manquant" };
+
+  const seen = new Set<string>();
+  const tasks: AgentDayTask[] = [];
+  for (const item of raw.tasks) {
+    if (!item || typeof item !== "object") continue;
+    const row = item as Record<string, unknown>;
+    const contactId = String(row.contactId || row.contact_id || "").trim();
+    const task = cleanDayTask(row.task);
+    if (!contactId || !task || seen.has(contactId)) continue;
+    seen.add(contactId);
+    tasks.push({ contactId, task });
+    if (tasks.length >= AGENT_TASK_CAP) break;
+  }
+  return { day, tasks };
 }
 
 export function isMissingDayTasksTable(
