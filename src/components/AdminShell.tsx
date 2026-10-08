@@ -61,7 +61,8 @@ export default function AdminShell({
       }`}
     >
       <header className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-wrap justify-between items-center gap-4">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col gap-4">
+          <div className="flex flex-wrap justify-between items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-xl">📊</span>
@@ -87,28 +88,6 @@ export default function AdminShell({
               </p>
             </div>
           </div>
-
-          <nav className="order-last flex w-full flex-wrap items-center justify-center gap-2 md:order-none md:w-auto md:flex-1">
-            {nav.map((item) => {
-              const active =
-                pathname === item.href ||
-                (item.href !== "/admin/dashboard" &&
-                  Boolean(pathname?.startsWith(item.href)));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-                    active
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                  }`}
-                >
-                  {item.icon} {item.label}
-                </Link>
-              );
-            })}
-          </nav>
 
           <div className="flex items-center gap-3">
             {limited ? null : (
@@ -163,6 +142,29 @@ export default function AdminShell({
               {t("logout")}
             </button>
           </div>
+          </div>
+
+          <nav className="flex flex-wrap items-center justify-center gap-2">
+            {nav.map((item) => {
+              const active =
+                pathname === item.href ||
+                (item.href !== "/admin/dashboard" &&
+                  Boolean(pathname?.startsWith(item.href)));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${
+                    active
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  }`}
+                >
+                  {item.icon} {item.label}
+                </Link>
+              );
+            })}
+          </nav>
         </div>
       </header>
       <div className="max-w-7xl mx-auto px-6 py-8">{children}</div>
