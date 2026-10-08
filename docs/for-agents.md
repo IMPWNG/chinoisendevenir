@@ -77,6 +77,21 @@ APIs : `NextResponse` dans `route.ts`. Réutiliser `getSupabaseAdmin()`, `rateLi
 **Admin :** `me`, `contacts`, `emails-week` (GET full+limited), `daily-report` (GET full), `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  
 **Ops :** `POST /api/email/auto-reply`, crons `formules-relance`, `blog-generate` (1/jour), `daily-report` (20h Pékin = `0 12 * * *` UTC → mail aux `ADMIN_EMAILS` + page `/admin/rapport`). Bearer `CRON_SECRET`. Webhook Resend sans secret = rejet. Le cron du rapport n'écrit pas les tâches du jour.
 
+**WhatsApp inbound (OpenWA) :** pas de webhook site — OpenWA POST en direct l'URL Cursor (`message.received`, filtre `fromMe: false`). Helper `GET|POST|DELETE /api/agent/openwa-webhooks` (header `Authorization: Bearer CRON_SECRET`), env serveur `OPENWA_*`. POST ré-exécutable : même `url` → update, pas de doublon. Ne pas toucher `/api/webhooks/resend`.
+
+```bash
+curl -X POST https://chinoisendevenir.com/api/agent/openwa-webhooks \
+  -H "Authorization: Bearer $CRON_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://api2.cursor.sh/automations/webhook/0fd1fd86-c1ea-5eec-961f-6c0237ed81b1","events":["message.received"]}'
+
+curl https://chinoisendevenir.com/api/agent/openwa-webhooks \
+  -H "Authorization: Bearer $CRON_SECRET"
+
+curl -X DELETE "https://chinoisendevenir.com/api/agent/openwa-webhooks?id=WEBHOOK_ID" \
+  -H "Authorization: Bearer $CRON_SECRET"
+```
+
 **Tâches du jour** (`day_tasks`) : l'admin les pose dans la fiche (`source=admin`). GrokBot lit les fiches avec `GET /api/agent/contacts` et le header `Authorization: Bearer CRON_SECRET`. Sans paramètre, jusqu'à 1000 fiches. La suite : `?offset=200` ou `?page=2` (tranches de 200). La réponse indique `total`, `offset` et `limit`. Chaque fiche a `emails` et `whatsapp` (3 derniers messages, `in` / `out`). WhatsApp est lu dans OpenWA ; s'il ne répond pas, `whatsapp` est vide et le reste de la fiche reste là. Il ajoute ensuite les tâches : `POST /api/agent/day-tasks`, corps `{ "tasks": [{ "contactId", "task" }] }` (jour Shanghai si `day` est omis). L'assignation affichée est « système automatique », pas un email. N'écrase pas une tâche GrokBot déjà posée ce jour-là pour le même dossier. SQL : `sql/day-tasks.sql`.
 
 **Tables :** `contacts` (suivi, formule, `paiements` 3 échéances, `espace_debloque`, `prioritaire`, pays via `countries.ts`), `contact_emails`, `suivi_actions`, `admin_users`, `universities`, `matching_runs`, `blog_posts`. SQL : `sql/admin-security.sql`, `universities.sql`, `matching_runs.sql`, `blog-posts.sql`, `sql/contacts-espace-debloque.sql`. Env : `.env.example`. Public : `NEXT_PUBLIC_SUPABASE_*` (fallback `VITE_SUPABASE_*`).

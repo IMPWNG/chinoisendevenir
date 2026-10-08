@@ -67,7 +67,7 @@ function publicError(status: number, body: unknown): string {
   return raw || "OpenWA a refusé la demande.";
 }
 
-async function openwa(
+export async function openwa(
   path: string,
   init?: RequestInit,
   opts?: { allowNotFound?: boolean; timeoutMs?: number },
