@@ -182,10 +182,28 @@ async function mapPool<T>(
   await Promise.all(workers);
 }
 
+type ChatJob = { contactId: string; chatId: string; head: Record<string, unknown> | null };
+
+function chatTimestamp(row: Record<string, unknown>): number {
+  const n = Number(row.timestamp);
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  return n < 1e12 ? n * 1000 : n;
+}
+
+/** Latest message already on the chat row. Null when OpenWA sent no usable preview. */
+export function whatsappChatHead(row: Record<string, unknown>): Record<string, unknown> | null {
+  const last = asRecord(row.lastMessage);
+  if (!last) return null;
+  const type = String(last.type || "").trim();
+  const body = String(last.body || "").trim();
+  if (body || (type && type !== "text")) return last;
+  return null;
+}
+
 /**
  * Last messages per dossier, from OpenWA.
- * ponytail: one chat page (1000) plus a history call per matched chat, 25s ceiling.
- * A down OpenWA returns an empty map so the contact feed still answers.
+ * ponytail: one chat page (1000), newest first. historyLimit 1 uses lastMessage on that page.
+ * Fuller threads still fetch history per match, 25s ceiling. A down OpenWA returns an empty map.
  * A privacy id (@lid) is resolved only inside that budget.
  */
 export async function recentWhatsappHistories(
@@ -209,28 +227,39 @@ export async function recentWhatsappHistories(
   const deadline = Date.now() + (opts?.budgetMs ?? WA_FEED_MS);
   const cap = opts?.maxMatches && opts.maxMatches > 0 ? opts.maxMatches : Number.POSITIVE_INFINITY;
   const historyLimit = Math.min(40, Math.max(1, opts?.historyLimit ?? 20));
+  const headsOnly = historyLimit <= 1;
 
-  const jobs: { contactId: string; chatId: string }[] = [];
+  const jobs: ChatJob[] = [];
   const lids: string[] = [];
+  const lidHeads = new Map<string, Record<string, unknown> | null>();
   const claimed = new Set<string>();
-  function claim(phone: string, chatId: string) {
+  function claim(phone: string, chatId: string, head: Record<string, unknown> | null) {
     if (claimed.size >= cap) return;
     const contactId = byPhone.get(phone);
     if (!contactId || claimed.has(contactId)) return;
     claimed.add(contactId);
-    jobs.push({ contactId, chatId });
+    jobs.push({ contactId, chatId, head });
   }
 
-  for (const row of chatList(chats)) {
-    if (claimed.size >= cap) break;
+  const rows = chatList(chats).slice().sort((a, b) => chatTimestamp(b) - chatTimestamp(a));
+  for (const row of rows) {
+    if (claimed.size >= cap && lids.length + claimed.size >= cap) break;
     const id = String(row.id || "");
     if (!id || !isPrivateChat(row, id)) continue;
+    const head = whatsappChatHead(row);
     const phone = msisdnFromChatId(id);
-    if (phone) claim(phone, id);
-    else if (id.endsWith("@lid") && lids.length + claimed.size < cap) lids.push(id);
+    if (phone) claim(phone, id, head);
+    else if (id.endsWith("@lid") && lids.length + claimed.size < cap) {
+      lids.push(id);
+      lidHeads.set(id, head);
+    }
   }
 
-  async function loadHistory(job: { contactId: string; chatId: string }) {
+  async function loadHistory(job: ChatJob) {
+    if (headsOnly && job.head) {
+      out.set(job.contactId, [job.head]);
+      return;
+    }
     try {
       const history = await openwa(
         `/messages/${encodeURIComponent(job.chatId)}/history?limit=${historyLimit}`,
@@ -238,8 +267,9 @@ export async function recentWhatsappHistories(
         { timeoutMs: 8_000 },
       );
       if (Array.isArray(history)) out.set(job.contactId, history);
+      else if (job.head) out.set(job.contactId, [job.head]);
     } catch {
-      /* one chat must not drop the feed */
+      if (job.head) out.set(job.contactId, [job.head]);
     }
   }
 
@@ -256,7 +286,7 @@ export async function recentWhatsappHistories(
               timeoutMs: 8_000,
             }),
           );
-          claim(String(body?.phone || "").replace(/\D/g, ""), lid);
+          claim(String(body?.phone || "").replace(/\D/g, ""), lid, lidHeads.get(lid) ?? null);
         } catch {
           /* unresolved privacy id */
         }

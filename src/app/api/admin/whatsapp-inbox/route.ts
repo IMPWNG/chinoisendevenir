@@ -27,9 +27,9 @@ export async function GET(request: Request) {
     }
     const contacts = data || [];
     const histories = await recentWhatsappHistories(contacts, {
-      maxMatches: 80,
-      budgetMs: 12_000,
-      historyLimit: 5,
+      maxMatches: 500,
+      budgetMs: 22_000,
+      historyLimit: 1,
     });
     const report = splitWhatsappInbox(contacts, histories);
     const day = shanghaiDayString();

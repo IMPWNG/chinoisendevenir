@@ -22,7 +22,7 @@ export type WhatsappInboxReport = {
   needStudentReply: WhatsappInboxItem[];
 };
 
-const LIST_CAP = 40;
+const LIST_CAP = 200;
 
 type InboxContact = {
   id: string;
