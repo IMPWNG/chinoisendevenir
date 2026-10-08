@@ -876,6 +876,7 @@ export default function AdminDashboard() {
         {access.whatsapp ? (
           <AdminWhatsappInbox
             refreshKey={inboxTick}
+            onSynced={() => setDayTaskKey((n) => n + 1)}
             onOpenContact={(contactId) => {
               const found = contacts.find((c) => c.id === contactId);
               if (found) setSelectedContact(found);
@@ -887,6 +888,7 @@ export default function AdminDashboard() {
           contacts={contacts}
           refreshKey={dayTaskKey}
           canDelete={access.role === "full"}
+          showWhatsapp={access.whatsapp}
           actorEmail={user?.email}
           onOpenContact={(contactId) => {
             const found = contacts.find((c) => c.id === contactId);

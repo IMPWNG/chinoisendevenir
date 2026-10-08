@@ -74,6 +74,7 @@ export const adminTranslations = {
       colBy: "Par",
       sourceAdmin: "Moi",
       sourceGrokbot: "système automatique",
+      sourceWhatsapp: "WhatsApp",
       add: "Tâche du jour",
       popupTitle: "Priorité du jour",
       popupHint:
@@ -815,6 +816,7 @@ export const adminTranslations = {
       colBy: "By",
       sourceAdmin: "Me",
       sourceGrokbot: "système automatique",
+      sourceWhatsapp: "WhatsApp",
       add: "Today's task",
       popupTitle: "Today's priority",
       popupHint: "Write what to do today. The file is marked as priority follow-up.",
@@ -1543,6 +1545,7 @@ export const adminTranslations = {
       colBy: "来自",
       sourceAdmin: "我",
       sourceGrokbot: "système automatique",
+      sourceWhatsapp: "WhatsApp",
       add: "今日任务",
       popupTitle: "今日优先",
       popupHint: "写下今天要做的事。档案会标为优先跟进。",

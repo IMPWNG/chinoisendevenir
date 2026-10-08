@@ -26,12 +26,14 @@ export default function AdminDayTasks({
   contacts,
   refreshKey = 0,
   canDelete = false,
+  showWhatsapp = false,
   actorEmail,
   onOpenContact,
 }: {
   contacts: NameRow[];
   refreshKey?: number;
   canDelete?: boolean;
+  showWhatsapp?: boolean;
   actorEmail?: string | null;
   onOpenContact: (contactId: string) => void;
 }) {
@@ -73,7 +75,8 @@ export default function AdminDayTasks({
     contacts.map((c) => [c.id, `${c.prenom || ""} ${c.nom || ""}`.trim()]),
   );
 
-  const ordered = [...rows].sort(
+  const visible = showWhatsapp ? rows : rows.filter((row) => row.source !== "whatsapp");
+  const ordered = [...visible].sort(
     (a, b) => Number(a.done) - Number(b.done),
   );
 
@@ -123,7 +126,7 @@ export default function AdminDayTasks({
         {t("dayTasks.title")}
         {!loading && !error ? (
           <span className="ml-2 text-slate-400 font-medium text-base">
-            ({rows.filter((row) => !row.done).length})
+            ({visible.filter((row) => !row.done).length})
           </span>
         ) : null}
       </h2>
@@ -182,7 +185,9 @@ export default function AdminDayTasks({
                         ? t("dayTasks.doneBy", { email: row.done_by })
                         : row.source === "grokbot"
                           ? t("dayTasks.sourceGrokbot")
-                          : row.created_by || "—"}
+                          : row.source === "whatsapp"
+                            ? t("dayTasks.sourceWhatsapp")
+                            : row.created_by || "—"}
                     </td>
                     {canDelete ? (
                       <td className="py-2.5 text-right">

@@ -159,9 +159,11 @@ function Column({
 export default function AdminWhatsappInbox({
   refreshKey = 0,
   onOpenContact,
+  onSynced,
 }: {
   refreshKey?: number;
   onOpenContact: (contactId: string) => void;
+  onSynced?: () => void;
 }) {
   const { t, lang } = useAdminI18n();
   const [report, setReport] = useState<WhatsappInboxReport | null>(null);
@@ -184,6 +186,7 @@ export default function AdminWhatsappInbox({
           return;
         }
         setReport(data.report as WhatsappInboxReport);
+        onSynced?.();
       } catch (err) {
         if (cancelled) return;
         const message = errorMessage(err);

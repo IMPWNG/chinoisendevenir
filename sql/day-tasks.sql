@@ -20,7 +20,7 @@ begin
   ) then
     alter table public.day_tasks
       add constraint day_tasks_source_ok
-      check (source in ('admin', 'grokbot'));
+      check (source in ('admin', 'grokbot', 'whatsapp'));
   end if;
 end $$;
 
@@ -100,8 +100,13 @@ alter table public.day_tasks
 alter table public.day_tasks
   add column if not exists done_by text;
 
+alter table public.day_tasks drop constraint if exists day_tasks_source_ok;
+alter table public.day_tasks
+  add constraint day_tasks_source_ok
+  check (source in ('admin', 'grokbot', 'whatsapp'));
+
 comment on table public.day_tasks is
-  'Tâche du jour liée à un dossier. source admin = fiche, grokbot = compte rendu.';
+  'Tâche du jour liée à un dossier. source admin = fiche, grokbot = compte rendu, whatsapp = message étudiant sans réponse.';
 comment on column public.day_tasks.created_by is
   'Email de la personne qui a créé la tâche.';
 comment on column public.day_tasks.done_by is
