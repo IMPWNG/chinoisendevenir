@@ -45,4 +45,28 @@ assert(
 );
 assert(__test.previewText("hello   world").includes("hello world"), "preview");
 
+const open = __test.latestOpenEmails([
+  {
+    id: "old",
+    contact_id: "a",
+    direction: "out",
+    sent_at: "2026-10-01T10:00:00.000Z",
+    dismissed_at: "2026-10-01T12:00:00.000Z",
+  },
+  {
+    id: "new",
+    contact_id: "a",
+    direction: "in",
+    sent_at: "2026-10-05T10:00:00.000Z",
+  },
+  {
+    id: "gone",
+    contact_id: "b",
+    direction: "out",
+    sent_at: "2026-10-04T10:00:00.000Z",
+    dismissed_at: "2026-10-04T11:00:00.000Z",
+  },
+]);
+assert(open.length === 1 && open[0].id === "new", "newer mail brings the thread back");
+
 console.log("adminEmailWeek check ok");

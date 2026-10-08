@@ -9,13 +9,18 @@ import type {
   UnansweredEmailsReport,
 } from "../lib/adminEmailWeek";
 
-async function authedFetch(path: string) {
+async function authedFetch(path: string, options: RequestInit = {}) {
   const {
     data: { session },
   } = await adminSupabase.auth.getSession();
   if (!session?.access_token) throw new Error("SESSION");
   return fetch(path, {
-    headers: { Authorization: `Bearer ${session.access_token}` },
+    ...options,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      ...(options.headers || {}),
+    },
   });
 }
 
@@ -40,11 +45,13 @@ function EmailModal({
   lang,
   onClose,
   onOpenFiche,
+  onDismiss,
 }: {
   item: EmailWeekItem;
   lang: string;
   onClose: () => void;
   onOpenFiche: (contactId: string) => void;
+  onDismiss: (item: EmailWeekItem) => void;
 }) {
   const { t } = useAdminI18n();
   return (
@@ -97,6 +104,13 @@ function EmailModal({
           </button>
           <button
             type="button"
+            onClick={() => onDismiss(item)}
+            className="px-5 py-2.5 rounded-xl text-sm font-bold bg-slate-700 text-slate-200 hover:bg-slate-600"
+          >
+            {t("emailsWeek.dismiss")}
+          </button>
+          <button
+            type="button"
             onClick={onClose}
             className="px-5 py-2.5 rounded-xl text-sm font-bold bg-slate-700 text-slate-200 hover:bg-slate-600"
           >
@@ -115,6 +129,7 @@ function UnansweredColumn({
   accent,
   onRead,
   onFiche,
+  onDismiss,
 }: {
   title: string;
   hint: string;
@@ -122,6 +137,7 @@ function UnansweredColumn({
   accent: "amber" | "sky";
   onRead: (item: EmailWeekItem) => void;
   onFiche: (contactId: string) => void;
+  onDismiss: (item: EmailWeekItem) => void;
 }) {
   const { t, lang } = useAdminI18n();
   const border =
@@ -189,6 +205,13 @@ function UnansweredColumn({
                 >
                   👤 {t("emailsWeek.openFiche")}
                 </button>
+                <button
+                  type="button"
+                  onClick={() => onDismiss(item)}
+                  className="w-full px-3 py-2.5 rounded-xl text-sm font-bold bg-slate-700 text-slate-200 hover:bg-slate-600"
+                >
+                  {t("emailsWeek.dismiss")}
+                </button>
               </div>
             </li>
           ))}
@@ -210,6 +233,41 @@ export default function AdminUnansweredEmails({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [open, setOpen] = useState<EmailWeekItem | null>(null);
+  const [dismissing, setDismissing] = useState("");
+
+  async function dismiss(item: EmailWeekItem) {
+    if (dismissing) return;
+    const previous = report;
+    setDismissing(item.id);
+    setError("");
+    setReport((prev) =>
+      prev
+        ? {
+            ...prev,
+            needOurReply: prev.needOurReply.filter((row) => row.id !== item.id),
+            needStudentReply: prev.needStudentReply.filter((row) => row.id !== item.id),
+          }
+        : prev,
+    );
+    if (open?.id === item.id) setOpen(null);
+    try {
+      const response = await authedFetch("/api/admin/emails-week", {
+        method: "PATCH",
+        body: JSON.stringify({ id: item.id }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.success) {
+        setReport(previous);
+        setError(data.error || t("emailsWeek.dismissFail"));
+      }
+    } catch (err) {
+      setReport(previous);
+      const message = errorMessage(err);
+      setError(message === "SESSION" ? t("sessionExpired") : t("emailsWeek.dismissFail"));
+    } finally {
+      setDismissing("");
+    }
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -272,6 +330,7 @@ export default function AdminUnansweredEmails({
             accent="amber"
             onRead={setOpen}
             onFiche={onOpenContact}
+            onDismiss={dismiss}
           />
           <UnansweredColumn
             title={t("emailsWeek.needStudentReply")}
@@ -280,6 +339,7 @@ export default function AdminUnansweredEmails({
             accent="sky"
             onRead={setOpen}
             onFiche={onOpenContact}
+            onDismiss={dismiss}
           />
         </div>
       ) : null}
@@ -290,6 +350,7 @@ export default function AdminUnansweredEmails({
           lang={lang}
           onClose={() => setOpen(null)}
           onOpenFiche={onOpenContact}
+          onDismiss={dismiss}
         />
       ) : null}
     </div>

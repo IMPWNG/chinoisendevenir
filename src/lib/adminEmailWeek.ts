@@ -59,6 +59,7 @@ type EmailRow = {
   to_email?: string | null;
   sent_at: string;
   read_at?: string | null;
+  dismissed_at?: string | null;
 };
 
 type ContactLite = {
@@ -131,9 +132,14 @@ export function latestEmailByContact(rows: EmailRow[]): EmailRow[] {
   );
 }
 
+/** Latest mail per contact, skipping threads an admin already cleared. */
+export function latestOpenEmails(rows: EmailRow[]): EmailRow[] {
+  return latestEmailByContact(rows).filter((row) => !row.dismissed_at);
+}
+
 /** @deprecated use latestEmailByContact + filter direction */
 export function pickAwaitingReply(rows: EmailRow[]): EmailRow[] {
-  return latestEmailByContact(rows).filter((row) => row.direction === "in");
+  return latestOpenEmails(rows).filter((row) => row.direction === "in");
 }
 
 async function mapContacts(
@@ -180,7 +186,7 @@ export async function buildUnansweredEmailsReport(
   const { data, error } = await admin
     .from("contact_emails")
     .select(
-      "id, contact_id, direction, subject, body_text, from_email, to_email, sent_at, read_at",
+      "id, contact_id, direction, subject, body_text, from_email, to_email, sent_at, read_at, dismissed_at",
     )
     .gte("sent_at", lookbackStart)
     .order("sent_at", { ascending: false })
@@ -193,7 +199,7 @@ export async function buildUnansweredEmailsReport(
     throw error;
   }
 
-  const latest = latestEmailByContact((data || []) as EmailRow[]);
+  const latest = latestOpenEmails((data || []) as EmailRow[]);
   const needOur = latest
     .filter((r) => r.direction === "in")
     .slice(0, LIST_CAP);
@@ -248,6 +254,7 @@ export async function buildEmailWeekReport(
 
 export const __test = {
   latestEmailByContact,
+  latestOpenEmails,
   pickAwaitingReply,
   previewText,
 };

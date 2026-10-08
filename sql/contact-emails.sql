@@ -74,3 +74,9 @@ comment on table public.contact_emails is
   'Fil email admin/étudiant (envoyés out + reçus in via Resend)';
 comment on column public.contact_emails.read_at is
   'Null = non lu (badge rouge). Rempli quand un admin ouvre la fiche.';
+
+alter table public.contact_emails
+  add column if not exists dismissed_at timestamptz;
+
+comment on column public.contact_emails.dismissed_at is
+  'Retiré de Email reçu. Le fil revient si un mail plus récent arrive.';

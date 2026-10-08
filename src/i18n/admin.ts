@@ -56,6 +56,8 @@ export const adminTranslations = {
       openMail: "Lire l'email",
       awaitingSince: "il y a {days} j",
       loadFail: "Impossible de charger les emails reçus.",
+      dismiss: "Retirer",
+      dismissFail: "Impossible de retirer cet email de la liste.",
     },
     whatsappInbox: {
       homeTitle: "WhatsApp reçu",
@@ -816,6 +818,8 @@ export const adminTranslations = {
       openMail: "Read email",
       awaitingSince: "{days} d ago",
       loadFail: "Could not load received emails.",
+      dismiss: "Remove",
+      dismissFail: "Could not remove this email from the list.",
     },
     whatsappInbox: {
       homeTitle: "WhatsApp received",
@@ -1564,6 +1568,8 @@ export const adminTranslations = {
       openMail: "阅读邮件",
       awaitingSince: "{days} 天前",
       loadFail: "无法加载收到的邮件。",
+      dismiss: "移除",
+      dismissFail: "无法从列表中移除这封邮件。",
     },
     whatsappInbox: {
       homeTitle: "收到的 WhatsApp",
