@@ -61,8 +61,7 @@ export default function AdminShell({
       }`}
     >
       <header className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col gap-4">
-          <div className="flex flex-wrap justify-between items-center gap-4">
+        <div className="max-w-7xl mx-auto px-6 pt-5 flex flex-wrap justify-between items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-xl">📊</span>
@@ -142,9 +141,9 @@ export default function AdminShell({
               {t("logout")}
             </button>
           </div>
-          </div>
+        </div>
 
-          <nav className="flex flex-wrap items-center justify-center gap-2">
+        <nav className="flex w-full flex-wrap items-center justify-center gap-2 px-6 pb-5">
             {nav.map((item) => {
               const active =
                 pathname === item.href ||
@@ -165,7 +164,6 @@ export default function AdminShell({
               );
             })}
           </nav>
-        </div>
       </header>
       <div className="max-w-7xl mx-auto px-6 py-8">{children}</div>
     </div>

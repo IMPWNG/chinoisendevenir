@@ -110,11 +110,7 @@ function EvolutionChart({
   return (
     <div className="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-4">
       <p className="text-sm font-bold text-slate-200 mb-2">{label}</p>
-      <svg
-        viewBox={`0 0 ${width} ${height}`}
-        preserveAspectRatio="xMinYMid meet"
-        className="block w-full h-40"
-      >
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-40">
         <polyline
           fill="none"
           stroke="#38bdf8"
@@ -292,7 +288,7 @@ export default function AdminDailyReport() {
               })}
             </p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <EvolutionChart
                 series={report.series}
                 metric="newContacts"
