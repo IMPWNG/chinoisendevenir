@@ -875,6 +875,7 @@ export default function AdminDashboard() {
         <AdminDayTasks
           contacts={contacts}
           refreshKey={dayTaskKey}
+          canDelete={access.role === "full"}
           onOpenContact={(contactId) => {
             const found = contacts.find((c) => c.id === contactId);
             if (found) setSelectedContact(found);

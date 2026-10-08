@@ -20,10 +20,12 @@ type NameRow = { id: string; prenom?: string | null; nom?: string | null };
 export default function AdminDayTasks({
   contacts,
   refreshKey = 0,
+  canDelete = false,
   onOpenContact,
 }: {
   contacts: NameRow[];
   refreshKey?: number;
+  canDelete?: boolean;
   onOpenContact: (contactId: string) => void;
 }) {
   const { t } = useAdminI18n();
@@ -86,6 +88,23 @@ export default function AdminDayTasks({
     }
   };
 
+  const deleteTask = async (row: TaskRow) => {
+    if (!canDelete) return;
+    if (!confirm(t("dayTasks.deleteConfirm"))) return;
+    setRows((prev) => prev.filter((item) => item.id !== row.id));
+    setError("");
+    const { error: deleteError } = await adminSupabase
+      .from("day_tasks")
+      .delete()
+      .eq("id", row.id);
+    if (deleteError) {
+      setRows((prev) =>
+        prev.some((item) => item.id === row.id) ? prev : [...prev, row],
+      );
+      setError(t("dayTasks.deleteFail"));
+    }
+  };
+
   return (
     <div className="mb-6 rounded-2xl border border-amber-500/30 bg-slate-800/50 p-5">
       <h2 className="text-lg font-bold text-white">
@@ -111,7 +130,8 @@ export default function AdminDayTasks({
                 <th className="py-2 pr-3 font-bold">{t("dayTasks.colDone")}</th>
                 <th className="py-2 pr-3 font-bold">{t("dayTasks.colStudent")}</th>
                 <th className="py-2 pr-3 font-bold">{t("dayTasks.colTask")}</th>
-                <th className="py-2 font-bold">{t("dayTasks.colBy")}</th>
+                <th className="py-2 pr-3 font-bold">{t("dayTasks.colBy")}</th>
+                {canDelete ? <th className="py-2 font-bold" /> : null}
               </tr>
             </thead>
             <tbody>
@@ -145,11 +165,22 @@ export default function AdminDayTasks({
                     >
                       {row.task}
                     </td>
-                    <td className="py-2.5 text-slate-400 whitespace-nowrap">
+                    <td className="py-2.5 pr-3 text-slate-400 whitespace-nowrap">
                       {row.source === "grokbot"
                         ? t("dayTasks.sourceGrokbot")
                         : row.created_by || "—"}
                     </td>
+                    {canDelete ? (
+                      <td className="py-2.5 text-right">
+                        <button
+                          type="button"
+                          onClick={() => deleteTask(row)}
+                          className="text-red-400 hover:text-red-300 hover:bg-red-500/20 px-3 py-1 rounded-lg text-sm font-semibold"
+                        >
+                          {t("dayTasks.delete")}
+                        </button>
+                      </td>
+                    ) : null}
                   </tr>
                 );
               })}

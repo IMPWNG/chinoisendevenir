@@ -44,14 +44,50 @@ begin
     return;
   end if;
 
+  if not exists (
+    select 1
+    from pg_proc p
+    join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname = 'public' and p.proname = 'is_full_admin'
+  ) then
+    raise notice 'public.is_full_admin() absente — exécutez aussi sql/admin-roles.sql';
+    return;
+  end if;
+
   execute 'drop policy if exists "admins manage day_tasks" on public.day_tasks';
+  execute 'drop policy if exists "admins read day_tasks" on public.day_tasks';
+  execute 'drop policy if exists "admins insert day_tasks" on public.day_tasks';
+  execute 'drop policy if exists "admins update day_tasks" on public.day_tasks';
+  execute 'drop policy if exists "full admins delete day_tasks" on public.day_tasks';
+
   execute $pol$
-    create policy "admins manage day_tasks"
+    create policy "admins read day_tasks"
       on public.day_tasks
-      for all
+      for select
+      to authenticated
+      using (public.is_admin())
+  $pol$;
+  execute $pol$
+    create policy "admins insert day_tasks"
+      on public.day_tasks
+      for insert
+      to authenticated
+      with check (public.is_admin())
+  $pol$;
+  execute $pol$
+    create policy "admins update day_tasks"
+      on public.day_tasks
+      for update
       to authenticated
       using (public.is_admin())
       with check (public.is_admin())
+  $pol$;
+  execute $pol$
+    create policy "full admins delete day_tasks"
+      on public.day_tasks
+      for delete
+      to authenticated
+      using (public.is_full_admin())
   $pol$;
 end $$;
 

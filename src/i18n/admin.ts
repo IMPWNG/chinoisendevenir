@@ -75,6 +75,9 @@ export const adminTranslations = {
       save: "Assigner",
       missing: "La liste du jour n'est pas encore disponible.",
       loadFail: "Impossible de charger les tâches du jour.",
+      delete: "Supprimer",
+      deleteConfirm: "Supprimer cette tâche du jour ?",
+      deleteFail: "La tâche n'a pas pu être supprimée.",
     },
     report: {
       title: "Rapport quotidien",
@@ -804,6 +807,9 @@ export const adminTranslations = {
       save: "Assign",
       missing: "Today's list is not available yet.",
       loadFail: "Could not load today's tasks.",
+      delete: "Delete",
+      deleteConfirm: "Delete this task for today?",
+      deleteFail: "The task could not be deleted.",
     },
     report: {
       title: "Daily report",
@@ -1522,6 +1528,9 @@ export const adminTranslations = {
       save: "分配",
       missing: "今日清单还不可用。",
       loadFail: "无法加载今日任务。",
+      delete: "删除",
+      deleteConfirm: "删除这条今日任务？",
+      deleteFail: "任务未能删除。",
     },
     report: {
       title: "每日报告",
