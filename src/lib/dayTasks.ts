@@ -17,13 +17,17 @@ export function cleanDayTask(value: unknown): string {
     .slice(0, DAY_TASK_MAX);
 }
 
+export function cleanAuthorEmail(value: unknown): string {
+  return String(value || "").trim().toLowerCase().slice(0, 200);
+}
+
 /**
  * Body sent by GrokBot. ponytail: 20 tâches, un dossier une fois.
  */
 export function parseAgentDayTasks(
   body: unknown,
   today: string,
-): { day: string; tasks: AgentDayTask[] } | { error: string } {
+): { day: string; tasks: AgentDayTask[]; createdBy: string } | { error: string } {
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return { error: "Format invalide" };
   }
@@ -34,6 +38,7 @@ export function parseAgentDayTasks(
       : String(raw.day).trim();
   if (!isValidDayString(day)) return { error: "Jour invalide" };
   if (!Array.isArray(raw.tasks)) return { error: "tasks manquant" };
+  const createdBy = cleanAuthorEmail(raw.createdBy || raw.created_by);
 
   const seen = new Set<string>();
   const tasks: AgentDayTask[] = [];
@@ -47,7 +52,7 @@ export function parseAgentDayTasks(
     tasks.push({ contactId, task });
     if (tasks.length >= AGENT_TASK_CAP) break;
   }
-  return { day, tasks };
+  return { day, tasks, createdBy };
 }
 
 export function isMissingDayTasksTable(

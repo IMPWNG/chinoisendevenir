@@ -36,7 +36,13 @@ if (!("error" in parsed)) {
       "a:Répondre au mail|b:Relancer le paiement",
     "dedupe and trim",
   );
+  assert(parsed.createdBy === "", "no author");
 }
+const withAuthor = parseAgentDayTasks(
+  { createdBy: "  Ada@Exemple.com ", tasks: [{ contactId: "a", task: "x" }] },
+  "2026-10-08",
+);
+assert(!("error" in withAuthor) && withAuthor.createdBy === "ada@exemple.com", "author email");
 
 assert(
   "error" in parseAgentDayTasks({ tasks: [] }, "pas-une-date") ||

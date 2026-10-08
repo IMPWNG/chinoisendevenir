@@ -58,5 +58,10 @@ end $$;
 grant select, insert, update, delete on public.day_tasks to authenticated;
 revoke all on public.day_tasks from anon;
 
+alter table public.day_tasks
+  add column if not exists created_by text;
+
 comment on table public.day_tasks is
   'Tâche du jour liée à un dossier. source admin = fiche, grokbot = compte rendu.';
+comment on column public.day_tasks.created_by is
+  'Email de la personne qui a créé la tâche.';

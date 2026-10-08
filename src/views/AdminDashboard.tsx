@@ -61,7 +61,7 @@ import {
   priorityPatch,
   sortPriorityFirst,
 } from "../lib/contactPriority";
-import { cleanDayTask, isMissingDayTasksTable } from "../lib/dayTasks";
+import { cleanDayTask, cleanAuthorEmail, isMissingDayTasksTable } from "../lib/dayTasks";
 import { shanghaiDayString } from "../lib/dailyReportShared";
 import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
@@ -1436,6 +1436,7 @@ function ContactModal({
         task,
         source: "admin",
         done: false,
+        created_by: cleanAuthorEmail(userEmail) || null,
       },
       { onConflict: "contact_id,day,source" },
     );

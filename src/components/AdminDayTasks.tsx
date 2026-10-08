@@ -12,6 +12,7 @@ type TaskRow = {
   task: string;
   source: DayTaskSource;
   done: boolean;
+  created_by?: string | null;
 };
 
 type NameRow = { id: string; prenom?: string | null; nom?: string | null };
@@ -37,7 +38,7 @@ export default function AdminDayTasks({
       setError("");
       const { data, error: queryError } = await adminSupabase
         .from("day_tasks")
-        .select("id, contact_id, task, source, done")
+        .select("id, contact_id, task, source, done, created_by")
         .eq("day", shanghaiDayString())
         .order("created_at", { ascending: true });
       if (cancelled) return;
@@ -145,9 +146,10 @@ export default function AdminDayTasks({
                       {row.task}
                     </td>
                     <td className="py-2.5 text-slate-400 whitespace-nowrap">
-                      {row.source === "grokbot"
-                        ? t("dayTasks.sourceGrokbot")
-                        : t("dayTasks.sourceAdmin")}
+                      {row.created_by ||
+                        (row.source === "grokbot"
+                          ? t("dayTasks.sourceGrokbot")
+                          : "—")}
                     </td>
                   </tr>
                 );

@@ -57,6 +57,7 @@ export async function POST(request: Request) {
         task: task.task,
         source: "grokbot",
         done: false,
+        created_by: parsed.createdBy || null,
       })),
     );
     if (insertError) {
