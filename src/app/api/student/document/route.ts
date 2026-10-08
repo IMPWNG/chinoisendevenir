@@ -3,19 +3,18 @@ import {
   getAuthenticatedContact,
   ensureStudentBucket,
 } from "@/lib/studentAuth";
-import { studentCanAccessDocuments } from "@/lib/studentProgress";
+import { isStudentAccessGranted, studentCanAccessDocuments } from "@/lib/studentProgress";
 import {
   createDocumentSignedUrl,
   getRequiredDocumentsStatus,
   isOwnedStoragePath,
-  isRequiredDocKey,
+  isRequestedUploadPath,
   listAdminSentDocuments,
+  loadRequestedDocumentKeys,
   replaceFolderFile,
   requiredFolder,
   validateDocumentFile,
 } from "@/lib/studentDocuments";
-import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
-import { uploadKeysFromMatches } from "@/lib/matching/documents";
 
 export async function GET(request: Request) {
   try {
@@ -24,11 +23,10 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!auth.contact || !studentCanAccessDocuments(auth.contact)) {
+    if (!auth.contact || !isStudentAccessGranted(auth.contact)) {
       return NextResponse.json(
         {
-          error:
-            "Les documents sont inclus à partir de la formule 2.",
+          error: "Votre espace n'est pas encore ouvert pour déposer des documents.",
         },
         { status: 403 },
       );
@@ -40,6 +38,20 @@ export async function GET(request: Request) {
         { error: "Document introuvable" },
         { status: 400 },
       );
+    }
+
+    if (!studentCanAccessDocuments(auth.contact)) {
+      const requested = await loadRequestedDocumentKeys(
+        auth.admin,
+        auth.contact.id,
+        auth.contact,
+      );
+      if (!isRequestedUploadPath(auth.contact.id, path, requested)) {
+        return NextResponse.json(
+          { error: "Document introuvable" },
+          { status: 400 },
+        );
+      }
     }
 
     await ensureStudentBucket(auth.admin);
@@ -60,11 +72,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: auth.error }, { status: auth.status });
     }
 
-    if (!auth.contact || !studentCanAccessDocuments(auth.contact)) {
+    if (!auth.contact || !isStudentAccessGranted(auth.contact)) {
       return NextResponse.json(
         {
-          error:
-            "Les documents sont inclus à partir de la formule 2.",
+          error: "Votre espace n'est pas encore ouvert pour déposer des documents.",
         },
         { status: 403 },
       );
@@ -73,10 +84,15 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const file = formData.get("file");
     const docKey = String(formData.get("docKey") || "");
+    const requested = await loadRequestedDocumentKeys(
+      auth.admin,
+      auth.contact.id,
+      auth.contact,
+    );
 
-    if (!isRequiredDocKey(docKey)) {
+    if (!requested.includes(docKey)) {
       return NextResponse.json(
-        { error: "Type de document invalide" },
+        { error: "Ce document n'est pas demandé pour votre dossier" },
         { status: 400 },
       );
     }
@@ -103,25 +119,11 @@ export async function POST(request: Request) {
       user_admin: auth.user.email,
     });
 
-    let extraKeys: string[] = [];
-    try {
-      const runs = (await listMatchingRuns(auth.admin, auth.contact.id)) as Array<{
-        result?: { kind?: string; matches?: unknown };
-      }>;
-      const universityRun = runs.find((run) => run.result?.kind !== MATCHING_KIND_CHINESE);
-      extraKeys = uploadKeysFromMatches(universityRun?.result?.matches);
-    } catch (error) {
-      console.warn("document matching keys:", error);
-    }
-
     const [requiredDocuments, adminDocuments] = await Promise.all([
-      getRequiredDocumentsStatus(
-        auth.admin,
-        auth.contact.id,
-        auth.contact,
-        extraKeys,
-      ),
-      listAdminSentDocuments(auth.admin, auth.contact.id),
+      getRequiredDocumentsStatus(auth.admin, auth.contact.id, auth.contact),
+      studentCanAccessDocuments(auth.contact)
+        ? listAdminSentDocuments(auth.admin, auth.contact.id)
+        : Promise.resolve([]),
     ]);
 
     return NextResponse.json({

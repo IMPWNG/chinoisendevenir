@@ -4,9 +4,11 @@ import {
 } from "./studentAuth";
 import {
   REQUIRED_STUDENT_DOCUMENTS,
-  getRequiredStudentDocuments,
+  STUDENT_DOCUMENT_CATALOG,
   getStudentDocumentSpec,
+  isMissingDocumentsDemandesColumn,
   legacyDiplomaDocKey,
+  parseRequestedDocumentKeys,
   type ContactRow,
 } from "./studentProgress";
 import type { AdminClient } from "./supabaseAdmin";
@@ -40,6 +42,66 @@ export function safeFileName(name: unknown) {
 
 export function isRequiredDocKey(key: unknown) {
   return ALL_DOCUMENT_KEYS.has(String(key || ""));
+}
+
+export function publicDocumentCatalog() {
+  return STUDENT_DOCUMENT_CATALOG.map(({ key, label, description }) => ({
+    key,
+    label,
+    description,
+  }));
+}
+
+export async function loadRequestedDocumentKeys(
+  admin: AdminClient,
+  contactId: unknown,
+  contact: ContactRow | null = null,
+) {
+  if (contact && Object.prototype.hasOwnProperty.call(contact, "documents_demandes")) {
+    return parseRequestedDocumentKeys(contact.documents_demandes);
+  }
+  if (!contactId) return [];
+  const { data, error } = await admin
+    .from("contacts")
+    .select("documents_demandes")
+    .eq("id", contactId)
+    .maybeSingle();
+  if (error) {
+    if (isMissingDocumentsDemandesColumn(error.message)) return [];
+    throw new Error(error.message || "Impossible de lire les documents demandés");
+  }
+  return parseRequestedDocumentKeys(data?.documents_demandes);
+}
+
+export async function saveRequestedDocumentKeys(
+  admin: AdminClient,
+  contactId: unknown,
+  keys: unknown,
+) {
+  const requestedKeys = parseRequestedDocumentKeys(keys);
+  const { error } = await admin
+    .from("contacts")
+    .update({ documents_demandes: requestedKeys })
+    .eq("id", contactId);
+  if (error) {
+    if (isMissingDocumentsDemandesColumn(error.message)) {
+      throw new Error("MISSING_DOCUMENTS_COLUMN");
+    }
+    throw new Error(error.message || "Impossible d'enregistrer les documents demandés");
+  }
+  return requestedKeys;
+}
+
+export function isRequestedUploadPath(
+  contactId: unknown,
+  path: unknown,
+  requestedKeys: string[],
+) {
+  const base = `${contactId}/${FOLDER_REQUIRED}/`;
+  const value = String(path || "");
+  if (!value.startsWith(base)) return false;
+  const key = value.slice(base.length).split("/")[0];
+  return requestedKeys.includes(key);
 }
 
 export function requiredFolder(contactId: unknown, docKey: unknown) {
@@ -110,7 +172,6 @@ export async function getRequiredDocumentsStatus(
   admin: AdminClient,
   contactId: unknown,
   contact: ContactRow | null = null,
-  extraKeys: string[] = [],
 ) {
   let diplome = contact?.dernier_diplome;
   if (!diplome && contactId) {
@@ -122,12 +183,10 @@ export async function getRequiredDocumentsStatus(
     diplome = data?.dernier_diplome || "";
   }
 
-  const specs = getRequiredStudentDocuments({ dernier_diplome: diplome });
-  extraKeys.forEach((key) => {
-    if (specs.some((spec) => spec.key === key)) return;
-    const extra = getStudentDocumentSpec(key);
-    if (extra) specs.push(extra);
-  });
+  const keys = await loadRequestedDocumentKeys(admin, contactId, contact);
+  const specs = keys
+    .map((key) => getStudentDocumentSpec(key))
+    .filter((spec): spec is NonNullable<typeof spec> => Boolean(spec));
   const results = await Promise.all(
     specs.map(async (spec) => {
       const folder = requiredFolder(contactId, spec.key);
@@ -153,7 +212,9 @@ export async function getRequiredDocumentsStatus(
   }
 
   const diplomaKey = legacyDiplomaDocKey(diplome);
-  const diploma = results.find((item) => item.key === diplomaKey);
+  const diploma =
+    results.find((item) => item.key === diplomaKey) ||
+    results.find((item) => item.key === "diplome");
   if (diploma && !diploma.file) {
     const folder = requiredFolder(contactId, LEGACY_DIPLOMA_KEY);
     const files = await listStorageFiles(admin, folder);

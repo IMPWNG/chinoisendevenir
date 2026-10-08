@@ -10,7 +10,6 @@ import {
 } from "@/lib/studentDocuments";
 import type { StudentDocRef } from "@/lib/studentProgress";
 import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
-import { uploadKeysFromMatches } from "@/lib/matching/documents";
 import {
   chineseMatchingForStudent,
   matchingForStudent,
@@ -47,21 +46,15 @@ export async function GET(request: Request) {
         console.warn("student matching:", errorMessage(error));
       }
 
-      if (profile.access?.documents) {
-        await ensureStudentBucket(auth.admin);
-        const extraKeys = uploadKeysFromMatches(universityRun?.result?.matches);
-        const [required, adminDocs] = await Promise.all([
-          getRequiredDocumentsStatus(
-            auth.admin,
-            auth.contact.id,
-            auth.contact,
-            extraKeys,
-          ),
-          listAdminSentDocuments(auth.admin, auth.contact.id),
-        ]);
-        requiredDocuments = required as StudentDocRef[];
-        adminDocuments = adminDocs;
-      }
+      if (profile.access?.documents) await ensureStudentBucket(auth.admin);
+      const [required, adminDocs] = await Promise.all([
+        getRequiredDocumentsStatus(auth.admin, auth.contact.id, auth.contact),
+        profile.access?.documents
+          ? listAdminSentDocuments(auth.admin, auth.contact.id)
+          : Promise.resolve([]),
+      ]);
+      requiredDocuments = required as StudentDocRef[];
+      if (profile.access?.documents) adminDocuments = adminDocs;
 
       try {
         matching = matchingForStudent(

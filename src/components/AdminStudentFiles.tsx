@@ -17,7 +17,11 @@ type RequiredDoc = {
 
 type AdminDoc = { path: string; name: string };
 
+type CatalogDoc = { key: string; label: string; description?: string };
+
 type FilesPayload = {
+  catalog?: CatalogDoc[];
+  requestedKeys?: string[];
   requiredDocuments?: RequiredDoc[];
   adminDocuments?: AdminDoc[];
   url?: string;
@@ -52,9 +56,12 @@ async function adminFetch(path: string, options: RequestInit = {}): Promise<File
 
 export default function AdminStudentFiles({ contactId }: { contactId: string }) {
   const { t } = useAdminI18n();
+  const [catalog, setCatalog] = useState<CatalogDoc[]>([]);
+  const [requestedKeys, setRequestedKeys] = useState<string[]>([]);
   const [requiredDocuments, setRequiredDocuments] = useState<RequiredDoc[]>([]);
   const [adminDocuments, setAdminDocuments] = useState<AdminDoc[]>([]);
   const [loading, setLoading] = useState(true);
+  const [savingKeys, setSavingKeys] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [deletingPath, setDeletingPath] = useState("");
   const [fileToSend, setFileToSend] = useState<File | null>(null);
@@ -67,8 +74,7 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
       const data = await adminFetch(
         `/api/admin/student-files?contactId=${encodeURIComponent(contactId)}`,
       );
-      setRequiredDocuments(data.requiredDocuments || []);
-      setAdminDocuments(data.adminDocuments || []);
+      applyFiles(data);
     } catch (err: unknown) {
       const message = errorMessage(err);
       setError(
@@ -104,8 +110,7 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
         method: "DELETE",
         body: JSON.stringify({ contactId, path }),
       });
-      setRequiredDocuments(data.requiredDocuments || []);
-      setAdminDocuments(data.adminDocuments || []);
+      applyFiles(data);
     } catch (err: unknown) {
       setError(errorMessage(err));
     } finally {
@@ -126,8 +131,7 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
         method: "POST",
         body,
       });
-      setRequiredDocuments(data.requiredDocuments || []);
-      setAdminDocuments(data.adminDocuments || []);
+      applyFiles(data);
       setFileToSend(null);
       e.currentTarget.reset();
     } catch (err: unknown) {
@@ -135,6 +139,43 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
     } finally {
       setUploading(false);
     }
+  };
+
+  const applyFiles = (data: FilesPayload) => {
+    setCatalog(data.catalog || []);
+    setRequestedKeys(data.requestedKeys || []);
+    setRequiredDocuments(data.requiredDocuments || []);
+    setAdminDocuments(data.adminDocuments || []);
+  };
+
+  const toggleRequested = async (key: string) => {
+    const next = requestedKeys.includes(key)
+      ? requestedKeys.filter((item) => item !== key)
+      : [...requestedKeys, key];
+    const previous = requestedKeys;
+    setRequestedKeys(next);
+    setSavingKeys(true);
+    setError("");
+    try {
+      const data = await adminFetch("/api/admin/student-files", {
+        method: "PATCH",
+        body: JSON.stringify({ contactId, requestedKeys: next }),
+      });
+      applyFiles(data);
+    } catch (err: unknown) {
+      setRequestedKeys(previous);
+      const message = errorMessage(err);
+      setError(
+        message === "SESSION" ? t("sessionExpired") : message === "ERROR" ? t("genericError") : message,
+      );
+    } finally {
+      setSavingKeys(false);
+    }
+  };
+
+  const docLabel = (key: string, fallback: string) => {
+    const translated = t(`docs.${key}`);
+    return translated === `docs.${key}` ? fallback : translated;
   };
 
   const missingCount = requiredDocuments.filter(
@@ -152,8 +193,40 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
             <p className="text-sm text-rose-300 mb-4">{error}</p>
           ) : null}
 
+          <p className="text-sm font-semibold text-white mb-1">
+            {t("files.requestTitle")}
+          </p>
+          <p className="text-xs text-slate-400 mb-3">{t("files.requestHint")}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+            {catalog.map((doc) => {
+              const checked = requestedKeys.includes(doc.key);
+              return (
+                <label
+                  key={doc.key}
+                  title={doc.description || ""}
+                  className={`flex items-start gap-2 rounded-lg border px-3 py-2 text-sm cursor-pointer ${
+                    checked
+                      ? "border-cyan-500/50 bg-cyan-500/10 text-white"
+                      : "border-slate-700 bg-slate-900/40 text-slate-300"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    className="mt-1"
+                    checked={checked}
+                    disabled={savingKeys}
+                    onChange={() => toggleRequested(doc.key)}
+                  />
+                  <span className="font-medium">{docLabel(doc.key, doc.label)}</span>
+                </label>
+              );
+            })}
+          </div>
+
           <p className="text-xs text-slate-400 mb-3">
-            {t("files.receivedFromStudent", { count: missingCount })}
+            {requestedKeys.length === 0
+              ? t("files.noneRequested")
+              : t("files.receivedFromStudent", { count: missingCount })}
           </p>
           <div className="space-y-3 mb-6">
             {requiredDocuments.map((doc: RequiredDoc) => {
@@ -170,10 +243,7 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <p className="text-white font-semibold">
-                        {doc.icon}{" "}
-                        {t(`docs.${doc.key}`) === `docs.${doc.key}`
-                          ? doc.label
-                          : t(`docs.${doc.key}`)}
+                        {docLabel(doc.key, doc.label)}
                       </p>
                       <p
                         className={`text-xs font-bold uppercase tracking-wide mt-1 ${

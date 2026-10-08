@@ -11,30 +11,27 @@ import {
   isAdminSentPath,
   isOwnedStoragePath,
   listAdminSentDocuments,
+  loadRequestedDocumentKeys,
+  publicDocumentCatalog,
   safeFileName,
+  saveRequestedDocumentKeys,
   validateDocumentFile,
 } from "@/lib/studentDocuments";
 import { asString, readJsonObject } from "@/lib/request";
 import type { AdminClient } from "@/lib/supabaseAdmin";
-import { listMatchingRuns, MATCHING_KIND_CHINESE } from "@/lib/matching/persist";
-import { uploadKeysFromMatches } from "@/lib/matching/documents";
 
 async function loadFiles(admin: AdminClient, contactId: string) {
-  let extraKeys: string[] = [];
-  try {
-    const runs = (await listMatchingRuns(admin, contactId)) as Array<{
-      result?: { kind?: string; matches?: unknown };
-    }>;
-    const universityRun = runs.find((run) => run.result?.kind !== MATCHING_KIND_CHINESE);
-    extraKeys = uploadKeysFromMatches(universityRun?.result?.matches);
-  } catch (error) {
-    console.warn("student-files matching keys:", error);
-  }
-  const [requiredDocuments, adminDocuments] = await Promise.all([
-    getRequiredDocumentsStatus(admin, contactId, null, extraKeys),
+  const [requestedKeys, requiredDocuments, adminDocuments] = await Promise.all([
+    loadRequestedDocumentKeys(admin, contactId, null),
+    getRequiredDocumentsStatus(admin, contactId, null),
     listAdminSentDocuments(admin, contactId),
   ]);
-  return { requiredDocuments, adminDocuments };
+  return {
+    catalog: publicDocumentCatalog(),
+    requestedKeys,
+    requiredDocuments,
+    adminDocuments,
+  };
 }
 
 export async function GET(request: Request) {
@@ -124,6 +121,63 @@ export async function POST(request: Request) {
         { status: 500 },
       );
     }
+
+    const files = await loadFiles(auth.admin, contactId);
+    return NextResponse.json({ success: true, ...files });
+  } catch (error) {
+    console.error("admin student-files:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const auth = await getAuthenticatedAdmin(request);
+    if ("error" in auth) {
+      return NextResponse.json({ error: auth.error }, { status: auth.status });
+    }
+
+    const body = await readJsonObject(request);
+    if (!body) {
+      return NextResponse.json({ error: "JSON invalide" }, { status: 400 });
+    }
+    const contactId = asString(body.contactId);
+    if (!contactId) {
+      return NextResponse.json({ error: "contactId manquant" }, { status: 400 });
+    }
+    if (!Array.isArray(body.requestedKeys)) {
+      return NextResponse.json({ error: "Liste de documents invalide" }, { status: 400 });
+    }
+
+    let requestedKeys: string[] = [];
+    try {
+      requestedKeys = await saveRequestedDocumentKeys(
+        auth.admin,
+        contactId,
+        body.requestedKeys,
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      if (message === "MISSING_DOCUMENTS_COLUMN") {
+        return NextResponse.json(
+          {
+            error:
+              "Colonne documents_demandes absente. Exécutez sql/contacts-documents-demandes.sql dans l’éditeur Supabase, puis actualisez.",
+          },
+          { status: 500 },
+        );
+      }
+      throw error;
+    }
+
+    await auth.admin.from("suivi_actions").insert({
+      contact_id: contactId,
+      action: "contact_modifier",
+      description: requestedKeys.length
+        ? `Documents demandés : ${requestedKeys.join(", ")}`
+        : "Aucun document demandé à l'étudiant",
+      user_admin: auth.user.email,
+    });
 
     const files = await loadFiles(auth.admin, contactId);
     return NextResponse.json({ success: true, ...files });

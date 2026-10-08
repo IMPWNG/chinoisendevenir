@@ -1264,6 +1264,8 @@ const fr = {
     missingCountPlural:
       "{count} documents manquants. Déposez-les ci-dessous (PDF, JPG ou PNG — 10 Mo max).",
     allReceived: "Tous les documents demandés ont été reçus.",
+    noRequestedDocs:
+      "Aucun document n'est demandé pour le moment. L'équipe indiquera les pièces à déposer.",
     missing: "Manquant",
     received: "Reçu",
     currentFile: "Fichier actuel :",
@@ -1387,6 +1389,73 @@ const fr = {
         label: "Extrait de casier judiciaire",
         description:
           "Certificat de non-condamnation (No Criminal Record), récent (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      photo: {
+        label: "Photo d'identité",
+        description: "Photo d'identité récente (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      diplome: {
+        label: "Dernier diplôme",
+        description:
+          "Dernier diplôme obtenu, avec traduction si besoin. Utile pour une école de langue (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      transcripts: {
+        label: "Relevés de notes",
+        description:
+          "Relevés de notes, avec traduction si besoin (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      hskk: {
+        label: "HSKK",
+        description: "HSK oral, parfois demandé en plus du HSK (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      motivation: {
+        label: "Lettre de motivation",
+        description:
+          "Lettre de motivation, study plan ou personal statement (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      recommendation: {
+        label: "Lettres de recommandation",
+        description:
+          "Lettres de recommandation demandées par l'établissement (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      resume: {
+        label: "CV",
+        description: "Curriculum vitae (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      application_form: {
+        label: "Formulaire de candidature",
+        description:
+          "Formulaire de demande de l'école ou de l'université (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      financial_proof: {
+        label: "Preuve de financement",
+        description:
+          "Attestation de fonds ou garantie financière (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      acte_naissance: {
+        label: "Acte de naissance",
+        description:
+          "Souvent demandé pour un mineur ou une école de langue (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      autorisation_parentale: {
+        label: "Autorisation parentale",
+        description:
+          "Autorisation du parent ou du tuteur, pour un étudiant mineur (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      video: {
+        label: "Vidéo de présentation",
+        description:
+          "Vidéo de présentation demandée par l'établissement (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      portfolio: {
+        label: "Portfolio",
+        description:
+          "Portfolio pour un programme d'art, de design ou d'architecture (PDF, JPG ou PNG — 10 Mo max.).",
+      },
+      projet_recherche: {
+        label: "Projet de recherche",
+        description:
+          "Projet de recherche, souvent demandé en master recherche ou en doctorat (PDF, JPG ou PNG — 10 Mo max.).",
       },
     },
     docsIntro: {
@@ -2859,6 +2928,8 @@ const en = {
     missingCountPlural:
       "{count} documents missing. Upload them below (PDF, JPG, or PNG — 10 MB max).",
     allReceived: "All requested documents have been received.",
+    noRequestedDocs:
+      "No document is requested yet. The team will tell you which files to upload.",
     missing: "Missing",
     received: "Received",
     currentFile: "Current file:",
@@ -2980,6 +3051,69 @@ const en = {
         label: "Criminal record extract",
         description:
           "No Criminal Record certificate, recent (PDF, JPG, or PNG — 10 MB max).",
+      },
+      photo: {
+        label: "ID photo",
+        description: "Recent ID photo (PDF, JPG, or PNG — 10 MB max).",
+      },
+      diplome: {
+        label: "Highest diploma",
+        description:
+          "Highest diploma obtained, with translation if needed. Useful for a language school (PDF, JPG, or PNG — 10 MB max).",
+      },
+      transcripts: {
+        label: "Transcripts",
+        description: "Transcripts, with translation if needed (PDF, JPG, or PNG — 10 MB max).",
+      },
+      hskk: {
+        label: "HSKK",
+        description: "Spoken HSK, sometimes required in addition to HSK (PDF, JPG, or PNG — 10 MB max).",
+      },
+      motivation: {
+        label: "Motivation letter",
+        description:
+          "Motivation letter, study plan, or personal statement (PDF, JPG, or PNG — 10 MB max).",
+      },
+      recommendation: {
+        label: "Recommendation letters",
+        description:
+          "Recommendation letters requested by the school (PDF, JPG, or PNG — 10 MB max).",
+      },
+      resume: {
+        label: "CV",
+        description: "Curriculum vitae (PDF, JPG, or PNG — 10 MB max).",
+      },
+      application_form: {
+        label: "Application form",
+        description: "School or university application form (PDF, JPG, or PNG — 10 MB max).",
+      },
+      financial_proof: {
+        label: "Financial proof",
+        description: "Bank statement or financial guarantee (PDF, JPG, or PNG — 10 MB max).",
+      },
+      acte_naissance: {
+        label: "Birth certificate",
+        description:
+          "Often requested for a minor or a language school (PDF, JPG, or PNG — 10 MB max).",
+      },
+      autorisation_parentale: {
+        label: "Parental authorization",
+        description:
+          "Parent or guardian authorization, for a minor student (PDF, JPG, or PNG — 10 MB max).",
+      },
+      video: {
+        label: "Introduction video",
+        description: "Introduction video requested by the school (PDF, JPG, or PNG — 10 MB max).",
+      },
+      portfolio: {
+        label: "Portfolio",
+        description:
+          "Portfolio for an art, design, or architecture program (PDF, JPG, or PNG — 10 MB max).",
+      },
+      projet_recherche: {
+        label: "Research proposal",
+        description:
+          "Research proposal, often requested for a research master's or a PhD (PDF, JPG, or PNG — 10 MB max).",
       },
     },
     docsIntro: {

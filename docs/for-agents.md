@@ -38,7 +38,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 
 **Matching** (`matching/run.ts` → `runMatching()`) : normalize → enrich LLM → `rankMatches` (`weights.ts`, pas `score.ts`) → mix safety/match/reach → rapports dual → `persist.ts` (`matching_runs`). Langue : `chinese.ts`, préfixe `[[CHINESE_MATCHING_JSON]]`. Univ. : `[[MATCHING_JSON]]`. Mix limité par formule. Vue étudiant : `matchingForStudent()`.
 
-**Docs :** bucket `student-documents` (`studentDocuments.ts`) si `access.documents`.
+**Docs :** bucket `student-documents` (`studentDocuments.ts`). Les pièces à déposer ne sont pas une liste fixe : l'admin coche le catalogue (`STUDENT_DOCUMENT_CATALOG`) sur la fiche. Seules les clés dans `contacts.documents_demandes` s'affichent dans l'espace étudiant (formule 1 comprise, si l'espace est ouvert). SQL : `sql/contacts-documents-demandes.sql`. Les fichiers envoyés par l'admin restent liés à `access.documents` (formule 2+).
 
 ## Auth
 

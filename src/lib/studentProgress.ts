@@ -27,6 +27,8 @@ export type ContactRow = {
   prioritaire?: boolean | null;
   /** Admin flag: student space progress/docs, independent of client_payé. */
   espace_debloque?: boolean | null;
+  /** Catalog keys the admin asked this student to upload. */
+  documents_demandes?: unknown;
   last_touched_by?: string | null;
   last_touched_at?: string | null;
   closed_by?: string | null;
@@ -203,6 +205,14 @@ export function isMissingEspaceDebloqueColumn(message: string | null | undefined
   );
 }
 
+export function isMissingDocumentsDemandesColumn(message: string | null | undefined) {
+  const text = String(message || "");
+  return (
+    /documents_demandes/i.test(text) &&
+    /(column|schema cache|does not exist|n'existe pas)/i.test(text)
+  );
+}
+
 export function canStudentChooseFormule(contact: ContactRow | null | undefined) {
   if (!hasFilledLeadForm(contact)) return false;
   return !getChosenFormule(contact);
@@ -265,68 +275,20 @@ export const FORMULE_OPTIONS = FORMULES.map((formule) => ({
 
 const FILE_HINT = "PDF, JPG ou PNG — 10 Mo max.";
 
-export const STUDENT_DOCUMENT_CATALOG = [
+type CatalogDoc = {
+  key: string;
+  label: string;
+  icon: string;
+  description: string;
+  levels: "all" | string[];
+};
+
+export const STUDENT_DOCUMENT_CATALOG: CatalogDoc[] = [
   {
     key: "passeport",
     label: "Passeport",
-    icon: "🛂",
+    icon: "",
     description: `Passeport en cours de validité (${FILE_HINT}).`,
-    levels: "all",
-  },
-  {
-    key: "high_school_diploma",
-    label: "Diplôme de fin d'études secondaires",
-    icon: "🏫",
-    description: `Baccalauréat ou équivalent, avec traduction si besoin (${FILE_HINT}).`,
-    levels: ["bac", "autre"],
-  },
-  {
-    key: "bachelor_degree",
-    label: "Diplôme de licence (bachelor)",
-    icon: "🎓",
-    description: `Diplôme de licence / bachelor, avec relevés de notes si possible (${FILE_HINT}).`,
-    levels: ["licence", "master", "doctorat", "autre"],
-  },
-  {
-    key: "master_degree",
-    label: "Diplôme de master",
-    icon: "📜",
-    description: `Diplôme de master, avec relevés de notes si possible (${FILE_HINT}).`,
-    levels: ["master", "doctorat"],
-  },
-  {
-    key: "hsk",
-    label: "Certificat HSK",
-    icon: "🈶",
-    description: `Pour un programme enseigné en chinois (${FILE_HINT}).`,
-    levels: "all",
-  },
-  {
-    key: "ielts_or_toefl",
-    label: "IELTS ou TOEFL",
-    icon: "🔤",
-    description: `Pour un programme enseigné en anglais. Un des deux certificats suffit (${FILE_HINT}).`,
-    levels: "all",
-  },
-  {
-    key: "csca",
-    label: "CSCA",
-    icon: "📝",
-    description: `China Scholastic Competency Assessment, souvent demandé pour une licence en Chine (${FILE_HINT}).`,
-    levels: ["bac"],
-  },
-  {
-    key: "formulaire_medical",
-    label: "Formulaire médical",
-    icon: "🩺",
-    description: `Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), daté et tamponné (${FILE_HINT}).`,
-    levels: "all",
-  },
-  {
-    key: "casier_judiciaire",
-    label: "Extrait de casier judiciaire",
-    icon: "⚖️",
-    description: `Certificat de non-condamnation (No Criminal Record), récent (${FILE_HINT}).`,
     levels: "all",
   },
   {
@@ -337,11 +299,67 @@ export const STUDENT_DOCUMENT_CATALOG = [
     levels: [],
   },
   {
+    key: "diplome",
+    label: "Dernier diplôme",
+    icon: "",
+    description: `Dernier diplôme obtenu, avec traduction si besoin. Utile pour une école de langue (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "high_school_diploma",
+    label: "Diplôme de fin d'études secondaires",
+    icon: "",
+    description: `Baccalauréat ou équivalent, avec traduction si besoin (${FILE_HINT}).`,
+    levels: ["bac", "autre"],
+  },
+  {
+    key: "bachelor_degree",
+    label: "Diplôme de licence (bachelor)",
+    icon: "",
+    description: `Diplôme de licence / bachelor (${FILE_HINT}).`,
+    levels: ["licence", "master", "doctorat", "autre"],
+  },
+  {
+    key: "master_degree",
+    label: "Diplôme de master",
+    icon: "",
+    description: `Diplôme de master (${FILE_HINT}).`,
+    levels: ["master", "doctorat"],
+  },
+  {
     key: "transcripts",
     label: "Relevés de notes",
     icon: "",
     description: `Relevés de notes, avec traduction si besoin (${FILE_HINT}).`,
     levels: [],
+  },
+  {
+    key: "hsk",
+    label: "Certificat HSK",
+    icon: "",
+    description: `Pour un programme enseigné en chinois (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "hskk",
+    label: "HSKK",
+    icon: "",
+    description: `HSK oral, parfois demandé en plus du HSK (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "ielts_or_toefl",
+    label: "IELTS ou TOEFL",
+    icon: "",
+    description: `Pour un programme enseigné en anglais. Un des deux certificats suffit (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "csca",
+    label: "CSCA",
+    icon: "",
+    description: `China Scholastic Competency Assessment, souvent demandé pour une licence en Chine (${FILE_HINT}).`,
+    levels: ["bac"],
   },
   {
     key: "motivation",
@@ -354,28 +372,7 @@ export const STUDENT_DOCUMENT_CATALOG = [
     key: "recommendation",
     label: "Lettres de recommandation",
     icon: "",
-    description: `Lettres de recommandation demandées par l'université (${FILE_HINT}).`,
-    levels: [],
-  },
-  {
-    key: "video",
-    label: "Vidéo de présentation",
-    icon: "",
-    description: `Vidéo de présentation demandée par l'université (${FILE_HINT}).`,
-    levels: [],
-  },
-  {
-    key: "financial_proof",
-    label: "Preuve de financement",
-    icon: "",
-    description: `Attestation de fonds ou garantie financière (${FILE_HINT}).`,
-    levels: [],
-  },
-  {
-    key: "application_form",
-    label: "Formulaire de candidature",
-    icon: "",
-    description: `Formulaire de demande de l'université (${FILE_HINT}).`,
+    description: `Lettres de recommandation demandées par l'établissement (${FILE_HINT}).`,
     levels: [],
   },
   {
@@ -386,10 +383,66 @@ export const STUDENT_DOCUMENT_CATALOG = [
     levels: [],
   },
   {
-    key: "diplome",
-    label: "Diplôme",
+    key: "application_form",
+    label: "Formulaire de candidature",
     icon: "",
-    description: `Dernier diplôme obtenu, avec traduction si besoin (${FILE_HINT}).`,
+    description: `Formulaire de demande de l'école ou de l'université (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "financial_proof",
+    label: "Preuve de financement",
+    icon: "",
+    description: `Attestation de fonds ou garantie financière (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "formulaire_medical",
+    label: "Formulaire médical",
+    icon: "",
+    description: `Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), daté et tamponné (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "casier_judiciaire",
+    label: "Extrait de casier judiciaire",
+    icon: "",
+    description: `Certificat de non-condamnation (No Criminal Record), récent (${FILE_HINT}).`,
+    levels: "all",
+  },
+  {
+    key: "acte_naissance",
+    label: "Acte de naissance",
+    icon: "",
+    description: `Souvent demandé pour un mineur ou une école de langue (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "autorisation_parentale",
+    label: "Autorisation parentale",
+    icon: "",
+    description: `Autorisation du parent ou du tuteur, pour un étudiant mineur (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "video",
+    label: "Vidéo de présentation",
+    icon: "",
+    description: `Vidéo de présentation demandée par l'établissement (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "portfolio",
+    label: "Portfolio",
+    icon: "",
+    description: `Portfolio pour un programme d'art, de design ou d'architecture (${FILE_HINT}).`,
+    levels: [],
+  },
+  {
+    key: "projet_recherche",
+    label: "Projet de recherche",
+    icon: "",
+    description: `Projet de recherche, souvent demandé en master recherche ou en doctorat (${FILE_HINT}).`,
     levels: [],
   },
 ];
@@ -423,6 +476,17 @@ export function getRequiredStudentDocuments(
 
 export function getStudentDocumentSpec(key: unknown) {
   return STUDENT_DOCUMENT_CATALOG.find((doc) => doc.key === String(key || "")) || null;
+}
+
+/** Known catalog keys only, in catalog order. Unknown values are dropped. */
+export function parseRequestedDocumentKeys(value: unknown) {
+  const raw = Array.isArray(value)
+    ? value
+    : typeof value === "string"
+      ? value.split(",")
+      : [];
+  const wanted = new Set(raw.map((item) => String(item || "").trim()).filter(Boolean));
+  return STUDENT_DOCUMENT_CATALOG.filter((doc) => wanted.has(doc.key)).map((doc) => doc.key);
 }
 
 export function getSchoolDocumentsIntro(dernierDiplome: unknown) {

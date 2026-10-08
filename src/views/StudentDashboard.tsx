@@ -34,7 +34,6 @@ import {
 import {
   DOMAINES_ETUDES,
   getDisplayedStepIndex,
-  getRequiredStudentDocuments,
   getVisibleStudentSteps,
   studentCanAccessVisaDocuments,
   type ContactRow,
@@ -184,29 +183,8 @@ export default function StudentDashboard() {
     getDisplayedStepIndex(profile),
     Math.max(visibleSteps.length - 1, 0),
   );
-  const reportDocs = matching?.student_report?.documents || [];
-  const docsToShow = reportDocs.length
-    ? reportDocs
-        .filter((doc) => doc.key && !doc.key.startsWith("other:"))
-        .map((doc) => {
-          const live = requiredDocuments.find((item) => item.key === doc.key);
-          const received = live?.status === "received" || doc.status === "fourni";
-          return {
-            key: String(doc.key),
-            label: doc.name,
-            description: live?.description || "",
-            icon: live?.icon || "",
-            status: received ? "received" : "missing",
-            file: live?.file || null,
-          };
-        })
-    : requiredDocuments.length > 0
-      ? requiredDocuments
-      : getRequiredStudentDocuments(profile || {}).map((doc) => ({
-          ...doc,
-          status: "missing",
-          file: null,
-        }));
+  const docsToShow = requiredDocuments;
+  const showUploadDocs = Boolean(access.documents) || docsToShow.length > 0;
   const missingCount = docsToShow.filter(
     (doc) => doc.status === "missing",
   ).length;
@@ -674,11 +652,14 @@ export default function StudentDashboard() {
                     formuleNumber={formuleNumber}
                   />
 
-                  {access.documents || showVisaDocs ? (
+                  {showUploadDocs || showVisaDocs ? (
                     <>
                       <div className="student-card student-card-wide">
                         <h2 className="card-title">{t("student.docsTitle")}</h2>
-                        {access.documents ? (
+                        {showUploadDocs ? (
+                          docsToShow.length === 0 ? (
+                            <p className="card-subtitle">{t("student.noRequestedDocs")}</p>
+                          ) : (
                           <>
                             <p className="card-subtitle">
                               {missingCount > 0
@@ -765,6 +746,7 @@ export default function StudentDashboard() {
                               })}
                             </div>
                           </>
+                          )
                         ) : (
                           <p className="card-subtitle">
                             {t("student.visaPrep")}
