@@ -2,10 +2,12 @@ import { NextResponse } from "next/server";
 import {
   AGENT_RECENT_CAP,
   agentContactWindow,
+  agentWhatsappMessages,
   clipAgentText,
   groupRecent,
 } from "@/lib/agentContacts";
 import { displayFormuleLabel } from "@/lib/formules";
+import { recentWhatsappHistories } from "@/lib/openwa";
 import { canonicalStatut } from "@/lib/suiviStatuts";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
@@ -24,6 +26,8 @@ type ContactRow = {
   email?: string | null;
   suivi_statut?: string | null;
   formule?: string | null;
+  phone?: string | null;
+  pays?: string | null;
 };
 
 type EmailRow = {
@@ -52,7 +56,7 @@ export async function GET(request: Request) {
     const admin = getSupabaseAdmin();
     const { data, error, count } = await admin
       .from("contacts")
-      .select("id, prenom, nom, email, suivi_statut, formule", { count: "exact" })
+      .select("id, prenom, nom, email, suivi_statut, formule, phone, pays", { count: "exact" })
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
     if (error) {
@@ -64,8 +68,10 @@ export async function GET(request: Request) {
     const emailsByContact = new Map<string, EmailRow[]>();
     const actionsByContact = new Map<string, ActionRow[]>();
 
+    const whatsappByContact = new Map<string, ReturnType<typeof agentWhatsappMessages>>();
+
     if (ids.length) {
-      const [emails, actions] = await Promise.all([
+      const [emails, actions, whatsapp] = await Promise.all([
         admin
           .from("contact_emails")
           .select("contact_id, direction, subject, body_text, sent_at")
@@ -78,6 +84,7 @@ export async function GET(request: Request) {
           .in("contact_id", ids)
           .order("created_at", { ascending: false })
           .limit(ids.length * AGENT_RECENT_CAP),
+        recentWhatsappHistories(contacts),
       ]);
       if (!emails.error) {
         for (const [id, rows] of groupRecent(
@@ -94,6 +101,9 @@ export async function GET(request: Request) {
         )) {
           actionsByContact.set(id, rows);
         }
+      }
+      for (const [id, rows] of whatsapp) {
+        whatsappByContact.set(id, agentWhatsappMessages(rows));
       }
     }
 
@@ -117,6 +127,7 @@ export async function GET(request: Request) {
             body: clipAgentText(mail.body_text),
             sentAt: mail.sent_at || "",
           })),
+          whatsapp: whatsappByContact.get(id) || [],
           actions: (actionsByContact.get(id) || []).map((action) => ({
             action: String(action.action || ""),
             description: clipAgentText(action.description),

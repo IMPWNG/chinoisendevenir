@@ -33,6 +33,44 @@ export function agentContactWindow(search: string): { offset: number; limit: num
   return { offset: params.has("page") ? (page - 1) * limit : 0, limit };
 }
 
+function epochMs(value: unknown): number {
+  if (typeof value === "string" && value.includes("T")) {
+    const parsed = Date.parse(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+  const n = Number(value);
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  return n < 1e12 ? n * 1000 : n;
+}
+
+export type AgentWhatsappMessage = {
+  direction: "in" | "out";
+  body: string;
+  sentAt: string;
+};
+
+/** Newest N WhatsApp rows. Accepts OpenWA live history (`fromMe`) or stored rows (`direction`). */
+export function agentWhatsappMessages(rows: unknown, limit = AGENT_RECENT_CAP): AgentWhatsappMessage[] {
+  const list = Array.isArray(rows) ? rows : [];
+  const parsed: { direction: "in" | "out"; body: string; at: number }[] = [];
+  for (const item of list) {
+    if (!item || typeof item !== "object") continue;
+    const row = item as Record<string, unknown>;
+    const type = String(row.type || "").trim();
+    const body = clipAgentText(row.body || (type && type !== "text" ? `[${type}]` : ""));
+    if (!body) continue;
+    const outgoing = row.fromMe === true || row.direction === "outgoing";
+    const at = epochMs(row.timestamp) || epochMs(row.createdAt);
+    parsed.push({ direction: outgoing ? "out" : "in", body, at });
+  }
+  parsed.sort((a, b) => b.at - a.at);
+  return parsed.slice(0, Math.max(0, limit)).map((row) => ({
+    direction: row.direction,
+    body: row.body,
+    sentAt: row.at ? new Date(row.at).toISOString() : "",
+  }));
+}
+
 /** Rows must already be newest first. ponytail: first N per contact, not a SQL window. */
 export function groupRecent<T>(
   rows: readonly T[],

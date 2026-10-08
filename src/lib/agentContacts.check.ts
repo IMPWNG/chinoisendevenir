@@ -2,7 +2,7 @@
  * Self-check for the agent contact feed grouping.
  * Run: npx tsx src/lib/agentContacts.check.ts
  */
-import { clipAgentText, agentContactWindow, groupRecent } from "./agentContacts";
+import { clipAgentText, agentContactWindow, agentWhatsappMessages, groupRecent } from "./agentContacts";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -43,5 +43,18 @@ assert(
     JSON.stringify({ offset: 200, limit: 50 }),
   "offset and limit",
 );
+
+const whatsapp = agentWhatsappMessages(
+  [
+    { body: "  hello  ", fromMe: false, timestamp: 100 },
+    { body: "moi", fromMe: true, timestamp: 300 },
+    { body: "", type: "image", fromMe: false, timestamp: 200 },
+    { body: "old", direction: "incoming", timestamp: 50 },
+  ],
+  3,
+);
+assert(whatsapp.map((row) => row.body).join("|") === "moi|[image]|hello", "newest three");
+assert(whatsapp.map((row) => row.direction).join(",") === "out,in,in", "direction");
+assert(whatsapp[0]?.sentAt === new Date(300_000).toISOString(), "sentAt");
 
 console.log("agentContacts check ok");

@@ -141,6 +141,128 @@ function uniqueIds(ids: string[]) {
   return [...new Set(ids.filter(Boolean))];
 }
 
+const WA_FEED_MS = 25_000;
+const WA_FEED_CONCURRENCY = 8;
+
+function chatList(body: unknown): Record<string, unknown>[] {
+  const wrapped = asRecord(body)?.data;
+  const rows = Array.isArray(body) ? body : Array.isArray(wrapped) ? wrapped : [];
+  return rows.flatMap((item) => {
+    const row = asRecord(item);
+    return row ? [row] : [];
+  });
+}
+
+function msisdnFromChatId(id: string): string | null {
+  const match = /^(\d+)@(c\.us|s\.whatsapp\.net)$/.exec(id);
+  return match?.[1] || null;
+}
+
+function isPrivateChat(row: Record<string, unknown>, id: string): boolean {
+  if (id.endsWith("@g.us")) return false;
+  if (row.isGroup === true) return false;
+  const kind = String(row.kind || "");
+  return kind !== "group" && kind !== "channel" && kind !== "status" && kind !== "broadcast";
+}
+
+async function mapPool<T>(
+  items: readonly T[],
+  run: (item: T) => Promise<void>,
+  deadline: number,
+) {
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(WA_FEED_CONCURRENCY, items.length) }, async () => {
+    while (Date.now() < deadline) {
+      const index = cursor;
+      cursor += 1;
+      if (index >= items.length) return;
+      await run(items[index]);
+    }
+  });
+  await Promise.all(workers);
+}
+
+/**
+ * Last messages per dossier, from OpenWA.
+ * ponytail: one chat page (1000) plus a history call per matched chat, 25s ceiling.
+ * A down OpenWA returns an empty map so the contact feed still answers.
+ * A privacy id (@lid) is resolved only inside that budget.
+ */
+export async function recentWhatsappHistories(
+  contacts: readonly { id: string; phone?: unknown; pays?: string | null }[],
+): Promise<Map<string, unknown[]>> {
+  const byPhone = new Map<string, string>();
+  for (const contact of contacts) {
+    const number = whatsappMsisdn(contact.phone, contact.pays);
+    if (number && contact.id) byPhone.set(number, contact.id);
+  }
+  const out = new Map<string, unknown[]>();
+  if (!byPhone.size) return out;
+
+  let chats: unknown;
+  try {
+    chats = await openwa("/chats?limit=1000", undefined, { timeoutMs: 20_000 });
+  } catch {
+    return out;
+  }
+  const deadline = Date.now() + WA_FEED_MS;
+
+  const jobs: { contactId: string; chatId: string }[] = [];
+  const lids: string[] = [];
+  const claimed = new Set<string>();
+  function claim(phone: string, chatId: string) {
+    const contactId = byPhone.get(phone);
+    if (!contactId || claimed.has(contactId)) return;
+    claimed.add(contactId);
+    jobs.push({ contactId, chatId });
+  }
+
+  for (const row of chatList(chats)) {
+    const id = String(row.id || "");
+    if (!id || !isPrivateChat(row, id)) continue;
+    const phone = msisdnFromChatId(id);
+    if (phone) claim(phone, id);
+    else if (id.endsWith("@lid")) lids.push(id);
+  }
+
+  async function loadHistory(job: { contactId: string; chatId: string }) {
+    try {
+      const history = await openwa(
+        `/messages/${encodeURIComponent(job.chatId)}/history?limit=20`,
+        undefined,
+        { timeoutMs: 8_000 },
+      );
+      if (Array.isArray(history)) out.set(job.contactId, history);
+    } catch {
+      /* one chat must not drop the feed */
+    }
+  }
+
+  const direct = jobs.splice(0);
+  await Promise.all([
+    mapPool(direct, loadHistory, deadline),
+    mapPool(
+      lids,
+      async (lid) => {
+        try {
+          const body = asRecord(
+            await openwa(`/contacts/${encodeURIComponent(lid)}/phone`, undefined, {
+              allowNotFound: true,
+              timeoutMs: 8_000,
+            }),
+          );
+          claim(String(body?.phone || "").replace(/\D/g, ""), lid);
+        } catch {
+          /* unresolved privacy id */
+        }
+      },
+      deadline,
+    ),
+  ]);
+  await mapPool(jobs, loadHistory, deadline);
+  return out;
+}
+
 /** Newest chats only. A down OpenWA throws; the caller treats that as no WhatsApp queue. */
 export async function unreadWhatsappPhones(): Promise<string[]> {
   const body = await openwa("/chats?limit=200", undefined, { timeoutMs: 20_000 });
