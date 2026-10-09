@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { shanghaiDayString } from "@/lib/dailyReportShared";
-import { whatsappPriorityTasks } from "@/lib/dayTasks";
+import { dayTaskListFilter, whatsappPriorityTasks } from "@/lib/dayTasks";
 import { recentWhatsappHistories } from "@/lib/openwa";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { splitWhatsappInbox } from "@/lib/whatsappInbox";
@@ -36,8 +36,8 @@ export async function GET(request: Request) {
     const { data: existing } = await auth.admin
       .from("day_tasks")
       .select("contact_id")
-      .eq("day", day)
-      .eq("source", "whatsapp");
+      .eq("source", "whatsapp")
+      .or(dayTaskListFilter(day));
     const rows = whatsappPriorityTasks(
       report.needOurReply.map((item) => ({
         contactId: item.contactId,

@@ -6,6 +6,7 @@ import { adminSupabase } from "../lib/supabase";
 import { shanghaiDayString } from "../lib/dailyReportShared";
 import {
   cleanAuthorEmail,
+  dayTaskListFilter,
   isMissingDayTasksTable,
   type DayTaskSource,
 } from "../lib/dayTasks";
@@ -50,7 +51,7 @@ export default function AdminDayTasks({
       const { data, error: queryError } = await adminSupabase
         .from("day_tasks")
         .select("id, contact_id, task, source, done, created_by, done_by")
-        .eq("day", shanghaiDayString())
+        .or(dayTaskListFilter(shanghaiDayString()))
         .order("created_at", { ascending: true });
       if (cancelled) return;
       if (queryError) {

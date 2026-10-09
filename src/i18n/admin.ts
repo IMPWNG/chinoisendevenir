@@ -68,7 +68,7 @@ export const adminTranslations = {
     },
     dayTasks: {
       title: "Tâches du jour",
-      hint: "Priorités du jour.",
+      hint: "Priorités du jour. Une tâche non cochée reste le lendemain.",
       empty: "Aucune tâche pour aujourd'hui.",
       colDone: "Fait",
       colStudent: "Étudiant",
@@ -830,7 +830,7 @@ export const adminTranslations = {
     },
     dayTasks: {
       title: "Today's tasks",
-      hint: "Today's priorities.",
+      hint: "Today's priorities. An unchecked task stays the next day.",
       empty: "No task for today.",
       colDone: "Done",
       colStudent: "Student",
@@ -1579,7 +1579,7 @@ export const adminTranslations = {
     },
     dayTasks: {
       title: "今日任务",
-      hint: "今日优先事项。",
+      hint: "今日优先事项。未勾选的任务会留到第二天。",
       empty: "今天没有任务。",
       colDone: "完成",
       colStudent: "学生",

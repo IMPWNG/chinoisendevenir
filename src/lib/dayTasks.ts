@@ -87,6 +87,19 @@ export function whatsappPriorityTasks(
   return out;
 }
 
+/** Today's rows, plus earlier rows still open. A checked task stays on its own day. */
+export function dayTaskBelongsToday(
+  row: { day: string; done: boolean },
+  today: string,
+): boolean {
+  return row.day === today || (!row.done && row.day < today);
+}
+
+/** PostgREST `or` filter matching `dayTaskBelongsToday`. `today` is YYYY-MM-DD. */
+export function dayTaskListFilter(today: string): string {
+  return `day.eq.${today},and(done.eq.false,day.lt.${today})`;
+}
+
 export function isMissingDayTasksTable(
   message: string | null | undefined,
 ): boolean {

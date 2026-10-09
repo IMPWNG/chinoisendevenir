@@ -4,6 +4,8 @@
  */
 import {
   cleanDayTask,
+  dayTaskBelongsToday,
+  dayTaskListFilter,
   isMissingDayTasksTable,
   parseAgentDayTasks,
   whatsappPriorityTasks,
@@ -88,5 +90,17 @@ assert(wa.length === 1, "one new whatsapp priority");
 assert(wa[0]?.source === "whatsapp", "source");
 assert(wa[0]?.task.startsWith("Répondre sur WhatsApp : Je voudrais"), "task text");
 assert(wa[0]?.created_by === "WhatsApp", "author");
+
+const today = "2026-10-09";
+assert(dayTaskBelongsToday({ day: "2026-10-08", done: false }, today), "open stays");
+assert(!dayTaskBelongsToday({ day: "2026-10-08", done: true }, today), "done stays behind");
+assert(dayTaskBelongsToday({ day: today, done: true }, today), "done today still listed");
+assert(dayTaskBelongsToday({ day: "2026-10-07", done: false }, today), "older open stays");
+assert(!dayTaskBelongsToday({ day: "2026-10-10", done: false }, today), "future hidden");
+assert(
+  dayTaskListFilter(today) ===
+    "day.eq.2026-10-09,and(done.eq.false,day.lt.2026-10-09)",
+  "list filter",
+);
 
 console.log("dayTasks check ok");
