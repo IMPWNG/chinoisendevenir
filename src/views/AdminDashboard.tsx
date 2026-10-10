@@ -66,7 +66,7 @@ import { cleanDayTask, cleanAuthorEmail, isMissingDayTasksTable } from "../lib/d
 import { shanghaiDayString } from "../lib/dailyReportShared";
 import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
-import { formatEurosOnly } from "../lib/money";
+import { formatEurosOnly, formatEurosWithRmb, moneyAsideForRole } from "../lib/money";
 import { paymentPlan } from "../lib/paymentPlan";
 import {
   formatHistoryDescription,
@@ -758,8 +758,16 @@ export default function AdminDashboard() {
           realHint={t("dashboard.revenueRealHint", {
             count: revenue.realCount,
           })}
-          hypothetic={formatEuros(revenue.hypothetic)}
-          real={formatEuros(revenue.real)}
+          hypothetic={
+            access.role === "full"
+              ? formatEurosWithRmb(revenue.hypothetic)
+              : formatEuros(revenue.hypothetic)
+          }
+          real={
+            access.role === "full"
+              ? formatEurosWithRmb(revenue.real)
+              : formatEuros(revenue.real)
+          }
         />
 
         {/* Filtres avancés */}
@@ -1098,7 +1106,7 @@ export default function AdminDashboard() {
                         </span>
                         {getChosenFormule(c) ? (
                           <p className="text-xs text-cyan-300 mt-1 font-semibold">
-                            📋 {translatedOrRaw(t, "formule", getChosenFormule(c))}
+                            📋 {moneyAsideForRole(access.role, translatedOrRaw(t, "formule", getChosenFormule(c)))}
                           </p>
                         ) : null}
                         {(() => {
@@ -1108,10 +1116,13 @@ export default function AdminDashboard() {
                             <p className="text-xs text-amber-200 mt-1 font-semibold">
                               {plan.remaining === 0
                                 ? t("dashboard.paySettled")
-                                : t("dashboard.payRemaining", {
-                                    amount: formatEurosOnly(plan.remaining),
-                                    count: plan.paidCount,
-                                  })}
+                                : moneyAsideForRole(
+                                    access.role,
+                                    t("dashboard.payRemaining", {
+                                      amount: formatEurosOnly(plan.remaining),
+                                      count: plan.paidCount,
+                                    }),
+                                  )}
                             </p>
                           );
                         })()}
@@ -1600,7 +1611,7 @@ function ContactModal({
             </h2>
             {getChosenFormule(contact) ? (
               <p className="text-white text-lg font-semibold mt-3 bg-white/15 inline-block px-4 py-2 rounded-xl">
-                📋 {translatedOrRaw(t, "formule", getChosenFormule(contact))}
+                📋 {moneyAsideForRole(access.role, translatedOrRaw(t, "formule", getChosenFormule(contact)))}
               </p>
             ) : (
               <p className="text-blue-100 text-sm mt-2 font-medium">
@@ -1831,7 +1842,9 @@ function ContactModal({
                         Formule {formule.number}
                       </p>
                       <p className="font-bold mt-1">{formule.shortTitle}</p>
-                      <p className="text-sm mt-1">{displayFormulePrice(formule)}</p>
+                      <p className="text-sm mt-1">
+                        {moneyAsideForRole(access.role, displayFormulePrice(formule))}
+                      </p>
                       {active ? (
                         <p className="text-xs text-emerald-300 mt-2">
                           {t("dashboard.formuleActive")}

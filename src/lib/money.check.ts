@@ -6,9 +6,14 @@ import { displayFormulePrice, FORMULES } from "./formules";
 import {
   EUR_TO_FCFA,
   eurosToFcfa,
+  eurosToRmb,
   formatEurosWithCfa,
+  formatEurosWithRmb,
+  moneyAsideForRole,
   parseEuroAmount,
+  stripCfaAside,
   withCfaInText,
+  withRmbInText,
 } from "./money";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -94,5 +99,20 @@ assert(
   "english thousands idempotent",
 );
 assert(!twice.includes("F CFA0"), "no leftover digit after F CFA");
+
+assert(eurosToRmb(800) === 6400, "800 € → 6 400 RMB");
+assert(eurosToRmb(1700) === 13600, "1 700 € → 13 600 RMB");
+assert(formatEurosWithRmb(800) === "800 € (6 400 RMB)", "rmb beside 800");
+assert(withRmbInText("800 €") === "800 €, soit 6 400 RMB", "rmb suffix");
+assert(
+  moneyAsideForRole("full", "1️⃣ Premier pas en Chine (800€, soit 524 766 F CFA)") ===
+    "1️⃣ Premier pas en Chine (800 €, soit 6 400 RMB)",
+  "global admin table swaps CFA for RMB",
+);
+assert(
+  moneyAsideForRole("limited", "800€, soit 524 766 F CFA") === "800€, soit 524 766 F CFA",
+  "limited admin keeps CFA",
+);
+assert(stripCfaAside("2 000 € (1 311 914 F CFA)") === "2 000 €", "strip parenthetical CFA");
 
 console.log("money check ok");

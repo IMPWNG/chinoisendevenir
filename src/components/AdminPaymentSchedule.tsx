@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
-import { formatEurosOnly } from "../lib/money";
+import { formatEurosOnly, moneyAsideForRole } from "../lib/money";
 import { paymentPlan, type PaymentFlags } from "../lib/paymentPlan";
+import { useAdminAccess } from "../context/AdminAccessContext";
 
 type PaymentContact = {
   id: string;
@@ -23,6 +24,7 @@ export default function AdminPaymentSchedule({
   onPatched: (paiements: PaymentFlags) => void;
 }) {
   const { t } = useAdminI18n();
+  const access = useAdminAccess();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const plan = paymentPlan(contact);
@@ -59,10 +61,13 @@ export default function AdminPaymentSchedule({
       <p className="text-sm text-slate-300">
         {plan.remaining === 0
           ? t("dashboard.paySettled")
-          : t("dashboard.payRemaining", {
-              amount: formatEurosOnly(plan.remaining),
-              count: plan.paidCount,
-            })}
+          : moneyAsideForRole(
+              access.role,
+              t("dashboard.payRemaining", {
+                amount: formatEurosOnly(plan.remaining),
+                count: plan.paidCount,
+              }),
+            )}
       </p>
       <ul className="space-y-3">
         {KEYS.map((key, index) => (
