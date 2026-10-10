@@ -14,8 +14,6 @@ import {
   buildSaleContract,
   clientReady,
   contractClientFromContact,
-  prestataireReady,
-  readPrestataire,
 } from "@/lib/saleContract";
 
 export async function POST(request: Request) {
@@ -62,14 +60,6 @@ export async function POST(request: Request) {
     );
   }
 
-  const prestataire = readPrestataire(body.prestataire);
-  if (!prestataireReady(prestataire)) {
-    return NextResponse.json(
-      { success: false, error: "Informations du prestataire incomplètes" },
-      { status: 400 },
-    );
-  }
-
   const supabase = getSupabaseAdmin();
   const { data: contact, error: fetchError } = await supabase
     .from("contacts")
@@ -112,7 +102,6 @@ export async function POST(request: Request) {
   const sentAt = new Date();
   const contract = buildSaleContract({
     client,
-    prestataire,
     formuleNumber,
     sentAt,
   });

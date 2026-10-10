@@ -7,20 +7,16 @@ import { CONTACT_FROM_EMAIL } from "../lib/emailConfig";
 import { getFormuleNumber } from "../lib/formules";
 import { errorMessage } from "../lib/request";
 import {
+  CONTRACT_ADDRESS,
   CONTRACT_COMPANY,
   CONTRACT_PLACE,
+  CONTRACT_REGISTRATION,
   CONTRACT_SITE,
   buildSaleContract,
   clientReady,
   contractClientFromContact,
   contractSendDate,
-  emptyPrestataire,
-  prestataireReady,
-  readPrestataire,
-  type PrestataireInfo,
 } from "../lib/saleContract";
-
-const STORAGE_KEY = "ced-contract-prestataire";
 
 type ContractContact = {
   id: string;
@@ -61,7 +57,6 @@ export default function AdminSendContract({
   onSent?: () => void;
 }) {
   const { t } = useAdminI18n();
-  const [prestataire, setPrestataire] = useState<PrestataireInfo>(emptyPrestataire);
   const [birth, setBirth] = useState("");
   const [nationality, setNationality] = useState(contact.pays || "");
   const [address, setAddress] = useState("");
@@ -79,12 +74,6 @@ export default function AdminSendContract({
     setPhone(contact.phone || "");
     setFormuleNumber(getFormuleNumber(contact.formule) || 0);
     setPreview(false);
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-      if (saved) setPrestataire(readPrestataire(saved));
-    } catch {
-      setPrestataire(emptyPrestataire());
-    }
   }, [contact.id, contact.pays, contact.phone, contact.formule]);
 
   const lockedFormule = getFormuleNumber(contact.formule);
@@ -95,7 +84,6 @@ export default function AdminSendContract({
     adresse: address,
   });
   const ready =
-    prestataireReady(prestataire) &&
     clientReady(client) &&
     (formuleNumber === 1 || formuleNumber === 2 || formuleNumber === 3);
 
@@ -103,21 +91,10 @@ export default function AdminSendContract({
     preview && ready
       ? buildSaleContract({
           client,
-          prestataire,
           formuleNumber,
           sentAt: new Date(),
         })?.html || ""
       : "";
-
-  function updatePrestataire(key: keyof PrestataireInfo, value: string) {
-    const next = readPrestataire({ ...prestataire, [key]: value });
-    setPrestataire(next);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    } catch {
-      /* ignore private mode */
-    }
-  }
 
   async function send() {
     if (!ready) return;
@@ -135,7 +112,6 @@ export default function AdminSendContract({
         body: JSON.stringify({
           contactId: contact.id,
           formuleNumber,
-          prestataire,
           phone,
           dateNaissance: birth,
           nationalite: nationality,
@@ -225,24 +201,14 @@ export default function AdminSendContract({
           <label className={label}>{t("dashboard.contractDenomination")}</label>
           <input readOnly value={CONTRACT_COMPANY} className={fieldClass(true)} />
         </div>
-        {(
-          [
-            ["forme", "contractLegalForm"],
-            ["adresse", "contractSeat"],
-            ["immatriculation", "contractRegistration"],
-            ["representant", "contractRepresentative"],
-          ] as const
-        ).map(([key, i18nKey]) => (
-          <div key={key} className={key === "adresse" ? "md:col-span-2" : ""}>
-            <label className={label}>{t(`dashboard.${i18nKey}`)}</label>
-            <input
-              value={prestataire[key]}
-              disabled={sending}
-              onChange={(e) => updatePrestataire(key, e.target.value)}
-              className={fieldClass(sending)}
-            />
-          </div>
-        ))}
+        <div className="md:col-span-2">
+          <label className={label}>{t("dashboard.contractSeat")}</label>
+          <input readOnly value={CONTRACT_ADDRESS} className={fieldClass(true)} />
+        </div>
+        <div>
+          <label className={label}>{t("dashboard.contractRegistration")}</label>
+          <input readOnly value={CONTRACT_REGISTRATION} className={fieldClass(true)} />
+        </div>
         <div>
           <label className={label}>{t("dashboard.contractProviderEmail")}</label>
           <input readOnly value={CONTACT_FROM_EMAIL} className={fieldClass(true)} />

@@ -3,13 +3,14 @@
  * Run: npx tsx src/lib/saleContract.check.ts
  */
 import {
+  CONTRACT_ADDRESS,
   CONTRACT_COMPANY,
   CONTRACT_PLACE,
+  CONTRACT_REGISTRATION,
   buildSaleContract,
   contractClientFromContact,
   contractInstallments,
   contractSendDate,
-  readPrestataire,
 } from "./saleContract";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -58,13 +59,6 @@ assert(client.nationalite === "Sénégal", "nationalité = pays");
 
 const built = buildSaleContract({
   client,
-  prestataire: readPrestataire({
-    denomination: "Société <test>",
-    forme: "SASU <x>",
-    adresse: "Chongqing",
-    immatriculation: "123",
-    representant: "Matisse",
-  }),
   formuleNumber: 2,
   sentAt,
 });
@@ -72,12 +66,12 @@ assert(built, "contrat formule 2");
 assert(built.html.includes("Awa Diallo"), "nom dans le contrat");
 assert(!built.html.includes("Pirate"), "le nom saisi à la main est ignoré");
 assert(built.html.includes(CONTRACT_COMPANY), "raison sociale fixe");
+assert(built.html.includes(CONTRACT_ADDRESS), "adresse fixe");
+assert(built.html.includes(CONTRACT_REGISTRATION), "immatriculation fixe");
+assert(!built.html.includes("Forme juridique"), "pas de forme juridique");
+assert(!built.html.includes("Représentée par"), "pas de représentant");
+assert(!built.html.includes("Nom et fonction"), "pas de signataire nommé");
 assert(!built.html.includes("Société"), "raison sociale non modifiable");
-assert(built.html.includes("SASU &lt;x&gt;"), "échappement HTML");
-assert(
-  readPrestataire({ denomination: "autre" }).denomination === CONTRACT_COMPANY,
-  "la lecture ignore une autre dénomination",
-);
 assert(built.html.includes(CONTRACT_PLACE), "lieu Chongqing");
 assert(built.html.includes("28 septembre 2026"), "date d'envoi");
 assert(built.html.includes("cinq (5)"), "annexe formule 2");

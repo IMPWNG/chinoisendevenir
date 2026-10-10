@@ -7,16 +7,10 @@ import { getFormuleByNumber } from "./formules";
 export const CONTRACT_STAMP_SRC = "";
 export const CONTRACT_PLACE = "Chongqing";
 export const CONTRACT_SITE = "https://chinoisendevenir.com";
-/** Legal name. Not editable from the admin form or the send API. */
+/** Legal identity. Not editable from the admin form or the send API. */
 export const CONTRACT_COMPANY = "重庆迈程桥国际贸易有限公司";
-
-export type PrestataireInfo = {
-  denomination: string;
-  forme: string;
-  adresse: string;
-  immatriculation: string;
-  representant: string;
-};
+export const CONTRACT_ADDRESS = "重庆市渝中区石油路街道经纬大道789号10-5#0534";
+export const CONTRACT_REGISTRATION = "91500103MAKNA0M76M";
 
 export type ContractClient = {
   prenom: string;
@@ -26,14 +20,6 @@ export type ContractClient = {
   dateNaissance: string;
   nationalite: string;
   adresse: string;
-};
-
-const EMPTY_PRESTATAIRE: PrestataireInfo = {
-  denomination: CONTRACT_COMPANY,
-  forme: "",
-  adresse: "",
-  immatriculation: "",
-  representant: "",
 };
 
 type Annex = {
@@ -140,25 +126,6 @@ function clip(value: unknown, max: number) {
     .slice(0, max);
 }
 
-export function emptyPrestataire(): PrestataireInfo {
-  return { ...EMPTY_PRESTATAIRE };
-}
-
-export function readPrestataire(value: unknown): PrestataireInfo {
-  const raw = (value || {}) as Partial<PrestataireInfo>;
-  return {
-    denomination: CONTRACT_COMPANY,
-    forme: clip(raw.forme, 80),
-    adresse: clip(raw.adresse, 240),
-    immatriculation: clip(raw.immatriculation, 80),
-    representant: clip(raw.representant, 120),
-  };
-}
-
-export function prestataireReady(info: PrestataireInfo) {
-  return Object.values(info).every((item) => item.length > 0);
-}
-
 export function contractInstallments(priceEuros: number) {
   const first = Math.round(priceEuros * 0.4);
   const second = Math.round(priceEuros * 0.3);
@@ -249,7 +216,6 @@ function stampHtml() {
 
 export function buildSaleContract(input: {
   client: ContractClient;
-  prestataire: PrestataireInfo;
   formuleNumber: number;
   sentAt: Date;
 }) {
@@ -277,11 +243,9 @@ export function buildSaleContract(input: {
     </div>
     <div class="section">
       <div class="section-title">Le Prestataire</div>
-      ${field("Dénomination sociale", input.prestataire.denomination)}
-      ${field("Forme juridique", input.prestataire.forme)}
-      ${field("Adresse du siège social", input.prestataire.adresse)}
-      ${field("Numéro d'immatriculation", input.prestataire.immatriculation)}
-      ${field("Représentée par", input.prestataire.representant)}
+      ${field("Dénomination sociale", CONTRACT_COMPANY)}
+      ${field("Adresse du siège social", CONTRACT_ADDRESS)}
+      ${field("Numéro d'immatriculation", CONTRACT_REGISTRATION)}
       ${field("Adresse e-mail", CONTACT_FROM_EMAIL)}
       ${field("Nom commercial / site", `Chinois en Devenir — ${CONTRACT_SITE}`)}
       <p>Ci-après « le Prestataire ».</p>
@@ -404,7 +368,7 @@ export function buildSaleContract(input: {
       <div class="section-title">Article 14 — Acceptation du contrat</div>
       <p>Le Client reconnaît avoir reçu et lu le présent socle contractuel, l'annexe correspondant à la formule choisie, et les informations sur les prestations incluses et non incluses.</p>
       <p><strong>Fait à :</strong> ${escapeHtml(CONTRACT_PLACE)}<br><strong>Le :</strong> ${escapeHtml(dateLabel)}</p>
-      <p><strong>Le Prestataire</strong><br>Nom et fonction : ${escapeHtml(input.prestataire.representant)}</p>
+      <p><strong>Le Prestataire</strong></p>
       ${stampHtml()}
       <p style="margin-top:16px;"><strong>Le Client</strong><br>Nom : ${escapeHtml(fullName)}<br>Signature précédée de la mention « Lu et approuvé » :</p>
     </div>
