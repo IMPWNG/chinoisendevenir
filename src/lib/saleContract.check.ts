@@ -78,5 +78,10 @@ assert(built.html.includes("cinq (5)"), "annexe formule 2");
 assert(built.html.includes("680"), "acompte formule 2");
 assert(!built.html.includes("huit (8)"), "pas l'annexe formule 3");
 assert(built.html.includes("Tampon de l'entreprise"), "emplacement du tampon");
+const formule3 = buildSaleContract({ client, formuleNumber: 3, sentAt });
+assert(
+  formule3 && !formule3.html.includes("Économie par rapport"),
+  "pas de phrase d'économie",
+);
 
 console.log("saleContract.check ok");

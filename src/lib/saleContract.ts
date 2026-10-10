@@ -28,7 +28,6 @@ type Annex = {
   excluded: string[];
   triggers: [string, string, string];
   thirdNote: string;
-  savings: boolean;
 };
 
 const ANNEXES: Record<1 | 2 | 3, Annex> = {
@@ -57,7 +56,6 @@ const ANNEXES: Record<1 | 2 | 3, Annex> = {
     ],
     thirdNote:
       "La troisième échéance reste due selon ce calendrier même si l'école refuse la candidature ou ne répond pas, sous réserve des droits impératifs applicables.",
-    savings: false,
   },
   2: {
     title: "Annexe — Formule 2 — Recherche d'universités et accompagnement des candidatures",
@@ -83,7 +81,6 @@ const ANNEXES: Record<1 | 2 | 3, Annex> = {
     ],
     thirdNote:
       "La troisième échéance reste due selon ce calendrier même si les universités refusent les candidatures ou ne répondent pas, sous réserve des droits impératifs applicables.",
-    savings: false,
   },
   3: {
     title: "Annexe — Formule 3 — Parcours complet : année de chinois, puis accompagnement universitaire",
@@ -115,7 +112,6 @@ const ANNEXES: Record<1 | 2 | 3, Annex> = {
     ],
     thirdNote:
       "La troisième échéance est liée à l'étape universitaire de l'année suivante, et non à la lettre de l'école de langue. Elle reste due selon le calendrier ci-dessus même si les universités refusent les candidatures ou ne répondent pas, sous réserve des droits impératifs applicables.",
-    savings: true,
   },
 };
 
@@ -227,9 +223,6 @@ export function buildSaleContract(input: {
   const fullName = `${input.client.prenom} ${input.client.nom}`.trim();
   const dateLabel = contractSendDate(input.sentAt);
   const total = `${formatEurosOnly(formule.priceEuros)} — équivalent indicatif : ${formatFcfa(eurosToFcfa(formule.priceEuros))}`;
-  const savings = annex.savings
-    ? `<p>Économie par rapport aux deux formules séparées : ${escapeHtml(formatEurosOnly(500))}, soit environ ${escapeHtml(formatFcfa(eurosToFcfa(500)))}.</p>`
-    : "";
   const visaNote =
     input.formuleNumber === 1
       ? `<p>L'accompagnement relatif au visa consiste en une aide à la préparation et à la vérification des documents. La décision de délivrer le visa appartient exclusivement aux autorités compétentes.</p>`
@@ -384,7 +377,6 @@ export function buildSaleContract(input: {
       <p>Prix total : ${escapeHtml(total)}</p>
       ${scheduleTable(amounts, annex.triggers)}
       <p>${escapeHtml(annex.thirdNote)}</p>
-      ${savings}
     </div>
   `;
 
