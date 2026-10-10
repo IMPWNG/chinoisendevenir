@@ -100,6 +100,21 @@ export function dayTaskListFilter(today: string): string {
   return `day.eq.${today},and(done.eq.false,day.lt.${today})`;
 }
 
+/**
+ * One row per student. Rows must be oldest first.
+ * An open task wins; among open tasks the oldest stays.
+ */
+export function pickVisibleDayTasks<T extends { contact_id: string; done: boolean }>(
+  rows: readonly T[],
+): T[] {
+  const chosen = new Map<string, T>();
+  for (const row of rows) {
+    const prev = chosen.get(row.contact_id);
+    if (!prev || (prev.done && !row.done)) chosen.set(row.contact_id, row);
+  }
+  return rows.filter((row) => chosen.get(row.contact_id) === row);
+}
+
 export function isMissingDayTasksTable(
   message: string | null | undefined,
 ): boolean {

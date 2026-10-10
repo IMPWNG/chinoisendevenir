@@ -1436,8 +1436,9 @@ function ContactModal({
       .from("day_tasks")
       .select("task")
       .eq("contact_id", contact.id)
-      .eq("day", shanghaiDayString())
-      .eq("source", "admin")
+      .eq("done", false)
+      .order("created_at", { ascending: true })
+      .limit(1)
       .maybeSingle();
     if (data?.task) setTaskText(String(data.task));
   };
@@ -1446,7 +1447,17 @@ function ContactModal({
     const task = cleanDayTask(taskText);
     if (!task) return;
     setSavingTask(true);
-    const { error } = await adminSupabase.from("day_tasks").upsert(
+    const { data: open } = await adminSupabase
+      .from("day_tasks")
+      .select("id")
+      .eq("contact_id", contact.id)
+      .eq("done", false)
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+    const { error } = open?.id
+      ? await adminSupabase.from("day_tasks").update({ task }).eq("id", open.id)
+      : await adminSupabase.from("day_tasks").upsert(
       {
         contact_id: contact.id,
         day: shanghaiDayString(),

@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { shanghaiDayString } from "@/lib/dailyReportShared";
-import { isMissingDayTasksTable, parseAgentDayTasks } from "@/lib/dayTasks";
+import {
+  dayTaskListFilter,
+  isMissingDayTasksTable,
+  parseAgentDayTasks,
+} from "@/lib/dayTasks";
 import { readJsonObject } from "@/lib/request";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
@@ -31,8 +35,7 @@ export async function POST(request: Request) {
     const { data, error } = await admin
       .from("day_tasks")
       .select("contact_id")
-      .eq("day", parsed.day)
-      .eq("source", "grokbot");
+      .or(dayTaskListFilter(parsed.day));
     if (error) {
       return NextResponse.json(
         {

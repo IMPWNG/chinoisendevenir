@@ -8,6 +8,7 @@ import {
   dayTaskListFilter,
   isMissingDayTasksTable,
   parseAgentDayTasks,
+  pickVisibleDayTasks,
   whatsappPriorityTasks,
 } from "./dayTasks";
 
@@ -101,6 +102,16 @@ assert(
   dayTaskListFilter(today) ===
     "day.eq.2026-10-09,and(done.eq.false,day.lt.2026-10-09)",
   "list filter",
+);
+const shown = pickVisibleDayTasks([
+  { contact_id: "a", done: false, task: "hier" },
+  { contact_id: "a", done: false, task: "aujourd'hui" },
+  { contact_id: "b", done: true, task: "faite" },
+  { contact_id: "b", done: false, task: "encore" },
+]);
+assert(
+  shown.map((row) => row.task).join("|") === "hier|encore",
+  "un étudiant, une tâche ouverte",
 );
 
 console.log("dayTasks check ok");

@@ -36,7 +36,6 @@ export async function GET(request: Request) {
     const { data: existing } = await auth.admin
       .from("day_tasks")
       .select("contact_id")
-      .eq("source", "whatsapp")
       .or(dayTaskListFilter(day));
     const rows = whatsappPriorityTasks(
       report.needOurReply.map((item) => ({

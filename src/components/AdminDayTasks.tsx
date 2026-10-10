@@ -8,6 +8,7 @@ import {
   cleanAuthorEmail,
   dayTaskListFilter,
   isMissingDayTasksTable,
+  pickVisibleDayTasks,
   type DayTaskSource,
 } from "../lib/dayTasks";
 
@@ -76,7 +77,9 @@ export default function AdminDayTasks({
     contacts.map((c) => [c.id, `${c.prenom || ""} ${c.nom || ""}`.trim()]),
   );
 
-  const visible = showWhatsapp ? rows : rows.filter((row) => row.source !== "whatsapp");
+  const visible = pickVisibleDayTasks(
+    showWhatsapp ? rows : rows.filter((row) => row.source !== "whatsapp"),
+  );
   const ordered = [...visible].sort(
     (a, b) => Number(a.done) - Number(b.done),
   );
@@ -84,22 +87,27 @@ export default function AdminDayTasks({
   const toggleDone = async (row: TaskRow) => {
     const next = !row.done;
     const doneBy = next ? cleanAuthorEmail(actorEmail) || null : null;
+    const ids = next
+      ? rows
+          .filter((item) => item.contact_id === row.contact_id && !item.done)
+          .map((item) => item.id)
+      : [row.id];
+    const previous = rows.filter((item) => ids.includes(item.id));
     setRows((prev) =>
       prev.map((item) =>
-        item.id === row.id ? { ...item, done: next, done_by: doneBy } : item,
+        ids.includes(item.id) ? { ...item, done: next, done_by: doneBy } : item,
       ),
     );
     const { error: updateError } = await adminSupabase
       .from("day_tasks")
       .update({ done: next, done_by: doneBy })
-      .eq("id", row.id);
+      .in("id", ids);
     if (updateError) {
       setRows((prev) =>
-        prev.map((item) =>
-          item.id === row.id
-            ? { ...item, done: row.done, done_by: row.done_by }
-            : item,
-        ),
+        prev.map((item) => {
+          const old = previous.find((entry) => entry.id === item.id);
+          return old ? { ...item, done: old.done, done_by: old.done_by } : item;
+        }),
       );
     }
   };
