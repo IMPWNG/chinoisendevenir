@@ -218,6 +218,18 @@ export function clientReady(client: ContractClient) {
   return contractGaps(client).length === 0;
 }
 
+export function contractTerms(value: unknown) {
+  const raw =
+    value && typeof value === "object"
+      ? (value as Record<string, unknown>)
+      : {};
+  return {
+    paymentMode: clip(raw.paymentMode, 240),
+    transferFees: clip(raw.transferFees, 240),
+    specialTerms: clip(raw.specialTerms, 500),
+  };
+}
+
 function bullets(items: string[]) {
   return `<ul class="formule-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
@@ -295,6 +307,7 @@ export function buildSaleContract(input: {
   client: ContractClient;
   formuleNumber: number;
   sentAt: Date;
+  terms?: unknown;
 }): SaleContract | null {
   const formuleNumber = input.formuleNumber as 1 | 2 | 3;
   const formule = getFormuleByNumber(formuleNumber);
@@ -303,6 +316,8 @@ export function buildSaleContract(input: {
 
   const gaps = contractGaps(input.client);
   if (gaps.length) return { validation: true, gaps };
+
+  const pay = contractTerms(input.terms);
 
   const client = input.client;
   const amounts = contractInstallments(formule.priceEuros);
@@ -502,7 +517,7 @@ export function buildSaleContract(input: {
       <p>Équivalence indicative : ${escapeHtml(formatFcfa(eurosToFcfa(formule.priceEuros)))}. L'équivalence en F CFA est indicative. Devise effectivement facturée : euros.</p>
       ${scheduleTable(amounts, annex.triggers)}
       <p>${escapeHtml(annex.thirdNote)}</p>
-      <p>Mode de paiement : ${escapeHtml(CONTRACT_BLANK)}<br>Frais éventuels de transfert : ${escapeHtml(CONTRACT_BLANK)}<br>Échéancier ou conditions particulières : ${escapeHtml(CONTRACT_BLANK)}</p>
+      <p>Mode de paiement : ${escapeHtml(pay.paymentMode || CONTRACT_BLANK)}<br>Frais éventuels de transfert : ${escapeHtml(pay.transferFees || CONTRACT_BLANK)}<br>Échéancier ou conditions particulières : ${escapeHtml(pay.specialTerms || CONTRACT_BLANK)}</p>
     </div>
   `;
 

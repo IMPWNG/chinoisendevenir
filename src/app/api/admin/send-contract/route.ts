@@ -15,6 +15,7 @@ import {
   clientReady,
   contractClientFromContact,
   contractGaps,
+  contractTerms,
 } from "@/lib/saleContract";
 
 export async function POST(request: Request) {
@@ -117,6 +118,7 @@ export async function POST(request: Request) {
     client,
     formuleNumber,
     sentAt,
+    terms: body.terms,
   });
   if (!contract || "validation" in contract) {
     return NextResponse.json(

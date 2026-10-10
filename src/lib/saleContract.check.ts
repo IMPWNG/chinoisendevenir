@@ -92,6 +92,23 @@ assert(built.html.includes("cinq (5)"), "annexe formule 2");
 assert(built.html.includes("680"), "acompte formule 2");
 assert(!built.html.includes("huit (8)"), "pas l'annexe formule 3");
 assert(built.html.includes("Tampon de l'entreprise"), "emplacement du tampon");
+assert(built.html.includes("Mode de paiement : [À COMPLÉTER]"), "paiement vide");
+const paid = buildSaleContract({
+  client,
+  formuleNumber: 2,
+  sentAt,
+  terms: {
+    paymentMode: "virement <bancaire>",
+    transferFees: "à la charge du Client",
+    specialTerms: "",
+  },
+});
+assert(paid && "html" in paid, "contrat avec paiement");
+if (paid && "html" in paid) {
+  assert(paid.html.includes("virement &lt;bancaire&gt;"), "mode de paiement");
+  assert(paid.html.includes("à la charge du Client"), "frais de transfert");
+  assert(paid.html.includes("Échéancier ou conditions particulières : [À COMPLÉTER]"), "condition vide");
+}
 assert(!built.html.includes("Si le Client est mineur"), "majeur sans représentant");
 const formule3 = buildSaleContract({ client, formuleNumber: 3, sentAt });
 assert(formule3 && "html" in formule3, "contrat formule 3");

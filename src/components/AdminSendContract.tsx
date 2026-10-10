@@ -68,6 +68,9 @@ export default function AdminSendContract({
   const [repLink, setRepLink] = useState("");
   const [repAddress, setRepAddress] = useState("");
   const [repContact, setRepContact] = useState("");
+  const [paymentMode, setPaymentMode] = useState("");
+  const [transferFees, setTransferFees] = useState("");
+  const [specialTerms, setSpecialTerms] = useState("");
   const [formuleNumber, setFormuleNumber] = useState(
     getFormuleNumber(contact.formule) || 0,
   );
@@ -85,6 +88,9 @@ export default function AdminSendContract({
     setRepLink("");
     setRepAddress("");
     setRepContact("");
+    setPaymentMode("");
+    setTransferFees("");
+    setSpecialTerms("");
     setFormuleNumber(getFormuleNumber(contact.formule) || 0);
     setPreview(false);
   }, [contact.id, contact.pays, contact.phone, contact.formule]);
@@ -109,12 +115,14 @@ export default function AdminSendContract({
     clientReady(client) &&
     (formuleNumber === 1 || formuleNumber === 2 || formuleNumber === 3);
 
+  const terms = { paymentMode, transferFees, specialTerms };
   const built =
     preview && ready
       ? buildSaleContract({
           client,
           formuleNumber,
           sentAt: new Date(),
+          terms,
         })
       : null;
   const previewHtml = built && "html" in built ? built.html : "";
@@ -147,6 +155,7 @@ export default function AdminSendContract({
             adresse: repAddress,
             contact: repContact,
           },
+          terms: { paymentMode, transferFees, specialTerms },
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -348,6 +357,37 @@ export default function AdminSendContract({
               <option value="3">Formule 3 — 2 000 €</option>
             </select>
           )}
+        </div>
+      </div>
+      <p className="text-xs text-slate-500 mb-3">{t("dashboard.contractPayHint")}</p>
+      <div className="grid grid-cols-1 gap-3 mb-4">
+        <div>
+          <label className={label}>{t("dashboard.contractPayMode")}</label>
+          <input
+            value={paymentMode}
+            disabled={sending}
+            onChange={(e) => setPaymentMode(e.target.value)}
+            placeholder={t("dashboard.contractPayModeHint")}
+            className={fieldClass(sending)}
+          />
+        </div>
+        <div>
+          <label className={label}>{t("dashboard.contractTransferFees")}</label>
+          <input
+            value={transferFees}
+            disabled={sending}
+            onChange={(e) => setTransferFees(e.target.value)}
+            className={fieldClass(sending)}
+          />
+        </div>
+        <div>
+          <label className={label}>{t("dashboard.contractSpecialTerms")}</label>
+          <input
+            value={specialTerms}
+            disabled={sending}
+            onChange={(e) => setSpecialTerms(e.target.value)}
+            className={fieldClass(sending)}
+          />
         </div>
       </div>
       {gaps.length ? (
