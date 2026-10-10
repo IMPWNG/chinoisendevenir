@@ -65,6 +65,7 @@ export const adminTranslations = {
         "Même lecture que les emails : dernier message de l'étudiant, ou message envoyé en attente de réponse.",
       openMessage: "Lire le message",
       loadFail: "Impossible de charger les WhatsApp reçus.",
+      dismissFail: "Impossible de retirer ce WhatsApp de la liste.",
     },
     dayTasks: {
       title: "Tâches du jour",
@@ -837,6 +838,7 @@ export const adminTranslations = {
         "Same as emails: the student's last message, or a message we sent that is still waiting.",
       openMessage: "Read message",
       loadFail: "Could not load received WhatsApp messages.",
+      dismissFail: "Could not remove this WhatsApp from the list.",
     },
     dayTasks: {
       title: "Today's tasks",
@@ -1596,6 +1598,7 @@ export const adminTranslations = {
       homeHint: "与邮件相同：学生的最后一条消息，或我们已发送、仍在等待回复的消息。",
       openMessage: "阅读消息",
       loadFail: "无法加载收到的 WhatsApp。",
+      dismissFail: "无法从列表中移除这条 WhatsApp。",
     },
     dayTasks: {
       title: "今日任务",

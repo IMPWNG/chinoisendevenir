@@ -6,13 +6,18 @@ import { adminSupabase } from "../lib/supabase";
 import { errorMessage } from "../lib/request";
 import type { WhatsappInboxItem, WhatsappInboxReport } from "../lib/whatsappInbox";
 
-async function authedFetch(path: string) {
+async function authedFetch(path: string, options: RequestInit = {}) {
   const {
     data: { session },
   } = await adminSupabase.auth.getSession();
   if (!session?.access_token) throw new Error("SESSION");
   return fetch(path, {
-    headers: { Authorization: `Bearer ${session.access_token}` },
+    ...options,
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      ...(options.headers || {}),
+    },
     cache: "no-store",
   });
 }
@@ -101,6 +106,7 @@ function Column({
   accent,
   onRead,
   onFiche,
+  onDismiss,
 }: {
   title: string;
   hint: string;
@@ -108,6 +114,7 @@ function Column({
   accent: "amber" | "sky";
   onRead: (item: WhatsappInboxItem) => void;
   onFiche: (contactId: string) => void;
+  onDismiss: (item: WhatsappInboxItem) => void;
 }) {
   const { t, lang } = useAdminI18n();
   const border = accent === "amber" ? "border-amber-500/40" : "border-sky-500/40";
@@ -147,6 +154,13 @@ function Column({
                 >
                   👤 {t("emailsWeek.openFiche")}
                 </button>
+                <button
+                  type="button"
+                  onClick={() => onDismiss(item)}
+                  className="w-full px-3 py-2.5 rounded-xl text-sm font-bold bg-slate-700 text-slate-200 hover:bg-slate-600"
+                >
+                  {t("emailsWeek.dismiss")}
+                </button>
               </div>
             </li>
           ))}
@@ -170,6 +184,41 @@ export default function AdminWhatsappInbox({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [open, setOpen] = useState<WhatsappInboxItem | null>(null);
+  const [dismissing, setDismissing] = useState("");
+
+  async function dismiss(item: WhatsappInboxItem) {
+    if (dismissing || !item.sentAt) return;
+    const previous = report;
+    setDismissing(item.id);
+    setError("");
+    setReport((prev) =>
+      prev
+        ? {
+            ...prev,
+            needOurReply: prev.needOurReply.filter((row) => row.id !== item.id),
+            needStudentReply: prev.needStudentReply.filter((row) => row.id !== item.id),
+          }
+        : prev,
+    );
+    if (open?.id === item.id) setOpen(null);
+    try {
+      const response = await authedFetch("/api/admin/whatsapp-inbox", {
+        method: "PATCH",
+        body: JSON.stringify({ contactId: item.contactId, sentAt: item.sentAt }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.success) {
+        setReport(previous);
+        setError(data.error || t("whatsappInbox.dismissFail"));
+      }
+    } catch (err) {
+      setReport(previous);
+      const message = errorMessage(err);
+      setError(message === "SESSION" ? t("sessionExpired") : t("whatsappInbox.dismissFail"));
+    } finally {
+      setDismissing("");
+    }
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -227,6 +276,7 @@ export default function AdminWhatsappInbox({
             accent="amber"
             onRead={setOpen}
             onFiche={onOpenContact}
+            onDismiss={dismiss}
           />
           <Column
             title={t("emailsWeek.needStudentReply")}
@@ -235,6 +285,7 @@ export default function AdminWhatsappInbox({
             accent="sky"
             onRead={setOpen}
             onFiche={onOpenContact}
+            onDismiss={dismiss}
           />
         </div>
       ) : null}

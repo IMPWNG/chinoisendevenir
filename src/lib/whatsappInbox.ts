@@ -37,15 +37,28 @@ function ageDays(sentAt: string, nowMs: number) {
   return Math.max(0, Math.floor((nowMs - at) / 86400000));
 }
 
+/** A cleared thread stays hidden until a newer WhatsApp message. */
+export function whatsappThreadOpen(
+  sentAt: string,
+  dismissedMessageAt: string | null | undefined,
+): boolean {
+  if (!dismissedMessageAt) return true;
+  const sent = Date.parse(sentAt);
+  const dismissed = Date.parse(dismissedMessageAt);
+  if (!Number.isFinite(sent) || !Number.isFinite(dismissed)) return true;
+  return sent > dismissed;
+}
+
 export function splitWhatsappInbox(
   contacts: readonly InboxContact[],
   histories: ReadonlyMap<string, unknown[]>,
   nowMs = Date.now(),
+  dismissed: ReadonlyMap<string, string> = new Map(),
 ): WhatsappInboxReport {
   const items: WhatsappInboxItem[] = [];
   for (const contact of contacts) {
     const latest = agentWhatsappMessages(histories.get(contact.id), 1)[0];
-    if (!latest) continue;
+    if (!latest || !whatsappThreadOpen(latest.sentAt, dismissed.get(contact.id))) continue;
     const name = [contact.prenom, contact.nom].filter(Boolean).join(" ").trim() || "Sans nom";
     items.push({
       id: contact.id,
