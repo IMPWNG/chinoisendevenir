@@ -248,6 +248,69 @@ const THANKS_OR_SCHEDULING = [
   /\bappelez[- ]moi\b/i,
 ];
 
+/** Explicit ask for the formulas mail. A bare "ok" / "oui" / "merci" is not one. */
+const INTEREST_KEYWORDS = [
+  "je souhaite recevoir les informations",
+  "je souhaite recevoir",
+  "je veux recevoir",
+  "je souhaite l'accompagnement",
+  "je souhaite l accompagnement",
+  "oui je suis intéressé",
+  "oui je suis interesse",
+  "oui je suis intéressée",
+  "je suis intéressé",
+  "je suis interesse",
+  "ça m'intéresse",
+  "ca m'interesse",
+  "ca minteresse",
+  "informations sur l'accompagnement",
+  "informations sur l accompagnement",
+  "intéressé",
+  "interessee",
+  "interesse",
+  "continuer",
+  "je continue",
+  "envoyez-moi",
+  "envoie moi",
+];
+
+const COURTESY_OPENING =
+  /^(ok|oui|d'accord|daccord|merci|thanks|thank you|bien recu|bien note|c'est note|note|parfait|super|bon courage)\b/;
+
+function hasExplicitInterestAsk(normalized: string): boolean {
+  return INTEREST_KEYWORDS.some((keyword) =>
+    normalized.includes(normalizeIntentText(keyword)),
+  );
+}
+
+function deniesInterest(normalized: string): boolean {
+  return (
+    /\bpas interesse/.test(normalized) ||
+    /\bplus interesse/.test(normalized) ||
+    /\bje ne (souhaite|veux) (pas|plus)\b/.test(normalized)
+  );
+}
+
+/** Short thanks or acknowledgement. Does not cover a message that also asks for the formulas. */
+export function isCourtesyReply(text: unknown): boolean {
+  const value = normalizeIntentText(text).replace(/\s+/g, " ").trim();
+  if (!value || value.length > 220) return false;
+  if (hasExplicitInterestAsk(value)) return false;
+  if (COURTESY_OPENING.test(value)) return true;
+  return (
+    /\bmerci\b/.test(value) &&
+    /\b(courage|encourager|encouragement|encourag)/.test(value)
+  );
+}
+
+export function detectInterest(text: unknown): boolean {
+  const normalized = normalizeIntentText(text).replace(/\s+/g, " ").trim();
+  if (!normalized || deniesInterest(normalized) || isCourtesyReply(normalized)) {
+    return false;
+  }
+  return hasExplicitInterestAsk(normalized);
+}
+
 export function isThanksOrScheduling(text: unknown): boolean {
   const value = normalizeIntentText(text).trim();
   if (!value) return false;

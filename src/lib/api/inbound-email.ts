@@ -21,6 +21,7 @@ import {
 } from "../suiviStatuts";
 import {
   detectEmailIntent,
+  detectInterest,
   extractPersonName,
   shouldCreateContactFromInbound,
   type EmailIntent,
@@ -36,35 +37,6 @@ import {
 const supabase = getSupabaseAdmin();
 const resend = new Resend(getResendApiKey());
 const resendApiKey = getResendApiKey();
-
-const INTEREST_KEYWORDS = [
-  "je souhaite recevoir les informations",
-  "je souhaite recevoir",
-  "je veux recevoir",
-  "je souhaite l'accompagnement",
-  "je souhaite l accompagnement",
-  "oui je suis intéressé",
-  "oui je suis interesse",
-  "oui je suis intéressée",
-  "je suis intéressé",
-  "je suis interesse",
-  "ça m'intéresse",
-  "ca m'interesse",
-  "ca minteresse",
-  "informations sur l'accompagnement",
-  "informations sur l accompagnement",
-  "intéressé",
-  "interessee",
-  "interesse",
-  "continuer",
-  "je continue",
-  "envoyez-moi",
-  "envoie moi",
-  "d'accord",
-  "daccord",
-  "ok",
-  "oui",
-];
 
 type FormulePattern = {
   key: string;
@@ -298,12 +270,7 @@ export function detectFormule(text: unknown): FormulePattern | null {
   return null;
 }
 
-export function detectInterest(text: unknown): boolean {
-  const normalized = normalizeText(text);
-  return INTEREST_KEYWORDS.some((keyword) =>
-    normalized.includes(normalizeText(keyword)),
-  );
-}
+export { detectInterest };
 
 export function looksLikeQuestion(text: unknown): boolean {
   const value = String(text || "");
