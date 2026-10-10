@@ -14,6 +14,7 @@ import {
   buildSaleContract,
   clientReady,
   contractClientFromContact,
+  contractGaps,
 } from "@/lib/saleContract";
 
 export async function POST(request: Request) {
@@ -87,13 +88,25 @@ export async function POST(request: Request) {
     phone: body.phone,
     dateNaissance: body.dateNaissance,
     nationalite: body.nationalite,
+    residence: body.residence,
     adresse: body.adresse,
+    mineur: body.mineur === true,
+    representant:
+      body.representant && typeof body.representant === "object"
+        ? (body.representant as {
+            nom?: unknown;
+            lien?: unknown;
+            adresse?: unknown;
+            contact?: unknown;
+          })
+        : null,
   });
   if (!clientReady(client)) {
     return NextResponse.json(
       {
         success: false,
-        error: "Date de naissance, nationalité, adresse ou téléphone manquant",
+        error: "VALIDATION HUMAINE REQUISE",
+        gaps: contractGaps(client),
       },
       { status: 400 },
     );
@@ -105,9 +118,13 @@ export async function POST(request: Request) {
     formuleNumber,
     sentAt,
   });
-  if (!contract) {
+  if (!contract || "validation" in contract) {
     return NextResponse.json(
-      { success: false, error: "Contrat impossible à préparer" },
+      {
+        success: false,
+        error: "VALIDATION HUMAINE REQUISE",
+        gaps: contract && "validation" in contract ? contract.gaps : [],
+      },
       { status: 400 },
     );
   }

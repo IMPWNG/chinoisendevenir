@@ -15,6 +15,7 @@ import {
   buildSaleContract,
   clientReady,
   contractClientFromContact,
+  contractGaps,
   contractSendDate,
 } from "../lib/saleContract";
 
@@ -58,9 +59,15 @@ export default function AdminSendContract({
 }) {
   const { t } = useAdminI18n();
   const [birth, setBirth] = useState("");
-  const [nationality, setNationality] = useState(contact.pays || "");
+  const [nationality, setNationality] = useState("");
+  const [residence, setResidence] = useState(contact.pays || "");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState(contact.phone || "");
+  const [minor, setMinor] = useState(false);
+  const [repName, setRepName] = useState("");
+  const [repLink, setRepLink] = useState("");
+  const [repAddress, setRepAddress] = useState("");
+  const [repContact, setRepContact] = useState("");
   const [formuleNumber, setFormuleNumber] = useState(
     getFormuleNumber(contact.formule) || 0,
   );
@@ -69,9 +76,15 @@ export default function AdminSendContract({
 
   useEffect(() => {
     setBirth("");
-    setNationality(contact.pays || "");
+    setNationality("");
+    setResidence(contact.pays || "");
     setAddress("");
     setPhone(contact.phone || "");
+    setMinor(false);
+    setRepName("");
+    setRepLink("");
+    setRepAddress("");
+    setRepContact("");
     setFormuleNumber(getFormuleNumber(contact.formule) || 0);
     setPreview(false);
   }, [contact.id, contact.pays, contact.phone, contact.formule]);
@@ -81,20 +94,30 @@ export default function AdminSendContract({
     phone,
     dateNaissance: birth,
     nationalite: nationality,
+    residence,
     adresse: address,
+    mineur: minor,
+    representant: {
+      nom: repName,
+      lien: repLink,
+      adresse: repAddress,
+      contact: repContact,
+    },
   });
+  const gaps = contractGaps(client);
   const ready =
     clientReady(client) &&
     (formuleNumber === 1 || formuleNumber === 2 || formuleNumber === 3);
 
-  const previewHtml =
+  const built =
     preview && ready
       ? buildSaleContract({
           client,
           formuleNumber,
           sentAt: new Date(),
-        })?.html || ""
-      : "";
+        })
+      : null;
+  const previewHtml = built && "html" in built ? built.html : "";
 
   async function send() {
     if (!ready) return;
@@ -115,12 +138,26 @@ export default function AdminSendContract({
           phone,
           dateNaissance: birth,
           nationalite: nationality,
+          residence,
           adresse: address,
+          mineur: minor,
+          representant: {
+            nom: repName,
+            lien: repLink,
+            adresse: repAddress,
+            contact: repContact,
+          },
         }),
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.success) {
-        alert("❌ " + (data.error || t("dashboard.contractFail")));
+        alert(
+          "❌ " +
+            (data.error || t("dashboard.contractFail")) +
+            (Array.isArray(data.gaps) && data.gaps.length
+              ? "\n" + data.gaps.join("\n")
+              : ""),
+        );
         return;
       }
       alert(`✅ ${t("dashboard.contractOk")}`);
@@ -171,7 +208,7 @@ export default function AdminSendContract({
             value={birth}
             disabled={sending}
             onChange={(e) => setBirth(e.target.value)}
-            placeholder="12 mars 2002"
+            placeholder={t("dashboard.contractBirthHint")}
             className={fieldClass(sending)}
           />
         </div>
@@ -184,6 +221,15 @@ export default function AdminSendContract({
             className={fieldClass(sending)}
           />
         </div>
+        <div>
+          <label className={label}>{t("dashboard.contractResidence")}</label>
+          <input
+            value={residence}
+            disabled={sending}
+            onChange={(e) => setResidence(e.target.value)}
+            className={fieldClass(sending)}
+          />
+        </div>
         <div className="md:col-span-2">
           <label className={label}>{t("dashboard.contractAddress")}</label>
           <input
@@ -193,6 +239,55 @@ export default function AdminSendContract({
             className={fieldClass(sending)}
           />
         </div>
+        <label className="md:col-span-2 flex items-center gap-2 text-sm text-slate-200">
+          <input
+            type="checkbox"
+            checked={minor}
+            disabled={sending}
+            onChange={(e) => setMinor(e.target.checked)}
+          />
+          {t("dashboard.contractMinor")}
+        </label>
+        {minor ? (
+          <>
+            <div>
+              <label className={label}>{t("dashboard.contractRepName")}</label>
+              <input
+                value={repName}
+                disabled={sending}
+                onChange={(e) => setRepName(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+            <div>
+              <label className={label}>{t("dashboard.contractRepLink")}</label>
+              <input
+                value={repLink}
+                disabled={sending}
+                onChange={(e) => setRepLink(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className={label}>{t("dashboard.contractRepAddress")}</label>
+              <input
+                value={repAddress}
+                disabled={sending}
+                onChange={(e) => setRepAddress(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className={label}>{t("dashboard.contractRepContact")}</label>
+              <input
+                value={repContact}
+                disabled={sending}
+                onChange={(e) => setRepContact(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+          </>
+        ) : null}
       </div>
 
       <p className={`${label} mb-2`}>{t("dashboard.contractProvider")}</p>
@@ -255,6 +350,16 @@ export default function AdminSendContract({
           )}
         </div>
       </div>
+      {gaps.length ? (
+        <div className="mb-4 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
+          <p className="text-sm font-bold text-amber-200">VALIDATION HUMAINE REQUISE</p>
+          <ul className="mt-2 list-disc pl-5 text-sm text-amber-100">
+            {gaps.map((gap) => (
+              <li key={gap}>{gap}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       <p className="text-xs text-slate-500 mb-4">{t("dashboard.contractStampNote")}</p>
 
       <div className="flex flex-wrap gap-3">
