@@ -9,7 +9,6 @@ import {
   isMissingDayTasksTable,
   parseAgentDayTasks,
   pickVisibleDayTasks,
-  whatsappPriorityTasks,
 } from "./dayTasks";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -76,21 +75,6 @@ assert(
   "missing table",
 );
 assert(!isMissingDayTasksTable("permission denied"), "other error");
-
-const wa = whatsappPriorityTasks(
-  [
-    { contactId: "a", text: "Je voudrais la formule 2" },
-    { contactId: "a", text: "doublon" },
-    { contactId: "b", text: "déjà posée" },
-    { contactId: "", text: "vide" },
-  ],
-  "2026-10-08",
-  new Set(["b"]),
-);
-assert(wa.length === 1, "one new whatsapp priority");
-assert(wa[0]?.source === "whatsapp", "source");
-assert(wa[0]?.task.startsWith("Répondre sur WhatsApp : Je voudrais"), "task text");
-assert(wa[0]?.created_by === "WhatsApp", "author");
 
 const today = "2026-10-09";
 assert(dayTaskBelongsToday({ day: "2026-10-08", done: false }, today), "open stays");

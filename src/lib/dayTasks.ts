@@ -55,38 +55,6 @@ export function parseAgentDayTasks(
   return { day, tasks, createdBy };
 }
 
-/** Students waiting on a WhatsApp reply become today's tasks. Skips dossiers already tasked from WhatsApp. */
-export function whatsappPriorityTasks(
-  items: readonly { contactId: string; text: string }[],
-  day: string,
-  existing: ReadonlySet<string>,
-) {
-  const out: {
-    contact_id: string;
-    day: string;
-    task: string;
-    source: "whatsapp";
-    done: false;
-    created_by: string;
-  }[] = [];
-  const seen = new Set<string>();
-  for (const item of items) {
-    const contactId = String(item.contactId || "").trim();
-    const task = cleanDayTask(`Répondre sur WhatsApp : ${item.text}`);
-    if (!contactId || !task || existing.has(contactId) || seen.has(contactId)) continue;
-    seen.add(contactId);
-    out.push({
-      contact_id: contactId,
-      day,
-      task,
-      source: "whatsapp",
-      done: false,
-      created_by: "WhatsApp",
-    });
-  }
-  return out;
-}
-
 /** Today's rows, plus earlier rows still open. A checked task stays on its own day. */
 export function dayTaskBelongsToday(
   row: { day: string; done: boolean },

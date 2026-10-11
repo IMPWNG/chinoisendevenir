@@ -14,7 +14,6 @@ import AdminContactWhatsApp from "../components/AdminContactWhatsApp";
 import AdminSendContract from "../components/AdminSendContract";
 import AdminContactEmailThread from "../components/AdminContactEmailThread";
 import AdminUnansweredEmails from "../components/AdminUnansweredEmails";
-import AdminWhatsappInbox from "../components/AdminWhatsappInbox";
 import AdminDayTasks from "../components/AdminDayTasks";
 import AdminBulkEmail from "../components/AdminBulkEmail";
 import AdminBulkWhatsapp from "../components/AdminBulkWhatsapp";
@@ -882,17 +881,6 @@ export default function AdminDashboard() {
             if (found) setSelectedContact(found);
           }}
         />
-
-        {access.whatsapp ? (
-          <AdminWhatsappInbox
-            refreshKey={inboxTick}
-            onSynced={() => setDayTaskKey((n) => n + 1)}
-            onOpenContact={(contactId) => {
-              const found = contacts.find((c) => c.id === contactId);
-              if (found) setSelectedContact(found);
-            }}
-          />
-        ) : null}
 
         <AdminDayTasks
           contacts={contacts}

@@ -59,14 +59,6 @@ export const adminTranslations = {
       dismiss: "Retirer",
       dismissFail: "Impossible de retirer cet email de la liste.",
     },
-    whatsappInbox: {
-      homeTitle: "WhatsApp reçu",
-      homeHint:
-        "Même lecture que les emails : dernier message de l'étudiant, ou message envoyé en attente de réponse.",
-      openMessage: "Lire le message",
-      loadFail: "Impossible de charger les WhatsApp reçus.",
-      dismissFail: "Impossible de retirer ce WhatsApp de la liste.",
-    },
     dayTasks: {
       title: "Tâches du jour",
       hint: "Priorités du jour. Une tâche non cochée reste le lendemain.",
@@ -835,14 +827,6 @@ export const adminTranslations = {
       dismiss: "Remove",
       dismissFail: "Could not remove this email from the list.",
     },
-    whatsappInbox: {
-      homeTitle: "WhatsApp received",
-      homeHint:
-        "Same as emails: the student's last message, or a message we sent that is still waiting.",
-      openMessage: "Read message",
-      loadFail: "Could not load received WhatsApp messages.",
-      dismissFail: "Could not remove this WhatsApp from the list.",
-    },
     dayTasks: {
       title: "Today's tasks",
       hint: "Today's priorities. An unchecked task stays the next day.",
@@ -1598,13 +1582,6 @@ export const adminTranslations = {
       loadFail: "无法加载收到的邮件。",
       dismiss: "移除",
       dismissFail: "无法从列表中移除这封邮件。",
-    },
-    whatsappInbox: {
-      homeTitle: "收到的 WhatsApp",
-      homeHint: "与邮件相同：学生的最后一条消息，或我们已发送、仍在等待回复的消息。",
-      openMessage: "阅读消息",
-      loadFail: "无法加载收到的 WhatsApp。",
-      dismissFail: "无法从列表中移除这条 WhatsApp。",
     },
     dayTasks: {
       title: "今日任务",
