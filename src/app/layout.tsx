@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type React from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import JsonLd from "@/components/JsonLd";
 import { organizationJsonLd, SITE, websiteJsonLd } from "@/lib/seo";
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body>
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <Providers>{children}</Providers>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
