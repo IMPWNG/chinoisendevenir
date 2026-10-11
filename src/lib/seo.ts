@@ -6,6 +6,7 @@ export const SITE = {
   locale: "fr_FR",
   language: "fr",
   email: "contact@chinoisendevenir.com",
+  whatsapp: "+33 7 67 52 33 61",
   tagline:
     "Accompagnement francophone pour étudier en Chine : orientation, admission, bourses et visa étudiant.",
   description:
@@ -301,6 +302,7 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       email: SITE.email,
+      telephone: "+33767523361",
       contactType: "customer service",
       availableLanguage: ["French", "English"],
     },
