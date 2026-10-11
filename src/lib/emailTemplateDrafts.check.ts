@@ -6,7 +6,9 @@ import {
   CARD_EMAIL_TEMPLATE_KEYS,
   formuleChoiceLines,
   generateDraftEmailHtml,
+  generateFormulesEmailHtml,
   getEmailTemplateDraft,
+  renderEditableEmailHtml,
 } from "./emailTemplateDrafts";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -49,11 +51,26 @@ assert(
   "disclaimer without WeChat/Alipay/bank account",
 );
 
-const formulesHtml = generateDraftEmailHtml({ prenom: "Awa" }, formules);
+const formulesHtml = generateFormulesEmailHtml({ prenom: "Awa" });
+assert(formulesHtml.includes("Bonjour Awa"), "formules : prénom");
 assert(
   formulesHtml.includes('href="https://chinoisendevenir.com/tarifs"'),
   "formules : lien cliquable",
 );
+assert(formulesHtml.includes("text-decoration:underline"), "formules : titres soulignés");
+assert(formulesHtml.includes("Recommandée"), "formules : formule 3");
+assert(formulesHtml.includes("<table"), "formules : tableau");
+const edited = renderEditableEmailHtml(
+  { prenom: "Awa" },
+  {
+    customSubject: formules.subject,
+    customTitle: formules.title,
+    customSubtitle: formules.subtitle,
+    customMessage: "Texte modifié par l'admin",
+  },
+);
+assert(edited.includes("Texte modifié"), "texte modifié conservé");
+assert(!edited.includes("Recommandée"), "texte modifié : pas le tableau");
 
 const html = generateDraftEmailHtml({ prenom: "Awa" }, bienvenue);
 assert(html.includes("Bonjour Awa"), "prénom");

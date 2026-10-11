@@ -11,10 +11,12 @@ import {
   withEtudeChineSubject,
   type EmailExtras,
 } from "../emailLayout";
-import { EXTRA_FEES, PAYMENT_NOTE, displayFormuleLabel, getFormuleIncludeGroups, displayFormulePrice, localizeFormules } from "../formules";
+import { displayFormuleLabel, displayFormulePrice, localizeFormules } from "../formules";
 import {
   generateDraftEmailHtml,
+  generateFormulesEmailHtml,
   getEmailTemplateDraft,
+  renderEditableEmailHtml,
 } from "../emailTemplateDrafts";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
 import { readJsonObject, asString, errorMessage } from "../request";
@@ -70,105 +72,6 @@ function generateRelanceFormulesTemplate(prenom: string) {
   });
 }
 
-function generateFormulesPresentationTemplate(prenom: string) {
-  const cards = localizeFormules().map((formule) => {
-    const featured = formule.featured ? " featured" : "";
-    const groups = getFormuleIncludeGroups(formule);
-    const items = groups
-      .map((group) => {
-        const heading =
-          groups.length > 1
-            ? `<p class="formule-intro" style="font-weight:700;margin-top:8px;">${escapeHtml(group.title)}</p>`
-            : "";
-        const list = `<ul class="formule-list">${group.items
-          .map((item) => `<li>${escapeHtml(item)}</li>`)
-          .join("")}</ul>`;
-        return `${heading}${list}`;
-      })
-      .join("");
-    const footnote = formule.footnote
-      ? `<p class="formule-intro" style="margin-top:12px;">${escapeHtml(formule.footnote)}</p>`
-      : "";
-    const badge = formule.badge
-      ? `<div class="formule-intro" style="font-weight:700;margin-bottom:6px;">${escapeHtml(formule.badge)}</div>`
-      : formule.audience
-        ? `<div class="formule-intro" style="font-weight:700;margin-bottom:6px;">${escapeHtml(formule.audience)}</div>`
-        : "";
-    return `
-            <div class="formule-card${featured}">
-              ${badge}
-              <div class="formule-title">Formule ${formule.number} — ${escapeHtml(formule.title)}</div>
-              <div class="formule-price">${escapeHtml(displayFormulePrice(formule))}</div>
-              <p class="formule-intro">${escapeHtml(PAYMENT_NOTE)}</p>
-              ${
-                formule.savingsText
-                  ? `<p class="formule-intro">${escapeHtml(formule.savingsText)}</p>`
-                  : ""
-              }
-              <p class="formule-intro">${escapeHtml(formule.intro)}</p>
-              <p class="formule-intro">Ce qui est inclus :</p>
-              ${items}
-              ${footnote}
-            </div>`;
-  }).join("");
-
-  const extraFees = EXTRA_FEES.map((item) => `<li>${escapeHtml(item)}</li>`).join(
-    "",
-  );
-  const choices = localizeFormules().map(
-    (formule) =>
-      `${formule.number} — ${escapeHtml(formule.title)} : ${escapeHtml(displayFormulePrice(formule))}`,
-  ).join("<br>");
-
-  return wrapEmailHtml({
-    title: "Nos formules d'accompagnement",
-    subtitle: "Pour étudier en Chine",
-    prenom,
-    bodyHtml: `
-            <div class="section">
-              <p>Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.</p>
-              <p>Vous souhaitez apprendre le chinois, intégrer une université ou préparer votre départ ? Ces formules nous aident à comprendre votre besoin, à préparer notre premier appel et à vous proposer un accompagnement adapté.</p>
-              <p>Notre objectif : un projet cohérent et un dossier sérieux, complet, aligné avec les exigences des universités chinoises.</p>
-            </div>
-
-            ${cards}
-
-            <div class="note">
-              <h4>Traduction et préparation des documents</h4>
-              <p>Nous vous aidons à identifier les documents qui doivent être traduits et à préparer les versions nécessaires en anglais ou en chinois, selon les exigences des universités ou des autorités concernées.</p>
-              <p>Les traductions officielles, certifiées, les légalisations, authentifications et notarisation peuvent être facturées séparément. Ces frais vous seront communiqués avant toute commande.</p>
-            </div>
-
-            <div class="note">
-              <h4>Frais qui restent à votre charge</h4>
-              <p>Nos tarifs couvrent l'accompagnement. Les frais des universités, administrations ou prestataires externes ne sont pas inclus, notamment :</p>
-              <ul>${extraFees}</ul>
-              <p style="margin-top:12px;">Lorsque c'est possible, nous vous les signalons à l'avance pour que vous puissiez prévoir votre budget.</p>
-            </div>
-
-            <div class="note">
-              <h4>Comment ça se passe</h4>
-              <p>Votre choix n'est pas un engagement définitif. Après votre réponse, nous vous proposons un appel pour comprendre votre parcours, évaluer le projet, préciser les services inclus et confirmer la formule.</p>
-              <p>Si vous poursuivez, vous recevez les conditions de service et les modalités de règlement. Aucune démarche ne commence avant signature et confirmation du paiement. Le paiement intervient après cette première consultation.</p>
-            </div>
-
-            <div class="note">
-              <h4>À retenir</h4>
-              <p>Nous ne pouvons pas garantir une admission, une bourse, un visa, une acceptation en école de langue ou un logement. La décision finale appartient aux universités, aux écoles de langue, aux organismes de bourses et aux autorités concernées. Notre rôle : vous conseiller et vous aider à constituer un dossier cohérent et complet.</p>
-            </div>
-
-            <div class="cta">
-              <p>Répondez à cet e-mail en indiquant la formule qui vous correspond le mieux :</p>
-              <div class="cta-choice">${choices}</div>
-            </div>
-            <div class="section">
-              <p>Nous reviendrons ensuite vers vous pour convenir d'un échange téléphonique.</p>
-              <p>Merci pour votre confiance. Nous restons à votre disposition.</p>
-            </div>
-    `,
-  });
-}
-
 function generateFormuleConfirmeeTemplate(
   contact: EmailContact,
   formuleLabel: unknown,
@@ -209,8 +112,7 @@ function generateFormuleConfirmeeTemplate(
 const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
   formules_presentation: {
     subject: "Nos formules d'accompagnement pour étudier en Chine",
-    generateHtml: (contact) =>
-      generateFormulesPresentationTemplate(contact.prenom || ""),
+    generateHtml: (contact) => generateFormulesEmailHtml(contact),
     action: "email_formules",
     description: "Email formules d'accompagnement envoyé",
     status: "formules_présentées",
@@ -319,7 +221,7 @@ async function sendTemplatedEmail(
     console.log(`📤 Envoi via Resend...`);
     const html =
       useEditedCopy || templateKey === "custom"
-        ? generateCustomEmailHtml(contact, extras)
+        ? renderEditableEmailHtml(contact, extras)
         : template.generateHtml(contact, extras);
     const payload: {
       from: string;

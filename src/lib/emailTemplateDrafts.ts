@@ -1,4 +1,9 @@
-import { generateCustomEmailHtml, SITE_URL } from "./emailLayout";
+import {
+  escapeHtml,
+  generateCustomEmailHtml,
+  SITE_URL,
+  wrapEmailHtml,
+} from "./emailLayout";
 import {
   displayFormulePrice,
   getFormuleIncludeGroups,
@@ -118,6 +123,83 @@ export function getEmailTemplateDraft(key: string): EmailTemplateDraft | null {
     subtitle: draft.subtitle,
     body: draft.body(),
   };
+}
+
+function formuleDetailHtml(formule: ReturnType<typeof localizeFormules>[number]) {
+  const groups = getFormuleIncludeGroups(formule);
+  return groups
+    .map((group) => {
+      const heading =
+        groups.length > 1
+          ? `<p style="margin:12px 0 6px;font-size:13px;font-weight:700;color:#1d3557;">${escapeHtml(group.title)}</p>`
+          : "";
+      const items = group.items
+        .map(
+          (item) =>
+            `<li style="margin:0 0 6px;font-size:13.5px;line-height:1.5;color:#3d4d5c;">${escapeHtml(item)}</li>`,
+        )
+        .join("");
+      return `${heading}<ul style="margin:0;padding-left:18px;">${items}</ul>`;
+    })
+    .join("");
+}
+
+export function generateFormulesEmailHtml(
+  contact: { prenom?: string | null } | null | undefined,
+) {
+  const formules = localizeFormules();
+  const details = formules
+    .map((formule) => {
+      const border = formule.featured ? "#e63946" : "#1d3557";
+      const bg = formule.featured ? "#fff8f8" : "#ffffff";
+      const badge = formule.featured
+        ? `<p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#e63946;">Recommandée</p>`
+        : "";
+      return `<tr><td style="background:${bg};border:1px solid #e6e9ee;border-left:4px solid ${border};padding:16px 18px;">
+        ${badge}
+        <p style="margin:0 0 8px;font-size:17px;font-weight:700;text-decoration:underline;color:#1d3557;">${formule.number} — ${escapeHtml(formule.title)}</p>
+        <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#243447;">${escapeHtml(displayFormulePrice(formule))}</p>
+        ${formule.subtitle ? `<p style="margin:0 0 10px;font-size:14px;color:#3d4d5c;">${escapeHtml(formule.subtitle)}</p>` : ""}
+        ${formuleDetailHtml(formule)}
+      </td></tr>`;
+    })
+    .join("");
+
+  return wrapEmailHtml({
+    title: "Nos formules d'accompagnement",
+    subtitle: "Pour étudier en Chine",
+    prenom: contact?.prenom || "",
+    bodyHtml: `
+      <div class="section">
+        <p>Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.</p>
+        <p>Ces formules nous aident à comprendre votre besoin. Votre choix n'est pas un engagement, et aucun paiement n'est demandé à cette étape.</p>
+      </div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 14px;">
+        ${details}
+      </table>
+      <div class="section">
+        <p>Le détail de chaque formule est sur notre site : <a class="body-link" href="${TARIFS_URL}">${TARIFS_URL}</a></p>
+        <p><strong>Répondez à cet e-mail avec le numéro de la formule.</strong> Nous reviendrons ensuite vers vous pour un appel.</p>
+      </div>
+      <div class="note">
+        <p>Nous ne pouvons pas garantir une admission, une bourse, un visa ou un logement. Les décisions finales appartiennent aux établissements et aux autorités concernées.</p>
+      </div>
+    `,
+  });
+}
+
+export function renderEditableEmailHtml(
+  contact: { prenom?: string | null } | null | undefined,
+  extras: {
+    customSubject?: string;
+    customTitle?: string;
+    customSubtitle?: string;
+    customMessage?: string;
+  },
+) {
+  const draft = getEmailTemplateDraft("formules_presentation");
+  if (draft && draftsMatch(draft, extras)) return generateFormulesEmailHtml(contact);
+  return generateCustomEmailHtml(contact, extras);
 }
 
 export function generateDraftEmailHtml(

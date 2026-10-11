@@ -3,12 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
-import { generateCustomEmailHtml } from "../lib/emailLayout";
 import { CONTACT_FROM_EMAIL, CONTACT_FROM_NAME } from "../lib/emailConfig";
 import { errorMessage } from "../lib/request";
 import {
   CARD_EMAIL_TEMPLATE_KEYS,
   getEmailTemplateDraft,
+  renderEditableEmailHtml,
 } from "../lib/emailTemplateDrafts";
 
 type EmailContact = {
@@ -84,7 +84,7 @@ export default function AdminContactEmail({
 
   const previewHtml = useMemo(
     () =>
-      generateCustomEmailHtml(contact, {
+      renderEditableEmailHtml(contact, {
         customSubject: subject,
         customTitle: title,
         customSubtitle: subtitle,
