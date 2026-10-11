@@ -55,8 +55,7 @@ function EcolesDeLangueChinePage() {
         data={[
           breadcrumbJsonLd(breadcrumbs),
           articleJsonLd({
-            title:
-              "Écoles de langue en Chine : commencer par le chinois avant l'université",
+            title: "Écoles de langue en Chine",
             description:
               "Pourquoi faire une année de chinois en Chine avant l'université, surtout sans IELTS, TOEFL ou HSK.",
             path: "/ecoles-de-langue-chine",

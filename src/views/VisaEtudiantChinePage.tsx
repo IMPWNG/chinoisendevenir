@@ -39,7 +39,7 @@ function VisaEtudiantChinePage() {
         data={[
           breadcrumbJsonLd(breadcrumbs),
           articleJsonLd({
-            title: "Visa étudiant pour étudier en Chine (X1, X2, JW201, JW202)",
+            title: "Visa étudiant Chine : X1, X2, JW201",
             description:
               "Comment obtenir un visa étudiant pour venir faire ses études en Chine.",
             path: "/visa-etudiant-chine",

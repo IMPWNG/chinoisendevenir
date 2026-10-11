@@ -264,11 +264,12 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     "slug": "etudier-gratuitement-en-chine",
-    "title": "Étudier gratuitement en Chine, est-ce vraiment possible ?",
-    "description": "Peut-on vraiment étudier gratuitement en Chine ? Découvrez la réalité des bourses complètes, ce qu'elles couvrent et les alternatives pour financer vos études.",
+    "title": "Étudier en Chine gratuitement : bourses",
+    "description": "Bourse pour étudier en Chine gratuitement : ce qu'une bourse CSC couvre, ce qui reste à payer, sans promesse d'obtention.",
     "publishedAt": "2026-09-17",
     "keywords": [
-      "étudier en Chine",
+      "étudier en Chine gratuitement",
+      "bourse d'etude en chine gratuit",
       "bourses complètes",
       "financement études Chine"
     ],
@@ -364,12 +365,12 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     "internalLinks": [
       {
-        "href": "/etudier-en-chine",
-        "label": "Étudier en Chine : les bases"
+        "href": "/bourses",
+        "label": "Bourses pour étudier en Chine"
       },
       {
-        "href": "/bourses",
-        "label": "Toutes les bourses pour la Chine"
+        "href": "/etudier-en-chine",
+        "label": "Comment étudier en Chine"
       },
       {
         "href": "/cout-vie-etudiante-chine",
@@ -1199,7 +1200,7 @@ export const BLOG_POSTS: BlogPost[] = [
     "internalLinks": [
       {
         "href": "/etudier-en-chine",
-        "label": "Étudier en Chine : le guide complet"
+        "label": "Comment étudier en Chine"
       },
       {
         "href": "/processus",

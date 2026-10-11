@@ -2,7 +2,7 @@ import VisaEtudiantChinePage from "@/views/VisaEtudiantChinePage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Visa X1 / X2 Chine : JW201, JW202 et délais",
+  title: "Visa étudiant Chine : X1, X2, JW201",
   description:
     "Visa étudiant Chine (X1 ou X2) : formulaire JW201 ou JW202, pièces du dossier, délais consulaires et permis de séjour après l'arrivée. Guide francophone, sans promesse d'obtention.",
   path: "/visa-etudiant-chine",

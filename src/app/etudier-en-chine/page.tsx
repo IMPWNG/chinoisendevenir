@@ -2,7 +2,7 @@ import EtudierEnChinePage from "@/views/EtudierEnChinePage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Étudier en Chine : guide admission, bourse et visa",
+  title: "Comment étudier en Chine",
   description:
     "Comment venir étudier en Chine depuis la France ou l'Afrique francophone : admission, HSK ou année de chinois, bourses CSC, calendrier et visa étudiant. Sans promesse d'admission.",
   path: "/etudier-en-chine",

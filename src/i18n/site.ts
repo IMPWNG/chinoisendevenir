@@ -171,7 +171,7 @@ const fr = {
     howTitle: "Comment venir faire ses études en Chine",
     howSubtitle:
       "Le parcours type dure souvent 4 à 6 mois : orientation, admission, bourse éventuelle, visa, puis départ.",
-    howLink: "Lire le guide complet",
+    howLink: "Comment étudier en Chine",
     how: [
       {
         title: "Clarifier le projet",
@@ -277,7 +277,7 @@ const fr = {
   },
   etudier: {
     crumb: "Étudier en Chine",
-    title: "Étudier en Chine : le guide pour venir faire ses études",
+    title: "Comment étudier en Chine",
     subtitle:
       "Venir étudier en Chine est possible en licence, master, doctorat ou année de langue. Le projet tient en cinq points : une formation adaptée, une université qui recrute des internationaux, un dossier d'admission complet, un financement (bourse ou frais payants), puis un visa étudiant.",
     disclaimer:
@@ -343,8 +343,7 @@ const fr = {
   langue: {
     crumb: "Écoles de langue en Chine",
     updated: "Mis à jour : septembre 2026",
-    title:
-      "Écoles de langue en Chine : commencer par le chinois avant l'université",
+    title: "Écoles de langue en Chine",
     lead: "Une école de langue en Chine est un programme de chinois pour étudiants internationaux, le plus souvent hébergé par une université. Vous partez sans IELTS, sans TOEFL et souvent sans HSK, vous apprenez en immersion, puis vous visez une licence ou un master enseigné en chinois. Pour beaucoup de francophones, c'est le chemin le plus réaliste.",
     disclaimer:
       "Chinois en Devenir accompagne le choix d'une école de langue et le visa étudiant, sans garantir une inscription, un HSK ou une admission universitaire ensuite.",
@@ -596,7 +595,7 @@ const fr = {
   },
   visa: {
     crumb: "Visa étudiant Chine",
-    title: "Visa X1 ou X2 pour étudier en Chine",
+    title: "Visa étudiant Chine : X1, X2, JW201",
     lead: "Pour venir faire ses études en Chine, l'admission ne suffit pas : il faut ensuite un visa étudiant. Les types les plus courants sont le X1 (séjour long) et le X2 (séjour plus court). Le dossier consulaire s'appuie sur la lettre d'admission et le formulaire JW201 ou JW202 délivré après acceptation par l'université. Chinois en Devenir vous guide sur ces démarches ; la décision appartient au consulat.",
     hX: "Visa X1 ou visa X2",
     pX: "Le visa X1 concerne en principe un séjour d'études de plus de 180 jours, typiquement une licence, un master, un doctorat ou une année de langue. Le visa X2 concerne un séjour plus court, souvent moins de 180 jours : semestre, formation brève, ou certains programmes d'été. Le type exact dépend de la durée indiquée par l'université, pas seulement du diplôme visé.",
@@ -616,8 +615,8 @@ const fr = {
     pStay:
       "Avec un visa X1, l'étudiant doit en général se présenter à l'université puis à la police locale pour un permis de séjour, dans le délai indiqué (souvent autour de 30 jours). Ce permis, et non le visa d'entrée, autorise le séjour d'études. Un X2 peut avoir des règles différentes. L'université internationale office guide généralement ces premières démarches.",
     hWhen: "Quand commencer",
-    pWhenBefore: "Le visa vient en fin de parcours : d'abord",
-    pWhenLink1: "le projet d'études en Chine",
+    pWhenBefore: "Le visa vient en fin de parcours. Voir d'abord",
+    pWhenLink1: "comment étudier en Chine",
     pWhenMid:
       ", puis le dossier, l'admission, ensuite seulement JW201/JW202 et le rendez-vous consulaire. Réserver un vol non flexible trop tôt est risqué. Notre",
     pWhenLink2: "processus d'admission",
@@ -1856,7 +1855,7 @@ const en = {
     howTitle: "How to come and study in China",
     howSubtitle:
       "A typical path lasts 4 to 6 months: orientation, admission, a possible scholarship, visa, then departure.",
-    howLink: "Read the full guide",
+    howLink: "How to study in China",
     how: [
       {
         title: "Clarify the project",
@@ -1962,7 +1961,7 @@ const en = {
   },
   etudier: {
     crumb: "Study in China",
-    title: "Study in China: the guide to coming for your studies",
+    title: "How to study in China",
     subtitle:
       "You can study in China for a bachelor's, master's, PhD, or language year. The project comes down to five points: a suitable program, a university that recruits internationals, a complete admission file, funding (scholarship or tuition), then a student visa.",
     disclaimer:
@@ -2028,8 +2027,7 @@ const en = {
   langue: {
     crumb: "Language schools in China",
     updated: "Last updated: September 2026",
-    title:
-      "Language schools in China: start with Chinese before university",
+    title: "Language schools in China",
     lead: "A language school in China is a Chinese program for international students, most often hosted by a university. You leave without IELTS, TOEFL, and often without HSK, you learn through immersion, then you aim for a Chinese-taught bachelor's or master's. For many French speakers, that is the most realistic path.",
     disclaimer:
       "Chinois en Devenir helps you choose a language program and prepare the student visa, without guaranteeing enrollment, an HSK result, or later university admission.",
@@ -2277,7 +2275,7 @@ const en = {
   },
   visa: {
     crumb: "China student visa",
-    title: "X1 or X2 visa to study in China",
+    title: "China student visa: X1, X2, JW201",
     lead: "Admission is not enough to come and study in China: you then need a student visa. The most common types are X1 (long stay) and X2 (shorter stay). The consular file relies on the admission letter and the JW201 or JW202 form issued after the university accepts you. Chinois en Devenir guides you through these steps; the decision belongs to the consulate.",
     hX: "X1 visa or X2 visa",
     pX: "The X1 visa is generally for a study stay of more than 180 days — typically a bachelor's, master's, PhD, or language year. The X2 visa is for a shorter stay, often under 180 days: a semester, a short program, or some summer programs. The exact type depends on the duration stated by the university, not only on the degree you aim for.",
@@ -2297,8 +2295,8 @@ const en = {
     pStay:
       "With an X1 visa, students generally must go to the university and then to the local police for a residence permit, within the stated deadline (often around 30 days). That permit, not the entry visa, authorizes the study stay. An X2 may follow different rules. The university international office usually guides these first steps.",
     hWhen: "When to start",
-    pWhenBefore: "The visa comes at the end of the path: first",
-    pWhenLink1: "the China study project",
+    pWhenBefore: "The visa comes at the end of the path. See first",
+    pWhenLink1: "how to study in China",
     pWhenMid:
       ", then the file, admission, and only then JW201/JW202 and the consular appointment. Booking a non-flexible flight too early is risky. Our",
     pWhenLink2: "admission process",

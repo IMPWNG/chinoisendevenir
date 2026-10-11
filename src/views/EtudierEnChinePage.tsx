@@ -28,7 +28,7 @@ function EtudierEnChinePage() {
         data={[
           breadcrumbJsonLd(breadcrumbs),
           articleJsonLd({
-            title: "Étudier en Chine : le guide pour les étudiants francophones",
+            title: "Comment étudier en Chine",
             description:
               "Comment étudier en Chine : admission, langue, bourses, calendrier, budget et visa étudiant.",
             path: "/etudier-en-chine",
