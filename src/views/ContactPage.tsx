@@ -29,17 +29,20 @@ function ContactPage() {
           <h1 className="landing-section-title">{t("contact.title")}</h1>
           <p className="landing-section-subtitle mb-8">{t("contact.subtitle")}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="landing-program-card shadow-lg">
               <div className="landing-program-icon text-5xl mb-4">📍</div>
               <h2 className="font-bold text-lg text-gray-800 mb-2">
                 {t("contact.presence")}
               </h2>
-              {["Chongqing", "Chengdu", "Shanghai", "Beijing"].map((city) => (
-                <p key={city} className="text-gray-600 text-sm">
-                  {city}
-                </p>
-              ))}
+              <p className="text-gray-800 text-sm font-medium">
+                重庆迈程桥国际贸易有限公司
+              </p>
+              <p className="text-gray-600 text-sm mt-2">
+                重庆市渝中区石油路街道
+                <br />
+                经纬大道789号10-5#0534
+              </p>
             </div>
 
             <div className="landing-program-card shadow-lg">
@@ -54,11 +57,16 @@ function ContactPage() {
                 {SITE.email}
               </a>
               <p className="text-gray-600 text-sm">{t("contact.hours")}</p>
+            </div>
+
+            <div className="landing-program-card shadow-lg">
+              <div className="landing-program-icon text-5xl mb-4">💬</div>
+              <h2 className="font-bold text-lg text-gray-800 mb-2">WhatsApp</h2>
               <a
                 href={whatsappHref}
-                className="text-gray-600 text-sm mt-3 inline-block hover:underline"
+                className="text-gray-600 text-sm hover:underline"
               >
-                WhatsApp {SITE.whatsapp}
+                {SITE.whatsapp}
               </a>
             </div>
           </div>
