@@ -1028,7 +1028,7 @@ const fr = {
     title: "Contact pour étudier en Chine",
     subtitle:
       "Une question sur l'admission, une bourse ou le visa étudiant ? Écrivez-nous : nous vous aidons à y voir clair sur votre projet d'études en Chine.",
-    presence: "Présence en Chine",
+    presence: "Adresse",
     phone: "Téléphone",
     hours: "Lun-Ven : 9h-18h",
     email: "Email",
@@ -2695,7 +2695,7 @@ const en = {
     title: "Contact us about studying in China",
     subtitle:
       "A question about admission, a scholarship, or the student visa? Write to us: we will help you see your China study project clearly.",
-    presence: "Presence in China",
+    presence: "Address",
     phone: "Phone",
     hours: "Mon–Fri: 9am–6pm",
     email: "Email",
