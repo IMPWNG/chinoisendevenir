@@ -30,11 +30,12 @@ function ContactPage() {
           <p className="landing-section-subtitle mb-8">{t("contact.subtitle")}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="landing-program-card is-left shadow-lg">
-              <h2 className="font-bold text-lg text-gray-800 mb-4">
+            <div className="landing-program-card shadow-lg">
+              <div className="landing-program-icon text-5xl mb-4">📍</div>
+              <h2 className="font-bold text-lg text-gray-800 mb-2">
                 {t("contact.presence")}
               </h2>
-              <address className="not-italic text-sm leading-7 text-gray-700">
+              <address className="not-italic text-sm leading-6 text-gray-600">
                 <span className="block font-medium text-gray-800">
                   重庆迈程桥国际贸易有限公司
                 </span>
