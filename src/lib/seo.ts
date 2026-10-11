@@ -1,4 +1,5 @@
 import { withCfaInText } from "./money";
+import { studySitemapRoutes } from "./studyFromCountries";
 
 export const SITE = {
   name: "Chinois en Devenir",
@@ -513,4 +514,5 @@ export const SITEMAP_ROUTES = [
     changeFrequency: "yearly" as const,
     priority: 0.2,
   },
+  ...studySitemapRoutes(),
 ];

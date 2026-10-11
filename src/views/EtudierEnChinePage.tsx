@@ -95,6 +95,11 @@ function EtudierEnChinePage() {
             ))}
           </div>
 
+          <p className="mt-12 text-center">
+            <Link href="/etudier-en-chine-depuis" className="seo-inline-link">
+              {t("etudier.fromCountry")}
+            </Link>
+          </p>
           <PageCta
             title={t("etudier.ctaTitle")}
             subtitle={t("etudier.ctaSubtitle")}

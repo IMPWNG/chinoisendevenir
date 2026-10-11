@@ -47,6 +47,7 @@ const fr = {
     rights: "Tous droits réservés",
     colStudy: "Étudier en Chine",
     guide: "Guide : étudier en Chine",
+    fromCountry: "Étudier en Chine selon le pays",
     languageSchools: "Écoles de langue",
     studentVisa: "Visa étudiant",
     scholarships: "Bourses d'études",
@@ -336,6 +337,7 @@ const fr = {
     ctaSubtitle:
       "Décrivez votre parcours et votre projet : nous vous indiquons les options d'études en Chine les plus réalistes pour votre profil.",
     cta: "Évaluer mon projet d'études en Chine",
+    fromCountry: "Préparer le projet depuis un pays précis",
     faqTitle: "Questions fréquentes pour étudier en Chine",
   },
   langue: {
@@ -1730,6 +1732,7 @@ const en = {
     rights: "All rights reserved",
     colStudy: "Study in China",
     guide: "Guide: studying in China",
+    fromCountry: "Study in China by country",
     languageSchools: "Language schools",
     studentVisa: "Student visa",
     scholarships: "Scholarships",
@@ -2019,6 +2022,7 @@ const en = {
     ctaSubtitle:
       "Describe your background and your project: we will outline the most realistic study-in-China options for your profile.",
     cta: "Assess my China study project",
+    fromCountry: "Prepare the project from a specific country",
     faqTitle: "Frequently asked questions about studying in China",
   },
   langue: {

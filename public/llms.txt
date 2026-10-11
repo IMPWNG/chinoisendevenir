@@ -21,6 +21,7 @@ Also: https://chinoisendevenir.com/.well-known/llms.txt
 
 - [Accueil — Étudier en Chine](https://chinoisendevenir.com/): accompagnement pour venir faire ses études en Chine
 - [Guide : étudier en Chine](https://chinoisendevenir.com/etudier-en-chine): admission, langue, calendrier, budget, bourses
+- [Étudier en Chine selon le pays](https://chinoisendevenir.com/etudier-en-chine-depuis): candidature depuis 15 pays francophones
 - [Écoles de langue en Chine](https://chinoisendevenir.com/ecoles-de-langue-chine): année de chinois avant l'université, surtout sans IELTS, TOEFL ou HSK
 - [Visa étudiant Chine](https://chinoisendevenir.com/visa-etudiant-chine): visa X1, visa X2, JW201/JW202, permis de séjour
 - [Bourses d'études en Chine](https://chinoisendevenir.com/bourses): CSC, bourses universitaires, provinciales et municipales

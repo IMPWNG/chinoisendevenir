@@ -22,6 +22,7 @@ const Footer = () => {
           <div className="landing-footer-col">
             <p className="landing-footer-heading">{t("footer.colStudy")}</p>
             <Link href="/etudier-en-chine">{t("footer.guide")}</Link>
+            <Link href="/etudier-en-chine-depuis">{t("footer.fromCountry")}</Link>
             <Link href="/ecoles-de-langue-chine">{t("footer.languageSchools")}</Link>
             <Link href="/visa-etudiant-chine">{t("footer.studentVisa")}</Link>
             <Link href="/bourses">{t("footer.scholarships")}</Link>
