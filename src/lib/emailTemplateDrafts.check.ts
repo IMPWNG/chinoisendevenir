@@ -27,6 +27,18 @@ const formules = getEmailTemplateDraft("formules_presentation");
 assert(formules, "draft formules");
 assert(formules.body.includes(formuleChoiceLines()), "formules : 3 tarifs");
 assert(formules.body.includes("aucun paiement"), "formules : pas de paiement");
+assert(
+  formules.body.includes("https://chinoisendevenir.com/tarifs"),
+  "formules : lien tarifs",
+);
+assert(
+  formules.body.includes("Recherche personnalisée d'écoles de langue en Chine"),
+  "formules : détail formule 1",
+);
+assert(
+  formules.body.includes("Dépôt de jusqu'à 5 candidatures universitaires"),
+  "formules : détail formule 2",
+);
 
 const espace = getEmailTemplateDraft("espace_etudiant");
 assert(espace, "draft espace");
@@ -35,6 +47,12 @@ assert(espace.body.includes("espace-etudiant/guide"), "espace : guide");
 assert(
   !espace.body.includes("ni l'ouverture d'un compte WeChat"),
   "disclaimer without WeChat/Alipay/bank account",
+);
+
+const formulesHtml = generateDraftEmailHtml({ prenom: "Awa" }, formules);
+assert(
+  formulesHtml.includes('href="https://chinoisendevenir.com/tarifs"'),
+  "formules : lien cliquable",
 );
 
 const html = generateDraftEmailHtml({ prenom: "Awa" }, bienvenue);

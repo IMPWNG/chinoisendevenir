@@ -1,5 +1,11 @@
 import { generateCustomEmailHtml, SITE_URL } from "./emailLayout";
-import { displayFormulePrice, localizeFormules } from "./formules";
+import {
+  displayFormulePrice,
+  getFormuleIncludeGroups,
+  localizeFormules,
+} from "./formules";
+
+const TARIFS_URL = `${SITE_URL}tarifs`;
 
 export type EmailTemplateDraft = {
   subject: string;
@@ -18,11 +24,19 @@ export type CardEmailTemplateKey = (typeof CARD_EMAIL_TEMPLATE_KEYS)[number];
 
 export function formuleChoiceLines() {
   return localizeFormules()
-    .map(
-      (formule) =>
+    .map((formule) => {
+      const lines = [
         `${formule.number} — ${formule.title} : ${displayFormulePrice(formule)}`,
-    )
-    .join("\n");
+      ];
+      if (formule.subtitle) lines.push(formule.subtitle);
+      const groups = getFormuleIncludeGroups(formule);
+      for (const group of groups) {
+        if (groups.length > 1 && group.title) lines.push(group.title);
+        for (const item of group.items) lines.push(`— ${item}`);
+      }
+      return lines.join("\n");
+    })
+    .join("\n\n");
 }
 
 function bienvenueBody() {
@@ -38,6 +52,7 @@ function formulesBody() {
     "Merci pour l'intérêt que vous portez à Chinois en Devenir et pour votre projet d'études en Chine.",
     "Ces formules nous aident à comprendre votre besoin. Votre choix n'est pas un engagement, et aucun paiement n'est demandé à cette étape.",
     formuleChoiceLines(),
+    `Le détail de chaque formule est sur notre site : ${TARIFS_URL}`,
     "Répondez à cet e-mail avec le numéro de la formule. Nous reviendrons ensuite vers vous pour un appel.",
     "Nous ne pouvons pas garantir une admission, une bourse, un visa ou un logement. Les décisions finales appartiennent aux établissements et aux autorités concernées.",
   ].join("\n\n");
