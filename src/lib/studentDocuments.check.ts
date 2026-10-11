@@ -6,6 +6,7 @@ import {
   parseRequestedDocumentKeys,
   STARTER_DOSSIER_DOCUMENT_KEYS,
   STUDENT_DOCUMENT_CATALOG,
+  requestedKeysOrStarter,
   withStarterDocuments,
 } from "./studentProgress";
 
@@ -29,5 +30,8 @@ const starter = withStarterDocuments(["hsk"]);
 assert(starter.includes("hsk") && starter.includes("passeport") && starter.includes("financial_proof"), "starter docs added");
 assert(starter.filter((key) => key === "passeport").length === 1, "starter does not duplicate");
 assert(STARTER_DOSSIER_DOCUMENT_KEYS.length === 6, "six starter documents");
+const ready = requestedKeysOrStarter([]);
+assert(ready.length === 6 && ready[0] === "passeport" && ready.includes("financial_proof"), "empty file asks for the starter six");
+assert(requestedKeysOrStarter(["hsk"]).join() === "hsk", "a chosen list is kept");
 
 console.log("requested documents ok");

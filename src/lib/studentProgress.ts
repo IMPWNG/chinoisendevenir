@@ -504,6 +504,12 @@ export function withStarterDocuments(existing: readonly string[]): string[] {
   return parseRequestedDocumentKeys([...existing, ...STARTER_DOSSIER_DOCUMENT_KEYS]);
 }
 
+/** Empty means the admin has not chosen yet: the six starter documents are already requested. */
+export function requestedKeysOrStarter(value: unknown): string[] {
+  const parsed = parseRequestedDocumentKeys(value);
+  return parsed.length ? parsed : [...STARTER_DOSSIER_DOCUMENT_KEYS];
+}
+
 export function getSchoolDocumentsIntro(dernierDiplome: unknown) {
   const level = diplomaLevelFromStudent(dernierDiplome);
   if (level === "bac") {

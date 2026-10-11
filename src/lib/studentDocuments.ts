@@ -9,6 +9,7 @@ import {
   isMissingDocumentsDemandesColumn,
   legacyDiplomaDocKey,
   parseRequestedDocumentKeys,
+  requestedKeysOrStarter,
   type ContactRow,
 } from "./studentProgress";
 import type { AdminClient } from "./supabaseAdmin";
@@ -57,20 +58,36 @@ export async function loadRequestedDocumentKeys(
   contactId: unknown,
   contact: ContactRow | null = null,
 ) {
+  let raw: unknown = null;
+  let fromContact = false;
   if (contact && Object.prototype.hasOwnProperty.call(contact, "documents_demandes")) {
-    return parseRequestedDocumentKeys(contact.documents_demandes);
+    raw = contact.documents_demandes;
+    fromContact = true;
   }
+  if (!fromContact) {
+    if (!contactId) return [];
+    const { data, error } = await admin
+      .from("contacts")
+      .select("documents_demandes")
+      .eq("id", contactId)
+      .maybeSingle();
+    if (error) {
+      if (isMissingDocumentsDemandesColumn(error.message)) return [];
+      throw new Error(error.message || "Impossible de lire les documents demandés");
+    }
+    raw = data?.documents_demandes;
+  }
+  const parsed = parseRequestedDocumentKeys(raw);
+  if (parsed.length) return parsed;
   if (!contactId) return [];
-  const { data, error } = await admin
-    .from("contacts")
-    .select("documents_demandes")
-    .eq("id", contactId)
-    .maybeSingle();
-  if (error) {
-    if (isMissingDocumentsDemandesColumn(error.message)) return [];
-    throw new Error(error.message || "Impossible de lire les documents demandés");
+  // ponytail: an empty list is "not chosen yet", so the starter six are saved on first read.
+  // Unchecking every box comes back to these six. A partial list is left as the admin saved it.
+  try {
+    return await saveRequestedDocumentKeys(admin, contactId, requestedKeysOrStarter(raw));
+  } catch (error) {
+    if (error instanceof Error && error.message === "MISSING_DOCUMENTS_COLUMN") return [];
+    throw error;
   }
-  return parseRequestedDocumentKeys(data?.documents_demandes);
 }
 
 export async function saveRequestedDocumentKeys(
