@@ -44,6 +44,8 @@ export type StudyCountry = {
   steps: string[];
   angleTitle: string;
   angle: string;
+  /** Algeria control grid. Empty cells stay "à confirmer" — no invented formality. */
+  angleTable?: { headers: string[]; rows: string[][] };
   faqs: { question: string; answer: string }[];
   cta: string;
   extras: LinkKey[];
@@ -69,7 +71,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Ce qu'un candidat au Sénégal clarifie avant le dépôt",
     angle:
-      "Équivalence du parcours, format des relevés, langue des pièces, interlocuteur officiel à contacter : ces points se confirment au cas par cas. Il n'existe pas une procédure unique pour tous les candidats sénégalais.",
+      "Avant de déposer le dossier, un candidat sénégalais clarifie souvent l'équivalence de son parcours, le format de ses relevés, la langue de ses pièces et l'interlocuteur officiel à contacter. Ces points doivent être confirmés au cas par cas, sans supposer une procédure unique pour tous les candidats.",
     faqs: [
       {
         question: "Quel niveau faut-il pour partir ?",
@@ -105,11 +107,11 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
       "Vérifier sur chaque portail officiel les conditions pour les candidats internationaux, la langue d'enseignement, les tests éventuels et le calendrier.",
       "Rassembler passeport, diplômes, relevés, CV, lettre de motivation, recommandations et justificatifs demandés par le programme.",
       "Confirmer les règles de traduction, certification, légalisation, format des photos et validité des documents.",
-      "Une fois la réponse universitaire reçue, vérifier les démarches de séjour et de visa auprès des sources officielles.",
+      "Une fois la réponse universitaire reçue, vérifier les démarches de séjour et de visa auprès des sources officielles, sans reproduire une règle non confirmée.",
     ],
     angleTitle: "Lisibilité des documents scolaires depuis le Burundi",
     angle:
-      "L'acceptation d'un relevé, d'un diplôme ou d'une traduction dépend du document et de l'établissement. La réponse se demande aux services concernés, pas à un modèle générique.",
+      "Vérifiez la lisibilité et l'acceptation de vos documents scolaires, ainsi que les traductions nécessaires. La réponse dépend du document et de l'établissement : elle doit être obtenue directement auprès des services concernés.",
     faqs: [
       {
         question: "Puis-je candidater à plusieurs universités ?",
@@ -149,7 +151,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Préparer ses questions depuis Haïti",
     angle:
-      "Comment présenter un parcours scolaire ou universitaire, quelle version des documents transmettre, quel service officiel valide chaque étape : ne déduisez pas une équivalence ou une formalité sans confirmation écrite.",
+      "Comment présenter un parcours scolaire ou universitaire, quelle version des documents transmettre, et quel service officiel validera chaque étape : ces trois questions se posent avant le dépôt. Ne déduisez pas une équivalence ou une formalité sans confirmation écrite.",
     faqs: [
       {
         question: "Quel diplôme haïtien est accepté ?",
@@ -189,7 +191,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Relier le parcours suivi au Mali à la formation visée",
     angle:
-      "Décrivez clairement le lien entre les études déjà suivies et la formation demandée en Chine. Cette présentation reste fidèle aux documents et aux critères du programme. Elle n'annonce pas une équivalence garantie.",
+      "Décrivez clairement le lien entre le parcours suivi au Mali et la formation demandée en Chine. Cette présentation doit rester fidèle aux documents et être adaptée aux critères du programme, sans annoncer une équivalence garantie.",
     faqs: [
       {
         question: "Un diplôme malien suffit-il pour candidater ?",
@@ -225,9 +227,9 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
       "Faire confirmer les modalités propres aux documents délivrés en RDC : traduction, certification, légalisation ou authentification, selon la demande officielle.",
       "Vérifier ensuite les documents et délais liés au séjour auprès de l'établissement et des autorités compétentes.",
     ],
-    angleTitle: "Présenter diplômes et relevés obtenus en RDC",
+    angleTitle: "Établissements, diplômes et relevés du parcours en RDC",
     angle:
-      "Établissements fréquentés, intitulés de diplômes, relevés : toute question d'équivalence ou d'authentification se soumet au service qui a compétence pour y répondre. La République démocratique du Congo et la République du Congo ne se traitent pas comme un seul pays.",
+      "Présentez clairement les établissements fréquentés, les intitulés de diplômes et les relevés issus du parcours en RDC. Toute question d'équivalence ou d'authentification doit être soumise au service qui a compétence pour y répondre.",
     faqs: [
       {
         question: "Comment savoir si mon diplôme est recevable ?",
@@ -265,7 +267,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Classer les pièces par niveau et par université",
     angle:
-      "Une checklist de travail permet de ranger les documents par niveau d'études et par établissement. Les pièces réellement exigées se reprennent de la source officielle, pas d'un modèle générique valable pour toute la Guinée.",
+      "Classez vos documents par niveau d'études et par université. Les pièces réellement exigées doivent être reprises de la source officielle, pas d'un modèle générique.",
     faqs: [
       {
         question: "Existe-t-il une procédure unique pour la Guinée ?",
@@ -302,7 +304,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Cohérence du projet, sans en faire un critère suffisant",
     angle:
-      "Le lien entre le projet professionnel au Burkina Faso et la formation sollicitée aide à rédiger le dossier. Cette cohérence ne suffit pas à elle seule et ne garantit pas l'issue de la candidature.",
+      "Reliez le projet professionnel au Burkina Faso et la formation sollicitée, sans présenter cette cohérence comme un critère suffisant ni garantir l'issue de la candidature.",
     faqs: [
       {
         question: "Puis-je candidater sans avoir choisi ma spécialité ?",
@@ -339,7 +341,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Un ordre de lecture, pas une procédure nationale",
     angle:
-      "Mon niveau, mes documents, la langue du programme, puis les formalités à confirmer : cet ordre aide à lire une candidature camerounaise. Il ne décrit pas une procédure unique pour tout le Cameroun.",
+      "Pour un candidat camerounais, l'ordre de lecture utile est : « mon niveau », « mes documents », « la langue du programme », puis « les formalités à confirmer ». Cette aide ne se transforme pas en affirmation sur une procédure nationale unique.",
     faqs: [
       {
         question: "Les conditions sont-elles identiques pour toutes les universités ?",
@@ -374,9 +376,9 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
       "Confirmer la forme des documents : traduction, certification, légalisation, authentification et transmission numérique.",
       "Suivre les instructions officielles pour l'inscription, le séjour et le visa après décision de l'université.",
     ],
-    angleTitle: "Organiser le dossier depuis le Togo",
+    angleTitle: "Dossier depuis le Togo",
     angle:
-      "Nommer les fichiers, conserver les versions originales et demander les confirmations par écrit. Ces conseils d'organisation n'impliquent aucune règle administrative commune à tous les candidats togolais.",
+      "Nommez les fichiers, conservez les versions originales et demandez les confirmations par écrit. Ces conseils n'impliquent aucune règle administrative propre à tous les candidats togolais.",
     faqs: [
       {
         question: "Quelle université choisir ?",
@@ -402,7 +404,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     title: "Étudier en Chine depuis le Bénin : dossier et admission",
     h1: "Étudier en Chine depuis le Bénin",
     description:
-      "Préparez vos études en Chine depuis le Bénin : choix du programme, documents et vérifications pour candidater.",
+      "Préparez vos études en Chine depuis le Bénin : choix du programme, documents et vérifications pour candidater sereinement.",
     intro:
       "Un projet d'études en Chine depuis le Bénin demande une recherche ciblée et une vérification des sources. Ces étapes aident à sélectionner un cursus, à préparer des documents cohérents et à contacter les bons interlocuteurs avant le dépôt.",
     steps: [
@@ -414,7 +416,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Rendre le parcours lisible",
     angle:
-      "Chronologie des études, intitulés exacts des diplômes, objectif de formation : le dossier doit être lisible. Toute interprétation de diplôme se fait valider par l'université concernée.",
+      "Transformez le parcours en dossier lisible : chronologie des études, intitulés exacts des diplômes et objectif de formation. Toute interprétation de diplôme doit être validée par l'université concernée.",
     faqs: [
       {
         question: "Les candidatures se font-elles toutes en ligne ?",
@@ -451,7 +453,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Ne pas confondre la République du Congo et la RDC",
     angle:
-      "Les formulaires, les URL et les demandes de pièces doivent porter l'intitulé exact du pays et des documents. La nationalité déclarée et le pays de délivrance des diplômes se vérifient sur les pièces, sans les regrouper avec la République démocratique du Congo.",
+      "Ne confondez pas la République du Congo et la République démocratique du Congo dans les formulaires, les URL, les contenus et les demandes de pièces. Vérifiez l'intitulé exact de vos documents et de votre nationalité déclarée.",
     faqs: [
       {
         question: "La République du Congo et la RDC suivent-elles la même procédure ?",
@@ -527,7 +529,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Intitulés de diplômes, sans équivalence automatique",
     angle:
-      "Comparer un intitulé marocain et un niveau d'entrée chinois aide à préparer les questions. L'université confirme l'admissibilité du parcours et les pièces acceptées. Rien n'est équivalent automatiquement.",
+      "Comparez les intitulés de diplômes et les niveaux d'entrée sans annoncer d'équivalence automatique. L'université doit confirmer l'admissibilité du parcours et les pièces acceptées.",
     faqs: [
       {
         question: "Comment vérifier l'équivalence de mon diplôme ?",
@@ -565,7 +567,18 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Suivre chaque pièce et sa source de confirmation",
     angle:
-      "Document original, traduction, certification demandée, source de confirmation : ce suivi aide à ne pas traiter une formalité comme obligatoire dans tous les cas. La règle se lit sur la checklist du programme.",
+      "Tenez un tableau de contrôle : document original, traduction, certification demandée, source de confirmation. Il aide à suivre les pièces sans affirmer qu'une formalité est obligatoire dans tous les cas.",
+    angleTable: {
+      headers: [
+        "Document original",
+        "Traduction",
+        "Certification demandée",
+        "Source de confirmation",
+      ],
+      rows: [
+        ["Nom de la pièce", "À confirmer", "À confirmer", "Checklist du programme"],
+      ],
+    },
     faqs: [
       {
         question: "Dois-je traduire mes diplômes ?",
@@ -587,7 +600,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
   {
     slug: "la-tunisie",
     name: "Tunisie",
-    title: "Étudier en Chine depuis la Tunisie : guide de candidature",
+    title: "Étudier en Chine depuis la Tunisie : guide complet de candidature",
     h1: "Étudier en Chine depuis la Tunisie",
     description:
       "Étudier en Chine depuis la Tunisie : choisissez un programme, préparez vos documents et vérifiez les formalités officielles.",
@@ -602,7 +615,7 @@ export const STUDY_COUNTRIES: StudyCountry[] = [
     ],
     angleTitle: "Parcours académique, résidence et nationalité",
     angle:
-      "Les documents du parcours tunisien ne se confondent pas avec les pièces liées à la résidence ou à la nationalité. Cette distinction se vérifie avec l'établissement et les autorités concernées, sans extrapolation.",
+      "Distinguez les documents du parcours académique des pièces liées à la résidence et à la nationalité. Cette distinction doit être vérifiée avec l'établissement et les autorités concernées, sans extrapolation.",
     faqs: [
       {
         question: "Quel parcours permet d'intégrer une université chinoise ?",

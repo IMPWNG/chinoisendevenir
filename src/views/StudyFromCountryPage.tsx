@@ -66,7 +66,35 @@ export default function StudyFromCountryPage({ slug }: { slug: string }) {
           </ol>
 
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{country.angleTitle}</h2>
-          <p className="text-gray-700 leading-relaxed mb-12">{country.angle}</p>
+          <p className={`text-gray-700 leading-relaxed ${country.angleTable ? "mb-6" : "mb-12"}`}>
+            {country.angle}
+          </p>
+          {country.angleTable ? (
+            <div className="overflow-x-auto mb-12">
+              <table className="w-full text-sm text-left border border-gray-200">
+                <thead className="bg-gray-50 text-gray-900">
+                  <tr>
+                    {country.angleTable.headers.map((header) => (
+                      <th key={header} className="px-3 py-2 font-semibold border-b border-gray-200">
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {country.angleTable.rows.map((row) => (
+                    <tr key={row.join("|")}>
+                      {row.map((cell, index) => (
+                        <td key={index} className="px-3 py-2 text-gray-700 border-b border-gray-100">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
 
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Sur le site</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
