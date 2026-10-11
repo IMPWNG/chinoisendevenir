@@ -2,6 +2,7 @@ import { withCfaInText } from "./money";
 
 export const SITE = {
   name: "Chinois en Devenir",
+  legalName: "重庆迈程桥国际贸易有限公司",
   url: "https://chinoisendevenir.com",
   locale: "fr_FR",
   language: "fr",

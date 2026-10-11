@@ -25,7 +25,9 @@ function PrivacyPolicyPage() {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 {t("privacy.s1Title")}
               </h2>
-              <p className="text-gray-700 leading-relaxed">{t("privacy.s1")}</p>
+              <p className="text-gray-700 leading-relaxed">
+                {t("privacy.s1", { company: SITE.legalName })}
+              </p>
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-md">
@@ -131,6 +133,9 @@ function PrivacyPolicyPage() {
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">{t("privacy.s8")}</p>
               <div className="bg-slate-50 p-6 rounded-lg space-y-2">
+                <p className="text-gray-900">
+                  <strong>{SITE.legalName}</strong>
+                </p>
                 <p className="text-gray-900">
                   <strong>{t("legal.email")}</strong>{" "}
                   <a

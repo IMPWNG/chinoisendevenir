@@ -1080,7 +1080,7 @@ const fr = {
   privacy: {
     title: "Politique de Confidentialité",
     s1Title: "1. Introduction",
-    s1: 'Chinois en Devenir ("nous", "nos", "notre") exploite le site web chinoisendevenir.com. Cette page vous informe de nos politiques concernant la collecte, l\'utilisation et la divulgation de données personnelles lorsque vous utilisez notre service et les choix que vous avez associés à ces données.',
+    s1: '{company} (« nous », « nos », « notre ») est responsable des données personnelles collectées sur ce site. Cette page vous informe de nos politiques concernant la collecte, l\'utilisation et la divulgation de ces données lorsque vous utilisez notre service, et des choix qui y sont associés.',
     s2Title: "2. Collecte et Utilisation des Données",
     s2Types: "📋 Types de données collectées :",
     s2TypeItems: [
@@ -2750,7 +2750,7 @@ const en = {
   privacy: {
     title: "Privacy Policy",
     s1Title: "1. Introduction",
-    s1: 'Chinois en Devenir ("we", "our") operates the website chinoisendevenir.com. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our service, and the choices you have associated with that data.',
+    s1: '{company} ("we", "our") is responsible for the personal data collected on this site. This page informs you of our policies regarding the collection, use, and disclosure of that data when you use our service, and the choices you have associated with it.',
     s2Title: "2. Data Collection and Use",
     s2Types: "📋 Types of data collected:",
     s2TypeItems: [
