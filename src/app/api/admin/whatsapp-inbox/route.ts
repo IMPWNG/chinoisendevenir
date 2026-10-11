@@ -59,7 +59,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ success: true, report });
   } catch (error) {
     console.error("whatsapp-inbox:", error);
-    return NextResponse.json({ success: true, report: empty });
+    return NextResponse.json({ error: "Lecture impossible" }, { status: 500 });
   }
 }
 

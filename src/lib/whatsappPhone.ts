@@ -1,5 +1,16 @@
 import { countryDialCode } from "./countries";
 
+/** null when the row does not say who sent it. */
+export function whatsappFromMe(row: { fromMe?: unknown; direction?: unknown }): boolean | null {
+  const raw = row.fromMe;
+  if (raw === true || raw === 1 || raw === "true" || raw === "1") return true;
+  if (raw === false || raw === 0 || raw === "false" || raw === "0") return false;
+  const direction = String(row.direction || "").toLowerCase();
+  if (direction === "outgoing" || direction === "out" || direction === "sent") return true;
+  if (direction === "incoming" || direction === "in" || direction === "received") return false;
+  return null;
+}
+
 /** Digits for OpenWA: international MSISDN, no plus, no leading zero. */
 export function whatsappMsisdn(raw: unknown, country?: string | null): string | null {
   const text = String(raw ?? "").trim();

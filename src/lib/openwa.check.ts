@@ -1,7 +1,13 @@
 /**
  * Run: npx tsx src/lib/openwa.check.ts
  */
-import { fillWhatsappText, mergeWhatsappThread, whatsappChatHead } from "./openwa";
+import {
+  fillWhatsappText,
+  mergeWhatsappThread,
+  newerWhatsappRow,
+  pickInboxHead,
+  whatsappChatHead,
+} from "./openwa";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -19,9 +25,27 @@ assert(head?.body === "bonjour", "chat head");
 assert(whatsappChatHead({ lastMessage: null }) === null, "empty head");
 assert(whatsappChatHead({}) === null, "missing head");
 const sent = whatsappChatHead({ lastMessage: "relance", unreadCount: 0, timestamp: 4 });
-assert(sent?.body === "relance" && sent.direction === "outgoing", "string preview sent");
+assert(sent?.body === "relance" && sent?.directionUnknown === true, "read preview has no sender");
+assert(sent?.unread === false, "read preview");
 const waiting = whatsappChatHead({ lastMessage: "question", unreadCount: 2, timestamp: 5 });
-assert(waiting?.fromMe === false, "string preview unread");
+assert(waiting?.unread === true && waiting?.directionUnknown === true, "unread preview");
+const readInbound = pickInboxHead(
+  { body: "ancien", direction: "outgoing", timestamp: 10 },
+  { body: "question", timestamp: 20, directionUnknown: true, unread: false },
+);
+assert(readInbound.needsHistory && readInbound.row?.body === "ancien", "read reply needs history");
+const unreadNow = pickInboxHead(null, {
+  body: "question",
+  timestamp: 20,
+  directionUnknown: true,
+  unread: true,
+});
+assert(unreadNow.needsHistory === false && unreadNow.row?.fromMe === false, "unread is the student");
+const kept = newerWhatsappRow(
+  { body: "old", timestamp: 1, direction: "outgoing" },
+  { body: "new", timestamp: 5, direction: "incoming" },
+);
+assert(kept.body === "new", "newer stored row wins");
 const thread = mergeWhatsappThread(
   [
     { id: "live-1", body: "un", fromMe: false, timestamp: 1 },

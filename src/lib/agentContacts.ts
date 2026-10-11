@@ -1,3 +1,5 @@
+import { whatsappFromMe } from "./whatsappPhone";
+
 export const AGENT_PAGE = 200;
 export const AGENT_MAX = 1000;
 export const AGENT_RECENT_CAP = 3;
@@ -59,9 +61,10 @@ export function agentWhatsappMessages(rows: unknown, limit = AGENT_RECENT_CAP): 
     const type = String(row.type || "").trim();
     const body = clipAgentText(row.body || (type && type !== "text" ? `[${type}]` : ""));
     if (!body) continue;
-    const outgoing = row.fromMe === true || row.direction === "outgoing";
+    const fromMe = whatsappFromMe(row);
+    if (fromMe === null && row.unread !== true) continue;
     const at = epochMs(row.timestamp) || epochMs(row.createdAt);
-    parsed.push({ direction: outgoing ? "out" : "in", body, at });
+    parsed.push({ direction: fromMe === true ? "out" : "in", body, at });
   }
   parsed.sort((a, b) => b.at - a.at);
   return parsed.slice(0, Math.max(0, limit)).map((row) => ({

@@ -55,6 +55,10 @@ const whatsapp = agentWhatsappMessages(
 );
 assert(whatsapp.map((row) => row.body).join("|") === "moi|[image]|hello", "newest three");
 assert(whatsapp.map((row) => row.direction).join(",") === "out,in,in", "direction");
+const ours = agentWhatsappMessages([{ body: "relance", direction: "out", timestamp: 10 }], 1);
+assert(ours[0]?.direction === "out", "direction out is ours");
+const unknown = agentWhatsappMessages([{ body: "preview", timestamp: 10 }], 1);
+assert(unknown.length === 0, "preview without sender is skipped");
 assert(whatsapp[0]?.sentAt === new Date(300_000).toISOString(), "sentAt");
 
 console.log("agentContacts check ok");

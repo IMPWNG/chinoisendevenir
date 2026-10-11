@@ -3,6 +3,7 @@ import {
   isEtudeChineLabel,
   whatsappAddressBookId,
   whatsappChatId,
+  whatsappFromMe,
   whatsappMsisdn,
 } from "./whatsappPhone";
 
@@ -193,12 +194,14 @@ function chatTimestamp(row: Record<string, unknown>): number {
 /** Latest message already on the chat row. OpenWA sends lastMessage as text, not a message object. */
 export function whatsappChatHead(row: Record<string, unknown>): Record<string, unknown> | null {
   if (typeof row.lastMessage === "string" && row.lastMessage.trim()) {
-    // ponytail: the preview has no fromMe. Unread means the student wrote last; a read
-    // inbound is filed with messages we sent until stored history supplies the real direction.
-    const unread = Number(row.unreadCount) > 0;
-    return unread
-      ? { body: row.lastMessage.trim(), timestamp: row.timestamp, fromMe: false }
-      : { body: row.lastMessage.trim(), timestamp: row.timestamp, direction: "outgoing" };
+    // The text preview has no sender. Unread is the student; a read preview stays unknown
+    // until history says who wrote it. Guessing "we sent it" hid read replies.
+    return {
+      body: row.lastMessage.trim(),
+      timestamp: row.timestamp,
+      directionUnknown: true,
+      unread: Number(row.unreadCount) > 0,
+    };
   }
   const last = asRecord(row.lastMessage);
   if (!last) return null;
@@ -223,7 +226,7 @@ export function mergeWhatsappThread(live: unknown, stored: unknown): WhatsappThr
     if (!row) continue;
     const body = messageBody(row);
     if (!body) continue;
-    const fromMe = row.fromMe === true || row.direction === "outgoing";
+    const fromMe = whatsappFromMe(row) === true;
     const at = messageAt(row.timestamp) || messageAt(row.createdAt);
     const id = String(row.waMessageId || row.id || `${at}-${fromMe ? "out" : "in"}-${body.slice(0, 24)}`);
     if (seen.has(id)) continue;
@@ -238,8 +241,37 @@ function storedPhone(row: Record<string, unknown>): string | null {
   const chatId = String(row.chatId || "");
   const onChat = msisdnFromChatId(chatId);
   if (onChat) return onChat;
-  const other = row.direction === "outgoing" ? row.to : row.from;
+  const other = whatsappFromMe(row) === true ? row.to : row.from;
   return msisdnFromChatId(String(other || ""));
+}
+
+export function newerWhatsappRow(
+  prev: Record<string, unknown> | undefined,
+  next: Record<string, unknown>,
+): Record<string, unknown> {
+  if (!prev) return next;
+  const prevAt = messageAt(prev.timestamp) || messageAt(prev.createdAt);
+  const nextAt = messageAt(next.timestamp) || messageAt(next.createdAt);
+  return nextAt >= prevAt ? next : prev;
+}
+
+/** Which row the home list can trust. A read text preview needs one history fetch. */
+export function pickInboxHead(
+  stored: Record<string, unknown> | null,
+  head: Record<string, unknown> | null,
+): { row: Record<string, unknown> | null; needsHistory: boolean } {
+  const storedAt = stored ? messageAt(stored.timestamp) || messageAt(stored.createdAt) : 0;
+  const headAt = head ? messageAt(head.timestamp) || messageAt(head.createdAt) : 0;
+  if (stored && whatsappFromMe(stored) !== null && (!head || storedAt >= headAt)) {
+    return { row: stored, needsHistory: false };
+  }
+  if (!head) return { row: stored, needsHistory: false };
+  const headFrom = whatsappFromMe(head);
+  if (headFrom === false || (headFrom === null && head.unread === true)) {
+    return { row: { ...head, fromMe: false }, needsHistory: false };
+  }
+  if (headFrom === true) return { row: head, needsHistory: false };
+  return { row: stored, needsHistory: true };
 }
 
 /** Newest stored message per chat. Null when the local log cannot be read. */
@@ -264,13 +296,25 @@ async function inboxFromStored(
         const row = asRecord(item);
         if (!row) continue;
         const chatId = String(row.chatId || "");
-        if (!chatId || chatId.endsWith("@g.us") || chatId.includes("broadcast") || latest.has(chatId)) {
-          continue;
-        }
-        latest.set(chatId, row);
+        if (!chatId || chatId.endsWith("@g.us") || chatId.includes("broadcast")) continue;
+        latest.set(chatId, newerWhatsappRow(latest.get(chatId), row));
       }
       offset += messages.length;
       if (messages.length < 100) break;
+    }
+    if (Number.isFinite(total) && total > offset && Date.now() < deadline) {
+      const tail = asRecord(
+        await openwa(`/messages?limit=100&offset=${Math.max(0, total - 100)}`, undefined, {
+          timeoutMs: 8_000,
+        }),
+      );
+      for (const item of storedMessageRows(tail)) {
+        const row = asRecord(item);
+        if (!row) continue;
+        const chatId = String(row.chatId || "");
+        if (!chatId || chatId.endsWith("@g.us") || chatId.includes("broadcast")) continue;
+        latest.set(chatId, newerWhatsappRow(latest.get(chatId), row));
+      }
     }
   } catch {
     return null;
@@ -313,9 +357,9 @@ async function inboxFromStored(
 
 /**
  * Last messages per dossier, from OpenWA.
- * ponytail: the home list reads the local message log (no live history per chat).
- * Fuller threads still fetch history per match, 25s ceiling. A down OpenWA returns an empty map.
- * A privacy id (@lid) is resolved only inside that budget.
+ * The home list trusts a stored row when it is at least as new as the chat preview.
+ * A read preview with no sender fetches one live message. A down OpenWA uses the local
+ * log, or throws when that log is missing too. Fuller threads fetch history per match.
  */
 export async function recentWhatsappHistories(
   contacts: readonly { id: string; phone?: unknown; pays?: string | null }[],
@@ -329,19 +373,20 @@ export async function recentWhatsappHistories(
   const out = new Map<string, unknown[]>();
   if (!byPhone.size) return out;
 
-  let chats: unknown;
+  let chats: unknown = null;
   try {
     chats = await openwa("/chats?limit=1000", undefined, { timeoutMs: 20_000 });
   } catch {
-    return out;
+    chats = null;
   }
   const deadline = Date.now() + (opts?.budgetMs ?? WA_FEED_MS);
   const cap = opts?.maxMatches && opts.maxMatches > 0 ? opts.maxMatches : Number.POSITIVE_INFINITY;
   const historyLimit = Math.min(40, Math.max(1, opts?.historyLimit ?? 20));
   const headsOnly = historyLimit <= 1;
-  if (headsOnly) {
-    const stored = await inboxFromStored(byPhone, cap, deadline);
-    if (stored) return stored;
+  const stored = headsOnly ? await inboxFromStored(byPhone, cap, deadline) : null;
+  if (!chats) {
+    if (!stored) throw new OpenwaError("WhatsApp indisponible", 503, "OPENWA_DOWN");
+    return stored;
   }
 
   const jobs: ChatJob[] = [];
@@ -370,9 +415,32 @@ export async function recentWhatsappHistories(
     }
   }
 
+  if (stored) {
+    for (const [contactId, rows] of stored) out.set(contactId, rows);
+  }
+
   async function loadHistory(job: ChatJob) {
-    if (headsOnly && job.head) {
-      out.set(job.contactId, [job.head]);
+    if (headsOnly) {
+      const storedRow = asRecord(stored?.get(job.contactId)?.[0]);
+      const picked = pickInboxHead(storedRow, job.head);
+      if (!picked.needsHistory) {
+        if (picked.row) out.set(job.contactId, [picked.row]);
+        return;
+      }
+      try {
+        const history = await openwa(
+          `/messages/${encodeURIComponent(job.chatId)}/history?limit=1`,
+          undefined,
+          { timeoutMs: 8_000 },
+        );
+        if (Array.isArray(history) && history.length) {
+          out.set(job.contactId, history);
+          return;
+        }
+      } catch {
+        /* keep the stored row when the live preview has no sender */
+      }
+      if (picked.row) out.set(job.contactId, [picked.row]);
       return;
     }
     try {
