@@ -1266,6 +1266,8 @@ const fr = {
     allReceived: "Tous les documents demandés ont été reçus.",
     noRequestedDocs:
       "Aucun document n'est demandé pour le moment. L'équipe indiquera les pièces à déposer.",
+    docsTranslation:
+      "Chaque document doit être traduit en chinois par un organisme officiel. Si vous ne pouvez pas le faire, nous pouvons nous en charger. Ces frais ne sont pas inclus dans l'accompagnement : prévoir {price} par document.",
     missing: "Manquant",
     received: "Reçu",
     currentFile: "Fichier actuel :",
@@ -1348,7 +1350,8 @@ const fr = {
     docsCatalog: {
       passeport: {
         label: "Passeport",
-        description: "Passeport en cours de validité (PDF, JPG ou PNG — 10 Mo max.).",
+        description:
+          "Copie scannée de la page d'information du passeport (PDF, JPG ou PNG — 10 Mo max.).",
       },
       high_school_diploma: {
         label: "Diplôme de fin d'études secondaires",
@@ -1383,12 +1386,12 @@ const fr = {
       formulaire_medical: {
         label: "Formulaire médical",
         description:
-          "Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), daté et tamponné (PDF, JPG ou PNG — 10 Mo max.).",
+          "Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), complété depuis moins de 6 mois (PDF, JPG ou PNG — 10 Mo max.).",
       },
       casier_judiciaire: {
         label: "Extrait de casier judiciaire",
         description:
-          "Certificat de non-condamnation (No Criminal Record), récent (PDF, JPG ou PNG — 10 Mo max.).",
+          "Certificat de non-condamnation, délivré depuis moins de 6 mois (PDF, JPG ou PNG — 10 Mo max.).",
       },
       photo: {
         label: "Photo d'identité",
@@ -1397,12 +1400,12 @@ const fr = {
       diplome: {
         label: "Dernier diplôme",
         description:
-          "Dernier diplôme obtenu, avec traduction si besoin. Utile pour une école de langue (PDF, JPG ou PNG — 10 Mo max.).",
+          "Diplôme de fin d'études secondaires, ou un diplôme supérieur (PDF, JPG ou PNG — 10 Mo max.).",
       },
       transcripts: {
         label: "Relevés de notes",
         description:
-          "Relevés de notes, avec traduction si besoin (PDF, JPG ou PNG — 10 Mo max.).",
+          "Relevé de notes de la dernière année du plus haut niveau obtenu (PDF, JPG ou PNG — 10 Mo max.).",
       },
       hskk: {
         label: "HSKK",
@@ -1430,7 +1433,7 @@ const fr = {
       financial_proof: {
         label: "Preuve de financement",
         description:
-          "Attestation de fonds ou garantie financière (PDF, JPG ou PNG — 10 Mo max.).",
+          "Fonds disponibles d'au moins 3 000 USD (PDF, JPG ou PNG — 10 Mo max.).",
       },
       acte_naissance: {
         label: "Acte de naissance",
@@ -2930,6 +2933,8 @@ const en = {
     allReceived: "All requested documents have been received.",
     noRequestedDocs:
       "No document is requested yet. The team will tell you which files to upload.",
+    docsTranslation:
+      "Each document must be translated into Chinese by an official organization. If you cannot arrange that, we can do it. This fee is not included in the support package: budget {price} per document.",
     missing: "Missing",
     received: "Received",
     currentFile: "Current file:",
@@ -3010,7 +3015,7 @@ const en = {
     docsCatalog: {
       passeport: {
         label: "Passport",
-        description: "Valid passport (PDF, JPG, or PNG — 10 MB max).",
+        description: "Scanned copy of the passport information page (PDF, JPG, or PNG — 10 MB max).",
       },
       high_school_diploma: {
         label: "High school diploma",
@@ -3045,12 +3050,12 @@ const en = {
       formulaire_medical: {
         label: "Medical form",
         description:
-          "Foreigner Physical Examination Form, dated and stamped (PDF, JPG, or PNG — 10 MB max).",
+          "Foreigner Physical Examination Form, completed within the last 6 months (PDF, JPG, or PNG — 10 MB max).",
       },
       casier_judiciaire: {
         label: "Criminal record extract",
         description:
-          "No Criminal Record certificate, recent (PDF, JPG, or PNG — 10 MB max).",
+          "No Criminal Record certificate, issued within the last 6 months (PDF, JPG, or PNG — 10 MB max).",
       },
       photo: {
         label: "ID photo",
@@ -3059,11 +3064,12 @@ const en = {
       diplome: {
         label: "Highest diploma",
         description:
-          "Highest diploma obtained, with translation if needed. Useful for a language school (PDF, JPG, or PNG — 10 MB max).",
+          "High school diploma, or a higher diploma (PDF, JPG, or PNG — 10 MB max).",
       },
       transcripts: {
         label: "Transcripts",
-        description: "Transcripts, with translation if needed (PDF, JPG, or PNG — 10 MB max).",
+        description:
+          "Transcript for the final year of the highest level completed (PDF, JPG, or PNG — 10 MB max).",
       },
       hskk: {
         label: "HSKK",
@@ -3089,7 +3095,7 @@ const en = {
       },
       financial_proof: {
         label: "Financial proof",
-        description: "Bank statement or financial guarantee (PDF, JPG, or PNG — 10 MB max).",
+        description: "Available funds of at least 3,000 USD (PDF, JPG, or PNG — 10 MB max).",
       },
       acte_naissance: {
         label: "Birth certificate",

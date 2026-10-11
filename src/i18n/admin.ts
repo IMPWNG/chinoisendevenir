@@ -365,6 +365,8 @@ export const adminTranslations = {
         "Action : Email envoyé • Statut : bienvenue envoyé, si le dossier est encore au tout début.",
       emailHintEspace:
         "N'avance pas le statut. À envoyer aux étudiants qui ont choisi une formule : création de compte et mode d'emploi.",
+      emailHintDocuments:
+        "N'avance pas le statut. Coche les pièces de départ sur la fiche et les affiche dans l'espace étudiant.",
       emailHintRelance1:
         "Action : Relance 1 • Statut : relance en cours",
       emailHintRelance2:
@@ -695,6 +697,7 @@ export const adminTranslations = {
       relance_formules: "Relance 3 — Choix des formules",
       formules_presentation: "Choix des formules - accompagnement",
       espace_etudiant: "Espace étudiant — mode d'emploi",
+      liste_documents: "Espace étudiant : Liste des documents",
       reponse_bourses: "Réponse — Bourses d'études",
       reponse_visa: "Réponse — Visa étudiant",
       reponse_langue: "Réponse — École de langue",
@@ -1135,6 +1138,8 @@ export const adminTranslations = {
         "Action: Email sent • Status: welcome sent, if the file is still at the very start.",
       emailHintEspace:
         "Does not change the status. Send to students who chose a plan: account setup and how to use the space.",
+      emailHintDocuments:
+        "Does not change the status. Checks the starter documents on the file and shows them in the student space.",
       emailHintRelance1: "Action: Follow-up 1 • Status: follow-up in progress",
       emailHintRelance2: "Action: Follow-up 2 • Status: follow-up in progress",
       emailHintRelanceFormules:
@@ -1462,6 +1467,7 @@ export const adminTranslations = {
       relance_formules: "Follow-up 3 — Package choice",
       formules_presentation: "Formula choice — support",
       espace_etudiant: "Student space — how to use it",
+      liste_documents: "Student space: document list",
       reponse_bourses: "Reply — Scholarships",
       reponse_visa: "Reply — Student visa",
       reponse_langue: "Reply — Language school",
@@ -1884,6 +1890,7 @@ export const adminTranslations = {
       emailHintFormules: "操作：套餐邮件 • 状态：已发送套餐（学生空间仍锁定）",
       emailHintBienvenue: "操作：已发邮件 • 状态：已发欢迎邮件（仅当档案仍处于最初阶段）。",
       emailHintEspace: "不改变状态。发给已选套餐的学生：注册账号和使用说明。",
+      emailHintDocuments: "不改变状态。在档案中勾选起步材料，并显示在学生空间。",
       emailHintRelance1: "操作：跟进 1 • 状态：跟进中",
       emailHintRelance2: "操作：跟进 2 • 状态：跟进中",
       emailHintRelanceFormules:
@@ -2200,6 +2207,7 @@ export const adminTranslations = {
       relance_formules: "跟进 3 — 选择套餐",
       formules_presentation: "套餐选择 — 辅导",
       espace_etudiant: "学生空间 — 使用说明",
+      liste_documents: "学生空间：材料清单",
       reponse_bourses: "回复 — 奖学金",
       reponse_visa: "回复 — 学生签证",
       reponse_langue: "回复 — 语言班",

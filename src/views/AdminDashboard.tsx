@@ -1439,6 +1439,7 @@ function ContactModal({
   const [taskOpen, setTaskOpen] = useState(false);
   const [taskText, setTaskText] = useState("");
   const [savingTask, setSavingTask] = useState(false);
+  const [filesKey, setFilesKey] = useState(0);
 
   const openDayTask = async () => {
     setTaskOpen(true);
@@ -1789,6 +1790,7 @@ function ContactModal({
                 fetchActions();
                 onContactUpdated?.();
                 onEmailThreadRefresh?.();
+                setFilesKey((key) => key + 1);
               }}
             />
           </FilePanel>
@@ -1949,7 +1951,7 @@ function ContactModal({
           </FilePanel>
 
           <FilePanel title={`📂 ${t("files.title")}`}>
-            <AdminStudentFiles contactId={contact.id} />
+            <AdminStudentFiles contactId={contact.id} refreshKey={filesKey} />
           </FilePanel>
 
           <FilePanel title={`➕ ${t("dashboard.logAction")}`} persist>

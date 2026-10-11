@@ -4,6 +4,7 @@ import {
   SITE_URL,
   wrapEmailHtml,
 } from "./emailLayout";
+import { formatDocTranslationFee } from "./money";
 import {
   displayFormulePrice,
   getFormuleIncludeGroups,
@@ -23,6 +24,7 @@ export const CARD_EMAIL_TEMPLATE_KEYS = [
   "reponse_general",
   "formules_presentation",
   "espace_etudiant",
+  "liste_documents",
 ] as const;
 
 export type CardEmailTemplateKey = (typeof CARD_EMAIL_TEMPLATE_KEYS)[number];
@@ -86,6 +88,27 @@ function espaceEtudiantBody() {
   ].join("\n\n");
 }
 
+function listeDocumentsBody() {
+  const login = `${SITE_URL}espace-etudiant/connexion`;
+  const fee = formatDocTranslationFee();
+  return [
+    "Voici la première liste des pièces à fournir pour commencer le dossier.",
+    "Chaque document doit être traduit en chinois par un organisme officiel.",
+    [
+      "1. Copie scannée de la page d'information du passeport",
+      "2. Diplôme de fin d'études secondaires, ou un diplôme supérieur",
+      "3. Relevé de notes de la dernière année du plus haut niveau d'études obtenu",
+      "4. Certificat de non-condamnation, délivré depuis moins de 6 mois",
+      "5. Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), complété depuis moins de 6 mois",
+      "6. Preuve de ressources financières : fonds disponibles d'au moins 3 000 USD",
+    ].join("\n"),
+    `Déposez ces pièces dans l'espace étudiant : ${login}`,
+    "Formats acceptés : PDF, JPG ou PNG, 10 Mo maximum.",
+    `Si vous ne pouvez pas faire traduire un document par un organisme officiel, nous pouvons le faire. Ces frais ne sont pas inclus dans l'accompagnement : prévoir ${fee} par document.`,
+    "Nous ne garantissons pas une admission, une bourse, un visa ou un logement. Les décisions appartiennent aux établissements et aux autorités concernées.",
+  ].join("\n\n");
+}
+
 const DRAFTS: Record<
   CardEmailTemplateKey,
   Omit<EmailTemplateDraft, "body"> & { body: () => string }
@@ -107,6 +130,12 @@ const DRAFTS: Record<
     title: "Votre espace étudiant",
     subtitle: "Compte, paiements, documents et départ",
     body: espaceEtudiantBody,
+  },
+  liste_documents: {
+    subject: "Espace étudiant — documents à fournir pour commencer le dossier",
+    title: "Documents à fournir",
+    subtitle: "Pour commencer le dossier",
+    body: listeDocumentsBody,
   },
 };
 

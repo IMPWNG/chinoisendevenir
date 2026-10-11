@@ -383,6 +383,7 @@ export default function AdminContactEmail({
             {template === "formules_presentation" &&
               t("dashboard.emailHintFormules")}
             {template === "espace_etudiant" && t("dashboard.emailHintEspace")}
+            {template === "liste_documents" && t("dashboard.emailHintDocuments")}
           </p>
 
           <div>

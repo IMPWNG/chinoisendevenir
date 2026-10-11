@@ -92,6 +92,18 @@ export async function saveRequestedDocumentKeys(
   return requestedKeys;
 }
 
+/** Adds keys without clearing the ones already checked on the file. */
+export async function addRequestedDocumentKeys(
+  admin: AdminClient,
+  contactId: unknown,
+  extra: readonly string[],
+) {
+  const current = await loadRequestedDocumentKeys(admin, contactId);
+  const merged = parseRequestedDocumentKeys([...current, ...extra]);
+  if (merged.join("\0") === current.join("\0")) return current;
+  return saveRequestedDocumentKeys(admin, contactId, merged);
+}
+
 export function isRequestedUploadPath(
   contactId: unknown,
   path: unknown,

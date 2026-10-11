@@ -15,10 +15,11 @@ function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
 }
 
-assert(CARD_EMAIL_TEMPLATE_KEYS.length === 3, "3 modèles");
+assert(CARD_EMAIL_TEMPLATE_KEYS.length === 4, "4 modèles");
 assert(CARD_EMAIL_TEMPLATE_KEYS.includes("reponse_general"), "bienvenue");
 assert(CARD_EMAIL_TEMPLATE_KEYS.includes("formules_presentation"), "formules");
 assert(CARD_EMAIL_TEMPLATE_KEYS.includes("espace_etudiant"), "espace");
+assert(CARD_EMAIL_TEMPLATE_KEYS.includes("liste_documents"), "documents");
 
 const bienvenue = getEmailTemplateDraft("reponse_general");
 assert(bienvenue, "draft bienvenue");
@@ -75,6 +76,13 @@ assert(!edited.includes("Recommandée"), "texte modifié : pas le tableau");
 const html = generateDraftEmailHtml({ prenom: "Awa" }, bienvenue);
 assert(html.includes("Bonjour Awa"), "prénom");
 assert(!html.includes("<script"), "pas de script");
+
+const documents = getEmailTemplateDraft("liste_documents");
+assert(documents, "draft documents");
+assert(documents.body.includes("page d'information du passeport"), "documents : passeport");
+assert(documents.body.includes("3 000 USD"), "documents : fonds");
+assert(documents.body.includes("150 RMB — 18,75 € (12 299 F CFA)"), "documents : traduction");
+assert(documents.body.includes("ne sont pas inclus"), "documents : hors accompagnement");
 
 assert(getEmailTemplateDraft("ouverture_printemps") === null, "printemps retiré");
 assert(getEmailTemplateDraft("inconnu") === null, "clé inconnue");

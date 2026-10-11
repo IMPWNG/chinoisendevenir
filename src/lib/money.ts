@@ -56,6 +56,14 @@ export function formatEurosWithRmb(amount: number): string {
   return `${formatEurosOnly(amount)} (${formatRmb(eurosToRmb(amount))})`;
 }
 
+/** Translation of one document, billed outside the support package. 1 € = 8 RMB. */
+export const DOC_TRANSLATION_FEE_RMB = 150;
+
+export function formatDocTranslationFee(): string {
+  const euros = DOC_TRANSLATION_FEE_RMB / EUR_TO_CNY;
+  return `${formatRmb(DOC_TRANSLATION_FEE_RMB)} — ${formatEurosWithCfa(euros)}`;
+}
+
 /** Remove a CFA gloss so the euro amount can be shown in another currency. */
 export function stripCfaAside(text: string): string {
   return text

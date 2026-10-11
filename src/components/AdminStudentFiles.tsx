@@ -54,7 +54,13 @@ async function adminFetch(path: string, options: RequestInit = {}): Promise<File
   return data;
 }
 
-export default function AdminStudentFiles({ contactId }: { contactId: string }) {
+export default function AdminStudentFiles({
+  contactId,
+  refreshKey = 0,
+}: {
+  contactId: string;
+  refreshKey?: number;
+}) {
   const { t } = useAdminI18n();
   const [catalog, setCatalog] = useState<CatalogDoc[]>([]);
   const [requestedKeys, setRequestedKeys] = useState<string[]>([]);
@@ -87,7 +93,7 @@ export default function AdminStudentFiles({ contactId }: { contactId: string }) 
 
   useEffect(() => {
     loadFiles();
-  }, [contactId]);
+  }, [contactId, refreshKey]);
 
   const downloadFile = async (path: string) => {
     try {

@@ -24,6 +24,7 @@ import { useSiteI18n } from "../context/SiteI18nContext";
 import type { SiteI18nValue } from "../context/SiteI18nContext";
 import type { SiteCopy } from "../i18n/site";
 import { errorMessage } from "../lib/request";
+import { formatDocTranslationFee } from "../lib/money";
 import { STUDY_DOMAIN_VALUE_BY_INDEX } from "../i18n/site";
 import {
   BUDGET_VALUES,
@@ -670,6 +671,11 @@ export default function StudentDashboard() {
                                     { count: missingCount },
                                   )
                                 : t("student.allReceived")}
+                            </p>
+                            <p className="card-subtitle">
+                              {t("student.docsTranslation", {
+                                price: formatDocTranslationFee(),
+                              })}
                             </p>
 
                             <div className="doc-list">

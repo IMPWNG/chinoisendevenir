@@ -19,6 +19,8 @@ import {
   renderEditableEmailHtml,
 } from "../emailTemplateDrafts";
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
+import { addRequestedDocumentKeys } from "../studentDocuments";
+import { STARTER_DOSSIER_DOCUMENT_KEYS } from "../studentProgress";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
@@ -129,6 +131,18 @@ const EMAIL_TEMPLATES: Record<string, EmailTemplate> = {
     description: "Guide espace étudiant envoyé — compte et mode d'emploi",
     status: null,
   },
+  liste_documents: {
+    subject: "Espace étudiant — documents à fournir pour commencer le dossier",
+    generateHtml: (contact) => {
+      const draft = getEmailTemplateDraft("liste_documents");
+      return draft
+        ? generateDraftEmailHtml(contact, draft)
+        : generateCustomEmailHtml(contact, {});
+    },
+    action: "email_envoye",
+    description: "Liste des documents de départ envoyée",
+    status: null,
+  },
   reponse_general: {
     subject: "Votre projet d'études en Chine — nous avons bien reçu votre message",
     generateHtml: (contact) => {
@@ -174,6 +188,7 @@ const ADMIN_SENDABLE_TEMPLATES = new Set([
   "reponse_general",
   "formules_presentation",
   "espace_etudiant",
+  "liste_documents",
 ]);
 
 // ✉️ Envoyer un email selon le template choisi
@@ -568,6 +583,18 @@ export default async function handler(request: Request) {
         actionDescription,
         auth.user.email || "admin",
       );
+
+      if (emailTemplate === "liste_documents") {
+        try {
+          await addRequestedDocumentKeys(
+            supabase,
+            contactId,
+            STARTER_DOSSIER_DOCUMENT_KEYS,
+          );
+        } catch (error) {
+          console.error("documents de départ:", errorMessage(error));
+        }
+      }
 
       console.log("\n" + "✅".repeat(40));
       console.log("SUCCÈS COMPLET - MANUEL");

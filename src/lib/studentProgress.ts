@@ -288,7 +288,7 @@ export const STUDENT_DOCUMENT_CATALOG: CatalogDoc[] = [
     key: "passeport",
     label: "Passeport",
     icon: "",
-    description: `Passeport en cours de validité (${FILE_HINT}).`,
+    description: `Copie scannée de la page d'information du passeport (${FILE_HINT}).`,
     levels: "all",
   },
   {
@@ -302,7 +302,7 @@ export const STUDENT_DOCUMENT_CATALOG: CatalogDoc[] = [
     key: "diplome",
     label: "Dernier diplôme",
     icon: "",
-    description: `Dernier diplôme obtenu, avec traduction si besoin. Utile pour une école de langue (${FILE_HINT}).`,
+    description: `Diplôme de fin d'études secondaires, ou un diplôme supérieur (${FILE_HINT}).`,
     levels: [],
   },
   {
@@ -330,7 +330,7 @@ export const STUDENT_DOCUMENT_CATALOG: CatalogDoc[] = [
     key: "transcripts",
     label: "Relevés de notes",
     icon: "",
-    description: `Relevés de notes, avec traduction si besoin (${FILE_HINT}).`,
+    description: `Relevé de notes de la dernière année du plus haut niveau obtenu (${FILE_HINT}).`,
     levels: [],
   },
   {
@@ -393,21 +393,21 @@ export const STUDENT_DOCUMENT_CATALOG: CatalogDoc[] = [
     key: "financial_proof",
     label: "Preuve de financement",
     icon: "",
-    description: `Attestation de fonds ou garantie financière (${FILE_HINT}).`,
+    description: `Fonds disponibles d'au moins 3 000 USD (${FILE_HINT}).`,
     levels: [],
   },
   {
     key: "formulaire_medical",
     label: "Formulaire médical",
     icon: "",
-    description: `Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), daté et tamponné (${FILE_HINT}).`,
+    description: `Formulaire d'examen médical pour étrangers (Foreigner Physical Examination Form), complété depuis moins de 6 mois (${FILE_HINT}).`,
     levels: "all",
   },
   {
     key: "casier_judiciaire",
     label: "Extrait de casier judiciaire",
     icon: "",
-    description: `Certificat de non-condamnation (No Criminal Record), récent (${FILE_HINT}).`,
+    description: `Certificat de non-condamnation, délivré depuis moins de 6 mois (${FILE_HINT}).`,
     levels: "all",
   },
   {
@@ -478,6 +478,16 @@ export function getStudentDocumentSpec(key: unknown) {
   return STUDENT_DOCUMENT_CATALOG.find((doc) => doc.key === String(key || "")) || null;
 }
 
+/** First documents asked when the dossier starts. */
+export const STARTER_DOSSIER_DOCUMENT_KEYS = [
+  "passeport",
+  "diplome",
+  "transcripts",
+  "casier_judiciaire",
+  "formulaire_medical",
+  "financial_proof",
+] as const;
+
 /** Known catalog keys only, in catalog order. Unknown values are dropped. */
 export function parseRequestedDocumentKeys(value: unknown) {
   const raw = Array.isArray(value)
@@ -487,6 +497,11 @@ export function parseRequestedDocumentKeys(value: unknown) {
       : [];
   const wanted = new Set(raw.map((item) => String(item || "").trim()).filter(Boolean));
   return STUDENT_DOCUMENT_CATALOG.filter((doc) => wanted.has(doc.key)).map((doc) => doc.key);
+}
+
+/** Catalog order. Existing requests stay; the starter list is added once. */
+export function withStarterDocuments(existing: readonly string[]): string[] {
+  return parseRequestedDocumentKeys([...existing, ...STARTER_DOSSIER_DOCUMENT_KEYS]);
 }
 
 export function getSchoolDocumentsIntro(dernierDiplome: unknown) {
