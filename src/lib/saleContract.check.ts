@@ -7,6 +7,8 @@ import {
   CONTRACT_COMPANY,
   CONTRACT_PLACE,
   CONTRACT_REGISTRATION,
+  CONTRACT_REPRESENTATIVE,
+  CONTRACT_ROLE,
   CONTRACT_STAMP_SRC,
   buildSaleContract,
   contractClientFromContact,
@@ -93,6 +95,9 @@ assert(built.html.includes("cinq (5)"), "annexe formule 2");
 assert(built.html.includes("680"), "acompte formule 2");
 assert(!built.html.includes("huit (8)"), "pas l'annexe formule 3");
 assert(built.html.includes(CONTRACT_STAMP_SRC), "tampon de l'entreprise");
+assert(built.html.includes(CONTRACT_REPRESENTATIVE), "représentant");
+assert(built.html.includes(`Fonction : ${CONTRACT_ROLE}`), "fonction");
+assert(!built.html.includes("Nom du représentant : [À COMPLÉTER]"), "représentant renseigné");
 assert(built.html.includes("À l'ouverture du dossier"), "échéance 1");
 assert(built.html.includes("À l'envoi des candidatures"), "échéance 2");
 assert(

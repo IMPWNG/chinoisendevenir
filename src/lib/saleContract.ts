@@ -4,7 +4,9 @@ import { eurosToFcfa, formatEurosOnly, formatFcfa } from "./money";
 import { getFormuleByNumber } from "./formules";
 
 /** Company stamp on the provider signature. Served from /public. */
-export const CONTRACT_STAMP_SRC = "https://chinoisendevenir.com/tampon-entreprise.jpg";
+export const CONTRACT_STAMP_SRC = "https://chinoisendevenir.com/tampon-entreprise.png";
+export const CONTRACT_REPRESENTATIVE = "Matisse Achéen";
+export const CONTRACT_ROLE = "Président";
 export const CONTRACT_PLACE = "Chongqing, Chine";
 export const CONTRACT_BLANK = "[À COMPLÉTER]";
 export const CONTRACT_PRIVACY_URL =
@@ -485,7 +487,7 @@ export function buildSaleContract(input: {
       <p>Le Client reconnaît avoir reçu, lu et accepté le présent contrat et l'annexe correspondant à la formule choisie. Il reconnaît également avoir reçu ou avoir pu consulter la politique de confidentialité.</p>
       ${client.mineur ? `<p>Son représentant légal déclare signer le contrat en son nom et l'avoir informé de ses principales conditions, dans la mesure adaptée à son âge.</p>` : ""}
       <p><strong>Fait à :</strong> ${escapeHtml(CONTRACT_PLACE)}<br><strong>Le :</strong> ${escapeHtml(dateLabel)}</p>
-      <p><strong>Le Prestataire</strong><br>Nom du représentant : ${escapeHtml(CONTRACT_BLANK)}<br>Fonction : ${escapeHtml(CONTRACT_BLANK)}</p>
+      <p><strong>Le Prestataire</strong><br>Nom du représentant : ${escapeHtml(CONTRACT_REPRESENTATIVE)}<br>Fonction : ${escapeHtml(CONTRACT_ROLE)}</p>
       ${stampHtml()}
       <p style="margin-top:16px;"><strong>Le Client</strong><br>Nom : ${escapeHtml(fullName)}<br>Signature précédée de la mention « Lu et approuvé » :</p>
       ${minorSign}
