@@ -190,6 +190,9 @@ export default function AdminDashboard() {
   const [whatsappPending, setWhatsappPending] = useState<Set<string>>(
     () => new Set(),
   );
+  const [studentSpaces, setStudentSpaces] = useState<Set<string>>(
+    () => new Set(),
+  );
   const [priorityOnly, setPriorityOnly] = useState(false);
   const [inboxTick, setInboxTick] = useState(0);
   const [selectedContact, setSelectedContact] = useState<DashboardContact | null>(null);
@@ -243,6 +246,33 @@ export default function AdminDashboard() {
       cancelled = true;
     };
   }, [access.whatsapp, inboxTick]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const {
+          data: { session },
+        } = await adminSupabase.auth.getSession();
+        if (!session?.access_token || cancelled) return;
+        const response = await fetch("/api/admin/student-spaces", {
+          headers: { Authorization: `Bearer ${session.access_token}` },
+          cache: "no-store",
+        });
+        const data = await response.json().catch(() => ({}));
+        if (cancelled || !response.ok) return;
+        const emails = Array.isArray(data.emails)
+          ? data.emails.map((email: unknown) => String(email).trim().toLowerCase())
+          : [];
+        setStudentSpaces(new Set(emails));
+      } catch {
+        if (!cancelled) setStudentSpaces(new Set());
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [inboxTick]);
 
   const fetchContacts = async () => {
     setLoading(true);
@@ -1071,6 +1101,17 @@ export default function AdminDashboard() {
                           <span>
                             {c.prenom} {c.nom}
                           </span>
+                          {studentSpaces.has(
+                            String(c.email || "").trim().toLowerCase(),
+                          ) ? (
+                            <span
+                              className="inline-flex items-center justify-center h-5 min-w-5 px-1 rounded-full bg-emerald-600 text-white text-[11px] font-bold leading-none"
+                              title={t("dashboard.studentSpaceCreated")}
+                              aria-label={t("dashboard.studentSpaceCreated")}
+                            >
+                              ✓
+                            </span>
+                          ) : null}
                           {(unreadByContact[c.id] || 0) > 0 ? (
                             <span
                               className="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-full bg-red-500 text-white text-[11px] font-bold leading-none"

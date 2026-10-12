@@ -1,6 +1,6 @@
 import type { User } from "@supabase/supabase-js";
 import { getSupabaseAdmin, getSupabaseUrl, type AdminClient } from "./supabaseAdmin";
-import { getSupabaseAnonClient } from "./supabaseAuth";
+import { getSupabaseAnonClient, normalizeAuthEmail } from "./supabaseAuth";
 import { errorMessage } from "./request";
 
 type AuthErrorLike = { code?: string; message?: string } | null | undefined;
@@ -25,6 +25,42 @@ function emailNotConfirmed(error: AuthErrorLike): boolean {
   const code = String(error?.code || "");
   const message = String(error?.message || "").toLowerCase();
   return code === "email_not_confirmed" || message.includes("email not confirmed");
+}
+
+const STUDENT_SPACE_SOURCE = "espace_etudiant";
+
+type SpaceUser = {
+  email?: string | null;
+  user_metadata?: { source?: unknown } | null;
+};
+
+export function studentSpaceEmails(users: SpaceUser[]): string[] {
+  const seen = new Set<string>();
+  const emails: string[] = [];
+  for (const user of users) {
+    if (user.user_metadata?.source !== STUDENT_SPACE_SOURCE) continue;
+    const email = normalizeAuthEmail(user.email);
+    if (!email || seen.has(email)) continue;
+    seen.add(email);
+    emails.push(email);
+  }
+  return emails;
+}
+
+export async function listStudentSpaceEmails(admin: AdminClient): Promise<string[]> {
+  const users: SpaceUser[] = [];
+  // ponytail: 20 × 200. Au-delà de 4000 comptes, lire auth.users en SQL.
+  for (let page = 1; page <= 20; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({
+      page,
+      perPage: 200,
+    });
+    if (error) throw error;
+    const batch = data?.users || [];
+    users.push(...batch);
+    if (batch.length < 200) break;
+  }
+  return studentSpaceEmails(users);
 }
 
 export async function findAuthUserByEmail(admin: AdminClient, email: string) {
@@ -80,7 +116,7 @@ export async function createConfirmedAuthUser(email: string, password: string) {
     email,
     password,
     email_confirm: true,
-    user_metadata: { source: "espace_etudiant" },
+    user_metadata: { source: STUDENT_SPACE_SOURCE },
   });
 
   if (!error) {
