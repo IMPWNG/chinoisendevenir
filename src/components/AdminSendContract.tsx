@@ -69,8 +69,6 @@ export default function AdminSendContract({
   const [repAddress, setRepAddress] = useState("");
   const [repContact, setRepContact] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
-  const [transferFees, setTransferFees] = useState("");
-  const [specialTerms, setSpecialTerms] = useState("");
   const [formuleNumber, setFormuleNumber] = useState(
     getFormuleNumber(contact.formule) || 0,
   );
@@ -89,8 +87,6 @@ export default function AdminSendContract({
     setRepAddress("");
     setRepContact("");
     setPaymentMode("");
-    setTransferFees("");
-    setSpecialTerms("");
     setFormuleNumber(getFormuleNumber(contact.formule) || 0);
     setPreview(false);
   }, [contact.id, contact.pays, contact.phone, contact.formule]);
@@ -115,7 +111,7 @@ export default function AdminSendContract({
     clientReady(client) &&
     (formuleNumber === 1 || formuleNumber === 2 || formuleNumber === 3);
 
-  const terms = { paymentMode, transferFees, specialTerms };
+  const terms = { paymentMode };
   const built =
     preview && ready
       ? buildSaleContract({
@@ -155,7 +151,7 @@ export default function AdminSendContract({
             adresse: repAddress,
             contact: repContact,
           },
-          terms: { paymentMode, transferFees, specialTerms },
+          terms: { paymentMode },
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -368,24 +364,6 @@ export default function AdminSendContract({
             disabled={sending}
             onChange={(e) => setPaymentMode(e.target.value)}
             placeholder={t("dashboard.contractPayModeHint")}
-            className={fieldClass(sending)}
-          />
-        </div>
-        <div>
-          <label className={label}>{t("dashboard.contractTransferFees")}</label>
-          <input
-            value={transferFees}
-            disabled={sending}
-            onChange={(e) => setTransferFees(e.target.value)}
-            className={fieldClass(sending)}
-          />
-        </div>
-        <div>
-          <label className={label}>{t("dashboard.contractSpecialTerms")}</label>
-          <input
-            value={specialTerms}
-            disabled={sending}
-            onChange={(e) => setSpecialTerms(e.target.value)}
             className={fieldClass(sending)}
           />
         </div>

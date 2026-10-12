@@ -3,8 +3,8 @@ import { escapeHtml, withEtudeChineSubject, wrapEmailHtml } from "./emailLayout"
 import { eurosToFcfa, formatEurosOnly, formatFcfa } from "./money";
 import { getFormuleByNumber } from "./formules";
 
-/** Shown in the provider signature until the company stamp image is set. */
-export const CONTRACT_STAMP_SRC = "";
+/** Company stamp on the provider signature. Served from /public. */
+export const CONTRACT_STAMP_SRC = "https://chinoisendevenir.com/tampon-entreprise.jpg";
 export const CONTRACT_PLACE = "Chongqing, Chine";
 export const CONTRACT_BLANK = "[À COMPLÉTER]";
 export const CONTRACT_PRIVACY_URL =
@@ -35,12 +35,19 @@ export type ContractClient = {
   representant: LegalRepresentative;
 };
 
+const SCHEDULE_TRIGGERS: [string, string, string] = [
+  "À l'ouverture du dossier",
+  "À l'envoi des candidatures",
+  "À la réception de l'acceptation de l'école et/ou de l'université",
+];
+
+const SCHEDULE_NOTE =
+  "La troisième échéance correspond au solde. Elle est due à la réception de l'acceptation de l'école et/ou de l'université. Les refus ou absences de réponse ne constituent pas une garantie de remboursement des prestations déjà réalisées. Les droits impératifs applicables au Client demeurent réservés.";
+
 type Annex = {
   title: string;
   included: string[];
   excluded: string[];
-  triggers: [string, string, string];
-  thirdNote: string;
 };
 
 const ANNEXES: Record<1 | 2 | 3, Annex> = {
@@ -62,13 +69,6 @@ const ANNEXES: Record<1 | 2 | 3, Annex> = {
       "traduction, légalisation ou certification de documents",
       "garantie d'admission, de visa ou de logement",
     ],
-    triggers: [
-      "À l'ouverture du dossier, après signature du contrat",
-      "Au dépôt de la candidature à l'école de langue",
-      "À la réception de la lettre de confirmation d'inscription",
-    ],
-    thirdNote:
-      "En cas d'absence de réponse de l'école, le Prestataire informe le Client du dépôt réalisé et de sa date. L'échéance liée à cette étape est due au plus tard dix (10) jours calendaires après le dépôt de la première candidature, sous réserve des règles impératives applicables et des dispositions du contrat concernant la fin anticipée et les prestations effectivement réalisées. Les refus ou absences de réponse ne constituent pas une garantie de remboursement des prestations déjà réalisées. Les droits impératifs applicables au Client demeurent réservés.",
   },
   2: {
     title: "Annexe — Formule 2 — Recherche d'universités et accompagnement des candidatures",
@@ -87,13 +87,6 @@ const ANNEXES: Record<1 | 2 | 3, Annex> = {
       "frais de visa, de transport, d'assurance ou de logement",
       "démarches ou prestations facturées par des tiers",
     ],
-    triggers: [
-      "À l'ouverture du dossier, après signature du contrat",
-      "Au dépôt de la première candidature universitaire",
-      "À la réception d'une lettre d'admission ou de confirmation d'inscription",
-    ],
-    thirdNote:
-      "En cas d'absence de réponse d'un établissement, le Prestataire informe le Client du dépôt réalisé et de sa date. L'échéance liée à cette étape est due au plus tard dix (10) jours calendaires après le dépôt de la première candidature universitaire, sous réserve des règles impératives applicables et des dispositions du contrat concernant la fin anticipée et les prestations effectivement réalisées. Les refus ou absences de réponse ne constituent pas une garantie de remboursement des prestations déjà réalisées. Les droits impératifs applicables au Client demeurent réservés.",
   },
   3: {
     title: "Annexe — Formule 3 : Parcours complet",
@@ -119,13 +112,6 @@ const ANNEXES: Record<1 | 2 | 3, Annex> = {
       "garantie d'admission, de bourse, de visa ou de logement",
       "les démarches qui doivent être réalisées personnellement par le Client ou son représentant légal",
     ],
-    triggers: [
-      "À l'ouverture du dossier, après signature du contrat",
-      "Au dépôt de la candidature à l'école de langue",
-      "Au début de l'accompagnement universitaire, lors du dépôt de la première candidature universitaire",
-    ],
-    thirdNote:
-      "La troisième échéance concerne l'étape universitaire prévue l'année suivant l'année de langue. Elle ne dépend pas de la réception d'une lettre de l'école de langue. En cas d'absence de réponse d'un établissement, le Prestataire informe le Client du dépôt réalisé et de la date de ce dépôt. L'échéance liée à cette étape est due au plus tard dix (10) jours calendaires après le dépôt de la première candidature universitaire, sous réserve des règles impératives applicables et des dispositions du contrat concernant la fin anticipée et les prestations effectivement réalisées. Les refus ou absences de réponse des universités ne constituent pas une garantie de remboursement des prestations déjà réalisées. Les droits impératifs applicables au Client demeurent réservés.",
   },
 };
 
@@ -225,8 +211,6 @@ export function contractTerms(value: unknown) {
       : {};
   return {
     paymentMode: clip(raw.paymentMode, 240),
-    transferFees: clip(raw.transferFees, 240),
-    specialTerms: clip(raw.specialTerms, 500),
   };
 }
 
@@ -242,7 +226,7 @@ function scheduleTable(amounts: number[], triggers: [string, string, string]) {
   const rows = [
     ["1re échéance — 40 %", amounts[0], triggers[0]],
     ["2e échéance — 30 %", amounts[1], triggers[1]],
-    ["3e échéance — 30 %", amounts[2], triggers[2]],
+    ["3e échéance — solde", amounts[2], triggers[2]],
   ];
   const body = rows
     .map(
@@ -515,9 +499,10 @@ export function buildSaleContract(input: {
       <p><strong>3. Prix et échéancier</strong></p>
       <p>Prix total : ${escapeHtml(formatEurosOnly(formule.priceEuros))}</p>
       <p>Équivalence indicative : ${escapeHtml(formatFcfa(eurosToFcfa(formule.priceEuros)))}. L'équivalence en F CFA est indicative. Devise effectivement facturée : euros.</p>
-      ${scheduleTable(amounts, annex.triggers)}
-      <p>${escapeHtml(annex.thirdNote)}</p>
-      <p>Mode de paiement : ${escapeHtml(pay.paymentMode || CONTRACT_BLANK)}<br>Frais éventuels de transfert : ${escapeHtml(pay.transferFees || CONTRACT_BLANK)}<br>Échéancier ou conditions particulières : ${escapeHtml(pay.specialTerms || CONTRACT_BLANK)}</p>
+      ${scheduleTable(amounts, SCHEDULE_TRIGGERS)}
+      <p>${escapeHtml(SCHEDULE_NOTE)}</p>
+      <p>Mode de paiement : ${escapeHtml(pay.paymentMode || CONTRACT_BLANK)}</p>
+      <p>Conditions particulières :</p>
     </div>
   `;
 

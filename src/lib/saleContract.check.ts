@@ -7,6 +7,7 @@ import {
   CONTRACT_COMPANY,
   CONTRACT_PLACE,
   CONTRACT_REGISTRATION,
+  CONTRACT_STAMP_SRC,
   buildSaleContract,
   contractClientFromContact,
   contractInstallments,
@@ -91,7 +92,18 @@ assert(built.html.includes("28 septembre 2026"), "date d'envoi");
 assert(built.html.includes("cinq (5)"), "annexe formule 2");
 assert(built.html.includes("680"), "acompte formule 2");
 assert(!built.html.includes("huit (8)"), "pas l'annexe formule 3");
-assert(built.html.includes("Tampon de l'entreprise"), "emplacement du tampon");
+assert(built.html.includes(CONTRACT_STAMP_SRC), "tampon de l'entreprise");
+assert(built.html.includes("À l'ouverture du dossier"), "échéance 1");
+assert(built.html.includes("À l'envoi des candidatures"), "échéance 2");
+assert(
+  built.html.includes("À la réception de l'acceptation de l'école et/ou de l'université"),
+  "échéance 3",
+);
+assert(built.html.includes("1re échéance — 40 %"), "40 %");
+assert(built.html.includes("2e échéance — 30 %"), "30 %");
+assert(built.html.includes("3e échéance — solde"), "solde");
+assert(!built.html.includes("Frais éventuels de transfert"), "pas de frais de transfert");
+assert(built.html.includes("Conditions particulières :</p>"), "conditions particulières vides");
 assert(built.html.includes("Mode de paiement : [À COMPLÉTER]"), "paiement vide");
 const paid = buildSaleContract({
   client,
@@ -99,15 +111,13 @@ const paid = buildSaleContract({
   sentAt,
   terms: {
     paymentMode: "virement <bancaire>",
-    transferFees: "à la charge du Client",
-    specialTerms: "",
   },
 });
 assert(paid && "html" in paid, "contrat avec paiement");
 if (paid && "html" in paid) {
   assert(paid.html.includes("virement &lt;bancaire&gt;"), "mode de paiement");
-  assert(paid.html.includes("à la charge du Client"), "frais de transfert");
-  assert(paid.html.includes("Échéancier ou conditions particulières : [À COMPLÉTER]"), "condition vide");
+  assert(!paid.html.includes("Frais éventuels de transfert"), "pas de frais de transfert");
+  assert(paid.html.includes("Conditions particulières :</p>"), "conditions particulières vides");
 }
 assert(!built.html.includes("Si le Client est mineur"), "majeur sans représentant");
 const formule3 = buildSaleContract({ client, formuleNumber: 3, sentAt });
@@ -115,6 +125,10 @@ assert(formule3 && "html" in formule3, "contrat formule 3");
 if (!formule3 || !("html" in formule3)) throw new Error("narrow 3");
 assert(!formule3.html.includes("Économie par rapport"), "pas de phrase d'économie");
 assert(formule3.html.includes("huit (8)"), "huit candidatures");
+assert(
+  formule3.html.includes("À la réception de l'acceptation de l'école et/ou de l'université"),
+  "même échéancier formule 3",
+);
 assert(formule3.html.includes("2 000"), "prix formule 3");
 const blocked = buildSaleContract({
   client: { ...client, nationalite: "" },
