@@ -29,10 +29,14 @@ export default function AdminLogin() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const { error: signError } = await signIn(email, password);
+    // iPad autofill writes the DOM fields without updating React state.
+    const submitted = new FormData(e.currentTarget);
+    const nextEmail = String(submitted.get("email") || email).trim();
+    const nextPassword = String(submitted.get("password") || password);
+    const { error: signError } = await signIn(nextEmail, nextPassword);
     if (signError) {
       setLoading(false);
-      setError(t("login.invalid"));
+      setError(signError.message || t("login.invalid"));
       return;
     }
 
@@ -95,6 +99,12 @@ export default function AdminLogin() {
           </label>
           <input
             type="email"
+            name="email"
+            inputMode="email"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -107,6 +117,11 @@ export default function AdminLogin() {
           </label>
           <input
             type="password"
+            name="password"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
