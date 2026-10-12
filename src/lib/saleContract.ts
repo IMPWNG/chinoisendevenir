@@ -1,6 +1,13 @@
 import { CONTACT_FROM_EMAIL } from "./emailConfig";
 import { escapeHtml, withEtudeChineSubject, wrapEmailHtml } from "./emailLayout";
-import { eurosToFcfa, formatEurosOnly, formatFcfa } from "./money";
+import {
+  eurosToFcfa,
+  eurosToRmb,
+  formatEuroFcfaRate,
+  formatEurosOnly,
+  formatFcfa,
+  formatRmb,
+} from "./money";
 import { getFormuleByNumber } from "./formules";
 
 /** Company stamp on the provider signature. Served from /public. */
@@ -206,6 +213,22 @@ export function clientReady(client: ContractClient) {
   return contractGaps(client).length === 0;
 }
 
+export const CONTRACT_CURRENCIES = ["EUR", "XOF", "CNY"] as const;
+export type ContractCurrency = (typeof CONTRACT_CURRENCIES)[number];
+
+const CURRENCY_LABEL: Record<ContractCurrency, string> = {
+  EUR: "euros",
+  XOF: "francs CFA",
+  CNY: "RMB",
+};
+
+export function contractCurrency(value: unknown): ContractCurrency {
+  const code = String(value || "").trim().toUpperCase();
+  return (CONTRACT_CURRENCIES as readonly string[]).includes(code)
+    ? (code as ContractCurrency)
+    : "EUR";
+}
+
 export function contractTerms(value: unknown) {
   const raw =
     value && typeof value === "object"
@@ -213,7 +236,30 @@ export function contractTerms(value: unknown) {
       : {};
   return {
     paymentMode: clip(raw.paymentMode, 240),
+    currency: contractCurrency(raw.currency),
   };
+}
+
+function convertedParts(
+  euros: number[],
+  totalEuros: number,
+  convert: (amount: number) => number,
+): number[] {
+  const parts = euros.map(convert);
+  parts[2] = convert(totalEuros) - parts[0] - parts[1];
+  return parts;
+}
+
+function formatInstallment(
+  euros: number,
+  cfa: number,
+  rmb: number,
+  currency: ContractCurrency,
+): string {
+  const cfaLabel = formatFcfa(cfa);
+  if (currency === "XOF") return cfaLabel;
+  if (currency === "CNY") return `${formatRmb(rmb)} (${cfaLabel})`;
+  return `${formatEurosOnly(euros)} (${cfaLabel})`;
 }
 
 function bullets(items: string[]) {
@@ -224,7 +270,10 @@ function field(label: string, value: string) {
   return `<p><strong>${escapeHtml(label)} :</strong> ${escapeHtml(value)}</p>`;
 }
 
-function scheduleTable(amounts: number[], triggers: [string, string, string]) {
+function scheduleTable(
+  amounts: string[],
+  triggers: [string, string, string],
+) {
   const rows = [
     ["1re échéance — 40 %", amounts[0], triggers[0]],
     ["2e échéance — 30 %", amounts[1], triggers[1]],
@@ -234,7 +283,7 @@ function scheduleTable(amounts: number[], triggers: [string, string, string]) {
     .map(
       ([label, amount, trigger]) => `<tr>
         <td style="padding:8px;border-bottom:1px solid #e6e9ee;vertical-align:top;">${escapeHtml(label)}</td>
-        <td style="padding:8px;border-bottom:1px solid #e6e9ee;vertical-align:top;white-space:nowrap;">${escapeHtml(formatEurosOnly(amount as number))}</td>
+        <td style="padding:8px;border-bottom:1px solid #e6e9ee;vertical-align:top;white-space:nowrap;">${escapeHtml(amount)}</td>
         <td style="padding:8px;border-bottom:1px solid #e6e9ee;vertical-align:top;">${escapeHtml(trigger)}</td>
       </tr>`,
     )
@@ -306,7 +355,18 @@ export function buildSaleContract(input: {
   const pay = contractTerms(input.terms);
 
   const client = input.client;
-  const amounts = contractInstallments(formule.priceEuros);
+  const euroParts = contractInstallments(formule.priceEuros);
+  const cfaParts = convertedParts(euroParts, formule.priceEuros, eurosToFcfa);
+  const rmbParts = convertedParts(euroParts, formule.priceEuros, eurosToRmb);
+  const amounts = euroParts.map((euros, index) =>
+    formatInstallment(euros, cfaParts[index], rmbParts[index], pay.currency),
+  );
+  const totalLabel = formatInstallment(
+    formule.priceEuros,
+    eurosToFcfa(formule.priceEuros),
+    eurosToRmb(formule.priceEuros),
+    pay.currency,
+  );
   const fullName = `${client.prenom} ${client.nom}`.trim();
   const dateLabel = contractSendDate(input.sentAt);
   const rep = client.representant;
@@ -499,8 +559,9 @@ export function buildSaleContract(input: {
       <p>Sauf accord écrit contraire, ne sont pas inclus :</p>
       ${bullets(annex.excluded)}
       <p><strong>3. Prix et échéancier</strong></p>
-      <p>Prix total : ${escapeHtml(formatEurosOnly(formule.priceEuros))}</p>
-      <p>Équivalence indicative : ${escapeHtml(formatFcfa(eurosToFcfa(formule.priceEuros)))}. L'équivalence en F CFA est indicative. Devise effectivement facturée : euros.</p>
+      <p>Devise de paiement : ${escapeHtml(CURRENCY_LABEL[pay.currency])}</p>
+      <p>Prix total : ${escapeHtml(totalLabel)}</p>
+      <p>Taux appliqué : ${escapeHtml(formatEuroFcfaRate())}.</p>
       ${scheduleTable(amounts, SCHEDULE_TRIGGERS)}
       <p>${escapeHtml(SCHEDULE_NOTE)}</p>
       <p>Mode de paiement : ${escapeHtml(pay.paymentMode || CONTRACT_BLANK)}</p>

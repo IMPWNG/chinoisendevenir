@@ -93,6 +93,9 @@ assert(built.html.includes(CONTRACT_PLACE), "lieu Chongqing");
 assert(built.html.includes("28 septembre 2026"), "date d'envoi");
 assert(built.html.includes("cinq (5)"), "annexe formule 2");
 assert(built.html.includes("680"), "acompte formule 2");
+assert(built.html.includes("446 051 F CFA"), "acompte en CFA");
+assert(built.html.includes("Devise de paiement : euros"), "devise euros");
+assert(built.html.includes("1 € = 655,957 F CFA"), "taux du franc CFA");
 assert(!built.html.includes("huit (8)"), "pas l'annexe formule 3");
 assert(built.html.includes(CONTRACT_STAMP_SRC), "tampon de l'entreprise");
 assert(built.html.includes(CONTRACT_REPRESENTATIVE), "représentant");
@@ -123,6 +126,28 @@ if (paid && "html" in paid) {
   assert(paid.html.includes("virement &lt;bancaire&gt;"), "mode de paiement");
   assert(!paid.html.includes("Frais éventuels de transfert"), "pas de frais de transfert");
   assert(paid.html.includes("Conditions particulières :</p>"), "conditions particulières vides");
+}
+const cfa = buildSaleContract({
+  client,
+  formuleNumber: 2,
+  sentAt,
+  terms: { currency: "XOF" },
+});
+assert(cfa && "html" in cfa && cfa.html.includes("Devise de paiement : francs CFA"), "devise CFA");
+if (cfa && "html" in cfa) {
+  assert(cfa.html.includes("446 051 F CFA"), "échéance en CFA");
+  assert(!cfa.html.includes("680 €"), "plus d'euros quand la devise est le CFA");
+}
+const rmb = buildSaleContract({
+  client,
+  formuleNumber: 2,
+  sentAt,
+  terms: { currency: "CNY" },
+});
+assert(rmb && "html" in rmb && rmb.html.includes("Devise de paiement : RMB"), "devise RMB");
+if (rmb && "html" in rmb) {
+  assert(rmb.html.includes("5 440 RMB"), "échéance en RMB");
+  assert(rmb.html.includes("446 051 F CFA"), "CFA à côté du RMB");
 }
 assert(!built.html.includes("Si le Client est mineur"), "majeur sans représentant");
 const formule3 = buildSaleContract({ client, formuleNumber: 3, sentAt });

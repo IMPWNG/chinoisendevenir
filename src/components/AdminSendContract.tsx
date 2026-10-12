@@ -11,7 +11,9 @@ import {
   CONTRACT_COMPANY,
   CONTRACT_PLACE,
   CONTRACT_REGISTRATION,
+  CONTRACT_CURRENCIES,
   CONTRACT_SITE,
+  type ContractCurrency,
   buildSaleContract,
   clientReady,
   contractClientFromContact,
@@ -69,6 +71,7 @@ export default function AdminSendContract({
   const [repAddress, setRepAddress] = useState("");
   const [repContact, setRepContact] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
+  const [currency, setCurrency] = useState<ContractCurrency>("EUR");
   const [formuleNumber, setFormuleNumber] = useState(
     getFormuleNumber(contact.formule) || 0,
   );
@@ -87,6 +90,7 @@ export default function AdminSendContract({
     setRepAddress("");
     setRepContact("");
     setPaymentMode("");
+    setCurrency("EUR");
     setFormuleNumber(getFormuleNumber(contact.formule) || 0);
     setPreview(false);
   }, [contact.id, contact.pays, contact.phone, contact.formule]);
@@ -111,7 +115,7 @@ export default function AdminSendContract({
     clientReady(client) &&
     (formuleNumber === 1 || formuleNumber === 2 || formuleNumber === 3);
 
-  const terms = { paymentMode };
+  const terms = { paymentMode, currency };
   const built =
     preview && ready
       ? buildSaleContract({
@@ -151,7 +155,7 @@ export default function AdminSendContract({
             adresse: repAddress,
             contact: repContact,
           },
-          terms: { paymentMode },
+          terms: { paymentMode, currency },
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -356,7 +360,22 @@ export default function AdminSendContract({
         </div>
       </div>
       <p className="text-xs text-slate-500 mb-3">{t("dashboard.contractPayHint")}</p>
-      <div className="grid grid-cols-1 gap-3 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        <div>
+          <label className={label}>{t("dashboard.contractCurrency")}</label>
+          <select
+            value={currency}
+            disabled={sending}
+            onChange={(e) => setCurrency(e.target.value as ContractCurrency)}
+            className={fieldClass(sending)}
+          >
+            {CONTRACT_CURRENCIES.map((code) => (
+              <option key={code} value={code}>
+                {t(`dashboard.contractCurrency${code}`)}
+              </option>
+            ))}
+          </select>
+        </div>
         <div>
           <label className={label}>{t("dashboard.contractPayMode")}</label>
           <input
@@ -388,6 +407,56 @@ export default function AdminSendContract({
           className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold disabled:opacity-50"
         >
           {preview ? t("dashboard.contractHidePreview") : t("dashboard.contractPreview")}
+        </button>
+        <button
+          type="button"
+          disabled={!ready || sending}
+          onClick={() => {
+            const doc = buildSaleContract({
+              client,
+              formuleNumber,
+              sentAt: new Date(),
+              terms,
+            });
+            if (!doc || !("html" in doc)) return;
+            const frame = window.open("", "_blank", "noopener,noreferrer");
+            if (!frame) {
+              alert(t("dashboard.contractPdfBlocked"));
+              return;
+            }
+            frame.document.open();
+            frame.document.write(
+              doc.html.replace(
+                "</head>",
+                "<style>@page{margin:16mm} @media print{body{background:#fff!important}}</style></head>",
+              ),
+            );
+            frame.document.close();
+            const images = [...frame.document.images];
+            const go = () => {
+              frame.focus();
+              frame.print();
+            };
+            if (!images.length) {
+              go();
+              return;
+            }
+            let pending = images.length;
+            const done = () => {
+              pending -= 1;
+              if (pending <= 0) go();
+            };
+            for (const img of images) {
+              if (img.complete) done();
+              else {
+                img.addEventListener("load", done);
+                img.addEventListener("error", done);
+              }
+            }
+          }}
+          className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold disabled:opacity-50"
+        >
+          {t("dashboard.contractPdf")}
         </button>
         <button
           type="button"

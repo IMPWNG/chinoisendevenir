@@ -36,6 +36,11 @@ export function formatFcfa(fcfa: number): string {
   return `${formatFrNumber(fcfa, 0)} ${FCFA_LABEL}`;
 }
 
+/** Official euro peg, the rate actually in force for the CFA franc. */
+export function formatEuroFcfaRate(): string {
+  return `1 € = ${formatFrNumber(EUR_TO_FCFA, 3)} ${FCFA_LABEL}`;
+}
+
 export function formatEurosOnly(amount: number): string {
   return `${formatFrNumber(amount, fractionDigits(amount))} €`;
 }
