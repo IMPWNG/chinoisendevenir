@@ -11,6 +11,11 @@ import {
   storeOutboundContactEmail,
 } from "@/lib/contactEmails";
 import {
+  contractEmailWithPdfNote,
+  contractHtmlToPdf,
+  contractPdfFilename,
+} from "@/lib/contractPdf";
+import {
   buildSaleContract,
   clientReady,
   contractClientFromContact,
@@ -141,6 +146,19 @@ export async function POST(request: Request) {
     );
   }
 
+  const fullName = `${client.prenom} ${client.nom}`.trim();
+  let pdf: Uint8Array;
+  try {
+    pdf = await contractHtmlToPdf(contract.html, `Contrat ${fullName}`);
+  } catch (error: unknown) {
+    console.error("send-contract pdf:", errorMessage(error));
+    return NextResponse.json(
+      { success: false, error: "Le PDF du contrat n'a pas pu être créé" },
+      { status: 500 },
+    );
+  }
+  const emailHtml = contractEmailWithPdfNote(contract.html);
+
   try {
     const resend = new Resend(getResendApiKey());
     const response = await resend.emails.send({
@@ -148,7 +166,14 @@ export async function POST(request: Request) {
       replyTo: INBOUND_REPLY_TO,
       to: client.email,
       subject: contract.subject,
-      html: contract.html,
+      html: emailHtml,
+      attachments: [
+        {
+          filename: contractPdfFilename(fullName),
+          content: Buffer.from(pdf),
+          contentType: "application/pdf",
+        },
+      ],
     });
     if (response.error) {
       console.error("send-contract resend:", response.error);
@@ -162,7 +187,7 @@ export async function POST(request: Request) {
       contactId,
       toEmail: client.email,
       subject: contract.subject,
-      bodyText: emailHtmlToText(contract.html),
+      bodyText: emailHtmlToText(emailHtml),
       resendId: response.data?.id || null,
     });
 
@@ -170,7 +195,7 @@ export async function POST(request: Request) {
       {
         contact_id: contactId,
         action: "email_envoye",
-        description: `Contrat de prestation envoyé — formule ${formuleNumber}`,
+        description: `Contrat de prestation envoyé — formule ${formuleNumber} (PDF joint)`,
         user_admin: auth.user.email || "admin",
       },
     ]);

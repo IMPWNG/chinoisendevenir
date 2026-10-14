@@ -3,6 +3,14 @@
  * Run: npx tsx src/lib/saleContract.check.ts
  */
 import {
+  CONTRACT_PDF_NOTE,
+  contractEmailWithPdfNote,
+  contractFontGaps,
+  contractHtmlBlocks,
+  contractHtmlToPdf,
+  contractPdfFilename,
+} from "./contractPdf";
+import {
   CONTRACT_ADDRESS,
   CONTRACT_COMPANY,
   CONTRACT_PLACE,
@@ -223,4 +231,44 @@ if (paidByParent && "html" in paidByParent) {
   assert(paidByParent.html.includes("<strong>Le payeur</strong>"), "signature du payeur");
 }
 
-console.log("saleContract.check ok");
+function blockText(html: string) {
+  return contractHtmlBlocks(html)
+    .map((block) => {
+      if (block.kind === "stamp") return "";
+      if (block.kind === "table") return block.rows.flat().join("\n");
+      return block.text;
+    })
+    .join("\n");
+}
+
+for (const doc of [built, formule3, paidByParent]) {
+  if (!doc || !("html" in doc)) continue;
+  const missing = contractFontGaps(blockText(doc.html));
+  assert(missing === "", `glyphes manquants: ${missing}`);
+  assert(contractHtmlBlocks(doc.html).some((block) => block.kind === "stamp"), "tampon dans le PDF");
+}
+assert(contractPdfFilename("Awa Diallo") === "contrat-Awa-Diallo.pdf", "nom du PDF");
+assert(
+  contractEmailWithPdfNote(built.html).includes(CONTRACT_PDF_NOTE),
+  "mention de la pièce jointe",
+);
+assert(!built.html.includes(CONTRACT_PDF_NOTE), "le contrat source n'annonce pas le PDF");
+assert(
+  contractFontGaps(`${CONTRACT_COMPANY}${CONTRACT_ADDRESS}`) === "",
+  "raison sociale hors police",
+);
+
+contractHtmlToPdf(built.html, "Contrat Awa Diallo")
+  .then(async (pdf) => {
+    assert(pdf.byteLength > 8000, "PDF trop petit");
+    assert(String.fromCharCode(...pdf.slice(0, 5)) === "%PDF-", "en-tête PDF");
+    const { PDFDocument } = await import("pdf-lib");
+    const loaded = await PDFDocument.load(pdf);
+    assert(loaded.getTitle() === "Contrat Awa Diallo", "titre du PDF");
+    assert(loaded.getPageCount() >= 2, "contrat sur plusieurs pages");
+    console.log("saleContract.check ok");
+  })
+  .catch((error: unknown) => {
+    console.error(error);
+    process.exit(1);
+  });

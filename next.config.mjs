@@ -29,6 +29,12 @@ const securityHeaders = [
 
 const nextConfig = {
   poweredByHeader: false,
+  outputFileTracingIncludes: {
+    "/api/admin/send-contract": [
+      "./src/lib/fonts/**",
+      "./public/tampon-entreprise.png",
+    ],
+  },
   // Bake Vite-era names into the client if NEXT_PUBLIC_* were never renamed on Vercel.
   env: {
     NEXT_PUBLIC_SUPABASE_URL:

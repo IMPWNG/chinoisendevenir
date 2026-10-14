@@ -193,18 +193,12 @@ export default function AdminSendContract({
 
   async function send() {
     if (!ready) return;
-    const html = contractHtml();
-    if (!html) return;
-    const pdfWindow = openContractPdfWindow();
     const confirmed = confirm(
       t("dashboard.contractConfirm", {
         name: `${client.prenom} ${client.nom}`.trim(),
       }),
     );
-    if (!confirmed) {
-      pdfWindow?.close();
-      return;
-    }
+    if (!confirmed) return;
 
     setSending(true);
     try {
@@ -237,7 +231,6 @@ export default function AdminSendContract({
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.success) {
-        pdfWindow?.close();
         alert(
           "❌ " +
             (data.error || t("dashboard.contractFail")) +
@@ -247,12 +240,9 @@ export default function AdminSendContract({
         );
         return;
       }
-      if (pdfWindow) fillContractPdf(pdfWindow, html);
-      else alert(t("dashboard.contractPdfBlocked"));
       alert(`✅ ${t("dashboard.contractOk")}`);
       onSent?.();
     } catch (error: unknown) {
-      pdfWindow?.close();
       const message = errorMessage(error);
       alert(
         "❌ " +
