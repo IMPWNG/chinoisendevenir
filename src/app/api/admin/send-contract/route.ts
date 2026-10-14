@@ -101,6 +101,16 @@ export async function POST(request: Request) {
             contact?: unknown;
           })
         : null,
+    tiersPayeur: body.tiersPayeur === true,
+    payeur:
+      body.payeur && typeof body.payeur === "object"
+        ? (body.payeur as {
+            nom?: unknown;
+            lien?: unknown;
+            adresse?: unknown;
+            contact?: unknown;
+          })
+        : null,
   });
   if (!clientReady(client)) {
     return NextResponse.json(

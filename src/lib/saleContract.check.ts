@@ -150,6 +150,10 @@ if (rmb && "html" in rmb) {
   assert(rmb.html.includes("446 051 F CFA"), "CFA à côté du RMB");
 }
 assert(!built.html.includes("Si le Client est mineur"), "majeur sans représentant");
+assert(
+  !built.html.includes("Personne qui règle l'accompagnement"),
+  "client qui paie lui-même",
+);
 const formule3 = buildSaleContract({ client, formuleNumber: 3, sentAt });
 assert(formule3 && "html" in formule3, "contrat formule 3");
 if (!formule3 || !("html" in formule3)) throw new Error("narrow 3");
@@ -179,5 +183,44 @@ assert(
   minor && "validation" in minor && minor.gaps.includes("Nom du représentant légal"),
   "mineur sans représentant",
 );
+const payerMissing = buildSaleContract({
+  client: { ...client, tiersPayeur: true },
+  formuleNumber: 2,
+  sentAt,
+});
+assert(
+  payerMissing &&
+    "validation" in payerMissing &&
+    payerMissing.gaps.includes("Nom du payeur"),
+  "payeur sans nom",
+);
+const paidByParent = buildSaleContract({
+  client: {
+    ...client,
+    tiersPayeur: true,
+    payeur: {
+      nom: "Fatou Diallo",
+      lien: "Mère",
+      adresse: "Dakar",
+      contact: "fatou@example.com",
+    },
+  },
+  formuleNumber: 2,
+  sentAt,
+});
+assert(paidByParent && "html" in paidByParent, "contrat payé par un parent");
+if (paidByParent && "html" in paidByParent) {
+  assert(
+    paidByParent.html.includes("Personne qui règle l'accompagnement"),
+    "bloc payeur",
+  );
+  assert(paidByParent.html.includes("Fatou Diallo"), "nom du payeur");
+  assert(paidByParent.html.includes("Mère"), "lien du payeur");
+  assert(
+    paidByParent.html.includes("Les échéances sont réglées par Fatou Diallo, Mère."),
+    "échéance réglée par le payeur",
+  );
+  assert(paidByParent.html.includes("<strong>Le payeur</strong>"), "signature du payeur");
+}
 
 console.log("saleContract.check ok");

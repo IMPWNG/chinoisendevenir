@@ -42,6 +42,9 @@ export type ContractClient = {
   adresse: string;
   mineur: boolean;
   representant: LegalRepresentative;
+  /** Someone other than the client pays (often a parent of an adult student). */
+  tiersPayeur: boolean;
+  payeur: LegalRepresentative;
 };
 
 const SCHEDULE_TRIGGERS: [string, string, string] = [
@@ -168,9 +171,17 @@ export function contractClientFromContact(
       adresse?: unknown;
       contact?: unknown;
     } | null;
+    tiersPayeur?: unknown;
+    payeur?: {
+      nom?: unknown;
+      lien?: unknown;
+      adresse?: unknown;
+      contact?: unknown;
+    } | null;
   },
 ): ContractClient {
   const rep = extras.representant || {};
+  const payer = extras.payeur || {};
   return {
     prenom: clip(contact.prenom, 80),
     nom: clip(contact.nom, 80),
@@ -186,6 +197,13 @@ export function contractClientFromContact(
       lien: clip(rep.lien, 80),
       adresse: clip(rep.adresse, 240),
       contact: clip(rep.contact, 160),
+    },
+    tiersPayeur: extras.tiersPayeur === true,
+    payeur: {
+      nom: clip(payer.nom, 120),
+      lien: clip(payer.lien, 80),
+      adresse: clip(payer.adresse, 240),
+      contact: clip(payer.contact, 160),
     },
   };
 }
@@ -205,6 +223,12 @@ export function contractGaps(client: ContractClient): string[] {
     if (!client.representant.lien) gaps.push("Lien du représentant légal avec le client");
     if (!client.representant.adresse) gaps.push("Adresse du représentant légal");
     if (!client.representant.contact) gaps.push("E-mail et téléphone du représentant légal");
+  }
+  if (client.tiersPayeur) {
+    if (!client.payeur.nom) gaps.push("Nom du payeur");
+    if (!client.payeur.lien) gaps.push("Lien du payeur avec le client");
+    if (!client.payeur.adresse) gaps.push("Adresse du payeur");
+    if (!client.payeur.contact) gaps.push("E-mail et téléphone du payeur");
   }
   return gaps;
 }
@@ -385,6 +409,21 @@ export function buildSaleContract(input: {
   const minorSign = client.mineur
     ? `<p style="margin-top:16px;"><strong>Le représentant légal</strong><br>Nom : ${shown(rep.nom)}<br>Qualité : ${shown(rep.lien)}<br>Signature précédée de la mention « Agissant en qualité de représentant légal du Client mineur » :</p>`
     : "";
+  const payer = client.payeur;
+  const payerBlock = client.tiersPayeur
+    ? `<div class="section">
+      <div class="section-title">Personne qui règle l'accompagnement</div>
+      <p>Les sommes dues au titre du présent contrat sont réglées par une personne autre que le Client, y compris lorsque le Client est majeur. Le Client demeure le bénéficiaire des prestations et reste partie au contrat. Le paiement par un tiers ne transfère pas au Payeur la qualité de Client.</p>
+      ${field("Nom et prénom du payeur", payer.nom)}
+      ${field("Lien avec le Client", payer.lien)}
+      ${field("Adresse", payer.adresse)}
+      ${field("E-mail et téléphone", payer.contact)}
+      <p>Le Payeur s'engage à régler les échéances prévues à l'annexe, selon le mode de paiement indiqué. À défaut de paiement par le Payeur, les sommes restent dues dans les conditions du présent contrat.</p>
+    </div>`
+    : "";
+  const payerSign = client.tiersPayeur
+    ? `<p style="margin-top:16px;"><strong>Le payeur</strong><br>Nom : ${shown(payer.nom)}<br>Qualité : ${shown(payer.lien)}<br>Signature :</p>`
+    : "";
 
   const bodyHtml = `
     <div class="section">
@@ -412,8 +451,10 @@ export function buildSaleContract(input: {
       <p>Ci-après dénommé le « Client ».</p>
     </div>
     ${minorBlock}
+    ${payerBlock}
     <div class="section">
       <p>Le Prestataire et le Client${client.mineur ? ", représenté par son représentant légal," : ""} sont ci-après désignés ensemble les « Parties ».</p>
+      ${client.tiersPayeur ? "<p>Le Payeur désigné ci-dessus règle les sommes dues. Les prestations restent fournies au Client.</p>" : ""}
     </div>
     <div class="section">
       <div class="section-title">Article 1 — Objet du contrat</div>
@@ -546,11 +587,13 @@ export function buildSaleContract(input: {
       <div class="section-title">Article 14 — Acceptation et signatures</div>
       <p>Le Client reconnaît avoir reçu, lu et accepté le présent contrat et l'annexe correspondant à la formule choisie. Il reconnaît également avoir reçu ou avoir pu consulter la politique de confidentialité.</p>
       ${client.mineur ? `<p>Son représentant légal déclare signer le contrat en son nom et l'avoir informé de ses principales conditions, dans la mesure adaptée à son âge.</p>` : ""}
+      ${client.tiersPayeur ? "<p>Le Payeur reconnaît avoir pris connaissance des échéances et s'engage à les régler.</p>" : ""}
       <p><strong>Fait à :</strong> ${escapeHtml(CONTRACT_PLACE)}<br><strong>Le :</strong> ${escapeHtml(dateLabel)}</p>
       <p><strong>Le Prestataire</strong><br>Nom du représentant : ${escapeHtml(CONTRACT_REPRESENTATIVE)}<br>Fonction : ${escapeHtml(CONTRACT_ROLE)}</p>
       ${stampHtml()}
       <p style="margin-top:16px;"><strong>Le Client</strong><br>Nom : ${escapeHtml(fullName)}<br>Signature précédée de la mention « Lu et approuvé » :</p>
       ${minorSign}
+      ${payerSign}
     </div>
     <div class="section">
       <div class="section-title">${escapeHtml(annex.title)}</div>
@@ -565,6 +608,11 @@ export function buildSaleContract(input: {
       ${scheduleTable(amounts, SCHEDULE_TRIGGERS)}
       <p>${escapeHtml(SCHEDULE_NOTE)}</p>
       <p>Mode de paiement : ${escapeHtml(pay.paymentMode || CONTRACT_BLANK)}</p>
+      ${
+        client.tiersPayeur
+          ? `<p>Les échéances sont réglées par ${escapeHtml(payer.nom)}, ${escapeHtml(payer.lien)}.</p>`
+          : ""
+      }
       <p>Conditions particulières :</p>
     </div>
   `;

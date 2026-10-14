@@ -37,6 +37,43 @@ function fieldClass(disabled: boolean) {
   }`;
 }
 
+function fillContractPdf(frame: Window, html: string) {
+  frame.document.open();
+  frame.document.write(
+    html.replace(
+      "</head>",
+      "<style>@page{margin:16mm} @media print{body{background:#fff!important}}</style></head>",
+    ),
+  );
+  frame.document.close();
+  const images = [...frame.document.images];
+  const go = () => {
+    frame.focus();
+    frame.print();
+  };
+  if (!images.length) {
+    go();
+    return;
+  }
+  let pending = images.length;
+  const done = () => {
+    pending -= 1;
+    if (pending <= 0) go();
+  };
+  for (const img of images) {
+    if (img.complete) done();
+    else {
+      img.addEventListener("load", done);
+      img.addEventListener("error", done);
+    }
+  }
+}
+
+/** Blank window opened in the click, then filled. `noopener` would return null and block the PDF. */
+function openContractPdfWindow() {
+  return window.open("", "_blank");
+}
+
 async function authedFetch(path: string, options: RequestInit = {}) {
   const {
     data: { session },
@@ -70,6 +107,11 @@ export default function AdminSendContract({
   const [repLink, setRepLink] = useState("");
   const [repAddress, setRepAddress] = useState("");
   const [repContact, setRepContact] = useState("");
+  const [otherPayer, setOtherPayer] = useState(false);
+  const [payerName, setPayerName] = useState("");
+  const [payerLink, setPayerLink] = useState("");
+  const [payerAddress, setPayerAddress] = useState("");
+  const [payerContact, setPayerContact] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
   const [currency, setCurrency] = useState<ContractCurrency>("EUR");
   const [formuleNumber, setFormuleNumber] = useState(
@@ -89,6 +131,11 @@ export default function AdminSendContract({
     setRepLink("");
     setRepAddress("");
     setRepContact("");
+    setOtherPayer(false);
+    setPayerName("");
+    setPayerLink("");
+    setPayerAddress("");
+    setPayerContact("");
     setPaymentMode("");
     setCurrency("EUR");
     setFormuleNumber(getFormuleNumber(contact.formule) || 0);
@@ -109,6 +156,13 @@ export default function AdminSendContract({
       adresse: repAddress,
       contact: repContact,
     },
+    tiersPayeur: otherPayer,
+    payeur: {
+      nom: payerName,
+      lien: payerLink,
+      adresse: payerAddress,
+      contact: payerContact,
+    },
   });
   const gaps = contractGaps(client);
   const ready =
@@ -127,14 +181,30 @@ export default function AdminSendContract({
       : null;
   const previewHtml = built && "html" in built ? built.html : "";
 
+  function contractHtml() {
+    const doc = buildSaleContract({
+      client,
+      formuleNumber,
+      sentAt: new Date(),
+      terms,
+    });
+    return doc && "html" in doc ? doc.html : "";
+  }
+
   async function send() {
     if (!ready) return;
+    const html = contractHtml();
+    if (!html) return;
+    const pdfWindow = openContractPdfWindow();
     const confirmed = confirm(
       t("dashboard.contractConfirm", {
         name: `${client.prenom} ${client.nom}`.trim(),
       }),
     );
-    if (!confirmed) return;
+    if (!confirmed) {
+      pdfWindow?.close();
+      return;
+    }
 
     setSending(true);
     try {
@@ -155,11 +225,19 @@ export default function AdminSendContract({
             adresse: repAddress,
             contact: repContact,
           },
+          tiersPayeur: otherPayer,
+          payeur: {
+            nom: payerName,
+            lien: payerLink,
+            adresse: payerAddress,
+            contact: payerContact,
+          },
           terms: { paymentMode, currency },
         }),
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.success) {
+        pdfWindow?.close();
         alert(
           "❌ " +
             (data.error || t("dashboard.contractFail")) +
@@ -169,9 +247,12 @@ export default function AdminSendContract({
         );
         return;
       }
+      if (pdfWindow) fillContractPdf(pdfWindow, html);
+      else alert(t("dashboard.contractPdfBlocked"));
       alert(`✅ ${t("dashboard.contractOk")}`);
       onSent?.();
     } catch (error: unknown) {
+      pdfWindow?.close();
       const message = errorMessage(error);
       alert(
         "❌ " +
@@ -387,6 +468,58 @@ export default function AdminSendContract({
           />
         </div>
       </div>
+      <label className="mb-3 flex items-center gap-2 text-sm text-slate-200">
+        <input
+          type="checkbox"
+          checked={otherPayer}
+          disabled={sending}
+          onChange={(e) => setOtherPayer(e.target.checked)}
+        />
+        {t("dashboard.contractPayer")}
+      </label>
+      {otherPayer ? (
+        <>
+          <p className="text-xs text-slate-500 mb-3">{t("dashboard.contractPayerHint")}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+            <div>
+              <label className={label}>{t("dashboard.contractPayerName")}</label>
+              <input
+                value={payerName}
+                disabled={sending}
+                onChange={(e) => setPayerName(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+            <div>
+              <label className={label}>{t("dashboard.contractPayerLink")}</label>
+              <input
+                value={payerLink}
+                disabled={sending}
+                onChange={(e) => setPayerLink(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className={label}>{t("dashboard.contractPayerAddress")}</label>
+              <input
+                value={payerAddress}
+                disabled={sending}
+                onChange={(e) => setPayerAddress(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className={label}>{t("dashboard.contractPayerContact")}</label>
+              <input
+                value={payerContact}
+                disabled={sending}
+                onChange={(e) => setPayerContact(e.target.value)}
+                className={fieldClass(sending)}
+              />
+            </div>
+          </div>
+        </>
+      ) : null}
       {gaps.length ? (
         <div className="mb-4 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
           <p className="text-sm font-bold text-amber-200">VALIDATION HUMAINE REQUISE</p>
@@ -412,47 +545,14 @@ export default function AdminSendContract({
           type="button"
           disabled={!ready || sending}
           onClick={() => {
-            const doc = buildSaleContract({
-              client,
-              formuleNumber,
-              sentAt: new Date(),
-              terms,
-            });
-            if (!doc || !("html" in doc)) return;
-            const frame = window.open("", "_blank", "noopener,noreferrer");
+            const html = contractHtml();
+            if (!html) return;
+            const frame = openContractPdfWindow();
             if (!frame) {
               alert(t("dashboard.contractPdfBlocked"));
               return;
             }
-            frame.document.open();
-            frame.document.write(
-              doc.html.replace(
-                "</head>",
-                "<style>@page{margin:16mm} @media print{body{background:#fff!important}}</style></head>",
-              ),
-            );
-            frame.document.close();
-            const images = [...frame.document.images];
-            const go = () => {
-              frame.focus();
-              frame.print();
-            };
-            if (!images.length) {
-              go();
-              return;
-            }
-            let pending = images.length;
-            const done = () => {
-              pending -= 1;
-              if (pending <= 0) go();
-            };
-            for (const img of images) {
-              if (img.complete) done();
-              else {
-                img.addEventListener("load", done);
-                img.addEventListener("error", done);
-              }
-            }
+            fillContractPdf(frame, html);
           }}
           className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold disabled:opacity-50"
         >
