@@ -93,11 +93,19 @@ export function createScopedAuth(
     }, []);
 
     const signIn = async (email: string, password: string): Promise<AuthResult> => {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      let response: Response;
+      try {
+        response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+      } catch {
+        return {
+          data: { user: null, session: null },
+          error: new Error("Connexion impossible. Réessayez dans un instant."),
+        };
+      }
       const payload = (await response.json().catch(() => ({}))) as {
         error?: string;
         access_token?: string;
@@ -122,7 +130,15 @@ export function createScopedAuth(
         payload.refresh_token,
       );
       if (applied.error) {
-        return { data: { user: null, session: null }, error: applied.error };
+        const raw = applied.error.message || "";
+        const message =
+          raw === "Failed to fetch" || raw === "NetworkError when attempting to fetch resource."
+            ? "Connexion impossible. Réessayez dans un instant."
+            : raw;
+        return {
+          data: { user: null, session: null },
+          error: new Error(message || "Connexion impossible."),
+        };
       }
 
       setUser(applied.data?.session?.user ?? applied.data?.user ?? null);
