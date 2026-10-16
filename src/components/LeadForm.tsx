@@ -74,6 +74,7 @@ const LeadForm = ({
   const [status, setStatus] = useState<LeadFormStatus>("idle");
   const [serverError, setServerError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const submittingRef = useRef(false);
 
   const diplomaOptions = withCurrentOption(
     DIPLOMA_VALUES,
@@ -150,8 +151,11 @@ const LeadForm = ({
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setServerError("");
     if (!validate()) {
+      submittingRef.current = false;
       scrollToFirstError();
       return;
     }
@@ -214,6 +218,8 @@ const LeadForm = ({
       setStatus("error");
       setServerError(t("form.error"));
       setTimeout(() => setStatus("idle"), 4000);
+    } finally {
+      submittingRef.current = false;
     }
   };
 

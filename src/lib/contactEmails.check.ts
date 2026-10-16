@@ -2,7 +2,7 @@
  * Self-check for contact email helpers.
  * Run: npx tsx src/lib/contactEmails.check.ts
  */
-import { emailHtmlToText } from "./contactEmails";
+import { emailHtmlToText, isFormWelcomeSubject } from "./contactEmails";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -19,6 +19,19 @@ assert(emailHtmlToText("") === "", "empty html");
 assert(
   !emailHtmlToText("<script>alert(1)</script>hello").includes("alert"),
   "strips script",
+);
+
+assert(
+  isFormWelcomeSubject(
+    "Etude Chine — Nous avons bien reçu votre demande, Kadra",
+  ),
+  "welcome subject",
+);
+assert(
+  !isFormWelcomeSubject(
+    "Etude Chine — Nos formules d'accompagnement pour étudier en Chine",
+  ),
+  "formules is not the welcome",
 );
 
 console.log("contactEmails check ok");

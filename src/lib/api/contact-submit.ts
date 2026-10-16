@@ -10,6 +10,7 @@ import { canonicalCountry } from "../countries";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
+  formWelcomeAlreadySent,
   storeOutboundContactEmail,
 } from "../contactEmails";
 
@@ -355,6 +356,13 @@ export default async function handler(request: Request) {
       console.warn("⚠️ Erreur suivi_actions:", errorMessage(actionError));
     }
 
+    const contactId = asString(contact?.id).trim();
+    const alreadyWelcomed =
+      isUpdate && contactId ? await formWelcomeAlreadySent(contactId) : false;
+
+    if (alreadyWelcomed) {
+      console.log("ℹ️ Bienvenue déjà envoyée:", normalizedEmail);
+    } else {
     try {
       const welcomeHtml = generateEmailTemplate(asString(prenom));
       const welcomeSubject = withEtudeChineSubject(
@@ -372,7 +380,7 @@ export default async function handler(request: Request) {
         console.warn("⚠️ Erreur Resend:", emailResponse.error);
       } else {
         console.log("✅ Email envoyé:", emailResponse.data?.id);
-        const cid = asString(contact?.id).trim();
+        const cid = contactId;
         if (cid) {
           await storeOutboundContactEmail({
             contactId: cid,
@@ -385,6 +393,7 @@ export default async function handler(request: Request) {
       }
     } catch (emailError: unknown) {
       console.warn("⚠️ Erreur Resend (non bloquant):", errorMessage(emailError));
+    }
     }
 
     return NextResponse.json(

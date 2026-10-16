@@ -116,6 +116,34 @@ export async function storeInboundContactEmail(opts: {
   });
 }
 
+export const FORM_WELCOME_SUBJECT_MARK = "Nous avons bien reçu votre demande";
+
+export function isFormWelcomeSubject(subject: unknown) {
+  return String(subject || "")
+    .toLowerCase()
+    .includes(FORM_WELCOME_SUBJECT_MARK.toLowerCase());
+}
+
+export async function formWelcomeAlreadySent(contactId: string): Promise<boolean> {
+  const id = String(contactId || "").trim();
+  if (!id) return false;
+
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("contact_emails")
+    .select("id")
+    .eq("contact_id", id)
+    .eq("direction", "out")
+    .ilike("subject", `%${FORM_WELCOME_SUBJECT_MARK}%`)
+    .limit(1);
+
+  if (error) {
+    console.warn("⚠️ formWelcomeAlreadySent:", error.message);
+    return false;
+  }
+  return (data || []).length > 0;
+}
+
 export async function storeOutboundContactEmail(opts: {
   contactId: string;
   toEmail?: string | null;
