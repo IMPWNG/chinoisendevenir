@@ -18,6 +18,8 @@ export { REQUIRED_STUDENT_DOCUMENTS };
 
 export const FOLDER_REQUIRED = "required";
 export const FOLDER_ADMIN = "from-admin";
+export const CONTRACT_COPY_NAME = "contrat-accompagnement.pdf";
+export const SIGNED_CONTRACT_KEY = "contrat_signe";
 
 const LEGACY_DIPLOMA_KEY = "dernier_diplome";
 const ALL_DOCUMENT_KEYS = new Set([
@@ -141,6 +143,30 @@ export function adminFolder(contactId: unknown) {
   return `${contactId}/${FOLDER_ADMIN}`;
 }
 
+export function contractCopyPath(contactId: unknown) {
+  return `${adminFolder(contactId)}/${CONTRACT_COPY_NAME}`;
+}
+
+export function isContractCopyPath(contactId: unknown, path: unknown) {
+  return String(path || "") === contractCopyPath(contactId);
+}
+
+export async function saveContractCopy(
+  admin: AdminClient,
+  contactId: unknown,
+  pdf: Uint8Array,
+) {
+  const path = contractCopyPath(contactId);
+  const { error } = await admin.storage.from(STUDENT_DOCUMENT_BUCKET).upload(path, pdf, {
+    contentType: "application/pdf",
+    upsert: true,
+  });
+  if (error) {
+    throw new Error(error.message || "Échec de l'enregistrement du contrat");
+  }
+  return path;
+}
+
 export function isOwnedStoragePath(contactId: unknown, path: unknown) {
   const id = String(contactId || "");
   const value = String(path || "");
@@ -227,9 +253,18 @@ export async function getRequiredDocumentsStatus(
         description: spec.description,
         status: files[0] ? "received" : "missing",
         file: toFileMeta(folder, files[0]),
+        template: null as { name: string; path: string; updated_at: string | null } | null,
       };
     }),
   );
+
+  const contractRow = results.find((item) => item.key === SIGNED_CONTRACT_KEY);
+  if (contractRow) {
+    const folder = adminFolder(contactId);
+    const files = await listStorageFiles(admin, folder);
+    const copy = files.find((file) => file.name === CONTRACT_COPY_NAME);
+    contractRow.template = toFileMeta(folder, copy);
+  }
 
   const passeport = results.find((item) => item.key === "passeport");
   if (passeport && !passeport.file) {

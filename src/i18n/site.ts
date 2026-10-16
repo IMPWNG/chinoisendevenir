@@ -1276,6 +1276,7 @@ const fr = {
     replace: "Remplacer",
     send: "Envoyer",
     download: "Télécharger",
+    downloadContract: "Télécharger le contrat",
     visaPrep:
       "Préparez les pièces nécessaires à votre demande de visa étudiant.",
     adminDocsTitle: "Documents fournis par Chinois en Devenir",
@@ -1349,6 +1350,11 @@ const fr = {
       },
     },
     docsCatalog: {
+      contrat_signe: {
+        label: "Contrat d'accompagnement signé",
+        description:
+          "Téléchargez le contrat, signez-le, puis déposez la version signée (PDF, JPG ou PNG — 10 Mo max.).",
+      },
       passeport: {
         label: "Passeport",
         description:
@@ -2944,6 +2950,7 @@ const en = {
     replace: "Replace",
     send: "Send",
     download: "Download",
+    downloadContract: "Download the contract",
     visaPrep: "Prepare the documents needed for your student visa application.",
     adminDocsTitle: "Documents provided by Chinois en Devenir",
     adminDocsSubtitle:
@@ -3015,6 +3022,11 @@ const en = {
       },
     },
     docsCatalog: {
+      contrat_signe: {
+        label: "Signed support contract",
+        description:
+          "Download the contract, sign it, then upload the signed copy (PDF, JPG, or PNG — 10 MB max).",
+      },
       passeport: {
         label: "Passport",
         description: "Scanned copy of the passport information page (PDF, JPG, or PNG — 10 MB max).",

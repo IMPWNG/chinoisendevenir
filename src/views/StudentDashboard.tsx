@@ -90,6 +90,7 @@ type StudentDoc = {
   description?: string;
   status?: string;
   file?: { name: string; path: string } | null;
+  template?: { name: string; path: string } | null;
 };
 
 type AdminDoc = { path: string; name?: string };
@@ -712,6 +713,15 @@ export default function StudentDashboard() {
                                       className="doc-row-actions"
                                       onSubmit={(e) => handleUpload(e, doc.key)}
                                     >
+                                      {doc.template?.path ? (
+                                        <button
+                                          type="button"
+                                          className="landing-btn landing-btn-secondary"
+                                          onClick={() => handleDownload(doc.template?.path || "")}
+                                        >
+                                          {t("student.downloadContract")}
+                                        </button>
+                                      ) : null}
                                       <input
                                         type="file"
                                         accept=".pdf,.jpg,.jpeg,.png,.webp"

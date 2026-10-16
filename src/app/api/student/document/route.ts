@@ -7,6 +7,7 @@ import { isStudentAccessGranted, studentCanAccessDocuments } from "@/lib/student
 import {
   createDocumentSignedUrl,
   getRequiredDocumentsStatus,
+  isContractCopyPath,
   isOwnedStoragePath,
   isRequestedUploadPath,
   listAdminSentDocuments,
@@ -46,7 +47,8 @@ export async function GET(request: Request) {
         auth.contact.id,
         auth.contact,
       );
-      if (!isRequestedUploadPath(auth.contact.id, path, requested)) {
+      const contractCopy = isContractCopyPath(auth.contact.id, path);
+      if (!contractCopy && !isRequestedUploadPath(auth.contact.id, path, requested)) {
         return NextResponse.json(
           { error: "Document introuvable" },
           { status: 400 },

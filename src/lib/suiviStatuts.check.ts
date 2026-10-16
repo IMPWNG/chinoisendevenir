@@ -2,7 +2,12 @@
  * Self-check: student space unlock is the admin flag, not client_payé.
  * Run: npx tsx src/lib/suiviStatuts.check.ts
  */
-import { PAID_STATUSES, SUIVI_STATUTS, canonicalStatut } from "./suiviStatuts";
+import {
+  PAID_STATUSES,
+  SUIVI_STATUTS,
+  canonicalStatut,
+  shouldAdvanceStatus,
+} from "./suiviStatuts";
 import {
   canStudentChooseFormule,
   isStudentAccessGranted,
@@ -73,6 +78,16 @@ assert(!SUIVI_STATUTS.includes("nouveau_prospect"), "nouveau_prospect retired");
 assert(!SUIVI_STATUTS.includes("a_qualifier"), "a_qualifier retired");
 assert(!SUIVI_STATUTS.includes("appel_réservé"), "appel_réservé retired");
 assert(!SUIVI_STATUTS.includes("relance_en_cours"), "relance_en_cours retired");
+assert(SUIVI_STATUTS.includes("client_sans_réponse"), "client sans réponse");
+assert(
+  shouldAdvanceStatus("client_payé", "client_sans_réponse"),
+  "on peut marquer un client payé sans réponse",
+);
+assert(
+  shouldAdvanceStatus("client_sans_réponse", "dossier_préparation"),
+  "un client sans réponse peut reprendre",
+);
+assert(!PAID_STATUSES.has("client_sans_réponse"), "sans réponse n'est pas un paiement");
 assert(
   canonicalStatut("nouveau_prospect") === "nouveau_prospect",
   "retired still canonical for old rows",

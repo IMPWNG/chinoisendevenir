@@ -13,6 +13,7 @@ export const SUIVI_STATUTS = [
   "visa_préparation",
   "arrive_chine",
   "dossier_terminé",
+  "client_sans_réponse",
   "prospect_perdu",
 ];
 
@@ -42,6 +43,7 @@ export const STATUT_ICONS: Record<string, string> = {
   visa_préparation: "🛂",
   arrive_chine: "🇨🇳",
   dossier_terminé: "🏆",
+  client_sans_réponse: "🔕",
   prospect_perdu: "❌",
 };
 
@@ -63,6 +65,7 @@ export const STATUT_COLORS: Record<string, string> = {
   visa_préparation: "bg-lime-500/20 text-lime-300 border-lime-500/50",
   arrive_chine: "bg-red-500/20 text-red-200 border-red-500/50",
   dossier_terminé: "bg-emerald-500/20 text-emerald-300 border-emerald-500/50",
+  client_sans_réponse: "bg-stone-500/20 text-stone-300 border-stone-500/50",
   prospect_perdu: "bg-zinc-500/20 text-zinc-400 border-zinc-500/50",
 };
 

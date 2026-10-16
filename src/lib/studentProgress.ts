@@ -128,6 +128,7 @@ const STATUS_STEP_INDEX: Record<string, number> = {
   offre_envoyée: 1,
   relance_en_cours: 1,
   attente_paiement: 1,
+  client_sans_réponse: 1,
   client_payé: 2,
   dossier_préparation: 3,
   dossier_incomplet: 3,
@@ -284,6 +285,13 @@ type CatalogDoc = {
 };
 
 export const STUDENT_DOCUMENT_CATALOG: CatalogDoc[] = [
+  {
+    key: "contrat_signe",
+    label: "Contrat d'accompagnement signé",
+    icon: "",
+    description: `Téléchargez le contrat, signez-le, puis déposez la version signée (${FILE_HINT}).`,
+    levels: [],
+  },
   {
     key: "passeport",
     label: "Passeport",

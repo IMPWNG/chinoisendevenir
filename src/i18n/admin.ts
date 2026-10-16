@@ -556,6 +556,7 @@ export const adminTranslations = {
       video: "Vidéo de présentation",
       portfolio: "Portfolio",
       projet_recherche: "Projet de recherche",
+      contrat_signe: "Contrat d'accompagnement signé",
     },
     universities: {
       title: "Universités",
@@ -659,6 +660,7 @@ export const adminTranslations = {
       visa_préparation: "Visa en préparation",
       arrive_chine: "Arrivé en Chine",
       dossier_terminé: "Dossier terminé",
+      client_sans_réponse: "Client sans réponse",
       prospect_perdu: "Prospect perdu",
       mail_bienvenue_envoyé: "Bienvenue envoyé",
       relance_1_envoyée: "Relance en cours",
@@ -1329,6 +1331,7 @@ export const adminTranslations = {
       video: "Introduction video",
       portfolio: "Portfolio",
       projet_recherche: "Research proposal",
+      contrat_signe: "Signed support contract",
     },
     universities: {
       title: "Universities",
@@ -1432,6 +1435,7 @@ export const adminTranslations = {
       visa_préparation: "Visa in progress",
       arrive_chine: "Arrived in China",
       dossier_terminé: "File completed",
+      client_sans_réponse: "Client not responding",
       prospect_perdu: "Lost prospect",
       mail_bienvenue_envoyé: "Welcome sent",
       relance_1_envoyée: "Follow-up in progress",
@@ -2075,6 +2079,7 @@ export const adminTranslations = {
       video: "自我介绍视频",
       portfolio: "作品集",
       projet_recherche: "研究计划",
+      contrat_signe: "已签署的陪读合同",
     },
     universities: {
       title: "大学",
@@ -2176,6 +2181,7 @@ export const adminTranslations = {
       visa_préparation: "签证办理中",
       arrive_chine: "已抵达中国",
       dossier_terminé: "档案已完成",
+      client_sans_réponse: "客户无回复",
       prospect_perdu: "已流失",
       mail_bienvenue_envoyé: "欢迎已发",
       relance_1_envoyée: "跟进中",

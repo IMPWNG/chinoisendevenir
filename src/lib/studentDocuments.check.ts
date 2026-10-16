@@ -2,6 +2,7 @@
  * Requested-document keys stay inside the catalog, in catalog order.
  * Run: npx tsx src/lib/studentDocuments.check.ts
  */
+import { contractCopyPath, isContractCopyPath } from "./studentDocuments";
 import {
   parseRequestedDocumentKeys,
   STARTER_DOSSIER_DOCUMENT_KEYS,
@@ -17,6 +18,10 @@ function assert(cond: unknown, msg: string): asserts cond {
 const keys = STUDENT_DOCUMENT_CATALOG.map((doc) => doc.key);
 assert(new Set(keys).size === keys.length, "catalog keys are unique");
 assert(keys.includes("passeport") && keys.includes("autorisation_parentale"), "catalog covers passport and guardian");
+assert(keys.includes("contrat_signe") && keys[0] === "contrat_signe", "contrat signé en tête");
+assert(isContractCopyPath("abc", contractCopyPath("abc")), "copie du contrat");
+assert(!isContractCopyPath("abc", contractCopyPath("autre")), "copie d'un autre dossier");
+assert(!requestedKeysOrStarter([]).includes("contrat_signe"), "le contrat signé n'est pas dans les six de départ");
 assert(keys.includes("hskk") && keys.includes("portfolio") && keys.includes("projet_recherche"), "catalog covers language, art, research");
 
 assert(parseRequestedDocumentKeys(null).length === 0, "null asks for nothing");

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { getAuthenticatedAdmin } from "@/lib/studentAuth";
+import { ensureStudentBucket, getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { getResendApiKey, getSupabaseAdmin } from "@/lib/supabaseAdmin";
 import { CONTACT_FROM, INBOUND_REPLY_TO } from "@/lib/emailConfig";
 import { rateLimit } from "@/lib/httpSecurity";
@@ -15,6 +15,11 @@ import {
   contractHtmlToPdf,
   contractPdfFilename,
 } from "@/lib/contractPdf";
+import {
+  SIGNED_CONTRACT_KEY,
+  addRequestedDocumentKeys,
+  saveContractCopy,
+} from "@/lib/studentDocuments";
 import {
   buildSaleContract,
   clientReady,
@@ -160,6 +165,18 @@ export async function POST(request: Request) {
   const emailHtml = contractEmailWithPdfNote(contract.html);
 
   try {
+    await ensureStudentBucket(supabase);
+    await saveContractCopy(supabase, contactId, pdf);
+    await addRequestedDocumentKeys(supabase, contactId, [SIGNED_CONTRACT_KEY]);
+  } catch (error: unknown) {
+    console.error("send-contract space:", errorMessage(error));
+    return NextResponse.json(
+      { success: false, error: "Le contrat n'a pas pu être ajouté à l'espace étudiant" },
+      { status: 500 },
+    );
+  }
+
+  try {
     const resend = new Resend(getResendApiKey());
     const response = await resend.emails.send({
       from: CONTACT_FROM,
@@ -195,7 +212,7 @@ export async function POST(request: Request) {
       {
         contact_id: contactId,
         action: "email_envoye",
-        description: `Contrat de prestation envoyé — formule ${formuleNumber} (PDF joint)`,
+        description: `Contrat de prestation envoyé — formule ${formuleNumber} (PDF joint, copie dans l'espace)`,
         user_admin: auth.user.email || "admin",
       },
     ]);

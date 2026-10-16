@@ -35,6 +35,7 @@ alter table public.contacts
       'visa_préparation',
       'arrive_chine',
       'dossier_terminé',
+      'client_sans_réponse',
       'inscrit',
       'perdu',
       'prospect_perdu'
