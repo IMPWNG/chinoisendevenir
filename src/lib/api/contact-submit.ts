@@ -10,7 +10,6 @@ import { canonicalCountry } from "../countries";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
-  formWelcomeAlreadySent,
   storeOutboundContactEmail,
 } from "../contactEmails";
 
@@ -356,44 +355,40 @@ export default async function handler(request: Request) {
       console.warn("⚠️ Erreur suivi_actions:", errorMessage(actionError));
     }
 
-    const contactId = asString(contact?.id).trim();
-    const alreadyWelcomed =
-      isUpdate && contactId ? await formWelcomeAlreadySent(contactId) : false;
-
-    if (alreadyWelcomed) {
-      console.log("ℹ️ Bienvenue déjà envoyée:", normalizedEmail);
+    if (isUpdate) {
+      console.log("ℹ️ Profil mis à jour, pas de second mail:", normalizedEmail);
     } else {
-    try {
-      const welcomeHtml = generateEmailTemplate(asString(prenom));
-      const welcomeSubject = withEtudeChineSubject(
-        `Nous avons bien reçu votre demande, ${asString(prenom)}`,
-      );
-      const emailResponse = await resend.emails.send({
-        from: CONTACT_FROM,
-        replyTo: INBOUND_REPLY_TO,
-        to: normalizedEmail,
-        subject: welcomeSubject,
-        html: welcomeHtml,
-      });
+      const contactId = asString(contact?.id).trim();
+      try {
+        const welcomeHtml = generateEmailTemplate(asString(prenom));
+        const welcomeSubject = withEtudeChineSubject(
+          `Nous avons bien reçu votre demande, ${asString(prenom)}`,
+        );
+        const emailResponse = await resend.emails.send({
+          from: CONTACT_FROM,
+          replyTo: INBOUND_REPLY_TO,
+          to: normalizedEmail,
+          subject: welcomeSubject,
+          html: welcomeHtml,
+        });
 
-      if (emailResponse.error) {
-        console.warn("⚠️ Erreur Resend:", emailResponse.error);
-      } else {
-        console.log("✅ Email envoyé:", emailResponse.data?.id);
-        const cid = contactId;
-        if (cid) {
-          await storeOutboundContactEmail({
-            contactId: cid,
-            toEmail: normalizedEmail,
-            subject: welcomeSubject,
-            bodyText: emailHtmlToText(welcomeHtml),
-            resendId: emailResponse.data?.id || null,
-          });
+        if (emailResponse.error) {
+          console.warn("⚠️ Erreur Resend:", emailResponse.error);
+        } else {
+          console.log("✅ Email envoyé:", emailResponse.data?.id);
+          if (contactId) {
+            await storeOutboundContactEmail({
+              contactId,
+              toEmail: normalizedEmail,
+              subject: welcomeSubject,
+              bodyText: emailHtmlToText(welcomeHtml),
+              resendId: emailResponse.data?.id || null,
+            });
+          }
         }
+      } catch (emailError: unknown) {
+        console.warn("⚠️ Erreur Resend (non bloquant):", errorMessage(emailError));
       }
-    } catch (emailError: unknown) {
-      console.warn("⚠️ Erreur Resend (non bloquant):", errorMessage(emailError));
-    }
     }
 
     return NextResponse.json(
