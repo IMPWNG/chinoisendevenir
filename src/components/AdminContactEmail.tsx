@@ -346,18 +346,6 @@ export default function AdminContactEmail({
               {aiError ? <p className="text-sm text-rose-300">{aiError}</p> : null}
             </div>
           </div>
-
-          <div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
-              {t("dashboard.emailPreview")}
-            </p>
-            <iframe
-              title={t("dashboard.emailPreview")}
-              sandbox=""
-              className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
-              srcDoc={previewHtml}
-            />
-          </div>
         </div>
       ) : (
         <div className="space-y-4">
@@ -436,21 +424,10 @@ export default function AdminContactEmail({
               className={`${fieldClass(busy)} resize-y min-h-[180px]`}
             />
           </div>
-          <div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
-              {t("dashboard.emailPreview")}
-            </p>
-            <iframe
-              title={t("dashboard.emailPreview")}
-              sandbox=""
-              className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
-              srcDoc={previewHtml}
-            />
-          </div>
         </div>
       )}
 
-      <div className="mt-4">
+      <div className="sticky bottom-0 z-20 mt-4 border-t border-slate-700/70 bg-slate-800/95 py-3 backdrop-blur">
         <button
           type="button"
           onClick={sendEmail}
@@ -464,6 +441,17 @@ export default function AdminContactEmail({
             {t("dashboard.emailHintCustom")}
           </p>
         ) : null}
+      </div>
+      <div className="mt-4">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">
+          {t("dashboard.emailPreview")}
+        </p>
+        <iframe
+          title={t("dashboard.emailPreview")}
+          sandbox=""
+          className="w-full h-96 rounded-xl border border-slate-700/50 bg-white"
+          srcDoc={previewHtml}
+        />
       </div>
     </div>
   );

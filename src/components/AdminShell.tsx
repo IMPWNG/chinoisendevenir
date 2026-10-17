@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
@@ -22,6 +22,7 @@ export default function AdminShell({
   children?: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
   const { lang, setLang, t } = useAdminI18n();
   const access = useAdminAccess();
   const limited = access.role !== "full";
@@ -38,6 +39,24 @@ export default function AdminShell({
     if (!limited) return;
     setLargeType(window.localStorage.getItem(LARGE_TYPE_KEY) === "1");
   }, [limited]);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const apply = () => {
+      document.documentElement.style.setProperty(
+        "--admin-header-h",
+        `${header.offsetHeight}px`,
+      );
+    };
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(header);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--admin-header-h");
+    };
+  }, []);
 
   const nav = (
     [
@@ -75,7 +94,10 @@ export default function AdminShell({
         limited && largeType ? " admin-large-type" : ""
       }`}
     >
-      <header className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl">
+      <header
+        ref={headerRef}
+        className="bg-slate-900/80 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-40 shadow-2xl"
+      >
         <div className="max-w-7xl mx-auto flex flex-col gap-3 px-4 pt-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pt-5">
           <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg sm:h-12 sm:w-12">

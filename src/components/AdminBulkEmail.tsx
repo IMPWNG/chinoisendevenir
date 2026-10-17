@@ -227,11 +227,8 @@ export default function AdminBulkEmail({
   }
 
   return (
-    <div
-      className={`bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl p-5 mb-8 border border-slate-700/50 ${
-        collapsed ? "sticky top-[88px] z-30" : ""
-      }`}
-    >
+    <div className="mb-8">
+    <div className="sticky top-[calc(var(--admin-header-h,10.5rem)+8px)] z-30 rounded-2xl border border-slate-700/50 bg-slate-900/95 p-5 shadow-2xl backdrop-blur-md">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col lg:flex-row gap-4 lg:items-start">
           <div className="flex-1 min-w-0">
@@ -314,10 +311,12 @@ export default function AdminBulkEmail({
                 : `📤 ${t("dashboard.send", { count: selectedIds.length })}`}
             </button>
           </div>
+          </div>
         </div>
+    </div>
 
         {collapsed ? null : (
-          <>
+          <div className="mt-4 rounded-2xl border border-slate-700/50 bg-slate-800/40 p-5 shadow-2xl backdrop-blur-md">
           <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-4 space-y-4">
             <div>
               <p className="text-xs font-bold uppercase tracking-wide text-violet-200">
@@ -431,9 +430,8 @@ export default function AdminBulkEmail({
               </div>
             ) : null}
           </div>
-          </>
+          </div>
         )}
-      </div>
     </div>
   );
 }
