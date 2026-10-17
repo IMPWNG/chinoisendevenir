@@ -16,7 +16,10 @@ const Footer = () => {
       <div className="container">
         <div className="landing-footer-grid">
           <div className="landing-footer-brand">
-            <p className="landing-footer-name">🎓 {SITE.name}</p>
+            <p className="landing-footer-name">
+              <img src="/logo-ced.png" alt="" width={46} height={36} />
+              {SITE.name}
+            </p>
             <p>{t("footer.description")}</p>
           </div>
           <div className="landing-footer-col">

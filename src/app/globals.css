@@ -99,12 +99,21 @@ a {
 }
 
 .landing-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 700;
   font-size: 1.15rem;
   color: var(--secondary);
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.landing-logo img {
+  height: 44px;
+  width: auto;
+  display: block;
 }
 
 .landing-nav {
@@ -624,9 +633,18 @@ a.landing-btn-accent:hover {
 }
 
 .landing-footer-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 700;
   font-size: 1.1rem;
   margin: 0 0 12px;
+}
+
+.landing-footer-name img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
 .landing-footer-brand p:last-child {

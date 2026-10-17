@@ -28,7 +28,8 @@ const Navigation = () => {
     <nav className="landing-header">
       <div className="container landing-header-content">
         <Link href="/" className="landing-logo">
-          🎓 Chinois en Devenir
+          <img src="/logo-ced.png" alt="" width={57} height={44} />
+          Chinois en Devenir
         </Link>
 
         <button
