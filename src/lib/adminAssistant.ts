@@ -106,15 +106,18 @@ export function selectKnowledge(markdown: string, question: string): string {
     .join("\n\n");
 }
 
-export function assistantSystemPrompt(question: string): string {
-  return [
+export function assistantSystemPrompt(question: string, dossiers = ""): string {
+  const lines = [
     "Tu es l'assistant de l'admin Chinois en Devenir.",
-    "Réponds uniquement à partir des extraits ci-dessous. S'ils ne contiennent pas le fait, dis-le en une phrase.",
-    "Tu n'as pas accès aux dossiers, e-mails ou à la base en direct.",
+    "Deux sources : le bloc Dossiers en direct (état réel des fiches) et les extraits de la base de connaissance (agence, visas, formules, bourses).",
+    "N'invente aucun dossier, statut, prix ou tâche qui n'est pas dans ce message.",
+    "S'il n'y a pas de bloc Dossiers, tu ne connais pas l'état des fiches : dis-le, sans deviner.",
     "Réponds dans la langue de la question, court, texte brut sans markdown.",
     "",
-    selectKnowledge(projectKnowledge(), question),
-  ].join("\n");
+  ];
+  if (dossiers.trim()) lines.push(dossiers.trim(), "");
+  lines.push(selectKnowledge(projectKnowledge(), question));
+  return lines.join("\n");
 }
 
 export function assistantPromptTurns(input: unknown): AssistantTurn[] | null {
@@ -171,6 +174,7 @@ function assistantModels(): string[] {
 
 export async function askAdminAssistant(
   turns: AssistantTurn[],
+  dossiers = "",
 ): Promise<{ ok: true; reply: string } | { ok: false; error: string }> {
   const apiKey = process.env.MAMMOUTH_API_KEY;
   if (!apiKey) return { ok: false, error: "Assistant indisponible" };
@@ -189,7 +193,7 @@ export async function askAdminAssistant(
         body: JSON.stringify({
           model,
           temperature: 0.2,
-          max_tokens: 700,
+          max_tokens: 1000,
           messages: [
             {
               role: "system",
@@ -199,6 +203,7 @@ export async function askAdminAssistant(
                   .slice(-2)
                   .map((turn) => turn.content)
                   .join("\n"),
+                dossiers,
               ),
             },
             ...turns,

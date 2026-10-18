@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { askAdminAssistant, assistantPromptTurns } from "@/lib/adminAssistant";
 import { requireFullAdmin } from "@/lib/adminRoles";
+import { loadDossierBrief } from "@/lib/assistantDossiers";
 import { rateLimit } from "@/lib/httpSecurity";
 import { readJsonObject } from "@/lib/request";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
+
+export const maxDuration = 60;
 
 export async function POST(request: Request) {
   const auth = await getAuthenticatedAdmin(request);
@@ -33,7 +36,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Question vide" }, { status: 400 });
   }
 
-  const result = await askAdminAssistant(turns);
+  const question = turns
+    .filter((turn) => turn.role === "user")
+    .slice(-2)
+    .map((turn) => turn.content)
+    .join("\n");
+  let dossiers = "";
+  try {
+    dossiers = await loadDossierBrief(auth.admin, question);
+  } catch {
+    dossiers = "Dossiers : lecture impossible.";
+  }
+
+  const result = await askAdminAssistant(turns, dossiers);
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: 502 });
   }

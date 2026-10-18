@@ -9,6 +9,7 @@ import {
   projectKnowledge,
   selectKnowledge,
 } from "./adminAssistant";
+import { dossierBrief, type AssistantDossier, type AssistantTask } from "./assistantDossiers";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -27,6 +28,49 @@ assert(!visa.includes("Visa X1 depuis la Belgique"), "skip unrelated country");
 
 const prompt = assistantSystemPrompt("Combien coûte la formule Premier pas ?");
 assert(prompt.includes("800") && prompt.length < knowledge.length, "prompt uses excerpts");
+assert(!prompt.includes("# Dossiers en direct"), "knowledge question skips dossiers");
+
+const dossiers: AssistantDossier[] = [
+  {
+    id: "1",
+    prenom: "Awa",
+    nom: "Diallo",
+    email: "awa@example.com",
+    pays: "Sénégal",
+    suivi_statut: "visa_préparation",
+    formule: "Admission universitaire (1700€)",
+    prioritaire: true,
+    espace_debloque: true,
+    notes_admin: "Consulat la semaine prochaine",
+  },
+  {
+    id: "2",
+    prenom: "Ben",
+    nom: "Kone",
+    email: "ben@example.com",
+    suivi_statut: "attente_paiement",
+    formule: "Premier pas en Chine (800€)",
+    prioritaire: false,
+  },
+];
+const tasks: AssistantTask[] = [
+  { contact_id: "1", task: "Rappeler pour le visa", done: false, day: "2026-10-16" },
+];
+const priorities = dossierBrief(dossiers, tasks, "Quelles sont mes priorités ?", "2026-10-18");
+assert(priorities.includes("Awa Diallo") && priorities.includes("Rappeler pour le visa"), "priorities");
+assert(priorities.includes("reprise du 2026-10-16"), "carried task");
+assert(!priorities.includes("Ben Kone"), "priority question skips the other dossier");
+
+const diallo = dossierBrief(dossiers, tasks, "Où en est Diallo ?", "2026-10-18");
+assert(diallo.includes("Visa en préparation") && diallo.includes("Consulat"), "one dossier");
+
+const paiement = dossierBrief(dossiers, tasks, "Qui est en attente de paiement ?", "2026-10-18");
+assert(paiement.includes("Ben Kone") && paiement.includes("En attente de paiement"), "status filter");
+
+assert(dossierBrief(dossiers, tasks, "C'est quoi le visa X1 ?", "2026-10-18") === "", "no dossiers for a general question");
+
+const withDossiers = assistantSystemPrompt("mes priorités", priorities);
+assert(withDossiers.includes("Awa Diallo") && withDossiers.includes("Règles de réponse"), "prompt carries dossiers and knowledge");
 
 assert(assistantPromptTurns(null) === null, "reject non-array");
 assert(assistantPromptTurns([{ role: "assistant", content: "bonjour" }]) === null, "need a user turn");
