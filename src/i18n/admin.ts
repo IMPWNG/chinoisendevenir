@@ -42,7 +42,7 @@ export const adminTranslations = {
     assistant: {
       open: "Assistant",
       title: "Assistant projet",
-      hint: "Questions sur le fonctionnement du site. Pas les dossiers en direct.",
+      hint: "Questions sur les études en Chine et l'agence. Pas les dossiers en direct.",
       placeholder: "Ex. Quelle formule inclut le visa ?",
       send: "Envoyer",
       thinking: "Réponse…",

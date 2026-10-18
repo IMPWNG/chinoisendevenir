@@ -7,6 +7,7 @@ import {
   assistantReplyText,
   assistantSystemPrompt,
   projectKnowledge,
+  selectKnowledge,
 } from "./adminAssistant";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -14,8 +15,18 @@ function assert(cond: unknown, msg: string): asserts cond {
 }
 
 const knowledge = projectKnowledge();
-assert(knowledge.includes("espace_debloque"), "brief loaded");
-assert(assistantSystemPrompt().includes(knowledge), "prompt carries the brief");
+assert(knowledge.includes("Règles de réponse") && knowledge.includes("Formule 1"), "knowledge file");
+
+const prix = selectKnowledge(knowledge, "Combien coûte la formule Premier pas ?");
+assert(prix.includes("800") && prix.includes("Règles de réponse"), "formula excerpt");
+assert(prix.length < knowledge.length / 2, "excerpt is smaller than the file");
+
+const visa = selectKnowledge(knowledge, "Quelles pièces pour le visa X1 depuis le Sénégal ?");
+assert(/s[eé]n[eé]gal/i.test(visa), "senegal section");
+assert(!visa.includes("Visa X1 depuis la Belgique"), "skip unrelated country");
+
+const prompt = assistantSystemPrompt("Combien coûte la formule Premier pas ?");
+assert(prompt.includes("800") && prompt.length < knowledge.length, "prompt uses excerpts");
 
 assert(assistantPromptTurns(null) === null, "reject non-array");
 assert(assistantPromptTurns([{ role: "assistant", content: "bonjour" }]) === null, "need a user turn");
