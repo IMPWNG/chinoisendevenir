@@ -7,6 +7,7 @@ import { shanghaiDayString } from "../lib/dailyReportShared";
 import {
   cleanAuthorEmail,
   dayTaskListFilter,
+  formatDayTaskDate,
   isMissingDayTasksTable,
   pickVisibleDayTasks,
   type DayTaskSource,
@@ -15,6 +16,7 @@ import {
 type TaskRow = {
   id: string;
   contact_id: string;
+  day?: string | null;
   task: string;
   source: DayTaskSource;
   done: boolean;
@@ -39,7 +41,7 @@ export default function AdminDayTasks({
   actorEmail?: string | null;
   onOpenContact: (contactId: string) => void;
 }) {
-  const { t } = useAdminI18n();
+  const { t, lang } = useAdminI18n();
   const [rows, setRows] = useState<TaskRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -51,7 +53,7 @@ export default function AdminDayTasks({
       setError("");
       const { data, error: queryError } = await adminSupabase
         .from("day_tasks")
-        .select("id, contact_id, task, source, done, created_by, done_by")
+        .select("id, contact_id, day, task, source, done, created_by, done_by")
         .or(dayTaskListFilter(shanghaiDayString()))
         .order("created_at", { ascending: true });
       if (cancelled) return;
@@ -77,6 +79,7 @@ export default function AdminDayTasks({
     contacts.map((c) => [c.id, `${c.prenom || ""} ${c.nom || ""}`.trim()]),
   );
 
+  const today = shanghaiDayString();
   const visible = pickVisibleDayTasks(
     showWhatsapp ? rows : rows.filter((row) => row.source !== "whatsapp"),
   );
@@ -189,14 +192,23 @@ export default function AdminDayTasks({
                     >
                       {row.task}
                     </td>
-                    <td className="py-2.5 pr-3 text-slate-400 whitespace-nowrap">
-                      {row.done && row.done_by
-                        ? t("dayTasks.doneBy", { email: row.done_by })
-                        : row.source === "grokbot"
-                          ? t("dayTasks.sourceGrokbot")
-                          : row.source === "whatsapp"
-                            ? t("dayTasks.sourceWhatsapp")
-                            : row.created_by || "—"}
+                    <td className="py-2.5 pr-3 text-slate-400">
+                      <div className="whitespace-nowrap">
+                        {row.done && row.done_by
+                          ? t("dayTasks.doneBy", { email: row.done_by })
+                          : row.source === "grokbot"
+                            ? t("dayTasks.sourceGrokbot")
+                            : row.source === "whatsapp"
+                              ? t("dayTasks.sourceWhatsapp")
+                              : row.created_by || "—"}
+                      </div>
+                      {row.day && row.day < today ? (
+                        <div className="text-xs text-slate-500 whitespace-nowrap">
+                          {t("dayTasks.carried", {
+                            date: formatDayTaskDate(row.day, lang),
+                          })}
+                        </div>
+                      ) : null}
                     </td>
                     {canDelete ? (
                       <td className="py-2.5 text-right">

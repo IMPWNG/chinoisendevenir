@@ -83,6 +83,22 @@ export function pickVisibleDayTasks<T extends { contact_id: string; done: boolea
   return rows.filter((row) => chosen.get(row.contact_id) === row);
 }
 
+const DAY_TASK_LOCALES = { fr: "fr-FR", en: "en-GB", zh: "zh-CN" } as const;
+
+/** Short date for the day-task list. `day` is YYYY-MM-DD. */
+export function formatDayTaskDate(
+  day: string,
+  lang: keyof typeof DAY_TASK_LOCALES = "fr",
+): string {
+  if (!isValidDayString(day)) return day;
+  const [year, month, date] = day.split("-").map(Number);
+  return new Intl.DateTimeFormat(DAY_TASK_LOCALES[lang], {
+    day: "numeric",
+    month: "short",
+    timeZone: "UTC",
+  }).format(new Date(Date.UTC(year, month - 1, date)));
+}
+
 export function isMissingDayTasksTable(
   message: string | null | undefined,
 ): boolean {

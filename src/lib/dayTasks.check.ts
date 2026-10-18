@@ -6,6 +6,7 @@ import {
   cleanDayTask,
   dayTaskBelongsToday,
   dayTaskListFilter,
+  formatDayTaskDate,
   isMissingDayTasksTable,
   parseAgentDayTasks,
   pickVisibleDayTasks,
@@ -97,5 +98,8 @@ assert(
   shown.map((row) => row.task).join("|") === "hier|encore",
   "un étudiant, une tâche ouverte",
 );
+const frDate = formatDayTaskDate("2026-10-16", "fr");
+assert(frDate.includes("16") && /oct/i.test(frDate), "date courte");
+assert(formatDayTaskDate("pas-une-date") === "pas-une-date", "date brute");
 
 console.log("dayTasks check ok");
