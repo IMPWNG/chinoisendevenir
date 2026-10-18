@@ -34,6 +34,7 @@ const nextConfig = {
       "./src/lib/fonts/**",
       "./public/tampon-entreprise.png",
     ],
+    "/api/admin/assistant": ["./docs/for-agents.md"],
   },
   // Bake Vite-era names into the client if NEXT_PUBLIC_* were never renamed on Vercel.
   env: {

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { useAdminAccess } from "../context/AdminAccessContext";
+import AdminAssistant from "./AdminAssistant";
 import { ADMIN_LANGS } from "../i18n/admin";
 
 type NavItem = { href: string; label: string; icon: string };
@@ -196,6 +197,7 @@ export default function AdminShell({
         </nav>
       </header>
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">{children}</div>
+      {limited ? null : <AdminAssistant />}
     </div>
   );
 }

@@ -39,6 +39,16 @@ export const adminTranslations = {
       universities: "Universités",
       blog: "Blog",
     },
+    assistant: {
+      open: "Assistant",
+      title: "Assistant projet",
+      hint: "Questions sur le fonctionnement du site. Pas les dossiers en direct.",
+      placeholder: "Ex. Quelle formule inclut le visa ?",
+      send: "Envoyer",
+      thinking: "Réponse…",
+      empty: "Posez une question sur le projet.",
+      error: "L'assistant n'a pas répondu. Réessayez.",
+    },
     emailsWeek: {
       homeTitle: "Email reçu",
       homeHint:
