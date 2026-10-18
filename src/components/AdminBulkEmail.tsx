@@ -230,8 +230,7 @@ export default function AdminBulkEmail({
     <div className="mb-8">
     <div className="sticky top-[calc(var(--admin-header-h,10.5rem)+8px)] z-30 rounded-2xl border border-slate-700/50 bg-slate-900/95 p-5 shadow-2xl backdrop-blur-md">
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col lg:flex-row gap-4 lg:items-start">
-          <div className="flex-1 min-w-0">
+        <div className="min-w-0">
             <p className="text-white font-bold">
               📬 {t("dashboard.bulkTitle")}
               {selectedIds.length > 0
@@ -310,7 +309,6 @@ export default function AdminBulkEmail({
                   })}`
                 : `📤 ${t("dashboard.send", { count: selectedIds.length })}`}
             </button>
-          </div>
           </div>
         </div>
     </div>
