@@ -12,6 +12,8 @@ import {
   emailHtmlToText,
   storeOutboundContactEmail,
 } from "../contactEmails";
+import { shouldAnswerStudentAsk } from "../studentAsk";
+import { scheduleStudentDemandReply } from "./studentDemandReply";
 
 // ✅ Liste standardisée des domaines d'études (doit matcher le front)
 const DOMAINES_VALIDES = [
@@ -389,6 +391,21 @@ export default async function handler(request: Request) {
       } catch (emailError: unknown) {
         console.warn("⚠️ Erreur Resend (non bloquant):", errorMessage(emailError));
       }
+    }
+
+    const answerContactId = asString(contact?.id).trim();
+    if (answerContactId && shouldAnswerStudentAsk(notes_admin)) {
+      scheduleStudentDemandReply({
+        contactId: answerContactId,
+        email: normalizedEmail,
+        prenom: asString(prenom),
+        ask: notes_admin,
+        diplome: dernier_diplome,
+        domaine: domaineFinal,
+        budget,
+        rentree: date_rentree,
+        pays: country,
+      });
     }
 
     return NextResponse.json(

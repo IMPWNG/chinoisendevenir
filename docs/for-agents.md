@@ -71,7 +71,7 @@ APIs : `NextResponse` dans `route.ts`. Réutiliser `getSupabaseAdmin()`, `rateLi
 
 ## API
 
-**Public :** `POST /api/contact-submit`, `POST /api/webhooks/resend`  
+**Public :** `POST /api/contact-submit`, `POST /api/webhooks/resend`. Une demande écrite (email reçu, ou note du formulaire) reçoit une réponse rédigée pour ce message-là (`replyToStudentDemand`), une fois par texte. « Merci » / « ok » n'envoient rien. Le choix d'une formule garde son mail de confirmation.  
 **Auth :** `login`, `register`, `recover`  
 **Étudiant :** `me`, `profile`, `formule`, `document`  
 **Admin :** `me`, `contacts`, `emails-week` (GET full+limited), `daily-report` (GET full), `matching` (GET/POST/DELETE full), `matching/chinese`, `student-files`, `compose-email`, `whatsapp` (full), `inbox-priority` (full), `universities/import-scan`, `blog` (full)  

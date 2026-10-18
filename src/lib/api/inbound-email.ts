@@ -28,6 +28,8 @@ import {
 } from "../emailIntents";
 import { asString, errorMessage } from "../request";
 import { storeInboundContactEmail } from "../contactEmails";
+import { shouldAnswerStudentAsk } from "../studentAsk";
+import { scheduleStudentDemandReply } from "./studentDemandReply";
 import {
   AUTO_MAIL_ACTOR,
   STUDENT_HISTORY_ACTOR,
@@ -717,6 +719,31 @@ export async function processInboundEmail(raw: unknown) {
       contact: contact.id,
       formule: formule.label,
       status: "formule_choisie",
+      httpStatus: 200,
+    };
+  }
+
+  if (shouldAnswerStudentAsk(replyText || rawText)) {
+    scheduleStudentDemandReply({
+      contactId: contactId(contact),
+      email: asString(contact.email),
+      prenom: contact.prenom == null ? null : String(contact.prenom),
+      ask: replyText || rawText,
+      diplome: contact.dernier_diplome,
+      domaine: contact.domaine_etudes,
+      budget: contact.budget,
+      rentree: contact.date_rentree,
+      pays: contact.pays,
+      markFormules:
+        interest &&
+        !isFormulesAwaitingReply(statut) &&
+        !isFormuleAlreadyChosen(statut),
+    });
+    return {
+      success: true,
+      message: "Réponse personnelle en cours d'envoi",
+      contact: contact.id,
+      intent,
       httpStatus: 200,
     };
   }
