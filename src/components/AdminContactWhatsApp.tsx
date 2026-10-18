@@ -377,12 +377,12 @@ export default function AdminContactWhatsApp({
           className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none disabled:opacity-50"
         />
       </div>
-      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3">
+      <div className="relative z-40 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3">
         <button
           type="button"
           disabled={busy !== null || !phone || !onWhatsapp}
           onClick={() => run("send")}
-          className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="relative z-40 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {busy === "send" ? t("sending") : t("dashboard.whatsappSend")}
         </button>

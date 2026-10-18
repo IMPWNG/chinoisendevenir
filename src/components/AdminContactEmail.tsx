@@ -198,7 +198,7 @@ export default function AdminContactEmail({
   }
 
   return (
-    <div>
+    <div className="relative overflow-hidden">
 
       {allowTemplates ? (
       <div className="flex flex-wrap gap-2 mb-4">
