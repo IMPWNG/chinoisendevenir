@@ -30,6 +30,13 @@ assert(
   new Set(BLOG_TOPICS.map((topic) => topic.slug)).size === BLOG_TOPICS.length,
   "unique topic slugs",
 );
+assert(!/^visa-x1-/.test(BLOG_TOPICS[0].slug), "queue does not open on a country visa guide");
+assert(
+  BLOG_TOPICS.filter((topic) => /^visa-x1-/.test(topic.slug)).length >= 9,
+  "country visa guides stay in the pool",
+);
+const firstVisa = BLOG_TOPICS.findIndex((topic) => /^visa-x1-/.test(topic.slug));
+assert(firstVisa > 15, "country visa guides are not next in line");
 
 const fileSlugs = BLOG_POSTS.map((post) => post.slug);
 const first = pickTopic(fileSlugs, BLOG_TOPICS, BLOG_POSTS.map((post) => post.title));

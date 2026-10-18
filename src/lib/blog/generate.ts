@@ -41,11 +41,163 @@ export type BlogTopic = {
 };
 
 /**
- * File de sujets IA : angles précis, utiles, variés.
- * Les exemples CSC / visa pays / HSK / villes donnent le niveau attendu ;
- * la liste doit rester large pour éviter la cannibalisation des 20 guides piliers.
+ * File de sujets IA. L'ordre est la file du cron : le premier slug inédit part.
+ * Bourses, admission et villes d'abord. Les guides « visa X1 depuis un pays » restent en fin de file.
+ * Faits tirés de public/llms-full.txt et src/i18n/site.ts — pas de stats inventées.
  */
 export const BLOG_TOPICS: BlogTopic[] = [
+  {
+    slug: "bourse-csc-ce-quelle-peut-couvrir",
+    title: "Bourse CSC : ce qu'elle peut couvrir, et ce qu'elle ne garantit pas",
+    context:
+      "Faits du site : bourse nationale du gouvernement chinois, partielle ou complète, licence, master et doctorat. Elle peut couvrir scolarité, logement, assurance et une allocation, selon le type. Attribution selon notes, projet, langue, âge, quota et concurrence. Jamais automatique. L'agence n'est pas le CSC. Aucun montant ni taux de réussite inventé.",
+    pillars: ["/bourses", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "bourse-universitaire-chine-comment-candidater",
+    title: "Bourse universitaire en Chine : comment le dossier est examiné",
+    context:
+      "Aide de l'université elle-même, partielle ou complète, licence/master/doctorat, souvent 1 à 4 ans. Dossier déposé auprès de l'établissement. Délai de réponse souvent cité : 2 à 3 mois, sans date garantie. Critères : résultats, âge, programme, qualité du dossier, niveau de chinois, nombre de candidats. Pas de promesse d'obtention.",
+    pillars: ["/bourses", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "bourse-provinciale-vs-municipale-chine",
+    title: "Bourse provinciale ou municipale en Chine : laquelle viser",
+    context:
+      "Provinciale : financée par une province pour les internationaux de ses établissements. Municipale : aide de certaines villes, partielle ou totale. Montants variables, non chiffrés. Les comparer à la CSC et à la bourse d'université sans élire une « meilleure ». Jamais automatique.",
+    pillars: ["/bourses", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "bourse-annee-de-langue-chine",
+    title: "Bourse pour une année de chinois en Chine : quand elle existe",
+    context:
+      "Une bourse de langue existe parfois ; elle n'est jamais automatique. L'année de chinois (programme universitaire de langue) et l'admission en diplôme sont deux dossiers distincts. Sans IELTS, TOEFL ou HSK, l'année de langue est souvent le premier pas réaliste. Les frais d'école, de visa et de voyage restent à l'étudiant.",
+    pillars: ["/bourses", "/ecoles-de-langue-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etapes-admission-universite-chinoise",
+    title: "Admission en université chinoise : les étapes et les délais réels",
+    context:
+      "Parcours type 4 à 6 mois, plus long pour une CSC ou un doctorat. Étapes du site : consultation 1-2 semaines, choix du programme 2-3 semaines (souvent 5 à 10 pistes), dossier 3-4 semaines, dépôt 1-2 semaines, attente des réponses 4-8 semaines, visa seulement après l'offre. Rentrée principale en septembre. Décision = université, pas l'agence.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "pieces-dossier-admission-chine",
+    title: "Dossier d'admission en Chine : pièces, traductions et ordre utile",
+    context:
+      "Pièces fréquentes : diplômes, relevés, passeport, photo, lettre de motivation, parfois recommandations, certificat de langue, formulaire médical. Traduire ce qui n'est ni en chinois ni en anglais. Traductions certifiées, légalisations et frais de candidature restent à la charge de l'étudiant. Chaque université a sa liste : ne pas en inventer une universelle.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "plusieurs-candidatures-universitaires-chine",
+    title: "Pourquoi déposer plusieurs candidatures universitaires en Chine",
+    context:
+      "Une seule université concentre le risque de refus. L'orientation compare en général plusieurs programmes. L'accompagnement admission suit jusqu'à 5 candidatures ; le parcours complet jusqu'à 8. Expliquer des pistes plus sûres, ajustées et ambitieuses sans garantir une admission et sans classement.",
+    pillars: ["/processus", "/etudier-en-chine"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "rentree-septembre-vs-printemps-chine",
+    title: "Rentrée de septembre ou de printemps en Chine : que change le calendrier",
+    context:
+      "Rentrée principale en septembre. Rentrée de printemps souvent en février ou mars, avec moins de programmes. Dossier payant : compter 4 à 6 mois d'avance. Pour une bourse, surtout la CSC, commencer plus tôt : les dates limites tombent plusieurs mois avant la rentrée. Ne pas inventer de calendrier figé.",
+    pillars: ["/processus", "/bourses"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "etudier-a-shanghai",
+    title: "Étudier à Shanghai : ce que ça change pour un étudiant francophone",
+    context:
+      "Grande ville côtière du catalogue d'orientation. Climat humide, coût de vie souvent plus élevé que dans l'intérieur, métro dense, anglais plus présent qu'ailleurs, chinois quand même utile hors campus. Fourchettes prudentes. Aucun frais de scolarité inventé, aucun classement, aucun partenariat exclusif.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "etudier-a-pekin",
+    title: "Étudier à Pékin : hiver, campus et vie quotidienne",
+    context:
+      "Capitale, présente dans le catalogue d'orientation. Hivers froids et secs, chauffage, campus souvent vastes, vie chère par rapport à l'intérieur. Le chinois structure le quotidien hors des cours en anglais. Fourchettes prudentes. Aucun classement ni frais inventé.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-a-chengdu",
+    title: "Étudier à Chengdu : rythme de vie et budget étudiant",
+    context:
+      "Capitale du Sichuan, présente dans le catalogue. Ville intérieure souvent moins chère que Shanghai ou Pékin, cuisine locale, climat doux et humide, campus nombreux. Utile pour comparer un projet « grande côte » et un projet « intérieur ». Fourchettes prudentes, pas de palmarès.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "etudier-a-wuhan",
+    title: "Étudier à Wuhan : une ville universitaire du centre",
+    context:
+      "Grande ville universitaire du Hubei, au catalogue. Étés chauds et humides, hivers frais, nombreux campus, coût de vie en général sous celui de Shanghai. Parler transports, logement campus et rythme étudiant. Fourchettes prudentes, aucun classement.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-a-canton",
+    title: "Étudier à Canton : climat, coût et langue au quotidien",
+    context:
+      "Guangzhou, sud de la Chine, au catalogue. Climat subtropical, proximité de Hong Kong, cantonais dans la rue et mandarin / anglais sur les campus internationaux. Coût souvent élevé mais variable selon le quartier. Fourchettes prudentes, pas de partenariat exclusif.",
+    pillars: ["/etudier-en-chine", "/ecoles-de-langue-chine"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "etudier-a-hangzhou",
+    title: "Étudier à Hangzhou : entre grande ville et cadre plus calme",
+    context:
+      "Capitale du Zhejiang, au catalogue. Ville côtière riche, coût plutôt haut, climat humide, campus et vie étudiante moins saturés que Shanghai. Utile pour un projet qui veut une grande ville sans partir à Shanghai ou Pékin. Aucun frais ni classement inventé.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-a-xian",
+    title: "Étudier à Xi'an : histoire, hiver et budget",
+    context:
+      "Capitale du Shaanxi, au catalogue. Ville intérieure du nord-ouest, hivers froids, coût souvent plus bas que les villes côtières, mandarin utile au quotidien. Ne pas réduire la ville à un guide touristique : rester sur le quotidien étudiant. Fourchettes prudentes.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "etudier-a-chongqing",
+    title: "Étudier à Chongqing : relief, climat et vie étudiante",
+    context:
+      "Municipalité du sud-ouest, très présente dans le catalogue d'orientation. Ville montagneuse, étés chauds et humides, hivers doux, coût de vie souvent modéré, mandarin au quotidien. Expliquer ce que le relief change (trajets, campus). Aucun classement.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-a-changsha",
+    title: "Étudier à Changsha : une alternative du centre de la Chine",
+    context:
+      "Capitale du Hunan, au catalogue. Ville intérieure, étés chauds, coût en général inférieur à Shanghai ou Canton, vie étudiante autour des campus. Servir à comparer avec Wuhan ou Chengdu sans élire une ville « idéale ». Fourchettes prudentes.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "etudier-a-kunming",
+    title: "Étudier à Kunming : climat doux et ville du sud-ouest",
+    context:
+      "Capitale du Yunnan, au catalogue. Climat printanier une grande partie de l'année, altitude, ville plus petite que Shanghai, coût souvent modéré. Utile pour un étudiant qui veut éviter le froid du nord et la chaleur humide du sud. Pas de palmarès.",
+    pillars: ["/etudier-en-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "etudier-a-xiamen",
+    title: "Étudier à Xiamen : ville côtière, climat et budget",
+    context:
+      "Ville côtière du Fujian, au catalogue. Climat subtropical, île et mer, taille plus humaine que Shanghai ou Canton, coût variable. Mandarin sur les campus, dialecte local dans la rue. Fourchettes prudentes, aucun frais de scolarité inventé.",
+    pillars: ["/etudier-en-chine", "/ecoles-de-langue-chine"],
+    cta: "/#lead-form",
+  },
   {
     slug: "calendrier-csc-2027",
     title: "Calendrier CSC 2027 : dates, voies et pièces à anticiper",
@@ -53,86 +205,6 @@ export const BLOG_TOPICS: BlogTopic[] = [
       "Calendrier type 2026–2027 de la bourse CSC : fenêtres de dépôt, voies université / ambassade, pièces qui bloquent. Aucune date garantie. Pas de promesse d'obtention.",
     pillars: ["/bourses", "/etudier-en-chine"],
     cta: "/tarifs",
-  },
-  {
-    slug: "visa-x1-senegal-etudes-chine",
-    title: "Visa X1 depuis le Sénégal : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 au Sénégal : dépôt, JW201/JW202, photo, passeport, délais. Décision consulaire.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
-  },
-  {
-    slug: "visa-x1-cote-ivoire-etudes-chine",
-    title: "Visa X1 depuis la Côte d'Ivoire : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 en Côte d'Ivoire : dépôt, documents, délais. Pas de garantie d'obtention.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
-  },
-  {
-    slug: "visa-x1-france-etudes-chine",
-    title: "Visa X1 depuis la France : centre des visas, pièces et délais",
-    context:
-      "Demande de visa X1 en France : centre des visas, JW201/JW202, délais. Décision consulaire.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/tarifs",
-  },
-  {
-    slug: "visa-x1-maroc-etudes-chine",
-    title: "Visa X1 depuis le Maroc : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 au Maroc : dépôt, documents, délais. Pas de garantie d'obtention.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
-  },
-  {
-    slug: "visa-x1-cameroun-etudes-chine",
-    title: "Visa X1 depuis le Cameroun : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 au Cameroun : où déposer, pièces fréquentes, délais. Décision consulaire.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
-  },
-  {
-    slug: "visa-x1-congo-rdc-etudes-chine",
-    title: "Visa X1 depuis la RDC : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 depuis la RDC : dépôt, documents, délais typiques. Pas de garantie.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
-  },
-  {
-    slug: "visa-x1-tunisie-etudes-chine",
-    title: "Visa X1 depuis la Tunisie : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 en Tunisie : centre de dépôt, JW201/JW202, délais. Décision consulaire.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/tarifs",
-  },
-  {
-    slug: "visa-x1-algerie-etudes-chine",
-    title: "Visa X1 depuis l'Algérie : consulat, pièces et délais",
-    context:
-      "Demande de visa X1 en Algérie : dépôt, documents, délais. Pas de garantie d'obtention.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
-  },
-  {
-    slug: "visa-x1-belgique-etudes-chine",
-    title: "Visa X1 depuis la Belgique : centre des visas, pièces et délais",
-    context:
-      "Demande de visa X1 en Belgique : centre des visas, pièces, délais. Décision consulaire.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/tarifs",
-  },
-  {
-    slug: "visa-x1-canada-etudes-chine",
-    title: "Visa X1 depuis le Canada : centre des visas, pièces et délais",
-    context:
-      "Demande de visa X1 au Canada : dépôt, JW201/JW202, délais. Pas de garantie.",
-    pillars: ["/visa-etudiant-chine", "/processus"],
-    cta: "/#lead-form",
   },
   {
     slug: "hsk-4-avant-licence-en-chine",
@@ -366,12 +438,93 @@ export const BLOG_TOPICS: BlogTopic[] = [
     pillars: ["/ecoles-de-langue-chine", "/processus"],
     cta: "/tarifs",
   },
+  {
+    slug: "visa-x1-senegal-etudes-chine",
+    title: "Visa X1 depuis le Sénégal : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 au Sénégal : dépôt, JW201/JW202, photo, passeport, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-cote-ivoire-etudes-chine",
+    title: "Visa X1 depuis la Côte d'Ivoire : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 en Côte d'Ivoire : dépôt, documents, délais. Pas de garantie d'obtention.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-france-etudes-chine",
+    title: "Visa X1 depuis la France : centre des visas, pièces et délais",
+    context:
+      "Demande de visa X1 en France : centre des visas, JW201/JW202, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-maroc-etudes-chine",
+    title: "Visa X1 depuis le Maroc : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 au Maroc : dépôt, documents, délais. Pas de garantie d'obtention.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-cameroun-etudes-chine",
+    title: "Visa X1 depuis le Cameroun : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 au Cameroun : où déposer, pièces fréquentes, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-congo-rdc-etudes-chine",
+    title: "Visa X1 depuis la RDC : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 depuis la RDC : dépôt, documents, délais typiques. Pas de garantie.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-tunisie-etudes-chine",
+    title: "Visa X1 depuis la Tunisie : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 en Tunisie : centre de dépôt, JW201/JW202, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-algerie-etudes-chine",
+    title: "Visa X1 depuis l'Algérie : consulat, pièces et délais",
+    context:
+      "Demande de visa X1 en Algérie : dépôt, documents, délais. Pas de garantie d'obtention.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
+  {
+    slug: "visa-x1-belgique-etudes-chine",
+    title: "Visa X1 depuis la Belgique : centre des visas, pièces et délais",
+    context:
+      "Demande de visa X1 en Belgique : centre des visas, pièces, délais. Décision consulaire.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/tarifs",
+  },
+  {
+    slug: "visa-x1-canada-etudes-chine",
+    title: "Visa X1 depuis le Canada : centre des visas, pièces et délais",
+    context:
+      "Demande de visa X1 au Canada : dépôt, JW201/JW202, délais. Pas de garantie.",
+    pillars: ["/visa-etudiant-chine", "/processus"],
+    cta: "/#lead-form",
+  },
 ];
 
 const SYSTEM = `Tu es un rédacteur SEO francophone senior pour Chinois en Devenir (https://chinoisendevenir.com), agence d'accompagnement pour étudier en Chine.
 Règles absolues:
 - Tu n'es PAS une université ni le CSC. Ne promets JAMAIS admission, bourse, visa, logement ou emploi.
-- Français clair, concret, utile. Pas de jargon marketing vide. Pas de stats inventées (fourchettes prudentes OK).
+- Reste sur le sujet du brief. N'écris pas un guide « visa depuis tel pays » sauf si le titre porte explicitement sur un visa.
+- Français clair, concret, utile. Pas de jargon marketing vide. Pas de stats inventées (fourchettes prudentes OK). Les faits du contexte priment sur tes connaissances générales.
 - Structure narrative INTERNE: d'abord le problème du lecteur, puis la solution concrète, puis une promesse réaliste — SANS jamais écrire les mots "Problème", "Solution" ou "Promesse" comme titres ou labels.
 - Article COMPLET: intro 80–120 mots, puis 5 à 7 sections H2 riches (2–4 paragraphes chacune, listes si utile), 4–5 FAQ utiles.
 - Liens internes OBLIGATOIRES dans internalLinks: les 2 pages piliers indiquées dans le brief, PLUS un lien /tarifs ou /#lead-form (ou /contact). Tu peux ajouter 1–2 liens /blog/<slug> utiles. Pas d'article orphelin.
