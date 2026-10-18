@@ -7,6 +7,8 @@ export type StoredBlogPost = {
   live: boolean;
   created_at: string;
   created_by: string | null;
+  /** Set when the article answers one client-file question. Not shown on the site. */
+  askKey: string | null;
   post: BlogPost;
 };
 
@@ -46,11 +48,14 @@ function mapRow(row: Record<string, unknown>): StoredBlogPost | null {
     published_at: String(row.published_at || ""),
   });
   if (!post || !row.id) return null;
+  const payload = asRecord(row.payload);
+  const askKey = String(payload.askKey || "").trim();
   return {
     id: String(row.id),
     live: row.live !== false,
     created_at: String(row.created_at || ""),
     created_by: row.created_by ? String(row.created_by) : null,
+    askKey: askKey || null,
     post,
   };
 }
@@ -115,19 +120,23 @@ export async function countAiPostsOn(day: string): Promise<number> {
 export async function insertStoredPost({
   post,
   createdBy,
+  askKey,
 }: {
   post: BlogPost;
   createdBy?: string;
+  /** Ties the article to one fiche question so it is not answered twice. */
+  askKey?: string | null;
 }): Promise<StoredBlogPost> {
   const admin = await client();
   if (!admin) throw new Error("Variables Supabase admin manquantes");
+  const key = String(askKey || "").trim();
   const { data, error } = await admin
     .from("blog_posts")
     .insert({
       slug: post.slug,
       published_at: post.publishedAt,
       live: true,
-      payload: post,
+      payload: key ? { ...post, askKey: key } : post,
       created_by: createdBy || "ai",
     })
     .select("id, slug, published_at, live, payload, created_at, created_by")

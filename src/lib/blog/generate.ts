@@ -1,6 +1,12 @@
 import type { BlogPost, BlogFaq, BlogLink, BlogSection } from "./types";
 import { BLOG_POSTS, parisDateString } from "./index";
 import {
+  loadFicheAsks,
+  pickFreshFicheAsk,
+  shouldUseFicheFaq,
+  topicFromFiche,
+} from "./ficheFaq";
+import {
   countAiPostsOn,
   insertStoredPost,
   listStoredPosts,
@@ -38,6 +44,8 @@ export type BlogTopic = {
   context: string;
   pillars: [string, string];
   cta: (typeof BLOG_CONVERSION_HREFS)[number];
+  /** One public question taken from a client file. */
+  faq?: boolean;
 };
 
 /**
@@ -745,7 +753,10 @@ async function mammouth(system: string, user: string) {
 
 async function generateOne(brief: BlogTopic, allSlugs: string[], publishedAt: string) {
   const required = requiredInternalLinks(brief);
-  const user = `Rédige un article de blog COMPLET (équivalent ~1000–1600 mots) pour:
+  const faqNote = brief.faq
+    ? "Mode FAQ: le titre EST la question. Réponds seulement à elle, sans citer de personne.\n\n"
+    : "";
+  const user = `${faqNote}Rédige un article de blog COMPLET (équivalent ~1000–1600 mots) pour:
 
 Titre imposé: ${brief.title}
 Slug: ${brief.slug}
@@ -795,23 +806,68 @@ export async function generateDailyBlogPost({
     ...stored.map((row) => row.post.title),
   ];
   const topic = pickTopic(usedSlugs, BLOG_TOPICS, usedTitles);
-  if (!topic) {
-    return { skipped: true as const, reason: "no-new-topic", already, today };
-  }
-  let post: BlogPost | null = null;
-  let lastError = "génération impossible";
-  for (let attempt = 1; attempt <= 2; attempt += 1) {
-    try {
-      post = await generateOne(topic, usedSlugs, today);
-      break;
-    } catch (error) {
-      lastError = error instanceof Error ? error.message : String(error);
+  const leadEnd = BLOG_TOPICS.findIndex((item) => item.slug === "calendrier-csc-2027");
+  const leadPublished =
+    leadEnd > 0 && BLOG_TOPICS.slice(0, leadEnd).some((item) => usedSlugs.includes(item.slug));
+  const lastWasFaq = Boolean(stored[0]?.askKey);
+  let fiche: BlogTopic | null = null;
+  let ficheKey: string | null = null;
+  if (leadPublished && !lastWasFaq) {
+    const fresh = pickFreshFicheAsk(
+      await loadFicheAsks(),
+      stored.map((row) => row.askKey || ""),
+    );
+    if (fresh && shouldUseFicheFaq({ leadPublished, lastWasFaq, hasFreshAsk: true })) {
+      let slug = slugifyBlogTitle(fresh.title);
+      if (!slug || usedSlugs.includes(slug)) slug = `${slug || "question"}-${fresh.key.slice(0, 6)}`;
+      fiche = topicFromFiche(fresh, slug);
+      ficheKey = fresh.key;
     }
   }
-  if (!post) throw new Error(lastError);
-  if (usedSlugs.includes(post.slug) || topicAlreadyCovered(topic, usedSlugs, usedTitles)) {
+  if (!topic && !fiche) {
     return { skipped: true as const, reason: "no-new-topic", already, today };
   }
-  const saved = await insertStoredPost({ post, createdBy });
+
+  const write = async (brief: BlogTopic) => {
+    let produced: BlogPost | null = null;
+    let lastError = "génération impossible";
+    for (let attempt = 1; attempt <= 2; attempt += 1) {
+      try {
+        produced = await generateOne(brief, usedSlugs, today);
+        break;
+      } catch (error) {
+        lastError = error instanceof Error ? error.message : String(error);
+      }
+    }
+    if (!produced) throw new Error(lastError);
+    return produced;
+  };
+
+  const collided = (item: BlogPost, brief: BlogTopic) =>
+    usedSlugs.includes(item.slug) || topicAlreadyCovered(brief, usedSlugs, usedTitles);
+
+  let post: BlogPost | null = null;
+  let savedKey: string | null = null;
+  if (fiche) {
+    try {
+      const faqPost = await write(fiche);
+      if (!collided(faqPost, fiche)) {
+        post = faqPost;
+        savedKey = ficheKey;
+      }
+    } catch (error) {
+      console.warn("fiche faq:", error instanceof Error ? error.message : error);
+    }
+  }
+  if (!post) {
+    if (!topic) throw new Error("génération impossible");
+    post = await write(topic);
+    savedKey = null;
+  }
+  const brief = savedKey ? fiche : topic;
+  if (!brief || collided(post, brief)) {
+    return { skipped: true as const, reason: "no-new-topic", already, today };
+  }
+  const saved = await insertStoredPost({ post, createdBy, askKey: savedKey });
   return { skipped: false as const, post: saved.post, id: saved.id, today };
 }

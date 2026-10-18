@@ -12,7 +12,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 
 | Surface | Routes | Qui |
 |---|---|---|
-| Public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. FR, JSON-LD, `public/llms.txt`. Blog : guides `src/lib/blog/` + IA `blog_posts` (1/jour si sujet inédit, cron). |
+| Public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. FR, JSON-LD, `public/llms.txt`. Blog : guides `src/lib/blog/` + IA `blog_posts` (1/jour, cron). File : bourses, admission, villes, puis le reste. Après le premier de ces sujets, un article sur deux répond à une question de fiche (`ficheFaq.ts`), sans nom ni email. |
 | Étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Supabase Auth. Orientation / documents après déblocage admin (`espace_debloque`). |
 | Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog`, `/admin/rapport` | `ADMIN_EMAILS` + `admin_users`. Rôle `full` ou `limited`. |
 
