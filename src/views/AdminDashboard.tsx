@@ -71,6 +71,7 @@ import {
   formatHistoryDescription,
   historyActorKind,
 } from "../lib/suiviHistory";
+import { phoneMatchesQuery } from "../lib/whatsappPhone";
 
 const STATUTS = SUIVI_STATUTS;
 
@@ -684,10 +685,12 @@ export default function AdminDashboard() {
     isInboxPending(row.id, unreadByContact, whatsappPending);
   const filteredContacts = sortInboxFirst(
     sortPriorityFirst(contacts.filter((c) => {
+    const needle = search.toLowerCase();
     const matchSearch =
-      c.prenom?.toLowerCase().includes(search.toLowerCase()) ||
-      c.nom?.toLowerCase().includes(search.toLowerCase()) ||
-      c.email?.toLowerCase().includes(search.toLowerCase());
+      c.prenom?.toLowerCase().includes(needle) ||
+      c.nom?.toLowerCase().includes(needle) ||
+      c.email?.toLowerCase().includes(needle) ||
+      phoneMatchesQuery(c.phone, search);
 
     const matchStatut =
       filterStatut === "tous" ||

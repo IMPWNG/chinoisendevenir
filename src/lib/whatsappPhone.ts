@@ -26,6 +26,13 @@ export function whatsappMsisdn(raw: unknown, country?: string | null): string | 
   return digits;
 }
 
+/** Admin search: digits only, so "+221 77 12" matches "7712". Under 3 digits, no match. */
+export function phoneMatchesQuery(stored: unknown, query: string): boolean {
+  const qDigits = query.replace(/\D/g, "");
+  if (qDigits.length < 3) return false;
+  return String(stored ?? "").replace(/\D/g, "").includes(qDigits);
+}
+
 /** Stored and displayed form: +indicatif followed by the national number. */
 export function phoneWithIndicatif(raw: unknown, country?: string | null): string | null {
   const number = whatsappMsisdn(raw, country);

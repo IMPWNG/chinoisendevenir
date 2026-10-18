@@ -5,6 +5,7 @@
 import { COUNTRIES, countryDialCode } from "./countries";
 import {
   isEtudeChineLabel,
+  phoneMatchesQuery,
   phoneWithIndicatif,
   whatsappAddressBookId,
   whatsappChatId,
@@ -41,5 +42,9 @@ assert(
   "phone jid kept",
 );
 assert(whatsappChatId("33612345678", null) === null, "missing jid");
+assert(phoneMatchesQuery("+221 77 123 45 67", "77 123"), "phone spaced");
+assert(phoneMatchesQuery("+221 77 123 45 67", "771234567"), "phone digits");
+assert(!phoneMatchesQuery("+221 77 123 45 67", "jean"), "phone ignores names");
+assert(!phoneMatchesQuery("+221 77 123 45 67", "12"), "phone needs 3 digits");
 
 console.log("whatsappPhone check ok");
