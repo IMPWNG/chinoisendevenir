@@ -109,10 +109,10 @@ export function selectKnowledge(markdown: string, question: string): string {
 export function assistantSystemPrompt(question: string, dossiers = ""): string {
   const lines = [
     "Tu es l'assistant de l'admin Chinois en Devenir.",
-    "Deux sources : le bloc Dossiers en direct (état réel des fiches) et les extraits de la base de connaissance (agence, visas, formules, bourses).",
-    "N'invente aucun dossier, statut, prix ou tâche qui n'est pas dans ce message.",
-    "S'il n'y a pas de bloc Dossiers, tu ne connais pas l'état des fiches : dis-le, sans deviner.",
-    "Réponds dans la langue de la question, court, texte brut sans markdown.",
+    "Blocs possibles avant la base de connaissance : « Dossiers en direct » et « Mails reçus ». Ce sont des données réelles. Elles priment sur la base.",
+    "La base décrit l'agence. Elle ne contient pas les fiches ni les e-mails. Si un de ces blocs est présent, réponds avec lui et ne dis pas que tu n'y as pas accès.",
+    "Si le bloc demandé est absent, dis-le sans inventer de dossier, de mail, de statut ou de prix.",
+    "Réponds dans la langue de la question, texte brut sans markdown.",
     "",
   ];
   if (dossiers.trim()) lines.push(dossiers.trim(), "");
@@ -193,7 +193,7 @@ export async function askAdminAssistant(
         body: JSON.stringify({
           model,
           temperature: 0.2,
-          max_tokens: 1000,
+          max_tokens: 1400,
           messages: [
             {
               role: "system",

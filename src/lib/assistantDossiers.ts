@@ -238,3 +238,73 @@ export async function loadDossierBrief(admin: AdminClient, question: string): Pr
   }
   return brief;
 }
+
+export type AssistantMail = {
+  contact_id?: string | null;
+  direction?: string | null;
+  subject?: string | null;
+  body_text?: string | null;
+  from_email?: string | null;
+  sent_at?: string | null;
+};
+
+const MAIL_CAP = 40;
+const MAIL_BODY = 240;
+
+export function wantsMailReport(question: string): boolean {
+  return /mail|email|courriel/.test(fold(question));
+}
+
+export function mailWindowDays(question: string): number {
+  const match = fold(question).match(/(\d{1,3})\s*(?:dernier|jour)/);
+  const days = match ? Number(match[1]) : 10;
+  if (!Number.isFinite(days) || days < 1) return 10;
+  return Math.min(31, days);
+}
+
+export function mailBrief(
+  rows: readonly AssistantMail[],
+  names: ReadonlyMap<string, string>,
+  days: number,
+  total = rows.length,
+): string {
+  const inbound = rows.filter((row) => String(row.direction || "") === "in");
+  const shown = inbound.slice(0, MAIL_CAP);
+  const lines = shown.map((row) => {
+    const when = String(row.sent_at || "").replace("T", " ").slice(0, 16);
+    const who = names.get(String(row.contact_id || "")) || String(row.from_email || "").trim() || "Expéditeur inconnu";
+    const subject = String(row.subject || "").trim() || "(sans objet)";
+    const body = String(row.body_text || "").trim().replace(/\s+/g, " ").slice(0, MAIL_BODY);
+    return [when, who, subject, body].filter(Boolean).join(" — ");
+  });
+  const more = total > shown.length ? `\n${shown.length} affichés sur ${total}, les plus récents.` : "";
+  const list = lines.length ? `\n- ${lines.join("\n- ")}` : "\nAucun mail reçu sur cette période.";
+  return `# Mails reçus (${days} derniers jours)\n${total} messages.${list}${more}`;
+}
+
+export async function loadMailBrief(admin: AdminClient, question: string): Promise<string> {
+  if (!wantsMailReport(question)) return "";
+  const days = mailWindowDays(question);
+  const since = new Date(Date.now() - days * 86400000).toISOString();
+  const { data, error, count } = await admin
+    .from("contact_emails")
+    .select("contact_id, direction, subject, body_text, from_email, sent_at", { count: "exact" })
+    .eq("direction", "in")
+    .gte("sent_at", since)
+    .order("sent_at", { ascending: false })
+    .limit(MAIL_CAP);
+  if (error) return "Mails reçus : lecture impossible.";
+
+  const mails = (data || []) as AssistantMail[];
+  const ids = [...new Set(mails.map((row) => String(row.contact_id || "")).filter(Boolean))];
+  const names = new Map<string, string>();
+  if (ids.length) {
+    const contacts = await admin.from("contacts").select("id, prenom, nom, suivi_statut").in("id", ids);
+    if (!contacts.error) {
+      for (const row of (contacts.data || []) as AssistantDossier[]) {
+        names.set(row.id, line([personName(row), statusLabel(row.suivi_statut)]));
+      }
+    }
+  }
+  return mailBrief(mails, names, days, count ?? mails.length);
+}

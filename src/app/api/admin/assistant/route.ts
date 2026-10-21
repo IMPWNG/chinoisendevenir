@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { askAdminAssistant, assistantPromptTurns } from "@/lib/adminAssistant";
 import { requireFullAdmin } from "@/lib/adminRoles";
-import { loadDossierBrief } from "@/lib/assistantDossiers";
+import { loadDossierBrief, loadMailBrief } from "@/lib/assistantDossiers";
 import { rateLimit } from "@/lib/httpSecurity";
 import { readJsonObject } from "@/lib/request";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
@@ -41,12 +41,11 @@ export async function POST(request: Request) {
     .slice(-2)
     .map((turn) => turn.content)
     .join("\n");
-  let dossiers = "";
-  try {
-    dossiers = await loadDossierBrief(auth.admin, question);
-  } catch {
-    dossiers = "Dossiers : lecture impossible.";
-  }
+  const [dossierText, mailText] = await Promise.all([
+    loadDossierBrief(auth.admin, question).catch(() => "Dossiers : lecture impossible."),
+    loadMailBrief(auth.admin, question).catch(() => "Mails reçus : lecture impossible."),
+  ]);
+  const dossiers = [dossierText, mailText].filter(Boolean).join("\n\n");
 
   const result = await askAdminAssistant(turns, dossiers);
   if (!result.ok) {

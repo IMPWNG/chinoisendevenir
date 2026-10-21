@@ -42,7 +42,7 @@ export const adminTranslations = {
     assistant: {
       open: "Assistant",
       title: "Assistant projet",
-      hint: "Dossiers, priorités, tâches, ou questions sur l'agence.",
+      hint: "Dossiers, priorités, tâches, mails reçus, ou questions sur l'agence.",
       placeholder: "Ex. Quelle formule inclut le visa ?",
       send: "Envoyer",
       thinking: "Réponse…",

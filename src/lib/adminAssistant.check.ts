@@ -9,7 +9,14 @@ import {
   projectKnowledge,
   selectKnowledge,
 } from "./adminAssistant";
-import { dossierBrief, type AssistantDossier, type AssistantTask } from "./assistantDossiers";
+import {
+  dossierBrief,
+  mailBrief,
+  mailWindowDays,
+  wantsMailReport,
+  type AssistantDossier,
+  type AssistantTask,
+} from "./assistantDossiers";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -100,5 +107,35 @@ assert(
     "formule 1",
   "parts reply",
 );
+
+const asked = "Peut tu me faire un compte rendu de tous les mails reçus dans les 10 derniers jours";
+assert(wantsMailReport(asked) && mailWindowDays(asked) === 10, "10 day mail window");
+assert(mailWindowDays("les mails des 90 jours") === 31, "cap the window");
+const mails = mailBrief(
+  [
+    {
+      contact_id: "1",
+      direction: "in",
+      subject: "Question visa",
+      body_text: "Je veux le détail du consulat.",
+      from_email: "awa@example.com",
+      sent_at: "2026-10-18T09:00:00.000Z",
+    },
+    {
+      contact_id: "1",
+      direction: "out",
+      subject: "Réponse",
+      body_text: "envoyé",
+      sent_at: "2026-10-18T10:00:00.000Z",
+    },
+  ],
+  new Map([["1", "Awa Diallo — Visa en préparation"]]),
+  10,
+  1,
+);
+assert(mails.includes("Question visa") && mails.includes("Awa Diallo"), "inbound mail");
+assert(!mails.includes("envoyé"), "skip outbound");
+const mailPrompt = assistantSystemPrompt(asked, mails);
+assert(mailPrompt.includes("# Mails reçus") && mailPrompt.includes("ne dis pas que tu n'y as pas accès"), "mail prompt");
 
 console.log("adminAssistant check ok");
