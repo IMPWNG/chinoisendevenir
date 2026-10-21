@@ -13,6 +13,8 @@ import {
   listAdminSentDocuments,
   loadRequestedDocumentKeys,
   publicDocumentCatalog,
+  replaceFolderFile,
+  depositFolderForRequestedKey,
   safeFileName,
   saveRequestedDocumentKeys,
   validateDocumentFile,
@@ -87,6 +89,7 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const contactId = String(formData.get("contactId") || "");
     const file = formData.get("file");
+    const docKey = String(formData.get("docKey") || "").trim();
 
     if (!contactId) {
       return NextResponse.json(
@@ -104,6 +107,26 @@ export async function POST(request: Request) {
     }
 
     await ensureStudentBucket(auth.admin);
+
+    if (docKey) {
+      const requested = await loadRequestedDocumentKeys(auth.admin, contactId, null);
+      const folder = depositFolderForRequestedKey(contactId, docKey, requested);
+      if (!folder) {
+        return NextResponse.json(
+          { error: "Ce document n'est pas demandé pour ce dossier" },
+          { status: 400 },
+        );
+      }
+      await replaceFolderFile(auth.admin, folder, file);
+      await auth.admin.from("suivi_actions").insert({
+        contact_id: contactId,
+        action: "document_envoye",
+        description: `Document déposé par l'admin (${docKey}) : ${file.name}`,
+        user_admin: auth.user.email,
+      });
+      const files = await loadFiles(auth.admin, contactId);
+      return NextResponse.json({ success: true, ...files });
+    }
 
     const folder = adminFolder(contactId);
     const path = `${folder}/${Date.now()}_${safeFileName(file.name)}`;

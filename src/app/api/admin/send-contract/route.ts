@@ -102,6 +102,7 @@ export async function POST(request: Request) {
     residence: body.residence,
     adresse: body.adresse,
     mineur: body.mineur === true,
+    representants: Array.isArray(body.representants) ? body.representants : null,
     representant:
       body.representant && typeof body.representant === "object"
         ? (body.representant as {

@@ -230,6 +230,25 @@ if (paidByParent && "html" in paidByParent) {
   );
   assert(paidByParent.html.includes("<strong>Le payeur</strong>"), "signature du payeur");
 }
+const twoTutors = contractClientFromContact(
+  { prenom: "Awa", nom: "Diallo", email: "a@b.c", phone: "+221770000000", pays: "Sénégal" },
+  {
+    ...extras,
+    mineur: true,
+    representants: [
+      { nom: "Fatou Diallo", lien: "Mère", adresse: "Dakar", contact: "fatou@example.com" },
+      { nom: "Moussa Diallo", lien: "Père", adresse: "Dakar", contact: "moussa@example.com" },
+    ],
+  },
+);
+assert(twoTutors.representants.length === 2 && twoTutors.representant.nom === "Fatou Diallo", "deux tutrices");
+const tutorsContract = buildSaleContract({ client: twoTutors, formuleNumber: 1, sentAt });
+assert(tutorsContract && "html" in tutorsContract, "contrat avec deux tutrices");
+if (tutorsContract && "html" in tutorsContract) {
+  assert(tutorsContract.html.includes("Personne tutrice 1"), "première tutrice");
+  assert(tutorsContract.html.includes("Moussa Diallo"), "deuxième tutrice");
+  assert(tutorsContract.html.includes("ses représentants légaux"), "pluriel");
+}
 
 function blockText(html: string) {
   return contractHtmlBlocks(html)

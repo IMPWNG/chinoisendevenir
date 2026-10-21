@@ -328,6 +328,9 @@ export const adminTranslations = {
       contractRepLink: "Lien avec le client",
       contractRepAddress: "Adresse du représentant",
       contractRepContact: "E-mail et téléphone du représentant",
+      contractTutorAdd: "Ajouter une personne tutrice",
+      contractTutorRemove: "Retirer",
+      contractTutorHeading: "Personne tutrice {n}",
       contractPayer: "Une autre personne paie l'accompagnement",
       contractPayerHint:
         "Même si l'étudiant est majeur, ce sont souvent les parents qui paient.",
@@ -536,6 +539,8 @@ export const adminTranslations = {
       noneSent: "Aucun document envoyé pour le moment.",
       sendToStudent: "Envoyer à l'étudiant",
       hint: "PDF, JPG ou PNG — 10 Mo max. Le fichier apparaîtra dans l'espace étudiant.",
+      deposit: "Déposer dans le dossier",
+      depositHint: "Ajoute le fichier sur cette pièce, visible dans l'espace étudiant.",
       deleteConfirm: "Supprimer « {name} » de l'espace étudiant ?",
       requestTitle: "Documents à demander",
       requestHint:

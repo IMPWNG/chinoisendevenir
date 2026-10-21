@@ -45,6 +45,8 @@ export type ContractClient = {
   /** Someone other than the client pays (often a parent of an adult student). */
   tiersPayeur: boolean;
   payeur: LegalRepresentative;
+  /** Legal guardians. `representant` stays the first one. */
+  representants: LegalRepresentative[];
 };
 
 const SCHEDULE_TRIGGERS: [string, string, string] = [
@@ -134,6 +136,36 @@ function clip(value: unknown, max: number) {
     .slice(0, max);
 }
 
+function blankPerson(): LegalRepresentative {
+  return { nom: "", lien: "", adresse: "", contact: "" };
+}
+
+function personFrom(value: unknown): LegalRepresentative {
+  const row =
+    value && typeof value === "object" ? (value as Record<string, unknown>) : {};
+  return {
+    nom: clip(row.nom, 120),
+    lien: clip(row.lien, 80),
+    adresse: clip(row.adresse, 240),
+    contact: clip(row.contact, 160),
+  };
+}
+
+function personFilled(person: LegalRepresentative) {
+  return Boolean(person.nom || person.lien || person.adresse || person.contact);
+}
+
+// ponytail: at most four tutors on one contract. Raise the cap if a file needs more.
+export const CONTRACT_TUTOR_CAP = 4;
+
+export function contractTutors(value: unknown): LegalRepresentative[] {
+  const list = Array.isArray(value) ? value : value ? [value] : [];
+  return list
+    .map(personFrom)
+    .filter(personFilled)
+    .slice(0, CONTRACT_TUTOR_CAP);
+}
+
 export function contractInstallments(priceEuros: number) {
   const first = Math.round(priceEuros * 0.4);
   const second = Math.round(priceEuros * 0.3);
@@ -171,6 +203,7 @@ export function contractClientFromContact(
       adresse?: unknown;
       contact?: unknown;
     } | null;
+    representants?: unknown;
     tiersPayeur?: unknown;
     payeur?: {
       nom?: unknown;
@@ -180,8 +213,13 @@ export function contractClientFromContact(
     } | null;
   },
 ): ContractClient {
-  const rep = extras.representant || {};
-  const payer = extras.payeur || {};
+  const listed = contractTutors(extras.representants);
+  const single = personFrom(extras.representant);
+  const representants = listed.length
+    ? listed
+    : personFilled(single)
+      ? [single]
+      : [];
   return {
     prenom: clip(contact.prenom, 80),
     nom: clip(contact.nom, 80),
@@ -192,19 +230,10 @@ export function contractClientFromContact(
     residence: clip(extras.residence, 80) || clip(contact.pays, 80),
     adresse: clip(extras.adresse, 240),
     mineur: extras.mineur === true,
-    representant: {
-      nom: clip(rep.nom, 120),
-      lien: clip(rep.lien, 80),
-      adresse: clip(rep.adresse, 240),
-      contact: clip(rep.contact, 160),
-    },
+    representant: representants[0] || blankPerson(),
+    representants,
     tiersPayeur: extras.tiersPayeur === true,
-    payeur: {
-      nom: clip(payer.nom, 120),
-      lien: clip(payer.lien, 80),
-      adresse: clip(payer.adresse, 240),
-      contact: clip(payer.contact, 160),
-    },
+    payeur: personFrom(extras.payeur),
   };
 }
 
@@ -219,10 +248,15 @@ export function contractGaps(client: ContractClient): string[] {
   if (!client.residence) gaps.push("Pays de résidence habituelle du client");
   if (!client.adresse) gaps.push("Adresse du client");
   if (client.mineur) {
-    if (!client.representant.nom) gaps.push("Nom du représentant légal");
-    if (!client.representant.lien) gaps.push("Lien du représentant légal avec le client");
-    if (!client.representant.adresse) gaps.push("Adresse du représentant légal");
-    if (!client.representant.contact) gaps.push("E-mail et téléphone du représentant légal");
+    const tutors = client.representants.length ? client.representants : [blankPerson()];
+    const suffix = (index: number) => (tutors.length > 1 ? ` ${index + 1}` : "");
+    tutors.forEach((rep, index) => {
+      const n = suffix(index);
+      if (!rep.nom) gaps.push(`Nom du représentant légal${n}`);
+      if (!rep.lien) gaps.push(`Lien du représentant légal avec le client${n}`);
+      if (!rep.adresse) gaps.push(`Adresse du représentant légal${n}`);
+      if (!rep.contact) gaps.push(`E-mail et téléphone du représentant légal${n}`);
+    });
   }
   if (client.tiersPayeur) {
     if (!client.payeur.nom) gaps.push("Nom du payeur");
@@ -393,21 +427,32 @@ export function buildSaleContract(input: {
   );
   const fullName = `${client.prenom} ${client.nom}`.trim();
   const dateLabel = contractSendDate(input.sentAt);
-  const rep = client.representant;
+  const tutors = client.representants;
+  const severalTutors = tutors.length > 1;
   const minorBlock = client.mineur
     ? `<div class="section">
       <div class="section-title">Si le Client est mineur</div>
-      <p>Le présent contrat est signé pour le Client mineur par son représentant légal :</p>
+      <p>Le présent contrat est signé pour le Client mineur par ${severalTutors ? "ses représentants légaux" : "son représentant légal"} :</p>
+      ${tutors
+        .map(
+          (rep, index) => `${severalTutors ? `<p><strong>Personne tutrice ${index + 1}</strong></p>` : ""}
       ${field("Nom et prénom du représentant légal", rep.nom)}
       ${field("Lien avec le Client", rep.lien)}
       ${field("Adresse", rep.adresse)}
-      ${field("E-mail et téléphone", rep.contact)}
+      ${field("E-mail et téléphone", rep.contact)}`,
+        )
+        .join("")}
       <p>Document établissant la qualité de représentant légal : ${escapeHtml(CONTRACT_BLANK)}</p>
-      <p>Le représentant légal déclare être habilité à conclure le présent contrat au nom du Client mineur et s'engage à participer aux démarches lorsque cela est nécessaire.</p>
+      <p>${severalTutors ? "Chaque représentant légal déclare être habilité" : "Le représentant légal déclare être habilité"} à conclure le présent contrat au nom du Client mineur et s'engage à participer aux démarches lorsque cela est nécessaire.</p>
     </div>`
     : "";
   const minorSign = client.mineur
-    ? `<p style="margin-top:16px;"><strong>Le représentant légal</strong><br>Nom : ${shown(rep.nom)}<br>Qualité : ${shown(rep.lien)}<br>Signature précédée de la mention « Agissant en qualité de représentant légal du Client mineur » :</p>`
+    ? tutors
+        .map(
+          (rep) =>
+            `<p style="margin-top:16px;"><strong>Le représentant légal</strong><br>Nom : ${shown(rep.nom)}<br>Qualité : ${shown(rep.lien)}<br>Signature précédée de la mention « Agissant en qualité de représentant légal du Client mineur » :</p>`,
+        )
+        .join("")
     : "";
   const payer = client.payeur;
   const payerBlock = client.tiersPayeur
@@ -453,7 +498,7 @@ export function buildSaleContract(input: {
     ${minorBlock}
     ${payerBlock}
     <div class="section">
-      <p>Le Prestataire et le Client${client.mineur ? ", représenté par son représentant légal," : ""} sont ci-après désignés ensemble les « Parties ».</p>
+      <p>Le Prestataire et le Client${client.mineur ? (severalTutors ? ", représenté par ses représentants légaux," : ", représenté par son représentant légal,") : ""} sont ci-après désignés ensemble les « Parties ».</p>
       ${client.tiersPayeur ? "<p>Le Payeur désigné ci-dessus règle les sommes dues. Les prestations restent fournies au Client.</p>" : ""}
     </div>
     <div class="section">
@@ -586,7 +631,7 @@ export function buildSaleContract(input: {
     <div class="section">
       <div class="section-title">Article 14 — Acceptation et signatures</div>
       <p>Le Client reconnaît avoir reçu, lu et accepté le présent contrat et l'annexe correspondant à la formule choisie. Il reconnaît également avoir reçu ou avoir pu consulter la politique de confidentialité.</p>
-      ${client.mineur ? `<p>Son représentant légal déclare signer le contrat en son nom et l'avoir informé de ses principales conditions, dans la mesure adaptée à son âge.</p>` : ""}
+      ${client.mineur ? `<p>${severalTutors ? "Ses représentants légaux déclarent signer" : "Son représentant légal déclare signer"} le contrat en son nom et l'avoir informé de ses principales conditions, dans la mesure adaptée à son âge.</p>` : ""}
       ${client.tiersPayeur ? "<p>Le Payeur reconnaît avoir pris connaissance des échéances et s'engage à les régler.</p>" : ""}
       <p><strong>Fait à :</strong> ${escapeHtml(CONTRACT_PLACE)}<br><strong>Le :</strong> ${escapeHtml(dateLabel)}</p>
       <p><strong>Le Prestataire</strong><br>Nom du représentant : ${escapeHtml(CONTRACT_REPRESENTATIVE)}<br>Fonction : ${escapeHtml(CONTRACT_ROLE)}</p>

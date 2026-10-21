@@ -19,7 +19,14 @@ import {
   contractClientFromContact,
   contractGaps,
   contractSendDate,
+  CONTRACT_TUTOR_CAP,
 } from "../lib/saleContract";
+
+type TutorFields = { nom: string; lien: string; adresse: string; contact: string };
+
+function emptyTutor(): TutorFields {
+  return { nom: "", lien: "", adresse: "", contact: "" };
+}
 
 type ContractContact = {
   id: string;
@@ -103,10 +110,7 @@ export default function AdminSendContract({
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState(contact.phone || "");
   const [minor, setMinor] = useState(false);
-  const [repName, setRepName] = useState("");
-  const [repLink, setRepLink] = useState("");
-  const [repAddress, setRepAddress] = useState("");
-  const [repContact, setRepContact] = useState("");
+  const [tutors, setTutors] = useState<TutorFields[]>([emptyTutor()]);
   const [otherPayer, setOtherPayer] = useState(false);
   const [payerName, setPayerName] = useState("");
   const [payerLink, setPayerLink] = useState("");
@@ -127,10 +131,7 @@ export default function AdminSendContract({
     setAddress("");
     setPhone(contact.phone || "");
     setMinor(false);
-    setRepName("");
-    setRepLink("");
-    setRepAddress("");
-    setRepContact("");
+    setTutors([emptyTutor()]);
     setOtherPayer(false);
     setPayerName("");
     setPayerLink("");
@@ -150,12 +151,8 @@ export default function AdminSendContract({
     residence,
     adresse: address,
     mineur: minor,
-    representant: {
-      nom: repName,
-      lien: repLink,
-      adresse: repAddress,
-      contact: repContact,
-    },
+    representants: tutors,
+    representant: tutors[0],
     tiersPayeur: otherPayer,
     payeur: {
       nom: payerName,
@@ -213,12 +210,8 @@ export default function AdminSendContract({
           residence,
           adresse: address,
           mineur: minor,
-          representant: {
-            nom: repName,
-            lien: repLink,
-            adresse: repAddress,
-            contact: repContact,
-          },
+          representants: tutors,
+          representant: tutors[0],
           tiersPayeur: otherPayer,
           payeur: {
             nom: payerName,
@@ -329,44 +322,101 @@ export default function AdminSendContract({
           {t("dashboard.contractMinor")}
         </label>
         {minor ? (
-          <>
-            <div>
-              <label className={label}>{t("dashboard.contractRepName")}</label>
-              <input
-                value={repName}
+          <div className="md:col-span-2 space-y-3">
+            {tutors.map((tutor, index) => (
+              <div key={index} className="rounded-xl border border-slate-700 bg-slate-900/40 p-3">
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <p className="text-sm font-semibold text-white">
+                    {t("dashboard.contractTutorHeading", { n: String(index + 1) })}
+                  </p>
+                  {tutors.length > 1 ? (
+                    <button
+                      type="button"
+                      disabled={sending}
+                      onClick={() =>
+                        setTutors((current) => current.filter((_, item) => item !== index))
+                      }
+                      className="text-xs font-bold text-slate-300 hover:text-white"
+                    >
+                      {t("dashboard.contractTutorRemove")}
+                    </button>
+                  ) : null}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <label className={label}>{t("dashboard.contractRepName")}</label>
+                    <input
+                      value={tutor.nom}
+                      disabled={sending}
+                      onChange={(e) =>
+                        setTutors((current) =>
+                          current.map((item, itemIndex) =>
+                            itemIndex === index ? { ...item, nom: e.target.value } : item,
+                          ),
+                        )
+                      }
+                      className={fieldClass(sending)}
+                    />
+                  </div>
+                  <div>
+                    <label className={label}>{t("dashboard.contractRepLink")}</label>
+                    <input
+                      value={tutor.lien}
+                      disabled={sending}
+                      onChange={(e) =>
+                        setTutors((current) =>
+                          current.map((item, itemIndex) =>
+                            itemIndex === index ? { ...item, lien: e.target.value } : item,
+                          ),
+                        )
+                      }
+                      className={fieldClass(sending)}
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className={label}>{t("dashboard.contractRepAddress")}</label>
+                    <input
+                      value={tutor.adresse}
+                      disabled={sending}
+                      onChange={(e) =>
+                        setTutors((current) =>
+                          current.map((item, itemIndex) =>
+                            itemIndex === index ? { ...item, adresse: e.target.value } : item,
+                          ),
+                        )
+                      }
+                      className={fieldClass(sending)}
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className={label}>{t("dashboard.contractRepContact")}</label>
+                    <input
+                      value={tutor.contact}
+                      disabled={sending}
+                      onChange={(e) =>
+                        setTutors((current) =>
+                          current.map((item, itemIndex) =>
+                            itemIndex === index ? { ...item, contact: e.target.value } : item,
+                          ),
+                        )
+                      }
+                      className={fieldClass(sending)}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {tutors.length < CONTRACT_TUTOR_CAP ? (
+              <button
+                type="button"
                 disabled={sending}
-                onChange={(e) => setRepName(e.target.value)}
-                className={fieldClass(sending)}
-              />
-            </div>
-            <div>
-              <label className={label}>{t("dashboard.contractRepLink")}</label>
-              <input
-                value={repLink}
-                disabled={sending}
-                onChange={(e) => setRepLink(e.target.value)}
-                className={fieldClass(sending)}
-              />
-            </div>
-            <div className="md:col-span-2">
-              <label className={label}>{t("dashboard.contractRepAddress")}</label>
-              <input
-                value={repAddress}
-                disabled={sending}
-                onChange={(e) => setRepAddress(e.target.value)}
-                className={fieldClass(sending)}
-              />
-            </div>
-            <div className="md:col-span-2">
-              <label className={label}>{t("dashboard.contractRepContact")}</label>
-              <input
-                value={repContact}
-                disabled={sending}
-                onChange={(e) => setRepContact(e.target.value)}
-                className={fieldClass(sending)}
-              />
-            </div>
-          </>
+                onClick={() => setTutors((current) => [...current, emptyTutor()])}
+                className="rounded-lg border border-slate-600 px-3 py-2 text-sm font-bold text-slate-200 hover:border-slate-400 hover:text-white"
+              >
+                {t("dashboard.contractTutorAdd")}
+              </button>
+            ) : null}
+          </div>
         ) : null}
       </div>
 

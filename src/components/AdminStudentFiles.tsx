@@ -66,6 +66,8 @@ export default function AdminStudentFiles({
   const [requestedKeys, setRequestedKeys] = useState<string[]>([]);
   const [requiredDocuments, setRequiredDocuments] = useState<RequiredDoc[]>([]);
   const [adminDocuments, setAdminDocuments] = useState<AdminDoc[]>([]);
+  const [depositKey, setDepositKey] = useState("");
+  const [depositFile, setDepositFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(true);
   const [savingKeys, setSavingKeys] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -121,6 +123,31 @@ export default function AdminStudentFiles({
       setError(errorMessage(err));
     } finally {
       setDeletingPath("");
+    }
+  };
+
+  const depositOnPiece = async (event: FormEvent<HTMLFormElement>, docKey: string) => {
+    event.preventDefault();
+    if (!depositFile || depositKey !== docKey) return;
+    setUploading(true);
+    setError("");
+    try {
+      const body = new FormData();
+      body.append("contactId", contactId);
+      body.append("docKey", docKey);
+      body.append("file", depositFile);
+      const data = await adminFetch("/api/admin/student-files", {
+        method: "POST",
+        body,
+      });
+      applyFiles(data);
+      setDepositFile(null);
+      setDepositKey("");
+      event.currentTarget.reset();
+    } catch (err: unknown) {
+      setError(errorMessage(err));
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -277,6 +304,31 @@ export default function AdminStudentFiles({
                       </button>
                     ) : null}
                   </div>
+                  <form
+                    onSubmit={(event) => depositOnPiece(event, doc.key)}
+                    className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center"
+                  >
+                    <input
+                      type="file"
+                      accept=".pdf,.jpg,.jpeg,.png,.webp"
+                      aria-label={docLabel(doc.key, doc.label)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setDepositKey(doc.key);
+                        setDepositFile(e.target.files?.[0] || null);
+                      }}
+                      className="flex-1 text-sm text-slate-300 file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-slate-700 file:text-white file:font-semibold"
+                    />
+                    <button
+                      type="submit"
+                      disabled={uploading || depositKey !== doc.key || !depositFile}
+                      className="px-4 py-2 bg-cyan-700 hover:bg-cyan-600 text-white rounded-lg text-sm font-bold disabled:opacity-50"
+                    >
+                      {uploading && depositKey === doc.key
+                        ? t("sending")
+                        : t("files.deposit")}
+                    </button>
+                  </form>
+                  <p className="mt-2 text-xs text-slate-500">{t("files.depositHint")}</p>
                 </div>
               );
             })}

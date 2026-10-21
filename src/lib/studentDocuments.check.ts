@@ -2,7 +2,7 @@
  * Requested-document keys stay inside the catalog, in catalog order.
  * Run: npx tsx src/lib/studentDocuments.check.ts
  */
-import { contractCopyPath, isContractCopyPath } from "./studentDocuments";
+import { contractCopyPath, depositFolderForRequestedKey, isContractCopyPath } from "./studentDocuments";
 import {
   parseRequestedDocumentKeys,
   STARTER_DOSSIER_DOCUMENT_KEYS,
@@ -38,5 +38,11 @@ assert(STARTER_DOSSIER_DOCUMENT_KEYS.length === 6, "six starter documents");
 const ready = requestedKeysOrStarter([]);
 assert(ready.length === 6 && ready[0] === "passeport" && ready.includes("financial_proof"), "empty file asks for the starter six");
 assert(requestedKeysOrStarter(["hsk"]).join() === "hsk", "a chosen list is kept");
+assert(
+  depositFolderForRequestedKey("c1", "passeport", ["passeport"]) === "c1/required/passeport",
+  "admin deposit lands on the student piece",
+);
+assert(depositFolderForRequestedKey("c1", "passeport", ["photo"]) === "", "undeclared piece is refused");
+assert(depositFolderForRequestedKey("c1", "inconnu", ["inconnu"]) === "", "unknown piece is refused");
 
 console.log("requested documents ok");

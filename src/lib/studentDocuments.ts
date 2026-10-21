@@ -139,6 +139,17 @@ export function requiredFolder(contactId: unknown, docKey: unknown) {
   return `${contactId}/${FOLDER_REQUIRED}/${docKey}`;
 }
 
+/** Folder for an admin deposit onto a piece the student already sees. Empty if the key is not requested. */
+export function depositFolderForRequestedKey(
+  contactId: unknown,
+  docKey: unknown,
+  requestedKeys: readonly string[],
+) {
+  const key = String(docKey || "");
+  if (!key || !requestedKeys.includes(key) || !getStudentDocumentSpec(key)) return "";
+  return requiredFolder(contactId, key);
+}
+
 export function adminFolder(contactId: unknown) {
   return `${contactId}/${FOLDER_ADMIN}`;
 }
