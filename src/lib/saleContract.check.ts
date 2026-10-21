@@ -249,6 +249,39 @@ if (tutorsContract && "html" in tutorsContract) {
   assert(tutorsContract.html.includes("Moussa Diallo"), "deuxième tutrice");
   assert(tutorsContract.html.includes("ses représentants légaux"), "pluriel");
 }
+const relatedAdult = contractClientFromContact(
+  { prenom: "Awa", nom: "Diallo", email: "a@b.c", phone: "+221770000000", pays: "Sénégal" },
+  {
+    ...extras,
+    representants: [
+      { nom: "Awa Ndiaye", lien: "Sœur", adresse: "Dakar", contact: "awa.n@example.com" },
+      { nom: "Ibrahima Ndiaye", lien: "Oncle", adresse: "Dakar", contact: "ib@example.com" },
+    ],
+  },
+);
+const relatedContract = buildSaleContract({ client: relatedAdult, formuleNumber: 1, sentAt });
+assert(relatedContract && "html" in relatedContract, "majeur avec personnes liées");
+if (relatedContract && "html" in relatedContract) {
+  assert(relatedContract.html.includes("Personnes liées au Client"), "bloc personnes liées");
+  assert(relatedContract.html.includes("Awa Ndiaye"), "première personne liée");
+  assert(relatedContract.html.includes("Ibrahima Ndiaye"), "deuxième personne liée");
+  assert(!relatedContract.html.includes("Si le Client est mineur"), "pas le bloc mineur");
+  assert(!relatedContract.html.includes("représentant légal"), "pas un représentant");
+}
+const partialRelated = buildSaleContract({
+  client: contractClientFromContact(
+    { prenom: "Awa", nom: "Diallo", email: "a@b.c", phone: "+221770000000", pays: "Sénégal" },
+    { ...extras, representants: [{ nom: "Awa Ndiaye", lien: "", adresse: "", contact: "" }] },
+  ),
+  formuleNumber: 1,
+  sentAt,
+});
+assert(
+  partialRelated &&
+    "validation" in partialRelated &&
+    partialRelated.gaps.includes("Lien de la personne liée avec le client"),
+  "personne liée incomplète",
+);
 
 function blockText(html: string) {
   return contractHtmlBlocks(html)

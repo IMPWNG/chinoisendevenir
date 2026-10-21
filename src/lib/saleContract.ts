@@ -257,6 +257,16 @@ export function contractGaps(client: ContractClient): string[] {
       if (!rep.adresse) gaps.push(`Adresse du représentant légal${n}`);
       if (!rep.contact) gaps.push(`E-mail et téléphone du représentant légal${n}`);
     });
+  } else {
+    const people = client.representants;
+    const suffix = (index: number) => (people.length > 1 ? ` ${index + 1}` : "");
+    people.forEach((person, index) => {
+      const n = suffix(index);
+      if (!person.nom) gaps.push(`Nom de la personne liée${n}`);
+      if (!person.lien) gaps.push(`Lien de la personne liée avec le client${n}`);
+      if (!person.adresse) gaps.push(`Adresse de la personne liée${n}`);
+      if (!person.contact) gaps.push(`E-mail et téléphone de la personne liée${n}`);
+    });
   }
   if (client.tiersPayeur) {
     if (!client.payeur.nom) gaps.push("Nom du payeur");
@@ -454,6 +464,31 @@ export function buildSaleContract(input: {
         )
         .join("")
     : "";
+  const relatedBlock =
+    !client.mineur && tutors.length
+      ? `<div class="section">
+      <div class="section-title">${severalTutors ? "Personnes liées au Client" : "Personne liée au Client"}</div>
+      <p>${severalTutors ? "Les personnes suivantes ont un lien avec le Client. Elles ne sont pas le Client et ne le représentent pas. Cette mention ne les désigne pas comme payeur." : "La personne suivante a un lien avec le Client. Elle n'est pas le Client et ne le représente pas. Cette mention ne la désigne pas comme payeur."}</p>
+      ${tutors
+        .map(
+          (person, index) => `${severalTutors ? `<p><strong>Personne liée ${index + 1}</strong></p>` : ""}
+      ${field("Nom et prénom", person.nom)}
+      ${field("Lien avec le Client", person.lien)}
+      ${field("Adresse", person.adresse)}
+      ${field("E-mail et téléphone", person.contact)}`,
+        )
+        .join("")}
+    </div>`
+      : "";
+  const relatedSign =
+    !client.mineur && tutors.length
+      ? tutors
+          .map(
+            (person) =>
+              `<p style="margin-top:16px;"><strong>Personne liée</strong><br>Nom : ${shown(person.nom)}<br>Qualité : ${shown(person.lien)}<br>Signature :</p>`,
+          )
+          .join("")
+      : "";
   const payer = client.payeur;
   const payerBlock = client.tiersPayeur
     ? `<div class="section">
@@ -496,6 +531,7 @@ export function buildSaleContract(input: {
       <p>Ci-après dénommé le « Client ».</p>
     </div>
     ${minorBlock}
+    ${relatedBlock}
     ${payerBlock}
     <div class="section">
       <p>Le Prestataire et le Client${client.mineur ? (severalTutors ? ", représenté par ses représentants légaux," : ", représenté par son représentant légal,") : ""} sont ci-après désignés ensemble les « Parties ».</p>
@@ -632,12 +668,14 @@ export function buildSaleContract(input: {
       <div class="section-title">Article 14 — Acceptation et signatures</div>
       <p>Le Client reconnaît avoir reçu, lu et accepté le présent contrat et l'annexe correspondant à la formule choisie. Il reconnaît également avoir reçu ou avoir pu consulter la politique de confidentialité.</p>
       ${client.mineur ? `<p>${severalTutors ? "Ses représentants légaux déclarent signer" : "Son représentant légal déclare signer"} le contrat en son nom et l'avoir informé de ses principales conditions, dans la mesure adaptée à son âge.</p>` : ""}
+      ${!client.mineur && tutors.length ? `<p>${severalTutors ? "Les personnes liées au Client reconnaissent avoir pris connaissance du présent contrat en raison de leur lien avec le Client." : "La personne liée au Client reconnaît avoir pris connaissance du présent contrat en raison de son lien avec le Client."}</p>` : ""}
       ${client.tiersPayeur ? "<p>Le Payeur reconnaît avoir pris connaissance des échéances et s'engage à les régler.</p>" : ""}
       <p><strong>Fait à :</strong> ${escapeHtml(CONTRACT_PLACE)}<br><strong>Le :</strong> ${escapeHtml(dateLabel)}</p>
       <p><strong>Le Prestataire</strong><br>Nom du représentant : ${escapeHtml(CONTRACT_REPRESENTATIVE)}<br>Fonction : ${escapeHtml(CONTRACT_ROLE)}</p>
       ${stampHtml()}
       <p style="margin-top:16px;"><strong>Le Client</strong><br>Nom : ${escapeHtml(fullName)}<br>Signature précédée de la mention « Lu et approuvé » :</p>
       ${minorSign}
+      ${relatedSign}
       ${payerSign}
     </div>
     <div class="section">

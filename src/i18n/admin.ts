@@ -313,7 +313,7 @@ export const adminTranslations = {
       whatsappListMissing: "La liste Étude Chine est introuvable sur ce WhatsApp.",
       contractSection: "Envoyer le contrat",
       contractHint:
-        "Le pays du dossier remplit la résidence habituelle, pas la nationalité. Un client mineur exige son représentant légal. Si une autre personne paie, renseignez-la, même si le client est majeur.",
+        "Le pays du dossier remplit la résidence habituelle, pas la nationalité. Un client mineur exige son représentant légal. Vous pouvez aussi indiquer d'autres personnes liées au client, qu'il soit mineur ou majeur. Si une autre personne paie, renseignez-la.",
       contractClient: "Client",
       contractFirstname: "Prénom",
       contractLastname: "Nom",
@@ -331,6 +331,11 @@ export const adminTranslations = {
       contractTutorAdd: "Ajouter une personne tutrice",
       contractTutorRemove: "Retirer",
       contractTutorHeading: "Personne tutrice {n}",
+      contractRelatedAdd: "Ajouter une personne liée",
+      contractRelatedHeading: "Personne liée {n}",
+      contractRelatedName: "Nom",
+      contractRelatedAddress: "Adresse",
+      contractRelatedContact: "E-mail et téléphone",
       contractPayer: "Une autre personne paie l'accompagnement",
       contractPayerHint:
         "Même si l'étudiant est majeur, ce sont souvent les parents qui paient.",

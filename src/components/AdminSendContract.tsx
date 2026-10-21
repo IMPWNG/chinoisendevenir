@@ -321,13 +321,17 @@ export default function AdminSendContract({
           />
           {t("dashboard.contractMinor")}
         </label>
-        {minor ? (
-          <div className="md:col-span-2 space-y-3">
+        <div className="md:col-span-2 space-y-3">
             {tutors.map((tutor, index) => (
               <div key={index} className="rounded-xl border border-slate-700 bg-slate-900/40 p-3">
                 <div className="mb-2 flex items-center justify-between gap-2">
                   <p className="text-sm font-semibold text-white">
-                    {t("dashboard.contractTutorHeading", { n: String(index + 1) })}
+                    {t(
+                      minor
+                        ? "dashboard.contractTutorHeading"
+                        : "dashboard.contractRelatedHeading",
+                      { n: String(index + 1) },
+                    )}
                   </p>
                   {tutors.length > 1 ? (
                     <button
@@ -344,7 +348,9 @@ export default function AdminSendContract({
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className={label}>{t("dashboard.contractRepName")}</label>
+                    <label className={label}>
+                      {t(minor ? "dashboard.contractRepName" : "dashboard.contractRelatedName")}
+                    </label>
                     <input
                       value={tutor.nom}
                       disabled={sending}
@@ -374,7 +380,13 @@ export default function AdminSendContract({
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className={label}>{t("dashboard.contractRepAddress")}</label>
+                    <label className={label}>
+                      {t(
+                        minor
+                          ? "dashboard.contractRepAddress"
+                          : "dashboard.contractRelatedAddress",
+                      )}
+                    </label>
                     <input
                       value={tutor.adresse}
                       disabled={sending}
@@ -389,7 +401,13 @@ export default function AdminSendContract({
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className={label}>{t("dashboard.contractRepContact")}</label>
+                    <label className={label}>
+                      {t(
+                        minor
+                          ? "dashboard.contractRepContact"
+                          : "dashboard.contractRelatedContact",
+                      )}
+                    </label>
                     <input
                       value={tutor.contact}
                       disabled={sending}
@@ -413,11 +431,10 @@ export default function AdminSendContract({
                 onClick={() => setTutors((current) => [...current, emptyTutor()])}
                 className="rounded-lg border border-slate-600 px-3 py-2 text-sm font-bold text-slate-200 hover:border-slate-400 hover:text-white"
               >
-                {t("dashboard.contractTutorAdd")}
+                {t(minor ? "dashboard.contractTutorAdd" : "dashboard.contractRelatedAdd")}
               </button>
             ) : null}
           </div>
-        ) : null}
       </div>
 
       <p className={`${label} mb-2`}>{t("dashboard.contractProvider")}</p>
