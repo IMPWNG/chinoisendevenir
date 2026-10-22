@@ -496,27 +496,85 @@ export async function markStudentWhatsappRead(input: {
   });
 }
 
+// ponytail: OpenWA returns 502 once a single text passes WhatsApp's limit. Split on paragraphs instead of refusing.
+const WHATSAPP_PART = 4000;
+
+export function whatsappTextParts(value: string): string[] {
+  const text = value.replace(/[\u2028\u2029]/g, "\n").replace(/\r\n/g, "\n").trim();
+  if (!text) return [];
+  const room = 16;
+  const limit = WHATSAPP_PART - room;
+  if (text.length <= WHATSAPP_PART) return [text];
+  const pieces: string[] = [];
+  let rest = text;
+  while (rest.length > limit) {
+    const window = rest.slice(0, limit);
+    let cut = window.lastIndexOf("\n\n");
+    if (cut < 400) cut = window.lastIndexOf("\n");
+    if (cut < 400) cut = window.lastIndexOf(" ");
+    if (cut < 1) cut = limit;
+    const piece = rest.slice(0, cut).trim();
+    if (!piece) break;
+    pieces.push(piece);
+    rest = rest.slice(cut).trim();
+  }
+  if (rest) pieces.push(rest);
+  if (pieces.length < 2) return pieces;
+  return pieces.map((part, index) => `${index + 1}/${pieces.length}\n${part}`);
+}
+
+async function deliverText(chatId: string, addressBookId: string, text: string) {
+  const sent = (await openwa(
+    "/messages/send-text",
+    { method: "POST", body: JSON.stringify({ chatId, text }) },
+    { timeoutMs: 25_000 },
+  ).catch(async (error) => {
+    if (chatId === addressBookId) throw error;
+    return openwa(
+      "/messages/send-text",
+      { method: "POST", body: JSON.stringify({ chatId: addressBookId, text }) },
+      { timeoutMs: 25_000 },
+    );
+  })) as { messageId?: string };
+  return sent?.messageId || null;
+}
+
+async function deliverParts(chatId: string, addressBookId: string, text: string) {
+  const parts = whatsappTextParts(text);
+  if (!parts.length) {
+    throw new OpenwaError("Message vide.", 400, "BAD_TEXT");
+  }
+  let messageId: string | null = null;
+  let sentCount = 0;
+  try {
+    for (const part of parts) {
+      messageId = await deliverText(chatId, addressBookId, part);
+      sentCount += 1;
+    }
+  } catch (error) {
+    if (sentCount > 0 && sentCount < parts.length) {
+      throw new OpenwaError(
+        `Une partie du message est partie (${sentCount}/${parts.length}). La suite n'a pas pu être envoyée.`,
+        error instanceof OpenwaError ? error.status : 502,
+        "PARTIAL",
+      );
+    }
+    throw error;
+  }
+  return { messageId, parts: parts.length };
+}
+
 export async function sendStudentWhatsapp(input: {
   phone: unknown;
   country?: string | null;
   text: string;
 }) {
-  const text = input.text.trim();
-  if (!text) {
+  if (!whatsappTextParts(input.text).length) {
     throw new OpenwaError("Message vide.", 400, "BAD_TEXT");
   }
   const { chatId, addressBookId } = await resolveChat(input.phone, input.country);
-  const sent = (await openwa("/messages/send-text", {
-    method: "POST",
-    body: JSON.stringify({ chatId, text }),
-  }).catch(async (error) => {
-    if (chatId === addressBookId) throw error;
-    return openwa("/messages/send-text", {
-      method: "POST",
-      body: JSON.stringify({ chatId: addressBookId, text }),
-    });
-  })) as { messageId?: string };
-  return { chatId, messageId: sent?.messageId || null };
+  const sent = await deliverParts(chatId, addressBookId, input.text);
+  return { chatId, messageId: sent.messageId, parts: sent.parts };
 }
 
 export async function saveStudentWhatsappContact(input: {
@@ -761,16 +819,7 @@ export async function applyStudentWhatsapp(input: {
     await labelIds([resolved.chatId, resolved.addressBookId]);
   }
   if (text) {
-    await openwa("/messages/send-text", {
-      method: "POST",
-      body: JSON.stringify({ chatId: resolved.chatId, text }),
-    }).catch(async (error) => {
-      if (resolved.chatId === resolved.addressBookId) throw error;
-      await openwa("/messages/send-text", {
-        method: "POST",
-        body: JSON.stringify({ chatId: resolved.addressBookId, text }),
-      });
-    });
+    await deliverParts(resolved.chatId, resolved.addressBookId, text);
   }
   return {
     chatId: resolved.chatId,

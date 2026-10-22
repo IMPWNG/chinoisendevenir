@@ -7,6 +7,7 @@ import {
   newerWhatsappRow,
   pickInboxHead,
   whatsappChatHead,
+  whatsappTextParts,
 } from "./openwa";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -63,5 +64,13 @@ const thread = mergeWhatsappThread(
 );
 assert(thread.length === 6, "thread keeps every message");
 assert(thread[1]?.fromMe === true && thread[5]?.body === "six", "thread order");
+assert(whatsappTextParts("  Bonjour  ").join() === "Bonjour", "court message intact");
+assert(whatsappTextParts("Bonjour\u2028Awa").join("\n") === "Bonjour\nAwa", "séparateur Word");
+const long = `${"Paragraphe assez long pour remplir. ".repeat(120)}\n\n${"Suite du message pour la fin. ".repeat(80)}`;
+const parts = whatsappTextParts(long);
+assert(parts.length >= 2, "long message découpé");
+assert(parts.every((part) => part.length <= 4000), "chaque partie tient dans WhatsApp");
+assert(parts[0].startsWith("1/"), "numéro de partie");
+assert(parts.join("\n").includes("Suite du message pour la fin."), "la fin est gardée");
 
 console.log("openwa check ok");

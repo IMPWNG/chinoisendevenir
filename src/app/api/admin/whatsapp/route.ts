@@ -13,6 +13,8 @@ import { rateLimit } from "@/lib/httpSecurity";
 import { asString, readJsonObject } from "@/lib/request";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 
+export const maxDuration = 60;
+
 async function guard(request: Request) {
   const auth = await getAuthenticatedAdmin(request);
   if ("error" in auth) {
