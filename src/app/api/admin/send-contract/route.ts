@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { ensureStudentBucket, getAuthenticatedAdmin } from "@/lib/studentAuth";
 import { getResendApiKey, getSupabaseAdmin } from "@/lib/supabaseAdmin";
 import { CONTACT_FROM, INBOUND_REPLY_TO } from "@/lib/emailConfig";
+import { getAdminEmailAllowlist } from "@/lib/adminRoles";
 import { rateLimit } from "@/lib/httpSecurity";
 import { asString, errorMessage, readJsonObject } from "@/lib/request";
 import { getFormuleNumber } from "@/lib/formules";
@@ -209,17 +210,49 @@ export async function POST(request: Request) {
       resendId: response.data?.id || null,
     });
 
+    let copyError = "";
+    if (body.copyAdmin === true) {
+      const recipients = [
+        ...getAdminEmailAllowlist(),
+        String(auth.user.email || "").trim().toLowerCase(),
+      ].filter((email, index, list) => {
+        return Boolean(email) && email !== client.email && list.indexOf(email) === index;
+      });
+      if (!recipients.length) {
+        copyError = "Aucun admin";
+      } else {
+        const copy = await resend.emails.send({
+          from: CONTACT_FROM,
+          replyTo: INBOUND_REPLY_TO,
+          to: recipients,
+          subject: `Copie admin — ${contract.subject}`,
+          html: emailHtml,
+          attachments: [
+            {
+              filename: contractPdfFilename(fullName),
+              content: Buffer.from(pdf),
+              contentType: "application/pdf",
+            },
+          ],
+        });
+        if (copy.error) {
+          console.error("send-contract admin copy:", copy.error);
+          copyError = "Erreur copie admin";
+        }
+      }
+    }
+
     const { error: actionError } = await supabase.from("suivi_actions").insert([
       {
         contact_id: contactId,
         action: "email_envoye",
-        description: `Contrat de prestation envoyé — formule ${formuleNumber} (PDF joint, copie dans l'espace)`,
+        description: `Contrat de prestation envoyé — formule ${formuleNumber} (PDF joint, copie dans l'espace${body.copyAdmin === true ? ", copie admin" : ""})`,
         user_admin: auth.user.email || "admin",
       },
     ]);
     if (actionError) console.warn("send-contract log:", actionError.message);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, copyError: copyError || undefined });
   } catch (error: unknown) {
     console.error("send-contract:", errorMessage(error));
     return NextResponse.json(

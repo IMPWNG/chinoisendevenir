@@ -1930,6 +1930,7 @@ function ContactModal({
           <FilePanel title={`📄 ${t("dashboard.contractSection")}`}>
             <AdminSendContract
               contact={contact}
+              onDraftSaved={(contrat) => onContactPatched({ ...contact, contrat })}
               onSent={() => {
                 fetchActions();
                 onContactUpdated?.();

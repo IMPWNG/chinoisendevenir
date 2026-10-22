@@ -636,14 +636,8 @@ function whatsappBodyFromParsed(json: ComposeFields | null, raw: string) {
   const fromJson = String(json?.body || "").trim();
   const body = (fromJson || raw).replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
   if (!body || body.length < 12) return null;
-  const capped =
-    body.length > WHATSAPP_TEXT_MAX ? body.slice(0, WHATSAPP_TEXT_MAX).trim() : body;
-  return capped.includes("{prenom}") ? capped : `Bonjour {prenom},\n\n${capped}`;
+  return body.includes("{prenom}") ? body : `Bonjour {prenom},\n\n${body}`;
 }
-
-/** WhatsApp hard cap. No extra “keep it short” clip for AI drafts. */
-export const WHATSAPP_TEXT_MAX = 4096;
-export const STUDENT_WHATSAPP_MAX = WHATSAPP_TEXT_MAX;
 
 export function studentWhatsappDraft(
   json: { body?: unknown } | null | undefined,
@@ -665,9 +659,6 @@ export function studentWhatsappDraft(
   const name = String(prenom || "").trim();
   if (name && !/^bonjour\b/i.test(body)) {
     body = `Bonjour ${name},\n\n${body}`;
-  }
-  if (body.length > WHATSAPP_TEXT_MAX) {
-    body = body.slice(0, WHATSAPP_TEXT_MAX).trim();
   }
   return body.length >= 12 ? body : null;
 }
@@ -695,7 +686,7 @@ Tu rédiges UN seul message WhatsApp, envoyé tel quel à plusieurs étudiants. 
 
 Format:
 - Texte brut, autant de paragraphes que nécessaire, séparés par une ligne vide.
-- Développe le brief : formules, ton, liens, tout ce que l'admin demande. Pas de plafond artificiel de longueur (maximum ${WHATSAPP_TEXT_MAX} caractères, limite WhatsApp).
+- Développe le brief : formules, ton, liens, tout ce que l'admin demande. Pas de plafond de longueur.
 - La première ligne est exactement « Bonjour {prenom}, » avec les accolades, pour que le prénom soit ajouté à l'envoi.
 - Pas d'objet, pas de titre, pas de HTML, pas de liste de destinataires.
 - Dernière ligne : « L'équipe Chinois en Devenir ».

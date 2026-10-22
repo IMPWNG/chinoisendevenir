@@ -154,7 +154,7 @@ export default function AdminContactWhatsApp({
         );
         return;
       }
-      setText(String(data.body || "").slice(0, 4096));
+      setText(String(data.body || ""));
     } catch (caught) {
       const message = errorMessage(caught);
       setAiError(
@@ -372,7 +372,6 @@ export default function AdminContactWhatsApp({
           disabled={busy !== null || composing || !onWhatsapp}
           onChange={(e) => setText(e.target.value)}
           rows={4}
-          maxLength={4096}
           placeholder={t("dashboard.whatsappPlaceholder")}
           className="mt-2 w-full px-4 py-3 bg-slate-800/80 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none disabled:opacity-50"
         />

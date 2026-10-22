@@ -13,8 +13,6 @@ import { rateLimit } from "@/lib/httpSecurity";
 import { asString, readJsonObject } from "@/lib/request";
 import { getAuthenticatedAdmin } from "@/lib/studentAuth";
 
-const TEXT_MAX = 4096;
-
 async function guard(request: Request) {
   const auth = await getAuthenticatedAdmin(request);
   if ("error" in auth) {
@@ -100,13 +98,6 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
     }
-    if (action === "send" && text.trim().length > TEXT_MAX) {
-      return NextResponse.json(
-        { error: `Message trop long (${TEXT_MAX} caractères max).` },
-        { status: 400 },
-      );
-    }
-
     const { data: contact, error } = await auth.admin
       .from("contacts")
       .select("id, prenom, nom, phone, pays")

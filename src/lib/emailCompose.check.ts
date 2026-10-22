@@ -2,7 +2,7 @@
  * Self-check: AI brief orders + clickable links in email HTML.
  * Run: npx tsx src/lib/emailCompose.check.ts
  */
-import { STUDENT_WHATSAPP_MAX, adminOrderBlock, studentWhatsappDraft } from "./emailCompose";
+import { adminOrderBlock, studentWhatsappDraft } from "./emailCompose";
 import { plainTextToEmailBodyHtml, textToLinkedHtml } from "./emailLayout";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -27,9 +27,8 @@ assert((kept || "").length > 500, "no 500-char clip");
 assert(studentWhatsappDraft({ body: "trop court" }, "", "") === null, "rejects tiny");
 assert(studentWhatsappDraft(null, '{"body":"secret"}', "") === null, "rejects json blob");
 assert(
-  (studentWhatsappDraft({ body: "A".repeat(5000) }, "", "") || "").length <=
-    STUDENT_WHATSAPP_MAX,
-  "whatsapp platform cap only",
+  (studentWhatsappDraft({ body: "A".repeat(5000) }, "", "") || "").length === 5000,
+  "pas de plafond de caractères",
 );
 
 const orders = adminOrderBlock(

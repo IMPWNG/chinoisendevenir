@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { CONTACT_FROM_EMAIL } from "../lib/emailConfig";
@@ -20,6 +20,8 @@ import {
   contractGaps,
   contractSendDate,
   CONTRACT_TUTOR_CAP,
+  readContractDraft,
+  type ContractDraft,
 } from "../lib/saleContract";
 
 type TutorFields = { nom: string; lien: string; adresse: string; contact: string };
@@ -36,6 +38,7 @@ type ContractContact = {
   phone?: string | null;
   pays?: string | null;
   formule?: string | null;
+  contrat?: unknown;
 };
 
 function fieldClass(disabled: boolean) {
@@ -99,9 +102,11 @@ async function authedFetch(path: string, options: RequestInit = {}) {
 export default function AdminSendContract({
   contact,
   onSent,
+  onDraftSaved,
 }: {
   contact: ContractContact;
   onSent?: () => void;
+  onDraftSaved?: (contrat: ContractDraft) => void;
 }) {
   const { t } = useAdminI18n();
   const [birth, setBirth] = useState("");
@@ -118,30 +123,41 @@ export default function AdminSendContract({
   const [payerContact, setPayerContact] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
   const [currency, setCurrency] = useState<ContractCurrency>("EUR");
+  const [copyAdmin, setCopyAdmin] = useState(true);
+  const [draftNote, setDraftNote] = useState("");
   const [formuleNumber, setFormuleNumber] = useState(
     getFormuleNumber(contact.formule) || 0,
   );
   const [preview, setPreview] = useState(false);
   const [sending, setSending] = useState(false);
+  const [epoch, setEpoch] = useState(0);
+  const saveSeq = useRef(0);
 
   useEffect(() => {
-    setBirth("");
-    setNationality("");
-    setResidence(contact.pays || "");
-    setAddress("");
-    setPhone(contact.phone || "");
-    setMinor(false);
-    setTutors([emptyTutor()]);
-    setOtherPayer(false);
-    setPayerName("");
-    setPayerLink("");
-    setPayerAddress("");
-    setPayerContact("");
-    setPaymentMode("");
-    setCurrency("EUR");
-    setFormuleNumber(getFormuleNumber(contact.formule) || 0);
+    const saved = readContractDraft(contact.contrat);
+    setBirth(saved?.dateNaissance || "");
+    setNationality(saved?.nationalite || "");
+    setResidence(saved?.residence || contact.pays || "");
+    setAddress(saved?.adresse || "");
+    setPhone(saved?.phone || contact.phone || "");
+    setMinor(saved?.mineur === true);
+    setTutors(saved?.representants || [emptyTutor()]);
+    setOtherPayer(saved?.tiersPayeur === true);
+    setPayerName(saved?.payeur.nom || "");
+    setPayerLink(saved?.payeur.lien || "");
+    setPayerAddress(saved?.payeur.adresse || "");
+    setPayerContact(saved?.payeur.contact || "");
+    setPaymentMode(saved?.paymentMode || "");
+    setCurrency(saved?.currency || "EUR");
+    setCopyAdmin(saved ? saved.copyAdmin : true);
+    setFormuleNumber(
+      getFormuleNumber(contact.formule) || saved?.formuleNumber || 0,
+    );
     setPreview(false);
-  }, [contact.id, contact.pays, contact.phone, contact.formule]);
+    setDraftNote("");
+    setEpoch((value) => value + 1);
+    // ponytail: reload only when the fiche changes. A parent patch of `contrat` must not reset the fields mid-typing.
+  }, [contact.id]);
 
   const lockedFormule = getFormuleNumber(contact.formule);
   const client = contractClientFromContact(contact, {
@@ -220,6 +236,7 @@ export default function AdminSendContract({
             contact: payerContact,
           },
           terms: { paymentMode, currency },
+          copyAdmin,
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -233,7 +250,12 @@ export default function AdminSendContract({
         );
         return;
       }
-      alert(`✅ ${t("dashboard.contractOk")}`);
+      alert(
+        `✅ ${t("dashboard.contractOk")}${
+          copyAdmin && !data.copyError ? `\n${t("dashboard.contractCopyOk")}` : ""
+        }`,
+      );
+      if (data.copyError) alert(`❌ ${t("dashboard.contractCopyFail")}`);
       onSent?.();
     } catch (error: unknown) {
       const message = errorMessage(error);
@@ -247,6 +269,72 @@ export default function AdminSendContract({
   }
 
   const label = "text-xs font-bold text-slate-400 uppercase tracking-wide";
+
+  function currentDraft(): ContractDraft {
+    return {
+      v: 1,
+      phone,
+      dateNaissance: birth,
+      nationalite: nationality,
+      residence,
+      adresse: address,
+      mineur: minor,
+      representants: tutors,
+      tiersPayeur: otherPayer,
+      payeur: {
+        nom: payerName,
+        lien: payerLink,
+        adresse: payerAddress,
+        contact: payerContact,
+      },
+      paymentMode,
+      currency,
+      formuleNumber,
+      copyAdmin,
+    };
+  }
+
+  useEffect(() => {
+    if (epoch === 0) return;
+    const id = contact.id;
+    const draft = currentDraft();
+    const seq = ++saveSeq.current;
+    const timer = setTimeout(() => {
+      void adminSupabase
+        .from("contacts")
+        .update({ contrat: draft })
+        .eq("id", id)
+        .then(({ error }) => {
+          if (saveSeq.current !== seq) return;
+          if (error) {
+            setDraftNote(t("dashboard.contractDraftFail"));
+            return;
+          }
+          setDraftNote(t("dashboard.contractDraftSaved"));
+          onDraftSaved?.(draft);
+        });
+    }, 700);
+    return () => clearTimeout(timer);
+  }, [
+    epoch,
+    contact.id,
+    phone,
+    birth,
+    nationality,
+    residence,
+    address,
+    minor,
+    tutors,
+    otherPayer,
+    payerName,
+    payerLink,
+    payerAddress,
+    payerContact,
+    paymentMode,
+    currency,
+    formuleNumber,
+    copyAdmin,
+  ]);
 
   return (
     <div>
@@ -588,6 +676,16 @@ export default function AdminSendContract({
         </div>
       ) : null}
       <p className="text-xs text-slate-500 mb-4">{t("dashboard.contractStampNote")}</p>
+      <label className="mb-4 flex items-center gap-2 text-sm text-slate-200">
+        <input
+          type="checkbox"
+          checked={copyAdmin}
+          disabled={sending}
+          onChange={(e) => setCopyAdmin(e.target.checked)}
+        />
+        {t("dashboard.contractCopyAdmin")}
+      </label>
+      {draftNote ? <p className="mb-3 text-xs text-slate-400">{draftNote}</p> : null}
 
       <div className="flex flex-wrap gap-3">
         <button

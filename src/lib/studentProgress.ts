@@ -29,6 +29,8 @@ export type ContactRow = {
   espace_debloque?: boolean | null;
   /** Catalog keys the admin asked this student to upload. */
   documents_demandes?: unknown;
+  /** Admin contract form, restored when the fiche is reopened. */
+  contrat?: unknown;
   last_touched_by?: string | null;
   last_touched_at?: string | null;
   closed_by?: string | null;

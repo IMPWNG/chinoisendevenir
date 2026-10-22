@@ -166,6 +166,51 @@ export function contractTutors(value: unknown): LegalRepresentative[] {
     .slice(0, CONTRACT_TUTOR_CAP);
 }
 
+export type ContractDraft = {
+  v: 1;
+  phone: string;
+  dateNaissance: string;
+  nationalite: string;
+  residence: string;
+  adresse: string;
+  mineur: boolean;
+  representants: LegalRepresentative[];
+  tiersPayeur: boolean;
+  payeur: LegalRepresentative;
+  paymentMode: string;
+  currency: ContractCurrency;
+  formuleNumber: number;
+  copyAdmin: boolean;
+};
+
+/** Saved form. `null` when the contact has never stored a draft. */
+export function readContractDraft(value: unknown): ContractDraft | null {
+  const row =
+    value && typeof value === "object" ? (value as Record<string, unknown>) : null;
+  if (!row || row.v !== 1) return null;
+  const people = (Array.isArray(row.representants) ? row.representants : [])
+    .map(personFrom)
+    .filter(personFilled)
+    .slice(0, CONTRACT_TUTOR_CAP);
+  const formule = Number(row.formuleNumber);
+  return {
+    v: 1,
+    phone: clip(row.phone, 40),
+    dateNaissance: clip(row.dateNaissance, 40),
+    nationalite: clip(row.nationalite, 80),
+    residence: clip(row.residence, 80),
+    adresse: clip(row.adresse, 240),
+    mineur: row.mineur === true,
+    representants: people.length ? people : [blankPerson()],
+    tiersPayeur: row.tiersPayeur === true,
+    payeur: personFrom(row.payeur),
+    paymentMode: clip(row.paymentMode, 120),
+    currency: contractCurrency(row.currency),
+    formuleNumber: formule === 1 || formule === 2 || formule === 3 ? formule : 0,
+    copyAdmin: row.copyAdmin !== false,
+  };
+}
+
 export function contractInstallments(priceEuros: number) {
   const first = Math.round(priceEuros * 0.4);
   const second = Math.round(priceEuros * 0.3);

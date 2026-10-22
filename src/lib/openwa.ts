@@ -7,8 +7,6 @@ import {
   whatsappMsisdn,
 } from "./whatsappPhone";
 
-const TEXT_MAX = 4096;
-
 export class OpenwaError extends Error {
   status: number;
   code: string;
@@ -504,12 +502,8 @@ export async function sendStudentWhatsapp(input: {
   text: string;
 }) {
   const text = input.text.trim();
-  if (!text || text.length > TEXT_MAX) {
-    throw new OpenwaError(
-      text ? `Message trop long (${TEXT_MAX} caractères max).` : "Message vide.",
-      400,
-      "BAD_TEXT",
-    );
+  if (!text) {
+    throw new OpenwaError("Message vide.", 400, "BAD_TEXT");
   }
   const { chatId, addressBookId } = await resolveChat(input.phone, input.country);
   const sent = (await openwa("/messages/send-text", {
@@ -584,7 +578,7 @@ function messageAt(value: unknown): number {
 
 function messageBody(row: Record<string, unknown>): string {
   const body = String(row.body || "").trim();
-  if (body) return body.slice(0, 2000);
+  if (body) return body;
   const type = String(row.type || "").trim();
   return type && type !== "text" ? `[${type}]` : "";
 }
@@ -758,9 +752,6 @@ export async function applyStudentWhatsapp(input: {
       400,
       "EMPTY",
     );
-  }
-  if (text.length > TEXT_MAX) {
-    throw new OpenwaError(`Message trop long (${TEXT_MAX} caractères max).`, 400, "BAD_TEXT");
   }
   const resolved = await resolveChat(input.phone, input.country);
   if (input.save) {

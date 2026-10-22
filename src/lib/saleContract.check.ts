@@ -22,6 +22,7 @@ import {
   contractClientFromContact,
   contractInstallments,
   contractSendDate,
+  readContractDraft,
 } from "./saleContract";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -282,6 +283,25 @@ assert(
     partialRelated.gaps.includes("Lien de la personne liée avec le client"),
   "personne liée incomplète",
 );
+
+assert(readContractDraft(null) === null, "pas de brouillon");
+assert(readContractDraft({}) === null, "brouillon sans version");
+const draft = readContractDraft({
+  v: 1,
+  phone: " +221770000000 ",
+  mineur: false,
+  representants: [
+    { nom: "Awa Ndiaye", lien: "Sœur", adresse: "Dakar", contact: "a@b.c" },
+    { nom: "", lien: "", adresse: "", contact: "" },
+  ],
+  currency: "nope",
+  copyAdmin: false,
+  formuleNumber: 2,
+});
+assert(draft?.phone === "+221770000000", "téléphone du brouillon");
+assert(draft?.representants.length === 1 && draft.representants[0].nom === "Awa Ndiaye", "personne liée gardée");
+assert(draft?.currency === "EUR" && draft.copyAdmin === false, "devise et copie");
+assert(draft?.formuleNumber === 2, "formule du brouillon");
 
 function blockText(html: string) {
   return contractHtmlBlocks(html)
