@@ -30,6 +30,7 @@ const BREAKDOWN_LABELS: Record<string, string> = {
   localisation: "Ville",
   financier: "Budget",
   intake: "Rentrée",
+  continuation: "Poursuite",
 };
 
 const RENTREE_OPTIONS = [
@@ -65,6 +66,7 @@ type ChineseResult = {
     preferredCity?: string;
     budgetKey?: string;
     dateRentree?: string;
+    extraNotes?: string;
   };
 };
 
@@ -111,6 +113,7 @@ export default function AdminChineseMatchingPanel({
   const [dateRentree, setDateRentree] = useState(
     languageIntakeKey(contact.date_rentree),
   );
+  const [extraNotes, setExtraNotes] = useState("");
   const [cities, setCities] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -139,6 +142,7 @@ export default function AdminChineseMatchingPanel({
     const ov = payload.overrides || {};
     if (ov.preferredCity) setPreferredCity(ov.preferredCity);
     if (ov.dateRentree) setDateRentree(languageIntakeKey(ov.dateRentree));
+    if (typeof ov.extraNotes === "string") setExtraNotes(ov.extraNotes);
     if (meta?.created_at) {
       setSavedInfo(
         `Sauvegardé le ${new Date(meta.created_at).toLocaleString("fr-FR")}`,
@@ -169,6 +173,7 @@ export default function AdminChineseMatchingPanel({
     setSavedInfo("");
     setError("");
     setPreferredCity("");
+    setExtraNotes("");
     setRunId("");
     setDateRentree(languageIntakeKey(contact.date_rentree));
     loadRuns({ restore: true });
@@ -186,6 +191,7 @@ export default function AdminChineseMatchingPanel({
           overrides: {
             preferredCity: preferredCity || null,
             dateRentree: dateRentree || null,
+            extraNotes: extraNotes.trim() || null,
           },
         }),
       });
@@ -275,10 +281,11 @@ export default function AdminChineseMatchingPanel({
           Matching chinois — écoles de langue
         </p>
         <p className="text-xs text-slate-500 mt-1">
-          Matching pour une année de chinois : ville et rentrée. Les frais des
-          écoles de langue sont proches, ils ne servent pas à classer. Le
-          résultat s’affiche dans l’espace étudiant, section « Étude du chinois
-          en Chine ».
+          Matching pour une année de chinois : ville, rentrée, et des notes si
+          l'étudiant doit ensuite poursuivre une formation dans la même école.
+          Les frais des écoles de langue sont proches, ils ne servent pas à
+          classer. Le résultat s’affiche dans l’espace étudiant, section
+          « Étude du chinois en Chine ».
         </p>
       </div>
 
@@ -319,6 +326,16 @@ export default function AdminChineseMatchingPanel({
           </select>
         </label>
       </div>
+      <label className="block text-xs text-slate-400 mb-3">
+        Notes pour le matching
+        <textarea
+          value={extraNotes}
+          onChange={(e) => setExtraNotes(e.target.value)}
+          rows={3}
+          placeholder="Ex. Après la langue, poursuivre en médecine. Chercher une école qui propose aussi cette formation."
+          className="mt-1 w-full px-3 py-2 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white text-sm"
+        />
+      </label>
 
       <button
         type="button"

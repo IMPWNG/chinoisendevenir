@@ -109,7 +109,7 @@ export async function POST(request: Request) {
       });
     }
 
-    const payload = compactChineseMatchingResult(result, body.overrides || {});
+    const payload = compactChineseMatchingResult(result, result.overrides);
     let saved = null;
     try {
       saved = await saveMatchingRun(auth.admin, {

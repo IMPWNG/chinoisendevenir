@@ -30,6 +30,13 @@ export const CHINESE_MATCHING_WEIGHTS = {
   intake: 0.3,
 };
 
+/** When the admin notes a later degree, that signal shares the rank with city and intake. */
+export const CHINESE_CONTINUATION_WEIGHTS = {
+  localisation: 0.45,
+  intake: 0.2,
+  continuation: 0.35,
+};
+
 export const CHINESE_MATCH_SIZE = 6;
 
 export const USD_TO_CNY = 7.2;

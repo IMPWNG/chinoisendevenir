@@ -1,8 +1,9 @@
 import { normalizeStudent, type StudentOverrides, type MatchingStudent } from "./student";
 import { normalizeUniversity, type MatchingUniversity, type UniversityRow } from "./university";
-import { normalizeText } from "./constants";
+import { normalizeText, DOMAIN_KEYS } from "./constants";
 import { canonicalDocuments } from "./documents";
 import {
+  CHINESE_CONTINUATION_WEIGHTS,
   CHINESE_MATCHING_WEIGHTS,
   CHINESE_MATCH_SIZE,
   DEFAULT_LIVING_COST_CNY,
@@ -276,7 +277,107 @@ function scoreIntake(student: MatchingStudent, months: unknown[]) {
   };
 }
 
-function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
+const NOTE_STOP = new Set([
+  "apres",
+  "annee",
+  "aussi",
+  "avec",
+  "cette",
+  "chercher",
+  "chinois",
+  "chinoise",
+  "choix",
+  "dans",
+  "domaine",
+  "ecole",
+  "ensuite",
+  "etudiant",
+  "etudiante",
+  "formation",
+  "langue",
+  "leur",
+  "peut",
+  "peuvent",
+  "pour",
+  "poursuivre",
+  "propose",
+  "proposer",
+  "puis",
+  "universite",
+  "universitaire",
+  "vers",
+]);
+
+const CONTINUATION_ALIASES: Record<string, string[]> = {
+  medecine: ["medicine", "medical", "clinical"],
+  medicale: ["medicine", "medical", "clinical"],
+  medicales: ["medicine", "medical", "clinical"],
+  sante: ["medicine", "medical", "health", "nursing"],
+};
+
+function noteNeedles(notes: string) {
+  const folded = normalizeText(notes);
+  const needles = new Set<string>();
+  for (const [label, aliases] of Object.entries(DOMAIN_KEYS)) {
+    if (label === "Langues") continue;
+    const keys = [normalizeText(label), ...aliases.map((alias) => normalizeText(alias))].filter(
+      (key) => key.length >= 4,
+    );
+    if (keys.some((key) => folded.includes(key))) {
+      keys.forEach((key) => needles.add(key));
+    }
+  }
+  for (const [key, aliases] of Object.entries(CONTINUATION_ALIASES)) {
+    if (!folded.includes(key)) continue;
+    aliases.forEach((alias) => needles.add(normalizeText(alias)));
+  }
+  for (const token of folded.split(" ")) {
+    if (token.length >= 4 && !NOTE_STOP.has(token)) needles.add(token);
+  }
+  return [...needles];
+}
+
+function degreeLabels(university: MatchingUniversity) {
+  const programs = (university.programs || []).filter((program) => {
+    const level = String(program.level || "").toLowerCase();
+    return level !== "language" && level !== "foundation";
+  });
+  return unique([
+    ...(Array.isArray(university.majors) ? university.majors : []),
+    ...programs.map((program) => program.name || program.field),
+    ...(university.fieldKeys || []).filter((key) => key !== "chinese_language"),
+  ]).map(String);
+}
+
+function scoreContinuation(notes: string, university: MatchingUniversity) {
+  const needles = noteNeedles(notes);
+  const labels = degreeLabels(university);
+  const hits = labels.filter((label) => {
+    const folded = normalizeText(label);
+    return needles.some((needle) => needle && folded.includes(needle));
+  });
+  if (hits.length) {
+    return {
+      points: 100,
+      max: 100,
+      note: `Poursuite possible ensuite : ${hits.slice(0, 2).join(", ")}.`,
+    };
+  }
+  if (!labels.length) {
+    return {
+      points: 30,
+      max: 100,
+      note: "Le catalogue ne liste pas de diplôme après l'année de langue.",
+    };
+  }
+  return {
+    points: 15,
+    max: 100,
+    note: "Aucune formation du catalogue ne correspond aux notes.",
+  };
+}
+
+function matchSchool(student: MatchingStudent, university: MatchingUniversity, notes = "") {
   if (!university.isActive) {
     return {
       excluded: true,
@@ -296,11 +397,15 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
   const cost = languageCost(university);
   const localisation = scoreCity(student, university);
   const intake = scoreIntake(student, months);
-
+  const continuation = notes ? scoreContinuation(notes, university) : null;
   const score = Math.round(
     clamp(
-      localisation.points * CHINESE_MATCHING_WEIGHTS.localisation +
-        intake.points * CHINESE_MATCHING_WEIGHTS.intake,
+      notes
+        ? localisation.points * CHINESE_CONTINUATION_WEIGHTS.localisation +
+          intake.points * CHINESE_CONTINUATION_WEIGHTS.intake +
+          (continuation?.points || 0) * CHINESE_CONTINUATION_WEIGHTS.continuation
+        : localisation.points * CHINESE_MATCHING_WEIGHTS.localisation +
+          intake.points * CHINESE_MATCHING_WEIGHTS.intake,
       0,
       100,
     ),
@@ -316,6 +421,9 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
   if (intake.points >= 85) why.push(intake.note);
   else if (intake.points <= 45) vigilance.push(intake.note);
   else why.push(intake.note);
+
+  if (continuation && continuation.points >= 85) why.unshift(continuation.note);
+  else if (continuation && continuation.points <= 40) vigilance.push(continuation.note);
 
   if (cost.status === "default") {
     vigilance.push("Les frais de scolarité ne sont pas assez précis pour calculer un total annuel.");
@@ -338,7 +446,11 @@ function matchSchool(student: MatchingStudent, university: MatchingUniversity) {
     score,
     categoryKey: category.key,
     category: category.label,
-    breakdown: { localisation, intake },
+    breakdown: {
+      localisation,
+      intake,
+      ...(continuation ? { continuation } : {}),
+    },
     cost,
     intake_months: months,
     intake_label: intakeLabel(months),
@@ -360,17 +472,20 @@ function scorePhrase(item: { categoryKey?: string }) {
   return "Écart sur la ville ou la rentrée visée.";
 }
 
-function profileBlurb(student: MatchingStudent) {
+function profileBlurb(student: MatchingStudent, notes = "") {
   const city = student.preferredCities?.[0];
   const intake = student.intake?.label;
   const bits: string[] = ["Vous visez une année de langue chinoise"];
   if (city) bits.push(`à ${city}`);
   if (student.intake?.months?.length && intake) bits.push(`pour la rentrée ${intake}`);
   else if (student.intake?.flexible) bits.push("avec une rentrée flexible");
-  return `${bits.join(" ")}. Les écoles ci-dessous sont classées à partir des frais, des dates et des conditions publiés. Aucune inscription n'est garantie.`;
+  const continuation = notes
+    ? " Les écoles qui proposent aussi une formation diplômante correspondant aux notes sont classées plus haut."
+    : "";
+  return `${bits.join(" ")}. Les écoles ci-dessous sont classées à partir des frais, des dates et des conditions publiés.${continuation} Aucune inscription n'est garantie.`;
 }
 
-function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
+function studentView(student: MatchingStudent, matches: ChineseMatch[], notes = "") {
   const schools = matches.map((item, index) => ({
     id: item.university_id,
     name: item.university_name,
@@ -403,7 +518,7 @@ function studentView(student: MatchingStudent, matches: ChineseMatch[]) {
 
   return {
     generated_at: new Date().toISOString(),
-    profile_blurb: profileBlurb(student),
+    profile_blurb: profileBlurb(student, notes),
     criteria: {
       city: student.preferredCities?.[0]
         ? `Ville indiquée dans votre dossier : ${student.preferredCities[0]}.`
@@ -441,8 +556,10 @@ export function runChineseMatching({
     budget: null,
     date_rentree: filled(overrides.dateRentree) || "non precisee",
   };
+  const notes = filled(overrides.extraNotes)?.slice(0, 800) || "";
   const student = normalizeStudent(patched, {
     ...overrides,
+    extraNotes: notes || null,
     targetDegree: "language",
     preferredCity: filled(overrides.preferredCity),
     preferredCities: filled(overrides.preferredCity)
@@ -455,7 +572,7 @@ export function runChineseMatching({
   const excluded: ChineseMatch[] = [];
 
   for (const university of catalog) {
-    const result = matchSchool(student, university);
+    const result = matchSchool(student, university, notes);
     if (result.excluded) excluded.push(result);
     else ranked.push(result);
   }
@@ -480,8 +597,8 @@ export function runChineseMatching({
       university_name: item.university_name,
       excludeReason: item.excludeReason,
     })),
-    student_view: studentView(student, matches),
-    overrides,
+    student_view: studentView(student, matches, notes),
+    overrides: { ...overrides, extraNotes: notes || null },
   };
 }
 
