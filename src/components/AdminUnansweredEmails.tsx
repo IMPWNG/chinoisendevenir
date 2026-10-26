@@ -9,6 +9,8 @@ import type {
   UnansweredEmailsReport,
 } from "../lib/adminEmailWeek";
 
+const COLLAPSE_KEY = "admin-emails-received-collapsed";
+
 async function authedFetch(path: string, options: RequestInit = {}) {
   const {
     data: { session },
@@ -234,6 +236,19 @@ export default function AdminUnansweredEmails({
   const [error, setError] = useState("");
   const [open, setOpen] = useState<EmailWeekItem | null>(null);
   const [dismissing, setDismissing] = useState("");
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(window.localStorage.getItem(COLLAPSE_KEY) === "1");
+  }, []);
+
+  const toggleCollapsed = () => {
+    setCollapsed((value) => {
+      const next = !value;
+      window.localStorage.setItem(COLLAPSE_KEY, next ? "1" : "0");
+      return next;
+    });
+  };
 
   async function dismiss(item: EmailWeekItem) {
     if (dismissing) return;
@@ -305,7 +320,7 @@ export default function AdminUnansweredEmails({
 
   return (
     <div className="mb-6 rounded-2xl border border-cyan-500/30 bg-slate-800/50 p-5 shadow-xl">
-      <div className="mb-4">
+      <div className="flex items-start justify-between gap-3">
         <h2 className="text-lg font-bold text-white">
           📧 {t("emailsWeek.homeTitle")}
           {!loading && report ? (
@@ -314,10 +329,20 @@ export default function AdminUnansweredEmails({
             </span>
           ) : null}
         </h2>
-        <p className="text-sm text-slate-400 mt-1">{t("emailsWeek.homeHint")}</p>
+        <button
+          type="button"
+          onClick={toggleCollapsed}
+          aria-expanded={!collapsed}
+          className="shrink-0 px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl text-sm font-bold"
+        >
+          {collapsed ? `▾ ${t("dashboard.bulkExpand")}` : `▴ ${t("dashboard.bulkCollapse")}`}
+        </button>
       </div>
+      {collapsed ? null : (
+        <p className="text-sm text-slate-400 mt-1 mb-4">{t("emailsWeek.homeHint")}</p>
+      )}
 
-      {loading ? (
+      {collapsed ? null : loading ? (
         <p className="text-sm text-slate-400">{t("loading")}</p>
       ) : error ? (
         <p className="text-sm text-rose-300">{error}</p>

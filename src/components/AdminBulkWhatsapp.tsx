@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { errorMessage } from "../lib/request";
 
 const SEND_PAUSE_MS = 4000;
+const COLLAPSE_KEY = "admin-bulk-whatsapp-collapsed";
 
 type BulkContact = {
   id: string;
@@ -60,6 +61,19 @@ export default function AdminBulkWhatsapp({
   const [sending, setSending] = useState(false);
   const [progress, setProgress] = useState<BulkProgress | null>(null);
   const [collapsed, setCollapsed] = useState(true);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem(COLLAPSE_KEY);
+    if (saved === "0" || saved === "1") setCollapsed(saved === "1");
+  }, []);
+
+  const toggleCollapsed = () => {
+    setCollapsed((value) => {
+      const next = !value;
+      window.localStorage.setItem(COLLAPSE_KEY, next ? "1" : "0");
+      return next;
+    });
+  };
 
   const selected = useMemo(
     () => contacts.filter((contact) => selectedIds.includes(contact.id)),
@@ -241,82 +255,80 @@ export default function AdminBulkWhatsapp({
   return (
     <div className="mb-8">
     <div className="sticky top-[calc(var(--admin-header-h,10.5rem)+8px)] z-30 rounded-2xl border border-slate-700/50 bg-slate-900/95 p-5 shadow-2xl backdrop-blur-md">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col lg:flex-row gap-4 lg:items-start">
-          <div className="flex-1 min-w-0">
-            <p className="text-white font-bold">
-              💬 {t("dashboard.waBulkTitle")}
-              {selectedIds.length > 0
-                ? ` — ${t("dashboard.bulkSelected", { count: selectedIds.length })}`
-                : ""}
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h2 className="text-lg font-bold text-white">
+            💬 {t("dashboard.waBulkTitle")}
+            {selectedIds.length > 0
+              ? ` — ${t("dashboard.bulkSelected", { count: selectedIds.length })}`
+              : ""}
+          </h2>
+          {sending && progress ? (
+            <p className="text-sm text-slate-400 mt-1">
+              {t("dashboard.bulkProgress", {
+                current: progress.current,
+                total: progress.total,
+                name: progress.name,
+              })}
             </p>
-            <p className="text-xs text-slate-400 mt-1">
-              {sending && progress
-                ? t("dashboard.bulkProgress", {
-                    current: progress.current,
-                    total: progress.total,
-                    name: progress.name,
-                  })
-                : collapsed
-                  ? t("dashboard.bulkCollapsedHint")
-                  : t("dashboard.waBulkHint")}
-            </p>
-            {sending && progress ? (
-              <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
-                  style={{
-                    width: `${Math.round((progress.current / progress.total) * 100)}%`,
-                  }}
-                />
-              </div>
-            ) : null}
-          </div>
-          <div className="flex flex-wrap gap-3">
+          ) : collapsed ? null : (
+            <p className="text-sm text-slate-400 mt-1">{t("dashboard.waBulkHint")}</p>
+          )}
+          {sending && progress ? (
+            <div className="mt-3 h-2 rounded-full bg-slate-700 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
+                style={{
+                  width: `${Math.round((progress.current / progress.total) * 100)}%`,
+                }}
+              />
+            </div>
+          ) : null}
+        </div>
+        <div className="flex flex-wrap justify-end gap-2">
+          <button
+            type="button"
+            disabled={busy || filteredContacts.length === 0}
+            onClick={toggleFiltered}
+            className="shrink-0 px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl text-sm font-bold disabled:opacity-50"
+          >
+            {allFilteredSelected
+              ? t("dashboard.deselectAll")
+              : t("dashboard.selectFiltered")}
+          </button>
+          {selectedIds.length > 0 ? (
             <button
               type="button"
-              onClick={() => setCollapsed((value) => !value)}
-              aria-expanded={!collapsed}
-              className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300"
+              disabled={busy}
+              onClick={() => onSelectedIdsChange([])}
+              className="shrink-0 px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl text-sm font-bold disabled:opacity-50"
             >
-              {collapsed
-                ? `▾ ${t("dashboard.bulkExpand")}`
-                : `▴ ${t("dashboard.bulkCollapse")}`}
+              {t("dashboard.clear")}
             </button>
-            <button
-              type="button"
-              disabled={busy || filteredContacts.length === 0}
-              onClick={toggleFiltered}
-              className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
-            >
-              {allFilteredSelected
-                ? t("dashboard.deselectAll")
-                : t("dashboard.selectFiltered")}
-            </button>
-            {selectedIds.length > 0 ? (
-              <button
-                type="button"
-                disabled={busy}
-                onClick={() => onSelectedIdsChange([])}
-                className="px-5 py-3 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50"
-              >
-                {t("dashboard.clear")}
-              </button>
-            ) : null}
-            <button
-              type="button"
-              disabled={busy || selectedIds.length === 0 || !hasDraft}
-              onClick={sendBulk}
-              className="relative z-30 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-            >
-              {sending
-                ? `⏳ ${t("dashboard.sendingCount", {
-                    current: progress?.current || 0,
-                    total: progress?.total || 0,
-                  })}`
-                : `📤 ${t("dashboard.send", { count: selectedIds.length })}`}
-            </button>
-          </div>
+          ) : null}
+          <button
+            type="button"
+            disabled={busy || selectedIds.length === 0 || !hasDraft}
+            onClick={sendBulk}
+            className="shrink-0 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          >
+            {sending
+              ? `⏳ ${t("dashboard.sendingCount", {
+                  current: progress?.current || 0,
+                  total: progress?.total || 0,
+                })}`
+              : `📤 ${t("dashboard.send", { count: selectedIds.length })}`}
+          </button>
+          <button
+            type="button"
+            onClick={toggleCollapsed}
+            aria-expanded={!collapsed}
+            className="shrink-0 px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl text-sm font-bold"
+          >
+            {collapsed
+              ? `▾ ${t("dashboard.bulkExpand")}`
+              : `▴ ${t("dashboard.bulkCollapse")}`}
+          </button>
         </div>
       </div>
     </div>
