@@ -14,7 +14,7 @@ Lis ce fichier avant de modifier le code. Ignore le `README.md` racine (reliquat
 |---|---|---|
 | Public SEO | `/`, `/etudier-en-chine`, `/ecoles-de-langue-chine`, `/visa-etudiant-chine`, `/bourses`, `/processus`, `/tarifs`, `/faq`, `/blog`, `/blog/[slug]`, `/contact`, `/about` | Anonyme. FR, JSON-LD, `public/llms.txt`. Blog : guides `src/lib/blog/` + IA `blog_posts` (1/jour, cron). File : bourses, admission, villes, puis le reste. Après le premier de ces sujets, un article sur deux répond à une question de fiche (`ficheFaq.ts`), sans nom ni email. Le titre public est réécrit en français correct : le message brut, avec ses fautes, ne devient pas le titre. |
 | Étudiant | `/espace-etudiant`, `/espace-etudiant/connexion` | Supabase Auth. Orientation / documents après déblocage admin (`espace_debloque`). |
-| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog`, `/admin/rapport` | `ADMIN_EMAILS` + `admin_users`. Rôle `full` ou `limited`. Sous le titre du dashboard : une ligne par heure (France et pays d'Afrique du catalogue, regroupés selon l'heure du moment). |
+| Admin | `/admin/login`, `/admin/dashboard`, `/admin/universites`, `/admin/blog`, `/admin/rapport` | `ADMIN_EMAILS` + `admin_users`. Rôle `full` ou `limited`. |
 
 `src/app/**/page.tsx` = metadata + vue `src/views/`. Métier dans `src/lib/`.
 
