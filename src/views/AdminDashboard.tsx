@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ComponentProps, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ComponentProps, type FormEvent, type ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminAuth } from "../context/AdminAuthContext";
@@ -62,6 +62,7 @@ import {
   priorityPatch,
   sortPriorityFirst,
 } from "../lib/contactPriority";
+import { ASSISTANT_TABLE_KEY } from "../lib/assistantDossiers";
 import { cleanDayTask, cleanAuthorEmail, dayTaskBlocked, isMissingDayTasksTable } from "../lib/dayTasks";
 import { shanghaiDayString } from "../lib/dailyReportShared";
 import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
@@ -202,6 +203,8 @@ export default function AdminDashboard() {
   const [dayTaskKey, setDayTaskKey] = useState(0);
   const [editOnOpen, setEditOnOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [shownIds, setShownIds] = useState<string[] | null>(null);
+  const pinningContacts = useRef(false);
   const [pays, setPays] = useState<string[]>([]);
   const { signOut, user } = useAdminAuth();
   const router = useRouter();
@@ -212,6 +215,59 @@ export default function AdminDashboard() {
     // eslint-disable-next-line react-hooks/immutability
     fetchContacts();
   }, []);
+
+  useEffect(() => {
+    const apply = (ids: string[]) => {
+      const clean = ids.map((id) => String(id || "").trim()).filter(Boolean).slice(0, 100);
+      if (!clean.length) return;
+      pinningContacts.current = true;
+      setShownIds(clean);
+      setSearch("");
+      setFilterStatut("tous");
+      setFilterBudget("tous");
+      setFilterPays("tous");
+      setFilterNiveau("tous");
+      setFilterDomaine("tous");
+      setFilterOwner("tous");
+      setPriorityOnly(false);
+      window.setTimeout(() => {
+        document.getElementById("admin-contacts")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    };
+    const stored = window.sessionStorage.getItem(ASSISTANT_TABLE_KEY);
+    if (stored) {
+      window.sessionStorage.removeItem(ASSISTANT_TABLE_KEY);
+      try {
+        const ids = JSON.parse(stored) as unknown;
+        if (Array.isArray(ids)) apply(ids.map(String));
+      } catch {
+        /* ignore a bad handoff */
+      }
+    }
+    const onShow = (event: Event) => {
+      const ids = (event as CustomEvent<{ ids?: string[] }>).detail?.ids || [];
+      apply(ids);
+    };
+    window.addEventListener(ASSISTANT_TABLE_KEY, onShow);
+    return () => window.removeEventListener(ASSISTANT_TABLE_KEY, onShow);
+  }, []);
+
+  useEffect(() => {
+    if (pinningContacts.current) {
+      pinningContacts.current = false;
+      return;
+    }
+    setShownIds(null);
+  }, [
+    search,
+    filterStatut,
+    filterBudget,
+    filterPays,
+    filterNiveau,
+    filterDomaine,
+    filterOwner,
+    priorityOnly,
+  ]);
 
   useEffect(() => {
     if (!openContactId || loading || !contacts.length) return;
@@ -686,6 +742,7 @@ export default function AdminDashboard() {
     isInboxPending(row.id, unreadByContact, whatsappPending);
   const filteredContacts = sortInboxFirst(
     sortPriorityFirst(contacts.filter((c) => {
+    if (shownIds) return shownIds.includes(c.id);
     const needle = search.toLowerCase();
     const matchSearch =
       c.prenom?.toLowerCase().includes(needle) ||
@@ -959,6 +1016,19 @@ export default function AdminDashboard() {
           </>
         ) : null}
 
+        {shownIds ? (
+          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-slate-200">
+            <span>{t("dashboard.assistantFilter", { count: shownIds.length })}</span>
+            <button
+              type="button"
+              onClick={() => setShownIds(null)}
+              className="rounded-lg border border-slate-600 px-3 py-1.5 font-bold text-white hover:border-slate-400"
+            >
+              {t("dashboard.assistantFilterClear")}
+            </button>
+          </div>
+        ) : null}
+
         <div className="mb-4">
           <button
             type="button"
@@ -979,7 +1049,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Table */}
-        <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
+        <div id="admin-contacts" className="bg-slate-800/40 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
           {loading ? (
             <div className="p-16 text-center">
               <div className="inline-block animate-spin text-4xl mb-4">⏳</div>

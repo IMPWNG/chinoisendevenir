@@ -1,13 +1,29 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useAdminI18n } from "../context/AdminI18nContext";
+import { ASSISTANT_TABLE_KEY } from "../lib/assistantDossiers";
 import { adminSupabase } from "../lib/supabase";
 
-type Turn = { role: "user" | "assistant"; content: string };
+type ChatContact = { id: string; name: string };
+type Turn = { role: "user" | "assistant"; content: string; contacts?: ChatContact[] };
+
+function showContacts(ids: string[], onDashboard: boolean, go: (href: string) => void) {
+  const clean = ids.filter(Boolean).slice(0, 100);
+  if (!clean.length) return;
+  if (onDashboard) {
+    window.dispatchEvent(new CustomEvent(ASSISTANT_TABLE_KEY, { detail: { ids: clean } }));
+    return;
+  }
+  sessionStorage.setItem(ASSISTANT_TABLE_KEY, JSON.stringify(clean));
+  go("/admin/dashboard");
+}
 
 export default function AdminAssistant() {
   const { t } = useAdminI18n();
+  const pathname = usePathname();
+  const router = useRouter();
   const titleId = useId();
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -60,11 +76,24 @@ export default function AdminAssistant() {
       const data = (await response.json().catch(() => ({}))) as {
         reply?: unknown;
         error?: unknown;
+        contacts?: unknown;
       };
       if (!response.ok || typeof data.reply !== "string" || !data.reply.trim()) {
         throw new Error(typeof data.error === "string" ? data.error : t("assistant.error"));
       }
-      setTurns((current) => [...current, { role: "assistant", content: data.reply as string }]);
+      const contacts = Array.isArray(data.contacts)
+        ? data.contacts.flatMap((item) => {
+            if (!item || typeof item !== "object") return [];
+            const row = item as { id?: unknown; name?: unknown };
+            const id = String(row.id || "").trim();
+            if (!id) return [];
+            return [{ id, name: String(row.name || "").trim() }];
+          })
+        : [];
+      setTurns((current) => [
+        ...current,
+        { role: "assistant", content: data.reply as string, contacts },
+      ]);
     } catch (err: unknown) {
       setError(err instanceof Error && err.message !== "SESSION" ? err.message : t("assistant.error"));
     } finally {
@@ -101,16 +130,37 @@ export default function AdminAssistant() {
               <p className="px-1 text-sm text-slate-400">{t("assistant.empty")}</p>
             ) : null}
             {turns.map((turn, index) => (
-              <p
+              <div
                 key={`${turn.role}-${index}`}
-                className={`max-w-[90%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm leading-snug ${
-                  turn.role === "user"
-                    ? "self-end bg-blue-600 text-white"
-                    : "self-start bg-slate-800 text-slate-100"
+                className={`flex max-w-[90%] flex-col gap-1 ${
+                  turn.role === "user" ? "self-end" : "self-start"
                 }`}
               >
-                {turn.content}
-              </p>
+                <p
+                  className={`whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm leading-snug ${
+                    turn.role === "user"
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-800 text-slate-100"
+                  }`}
+                >
+                  {turn.content}
+                </p>
+                {turn.role === "assistant" && turn.contacts?.length ? (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      showContacts(
+                        turn.contacts?.map((contact) => contact.id) || [],
+                        Boolean(pathname?.startsWith("/admin/dashboard")),
+                        (href) => router.push(href),
+                      )
+                    }
+                    className="self-start rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-slate-900 hover:bg-slate-200"
+                  >
+                    {t("assistant.showInTable")}
+                  </button>
+                ) : null}
+              </div>
             ))}
             {busy ? <p className="px-1 text-xs text-slate-400">{t("assistant.thinking")}</p> : null}
             {error ? <p className="px-1 text-xs text-red-300">{error}</p> : null}

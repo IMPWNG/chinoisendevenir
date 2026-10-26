@@ -41,15 +41,21 @@ export async function POST(request: Request) {
     .slice(-2)
     .map((turn) => turn.content)
     .join("\n");
-  const [dossierText, mailText] = await Promise.all([
-    loadDossierBrief(auth.admin, question).catch(() => "Dossiers : lecture impossible."),
+  const [dossier, mailText] = await Promise.all([
+    loadDossierBrief(auth.admin, question).catch(() => ({
+      brief: "Dossiers : lecture impossible.",
+      contacts: [] as Array<{ id: string; name: string }>,
+    })),
     loadMailBrief(auth.admin, question).catch(() => "Mails reçus : lecture impossible."),
   ]);
-  const dossiers = [dossierText, mailText].filter(Boolean).join("\n\n");
+  const dossiers = [dossier.brief, mailText].filter(Boolean).join("\n\n");
 
   const result = await askAdminAssistant(turns, dossiers);
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: 502 });
   }
-  return NextResponse.json({ reply: result.reply });
+  return NextResponse.json({
+    reply: result.reply,
+    contacts: dossier.contacts,
+  });
 }

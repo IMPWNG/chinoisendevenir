@@ -21,6 +21,7 @@ export type AssistantDossier = {
   date_rentree?: string | null;
   domaine_etudes?: string | null;
   notes_admin?: string | null;
+  created_at?: string | null;
 };
 
 export type AssistantTask = {
@@ -80,6 +81,37 @@ export function wantsDossierState(question: string): boolean {
   );
 }
 
+/** « Nouveaux entrants de la semaine » : lundi → aujourd'hui, heure de Pékin. */
+export function wantsNewThisWeek(question: string): boolean {
+  const q = fold(question);
+  return /nouveaux?|entrant|inscrit/.test(q) && /semaine|7 jours/.test(q);
+}
+
+function shanghaiDayOf(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
+function mondayOf(today: string): string {
+  const [year, month, day] = today.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  const weekday = date.getUTCDay();
+  date.setUTCDate(date.getUTCDate() - (weekday === 0 ? 6 : weekday - 1));
+  return date.toISOString().slice(0, 10);
+}
+
+function createdThisWeek(row: AssistantDossier, today: string): boolean {
+  const day = shanghaiDayOf(String(row.created_at || ""));
+  const start = mondayOf(today);
+  return Boolean(day) && day >= start && day <= today;
+}
+
 function nameHit(row: AssistantDossier, question: string): boolean {
   const full = fold(`${row.prenom || ""} ${row.nom || ""}`).trim();
   if (full.length >= 4 && question.includes(full)) return true;
@@ -119,28 +151,52 @@ function taskFor(tasks: Map<string, AssistantTask>, id: string, today: string): 
   return `${task.task}${reprise}`;
 }
 
+export const ASSISTANT_TABLE_KEY = "ced-show-contacts";
+
+export type DossierAnswer = {
+  brief: string;
+  contacts: Array<{ id: string; name: string }>;
+};
+
 export function dossierBrief(
   rows: readonly AssistantDossier[],
   taskRows: readonly AssistantTask[],
   question: string,
   today = "2026-10-18",
 ): string {
+  return dossierAnswer(rows, taskRows, question, today).brief;
+}
+
+export function dossierAnswer(
+  rows: readonly AssistantDossier[],
+  taskRows: readonly AssistantTask[],
+  question: string,
+  today = "2026-10-18",
+): DossierAnswer {
   const q = fold(question);
-  const named = rows.filter((row) => nameHit(row, q));
-  if (!named.length && !wantsDossierState(question)) return "";
+  const askedWeek = wantsNewThisWeek(question);
+  const source = askedWeek ? rows.filter((row) => createdThisWeek(row, today)) : rows;
+  const named = source.filter((row) => nameHit(row, q));
+  if (!named.length && !wantsDossierState(question) && !askedWeek) {
+    return { brief: "", contacts: [] };
+  }
+  if (askedWeek && !source.length) {
+    return { brief: "Aucun nouvel entrant cette semaine.", contacts: [] };
+  }
+  const rowsForBrief = source;
 
   const visible = pickVisibleDayTasks(taskRows);
-  const byId = new Map(rows.map((row) => [row.id, row]));
+  const byId = new Map(rowsForBrief.map((row) => [row.id, row]));
   const openTasks = new Map<string, AssistantTask>();
   for (const task of visible) {
     if (task.done) continue;
     const owner = byId.get(task.contact_id);
-    if (owner && dayTaskBlocked(owner.suivi_statut)) continue;
+    if (!owner || dayTaskBlocked(owner.suivi_statut)) continue;
     openTasks.set(task.contact_id, task);
   }
 
   const counts = new Map<string, number>();
-  for (const row of rows) {
+  for (const row of rowsForBrief) {
     const label = statusLabel(row.suivi_statut);
     counts.set(label, (counts.get(label) || 0) + 1);
   }
@@ -149,7 +205,7 @@ export function dossierBrief(
     .map(([label, count]) => `${label} ${count}`)
     .join(", ");
 
-  const priorityAll = rows.filter((row) => isPrioritaire(row));
+  const priorityAll = rowsForBrief.filter((row) => isPrioritaire(row));
   const priority = priorityAll.slice(0, LIST_CAP);
   const priorityLines = priority.map((row) => {
     const task = taskFor(openTasks, row.id, today);
@@ -168,13 +224,24 @@ export function dossierBrief(
   });
 
   const statuses = statutHits(q);
-  let details: readonly AssistantDossier[] = [];
-  if (named.length) details = named;
+  let picked: AssistantDossier[] = [];
+  if (named.length) picked = named;
   else if (statuses.size) {
-    details = rows.filter((row) => statuses.has(canonicalStatut(row.suivi_statut)));
-  } else if (/liste|tous|toutes|lesquels/.test(q) && !/priorit/.test(q)) {
-    details = rows.slice(0, DETAIL_CAP);
+    picked = rowsForBrief.filter((row) => statuses.has(canonicalStatut(row.suivi_statut)));
+  } else if (/priorit/.test(q)) {
+    picked = rowsForBrief.filter((row) => isPrioritaire(row));
+  } else if (/tache/.test(q)) {
+    picked = rowsForBrief.filter((row) => openTasks.has(row.id));
+  } else if (askedWeek || /liste|tous|toutes|lesquels/.test(q)) {
+    picked = [...rowsForBrief];
   }
+  const hideAll =
+    !askedWeek && picked.length === rowsForBrief.length && rowsForBrief.length > DETAIL_CAP;
+  const contacts = (hideAll ? [] : picked).slice(0, 100).map((row) => ({
+    id: row.id,
+    name: personName(row),
+  }));
+  const details = picked;
 
   const shown = details.slice(0, DETAIL_CAP);
   const detailLines = shown.map((row) => {
@@ -198,7 +265,7 @@ export function dossierBrief(
 
   const blocks = [
     `# Dossiers en direct (${today}, heure de Pékin)`,
-    `${rows.length} dossiers.`,
+    `${rowsForBrief.length} dossiers.`,
     countLine ? `Statuts : ${countLine}.` : "",
     priorityLines.length
       ? `Prioritaires (${priorityAll.length}) :\n- ${priorityLines.join("\n- ")}`
@@ -211,13 +278,13 @@ export function dossierBrief(
       `Dossiers demandés :\n- ${detailLines.join("\n- ")}${more ? `\n${more.trim()}` : ""}`,
     );
   }
-  return blocks.filter(Boolean).join("\n");
+  return { brief: blocks.filter(Boolean).join("\n"), contacts };
 }
 
 const CONTACT_FIELDS =
-  "id, prenom, nom, email, phone, pays, suivi_statut, formule, prioritaire, assigned_to, espace_debloque, date_rentree, domaine_etudes, notes_admin";
+  "id, prenom, nom, email, phone, pays, suivi_statut, formule, prioritaire, assigned_to, espace_debloque, date_rentree, domaine_etudes, notes_admin, created_at";
 
-export async function loadDossierBrief(admin: AdminClient, question: string): Promise<string> {
+export async function loadDossierBrief(admin: AdminClient, question: string): Promise<DossierAnswer> {
   const today = shanghaiDayString();
   const [contacts, tasks] = await Promise.all([
     admin.from("contacts").select(CONTACT_FIELDS).order("created_at", { ascending: false }).limit(1000),
@@ -230,16 +297,19 @@ export async function loadDossierBrief(admin: AdminClient, question: string): Pr
       .limit(300),
   ]);
   if (contacts.error) {
-    return wantsDossierState(question) ? "Dossiers : lecture impossible." : "";
+    return {
+      brief: wantsDossierState(question) || wantsNewThisWeek(question) ? "Dossiers : lecture impossible." : "",
+      contacts: [],
+    };
   }
   const taskError = tasks.error?.message || "";
   const taskRows = taskError ? [] : ((tasks.data || []) as AssistantTask[]);
-  const brief = dossierBrief((contacts.data || []) as AssistantDossier[], taskRows, question, today);
-  if (!brief) return "";
+  const answer = dossierAnswer((contacts.data || []) as AssistantDossier[], taskRows, question, today);
+  if (!answer.brief) return { brief: "", contacts: [] };
   if (taskError && !isMissingDayTasksTable(taskError)) {
-    return `${brief}\nTâches : lecture impossible.`;
+    return { ...answer, brief: `${answer.brief}\nTâches : lecture impossible.` };
   }
-  return brief;
+  return answer;
 }
 
 export type AssistantMail = {

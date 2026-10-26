@@ -48,6 +48,7 @@ export const adminTranslations = {
       thinking: "Réponse…",
       empty: "Posez une question sur le projet.",
       error: "L'assistant n'a pas répondu. Réessayez.",
+      showInTable: "Afficher dans le tableau",
     },
     emailsWeek: {
       homeTitle: "Email reçu",
@@ -154,6 +155,8 @@ export const adminTranslations = {
     dashboard: {
       title: "Dashboard Admin",
       subtitle: "Étudier en Chine",
+      assistantFilter: "Liste de l'assistant ({count})",
+      assistantFilterClear: "Tout afficher",
       totalContacts: "Contact total",
       toQualify: "À qualifier",
       waitingPayment: "En attente de paiement",

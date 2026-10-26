@@ -10,6 +10,7 @@ import {
   selectKnowledge,
 } from "./adminAssistant";
 import {
+  dossierAnswer,
   dossierBrief,
   mailBrief,
   mailWindowDays,
@@ -75,6 +76,21 @@ const paiement = dossierBrief(dossiers, tasks, "Qui est en attente de paiement ?
 assert(paiement.includes("Ben Kone") && paiement.includes("En attente de paiement"), "status filter");
 
 assert(dossierBrief(dossiers, tasks, "C'est quoi le visa X1 ?", "2026-10-18") === "", "no dossiers for a general question");
+assert(
+  dossierAnswer(dossiers, tasks, "Où en est Diallo ?", "2026-10-18").contacts.map((row) => row.id).join() === "1",
+  "named dossier can open the table",
+);
+const week = dossierAnswer(
+  [
+    { ...dossiers[0], created_at: "2026-10-13T02:00:00.000Z" },
+    { ...dossiers[1], created_at: "2026-09-01T00:00:00.000Z" },
+  ],
+  tasks,
+  "liste des nouveaux entrants de la semaine",
+  "2026-10-18",
+);
+assert(week.contacts.map((row) => row.id).join() === "1", "only this week's new file");
+assert(week.brief.includes("Awa Diallo") && !week.brief.includes("Ben Kone"), "week brief stays on the new file");
 
 const withDossiers = assistantSystemPrompt("mes priorités", priorities);
 assert(withDossiers.includes("Awa Diallo") && withDossiers.includes("Règles de réponse"), "prompt carries dossiers and knowledge");
