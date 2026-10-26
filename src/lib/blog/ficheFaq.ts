@@ -51,6 +51,26 @@ export function askKey(value: string): string {
   return (hash >>> 0).toString(16);
 }
 
+/** Student messages often arrive in SMS French. The public title must not. */
+export function polishStudentFrench(value: string): string {
+  let text = value.replace(/\s+---\s+.*$/, "").replace(/\s+/g, " ").trim();
+  text = text
+    .replace(/\bcommmerce\b/gi, "commerce")
+    .replace(/\bcommerce internationale\b/gi, "commerce international")
+    .replace(/\bd\s+autrui\b/gi, "d'autrui")
+    .replace(/\bc\s+un\b/gi, "c'est un")
+    .replace(/\bc\s+est\b/gi, "c'est")
+    .replace(/\b([jnl])\s+(?=[aeiouhéèêàùœæ])/gi, "$1'")
+    .replace(/\bqu\s+(?=[aeiouhéèêàùœæ])/gi, "qu'")
+    .replace(
+      /([a-zàâäéèêëïîôùûüç])\s+([A-ZÀÂÄÉÈÊËÏÎÔÙÛÜÇ][a-zàâäéèêëïîôùûüç])/g,
+      "$1. $2",
+    )
+    .replace(/\bles moyens ne sont pas présents\b/gi, "Je n'ai pas les moyens")
+    .replace(/([^,]) mais /g, "$1, mais ");
+  return text.replace(/\s+/g, " ").trim();
+}
+
 /** One public question, or null when the message is too thin or still identifying. */
 export function publicFaqTitle(raw: unknown): string | null {
   const text = redactPersonal(raw);
@@ -58,7 +78,9 @@ export function publicFaqTitle(raw: unknown): string | null {
   const folded = fold(text);
   if (/^(ok|d'accord|merci|oui|bien recu)\b/.test(folded) && folded.length < 40) return null;
   const sentences = text.split(/(?<=[.!?])\s+/);
-  let title = (sentences.find((item) => item.includes("?")) || sentences[0] || "").trim();
+  let title = polishStudentFrench(
+    (sentences.find((item) => item.includes("?")) || sentences[0] || "").trim(),
+  );
   if (title.length > 110) title = title.slice(0, 107).replace(/\s+\S*$/, "").trim();
   if (!title.endsWith("?")) title = `${title.replace(/[.!]+$/, "")} ?`;
   title = title.charAt(0).toUpperCase() + title.slice(1);
@@ -122,7 +144,8 @@ export function topicFromFiche(
     title: ask.title,
     faq: true,
     context:
-      `Question publique, déjà nettoyée de tout nom, email et téléphone : « ${ask.title} ». ` +
+      `Question publique, déjà réécrite en français correct, sans nom, email ni téléphone : « ${ask.title} ». ` +
+      "Garde ce français. Ne reprends pas le style SMS du message d'origine. " +
       "Réponds uniquement à cette question. Ne dis pas qu'un client l'a posée. " +
       "Faits du site : une bourse n'est jamais garantie ; la CSC peut couvrir scolarité, logement, assurance et une allocation selon le type ; " +
       "le parcours d'admission dure souvent 4 à 6 mois ; la rentrée principale est en septembre ; " +

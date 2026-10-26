@@ -19,6 +19,23 @@ const clean = redactPersonal(raw);
 assert(!clean.includes("@") && !clean.includes("Awa") && !/221/.test(clean), "redact name email phone");
 const title = publicFaqTitle(raw);
 assert(title === "Est-ce qu'une bourse CSC est possible avec un bac ?", "title is the question");
+assert(
+  publicFaqTitle("Je veux bien mais c un peu cher Les moyens ne sont pas présents ?") ===
+    "Je veux bien, mais c'est un peu cher. Je n'ai pas les moyens ?",
+  "sms price question is rewritten",
+);
+assert(
+  publicFaqTitle(
+    "Je souhaite étudier le commerce pour ma passion et pour mieux découvrir les cultures d autrui --- je veux continuer longtemps",
+  ) ===
+    "Je souhaite étudier le commerce pour ma passion et pour mieux découvrir les cultures d'autrui ?",
+  "cut-off and missing apostrophe",
+);
+assert(
+  publicFaqTitle("Mon projet est d’acquérir une compétence en matière de commmerce internationale ?") ===
+    "Mon projet est d’acquérir une compétence en matière de commerce international ?",
+  "typo and agreement",
+);
 assert(publicFaqTitle("Merci beaucoup") === null, "thanks is not a question");
 assert(pillarsForAsk(title || "")[0] === "/bourses", "scholarship pillar");
 

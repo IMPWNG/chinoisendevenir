@@ -59,6 +59,27 @@ const nextConfig = {
         destination: "https://chinoisendevenir.com/:path*",
         statusCode: 308,
       },
+      {
+        source: "/blog/je-veux-bien-mais-c-un-peu-cher-les-moyens-ne-sont-pas-presents",
+        destination: "/blog/je-veux-bien-mais-cest-un-peu-cher",
+        statusCode: 308,
+      },
+      {
+        source: "/blog/je-suis-toujours-interesse",
+        destination: "/blog/suis-je-toujours-interesse-par-des-etudes-en-chine",
+        statusCode: 308,
+      },
+      {
+        source: "/blog/je-souhaite-etudier-le-commerce-pour-ma-passion-et-pour-mieux-decouvrir-les-cult",
+        destination: "/blog/etudier-le-commerce-par-passion",
+        statusCode: 308,
+      },
+      {
+        source:
+          "/blog/mon-projet-est-d-acquerir-une-competence-en-matiere-de-commmerce-internationale",
+        destination: "/blog/competence-en-commerce-international",
+        statusCode: 308,
+      },
     ];
   },
   async headers() {
