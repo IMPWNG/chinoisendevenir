@@ -1,4 +1,5 @@
 import { isValidDayString } from "./dailyReportShared";
+import { canonicalStatut } from "./suiviStatuts";
 
 export const DAY_TASK_MAX = 500;
 const AGENT_TASK_CAP = 20;
@@ -19,6 +20,11 @@ export function cleanDayTask(value: unknown): string {
 
 export function cleanAuthorEmail(value: unknown): string {
   return String(value || "").trim().toLowerCase().slice(0, 200);
+}
+
+/** A lost prospect stays off the day list and receives no new task. */
+export function dayTaskBlocked(statut: unknown) {
+  return canonicalStatut(statut) === "prospect_perdu";
 }
 
 /**

@@ -1,7 +1,7 @@
 import { adminTranslations } from "../i18n/admin";
 import { isPrioritaire } from "./contactPriority";
 import { shanghaiDayString } from "./dailyReportShared";
-import { dayTaskListFilter, isMissingDayTasksTable, pickVisibleDayTasks } from "./dayTasks";
+import { dayTaskBlocked, dayTaskListFilter, isMissingDayTasksTable, pickVisibleDayTasks } from "./dayTasks";
 import { displayFormuleLabel } from "./formules";
 import { canonicalStatut } from "./suiviStatuts";
 import type { AdminClient } from "./supabaseAdmin";
@@ -130,11 +130,14 @@ export function dossierBrief(
   if (!named.length && !wantsDossierState(question)) return "";
 
   const visible = pickVisibleDayTasks(taskRows);
+  const byId = new Map(rows.map((row) => [row.id, row]));
   const openTasks = new Map<string, AssistantTask>();
   for (const task of visible) {
-    if (!task.done) openTasks.set(task.contact_id, task);
+    if (task.done) continue;
+    const owner = byId.get(task.contact_id);
+    if (owner && dayTaskBlocked(owner.suivi_statut)) continue;
+    openTasks.set(task.contact_id, task);
   }
-  const byId = new Map(rows.map((row) => [row.id, row]));
 
   const counts = new Map<string, number>();
   for (const row of rows) {

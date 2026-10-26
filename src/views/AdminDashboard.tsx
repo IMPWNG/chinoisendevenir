@@ -61,7 +61,7 @@ import {
   priorityPatch,
   sortPriorityFirst,
 } from "../lib/contactPriority";
-import { cleanDayTask, cleanAuthorEmail, isMissingDayTasksTable } from "../lib/dayTasks";
+import { cleanDayTask, cleanAuthorEmail, dayTaskBlocked, isMissingDayTasksTable } from "../lib/dayTasks";
 import { shanghaiDayString } from "../lib/dailyReportShared";
 import { isInboxPending, sortInboxFirst } from "../lib/inboxPriority";
 import { formatEuros, revenueForViewer } from "../lib/contactRevenue";
@@ -1489,7 +1489,7 @@ function ContactModal({
 
   const saveDayTask = async () => {
     const task = cleanDayTask(taskText);
-    if (!task) return;
+    if (!task || dayTaskBlocked(contact.suivi_statut)) return;
     setSavingTask(true);
     const { data: open } = await adminSupabase
       .from("day_tasks")
@@ -1682,6 +1682,7 @@ function ContactModal({
                 />
                 <span>{t("dashboard.priorityFollow")}</span>
               </label>
+              {dayTaskBlocked(contact.suivi_statut) ? null : (
               <button
                 type="button"
                 onClick={openDayTask}
@@ -1689,6 +1690,7 @@ function ContactModal({
               >
                 {t("dayTasks.add")}
               </button>
+              )}
             </div>
           </div>
 

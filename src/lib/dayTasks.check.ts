@@ -5,6 +5,7 @@
 import {
   cleanDayTask,
   dayTaskBelongsToday,
+  dayTaskBlocked,
   dayTaskListFilter,
   formatDayTaskDate,
   isMissingDayTasksTable,
@@ -15,6 +16,9 @@ import {
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
 }
+
+assert(dayTaskBlocked("prospect_perdu") && dayTaskBlocked("perdu"), "prospect perdu");
+assert(!dayTaskBlocked("client_payé") && !dayTaskBlocked(""), "les autres statuts restent");
 
 assert(cleanDayTask("  rappeler   demain ") === "rappeler demain", "collapse space");
 assert(cleanDayTask("x".repeat(600)).length === 500, "cap 500");

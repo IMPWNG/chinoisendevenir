@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { shanghaiDayString } from "@/lib/dailyReportShared";
 import {
   dayTaskListFilter,
+  dayTaskBlocked,
   isMissingDayTasksTable,
   parseAgentDayTasks,
 } from "@/lib/dayTasks";
@@ -49,12 +50,25 @@ export async function POST(request: Request) {
 
     const have = new Set((data || []).map((row) => String(row.contact_id)));
     const fresh = parsed.tasks.filter((task) => !have.has(task.contactId));
-    if (!fresh.length) {
+    const ids = fresh.map((task) => task.contactId);
+    const { data: contacts, error: contactError } = ids.length
+      ? await admin.from("contacts").select("id, suivi_statut").in("id", ids)
+      : { data: [], error: null };
+    if (contactError) {
+      return NextResponse.json({ error: "Lecture impossible" }, { status: 500 });
+    }
+    const lost = new Set(
+      (contacts || [])
+        .filter((row) => dayTaskBlocked(row.suivi_statut))
+        .map((row) => String(row.id)),
+    );
+    const allowed = fresh.filter((task) => !lost.has(task.contactId));
+    if (!allowed.length) {
       return NextResponse.json({ success: true, day: parsed.day, inserted: 0 });
     }
 
     const { error: insertError } = await admin.from("day_tasks").insert(
-      fresh.map((task) => ({
+      allowed.map((task) => ({
         contact_id: task.contactId,
         day: parsed.day,
         task: task.task,
@@ -70,7 +84,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       day: parsed.day,
-      inserted: fresh.length,
+      inserted: allowed.length,
     });
   } catch (error) {
     console.error("agent day-tasks:", error);

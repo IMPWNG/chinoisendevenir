@@ -7,6 +7,7 @@ import { shanghaiDayString } from "../lib/dailyReportShared";
 import {
   cleanAuthorEmail,
   dayTaskListFilter,
+  dayTaskBlocked,
   formatDayTaskDate,
   isMissingDayTasksTable,
   pickVisibleDayTasks,
@@ -24,7 +25,7 @@ type TaskRow = {
   done_by?: string | null;
 };
 
-type NameRow = { id: string; prenom?: string | null; nom?: string | null };
+type NameRow = { id: string; prenom?: string | null; nom?: string | null; suivi_statut?: string | null };
 
 const COLLAPSE_KEY = "admin-day-tasks-collapsed";
 
@@ -85,11 +86,14 @@ export default function AdminDayTasks({
   const names = new Map(
     contacts.map((c) => [c.id, `${c.prenom || ""} ${c.nom || ""}`.trim()]),
   );
+  const lost = new Set(
+    contacts.filter((c) => dayTaskBlocked(c.suivi_statut)).map((c) => c.id),
+  );
 
   const today = shanghaiDayString();
   const visible = pickVisibleDayTasks(
     showWhatsapp ? rows : rows.filter((row) => row.source !== "whatsapp"),
-  );
+  ).filter((row) => !lost.has(row.contact_id));
   const ordered = [...visible].sort(
     (a, b) => Number(a.done) - Number(b.done),
   );
