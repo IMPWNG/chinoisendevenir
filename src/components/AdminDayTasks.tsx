@@ -26,6 +26,8 @@ type TaskRow = {
 
 type NameRow = { id: string; prenom?: string | null; nom?: string | null };
 
+const COLLAPSE_KEY = "admin-day-tasks-collapsed";
+
 export default function AdminDayTasks({
   contacts,
   refreshKey = 0,
@@ -45,6 +47,11 @@ export default function AdminDayTasks({
   const [rows, setRows] = useState<TaskRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(window.localStorage.getItem(COLLAPSE_KEY) === "1");
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -132,18 +139,38 @@ export default function AdminDayTasks({
     }
   };
 
+  const toggleCollapsed = () => {
+    setCollapsed((value) => {
+      const next = !value;
+      window.localStorage.setItem(COLLAPSE_KEY, next ? "1" : "0");
+      return next;
+    });
+  };
+
   return (
     <div className="mb-6 rounded-2xl border border-amber-500/30 bg-slate-800/50 p-5">
-      <h2 className="text-lg font-bold text-white">
-        {t("dayTasks.title")}
-        {!loading && !error ? (
-          <span className="ml-2 text-slate-400 font-medium text-base">
-            ({visible.filter((row) => !row.done).length})
-          </span>
-        ) : null}
-      </h2>
-      <p className="text-sm text-slate-400 mt-1 mb-4">{t("dayTasks.hint")}</p>
-      {loading ? (
+      <div className="flex items-start justify-between gap-3">
+        <h2 className="text-lg font-bold text-white">
+          {t("dayTasks.title")}
+          {!loading && !error ? (
+            <span className="ml-2 text-slate-400 font-medium text-base">
+              ({visible.filter((row) => !row.done).length})
+            </span>
+          ) : null}
+        </h2>
+        <button
+          type="button"
+          onClick={toggleCollapsed}
+          aria-expanded={!collapsed}
+          className="shrink-0 px-4 py-2 bg-slate-700/70 hover:bg-slate-600 text-white rounded-xl text-sm font-bold"
+        >
+          {collapsed ? `▾ ${t("dashboard.bulkExpand")}` : `▴ ${t("dashboard.bulkCollapse")}`}
+        </button>
+      </div>
+      {collapsed ? null : (
+        <p className="text-sm text-slate-400 mt-1 mb-4">{t("dayTasks.hint")}</p>
+      )}
+      {collapsed ? null : loading ? (
         <p className="text-sm text-slate-400">{t("loading")}</p>
       ) : error ? (
         <p className="text-sm text-rose-300">{error}</p>
