@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminAuth } from "../context/AdminAuthContext";
 import AdminShell from "../components/AdminShell";
+import AdminClocks from "../components/AdminClocks";
 import AdminStudentFiles from "../components/AdminStudentFiles";
 import AdminMatchingPanel from "../components/AdminMatchingPanel";
 import AdminChineseMatchingPanel from "../components/AdminChineseMatchingPanel";
@@ -742,6 +743,7 @@ export default function AdminDashboard() {
 
   return (
     <AdminShell user={user} onLogout={handleLogout}>
+        <AdminClocks />
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-5">
           <StatCard
