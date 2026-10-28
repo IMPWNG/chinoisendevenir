@@ -2,7 +2,7 @@
  * Self-check: AI brief orders + clickable links in email HTML.
  * Run: npx tsx src/lib/emailCompose.check.ts
  */
-import { adminOrderBlock, studentWhatsappDraft } from "./emailCompose";
+import { adminOrderBlock, emailProSystem, studentWhatsappDraft } from "./emailCompose";
 import { plainTextToEmailBodyHtml, textToLinkedHtml } from "./emailLayout";
 
 function assert(cond: unknown, msg: string): asserts cond {
@@ -38,6 +38,14 @@ assert(orders.includes("indiquer les formules"), "keeps parenthetical order");
 assert(orders.includes("ton convaincant"), "keeps tone order");
 assert(orders.includes("https://chinoisendevenir.com/tarifs"), "keeps url");
 assert(/3 formules/.test(orders), "asks to list packages");
+
+const pro = emailProSystem("Propose un appel (ton convaincant)");
+assert(/e-mail complet/i.test(pro), "asks for a real email");
+assert(/ne recopies pas les notes/i.test(pro), "forbids a light paraphrase");
+assert(/N'invente aucun fait/i.test(pro), "still forbids invented facts");
+assert(/Pas de garantie/i.test(pro), "still no admission promise");
+assert(pro.includes("ton convaincant"), "keeps the admin order");
+assert(!/Tu le reformules \(orthographe/.test(pro), "old paraphrase instruction is gone");
 
 const linked = textToLinkedHtml(
   "Voir https://chinoisendevenir.com/tarifs et [le site](https://chinoisendevenir.com/)",

@@ -422,7 +422,7 @@ export const adminTranslations = {
       emailCustomEmpty: "Indiquez un objet et un message.",
       emailAiSection: "Rédiger avec l'IA",
       emailAiHint:
-        "Écrivez ce que vous voulez dire, même en vrac. Les consignes entre parenthèses (indiquer les formules, ton convaincant…) sont appliquées. Une URL devient un lien cliquable. Vous relisez avant d'envoyer.",
+        "Écrivez ce que vous voulez dire, même en vrac. L'IA en fait un vrai e-mail à partir de cette demande (sujet, explication, prochaine étape), sans inventer de faits. Les consignes entre parenthèses et les URL sont respectées. Vous relisez avant d'envoyer.",
       emailAiPlaceholder:
         "Ex. Bonjour, je te propose un RDV téléphone entre tel et tel jour, as-tu de la dispo ?",
       emailAiButton: "Transformer en email pro",

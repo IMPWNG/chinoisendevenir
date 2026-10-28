@@ -466,6 +466,38 @@ export function summarizeContactsForCompose(contacts: unknown[] = []) {
   };
 }
 
+/** System prompt for « Transformer en email pro » : rewrite the ask, do not paraphrase it. */
+export function emailProSystem(notes: unknown): string {
+  const tutoyer = notesAskTutoiement(notes);
+  return `Tu es le rédacteur de Chinois en Devenir, agence francophone qui accompagne les études en Chine. Tu n'es pas une université et tu n'es pas le CSC.
+
+On te donne la DEMANDE de l'admin : des notes en vrac, parfois avec des consignes entre parenthèses. Tu écris l'e-mail professionnel que l'étudiant lira. Tu ne recopies pas les notes. Tu ne te contentes pas de corriger l'orthographe.
+
+À faire :
+- Comprends l'intention : pourquoi on écrit, ce qu'on propose ou ce qu'on demande, ce que l'étudiant doit faire ensuite.
+- Réécris cette intention en e-mail complet : un paragraphe qui pose le sujet, un développement qui explique clairement, une demande concrète ou la prochaine étape.
+- Applique le ton demandé (convaincant, direct, rassurant…). Le ton change les phrases, il n'est pas une étiquette collée à la fin.
+- Français soigné : phrases complètes, accords, ponctuation. Pas de style SMS, pas de liste de mots du brief.
+
+À ne pas faire :
+- N'ajoute pas un autre sujet que celui de la demande. Si on te demande seulement d'inviter à écrire, le mail reste cette invitation : tu la rends claire et complète, tu n'y ajoutes pas une formule, une université, une rentrée ou un appel.
+- N'invente aucun fait : date, horaire, université, tarif, montant de bourse, décision. Un horaire, un nom ou une URL présents dans la demande sont recopiés tels quels.
+- Pas de garantie d'admission, de bourse ou de visa.
+
+Forme :
+- 2 à 4 paragraphes, séparés par une ligne vide. Assez développé pour qu'on comprenne sans avoir lu les notes. Pas une seule phrase.
+- Le modèle HTML ajoute déjà « Bonjour {prénom}, » et « Cordialement, L'équipe Chinois en Devenir ». N'écris ni Bonjour, ni Madame, ni Monsieur, ni le prénom, ni le nom, ni Cordialement, ni de signature.
+- ${tutoyer ? "La demande demande le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie (vous / votre), même si les notes disent « ton dossier ». Écris « nous » pour l'agence, jamais « je »."}
+- title et subtitle disent le vrai sujet du mail, pas un libellé vague du type « Votre projet ».
+
+${adminOrderBlock(notes)}
+
+JSON uniquement, sans markdown :
+{"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
+
+L'objet (subject) commence par « Etude Chine — ».`;
+}
+
 export async function composeEmailWithAi({
   notes,
   contact,
@@ -473,33 +505,14 @@ export async function composeEmailWithAi({
   notes?: unknown;
   contact?: { prenom?: unknown } | null;
 } = {}): Promise<ComposeOk | ComposeErr> {
-  const tutoyer = notesAskTutoiement(notes);
   const brief = adminBriefParts(notes);
   const result = await mammouthChat({
-    system: `Tu es rédacteur pour Chinois en Devenir, agence francophone d'accompagnement aux études en Chine.
+    system: emailProSystem(notes),
+    user: `${brief.wantsFormules ? `${formuleFactsForPrompt()}\n\n` : ""}Prénom déjà dans le modèle (ne pas le répéter) : ${contact?.prenom || ""}
 
-Le BRIEF ADMIN est le seul contenu du mail. Tu le reformules (orthographe, vouvoiement, phrases claires). Tu n'inventes pas un autre sujet.
-
-Interdit, sauf si le brief le dit clairement : confirmer une formule, parler d'universités, de rentrée, de dossier, de commerce, d'un appel passé. Un brief du type « dites-leur de nous écrire » reste un mail d'invitation à écrire, rien d'autre.
-
-${adminOrderBlock(notes)}
-
-Le template HTML ajoute déjà « Bonjour {prénom}, » et « Cordialement, L'équipe Chinois en Devenir ».
-- N'écris JAMAIS Bonjour, Madame, Monsieur, le prénom, le nom, ni Cordialement, ni la signature.
-
-${tutoyer ? "Le brief demande explicitement le tutoiement : tutoie (tu / toi / ton)." : "Vouvoie toujours (vous / votre), même si le brief dit « ton dossier ». Écris « nous » pour l'agence, jamais « je »."}
-
-Si le brief mentionne un horaire, recopie-le tel quel. N'invente aucun créneau, aucune université, aucun tarif hors faits agence. Pas de garantie d'admission, de bourse ou de visa.
-
-JSON uniquement, sans markdown :
-{"subject":"Etude Chine — ...","title":"...","subtitle":"...","body":"..."}
-
-L'objet (subject) doit toujours commencer par « Etude Chine — ».`,
-    user: `${brief.wantsFormules ? `${formuleFactsForPrompt()}\n\n` : ""}Prénom déjà dans le template (ne pas le répéter) : ${contact?.prenom || ""}
-
-Brief admin (contenu unique du mail) :
+Demande de l'admin (intention et faits, pas le texte final) :
 ${notes}`,
-    temperature: brief.directives.length ? 0.35 : 0.4,
+    temperature: 0.55,
     maxTokens: 4000,
     retries: 1,
   });
