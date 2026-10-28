@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { usePathname } from "next/navigation";
 import LeadForm from "./LeadForm";
 import { useSiteI18n } from "../context/SiteI18nContext";
-
-const STORAGE_KEY = "ced-intake-2027-popup";
 
 function isPublicPage(path: string) {
   return !path.startsWith("/admin") && !path.startsWith("/espace-etudiant");
@@ -16,16 +14,11 @@ export default function IntakePopup() {
   const { t } = useSiteI18n();
   const titleId = useId();
   const [open, setOpen] = useState(false);
-  const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (timerRef.current != null) return;
     if (!isPublicPage(pathname)) return;
-    if (window.sessionStorage.getItem(STORAGE_KEY) === "1") return;
-    timerRef.current = window.setTimeout(() => {
-      timerRef.current = null;
-      setOpen(true);
-    }, 6000);
+    const timer = window.setTimeout(() => setOpen(true), 6000);
+    return () => window.clearTimeout(timer);
   }, [pathname]);
 
   useEffect(() => {
@@ -43,7 +36,6 @@ export default function IntakePopup() {
   }, [open]);
 
   function close() {
-    window.sessionStorage.setItem(STORAGE_KEY, "1");
     setOpen(false);
   }
 
