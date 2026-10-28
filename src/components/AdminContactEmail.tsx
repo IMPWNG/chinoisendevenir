@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { adminSupabase } from "../lib/supabase";
 import { useAdminI18n } from "../context/AdminI18nContext";
 import { CONTACT_FROM_EMAIL, CONTACT_FROM_NAME } from "../lib/emailConfig";
+import { isValidEmail } from "../lib/contactForm";
 import { errorMessage } from "../lib/request";
 import {
   CARD_EMAIL_TEMPLATE_KEYS,
@@ -61,6 +62,7 @@ export default function AdminContactEmail({
   const [aiError, setAiError] = useState("");
   const [composing, setComposing] = useState(false);
   const [sending, setSending] = useState(false);
+  const [toEmail, setToEmail] = useState("");
 
   useEffect(() => {
     setMode("write");
@@ -71,7 +73,8 @@ export default function AdminContactEmail({
     setMessage("");
     setAiNotes("");
     setAiError("");
-  }, [contact.id, allowTemplates]);
+    setToEmail(String(contact.email || "").trim());
+  }, [contact.id, allowTemplates, contact.email]);
 
   function applyDraft(key: string) {
     const draft = getEmailTemplateDraft(key);
@@ -94,7 +97,7 @@ export default function AdminContactEmail({
   );
 
   const busy = composing || sending;
-  const hasEmail = Boolean(String(contact.email || "").trim());
+  const hasEmail = isValidEmail(toEmail);
   const canSendWrite = Boolean(subject.trim() && message.trim());
   const sendLabel =
     mode === "template"
@@ -146,7 +149,7 @@ export default function AdminContactEmail({
 
   async function sendEmail() {
     if (!hasEmail) {
-      alert(t("dashboard.emailNoAddress"));
+      alert(toEmail.trim() ? t("dashboard.emailToInvalid") : t("dashboard.emailNoAddress"));
       return;
     }
     if (!canSendWrite) {
@@ -158,6 +161,7 @@ export default function AdminContactEmail({
       t("dashboard.sendEmailConfirm", {
         template: sendLabel,
         name: contact.prenom || "",
+        email: toEmail.trim(),
       }),
     );
     if (!confirmed) return;
@@ -166,6 +170,7 @@ export default function AdminContactEmail({
     try {
       const payload = {
         contactId: String(contact.id),
+        toEmail: toEmail.trim(),
         emailTemplate: mode === "write" ? "custom" : template,
         customSubject: subject.trim(),
         customTitle: title.trim(),
@@ -254,11 +259,13 @@ export default function AdminContactEmail({
               </label>
               <input
                 type="email"
-                readOnly
-                value={contact.email || ""}
+                value={toEmail}
+                disabled={busy}
+                onChange={(e) => setToEmail(e.target.value)}
                 placeholder={t("dashboard.emailNoAddress")}
-                className={`${fieldClass(true)} text-slate-300`}
+                className={fieldClass(busy)}
               />
+              <p className="mt-1 text-xs text-slate-500">{t("dashboard.emailToHint")}</p>
             </div>
           </div>
 

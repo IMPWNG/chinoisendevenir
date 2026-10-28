@@ -21,6 +21,7 @@ import {
 import { shouldAdvanceStatus, toStoredStatut } from "../suiviStatuts";
 import { addRequestedDocumentKeys } from "../studentDocuments";
 import { STARTER_DOSSIER_DOCUMENT_KEYS } from "../studentProgress";
+import { resolveOutboundEmail } from "../contactForm";
 import { readJsonObject, asString, errorMessage } from "../request";
 import {
   emailHtmlToText,
@@ -196,6 +197,7 @@ async function sendTemplatedEmail(
   contact: EmailContact,
   templateKey = "formules_presentation",
   extras: EmailExtras = {},
+  toEmail?: string,
 ) {
   const template = EMAIL_TEMPLATES[templateKey];
   if (!template) {
@@ -205,7 +207,8 @@ async function sendTemplatedEmail(
 
   console.log("\n📧 === ENVOI EMAIL ===");
   console.log(`Template: ${templateKey}`);
-  console.log(`À: ${contact.email}`);
+  const recipient = asString(toEmail || contact.email).trim();
+  console.log(`À: ${recipient}`);
   console.log(`Prenom: ${contact.prenom}`);
 
   const hasCustomCopy = Boolean(String(extras.customMessage || "").trim());
@@ -247,7 +250,7 @@ async function sendTemplatedEmail(
       headers?: Record<string, string>;
     } = {
       from: CONTACT_FROM,
-      to: asString(contact.email),
+      to: recipient,
       subject,
       html,
       replyTo: INBOUND_REPLY_TO,
@@ -275,7 +278,7 @@ async function sendTemplatedEmail(
           : emailHtmlToText(html);
       await storeOutboundContactEmail({
         contactId,
-        toEmail: contact.email,
+        toEmail: recipient,
         subject,
         bodyText,
         resendId: response.data?.id || null,
@@ -535,10 +538,25 @@ export default async function handler(request: Request) {
 
       console.log(`✅ Contact trouvé: ${contact.prenom} ${contact.nom}`);
 
+      const recipient = resolveOutboundEmail(contact.email, body.toEmail);
+      if (!recipient.ok) {
+        return NextResponse.json(
+          {
+            success: false,
+            message:
+              recipient.error === "invalid"
+                ? "Adresse email invalide"
+                : "Ce contact n'a pas d'email",
+          },
+          { status: 400 },
+        );
+      }
+
       const replySent = await sendTemplatedEmail(
         contact as EmailContact,
         emailTemplate,
         extras,
+        recipient.email,
       );
       if (!replySent.success) {
         console.error("❌ Échec envoi email:", replySent.error);
@@ -569,12 +587,15 @@ export default async function handler(request: Request) {
         );
       }
 
-      const actionDescription =
+      const sentElsewhere =
+        recipient.email !== String(contact.email || "").trim().toLowerCase();
+      const actionDescription = `${
         emailTemplate === "custom"
           ? `${template.description} — ${extras.customSubject}\n${String(extras.customMessage || "").slice(0, 500)}`
           : nextStatus && canAdvance
             ? `${template.description} - Statut visé: ${nextStatus}`
-            : template.description;
+            : template.description
+      }${sentElsewhere ? `\nEnvoyé à ${recipient.email}` : ""}`;
 
       await logAction(
         contactId,

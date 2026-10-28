@@ -20,6 +20,20 @@ export function isValidEmail(value: unknown): boolean {
   return email.length > 0 && email.length <= 254 && EMAIL_RE.test(email);
 }
 
+/** Empty override keeps the contact address. A filled one must be a real email. */
+export function resolveOutboundEmail(
+  contactEmail: unknown,
+  override: unknown,
+): { ok: true; email: string } | { ok: false; error: "invalid" | "missing" } {
+  const asked = normalizeEmail(override);
+  if (asked) {
+    return isValidEmail(asked) ? { ok: true, email: asked } : { ok: false, error: "invalid" };
+  }
+  const own = normalizeEmail(contactEmail);
+  if (isValidEmail(own)) return { ok: true, email: own };
+  return { ok: false, error: "missing" };
+}
+
 export function isValidPhone(value: unknown): boolean {
   const raw = String(value || "").trim();
   if (!raw) return true;
