@@ -58,16 +58,20 @@ export default function IntakePopup() {
         aria-labelledby={titleId}
         className="intake-popup-card"
       >
-        <button type="button" className="intake-popup-close" aria-label={t("intakePopup.close")} onClick={close}>
-          ×
-        </button>
-        <div className="intake-popup-scroll">
+        <header className="intake-popup-head">
+          <button type="button" className="intake-popup-close" aria-label={t("intakePopup.close")} onClick={close}>
+            ×
+          </button>
           <h2 id={titleId}>{t("intakePopup.title")}</h2>
           <p>{t("intakePopup.p1")}</p>
+        </header>
+        <div className="intake-popup-body">
           <p>{t("intakePopup.p2")}</p>
-          <p>{t("intakePopup.p3")}</p>
-          <h3>{t("form.title")}</h3>
-          <LeadForm embedded initialValues={{ date_rentree: "septembre_2027" }} />
+          <p className="intake-popup-note">{t("intakePopup.p3")}</p>
+          <div className="intake-popup-form">
+            <h3>{t("form.title")}</h3>
+            <LeadForm embedded initialValues={{ date_rentree: "septembre_2027" }} />
+          </div>
         </div>
       </section>
     </div>
