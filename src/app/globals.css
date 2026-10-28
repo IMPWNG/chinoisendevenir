@@ -983,9 +983,10 @@ a.landing-btn-accent:hover {
 .intake-popup-head {
   position: relative;
   flex: none;
-  padding: 28px 64px 22px 28px;
+  padding: 28px 64px 22px;
   background: linear-gradient(135deg, var(--secondary), #457b9d);
   color: #fff;
+  text-align: center;
 }
 
 .intake-popup-head h2 {
@@ -997,7 +998,7 @@ a.landing-btn-accent:hover {
 }
 
 .intake-popup-head p {
-  margin: 0;
+  margin: 0 auto;
   max-width: 62ch;
   color: rgba(255, 255, 255, 0.92);
   font-size: 0.98rem;
@@ -1069,7 +1070,7 @@ a.landing-btn-accent:hover {
 
 @media (max-width: 640px) {
   .intake-popup-head {
-    padding: 20px 64px 16px 18px;
+    padding: 20px 56px 16px;
   }
 
   .intake-popup-head h2 {
