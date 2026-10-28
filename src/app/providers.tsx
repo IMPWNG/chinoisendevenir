@@ -4,6 +4,7 @@ import type React from "react";
 import { AdminAuthProvider } from "@/context/AdminAuthContext";
 import { StudentAuthProvider } from "@/context/AuthContext";
 import { SiteI18nProvider } from "@/context/SiteI18nContext";
+import IntakePopup from "@/components/IntakePopup";
 
 export default function Providers({
   children,
@@ -13,7 +14,10 @@ export default function Providers({
   return (
     <SiteI18nProvider>
       <AdminAuthProvider>
-        <StudentAuthProvider>{children}</StudentAuthProvider>
+        <StudentAuthProvider>
+          {children}
+          <IntakePopup />
+        </StudentAuthProvider>
       </AdminAuthProvider>
     </SiteI18nProvider>
   );

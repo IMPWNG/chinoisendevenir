@@ -197,6 +197,13 @@ const fr = {
     faqTitle: "Questions fréquentes sur les études en Chine",
     allFaqs: "Voir toutes les questions sur les études en Chine",
   },
+  intakePopup: {
+    title: "Septembre 2027 : préparez le dossier maintenant",
+    p1: "La rentrée de septembre 2027 se prépare dès maintenant. Un dossier d'admission demande plusieurs mois : orientation, pièces, puis dépôt auprès des universités.",
+    p2: "Pour une bourse (CSC, université ou province), les dates limites tombent souvent bien avant septembre. Commencer tôt permet encore de viser ces échéances. Attendre réduit les options, surtout pour les bourses.",
+    p3: "Une bourse n'est jamais automatique. Nous ne garantissons ni l'admission, ni la bourse, ni le visa.",
+    close: "Fermer",
+  },
   form: {
     title: "Parlons de votre projet d'études",
     subtitle:
@@ -1886,6 +1893,13 @@ const en = {
     ],
     faqTitle: "Frequently asked questions about studying in China",
     allFaqs: "See all questions about studying in China",
+  },
+  intakePopup: {
+    title: "September 2027: prepare your application now",
+    p1: "The September 2027 intake is prepared now. An admission file takes several months: orientation, documents, then submission to the universities.",
+    p2: "For a scholarship (CSC, university, or province), deadlines often fall well before September. Starting early still leaves time to meet those dates. Waiting narrows the options, especially for scholarships.",
+    p3: "A scholarship is never automatic. We do not guarantee admission, a scholarship, or a visa.",
+    close: "Close",
   },
   form: {
     title: "Let's talk about your study project",

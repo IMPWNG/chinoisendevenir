@@ -1,0 +1,75 @@
+"use client";
+
+import { useEffect, useId, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import LeadForm from "./LeadForm";
+import { useSiteI18n } from "../context/SiteI18nContext";
+
+const STORAGE_KEY = "ced-intake-2027-popup";
+
+function isPublicPage(path: string) {
+  return !path.startsWith("/admin") && !path.startsWith("/espace-etudiant");
+}
+
+export default function IntakePopup() {
+  const pathname = usePathname() || "/";
+  const { t } = useSiteI18n();
+  const titleId = useId();
+  const [open, setOpen] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (timerRef.current != null) return;
+    if (!isPublicPage(pathname)) return;
+    if (window.sessionStorage.getItem(STORAGE_KEY) === "1") return;
+    timerRef.current = window.setTimeout(() => {
+      timerRef.current = null;
+      setOpen(true);
+    }, 6000);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  function close() {
+    window.sessionStorage.setItem(STORAGE_KEY, "1");
+    setOpen(false);
+  }
+
+  if (!open || !isPublicPage(pathname)) return null;
+
+  return (
+    <div className="intake-popup" role="presentation">
+      <button type="button" className="intake-popup-backdrop" aria-label={t("intakePopup.close")} onClick={close} />
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="intake-popup-card"
+      >
+        <button type="button" className="intake-popup-close" aria-label={t("intakePopup.close")} onClick={close}>
+          ×
+        </button>
+        <div className="intake-popup-scroll">
+          <h2 id={titleId}>{t("intakePopup.title")}</h2>
+          <p>{t("intakePopup.p1")}</p>
+          <p>{t("intakePopup.p2")}</p>
+          <p>{t("intakePopup.p3")}</p>
+          <h3>{t("form.title")}</h3>
+          <LeadForm embedded initialValues={{ date_rentree: "septembre_2027" }} />
+        </div>
+      </section>
+    </div>
+  );
+}
