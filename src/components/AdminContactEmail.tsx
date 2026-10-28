@@ -434,12 +434,12 @@ export default function AdminContactEmail({
         </div>
       )}
 
-      <div className="sticky bottom-0 z-30 mt-4 border-t border-slate-700/70 bg-slate-800 py-3">
+      <div className="mt-4 border-t border-slate-700/70 py-3">
         <button
           type="button"
           onClick={sendEmail}
           disabled={busy || !hasEmail || !canSendWrite}
-          className="relative z-30 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
         >
           {sending ? `⏳ ${t("sending")}` : `📤 ${t("dashboard.sendEmail")}`}
         </button>
@@ -456,7 +456,7 @@ export default function AdminContactEmail({
         <iframe
           title={t("dashboard.emailPreview")}
           sandbox=""
-          className="pointer-events-none relative z-0 w-full h-96 rounded-xl border border-slate-700/50 bg-white"
+          className="w-full h-[min(32rem,60vh)] rounded-xl border border-slate-700/50 bg-white"
           srcDoc={previewHtml}
         />
       </div>

@@ -1707,7 +1707,7 @@ function ContactModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-8 flex flex-wrap justify-between items-start gap-4 sticky top-0 z-10">
+        <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-8 flex flex-wrap justify-between items-start gap-4 sticky top-0 z-40">
           <div className="min-w-0 flex-1">
             <h2 className="text-3xl font-bold text-white">
               👤 {contact.prenom} {contact.nom}
