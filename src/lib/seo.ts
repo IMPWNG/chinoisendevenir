@@ -502,6 +502,7 @@ export const SITEMAP_ROUTES = [
   { path: "/bourses", changeFrequency: "monthly" as const, priority: 0.85 },
   { path: "/processus", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/tarifs", changeFrequency: "monthly" as const, priority: 0.75 },
+  { path: "/avis", changeFrequency: "monthly" as const, priority: 0.6 },
   { path: "/faq", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/contact", changeFrequency: "yearly" as const, priority: 0.6 },
   {

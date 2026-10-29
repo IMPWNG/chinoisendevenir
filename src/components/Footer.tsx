@@ -36,6 +36,7 @@ const Footer = () => {
           <div className="landing-footer-col">
             <p className="landing-footer-heading">{t("footer.colSupport")}</p>
             <Link href="/tarifs">{t("footer.pricing")}</Link>
+            <Link href="/avis">{t("footer.reviews")}</Link>
             <Link href="/#lead-form">{t("footer.evaluate")}</Link>
             <Link href={studentHref}>{t("footer.studentSpace")}</Link>
             <Link href="/politique-confidentialite">{t("footer.privacy")}</Link>

@@ -21,6 +21,7 @@ const Navigation = () => {
     { path: "/ecoles-de-langue-chine", label: t("nav.language") },
     { path: "/bourses", label: t("nav.scholarships") },
     { path: "/blog", label: t("nav.blog") },
+    { path: "/avis", label: t("nav.reviews") },
     { path: "/tarifs", label: t("nav.pricing") },
   ];
 
