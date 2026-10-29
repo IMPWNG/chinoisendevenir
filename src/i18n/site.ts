@@ -198,7 +198,7 @@ const fr = {
     allFaqs: "Voir toutes les questions sur les études en Chine",
   },
   intakePopup: {
-    title: "Septembre 2027 : préparez le dossier maintenant",
+    title: "Septembre 2027 : préparez votre dossier maintenant",
     p1: "La rentrée de septembre 2027 se prépare dès maintenant. Un dossier d'admission demande plusieurs mois : orientation, pièces, puis dépôt auprès des universités.",
     p2: "Pour une bourse (CSC, université ou province), les dates limites tombent souvent bien avant septembre. Commencer tôt permet encore de viser ces échéances. Attendre réduit les options, surtout pour les bourses.",
     p3: "Une bourse n'est jamais automatique. Nous ne garantissons ni l'admission, ni la bourse, ni le visa.",

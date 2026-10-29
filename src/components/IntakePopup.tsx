@@ -58,8 +58,14 @@ export default function IntakePopup() {
           <p>{t("intakePopup.p1")}</p>
         </header>
         <div className="intake-popup-body">
-          <p>{t("intakePopup.p2")}</p>
-          <p className="intake-popup-note">{t("intakePopup.p3")}</p>
+          <p className="intake-popup-alert">
+            <span aria-hidden="true">⚠️ </span>
+            {t("intakePopup.p2")}
+          </p>
+          <p className="intake-popup-note">
+            <span className="intake-popup-asterisk" aria-hidden="true">*</span>
+            <span>{t("intakePopup.p3")}</span>
+          </p>
           <div className="intake-popup-form">
             <h3>{t("form.title")}</h3>
             <LeadForm embedded initialValues={{ date_rentree: "septembre_2027" }} />
