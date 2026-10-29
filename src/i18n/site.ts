@@ -72,7 +72,7 @@ const fr = {
   avisPage: {
     crumb: "Avis",
     title: "Avis d'étudiants",
-    lead: "Des messages reçus après un dossier, une admission ou une arrivée en Chine. Chacun raconte son cas. Une bourse n'est jamais automatique, et le premier choix d'université non plus.",
+    lead: "Ils nous ont écrit après leur dossier, leur admission ou une fois en Chine.",
     ctaTitle: "Vous préparez votre dossier ?",
     ctaText: "Décrivez votre projet. On vous dit ce qui est réaliste, sans promettre l'admission, la bourse ou le visa.",
     cta: "Obtenir une première orientation",
@@ -1779,7 +1779,7 @@ const en = {
   avisPage: {
     crumb: "Reviews",
     title: "Student reviews",
-    lead: "Messages we received after an application, an admission, or an arrival in China. Each one is that student's case. A scholarship is never automatic, and neither is a first-choice university.",
+    lead: "They wrote to us after their application, their admission, or once they were in China.",
     ctaTitle: "Preparing your application?",
     ctaText: "Tell us about your project. We will say what is realistic, without promising admission, a scholarship, or a visa.",
     cta: "Get a first orientation",
