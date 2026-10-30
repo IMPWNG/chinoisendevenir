@@ -8,7 +8,13 @@ import {
 } from "../contactEmails";
 import { generateCustomEmailHtml } from "../emailLayout";
 import { composeStudentQuestionReply } from "../emailCompose";
-import { studentAskKey, studentAskText, shouldAnswerStudentAsk } from "../studentAsk";
+import {
+  PERSONAL_REPLY_PREFIX,
+  hasPersonalReply,
+  studentAskKey,
+  studentAskText,
+  shouldAnswerStudentAsk,
+} from "../studentAsk";
 import { AUTO_MAIL_ACTOR } from "../suiviHistory";
 import { errorMessage } from "../request";
 import { updateContactStatus, logAction } from "./auto-reply";
@@ -39,11 +45,13 @@ export async function replyToStudentDemand(
 
   const { data: existing } = await supabase
     .from("suivi_actions")
-    .select("id")
+    .select("description")
     .eq("contact_id", input.contactId)
-    .ilike("description", `%${marker}%`)
+    .eq("action", "email_envoye")
+    .ilike("description", `${PERSONAL_REPLY_PREFIX}%`)
     .limit(1);
-  if (existing && existing.length > 0) return "already";
+  if (hasPersonalReply((existing || []).map((row) => row.description))) return "already";
+  // ponytail: two sends already in flight can both pass this read. The log row below blocks every later edit.
 
   const composed = await composeStudentQuestionReply({
     ask,
@@ -98,7 +106,7 @@ export async function replyToStudentDemand(
     input.contactId,
     input.email,
     "email_envoye",
-    `Réponse personnelle à la demande de l'étudiant ${marker}`,
+    `${PERSONAL_REPLY_PREFIX} de l'étudiant ${marker}`,
     AUTO_MAIL_ACTOR,
   );
   if (input.markFormules) {

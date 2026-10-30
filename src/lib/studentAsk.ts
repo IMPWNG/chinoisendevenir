@@ -32,7 +32,15 @@ export function shouldAnswerStudentAsk(value: unknown): boolean {
   );
 }
 
-/** Same wording → same key, so the reply is sent once. */
+/** Same wording → same key. The send itself is once per dossier, not per key. */
+export const PERSONAL_REPLY_PREFIX = "Réponse personnelle à la demande";
+
+export function hasPersonalReply(descriptions: readonly unknown[]): boolean {
+  return descriptions.some((line) =>
+    String(line || "").startsWith(PERSONAL_REPLY_PREFIX),
+  );
+}
+
 export function studentAskKey(value: unknown): string {
   const text = fold(studentAskText(value)).replace(/[^a-z0-9]+/g, "");
   let hash = 5381;

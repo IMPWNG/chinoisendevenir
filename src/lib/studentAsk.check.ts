@@ -2,7 +2,12 @@
  * Self-check for which student messages get a personal reply.
  * Run: npx tsx src/lib/studentAsk.check.ts
  */
-import { shouldAnswerStudentAsk, studentAskKey, studentAskText } from "./studentAsk";
+import {
+  hasPersonalReply,
+  shouldAnswerStudentAsk,
+  studentAskKey,
+  studentAskText,
+} from "./studentAsk";
 
 function assert(cond: unknown, msg: string): asserts cond {
   if (!cond) throw new Error(msg);
@@ -38,5 +43,10 @@ assert(
 const again = "Comment faire pour avoir une bourse complète ?";
 assert(studentAskKey(again) === studentAskKey(`  ${again}  `), "stable key");
 assert(studentAskKey(again) !== studentAskKey(`${again} et le visa`), "new ask");
+assert(
+  hasPersonalReply(["Réponse personnelle à la demande de l'étudiant [demande:abc]"]),
+  "one reply blocks the next",
+);
+assert(!hasPersonalReply(["Email de bienvenue envoyé"]), "other mail stays open");
 
 console.log("studentAsk check ok");
