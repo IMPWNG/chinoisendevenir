@@ -60,7 +60,7 @@ function reportHtml(report: DailyReport) {
     <li>Formules choisies : <strong>${t.formulesChoisies}</strong> (F1 ${t.formulesF1} / F2 ${t.formulesF2} / F3 ${t.formulesF3})</li>
     <li>Client payé : <strong>${t.clientPaye}</strong> · Perdus : <strong>${t.prospectPerdu}</strong></li>
     <li>Appels : <strong>${t.appels}</strong> · Réponses clients : <strong>${t.reponsesClient}</strong></li>
-    <li>Mails in/out : <strong>${t.emailsIn}/${t.emailsOut}</strong> · WhatsApp : <strong>${t.whatsappOut}</strong></li>
+    <li>Mails in/out : <strong>${t.emailsIn}/${t.emailsOut}</strong> · WhatsApp envoyés/reçus : <strong>${t.whatsappOut}/${t.whatsappIn}</strong></li>
     <li>Matchings : <strong>${t.matchings}</strong> · Relances : <strong>${t.relancesFormules}</strong></li>
   </ul>
   ${priorityBlocks || "<p>Aucune priorité listée.</p>"}

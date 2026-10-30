@@ -145,6 +145,85 @@ function EvolutionChart({
   );
 }
 
+function MessagesChart({
+  series,
+  title,
+  labels,
+}: {
+  series: DayTotals[];
+  title: string;
+  labels: { waOut: string; waIn: string; mailOut: string };
+}) {
+  const lines = [
+    { key: "whatsappOut" as const, color: "#4ade80", name: labels.waOut },
+    { key: "whatsappIn" as const, color: "#fbbf24", name: labels.waIn },
+    { key: "emailsOut" as const, color: "#38bdf8", name: labels.mailOut },
+  ];
+  const max = Math.max(
+    1,
+    ...series.flatMap((row) => lines.map((line) => Number(row[line.key] || 0))),
+  );
+  const width = 560;
+  const height = 180;
+  const padX = 28;
+  const padY = 16;
+  const innerW = width - padX * 2;
+  const innerH = height - padY * 2 - 8;
+  const xAt = (i: number) =>
+    padX + (series.length <= 1 ? innerW / 2 : (i / (series.length - 1)) * innerW);
+  const yAt = (v: number) => padY + innerH - (v / max) * innerH;
+
+  return (
+    <div className="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-4">
+      <p className="text-sm font-bold text-slate-200 mb-2">{title}</p>
+      <div className="flex flex-wrap gap-4 mb-2 text-xs text-slate-300">
+        {lines.map((line) => (
+          <span key={line.key} className="inline-flex items-center gap-1.5">
+            <span className="inline-block w-3 h-1.5 rounded" style={{ background: line.color }} />
+            {line.name}
+          </span>
+        ))}
+      </div>
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-44">
+        {lines.map((line) => {
+          const points = series.map((row, i) => `${xAt(i)},${yAt(Number(row[line.key] || 0))}`);
+          return (
+            <polyline
+              key={line.key}
+              fill="none"
+              stroke={line.color}
+              strokeWidth="3"
+              points={points.join(" ")}
+            />
+          );
+        })}
+        {series.map((row, i) => (
+          <text
+            key={row.date}
+            x={xAt(i)}
+            y={height - 2}
+            textAnchor="middle"
+            fontSize="9"
+            fill="#94a3b8"
+          >
+            {row.date.slice(5)}
+          </text>
+        ))}
+        {lines.map((line) =>
+          series.map((row, i) => {
+            const v = Number(row[line.key] || 0);
+            return (
+              <circle key={`${line.key}-${row.date}`} cx={xAt(i)} cy={yAt(v)} r="3.5" fill={line.color}>
+                <title>{`${line.name} ${row.date.slice(5)} : ${v}`}</title>
+              </circle>
+            );
+          }),
+        )}
+      </svg>
+    </div>
+  );
+}
+
 export default function AdminDailyReport() {
   const { user, signOut } = useAdminAuth();
   const { t } = useAdminI18n();
@@ -269,6 +348,11 @@ export default function AdminDailyReport() {
                 delta={report.delta.whatsappOut}
               />
               <Metric
+                label={t("report.whatsappIn")}
+                value={report.today.whatsappIn}
+                delta={report.delta.whatsappIn}
+              />
+              <Metric
                 label={t("report.matchings")}
                 value={report.today.matchings}
                 delta={report.delta.matchings}
@@ -287,6 +371,16 @@ export default function AdminDailyReport() {
                 f3: report.today.formulesF3,
               })}
             </p>
+
+            <MessagesChart
+              series={report.series}
+              title={t("report.chartMessages")}
+              labels={{
+                waOut: t("report.chartWaOut"),
+                waIn: t("report.chartWaIn"),
+                mailOut: t("report.chartMailOut"),
+              }}
+            />
 
             <div className="grid grid-cols-2 gap-4">
               <EvolutionChart

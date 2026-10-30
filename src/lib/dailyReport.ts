@@ -57,6 +57,7 @@ function emptyTotals(date: string): DayTotals {
     emailsIn: 0,
     emailsOut: 0,
     whatsappOut: 0,
+    whatsappIn: 0,
     matchings: 0,
     relancesFormules: 0,
   };
@@ -288,6 +289,7 @@ function buildSeries(
     if (CALL_ACTIONS.has(kind)) row.appels += 1;
     if (REPLY_ACTIONS.has(kind)) row.reponsesClient += 1;
     if (WHATSAPP_ACTIONS.has(kind)) row.whatsappOut += 1;
+    if (kind === "reponse_whatsapp") row.whatsappIn += 1;
     if (RELANCE_ACTIONS.has(kind)) row.relancesFormules += 1;
     if (looksPaid(kind, desc)) row.clientPaye += 1;
     if (looksPerdu(kind, desc)) row.prospectPerdu += 1;
@@ -593,7 +595,7 @@ export function reportSummaryLines(report: DailyReport): string[] {
     `Formules choisies: ${t.formulesChoisies} (F1 ${t.formulesF1} / F2 ${t.formulesF2} / F3 ${t.formulesF3})`,
     `Client payé: ${t.clientPaye} · Perdus: ${t.prospectPerdu}`,
     `Appels: ${t.appels} · Réponses clients: ${t.reponsesClient}`,
-    `Mails in/out: ${t.emailsIn}/${t.emailsOut} · WhatsApp: ${t.whatsappOut}`,
+    `Mails in/out: ${t.emailsIn}/${t.emailsOut} · WhatsApp envoyés/reçus: ${t.whatsappOut}/${t.whatsappIn}`,
     `Matchings: ${t.matchings} · Relances: ${t.relancesFormules}`,
     `Priorités: non attribués ${report.priorities.unassigned.length}, inbox ${report.priorities.unreadInbox.length}, attente paiement ${report.priorities.attentePaiement.length}`,
   ];

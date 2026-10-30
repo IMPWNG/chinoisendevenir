@@ -27,6 +27,7 @@ export type DayTotals = {
   emailsIn: number;
   emailsOut: number;
   whatsappOut: number;
+  whatsappIn: number;
   matchings: number;
   relancesFormules: number;
 };

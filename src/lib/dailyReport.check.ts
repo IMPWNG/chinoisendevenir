@@ -59,6 +59,18 @@ const series = __test.buildSeries(
       action: "reponse_client",
       created_at: "2026-10-04T20:00:00.000Z", // Shanghai Oct 5
     },
+    {
+      id: "a4",
+      contact_id: "c1",
+      action: "whatsapp_envoye",
+      created_at: "2026-10-05T18:40:00.000Z",
+    },
+    {
+      id: "a5",
+      contact_id: "c1",
+      action: "reponse_whatsapp",
+      created_at: "2026-10-05T18:50:00.000Z",
+    },
   ],
   [
     { direction: "in", sent_at: "2026-10-05T17:00:00.000Z" },
@@ -73,6 +85,8 @@ assert(day6?.newContacts === 1, "new contact on Shanghai day");
 assert(day6?.appels === 1, "call counted");
 assert(day6?.formulesChoisies === 1 && day6.formulesF2 === 1, "formule 2");
 assert(day6?.emailsIn === 1 && day6?.emailsOut === 1, "emails");
+assert(day6?.whatsappOut === 1 && day6?.whatsappIn === 1, "whatsapp in and out");
+assert(day6?.reponsesClient === 1, "whatsapp reply also counts as client reply");
 assert(day5?.reponsesClient === 1, "reply previous day");
 
 assert(formatDelta(3) === "+3", "plus delta");
