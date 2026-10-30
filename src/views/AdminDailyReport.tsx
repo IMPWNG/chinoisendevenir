@@ -86,21 +86,19 @@ function EvolutionChart({
   series,
   metric,
   label,
-  color = "#38bdf8",
 }: {
   series: DayTotals[];
   metric: keyof Omit<DayTotals, "date">;
   label: string;
-  color?: string;
 }) {
   const values = series.map((row) => Number(row[metric] || 0));
   const max = Math.max(1, ...values);
-  const width = 720;
-  const height = 200;
-  const padX = 36;
-  const padY = 28;
+  const width = 560;
+  const height = 160;
+  const padX = 28;
+  const padY = 20;
   const innerW = width - padX * 2;
-  const innerH = height - padY * 2 - 8;
+  const innerH = height - padY * 2;
   const points = values.map((v, i) => {
     const x =
       padX + (values.length <= 1 ? innerW / 2 : (i / (values.length - 1)) * innerW);
@@ -108,45 +106,24 @@ function EvolutionChart({
     return { x, y, v, date: series[i]?.date || "" };
   });
   const line = points.map((p) => `${p.x},${p.y}`).join(" ");
-  const today = values[values.length - 1] || 0;
 
   return (
     <div className="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-4">
-      <div className="flex items-baseline justify-between gap-3 mb-2">
-        <p className="text-base font-bold text-white">{label}</p>
-        <p className="text-2xl font-bold tabular-nums" style={{ color }}>
-          {today}
-        </p>
-      </div>
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-52">
-        <line
-          x1={padX}
-          y1={padY + innerH}
-          x2={width - padX}
-          y2={padY + innerH}
-          stroke="#334155"
-          strokeWidth="1"
-        />
-        <polyline fill="none" stroke={color} strokeWidth="4" points={line} />
+      <p className="text-sm font-bold text-slate-200 mb-2">{label}</p>
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-40">
+        <polyline fill="none" stroke="#38bdf8" strokeWidth="3" points={line} />
         {points.map((p) => (
           <g key={p.date}>
-            <circle cx={p.x} cy={p.y} r="5" fill={color} />
-            <text
-              x={p.x}
-              y={height - 6}
-              textAnchor="middle"
-              fontSize="12"
-              fill="#cbd5e1"
-            >
+            <circle cx={p.x} cy={p.y} r="4" fill="#7dd3fc" />
+            <text x={p.x} y={height - 4} textAnchor="middle" fontSize="9" fill="#94a3b8">
               {p.date.slice(5)}
             </text>
             <text
               x={p.x}
-              y={Math.max(16, p.y - 10)}
+              y={Math.max(12, p.y - 8)}
               textAnchor="middle"
-              fontSize="14"
-              fontWeight="700"
-              fill="#f8fafc"
+              fontSize="10"
+              fill="#e2e8f0"
             >
               {p.v}
             </text>
@@ -305,41 +282,32 @@ export default function AdminDailyReport() {
               })}
             </p>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white">{t("report.chartMessages")}</h3>
+            <div className="grid grid-cols-2 gap-4">
               <EvolutionChart
                 series={report.series}
                 metric="whatsappOut"
                 label={t("report.chartWaOut")}
-                color="#4ade80"
               />
               <EvolutionChart
                 series={report.series}
                 metric="whatsappIn"
                 label={t("report.chartWaIn")}
-                color="#fbbf24"
               />
               <EvolutionChart
                 series={report.series}
                 metric="emailsOut"
                 label={t("report.chartMailOut")}
-                color="#38bdf8"
               />
               <EvolutionChart
                 series={report.series}
                 metric="emailsIn"
                 label={t("report.chartEmailsIn")}
-                color="#c084fc"
               />
               <EvolutionChart
                 series={report.series}
                 metric="appels"
                 label={t("report.chartCalls")}
-                color="#fb7185"
               />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <EvolutionChart
                 series={report.series}
                 metric="newContacts"
